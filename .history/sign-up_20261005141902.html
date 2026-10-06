@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up |Lịch phong thuỷ</title>
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="./assets/css/main.css">
+
+    <!-- scripts -->
+    <script src="./assets/js/script.js"></script>
+
+</head>
+
+<body>
+
+    <header id="header">
+        <!-- Header content will be inserted here -->
+    </header>
+    <script>
+        load("#header", "./templates/header.html");
+    </script>
+    <main>
+        <!-- Main content will be inserted here -->
+        <h1>Sign up pages</h1>
+    </main>
+    <footer id="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script>
+</body>
+`
+
+</html>
+
+
+<!-- nháp -->
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tòa nhà The Hallmark Tower | Văn phòng hạng A đẳng cấp</title>
+    <meta name="description"
+        content="Tòa nhà The Hallmark nằm 15 Trần Bạch Đằng, An Khánh, Quận 2. Giá thuê từ 49–50 USD/m², diện tích linh hoạt 150–2.000 m²." />
+    <meta name="keywords"
+        content="the hallmark, the hallmark building, the hallmark - grade a+ office building, the hallmark, the hallmark chủ đầu tư, hallmark thủ thiêm" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="distribution" content="Global" />
+    <meta name='revisit-after' content='1 days' />
+    <meta name="DC.title" content="The Hallmark" />
+    <meta name="geo.region" content="VN" />
+    <meta name="geo.placename" content="The Hallmark, 15 Trần Bạch Đằng, Phường An Khánh, Thành Phố Hồ Chí Minh" />
+    <meta name="geo.position" content="10.7778352;106.7138147" />
+    <meta name="ICBM" content="10.7778352, 106.7138147" />
+    <meta name="google-site-verification" content="VKzfZsolz3gWcRVsk0ReYHEG14UwRS4NzoU35j18F44" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --bg-main: #FDFDFD;
+            --bg-card: #FFFFFF;
+            --gold: #B3985B;
+            --gold-hover: #9A824A;
+            --text-main: #003f35;
+            --text-muted: #6B6B6B;
+            --border-color: #EAEAEA;
+            --header-bg: rgba(253, 253, 253, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 400;
+            color: var(--text-main);
+        }
+
+        .section-title span {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--gold-hover);
+            box-shadow: 0 5px 15px rgba(179, 152, 91, 0.3);
+            transform: translateY(-2px);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--gold);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .desktop-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--gold);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--bg-card);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 2001;
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 80px 30px 30px;
+        }
+
+        .mobile-menu-overlay.open {
+            right: 0;
+        }
+
+        .close-menu-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 35px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-menu-btn:hover {
+            color: var(--text-main);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: auto;
+        }
+
+        .mobile-nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: block;
+        }
+
+        .mobile-menu-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+        }
+
+        .mobile-phone {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .body-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .body-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            max-width: 800px;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 300;
+            color: #FFFFFF;
+        }
+
+        .hero-text h1 span {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #F0F0F0;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .overview-content p {
+            color: #003f35;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .overview-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-box h3 {
+            color: var(--gold);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-box span {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .location-img {
+            height: 400px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .location-features {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .feature-item h4 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: #003f35;
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .amenity-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .amenity-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: -1;
+            transform: scale(1.1);
+        }
+
+        .amenity-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(179, 152, 91, 0.15);
+        }
+
+        .amenity-card:hover::before {
+            opacity: 0.85;
+            transform: scale(1);
+        }
+
+        .amenity-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            transition: color 0.4s ease;
+        }
+
+        .amenity-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: color 0.4s ease;
+        }
+
+        .amenity-card:hover h4,
+        .amenity-card:hover p {
+            color: #FFFFFF;
+        }
+
+        .amenity-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 44, 44, 0.7);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .amenity-card:hover::after {
+            opacity: 1;
+        }
+
+        .amenity-card:nth-child(1)::before {
+            background-image: url('assets/img/the-hallmark-tower-5.jpg');
+        }
+
+        .amenity-card:nth-child(2)::before {
+            background-image: url('assets/img/the-hallmark-tower-le-tan.jpg');
+        }
+
+        .amenity-card:nth-child(3)::before {
+            background-image: url('assets/img/the-hallmark-tower-chung-nhan-xanh.png');
+        }
+
+        .amenity-card:nth-child(4)::before {
+            background-image: url('assets/img/the-hallmark-tower-thang-may.jpg');
+        }
+
+        .amenity-card:nth-child(5)::before {
+            background-image: url('./assets/img/the-hallmark-tower-thang-may-2.jpg');
+        }
+
+        .amenity-card:nth-child(6)::before {
+            background-image: url('assets/img/the-hallmark-tower-ham-dau-xe.jpg');
+        }
+
+        .amenity-card:nth-child(7)::before {
+            background-image: url('assets/img/the-hallmark-tower-may-phat-dien.avif');
+        }
+
+        .amenity-card:nth-child(8)::before {
+            background-image: url('assets/img/the-hallmark-tower-an-ninh.jpg');
+        }
+
+        .pricing-section {
+            background: linear-gradient(rgba(245, 245, 245, 0.2), rgba(250, 250, 250, 0.4)),
+                url('assets/banner/the-hallmark-banner-2.jpg') center/cover;
+            padding: 100px 0
+        }
+
+        .pricing-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .price-box {
+            background: var(--gold);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            width: 300px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 40px rgba(179, 152, 91, 0.3);
+        }
+
+        .price-box h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .price-box .price {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .price-box .price span {
+            font-size: 1.2rem;
+            font-weight: normal;
+        }
+
+        .info-box {
+            background: var(--bg-card);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list span {
+            color: var(--text-main);
+            font-weight: bold;
+        }
+
+        footer {
+            background: #003f35;
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col p,
+        .footer-col a {
+            color: #fff;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8b735b;
+            font-size: 0.9rem;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--text-muted);
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--text-main);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: #F9F9F9;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            outline: none;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--gold);
+            background: #FFFFFF;
+        }
+
+        .carousel-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .floating-phone {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(179, 152, 91, 0.4);
+            animation: phoneTada 1.5s infinite;
+        }
+
+        .phone-icon {
+            font-size: 28px;
+            z-index: 2;
+        }
+
+        .phone-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            animation: phoneRing 1.5s infinite ease-out;
+            z-index: 1;
+        }
+
+        #backToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(179, 152, 91, 0.4);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #backToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTopBtn:hover {
+            background-color: var(--gold-hover);
+            transform: translateY(-5px);
+        }
+
+        @keyframes phoneRing {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        @keyframes phoneTada {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            10% {
+                transform: rotate(-15deg);
+            }
+
+            20% {
+                transform: rotate(15deg);
+            }
+
+            30% {
+                transform: rotate(-15deg);
+            }
+
+            40% {
+                transform: rotate(15deg);
+            }
+
+            50% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .header-phone {
+            color: #013f36;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-right: 20px;
+        }
+
+        @media (max-width: 768px) {
+
+            .overview-grid,
+            .location-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            /* Responsive Menu */
+            nav.desktop-nav {
+                display: none;
+            }
+
+            .desktop-actions {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .overview-content p {
+                font-size: 1rem;
+                margin-bottom: 15px;
+                text-align: justify;
+            }
+
+            .overview-stats {
+                gap: 15px;
+            }
+
+            .stat-box {
+                padding: 20px 10px;
+            }
+
+            .stat-box h3 {
+                font-size: 1.8rem;
+            }
+
+            .stat-box span {
+                font-size: 0.75rem;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        .layout-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- Tích hợp Section Gallery & Lightbox (The Hallmark) --- */
+        .gallery-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 16px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 16px;
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .gallery-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-item {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            height: 300px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Lớp phủ màu Xanh rêu của The Hallmark */
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 63, 53, 0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            color: #ffffff;
+            font-size: 40px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover::after,
+        .gallery-item:hover .gallery-item-icon {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-item-icon {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .gallery-btn-wrapper {
+            display: none;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+                overflow: visible;
+                padding: 0;
+                margin: 0;
+            }
+
+            .gallery-item {
+                height: 350px;
+                flex: auto;
+            }
+
+            .gallery-item.hidden-pc {
+                display: none;
+            }
+
+            .gallery-grid.show-all .gallery-item.hidden-pc {
+                display: block;
+            }
+
+            .gallery-btn-wrapper {
+                display: block;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Lightbox - Màu nền The Hallmark */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            padding: 40px 0;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 63, 53, 0.95);
+            /* Xanh rêu đậm */
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            animation: zoomIn 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 100000;
+        }
+
+        .lightbox-close:hover {
+            color: var(--gold);
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 100000;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: var(--gold);
+            color: #fff;
+            border-color: var(--gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 32px;
+        }
+
+        .lightbox-next {
+            right: 32px;
+        }
+
+        @media (max-width: 768px) {
+
+            .lightbox-prev,
+            .lightbox-next {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .lightbox-prev {
+                left: 16px;
+            }
+
+            .lightbox-next {
+                right: 16px;
+            }
+
+            .lightbox-close {
+                top: 16px;
+                right: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header">
+        <div data-aos="fade-up" data-aos-duration="1000" class="container header-content">
+            <a href="#" class="logo">THE HALLMARK</a>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#overview">Tổng quan</a></li>
+                    <li><a href="#location">Vị trí</a></li>
+                    <li><a href="#amenities">Thiết kế & Tiện ích</a></li>
+                    <li><a href="#layout">Layout</a></li>
+                    <li><a href="#pricing">Bảng giá</a></li>
+                </ul>
+            </nav>
+            <div class="desktop-actions">
+                <a href="tel:0888262838" title="Gọi ngay cho chúng tôi" style="text-decoration: none;">
+                    <span class="header-phone">📞 0888262838</span>
+                </a>
+                <!-- <button class="btn-gold" onclick="openModal()">Liên hệ ngay</button> -->
+            </div>
+            <button class="menu-toggle" id="mobile-menu-btn" title="Mở menu">
+                ☰
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="close-menu-btn" id="close-menu-btn" title="Đóng menu">×</button>
+        <ul class="mobile-nav-links">
+            <li><a href="#overview" class="mobile-link">Tổng quan</a></li>
+            <li><a href="#location" class="mobile-link">Vị trí</a></li>
+            <li><a href="#amenities" class="mobile-link">Thiết kế & Tiện ích</a></li>
+            <li><a href="#layout" class="mobile-link">Layout</a></li>
+            <li><a href="#pricing" class="mobile-link">Bảng giá</a></li>
+        </ul>
+        <div class="mobile-menu-actions">
+            <a href="tel:0888262838" class="mobile-phone">📞 0888262838</a>
+            <button class="btn-gold" onclick="openModal(); document.getElementById('close-menu-btn').click();"
+                style="width: 100%;">Liên hệ ngay</button>
+        </div>
+    </div>
+
+    <div class="body-overlay" id="body-overlay"></div>
+
+    <section class="hero">
+        <div class="carousel-container" id="heroCarousel">
+            <div class="carousel-slide active"
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('assets/banner/the-hallmark-banner.jpg');">
+            </div>
+            <div class="carousel-slide"
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('assets/banner/the-hallmark-banner-2.jpg');">
+            </div>
+            <div class="carousel-slide"
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('assets/banner/the-hallmark-banner-3.jpg');">
+            </div>
+        </div>
+
+        <div class="container">
+            <div data-aos="fade-up" data-aos-duration="2000" class="hero-text">
+                <h1>Văn Phòng Hạng A<br><span>Trung Tâm Quận 2</span></h1>
+                <p>The Hallmark mang đến không gian làm việc chuyên nghiệp bậc nhất, là lựa chọn lý tưởng để các tập
+                    đoàn
+                    lớn đặt nền móng kiến tạo sự thịnh vượng.</p>
+                <button class="btn-gold" onclick="document.getElementById('overview').scrollIntoView();">Khám phá tòa
+                    nhà</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview">
+        <div data-aos="fade-up" data-aos-duration="1000" class="container">
+            <h2 class="section-title">Tổng Quan <span>Tòa Nhà</span></h2>
+            <div class="overview-grid">
+                <div class="overview-content">
+                    <p>Được phát triển bởi <b>Hướng Việt Holdings</b> và chủ đầu tư <b>Gateway Thủ Thiêm</b>, dự án cung
+                        cấp không
+                        gian văn
+                        phòng đẳng cấp với thiết kế hiện đại. Chúng tôi tự hào chào đón những khách thuê đầu tiên đến
+                        trải nghiệm
+                        dịch vụ vào Quý 1/2023.
+                    </p>
+                    <p>Được xây dựng và phát triển với tiêu chuẩn văn phòng hạng A cao cấp, The Hallmark tọa lạc trên
+                        mặt
+                        tiền đường Trần Bạch Đằng, tự hào mang tới sự khác biệt và đẳng cấp thực sự cho các doanh
+                        nghiệp.
+                    </p>
+                    <p>Không gian được thiết kế thoáng đãng, tối ưu hóa ánh sáng tự nhiên cùng trang thiết bị kỹ thuật
+                        được giám
+                        sát khắt khe nhất, đáp ứng mọi tiêu chuẩn khắt khe của các tập đoàn đa quốc gia.
+                    </p>
+                </div>
+                <div class="overview-stats">
+                    <div class="stat-box">
+                        <h3>68.000</h3>
+                        <span>Tổng diện tích (m²)</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>30</h3>
+                        <span>Tầng cao</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>3</h3>
+                        <span>Tầng hầm đỗ xe</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>2.65m</h3>
+                        <span>Độ cao trần</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location">
+        <div data-aos="fade-up" data-aos-duration="1000" class="container">
+            <h2 class="section-title">Vị Trí <span>Đắc Địa</span></h2>
+            <div class="location-grid">
+
+                <div class="location-img secure-img">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.437188089023!2d106.71395260000001!3d10.777789300000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527ea7cf6b303%3A0x8cba573adf74440f!2sThe%20Hallmark!5e0!3m2!1svi!2s!4v1780111318536!5m2!1svi!2s"
+                        style="border:0; width: 100%; height: 100%; min-height: 450px; border-radius: 8px;"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div class="location-features">
+                    <div class="feature-item">
+                        <h4>Lưu Thông Thuận Tiện</h4>
+                        <p>Cách trung tâm Quận 1 chưa đầy 1 phút đi xe. Dễ dàng di chuyển sang Quận 1, Quận 3, Quận 5,
+                            Phú Nhuận và
+                            Bình Thạnh.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Tuyến Đường Trọng Yếu</h4>
+                        <p>Nằm trên trục đường Trần Bạch Đằng nối liền Q1 và Q2, cắt ngang các đại lộ lớn như Mai Chí
+                            Thọ, Nguyễn Cơ
+                            Thạch.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Giao Thương Thuận Lợi</h4>
+                        <p>Tập trung hàng loạt ngân hàng lớn, trung tâm thương mại và các tòa nhà văn phòng cao cấp, tạo
+                            nên một hệ
+                            sinh thái doanh nghiệp hoàn chỉnh.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div data-aos="fade-up" data-aos-duration="1000" style="margin-top: 50px; width: 100%; height: auto;">
+            <div class="">
+                <img src="assets/map/map-scaled.jpg" style="display: block; width: 100%; height: auto;" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section id="amenities">
+        <div data-aos="fade-up" data-aos-duration="1000" class="container">
+            <h2 class="section-title">Thiết Kế & <span>Tiện Ích</span></h2>
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <h4>Thiết Kế Tương Phản</h4>
+                    <p>Sử dụng gạch men cao cấp, màu sắc trang nhã giúp tối ưu độ tương phản ánh sáng.</p>
+                </div>
+                <div class="amenity-card">
+                    <h4>Lễ Tân Chuyên Nghiệp</h4>
+                    <p>Dành riêng toàn bộ tầng trệt cho khu vực lễ tân và đại sảnh chuẩn khách sạn 5 sao.</p>
+                </div>
+                <div class="amenity-card">
+                    <h4>Chứng Nhận Xanh</h4>
+                    <p>Green Mark Gold khẳng định cam kết tiết kiệm năng lượng và bảo vệ môi trường.</p>
+                </div>
+                <div class="amenity-card">
+                    <h4>Thang Máy Schindler</h4>
+                    <p>20 thang máy tốc độ 35s đảm bảo lưu thông nhanh chóng trong tòa nhà.</p>
+                </div>
+                <div class="amenity-card">
+                    <h4>Điều Hòa Trung Tâm</h4>
+                    <p>Hệ thống cung cấp nguồn nhiệt tối ưu, đảm bảo không khí luôn tươi mát.</p>
+                </div>
+                <div class="amenity-card">
+                    <h4>Hầm Đỗ Xe Thông Minh</h4>
+                    <p>3 tầng hầm diện tích lớn với 2 lối ra vào tách biệt chống ùn tắc.</p>
+                </div>
+                <div class="amenity-card">
+                    <h4>Máy Phát Điện 100%</h4>
+                    <p>Hệ thống điện dự phòng công suất lớn, tự động vận hành liên tục.</p>
+                </div>
+                <div class="amenity-card">
+                    <h4>An Ninh 24/7</h4>
+                    <p>Camera giám sát liên tục cùng hệ thống PCCC tự động đạt chuẩn NFPA quốc tế.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="layout">
+        <div data-aos="fade-up" data-aos-duration="1000" class="container">
+            <h2 class="section-title">Layout <span>Tòa Nhà</span></h2>
+            <div class="layout-img">
+                <img src="assets/layout/img4.jpg" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div data-aos="fade-up" data-aos-duration="1000" class="container">
+            <h2 class="section-title">Thư Viện <span>Hình Ảnh</span></h2>
+
+            <div class="gallery-wrapper">
+                <div class="gallery-grid" id="galleryGrid">
+                    <div class="gallery-item">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong.jpg" alt="Gallery 1">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-2.jpg" alt="Gallery 2">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-3.jpg" alt="Gallery 3">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-4.jpg" alt="Gallery 4">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-5.jpg" alt="Gallery 5">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-6.jpg" alt="Gallery 6">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+
+                    <div class="gallery-item hidden-pc">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-7.jpg" alt="Gallery 7">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item hidden-pc">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-8.jpg" alt="Gallery 8">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item hidden-pc">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-9.jpg" alt="Gallery 9">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item hidden-pc">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-10.jpg" alt="Gallery 10">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item hidden-pc">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-11.jpg" alt="Gallery 11">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                    <div class="gallery-item hidden-pc">
+                        <img src="assets/img/the-hallmark-tower-mat-bang-trong-12.jpg" alt="Gallery 12">
+                        <i class="ph ph-magnifying-glass-plus gallery-item-icon"></i>
+                    </div>
+                </div>
+
+                <div class="gallery-btn-wrapper">
+                    <button class="btn-gold" id="loadMoreGallery">
+                        Xem thêm hình ảnh
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div data-aos="fade-up" data-aos-duration="1000" class="container">
+            <h2 class="section-title">Diện Tích & <span>Báo Giá</span></h2>
+            <div class="pricing-wrapper">
+                <div class="price-box">
+                    <h3>Giá thuê niêm yết</h3>
+                    <div class="price">$50<span>/m²</span></div>
+                    <button class="btn-gold" style="background-color: #FFFFFF; color: var(--gold);"
+                        onclick="openModal()">Nhận Báo
+                        Giá Chi Tiết</button>
+                </div>
+                <div class="info-box">
+                    <ul class="info-list">
+                        <li>Diện tích linh hoạt <span>150 - 200 - 400 - 800 - 1650 m²</span></li>
+                        <li>Phí quản lý <span>$7.5 /m²</span></li>
+                        <li>Phí gửi xe máy <span>$17 /tháng</span></li>
+                        <li>Phí gửi ô tô <span>$187 /tháng</span></li>
+                        <li>Thời gian thuê tối thiểu <span>3 Năm</span></li>
+                        <li>Tiền cọc / Thanh toán <span>3 Tháng / Theo quý</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div data-aos="fade-up" data-aos-duration="1000" class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>The Hallmark</h4>
+                    <p>Phát triển với tiêu chuẩn văn phòng hạng A cao cấp, mang đến không gian làm việc chuyên
+                        nghiệp
+                        bậc nhất tại
+                        TP.HCM.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên hệ đại lý tư vấn</h4>
+                    <p>Địa chỉ: 15 Trần Bạch Đằng, Phường An Khánh, (Thủ Đức) TP.HCM</p>
+                    <p>Hotline: 0888262838</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Cam Kết Của Chúng Tôi</h4>
+                    <p>✓ Bảo mật thông tin khách hàng</p>
+                    <p>✓ Giá thuê trực tiếp từ chủ đầu tư.</p>
+                    <p>✓ Hỗ trợ làm thủ tục trọn gói</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="quoteModal">
+        <div class="modal-box">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <h2
+                style="color: var(--gold); margin-bottom: 20px; font-size: 1.5rem; text-transform: uppercase; text-align: center;">
+                Đăng ký view site tour
+            </h2>
+            <div id="getfly-optin-form-iframe-1771986516829" style="padding-top: 35px;">
+                <iframe
+                    src="https://phanmem.officesaigon.vn/api/forms/viewform/?key=LXLh0qF0BXZrHLUkKgIF1UKStesKTk9zfG25Iw3hJc6CQsrvHG&referrer=https://www.google.com/&full_url=https%3A%2F%2Fwww.anphuoffice.vn%2F"
+                    frameborder="0" marginheight="0" marginwidth="0" style="width: 100%; height: 395px;">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <button class="lightbox-prev"><i class="ph ph-caret-left"></i></button>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Full screen image">
+        <button class="lightbox-next"><i class="ph ph-caret-right"></i></button>
+    </div>
+
+    <a href="tel:0888262838" class="floating-phone" title="Gọi ngay cho chúng tôi">
+        <div class="phone-ring"></div>
+        <div class="phone-icon">📞</div>
+    </a>
+
+    <button id="backToTopBtn" title="Lên đầu trang">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+    div
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '10px 0';
+                header.style.background = 'rgba(253, 253, 253, 0.98)';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            } else {
+                header.style.padding = '20px 0';
+                header.style.background = 'rgba(253, 253, 253, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        const modal = document.getElementById('quoteModal');
+        function openModal() { modal.style.display = 'flex'; }
+        function closeModal() { modal.style.display = 'none'; }
+        window.onclick = function (event) {
+            if (event.target == modal) closeModal();
+        }
+
+        document.querySelectorAll('.secure-img').forEach(img => {
+            img.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+                console.log("Image protected by security layer.");
+            });
+        });
+
+        function setupCarousel(containerId, intervalTime) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const slides = container.querySelectorAll('.carousel-slide');
+            let currentIndex = 0;
+            if (slides.length <= 1) return;
+            setInterval(() => {
+                slides[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % slides.length;
+                slides[currentIndex].classList.add('active');
+            }, intervalTime);
+        }
+        setupCarousel('heroCarousel', 4000);
+        setupCarousel('locationCarousel', 3000);
+
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const bodyOverlay = document.getElementById('body-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('open');
+            bodyOverlay.classList.toggle('open');
+            if (mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        closeMenuBtn.addEventListener('click', toggleMobileMenu);
+        bodyOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Tự động đóng menu khi bấm vào link chuyển hướng
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // Xử lý Gallery & Lightbox
+        document.addEventListener('DOMContentLoaded', function () {
+            const loadMoreBtn = document.getElementById('loadMoreGallery');
+            const galleryGrid = document.getElementById('galleryGrid');
+
+            // Xử lý nút Xem thêm
+            if (loadMoreBtn && galleryGrid) {
+                loadMoreBtn.addEventListener('click', function () {
+                    galleryGrid.classList.toggle('show-all');
+                    if (galleryGrid.classList.contains('show-all')) {
+                        loadMoreBtn.innerHTML = 'Thu gọn';
+                    } else {
+                        loadMoreBtn.innerHTML = 'Xem thêm hình ảnh';
+                        const galleryTop = document.getElementById('gallery').offsetTop - 80;
+                        window.scrollTo({ top: galleryTop, behavior: 'smooth' });
+                    }
+                });
+            }
+
+            // Xử lý Lightbox Toàn màn hình
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeLightbox = document.querySelector('.lightbox-close');
+            const lightboxPrev = document.querySelector('.lightbox-prev');
+            const lightboxNext = document.querySelector('.lightbox-next');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const images = document.querySelectorAll('.gallery-item img');
+            let currentIndex = 0;
+
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    lightbox.classList.add('active');
+                    lightboxImg.src = images[index].src;
+                    currentIndex = index;
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function showLightboxImage(index) {
+                if (index < 0) currentIndex = images.length - 1;
+                else if (index >= images.length) currentIndex = 0;
+                else currentIndex = index;
+
+                lightboxImg.style.opacity = 0.5;
+                setTimeout(() => {
+                    lightboxImg.src = images[currentIndex].src;
+                    lightboxImg.style.opacity = 1;
+                }, 150);
+            }
+
+            if (lightboxPrev) {
+                lightboxPrev.addEventListener('click', (e) => {
+                    e.stopPropagation(); showLightboxImage(currentIndex - 1);
+                });
+            }
+            if (lightboxNext) {
+                lightboxNext.addEventListener('click', (e) => {
+                    e.stopPropagation(); showLightboxImage(currentIndex + 1);
+                });
+            }
+
+            function closeLightboxFunc() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (closeLightbox) closeLightbox.addEventListener('click', closeLightboxFunc);
+            if (lightbox) {
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) closeLightboxFunc();
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (lightbox && lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') closeLightboxFunc();
+                    else if (e.key === 'ArrowLeft') showLightboxImage(currentIndex - 1);
+                    else if (e.key === 'ArrowRight') showLightboxImage(currentIndex + 1);
+                }
+            });
+        });
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
+<!-- nháp -->

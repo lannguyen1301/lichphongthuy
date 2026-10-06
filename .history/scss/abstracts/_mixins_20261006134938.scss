@@ -1,0 +1,22 @@
+/* 
+   Mixins hỗ trợ tính toán và hiển thị
+   Tích hợp biến hệ thống thông qua module @use.
+*/
+
+@use "sass:map";
+@use "variables" as v;
+
+// Mixin hỗ trợ Media Query tự động dựa vào hệ thống lưới chuẩn hóa
+@mixin screen($key) {
+    $breakpoint: map.get(v.$grid-breakpoints, $key);
+    
+    @if ($breakpoint) {
+        // Áp dụng kỹ thuật trừ 0.02px để xử lý sub-pixel overlap rendering
+        // Đảm bảo không có xung đột giữa min-width và max-width ở điểm giao cắt
+        @media (max-width: ($breakpoint - 0.02px)) {
+            @content;
+        }
+    } @else {
+        @error "The value #{$key} is not defined in the v.$grid-breakpoints map.";
+    }
+}

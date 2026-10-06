@@ -1,0 +1,27 @@
+// scss/base/_utils.scss
+@use "sass:map";
+@use "../abstracts/variables" as vars;
+@use "../abstracts/mixins" as mixins;
+
+$display-values: block, flex, grid, none;
+
+@mixin make-display($infix: "") {
+    @each $display in $display-values {
+        .d#{$infix}-#{$display} {
+            display: $display !important;
+        }
+    }
+}
+
+// Mobile first (default)
+@include make-display("");
+
+// Responsive utilities
+@each $breakpoint, $dimension in vars.$grid-breakpoints {
+    @if $dimension != 0 {
+        @include mixins.breakpoint($breakpoint) {
+            $infix: "-#{$breakpoint}";
+            @include make-display($infix);
+        }
+    }
+}

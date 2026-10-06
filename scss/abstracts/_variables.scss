@@ -1,0 +1,68 @@
+/* ==========================================================================
+   BIẾN HỆ THỐNG TOÀN CỤC (GLOBAL VARIABLES)
+   Mọi tham số thiết kế lõi phải được định nghĩa tại đây.
+   Sử dụng cờ !default để cho phép ghi đè trong môi trường module hóa,
+   bảo vệ mã nguồn khỏi các xung đột khi tích hợp giao diện (theming).
+   ========================================================================== */
+
+// 1. TYPOGRAPHY (Kiểu Chữ)
+// Khai báo các giá trị nền tảng thay thế cho các chuỗi hardcoded trong _base.scss
+// --------------------------------------------------------------------------
+$base-font-size: 62.5% !default; // Thiết lập 1rem = 10px
+$body-font-size: 1.6rem !default;
+$body-font-family:
+    Gordita,
+    sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue" !default;
+
+// 2. GRID SYSTEM (Hệ Thống Lưới & Điểm Ngắt)
+// Tổng hợp từ _grid.scss, _utils.scss và _mixins.scss
+// --------------------------------------------------------------------------
+// Điểm ngắt cho Media Queries (Breakpoint dictionary)
+$grid-breakpoints: (
+    xxl: 1400px,
+    xl: 1200px,
+    lg: 992px,
+    md: 768px,
+    sm: 576px,
+) !default;
+
+// Chiều rộng tối đa của container theo từng điểm ngắt
+$container-max-widths: (
+    xxl: 1140px,
+    xl: 960px,
+    lg: 720px,
+    md: 540px,
+    sm: 100%,
+) !default;
+
+// Tham số cấu trúc lưới và kích thước thành phần
+$grid-columns: 12 !default;
+$grid-gutter-width: 30px !default;
+$container-max-width-custom: 1370px !default;
+$container-padding-sm: 20px !default;
+
+// Các hệ số nhân của khoảng cách (Gutters ratio map)
+$gutters: (
+    0: 0,
+    1: 0.25,
+    2: 0.5,
+    3: 1,
+    4: 1.5,
+    5: 3,
+) !default;
+
+// 3. UTILITIES (Tiện Ích Hiển Thị)
+// Tham số điều khiển từ _utils.scss
+// --------------------------------------------------------------------------
+// Các giá trị của thuộc tính display được hỗ trợ để tự động sinh class (.d-flex, .d-block...)
+$display-values: block, flex, grid, none !default;

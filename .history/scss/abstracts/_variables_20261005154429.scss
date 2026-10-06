@@ -1,0 +1,38 @@
+// dời các biến màu sác qua bên này? hết dự án nhé!
+// scss/abstracts/_variables.scss
+
+$grid-breakpoints: (
+    xxl: 1200px,
+    // Tôi đã điều chỉnh lại một chút cho logic hơn
+    xl: 992px,
+    lg: 768px,
+    md: 576px,
+    sm: 0, // xs mặc định là 0
+);
+
+$container-max-widths: (
+    xxl: 1140px,
+    xl: 960px,
+    lg: 720px,
+    md: 540px,
+    sm: 100%,
+);
+
+$grid-columns: 12 !default;
+$grid-gutter-width: 30px !default;
+
+$gutters: (
+    0: 0,
+    1: 0.25,
+    2: 0.5,
+    3: 1,
+    4: 1.5,
+    5: 3,
+);
+
+// Màu sắc và các biến khác sẽ được thêm vào đây sau này
+$text-color: #333;
+$body-bg: #fff;
+$icon-color: inherit;
+$separate-color: #eee;
+$margin: 20px;

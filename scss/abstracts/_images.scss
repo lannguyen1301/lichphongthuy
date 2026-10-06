@@ -1,0 +1,27 @@
+// IMAGES & BACKGROUNDS PLACEHOLDERS// Hình nền: Phủ kín khung, tự cắt phần thừa, không méo
+%bgCover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+// Hình nền: Hiển thị trọn vẹn hình ảnh, không cắt xén, căn giữa
+%bgContain {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+// Thẻ <img>: Phủ kín khung cha, tự động cắt phần thừa, không méo (Thường dùng cho Avatar, Thumbnail bài viết)
+%imgCover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+// Thẻ <img>: Thu nhỏ để vừa vặn hoàn toàn trong khung cha, không méo, không cắt (Thường dùng cho Logo, Hình sản phẩm chi tiết)
+%imgContain {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

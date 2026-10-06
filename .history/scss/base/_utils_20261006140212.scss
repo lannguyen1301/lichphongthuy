@@ -1,0 +1,27 @@
+/* ==========================================================================
+   TIỆN ÍCH (UTILITIES)
+   Tự động sinh các lớp bổ trợ điều khiển hiển thị (display classes).
+   ========================================================================== */
+
+@use "../abstracts/" as v;
+
+@mixin make-display($breakpoint: null) {
+    // Phân tích nội suy tiền tố một cách an toàn
+    $infix: if($breakpoint != null, "-#{$breakpoint}", "");
+
+    @each $display in v.$display-values {
+        .d#{$infix}-#{$display} {
+            display: $display !important;
+        }
+    }
+}
+
+// 1. Gọi lớp tiện ích hiển thị cho viewport tiêu chuẩn
+@include make-display();
+
+// 2. Khởi tạo các lớp tiện ích tương ứng với từng breakpoint
+@each $breakpoint, $dimension in v.$grid-breakpoints {
+    @media (max-width: ($dimension - 0.02px)) {
+        @include make-display($breakpoint);
+    }
+}

@@ -1,0 +1,188 @@
+<div class="container">
+    <!-- 1. Logo -->
+    <div class="header__logo">
+        <a href="#!" aria-label="Logo" class="header__logo-link">
+            <img src="./assets/icons/logo.svg" alt="lichphongthuy">
+        </a>
+    </div>
+
+    <!-- 2. Icon Home -->
+    <div class="header__home">
+        <a href="#!" aria-label="Home">
+            <img src="./assets/icons/home.svg" alt="lichphongthuy" class="header__icon icon"> <!-- Hoặc thẻ img -->
+            <i class="icon-home"></i> <!-- Hoặc thẻ img -->
+        </a>
+    </div>
+
+    <!-- 3. Div Date Year (Container cha chứa cả Date và Time) -->
+    <div class="header__datetime-wrapper">
+
+        <!-- 3.1. Div Year Group (Ngày tháng) -->
+        <div class="header__date-group">
+            <div class="header__date-icon">
+                <img src="./assets/icons/calendar.svg" alt="icon lịch">
+            </div>
+            <div class="header__date-text">24/05/2024</div>
+        </div>
+
+        <!-- 3.2. Div Time Group (Giờ phút giây) -->
+        <div class="header__time-group">
+            <div class="header__time-icon">
+                <img src="./assets/icons/clock.svg" alt="icon giờ">
+            </div>
+            <div class="header__time-text">14:30:05</div>
+        </div>
+    </div>
+
+    <!-- 4. Div chưa group ngôn ngữ -->
+    <div class="header__lang">
+        <div class="header__lang-text">VN</div>
+        details.header__lang-details
+        <summary class="header__lang-summary">
+            <img src="./assets/icons/global.svg" alt="icon ngôn ngữ">
+        </summary>
+        <ul class="header__lang-list">
+            <li>
+                <a href="#!" class="header__lang-link">VN</a>
+            </li>
+            <li>
+                <a href="#!" class="header__lang-link">EN</a>
+            </li>
+            <li>
+                <a href="#!" class="header__lang-link">JP</a>
+            </li>
+        </ul>
+        <img src="./assets/icons/arrow-down.svg" alt="icon mũi tên xuống" class="header__lang-arrow icon">
+    </div>
+
+    <!-- 5. Div Đăng nhập -->
+    <div class="header__auth">
+        <button class="btn-login">Đăng nhập</button>
+    </div>
+
+    <!-- 6. Div chưa group theme -->
+    <div class="header__theme-group">
+        <details class="header__theme-details">
+            <summary class="header__theme-summary">
+                <img src="./assets/icons/theme.svg" alt="icon theme">
+            </summary>
+            <ul class="header__theme-list">
+                <li class="header__theme-item">
+                    <button data-theme="light">
+                        <img src="./assets/icons/light.svg" alt="" class="header__theme-icon icon">
+                        Sáng
+                    </button>
+                </li>
+                <li class="header__theme-item">
+                    <button data-theme="dark">
+                        <img src="./assets/icons/dark.svg" alt="" class="header__theme-icon icon">
+                        Tối
+                    </button>
+                </li>
+                <li class="header__theme-item">
+                    <button data-theme="earth">
+                        <img src="./assets/icons/earth.svg" alt="" class="header__theme-icon icon">
+                        Thổ
+                    </button>
+                </li>
+                <li class="header__theme-item">
+                    <button data-theme="fire">
+                        <img src="./assets/icons/fire.svg" alt="" class="header__theme-icon icon">
+                        Hoả
+                    </button>
+                </li>
+                <li class="header__theme-item">
+                    <button data-theme="sakura">🌸 Hoa anh đào</button>
+                    <button data-theme="metal">
+                        <img src="./assets/icons/metal.svg" alt="" class="header__theme-icon icon">
+                        Kim
+                    </button>
+                </li>
+                <li class="header__theme-item">
+                    <button data-theme="water">
+                        <img src="./assets/icons/water.svg" alt="" class="header__theme-icon icon">
+                        Thuỷ
+                    </button>
+                </li>
+                <li class="header__theme-item">
+                    <button data-theme="sakura">🌸 Hoa anh đào</button>
+                    <button data-theme="wood">
+                        <img src="./assets/icons/wood.svg" alt="" class="header__theme-icon icon">
+                        Mộc
+                    </button>
+                </li>
+            </ul>
+        </details>
+    </div>
+</div>
+
+
+<!-- Block 'header' kết hợp với Block layout 'container' -->
+<header class="header container">
+
+    <!-- Element: Logo -->
+    <div class="header__logo">
+        <a href="#!"><img src="./assets/icons/logo.svg" alt="Lịch phong thủy"></a>
+    </div>
+
+    <!-- Element: Home -->
+    <div class="header__home">
+        <a href="#!" aria-label="Home" class="header__home-link">
+            <!-- Block 'icon' độc lập, kết hợp với Element của header -->
+            <img src="./assets/icons/home.svg" alt="Home" class="icon header__icon">
+        </a>
+    </div>
+
+    <!-- Element: Group Ngày Giờ -->
+    <div class="header__datetime">
+        <div class="header__date">
+            <img src="calendar-icon.svg" alt="Lịch" class="header__date-icon">
+            <span class="header__date-text">24/05/2024</span>
+        </div>
+        <div class="header__time">
+            <img src="clock-icon.svg" alt="Đồng hồ" class="header__time-icon">
+            <span class="header__time-text">14:30:05</span>
+        </div>
+    </div>
+
+    <!-- Element: Ngôn ngữ -->
+    <div class="header__lang">
+        <details class="header__lang-details">
+            <summary class="header__lang-summary">
+                <span class="header__lang-text">VN</span>
+                <img src="./assets/icons/global.svg" alt="Global">
+                <img src="./assets/icons/arrow-down.svg" alt="Mở rộng" class="header__lang-arrow">
+            </summary>
+            <ul class="header__lang-list">
+                <li class="header__lang-item"><a href="#!" class="header__lang-link">VN</a></li>
+                <li class="header__lang-item"><a href="#!" class="header__lang-link">EN</a></li>
+                <li class="header__lang-item"><a href="#!" class="header__lang-link">JP</a></li>
+            </ul>
+        </details>
+    </div>
+
+    <!-- Element: Auth (Đăng nhập) -->
+    <div class="header__auth">
+        <!-- Áp dụng Mixin trong BEM: block 'btn' + element 'header__auth-btn' -->
+        <button class="btn btn--primary header__auth-btn">Đăng nhập</button>
+    </div>
+
+    <!-- Element: Theme -->
+    <div class="header__theme">
+        <details class="header__theme-details">
+            <summary class="header__theme-summary">
+                <img src="./assets/icons/theme.svg" alt="Theme">
+            </summary>
+            <ul class="header__theme-list">
+                <li class="header__theme-item">
+                    <button class="header__theme-btn" data-theme="light">
+                        <img src="./assets/icons/light.svg" alt="Sáng" class="icon header__theme-icon">
+                        Sáng
+                    </button>
+                </li>
+                <!-- Các li khác tương tự... -->
+            </ul>
+        </details>
+    </div>
+
+</header>

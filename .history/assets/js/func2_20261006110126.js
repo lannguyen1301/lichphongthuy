@@ -1,0 +1,21623 @@
+var Gv = Object.defineProperty,
+    qv = Object.defineProperties;
+var Wv = Object.getOwnPropertyDescriptors;
+var um = Object.getOwnPropertySymbols;
+var Yv = Object.prototype.hasOwnProperty,
+    Kv = Object.prototype.propertyIsEnumerable;
+var dm = (t, n, e) => n in t ? Gv(t, n, {
+        enumerable: !0,
+        configurable: !0,
+        writable: !0,
+        value: e
+    }) : t[n] = e,
+    A = (t, n) => {
+        for (var e in n ||= {}) Yv.call(n, e) && dm(t, e, n[e]);
+        if (um)
+            for (var e of um(n)) Kv.call(n, e) && dm(t, e, n[e]);
+        return t
+    },
+    ue = (t, n) => qv(t, Wv(n));
+var Fc;
+
+function Ia() {
+    return Fc
+}
+
+function Ut(t) {
+    let n = Fc;
+    return Fc = t, n
+}
+var hm = Symbol("NotFound");
+
+function ki(t) {
+    return t === hm || t?.name === "\u0275NotFound"
+}
+var We = null,
+    Ma = !1,
+    Pc = 1,
+    Qv = null,
+    Je = Symbol("SIGNAL");
+
+function Y(t) {
+    let n = We;
+    return We = t, n
+}
+
+function Ra() {
+    return We
+}
+var Vn = {
+    version: 0,
+    lastCleanEpoch: 0,
+    dirty: !1,
+    producers: void 0,
+    producersTail: void 0,
+    consumers: void 0,
+    consumersTail: void 0,
+    recomputing: !1,
+    consumerAllowSignalWrites: !1,
+    consumerIsAlwaysLive: !1,
+    kind: "unknown",
+    producerMustRecompute: () => !1,
+    producerRecomputeValue: () => {},
+    consumerMarkedDirty: () => {},
+    consumerOnSignalRead: () => {}
+};
+
+function Ri(t) {
+    if (Ma) throw new Error("");
+    if (We === null) return;
+    We.consumerOnSignalRead(t);
+    let n = We.producersTail;
+    if (n !== void 0 && n.producer === t) return;
+    let e, i = We.recomputing;
+    if (i && (e = n !== void 0 ? n.nextProducer : We.producers, e !== void 0 && e.producer === t)) {
+        We.producersTail = e, e.lastReadVersion = t.version;
+        return
+    }
+    let r = t.consumersTail;
+    if (r !== void 0 && r.consumer === We && (!i || Xv(r, We))) return;
+    let o = Fi(We),
+        a = {
+            producer: t,
+            consumer: We,
+            nextProducer: e,
+            prevConsumer: r,
+            lastReadVersion: t.version,
+            nextConsumer: void 0
+        };
+    We.producersTail = a, n !== void 0 ? n.nextProducer = a : We.producers = a, o && gm(t, a)
+}
+
+function mm() {
+    Pc++
+}
+
+function Oa(t) {
+    if (!(Fi(t) && !t.dirty) && !(!t.dirty && t.lastCleanEpoch === Pc)) {
+        if (!t.producerMustRecompute(t) && !Li(t)) {
+            ka(t);
+            return
+        }
+        t.producerRecomputeValue(t), ka(t)
+    }
+}
+
+function Bc(t) {
+    if (t.consumers === void 0) return;
+    let n = Ma;
+    Ma = !0;
+    try {
+        for (let e = t.consumers; e !== void 0; e = e.nextConsumer) {
+            let i = e.consumer;
+            i.dirty || Zv(i)
+        }
+    } finally {
+        Ma = n
+    }
+}
+
+function Hc() {
+    return We?.consumerAllowSignalWrites !== !1
+}
+
+function Zv(t) {
+    t.dirty = !0, Bc(t), t.consumerMarkedDirty?.(t)
+}
+
+function ka(t) {
+    t.dirty = !1, t.lastCleanEpoch = Pc
+}
+
+function $n(t) {
+    return t && fm(t), Y(t)
+}
+
+function fm(t) {
+    t.producersTail = void 0, t.recomputing = !0
+}
+
+function Oi(t, n) {
+    Y(n), t && pm(t)
+}
+
+function pm(t) {
+    t.recomputing = !1;
+    let n = t.producersTail,
+        e = n !== void 0 ? n.nextProducer : t.producers;
+    if (e !== void 0) {
+        if (Fi(t))
+            do e = jc(e); while (e !== void 0);
+        n !== void 0 ? n.nextProducer = void 0 : t.producers = void 0
+    }
+}
+
+function Li(t) {
+    for (let n = t.producers; n !== void 0; n = n.nextProducer) {
+        let e = n.producer,
+            i = n.lastReadVersion;
+        if (i !== e.version || (Oa(e), i !== e.version)) return !0
+    }
+    return !1
+}
+
+function Un(t) {
+    if (Fi(t)) {
+        let n = t.producers;
+        for (; n !== void 0;) n = jc(n)
+    }
+    t.producers = void 0, t.producersTail = void 0, t.consumers = void 0, t.consumersTail = void 0
+}
+
+function gm(t, n) {
+    let e = t.consumersTail,
+        i = Fi(t);
+    if (e !== void 0 ? (n.nextConsumer = e.nextConsumer, e.nextConsumer = n) : (n.nextConsumer = void 0, t.consumers = n), n.prevConsumer = e, t.consumersTail = n, !i)
+        for (let r = t.producers; r !== void 0; r = r.nextProducer) gm(r.producer, r)
+}
+
+function jc(t) {
+    let n = t.producer,
+        e = t.nextProducer,
+        i = t.nextConsumer,
+        r = t.prevConsumer;
+    if (t.nextConsumer = void 0, t.prevConsumer = void 0, i !== void 0 ? i.prevConsumer = r : n.consumersTail = r, r !== void 0) r.nextConsumer = i;
+    else if (n.consumers = i, !Fi(n)) {
+        let o = n.producers;
+        for (; o !== void 0;) o = jc(o)
+    }
+    return e
+}
+
+function Fi(t) {
+    return t.consumerIsAlwaysLive || t.consumers !== void 0
+}
+
+function La(t) {
+    Qv?.(t)
+}
+
+function Xv(t, n) {
+    let e = n.producersTail;
+    if (e !== void 0) {
+        let i = n.producers;
+        do {
+            if (i === t) return !0;
+            if (i === e) break;
+            i = i.nextProducer
+        } while (i !== void 0)
+    }
+    return !1
+}
+
+function Fa(t, n) {
+    return Object.is(t, n)
+}
+
+function Pa(t, n) {
+    let e = Object.create(Jv);
+    e.computation = t, n !== void 0 && (e.equal = n);
+    let i = () => {
+        if (Oa(e), Ri(e), e.value === ro) throw e.error;
+        return e.value
+    };
+    return i[Je] = e, La(e), i
+}
+var Na = Symbol("UNSET"),
+    Aa = Symbol("COMPUTING"),
+    ro = Symbol("ERRORED"),
+    Jv = ue(A({}, Vn), {
+        value: Na,
+        dirty: !0,
+        error: null,
+        equal: Fa,
+        kind: "computed",
+        producerMustRecompute(t) {
+            return t.value === Na || t.value === Aa
+        },
+        producerRecomputeValue(t) {
+            if (t.value === Aa) throw new Error("");
+            let n = t.value;
+            t.value = Aa;
+            let e = $n(t),
+                i, r = !1;
+            try {
+                i = t.computation(), Y(null), r = n !== Na && n !== ro && i !== ro && t.equal(n, i)
+            } catch (o) {
+                i = ro, t.error = o
+            } finally {
+                Oi(t, e)
+            }
+            if (r) {
+                t.value = n;
+                return
+            }
+            t.value = i, t.version++
+        }
+    });
+
+function ey() {
+    throw new Error
+}
+var vm = ey;
+
+function ym(t) {
+    vm(t)
+}
+
+function Vc(t) {
+    vm = t
+}
+var ty = null;
+
+function $c(t, n) {
+    let e = Object.create(Ba);
+    e.value = t, n !== void 0 && (e.equal = n);
+    let i = () => Em(e);
+    return i[Je] = e, La(e), [i, a => Pi(e, a), a => Uc(e, a)]
+}
+
+function Em(t) {
+    return Ri(t), t.value
+}
+
+function Pi(t, n) {
+    Hc() || ym(t), t.equal(t.value, n) || (t.value = n, ny(t))
+}
+
+function Uc(t, n) {
+    Hc() || ym(t), Pi(t, n(t.value))
+}
+var Ba = ue(A({}, Vn), {
+    equal: Fa,
+    value: void 0,
+    kind: "signal"
+});
+
+function ny(t) {
+    t.version++, mm(), Bc(t), ty?.(t)
+}
+
+function te(t) {
+    return typeof t == "function"
+}
+
+function Bi(t) {
+    let e = t(i => {
+        Error.call(i), i.stack = new Error().stack
+    });
+    return e.prototype = Object.create(Error.prototype), e.prototype.constructor = e, e
+}
+var Ha = Bi(t => function(e) {
+    t(this), this.message = e ? `${e.length} errors occurred during unsubscription:
+${e.map((i,r)=>`${r+1}) ${i.toString()}`).join(`
+  `)}` : "", this.name = "UnsubscriptionError", this.errors = e
+});
+
+function oo(t, n) {
+    if (t) {
+        let e = t.indexOf(n);
+        0 <= e && t.splice(e, 1)
+    }
+}
+var Me = class t {
+    constructor(n) {
+        this.initialTeardown = n, this.closed = !1, this._parentage = null, this._finalizers = null
+    }
+    unsubscribe() {
+        let n;
+        if (!this.closed) {
+            this.closed = !0;
+            let {
+                _parentage: e
+            } = this;
+            if (e)
+                if (this._parentage = null, Array.isArray(e))
+                    for (let o of e) o.remove(this);
+                else e.remove(this);
+            let {
+                initialTeardown: i
+            } = this;
+            if (te(i)) try {
+                i()
+            } catch (o) {
+                n = o instanceof Ha ? o.errors : [o]
+            }
+            let {
+                _finalizers: r
+            } = this;
+            if (r) {
+                this._finalizers = null;
+                for (let o of r) try {
+                    bm(o)
+                } catch (a) {
+                    n = n ?? [], a instanceof Ha ? n = [...n, ...a.errors] : n.push(a)
+                }
+            }
+            if (n) throw new Ha(n)
+        }
+    }
+    add(n) {
+        var e;
+        if (n && n !== this)
+            if (this.closed) bm(n);
+            else {
+                if (n instanceof t) {
+                    if (n.closed || n._hasParent(this)) return;
+                    n._addParent(this)
+                }(this._finalizers = (e = this._finalizers) !== null && e !== void 0 ? e : []).push(n)
+            }
+    }
+    _hasParent(n) {
+        let {
+            _parentage: e
+        } = this;
+        return e === n || Array.isArray(e) && e.includes(n)
+    }
+    _addParent(n) {
+        let {
+            _parentage: e
+        } = this;
+        this._parentage = Array.isArray(e) ? (e.push(n), e) : e ? [e, n] : n
+    }
+    _removeParent(n) {
+        let {
+            _parentage: e
+        } = this;
+        e === n ? this._parentage = null : Array.isArray(e) && oo(e, n)
+    }
+    remove(n) {
+        let {
+            _finalizers: e
+        } = this;
+        e && oo(e, n), n instanceof t && n._removeParent(this)
+    }
+};
+Me.EMPTY = (() => {
+    let t = new Me;
+    return t.closed = !0, t
+})();
+var zc = Me.EMPTY;
+
+function ja(t) {
+    return t instanceof Me || t && "closed" in t && te(t.remove) && te(t.add) && te(t.unsubscribe)
+}
+
+function bm(t) {
+    te(t) ? t() : t.unsubscribe()
+}
+var kt = {
+    onUnhandledError: null,
+    onStoppedNotification: null,
+    Promise: void 0,
+    useDeprecatedSynchronousErrorHandling: !1,
+    useDeprecatedNextContext: !1
+};
+var Hi = {
+    setTimeout(t, n, ...e) {
+        let {
+            delegate: i
+        } = Hi;
+        return i?.setTimeout ? i.setTimeout(t, n, ...e) : setTimeout(t, n, ...e)
+    },
+    clearTimeout(t) {
+        let {
+            delegate: n
+        } = Hi;
+        return (n?.clearTimeout || clearTimeout)(t)
+    },
+    delegate: void 0
+};
+
+function Va(t) {
+    Hi.setTimeout(() => {
+        let {
+            onUnhandledError: n
+        } = kt;
+        if (n) n(t);
+        else throw t
+    })
+}
+
+function ao() {}
+var Dm = Gc("C", void 0, void 0);
+
+function Cm(t) {
+    return Gc("E", void 0, t)
+}
+
+function xm(t) {
+    return Gc("N", t, void 0)
+}
+
+function Gc(t, n, e) {
+    return {
+        kind: t,
+        value: n,
+        error: e
+    }
+}
+var zn = null;
+
+function ji(t) {
+    if (kt.useDeprecatedSynchronousErrorHandling) {
+        let n = !zn;
+        if (n && (zn = {
+                errorThrown: !1,
+                error: null
+            }), t(), n) {
+            let {
+                errorThrown: e,
+                error: i
+            } = zn;
+            if (zn = null, e) throw i
+        }
+    } else t()
+}
+
+function _m(t) {
+    kt.useDeprecatedSynchronousErrorHandling && zn && (zn.errorThrown = !0, zn.error = t)
+}
+var Gn = class extends Me {
+        constructor(n) {
+            super(), this.isStopped = !1, n ? (this.destination = n, ja(n) && n.add(this)) : this.destination = oy
+        }
+        static create(n, e, i) {
+            return new Vi(n, e, i)
+        }
+        next(n) {
+            this.isStopped ? Wc(xm(n), this) : this._next(n)
+        }
+        error(n) {
+            this.isStopped ? Wc(Cm(n), this) : (this.isStopped = !0, this._error(n))
+        }
+        complete() {
+            this.isStopped ? Wc(Dm, this) : (this.isStopped = !0, this._complete())
+        }
+        unsubscribe() {
+            this.closed || (this.isStopped = !0, super.unsubscribe(), this.destination = null)
+        }
+        _next(n) {
+            this.destination.next(n)
+        }
+        _error(n) {
+            try {
+                this.destination.error(n)
+            } finally {
+                this.unsubscribe()
+            }
+        }
+        _complete() {
+            try {
+                this.destination.complete()
+            } finally {
+                this.unsubscribe()
+            }
+        }
+    },
+    iy = Function.prototype.bind;
+
+function qc(t, n) {
+    return iy.call(t, n)
+}
+var Yc = class {
+        constructor(n) {
+            this.partialObserver = n
+        }
+        next(n) {
+            let {
+                partialObserver: e
+            } = this;
+            if (e.next) try {
+                e.next(n)
+            } catch (i) {
+                $a(i)
+            }
+        }
+        error(n) {
+            let {
+                partialObserver: e
+            } = this;
+            if (e.error) try {
+                e.error(n)
+            } catch (i) {
+                $a(i)
+            } else $a(n)
+        }
+        complete() {
+            let {
+                partialObserver: n
+            } = this;
+            if (n.complete) try {
+                n.complete()
+            } catch (e) {
+                $a(e)
+            }
+        }
+    },
+    Vi = class extends Gn {
+        constructor(n, e, i) {
+            super();
+            let r;
+            if (te(n) || !n) r = {
+                next: n ?? void 0,
+                error: e ?? void 0,
+                complete: i ?? void 0
+            };
+            else {
+                let o;
+                this && kt.useDeprecatedNextContext ? (o = Object.create(n), o.unsubscribe = () => this.unsubscribe(), r = {
+                    next: n.next && qc(n.next, o),
+                    error: n.error && qc(n.error, o),
+                    complete: n.complete && qc(n.complete, o)
+                }) : r = n
+            }
+            this.destination = new Yc(r)
+        }
+    };
+
+function $a(t) {
+    kt.useDeprecatedSynchronousErrorHandling ? _m(t) : Va(t)
+}
+
+function ry(t) {
+    throw t
+}
+
+function Wc(t, n) {
+    let {
+        onStoppedNotification: e
+    } = kt;
+    e && Hi.setTimeout(() => e(t, n))
+}
+var oy = {
+    closed: !0,
+    next: ao,
+    error: ry,
+    complete: ao
+};
+var $i = typeof Symbol == "function" && Symbol.observable || "@@observable";
+
+function ut(t) {
+    return t
+}
+
+function Kc(...t) {
+    return Qc(t)
+}
+
+function Qc(t) {
+    return t.length === 0 ? ut : t.length === 1 ? t[0] : function(e) {
+        return t.reduce((i, r) => r(i), e)
+    }
+}
+var le = (() => {
+    class t {
+        constructor(e) {
+            e && (this._subscribe = e)
+        }
+        lift(e) {
+            let i = new t;
+            return i.source = this, i.operator = e, i
+        }
+        subscribe(e, i, r) {
+            let o = sy(e) ? e : new Vi(e, i, r);
+            return ji(() => {
+                let {
+                    operator: a,
+                    source: s
+                } = this;
+                o.add(a ? a.call(o, s) : s ? this._subscribe(o) : this._trySubscribe(o))
+            }), o
+        }
+        _trySubscribe(e) {
+            try {
+                return this._subscribe(e)
+            } catch (i) {
+                e.error(i)
+            }
+        }
+        forEach(e, i) {
+            return i = Tm(i), new i((r, o) => {
+                let a = new Vi({
+                    next: s => {
+                        try {
+                            e(s)
+                        } catch (l) {
+                            o(l), a.unsubscribe()
+                        }
+                    },
+                    error: o,
+                    complete: r
+                });
+                this.subscribe(a)
+            })
+        }
+        _subscribe(e) {
+            var i;
+            return (i = this.source) === null || i === void 0 ? void 0 : i.subscribe(e)
+        } [$i]() {
+            return this
+        }
+        pipe(...e) {
+            return Qc(e)(this)
+        }
+        toPromise(e) {
+            return e = Tm(e), new e((i, r) => {
+                let o;
+                this.subscribe(a => o = a, a => r(a), () => i(o))
+            })
+        }
+    }
+    return t.create = n => new t(n), t
+})();
+
+function Tm(t) {
+    var n;
+    return (n = t ?? kt.Promise) !== null && n !== void 0 ? n : Promise
+}
+
+function ay(t) {
+    return t && te(t.next) && te(t.error) && te(t.complete)
+}
+
+function sy(t) {
+    return t && t instanceof Gn || ay(t) && ja(t)
+}
+
+function Zc(t) {
+    return te(t?.lift)
+}
+
+function he(t) {
+    return n => {
+        if (Zc(n)) return n.lift(function(e) {
+            try {
+                return t(e, this)
+            } catch (i) {
+                this.error(i)
+            }
+        });
+        throw new TypeError("Unable to lift unknown Observable type")
+    }
+}
+
+function ce(t, n, e, i, r) {
+    return new Xc(t, n, e, i, r)
+}
+var Xc = class extends Gn {
+    constructor(n, e, i, r, o, a) {
+        super(n), this.onFinalize = o, this.shouldUnsubscribe = a, this._next = e ? function(s) {
+            try {
+                e(s)
+            } catch (l) {
+                n.error(l)
+            }
+        } : super._next, this._error = r ? function(s) {
+            try {
+                r(s)
+            } catch (l) {
+                n.error(l)
+            } finally {
+                this.unsubscribe()
+            }
+        } : super._error, this._complete = i ? function() {
+            try {
+                i()
+            } catch (s) {
+                n.error(s)
+            } finally {
+                this.unsubscribe()
+            }
+        } : super._complete
+    }
+    unsubscribe() {
+        var n;
+        if (!this.shouldUnsubscribe || this.shouldUnsubscribe()) {
+            let {
+                closed: e
+            } = this;
+            super.unsubscribe(), !e && ((n = this.onFinalize) === null || n === void 0 || n.call(this))
+        }
+    }
+};
+
+function Ui() {
+    return he((t, n) => {
+        let e = null;
+        t._refCount++;
+        let i = ce(n, void 0, void 0, void 0, () => {
+            if (!t || t._refCount <= 0 || 0 < --t._refCount) {
+                e = null;
+                return
+            }
+            let r = t._connection,
+                o = e;
+            e = null, r && (!o || r === o) && r.unsubscribe(), n.unsubscribe()
+        });
+        t.subscribe(i), i.closed || (e = t.connect())
+    })
+}
+var zi = class extends le {
+    constructor(n, e) {
+        super(), this.source = n, this.subjectFactory = e, this._subject = null, this._refCount = 0, this._connection = null, Zc(n) && (this.lift = n.lift)
+    }
+    _subscribe(n) {
+        return this.getSubject().subscribe(n)
+    }
+    getSubject() {
+        let n = this._subject;
+        return (!n || n.isStopped) && (this._subject = this.subjectFactory()), this._subject
+    }
+    _teardown() {
+        this._refCount = 0;
+        let {
+            _connection: n
+        } = this;
+        this._subject = this._connection = null, n?.unsubscribe()
+    }
+    connect() {
+        let n = this._connection;
+        if (!n) {
+            n = this._connection = new Me;
+            let e = this.getSubject();
+            n.add(this.source.subscribe(ce(e, void 0, () => {
+                this._teardown(), e.complete()
+            }, i => {
+                this._teardown(), e.error(i)
+            }, () => this._teardown()))), n.closed && (this._connection = null, n = Me.EMPTY)
+        }
+        return n
+    }
+    refCount() {
+        return Ui()(this)
+    }
+};
+var Sm = Bi(t => function() {
+    t(this), this.name = "ObjectUnsubscribedError", this.message = "object unsubscribed"
+});
+var Be = (() => {
+        class t extends le {
+            constructor() {
+                super(), this.closed = !1, this.currentObservers = null, this.observers = [], this.isStopped = !1, this.hasError = !1, this.thrownError = null
+            }
+            lift(e) {
+                let i = new Ua(this, this);
+                return i.operator = e, i
+            }
+            _throwIfClosed() {
+                if (this.closed) throw new Sm
+            }
+            next(e) {
+                ji(() => {
+                    if (this._throwIfClosed(), !this.isStopped) {
+                        this.currentObservers || (this.currentObservers = Array.from(this.observers));
+                        for (let i of this.currentObservers) i.next(e)
+                    }
+                })
+            }
+            error(e) {
+                ji(() => {
+                    if (this._throwIfClosed(), !this.isStopped) {
+                        this.hasError = this.isStopped = !0, this.thrownError = e;
+                        let {
+                            observers: i
+                        } = this;
+                        for (; i.length;) i.shift().error(e)
+                    }
+                })
+            }
+            complete() {
+                ji(() => {
+                    if (this._throwIfClosed(), !this.isStopped) {
+                        this.isStopped = !0;
+                        let {
+                            observers: e
+                        } = this;
+                        for (; e.length;) e.shift().complete()
+                    }
+                })
+            }
+            unsubscribe() {
+                this.isStopped = this.closed = !0, this.observers = this.currentObservers = null
+            }
+            get observed() {
+                var e;
+                return ((e = this.observers) === null || e === void 0 ? void 0 : e.length) > 0
+            }
+            _trySubscribe(e) {
+                return this._throwIfClosed(), super._trySubscribe(e)
+            }
+            _subscribe(e) {
+                return this._throwIfClosed(), this._checkFinalizedStatuses(e), this._innerSubscribe(e)
+            }
+            _innerSubscribe(e) {
+                let {
+                    hasError: i,
+                    isStopped: r,
+                    observers: o
+                } = this;
+                return i || r ? zc : (this.currentObservers = null, o.push(e), new Me(() => {
+                    this.currentObservers = null, oo(o, e)
+                }))
+            }
+            _checkFinalizedStatuses(e) {
+                let {
+                    hasError: i,
+                    thrownError: r,
+                    isStopped: o
+                } = this;
+                i ? e.error(r) : o && e.complete()
+            }
+            asObservable() {
+                let e = new le;
+                return e.source = this, e
+            }
+        }
+        return t.create = (n, e) => new Ua(n, e), t
+    })(),
+    Ua = class extends Be {
+        constructor(n, e) {
+            super(), this.destination = n, this.source = e
+        }
+        next(n) {
+            var e, i;
+            (i = (e = this.destination) === null || e === void 0 ? void 0 : e.next) === null || i === void 0 || i.call(e, n)
+        }
+        error(n) {
+            var e, i;
+            (i = (e = this.destination) === null || e === void 0 ? void 0 : e.error) === null || i === void 0 || i.call(e, n)
+        }
+        complete() {
+            var n, e;
+            (e = (n = this.destination) === null || n === void 0 ? void 0 : n.complete) === null || e === void 0 || e.call(n)
+        }
+        _subscribe(n) {
+            var e, i;
+            return (i = (e = this.source) === null || e === void 0 ? void 0 : e.subscribe(n)) !== null && i !== void 0 ? i : zc
+        }
+    };
+var $e = class extends Be {
+    constructor(n) {
+        super(), this._value = n
+    }
+    get value() {
+        return this.getValue()
+    }
+    _subscribe(n) {
+        let e = super._subscribe(n);
+        return !e.closed && n.next(this._value), e
+    }
+    getValue() {
+        let {
+            hasError: n,
+            thrownError: e,
+            _value: i
+        } = this;
+        if (n) throw e;
+        return this._throwIfClosed(), i
+    }
+    next(n) {
+        super.next(this._value = n)
+    }
+};
+var rt = new le(t => t.complete());
+
+function wm(t) {
+    return t && te(t.schedule)
+}
+
+function Im(t) {
+    return t[t.length - 1]
+}
+
+function za(t) {
+    return te(Im(t)) ? t.pop() : void 0
+}
+
+function _n(t) {
+    return wm(Im(t)) ? t.pop() : void 0
+}
+
+function Nm(t, n, e, i) {
+    function r(o) {
+        return o instanceof e ? o : new e(function(a) {
+            a(o)
+        })
+    }
+    return new(e || (e = Promise))(function(o, a) {
+        function s(f) {
+            try {
+                m(i.next(f))
+            } catch (p) {
+                a(p)
+            }
+        }
+
+        function l(f) {
+            try {
+                m(i.throw(f))
+            } catch (p) {
+                a(p)
+            }
+        }
+
+        function m(f) {
+            f.done ? o(f.value) : r(f.value).then(s, l)
+        }
+        m((i = i.apply(t, n || [])).next())
+    })
+}
+
+function Mm(t) {
+    var n = typeof Symbol == "function" && Symbol.iterator,
+        e = n && t[n],
+        i = 0;
+    if (e) return e.call(t);
+    if (t && typeof t.length == "number") return {
+        next: function() {
+            return t && i >= t.length && (t = void 0), {
+                value: t && t[i++],
+                done: !t
+            }
+        }
+    };
+    throw new TypeError(n ? "Object is not iterable." : "Symbol.iterator is not defined.")
+}
+
+function qn(t) {
+    return this instanceof qn ? (this.v = t, this) : new qn(t)
+}
+
+function Am(t, n, e) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var i = e.apply(t, n || []),
+        r, o = [];
+    return r = Object.create((typeof AsyncIterator == "function" ? AsyncIterator : Object).prototype), s("next"), s("throw"), s("return", a), r[Symbol.asyncIterator] = function() {
+        return this
+    }, r;
+
+    function a(v) {
+        return function(x) {
+            return Promise.resolve(x).then(v, p)
+        }
+    }
+
+    function s(v, x) {
+        i[v] && (r[v] = function(B) {
+            return new Promise(function(M, I) {
+                o.push([v, B, M, I]) > 1 || l(v, B)
+            })
+        }, x && (r[v] = x(r[v])))
+    }
+
+    function l(v, x) {
+        try {
+            m(i[v](x))
+        } catch (B) {
+            g(o[0][3], B)
+        }
+    }
+
+    function m(v) {
+        v.value instanceof qn ? Promise.resolve(v.value.v).then(f, p) : g(o[0][2], v)
+    }
+
+    function f(v) {
+        l("next", v)
+    }
+
+    function p(v) {
+        l("throw", v)
+    }
+
+    function g(v, x) {
+        v(x), o.shift(), o.length && l(o[0][0], o[0][1])
+    }
+}
+
+function km(t) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var n = t[Symbol.asyncIterator],
+        e;
+    return n ? n.call(t) : (t = typeof Mm == "function" ? Mm(t) : t[Symbol.iterator](), e = {}, i("next"), i("throw"), i("return"), e[Symbol.asyncIterator] = function() {
+        return this
+    }, e);
+
+    function i(o) {
+        e[o] = t[o] && function(a) {
+            return new Promise(function(s, l) {
+                a = t[o](a), r(s, l, a.done, a.value)
+            })
+        }
+    }
+
+    function r(o, a, s, l) {
+        Promise.resolve(l).then(function(m) {
+            o({
+                value: m,
+                done: s
+            })
+        }, a)
+    }
+}
+var Ga = t => t && typeof t.length == "number" && typeof t != "function";
+
+function qa(t) {
+    return te(t?.then)
+}
+
+function Wa(t) {
+    return te(t[$i])
+}
+
+function Ya(t) {
+    return Symbol.asyncIterator && te(t?.[Symbol.asyncIterator])
+}
+
+function Ka(t) {
+    return new TypeError(`You provided ${t!==null&&typeof t=="object"?"an invalid object":`'${t}'`} where a stream was expected. You can provide an Observable, Promise, ReadableStream, Array, AsyncIterable, or Iterable.`)
+}
+
+function ly() {
+    return typeof Symbol != "function" || !Symbol.iterator ? "@@iterator" : Symbol.iterator
+}
+var Qa = ly();
+
+function Za(t) {
+    return te(t?.[Qa])
+}
+
+function Xa(t) {
+    return Am(this, arguments, function*() {
+        let e = t.getReader();
+        try {
+            for (;;) {
+                let {
+                    value: i,
+                    done: r
+                } = yield qn(e.read());
+                if (r) return yield qn(void 0);
+                yield yield qn(i)
+            }
+        } finally {
+            e.releaseLock()
+        }
+    })
+}
+
+function Ja(t) {
+    return te(t?.getReader)
+}
+
+function Ne(t) {
+    if (t instanceof le) return t;
+    if (t != null) {
+        if (Wa(t)) return cy(t);
+        if (Ga(t)) return uy(t);
+        if (qa(t)) return dy(t);
+        if (Ya(t)) return Rm(t);
+        if (Za(t)) return hy(t);
+        if (Ja(t)) return my(t)
+    }
+    throw Ka(t)
+}
+
+function cy(t) {
+    return new le(n => {
+        let e = t[$i]();
+        if (te(e.subscribe)) return e.subscribe(n);
+        throw new TypeError("Provided object does not correctly implement Symbol.observable")
+    })
+}
+
+function uy(t) {
+    return new le(n => {
+        for (let e = 0; e < t.length && !n.closed; e++) n.next(t[e]);
+        n.complete()
+    })
+}
+
+function dy(t) {
+    return new le(n => {
+        t.then(e => {
+            n.closed || (n.next(e), n.complete())
+        }, e => n.error(e)).then(null, Va)
+    })
+}
+
+function hy(t) {
+    return new le(n => {
+        for (let e of t)
+            if (n.next(e), n.closed) return;
+        n.complete()
+    })
+}
+
+function Rm(t) {
+    return new le(n => {
+        fy(t, n).catch(e => n.error(e))
+    })
+}
+
+function my(t) {
+    return Rm(Xa(t))
+}
+
+function fy(t, n) {
+    var e, i, r, o;
+    return Nm(this, void 0, void 0, function*() {
+        try {
+            for (e = km(t); i = yield e.next(), !i.done;) {
+                let a = i.value;
+                if (n.next(a), n.closed) return
+            }
+        } catch (a) {
+            r = {
+                error: a
+            }
+        } finally {
+            try {
+                i && !i.done && (o = e.return) && (yield o.call(e))
+            } finally {
+                if (r) throw r.error
+            }
+        }
+        n.complete()
+    })
+}
+
+function ot(t, n, e, i = 0, r = !1) {
+    let o = n.schedule(function() {
+        e(), r ? t.add(this.schedule(null, i)) : this.unsubscribe()
+    }, i);
+    if (t.add(o), !r) return o
+}
+
+function es(t, n = 0) {
+    return he((e, i) => {
+        e.subscribe(ce(i, r => ot(i, t, () => i.next(r), n), () => ot(i, t, () => i.complete(), n), r => ot(i, t, () => i.error(r), n)))
+    })
+}
+
+function ts(t, n = 0) {
+    return he((e, i) => {
+        i.add(t.schedule(() => e.subscribe(i), n))
+    })
+}
+
+function Om(t, n) {
+    return Ne(t).pipe(ts(n), es(n))
+}
+
+function Lm(t, n) {
+    return Ne(t).pipe(ts(n), es(n))
+}
+
+function Fm(t, n) {
+    return new le(e => {
+        let i = 0;
+        return n.schedule(function() {
+            i === t.length ? e.complete() : (e.next(t[i++]), e.closed || this.schedule())
+        })
+    })
+}
+
+function Pm(t, n) {
+    return new le(e => {
+        let i;
+        return ot(e, n, () => {
+            i = t[Qa](), ot(e, n, () => {
+                let r, o;
+                try {
+                    ({
+                        value: r,
+                        done: o
+                    } = i.next())
+                } catch (a) {
+                    e.error(a);
+                    return
+                }
+                o ? e.complete() : e.next(r)
+            }, 0, !0)
+        }), () => te(i?.return) && i.return()
+    })
+}
+
+function ns(t, n) {
+    if (!t) throw new Error("Iterable cannot be null");
+    return new le(e => {
+        ot(e, n, () => {
+            let i = t[Symbol.asyncIterator]();
+            ot(e, n, () => {
+                i.next().then(r => {
+                    r.done ? e.complete() : e.next(r.value)
+                })
+            }, 0, !0)
+        })
+    })
+}
+
+function Bm(t, n) {
+    return ns(Xa(t), n)
+}
+
+function Hm(t, n) {
+    if (t != null) {
+        if (Wa(t)) return Om(t, n);
+        if (Ga(t)) return Fm(t, n);
+        if (qa(t)) return Lm(t, n);
+        if (Ya(t)) return ns(t, n);
+        if (Za(t)) return Pm(t, n);
+        if (Ja(t)) return Bm(t, n)
+    }
+    throw Ka(t)
+}
+
+function Ae(t, n) {
+    return n ? Hm(t, n) : Ne(t)
+}
+
+function z(...t) {
+    let n = _n(t);
+    return Ae(t, n)
+}
+
+function Gi(t, n) {
+    let e = te(t) ? t : () => t,
+        i = r => r.error(e());
+    return new le(n ? r => n.schedule(i, 0, r) : i)
+}
+
+function Jc(t) {
+    return !!t && (t instanceof le || te(t.lift) && te(t.subscribe))
+}
+var rn = Bi(t => function() {
+    t(this), this.name = "EmptyError", this.message = "no elements in sequence"
+});
+
+function re(t, n) {
+    return he((e, i) => {
+        let r = 0;
+        e.subscribe(ce(i, o => {
+            i.next(t.call(n, o, r++))
+        }))
+    })
+}
+var {
+    isArray: py
+} = Array;
+
+function gy(t, n) {
+    return py(n) ? t(...n) : t(n)
+}
+
+function is(t) {
+    return re(n => gy(t, n))
+}
+var {
+    isArray: vy
+} = Array, {
+    getPrototypeOf: yy,
+    prototype: Ey,
+    keys: by
+} = Object;
+
+function rs(t) {
+    if (t.length === 1) {
+        let n = t[0];
+        if (vy(n)) return {
+            args: n,
+            keys: null
+        };
+        if (Dy(n)) {
+            let e = by(n);
+            return {
+                args: e.map(i => n[i]),
+                keys: e
+            }
+        }
+    }
+    return {
+        args: t,
+        keys: null
+    }
+}
+
+function Dy(t) {
+    return t && typeof t == "object" && yy(t) === Ey
+}
+
+function os(t, n) {
+    return t.reduce((e, i, r) => (e[i] = n[r], e), {})
+}
+
+function as(...t) {
+    let n = _n(t),
+        e = za(t),
+        {
+            args: i,
+            keys: r
+        } = rs(t);
+    if (i.length === 0) return Ae([], n);
+    let o = new le(Cy(i, n, r ? a => os(r, a) : ut));
+    return e ? o.pipe(is(e)) : o
+}
+
+function Cy(t, n, e = ut) {
+    return i => {
+        jm(n, () => {
+            let {
+                length: r
+            } = t, o = new Array(r), a = r, s = r;
+            for (let l = 0; l < r; l++) jm(n, () => {
+                let m = Ae(t[l], n),
+                    f = !1;
+                m.subscribe(ce(i, p => {
+                    o[l] = p, f || (f = !0, s--), s || i.next(e(o.slice()))
+                }, () => {
+                    --a || i.complete()
+                }))
+            }, i)
+        }, i)
+    }
+}
+
+function jm(t, n, e) {
+    t ? ot(e, t, n) : n()
+}
+
+function Vm(t, n, e, i, r, o, a, s) {
+    let l = [],
+        m = 0,
+        f = 0,
+        p = !1,
+        g = () => {
+            p && !l.length && !m && n.complete()
+        },
+        v = B => m < i ? x(B) : l.push(B),
+        x = B => {
+            o && n.next(B), m++;
+            let M = !1;
+            Ne(e(B, f++)).subscribe(ce(n, I => {
+                r?.(I), o ? v(I) : n.next(I)
+            }, () => {
+                M = !0
+            }, void 0, () => {
+                if (M) try {
+                    for (m--; l.length && m < i;) {
+                        let I = l.shift();
+                        a ? ot(n, a, () => x(I)) : x(I)
+                    }
+                    g()
+                } catch (I) {
+                    n.error(I)
+                }
+            }))
+        };
+    return t.subscribe(ce(n, v, () => {
+        p = !0, g()
+    })), () => {
+        s?.()
+    }
+}
+
+function Fe(t, n, e = 1 / 0) {
+    return te(n) ? Fe((i, r) => re((o, a) => n(i, o, r, a))(Ne(t(i, r))), e) : (typeof n == "number" && (e = n), he((i, r) => Vm(i, r, t, e)))
+}
+
+function $m(t = 1 / 0) {
+    return Fe(ut, t)
+}
+
+function Um() {
+    return $m(1)
+}
+
+function qi(...t) {
+    return Um()(Ae(t, _n(t)))
+}
+
+function so(t) {
+    return new le(n => {
+        Ne(t()).subscribe(n)
+    })
+}
+
+function eu(...t) {
+    let n = za(t),
+        {
+            args: e,
+            keys: i
+        } = rs(t),
+        r = new le(o => {
+            let {
+                length: a
+            } = e;
+            if (!a) {
+                o.complete();
+                return
+            }
+            let s = new Array(a),
+                l = a,
+                m = a;
+            for (let f = 0; f < a; f++) {
+                let p = !1;
+                Ne(e[f]).subscribe(ce(o, g => {
+                    p || (p = !0, m--), s[f] = g
+                }, () => l--, void 0, () => {
+                    (!l || !p) && (m || o.next(i ? os(i, s) : s), o.complete())
+                }))
+            }
+        });
+    return n ? r.pipe(is(n)) : r
+}
+
+function Ye(t, n) {
+    return he((e, i) => {
+        let r = 0;
+        e.subscribe(ce(i, o => t.call(n, o, r++) && i.next(o)))
+    })
+}
+
+function at(t) {
+    return he((n, e) => {
+        let i = null,
+            r = !1,
+            o;
+        i = n.subscribe(ce(e, void 0, void 0, a => {
+            o = Ne(t(a, at(t)(n))), i ? (i.unsubscribe(), i = null, o.subscribe(e)) : r = !0
+        })), r && (i.unsubscribe(), i = null, o.subscribe(e))
+    })
+}
+
+function zm(t, n, e, i, r) {
+    return (o, a) => {
+        let s = e,
+            l = n,
+            m = 0;
+        o.subscribe(ce(a, f => {
+            let p = m++;
+            l = s ? t(l, f, p) : (s = !0, f), i && a.next(l)
+        }, r && (() => {
+            s && a.next(l), a.complete()
+        })))
+    }
+}
+
+function Tn(t, n) {
+    return te(n) ? Fe(t, n, 1) : Fe(t, 1)
+}
+
+function Sn(t) {
+    return he((n, e) => {
+        let i = !1;
+        n.subscribe(ce(e, r => {
+            i = !0, e.next(r)
+        }, () => {
+            i || e.next(t), e.complete()
+        }))
+    })
+}
+
+function on(t) {
+    return t <= 0 ? () => rt : he((n, e) => {
+        let i = 0;
+        n.subscribe(ce(e, r => {
+            ++i <= t && (e.next(r), t <= i && e.complete())
+        }))
+    })
+}
+
+function ss(t = xy) {
+    return he((n, e) => {
+        let i = !1;
+        n.subscribe(ce(e, r => {
+            i = !0, e.next(r)
+        }, () => i ? e.complete() : e.error(t())))
+    })
+}
+
+function xy() {
+    return new rn
+}
+
+function an(t) {
+    return he((n, e) => {
+        try {
+            n.subscribe(e)
+        } finally {
+            e.add(t)
+        }
+    })
+}
+
+function sn(t, n) {
+    let e = arguments.length >= 2;
+    return i => i.pipe(t ? Ye((r, o) => t(r, o, i)) : ut, on(1), e ? Sn(n) : ss(() => new rn))
+}
+
+function Wi(t) {
+    return t <= 0 ? () => rt : he((n, e) => {
+        let i = [];
+        n.subscribe(ce(e, r => {
+            i.push(r), t < i.length && i.shift()
+        }, () => {
+            for (let r of i) e.next(r);
+            e.complete()
+        }, void 0, () => {
+            i = null
+        }))
+    })
+}
+
+function tu(t, n) {
+    let e = arguments.length >= 2;
+    return i => i.pipe(t ? Ye((r, o) => t(r, o, i)) : ut, Wi(1), e ? Sn(n) : ss(() => new rn))
+}
+
+function nu(t, n) {
+    return he(zm(t, n, arguments.length >= 2, !0))
+}
+
+function iu(...t) {
+    let n = _n(t);
+    return he((e, i) => {
+        (n ? qi(t, e, n) : qi(t, e)).subscribe(i)
+    })
+}
+
+function Ke(t, n) {
+    return he((e, i) => {
+        let r = null,
+            o = 0,
+            a = !1,
+            s = () => a && !r && i.complete();
+        e.subscribe(ce(i, l => {
+            r?.unsubscribe();
+            let m = 0,
+                f = o++;
+            Ne(t(l, f)).subscribe(r = ce(i, p => i.next(n ? n(l, p, f, m++) : p), () => {
+                r = null, s()
+            }))
+        }, () => {
+            a = !0, s()
+        }))
+    })
+}
+
+function ls(t) {
+    return he((n, e) => {
+        Ne(t).subscribe(ce(e, () => e.complete(), ao)), !e.closed && n.subscribe(e)
+    })
+}
+
+function He(t, n, e) {
+    let i = te(t) || n || e ? {
+        next: t,
+        error: n,
+        complete: e
+    } : t;
+    return i ? he((r, o) => {
+        var a;
+        (a = i.subscribe) === null || a === void 0 || a.call(i);
+        let s = !0;
+        r.subscribe(ce(o, l => {
+            var m;
+            (m = i.next) === null || m === void 0 || m.call(i, l), o.next(l)
+        }, () => {
+            var l;
+            s = !1, (l = i.complete) === null || l === void 0 || l.call(i), o.complete()
+        }, l => {
+            var m;
+            s = !1, (m = i.error) === null || m === void 0 || m.call(i, l), o.error(l)
+        }, () => {
+            var l, m;
+            s && ((l = i.unsubscribe) === null || l === void 0 || l.call(i)), (m = i.finalize) === null || m === void 0 || m.call(i)
+        }))
+    }) : ut
+}
+
+function Gm(t) {
+    let n = Y(null);
+    try {
+        return t()
+    } finally {
+        Y(n)
+    }
+}
+var qm = ue(A({}, Vn), {
+    consumerIsAlwaysLive: !0,
+    consumerAllowSignalWrites: !0,
+    dirty: !0,
+    kind: "effect"
+});
+
+function Wm(t) {
+    if (t.dirty = !1, t.version > 0 && !Li(t)) return;
+    t.version++;
+    let n = $n(t);
+    try {
+        t.cleanup(), t.fn()
+    } finally {
+        Oi(t, n)
+    }
+}
+var ms = "https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss",
+    $ = class extends Error {
+        code;
+        constructor(n, e) {
+            super(un(n, e)), this.code = n
+        }
+    };
+
+function _y(t) {
+    return `NG0${Math.abs(t)}`
+}
+
+function un(t, n) {
+    return `${_y(t)}${n?": "+n:""}`
+}
+var mo = globalThis;
+
+function ve(t) {
+    for (let n in t)
+        if (t[n] === ve) return n;
+    throw Error("")
+}
+
+function cn(t) {
+    if (typeof t == "string") return t;
+    if (Array.isArray(t)) return `[${t.map(cn).join(", ")}]`;
+    if (t == null) return "" + t;
+    let n = t.overriddenName || t.name;
+    if (n) return `${n}`;
+    let e = t.toString();
+    if (e == null) return "" + e;
+    let i = e.indexOf(`
+`);
+    return i >= 0 ? e.slice(0, i) : e
+}
+
+function fs(t, n) {
+    return t ? n ? `${t} ${n}` : t : n || ""
+}
+var Ty = ve({
+    __forward_ref__: ve
+});
+
+function ps(t) {
+    return t.__forward_ref__ = ps, t.toString = function() {
+        return cn(this())
+    }, t
+}
+
+function st(t) {
+    return fu(t) ? t() : t
+}
+
+function fu(t) {
+    return typeof t == "function" && t.hasOwnProperty(Ty) && t.__forward_ref__ === ps
+}
+
+function j(t) {
+    return {
+        token: t.token,
+        providedIn: t.providedIn || null,
+        factory: t.factory,
+        value: void 0
+    }
+}
+
+function In(t) {
+    return {
+        providers: t.providers || [],
+        imports: t.imports || []
+    }
+}
+
+function fo(t) {
+    return Sy(t, gs)
+}
+
+function pu(t) {
+    return fo(t) !== null
+}
+
+function Sy(t, n) {
+    return t.hasOwnProperty(n) && t[n] || null
+}
+
+function wy(t) {
+    let n = t?.[gs] ?? null;
+    return n || null
+}
+
+function ou(t) {
+    return t && t.hasOwnProperty(us) ? t[us] : null
+}
+var gs = ve({
+        \u0275prov: ve
+    }),
+    us = ve({
+        \u0275inj: ve
+    }),
+    U = class {
+        _desc;
+        ngMetadataName = "InjectionToken";
+        \u0275prov;
+        constructor(n, e) {
+            this._desc = n, this.\u0275prov = void 0, typeof e == "number" ? this.__NG_ELEMENT_ID__ = e : e !== void 0 && (this.\u0275prov = j({
+                token: this,
+                providedIn: e.providedIn || "root",
+                factory: e.factory
+            }))
+        }
+        get multi() {
+            return this
+        }
+        toString() {
+            return `InjectionToken ${this._desc}`
+        }
+    };
+
+function gu(t) {
+    return t && !!t.\u0275providers
+}
+var vu = ve({
+        \u0275cmp: ve
+    }),
+    yu = ve({
+        \u0275dir: ve
+    }),
+    Eu = ve({
+        \u0275pipe: ve
+    }),
+    bu = ve({
+        \u0275mod: ve
+    }),
+    co = ve({
+        \u0275fac: ve
+    }),
+    Zn = ve({
+        __NG_ELEMENT_ID__: ve
+    }),
+    Ym = ve({
+        __NG_ENV_ID__: ve
+    });
+
+function zt(t) {
+    return typeof t == "string" ? t : t == null ? "" : String(t)
+}
+
+function Qm(t) {
+    return typeof t == "function" ? t.name || t.toString() : typeof t == "object" && t != null && typeof t.type == "function" ? t.type.name || t.type.toString() : zt(t)
+}
+var Zm = ve({
+        ngErrorCode: ve
+    }),
+    Iy = ve({
+        ngErrorMessage: ve
+    }),
+    My = ve({
+        ngTokenPath: ve
+    });
+
+function Du(t, n) {
+    return Xm("", -200, n)
+}
+
+function vs(t, n) {
+    throw new $(-201, !1)
+}
+
+function Xm(t, n, e) {
+    let i = new $(n, t);
+    return i[Zm] = n, i[Iy] = t, e && (i[My] = e), i
+}
+
+function Ny(t) {
+    return t[Zm]
+}
+var au;
+
+function Jm() {
+    return au
+}
+
+function dt(t) {
+    let n = au;
+    return au = t, n
+}
+
+function Cu(t, n, e) {
+    let i = fo(t);
+    if (i && i.providedIn == "root") return i.value === void 0 ? i.value = i.factory() : i.value;
+    if (e & 8) return null;
+    if (n !== void 0) return n;
+    vs(t, "Injector")
+}
+var Ay = {},
+    Wn = Ay,
+    ky = "__NG_DI_FLAG__",
+    su = class {
+        injector;
+        constructor(n) {
+            this.injector = n
+        }
+        retrieve(n, e) {
+            let i = Yn(e) || 0;
+            try {
+                return this.injector.get(n, i & 8 ? null : Wn, i)
+            } catch (r) {
+                if (ki(r)) return r;
+                throw r
+            }
+        }
+    };
+
+function Ry(t, n = 0) {
+    let e = Ia();
+    if (e === void 0) throw new $(-203, !1);
+    if (e === null) return Cu(t, void 0, n);
+    {
+        let i = Oy(n),
+            r = e.retrieve(t, i);
+        if (ki(r)) {
+            if (i.optional) return null;
+            throw r
+        }
+        return r
+    }
+}
+
+function G(t, n = 0) {
+    return (Jm() || Ry)(st(t), n)
+}
+
+function E(t, n) {
+    return G(t, Yn(n))
+}
+
+function Yn(t) {
+    return typeof t > "u" || typeof t == "number" ? t : 0 | (t.optional && 8) | (t.host && 1) | (t.self && 2) | (t.skipSelf && 4)
+}
+
+function Oy(t) {
+    return {
+        optional: !!(t & 8),
+        host: !!(t & 1),
+        self: !!(t & 2),
+        skipSelf: !!(t & 4)
+    }
+}
+
+function lu(t) {
+    let n = [];
+    for (let e = 0; e < t.length; e++) {
+        let i = st(t[e]);
+        if (Array.isArray(i)) {
+            if (i.length === 0) throw new $(900, !1);
+            let r, o = 0;
+            for (let a = 0; a < i.length; a++) {
+                let s = i[a],
+                    l = Ly(s);
+                typeof l == "number" ? l === -1 ? r = s.token : o |= l : r = s
+            }
+            n.push(G(r, o))
+        } else n.push(G(i))
+    }
+    return n
+}
+
+function Ly(t) {
+    return t[ky]
+}
+
+function Kn(t, n) {
+    let e = t.hasOwnProperty(co);
+    return e ? t[co] : null
+}
+
+function ys(t, n) {
+    t.forEach(e => Array.isArray(e) ? ys(e, n) : n(e))
+}
+
+function xu(t, n, e) {
+    n >= t.length ? t.push(e) : t.splice(n, 0, e)
+}
+
+function po(t, n) {
+    return n >= t.length - 1 ? t.pop() : t.splice(n, 1)[0]
+}
+
+function ef(t, n, e, i) {
+    let r = t.length;
+    if (r == n) t.push(e, i);
+    else if (r === 1) t.push(i, t[0]), t[0] = e;
+    else {
+        for (r--, t.push(t[r - 1], t[r]); r > n;) {
+            let o = r - 2;
+            t[r] = t[o], r--
+        }
+        t[n] = e, t[n + 1] = i
+    }
+}
+
+function Es(t, n, e) {
+    let i = Ki(t, n);
+    return i >= 0 ? t[i | 1] = e : (i = ~i, ef(t, i, n, e)), i
+}
+
+function bs(t, n) {
+    let e = Ki(t, n);
+    if (e >= 0) return t[e | 1]
+}
+
+function Ki(t, n) {
+    return Fy(t, n, 1)
+}
+
+function Fy(t, n, e) {
+    let i = 0,
+        r = t.length >> e;
+    for (; r !== i;) {
+        let o = i + (r - i >> 1),
+            a = t[o << e];
+        if (n === a) return o << e;
+        a > n ? r = o : i = o + 1
+    }
+    return ~(r << e)
+}
+var Xn = {},
+    lt = [],
+    Mn = new U(""),
+    _u = new U("", -1),
+    Tu = new U(""),
+    uo = class {
+        get(n, e = Wn) {
+            if (e === Wn) {
+                let r = Xm("", -201);
+                throw r.name = "\u0275NotFound", r
+            }
+            return e
+        }
+    };
+
+function Su(t) {
+    return t[bu] || null
+}
+
+function Nn(t) {
+    return t[vu] || null
+}
+
+function wu(t) {
+    return t[yu] || null
+}
+
+function tf(t) {
+    return t[Eu] || null
+}
+
+function Jn(t) {
+    return {
+        \u0275providers: t
+    }
+}
+
+function nf(...t) {
+    return {
+        \u0275providers: Iu(!0, t),
+        \u0275fromNgModule: !0
+    }
+}
+
+function Iu(t, ...n) {
+    let e = [],
+        i = new Set,
+        r, o = a => {
+            e.push(a)
+        };
+    return ys(n, a => {
+        let s = a;
+        ds(s, o, [], i) && (r ||= [], r.push(s))
+    }), r !== void 0 && rf(r, o), e
+}
+
+function rf(t, n) {
+    for (let e = 0; e < t.length; e++) {
+        let {
+            ngModule: i,
+            providers: r
+        } = t[e];
+        Mu(r, o => {
+            n(o, i)
+        })
+    }
+}
+
+function ds(t, n, e, i) {
+    if (t = st(t), !t) return !1;
+    let r = null,
+        o = ou(t),
+        a = !o && Nn(t);
+    if (!o && !a) {
+        let l = t.ngModule;
+        if (o = ou(l), o) r = l;
+        else return !1
+    } else {
+        if (a && !a.standalone) return !1;
+        r = t
+    }
+    let s = i.has(r);
+    if (a) {
+        if (s) return !1;
+        if (i.add(r), a.dependencies) {
+            let l = typeof a.dependencies == "function" ? a.dependencies() : a.dependencies;
+            for (let m of l) ds(m, n, e, i)
+        }
+    } else if (o) {
+        if (o.imports != null && !s) {
+            i.add(r);
+            let m;
+            try {
+                ys(o.imports, f => {
+                    ds(f, n, e, i) && (m ||= [], m.push(f))
+                })
+            } finally {}
+            m !== void 0 && rf(m, n)
+        }
+        if (!s) {
+            let m = Kn(r) || (() => new r);
+            n({
+                provide: r,
+                useFactory: m,
+                deps: lt
+            }, r), n({
+                provide: Tu,
+                useValue: r,
+                multi: !0
+            }, r), n({
+                provide: Mn,
+                useValue: () => G(r),
+                multi: !0
+            }, r)
+        }
+        let l = o.providers;
+        if (l != null && !s) {
+            let m = t;
+            Mu(l, f => {
+                n(f, m)
+            })
+        }
+    } else return !1;
+    return r !== t && t.providers !== void 0
+}
+
+function Mu(t, n) {
+    for (let e of t) gu(e) && (e = e.\u0275providers), Array.isArray(e) ? Mu(e, n) : n(e)
+}
+var Py = ve({
+    provide: String,
+    useValue: ve
+});
+
+function of(t) {
+    return t !== null && typeof t == "object" && Py in t
+}
+
+function By(t) {
+    return !!(t && t.useExisting)
+}
+
+function Hy(t) {
+    return !!(t && t.useFactory)
+}
+
+function hs(t) {
+    return typeof t == "function"
+}
+var go = new U(""),
+    cs = {},
+    Km = {},
+    ru;
+
+function vo() {
+    return ru === void 0 && (ru = new uo), ru
+}
+var ke = class {},
+    Qn = class extends ke {
+        parent;
+        source;
+        scopes;
+        records = new Map;
+        _ngOnDestroyHooks = new Set;
+        _onDestroyHooks = [];
+        get destroyed() {
+            return this._destroyed
+        }
+        _destroyed = !1;
+        injectorDefTypes;
+        constructor(n, e, i, r) {
+            super(), this.parent = e, this.source = i, this.scopes = r, uu(n, a => this.processProvider(a)), this.records.set(_u, Yi(void 0, this)), r.has("environment") && this.records.set(ke, Yi(void 0, this));
+            let o = this.records.get(go);
+            o != null && typeof o.value == "string" && this.scopes.add(o.value), this.injectorDefTypes = new Set(this.get(Tu, lt, {
+                self: !0
+            }))
+        }
+        retrieve(n, e) {
+            let i = Yn(e) || 0;
+            try {
+                return this.get(n, Wn, i)
+            } catch (r) {
+                if (ki(r)) return r;
+                throw r
+            }
+        }
+        destroy() {
+            lo(this), this._destroyed = !0;
+            let n = Y(null);
+            try {
+                for (let i of this._ngOnDestroyHooks) i.ngOnDestroy();
+                let e = this._onDestroyHooks;
+                this._onDestroyHooks = [];
+                for (let i of e) i()
+            } finally {
+                this.records.clear(), this._ngOnDestroyHooks.clear(), this.injectorDefTypes.clear(), Y(n)
+            }
+        }
+        onDestroy(n) {
+            return lo(this), this._onDestroyHooks.push(n), () => this.removeOnDestroy(n)
+        }
+        runInContext(n) {
+            lo(this);
+            let e = Ut(this),
+                i = dt(void 0),
+                r;
+            try {
+                return n()
+            } finally {
+                Ut(e), dt(i)
+            }
+        }
+        get(n, e = Wn, i) {
+            if (lo(this), n.hasOwnProperty(Ym)) return n[Ym](this);
+            let r = Yn(i),
+                o, a = Ut(this),
+                s = dt(void 0);
+            try {
+                if (!(r & 4)) {
+                    let m = this.records.get(n);
+                    if (m === void 0) {
+                        let f = zy(n) && fo(n);
+                        f && this.injectableDefInScope(f) ? m = Yi(cu(n), cs) : m = null, this.records.set(n, m)
+                    }
+                    if (m != null) return this.hydrate(n, m, r)
+                }
+                let l = r & 2 ? vo() : this.parent;
+                return e = r & 8 && e === Wn ? null : e, l.get(n, e)
+            } catch (l) {
+                let m = Ny(l);
+                throw m === -200 || m === -201 ? new $(m, null) : l
+            } finally {
+                dt(s), Ut(a)
+            }
+        }
+        resolveInjectorInitializers() {
+            let n = Y(null),
+                e = Ut(this),
+                i = dt(void 0),
+                r;
+            try {
+                let o = this.get(Mn, lt, {
+                    self: !0
+                });
+                for (let a of o) a()
+            } finally {
+                Ut(e), dt(i), Y(n)
+            }
+        }
+        toString() {
+            let n = [],
+                e = this.records;
+            for (let i of e.keys()) n.push(cn(i));
+            return `R3Injector[${n.join(", ")}]`
+        }
+        processProvider(n) {
+            n = st(n);
+            let e = hs(n) ? n : st(n && n.provide),
+                i = Vy(n);
+            if (!hs(n) && n.multi === !0) {
+                let r = this.records.get(e);
+                r || (r = Yi(void 0, cs, !0), r.factory = () => lu(r.multi), this.records.set(e, r)), e = n, r.multi.push(n)
+            }
+            this.records.set(e, i)
+        }
+        hydrate(n, e, i) {
+            let r = Y(null);
+            try {
+                if (e.value === Km) throw Du(cn(n));
+                return e.value === cs && (e.value = Km, e.value = e.factory(void 0, i)), typeof e.value == "object" && e.value && Uy(e.value) && this._ngOnDestroyHooks.add(e.value), e.value
+            } finally {
+                Y(r)
+            }
+        }
+        injectableDefInScope(n) {
+            if (!n.providedIn) return !1;
+            let e = st(n.providedIn);
+            return typeof e == "string" ? e === "any" || this.scopes.has(e) : this.injectorDefTypes.has(e)
+        }
+        removeOnDestroy(n) {
+            let e = this._onDestroyHooks.indexOf(n);
+            e !== -1 && this._onDestroyHooks.splice(e, 1)
+        }
+    };
+
+function cu(t) {
+    let n = fo(t),
+        e = n !== null ? n.factory : Kn(t);
+    if (e !== null) return e;
+    if (t instanceof U) throw new $(204, !1);
+    if (t instanceof Function) return jy(t);
+    throw new $(204, !1)
+}
+
+function jy(t) {
+    if (t.length > 0) throw new $(204, !1);
+    let e = wy(t);
+    return e !== null ? () => e.factory(t) : () => new t
+}
+
+function Vy(t) {
+    if (of(t)) return Yi(void 0, t.useValue);
+    {
+        let n = af(t);
+        return Yi(n, cs)
+    }
+}
+
+function af(t, n, e) {
+    let i;
+    if (hs(t)) {
+        let r = st(t);
+        return Kn(r) || cu(r)
+    } else if (of(t)) i = () => st(t.useValue);
+    else if (Hy(t)) i = () => t.useFactory(...lu(t.deps || []));
+    else if (By(t)) i = (r, o) => G(st(t.useExisting), o !== void 0 && o & 8 ? 8 : void 0);
+    else {
+        let r = st(t && (t.useClass || t.provide));
+        if ($y(t)) i = () => new r(...lu(t.deps));
+        else return Kn(r) || cu(r)
+    }
+    return i
+}
+
+function lo(t) {
+    if (t.destroyed) throw new $(205, !1)
+}
+
+function Yi(t, n, e = !1) {
+    return {
+        factory: t,
+        value: n,
+        multi: e ? [] : void 0
+    }
+}
+
+function $y(t) {
+    return !!t.deps
+}
+
+function Uy(t) {
+    return t !== null && typeof t == "object" && typeof t.ngOnDestroy == "function"
+}
+
+function zy(t) {
+    return typeof t == "function" || typeof t == "object" && t.ngMetadataName === "InjectionToken"
+}
+
+function uu(t, n) {
+    for (let e of t) Array.isArray(e) ? uu(e, n) : e && gu(e) ? uu(e.\u0275providers, n) : n(e)
+}
+
+function Ue(t, n) {
+    let e;
+    t instanceof Qn ? (lo(t), e = t) : e = new su(t);
+    let i, r = Ut(e),
+        o = dt(void 0);
+    try {
+        return n()
+    } finally {
+        Ut(r), dt(o)
+    }
+}
+
+function sf() {
+    return Jm() !== void 0 || Ia() != null
+}
+var Ot = 0,
+    J = 1,
+    X = 2,
+    je = 3,
+    Dt = 4,
+    Ct = 5,
+    Qi = 6,
+    Zi = 7,
+    Se = 8,
+    dn = 9,
+    Gt = 10,
+    Ce = 11,
+    Xi = 12,
+    Nu = 13,
+    ei = 14,
+    ht = 15,
+    ti = 16,
+    ni = 17,
+    ii = 18,
+    yo = 19,
+    Au = 20,
+    ln = 21,
+    Ds = 22,
+    hn = 23,
+    mt = 24,
+    Cs = 25,
+    ri = 26,
+    Pe = 27,
+    lf = 1,
+    ku = 6,
+    An = 7,
+    Eo = 8,
+    bo = 9,
+    we = 10;
+
+function qt(t) {
+    return Array.isArray(t) && typeof t[lf] == "object"
+}
+
+function Lt(t) {
+    return Array.isArray(t) && t[lf] === !0
+}
+
+function Ru(t) {
+    return (t.flags & 4) !== 0
+}
+
+function kn(t) {
+    return t.componentOffset > -1
+}
+
+function Do(t) {
+    return (t.flags & 1) === 1
+}
+
+function oi(t) {
+    return !!t.template
+}
+
+function Ji(t) {
+    return (t[X] & 512) !== 0
+}
+
+function ai(t) {
+    return (t[X] & 256) === 256
+}
+var Ou = "svg",
+    cf = "math";
+
+function xt(t) {
+    for (; Array.isArray(t);) t = t[Ot];
+    return t
+}
+
+function Lu(t, n) {
+    return xt(n[t])
+}
+
+function Ft(t, n) {
+    return xt(n[t.index])
+}
+
+function Co(t, n) {
+    return t.data[n]
+}
+
+function uf(t, n) {
+    return t[n]
+}
+
+function _t(t, n) {
+    let e = n[t];
+    return qt(e) ? e : e[Ot]
+}
+
+function xs(t) {
+    return (t[X] & 128) === 128
+}
+
+function df(t) {
+    return Lt(t[je])
+}
+
+function Tt(t, n) {
+    return n == null ? null : t[n]
+}
+
+function Fu(t) {
+    t[ni] = 0
+}
+
+function Pu(t) {
+    t[X] & 1024 || (t[X] |= 1024, xs(t) && si(t))
+}
+
+function hf(t, n) {
+    for (; t > 0;) n = n[ei], t--;
+    return n
+}
+
+function xo(t) {
+    return !!(t[X] & 9216 || t[mt]?.dirty)
+}
+
+function _s(t) {
+    t[Gt].changeDetectionScheduler?.notify(8), t[X] & 64 && (t[X] |= 1024), xo(t) && si(t)
+}
+
+function si(t) {
+    t[Gt].changeDetectionScheduler?.notify(0);
+    let n = wn(t);
+    for (; n !== null && !(n[X] & 8192 || (n[X] |= 8192, !xs(n)));) n = wn(n)
+}
+
+function Bu(t, n) {
+    if (ai(t)) throw new $(911, !1);
+    t[ln] === null && (t[ln] = []), t[ln].push(n)
+}
+
+function mf(t, n) {
+    if (t[ln] === null) return;
+    let e = t[ln].indexOf(n);
+    e !== -1 && t[ln].splice(e, 1)
+}
+
+function wn(t) {
+    let n = t[je];
+    return Lt(n) ? n[je] : n
+}
+
+function ff(t) {
+    return t[Zi] ??= []
+}
+
+function pf(t) {
+    return t.cleanup ??= []
+}
+var ie = {
+    lFrame: If(null),
+    bindingsEnabled: !0,
+    skipHydrationRootTNode: null
+};
+var du = !1;
+
+function gf() {
+    return ie.lFrame.elementDepthCount
+}
+
+function vf() {
+    ie.lFrame.elementDepthCount++
+}
+
+function Hu() {
+    ie.lFrame.elementDepthCount--
+}
+
+function ju() {
+    return ie.bindingsEnabled
+}
+
+function yf() {
+    return ie.skipHydrationRootTNode !== null
+}
+
+function Vu(t) {
+    return ie.skipHydrationRootTNode === t
+}
+
+function $u() {
+    ie.skipHydrationRootTNode = null
+}
+
+function oe() {
+    return ie.lFrame.lView
+}
+
+function et() {
+    return ie.lFrame.tView
+}
+
+function S(t) {
+    return ie.lFrame.contextLView = t, t[Se]
+}
+
+function w(t) {
+    return ie.lFrame.contextLView = null, t
+}
+
+function Qe() {
+    let t = Uu();
+    for (; t !== null && t.type === 64;) t = t.parent;
+    return t
+}
+
+function Uu() {
+    return ie.lFrame.currentTNode
+}
+
+function Ef() {
+    let t = ie.lFrame,
+        n = t.currentTNode;
+    return t.isParent ? n : n.parent
+}
+
+function er(t, n) {
+    let e = ie.lFrame;
+    e.currentTNode = t, e.isParent = n
+}
+
+function zu() {
+    return ie.lFrame.isParent
+}
+
+function bf() {
+    ie.lFrame.isParent = !1
+}
+
+function Df() {
+    return ie.lFrame.contextLView
+}
+
+function Gu() {
+    return du
+}
+
+function tr(t) {
+    let n = du;
+    return du = t, n
+}
+
+function Ts() {
+    let t = ie.lFrame,
+        n = t.bindingRootIndex;
+    return n === -1 && (n = t.bindingRootIndex = t.tView.bindingStartIndex), n
+}
+
+function qu() {
+    return ie.lFrame.bindingIndex
+}
+
+function Cf(t) {
+    return ie.lFrame.bindingIndex = t
+}
+
+function li() {
+    return ie.lFrame.bindingIndex++
+}
+
+function _o(t) {
+    let n = ie.lFrame,
+        e = n.bindingIndex;
+    return n.bindingIndex = n.bindingIndex + t, e
+}
+
+function xf() {
+    return ie.lFrame.inI18n
+}
+
+function _f(t, n) {
+    let e = ie.lFrame;
+    e.bindingIndex = e.bindingRootIndex = t, Ss(n)
+}
+
+function Tf() {
+    return ie.lFrame.currentDirectiveIndex
+}
+
+function Ss(t) {
+    ie.lFrame.currentDirectiveIndex = t
+}
+
+function Sf(t) {
+    let n = ie.lFrame.currentDirectiveIndex;
+    return n === -1 ? null : t[n]
+}
+
+function Wu(t) {
+    ie.lFrame.currentQueryIndex = t
+}
+
+function Gy(t) {
+    let n = t[J];
+    return n.type === 2 ? n.declTNode : n.type === 1 ? t[Ct] : null
+}
+
+function Yu(t, n, e) {
+    if (e & 4) {
+        let r = n,
+            o = t;
+        for (; r = r.parent, r === null && !(e & 1);)
+            if (r = Gy(o), r === null || (o = o[ei], r.type & 10)) break;
+        if (r === null) return !1;
+        n = r, t = o
+    }
+    let i = ie.lFrame = wf();
+    return i.currentTNode = n, i.lView = t, !0
+}
+
+function ws(t) {
+    let n = wf(),
+        e = t[J];
+    ie.lFrame = n, n.currentTNode = e.firstChild, n.lView = t, n.tView = e, n.contextLView = t, n.bindingIndex = e.bindingStartIndex, n.inI18n = !1
+}
+
+function wf() {
+    let t = ie.lFrame,
+        n = t === null ? null : t.child;
+    return n === null ? If(t) : n
+}
+
+function If(t) {
+    let n = {
+        currentTNode: null,
+        isParent: !0,
+        lView: null,
+        tView: null,
+        selectedIndex: -1,
+        contextLView: null,
+        elementDepthCount: 0,
+        currentNamespace: null,
+        currentDirectiveIndex: -1,
+        bindingRootIndex: -1,
+        bindingIndex: -1,
+        currentQueryIndex: 0,
+        parent: t,
+        child: null,
+        inI18n: !1
+    };
+    return t !== null && (t.child = n), n
+}
+
+function Mf() {
+    let t = ie.lFrame;
+    return ie.lFrame = t.parent, t.currentTNode = null, t.lView = null, t
+}
+var Ku = Mf;
+
+function Is() {
+    let t = Mf();
+    t.isParent = !0, t.tView = null, t.selectedIndex = -1, t.contextLView = null, t.elementDepthCount = 0, t.currentDirectiveIndex = -1, t.currentNamespace = null, t.bindingRootIndex = -1, t.bindingIndex = -1, t.currentQueryIndex = 0
+}
+
+function Nf(t) {
+    return (ie.lFrame.contextLView = hf(t, ie.lFrame.contextLView))[Se]
+}
+
+function Pt() {
+    return ie.lFrame.selectedIndex
+}
+
+function Rn(t) {
+    ie.lFrame.selectedIndex = t
+}
+
+function Ms() {
+    let t = ie.lFrame;
+    return Co(t.tView, t.selectedIndex)
+}
+
+function K() {
+    ie.lFrame.currentNamespace = Ou
+}
+
+function ne() {
+    qy()
+}
+
+function qy() {
+    ie.lFrame.currentNamespace = null
+}
+
+function Af() {
+    return ie.lFrame.currentNamespace
+}
+var kf = !0;
+
+function Ns() {
+    return kf
+}
+
+function As(t) {
+    kf = t
+}
+
+function hu(t, n = null, e = null, i) {
+    let r = Qu(t, n, e, i);
+    return r.resolveInjectorInitializers(), r
+}
+
+function Qu(t, n = null, e = null, i, r = new Set) {
+    let o = [e || lt, nf(t)];
+    return i = i || (typeof t == "object" ? void 0 : cn(t)), new Qn(o, n || vo(), i || null, r)
+}
+var ct = class t {
+        static THROW_IF_NOT_FOUND = Wn;
+        static NULL = new uo;
+        static create(n, e) {
+            if (Array.isArray(n)) return hu({
+                name: ""
+            }, e, n, "");
+            {
+                let i = n.name ?? "";
+                return hu({
+                    name: i
+                }, n.parent, n.providers, i)
+            }
+        }
+        static \u0275prov = j({
+            token: t,
+            providedIn: "any",
+            factory: () => G(_u)
+        });
+        static __NG_ELEMENT_ID__ = -1
+    },
+    Ie = new U(""),
+    St = (() => {
+        class t {
+            static __NG_ELEMENT_ID__ = Wy;
+            static __NG_ENV_ID__ = e => e
+        }
+        return t
+    })(),
+    ho = class extends St {
+        _lView;
+        constructor(n) {
+            super(), this._lView = n
+        }
+        get destroyed() {
+            return ai(this._lView)
+        }
+        onDestroy(n) {
+            let e = this._lView;
+            return Bu(e, n), () => mf(e, n)
+        }
+    };
+
+function Wy() {
+    return new ho(oe())
+}
+var bt = class {
+        _console = console;
+        handleError(n) {
+            this._console.error("ERROR", n)
+        }
+    },
+    ft = new U("", {
+        providedIn: "root",
+        factory: () => {
+            let t = E(ke),
+                n;
+            return e => {
+                t.destroyed && !n ? setTimeout(() => {
+                    throw e
+                }) : (n ??= t.get(bt), n.handleError(e))
+            }
+        }
+    }),
+    Rf = {
+        provide: Mn,
+        useValue: () => void E(bt),
+        multi: !0
+    };
+
+function C(t, n) {
+    let [e, i, r] = $c(t, n?.equal), o = e, a = o[Je];
+    return o.set = i, o.update = r, o.asReadonly = Zu.bind(o), o
+}
+
+function Zu() {
+    let t = this[Je];
+    if (t.readonlyFn === void 0) {
+        let n = () => this();
+        n[Je] = t, t.readonlyFn = n
+    }
+    return t.readonlyFn
+}
+var To = (() => {
+    class t {
+        view;
+        node;
+        constructor(e, i) {
+            this.view = e, this.node = i
+        }
+        static __NG_ELEMENT_ID__ = Yy
+    }
+    return t
+})();
+
+function Yy() {
+    return new To(oe(), Qe())
+}
+var Rt = class {},
+    So = new U("", {
+        providedIn: "root",
+        factory: () => !1
+    });
+var Xu = new U(""),
+    ks = new U(""),
+    Wt = (() => {
+        class t {
+            taskId = 0;
+            pendingTasks = new Set;
+            destroyed = !1;
+            pendingTask = new $e(!1);
+            get hasPendingTasks() {
+                return this.destroyed ? !1 : this.pendingTask.value
+            }
+            get hasPendingTasksObservable() {
+                return this.destroyed ? new le(e => {
+                    e.next(!1), e.complete()
+                }) : this.pendingTask
+            }
+            add() {
+                !this.hasPendingTasks && !this.destroyed && this.pendingTask.next(!0);
+                let e = this.taskId++;
+                return this.pendingTasks.add(e), e
+            }
+            has(e) {
+                return this.pendingTasks.has(e)
+            }
+            remove(e) {
+                this.pendingTasks.delete(e), this.pendingTasks.size === 0 && this.hasPendingTasks && this.pendingTask.next(!1)
+            }
+            ngOnDestroy() {
+                this.pendingTasks.clear(), this.hasPendingTasks && this.pendingTask.next(!1), this.destroyed = !0, this.pendingTask.unsubscribe()
+            }
+            static \u0275prov = j({
+                token: t,
+                providedIn: "root",
+                factory: () => new t
+            })
+        }
+        return t
+    })(),
+    wo = (() => {
+        class t {
+            internalPendingTasks = E(Wt);
+            scheduler = E(Rt);
+            errorHandler = E(ft);
+            add() {
+                let e = this.internalPendingTasks.add();
+                return () => {
+                    this.internalPendingTasks.has(e) && (this.scheduler.notify(11), this.internalPendingTasks.remove(e))
+                }
+            }
+            run(e) {
+                let i = this.add();
+                e().catch(this.errorHandler).finally(i)
+            }
+            static \u0275prov = j({
+                token: t,
+                providedIn: "root",
+                factory: () => new t
+            })
+        }
+        return t
+    })();
+
+function ci(...t) {}
+var Io = (() => {
+        class t {
+            static \u0275prov = j({
+                token: t,
+                providedIn: "root",
+                factory: () => new mu
+            })
+        }
+        return t
+    })(),
+    mu = class {
+        dirtyEffectCount = 0;
+        queues = new Map;
+        add(n) {
+            this.enqueue(n), this.schedule(n)
+        }
+        schedule(n) {
+            n.dirty && this.dirtyEffectCount++
+        }
+        remove(n) {
+            let e = n.zone,
+                i = this.queues.get(e);
+            i.has(n) && (i.delete(n), n.dirty && this.dirtyEffectCount--)
+        }
+        enqueue(n) {
+            let e = n.zone;
+            this.queues.has(e) || this.queues.set(e, new Set);
+            let i = this.queues.get(e);
+            i.has(n) || i.add(n)
+        }
+        flush() {
+            for (; this.dirtyEffectCount > 0;) {
+                let n = !1;
+                for (let [e, i] of this.queues) e === null ? n ||= this.flushQueue(i) : n ||= e.run(() => this.flushQueue(i));
+                n || (this.dirtyEffectCount = 0)
+            }
+        }
+        flushQueue(n) {
+            let e = !1;
+            for (let i of n) i.dirty && (this.dirtyEffectCount--, e = !0, i.run());
+            return e
+        }
+    };
+
+function Bo(t) {
+    return {
+        toString: t
+    }.toString()
+}
+
+function nE(t) {
+    return typeof t == "function"
+}
+var Hs = class {
+    previousValue;
+    currentValue;
+    firstChange;
+    constructor(n, e, i) {
+        this.previousValue = n, this.currentValue = e, this.firstChange = i
+    }
+    isFirstChange() {
+        return this.firstChange
+    }
+};
+
+function up(t, n, e, i) {
+    n !== null ? n.applyValueToInputSignal(n, i) : t[e] = i
+}
+var pn = (() => {
+    let t = () => dp;
+    return t.ngInherit = !0, t
+})();
+
+function dp(t) {
+    return t.type.prototype.ngOnChanges && (t.setInput = rE), iE
+}
+
+function iE() {
+    let t = mp(this),
+        n = t?.current;
+    if (n) {
+        let e = t.previous;
+        if (e === Xn) t.previous = n;
+        else
+            for (let i in n) e[i] = n[i];
+        t.current = null, this.ngOnChanges(n)
+    }
+}
+
+function rE(t, n, e, i, r) {
+    let o = this.declaredInputs[i],
+        a = mp(t) || oE(t, {
+            previous: Xn,
+            current: null
+        }),
+        s = a.current || (a.current = {}),
+        l = a.previous,
+        m = l[o];
+    s[o] = new Hs(m && m.currentValue, e, l === Xn), up(t, n, r, e)
+}
+var hp = "__ngSimpleChanges__";
+
+function mp(t) {
+    return t[hp] || null
+}
+
+function oE(t, n) {
+    return t[hp] = n
+}
+var Of = [];
+var be = function(t, n = null, e) {
+    for (let i = 0; i < Of.length; i++) {
+        let r = Of[i];
+        r(t, n, e)
+    }
+};
+
+function aE(t, n, e) {
+    let {
+        ngOnChanges: i,
+        ngOnInit: r,
+        ngDoCheck: o
+    } = n.type.prototype;
+    if (i) {
+        let a = dp(n);
+        (e.preOrderHooks ??= []).push(t, a), (e.preOrderCheckHooks ??= []).push(t, a)
+    }
+    r && (e.preOrderHooks ??= []).push(0 - t, r), o && ((e.preOrderHooks ??= []).push(t, o), (e.preOrderCheckHooks ??= []).push(t, o))
+}
+
+function fp(t, n) {
+    for (let e = n.directiveStart, i = n.directiveEnd; e < i; e++) {
+        let o = t.data[e].type.prototype,
+            {
+                ngAfterContentInit: a,
+                ngAfterContentChecked: s,
+                ngAfterViewInit: l,
+                ngAfterViewChecked: m,
+                ngOnDestroy: f
+            } = o;
+        a && (t.contentHooks ??= []).push(-e, a), s && ((t.contentHooks ??= []).push(e, s), (t.contentCheckHooks ??= []).push(e, s)), l && (t.viewHooks ??= []).push(-e, l), m && ((t.viewHooks ??= []).push(e, m), (t.viewCheckHooks ??= []).push(e, m)), f != null && (t.destroyHooks ??= []).push(e, f)
+    }
+}
+
+function Ls(t, n, e) {
+    pp(t, n, 3, e)
+}
+
+function Fs(t, n, e, i) {
+    (t[X] & 3) === e && pp(t, n, e, i)
+}
+
+function Ju(t, n) {
+    let e = t[X];
+    (e & 3) === n && (e &= 16383, e += 1, t[X] = e)
+}
+
+function pp(t, n, e, i) {
+    let r = i !== void 0 ? t[ni] & 65535 : 0,
+        o = i ?? -1,
+        a = n.length - 1,
+        s = 0;
+    for (let l = r; l < a; l++)
+        if (typeof n[l + 1] == "number") {
+            if (s = n[l], i != null && s >= i) break
+        } else n[l] < 0 && (t[ni] += 65536), (s < o || o == -1) && (sE(t, e, n, l), t[ni] = (t[ni] & 4294901760) + l + 2), l++
+}
+
+function Lf(t, n) {
+    be(4, t, n);
+    let e = Y(null);
+    try {
+        n.call(t)
+    } finally {
+        Y(e), be(5, t, n)
+    }
+}
+
+function sE(t, n, e, i) {
+    let r = e[i] < 0,
+        o = e[i + 1],
+        a = r ? -e[i] : e[i],
+        s = t[a];
+    r ? t[X] >> 14 < t[ni] >> 16 && (t[X] & 3) === n && (t[X] += 16384, Lf(s, o)) : Lf(s, o)
+}
+var ir = -1,
+    Ao = class {
+        factory;
+        name;
+        injectImpl;
+        resolving = !1;
+        canSeeViewProviders;
+        multi;
+        componentProviders;
+        index;
+        providerFactory;
+        constructor(n, e, i, r) {
+            this.factory = n, this.name = r, this.canSeeViewProviders = e, this.injectImpl = i
+        }
+    };
+
+function lE(t) {
+    return (t.flags & 8) !== 0
+}
+
+function cE(t) {
+    return (t.flags & 16) !== 0
+}
+
+function uE(t, n, e) {
+    let i = 0;
+    for (; i < e.length;) {
+        let r = e[i];
+        if (typeof r == "number") {
+            if (r !== 0) break;
+            i++;
+            let o = e[i++],
+                a = e[i++],
+                s = e[i++];
+            t.setAttribute(n, a, s, o)
+        } else {
+            let o = r,
+                a = e[++i];
+            dE(o) ? t.setProperty(n, o, a) : t.setAttribute(n, o, a), i++
+        }
+    }
+    return i
+}
+
+function gp(t) {
+    return t === 3 || t === 4 || t === 6
+}
+
+function dE(t) {
+    return t.charCodeAt(0) === 64
+}
+
+function nl(t, n) {
+    if (!(n === null || n.length === 0))
+        if (t === null || t.length === 0) t = n.slice();
+        else {
+            let e = -1;
+            for (let i = 0; i < n.length; i++) {
+                let r = n[i];
+                typeof r == "number" ? e = r : e === 0 || (e === -1 || e === 2 ? Ff(t, e, r, null, n[++i]) : Ff(t, e, r, null, null))
+            }
+        } return t
+}
+
+function Ff(t, n, e, i, r) {
+    let o = 0,
+        a = t.length;
+    if (n === -1) a = -1;
+    else
+        for (; o < t.length;) {
+            let s = t[o++];
+            if (typeof s == "number") {
+                if (s === n) {
+                    a = -1;
+                    break
+                } else if (s > n) {
+                    a = o - 1;
+                    break
+                }
+            }
+        }
+    for (; o < t.length;) {
+        let s = t[o];
+        if (typeof s == "number") break;
+        if (s === e) {
+            r !== null && (t[o + 1] = r);
+            return
+        }
+        o++, r !== null && o++
+    }
+    a !== -1 && (t.splice(a, 0, n), o = a + 1), t.splice(o++, 0, e), r !== null && t.splice(o++, 0, r)
+}
+
+function vp(t) {
+    return t !== ir
+}
+
+function js(t) {
+    return t & 32767
+}
+
+function hE(t) {
+    return t >> 16
+}
+
+function Vs(t, n) {
+    let e = hE(t),
+        i = n;
+    for (; e > 0;) i = i[ei], e--;
+    return i
+}
+var ad = !0;
+
+function Pf(t) {
+    let n = ad;
+    return ad = t, n
+}
+var mE = 256,
+    yp = mE - 1,
+    Ep = 5,
+    fE = 0,
+    Yt = {};
+
+function pE(t, n, e) {
+    let i;
+    typeof e == "string" ? i = e.charCodeAt(0) || 0 : e.hasOwnProperty(Zn) && (i = e[Zn]), i == null && (i = e[Zn] = fE++);
+    let r = i & yp,
+        o = 1 << r;
+    n.data[t + (r >> Ep)] |= o
+}
+
+function bp(t, n) {
+    let e = Dp(t, n);
+    if (e !== -1) return e;
+    let i = n[J];
+    i.firstCreatePass && (t.injectorIndex = n.length, ed(i.data, t), ed(n, null), ed(i.blueprint, null));
+    let r = Nd(t, n),
+        o = t.injectorIndex;
+    if (vp(r)) {
+        let a = js(r),
+            s = Vs(r, n),
+            l = s[J].data;
+        for (let m = 0; m < 8; m++) n[o + m] = s[a + m] | l[a + m]
+    }
+    return n[o + 8] = r, o
+}
+
+function ed(t, n) {
+    t.push(0, 0, 0, 0, 0, 0, 0, 0, n)
+}
+
+function Dp(t, n) {
+    return t.injectorIndex === -1 || t.parent && t.parent.injectorIndex === t.injectorIndex || n[t.injectorIndex + 8] === null ? -1 : t.injectorIndex
+}
+
+function Nd(t, n) {
+    if (t.parent && t.parent.injectorIndex !== -1) return t.parent.injectorIndex;
+    let e = 0,
+        i = null,
+        r = n;
+    for (; r !== null;) {
+        if (i = Sp(r), i === null) return ir;
+        if (e++, r = r[ei], i.injectorIndex !== -1) return i.injectorIndex | e << 16
+    }
+    return ir
+}
+
+function gE(t, n, e) {
+    pE(t, n, e)
+}
+
+function vE(t, n) {
+    if (n === "class") return t.classes;
+    if (n === "style") return t.styles;
+    let e = t.attrs;
+    if (e) {
+        let i = e.length,
+            r = 0;
+        for (; r < i;) {
+            let o = e[r];
+            if (gp(o)) break;
+            if (o === 0) r = r + 2;
+            else if (typeof o == "number")
+                for (r++; r < i && typeof e[r] == "string";) r++;
+            else {
+                if (o === n) return e[r + 1];
+                r = r + 2
+            }
+        }
+    }
+    return null
+}
+
+function Cp(t, n, e) {
+    if (e & 8 || t !== void 0) return t;
+    vs(n, "NodeInjector")
+}
+
+function xp(t, n, e, i) {
+    if (e & 8 && i === void 0 && (i = null), (e & 3) === 0) {
+        let r = t[dn],
+            o = dt(void 0);
+        try {
+            return r ? r.get(n, i, e & 8) : Cu(n, i, e & 8)
+        } finally {
+            dt(o)
+        }
+    }
+    return Cp(i, n, e)
+}
+
+function _p(t, n, e, i = 0, r) {
+    if (t !== null) {
+        if (n[X] & 2048 && !(i & 2)) {
+            let a = CE(t, n, e, i, Yt);
+            if (a !== Yt) return a
+        }
+        let o = Tp(t, n, e, i, Yt);
+        if (o !== Yt) return o
+    }
+    return xp(n, e, i, r)
+}
+
+function Tp(t, n, e, i, r) {
+    let o = bE(e);
+    if (typeof o == "function") {
+        if (!Yu(n, t, i)) return i & 1 ? Cp(r, e, i) : xp(n, e, i, r);
+        try {
+            let a;
+            if (a = o(i), a == null && !(i & 8)) vs(e);
+            else return a
+        } finally {
+            Ku()
+        }
+    } else if (typeof o == "number") {
+        let a = null,
+            s = Dp(t, n),
+            l = ir,
+            m = i & 1 ? n[ht][Ct] : null;
+        for ((s === -1 || i & 4) && (l = s === -1 ? Nd(t, n) : n[s + 8], l === ir || !Hf(i, !1) ? s = -1 : (a = n[J], s = js(l), n = Vs(l, n))); s !== -1;) {
+            let f = n[J];
+            if (Bf(o, s, f.data)) {
+                let p = yE(s, n, e, a, i, m);
+                if (p !== Yt) return p
+            }
+            l = n[s + 8], l !== ir && Hf(i, n[J].data[s + 8] === m) && Bf(o, s, n) ? (a = f, s = js(l), n = Vs(l, n)) : s = -1
+        }
+    }
+    return r
+}
+
+function yE(t, n, e, i, r, o) {
+    let a = n[J],
+        s = a.data[t + 8],
+        l = i == null ? kn(s) && ad : i != a && (s.type & 3) !== 0,
+        m = r & 1 && o === s,
+        f = EE(s, a, e, l, m);
+    return f !== null ? sd(n, a, f, s, r) : Yt
+}
+
+function EE(t, n, e, i, r) {
+    let o = t.providerIndexes,
+        a = n.data,
+        s = o & 1048575,
+        l = t.directiveStart,
+        m = t.directiveEnd,
+        f = o >> 20,
+        p = i ? s : s + f,
+        g = r ? s + f : m;
+    for (let v = p; v < g; v++) {
+        let x = a[v];
+        if (v < l && e === x || v >= l && x.type === e) return v
+    }
+    if (r) {
+        let v = a[l];
+        if (v && oi(v) && v.type === e) return l
+    }
+    return null
+}
+
+function sd(t, n, e, i, r) {
+    let o = t[e],
+        a = n.data;
+    if (o instanceof Ao) {
+        let s = o;
+        if (s.resolving) {
+            let v = Qm(a[e]);
+            throw Du(v)
+        }
+        let l = Pf(s.canSeeViewProviders);
+        s.resolving = !0;
+        let m = a[e].type || a[e],
+            f, p = s.injectImpl ? dt(s.injectImpl) : null,
+            g = Yu(t, i, 0);
+        try {
+            o = t[e] = s.factory(void 0, r, a, t, i), n.firstCreatePass && e >= i.directiveStart && aE(e, a[e], n)
+        } finally {
+            p !== null && dt(p), Pf(l), s.resolving = !1, Ku()
+        }
+    }
+    return o
+}
+
+function bE(t) {
+    if (typeof t == "string") return t.charCodeAt(0) || 0;
+    let n = t.hasOwnProperty(Zn) ? t[Zn] : void 0;
+    return typeof n == "number" ? n >= 0 ? n & yp : DE : n
+}
+
+function Bf(t, n, e) {
+    let i = 1 << t;
+    return !!(e[n + (t >> Ep)] & i)
+}
+
+function Hf(t, n) {
+    return !(t & 2) && !(t & 1 && n)
+}
+var ui = class {
+    _tNode;
+    _lView;
+    constructor(n, e) {
+        this._tNode = n, this._lView = e
+    }
+    get(n, e, i) {
+        return _p(this._tNode, this._lView, n, Yn(i), e)
+    }
+};
+
+function DE() {
+    return new ui(Qe(), oe())
+}
+
+function lr(t) {
+    return Bo(() => {
+        let n = t.prototype.constructor,
+            e = n[co] || ld(n),
+            i = Object.prototype,
+            r = Object.getPrototypeOf(t.prototype).constructor;
+        for (; r && r !== i;) {
+            let o = r[co] || ld(r);
+            if (o && o !== e) return o;
+            r = Object.getPrototypeOf(r)
+        }
+        return o => new o
+    })
+}
+
+function ld(t) {
+    return fu(t) ? () => {
+        let n = ld(st(t));
+        return n && n()
+    } : Kn(t)
+}
+
+function CE(t, n, e, i, r) {
+    let o = t,
+        a = n;
+    for (; o !== null && a !== null && a[X] & 2048 && !Ji(a);) {
+        let s = Tp(o, a, e, i | 2, Yt);
+        if (s !== Yt) return s;
+        let l = o.parent;
+        if (!l) {
+            let m = a[Au];
+            if (m) {
+                let f = m.get(e, Yt, i);
+                if (f !== Yt) return f
+            }
+            l = Sp(a), a = a[ei]
+        }
+        o = l
+    }
+    return r
+}
+
+function Sp(t) {
+    let n = t[J],
+        e = n.type;
+    return e === 2 ? n.declTNode : e === 1 ? t[Ct] : null
+}
+
+function Ho(t) {
+    return vE(Qe(), t)
+}
+
+function xE() {
+    return il(Qe(), oe())
+}
+
+function il(t, n) {
+    return new fi(Ft(t, n))
+}
+var fi = (() => {
+    class t {
+        nativeElement;
+        constructor(e) {
+            this.nativeElement = e
+        }
+        static __NG_ELEMENT_ID__ = xE
+    }
+    return t
+})();
+
+function wp(t) {
+    return (t.flags & 128) === 128
+}
+var Ad = (function(t) {
+        return t[t.OnPush = 0] = "OnPush", t[t.Default = 1] = "Default", t
+    })(Ad || {}),
+    Ip = new Map,
+    _E = 0;
+
+function TE() {
+    return _E++
+}
+
+function SE(t) {
+    Ip.set(t[yo], t)
+}
+
+function cd(t) {
+    Ip.delete(t[yo])
+}
+var jf = "__ngContext__";
+
+function rr(t, n) {
+    qt(n) ? (t[jf] = n[yo], SE(n)) : t[jf] = n
+}
+
+function Mp(t) {
+    return Ap(t[Xi])
+}
+
+function Np(t) {
+    return Ap(t[Dt])
+}
+
+function Ap(t) {
+    for (; t !== null && !Lt(t);) t = t[Dt];
+    return t
+}
+var ud;
+
+function kd(t) {
+    ud = t
+}
+
+function kp() {
+    if (ud !== void 0) return ud;
+    if (typeof document < "u") return document;
+    throw new $(210, !1)
+}
+var rl = new U("", {
+        providedIn: "root",
+        factory: () => wE
+    }),
+    wE = "ng",
+    ol = new U(""),
+    jo = new U("", {
+        providedIn: "platform",
+        factory: () => "unknown"
+    });
+var al = new U("", {
+        providedIn: "root",
+        factory: () => kp().body?.querySelector("[ngCspNonce]")?.getAttribute("ngCspNonce") || null
+    }),
+    sl = {
+        breakpoints: [16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+        placeholderResolution: 30,
+        disableImageSizeWarning: !1,
+        disableImageLazyLoadWarning: !1
+    },
+    ll = new U("", {
+        providedIn: "root",
+        factory: () => sl
+    });
+var IE = "h",
+    ME = "b";
+var Rp = "r";
+var Op = "di";
+var Lp = !1,
+    Fp = new U("", {
+        providedIn: "root",
+        factory: () => Lp
+    });
+var NE = (t, n, e, i) => {};
+
+function AE(t, n, e, i) {
+    NE(t, n, e, i)
+}
+
+function Rd(t) {
+    return (t.flags & 32) === 32
+}
+var kE = () => null;
+
+function Pp(t, n, e = !1) {
+    return kE(t, n, e)
+}
+
+function Bp(t, n) {
+    let e = t.contentQueries;
+    if (e !== null) {
+        let i = Y(null);
+        try {
+            for (let r = 0; r < e.length; r += 2) {
+                let o = e[r],
+                    a = e[r + 1];
+                if (a !== -1) {
+                    let s = t.data[a];
+                    Wu(o), s.contentQueries(2, n[a], a)
+                }
+            }
+        } finally {
+            Y(i)
+        }
+    }
+}
+
+function dd(t, n, e) {
+    Wu(0);
+    let i = Y(null);
+    try {
+        n(t, e)
+    } finally {
+        Y(i)
+    }
+}
+
+function Hp(t, n, e) {
+    if (Ru(n)) {
+        let i = Y(null);
+        try {
+            let r = n.directiveStart,
+                o = n.directiveEnd;
+            for (let a = r; a < o; a++) {
+                let s = t.data[a];
+                if (s.contentQueries) {
+                    let l = e[a];
+                    s.contentQueries(1, l, a)
+                }
+            }
+        } finally {
+            Y(i)
+        }
+    }
+}
+var mn = (function(t) {
+    return t[t.Emulated = 0] = "Emulated", t[t.None = 2] = "None", t[t.ShadowDom = 3] = "ShadowDom", t
+})(mn || {});
+var Rs;
+
+function RE() {
+    if (Rs === void 0 && (Rs = null, mo.trustedTypes)) try {
+        Rs = mo.trustedTypes.createPolicy("angular#unsafe-bypass", {
+            createHTML: t => t,
+            createScript: t => t,
+            createScriptURL: t => t
+        })
+    } catch {}
+    return Rs
+}
+
+function Vf(t) {
+    return RE()?.createScriptURL(t) || t
+}
+var $s = class {
+    changingThisBreaksApplicationSecurity;
+    constructor(n) {
+        this.changingThisBreaksApplicationSecurity = n
+    }
+    toString() {
+        return `SafeValue must use [property]=binding: ${this.changingThisBreaksApplicationSecurity} (see ${ms})`
+    }
+};
+
+function pi(t) {
+    return t instanceof $s ? t.changingThisBreaksApplicationSecurity : t
+}
+
+function Od(t, n) {
+    let e = jp(t);
+    if (e != null && e !== n) {
+        if (e === "ResourceURL" && n === "URL") return !0;
+        throw new Error(`Required a safe ${n}, got a ${e} (see ${ms})`)
+    }
+    return e === n
+}
+
+function jp(t) {
+    return t instanceof $s && t.getTypeName() || null
+}
+var OE = /^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:\/?#]*(?:[\/?#]|$))/i;
+
+function Vp(t) {
+    return t = String(t), t.match(OE) ? t : "unsafe:" + t
+}
+
+function LE(t, n) {
+    return t.createText(n)
+}
+
+function FE(t, n, e) {
+    t.setValue(n, e)
+}
+
+function $p(t, n, e) {
+    return t.createElement(n, e)
+}
+
+function Us(t, n, e, i, r) {
+    t.insertBefore(n, e, i, r)
+}
+
+function Up(t, n, e) {
+    t.appendChild(n, e)
+}
+
+function $f(t, n, e, i, r) {
+    i !== null ? Us(t, n, e, i, r) : Up(t, n, e)
+}
+
+function zp(t, n, e, i) {
+    t.removeChild(null, n, e, i)
+}
+
+function PE(t, n, e) {
+    t.setAttribute(n, "style", e)
+}
+
+function BE(t, n, e) {
+    e === "" ? t.removeAttribute(n, "class") : t.setAttribute(n, "class", e)
+}
+
+function Gp(t, n, e) {
+    let {
+        mergedAttrs: i,
+        classes: r,
+        styles: o
+    } = e;
+    i !== null && uE(t, n, i), r !== null && BE(t, n, r), o !== null && PE(t, n, o)
+}
+var cl = (function(t) {
+    return t[t.NONE = 0] = "NONE", t[t.HTML = 1] = "HTML", t[t.STYLE = 2] = "STYLE", t[t.SCRIPT = 3] = "SCRIPT", t[t.URL = 4] = "URL", t[t.RESOURCE_URL = 5] = "RESOURCE_URL", t
+})(cl || {});
+
+function gn(t) {
+    let n = Wp();
+    return n ? n.sanitize(cl.URL, t) || "" : Od(t, "URL") ? pi(t) : Vp(zt(t))
+}
+
+function qp(t) {
+    let n = Wp();
+    if (n) return Vf(n.sanitize(cl.RESOURCE_URL, t) || "");
+    if (Od(t, "ResourceURL")) return Vf(pi(t));
+    throw new $(904, !1)
+}
+var HE = new Set(["embed", "frame", "iframe", "media", "script"]),
+    jE = new Set(["base", "link", "script"]);
+
+function VE(t, n) {
+    return n === "src" && HE.has(t) || n === "href" && jE.has(t) || n === "xlink:href" && t === "script" ? qp : gn
+}
+
+function Ld(t, n, e) {
+    return VE(n, e)(t)
+}
+
+function Wp() {
+    let t = oe();
+    return t && t[Gt].sanitizer
+}
+
+function Yp(t) {
+    return t instanceof Function ? t() : t
+}
+
+function $E(t, n, e) {
+    let i = t.length;
+    for (;;) {
+        let r = t.indexOf(n, e);
+        if (r === -1) return r;
+        if (r === 0 || t.charCodeAt(r - 1) <= 32) {
+            let o = n.length;
+            if (r + o === i || t.charCodeAt(r + o) <= 32) return r
+        }
+        e = r + 1
+    }
+}
+var Kp = "ng-template";
+
+function UE(t, n, e, i) {
+    let r = 0;
+    if (i) {
+        for (; r < n.length && typeof n[r] == "string"; r += 2)
+            if (n[r] === "class" && $E(n[r + 1].toLowerCase(), e, 0) !== -1) return !0
+    } else if (Fd(t)) return !1;
+    if (r = n.indexOf(1, r), r > -1) {
+        let o;
+        for (; ++r < n.length && typeof(o = n[r]) == "string";)
+            if (o.toLowerCase() === e) return !0
+    }
+    return !1
+}
+
+function Fd(t) {
+    return t.type === 4 && t.value !== Kp
+}
+
+function zE(t, n, e) {
+    let i = t.type === 4 && !e ? Kp : t.value;
+    return n === i
+}
+
+function GE(t, n, e) {
+    let i = 4,
+        r = t.attrs,
+        o = r !== null ? YE(r) : 0,
+        a = !1;
+    for (let s = 0; s < n.length; s++) {
+        let l = n[s];
+        if (typeof l == "number") {
+            if (!a && !Bt(i) && !Bt(l)) return !1;
+            if (a && Bt(l)) continue;
+            a = !1, i = l | i & 1;
+            continue
+        }
+        if (!a)
+            if (i & 4) {
+                if (i = 2 | i & 1, l !== "" && !zE(t, l, e) || l === "" && n.length === 1) {
+                    if (Bt(i)) return !1;
+                    a = !0
+                }
+            } else if (i & 8) {
+            if (r === null || !UE(t, r, l, e)) {
+                if (Bt(i)) return !1;
+                a = !0
+            }
+        } else {
+            let m = n[++s],
+                f = qE(l, r, Fd(t), e);
+            if (f === -1) {
+                if (Bt(i)) return !1;
+                a = !0;
+                continue
+            }
+            if (m !== "") {
+                let p;
+                if (f > o ? p = "" : p = r[f + 1].toLowerCase(), i & 2 && m !== p) {
+                    if (Bt(i)) return !1;
+                    a = !0
+                }
+            }
+        }
+    }
+    return Bt(i) || a
+}
+
+function Bt(t) {
+    return (t & 1) === 0
+}
+
+function qE(t, n, e, i) {
+    if (n === null) return -1;
+    let r = 0;
+    if (i || !e) {
+        let o = !1;
+        for (; r < n.length;) {
+            let a = n[r];
+            if (a === t) return r;
+            if (a === 3 || a === 6) o = !0;
+            else if (a === 1 || a === 2) {
+                let s = n[++r];
+                for (; typeof s == "string";) s = n[++r];
+                continue
+            } else {
+                if (a === 4) break;
+                if (a === 0) {
+                    r += 4;
+                    continue
+                }
+            }
+            r += o ? 1 : 2
+        }
+        return -1
+    } else return KE(n, t)
+}
+
+function WE(t, n, e = !1) {
+    for (let i = 0; i < n.length; i++)
+        if (GE(t, n[i], e)) return !0;
+    return !1
+}
+
+function YE(t) {
+    for (let n = 0; n < t.length; n++) {
+        let e = t[n];
+        if (gp(e)) return n
+    }
+    return t.length
+}
+
+function KE(t, n) {
+    let e = t.indexOf(4);
+    if (e > -1)
+        for (e++; e < t.length;) {
+            let i = t[e];
+            if (typeof i == "number") return -1;
+            if (i === n) return e;
+            e++
+        }
+    return -1
+}
+
+function Uf(t, n) {
+    return t ? ":not(" + n.trim() + ")" : n
+}
+
+function QE(t) {
+    let n = t[0],
+        e = 1,
+        i = 2,
+        r = "",
+        o = !1;
+    for (; e < t.length;) {
+        let a = t[e];
+        if (typeof a == "string")
+            if (i & 2) {
+                let s = t[++e];
+                r += "[" + a + (s.length > 0 ? '="' + s + '"' : "") + "]"
+            } else i & 8 ? r += "." + a : i & 4 && (r += " " + a);
+        else r !== "" && !Bt(a) && (n += Uf(o, r), r = ""), i = a, o = o || !Bt(i);
+        e++
+    }
+    return r !== "" && (n += Uf(o, r)), n
+}
+
+function ZE(t) {
+    return t.map(QE).join(",")
+}
+
+function XE(t) {
+    let n = [],
+        e = [],
+        i = 1,
+        r = 2;
+    for (; i < t.length;) {
+        let o = t[i];
+        if (typeof o == "string") r === 2 ? o !== "" && n.push(o, t[++i]) : r === 8 && e.push(o);
+        else {
+            if (!Bt(r)) break;
+            r = o
+        }
+        i++
+    }
+    return e.length && n.push(1, ...e), n
+}
+var ze = {};
+
+function Pd(t, n, e, i, r, o, a, s, l, m, f) {
+    let p = Pe + i,
+        g = p + r,
+        v = JE(p, g),
+        x = typeof m == "function" ? m() : m;
+    return v[J] = {
+        type: t,
+        blueprint: v,
+        template: e,
+        queries: null,
+        viewQuery: s,
+        declTNode: n,
+        data: v.slice().fill(null, p),
+        bindingStartIndex: p,
+        expandoStartIndex: g,
+        hostBindingOpCodes: null,
+        firstCreatePass: !0,
+        firstUpdatePass: !0,
+        staticViewQueries: !1,
+        staticContentQueries: !1,
+        preOrderHooks: null,
+        preOrderCheckHooks: null,
+        contentHooks: null,
+        contentCheckHooks: null,
+        viewHooks: null,
+        viewCheckHooks: null,
+        destroyHooks: null,
+        cleanup: null,
+        contentQueries: null,
+        components: null,
+        directiveRegistry: typeof o == "function" ? o() : o,
+        pipeRegistry: typeof a == "function" ? a() : a,
+        firstChild: null,
+        schemas: l,
+        consts: x,
+        incompleteFirstPass: !1,
+        ssrId: f
+    }
+}
+
+function JE(t, n) {
+    let e = [];
+    for (let i = 0; i < n; i++) e.push(i < t ? null : ze);
+    return e
+}
+
+function e1(t) {
+    let n = t.tView;
+    return n === null || n.incompleteFirstPass ? t.tView = Pd(1, null, t.template, t.decls, t.vars, t.directiveDefs, t.pipeDefs, t.viewQuery, t.schemas, t.consts, t.id) : n
+}
+
+function Bd(t, n, e, i, r, o, a, s, l, m, f) {
+    let p = n.blueprint.slice();
+    return p[Ot] = r, p[X] = i | 4 | 128 | 8 | 64 | 1024, (m !== null || t && t[X] & 2048) && (p[X] |= 2048), Fu(p), p[je] = p[ei] = t, p[Se] = e, p[Gt] = a || t && t[Gt], p[Ce] = s || t && t[Ce], p[dn] = l || t && t[dn] || null, p[Ct] = o, p[yo] = TE(), p[Qi] = f, p[Au] = m, p[ht] = n.type == 2 ? t[ht] : p, p
+}
+
+function t1(t, n, e) {
+    let i = Ft(n, t),
+        r = e1(e),
+        o = t[Gt].rendererFactory,
+        a = Hd(t, Bd(t, r, null, Qp(e), i, n, null, o.createRenderer(i, e), null, null, null));
+    return t[n.index] = a
+}
+
+function Qp(t) {
+    let n = 16;
+    return t.signals ? n = 4096 : t.onPush && (n = 64), n
+}
+
+function Zp(t, n, e, i) {
+    if (e === 0) return -1;
+    let r = n.length;
+    for (let o = 0; o < e; o++) n.push(i), t.blueprint.push(i), t.data.push(null);
+    return r
+}
+
+function Hd(t, n) {
+    return t[Xi] ? t[Nu][Dt] = n : t[Xi] = n, t[Nu] = n, n
+}
+
+function h(t = 1) {
+    Xp(et(), oe(), Pt() + t, !1)
+}
+
+function Xp(t, n, e, i) {
+    if (!i)
+        if ((n[X] & 3) === 3) {
+            let o = t.preOrderCheckHooks;
+            o !== null && Ls(n, o, e)
+        } else {
+            let o = t.preOrderHooks;
+            o !== null && Fs(n, o, 0, e)
+        } Rn(e)
+}
+var ul = (function(t) {
+    return t[t.None = 0] = "None", t[t.SignalBased = 1] = "SignalBased", t[t.HasDecoratorInputTransform = 2] = "HasDecoratorInputTransform", t
+})(ul || {});
+
+function hd(t, n, e, i) {
+    let r = Y(null);
+    try {
+        let [o, a, s] = t.inputs[e], l = null;
+        (a & ul.SignalBased) !== 0 && (l = n[o][Je]), l !== null && l.transformFn !== void 0 ? i = l.transformFn(i) : s !== null && (i = s.call(n, i)), t.setInput !== null ? t.setInput(n, l, i, e, o) : up(n, l, o, i)
+    } finally {
+        Y(r)
+    }
+}
+var fn = (function(t) {
+        return t[t.Important = 1] = "Important", t[t.DashCase = 2] = "DashCase", t
+    })(fn || {}),
+    n1;
+
+function jd(t, n) {
+    return n1(t, n)
+}
+var di = new Set,
+    Vd = (function(t) {
+        return t[t.CHANGE_DETECTION = 0] = "CHANGE_DETECTION", t[t.AFTER_NEXT_RENDER = 1] = "AFTER_NEXT_RENDER", t
+    })(Vd || {}),
+    Vo = new U(""),
+    zf = new Set;
+
+function Kt(t) {
+    zf.has(t) || (zf.add(t), performance?.mark?.("mark_feature_usage", {
+        detail: {
+            feature: t
+        }
+    }))
+}
+var Jp = !1,
+    md = class extends Be {
+        __isAsync;
+        destroyRef = void 0;
+        pendingTasks = void 0;
+        constructor(n = !1) {
+            super(), this.__isAsync = n, sf() && (this.destroyRef = E(St, {
+                optional: !0
+            }) ?? void 0, this.pendingTasks = E(Wt, {
+                optional: !0
+            }) ?? void 0)
+        }
+        emit(n) {
+            let e = Y(null);
+            try {
+                super.next(n)
+            } finally {
+                Y(e)
+            }
+        }
+        subscribe(n, e, i) {
+            let r = n,
+                o = e || (() => null),
+                a = i;
+            if (n && typeof n == "object") {
+                let l = n;
+                r = l.next?.bind(l), o = l.error?.bind(l), a = l.complete?.bind(l)
+            }
+            this.__isAsync && (o = this.wrapInTimeout(o), r && (r = this.wrapInTimeout(r)), a && (a = this.wrapInTimeout(a)));
+            let s = super.subscribe({
+                next: r,
+                error: o,
+                complete: a
+            });
+            return n instanceof Me && n.add(s), s
+        }
+        wrapInTimeout(n) {
+            return e => {
+                let i = this.pendingTasks?.add();
+                setTimeout(() => {
+                    try {
+                        n(e)
+                    } finally {
+                        i !== void 0 && this.pendingTasks?.remove(i)
+                    }
+                })
+            }
+        }
+    },
+    tt = md;
+
+function eg(t) {
+    let n, e;
+
+    function i() {
+        t = ci;
+        try {
+            e !== void 0 && typeof cancelAnimationFrame == "function" && cancelAnimationFrame(e), n !== void 0 && clearTimeout(n)
+        } catch {}
+    }
+    return n = setTimeout(() => {
+        t(), i()
+    }), typeof requestAnimationFrame == "function" && (e = requestAnimationFrame(() => {
+        t(), i()
+    })), () => i()
+}
+
+function Gf(t) {
+    return queueMicrotask(() => t()), () => {
+        t = ci
+    }
+}
+var $d = "isAngularZone",
+    zs = $d + "_ID",
+    i1 = 0,
+    Re = class t {
+        hasPendingMacrotasks = !1;
+        hasPendingMicrotasks = !1;
+        isStable = !0;
+        onUnstable = new tt(!1);
+        onMicrotaskEmpty = new tt(!1);
+        onStable = new tt(!1);
+        onError = new tt(!1);
+        constructor(n) {
+            let {
+                enableLongStackTrace: e = !1,
+                shouldCoalesceEventChangeDetection: i = !1,
+                shouldCoalesceRunChangeDetection: r = !1,
+                scheduleInRootZone: o = Jp
+            } = n;
+            if (typeof Zone > "u") throw new $(908, !1);
+            Zone.assertZonePatched();
+            let a = this;
+            a._nesting = 0, a._outer = a._inner = Zone.current, Zone.TaskTrackingZoneSpec && (a._inner = a._inner.fork(new Zone.TaskTrackingZoneSpec)), e && Zone.longStackTraceZoneSpec && (a._inner = a._inner.fork(Zone.longStackTraceZoneSpec)), a.shouldCoalesceEventChangeDetection = !r && i, a.shouldCoalesceRunChangeDetection = r, a.callbackScheduled = !1, a.scheduleInRootZone = o, a1(a)
+        }
+        static isInAngularZone() {
+            return typeof Zone < "u" && Zone.current.get($d) === !0
+        }
+        static assertInAngularZone() {
+            if (!t.isInAngularZone()) throw new $(909, !1)
+        }
+        static assertNotInAngularZone() {
+            if (t.isInAngularZone()) throw new $(909, !1)
+        }
+        run(n, e, i) {
+            return this._inner.run(n, e, i)
+        }
+        runTask(n, e, i, r) {
+            let o = this._inner,
+                a = o.scheduleEventTask("NgZoneEvent: " + r, n, r1, ci, ci);
+            try {
+                return o.runTask(a, e, i)
+            } finally {
+                o.cancelTask(a)
+            }
+        }
+        runGuarded(n, e, i) {
+            return this._inner.runGuarded(n, e, i)
+        }
+        runOutsideAngular(n) {
+            return this._outer.run(n)
+        }
+    },
+    r1 = {};
+
+function Ud(t) {
+    if (t._nesting == 0 && !t.hasPendingMicrotasks && !t.isStable) try {
+        t._nesting++, t.onMicrotaskEmpty.emit(null)
+    } finally {
+        if (t._nesting--, !t.hasPendingMicrotasks) try {
+            t.runOutsideAngular(() => t.onStable.emit(null))
+        } finally {
+            t.isStable = !0
+        }
+    }
+}
+
+function o1(t) {
+    if (t.isCheckStableRunning || t.callbackScheduled) return;
+    t.callbackScheduled = !0;
+
+    function n() {
+        eg(() => {
+            t.callbackScheduled = !1, fd(t), t.isCheckStableRunning = !0, Ud(t), t.isCheckStableRunning = !1
+        })
+    }
+    t.scheduleInRootZone ? Zone.root.run(() => {
+        n()
+    }) : t._outer.run(() => {
+        n()
+    }), fd(t)
+}
+
+function a1(t) {
+    let n = () => {
+            o1(t)
+        },
+        e = i1++;
+    t._inner = t._inner.fork({
+        name: "angular",
+        properties: {
+            [$d]: !0,
+            [zs]: e,
+            [zs + e]: !0
+        },
+        onInvokeTask: (i, r, o, a, s, l) => {
+            if (s1(l)) return i.invokeTask(o, a, s, l);
+            try {
+                return qf(t), i.invokeTask(o, a, s, l)
+            } finally {
+                (t.shouldCoalesceEventChangeDetection && a.type === "eventTask" || t.shouldCoalesceRunChangeDetection) && n(), Wf(t)
+            }
+        },
+        onInvoke: (i, r, o, a, s, l, m) => {
+            try {
+                return qf(t), i.invoke(o, a, s, l, m)
+            } finally {
+                t.shouldCoalesceRunChangeDetection && !t.callbackScheduled && !l1(l) && n(), Wf(t)
+            }
+        },
+        onHasTask: (i, r, o, a) => {
+            i.hasTask(o, a), r === o && (a.change == "microTask" ? (t._hasPendingMicrotasks = a.microTask, fd(t), Ud(t)) : a.change == "macroTask" && (t.hasPendingMacrotasks = a.macroTask))
+        },
+        onHandleError: (i, r, o, a) => (i.handleError(o, a), t.runOutsideAngular(() => t.onError.emit(a)), !1)
+    })
+}
+
+function fd(t) {
+    t._hasPendingMicrotasks || (t.shouldCoalesceEventChangeDetection || t.shouldCoalesceRunChangeDetection) && t.callbackScheduled === !0 ? t.hasPendingMicrotasks = !0 : t.hasPendingMicrotasks = !1
+}
+
+function qf(t) {
+    t._nesting++, t.isStable && (t.isStable = !1, t.onUnstable.emit(null))
+}
+
+function Wf(t) {
+    t._nesting--, Ud(t)
+}
+var ko = class {
+    hasPendingMicrotasks = !1;
+    hasPendingMacrotasks = !1;
+    isStable = !0;
+    onUnstable = new tt;
+    onMicrotaskEmpty = new tt;
+    onStable = new tt;
+    onError = new tt;
+    run(n, e, i) {
+        return n.apply(e, i)
+    }
+    runGuarded(n, e, i) {
+        return n.apply(e, i)
+    }
+    runOutsideAngular(n) {
+        return n()
+    }
+    runTask(n, e, i, r) {
+        return n.apply(e, i)
+    }
+};
+
+function s1(t) {
+    return tg(t, "__ignore_ng_zone__")
+}
+
+function l1(t) {
+    return tg(t, "__scheduler_tick__")
+}
+
+function tg(t, n) {
+    return !Array.isArray(t) || t.length !== 1 ? !1 : t[0]?.data?.[n] === !0
+}
+var ng = (() => {
+    class t {
+        impl = null;
+        execute() {
+            this.impl?.execute()
+        }
+        static \u0275prov = j({
+            token: t,
+            providedIn: "root",
+            factory: () => new t
+        })
+    }
+    return t
+})();
+var ig = new U("", {
+    providedIn: "root",
+    factory: () => ({
+        queue: new Set,
+        isScheduled: !1,
+        scheduler: null
+    })
+});
+
+function rg(t, n, e) {
+    let i = t.get(ig);
+    if (Array.isArray(n))
+        for (let r of n) i.queue.add(r), e?.detachedLeaveAnimationFns?.push(r);
+    else i.queue.add(n), e?.detachedLeaveAnimationFns?.push(n);
+    i.scheduler && i.scheduler(t)
+}
+
+function c1(t, n) {
+    let e = t.get(ig);
+    if (n.detachedLeaveAnimationFns) {
+        for (let i of n.detachedLeaveAnimationFns) e.queue.delete(i);
+        n.detachedLeaveAnimationFns = void 0
+    }
+}
+
+function u1(t, n) {
+    for (let [e, i] of n) rg(t, i.animateFns)
+}
+
+function Yf(t, n, e, i) {
+    let r = t?.[ri]?.enter;
+    n !== null && r && r.has(e.index) && u1(i, r)
+}
+
+function nr(t, n, e, i, r, o, a, s) {
+    if (r != null) {
+        let l, m = !1;
+        Lt(r) ? l = r : qt(r) && (m = !0, r = r[Ot]);
+        let f = xt(r);
+        t === 0 && i !== null ? (Yf(s, i, o, e), a == null ? Up(n, i, f) : Us(n, i, f, a || null, !0)) : t === 1 && i !== null ? (Yf(s, i, o, e), Us(n, i, f, a || null, !0)) : t === 2 ? Kf(s, o, e, p => {
+            zp(n, f, m, p)
+        }) : t === 3 && Kf(s, o, e, () => {
+            n.destroyNode(f)
+        }), l != null && x1(n, t, e, l, o, i, a)
+    }
+}
+
+function d1(t, n) {
+    og(t, n), n[Ot] = null, n[Ct] = null
+}
+
+function h1(t, n, e, i, r, o) {
+    i[Ot] = r, i[Ct] = n, hl(t, i, e, 1, r, o)
+}
+
+function og(t, n) {
+    n[Gt].changeDetectionScheduler?.notify(9), hl(t, n, n[Ce], 2, null, null)
+}
+
+function m1(t) {
+    let n = t[Xi];
+    if (!n) return td(t[J], t);
+    for (; n;) {
+        let e = null;
+        if (qt(n)) e = n[Xi];
+        else {
+            let i = n[we];
+            i && (e = i)
+        }
+        if (!e) {
+            for (; n && !n[Dt] && n !== t;) qt(n) && td(n[J], n), n = n[je];
+            n === null && (n = t), qt(n) && td(n[J], n), e = n && n[Dt]
+        }
+        n = e
+    }
+}
+
+function zd(t, n) {
+    let e = t[bo],
+        i = e.indexOf(n);
+    e.splice(i, 1)
+}
+
+function dl(t, n) {
+    if (ai(n)) return;
+    let e = n[Ce];
+    e.destroyNode && hl(t, n, e, 3, null, null), m1(n)
+}
+
+function td(t, n) {
+    if (ai(n)) return;
+    let e = Y(null);
+    try {
+        n[X] &= -129, n[X] |= 256, n[mt] && Un(n[mt]), g1(t, n), p1(t, n), n[J].type === 1 && n[Ce].destroy();
+        let i = n[ti];
+        if (i !== null && Lt(n[je])) {
+            i !== n[je] && zd(i, n);
+            let r = n[ii];
+            r !== null && r.detachView(t)
+        }
+        cd(n)
+    } finally {
+        Y(e)
+    }
+}
+
+function Kf(t, n, e, i) {
+    let r = t?.[ri];
+    if (r == null || r.leave == null || !r.leave.has(n.index)) return i(!1);
+    t && di.add(t), rg(e, () => {
+        if (r.leave && r.leave.has(n.index)) {
+            let a = r.leave.get(n.index),
+                s = [];
+            if (a) {
+                for (let l = 0; l < a.animateFns.length; l++) {
+                    let m = a.animateFns[l],
+                        {
+                            promise: f
+                        } = m();
+                    s.push(f)
+                }
+                r.detachedLeaveAnimationFns = void 0
+            }
+            r.running = Promise.allSettled(s), f1(t, i)
+        } else t && di.delete(t), i(!1)
+    }, r)
+}
+
+function f1(t, n) {
+    let e = t[ri]?.running;
+    if (e) {
+        e.then(() => {
+            t[ri].running = void 0, di.delete(t), n(!0)
+        });
+        return
+    }
+    n(!1)
+}
+
+function p1(t, n) {
+    let e = t.cleanup,
+        i = n[Zi];
+    if (e !== null)
+        for (let a = 0; a < e.length - 1; a += 2)
+            if (typeof e[a] == "string") {
+                let s = e[a + 3];
+                s >= 0 ? i[s]() : i[-s].unsubscribe(), a += 2
+            } else {
+                let s = i[e[a + 1]];
+                e[a].call(s)
+            } i !== null && (n[Zi] = null);
+    let r = n[ln];
+    if (r !== null) {
+        n[ln] = null;
+        for (let a = 0; a < r.length; a++) {
+            let s = r[a];
+            s()
+        }
+    }
+    let o = n[hn];
+    if (o !== null) {
+        n[hn] = null;
+        for (let a of o) a.destroy()
+    }
+}
+
+function g1(t, n) {
+    let e;
+    if (t != null && (e = t.destroyHooks) != null)
+        for (let i = 0; i < e.length; i += 2) {
+            let r = n[e[i]];
+            if (!(r instanceof Ao)) {
+                let o = e[i + 1];
+                if (Array.isArray(o))
+                    for (let a = 0; a < o.length; a += 2) {
+                        let s = r[o[a]],
+                            l = o[a + 1];
+                        be(4, s, l);
+                        try {
+                            l.call(s)
+                        } finally {
+                            be(5, s, l)
+                        }
+                    } else {
+                        be(4, r, o);
+                        try {
+                            o.call(r)
+                        } finally {
+                            be(5, r, o)
+                        }
+                    }
+            }
+        }
+}
+
+function v1(t, n, e) {
+    return y1(t, n.parent, e)
+}
+
+function y1(t, n, e) {
+    let i = n;
+    for (; i !== null && i.type & 168;) n = i, i = n.parent;
+    if (i === null) return e[Ot];
+    if (kn(i)) {
+        let {
+            encapsulation: r
+        } = t.data[i.directiveStart + i.componentOffset];
+        if (r === mn.None || r === mn.Emulated) return null
+    }
+    return Ft(i, e)
+}
+
+function E1(t, n, e) {
+    return D1(t, n, e)
+}
+
+function b1(t, n, e) {
+    return t.type & 40 ? Ft(t, e) : null
+}
+var D1 = b1,
+    Qf;
+
+function Gd(t, n, e, i) {
+    let r = v1(t, i, n),
+        o = n[Ce],
+        a = i.parent || n[Ct],
+        s = E1(a, i, n);
+    if (r != null)
+        if (Array.isArray(e))
+            for (let l = 0; l < e.length; l++) $f(o, r, e[l], s, !1);
+        else $f(o, r, e, s, !1);
+    Qf !== void 0 && Qf(o, i, n, e, r)
+}
+
+function Mo(t, n) {
+    if (n !== null) {
+        let e = n.type;
+        if (e & 3) return Ft(n, t);
+        if (e & 4) return pd(-1, t[n.index]);
+        if (e & 8) {
+            let i = n.child;
+            if (i !== null) return Mo(t, i);
+            {
+                let r = t[n.index];
+                return Lt(r) ? pd(-1, r) : xt(r)
+            }
+        } else {
+            if (e & 128) return Mo(t, n.next);
+            if (e & 32) return jd(n, t)() || xt(t[n.index]);
+            {
+                let i = ag(t, n);
+                if (i !== null) {
+                    if (Array.isArray(i)) return i[0];
+                    let r = wn(t[ht]);
+                    return Mo(r, i)
+                } else return Mo(t, n.next)
+            }
+        }
+    }
+    return null
+}
+
+function ag(t, n) {
+    if (n !== null) {
+        let i = t[ht][Ct],
+            r = n.projection;
+        return i.projection[r]
+    }
+    return null
+}
+
+function pd(t, n) {
+    let e = we + t + 1;
+    if (e < n.length) {
+        let i = n[e],
+            r = i[J].firstChild;
+        if (r !== null) return Mo(i, r)
+    }
+    return n[An]
+}
+
+function qd(t, n, e, i, r, o, a) {
+    for (; e != null;) {
+        let s = i[dn];
+        if (e.type === 128) {
+            e = e.next;
+            continue
+        }
+        let l = i[e.index],
+            m = e.type;
+        if (a && n === 0 && (l && rr(xt(l), i), e.flags |= 2), !Rd(e))
+            if (m & 8) qd(t, n, e.child, i, r, o, !1), nr(n, t, s, r, l, e, o, i);
+            else if (m & 32) {
+            let f = jd(e, i),
+                p;
+            for (; p = f();) nr(n, t, s, r, p, e, o, i);
+            nr(n, t, s, r, l, e, o, i)
+        } else m & 16 ? C1(t, n, i, e, r, o) : nr(n, t, s, r, l, e, o, i);
+        e = a ? e.projectionNext : e.next
+    }
+}
+
+function hl(t, n, e, i, r, o) {
+    qd(e, i, t.firstChild, n, r, o, !1)
+}
+
+function C1(t, n, e, i, r, o) {
+    let a = e[ht],
+        l = a[Ct].projection[i.projection];
+    if (Array.isArray(l))
+        for (let m = 0; m < l.length; m++) {
+            let f = l[m];
+            nr(n, t, e[dn], r, f, i, o, e)
+        } else {
+            let m = l,
+                f = a[je];
+            wp(i) && (m.flags |= 128), qd(t, n, m, f, r, o, !0)
+        }
+}
+
+function x1(t, n, e, i, r, o, a) {
+    let s = i[An],
+        l = xt(i);
+    s !== l && nr(n, t, e, o, s, r, a);
+    for (let m = we; m < i.length; m++) {
+        let f = i[m];
+        hl(f[J], f, t, n, o, s)
+    }
+}
+
+function _1(t, n, e, i, r) {
+    if (n) r ? t.addClass(e, i) : t.removeClass(e, i);
+    else {
+        let o = i.indexOf("-") === -1 ? void 0 : fn.DashCase;
+        r == null ? t.removeStyle(e, i, o) : (typeof r == "string" && r.endsWith("!important") && (r = r.slice(0, -10), o |= fn.Important), t.setStyle(e, i, r, o))
+    }
+}
+
+function sg(t, n, e, i, r) {
+    let o = Pt(),
+        a = i & 2;
+    try {
+        Rn(-1), a && n.length > Pe && Xp(t, n, Pe, !1), be(a ? 2 : 0, r, e), e(i, r)
+    } finally {
+        Rn(o), be(a ? 3 : 1, r, e)
+    }
+}
+
+function Wd(t, n, e) {
+    A1(t, n, e), (e.flags & 64) === 64 && k1(t, n, e)
+}
+
+function ml(t, n, e = Ft) {
+    let i = n.localNames;
+    if (i !== null) {
+        let r = n.index + 1;
+        for (let o = 0; o < i.length; o += 2) {
+            let a = i[o + 1],
+                s = a === -1 ? e(n, t) : t[a];
+            t[r++] = s
+        }
+    }
+}
+
+function T1(t, n, e, i) {
+    let o = i.get(Fp, Lp) || e === mn.ShadowDom,
+        a = t.selectRootElement(n, o);
+    return S1(a), a
+}
+
+function S1(t) {
+    w1(t)
+}
+var w1 = () => null;
+
+function I1(t) {
+    return t === "class" ? "className" : t === "for" ? "htmlFor" : t === "formaction" ? "formAction" : t === "innerHtml" ? "innerHTML" : t === "readonly" ? "readOnly" : t === "tabindex" ? "tabIndex" : t
+}
+
+function M1(t, n, e, i, r, o) {
+    let a = n[J];
+    if (Yd(t, a, n, e, i)) {
+        kn(t) && N1(n, t.index);
+        return
+    }
+    t.type & 3 && (e = I1(e)), lg(t, n, e, i, r, o)
+}
+
+function lg(t, n, e, i, r, o) {
+    if (t.type & 3) {
+        let a = Ft(t, n);
+        i = o != null ? o(i, t.value || "", e) : i, r.setProperty(a, e, i)
+    } else t.type & 12
+}
+
+function N1(t, n) {
+    let e = _t(n, t);
+    e[X] & 16 || (e[X] |= 64)
+}
+
+function A1(t, n, e) {
+    let i = e.directiveStart,
+        r = e.directiveEnd;
+    kn(e) && t1(n, e, t.data[i + e.componentOffset]), t.firstCreatePass || bp(e, n);
+    let o = e.initialInputs;
+    for (let a = i; a < r; a++) {
+        let s = t.data[a],
+            l = sd(n, t, a, e);
+        if (rr(l, n), o !== null && F1(n, a - i, l, s, e, o), oi(s)) {
+            let m = _t(e.index, n);
+            m[Se] = sd(n, t, a, e)
+        }
+    }
+}
+
+function k1(t, n, e) {
+    let i = e.directiveStart,
+        r = e.directiveEnd,
+        o = e.index,
+        a = Tf();
+    try {
+        Rn(o);
+        for (let s = i; s < r; s++) {
+            let l = t.data[s],
+                m = n[s];
+            Ss(s), (l.hostBindings !== null || l.hostVars !== 0 || l.hostAttrs !== null) && R1(l, m)
+        }
+    } finally {
+        Rn(-1), Ss(a)
+    }
+}
+
+function R1(t, n) {
+    t.hostBindings !== null && t.hostBindings(1, n)
+}
+
+function cg(t, n) {
+    let e = t.directiveRegistry,
+        i = null;
+    if (e)
+        for (let r = 0; r < e.length; r++) {
+            let o = e[r];
+            WE(n, o.selectors, !1) && (i ??= [], oi(o) ? i.unshift(o) : i.push(o))
+        }
+    return i
+}
+
+function O1(t, n, e, i, r, o) {
+    let a = Ft(t, n);
+    L1(n[Ce], a, o, t.value, e, i, r)
+}
+
+function L1(t, n, e, i, r, o, a) {
+    if (o == null) t.removeAttribute(n, r, e);
+    else {
+        let s = a == null ? zt(o) : a(o, i || "", r);
+        t.setAttribute(n, r, s, e)
+    }
+}
+
+function F1(t, n, e, i, r, o) {
+    let a = o[n];
+    if (a !== null)
+        for (let s = 0; s < a.length; s += 2) {
+            let l = a[s],
+                m = a[s + 1];
+            hd(i, e, l, m)
+        }
+}
+
+function ug(t, n, e, i, r) {
+    let o = Pe + e,
+        a = n[J],
+        s = r(a, n, t, i, e);
+    n[o] = s, er(t, !0);
+    let l = t.type === 2;
+    return l ? (Gp(n[Ce], s, t), (gf() === 0 || Do(t)) && rr(s, n), vf()) : rr(s, n), Ns() && (!l || !Rd(t)) && Gd(a, n, s, t), t
+}
+
+function dg(t) {
+    let n = t;
+    return zu() ? bf() : (n = n.parent, er(n, !1)), n
+}
+
+function P1(t, n) {
+    let e = t[dn];
+    if (!e) return;
+    let i;
+    try {
+        i = e.get(ft, null)
+    } catch {
+        i = null
+    }
+    i?.(n)
+}
+
+function Yd(t, n, e, i, r) {
+    let o = t.inputs?.[i],
+        a = t.hostDirectiveInputs?.[i],
+        s = !1;
+    if (a)
+        for (let l = 0; l < a.length; l += 2) {
+            let m = a[l],
+                f = a[l + 1],
+                p = n.data[m];
+            hd(p, e[m], f, r), s = !0
+        }
+    if (o)
+        for (let l of o) {
+            let m = e[l],
+                f = n.data[l];
+            hd(f, m, i, r), s = !0
+        }
+    return s
+}
+
+function B1(t, n) {
+    let e = _t(n, t),
+        i = e[J];
+    H1(i, e);
+    let r = e[Ot];
+    r !== null && e[Qi] === null && (e[Qi] = Pp(r, e[dn])), be(18), Kd(i, e, e[Se]), be(19, e[Se])
+}
+
+function H1(t, n) {
+    for (let e = n.length; e < t.blueprint.length; e++) n.push(t.blueprint[e])
+}
+
+function Kd(t, n, e) {
+    ws(n);
+    try {
+        let i = t.viewQuery;
+        i !== null && dd(1, i, e);
+        let r = t.template;
+        r !== null && sg(t, n, r, 1, e), t.firstCreatePass && (t.firstCreatePass = !1), n[ii]?.finishViewCreation(t), t.staticContentQueries && Bp(t, n), t.staticViewQueries && dd(2, t.viewQuery, e);
+        let o = t.components;
+        o !== null && j1(n, o)
+    } catch (i) {
+        throw t.firstCreatePass && (t.incompleteFirstPass = !0, t.firstCreatePass = !1), i
+    } finally {
+        n[X] &= -5, Is()
+    }
+}
+
+function j1(t, n) {
+    for (let e = 0; e < n.length; e++) B1(t, n[e])
+}
+
+function fl(t, n, e, i) {
+    let r = Y(null);
+    try {
+        let o = n.tView,
+            s = t[X] & 4096 ? 4096 : 16,
+            l = Bd(t, o, e, s, null, n, null, null, i?.injector ?? null, i?.embeddedViewInjector ?? null, i?.dehydratedView ?? null),
+            m = t[n.index];
+        l[ti] = m;
+        let f = t[ii];
+        return f !== null && (l[ii] = f.createEmbeddedView(o)), Kd(o, l, e), l
+    } finally {
+        Y(r)
+    }
+}
+
+function Ro(t, n) {
+    return !n || n.firstChild === null || wp(t)
+}
+
+function Oo(t, n, e, i, r = !1) {
+    for (; e !== null;) {
+        if (e.type === 128) {
+            e = r ? e.projectionNext : e.next;
+            continue
+        }
+        let o = n[e.index];
+        o !== null && i.push(xt(o)), Lt(o) && hg(o, i);
+        let a = e.type;
+        if (a & 8) Oo(t, n, e.child, i);
+        else if (a & 32) {
+            let s = jd(e, n),
+                l;
+            for (; l = s();) i.push(l)
+        } else if (a & 16) {
+            let s = ag(n, e);
+            if (Array.isArray(s)) i.push(...s);
+            else {
+                let l = wn(n[ht]);
+                Oo(l[J], l, s, i, !0)
+            }
+        }
+        e = r ? e.projectionNext : e.next
+    }
+    return i
+}
+
+function hg(t, n) {
+    for (let e = we; e < t.length; e++) {
+        let i = t[e],
+            r = i[J].firstChild;
+        r !== null && Oo(i[J], i, r, n)
+    }
+    t[An] !== t[Ot] && n.push(t[An])
+}
+
+function mg(t) {
+    if (t[Cs] !== null) {
+        for (let n of t[Cs]) n.impl.addSequence(n);
+        t[Cs].length = 0
+    }
+}
+var fg = [];
+
+function V1(t) {
+    return t[mt] ?? $1(t)
+}
+
+function $1(t) {
+    let n = fg.pop() ?? Object.create(z1);
+    return n.lView = t, n
+}
+
+function U1(t) {
+    t.lView[mt] !== t && (t.lView = null, fg.push(t))
+}
+var z1 = ue(A({}, Vn), {
+    consumerIsAlwaysLive: !0,
+    kind: "template",
+    consumerMarkedDirty: t => {
+        si(t.lView)
+    },
+    consumerOnSignalRead() {
+        this.lView[mt] = this
+    }
+});
+
+function G1(t) {
+    let n = t[mt] ?? Object.create(q1);
+    return n.lView = t, n
+}
+var q1 = ue(A({}, Vn), {
+    consumerIsAlwaysLive: !0,
+    kind: "template",
+    consumerMarkedDirty: t => {
+        let n = wn(t.lView);
+        for (; n && !pg(n[J]);) n = wn(n);
+        n && Pu(n)
+    },
+    consumerOnSignalRead() {
+        this.lView[mt] = this
+    }
+});
+
+function pg(t) {
+    return t.type !== 2
+}
+
+function gg(t) {
+    if (t[hn] === null) return;
+    let n = !0;
+    for (; n;) {
+        let e = !1;
+        for (let i of t[hn]) i.dirty && (e = !0, i.zone === null || Zone.current === i.zone ? i.run() : i.zone.run(() => i.run()));
+        n = e && !!(t[X] & 8192)
+    }
+}
+var W1 = 100;
+
+function vg(t, n = 0) {
+    let i = t[Gt].rendererFactory,
+        r = !1;
+    r || i.begin?.();
+    try {
+        Y1(t, n)
+    } finally {
+        r || i.end?.()
+    }
+}
+
+function Y1(t, n) {
+    let e = Gu();
+    try {
+        tr(!0), gd(t, n);
+        let i = 0;
+        for (; xo(t);) {
+            if (i === W1) throw new $(103, !1);
+            i++, gd(t, 1)
+        }
+    } finally {
+        tr(e)
+    }
+}
+
+function K1(t, n, e, i) {
+    if (ai(n)) return;
+    let r = n[X],
+        o = !1,
+        a = !1;
+    ws(n);
+    let s = !0,
+        l = null,
+        m = null;
+    o || (pg(t) ? (m = V1(n), l = $n(m)) : Ra() === null ? (s = !1, m = G1(n), l = $n(m)) : n[mt] && (Un(n[mt]), n[mt] = null));
+    try {
+        Fu(n), Cf(t.bindingStartIndex), e !== null && sg(t, n, e, 2, i);
+        let f = (r & 3) === 3;
+        if (!o)
+            if (f) {
+                let v = t.preOrderCheckHooks;
+                v !== null && Ls(n, v, null)
+            } else {
+                let v = t.preOrderHooks;
+                v !== null && Fs(n, v, 0, null), Ju(n, 0)
+            } if (a || Q1(n), gg(n), yg(n, 0), t.contentQueries !== null && Bp(t, n), !o)
+            if (f) {
+                let v = t.contentCheckHooks;
+                v !== null && Ls(n, v)
+            } else {
+                let v = t.contentHooks;
+                v !== null && Fs(n, v, 1), Ju(n, 1)
+            } X1(t, n);
+        let p = t.components;
+        p !== null && bg(n, p, 0);
+        let g = t.viewQuery;
+        if (g !== null && dd(2, g, i), !o)
+            if (f) {
+                let v = t.viewCheckHooks;
+                v !== null && Ls(n, v)
+            } else {
+                let v = t.viewHooks;
+                v !== null && Fs(n, v, 2), Ju(n, 2)
+            } if (t.firstUpdatePass === !0 && (t.firstUpdatePass = !1), n[Ds]) {
+            for (let v of n[Ds]) v();
+            n[Ds] = null
+        }
+        o || (mg(n), n[X] &= -73)
+    } catch (f) {
+        throw o || si(n), f
+    } finally {
+        m !== null && (Oi(m, l), s && U1(m)), Is()
+    }
+}
+
+function yg(t, n) {
+    for (let e = Mp(t); e !== null; e = Np(e))
+        for (let i = we; i < e.length; i++) {
+            let r = e[i];
+            Eg(r, n)
+        }
+}
+
+function Q1(t) {
+    for (let n = Mp(t); n !== null; n = Np(n)) {
+        if (!(n[X] & 2)) continue;
+        let e = n[bo];
+        for (let i = 0; i < e.length; i++) {
+            let r = e[i];
+            Pu(r)
+        }
+    }
+}
+
+function Z1(t, n, e) {
+    be(18);
+    let i = _t(n, t);
+    Eg(i, e), be(19, i[Se])
+}
+
+function Eg(t, n) {
+    xs(t) && gd(t, n)
+}
+
+function gd(t, n) {
+    let i = t[J],
+        r = t[X],
+        o = t[mt],
+        a = !!(n === 0 && r & 16);
+    if (a ||= !!(r & 64 && n === 0), a ||= !!(r & 1024), a ||= !!(o?.dirty && Li(o)), a ||= !1, o && (o.dirty = !1), t[X] &= -9217, a) K1(i, t, i.template, t[Se]);
+    else if (r & 8192) {
+        let s = Y(null);
+        try {
+            gg(t), yg(t, 1);
+            let l = i.components;
+            l !== null && bg(t, l, 1), mg(t)
+        } finally {
+            Y(s)
+        }
+    }
+}
+
+function bg(t, n, e) {
+    for (let i = 0; i < n.length; i++) Z1(t, n[i], e)
+}
+
+function X1(t, n) {
+    let e = t.hostBindingOpCodes;
+    if (e !== null) try {
+        for (let i = 0; i < e.length; i++) {
+            let r = e[i];
+            if (r < 0) Rn(~r);
+            else {
+                let o = r,
+                    a = e[++i],
+                    s = e[++i];
+                _f(a, o);
+                let l = n[o];
+                be(24, l), s(2, l), be(25, l)
+            }
+        }
+    } finally {
+        Rn(-1)
+    }
+}
+
+function Qd(t, n) {
+    let e = Gu() ? 64 : 1088;
+    for (t[Gt].changeDetectionScheduler?.notify(n); t;) {
+        t[X] |= e;
+        let i = wn(t);
+        if (Ji(t) && !i) return t;
+        t = i
+    }
+    return null
+}
+
+function Dg(t, n, e, i) {
+    return [t, !0, 0, n, null, i, null, e, null, null]
+}
+
+function Cg(t, n) {
+    let e = we + n;
+    if (e < t.length) return t[e]
+}
+
+function pl(t, n, e, i = !0) {
+    let r = n[J];
+    if (J1(r, n, t, e), i) {
+        let a = pd(e, t),
+            s = n[Ce],
+            l = s.parentNode(t[An]);
+        l !== null && h1(r, t[Ct], s, n, l, a)
+    }
+    let o = n[Qi];
+    o !== null && o.firstChild !== null && (o.firstChild = null)
+}
+
+function xg(t, n) {
+    let e = Lo(t, n);
+    return e !== void 0 && dl(e[J], e), e
+}
+
+function Lo(t, n) {
+    if (t.length <= we) return;
+    let e = we + n,
+        i = t[e];
+    if (i) {
+        let r = i[ti];
+        r !== null && r !== t && zd(r, i), n > 0 && (t[e - 1][Dt] = i[Dt]);
+        let o = po(t, we + n);
+        d1(i[J], i);
+        let a = o[ii];
+        a !== null && a.detachView(o[J]), i[je] = null, i[Dt] = null, i[X] &= -129
+    }
+    return i
+}
+
+function J1(t, n, e, i) {
+    let r = we + i,
+        o = e.length;
+    i > 0 && (e[r - 1][Dt] = n), i < o - we ? (n[Dt] = e[r], xu(e, we + i, n)) : (e.push(n), n[Dt] = null), n[je] = e;
+    let a = n[ti];
+    a !== null && e !== a && _g(a, n);
+    let s = n[ii];
+    s !== null && s.insertView(t), _s(n), n[X] |= 128
+}
+
+function _g(t, n) {
+    let e = t[bo],
+        i = n[je];
+    if (qt(i)) t[X] |= 2;
+    else {
+        let r = i[je][ht];
+        n[ht] !== r && (t[X] |= 2)
+    }
+    e === null ? t[bo] = [n] : e.push(n)
+}
+var On = class {
+    _lView;
+    _cdRefInjectingView;
+    _appRef = null;
+    _attachedToViewContainer = !1;
+    exhaustive;
+    get rootNodes() {
+        let n = this._lView,
+            e = n[J];
+        return Oo(e, n, e.firstChild, [])
+    }
+    constructor(n, e) {
+        this._lView = n, this._cdRefInjectingView = e
+    }
+    get context() {
+        return this._lView[Se]
+    }
+    set context(n) {
+        this._lView[Se] = n
+    }
+    get destroyed() {
+        return ai(this._lView)
+    }
+    destroy() {
+        if (this._appRef) this._appRef.detachView(this);
+        else if (this._attachedToViewContainer) {
+            let n = this._lView[je];
+            if (Lt(n)) {
+                let e = n[Eo],
+                    i = e ? e.indexOf(this) : -1;
+                i > -1 && (Lo(n, i), po(e, i))
+            }
+            this._attachedToViewContainer = !1
+        }
+        dl(this._lView[J], this._lView)
+    }
+    onDestroy(n) {
+        Bu(this._lView, n)
+    }
+    markForCheck() {
+        Qd(this._cdRefInjectingView || this._lView, 4)
+    }
+    detach() {
+        this._lView[X] &= -129
+    }
+    reattach() {
+        _s(this._lView), this._lView[X] |= 128
+    }
+    detectChanges() {
+        this._lView[X] |= 1024, vg(this._lView)
+    }
+    checkNoChanges() {}
+    attachToViewContainerRef() {
+        if (this._appRef) throw new $(902, !1);
+        this._attachedToViewContainer = !0
+    }
+    detachFromAppRef() {
+        this._appRef = null;
+        let n = Ji(this._lView),
+            e = this._lView[ti];
+        e !== null && !n && zd(e, this._lView), og(this._lView[J], this._lView)
+    }
+    attachToAppRef(n) {
+        if (this._attachedToViewContainer) throw new $(902, !1);
+        this._appRef = n;
+        let e = Ji(this._lView),
+            i = this._lView[ti];
+        i !== null && !e && _g(i, this._lView), _s(this._lView)
+    }
+};
+var Zd = (() => {
+    class t {
+        _declarationLView;
+        _declarationTContainer;
+        elementRef;
+        static __NG_ELEMENT_ID__ = eb;
+        constructor(e, i, r) {
+            this._declarationLView = e, this._declarationTContainer = i, this.elementRef = r
+        }
+        get ssrId() {
+            return this._declarationTContainer.tView?.ssrId || null
+        }
+        createEmbeddedView(e, i) {
+            return this.createEmbeddedViewImpl(e, i)
+        }
+        createEmbeddedViewImpl(e, i, r) {
+            let o = fl(this._declarationLView, this._declarationTContainer, e, {
+                embeddedViewInjector: i,
+                dehydratedView: r
+            });
+            return new On(o)
+        }
+    }
+    return t
+})();
+
+function eb() {
+    return Tg(Qe(), oe())
+}
+
+function Tg(t, n) {
+    return t.type & 4 ? new Zd(n, t, il(t, n)) : null
+}
+
+function $o(t, n, e, i, r) {
+    let o = t.data[n];
+    if (o === null) o = tb(t, n, e, i, r), xf() && (o.flags |= 32);
+    else if (o.type & 64) {
+        o.type = e, o.value = i, o.attrs = r;
+        let a = Ef();
+        o.injectorIndex = a === null ? -1 : a.injectorIndex
+    }
+    return er(o, !0), o
+}
+
+function tb(t, n, e, i, r) {
+    let o = Uu(),
+        a = zu(),
+        s = a ? o : o && o.parent,
+        l = t.data[n] = ib(t, s, e, n, i, r);
+    return nb(t, l, o, a), l
+}
+
+function nb(t, n, e, i) {
+    t.firstChild === null && (t.firstChild = n), e !== null && (i ? e.child == null && n.parent !== null && (e.child = n) : e.next === null && (e.next = n, n.prev = e))
+}
+
+function ib(t, n, e, i, r, o) {
+    let a = n ? n.injectorIndex : -1,
+        s = 0;
+    return yf() && (s |= 128), {
+        type: e,
+        index: i,
+        insertBeforeIndex: null,
+        injectorIndex: a,
+        directiveStart: -1,
+        directiveEnd: -1,
+        directiveStylingLast: -1,
+        componentOffset: -1,
+        propertyBindings: null,
+        flags: s,
+        providerIndexes: 0,
+        value: r,
+        attrs: o,
+        mergedAttrs: null,
+        localNames: null,
+        initialInputs: null,
+        inputs: null,
+        hostDirectiveInputs: null,
+        outputs: null,
+        hostDirectiveOutputs: null,
+        directiveToIndex: null,
+        tView: null,
+        next: null,
+        prev: null,
+        projectionNext: null,
+        child: null,
+        parent: n,
+        projection: null,
+        styles: null,
+        stylesWithoutHost: null,
+        residualStyles: void 0,
+        classes: null,
+        classesWithoutHost: null,
+        residualClasses: void 0,
+        classBindings: 0,
+        styleBindings: 0
+    }
+}
+var uF = new RegExp(`^(\\d+)*(${ME}|${IE})*(.*)`);
+
+function rb(t) {
+    let n = t[ku] ?? [],
+        i = t[je][Ce],
+        r = [];
+    for (let o of n) o.data[Op] !== void 0 ? r.push(o) : ob(o, i);
+    t[ku] = r
+}
+
+function ob(t, n) {
+    let e = 0,
+        i = t.firstChild;
+    if (i) {
+        let r = t.data[Rp];
+        for (; e < r;) {
+            let o = i.nextSibling;
+            zp(n, i, !1), i = o, e++
+        }
+    }
+}
+var ab = () => null,
+    sb = () => null;
+
+function vd(t, n) {
+    return ab(t, n)
+}
+
+function Sg(t, n, e) {
+    return sb(t, n, e)
+}
+var wg = class {},
+    gl = class {},
+    yd = class {
+        resolveComponentFactory(n) {
+            throw new $(917, !1)
+        }
+    },
+    Uo = class {
+        static NULL = new yd
+    },
+    hi = class {},
+    cr = (() => {
+        class t {
+            destroyNode = null;
+            static __NG_ELEMENT_ID__ = () => lb()
+        }
+        return t
+    })();
+
+function lb() {
+    let t = oe(),
+        n = Qe(),
+        e = _t(n.index, t);
+    return (qt(e) ? e : t)[Ce]
+}
+var Ig = (() => {
+    class t {
+        static \u0275prov = j({
+            token: t,
+            providedIn: "root",
+            factory: () => null
+        })
+    }
+    return t
+})();
+var Ps = {},
+    Ed = class {
+        injector;
+        parentInjector;
+        constructor(n, e) {
+            this.injector = n, this.parentInjector = e
+        }
+        get(n, e, i) {
+            let r = this.injector.get(n, Ps, i);
+            return r !== Ps || e === Ps ? r : this.parentInjector.get(n, e, i)
+        }
+    };
+
+function Gs(t, n, e) {
+    let i = e ? t.styles : null,
+        r = e ? t.classes : null,
+        o = 0;
+    if (n !== null)
+        for (let a = 0; a < n.length; a++) {
+            let s = n[a];
+            if (typeof s == "number") o = s;
+            else if (o == 1) r = fs(r, s);
+            else if (o == 2) {
+                let l = s,
+                    m = n[++a];
+                i = fs(i, l + ": " + m + ";")
+            }
+        }
+    e ? t.styles = i : t.stylesWithoutHost = i, e ? t.classes = r : t.classesWithoutHost = r
+}
+
+function Qt(t, n = 0) {
+    let e = oe();
+    if (e === null) return G(t, n);
+    let i = Qe();
+    return _p(i, e, st(t), n)
+}
+
+function Mg(t, n, e, i, r) {
+    let o = i === null ? null : {
+            "": -1
+        },
+        a = r(t, e);
+    if (a !== null) {
+        let s = a,
+            l = null,
+            m = null;
+        for (let f of a)
+            if (f.resolveHostDirectives !== null) {
+                [s, l, m] = f.resolveHostDirectives(a);
+                break
+            } db(t, n, e, s, o, l, m)
+    }
+    o !== null && i !== null && cb(e, i, o)
+}
+
+function cb(t, n, e) {
+    let i = t.localNames = [];
+    for (let r = 0; r < n.length; r += 2) {
+        let o = e[n[r + 1]];
+        if (o == null) throw new $(-301, !1);
+        i.push(n[r], o)
+    }
+}
+
+function ub(t, n, e) {
+    n.componentOffset = e, (t.components ??= []).push(n.index)
+}
+
+function db(t, n, e, i, r, o, a) {
+    let s = i.length,
+        l = !1;
+    for (let g = 0; g < s; g++) {
+        let v = i[g];
+        !l && oi(v) && (l = !0, ub(t, e, g)), gE(bp(e, n), t, v.type)
+    }
+    vb(e, t.data.length, s);
+    for (let g = 0; g < s; g++) {
+        let v = i[g];
+        v.providersResolver && v.providersResolver(v)
+    }
+    let m = !1,
+        f = !1,
+        p = Zp(t, n, s, null);
+    s > 0 && (e.directiveToIndex = new Map);
+    for (let g = 0; g < s; g++) {
+        let v = i[g];
+        if (e.mergedAttrs = nl(e.mergedAttrs, v.hostAttrs), mb(t, e, n, p, v), gb(p, v, r), a !== null && a.has(v)) {
+            let [B, M] = a.get(v);
+            e.directiveToIndex.set(v.type, [p, B + e.directiveStart, M + e.directiveStart])
+        } else(o === null || !o.has(v)) && e.directiveToIndex.set(v.type, p);
+        v.contentQueries !== null && (e.flags |= 4), (v.hostBindings !== null || v.hostAttrs !== null || v.hostVars !== 0) && (e.flags |= 64);
+        let x = v.type.prototype;
+        !m && (x.ngOnChanges || x.ngOnInit || x.ngDoCheck) && ((t.preOrderHooks ??= []).push(e.index), m = !0), !f && (x.ngOnChanges || x.ngDoCheck) && ((t.preOrderCheckHooks ??= []).push(e.index), f = !0), p++
+    }
+    hb(t, e, o)
+}
+
+function hb(t, n, e) {
+    for (let i = n.directiveStart; i < n.directiveEnd; i++) {
+        let r = t.data[i];
+        if (e === null || !e.has(r)) Zf(0, n, r, i), Zf(1, n, r, i), Jf(n, i, !1);
+        else {
+            let o = e.get(r);
+            Xf(0, n, o, i), Xf(1, n, o, i), Jf(n, i, !0)
+        }
+    }
+}
+
+function Zf(t, n, e, i) {
+    let r = t === 0 ? e.inputs : e.outputs;
+    for (let o in r)
+        if (r.hasOwnProperty(o)) {
+            let a;
+            t === 0 ? a = n.inputs ??= {} : a = n.outputs ??= {}, a[o] ??= [], a[o].push(i), Ng(n, o)
+        }
+}
+
+function Xf(t, n, e, i) {
+    let r = t === 0 ? e.inputs : e.outputs;
+    for (let o in r)
+        if (r.hasOwnProperty(o)) {
+            let a = r[o],
+                s;
+            t === 0 ? s = n.hostDirectiveInputs ??= {} : s = n.hostDirectiveOutputs ??= {}, s[a] ??= [], s[a].push(i, o), Ng(n, a)
+        }
+}
+
+function Ng(t, n) {
+    n === "class" ? t.flags |= 8 : n === "style" && (t.flags |= 16)
+}
+
+function Jf(t, n, e) {
+    let {
+        attrs: i,
+        inputs: r,
+        hostDirectiveInputs: o
+    } = t;
+    if (i === null || !e && r === null || e && o === null || Fd(t)) {
+        t.initialInputs ??= [], t.initialInputs.push(null);
+        return
+    }
+    let a = null,
+        s = 0;
+    for (; s < i.length;) {
+        let l = i[s];
+        if (l === 0) {
+            s += 4;
+            continue
+        } else if (l === 5) {
+            s += 2;
+            continue
+        } else if (typeof l == "number") break;
+        if (!e && r.hasOwnProperty(l)) {
+            let m = r[l];
+            for (let f of m)
+                if (f === n) {
+                    a ??= [], a.push(l, i[s + 1]);
+                    break
+                }
+        } else if (e && o.hasOwnProperty(l)) {
+            let m = o[l];
+            for (let f = 0; f < m.length; f += 2)
+                if (m[f] === n) {
+                    a ??= [], a.push(m[f + 1], i[s + 1]);
+                    break
+                }
+        }
+        s += 2
+    }
+    t.initialInputs ??= [], t.initialInputs.push(a)
+}
+
+function mb(t, n, e, i, r) {
+    t.data[i] = r;
+    let o = r.factory || (r.factory = Kn(r.type, !0)),
+        a = new Ao(o, oi(r), Qt, null);
+    t.blueprint[i] = a, e[i] = a, fb(t, n, i, Zp(t, e, r.hostVars, ze), r)
+}
+
+function fb(t, n, e, i, r) {
+    let o = r.hostBindings;
+    if (o) {
+        let a = t.hostBindingOpCodes;
+        a === null && (a = t.hostBindingOpCodes = []);
+        let s = ~n.index;
+        pb(a) != s && a.push(s), a.push(e, i, o)
+    }
+}
+
+function pb(t) {
+    let n = t.length;
+    for (; n > 0;) {
+        let e = t[--n];
+        if (typeof e == "number" && e < 0) return e
+    }
+    return 0
+}
+
+function gb(t, n, e) {
+    if (e) {
+        if (n.exportAs)
+            for (let i = 0; i < n.exportAs.length; i++) e[n.exportAs[i]] = t;
+        oi(n) && (e[""] = t)
+    }
+}
+
+function vb(t, n, e) {
+    t.flags |= 1, t.directiveStart = n, t.directiveEnd = n + e, t.providerIndexes = n
+}
+
+function Ag(t, n, e, i, r, o, a, s) {
+    let l = n[J],
+        m = l.consts,
+        f = Tt(m, a),
+        p = $o(l, t, e, i, f);
+    return o && Mg(l, n, p, Tt(m, s), r), p.mergedAttrs = nl(p.mergedAttrs, p.attrs), p.attrs !== null && Gs(p, p.attrs, !1), p.mergedAttrs !== null && Gs(p, p.mergedAttrs, !0), l.queries !== null && l.queries.elementStart(l, p), p
+}
+
+function kg(t, n) {
+    fp(t, n), Ru(n) && t.queries.elementEnd(n)
+}
+
+function yb(t, n, e, i, r, o) {
+    let a = n.consts,
+        s = Tt(a, r),
+        l = $o(n, t, e, i, s);
+    if (l.mergedAttrs = nl(l.mergedAttrs, l.attrs), o != null) {
+        let m = Tt(a, o);
+        l.localNames = [];
+        for (let f = 0; f < m.length; f += 2) l.localNames.push(m[f], -1)
+    }
+    return l.attrs !== null && Gs(l, l.attrs, !1), l.mergedAttrs !== null && Gs(l, l.mergedAttrs, !0), n.queries !== null && n.queries.elementStart(n, l), l
+}
+
+function Xd(t, n, e) {
+    return t[n] = e
+}
+
+function Eb(t, n) {
+    return t[n]
+}
+
+function wt(t, n, e) {
+    if (e === ze) return !1;
+    let i = t[n];
+    return Object.is(i, e) ? !1 : (t[n] = e, !0)
+}
+
+function qs(t, n, e, i) {
+    let r = wt(t, n, e);
+    return wt(t, n + 1, i) || r
+}
+
+function bb(t, n, e, i, r) {
+    let o = qs(t, n, e, i);
+    return wt(t, n + 2, r) || o
+}
+
+function Db(t, n, e, i, r, o) {
+    let a = qs(t, n, e, i);
+    return qs(t, n + 2, r, o) || a
+}
+
+function Bs(t, n, e) {
+    return function i(r) {
+        let o = kn(t) ? _t(t.index, n) : n;
+        Qd(o, 5);
+        let a = n[Se],
+            s = ep(n, a, e, r),
+            l = i.__ngNextListenerFn__;
+        for (; l;) s = ep(n, a, l, r) && s, l = l.__ngNextListenerFn__;
+        return s
+    }
+}
+
+function ep(t, n, e, i) {
+    let r = Y(null);
+    try {
+        return be(6, n, e), e(i) !== !1
+    } catch (o) {
+        return P1(t, o), !1
+    } finally {
+        be(7, n, e), Y(r)
+    }
+}
+
+function Rg(t, n, e, i, r, o, a, s) {
+    let l = Do(t),
+        m = !1,
+        f = null;
+    if (!i && l && (f = xb(n, e, o, t.index)), f !== null) {
+        let p = f.__ngLastListenerFn__ || f;
+        p.__ngNextListenerFn__ = a, f.__ngLastListenerFn__ = a, m = !0
+    } else {
+        let p = Ft(t, e),
+            g = i ? i(p) : p;
+        AE(e, g, o, s);
+        let v = r.listen(g, o, s);
+        if (!Cb(o)) {
+            let x = i ? B => i(xt(B[t.index])) : t.index;
+            Og(x, n, e, o, s, v, !1)
+        }
+    }
+    return m
+}
+
+function Cb(t) {
+    return t.startsWith("animation") || t.startsWith("transition")
+}
+
+function xb(t, n, e, i) {
+    let r = t.cleanup;
+    if (r != null)
+        for (let o = 0; o < r.length - 1; o += 2) {
+            let a = r[o];
+            if (a === e && r[o + 1] === i) {
+                let s = n[Zi],
+                    l = r[o + 2];
+                return s && s.length > l ? s[l] : null
+            }
+            typeof a == "string" && (o += 2)
+        }
+    return null
+}
+
+function Og(t, n, e, i, r, o, a) {
+    let s = n.firstCreatePass ? pf(n) : null,
+        l = ff(e),
+        m = l.length;
+    l.push(r, o), s && s.push(i, t, m, (m + 1) * (a ? -1 : 1))
+}
+
+function tp(t, n, e, i, r, o) {
+    let a = n[e],
+        s = n[J],
+        m = s.data[e].outputs[i],
+        p = a[m].subscribe(o);
+    Og(t.index, s, n, r, o, p, !0)
+}
+var bd = Symbol("BINDING");
+var Ws = class extends Uo {
+    ngModule;
+    constructor(n) {
+        super(), this.ngModule = n
+    }
+    resolveComponentFactory(n) {
+        let e = Nn(n);
+        return new or(e, this.ngModule)
+    }
+};
+
+function _b(t) {
+    return Object.keys(t).map(n => {
+        let [e, i, r] = t[n], o = {
+            propName: e,
+            templateName: n,
+            isSignal: (i & ul.SignalBased) !== 0
+        };
+        return r && (o.transform = r), o
+    })
+}
+
+function Tb(t) {
+    return Object.keys(t).map(n => ({
+        propName: t[n],
+        templateName: n
+    }))
+}
+
+function Sb(t, n, e) {
+    let i = n instanceof ke ? n : n?.injector;
+    return i && t.getStandaloneInjector !== null && (i = t.getStandaloneInjector(i) || i), i ? new Ed(e, i) : e
+}
+
+function wb(t) {
+    let n = t.get(hi, null);
+    if (n === null) throw new $(407, !1);
+    let e = t.get(Ig, null),
+        i = t.get(Rt, null);
+    return {
+        rendererFactory: n,
+        sanitizer: e,
+        changeDetectionScheduler: i,
+        ngReflect: !1
+    }
+}
+
+function Ib(t, n) {
+    let e = Lg(t);
+    return $p(n, e, e === "svg" ? Ou : e === "math" ? cf : null)
+}
+
+function Lg(t) {
+    return (t.selectors[0][0] || "div").toLowerCase()
+}
+var or = class extends gl {
+    componentDef;
+    ngModule;
+    selector;
+    componentType;
+    ngContentSelectors;
+    isBoundToModule;
+    cachedInputs = null;
+    cachedOutputs = null;
+    get inputs() {
+        return this.cachedInputs ??= _b(this.componentDef.inputs), this.cachedInputs
+    }
+    get outputs() {
+        return this.cachedOutputs ??= Tb(this.componentDef.outputs), this.cachedOutputs
+    }
+    constructor(n, e) {
+        super(), this.componentDef = n, this.ngModule = e, this.componentType = n.type, this.selector = ZE(n.selectors), this.ngContentSelectors = n.ngContentSelectors ?? [], this.isBoundToModule = !!e
+    }
+    create(n, e, i, r, o, a) {
+        be(22);
+        let s = Y(null);
+        try {
+            let l = this.componentDef,
+                m = Mb(i, l, a, o),
+                f = Sb(l, r || this.ngModule, n),
+                p = wb(f),
+                g = p.rendererFactory.createRenderer(null, l),
+                v = i ? T1(g, i, l.encapsulation, f) : Ib(l, g),
+                x = a?.some(np) || o?.some(I => typeof I != "function" && I.bindings.some(np)),
+                B = Bd(null, m, null, 512 | Qp(l), null, null, p, g, f, null, Pp(v, f, !0));
+            B[Pe] = v, ws(B);
+            let M = null;
+            try {
+                let I = Ag(Pe, B, 2, "#host", () => m.directiveRegistry, !0, 0);
+                Gp(g, v, I), rr(v, B), Wd(m, B, I), Hp(m, I, B), kg(m, I), e !== void 0 && Ab(I, this.ngContentSelectors, e), M = _t(I.index, B), B[Se] = M[Se], Kd(m, B, null)
+            } catch (I) {
+                throw M !== null && cd(M), cd(B), I
+            } finally {
+                be(23), Is()
+            }
+            return new Ys(this.componentType, B, !!x)
+        } finally {
+            Y(s)
+        }
+    }
+};
+
+function Mb(t, n, e, i) {
+    let r = t ? ["ng-version", "20.3.18"] : XE(n.selectors[0]),
+        o = null,
+        a = null,
+        s = 0;
+    if (e)
+        for (let f of e) s += f[bd].requiredVars, f.create && (f.targetIdx = 0, (o ??= []).push(f)), f.update && (f.targetIdx = 0, (a ??= []).push(f));
+    if (i)
+        for (let f = 0; f < i.length; f++) {
+            let p = i[f];
+            if (typeof p != "function")
+                for (let g of p.bindings) {
+                    s += g[bd].requiredVars;
+                    let v = f + 1;
+                    g.create && (g.targetIdx = v, (o ??= []).push(g)), g.update && (g.targetIdx = v, (a ??= []).push(g))
+                }
+        }
+    let l = [n];
+    if (i)
+        for (let f of i) {
+            let p = typeof f == "function" ? f : f.type,
+                g = wu(p);
+            l.push(g)
+        }
+    return Pd(0, null, Nb(o, a), 1, s, l, null, null, null, [r], null)
+}
+
+function Nb(t, n) {
+    return !t && !n ? null : e => {
+        if (e & 1 && t)
+            for (let i of t) i.create();
+        if (e & 2 && n)
+            for (let i of n) i.update()
+    }
+}
+
+function np(t) {
+    let n = t[bd].kind;
+    return n === "input" || n === "twoWay"
+}
+var Ys = class extends wg {
+    _rootLView;
+    _hasInputBindings;
+    instance;
+    hostView;
+    changeDetectorRef;
+    componentType;
+    location;
+    previousInputValues = null;
+    _tNode;
+    constructor(n, e, i) {
+        super(), this._rootLView = e, this._hasInputBindings = i, this._tNode = Co(e[J], Pe), this.location = il(this._tNode, e), this.instance = _t(this._tNode.index, e)[Se], this.hostView = this.changeDetectorRef = new On(e, void 0), this.componentType = n
+    }
+    setInput(n, e) {
+        this._hasInputBindings;
+        let i = this._tNode;
+        if (this.previousInputValues ??= new Map, this.previousInputValues.has(n) && Object.is(this.previousInputValues.get(n), e)) return;
+        let r = this._rootLView,
+            o = Yd(i, r[J], r, n, e);
+        this.previousInputValues.set(n, e);
+        let a = _t(i.index, r);
+        Qd(a, 1)
+    }
+    get injector() {
+        return new ui(this._tNode, this._rootLView)
+    }
+    destroy() {
+        this.hostView.destroy()
+    }
+    onDestroy(n) {
+        this.hostView.onDestroy(n)
+    }
+};
+
+function Ab(t, n, e) {
+    let i = t.projection = [];
+    for (let r = 0; r < n.length; r++) {
+        let o = e[r];
+        i.push(o != null && o.length ? Array.from(o) : null)
+    }
+}
+var ur = (() => {
+    class t {
+        static __NG_ELEMENT_ID__ = kb
+    }
+    return t
+})();
+
+function kb() {
+    let t = Qe();
+    return Ob(t, oe())
+}
+var Rb = ur,
+    Fg = class extends Rb {
+        _lContainer;
+        _hostTNode;
+        _hostLView;
+        constructor(n, e, i) {
+            super(), this._lContainer = n, this._hostTNode = e, this._hostLView = i
+        }
+        get element() {
+            return il(this._hostTNode, this._hostLView)
+        }
+        get injector() {
+            return new ui(this._hostTNode, this._hostLView)
+        }
+        get parentInjector() {
+            let n = Nd(this._hostTNode, this._hostLView);
+            if (vp(n)) {
+                let e = Vs(n, this._hostLView),
+                    i = js(n),
+                    r = e[J].data[i + 8];
+                return new ui(r, e)
+            } else return new ui(null, this._hostLView)
+        }
+        clear() {
+            for (; this.length > 0;) this.remove(this.length - 1)
+        }
+        get(n) {
+            let e = ip(this._lContainer);
+            return e !== null && e[n] || null
+        }
+        get length() {
+            return this._lContainer.length - we
+        }
+        createEmbeddedView(n, e, i) {
+            let r, o;
+            typeof i == "number" ? r = i : i != null && (r = i.index, o = i.injector);
+            let a = vd(this._lContainer, n.ssrId),
+                s = n.createEmbeddedViewImpl(e || {}, o, a);
+            return this.insertImpl(s, r, Ro(this._hostTNode, a)), s
+        }
+        createComponent(n, e, i, r, o, a, s) {
+            let l = n && !nE(n),
+                m;
+            if (l) m = e;
+            else {
+                let M = e || {};
+                m = M.index, i = M.injector, r = M.projectableNodes, o = M.environmentInjector || M.ngModuleRef, a = M.directives, s = M.bindings
+            }
+            let f = l ? n : new or(Nn(n)),
+                p = i || this.parentInjector;
+            if (!o && f.ngModule == null) {
+                let I = (l ? p : this.parentInjector).get(ke, null);
+                I && (o = I)
+            }
+            let g = Nn(f.componentType ?? {}),
+                v = vd(this._lContainer, g?.id ?? null),
+                x = v?.firstChild ?? null,
+                B = f.create(p, r, x, o, a, s);
+            return this.insertImpl(B.hostView, m, Ro(this._hostTNode, v)), B
+        }
+        insert(n, e) {
+            return this.insertImpl(n, e, !0)
+        }
+        insertImpl(n, e, i) {
+            let r = n._lView;
+            if (df(r)) {
+                let s = this.indexOf(n);
+                if (s !== -1) this.detach(s);
+                else {
+                    let l = r[je],
+                        m = new Fg(l, l[Ct], l[je]);
+                    m.detach(m.indexOf(n))
+                }
+            }
+            let o = this._adjustIndex(e),
+                a = this._lContainer;
+            return pl(a, r, o, i), n.attachToViewContainerRef(), xu(nd(a), o, n), n
+        }
+        move(n, e) {
+            return this.insert(n, e)
+        }
+        indexOf(n) {
+            let e = ip(this._lContainer);
+            return e !== null ? e.indexOf(n) : -1
+        }
+        remove(n) {
+            let e = this._adjustIndex(n, -1),
+                i = Lo(this._lContainer, e);
+            i && (po(nd(this._lContainer), e), dl(i[J], i))
+        }
+        detach(n) {
+            let e = this._adjustIndex(n, -1),
+                i = Lo(this._lContainer, e);
+            return i && po(nd(this._lContainer), e) != null ? new On(i) : null
+        }
+        _adjustIndex(n, e = 0) {
+            return n ?? this.length + e
+        }
+    };
+
+function ip(t) {
+    return t[Eo]
+}
+
+function nd(t) {
+    return t[Eo] || (t[Eo] = [])
+}
+
+function Ob(t, n) {
+    let e, i = n[t.index];
+    return Lt(i) ? e = i : (e = Dg(i, n, null, t), n[t.index] = e, Hd(n, e)), Fb(e, n, t, i), new Fg(e, t, n)
+}
+
+function Lb(t, n) {
+    let e = t[Ce],
+        i = e.createComment(""),
+        r = Ft(n, t),
+        o = e.parentNode(r);
+    return Us(e, o, i, e.nextSibling(r), !1), i
+}
+var Fb = Hb,
+    Pb = () => !1;
+
+function Bb(t, n, e) {
+    return Pb(t, n, e)
+}
+
+function Hb(t, n, e, i) {
+    if (t[An]) return;
+    let r;
+    e.type & 8 ? r = xt(i) : r = Lb(n, e), t[An] = r
+}
+var ar = class {},
+    vl = class {};
+var Ks = class extends ar {
+        ngModuleType;
+        _parent;
+        _bootstrapComponents = [];
+        _r3Injector;
+        instance;
+        destroyCbs = [];
+        componentFactoryResolver = new Ws(this);
+        constructor(n, e, i, r = !0) {
+            super(), this.ngModuleType = n, this._parent = e;
+            let o = Su(n);
+            this._bootstrapComponents = Yp(o.bootstrap), this._r3Injector = Qu(n, e, [{
+                provide: ar,
+                useValue: this
+            }, {
+                provide: Uo,
+                useValue: this.componentFactoryResolver
+            }, ...i], cn(n), new Set(["environment"])), r && this.resolveInjectorInitializers()
+        }
+        resolveInjectorInitializers() {
+            this._r3Injector.resolveInjectorInitializers(), this.instance = this._r3Injector.get(this.ngModuleType)
+        }
+        get injector() {
+            return this._r3Injector
+        }
+        destroy() {
+            let n = this._r3Injector;
+            !n.destroyed && n.destroy(), this.destroyCbs.forEach(e => e()), this.destroyCbs = null
+        }
+        onDestroy(n) {
+            this.destroyCbs.push(n)
+        }
+    },
+    Qs = class extends vl {
+        moduleType;
+        constructor(n) {
+            super(), this.moduleType = n
+        }
+        create(n) {
+            return new Ks(this.moduleType, n, [])
+        }
+    };
+var Fo = class extends ar {
+    injector;
+    componentFactoryResolver = new Ws(this);
+    instance = null;
+    constructor(n) {
+        super();
+        let e = new Qn([...n.providers, {
+            provide: ar,
+            useValue: this
+        }, {
+            provide: Uo,
+            useValue: this.componentFactoryResolver
+        }], n.parent || vo(), n.debugName, new Set(["environment"]));
+        this.injector = e, n.runEnvironmentInitializers && e.resolveInjectorInitializers()
+    }
+    destroy() {
+        this.injector.destroy()
+    }
+    onDestroy(n) {
+        this.injector.onDestroy(n)
+    }
+};
+
+function zo(t, n, e = null) {
+    return new Fo({
+        providers: t,
+        parent: n,
+        debugName: e,
+        runEnvironmentInitializers: !0
+    }).injector
+}
+var jb = (() => {
+    class t {
+        _injector;
+        cachedInjectors = new Map;
+        constructor(e) {
+            this._injector = e
+        }
+        getOrCreateStandaloneInjector(e) {
+            if (!e.standalone) return null;
+            if (!this.cachedInjectors.has(e)) {
+                let i = Iu(!1, e.type),
+                    r = i.length > 0 ? zo([i], this._injector, `Standalone[${e.type.name}]`) : null;
+                this.cachedInjectors.set(e, r)
+            }
+            return this.cachedInjectors.get(e)
+        }
+        ngOnDestroy() {
+            try {
+                for (let e of this.cachedInjectors.values()) e !== null && e.destroy()
+            } finally {
+                this.cachedInjectors.clear()
+            }
+        }
+        static \u0275prov = j({
+            token: t,
+            providedIn: "environment",
+            factory: () => new t(G(ke))
+        })
+    }
+    return t
+})();
+
+function q(t) {
+    return Bo(() => {
+        let n = Pg(t),
+            e = ue(A({}, n), {
+                decls: t.decls,
+                vars: t.vars,
+                template: t.template,
+                consts: t.consts || null,
+                ngContentSelectors: t.ngContentSelectors,
+                onPush: t.changeDetection === Ad.OnPush,
+                directiveDefs: null,
+                pipeDefs: null,
+                dependencies: n.standalone && t.dependencies || null,
+                getStandaloneInjector: n.standalone ? r => r.get(jb).getOrCreateStandaloneInjector(e) : null,
+                getExternalStyles: null,
+                signals: t.signals ?? !1,
+                data: t.data || {},
+                encapsulation: t.encapsulation || mn.Emulated,
+                styles: t.styles || lt,
+                _: null,
+                schemas: t.schemas || null,
+                tView: null,
+                id: ""
+            });
+        n.standalone && Kt("NgStandalone"), Bg(e);
+        let i = t.dependencies;
+        return e.directiveDefs = rp(i, Vb), e.pipeDefs = rp(i, tf), e.id = zb(e), e
+    })
+}
+
+function Vb(t) {
+    return Nn(t) || wu(t)
+}
+
+function gi(t) {
+    return Bo(() => ({
+        type: t.type,
+        bootstrap: t.bootstrap || lt,
+        declarations: t.declarations || lt,
+        imports: t.imports || lt,
+        exports: t.exports || lt,
+        transitiveCompileScopes: null,
+        schemas: t.schemas || null,
+        id: t.id || null
+    }))
+}
+
+function $b(t, n) {
+    if (t == null) return Xn;
+    let e = {};
+    for (let i in t)
+        if (t.hasOwnProperty(i)) {
+            let r = t[i],
+                o, a, s, l;
+            Array.isArray(r) ? (s = r[0], o = r[1], a = r[2] ?? o, l = r[3] || null) : (o = r, a = r, s = ul.None, l = null), e[o] = [i, s, l], n[o] = a
+        } return e
+}
+
+function Ub(t) {
+    if (t == null) return Xn;
+    let n = {};
+    for (let e in t) t.hasOwnProperty(e) && (n[t[e]] = e);
+    return n
+}
+
+function vn(t) {
+    return Bo(() => {
+        let n = Pg(t);
+        return Bg(n), n
+    })
+}
+
+function Pg(t) {
+    let n = {};
+    return {
+        type: t.type,
+        providersResolver: null,
+        factory: null,
+        hostBindings: t.hostBindings || null,
+        hostVars: t.hostVars || 0,
+        hostAttrs: t.hostAttrs || null,
+        contentQueries: t.contentQueries || null,
+        declaredInputs: n,
+        inputConfig: t.inputs || Xn,
+        exportAs: t.exportAs || null,
+        standalone: t.standalone ?? !0,
+        signals: t.signals === !0,
+        selectors: t.selectors || lt,
+        viewQuery: t.viewQuery || null,
+        features: t.features || null,
+        setInput: null,
+        resolveHostDirectives: null,
+        hostDirectives: null,
+        inputs: $b(t.inputs, n),
+        outputs: Ub(t.outputs),
+        debugInfo: null
+    }
+}
+
+function Bg(t) {
+    t.features?.forEach(n => n(t))
+}
+
+function rp(t, n) {
+    return t ? () => {
+        let e = typeof t == "function" ? t() : t,
+            i = [];
+        for (let r of e) {
+            let o = n(r);
+            o !== null && i.push(o)
+        }
+        return i
+    } : null
+}
+
+function zb(t) {
+    let n = 0,
+        e = typeof t.consts == "function" ? "" : t.consts,
+        i = [t.selectors, t.ngContentSelectors, t.hostVars, t.hostAttrs, e, t.vars, t.decls, t.encapsulation, t.standalone, t.signals, t.exportAs, JSON.stringify(t.inputs), JSON.stringify(t.outputs), Object.getOwnPropertyNames(t.type.prototype), !!t.contentQueries, !!t.viewQuery];
+    for (let o of i.join("|")) n = Math.imul(31, n) + o.charCodeAt(0) << 0;
+    return n += 2147483648, "c" + n
+}
+
+function Hg(t, n, e, i, r, o, a, s) {
+    if (e.firstCreatePass) {
+        t.mergedAttrs = nl(t.mergedAttrs, t.attrs);
+        let f = t.tView = Pd(2, t, r, o, a, e.directiveRegistry, e.pipeRegistry, null, e.schemas, e.consts, null);
+        e.queries !== null && (e.queries.template(e, t), f.queries = e.queries.embeddedTView(t))
+    }
+    s && (t.flags |= s), er(t, !1);
+    let l = qb(e, n, t, i);
+    Ns() && Gd(e, n, l, t), rr(l, n);
+    let m = Dg(l, n, l, t);
+    n[i + Pe] = m, Hd(n, m), Bb(m, t, n)
+}
+
+function Gb(t, n, e, i, r, o, a, s, l, m, f) {
+    let p = e + Pe,
+        g;
+    return n.firstCreatePass ? (g = $o(n, p, 4, a || null, s || null), ju() && Mg(n, t, g, Tt(n.consts, m), cg), fp(n, g)) : g = n.data[p], Hg(g, t, n, e, i, r, o, l), Do(g) && Wd(n, t, g), m != null && ml(t, g, f), g
+}
+
+function Zs(t, n, e, i, r, o, a, s, l, m, f) {
+    let p = e + Pe,
+        g;
+    if (n.firstCreatePass) {
+        if (g = $o(n, p, 4, a || null, s || null), m != null) {
+            let v = Tt(n.consts, m);
+            g.localNames = [];
+            for (let x = 0; x < v.length; x += 2) g.localNames.push(v[x], -1)
+        }
+    } else g = n.data[p];
+    return Hg(g, t, n, e, i, r, o, l), m != null && ml(t, g, f), g
+}
+
+function Ln(t, n, e, i, r, o, a, s) {
+    let l = oe(),
+        m = et(),
+        f = Tt(m.consts, o);
+    return Gb(l, m, t, n, e, i, r, f, void 0, a, s), Ln
+}
+var qb = Wb;
+
+function Wb(t, n, e, i) {
+    return As(!0), n[Ce].createComment("")
+}
+var Jd = (() => {
+    class t {
+        log(e) {
+            console.log(e)
+        }
+        warn(e) {
+            console.warn(e)
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: t.\u0275fac,
+            providedIn: "platform"
+        })
+    }
+    return t
+})();
+var eh = new U("");
+
+function Go(t) {
+    return !!t && typeof t.then == "function"
+}
+
+function jg(t) {
+    return !!t && typeof t.subscribe == "function"
+}
+var Vg = new U("");
+var th = (() => {
+        class t {
+            resolve;
+            reject;
+            initialized = !1;
+            done = !1;
+            donePromise = new Promise((e, i) => {
+                this.resolve = e, this.reject = i
+            });
+            appInits = E(Vg, {
+                optional: !0
+            }) ?? [];
+            injector = E(ct);
+            constructor() {}
+            runInitializers() {
+                if (this.initialized) return;
+                let e = [];
+                for (let r of this.appInits) {
+                    let o = Ue(this.injector, r);
+                    if (Go(o)) e.push(o);
+                    else if (jg(o)) {
+                        let a = new Promise((s, l) => {
+                            o.subscribe({
+                                complete: s,
+                                error: l
+                            })
+                        });
+                        e.push(a)
+                    }
+                }
+                let i = () => {
+                    this.done = !0, this.resolve()
+                };
+                Promise.all(e).then(() => {
+                    i()
+                }).catch(r => {
+                    this.reject(r)
+                }), e.length === 0 && i(), this.initialized = !0
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    yl = new U("");
+
+function $g() {
+    Vc(() => {
+        let t = "";
+        throw new $(600, t)
+    })
+}
+
+function Ug(t) {
+    return t.isBoundToModule
+}
+var Yb = 10;
+var vi = (() => {
+    class t {
+        _runningTick = !1;
+        _destroyed = !1;
+        _destroyListeners = [];
+        _views = [];
+        internalErrorHandler = E(ft);
+        afterRenderManager = E(ng);
+        zonelessEnabled = E(So);
+        rootEffectScheduler = E(Io);
+        dirtyFlags = 0;
+        tracingSnapshot = null;
+        allTestViews = new Set;
+        autoDetectTestViews = new Set;
+        includeAllTestViews = !1;
+        afterTick = new Be;
+        get allViews() {
+            return [...(this.includeAllTestViews ? this.allTestViews : this.autoDetectTestViews).keys(), ...this._views]
+        }
+        get destroyed() {
+            return this._destroyed
+        }
+        componentTypes = [];
+        components = [];
+        internalPendingTask = E(Wt);
+        get isStable() {
+            return this.internalPendingTask.hasPendingTasksObservable.pipe(re(e => !e))
+        }
+        constructor() {
+            E(Vo, {
+                optional: !0
+            })
+        }
+        whenStable() {
+            let e;
+            return new Promise(i => {
+                e = this.isStable.subscribe({
+                    next: r => {
+                        r && i()
+                    }
+                })
+            }).finally(() => {
+                e.unsubscribe()
+            })
+        }
+        _injector = E(ke);
+        _rendererFactory = null;
+        get injector() {
+            return this._injector
+        }
+        bootstrap(e, i) {
+            return this.bootstrapImpl(e, i)
+        }
+        bootstrapImpl(e, i, r = ct.NULL) {
+            return this._injector.get(Re).run(() => {
+                be(10);
+                let a = e instanceof gl;
+                if (!this._injector.get(th).done) {
+                    let x = "";
+                    throw new $(405, x)
+                }
+                let l;
+                a ? l = e : l = this._injector.get(Uo).resolveComponentFactory(e), this.componentTypes.push(l.componentType);
+                let m = Ug(l) ? void 0 : this._injector.get(ar),
+                    f = i || l.selector,
+                    p = l.create(r, [], f, m),
+                    g = p.location.nativeElement,
+                    v = p.injector.get(eh, null);
+                return v?.registerApplication(g), p.onDestroy(() => {
+                    this.detachView(p.hostView), No(this.components, p), v?.unregisterApplication(g)
+                }), this._loadComponent(p), be(11, p), p
+            })
+        }
+        tick() {
+            this.zonelessEnabled || (this.dirtyFlags |= 1), this._tick()
+        }
+        _tick() {
+            be(12), this.tracingSnapshot !== null ? this.tracingSnapshot.run(Vd.CHANGE_DETECTION, this.tickImpl) : this.tickImpl()
+        }
+        tickImpl = () => {
+            if (this._runningTick) throw new $(101, !1);
+            let e = Y(null);
+            try {
+                this._runningTick = !0, this.synchronize()
+            } finally {
+                this._runningTick = !1, this.tracingSnapshot?.dispose(), this.tracingSnapshot = null, Y(e), this.afterTick.next(), be(13)
+            }
+        };
+        synchronize() {
+            this._rendererFactory === null && !this._injector.destroyed && (this._rendererFactory = this._injector.get(hi, null, {
+                optional: !0
+            }));
+            let e = 0;
+            for (; this.dirtyFlags !== 0 && e++ < Yb;) be(14), this.synchronizeOnce(), be(15)
+        }
+        synchronizeOnce() {
+            this.dirtyFlags & 16 && (this.dirtyFlags &= -17, this.rootEffectScheduler.flush());
+            let e = !1;
+            if (this.dirtyFlags & 7) {
+                let i = !!(this.dirtyFlags & 1);
+                this.dirtyFlags &= -8, this.dirtyFlags |= 8;
+                for (let {
+                        _lView: r
+                    }
+                    of this.allViews) {
+                    if (!i && !xo(r)) continue;
+                    let o = i && !this.zonelessEnabled ? 0 : 1;
+                    vg(r, o), e = !0
+                }
+                if (this.dirtyFlags &= -5, this.syncDirtyFlagsWithViews(), this.dirtyFlags & 23) return
+            }
+            e || (this._rendererFactory?.begin?.(), this._rendererFactory?.end?.()), this.dirtyFlags & 8 && (this.dirtyFlags &= -9, this.afterRenderManager.execute()), this.syncDirtyFlagsWithViews()
+        }
+        syncDirtyFlagsWithViews() {
+            if (this.allViews.some(({
+                    _lView: e
+                }) => xo(e))) {
+                this.dirtyFlags |= 2;
+                return
+            } else this.dirtyFlags &= -8
+        }
+        attachView(e) {
+            let i = e;
+            this._views.push(i), i.attachToAppRef(this)
+        }
+        detachView(e) {
+            let i = e;
+            No(this._views, i), i.detachFromAppRef()
+        }
+        _loadComponent(e) {
+            this.attachView(e.hostView);
+            try {
+                this.tick()
+            } catch (r) {
+                this.internalErrorHandler(r)
+            }
+            this.components.push(e), this._injector.get(yl, []).forEach(r => r(e))
+        }
+        ngOnDestroy() {
+            if (!this._destroyed) try {
+                this._destroyListeners.forEach(e => e()), this._views.slice().forEach(e => e.destroy())
+            } finally {
+                this._destroyed = !0, this._views = [], this._destroyListeners = []
+            }
+        }
+        onDestroy(e) {
+            return this._destroyListeners.push(e), () => No(this._destroyListeners, e)
+        }
+        destroy() {
+            if (this._destroyed) throw new $(406, !1);
+            let e = this._injector;
+            e.destroy && !e.destroyed && e.destroy()
+        }
+        get viewCount() {
+            return this._views.length
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: t.\u0275fac,
+            providedIn: "root"
+        })
+    }
+    return t
+})();
+
+function No(t, n) {
+    let e = t.indexOf(n);
+    e > -1 && t.splice(e, 1)
+}
+
+function It(t, n, e, i) {
+    let r = oe(),
+        o = li();
+    if (wt(r, o, n)) {
+        let a = et(),
+            s = Ms();
+        O1(s, r, t, n, e, i)
+    }
+    return It
+}
+var vF = typeof document < "u" && typeof document?.documentElement?.getAnimations == "function";
+var Dd = class {
+    destroy(n) {}
+    updateValue(n, e) {}
+    swap(n, e) {
+        let i = Math.min(n, e),
+            r = Math.max(n, e),
+            o = this.detach(r);
+        if (r - i > 1) {
+            let a = this.detach(i);
+            this.attach(i, o), this.attach(r, a)
+        } else this.attach(i, o)
+    }
+    move(n, e) {
+        this.attach(e, this.detach(n))
+    }
+};
+
+function id(t, n, e, i, r) {
+    return t === e && Object.is(n, i) ? 1 : Object.is(r(t, n), r(e, i)) ? -1 : 0
+}
+
+function Kb(t, n, e) {
+    let i, r, o = 0,
+        a = t.length - 1,
+        s = void 0;
+    if (Array.isArray(n)) {
+        let l = n.length - 1;
+        for (; o <= a && o <= l;) {
+            let m = t.at(o),
+                f = n[o],
+                p = id(o, m, o, f, e);
+            if (p !== 0) {
+                p < 0 && t.updateValue(o, f), o++;
+                continue
+            }
+            let g = t.at(a),
+                v = n[l],
+                x = id(a, g, l, v, e);
+            if (x !== 0) {
+                x < 0 && t.updateValue(a, v), a--, l--;
+                continue
+            }
+            let B = e(o, m),
+                M = e(a, g),
+                I = e(o, f);
+            if (Object.is(I, M)) {
+                let se = e(l, v);
+                Object.is(se, B) ? (t.swap(o, a), t.updateValue(a, v), l--, a--) : t.move(a, o), t.updateValue(o, f), o++;
+                continue
+            }
+            if (i ??= new Xs, r ??= ap(t, o, a, e), Cd(t, i, o, I)) t.updateValue(o, f), o++, a++;
+            else if (r.has(I)) i.set(B, t.detach(o)), a--;
+            else {
+                let se = t.create(o, n[o]);
+                t.attach(o, se), o++, a++
+            }
+        }
+        for (; o <= l;) op(t, i, e, o, n[o]), o++
+    } else if (n != null) {
+        let l = n[Symbol.iterator](),
+            m = l.next();
+        for (; !m.done && o <= a;) {
+            let f = t.at(o),
+                p = m.value,
+                g = id(o, f, o, p, e);
+            if (g !== 0) g < 0 && t.updateValue(o, p), o++, m = l.next();
+            else {
+                i ??= new Xs, r ??= ap(t, o, a, e);
+                let v = e(o, p);
+                if (Cd(t, i, o, v)) t.updateValue(o, p), o++, a++, m = l.next();
+                else if (!r.has(v)) t.attach(o, t.create(o, p)), o++, a++, m = l.next();
+                else {
+                    let x = e(o, f);
+                    i.set(x, t.detach(o)), a--
+                }
+            }
+        }
+        for (; !m.done;) op(t, i, e, t.length, m.value), m = l.next()
+    }
+    for (; o <= a;) t.destroy(t.detach(a--));
+    i?.forEach(l => {
+        t.destroy(l)
+    })
+}
+
+function Cd(t, n, e, i) {
+    return n !== void 0 && n.has(i) ? (t.attach(e, n.get(i)), n.delete(i), !0) : !1
+}
+
+function op(t, n, e, i, r) {
+    if (Cd(t, n, i, e(i, r))) t.updateValue(i, r);
+    else {
+        let o = t.create(i, r);
+        t.attach(i, o)
+    }
+}
+
+function ap(t, n, e, i) {
+    let r = new Set;
+    for (let o = n; o <= e; o++) r.add(i(o, t.at(o)));
+    return r
+}
+var Xs = class {
+    kvMap = new Map;
+    _vMap = void 0;
+    has(n) {
+        return this.kvMap.has(n)
+    }
+    delete(n) {
+        if (!this.has(n)) return !1;
+        let e = this.kvMap.get(n);
+        return this._vMap !== void 0 && this._vMap.has(e) ? (this.kvMap.set(n, this._vMap.get(e)), this._vMap.delete(e)) : this.kvMap.delete(n), !0
+    }
+    get(n) {
+        return this.kvMap.get(n)
+    }
+    set(n, e) {
+        if (this.kvMap.has(n)) {
+            let i = this.kvMap.get(n);
+            this._vMap === void 0 && (this._vMap = new Map);
+            let r = this._vMap;
+            for (; r.has(i);) i = r.get(i);
+            r.set(i, e)
+        } else this.kvMap.set(n, e)
+    }
+    forEach(n) {
+        for (let [e, i] of this.kvMap)
+            if (n(i, e), this._vMap !== void 0) {
+                let r = this._vMap;
+                for (; r.has(i);) i = r.get(i), n(i, e)
+            }
+    }
+};
+
+function _(t, n, e, i, r, o, a, s) {
+    Kt("NgControlFlow");
+    let l = oe(),
+        m = et(),
+        f = Tt(m.consts, o);
+    return Zs(l, m, t, n, e, i, r, f, 256, a, s), nh
+}
+
+function nh(t, n, e, i, r, o, a, s) {
+    Kt("NgControlFlow");
+    let l = oe(),
+        m = et(),
+        f = Tt(m.consts, o);
+    return Zs(l, m, t, n, e, i, r, f, 512, a, s), nh
+}
+
+function T(t, n) {
+    Kt("NgControlFlow");
+    let e = oe(),
+        i = li(),
+        r = e[i] !== ze ? e[i] : -1,
+        o = r !== -1 ? Js(e, Pe + r) : void 0,
+        a = 0;
+    if (wt(e, i, t)) {
+        let s = Y(null);
+        try {
+            if (o !== void 0 && xg(o, a), t !== -1) {
+                let l = Pe + t,
+                    m = Js(e, l),
+                    f = Sd(e[J], l),
+                    p = Sg(m, f, e),
+                    g = fl(e, f, n, {
+                        dehydratedView: p
+                    });
+                pl(m, g, a, Ro(f, p))
+            }
+        } finally {
+            Y(s)
+        }
+    } else if (o !== void 0) {
+        let s = Cg(o, a);
+        s !== void 0 && (s[Se] = n)
+    }
+}
+var xd = class {
+    lContainer;
+    $implicit;
+    $index;
+    constructor(n, e, i) {
+        this.lContainer = n, this.$implicit = e, this.$index = i
+    }
+    get $count() {
+        return this.lContainer.length - we
+    }
+};
+
+function ih(t) {
+    return t
+}
+
+function pe(t, n) {
+    return n
+}
+var _d = class {
+    hasEmptyBlock;
+    trackByFn;
+    liveCollection;
+    constructor(n, e, i) {
+        this.hasEmptyBlock = n, this.trackByFn = e, this.liveCollection = i
+    }
+};
+
+function R(t, n, e, i, r, o, a, s, l, m, f, p, g) {
+    Kt("NgControlFlow");
+    let v = oe(),
+        x = et(),
+        B = l !== void 0,
+        M = oe(),
+        I = s ? a.bind(M[ht][Se]) : a,
+        se = new _d(B, I);
+    M[Pe + t] = se, Zs(v, x, t + 1, n, e, i, r, Tt(x.consts, o), 256), B && Zs(v, x, t + 2, l, m, f, p, Tt(x.consts, g), 512)
+}
+var Td = class extends Dd {
+    lContainer;
+    hostLView;
+    templateTNode;
+    operationsCounter = void 0;
+    needsIndexUpdate = !1;
+    constructor(n, e, i) {
+        super(), this.lContainer = n, this.hostLView = e, this.templateTNode = i
+    }
+    get length() {
+        return this.lContainer.length - we
+    }
+    at(n) {
+        return this.getLView(n)[Se].$implicit
+    }
+    attach(n, e) {
+        let i = e[Qi];
+        this.needsIndexUpdate ||= n !== this.length, pl(this.lContainer, e, n, Ro(this.templateTNode, i)), Qb(this.lContainer, n)
+    }
+    detach(n) {
+        return this.needsIndexUpdate ||= n !== this.length - 1, Zb(this.lContainer, n), Xb(this.lContainer, n)
+    }
+    create(n, e) {
+        let i = vd(this.lContainer, this.templateTNode.tView.ssrId),
+            r = fl(this.hostLView, this.templateTNode, new xd(this.lContainer, e, n), {
+                dehydratedView: i
+            });
+        return this.operationsCounter?.recordCreate(), r
+    }
+    destroy(n) {
+        dl(n[J], n), this.operationsCounter?.recordDestroy()
+    }
+    updateValue(n, e) {
+        this.getLView(n)[Se].$implicit = e
+    }
+    reset() {
+        this.needsIndexUpdate = !1, this.operationsCounter?.reset()
+    }
+    updateIndexes() {
+        if (this.needsIndexUpdate)
+            for (let n = 0; n < this.length; n++) this.getLView(n)[Se].$index = n
+    }
+    getLView(n) {
+        return Jb(this.lContainer, n)
+    }
+};
+
+function O(t) {
+    let n = Y(null),
+        e = Pt();
+    try {
+        let i = oe(),
+            r = i[J],
+            o = i[e],
+            a = e + 1,
+            s = Js(i, a);
+        if (o.liveCollection === void 0) {
+            let m = Sd(r, a);
+            o.liveCollection = new Td(s, i, m)
+        } else o.liveCollection.reset();
+        let l = o.liveCollection;
+        if (Kb(l, t, o.trackByFn), l.updateIndexes(), o.hasEmptyBlock) {
+            let m = li(),
+                f = l.length === 0;
+            if (wt(i, m, f)) {
+                let p = e + 2,
+                    g = Js(i, p);
+                if (f) {
+                    let v = Sd(r, p),
+                        x = Sg(g, v, i),
+                        B = fl(i, v, void 0, {
+                            dehydratedView: x
+                        });
+                    pl(g, B, 0, Ro(v, x))
+                } else r.firstUpdatePass && rb(g), xg(g, 0)
+            }
+        }
+    } finally {
+        Y(n)
+    }
+}
+
+function Js(t, n) {
+    return t[n]
+}
+
+function Qb(t, n) {
+    if (t.length <= we) return;
+    let e = we + n,
+        i = t[e],
+        r = i ? i[ri] : void 0;
+    if (i && r && r.detachedLeaveAnimationFns && r.detachedLeaveAnimationFns.length > 0) {
+        let o = i[dn];
+        c1(o, r), di.delete(i), r.detachedLeaveAnimationFns = void 0
+    }
+}
+
+function Zb(t, n) {
+    if (t.length <= we) return;
+    let e = we + n,
+        i = t[e],
+        r = i ? i[ri] : void 0;
+    r && r.leave && r.leave.size > 0 && (r.detachedLeaveAnimationFns = [])
+}
+
+function Xb(t, n) {
+    return Lo(t, n)
+}
+
+function Jb(t, n) {
+    return Cg(t, n)
+}
+
+function Sd(t, n) {
+    return Co(t, n)
+}
+
+function nt(t, n, e) {
+    let i = oe(),
+        r = li();
+    if (wt(i, r, n)) {
+        let o = et(),
+            a = Ms();
+        M1(a, i, t, n, i[Ce], e)
+    }
+    return nt
+}
+
+function wd(t, n, e, i, r) {
+    Yd(n, t, e, r ? "class" : "style", i)
+}
+
+function k(t, n, e, i) {
+    let r = oe(),
+        o = r[J],
+        a = t + Pe,
+        s = o.firstCreatePass ? Ag(a, r, 2, n, cg, ju(), e, i) : o.data[a];
+    if (ug(s, r, t, n, zg), Do(s)) {
+        let l = r[J];
+        Wd(l, r, s), Hp(l, s, r)
+    }
+    return i != null && ml(r, s), k
+}
+
+function F() {
+    let t = et(),
+        n = Qe(),
+        e = dg(n);
+    return t.firstCreatePass && kg(t, e), Vu(e) && $u(), Hu(), e.classesWithoutHost != null && lE(e) && wd(t, e, oe(), e.classesWithoutHost, !0), e.stylesWithoutHost != null && cE(e) && wd(t, e, oe(), e.stylesWithoutHost, !1), F
+}
+
+function _e(t, n, e, i) {
+    return k(t, n, e, i), F(), _e
+}
+
+function u(t, n, e, i) {
+    let r = oe(),
+        o = r[J],
+        a = t + Pe,
+        s = o.firstCreatePass ? yb(a, o, 2, n, e, i) : o.data[a];
+    return ug(s, r, t, n, zg), i != null && ml(r, s), u
+}
+
+function c() {
+    let t = Qe(),
+        n = dg(t);
+    return Vu(n) && $u(), Hu(), c
+}
+
+function P(t, n, e, i) {
+    return u(t, n, e, i), c(), P
+}
+var zg = (t, n, e, i, r) => (As(!0), $p(n[Ce], i, Af()));
+
+function V() {
+    return oe()
+}
+
+function H(t, n, e) {
+    let i = oe(),
+        r = li();
+    if (wt(i, r, n)) {
+        let o = et(),
+            a = Ms();
+        lg(a, i, t, n, i[Ce], e)
+    }
+    return H
+}
+var qo = "en-US";
+var eD = qo;
+
+function Gg(t) {
+    typeof t == "string" && (eD = t.toLowerCase().replace(/_/g, "-"))
+}
+
+function de(t, n, e) {
+    let i = oe(),
+        r = et(),
+        o = Qe();
+    return tD(r, i, i[Ce], o, t, n, e), de
+}
+
+function D(t, n, e) {
+    let i = oe(),
+        r = et(),
+        o = Qe();
+    return (o.type & 3 || e) && Rg(o, r, i, e, i[Ce], t, n, Bs(o, i, n)), D
+}
+
+function tD(t, n, e, i, r, o, a) {
+    let s = !0,
+        l = null;
+    if ((i.type & 3 || a) && (l ??= Bs(i, n, o), Rg(i, t, n, a, e, r, o, l) && (s = !1)), s) {
+        let m = i.outputs?.[r],
+            f = i.hostDirectiveOutputs?.[r];
+        if (f && f.length)
+            for (let p = 0; p < f.length; p += 2) {
+                let g = f[p],
+                    v = f[p + 1];
+                l ??= Bs(i, n, o), tp(i, n, g, v, r, l)
+            }
+        if (m && m.length)
+            for (let p of m) l ??= Bs(i, n, o), tp(i, n, p, r, r, l)
+    }
+}
+
+function y(t = 1) {
+    return Nf(t)
+}
+
+function Mt(t) {
+    let n = Df();
+    return uf(n, Pe + t)
+}
+
+function Os(t, n) {
+    return t << 17 | n << 2
+}
+
+function mi(t) {
+    return t >> 17 & 32767
+}
+
+function nD(t) {
+    return (t & 2) == 2
+}
+
+function iD(t, n) {
+    return t & 131071 | n << 17
+}
+
+function Id(t) {
+    return t | 2
+}
+
+function sr(t) {
+    return (t & 131068) >> 2
+}
+
+function rd(t, n) {
+    return t & -131069 | n << 2
+}
+
+function rD(t) {
+    return (t & 1) === 1
+}
+
+function Md(t) {
+    return t | 1
+}
+
+function oD(t, n, e, i, r, o) {
+    let a = o ? n.classBindings : n.styleBindings,
+        s = mi(a),
+        l = sr(a);
+    t[i] = e;
+    let m = !1,
+        f;
+    if (Array.isArray(e)) {
+        let p = e;
+        f = p[1], (f === null || Ki(p, f) > 0) && (m = !0)
+    } else f = e;
+    if (r)
+        if (l !== 0) {
+            let g = mi(t[s + 1]);
+            t[i + 1] = Os(g, s), g !== 0 && (t[g + 1] = rd(t[g + 1], i)), t[s + 1] = iD(t[s + 1], i)
+        } else t[i + 1] = Os(s, 0), s !== 0 && (t[s + 1] = rd(t[s + 1], i)), s = i;
+    else t[i + 1] = Os(l, 0), s === 0 ? s = i : t[l + 1] = rd(t[l + 1], i), l = i;
+    m && (t[i + 1] = Id(t[i + 1])), sp(t, f, i, !0), sp(t, f, i, !1), aD(n, f, t, i, o), a = Os(s, l), o ? n.classBindings = a : n.styleBindings = a
+}
+
+function aD(t, n, e, i, r) {
+    let o = r ? t.residualClasses : t.residualStyles;
+    o != null && typeof n == "string" && Ki(o, n) >= 0 && (e[i + 1] = Md(e[i + 1]))
+}
+
+function sp(t, n, e, i) {
+    let r = t[e + 1],
+        o = n === null,
+        a = i ? mi(r) : sr(r),
+        s = !1;
+    for (; a !== 0 && (s === !1 || o);) {
+        let l = t[a],
+            m = t[a + 1];
+        sD(l, n) && (s = !0, t[a + 1] = i ? Md(m) : Id(m)), a = i ? mi(m) : sr(m)
+    }
+    s && (t[e + 1] = i ? Id(r) : Md(r))
+}
+
+function sD(t, n) {
+    return t === null || n == null || (Array.isArray(t) ? t[1] : t) === n ? !0 : Array.isArray(t) && typeof n == "string" ? Ki(t, n) >= 0 : !1
+}
+var Ht = {
+    textEnd: 0,
+    key: 0,
+    keyEnd: 0,
+    value: 0,
+    valueEnd: 0
+};
+
+function lD(t) {
+    return t.substring(Ht.key, Ht.keyEnd)
+}
+
+function cD(t) {
+    return uD(t), qg(t, Wg(t, 0, Ht.textEnd))
+}
+
+function qg(t, n) {
+    let e = Ht.textEnd;
+    return e === n ? -1 : (n = Ht.keyEnd = dD(t, Ht.key = n, e), Wg(t, n, e))
+}
+
+function uD(t) {
+    Ht.key = 0, Ht.keyEnd = 0, Ht.value = 0, Ht.valueEnd = 0, Ht.textEnd = t.length
+}
+
+function Wg(t, n, e) {
+    for (; n < e && t.charCodeAt(n) <= 32;) n++;
+    return n
+}
+
+function dD(t, n, e) {
+    for (; n < e && t.charCodeAt(n) > 32;) n++;
+    return n
+}
+
+function yn(t, n, e) {
+    return Yg(t, n, e, !1), yn
+}
+
+function N(t, n) {
+    return Yg(t, n, null, !0), N
+}
+
+function fe(t) {
+    mD(ED, hD, t, !0)
+}
+
+function hD(t, n) {
+    for (let e = cD(n); e >= 0; e = qg(n, e)) Es(t, lD(n), !0)
+}
+
+function Yg(t, n, e, i) {
+    let r = oe(),
+        o = et(),
+        a = _o(2);
+    if (o.firstUpdatePass && Qg(o, t, a, i), n !== ze && wt(r, a, n)) {
+        let s = o.data[Pt()];
+        Zg(o, s, r, r[Ce], t, r[a + 1] = DD(n, e), i, a)
+    }
+}
+
+function mD(t, n, e, i) {
+    let r = et(),
+        o = _o(2);
+    r.firstUpdatePass && Qg(r, null, o, i);
+    let a = oe();
+    if (e !== ze && wt(a, o, e)) {
+        let s = r.data[Pt()];
+        if (Xg(s, i) && !Kg(r, o)) {
+            let l = i ? s.classesWithoutHost : s.stylesWithoutHost;
+            l !== null && (e = fs(l, e || "")), wd(r, s, a, e, i)
+        } else bD(r, s, a, a[Ce], a[o + 1], a[o + 1] = yD(t, n, e), i, o)
+    }
+}
+
+function Kg(t, n) {
+    return n >= t.expandoStartIndex
+}
+
+function Qg(t, n, e, i) {
+    let r = t.data;
+    if (r[e + 1] === null) {
+        let o = r[Pt()],
+            a = Kg(t, e);
+        Xg(o, i) && n === null && !a && (n = !1), n = fD(r, o, n, i), oD(r, o, n, e, a, i)
+    }
+}
+
+function fD(t, n, e, i) {
+    let r = Sf(t),
+        o = i ? n.residualClasses : n.residualStyles;
+    if (r === null)(i ? n.classBindings : n.styleBindings) === 0 && (e = od(null, t, n, e, i), e = Po(e, n.attrs, i), o = null);
+    else {
+        let a = n.directiveStylingLast;
+        if (a === -1 || t[a] !== r)
+            if (e = od(r, t, n, e, i), o === null) {
+                let l = pD(t, n, i);
+                l !== void 0 && Array.isArray(l) && (l = od(null, t, n, l[1], i), l = Po(l, n.attrs, i), gD(t, n, i, l))
+            } else o = vD(t, n, i)
+    }
+    return o !== void 0 && (i ? n.residualClasses = o : n.residualStyles = o), e
+}
+
+function pD(t, n, e) {
+    let i = e ? n.classBindings : n.styleBindings;
+    if (sr(i) !== 0) return t[mi(i)]
+}
+
+function gD(t, n, e, i) {
+    let r = e ? n.classBindings : n.styleBindings;
+    t[mi(r)] = i
+}
+
+function vD(t, n, e) {
+    let i, r = n.directiveEnd;
+    for (let o = 1 + n.directiveStylingLast; o < r; o++) {
+        let a = t[o].hostAttrs;
+        i = Po(i, a, e)
+    }
+    return Po(i, n.attrs, e)
+}
+
+function od(t, n, e, i, r) {
+    let o = null,
+        a = e.directiveEnd,
+        s = e.directiveStylingLast;
+    for (s === -1 ? s = e.directiveStart : s++; s < a && (o = n[s], i = Po(i, o.hostAttrs, r), o !== t);) s++;
+    return t !== null && (e.directiveStylingLast = s), i
+}
+
+function Po(t, n, e) {
+    let i = e ? 1 : 2,
+        r = -1;
+    if (n !== null)
+        for (let o = 0; o < n.length; o++) {
+            let a = n[o];
+            typeof a == "number" ? r = a : r === i && (Array.isArray(t) || (t = t === void 0 ? [] : ["", t]), Es(t, a, e ? !0 : n[++o]))
+        }
+    return t === void 0 ? null : t
+}
+
+function yD(t, n, e) {
+    if (e == null || e === "") return lt;
+    let i = [],
+        r = pi(e);
+    if (Array.isArray(r))
+        for (let o = 0; o < r.length; o++) t(i, r[o], !0);
+    else if (typeof r == "object")
+        for (let o in r) r.hasOwnProperty(o) && t(i, o, r[o]);
+    else typeof r == "string" && n(i, r);
+    return i
+}
+
+function ED(t, n, e) {
+    let i = String(n);
+    i !== "" && !i.includes(" ") && Es(t, i, e)
+}
+
+function bD(t, n, e, i, r, o, a, s) {
+    r === ze && (r = lt);
+    let l = 0,
+        m = 0,
+        f = 0 < r.length ? r[0] : null,
+        p = 0 < o.length ? o[0] : null;
+    for (; f !== null || p !== null;) {
+        let g = l < r.length ? r[l + 1] : void 0,
+            v = m < o.length ? o[m + 1] : void 0,
+            x = null,
+            B;
+        f === p ? (l += 2, m += 2, g !== v && (x = p, B = v)) : p === null || f !== null && f < p ? (l += 2, x = f) : (m += 2, x = p, B = v), x !== null && Zg(t, n, e, i, x, B, a, s), f = l < r.length ? r[l] : null, p = m < o.length ? o[m] : null
+    }
+}
+
+function Zg(t, n, e, i, r, o, a, s) {
+    if (!(n.type & 3)) return;
+    let l = t.data,
+        m = l[s + 1],
+        f = rD(m) ? lp(l, n, e, r, sr(m), a) : void 0;
+    if (!el(f)) {
+        el(o) || nD(m) && (o = lp(l, null, e, r, s, a));
+        let p = Lu(Pt(), e);
+        _1(i, a, p, r, o)
+    }
+}
+
+function lp(t, n, e, i, r, o) {
+    let a = n === null,
+        s;
+    for (; r > 0;) {
+        let l = t[r],
+            m = Array.isArray(l),
+            f = m ? l[1] : l,
+            p = f === null,
+            g = e[r + 1];
+        g === ze && (g = p ? lt : void 0);
+        let v = p ? bs(g, i) : f === i ? g : void 0;
+        if (m && !el(v) && (v = bs(l, i)), el(v) && (s = v, a)) return s;
+        let x = t[r + 1];
+        r = a ? mi(x) : sr(x)
+    }
+    if (n !== null) {
+        let l = o ? n.residualClasses : n.residualStyles;
+        l != null && (s = bs(l, i))
+    }
+    return s
+}
+
+function el(t) {
+    return t !== void 0
+}
+
+function DD(t, n) {
+    return t == null || t === "" || (typeof n == "string" ? t = t + n : typeof t == "object" && (t = cn(pi(t)))), t
+}
+
+function Xg(t, n) {
+    return (t.flags & (n ? 8 : 16)) !== 0
+}
+
+function d(t, n = "") {
+    let e = oe(),
+        i = et(),
+        r = t + Pe,
+        o = i.firstCreatePass ? $o(i, r, 1, n, null) : i.data[r],
+        a = CD(i, e, o, n, t);
+    e[r] = a, Ns() && Gd(i, e, a, o), er(o, !1)
+}
+var CD = (t, n, e, i, r) => (As(!0), LE(n[Ce], i));
+
+function xD(t, n, e, i = "") {
+    return wt(t, li(), e) ? n + zt(e) + i : ze
+}
+
+function _D(t, n, e, i, r, o = "") {
+    let a = qu(),
+        s = qs(t, a, e, r);
+    return _o(2), s ? n + zt(e) + i + zt(r) + o : ze
+}
+
+function TD(t, n, e, i, r, o, a, s = "") {
+    let l = qu(),
+        m = bb(t, l, e, r, a);
+    return _o(3), m ? n + zt(e) + i + zt(r) + o + zt(a) + s : ze
+}
+
+function b(t) {
+    return L("", t), b
+}
+
+function L(t, n, e) {
+    let i = oe(),
+        r = xD(i, t, n, e);
+    return r !== ze && rh(i, Pt(), r), L
+}
+
+function W(t, n, e, i, r) {
+    let o = oe(),
+        a = _D(o, t, n, e, i, r);
+    return a !== ze && rh(o, Pt(), a), W
+}
+
+function Ze(t, n, e, i, r, o, a) {
+    let s = oe(),
+        l = TD(s, t, n, e, i, r, o, a);
+    return l !== ze && rh(s, Pt(), l), Ze
+}
+
+function rh(t, n, e) {
+    let i = Lu(n, t);
+    FE(t[Ce], i, e)
+}
+
+function me(t, n, e) {
+    let i = Ts() + t,
+        r = oe();
+    return r[i] === ze ? Xd(r, i, e ? n.call(e) : n()) : Eb(r, i)
+}
+
+function Fn(t, n, e, i) {
+    return SD(oe(), Ts(), t, n, e, i)
+}
+
+function oh(t, n, e, i, r, o, a) {
+    return wD(oe(), Ts(), t, n, e, i, r, o, a)
+}
+
+function Jg(t, n) {
+    let e = t[n];
+    return e === ze ? void 0 : e
+}
+
+function SD(t, n, e, i, r, o) {
+    let a = n + e;
+    return wt(t, a, r) ? Xd(t, a + 1, o ? i.call(o, r) : i(r)) : Jg(t, a + 1)
+}
+
+function wD(t, n, e, i, r, o, a, s, l) {
+    let m = n + e;
+    return Db(t, m, r, o, a, s) ? Xd(t, m + 4, l ? i.call(l, r, o, a, s) : i(r, o, a, s)) : Jg(t, m + 4)
+}
+
+function ah(t, n) {
+    return Tg(t, n)
+}
+var tl = class {
+        ngModuleFactory;
+        componentFactories;
+        constructor(n, e) {
+            this.ngModuleFactory = n, this.componentFactories = e
+        }
+    },
+    sh = (() => {
+        class t {
+            compileModuleSync(e) {
+                return new Qs(e)
+            }
+            compileModuleAsync(e) {
+                return Promise.resolve(this.compileModuleSync(e))
+            }
+            compileModuleAndAllComponentsSync(e) {
+                let i = this.compileModuleSync(e),
+                    r = Su(e),
+                    o = Yp(r.declarations).reduce((a, s) => {
+                        let l = Nn(s);
+                        return l && a.push(new or(l)), a
+                    }, []);
+                return new tl(i, o)
+            }
+            compileModuleAndAllComponentsAsync(e) {
+                return Promise.resolve(this.compileModuleAndAllComponentsSync(e))
+            }
+            clearCache() {}
+            clearCacheFor(e) {}
+            getModuleId(e) {}
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })();
+var ID = (() => {
+    class t {
+        zone = E(Re);
+        changeDetectionScheduler = E(Rt);
+        applicationRef = E(vi);
+        applicationErrorHandler = E(ft);
+        _onMicrotaskEmptySubscription;
+        initialize() {
+            this._onMicrotaskEmptySubscription || (this._onMicrotaskEmptySubscription = this.zone.onMicrotaskEmpty.subscribe({
+                next: () => {
+                    this.changeDetectionScheduler.runningTick || this.zone.run(() => {
+                        try {
+                            this.applicationRef.dirtyFlags |= 1, this.applicationRef._tick()
+                        } catch (e) {
+                            this.applicationErrorHandler(e)
+                        }
+                    })
+                }
+            }))
+        }
+        ngOnDestroy() {
+            this._onMicrotaskEmptySubscription?.unsubscribe()
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: t.\u0275fac,
+            providedIn: "root"
+        })
+    }
+    return t
+})();
+
+function e0({
+    ngZoneFactory: t,
+    ignoreChangesOutsideZone: n,
+    scheduleInRootZone: e
+}) {
+    return t ??= () => new Re(ue(A({}, t0()), {
+        scheduleInRootZone: e
+    })), [{
+        provide: Re,
+        useFactory: t
+    }, {
+        provide: Mn,
+        multi: !0,
+        useFactory: () => {
+            let i = E(ID, {
+                optional: !0
+            });
+            return () => i.initialize()
+        }
+    }, {
+        provide: Mn,
+        multi: !0,
+        useFactory: () => {
+            let i = E(MD);
+            return () => {
+                i.initialize()
+            }
+        }
+    }, n === !0 ? {
+        provide: Xu,
+        useValue: !0
+    } : [], {
+        provide: ks,
+        useValue: e ?? Jp
+    }, {
+        provide: ft,
+        useFactory: () => {
+            let i = E(Re),
+                r = E(ke),
+                o;
+            return a => {
+                i.runOutsideAngular(() => {
+                    r.destroyed && !o ? setTimeout(() => {
+                        throw a
+                    }) : (o ??= r.get(bt), o.handleError(a))
+                })
+            }
+        }
+    }]
+}
+
+function t0(t) {
+    return {
+        enableLongStackTrace: !1,
+        shouldCoalesceEventChangeDetection: t?.eventCoalescing ?? !1,
+        shouldCoalesceRunChangeDetection: t?.runCoalescing ?? !1
+    }
+}
+var MD = (() => {
+    class t {
+        subscription = new Me;
+        initialized = !1;
+        zone = E(Re);
+        pendingTasks = E(Wt);
+        initialize() {
+            if (this.initialized) return;
+            this.initialized = !0;
+            let e = null;
+            !this.zone.isStable && !this.zone.hasPendingMacrotasks && !this.zone.hasPendingMicrotasks && (e = this.pendingTasks.add()), this.zone.runOutsideAngular(() => {
+                this.subscription.add(this.zone.onStable.subscribe(() => {
+                    Re.assertNotInAngularZone(), queueMicrotask(() => {
+                        e !== null && !this.zone.hasPendingMacrotasks && !this.zone.hasPendingMicrotasks && (this.pendingTasks.remove(e), e = null)
+                    })
+                }))
+            }), this.subscription.add(this.zone.onUnstable.subscribe(() => {
+                Re.assertInAngularZone(), e ??= this.pendingTasks.add()
+            }))
+        }
+        ngOnDestroy() {
+            this.subscription.unsubscribe()
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: t.\u0275fac,
+            providedIn: "root"
+        })
+    }
+    return t
+})();
+var lh = (() => {
+    class t {
+        applicationErrorHandler = E(ft);
+        appRef = E(vi);
+        taskService = E(Wt);
+        ngZone = E(Re);
+        zonelessEnabled = E(So);
+        tracing = E(Vo, {
+            optional: !0
+        });
+        disableScheduling = E(Xu, {
+            optional: !0
+        }) ?? !1;
+        zoneIsDefined = typeof Zone < "u" && !!Zone.root.run;
+        schedulerTickApplyArgs = [{
+            data: {
+                __scheduler_tick__: !0
+            }
+        }];
+        subscriptions = new Me;
+        angularZoneId = this.zoneIsDefined ? this.ngZone._inner?.get(zs) : null;
+        scheduleInRootZone = !this.zonelessEnabled && this.zoneIsDefined && (E(ks, {
+            optional: !0
+        }) ?? !1);
+        cancelScheduledCallback = null;
+        useMicrotaskScheduler = !1;
+        runningTick = !1;
+        pendingRenderTaskId = null;
+        constructor() {
+            this.subscriptions.add(this.appRef.afterTick.subscribe(() => {
+                this.runningTick || this.cleanup()
+            })), this.subscriptions.add(this.ngZone.onUnstable.subscribe(() => {
+                this.runningTick || this.cleanup()
+            })), this.disableScheduling ||= !this.zonelessEnabled && (this.ngZone instanceof ko || !this.zoneIsDefined)
+        }
+        notify(e) {
+            if (!this.zonelessEnabled && e === 5) return;
+            let i = !1;
+            switch (e) {
+                case 0: {
+                    this.appRef.dirtyFlags |= 2;
+                    break
+                }
+                case 3:
+                case 2:
+                case 4:
+                case 5:
+                case 1: {
+                    this.appRef.dirtyFlags |= 4;
+                    break
+                }
+                case 6: {
+                    this.appRef.dirtyFlags |= 2, i = !0;
+                    break
+                }
+                case 12: {
+                    this.appRef.dirtyFlags |= 16, i = !0;
+                    break
+                }
+                case 13: {
+                    this.appRef.dirtyFlags |= 2, i = !0;
+                    break
+                }
+                case 11: {
+                    i = !0;
+                    break
+                }
+                case 9:
+                case 8:
+                case 7:
+                case 10:
+                default:
+                    this.appRef.dirtyFlags |= 8
+            }
+            if (this.appRef.tracingSnapshot = this.tracing?.snapshot(this.appRef.tracingSnapshot) ?? null, !this.shouldScheduleTick(i)) return;
+            let r = this.useMicrotaskScheduler ? Gf : eg;
+            this.pendingRenderTaskId = this.taskService.add(), this.scheduleInRootZone ? this.cancelScheduledCallback = Zone.root.run(() => r(() => this.tick())) : this.cancelScheduledCallback = this.ngZone.runOutsideAngular(() => r(() => this.tick()))
+        }
+        shouldScheduleTick(e) {
+            return !(this.disableScheduling && !e || this.appRef.destroyed || this.pendingRenderTaskId !== null || this.runningTick || this.appRef._runningTick || !this.zonelessEnabled && this.zoneIsDefined && Zone.current.get(zs + this.angularZoneId))
+        }
+        tick() {
+            if (this.runningTick || this.appRef.destroyed) return;
+            if (this.appRef.dirtyFlags === 0) {
+                this.cleanup();
+                return
+            }!this.zonelessEnabled && this.appRef.dirtyFlags & 7 && (this.appRef.dirtyFlags |= 1);
+            let e = this.taskService.add();
+            try {
+                this.ngZone.run(() => {
+                    this.runningTick = !0, this.appRef._tick()
+                }, void 0, this.schedulerTickApplyArgs)
+            } catch (i) {
+                this.taskService.remove(e), this.applicationErrorHandler(i)
+            } finally {
+                this.cleanup()
+            }
+            this.useMicrotaskScheduler = !0, Gf(() => {
+                this.useMicrotaskScheduler = !1, this.taskService.remove(e)
+            })
+        }
+        ngOnDestroy() {
+            this.subscriptions.unsubscribe(), this.cleanup()
+        }
+        cleanup() {
+            if (this.runningTick = !1, this.cancelScheduledCallback?.(), this.cancelScheduledCallback = null, this.pendingRenderTaskId !== null) {
+                let e = this.pendingRenderTaskId;
+                this.pendingRenderTaskId = null, this.taskService.remove(e)
+            }
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: t.\u0275fac,
+            providedIn: "root"
+        })
+    }
+    return t
+})();
+
+function ch() {
+    return Kt("NgZoneless"), Jn([{
+            provide: Rt,
+            useExisting: lh
+        }, {
+            provide: Re,
+            useClass: ko
+        }, {
+            provide: So,
+            useValue: !0
+        }, {
+            provide: ks,
+            useValue: !1
+        },
+        []
+    ])
+}
+
+function ND() {
+    return typeof $localize < "u" && $localize.locale || qo
+}
+var uh = new U("", {
+    providedIn: "root",
+    factory: () => E(uh, {
+        optional: !0,
+        skipSelf: !0
+    }) || ND()
+});
+var El = class {
+    destroyed = !1;
+    listeners = null;
+    errorHandler = E(bt, {
+        optional: !0
+    });
+    destroyRef = E(St);
+    constructor() {
+        this.destroyRef.onDestroy(() => {
+            this.destroyed = !0, this.listeners = null
+        })
+    }
+    subscribe(n) {
+        if (this.destroyed) throw new $(953, !1);
+        return (this.listeners ??= []).push(n), {
+            unsubscribe: () => {
+                let e = this.listeners?.indexOf(n);
+                e !== void 0 && e !== -1 && this.listeners?.splice(e, 1)
+            }
+        }
+    }
+    emit(n) {
+        if (this.destroyed) {
+            console.warn(un(953, !1));
+            return
+        }
+        if (this.listeners === null) return;
+        let e = Y(null);
+        try {
+            for (let i of this.listeners) try {
+                i(n)
+            } catch (r) {
+                this.errorHandler?.handleError(r)
+            }
+        } finally {
+            Y(e)
+        }
+    }
+};
+
+function En(t) {
+    return Gm(t)
+}
+
+function Z(t, n) {
+    return Pa(t, n?.equal)
+}
+var dh = class {
+    [Je];
+    constructor(n) {
+        this[Je] = n
+    }
+    destroy() {
+        this[Je].destroy()
+    }
+};
+
+function hh(t, n) {
+    let e = n?.injector ?? E(ct),
+        i = n?.manualCleanup !== !0 ? e.get(St) : null,
+        r, o = e.get(To, null, {
+            optional: !0
+        }),
+        a = e.get(Rt);
+    return o !== null ? (r = RD(o.view, a, t), i instanceof ho && i._lView === o.view && (i = null)) : r = OD(t, e.get(Io), a), r.injector = e, i !== null && (r.onDestroyFn = i.onDestroy(() => r.destroy())), new dh(r)
+}
+var n0 = ue(A({}, qm), {
+        cleanupFns: void 0,
+        zone: null,
+        onDestroyFn: ci,
+        run() {
+            let t = tr(!1);
+            try {
+                Wm(this)
+            } finally {
+                tr(t)
+            }
+        },
+        cleanup() {
+            if (!this.cleanupFns?.length) return;
+            let t = Y(null);
+            try {
+                for (; this.cleanupFns.length;) this.cleanupFns.pop()()
+            } finally {
+                this.cleanupFns = [], Y(t)
+            }
+        }
+    }),
+    AD = ue(A({}, n0), {
+        consumerMarkedDirty() {
+            this.scheduler.schedule(this), this.notifier.notify(12)
+        },
+        destroy() {
+            Un(this), this.onDestroyFn(), this.cleanup(), this.scheduler.remove(this)
+        }
+    }),
+    kD = ue(A({}, n0), {
+        consumerMarkedDirty() {
+            this.view[X] |= 8192, si(this.view), this.notifier.notify(13)
+        },
+        destroy() {
+            Un(this), this.onDestroyFn(), this.cleanup(), this.view[hn]?.delete(this)
+        }
+    });
+
+function RD(t, n, e) {
+    let i = Object.create(kD);
+    return i.view = t, i.zone = typeof Zone < "u" ? Zone.current : null, i.notifier = n, i.fn = i0(i, e), t[hn] ??= new Set, t[hn].add(i), i.consumerMarkedDirty(i), i
+}
+
+function OD(t, n, e) {
+    let i = Object.create(AD);
+    return i.fn = i0(i, t), i.scheduler = n, i.notifier = e, i.zone = typeof Zone < "u" ? Zone.current : null, i.scheduler.add(i), i.notifier.notify(12), i
+}
+
+function i0(t, n) {
+    return () => {
+        n(e => (t.cleanupFns ??= []).push(e))
+    }
+}
+var o0 = Symbol("InputSignalNode#UNSET"),
+    QD = ue(A({}, Ba), {
+        transformFn: void 0,
+        applyValueToInputSignal(t, n) {
+            Pi(t, n)
+        }
+    });
+
+function a0(t, n) {
+    let e = Object.create(QD);
+    e.value = t, e.transformFn = n?.transform;
+
+    function i() {
+        if (Ri(e), e.value === o0) {
+            let r = null;
+            throw new $(-950, r)
+        }
+        return e.value
+    }
+    return i[Je] = e, i
+}
+var Dl = class {
+        attributeName;
+        constructor(n) {
+            this.attributeName = n
+        }
+        __NG_ELEMENT_ID__ = () => Ho(this.attributeName);
+        toString() {
+            return `HostAttributeToken ${this.attributeName}`
+        }
+    },
+    ZD = new U("");
+ZD.__NG_ELEMENT_ID__ = t => {
+    let n = Qe();
+    if (n === null) throw new $(204, !1);
+    if (n.type & 2) return n.value;
+    if (t & 8) return null;
+    throw new $(204, !1)
+};
+
+function Ge(t) {
+    return new El
+}
+
+function r0(t, n) {
+    return a0(t, n)
+}
+
+function XD(t) {
+    return a0(o0, t)
+}
+var dr = (r0.required = XD, r0);
+var mh = new U(""),
+    JD = new U("");
+
+function Wo(t) {
+    return !t.moduleRef
+}
+
+function eC(t) {
+    let n = Wo(t) ? t.r3Injector : t.moduleRef.injector,
+        e = n.get(Re);
+    return e.run(() => {
+        Wo(t) ? t.r3Injector.resolveInjectorInitializers() : t.moduleRef.resolveInjectorInitializers();
+        let i = n.get(ft),
+            r;
+        if (e.runOutsideAngular(() => {
+                r = e.onError.subscribe({
+                    next: i
+                })
+            }), Wo(t)) {
+            let o = () => n.destroy(),
+                a = t.platformInjector.get(mh);
+            a.add(o), n.onDestroy(() => {
+                r.unsubscribe(), a.delete(o)
+            })
+        } else {
+            let o = () => t.moduleRef.destroy(),
+                a = t.platformInjector.get(mh);
+            a.add(o), t.moduleRef.onDestroy(() => {
+                No(t.allPlatformModules, t.moduleRef), r.unsubscribe(), a.delete(o)
+            })
+        }
+        return nC(i, e, () => {
+            let o = n.get(Wt),
+                a = o.add(),
+                s = n.get(th);
+            return s.runInitializers(), s.donePromise.then(() => {
+                let l = n.get(uh, qo);
+                if (Gg(l || qo), !n.get(JD, !0)) return Wo(t) ? n.get(vi) : (t.allPlatformModules.push(t.moduleRef), t.moduleRef);
+                if (Wo(t)) {
+                    let f = n.get(vi);
+                    return t.rootComponent !== void 0 && f.bootstrap(t.rootComponent), f
+                } else return tC?.(t.moduleRef, t.allPlatformModules), t.moduleRef
+            }).finally(() => void o.remove(a))
+        })
+    })
+}
+var tC;
+
+function nC(t, n, e) {
+    try {
+        let i = e();
+        return Go(i) ? i.catch(r => {
+            throw n.runOutsideAngular(() => t(r)), r
+        }) : i
+    } catch (i) {
+        throw n.runOutsideAngular(() => t(i)), i
+    }
+}
+var bl = null;
+
+function iC(t = [], n) {
+    return ct.create({
+        name: n,
+        providers: [{
+            provide: go,
+            useValue: "platform"
+        }, {
+            provide: mh,
+            useValue: new Set([() => bl = null])
+        }, ...t]
+    })
+}
+
+function rC(t = []) {
+    if (bl) return bl;
+    let n = iC(t);
+    return bl = n, $g(), oC(n), n
+}
+
+function oC(t) {
+    let n = t.get(ol, null);
+    Ue(t, () => {
+        n?.forEach(e => e())
+    })
+}
+var hr = (() => {
+    class t {
+        static __NG_ELEMENT_ID__ = aC
+    }
+    return t
+})();
+
+function aC(t) {
+    return sC(Qe(), oe(), (t & 16) === 16)
+}
+
+function sC(t, n, e) {
+    if (kn(t) && !e) {
+        let i = _t(t.index, n);
+        return new On(i, i)
+    } else if (t.type & 175) {
+        let i = n[ht];
+        return new On(i, n)
+    }
+    return null
+}
+
+function s0(t) {
+    let {
+        rootComponent: n,
+        appProviders: e,
+        platformProviders: i,
+        platformRef: r
+    } = t;
+    be(8);
+    try {
+        let o = r?.injector ?? rC(i),
+            a = [e0({}), {
+                provide: Rt,
+                useExisting: lh
+            }, Rf, ...e || []],
+            s = new Fo({
+                providers: a,
+                parent: o,
+                debugName: "",
+                runEnvironmentInitializers: !1
+            });
+        return eC({
+            r3Injector: s.injector,
+            platformInjector: o,
+            rootComponent: n
+        })
+    } catch (o) {
+        return Promise.reject(o)
+    } finally {
+        be(9)
+    }
+}
+
+function bn(t) {
+    return typeof t == "boolean" ? t : t != null && t !== "false"
+}
+
+function fh(t, n = NaN) {
+    return !isNaN(parseFloat(t)) && !isNaN(Number(t)) ? Number(t) : n
+}
+var u0 = null;
+
+function Zt() {
+    return u0
+}
+
+function ph(t) {
+    u0 ??= t
+}
+var Yo = class {},
+    Ko = (() => {
+        class t {
+            historyGo(e) {
+                throw new Error("")
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: () => E(d0),
+                providedIn: "platform"
+            })
+        }
+        return t
+    })();
+var d0 = (() => {
+    class t extends Ko {
+        _location;
+        _history;
+        _doc = E(Ie);
+        constructor() {
+            super(), this._location = window.location, this._history = window.history
+        }
+        getBaseHrefFromDOM() {
+            return Zt().getBaseHref(this._doc)
+        }
+        onPopState(e) {
+            let i = Zt().getGlobalEventTarget(this._doc, "window");
+            return i.addEventListener("popstate", e, !1), () => i.removeEventListener("popstate", e)
+        }
+        onHashChange(e) {
+            let i = Zt().getGlobalEventTarget(this._doc, "window");
+            return i.addEventListener("hashchange", e, !1), () => i.removeEventListener("hashchange", e)
+        }
+        get href() {
+            return this._location.href
+        }
+        get protocol() {
+            return this._location.protocol
+        }
+        get hostname() {
+            return this._location.hostname
+        }
+        get port() {
+            return this._location.port
+        }
+        get pathname() {
+            return this._location.pathname
+        }
+        get search() {
+            return this._location.search
+        }
+        get hash() {
+            return this._location.hash
+        }
+        set pathname(e) {
+            this._location.pathname = e
+        }
+        pushState(e, i, r) {
+            this._history.pushState(e, i, r)
+        }
+        replaceState(e, i, r) {
+            this._history.replaceState(e, i, r)
+        }
+        forward() {
+            this._history.forward()
+        }
+        back() {
+            this._history.back()
+        }
+        historyGo(e = 0) {
+            this._history.go(e)
+        }
+        getState() {
+            return this._history.state
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: () => new t,
+            providedIn: "platform"
+        })
+    }
+    return t
+})();
+
+function Cl(t, n) {
+    return t ? n ? t.endsWith("/") ? n.startsWith("/") ? t + n.slice(1) : t + n : n.startsWith("/") ? t + n : `${t}/${n}` : t : n
+}
+
+function l0(t) {
+    let n = t.search(/#|\?|$/);
+    return t[n - 1] === "/" ? t.slice(0, n - 1) + t.slice(n) : t
+}
+
+function jt(t) {
+    return t && t[0] !== "?" ? `?${t}` : t
+}
+var Xt = (() => {
+        class t {
+            historyGo(e) {
+                throw new Error("")
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: () => E(gh),
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    mr = new U(""),
+    gh = (() => {
+        class t extends Xt {
+            _platformLocation;
+            _baseHref;
+            _removeListenerFns = [];
+            constructor(e, i) {
+                super(), this._platformLocation = e, this._baseHref = i ?? this._platformLocation.getBaseHrefFromDOM() ?? E(Ie).location?.origin ?? ""
+            }
+            ngOnDestroy() {
+                for (; this._removeListenerFns.length;) this._removeListenerFns.pop()()
+            }
+            onPopState(e) {
+                this._removeListenerFns.push(this._platformLocation.onPopState(e), this._platformLocation.onHashChange(e))
+            }
+            getBaseHref() {
+                return this._baseHref
+            }
+            prepareExternalUrl(e) {
+                return Cl(this._baseHref, e)
+            }
+            path(e = !1) {
+                let i = this._platformLocation.pathname + jt(this._platformLocation.search),
+                    r = this._platformLocation.hash;
+                return r && e ? `${i}${r}` : i
+            }
+            pushState(e, i, r, o) {
+                let a = this.prepareExternalUrl(r + jt(o));
+                this._platformLocation.pushState(e, i, a)
+            }
+            replaceState(e, i, r, o) {
+                let a = this.prepareExternalUrl(r + jt(o));
+                this._platformLocation.replaceState(e, i, a)
+            }
+            forward() {
+                this._platformLocation.forward()
+            }
+            back() {
+                this._platformLocation.back()
+            }
+            getState() {
+                return this._platformLocation.getState()
+            }
+            historyGo(e = 0) {
+                this._platformLocation.historyGo?.(e)
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Ko), G(mr, 8))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    yi = (() => {
+        class t {
+            _subject = new Be;
+            _basePath;
+            _locationStrategy;
+            _urlChangeListeners = [];
+            _urlChangeSubscription = null;
+            constructor(e) {
+                this._locationStrategy = e;
+                let i = this._locationStrategy.getBaseHref();
+                this._basePath = uC(l0(c0(i))), this._locationStrategy.onPopState(r => {
+                    this._subject.next({
+                        url: this.path(!0),
+                        pop: !0,
+                        state: r.state,
+                        type: r.type
+                    })
+                })
+            }
+            ngOnDestroy() {
+                this._urlChangeSubscription?.unsubscribe(), this._urlChangeListeners = []
+            }
+            path(e = !1) {
+                return this.normalize(this._locationStrategy.path(e))
+            }
+            getState() {
+                return this._locationStrategy.getState()
+            }
+            isCurrentPathEqualTo(e, i = "") {
+                return this.path() == this.normalize(e + jt(i))
+            }
+            normalize(e) {
+                return t.stripTrailingSlash(cC(this._basePath, c0(e)))
+            }
+            prepareExternalUrl(e) {
+                return e && e[0] !== "/" && (e = "/" + e), this._locationStrategy.prepareExternalUrl(e)
+            }
+            go(e, i = "", r = null) {
+                this._locationStrategy.pushState(r, "", e, i), this._notifyUrlChangeListeners(this.prepareExternalUrl(e + jt(i)), r)
+            }
+            replaceState(e, i = "", r = null) {
+                this._locationStrategy.replaceState(r, "", e, i), this._notifyUrlChangeListeners(this.prepareExternalUrl(e + jt(i)), r)
+            }
+            forward() {
+                this._locationStrategy.forward()
+            }
+            back() {
+                this._locationStrategy.back()
+            }
+            historyGo(e = 0) {
+                this._locationStrategy.historyGo?.(e)
+            }
+            onUrlChange(e) {
+                return this._urlChangeListeners.push(e), this._urlChangeSubscription ??= this.subscribe(i => {
+                    this._notifyUrlChangeListeners(i.url, i.state)
+                }), () => {
+                    let i = this._urlChangeListeners.indexOf(e);
+                    this._urlChangeListeners.splice(i, 1), this._urlChangeListeners.length === 0 && (this._urlChangeSubscription?.unsubscribe(), this._urlChangeSubscription = null)
+                }
+            }
+            _notifyUrlChangeListeners(e = "", i) {
+                this._urlChangeListeners.forEach(r => r(e, i))
+            }
+            subscribe(e, i, r) {
+                return this._subject.subscribe({
+                    next: e,
+                    error: i ?? void 0,
+                    complete: r ?? void 0
+                })
+            }
+            static normalizeQueryParams = jt;
+            static joinWithSlash = Cl;
+            static stripTrailingSlash = l0;
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Xt))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: () => lC(),
+                providedIn: "root"
+            })
+        }
+        return t
+    })();
+
+function lC() {
+    return new yi(G(Xt))
+}
+
+function cC(t, n) {
+    if (!t || !n.startsWith(t)) return n;
+    let e = n.substring(t.length);
+    return e === "" || ["/", ";", "?", "#"].includes(e[0]) ? e : n
+}
+
+function c0(t) {
+    return t.replace(/\/index.html$/, "")
+}
+
+function uC(t) {
+    if (new RegExp("^(https?:)?//").test(t)) {
+        let [, e] = t.split(/\/\/[^\/]+/);
+        return e
+    }
+    return t
+}
+var vh = (() => {
+    class t extends Xt {
+        _platformLocation;
+        _baseHref = "";
+        _removeListenerFns = [];
+        constructor(e, i) {
+            super(), this._platformLocation = e, i != null && (this._baseHref = i)
+        }
+        ngOnDestroy() {
+            for (; this._removeListenerFns.length;) this._removeListenerFns.pop()()
+        }
+        onPopState(e) {
+            this._removeListenerFns.push(this._platformLocation.onPopState(e), this._platformLocation.onHashChange(e))
+        }
+        getBaseHref() {
+            return this._baseHref
+        }
+        path(e = !1) {
+            let i = this._platformLocation.hash ?? "#";
+            return i.length > 0 ? i.substring(1) : i
+        }
+        prepareExternalUrl(e) {
+            let i = Cl(this._baseHref, e);
+            return i.length > 0 ? "#" + i : i
+        }
+        pushState(e, i, r, o) {
+            let a = this.prepareExternalUrl(r + jt(o)) || this._platformLocation.pathname;
+            this._platformLocation.pushState(e, i, a)
+        }
+        replaceState(e, i, r, o) {
+            let a = this.prepareExternalUrl(r + jt(o)) || this._platformLocation.pathname;
+            this._platformLocation.replaceState(e, i, a)
+        }
+        forward() {
+            this._platformLocation.forward()
+        }
+        back() {
+            this._platformLocation.back()
+        }
+        getState() {
+            return this._platformLocation.getState()
+        }
+        historyGo(e = 0) {
+            this._platformLocation.historyGo?.(e)
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)(G(Ko), G(mr, 8))
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: t.\u0275fac
+        })
+    }
+    return t
+})();
+var yh = (() => {
+    class t {
+        _viewContainerRef;
+        _viewRef = null;
+        ngTemplateOutletContext = null;
+        ngTemplateOutlet = null;
+        ngTemplateOutletInjector = null;
+        constructor(e) {
+            this._viewContainerRef = e
+        }
+        ngOnChanges(e) {
+            if (this._shouldRecreateView(e)) {
+                let i = this._viewContainerRef;
+                if (this._viewRef && i.remove(i.indexOf(this._viewRef)), !this.ngTemplateOutlet) {
+                    this._viewRef = null;
+                    return
+                }
+                let r = this._createContextForwardProxy();
+                this._viewRef = i.createEmbeddedView(this.ngTemplateOutlet, r, {
+                    injector: this.ngTemplateOutletInjector ?? void 0
+                })
+            }
+        }
+        _shouldRecreateView(e) {
+            return !!e.ngTemplateOutlet || !!e.ngTemplateOutletInjector
+        }
+        _createContextForwardProxy() {
+            return new Proxy({}, {
+                set: (e, i, r) => this.ngTemplateOutletContext ? Reflect.set(this.ngTemplateOutletContext, i, r) : !1,
+                get: (e, i, r) => {
+                    if (this.ngTemplateOutletContext) return Reflect.get(this.ngTemplateOutletContext, i, r)
+                }
+            })
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)(Qt(ur))
+        };
+        static \u0275dir = vn({
+            type: t,
+            selectors: [
+                ["", "ngTemplateOutlet", ""]
+            ],
+            inputs: {
+                ngTemplateOutletContext: "ngTemplateOutletContext",
+                ngTemplateOutlet: "ngTemplateOutlet",
+                ngTemplateOutletInjector: "ngTemplateOutletInjector"
+            },
+            features: [pn]
+        })
+    }
+    return t
+})();
+var Q = (() => {
+    class t {
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275mod = gi({
+            type: t
+        });
+        static \u0275inj = In({})
+    }
+    return t
+})();
+
+function Qo(t, n) {
+    n = encodeURIComponent(n);
+    for (let e of t.split(";")) {
+        let i = e.indexOf("="),
+            [r, o] = i == -1 ? [e, ""] : [e.slice(0, i), e.slice(i + 1)];
+        if (r.trim() === n) return decodeURIComponent(o)
+    }
+    return null
+}
+var Ei = class {};
+var m0 = "browser";
+var f0 = t => t.src,
+    mC = new U("", {
+        providedIn: "root",
+        factory: () => f0
+    });
+var h0 = /^((\s*\d+w\s*(,|$)){1,})$/;
+var fC = [1, 2],
+    pC = 640;
+var gC = 1920,
+    vC = 1080;
+var p0 = (() => {
+    class t {
+        imageLoader = E(mC);
+        config = yC(E(ll));
+        renderer = E(cr);
+        imgElement = E(fi).nativeElement;
+        injector = E(ct);
+        destroyRef = E(St);
+        lcpObserver;
+        _renderedSrc = null;
+        ngSrc;
+        ngSrcset;
+        sizes;
+        width;
+        height;
+        decoding;
+        loading;
+        priority = !1;
+        loaderParams;
+        disableOptimizedSrcset = !1;
+        fill = !1;
+        placeholder;
+        placeholderConfig;
+        src;
+        srcset;
+        constructor() {}
+        ngOnInit() {
+            Kt("NgOptimizedImage"), this.placeholder && this.removePlaceholderOnLoad(this.imgElement), this.setHostAttributes()
+        }
+        setHostAttributes() {
+            this.fill ? this.sizes ||= "100vw" : (this.setHostAttribute("width", this.width.toString()), this.setHostAttribute("height", this.height.toString())), this.setHostAttribute("loading", this.getLoadingBehavior()), this.setHostAttribute("fetchpriority", this.getFetchPriority()), this.setHostAttribute("decoding", this.getDecoding()), this.setHostAttribute("ng-img", "true");
+            let e = this.updateSrcAndSrcset();
+            this.sizes ? this.getLoadingBehavior() === "lazy" ? this.setHostAttribute("sizes", "auto, " + this.sizes) : this.setHostAttribute("sizes", this.sizes) : this.ngSrcset && h0.test(this.ngSrcset) && this.getLoadingBehavior() === "lazy" && this.setHostAttribute("sizes", "auto, 100vw")
+        }
+        ngOnChanges(e) {
+            if (e.ngSrc && !e.ngSrc.isFirstChange()) {
+                let i = this._renderedSrc;
+                this.updateSrcAndSrcset(!0)
+            }
+        }
+        callImageLoader(e) {
+            let i = e;
+            return this.loaderParams && (i.loaderParams = this.loaderParams), this.imageLoader(i)
+        }
+        getLoadingBehavior() {
+            return !this.priority && this.loading !== void 0 ? this.loading : this.priority ? "eager" : "lazy"
+        }
+        getFetchPriority() {
+            return this.priority ? "high" : "auto"
+        }
+        getDecoding() {
+            return this.priority ? "sync" : this.decoding ?? "auto"
+        }
+        getRewrittenSrc() {
+            if (!this._renderedSrc) {
+                let e = {
+                    src: this.ngSrc
+                };
+                this._renderedSrc = this.callImageLoader(e)
+            }
+            return this._renderedSrc
+        }
+        getRewrittenSrcset() {
+            let e = h0.test(this.ngSrcset);
+            return this.ngSrcset.split(",").filter(r => r !== "").map(r => {
+                r = r.trim();
+                let o = e ? parseFloat(r) : parseFloat(r) * this.width;
+                return `${this.callImageLoader({src:this.ngSrc,width:o})} ${r}`
+            }).join(", ")
+        }
+        getAutomaticSrcset() {
+            return this.sizes ? this.getResponsiveSrcset() : this.getFixedSrcset()
+        }
+        getResponsiveSrcset() {
+            let {
+                breakpoints: e
+            } = this.config, i = e;
+            return this.sizes?.trim() === "100vw" && (i = e.filter(o => o >= pC)), i.map(o => `${this.callImageLoader({src:this.ngSrc,width:o})} ${o}w`).join(", ")
+        }
+        updateSrcAndSrcset(e = !1) {
+            e && (this._renderedSrc = null);
+            let i = this.getRewrittenSrc();
+            this.setHostAttribute("src", i);
+            let r;
+            return this.ngSrcset ? r = this.getRewrittenSrcset() : this.shouldGenerateAutomaticSrcset() && (r = this.getAutomaticSrcset()), r && this.setHostAttribute("srcset", r), r
+        }
+        getFixedSrcset() {
+            return fC.map(i => `${this.callImageLoader({src:this.ngSrc,width:this.width*i})} ${i}x`).join(", ")
+        }
+        shouldGenerateAutomaticSrcset() {
+            let e = !1;
+            return this.sizes || (e = this.width > gC || this.height > vC), !this.disableOptimizedSrcset && !this.srcset && this.imageLoader !== f0 && !e
+        }
+        generatePlaceholder(e) {
+            let {
+                placeholderResolution: i
+            } = this.config;
+            return e === !0 ? `url(${this.callImageLoader({src:this.ngSrc,width:i,isPlaceholder:!0})})` : typeof e == "string" ? `url(${e})` : null
+        }
+        shouldBlurPlaceholder(e) {
+            return !e || !e.hasOwnProperty("blur") ? !0 : !!e.blur
+        }
+        removePlaceholderOnLoad(e) {
+            let i = () => {
+                    let a = this.injector.get(hr);
+                    r(), o(), this.placeholder = !1, a.markForCheck()
+                },
+                r = this.renderer.listen(e, "load", i),
+                o = this.renderer.listen(e, "error", i);
+            this.destroyRef.onDestroy(() => {
+                r(), o()
+            }), EC(e, i)
+        }
+        setHostAttribute(e, i) {
+            this.renderer.setAttribute(this.imgElement, e, i)
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275dir = vn({
+            type: t,
+            selectors: [
+                ["img", "ngSrc", ""]
+            ],
+            hostVars: 18,
+            hostBindings: function(i, r) {
+                i & 2 && yn("position", r.fill ? "absolute" : null)("width", r.fill ? "100%" : null)("height", r.fill ? "100%" : null)("inset", r.fill ? "0" : null)("background-size", r.placeholder ? "cover" : null)("background-position", r.placeholder ? "50% 50%" : null)("background-repeat", r.placeholder ? "no-repeat" : null)("background-image", r.placeholder ? r.generatePlaceholder(r.placeholder) : null)("filter", r.placeholder && r.shouldBlurPlaceholder(r.placeholderConfig) ? "blur(15px)" : null)
+            },
+            inputs: {
+                ngSrc: [2, "ngSrc", "ngSrc", bC],
+                ngSrcset: "ngSrcset",
+                sizes: "sizes",
+                width: [2, "width", "width", fh],
+                height: [2, "height", "height", fh],
+                decoding: "decoding",
+                loading: "loading",
+                priority: [2, "priority", "priority", bn],
+                loaderParams: "loaderParams",
+                disableOptimizedSrcset: [2, "disableOptimizedSrcset", "disableOptimizedSrcset", bn],
+                fill: [2, "fill", "fill", bn],
+                placeholder: [2, "placeholder", "placeholder", DC],
+                placeholderConfig: "placeholderConfig",
+                src: "src",
+                srcset: "srcset"
+            },
+            features: [pn]
+        })
+    }
+    return t
+})();
+
+function yC(t) {
+    let n = {};
+    return t.breakpoints && (n.breakpoints = t.breakpoints.sort((e, i) => e - i)), Object.assign({}, sl, t, n)
+}
+
+function EC(t, n) {
+    t.complete && t.naturalWidth && n()
+}
+
+function bC(t) {
+    return typeof t == "string" ? t : pi(t)
+}
+
+function DC(t) {
+    return typeof t == "string" && t !== "true" && t !== "false" && t !== "" ? t : bn(t)
+}
+var Zo = class {
+        _doc;
+        constructor(n) {
+            this._doc = n
+        }
+        manager
+    },
+    xl = (() => {
+        class t extends Zo {
+            constructor(e) {
+                super(e)
+            }
+            supports(e) {
+                return !0
+            }
+            addEventListener(e, i, r, o) {
+                return e.addEventListener(i, r, o), () => this.removeEventListener(e, i, r, o)
+            }
+            removeEventListener(e, i, r, o) {
+                return e.removeEventListener(i, r, o)
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Ie))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac
+            })
+        }
+        return t
+    })(),
+    Tl = new U(""),
+    xh = (() => {
+        class t {
+            _zone;
+            _plugins;
+            _eventNameToPlugin = new Map;
+            constructor(e, i) {
+                this._zone = i, e.forEach(a => {
+                    a.manager = this
+                });
+                let r = e.filter(a => !(a instanceof xl));
+                this._plugins = r.slice().reverse();
+                let o = e.find(a => a instanceof xl);
+                o && this._plugins.push(o)
+            }
+            addEventListener(e, i, r, o) {
+                return this._findPluginFor(i).addEventListener(e, i, r, o)
+            }
+            getZone() {
+                return this._zone
+            }
+            _findPluginFor(e) {
+                let i = this._eventNameToPlugin.get(e);
+                if (i) return i;
+                if (i = this._plugins.find(o => o.supports(e)), !i) throw new $(5101, !1);
+                return this._eventNameToPlugin.set(e, i), i
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Tl), G(Re))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac
+            })
+        }
+        return t
+    })(),
+    Eh = "ng-app-id";
+
+function v0(t) {
+    for (let n of t) n.remove()
+}
+
+function y0(t, n) {
+    let e = n.createElement("style");
+    return e.textContent = t, e
+}
+
+function CC(t, n, e, i) {
+    let r = t.head?.querySelectorAll(`style[${Eh}="${n}"],link[${Eh}="${n}"]`);
+    if (r)
+        for (let o of r) o.removeAttribute(Eh), o instanceof HTMLLinkElement ? i.set(o.href.slice(o.href.lastIndexOf("/") + 1), {
+            usage: 0,
+            elements: [o]
+        }) : o.textContent && e.set(o.textContent, {
+            usage: 0,
+            elements: [o]
+        })
+}
+
+function Dh(t, n) {
+    let e = n.createElement("link");
+    return e.setAttribute("rel", "stylesheet"), e.setAttribute("href", t), e
+}
+var _h = (() => {
+        class t {
+            doc;
+            appId;
+            nonce;
+            inline = new Map;
+            external = new Map;
+            hosts = new Set;
+            constructor(e, i, r, o = {}) {
+                this.doc = e, this.appId = i, this.nonce = r, CC(e, i, this.inline, this.external), this.hosts.add(e.head)
+            }
+            addStyles(e, i) {
+                for (let r of e) this.addUsage(r, this.inline, y0);
+                i?.forEach(r => this.addUsage(r, this.external, Dh))
+            }
+            removeStyles(e, i) {
+                for (let r of e) this.removeUsage(r, this.inline);
+                i?.forEach(r => this.removeUsage(r, this.external))
+            }
+            addUsage(e, i, r) {
+                let o = i.get(e);
+                o ? o.usage++ : i.set(e, {
+                    usage: 1,
+                    elements: [...this.hosts].map(a => this.addElement(a, r(e, this.doc)))
+                })
+            }
+            removeUsage(e, i) {
+                let r = i.get(e);
+                r && (r.usage--, r.usage <= 0 && (v0(r.elements), i.delete(e)))
+            }
+            ngOnDestroy() {
+                for (let [, {
+                        elements: e
+                    }] of [...this.inline, ...this.external]) v0(e);
+                this.hosts.clear()
+            }
+            addHost(e) {
+                this.hosts.add(e);
+                for (let [i, {
+                        elements: r
+                    }] of this.inline) r.push(this.addElement(e, y0(i, this.doc)));
+                for (let [i, {
+                        elements: r
+                    }] of this.external) r.push(this.addElement(e, Dh(i, this.doc)))
+            }
+            removeHost(e) {
+                this.hosts.delete(e)
+            }
+            addElement(e, i) {
+                return this.nonce && i.setAttribute("nonce", this.nonce), e.appendChild(i)
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Ie), G(rl), G(al, 8), G(jo))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac
+            })
+        }
+        return t
+    })(),
+    bh = {
+        svg: "http://www.w3.org/2000/svg",
+        xhtml: "http://www.w3.org/1999/xhtml",
+        xlink: "http://www.w3.org/1999/xlink",
+        xml: "http://www.w3.org/XML/1998/namespace",
+        xmlns: "http://www.w3.org/2000/xmlns/",
+        math: "http://www.w3.org/1998/Math/MathML"
+    },
+    Th = /%COMP%/g;
+var b0 = "%COMP%",
+    xC = `_nghost-${b0}`,
+    _C = `_ngcontent-${b0}`,
+    TC = !0,
+    SC = new U("", {
+        providedIn: "root",
+        factory: () => TC
+    });
+
+function wC(t) {
+    return _C.replace(Th, t)
+}
+
+function IC(t) {
+    return xC.replace(Th, t)
+}
+
+function D0(t, n) {
+    return n.map(e => e.replace(Th, t))
+}
+var Sh = (() => {
+        class t {
+            eventManager;
+            sharedStylesHost;
+            appId;
+            removeStylesOnCompDestroy;
+            doc;
+            ngZone;
+            nonce;
+            tracingService;
+            rendererByCompId = new Map;
+            defaultRenderer;
+            platformIsServer;
+            constructor(e, i, r, o, a, s, l = null, m = null) {
+                this.eventManager = e, this.sharedStylesHost = i, this.appId = r, this.removeStylesOnCompDestroy = o, this.doc = a, this.ngZone = s, this.nonce = l, this.tracingService = m, this.platformIsServer = !1, this.defaultRenderer = new Xo(e, a, s, this.platformIsServer, this.tracingService)
+            }
+            createRenderer(e, i) {
+                if (!e || !i) return this.defaultRenderer;
+                let r = this.getOrCreateRenderer(e, i);
+                return r instanceof _l ? r.applyToHost(e) : r instanceof Jo && r.applyStyles(), r
+            }
+            getOrCreateRenderer(e, i) {
+                let r = this.rendererByCompId,
+                    o = r.get(i.id);
+                if (!o) {
+                    let a = this.doc,
+                        s = this.ngZone,
+                        l = this.eventManager,
+                        m = this.sharedStylesHost,
+                        f = this.removeStylesOnCompDestroy,
+                        p = this.platformIsServer,
+                        g = this.tracingService;
+                    switch (i.encapsulation) {
+                        case mn.Emulated:
+                            o = new _l(l, m, i, this.appId, f, a, s, p, g);
+                            break;
+                        case mn.ShadowDom:
+                            return new Ch(l, m, e, i, a, s, this.nonce, p, g);
+                        default:
+                            o = new Jo(l, m, i, f, a, s, p, g);
+                            break
+                    }
+                    r.set(i.id, o)
+                }
+                return o
+            }
+            ngOnDestroy() {
+                this.rendererByCompId.clear()
+            }
+            componentReplaced(e) {
+                this.rendererByCompId.delete(e)
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(xh), G(_h), G(rl), G(SC), G(Ie), G(Re), G(al), G(Vo, 8))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac
+            })
+        }
+        return t
+    })(),
+    Xo = class {
+        eventManager;
+        doc;
+        ngZone;
+        platformIsServer;
+        tracingService;
+        data = Object.create(null);
+        throwOnSyntheticProps = !0;
+        constructor(n, e, i, r, o) {
+            this.eventManager = n, this.doc = e, this.ngZone = i, this.platformIsServer = r, this.tracingService = o
+        }
+        destroy() {}
+        destroyNode = null;
+        createElement(n, e) {
+            return e ? this.doc.createElementNS(bh[e] || e, n) : this.doc.createElement(n)
+        }
+        createComment(n) {
+            return this.doc.createComment(n)
+        }
+        createText(n) {
+            return this.doc.createTextNode(n)
+        }
+        appendChild(n, e) {
+            (E0(n) ? n.content : n).appendChild(e)
+        }
+        insertBefore(n, e, i) {
+            n && (E0(n) ? n.content : n).insertBefore(e, i)
+        }
+        removeChild(n, e) {
+            e.remove()
+        }
+        selectRootElement(n, e) {
+            let i = typeof n == "string" ? this.doc.querySelector(n) : n;
+            if (!i) throw new $(-5104, !1);
+            return e || (i.textContent = ""), i
+        }
+        parentNode(n) {
+            return n.parentNode
+        }
+        nextSibling(n) {
+            return n.nextSibling
+        }
+        setAttribute(n, e, i, r) {
+            if (r) {
+                e = r + ":" + e;
+                let o = bh[r];
+                o ? n.setAttributeNS(o, e, i) : n.setAttribute(e, i)
+            } else n.setAttribute(e, i)
+        }
+        removeAttribute(n, e, i) {
+            if (i) {
+                let r = bh[i];
+                r ? n.removeAttributeNS(r, e) : n.removeAttribute(`${i}:${e}`)
+            } else n.removeAttribute(e)
+        }
+        addClass(n, e) {
+            n.classList.add(e)
+        }
+        removeClass(n, e) {
+            n.classList.remove(e)
+        }
+        setStyle(n, e, i, r) {
+            r & (fn.DashCase | fn.Important) ? n.style.setProperty(e, i, r & fn.Important ? "important" : "") : n.style[e] = i
+        }
+        removeStyle(n, e, i) {
+            i & fn.DashCase ? n.style.removeProperty(e) : n.style[e] = ""
+        }
+        setProperty(n, e, i) {
+            n != null && (n[e] = i)
+        }
+        setValue(n, e) {
+            n.nodeValue = e
+        }
+        listen(n, e, i, r) {
+            if (typeof n == "string" && (n = Zt().getGlobalEventTarget(this.doc, n), !n)) throw new $(5102, !1);
+            let o = this.decoratePreventDefault(i);
+            return this.tracingService?.wrapEventListener && (o = this.tracingService.wrapEventListener(n, e, o)), this.eventManager.addEventListener(n, e, o, r)
+        }
+        decoratePreventDefault(n) {
+            return e => {
+                if (e === "__ngUnwrap__") return n;
+                n(e) === !1 && e.preventDefault()
+            }
+        }
+    };
+
+function E0(t) {
+    return t.tagName === "TEMPLATE" && t.content !== void 0
+}
+var Ch = class extends Xo {
+        sharedStylesHost;
+        hostEl;
+        shadowRoot;
+        constructor(n, e, i, r, o, a, s, l, m) {
+            super(n, o, a, l, m), this.sharedStylesHost = e, this.hostEl = i, this.shadowRoot = i.attachShadow({
+                mode: "open"
+            }), this.sharedStylesHost.addHost(this.shadowRoot);
+            let f = r.styles;
+            f = D0(r.id, f);
+            for (let g of f) {
+                let v = document.createElement("style");
+                s && v.setAttribute("nonce", s), v.textContent = g, this.shadowRoot.appendChild(v)
+            }
+            let p = r.getExternalStyles?.();
+            if (p)
+                for (let g of p) {
+                    let v = Dh(g, o);
+                    s && v.setAttribute("nonce", s), this.shadowRoot.appendChild(v)
+                }
+        }
+        nodeOrShadowRoot(n) {
+            return n === this.hostEl ? this.shadowRoot : n
+        }
+        appendChild(n, e) {
+            return super.appendChild(this.nodeOrShadowRoot(n), e)
+        }
+        insertBefore(n, e, i) {
+            return super.insertBefore(this.nodeOrShadowRoot(n), e, i)
+        }
+        removeChild(n, e) {
+            return super.removeChild(null, e)
+        }
+        parentNode(n) {
+            return this.nodeOrShadowRoot(super.parentNode(this.nodeOrShadowRoot(n)))
+        }
+        destroy() {
+            this.sharedStylesHost.removeHost(this.shadowRoot)
+        }
+    },
+    Jo = class extends Xo {
+        sharedStylesHost;
+        removeStylesOnCompDestroy;
+        styles;
+        styleUrls;
+        constructor(n, e, i, r, o, a, s, l, m) {
+            super(n, o, a, s, l), this.sharedStylesHost = e, this.removeStylesOnCompDestroy = r;
+            let f = i.styles;
+            this.styles = m ? D0(m, f) : f, this.styleUrls = i.getExternalStyles?.(m)
+        }
+        applyStyles() {
+            this.sharedStylesHost.addStyles(this.styles, this.styleUrls)
+        }
+        destroy() {
+            this.removeStylesOnCompDestroy && di.size === 0 && this.sharedStylesHost.removeStyles(this.styles, this.styleUrls)
+        }
+    },
+    _l = class extends Jo {
+        contentAttr;
+        hostAttr;
+        constructor(n, e, i, r, o, a, s, l, m) {
+            let f = r + "-" + i.id;
+            super(n, e, i, o, a, s, l, m, f), this.contentAttr = wC(f), this.hostAttr = IC(f)
+        }
+        applyToHost(n) {
+            this.applyStyles(), this.setAttribute(n, this.hostAttr, "")
+        }
+        createElement(n, e) {
+            let i = super.createElement(n, e);
+            return super.setAttribute(i, this.contentAttr, ""), i
+        }
+    };
+var Sl = class t extends Yo {
+        supportsDOMEvents = !0;
+        static makeCurrent() {
+            ph(new t)
+        }
+        onAndCancel(n, e, i, r) {
+            return n.addEventListener(e, i, r), () => {
+                n.removeEventListener(e, i, r)
+            }
+        }
+        dispatchEvent(n, e) {
+            n.dispatchEvent(e)
+        }
+        remove(n) {
+            n.remove()
+        }
+        createElement(n, e) {
+            return e = e || this.getDefaultDocument(), e.createElement(n)
+        }
+        createHtmlDocument() {
+            return document.implementation.createHTMLDocument("fakeTitle")
+        }
+        getDefaultDocument() {
+            return document
+        }
+        isElementNode(n) {
+            return n.nodeType === Node.ELEMENT_NODE
+        }
+        isShadowRoot(n) {
+            return n instanceof DocumentFragment
+        }
+        getGlobalEventTarget(n, e) {
+            return e === "window" ? window : e === "document" ? n : e === "body" ? n.body : null
+        }
+        getBaseHref(n) {
+            let e = MC();
+            return e == null ? null : NC(e)
+        }
+        resetBaseElement() {
+            ea = null
+        }
+        getUserAgent() {
+            return window.navigator.userAgent
+        }
+        getCookie(n) {
+            return Qo(document.cookie, n)
+        }
+    },
+    ea = null;
+
+function MC() {
+    return ea = ea || document.head.querySelector("base"), ea ? ea.getAttribute("href") : null
+}
+
+function NC(t) {
+    return new URL(t, document.baseURI).pathname
+}
+var AC = (() => {
+        class t {
+            build() {
+                return new XMLHttpRequest
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac
+            })
+        }
+        return t
+    })(),
+    C0 = ["alt", "control", "meta", "shift"],
+    kC = {
+        "\b": "Backspace",
+        "	": "Tab",
+        "\x7F": "Delete",
+        "\x1B": "Escape",
+        Del: "Delete",
+        Esc: "Escape",
+        Left: "ArrowLeft",
+        Right: "ArrowRight",
+        Up: "ArrowUp",
+        Down: "ArrowDown",
+        Menu: "ContextMenu",
+        Scroll: "ScrollLock",
+        Win: "OS"
+    },
+    RC = {
+        alt: t => t.altKey,
+        control: t => t.ctrlKey,
+        meta: t => t.metaKey,
+        shift: t => t.shiftKey
+    },
+    x0 = (() => {
+        class t extends Zo {
+            constructor(e) {
+                super(e)
+            }
+            supports(e) {
+                return t.parseEventName(e) != null
+            }
+            addEventListener(e, i, r, o) {
+                let a = t.parseEventName(i),
+                    s = t.eventCallback(a.fullKey, r, this.manager.getZone());
+                return this.manager.getZone().runOutsideAngular(() => Zt().onAndCancel(e, a.domEventName, s, o))
+            }
+            static parseEventName(e) {
+                let i = e.toLowerCase().split("."),
+                    r = i.shift();
+                if (i.length === 0 || !(r === "keydown" || r === "keyup")) return null;
+                let o = t._normalizeKey(i.pop()),
+                    a = "",
+                    s = i.indexOf("code");
+                if (s > -1 && (i.splice(s, 1), a = "code."), C0.forEach(m => {
+                        let f = i.indexOf(m);
+                        f > -1 && (i.splice(f, 1), a += m + ".")
+                    }), a += o, i.length != 0 || o.length === 0) return null;
+                let l = {};
+                return l.domEventName = r, l.fullKey = a, l
+            }
+            static matchEventFullKeyCode(e, i) {
+                let r = kC[e.key] || e.key,
+                    o = "";
+                return i.indexOf("code.") > -1 && (r = e.code, o = "code."), r == null || !r ? !1 : (r = r.toLowerCase(), r === " " ? r = "space" : r === "." && (r = "dot"), C0.forEach(a => {
+                    if (a !== r) {
+                        let s = RC[a];
+                        s(e) && (o += a + ".")
+                    }
+                }), o += r, o === i)
+            }
+            static eventCallback(e, i, r) {
+                return o => {
+                    t.matchEventFullKeyCode(o, e) && r.runGuarded(() => i(o))
+                }
+            }
+            static _normalizeKey(e) {
+                return e === "esc" ? "escape" : e
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Ie))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac
+            })
+        }
+        return t
+    })();
+
+function wh(t, n, e) {
+    let i = A({
+        rootComponent: t,
+        platformRef: e?.platformRef
+    }, OC(n));
+    return s0(i)
+}
+
+function OC(t) {
+    return {
+        appProviders: [...HC, ...t?.providers ?? []],
+        platformProviders: BC
+    }
+}
+
+function LC() {
+    Sl.makeCurrent()
+}
+
+function FC() {
+    return new bt
+}
+
+function PC() {
+    return kd(document), document
+}
+var BC = [{
+    provide: jo,
+    useValue: m0
+}, {
+    provide: ol,
+    useValue: LC,
+    multi: !0
+}, {
+    provide: Ie,
+    useFactory: PC
+}];
+var HC = [{
+        provide: go,
+        useValue: "root"
+    }, {
+        provide: bt,
+        useFactory: FC
+    }, {
+        provide: Tl,
+        useClass: xl,
+        multi: !0,
+        deps: [Ie]
+    }, {
+        provide: Tl,
+        useClass: x0,
+        multi: !0,
+        deps: [Ie]
+    }, Sh, _h, xh, {
+        provide: hi,
+        useExisting: Sh
+    }, {
+        provide: Ei,
+        useClass: AC
+    },
+    []
+];
+var gr = class {},
+    ta = class {},
+    Pn = class t {
+        headers;
+        normalizedNames = new Map;
+        lazyInit;
+        lazyUpdate = null;
+        constructor(n) {
+            n ? typeof n == "string" ? this.lazyInit = () => {
+                this.headers = new Map, n.split(`
+`).forEach(e => {
+                    let i = e.indexOf(":");
+                    if (i > 0) {
+                        let r = e.slice(0, i),
+                            o = e.slice(i + 1).trim();
+                        this.addHeaderEntry(r, o)
+                    }
+                })
+            } : typeof Headers < "u" && n instanceof Headers ? (this.headers = new Map, n.forEach((e, i) => {
+                this.addHeaderEntry(i, e)
+            })) : this.lazyInit = () => {
+                this.headers = new Map, Object.entries(n).forEach(([e, i]) => {
+                    this.setHeaderEntries(e, i)
+                })
+            } : this.headers = new Map
+        }
+        has(n) {
+            return this.init(), this.headers.has(n.toLowerCase())
+        }
+        get(n) {
+            this.init();
+            let e = this.headers.get(n.toLowerCase());
+            return e && e.length > 0 ? e[0] : null
+        }
+        keys() {
+            return this.init(), Array.from(this.normalizedNames.values())
+        }
+        getAll(n) {
+            return this.init(), this.headers.get(n.toLowerCase()) || null
+        }
+        append(n, e) {
+            return this.clone({
+                name: n,
+                value: e,
+                op: "a"
+            })
+        }
+        set(n, e) {
+            return this.clone({
+                name: n,
+                value: e,
+                op: "s"
+            })
+        }
+        delete(n, e) {
+            return this.clone({
+                name: n,
+                value: e,
+                op: "d"
+            })
+        }
+        maybeSetNormalizedName(n, e) {
+            this.normalizedNames.has(e) || this.normalizedNames.set(e, n)
+        }
+        init() {
+            this.lazyInit && (this.lazyInit instanceof t ? this.copyFrom(this.lazyInit) : this.lazyInit(), this.lazyInit = null, this.lazyUpdate && (this.lazyUpdate.forEach(n => this.applyUpdate(n)), this.lazyUpdate = null))
+        }
+        copyFrom(n) {
+            n.init(), Array.from(n.headers.keys()).forEach(e => {
+                this.headers.set(e, n.headers.get(e)), this.normalizedNames.set(e, n.normalizedNames.get(e))
+            })
+        }
+        clone(n) {
+            let e = new t;
+            return e.lazyInit = this.lazyInit && this.lazyInit instanceof t ? this.lazyInit : this, e.lazyUpdate = (this.lazyUpdate || []).concat([n]), e
+        }
+        applyUpdate(n) {
+            let e = n.name.toLowerCase();
+            switch (n.op) {
+                case "a":
+                case "s":
+                    let i = n.value;
+                    if (typeof i == "string" && (i = [i]), i.length === 0) return;
+                    this.maybeSetNormalizedName(n.name, e);
+                    let r = (n.op === "a" ? this.headers.get(e) : void 0) || [];
+                    r.push(...i), this.headers.set(e, r);
+                    break;
+                case "d":
+                    let o = n.value;
+                    if (!o) this.headers.delete(e), this.normalizedNames.delete(e);
+                    else {
+                        let a = this.headers.get(e);
+                        if (!a) return;
+                        a = a.filter(s => o.indexOf(s) === -1), a.length === 0 ? (this.headers.delete(e), this.normalizedNames.delete(e)) : this.headers.set(e, a)
+                    }
+                    break
+            }
+        }
+        addHeaderEntry(n, e) {
+            let i = n.toLowerCase();
+            this.maybeSetNormalizedName(n, i), this.headers.has(i) ? this.headers.get(i).push(e) : this.headers.set(i, [e])
+        }
+        setHeaderEntries(n, e) {
+            let i = (Array.isArray(e) ? e : [e]).map(o => o.toString()),
+                r = n.toLowerCase();
+            this.headers.set(r, i), this.maybeSetNormalizedName(n, r)
+        }
+        forEach(n) {
+            this.init(), Array.from(this.normalizedNames.keys()).forEach(e => n(this.normalizedNames.get(e), this.headers.get(e)))
+        }
+    };
+var Il = class {
+    encodeKey(n) {
+        return _0(n)
+    }
+    encodeValue(n) {
+        return _0(n)
+    }
+    decodeKey(n) {
+        return decodeURIComponent(n)
+    }
+    decodeValue(n) {
+        return decodeURIComponent(n)
+    }
+};
+
+function jC(t, n) {
+    let e = new Map;
+    return t.length > 0 && t.replace(/^\?/, "").split("&").forEach(r => {
+        let o = r.indexOf("="),
+            [a, s] = o == -1 ? [n.decodeKey(r), ""] : [n.decodeKey(r.slice(0, o)), n.decodeValue(r.slice(o + 1))],
+            l = e.get(a) || [];
+        l.push(s), e.set(a, l)
+    }), e
+}
+var VC = /%(\d[a-f0-9])/gi,
+    $C = {
+        40: "@",
+        "3A": ":",
+        24: "$",
+        "2C": ",",
+        "3B": ";",
+        "3D": "=",
+        "3F": "?",
+        "2F": "/"
+    };
+
+function _0(t) {
+    return encodeURIComponent(t).replace(VC, (n, e) => $C[e] ?? n)
+}
+
+function wl(t) {
+    return `${t}`
+}
+var Dn = class t {
+    map;
+    encoder;
+    updates = null;
+    cloneFrom = null;
+    constructor(n = {}) {
+        if (this.encoder = n.encoder || new Il, n.fromString) {
+            if (n.fromObject) throw new $(2805, !1);
+            this.map = jC(n.fromString, this.encoder)
+        } else n.fromObject ? (this.map = new Map, Object.keys(n.fromObject).forEach(e => {
+            let i = n.fromObject[e],
+                r = Array.isArray(i) ? i.map(wl) : [wl(i)];
+            this.map.set(e, r)
+        })) : this.map = null
+    }
+    has(n) {
+        return this.init(), this.map.has(n)
+    }
+    get(n) {
+        this.init();
+        let e = this.map.get(n);
+        return e ? e[0] : null
+    }
+    getAll(n) {
+        return this.init(), this.map.get(n) || null
+    }
+    keys() {
+        return this.init(), Array.from(this.map.keys())
+    }
+    append(n, e) {
+        return this.clone({
+            param: n,
+            value: e,
+            op: "a"
+        })
+    }
+    appendAll(n) {
+        let e = [];
+        return Object.keys(n).forEach(i => {
+            let r = n[i];
+            Array.isArray(r) ? r.forEach(o => {
+                e.push({
+                    param: i,
+                    value: o,
+                    op: "a"
+                })
+            }) : e.push({
+                param: i,
+                value: r,
+                op: "a"
+            })
+        }), this.clone(e)
+    }
+    set(n, e) {
+        return this.clone({
+            param: n,
+            value: e,
+            op: "s"
+        })
+    }
+    delete(n, e) {
+        return this.clone({
+            param: n,
+            value: e,
+            op: "d"
+        })
+    }
+    toString() {
+        return this.init(), this.keys().map(n => {
+            let e = this.encoder.encodeKey(n);
+            return this.map.get(n).map(i => e + "=" + this.encoder.encodeValue(i)).join("&")
+        }).filter(n => n !== "").join("&")
+    }
+    clone(n) {
+        let e = new t({
+            encoder: this.encoder
+        });
+        return e.cloneFrom = this.cloneFrom || this, e.updates = (this.updates || []).concat(n), e
+    }
+    init() {
+        this.map === null && (this.map = new Map), this.cloneFrom !== null && (this.cloneFrom.init(), this.cloneFrom.keys().forEach(n => this.map.set(n, this.cloneFrom.map.get(n))), this.updates.forEach(n => {
+            switch (n.op) {
+                case "a":
+                case "s":
+                    let e = (n.op === "a" ? this.map.get(n.param) : void 0) || [];
+                    e.push(wl(n.value)), this.map.set(n.param, e);
+                    break;
+                case "d":
+                    if (n.value !== void 0) {
+                        let i = this.map.get(n.param) || [],
+                            r = i.indexOf(wl(n.value));
+                        r !== -1 && i.splice(r, 1), i.length > 0 ? this.map.set(n.param, i) : this.map.delete(n.param)
+                    } else {
+                        this.map.delete(n.param);
+                        break
+                    }
+            }
+        }), this.cloneFrom = this.updates = null)
+    }
+};
+var Ml = class {
+    map = new Map;
+    set(n, e) {
+        return this.map.set(n, e), this
+    }
+    get(n) {
+        return this.map.has(n) || this.map.set(n, n.defaultValue()), this.map.get(n)
+    }
+    delete(n) {
+        return this.map.delete(n), this
+    }
+    has(n) {
+        return this.map.has(n)
+    }
+    keys() {
+        return this.map.keys()
+    }
+};
+
+function UC(t) {
+    switch (t) {
+        case "DELETE":
+        case "GET":
+        case "HEAD":
+        case "OPTIONS":
+        case "JSONP":
+            return !1;
+        default:
+            return !0
+    }
+}
+
+function T0(t) {
+    return typeof ArrayBuffer < "u" && t instanceof ArrayBuffer
+}
+
+function S0(t) {
+    return typeof Blob < "u" && t instanceof Blob
+}
+
+function w0(t) {
+    return typeof FormData < "u" && t instanceof FormData
+}
+
+function zC(t) {
+    return typeof URLSearchParams < "u" && t instanceof URLSearchParams
+}
+var I0 = "Content-Type",
+    M0 = "Accept",
+    N0 = "X-Request-URL",
+    A0 = "text/plain",
+    k0 = "application/json",
+    GC = `${k0}, ${A0}, */*`,
+    fr = class t {
+        url;
+        body = null;
+        headers;
+        context;
+        reportProgress = !1;
+        withCredentials = !1;
+        credentials;
+        keepalive = !1;
+        cache;
+        priority;
+        mode;
+        redirect;
+        referrer;
+        integrity;
+        responseType = "json";
+        method;
+        params;
+        urlWithParams;
+        transferCache;
+        timeout;
+        constructor(n, e, i, r) {
+            this.url = e, this.method = n.toUpperCase();
+            let o;
+            if (UC(this.method) || r ? (this.body = i !== void 0 ? i : null, o = r) : o = i, o) {
+                if (this.reportProgress = !!o.reportProgress, this.withCredentials = !!o.withCredentials, this.keepalive = !!o.keepalive, o.responseType && (this.responseType = o.responseType), o.headers && (this.headers = o.headers), o.context && (this.context = o.context), o.params && (this.params = o.params), o.priority && (this.priority = o.priority), o.cache && (this.cache = o.cache), o.credentials && (this.credentials = o.credentials), typeof o.timeout == "number") {
+                    if (o.timeout < 1 || !Number.isInteger(o.timeout)) throw new $(2822, "");
+                    this.timeout = o.timeout
+                }
+                o.mode && (this.mode = o.mode), o.redirect && (this.redirect = o.redirect), o.integrity && (this.integrity = o.integrity), o.referrer && (this.referrer = o.referrer), this.transferCache = o.transferCache
+            }
+            if (this.headers ??= new Pn, this.context ??= new Ml, !this.params) this.params = new Dn, this.urlWithParams = e;
+            else {
+                let a = this.params.toString();
+                if (a.length === 0) this.urlWithParams = e;
+                else {
+                    let s = e.indexOf("?"),
+                        l = s === -1 ? "?" : s < e.length - 1 ? "&" : "";
+                    this.urlWithParams = e + l + a
+                }
+            }
+        }
+        serializeBody() {
+            return this.body === null ? null : typeof this.body == "string" || T0(this.body) || S0(this.body) || w0(this.body) || zC(this.body) ? this.body : this.body instanceof Dn ? this.body.toString() : typeof this.body == "object" || typeof this.body == "boolean" || Array.isArray(this.body) ? JSON.stringify(this.body) : this.body.toString()
+        }
+        detectContentTypeHeader() {
+            return this.body === null || w0(this.body) ? null : S0(this.body) ? this.body.type || null : T0(this.body) ? null : typeof this.body == "string" ? A0 : this.body instanceof Dn ? "application/x-www-form-urlencoded;charset=UTF-8" : typeof this.body == "object" || typeof this.body == "number" || typeof this.body == "boolean" ? k0 : null
+        }
+        clone(n = {}) {
+            let e = n.method || this.method,
+                i = n.url || this.url,
+                r = n.responseType || this.responseType,
+                o = n.keepalive ?? this.keepalive,
+                a = n.priority || this.priority,
+                s = n.cache || this.cache,
+                l = n.mode || this.mode,
+                m = n.redirect || this.redirect,
+                f = n.credentials || this.credentials,
+                p = n.referrer || this.referrer,
+                g = n.integrity || this.integrity,
+                v = n.transferCache ?? this.transferCache,
+                x = n.timeout ?? this.timeout,
+                B = n.body !== void 0 ? n.body : this.body,
+                M = n.withCredentials ?? this.withCredentials,
+                I = n.reportProgress ?? this.reportProgress,
+                se = n.headers || this.headers,
+                De = n.params || this.params,
+                ye = n.context ?? this.context;
+            return n.setHeaders !== void 0 && (se = Object.keys(n.setHeaders).reduce((At, yt) => At.set(yt, n.setHeaders[yt]), se)), n.setParams && (De = Object.keys(n.setParams).reduce((At, yt) => At.set(yt, n.setParams[yt]), De)), new t(e, i, B, {
+                params: De,
+                headers: se,
+                context: ye,
+                reportProgress: I,
+                responseType: r,
+                withCredentials: M,
+                transferCache: v,
+                keepalive: o,
+                cache: s,
+                priority: a,
+                timeout: x,
+                mode: l,
+                redirect: m,
+                credentials: f,
+                referrer: p,
+                integrity: g
+            })
+        }
+    },
+    bi = (function(t) {
+        return t[t.Sent = 0] = "Sent", t[t.UploadProgress = 1] = "UploadProgress", t[t.ResponseHeader = 2] = "ResponseHeader", t[t.DownloadProgress = 3] = "DownloadProgress", t[t.Response = 4] = "Response", t[t.User = 5] = "User", t
+    })(bi || {}),
+    vr = class {
+        headers;
+        status;
+        statusText;
+        url;
+        ok;
+        type;
+        redirected;
+        constructor(n, e = 200, i = "OK") {
+            this.headers = n.headers || new Pn, this.status = n.status !== void 0 ? n.status : e, this.statusText = n.statusText || i, this.url = n.url || null, this.redirected = n.redirected, this.ok = this.status >= 200 && this.status < 300
+        }
+    },
+    Nl = class t extends vr {
+        constructor(n = {}) {
+            super(n)
+        }
+        type = bi.ResponseHeader;
+        clone(n = {}) {
+            return new t({
+                headers: n.headers || this.headers,
+                status: n.status !== void 0 ? n.status : this.status,
+                statusText: n.statusText || this.statusText,
+                url: n.url || this.url || void 0
+            })
+        }
+    },
+    na = class t extends vr {
+        body;
+        constructor(n = {}) {
+            super(n), this.body = n.body !== void 0 ? n.body : null
+        }
+        type = bi.Response;
+        clone(n = {}) {
+            return new t({
+                body: n.body !== void 0 ? n.body : this.body,
+                headers: n.headers || this.headers,
+                status: n.status !== void 0 ? n.status : this.status,
+                statusText: n.statusText || this.statusText,
+                url: n.url || this.url || void 0,
+                redirected: n.redirected ?? this.redirected
+            })
+        }
+    },
+    pr = class extends vr {
+        name = "HttpErrorResponse";
+        message;
+        error;
+        ok = !1;
+        constructor(n) {
+            super(n, 0, "Unknown Error"), this.status >= 200 && this.status < 300 ? this.message = `Http failure during parsing for ${n.url||"(unknown url)"}` : this.message = `Http failure response for ${n.url||"(unknown url)"}: ${n.status} ${n.statusText}`, this.error = n.error || null
+        }
+    },
+    qC = 200,
+    WC = 204;
+
+function Ih(t, n) {
+    return {
+        body: n,
+        headers: t.headers,
+        context: t.context,
+        observe: t.observe,
+        params: t.params,
+        reportProgress: t.reportProgress,
+        responseType: t.responseType,
+        withCredentials: t.withCredentials,
+        credentials: t.credentials,
+        transferCache: t.transferCache,
+        timeout: t.timeout,
+        keepalive: t.keepalive,
+        priority: t.priority,
+        cache: t.cache,
+        mode: t.mode,
+        redirect: t.redirect,
+        integrity: t.integrity,
+        referrer: t.referrer
+    }
+}
+var kl = (() => {
+    class t {
+        handler;
+        constructor(e) {
+            this.handler = e
+        }
+        request(e, i, r = {}) {
+            let o;
+            if (e instanceof fr) o = e;
+            else {
+                let l;
+                r.headers instanceof Pn ? l = r.headers : l = new Pn(r.headers);
+                let m;
+                r.params && (r.params instanceof Dn ? m = r.params : m = new Dn({
+                    fromObject: r.params
+                })), o = new fr(e, i, r.body !== void 0 ? r.body : null, {
+                    headers: l,
+                    context: r.context,
+                    params: m,
+                    reportProgress: r.reportProgress,
+                    responseType: r.responseType || "json",
+                    withCredentials: r.withCredentials,
+                    transferCache: r.transferCache,
+                    keepalive: r.keepalive,
+                    priority: r.priority,
+                    cache: r.cache,
+                    mode: r.mode,
+                    redirect: r.redirect,
+                    credentials: r.credentials,
+                    referrer: r.referrer,
+                    integrity: r.integrity,
+                    timeout: r.timeout
+                })
+            }
+            let a = z(o).pipe(Tn(l => this.handler.handle(l)));
+            if (e instanceof fr || r.observe === "events") return a;
+            let s = a.pipe(Ye(l => l instanceof na));
+            switch (r.observe || "body") {
+                case "body":
+                    switch (o.responseType) {
+                        case "arraybuffer":
+                            return s.pipe(re(l => {
+                                if (l.body !== null && !(l.body instanceof ArrayBuffer)) throw new $(2806, !1);
+                                return l.body
+                            }));
+                        case "blob":
+                            return s.pipe(re(l => {
+                                if (l.body !== null && !(l.body instanceof Blob)) throw new $(2807, !1);
+                                return l.body
+                            }));
+                        case "text":
+                            return s.pipe(re(l => {
+                                if (l.body !== null && typeof l.body != "string") throw new $(2808, !1);
+                                return l.body
+                            }));
+                        case "json":
+                        default:
+                            return s.pipe(re(l => l.body))
+                    }
+                case "response":
+                    return s;
+                default:
+                    throw new $(2809, !1)
+            }
+        }
+        delete(e, i = {}) {
+            return this.request("DELETE", e, i)
+        }
+        get(e, i = {}) {
+            return this.request("GET", e, i)
+        }
+        head(e, i = {}) {
+            return this.request("HEAD", e, i)
+        }
+        jsonp(e, i) {
+            return this.request("JSONP", e, {
+                params: new Dn().append(i, "JSONP_CALLBACK"),
+                observe: "body",
+                responseType: "json"
+            })
+        }
+        options(e, i = {}) {
+            return this.request("OPTIONS", e, i)
+        }
+        patch(e, i, r = {}) {
+            return this.request("PATCH", e, Ih(r, i))
+        }
+        post(e, i, r = {}) {
+            return this.request("POST", e, Ih(r, i))
+        }
+        put(e, i, r = {}) {
+            return this.request("PUT", e, Ih(r, i))
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)(G(gr))
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: t.\u0275fac
+        })
+    }
+    return t
+})();
+var YC = new U("");
+
+function KC(t, n) {
+    return n(t)
+}
+
+function QC(t, n, e) {
+    return (i, r) => Ue(e, () => n(i, o => t(o, r)))
+}
+var R0 = new U(""),
+    O0 = new U(""),
+    L0 = new U("", {
+        providedIn: "root",
+        factory: () => !0
+    });
+var Al = (() => {
+    class t extends gr {
+        backend;
+        injector;
+        chain = null;
+        pendingTasks = E(wo);
+        contributeToStability = E(L0);
+        constructor(e, i) {
+            super(), this.backend = e, this.injector = i
+        }
+        handle(e) {
+            if (this.chain === null) {
+                let i = Array.from(new Set([...this.injector.get(R0), ...this.injector.get(O0, [])]));
+                this.chain = i.reduceRight((r, o) => QC(r, o, this.injector), KC)
+            }
+            if (this.contributeToStability) {
+                let i = this.pendingTasks.add();
+                return this.chain(e, r => this.backend.handle(r)).pipe(an(i))
+            } else return this.chain(e, i => this.backend.handle(i))
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)(G(ta), G(ke))
+        };
+        static \u0275prov = j({
+            token: t,
+            factory: t.\u0275fac
+        })
+    }
+    return t
+})();
+var ZC = /^\)\]\}',?\n/,
+    XC = RegExp(`^${N0}:`, "m");
+
+function JC(t) {
+    return "responseURL" in t && t.responseURL ? t.responseURL : XC.test(t.getAllResponseHeaders()) ? t.getResponseHeader(N0) : null
+}
+var Mh = (() => {
+        class t {
+            xhrFactory;
+            constructor(e) {
+                this.xhrFactory = e
+            }
+            handle(e) {
+                if (e.method === "JSONP") throw new $(-2800, !1);
+                let i = this.xhrFactory;
+                return z(null).pipe(Ke(() => new le(o => {
+                    let a = i.build();
+                    if (a.open(e.method, e.urlWithParams), e.withCredentials && (a.withCredentials = !0), e.headers.forEach((M, I) => a.setRequestHeader(M, I.join(","))), e.headers.has(M0) || a.setRequestHeader(M0, GC), !e.headers.has(I0)) {
+                        let M = e.detectContentTypeHeader();
+                        M !== null && a.setRequestHeader(I0, M)
+                    }
+                    if (e.timeout && (a.timeout = e.timeout), e.responseType) {
+                        let M = e.responseType.toLowerCase();
+                        a.responseType = M !== "json" ? M : "text"
+                    }
+                    let s = e.serializeBody(),
+                        l = null,
+                        m = () => {
+                            if (l !== null) return l;
+                            let M = a.statusText || "OK",
+                                I = new Pn(a.getAllResponseHeaders()),
+                                se = JC(a) || e.url;
+                            return l = new Nl({
+                                headers: I,
+                                status: a.status,
+                                statusText: M,
+                                url: se
+                            }), l
+                        },
+                        f = () => {
+                            let {
+                                headers: M,
+                                status: I,
+                                statusText: se,
+                                url: De
+                            } = m(), ye = null;
+                            I !== WC && (ye = typeof a.response > "u" ? a.responseText : a.response), I === 0 && (I = ye ? qC : 0);
+                            let At = I >= 200 && I < 300;
+                            if (e.responseType === "json" && typeof ye == "string") {
+                                let yt = ye;
+                                ye = ye.replace(ZC, "");
+                                try {
+                                    ye = ye !== "" ? JSON.parse(ye) : null
+                                } catch (Et) {
+                                    ye = yt, At && (At = !1, ye = {
+                                        error: Et,
+                                        text: ye
+                                    })
+                                }
+                            }
+                            At ? (o.next(new na({
+                                body: ye,
+                                headers: M,
+                                status: I,
+                                statusText: se,
+                                url: De || void 0
+                            })), o.complete()) : o.error(new pr({
+                                error: ye,
+                                headers: M,
+                                status: I,
+                                statusText: se,
+                                url: De || void 0
+                            }))
+                        },
+                        p = M => {
+                            let {
+                                url: I
+                            } = m(), se = new pr({
+                                error: M,
+                                status: a.status || 0,
+                                statusText: a.statusText || "Unknown Error",
+                                url: I || void 0
+                            });
+                            o.error(se)
+                        },
+                        g = p;
+                    e.timeout && (g = M => {
+                        let {
+                            url: I
+                        } = m(), se = new pr({
+                            error: new DOMException("Request timed out", "TimeoutError"),
+                            status: a.status || 0,
+                            statusText: a.statusText || "Request timeout",
+                            url: I || void 0
+                        });
+                        o.error(se)
+                    });
+                    let v = !1,
+                        x = M => {
+                            v || (o.next(m()), v = !0);
+                            let I = {
+                                type: bi.DownloadProgress,
+                                loaded: M.loaded
+                            };
+                            M.lengthComputable && (I.total = M.total), e.responseType === "text" && a.responseText && (I.partialText = a.responseText), o.next(I)
+                        },
+                        B = M => {
+                            let I = {
+                                type: bi.UploadProgress,
+                                loaded: M.loaded
+                            };
+                            M.lengthComputable && (I.total = M.total), o.next(I)
+                        };
+                    return a.addEventListener("load", f), a.addEventListener("error", p), a.addEventListener("timeout", g), a.addEventListener("abort", p), e.reportProgress && (a.addEventListener("progress", x), s !== null && a.upload && a.upload.addEventListener("progress", B)), a.send(s), o.next({
+                        type: bi.Sent
+                    }), () => {
+                        a.removeEventListener("error", p), a.removeEventListener("abort", p), a.removeEventListener("load", f), a.removeEventListener("timeout", g), e.reportProgress && (a.removeEventListener("progress", x), s !== null && a.upload && a.upload.removeEventListener("progress", B)), a.readyState !== a.DONE && a.abort()
+                    }
+                })))
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Ei))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac
+            })
+        }
+        return t
+    })(),
+    F0 = new U(""),
+    ex = "XSRF-TOKEN",
+    tx = new U("", {
+        providedIn: "root",
+        factory: () => ex
+    }),
+    nx = "X-XSRF-TOKEN",
+    ix = new U("", {
+        providedIn: "root",
+        factory: () => nx
+    }),
+    ia = class {},
+    rx = (() => {
+        class t {
+            doc;
+            cookieName;
+            lastCookieString = "";
+            lastToken = null;
+            parseCount = 0;
+            constructor(e, i) {
+                this.doc = e, this.cookieName = i
+            }
+            getToken() {
+                let e = this.doc.cookie || "";
+                return e !== this.lastCookieString && (this.parseCount++, this.lastToken = Qo(e, this.cookieName), this.lastCookieString = e), this.lastToken
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Ie), G(tx))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac
+            })
+        }
+        return t
+    })(),
+    ox = /^(?:https?:)?\/\//i;
+
+function ax(t, n) {
+    if (!E(F0) || t.method === "GET" || t.method === "HEAD" || ox.test(t.url)) return n(t);
+    let e = E(ia).getToken(),
+        i = E(ix);
+    return e != null && !t.headers.has(i) && (t = t.clone({
+        headers: t.headers.set(i, e)
+    })), n(t)
+}
+
+function Nh(...t) {
+    let n = [kl, Mh, Al, {
+        provide: gr,
+        useExisting: Al
+    }, {
+        provide: ta,
+        useFactory: () => E(YC, {
+            optional: !0
+        }) ?? E(Mh)
+    }, {
+        provide: R0,
+        useValue: ax,
+        multi: !0
+    }, {
+        provide: F0,
+        useValue: !0
+    }, {
+        provide: ia,
+        useClass: rx
+    }];
+    for (let e of t) n.push(...e.\u0275providers);
+    return Jn(n)
+}
+var P0 = (() => {
+        class t {
+            _doc;
+            _dom;
+            constructor(e) {
+                this._doc = e, this._dom = Zt()
+            }
+            addTag(e, i = !1) {
+                return e ? this._getOrCreateElement(e, i) : null
+            }
+            addTags(e, i = !1) {
+                return e ? e.reduce((r, o) => (o && r.push(this._getOrCreateElement(o, i)), r), []) : []
+            }
+            getTag(e) {
+                return e && this._doc.querySelector(`meta[${e}]`) || null
+            }
+            getTags(e) {
+                if (!e) return [];
+                let i = this._doc.querySelectorAll(`meta[${e}]`);
+                return i ? [].slice.call(i) : []
+            }
+            updateTag(e, i) {
+                if (!e) return null;
+                i = i || this._parseSelector(e);
+                let r = this.getTag(i);
+                return r ? this._setMetaElementAttributes(e, r) : this._getOrCreateElement(e, !0)
+            }
+            removeTag(e) {
+                this.removeTagElement(this.getTag(e))
+            }
+            removeTagElement(e) {
+                e && this._dom.remove(e)
+            }
+            _getOrCreateElement(e, i = !1) {
+                if (!i) {
+                    let a = this._parseSelector(e),
+                        s = this.getTags(a).filter(l => this._containsAttributes(e, l))[0];
+                    if (s !== void 0) return s
+                }
+                let r = this._dom.createElement("meta");
+                return this._setMetaElementAttributes(e, r), this._doc.getElementsByTagName("head")[0].appendChild(r), r
+            }
+            _setMetaElementAttributes(e, i) {
+                return Object.keys(e).forEach(r => i.setAttribute(this._getMetaKeyMap(r), e[r])), i
+            }
+            _parseSelector(e) {
+                let i = e.name ? "name" : "property";
+                return `${i}="${e[i]}"`
+            }
+            _containsAttributes(e, i) {
+                return Object.keys(e).every(r => i.getAttribute(this._getMetaKeyMap(r)) === e[r])
+            }
+            _getMetaKeyMap(e) {
+                return sx[e] || e
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Ie))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    sx = {
+        httpEquiv: "http-equiv"
+    },
+    Rl = (() => {
+        class t {
+            _doc;
+            constructor(e) {
+                this._doc = e
+            }
+            getTitle() {
+                return this._doc.title
+            }
+            setTitle(e) {
+                this._doc.title = e || ""
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Ie))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })();
+var ee = "primary",
+    ya = Symbol("RouteTitle"),
+    Lh = class {
+        params;
+        constructor(n) {
+            this.params = n || {}
+        }
+        has(n) {
+            return Object.prototype.hasOwnProperty.call(this.params, n)
+        }
+        get(n) {
+            if (this.has(n)) {
+                let e = this.params[n];
+                return Array.isArray(e) ? e[0] : e
+            }
+            return null
+        }
+        getAll(n) {
+            if (this.has(n)) {
+                let e = this.params[n];
+                return Array.isArray(e) ? e : [e]
+            }
+            return []
+        }
+        get keys() {
+            return Object.keys(this.params)
+        }
+    };
+
+function xi(t) {
+    return new Lh(t)
+}
+
+function G0(t, n, e) {
+    let i = e.path.split("/");
+    if (i.length > t.length || e.pathMatch === "full" && (n.hasChildren() || i.length < t.length)) return null;
+    let r = {};
+    for (let o = 0; o < i.length; o++) {
+        let a = i[o],
+            s = t[o];
+        if (a[0] === ":") r[a.substring(1)] = s;
+        else if (a !== s.path) return null
+    }
+    return {
+        consumed: t.slice(0, i.length),
+        posParams: r
+    }
+}
+
+function cx(t, n) {
+    if (t.length !== n.length) return !1;
+    for (let e = 0; e < t.length; ++e)
+        if (!Jt(t[e], n[e])) return !1;
+    return !0
+}
+
+function Jt(t, n) {
+    let e = t ? Fh(t) : void 0,
+        i = n ? Fh(n) : void 0;
+    if (!e || !i || e.length != i.length) return !1;
+    let r;
+    for (let o = 0; o < e.length; o++)
+        if (r = e[o], !q0(t[r], n[r])) return !1;
+    return !0
+}
+
+function Fh(t) {
+    return [...Object.keys(t), ...Object.getOwnPropertySymbols(t)]
+}
+
+function q0(t, n) {
+    if (Array.isArray(t) && Array.isArray(n)) {
+        if (t.length !== n.length) return !1;
+        let e = [...t].sort(),
+            i = [...n].sort();
+        return e.every((r, o) => i[o] === r)
+    } else return t === n
+}
+
+function W0(t) {
+    return t.length > 0 ? t[t.length - 1] : null
+}
+
+function xn(t) {
+    return Jc(t) ? t : Go(t) ? Ae(Promise.resolve(t)) : z(t)
+}
+var ux = {
+        exact: K0,
+        subset: Q0
+    },
+    Y0 = {
+        exact: dx,
+        subset: hx,
+        ignored: () => !0
+    };
+
+function B0(t, n, e) {
+    return ux[e.paths](t.root, n.root, e.matrixParams) && Y0[e.queryParams](t.queryParams, n.queryParams) && !(e.fragment === "exact" && t.fragment !== n.fragment)
+}
+
+function dx(t, n) {
+    return Jt(t, n)
+}
+
+function K0(t, n, e) {
+    if (!Di(t.segments, n.segments) || !Fl(t.segments, n.segments, e) || t.numberOfChildren !== n.numberOfChildren) return !1;
+    for (let i in n.children)
+        if (!t.children[i] || !K0(t.children[i], n.children[i], e)) return !1;
+    return !0
+}
+
+function hx(t, n) {
+    return Object.keys(n).length <= Object.keys(t).length && Object.keys(n).every(e => q0(t[e], n[e]))
+}
+
+function Q0(t, n, e) {
+    return Z0(t, n, n.segments, e)
+}
+
+function Z0(t, n, e, i) {
+    if (t.segments.length > e.length) {
+        let r = t.segments.slice(0, e.length);
+        return !(!Di(r, e) || n.hasChildren() || !Fl(r, e, i))
+    } else if (t.segments.length === e.length) {
+        if (!Di(t.segments, e) || !Fl(t.segments, e, i)) return !1;
+        for (let r in n.children)
+            if (!t.children[r] || !Q0(t.children[r], n.children[r], i)) return !1;
+        return !0
+    } else {
+        let r = e.slice(0, t.segments.length),
+            o = e.slice(t.segments.length);
+        return !Di(t.segments, r) || !Fl(t.segments, r, i) || !t.children[ee] ? !1 : Z0(t.children[ee], n, o, i)
+    }
+}
+
+function Fl(t, n, e) {
+    return n.every((i, r) => Y0[e](t[r].parameters, i.parameters))
+}
+var tn = class {
+        root;
+        queryParams;
+        fragment;
+        _queryParamMap;
+        constructor(n = new ge([], {}), e = {}, i = null) {
+            this.root = n, this.queryParams = e, this.fragment = i
+        }
+        get queryParamMap() {
+            return this._queryParamMap ??= xi(this.queryParams), this._queryParamMap
+        }
+        toString() {
+            return px.serialize(this)
+        }
+    },
+    ge = class {
+        segments;
+        children;
+        parent = null;
+        constructor(n, e) {
+            this.segments = n, this.children = e, Object.values(e).forEach(i => i.parent = this)
+        }
+        hasChildren() {
+            return this.numberOfChildren > 0
+        }
+        get numberOfChildren() {
+            return Object.keys(this.children).length
+        }
+        toString() {
+            return Pl(this)
+        }
+    },
+    Bn = class {
+        path;
+        parameters;
+        _parameterMap;
+        constructor(n, e) {
+            this.path = n, this.parameters = e
+        }
+        get parameterMap() {
+            return this._parameterMap ??= xi(this.parameters), this._parameterMap
+        }
+        toString() {
+            return J0(this)
+        }
+    };
+
+function mx(t, n) {
+    return Di(t, n) && t.every((e, i) => Jt(e.parameters, n[i].parameters))
+}
+
+function Di(t, n) {
+    return t.length !== n.length ? !1 : t.every((e, i) => e.path === n[i].path)
+}
+
+function fx(t, n) {
+    let e = [];
+    return Object.entries(t.children).forEach(([i, r]) => {
+        i === ee && (e = e.concat(n(r, i)))
+    }), Object.entries(t.children).forEach(([i, r]) => {
+        i !== ee && (e = e.concat(n(r, i)))
+    }), e
+}
+var Ea = (() => {
+        class t {
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: () => new _i,
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    _i = class {
+        parse(n) {
+            let e = new Bh(n);
+            return new tn(e.parseRootSegment(), e.parseQueryParams(), e.parseFragment())
+        }
+        serialize(n) {
+            let e = `/${ra(n.root,!0)}`,
+                i = yx(n.queryParams),
+                r = typeof n.fragment == "string" ? `#${gx(n.fragment)}` : "";
+            return `${e}${i}${r}`
+        }
+    },
+    px = new _i;
+
+function Pl(t) {
+    return t.segments.map(n => J0(n)).join("/")
+}
+
+function ra(t, n) {
+    if (!t.hasChildren()) return Pl(t);
+    if (n) {
+        let e = t.children[ee] ? ra(t.children[ee], !1) : "",
+            i = [];
+        return Object.entries(t.children).forEach(([r, o]) => {
+            r !== ee && i.push(`${r}:${ra(o,!1)}`)
+        }), i.length > 0 ? `${e}(${i.join("//")})` : e
+    } else {
+        let e = fx(t, (i, r) => r === ee ? [ra(t.children[ee], !1)] : [`${r}:${ra(i,!1)}`]);
+        return Object.keys(t.children).length === 1 && t.children[ee] != null ? `${Pl(t)}/${e[0]}` : `${Pl(t)}/(${e.join("//")})`
+    }
+}
+
+function X0(t) {
+    return encodeURIComponent(t).replace(/%40/g, "@").replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",")
+}
+
+function Ol(t) {
+    return X0(t).replace(/%3B/gi, ";")
+}
+
+function gx(t) {
+    return encodeURI(t)
+}
+
+function Ph(t) {
+    return X0(t).replace(/\(/g, "%28").replace(/\)/g, "%29").replace(/%26/gi, "&")
+}
+
+function Bl(t) {
+    return decodeURIComponent(t)
+}
+
+function H0(t) {
+    return Bl(t.replace(/\+/g, "%20"))
+}
+
+function J0(t) {
+    return `${Ph(t.path)}${vx(t.parameters)}`
+}
+
+function vx(t) {
+    return Object.entries(t).map(([n, e]) => `;${Ph(n)}=${Ph(e)}`).join("")
+}
+
+function yx(t) {
+    let n = Object.entries(t).map(([e, i]) => Array.isArray(i) ? i.map(r => `${Ol(e)}=${Ol(r)}`).join("&") : `${Ol(e)}=${Ol(i)}`).filter(e => e);
+    return n.length ? `?${n.join("&")}` : ""
+}
+var Ex = /^[^\/()?;#]+/;
+
+function Ah(t) {
+    let n = t.match(Ex);
+    return n ? n[0] : ""
+}
+var bx = /^[^\/()?;=#]+/;
+
+function Dx(t) {
+    let n = t.match(bx);
+    return n ? n[0] : ""
+}
+var Cx = /^[^=?&#]+/;
+
+function xx(t) {
+    let n = t.match(Cx);
+    return n ? n[0] : ""
+}
+var _x = /^[^&#]+/;
+
+function Tx(t) {
+    let n = t.match(_x);
+    return n ? n[0] : ""
+}
+var Bh = class {
+    url;
+    remaining;
+    constructor(n) {
+        this.url = n, this.remaining = n
+    }
+    parseRootSegment() {
+        return this.consumeOptional("/"), this.remaining === "" || this.peekStartsWith("?") || this.peekStartsWith("#") ? new ge([], {}) : new ge([], this.parseChildren())
+    }
+    parseQueryParams() {
+        let n = {};
+        if (this.consumeOptional("?"))
+            do this.parseQueryParam(n); while (this.consumeOptional("&"));
+        return n
+    }
+    parseFragment() {
+        return this.consumeOptional("#") ? decodeURIComponent(this.remaining) : null
+    }
+    parseChildren() {
+        if (this.remaining === "") return {};
+        this.consumeOptional("/");
+        let n = [];
+        for (this.peekStartsWith("(") || n.push(this.parseSegment()); this.peekStartsWith("/") && !this.peekStartsWith("//") && !this.peekStartsWith("/(");) this.capture("/"), n.push(this.parseSegment());
+        let e = {};
+        this.peekStartsWith("/(") && (this.capture("/"), e = this.parseParens(!0));
+        let i = {};
+        return this.peekStartsWith("(") && (i = this.parseParens(!1)), (n.length > 0 || Object.keys(e).length > 0) && (i[ee] = new ge(n, e)), i
+    }
+    parseSegment() {
+        let n = Ah(this.remaining);
+        if (n === "" && this.peekStartsWith(";")) throw new $(4009, !1);
+        return this.capture(n), new Bn(Bl(n), this.parseMatrixParams())
+    }
+    parseMatrixParams() {
+        let n = {};
+        for (; this.consumeOptional(";");) this.parseParam(n);
+        return n
+    }
+    parseParam(n) {
+        let e = Dx(this.remaining);
+        if (!e) return;
+        this.capture(e);
+        let i = "";
+        if (this.consumeOptional("=")) {
+            let r = Ah(this.remaining);
+            r && (i = r, this.capture(i))
+        }
+        n[Bl(e)] = Bl(i)
+    }
+    parseQueryParam(n) {
+        let e = xx(this.remaining);
+        if (!e) return;
+        this.capture(e);
+        let i = "";
+        if (this.consumeOptional("=")) {
+            let a = Tx(this.remaining);
+            a && (i = a, this.capture(i))
+        }
+        let r = H0(e),
+            o = H0(i);
+        if (n.hasOwnProperty(r)) {
+            let a = n[r];
+            Array.isArray(a) || (a = [a], n[r] = a), a.push(o)
+        } else n[r] = o
+    }
+    parseParens(n) {
+        let e = {};
+        for (this.capture("("); !this.consumeOptional(")") && this.remaining.length > 0;) {
+            let i = Ah(this.remaining),
+                r = this.remaining[i.length];
+            if (r !== "/" && r !== ")" && r !== ";") throw new $(4010, !1);
+            let o;
+            i.indexOf(":") > -1 ? (o = i.slice(0, i.indexOf(":")), this.capture(o), this.capture(":")) : n && (o = ee);
+            let a = this.parseChildren();
+            e[o ?? ee] = Object.keys(a).length === 1 && a[ee] ? a[ee] : new ge([], a), this.consumeOptional("//")
+        }
+        return e
+    }
+    peekStartsWith(n) {
+        return this.remaining.startsWith(n)
+    }
+    consumeOptional(n) {
+        return this.peekStartsWith(n) ? (this.remaining = this.remaining.substring(n.length), !0) : !1
+    }
+    capture(n) {
+        if (!this.consumeOptional(n)) throw new $(4011, !1)
+    }
+};
+
+function ev(t) {
+    return t.segments.length > 0 ? new ge([], {
+        [ee]: t
+    }) : t
+}
+
+function tv(t) {
+    let n = {};
+    for (let [i, r] of Object.entries(t.children)) {
+        let o = tv(r);
+        if (i === ee && o.segments.length === 0 && o.hasChildren())
+            for (let [a, s] of Object.entries(o.children)) n[a] = s;
+        else(o.segments.length > 0 || o.hasChildren()) && (n[i] = o)
+    }
+    let e = new ge(t.segments, n);
+    return Sx(e)
+}
+
+function Sx(t) {
+    if (t.numberOfChildren === 1 && t.children[ee]) {
+        let n = t.children[ee];
+        return new ge(t.segments.concat(n.segments), n.children)
+    }
+    return t
+}
+
+function Hn(t) {
+    return t instanceof tn
+}
+
+function nv(t, n, e = null, i = null) {
+    let r = iv(t);
+    return rv(r, n, e, i)
+}
+
+function iv(t) {
+    let n;
+
+    function e(o) {
+        let a = {};
+        for (let l of o.children) {
+            let m = e(l);
+            a[l.outlet] = m
+        }
+        let s = new ge(o.url, a);
+        return o === t && (n = s), s
+    }
+    let i = e(t.root),
+        r = ev(i);
+    return n ?? r
+}
+
+function rv(t, n, e, i) {
+    let r = t;
+    for (; r.parent;) r = r.parent;
+    if (n.length === 0) return kh(r, r, r, e, i);
+    let o = wx(n);
+    if (o.toRoot()) return kh(r, r, new ge([], {}), e, i);
+    let a = Ix(o, r, t),
+        s = a.processChildren ? aa(a.segmentGroup, a.index, o.commands) : av(a.segmentGroup, a.index, o.commands);
+    return kh(r, a.segmentGroup, s, e, i)
+}
+
+function Hl(t) {
+    return typeof t == "object" && t != null && !t.outlets && !t.segmentPath
+}
+
+function ca(t) {
+    return typeof t == "object" && t != null && t.outlets
+}
+
+function kh(t, n, e, i, r) {
+    let o = {};
+    i && Object.entries(i).forEach(([l, m]) => {
+        o[l] = Array.isArray(m) ? m.map(f => `${f}`) : `${m}`
+    });
+    let a;
+    t === n ? a = e : a = ov(t, n, e);
+    let s = ev(tv(a));
+    return new tn(s, o, r)
+}
+
+function ov(t, n, e) {
+    let i = {};
+    return Object.entries(t.children).forEach(([r, o]) => {
+        o === n ? i[r] = e : i[r] = ov(o, n, e)
+    }), new ge(t.segments, i)
+}
+var jl = class {
+    isAbsolute;
+    numberOfDoubleDots;
+    commands;
+    constructor(n, e, i) {
+        if (this.isAbsolute = n, this.numberOfDoubleDots = e, this.commands = i, n && i.length > 0 && Hl(i[0])) throw new $(4003, !1);
+        let r = i.find(ca);
+        if (r && r !== W0(i)) throw new $(4004, !1)
+    }
+    toRoot() {
+        return this.isAbsolute && this.commands.length === 1 && this.commands[0] == "/"
+    }
+};
+
+function wx(t) {
+    if (typeof t[0] == "string" && t.length === 1 && t[0] === "/") return new jl(!0, 0, t);
+    let n = 0,
+        e = !1,
+        i = t.reduce((r, o, a) => {
+            if (typeof o == "object" && o != null) {
+                if (o.outlets) {
+                    let s = {};
+                    return Object.entries(o.outlets).forEach(([l, m]) => {
+                        s[l] = typeof m == "string" ? m.split("/") : m
+                    }), [...r, {
+                        outlets: s
+                    }]
+                }
+                if (o.segmentPath) return [...r, o.segmentPath]
+            }
+            return typeof o != "string" ? [...r, o] : a === 0 ? (o.split("/").forEach((s, l) => {
+                l == 0 && s === "." || (l == 0 && s === "" ? e = !0 : s === ".." ? n++ : s != "" && r.push(s))
+            }), r) : [...r, o]
+        }, []);
+    return new jl(e, n, i)
+}
+var br = class {
+    segmentGroup;
+    processChildren;
+    index;
+    constructor(n, e, i) {
+        this.segmentGroup = n, this.processChildren = e, this.index = i
+    }
+};
+
+function Ix(t, n, e) {
+    if (t.isAbsolute) return new br(n, !0, 0);
+    if (!e) return new br(n, !1, NaN);
+    if (e.parent === null) return new br(e, !0, 0);
+    let i = Hl(t.commands[0]) ? 0 : 1,
+        r = e.segments.length - 1 + i;
+    return Mx(e, r, t.numberOfDoubleDots)
+}
+
+function Mx(t, n, e) {
+    let i = t,
+        r = n,
+        o = e;
+    for (; o > r;) {
+        if (o -= r, i = i.parent, !i) throw new $(4005, !1);
+        r = i.segments.length
+    }
+    return new br(i, !1, r - o)
+}
+
+function Nx(t) {
+    return ca(t[0]) ? t[0].outlets : {
+        [ee]: t
+    }
+}
+
+function av(t, n, e) {
+    if (t ??= new ge([], {}), t.segments.length === 0 && t.hasChildren()) return aa(t, n, e);
+    let i = Ax(t, n, e),
+        r = e.slice(i.commandIndex);
+    if (i.match && i.pathIndex < t.segments.length) {
+        let o = new ge(t.segments.slice(0, i.pathIndex), {});
+        return o.children[ee] = new ge(t.segments.slice(i.pathIndex), t.children), aa(o, 0, r)
+    } else return i.match && r.length === 0 ? new ge(t.segments, {}) : i.match && !t.hasChildren() ? Hh(t, n, e) : i.match ? aa(t, 0, r) : Hh(t, n, e)
+}
+
+function aa(t, n, e) {
+    if (e.length === 0) return new ge(t.segments, {});
+    {
+        let i = Nx(e),
+            r = {};
+        if (Object.keys(i).some(o => o !== ee) && t.children[ee] && t.numberOfChildren === 1 && t.children[ee].segments.length === 0) {
+            let o = aa(t.children[ee], n, e);
+            return new ge(t.segments, o.children)
+        }
+        return Object.entries(i).forEach(([o, a]) => {
+            typeof a == "string" && (a = [a]), a !== null && (r[o] = av(t.children[o], n, a))
+        }), Object.entries(t.children).forEach(([o, a]) => {
+            i[o] === void 0 && (r[o] = a)
+        }), new ge(t.segments, r)
+    }
+}
+
+function Ax(t, n, e) {
+    let i = 0,
+        r = n,
+        o = {
+            match: !1,
+            pathIndex: 0,
+            commandIndex: 0
+        };
+    for (; r < t.segments.length;) {
+        if (i >= e.length) return o;
+        let a = t.segments[r],
+            s = e[i];
+        if (ca(s)) break;
+        let l = `${s}`,
+            m = i < e.length - 1 ? e[i + 1] : null;
+        if (r > 0 && l === void 0) break;
+        if (l && m && typeof m == "object" && m.outlets === void 0) {
+            if (!V0(l, m, a)) return o;
+            i += 2
+        } else {
+            if (!V0(l, {}, a)) return o;
+            i++
+        }
+        r++
+    }
+    return {
+        match: !0,
+        pathIndex: r,
+        commandIndex: i
+    }
+}
+
+function Hh(t, n, e) {
+    let i = t.segments.slice(0, n),
+        r = 0;
+    for (; r < e.length;) {
+        let o = e[r];
+        if (ca(o)) {
+            let l = kx(o.outlets);
+            return new ge(i, l)
+        }
+        if (r === 0 && Hl(e[0])) {
+            let l = t.segments[n];
+            i.push(new Bn(l.path, j0(e[0]))), r++;
+            continue
+        }
+        let a = ca(o) ? o.outlets[ee] : `${o}`,
+            s = r < e.length - 1 ? e[r + 1] : null;
+        a && s && Hl(s) ? (i.push(new Bn(a, j0(s))), r += 2) : (i.push(new Bn(a, {})), r++)
+    }
+    return new ge(i, {})
+}
+
+function kx(t) {
+    let n = {};
+    return Object.entries(t).forEach(([e, i]) => {
+        typeof i == "string" && (i = [i]), i !== null && (n[e] = Hh(new ge([], {}), 0, i))
+    }), n
+}
+
+function j0(t) {
+    let n = {};
+    return Object.entries(t).forEach(([e, i]) => n[e] = `${i}`), n
+}
+
+function V0(t, n, e) {
+    return t == e.path && Jt(n, e.parameters)
+}
+var sa = "imperative",
+    Ve = (function(t) {
+        return t[t.NavigationStart = 0] = "NavigationStart", t[t.NavigationEnd = 1] = "NavigationEnd", t[t.NavigationCancel = 2] = "NavigationCancel", t[t.NavigationError = 3] = "NavigationError", t[t.RoutesRecognized = 4] = "RoutesRecognized", t[t.ResolveStart = 5] = "ResolveStart", t[t.ResolveEnd = 6] = "ResolveEnd", t[t.GuardsCheckStart = 7] = "GuardsCheckStart", t[t.GuardsCheckEnd = 8] = "GuardsCheckEnd", t[t.RouteConfigLoadStart = 9] = "RouteConfigLoadStart", t[t.RouteConfigLoadEnd = 10] = "RouteConfigLoadEnd", t[t.ChildActivationStart = 11] = "ChildActivationStart", t[t.ChildActivationEnd = 12] = "ChildActivationEnd", t[t.ActivationStart = 13] = "ActivationStart", t[t.ActivationEnd = 14] = "ActivationEnd", t[t.Scroll = 15] = "Scroll", t[t.NavigationSkipped = 16] = "NavigationSkipped", t
+    })(Ve || {}),
+    gt = class {
+        id;
+        url;
+        constructor(n, e) {
+            this.id = n, this.url = e
+        }
+    },
+    Ti = class extends gt {
+        type = Ve.NavigationStart;
+        navigationTrigger;
+        restoredState;
+        constructor(n, e, i = "imperative", r = null) {
+            super(n, e), this.navigationTrigger = i, this.restoredState = r
+        }
+        toString() {
+            return `NavigationStart(id: ${this.id}, url: '${this.url}')`
+        }
+    },
+    Nt = class extends gt {
+        urlAfterRedirects;
+        type = Ve.NavigationEnd;
+        constructor(n, e, i) {
+            super(n, e), this.urlAfterRedirects = i
+        }
+        toString() {
+            return `NavigationEnd(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}')`
+        }
+    },
+    it = (function(t) {
+        return t[t.Redirect = 0] = "Redirect", t[t.SupersededByNewNavigation = 1] = "SupersededByNewNavigation", t[t.NoDataFromResolver = 2] = "NoDataFromResolver", t[t.GuardRejected = 3] = "GuardRejected", t[t.Aborted = 4] = "Aborted", t
+    })(it || {}),
+    ua = (function(t) {
+        return t[t.IgnoredSameUrlNavigation = 0] = "IgnoredSameUrlNavigation", t[t.IgnoredByUrlHandlingStrategy = 1] = "IgnoredByUrlHandlingStrategy", t
+    })(ua || {}),
+    en = class extends gt {
+        reason;
+        code;
+        type = Ve.NavigationCancel;
+        constructor(n, e, i, r) {
+            super(n, e), this.reason = i, this.code = r
+        }
+        toString() {
+            return `NavigationCancel(id: ${this.id}, url: '${this.url}')`
+        }
+    },
+    Cn = class extends gt {
+        reason;
+        code;
+        type = Ve.NavigationSkipped;
+        constructor(n, e, i, r) {
+            super(n, e), this.reason = i, this.code = r
+        }
+    },
+    Cr = class extends gt {
+        error;
+        target;
+        type = Ve.NavigationError;
+        constructor(n, e, i, r) {
+            super(n, e), this.error = i, this.target = r
+        }
+        toString() {
+            return `NavigationError(id: ${this.id}, url: '${this.url}', error: ${this.error})`
+        }
+    },
+    da = class extends gt {
+        urlAfterRedirects;
+        state;
+        type = Ve.RoutesRecognized;
+        constructor(n, e, i, r) {
+            super(n, e), this.urlAfterRedirects = i, this.state = r
+        }
+        toString() {
+            return `RoutesRecognized(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state})`
+        }
+    },
+    Vl = class extends gt {
+        urlAfterRedirects;
+        state;
+        type = Ve.GuardsCheckStart;
+        constructor(n, e, i, r) {
+            super(n, e), this.urlAfterRedirects = i, this.state = r
+        }
+        toString() {
+            return `GuardsCheckStart(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state})`
+        }
+    },
+    $l = class extends gt {
+        urlAfterRedirects;
+        state;
+        shouldActivate;
+        type = Ve.GuardsCheckEnd;
+        constructor(n, e, i, r, o) {
+            super(n, e), this.urlAfterRedirects = i, this.state = r, this.shouldActivate = o
+        }
+        toString() {
+            return `GuardsCheckEnd(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state}, shouldActivate: ${this.shouldActivate})`
+        }
+    },
+    Ul = class extends gt {
+        urlAfterRedirects;
+        state;
+        type = Ve.ResolveStart;
+        constructor(n, e, i, r) {
+            super(n, e), this.urlAfterRedirects = i, this.state = r
+        }
+        toString() {
+            return `ResolveStart(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state})`
+        }
+    },
+    zl = class extends gt {
+        urlAfterRedirects;
+        state;
+        type = Ve.ResolveEnd;
+        constructor(n, e, i, r) {
+            super(n, e), this.urlAfterRedirects = i, this.state = r
+        }
+        toString() {
+            return `ResolveEnd(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state})`
+        }
+    },
+    Gl = class {
+        route;
+        type = Ve.RouteConfigLoadStart;
+        constructor(n) {
+            this.route = n
+        }
+        toString() {
+            return `RouteConfigLoadStart(path: ${this.route.path})`
+        }
+    },
+    ql = class {
+        route;
+        type = Ve.RouteConfigLoadEnd;
+        constructor(n) {
+            this.route = n
+        }
+        toString() {
+            return `RouteConfigLoadEnd(path: ${this.route.path})`
+        }
+    },
+    Wl = class {
+        snapshot;
+        type = Ve.ChildActivationStart;
+        constructor(n) {
+            this.snapshot = n
+        }
+        toString() {
+            return `ChildActivationStart(path: '${this.snapshot.routeConfig&&this.snapshot.routeConfig.path||""}')`
+        }
+    },
+    Yl = class {
+        snapshot;
+        type = Ve.ChildActivationEnd;
+        constructor(n) {
+            this.snapshot = n
+        }
+        toString() {
+            return `ChildActivationEnd(path: '${this.snapshot.routeConfig&&this.snapshot.routeConfig.path||""}')`
+        }
+    },
+    Kl = class {
+        snapshot;
+        type = Ve.ActivationStart;
+        constructor(n) {
+            this.snapshot = n
+        }
+        toString() {
+            return `ActivationStart(path: '${this.snapshot.routeConfig&&this.snapshot.routeConfig.path||""}')`
+        }
+    },
+    Ql = class {
+        snapshot;
+        type = Ve.ActivationEnd;
+        constructor(n) {
+            this.snapshot = n
+        }
+        toString() {
+            return `ActivationEnd(path: '${this.snapshot.routeConfig&&this.snapshot.routeConfig.path||""}')`
+        }
+    };
+var ha = class {},
+    xr = class {
+        url;
+        navigationBehaviorOptions;
+        constructor(n, e) {
+            this.url = n, this.navigationBehaviorOptions = e
+        }
+    };
+
+function Rx(t) {
+    return !(t instanceof ha) && !(t instanceof xr)
+}
+
+function Ox(t, n) {
+    return t.providers && !t._injector && (t._injector = zo(t.providers, n, `Route: ${t.path}`)), t._injector ?? n
+}
+
+function Vt(t) {
+    return t.outlet || ee
+}
+
+function Lx(t, n) {
+    let e = t.filter(i => Vt(i) === n);
+    return e.push(...t.filter(i => Vt(i) !== n)), e
+}
+
+function Sr(t) {
+    if (!t) return null;
+    if (t.routeConfig?._injector) return t.routeConfig._injector;
+    for (let n = t.parent; n; n = n.parent) {
+        let e = n.routeConfig;
+        if (e?._loadedInjector) return e._loadedInjector;
+        if (e?._injector) return e._injector
+    }
+    return null
+}
+var Zl = class {
+        rootInjector;
+        outlet = null;
+        route = null;
+        children;
+        attachRef = null;
+        get injector() {
+            return Sr(this.route?.snapshot) ?? this.rootInjector
+        }
+        constructor(n) {
+            this.rootInjector = n, this.children = new wr(this.rootInjector)
+        }
+    },
+    wr = (() => {
+        class t {
+            rootInjector;
+            contexts = new Map;
+            constructor(e) {
+                this.rootInjector = e
+            }
+            onChildOutletCreated(e, i) {
+                let r = this.getOrCreateContext(e);
+                r.outlet = i, this.contexts.set(e, r)
+            }
+            onChildOutletDestroyed(e) {
+                let i = this.getContext(e);
+                i && (i.outlet = null, i.attachRef = null)
+            }
+            onOutletDeactivated() {
+                let e = this.contexts;
+                return this.contexts = new Map, e
+            }
+            onOutletReAttached(e) {
+                this.contexts = e
+            }
+            getOrCreateContext(e) {
+                let i = this.getContext(e);
+                return i || (i = new Zl(this.rootInjector), this.contexts.set(e, i)), i
+            }
+            getContext(e) {
+                return this.contexts.get(e) || null
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(ke))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    Xl = class {
+        _root;
+        constructor(n) {
+            this._root = n
+        }
+        get root() {
+            return this._root.value
+        }
+        parent(n) {
+            let e = this.pathFromRoot(n);
+            return e.length > 1 ? e[e.length - 2] : null
+        }
+        children(n) {
+            let e = jh(n, this._root);
+            return e ? e.children.map(i => i.value) : []
+        }
+        firstChild(n) {
+            let e = jh(n, this._root);
+            return e && e.children.length > 0 ? e.children[0].value : null
+        }
+        siblings(n) {
+            let e = Vh(n, this._root);
+            return e.length < 2 ? [] : e[e.length - 2].children.map(r => r.value).filter(r => r !== n)
+        }
+        pathFromRoot(n) {
+            return Vh(n, this._root).map(e => e.value)
+        }
+    };
+
+function jh(t, n) {
+    if (t === n.value) return n;
+    for (let e of n.children) {
+        let i = jh(t, e);
+        if (i) return i
+    }
+    return null
+}
+
+function Vh(t, n) {
+    if (t === n.value) return [n];
+    for (let e of n.children) {
+        let i = Vh(t, e);
+        if (i.length) return i.unshift(n), i
+    }
+    return []
+}
+var pt = class {
+    value;
+    children;
+    constructor(n, e) {
+        this.value = n, this.children = e
+    }
+    toString() {
+        return `TreeNode(${this.value})`
+    }
+};
+
+function Er(t) {
+    let n = {};
+    return t && t.children.forEach(e => n[e.value.outlet] = e), n
+}
+var ma = class extends Xl {
+    snapshot;
+    constructor(n, e) {
+        super(n), this.snapshot = e, Kh(this, n)
+    }
+    toString() {
+        return this.snapshot.toString()
+    }
+};
+
+function sv(t) {
+    let n = Fx(t),
+        e = new $e([new Bn("", {})]),
+        i = new $e({}),
+        r = new $e({}),
+        o = new $e({}),
+        a = new $e(""),
+        s = new qe(e, i, o, a, r, ee, t, n.root);
+    return s.snapshot = n.root, new ma(new pt(s, []), n)
+}
+
+function Fx(t) {
+    let n = {},
+        e = {},
+        i = {},
+        o = new Ci([], n, i, "", e, ee, t, null, {});
+    return new fa("", new pt(o, []))
+}
+var qe = class {
+    urlSubject;
+    paramsSubject;
+    queryParamsSubject;
+    fragmentSubject;
+    dataSubject;
+    outlet;
+    component;
+    snapshot;
+    _futureSnapshot;
+    _routerState;
+    _paramMap;
+    _queryParamMap;
+    title;
+    url;
+    params;
+    queryParams;
+    fragment;
+    data;
+    constructor(n, e, i, r, o, a, s, l) {
+        this.urlSubject = n, this.paramsSubject = e, this.queryParamsSubject = i, this.fragmentSubject = r, this.dataSubject = o, this.outlet = a, this.component = s, this._futureSnapshot = l, this.title = this.dataSubject?.pipe(re(m => m[ya])) ?? z(void 0), this.url = n, this.params = e, this.queryParams = i, this.fragment = r, this.data = o
+    }
+    get routeConfig() {
+        return this._futureSnapshot.routeConfig
+    }
+    get root() {
+        return this._routerState.root
+    }
+    get parent() {
+        return this._routerState.parent(this)
+    }
+    get firstChild() {
+        return this._routerState.firstChild(this)
+    }
+    get children() {
+        return this._routerState.children(this)
+    }
+    get pathFromRoot() {
+        return this._routerState.pathFromRoot(this)
+    }
+    get paramMap() {
+        return this._paramMap ??= this.params.pipe(re(n => xi(n))), this._paramMap
+    }
+    get queryParamMap() {
+        return this._queryParamMap ??= this.queryParams.pipe(re(n => xi(n))), this._queryParamMap
+    }
+    toString() {
+        return this.snapshot ? this.snapshot.toString() : `Future(${this._futureSnapshot})`
+    }
+};
+
+function Jl(t, n, e = "emptyOnly") {
+    let i, {
+        routeConfig: r
+    } = t;
+    return n !== null && (e === "always" || r?.path === "" || !n.component && !n.routeConfig?.loadComponent) ? i = {
+        params: A(A({}, n.params), t.params),
+        data: A(A({}, n.data), t.data),
+        resolve: A(A(A(A({}, t.data), n.data), r?.data), t._resolvedData)
+    } : i = {
+        params: A({}, t.params),
+        data: A({}, t.data),
+        resolve: A(A({}, t.data), t._resolvedData ?? {})
+    }, r && cv(r) && (i.resolve[ya] = r.title), i
+}
+var Ci = class {
+        url;
+        params;
+        queryParams;
+        fragment;
+        data;
+        outlet;
+        component;
+        routeConfig;
+        _resolve;
+        _resolvedData;
+        _routerState;
+        _paramMap;
+        _queryParamMap;
+        get title() {
+            return this.data?.[ya]
+        }
+        constructor(n, e, i, r, o, a, s, l, m) {
+            this.url = n, this.params = e, this.queryParams = i, this.fragment = r, this.data = o, this.outlet = a, this.component = s, this.routeConfig = l, this._resolve = m
+        }
+        get root() {
+            return this._routerState.root
+        }
+        get parent() {
+            return this._routerState.parent(this)
+        }
+        get firstChild() {
+            return this._routerState.firstChild(this)
+        }
+        get children() {
+            return this._routerState.children(this)
+        }
+        get pathFromRoot() {
+            return this._routerState.pathFromRoot(this)
+        }
+        get paramMap() {
+            return this._paramMap ??= xi(this.params), this._paramMap
+        }
+        get queryParamMap() {
+            return this._queryParamMap ??= xi(this.queryParams), this._queryParamMap
+        }
+        toString() {
+            let n = this.url.map(i => i.toString()).join("/"),
+                e = this.routeConfig ? this.routeConfig.path : "";
+            return `Route(url:'${n}', path:'${e}')`
+        }
+    },
+    fa = class extends Xl {
+        url;
+        constructor(n, e) {
+            super(e), this.url = n, Kh(this, e)
+        }
+        toString() {
+            return lv(this._root)
+        }
+    };
+
+function Kh(t, n) {
+    n.value._routerState = t, n.children.forEach(e => Kh(t, e))
+}
+
+function lv(t) {
+    let n = t.children.length > 0 ? ` { ${t.children.map(lv).join(", ")} } ` : "";
+    return `${t.value}${n}`
+}
+
+function Rh(t) {
+    if (t.snapshot) {
+        let n = t.snapshot,
+            e = t._futureSnapshot;
+        t.snapshot = e, Jt(n.queryParams, e.queryParams) || t.queryParamsSubject.next(e.queryParams), n.fragment !== e.fragment && t.fragmentSubject.next(e.fragment), Jt(n.params, e.params) || t.paramsSubject.next(e.params), cx(n.url, e.url) || t.urlSubject.next(e.url), Jt(n.data, e.data) || t.dataSubject.next(e.data)
+    } else t.snapshot = t._futureSnapshot, t.dataSubject.next(t._futureSnapshot.data)
+}
+
+function $h(t, n) {
+    let e = Jt(t.params, n.params) && mx(t.url, n.url),
+        i = !t.parent != !n.parent;
+    return e && !i && (!t.parent || $h(t.parent, n.parent))
+}
+
+function cv(t) {
+    return typeof t.title == "string" || t.title === null
+}
+var uv = new U(""),
+    ba = (() => {
+        class t {
+            activated = null;
+            get activatedComponentRef() {
+                return this.activated
+            }
+            _activatedRoute = null;
+            name = ee;
+            activateEvents = new tt;
+            deactivateEvents = new tt;
+            attachEvents = new tt;
+            detachEvents = new tt;
+            routerOutletData = dr();
+            parentContexts = E(wr);
+            location = E(ur);
+            changeDetector = E(hr);
+            inputBinder = E(ic, {
+                optional: !0
+            });
+            supportsBindingToComponentInputs = !0;
+            ngOnChanges(e) {
+                if (e.name) {
+                    let {
+                        firstChange: i,
+                        previousValue: r
+                    } = e.name;
+                    if (i) return;
+                    this.isTrackedInParentContexts(r) && (this.deactivate(), this.parentContexts.onChildOutletDestroyed(r)), this.initializeOutletWithName()
+                }
+            }
+            ngOnDestroy() {
+                this.isTrackedInParentContexts(this.name) && this.parentContexts.onChildOutletDestroyed(this.name), this.inputBinder?.unsubscribeFromRouteData(this)
+            }
+            isTrackedInParentContexts(e) {
+                return this.parentContexts.getContext(e)?.outlet === this
+            }
+            ngOnInit() {
+                this.initializeOutletWithName()
+            }
+            initializeOutletWithName() {
+                if (this.parentContexts.onChildOutletCreated(this.name, this), this.activated) return;
+                let e = this.parentContexts.getContext(this.name);
+                e?.route && (e.attachRef ? this.attach(e.attachRef, e.route) : this.activateWith(e.route, e.injector))
+            }
+            get isActivated() {
+                return !!this.activated
+            }
+            get component() {
+                if (!this.activated) throw new $(4012, !1);
+                return this.activated.instance
+            }
+            get activatedRoute() {
+                if (!this.activated) throw new $(4012, !1);
+                return this._activatedRoute
+            }
+            get activatedRouteData() {
+                return this._activatedRoute ? this._activatedRoute.snapshot.data : {}
+            }
+            detach() {
+                if (!this.activated) throw new $(4012, !1);
+                this.location.detach();
+                let e = this.activated;
+                return this.activated = null, this._activatedRoute = null, this.detachEvents.emit(e.instance), e
+            }
+            attach(e, i) {
+                this.activated = e, this._activatedRoute = i, this.location.insert(e.hostView), this.inputBinder?.bindActivatedRouteToOutletComponent(this), this.attachEvents.emit(e.instance)
+            }
+            deactivate() {
+                if (this.activated) {
+                    let e = this.component;
+                    this.activated.destroy(), this.activated = null, this._activatedRoute = null, this.deactivateEvents.emit(e)
+                }
+            }
+            activateWith(e, i) {
+                if (this.isActivated) throw new $(4013, !1);
+                this._activatedRoute = e;
+                let r = this.location,
+                    a = e.snapshot.component,
+                    s = this.parentContexts.getOrCreateContext(this.name).children,
+                    l = new Uh(e, s, r.injector, this.routerOutletData);
+                this.activated = r.createComponent(a, {
+                    index: r.length,
+                    injector: l,
+                    environmentInjector: i
+                }), this.changeDetector.markForCheck(), this.inputBinder?.bindActivatedRouteToOutletComponent(this), this.activateEvents.emit(this.activated.instance)
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275dir = vn({
+                type: t,
+                selectors: [
+                    ["router-outlet"]
+                ],
+                inputs: {
+                    name: "name",
+                    routerOutletData: [1, "routerOutletData"]
+                },
+                outputs: {
+                    activateEvents: "activate",
+                    deactivateEvents: "deactivate",
+                    attachEvents: "attach",
+                    detachEvents: "detach"
+                },
+                exportAs: ["outlet"],
+                features: [pn]
+            })
+        }
+        return t
+    })(),
+    Uh = class {
+        route;
+        childContexts;
+        parent;
+        outletData;
+        constructor(n, e, i, r) {
+            this.route = n, this.childContexts = e, this.parent = i, this.outletData = r
+        }
+        get(n, e) {
+            return n === qe ? this.route : n === wr ? this.childContexts : n === uv ? this.outletData : this.parent.get(n, e)
+        }
+    },
+    ic = new U("");
+var Qh = (() => {
+    class t {
+        static \u0275fac = function(i) {
+            return new(i || t)
+        };
+        static \u0275cmp = q({
+            type: t,
+            selectors: [
+                ["ng-component"]
+            ],
+            exportAs: ["emptyRouterOutlet"],
+            decls: 1,
+            vars: 0,
+            template: function(i, r) {
+                i & 1 && _e(0, "router-outlet")
+            },
+            dependencies: [ba],
+            encapsulation: 2
+        })
+    }
+    return t
+})();
+
+function Zh(t) {
+    let n = t.children && t.children.map(Zh),
+        e = n ? ue(A({}, t), {
+            children: n
+        }) : A({}, t);
+    return !e.component && !e.loadComponent && (n || e.loadChildren) && e.outlet && e.outlet !== ee && (e.component = Qh), e
+}
+
+function Px(t, n, e) {
+    let i = pa(t, n._root, e ? e._root : void 0);
+    return new ma(i, n)
+}
+
+function pa(t, n, e) {
+    if (e && t.shouldReuseRoute(n.value, e.value.snapshot)) {
+        let i = e.value;
+        i._futureSnapshot = n.value;
+        let r = Bx(t, n, e);
+        return new pt(i, r)
+    } else {
+        if (t.shouldAttach(n.value)) {
+            let o = t.retrieve(n.value);
+            if (o !== null) {
+                let a = o.route;
+                return a.value._futureSnapshot = n.value, a.children = n.children.map(s => pa(t, s)), a
+            }
+        }
+        let i = Hx(n.value),
+            r = n.children.map(o => pa(t, o));
+        return new pt(i, r)
+    }
+}
+
+function Bx(t, n, e) {
+    return n.children.map(i => {
+        for (let r of e.children)
+            if (t.shouldReuseRoute(i.value, r.value.snapshot)) return pa(t, i, r);
+        return pa(t, i)
+    })
+}
+
+function Hx(t) {
+    return new qe(new $e(t.url), new $e(t.params), new $e(t.queryParams), new $e(t.fragment), new $e(t.data), t.outlet, t.component, t)
+}
+var _r = class {
+        redirectTo;
+        navigationBehaviorOptions;
+        constructor(n, e) {
+            this.redirectTo = n, this.navigationBehaviorOptions = e
+        }
+    },
+    dv = "ngNavigationCancelingError";
+
+function ec(t, n) {
+    let {
+        redirectTo: e,
+        navigationBehaviorOptions: i
+    } = Hn(n) ? {
+        redirectTo: n,
+        navigationBehaviorOptions: void 0
+    } : n, r = hv(!1, it.Redirect);
+    return r.url = e, r.navigationBehaviorOptions = i, r
+}
+
+function hv(t, n) {
+    let e = new Error(`NavigationCancelingError: ${t||""}`);
+    return e[dv] = !0, e.cancellationCode = n, e
+}
+
+function jx(t) {
+    return mv(t) && Hn(t.url)
+}
+
+function mv(t) {
+    return !!t && t[dv]
+}
+var Vx = (t, n, e, i) => re(r => (new zh(n, r.targetRouterState, r.currentRouterState, e, i).activate(t), r)),
+    zh = class {
+        routeReuseStrategy;
+        futureState;
+        currState;
+        forwardEvent;
+        inputBindingEnabled;
+        constructor(n, e, i, r, o) {
+            this.routeReuseStrategy = n, this.futureState = e, this.currState = i, this.forwardEvent = r, this.inputBindingEnabled = o
+        }
+        activate(n) {
+            let e = this.futureState._root,
+                i = this.currState ? this.currState._root : null;
+            this.deactivateChildRoutes(e, i, n), Rh(this.futureState.root), this.activateChildRoutes(e, i, n)
+        }
+        deactivateChildRoutes(n, e, i) {
+            let r = Er(e);
+            n.children.forEach(o => {
+                let a = o.value.outlet;
+                this.deactivateRoutes(o, r[a], i), delete r[a]
+            }), Object.values(r).forEach(o => {
+                this.deactivateRouteAndItsChildren(o, i)
+            })
+        }
+        deactivateRoutes(n, e, i) {
+            let r = n.value,
+                o = e ? e.value : null;
+            if (r === o)
+                if (r.component) {
+                    let a = i.getContext(r.outlet);
+                    a && this.deactivateChildRoutes(n, e, a.children)
+                } else this.deactivateChildRoutes(n, e, i);
+            else o && this.deactivateRouteAndItsChildren(e, i)
+        }
+        deactivateRouteAndItsChildren(n, e) {
+            n.value.component && this.routeReuseStrategy.shouldDetach(n.value.snapshot) ? this.detachAndStoreRouteSubtree(n, e) : this.deactivateRouteAndOutlet(n, e)
+        }
+        detachAndStoreRouteSubtree(n, e) {
+            let i = e.getContext(n.value.outlet),
+                r = i && n.value.component ? i.children : e,
+                o = Er(n);
+            for (let a of Object.values(o)) this.deactivateRouteAndItsChildren(a, r);
+            if (i && i.outlet) {
+                let a = i.outlet.detach(),
+                    s = i.children.onOutletDeactivated();
+                this.routeReuseStrategy.store(n.value.snapshot, {
+                    componentRef: a,
+                    route: n,
+                    contexts: s
+                })
+            }
+        }
+        deactivateRouteAndOutlet(n, e) {
+            let i = e.getContext(n.value.outlet),
+                r = i && n.value.component ? i.children : e,
+                o = Er(n);
+            for (let a of Object.values(o)) this.deactivateRouteAndItsChildren(a, r);
+            i && (i.outlet && (i.outlet.deactivate(), i.children.onOutletDeactivated()), i.attachRef = null, i.route = null)
+        }
+        activateChildRoutes(n, e, i) {
+            let r = Er(e);
+            n.children.forEach(o => {
+                this.activateRoutes(o, r[o.value.outlet], i), this.forwardEvent(new Ql(o.value.snapshot))
+            }), n.children.length && this.forwardEvent(new Yl(n.value.snapshot))
+        }
+        activateRoutes(n, e, i) {
+            let r = n.value,
+                o = e ? e.value : null;
+            if (Rh(r), r === o)
+                if (r.component) {
+                    let a = i.getOrCreateContext(r.outlet);
+                    this.activateChildRoutes(n, e, a.children)
+                } else this.activateChildRoutes(n, e, i);
+            else if (r.component) {
+                let a = i.getOrCreateContext(r.outlet);
+                if (this.routeReuseStrategy.shouldAttach(r.snapshot)) {
+                    let s = this.routeReuseStrategy.retrieve(r.snapshot);
+                    this.routeReuseStrategy.store(r.snapshot, null), a.children.onOutletReAttached(s.contexts), a.attachRef = s.componentRef, a.route = s.route.value, a.outlet && a.outlet.attach(s.componentRef, s.route.value), Rh(s.route.value), this.activateChildRoutes(n, null, a.children)
+                } else a.attachRef = null, a.route = r, a.outlet && a.outlet.activateWith(r, a.injector), this.activateChildRoutes(n, null, a.children)
+            } else this.activateChildRoutes(n, null, i)
+        }
+    },
+    tc = class {
+        path;
+        route;
+        constructor(n) {
+            this.path = n, this.route = this.path[this.path.length - 1]
+        }
+    },
+    Dr = class {
+        component;
+        route;
+        constructor(n, e) {
+            this.component = n, this.route = e
+        }
+    };
+
+function $x(t, n, e) {
+    let i = t._root,
+        r = n ? n._root : null;
+    return oa(i, r, e, [i.value])
+}
+
+function Ux(t) {
+    let n = t.routeConfig ? t.routeConfig.canActivateChild : null;
+    return !n || n.length === 0 ? null : {
+        node: t,
+        guards: n
+    }
+}
+
+function Ir(t, n) {
+    let e = Symbol(),
+        i = n.get(t, e);
+    return i === e ? typeof t == "function" && !pu(t) ? t : n.get(t) : i
+}
+
+function oa(t, n, e, i, r = {
+    canDeactivateChecks: [],
+    canActivateChecks: []
+}) {
+    let o = Er(n);
+    return t.children.forEach(a => {
+        zx(a, o[a.value.outlet], e, i.concat([a.value]), r), delete o[a.value.outlet]
+    }), Object.entries(o).forEach(([a, s]) => la(s, e.getContext(a), r)), r
+}
+
+function zx(t, n, e, i, r = {
+    canDeactivateChecks: [],
+    canActivateChecks: []
+}) {
+    let o = t.value,
+        a = n ? n.value : null,
+        s = e ? e.getContext(t.value.outlet) : null;
+    if (a && o.routeConfig === a.routeConfig) {
+        let l = Gx(a, o, o.routeConfig.runGuardsAndResolvers);
+        l ? r.canActivateChecks.push(new tc(i)) : (o.data = a.data, o._resolvedData = a._resolvedData), o.component ? oa(t, n, s ? s.children : null, i, r) : oa(t, n, e, i, r), l && s && s.outlet && s.outlet.isActivated && r.canDeactivateChecks.push(new Dr(s.outlet.component, a))
+    } else a && la(n, s, r), r.canActivateChecks.push(new tc(i)), o.component ? oa(t, null, s ? s.children : null, i, r) : oa(t, null, e, i, r);
+    return r
+}
+
+function Gx(t, n, e) {
+    if (typeof e == "function") return e(t, n);
+    switch (e) {
+        case "pathParamsChange":
+            return !Di(t.url, n.url);
+        case "pathParamsOrQueryParamsChange":
+            return !Di(t.url, n.url) || !Jt(t.queryParams, n.queryParams);
+        case "always":
+            return !0;
+        case "paramsOrQueryParamsChange":
+            return !$h(t, n) || !Jt(t.queryParams, n.queryParams);
+        case "paramsChange":
+        default:
+            return !$h(t, n)
+    }
+}
+
+function la(t, n, e) {
+    let i = Er(t),
+        r = t.value;
+    Object.entries(i).forEach(([o, a]) => {
+        r.component ? n ? la(a, n.children.getContext(o), e) : la(a, null, e) : la(a, n, e)
+    }), r.component ? n && n.outlet && n.outlet.isActivated ? e.canDeactivateChecks.push(new Dr(n.outlet.component, r)) : e.canDeactivateChecks.push(new Dr(null, r)) : e.canDeactivateChecks.push(new Dr(null, r))
+}
+
+function Da(t) {
+    return typeof t == "function"
+}
+
+function qx(t) {
+    return typeof t == "boolean"
+}
+
+function Wx(t) {
+    return t && Da(t.canLoad)
+}
+
+function Yx(t) {
+    return t && Da(t.canActivate)
+}
+
+function Kx(t) {
+    return t && Da(t.canActivateChild)
+}
+
+function Qx(t) {
+    return t && Da(t.canDeactivate)
+}
+
+function Zx(t) {
+    return t && Da(t.canMatch)
+}
+
+function fv(t) {
+    return t instanceof rn || t?.name === "EmptyError"
+}
+var Ll = Symbol("INITIAL_VALUE");
+
+function Tr() {
+    return Ke(t => as(t.map(n => n.pipe(on(1), iu(Ll)))).pipe(re(n => {
+        for (let e of n)
+            if (e !== !0) {
+                if (e === Ll) return Ll;
+                if (e === !1 || Xx(e)) return e
+            } return !0
+    }), Ye(n => n !== Ll), on(1)))
+}
+
+function Xx(t) {
+    return Hn(t) || t instanceof _r
+}
+
+function Jx(t, n) {
+    return Fe(e => {
+        let {
+            targetSnapshot: i,
+            currentSnapshot: r,
+            guards: {
+                canActivateChecks: o,
+                canDeactivateChecks: a
+            }
+        } = e;
+        return a.length === 0 && o.length === 0 ? z(ue(A({}, e), {
+            guardsResult: !0
+        })) : e_(a, i, r, t).pipe(Fe(s => s && qx(s) ? t_(i, o, t, n) : z(s)), re(s => ue(A({}, e), {
+            guardsResult: s
+        })))
+    })
+}
+
+function e_(t, n, e, i) {
+    return Ae(t).pipe(Fe(r => a_(r.component, r.route, e, n, i)), sn(r => r !== !0, !0))
+}
+
+function t_(t, n, e, i) {
+    return Ae(n).pipe(Tn(r => qi(i_(r.route.parent, i), n_(r.route, i), o_(t, r.path, e), r_(t, r.route, e))), sn(r => r !== !0, !0))
+}
+
+function n_(t, n) {
+    return t !== null && n && n(new Kl(t)), z(!0)
+}
+
+function i_(t, n) {
+    return t !== null && n && n(new Wl(t)), z(!0)
+}
+
+function r_(t, n, e) {
+    let i = n.routeConfig ? n.routeConfig.canActivate : null;
+    if (!i || i.length === 0) return z(!0);
+    let r = i.map(o => so(() => {
+        let a = Sr(n) ?? e,
+            s = Ir(o, a),
+            l = Yx(s) ? s.canActivate(n, t) : Ue(a, () => s(n, t));
+        return xn(l).pipe(sn())
+    }));
+    return z(r).pipe(Tr())
+}
+
+function o_(t, n, e) {
+    let i = n[n.length - 1],
+        o = n.slice(0, n.length - 1).reverse().map(a => Ux(a)).filter(a => a !== null).map(a => so(() => {
+            let s = a.guards.map(l => {
+                let m = Sr(a.node) ?? e,
+                    f = Ir(l, m),
+                    p = Kx(f) ? f.canActivateChild(i, t) : Ue(m, () => f(i, t));
+                return xn(p).pipe(sn())
+            });
+            return z(s).pipe(Tr())
+        }));
+    return z(o).pipe(Tr())
+}
+
+function a_(t, n, e, i, r) {
+    let o = n && n.routeConfig ? n.routeConfig.canDeactivate : null;
+    if (!o || o.length === 0) return z(!0);
+    let a = o.map(s => {
+        let l = Sr(n) ?? r,
+            m = Ir(s, l),
+            f = Qx(m) ? m.canDeactivate(t, n, e, i) : Ue(l, () => m(t, n, e, i));
+        return xn(f).pipe(sn())
+    });
+    return z(a).pipe(Tr())
+}
+
+function s_(t, n, e, i) {
+    let r = n.canLoad;
+    if (r === void 0 || r.length === 0) return z(!0);
+    let o = r.map(a => {
+        let s = Ir(a, t),
+            l = Wx(s) ? s.canLoad(n, e) : Ue(t, () => s(n, e));
+        return xn(l)
+    });
+    return z(o).pipe(Tr(), pv(i))
+}
+
+function pv(t) {
+    return Kc(He(n => {
+        if (typeof n != "boolean") throw ec(t, n)
+    }), re(n => n === !0))
+}
+
+function l_(t, n, e, i) {
+    let r = n.canMatch;
+    if (!r || r.length === 0) return z(!0);
+    let o = r.map(a => {
+        let s = Ir(a, t),
+            l = Zx(s) ? s.canMatch(n, e) : Ue(t, () => s(n, e));
+        return xn(l)
+    });
+    return z(o).pipe(Tr(), pv(i))
+}
+var ga = class {
+        segmentGroup;
+        constructor(n) {
+            this.segmentGroup = n || null
+        }
+    },
+    va = class extends Error {
+        urlTree;
+        constructor(n) {
+            super(), this.urlTree = n
+        }
+    };
+
+function yr(t) {
+    return Gi(new ga(t))
+}
+
+function c_(t) {
+    return Gi(new $(4e3, !1))
+}
+
+function u_(t) {
+    return Gi(hv(!1, it.GuardRejected))
+}
+var Gh = class {
+    urlSerializer;
+    urlTree;
+    constructor(n, e) {
+        this.urlSerializer = n, this.urlTree = e
+    }
+    lineralizeSegments(n, e) {
+        let i = [],
+            r = e.root;
+        for (;;) {
+            if (i = i.concat(r.segments), r.numberOfChildren === 0) return z(i);
+            if (r.numberOfChildren > 1 || !r.children[ee]) return c_(`${n.redirectTo}`);
+            r = r.children[ee]
+        }
+    }
+    applyRedirectCommands(n, e, i, r, o) {
+        return d_(e, r, o).pipe(re(a => {
+            if (a instanceof tn) throw new va(a);
+            let s = this.applyRedirectCreateUrlTree(a, this.urlSerializer.parse(a), n, i);
+            if (a[0] === "/") throw new va(s);
+            return s
+        }))
+    }
+    applyRedirectCreateUrlTree(n, e, i, r) {
+        let o = this.createSegmentGroup(n, e.root, i, r);
+        return new tn(o, this.createQueryParams(e.queryParams, this.urlTree.queryParams), e.fragment)
+    }
+    createQueryParams(n, e) {
+        let i = {};
+        return Object.entries(n).forEach(([r, o]) => {
+            if (typeof o == "string" && o[0] === ":") {
+                let s = o.substring(1);
+                i[r] = e[s]
+            } else i[r] = o
+        }), i
+    }
+    createSegmentGroup(n, e, i, r) {
+        let o = this.createSegments(n, e.segments, i, r),
+            a = {};
+        return Object.entries(e.children).forEach(([s, l]) => {
+            a[s] = this.createSegmentGroup(n, l, i, r)
+        }), new ge(o, a)
+    }
+    createSegments(n, e, i, r) {
+        return e.map(o => o.path[0] === ":" ? this.findPosParam(n, o, r) : this.findOrReturn(o, i))
+    }
+    findPosParam(n, e, i) {
+        let r = i[e.path.substring(1)];
+        if (!r) throw new $(4001, !1);
+        return r
+    }
+    findOrReturn(n, e) {
+        let i = 0;
+        for (let r of e) {
+            if (r.path === n.path) return e.splice(i), r;
+            i++
+        }
+        return n
+    }
+};
+
+function d_(t, n, e) {
+    if (typeof t == "string") return z(t);
+    let i = t,
+        {
+            queryParams: r,
+            fragment: o,
+            routeConfig: a,
+            url: s,
+            outlet: l,
+            params: m,
+            data: f,
+            title: p
+        } = n;
+    return xn(Ue(e, () => i({
+        params: m,
+        data: f,
+        queryParams: r,
+        fragment: o,
+        routeConfig: a,
+        url: s,
+        outlet: l,
+        title: p
+    })))
+}
+var qh = {
+    matched: !1,
+    consumedSegments: [],
+    remainingSegments: [],
+    parameters: {},
+    positionalParamSegments: {}
+};
+
+function h_(t, n, e, i, r) {
+    let o = gv(t, n, e);
+    return o.matched ? (i = Ox(n, i), l_(i, n, e, r).pipe(re(a => a === !0 ? o : A({}, qh)))) : z(o)
+}
+
+function gv(t, n, e) {
+    if (n.path === "**") return m_(e);
+    if (n.path === "") return n.pathMatch === "full" && (t.hasChildren() || e.length > 0) ? A({}, qh) : {
+        matched: !0,
+        consumedSegments: [],
+        remainingSegments: e,
+        parameters: {},
+        positionalParamSegments: {}
+    };
+    let r = (n.matcher || G0)(e, t, n);
+    if (!r) return A({}, qh);
+    let o = {};
+    Object.entries(r.posParams ?? {}).forEach(([s, l]) => {
+        o[s] = l.path
+    });
+    let a = r.consumed.length > 0 ? A(A({}, o), r.consumed[r.consumed.length - 1].parameters) : o;
+    return {
+        matched: !0,
+        consumedSegments: r.consumed,
+        remainingSegments: e.slice(r.consumed.length),
+        parameters: a,
+        positionalParamSegments: r.posParams ?? {}
+    }
+}
+
+function m_(t) {
+    return {
+        matched: !0,
+        parameters: t.length > 0 ? W0(t).parameters : {},
+        consumedSegments: t,
+        remainingSegments: [],
+        positionalParamSegments: {}
+    }
+}
+
+function $0(t, n, e, i) {
+    return e.length > 0 && g_(t, e, i) ? {
+        segmentGroup: new ge(n, p_(i, new ge(e, t.children))),
+        slicedSegments: []
+    } : e.length === 0 && v_(t, e, i) ? {
+        segmentGroup: new ge(t.segments, f_(t, e, i, t.children)),
+        slicedSegments: e
+    } : {
+        segmentGroup: new ge(t.segments, t.children),
+        slicedSegments: e
+    }
+}
+
+function f_(t, n, e, i) {
+    let r = {};
+    for (let o of e)
+        if (rc(t, n, o) && !i[Vt(o)]) {
+            let a = new ge([], {});
+            r[Vt(o)] = a
+        } return A(A({}, i), r)
+}
+
+function p_(t, n) {
+    let e = {};
+    e[ee] = n;
+    for (let i of t)
+        if (i.path === "" && Vt(i) !== ee) {
+            let r = new ge([], {});
+            e[Vt(i)] = r
+        } return e
+}
+
+function g_(t, n, e) {
+    return e.some(i => rc(t, n, i) && Vt(i) !== ee)
+}
+
+function v_(t, n, e) {
+    return e.some(i => rc(t, n, i))
+}
+
+function rc(t, n, e) {
+    return (t.hasChildren() || n.length > 0) && e.pathMatch === "full" ? !1 : e.path === ""
+}
+
+function y_(t, n, e) {
+    return n.length === 0 && !t.children[e]
+}
+var Wh = class {};
+
+function E_(t, n, e, i, r, o, a = "emptyOnly") {
+    return new Yh(t, n, e, i, r, a, o).recognize()
+}
+var b_ = 31,
+    Yh = class {
+        injector;
+        configLoader;
+        rootComponentType;
+        config;
+        urlTree;
+        paramsInheritanceStrategy;
+        urlSerializer;
+        applyRedirects;
+        absoluteRedirectCount = 0;
+        allowRedirects = !0;
+        constructor(n, e, i, r, o, a, s) {
+            this.injector = n, this.configLoader = e, this.rootComponentType = i, this.config = r, this.urlTree = o, this.paramsInheritanceStrategy = a, this.urlSerializer = s, this.applyRedirects = new Gh(this.urlSerializer, this.urlTree)
+        }
+        noMatchError(n) {
+            return new $(4002, `'${n.segmentGroup}'`)
+        }
+        recognize() {
+            let n = $0(this.urlTree.root, [], [], this.config).segmentGroup;
+            return this.match(n).pipe(re(({
+                children: e,
+                rootSnapshot: i
+            }) => {
+                let r = new pt(i, e),
+                    o = new fa("", r),
+                    a = nv(i, [], this.urlTree.queryParams, this.urlTree.fragment);
+                return a.queryParams = this.urlTree.queryParams, o.url = this.urlSerializer.serialize(a), {
+                    state: o,
+                    tree: a
+                }
+            }))
+        }
+        match(n) {
+            let e = new Ci([], Object.freeze({}), Object.freeze(A({}, this.urlTree.queryParams)), this.urlTree.fragment, Object.freeze({}), ee, this.rootComponentType, null, {});
+            return this.processSegmentGroup(this.injector, this.config, n, ee, e).pipe(re(i => ({
+                children: i,
+                rootSnapshot: e
+            })), at(i => {
+                if (i instanceof va) return this.urlTree = i.urlTree, this.match(i.urlTree.root);
+                throw i instanceof ga ? this.noMatchError(i) : i
+            }))
+        }
+        processSegmentGroup(n, e, i, r, o) {
+            return i.segments.length === 0 && i.hasChildren() ? this.processChildren(n, e, i, o) : this.processSegment(n, e, i, i.segments, r, !0, o).pipe(re(a => a instanceof pt ? [a] : []))
+        }
+        processChildren(n, e, i, r) {
+            let o = [];
+            for (let a of Object.keys(i.children)) a === "primary" ? o.unshift(a) : o.push(a);
+            return Ae(o).pipe(Tn(a => {
+                let s = i.children[a],
+                    l = Lx(e, a);
+                return this.processSegmentGroup(n, l, s, a, r)
+            }), nu((a, s) => (a.push(...s), a)), Sn(null), tu(), Fe(a => {
+                if (a === null) return yr(i);
+                let s = vv(a);
+                return D_(s), z(s)
+            }))
+        }
+        processSegment(n, e, i, r, o, a, s) {
+            return Ae(e).pipe(Tn(l => this.processSegmentAgainstRoute(l._injector ?? n, e, l, i, r, o, a, s).pipe(at(m => {
+                if (m instanceof ga) return z(null);
+                throw m
+            }))), sn(l => !!l), at(l => {
+                if (fv(l)) return y_(i, r, o) ? z(new Wh) : yr(i);
+                throw l
+            }))
+        }
+        processSegmentAgainstRoute(n, e, i, r, o, a, s, l) {
+            return Vt(i) !== a && (a === ee || !rc(r, o, i)) ? yr(r) : i.redirectTo === void 0 ? this.matchSegmentAgainstRoute(n, r, i, o, a, l) : this.allowRedirects && s ? this.expandSegmentAgainstRouteUsingRedirect(n, r, e, i, o, a, l) : yr(r)
+        }
+        expandSegmentAgainstRouteUsingRedirect(n, e, i, r, o, a, s) {
+            let {
+                matched: l,
+                parameters: m,
+                consumedSegments: f,
+                positionalParamSegments: p,
+                remainingSegments: g
+            } = gv(e, r, o);
+            if (!l) return yr(e);
+            typeof r.redirectTo == "string" && r.redirectTo[0] === "/" && (this.absoluteRedirectCount++, this.absoluteRedirectCount > b_ && (this.allowRedirects = !1));
+            let v = new Ci(o, m, Object.freeze(A({}, this.urlTree.queryParams)), this.urlTree.fragment, U0(r), Vt(r), r.component ?? r._loadedComponent ?? null, r, z0(r)),
+                x = Jl(v, s, this.paramsInheritanceStrategy);
+            return v.params = Object.freeze(x.params), v.data = Object.freeze(x.data), this.applyRedirects.applyRedirectCommands(f, r.redirectTo, p, v, n).pipe(Ke(M => this.applyRedirects.lineralizeSegments(r, M)), Fe(M => this.processSegment(n, i, e, M.concat(g), a, !1, s)))
+        }
+        matchSegmentAgainstRoute(n, e, i, r, o, a) {
+            let s = h_(e, i, r, n, this.urlSerializer);
+            return i.path === "**" && (e.children = {}), s.pipe(Ke(l => l.matched ? (n = i._injector ?? n, this.getChildConfig(n, i, r).pipe(Ke(({
+                routes: m
+            }) => {
+                let f = i._loadedInjector ?? n,
+                    {
+                        parameters: p,
+                        consumedSegments: g,
+                        remainingSegments: v
+                    } = l,
+                    x = new Ci(g, p, Object.freeze(A({}, this.urlTree.queryParams)), this.urlTree.fragment, U0(i), Vt(i), i.component ?? i._loadedComponent ?? null, i, z0(i)),
+                    B = Jl(x, a, this.paramsInheritanceStrategy);
+                x.params = Object.freeze(B.params), x.data = Object.freeze(B.data);
+                let {
+                    segmentGroup: M,
+                    slicedSegments: I
+                } = $0(e, g, v, m);
+                if (I.length === 0 && M.hasChildren()) return this.processChildren(f, m, M, x).pipe(re(De => new pt(x, De)));
+                if (m.length === 0 && I.length === 0) return z(new pt(x, []));
+                let se = Vt(i) === o;
+                return this.processSegment(f, m, M, I, se ? ee : o, !0, x).pipe(re(De => new pt(x, De instanceof pt ? [De] : [])))
+            }))) : yr(e)))
+        }
+        getChildConfig(n, e, i) {
+            return e.children ? z({
+                routes: e.children,
+                injector: n
+            }) : e.loadChildren ? e._loadedRoutes !== void 0 ? z({
+                routes: e._loadedRoutes,
+                injector: e._loadedInjector
+            }) : s_(n, e, i, this.urlSerializer).pipe(Fe(r => r ? this.configLoader.loadChildren(n, e).pipe(He(o => {
+                e._loadedRoutes = o.routes, e._loadedInjector = o.injector
+            })) : u_(e))) : z({
+                routes: [],
+                injector: n
+            })
+        }
+    };
+
+function D_(t) {
+    t.sort((n, e) => n.value.outlet === ee ? -1 : e.value.outlet === ee ? 1 : n.value.outlet.localeCompare(e.value.outlet))
+}
+
+function C_(t) {
+    let n = t.value.routeConfig;
+    return n && n.path === ""
+}
+
+function vv(t) {
+    let n = [],
+        e = new Set;
+    for (let i of t) {
+        if (!C_(i)) {
+            n.push(i);
+            continue
+        }
+        let r = n.find(o => i.value.routeConfig === o.value.routeConfig);
+        r !== void 0 ? (r.children.push(...i.children), e.add(r)) : n.push(i)
+    }
+    for (let i of e) {
+        let r = vv(i.children);
+        n.push(new pt(i.value, r))
+    }
+    return n.filter(i => !e.has(i))
+}
+
+function U0(t) {
+    return t.data || {}
+}
+
+function z0(t) {
+    return t.resolve || {}
+}
+
+function x_(t, n, e, i, r, o) {
+    return Fe(a => E_(t, n, e, i, a.extractedUrl, r, o).pipe(re(({
+        state: s,
+        tree: l
+    }) => ue(A({}, a), {
+        targetSnapshot: s,
+        urlAfterRedirects: l
+    }))))
+}
+
+function __(t, n) {
+    return Fe(e => {
+        let {
+            targetSnapshot: i,
+            guards: {
+                canActivateChecks: r
+            }
+        } = e;
+        if (!r.length) return z(e);
+        let o = new Set(r.map(l => l.route)),
+            a = new Set;
+        for (let l of o)
+            if (!a.has(l))
+                for (let m of yv(l)) a.add(m);
+        let s = 0;
+        return Ae(a).pipe(Tn(l => o.has(l) ? T_(l, i, t, n) : (l.data = Jl(l, l.parent, t).resolve, z(void 0))), He(() => s++), Wi(1), Fe(l => s === a.size ? z(e) : rt))
+    })
+}
+
+function yv(t) {
+    let n = t.children.map(e => yv(e)).flat();
+    return [t, ...n]
+}
+
+function T_(t, n, e, i) {
+    let r = t.routeConfig,
+        o = t._resolve;
+    return r?.title !== void 0 && !cv(r) && (o[ya] = r.title), so(() => (t.data = Jl(t, t.parent, e).resolve, S_(o, t, n, i).pipe(re(a => (t._resolvedData = a, t.data = A(A({}, t.data), a), null)))))
+}
+
+function S_(t, n, e, i) {
+    let r = Fh(t);
+    if (r.length === 0) return z({});
+    let o = {};
+    return Ae(r).pipe(Fe(a => w_(t[a], n, e, i).pipe(sn(), He(s => {
+        if (s instanceof _r) throw ec(new _i, s);
+        o[a] = s
+    }))), Wi(1), re(() => o), at(a => fv(a) ? rt : Gi(a)))
+}
+
+function w_(t, n, e, i) {
+    let r = Sr(n) ?? i,
+        o = Ir(t, r),
+        a = o.resolve ? o.resolve(n, e) : Ue(r, () => o(n, e));
+    return xn(a)
+}
+
+function Oh(t) {
+    return Ke(n => {
+        let e = t(n);
+        return e ? Ae(e).pipe(re(() => n)) : z(n)
+    })
+}
+var Si = (() => {
+        class t {
+            buildTitle(e) {
+                let i, r = e.root;
+                for (; r !== void 0;) i = this.getResolvedTitleForRoute(r) ?? i, r = r.children.find(o => o.outlet === ee);
+                return i
+            }
+            getResolvedTitleForRoute(e) {
+                return e.data[ya]
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: () => E(Ev),
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    Ev = (() => {
+        class t extends Si {
+            title;
+            constructor(e) {
+                super(), this.title = e
+            }
+            updateTitle(e) {
+                let i = this.buildTitle(e);
+                i !== void 0 && this.title.setTitle(i)
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)(G(Rl))
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    Mr = new U("", {
+        providedIn: "root",
+        factory: () => ({})
+    }),
+    Ca = new U(""),
+    bv = (() => {
+        class t {
+            componentLoaders = new WeakMap;
+            childrenLoaders = new WeakMap;
+            onLoadStartListener;
+            onLoadEndListener;
+            compiler = E(sh);
+            loadComponent(e, i) {
+                if (this.componentLoaders.get(i)) return this.componentLoaders.get(i);
+                if (i._loadedComponent) return z(i._loadedComponent);
+                this.onLoadStartListener && this.onLoadStartListener(i);
+                let r = xn(Ue(e, () => i.loadComponent())).pipe(re(Cv), Ke(xv), He(a => {
+                        this.onLoadEndListener && this.onLoadEndListener(i), i._loadedComponent = a
+                    }), an(() => {
+                        this.componentLoaders.delete(i)
+                    })),
+                    o = new zi(r, () => new Be).pipe(Ui());
+                return this.componentLoaders.set(i, o), o
+            }
+            loadChildren(e, i) {
+                if (this.childrenLoaders.get(i)) return this.childrenLoaders.get(i);
+                if (i._loadedRoutes) return z({
+                    routes: i._loadedRoutes,
+                    injector: i._loadedInjector
+                });
+                this.onLoadStartListener && this.onLoadStartListener(i);
+                let o = Dv(i, this.compiler, e, this.onLoadEndListener).pipe(an(() => {
+                        this.childrenLoaders.delete(i)
+                    })),
+                    a = new zi(o, () => new Be).pipe(Ui());
+                return this.childrenLoaders.set(i, a), a
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })();
+
+function Dv(t, n, e, i) {
+    return xn(Ue(e, () => t.loadChildren())).pipe(re(Cv), Ke(xv), Fe(r => r instanceof vl || Array.isArray(r) ? z(r) : Ae(n.compileModuleAsync(r))), re(r => {
+        i && i(t);
+        let o, a, s = !1;
+        return Array.isArray(r) ? (a = r, s = !0) : (o = r.create(e).injector, a = o.get(Ca, [], {
+            optional: !0,
+            self: !0
+        }).flat()), {
+            routes: a.map(Zh),
+            injector: o
+        }
+    }))
+}
+
+function I_(t) {
+    return t && typeof t == "object" && "default" in t
+}
+
+function Cv(t) {
+    return I_(t) ? t.default : t
+}
+
+function xv(t) {
+    return z(t)
+}
+var oc = (() => {
+        class t {
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: () => E(M_),
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    M_ = (() => {
+        class t {
+            shouldProcessUrl(e) {
+                return !0
+            }
+            extract(e) {
+                return e
+            }
+            merge(e, i) {
+                return e
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    _v = new U("");
+var Tv = new U(""),
+    Sv = (() => {
+        class t {
+            currentNavigation = C(null, {
+                equal: () => !1
+            });
+            currentTransition = null;
+            lastSuccessfulNavigation = null;
+            events = new Be;
+            transitionAbortWithErrorSubject = new Be;
+            configLoader = E(bv);
+            environmentInjector = E(ke);
+            destroyRef = E(St);
+            urlSerializer = E(Ea);
+            rootContexts = E(wr);
+            location = E(yi);
+            inputBindingEnabled = E(ic, {
+                optional: !0
+            }) !== null;
+            titleStrategy = E(Si);
+            options = E(Mr, {
+                optional: !0
+            }) || {};
+            paramsInheritanceStrategy = this.options.paramsInheritanceStrategy || "emptyOnly";
+            urlHandlingStrategy = E(oc);
+            createViewTransition = E(_v, {
+                optional: !0
+            });
+            navigationErrorHandler = E(Tv, {
+                optional: !0
+            });
+            navigationId = 0;
+            get hasRequestedNavigation() {
+                return this.navigationId !== 0
+            }
+            transitions;
+            afterPreactivation = () => z(void 0);
+            rootComponentType = null;
+            destroyed = !1;
+            constructor() {
+                let e = r => this.events.next(new Gl(r)),
+                    i = r => this.events.next(new ql(r));
+                this.configLoader.onLoadEndListener = i, this.configLoader.onLoadStartListener = e, this.destroyRef.onDestroy(() => {
+                    this.destroyed = !0
+                })
+            }
+            complete() {
+                this.transitions?.complete()
+            }
+            handleNavigationRequest(e) {
+                let i = ++this.navigationId;
+                En(() => {
+                    this.transitions?.next(ue(A({}, e), {
+                        extractedUrl: this.urlHandlingStrategy.extract(e.rawUrl),
+                        targetSnapshot: null,
+                        targetRouterState: null,
+                        guards: {
+                            canActivateChecks: [],
+                            canDeactivateChecks: []
+                        },
+                        guardsResult: null,
+                        abortController: new AbortController,
+                        id: i
+                    }))
+                })
+            }
+            setupNavigations(e) {
+                return this.transitions = new $e(null), this.transitions.pipe(Ye(i => i !== null), Ke(i => {
+                    let r = !1;
+                    return z(i).pipe(Ke(o => {
+                        if (this.navigationId > i.id) return this.cancelNavigationTransition(i, "", it.SupersededByNewNavigation), rt;
+                        this.currentTransition = i, this.currentNavigation.set({
+                            id: o.id,
+                            initialUrl: o.rawUrl,
+                            extractedUrl: o.extractedUrl,
+                            targetBrowserUrl: typeof o.extras.browserUrl == "string" ? this.urlSerializer.parse(o.extras.browserUrl) : o.extras.browserUrl,
+                            trigger: o.source,
+                            extras: o.extras,
+                            previousNavigation: this.lastSuccessfulNavigation ? ue(A({}, this.lastSuccessfulNavigation), {
+                                previousNavigation: null
+                            }) : null,
+                            abort: () => o.abortController.abort()
+                        });
+                        let a = !e.navigated || this.isUpdatingInternalState() || this.isUpdatedBrowserUrl(),
+                            s = o.extras.onSameUrlNavigation ?? e.onSameUrlNavigation;
+                        if (!a && s !== "reload") return this.events.next(new Cn(o.id, this.urlSerializer.serialize(o.rawUrl), "", ua.IgnoredSameUrlNavigation)), o.resolve(!1), rt;
+                        if (this.urlHandlingStrategy.shouldProcessUrl(o.rawUrl)) return z(o).pipe(Ke(l => (this.events.next(new Ti(l.id, this.urlSerializer.serialize(l.extractedUrl), l.source, l.restoredState)), l.id !== this.navigationId ? rt : Promise.resolve(l))), x_(this.environmentInjector, this.configLoader, this.rootComponentType, e.config, this.urlSerializer, this.paramsInheritanceStrategy), He(l => {
+                            i.targetSnapshot = l.targetSnapshot, i.urlAfterRedirects = l.urlAfterRedirects, this.currentNavigation.update(f => (f.finalUrl = l.urlAfterRedirects, f));
+                            let m = new da(l.id, this.urlSerializer.serialize(l.extractedUrl), this.urlSerializer.serialize(l.urlAfterRedirects), l.targetSnapshot);
+                            this.events.next(m)
+                        }));
+                        if (a && this.urlHandlingStrategy.shouldProcessUrl(o.currentRawUrl)) {
+                            let {
+                                id: l,
+                                extractedUrl: m,
+                                source: f,
+                                restoredState: p,
+                                extras: g
+                            } = o, v = new Ti(l, this.urlSerializer.serialize(m), f, p);
+                            this.events.next(v);
+                            let x = sv(this.rootComponentType).snapshot;
+                            return this.currentTransition = i = ue(A({}, o), {
+                                targetSnapshot: x,
+                                urlAfterRedirects: m,
+                                extras: ue(A({}, g), {
+                                    skipLocationChange: !1,
+                                    replaceUrl: !1
+                                })
+                            }), this.currentNavigation.update(B => (B.finalUrl = m, B)), z(i)
+                        } else return this.events.next(new Cn(o.id, this.urlSerializer.serialize(o.extractedUrl), "", ua.IgnoredByUrlHandlingStrategy)), o.resolve(!1), rt
+                    }), He(o => {
+                        let a = new Vl(o.id, this.urlSerializer.serialize(o.extractedUrl), this.urlSerializer.serialize(o.urlAfterRedirects), o.targetSnapshot);
+                        this.events.next(a)
+                    }), re(o => (this.currentTransition = i = ue(A({}, o), {
+                        guards: $x(o.targetSnapshot, o.currentSnapshot, this.rootContexts)
+                    }), i)), Jx(this.environmentInjector, o => this.events.next(o)), He(o => {
+                        if (i.guardsResult = o.guardsResult, o.guardsResult && typeof o.guardsResult != "boolean") throw ec(this.urlSerializer, o.guardsResult);
+                        let a = new $l(o.id, this.urlSerializer.serialize(o.extractedUrl), this.urlSerializer.serialize(o.urlAfterRedirects), o.targetSnapshot, !!o.guardsResult);
+                        this.events.next(a)
+                    }), Ye(o => o.guardsResult ? !0 : (this.cancelNavigationTransition(o, "", it.GuardRejected), !1)), Oh(o => {
+                        if (o.guards.canActivateChecks.length !== 0) return z(o).pipe(He(a => {
+                            let s = new Ul(a.id, this.urlSerializer.serialize(a.extractedUrl), this.urlSerializer.serialize(a.urlAfterRedirects), a.targetSnapshot);
+                            this.events.next(s)
+                        }), Ke(a => {
+                            let s = !1;
+                            return z(a).pipe(__(this.paramsInheritanceStrategy, this.environmentInjector), He({
+                                next: () => s = !0,
+                                complete: () => {
+                                    s || this.cancelNavigationTransition(a, "", it.NoDataFromResolver)
+                                }
+                            }))
+                        }), He(a => {
+                            let s = new zl(a.id, this.urlSerializer.serialize(a.extractedUrl), this.urlSerializer.serialize(a.urlAfterRedirects), a.targetSnapshot);
+                            this.events.next(s)
+                        }))
+                    }), Oh(o => {
+                        let a = s => {
+                            let l = [];
+                            if (s.routeConfig?.loadComponent) {
+                                let m = Sr(s) ?? this.environmentInjector;
+                                l.push(this.configLoader.loadComponent(m, s.routeConfig).pipe(He(f => {
+                                    s.component = f
+                                }), re(() => {})))
+                            }
+                            for (let m of s.children) l.push(...a(m));
+                            return l
+                        };
+                        return as(a(o.targetSnapshot.root)).pipe(Sn(null), on(1))
+                    }), Oh(() => this.afterPreactivation()), Ke(() => {
+                        let {
+                            currentSnapshot: o,
+                            targetSnapshot: a
+                        } = i, s = this.createViewTransition?.(this.environmentInjector, o.root, a.root);
+                        return s ? Ae(s).pipe(re(() => i)) : z(i)
+                    }), re(o => {
+                        let a = Px(e.routeReuseStrategy, o.targetSnapshot, o.currentRouterState);
+                        return this.currentTransition = i = ue(A({}, o), {
+                            targetRouterState: a
+                        }), this.currentNavigation.update(s => (s.targetRouterState = a, s)), i
+                    }), He(() => {
+                        this.events.next(new ha)
+                    }), Vx(this.rootContexts, e.routeReuseStrategy, o => this.events.next(o), this.inputBindingEnabled), on(1), ls(new le(o => {
+                        let a = i.abortController.signal,
+                            s = () => o.next();
+                        return a.addEventListener("abort", s), () => a.removeEventListener("abort", s)
+                    }).pipe(Ye(() => !r && !i.targetRouterState), He(() => {
+                        this.cancelNavigationTransition(i, i.abortController.signal.reason + "", it.Aborted)
+                    }))), He({
+                        next: o => {
+                            r = !0, this.lastSuccessfulNavigation = En(this.currentNavigation), this.events.next(new Nt(o.id, this.urlSerializer.serialize(o.extractedUrl), this.urlSerializer.serialize(o.urlAfterRedirects))), this.titleStrategy?.updateTitle(o.targetRouterState.snapshot), o.resolve(!0)
+                        },
+                        complete: () => {
+                            r = !0
+                        }
+                    }), ls(this.transitionAbortWithErrorSubject.pipe(He(o => {
+                        throw o
+                    }))), an(() => {
+                        r || this.cancelNavigationTransition(i, "", it.SupersededByNewNavigation), this.currentTransition?.id === i.id && (this.currentNavigation.set(null), this.currentTransition = null)
+                    }), at(o => {
+                        if (this.destroyed) return i.resolve(!1), rt;
+                        if (r = !0, mv(o)) this.events.next(new en(i.id, this.urlSerializer.serialize(i.extractedUrl), o.message, o.cancellationCode)), jx(o) ? this.events.next(new xr(o.url, o.navigationBehaviorOptions)) : i.resolve(!1);
+                        else {
+                            let a = new Cr(i.id, this.urlSerializer.serialize(i.extractedUrl), o, i.targetSnapshot ?? void 0);
+                            try {
+                                let s = Ue(this.environmentInjector, () => this.navigationErrorHandler?.(a));
+                                if (s instanceof _r) {
+                                    let {
+                                        message: l,
+                                        cancellationCode: m
+                                    } = ec(this.urlSerializer, s);
+                                    this.events.next(new en(i.id, this.urlSerializer.serialize(i.extractedUrl), l, m)), this.events.next(new xr(s.redirectTo, s.navigationBehaviorOptions))
+                                } else throw this.events.next(a), o
+                            } catch (s) {
+                                this.options.resolveNavigationPromiseOnError ? i.resolve(!1) : i.reject(s)
+                            }
+                        }
+                        return rt
+                    }))
+                }))
+            }
+            cancelNavigationTransition(e, i, r) {
+                let o = new en(e.id, this.urlSerializer.serialize(e.extractedUrl), i, r);
+                this.events.next(o), e.resolve(!1)
+            }
+            isUpdatingInternalState() {
+                return this.currentTransition?.extractedUrl.toString() !== this.currentTransition?.currentUrlTree.toString()
+            }
+            isUpdatedBrowserUrl() {
+                let e = this.urlHandlingStrategy.extract(this.urlSerializer.parse(this.location.path(!0))),
+                    i = En(this.currentNavigation),
+                    r = i?.targetBrowserUrl ?? i?.extractedUrl;
+                return e.toString() !== r?.toString() && !i?.extras.skipLocationChange
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })();
+
+function N_(t) {
+    return t !== sa
+}
+var wv = (() => {
+        class t {
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: () => E(A_),
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    nc = class {
+        shouldDetach(n) {
+            return !1
+        }
+        store(n, e) {}
+        shouldAttach(n) {
+            return !1
+        }
+        retrieve(n) {
+            return null
+        }
+        shouldReuseRoute(n, e) {
+            return n.routeConfig === e.routeConfig
+        }
+    },
+    A_ = (() => {
+        class t extends nc {
+            static \u0275fac = (() => {
+                let e;
+                return function(r) {
+                    return (e || (e = lr(t)))(r || t)
+                }
+            })();
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    Iv = (() => {
+        class t {
+            urlSerializer = E(Ea);
+            options = E(Mr, {
+                optional: !0
+            }) || {};
+            canceledNavigationResolution = this.options.canceledNavigationResolution || "replace";
+            location = E(yi);
+            urlHandlingStrategy = E(oc);
+            urlUpdateStrategy = this.options.urlUpdateStrategy || "deferred";
+            currentUrlTree = new tn;
+            getCurrentUrlTree() {
+                return this.currentUrlTree
+            }
+            rawUrlTree = this.currentUrlTree;
+            getRawUrlTree() {
+                return this.rawUrlTree
+            }
+            createBrowserPath({
+                finalUrl: e,
+                initialUrl: i,
+                targetBrowserUrl: r
+            }) {
+                let o = e !== void 0 ? this.urlHandlingStrategy.merge(e, i) : i,
+                    a = r ?? o;
+                return a instanceof tn ? this.urlSerializer.serialize(a) : a
+            }
+            commitTransition({
+                targetRouterState: e,
+                finalUrl: i,
+                initialUrl: r
+            }) {
+                i && e ? (this.currentUrlTree = i, this.rawUrlTree = this.urlHandlingStrategy.merge(i, r), this.routerState = e) : this.rawUrlTree = r
+            }
+            routerState = sv(null);
+            getRouterState() {
+                return this.routerState
+            }
+            stateMemento = this.createStateMemento();
+            updateStateMemento() {
+                this.stateMemento = this.createStateMemento()
+            }
+            createStateMemento() {
+                return {
+                    rawUrlTree: this.rawUrlTree,
+                    currentUrlTree: this.currentUrlTree,
+                    routerState: this.routerState
+                }
+            }
+            resetInternalState({
+                finalUrl: e
+            }) {
+                this.routerState = this.stateMemento.routerState, this.currentUrlTree = this.stateMemento.currentUrlTree, this.rawUrlTree = this.urlHandlingStrategy.merge(this.currentUrlTree, e ?? this.rawUrlTree)
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: () => E(k_),
+                providedIn: "root"
+            })
+        }
+        return t
+    })(),
+    k_ = (() => {
+        class t extends Iv {
+            currentPageId = 0;
+            lastSuccessfulId = -1;
+            restoredState() {
+                return this.location.getState()
+            }
+            get browserPageId() {
+                return this.canceledNavigationResolution !== "computed" ? this.currentPageId : this.restoredState()?.\u0275routerPageId ?? this.currentPageId
+            }
+            registerNonRouterCurrentEntryChangeListener(e) {
+                return this.location.subscribe(i => {
+                    i.type === "popstate" && setTimeout(() => {
+                        e(i.url, i.state, "popstate")
+                    })
+                })
+            }
+            handleRouterEvent(e, i) {
+                e instanceof Ti ? this.updateStateMemento() : e instanceof Cn ? this.commitTransition(i) : e instanceof da ? this.urlUpdateStrategy === "eager" && (i.extras.skipLocationChange || this.setBrowserUrl(this.createBrowserPath(i), i)) : e instanceof ha ? (this.commitTransition(i), this.urlUpdateStrategy === "deferred" && !i.extras.skipLocationChange && this.setBrowserUrl(this.createBrowserPath(i), i)) : e instanceof en && e.code !== it.SupersededByNewNavigation && e.code !== it.Redirect ? this.restoreHistory(i) : e instanceof Cr ? this.restoreHistory(i, !0) : e instanceof Nt && (this.lastSuccessfulId = e.id, this.currentPageId = this.browserPageId)
+            }
+            setBrowserUrl(e, {
+                extras: i,
+                id: r
+            }) {
+                let {
+                    replaceUrl: o,
+                    state: a
+                } = i;
+                if (this.location.isCurrentPathEqualTo(e) || o) {
+                    let s = this.browserPageId,
+                        l = A(A({}, a), this.generateNgRouterState(r, s));
+                    this.location.replaceState(e, "", l)
+                } else {
+                    let s = A(A({}, a), this.generateNgRouterState(r, this.browserPageId + 1));
+                    this.location.go(e, "", s)
+                }
+            }
+            restoreHistory(e, i = !1) {
+                if (this.canceledNavigationResolution === "computed") {
+                    let r = this.browserPageId,
+                        o = this.currentPageId - r;
+                    o !== 0 ? this.location.historyGo(o) : this.getCurrentUrlTree() === e.finalUrl && o === 0 && (this.resetInternalState(e), this.resetUrlToCurrentUrlTree())
+                } else this.canceledNavigationResolution === "replace" && (i && this.resetInternalState(e), this.resetUrlToCurrentUrlTree())
+            }
+            resetUrlToCurrentUrlTree() {
+                this.location.replaceState(this.urlSerializer.serialize(this.getRawUrlTree()), "", this.generateNgRouterState(this.lastSuccessfulId, this.currentPageId))
+            }
+            generateNgRouterState(e, i) {
+                return this.canceledNavigationResolution === "computed" ? {
+                    navigationId: e,
+                    \u0275routerPageId: i
+                } : {
+                    navigationId: e
+                }
+            }
+            static \u0275fac = (() => {
+                let e;
+                return function(r) {
+                    return (e || (e = lr(t)))(r || t)
+                }
+            })();
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })();
+
+function Xh(t, n) {
+    t.events.pipe(Ye(e => e instanceof Nt || e instanceof en || e instanceof Cr || e instanceof Cn), re(e => e instanceof Nt || e instanceof Cn ? 0 : (e instanceof en ? e.code === it.Redirect || e.code === it.SupersededByNewNavigation : !1) ? 2 : 1), Ye(e => e !== 2), on(1)).subscribe(() => {
+        n()
+    })
+}
+var R_ = {
+        paths: "exact",
+        fragment: "ignored",
+        matrixParams: "ignored",
+        queryParams: "exact"
+    },
+    O_ = {
+        paths: "subset",
+        fragment: "ignored",
+        matrixParams: "ignored",
+        queryParams: "subset"
+    },
+    Te = (() => {
+        class t {
+            get currentUrlTree() {
+                return this.stateManager.getCurrentUrlTree()
+            }
+            get rawUrlTree() {
+                return this.stateManager.getRawUrlTree()
+            }
+            disposed = !1;
+            nonRouterCurrentEntryChangeSubscription;
+            console = E(Jd);
+            stateManager = E(Iv);
+            options = E(Mr, {
+                optional: !0
+            }) || {};
+            pendingTasks = E(Wt);
+            urlUpdateStrategy = this.options.urlUpdateStrategy || "deferred";
+            navigationTransitions = E(Sv);
+            urlSerializer = E(Ea);
+            location = E(yi);
+            urlHandlingStrategy = E(oc);
+            injector = E(ke);
+            _events = new Be;
+            get events() {
+                return this._events
+            }
+            get routerState() {
+                return this.stateManager.getRouterState()
+            }
+            navigated = !1;
+            routeReuseStrategy = E(wv);
+            onSameUrlNavigation = this.options.onSameUrlNavigation || "ignore";
+            config = E(Ca, {
+                optional: !0
+            })?.flat() ?? [];
+            componentInputBindingEnabled = !!E(ic, {
+                optional: !0
+            });
+            currentNavigation = this.navigationTransitions.currentNavigation.asReadonly();
+            constructor() {
+                this.resetConfig(this.config), this.navigationTransitions.setupNavigations(this).subscribe({
+                    error: e => {
+                        this.console.warn(e)
+                    }
+                }), this.subscribeToNavigationEvents()
+            }
+            eventsSubscription = new Me;
+            subscribeToNavigationEvents() {
+                let e = this.navigationTransitions.events.subscribe(i => {
+                    try {
+                        let r = this.navigationTransitions.currentTransition,
+                            o = En(this.navigationTransitions.currentNavigation);
+                        if (r !== null && o !== null) {
+                            if (this.stateManager.handleRouterEvent(i, o), i instanceof en && i.code !== it.Redirect && i.code !== it.SupersededByNewNavigation) this.navigated = !0;
+                            else if (i instanceof Nt) this.navigated = !0;
+                            else if (i instanceof xr) {
+                                let a = i.navigationBehaviorOptions,
+                                    s = this.urlHandlingStrategy.merge(i.url, r.currentRawUrl),
+                                    l = A({
+                                        browserUrl: r.extras.browserUrl,
+                                        info: r.extras.info,
+                                        skipLocationChange: r.extras.skipLocationChange,
+                                        replaceUrl: r.extras.replaceUrl || this.urlUpdateStrategy === "eager" || N_(r.source)
+                                    }, a);
+                                this.scheduleNavigation(s, sa, null, l, {
+                                    resolve: r.resolve,
+                                    reject: r.reject,
+                                    promise: r.promise
+                                })
+                            }
+                        }
+                        Rx(i) && this._events.next(i)
+                    } catch (r) {
+                        this.navigationTransitions.transitionAbortWithErrorSubject.next(r)
+                    }
+                });
+                this.eventsSubscription.add(e)
+            }
+            resetRootComponentType(e) {
+                this.routerState.root.component = e, this.navigationTransitions.rootComponentType = e
+            }
+            initialNavigation() {
+                this.setUpLocationChangeListener(), this.navigationTransitions.hasRequestedNavigation || this.navigateToSyncWithBrowser(this.location.path(!0), sa, this.stateManager.restoredState())
+            }
+            setUpLocationChangeListener() {
+                this.nonRouterCurrentEntryChangeSubscription ??= this.stateManager.registerNonRouterCurrentEntryChangeListener((e, i, r) => {
+                    this.navigateToSyncWithBrowser(e, r, i)
+                })
+            }
+            navigateToSyncWithBrowser(e, i, r) {
+                let o = {
+                        replaceUrl: !0
+                    },
+                    a = r?.navigationId ? r : null;
+                if (r) {
+                    let l = A({}, r);
+                    delete l.navigationId, delete l.\u0275routerPageId, Object.keys(l).length !== 0 && (o.state = l)
+                }
+                let s = this.parseUrl(e);
+                this.scheduleNavigation(s, i, a, o).catch(l => {
+                    this.disposed || this.injector.get(ft)(l)
+                })
+            }
+            get url() {
+                return this.serializeUrl(this.currentUrlTree)
+            }
+            getCurrentNavigation() {
+                return En(this.navigationTransitions.currentNavigation)
+            }
+            get lastSuccessfulNavigation() {
+                return this.navigationTransitions.lastSuccessfulNavigation
+            }
+            resetConfig(e) {
+                this.config = e.map(Zh), this.navigated = !1
+            }
+            ngOnDestroy() {
+                this.dispose()
+            }
+            dispose() {
+                this._events.unsubscribe(), this.navigationTransitions.complete(), this.nonRouterCurrentEntryChangeSubscription && (this.nonRouterCurrentEntryChangeSubscription.unsubscribe(), this.nonRouterCurrentEntryChangeSubscription = void 0), this.disposed = !0, this.eventsSubscription.unsubscribe()
+            }
+            createUrlTree(e, i = {}) {
+                let {
+                    relativeTo: r,
+                    queryParams: o,
+                    fragment: a,
+                    queryParamsHandling: s,
+                    preserveFragment: l
+                } = i, m = l ? this.currentUrlTree.fragment : a, f = null;
+                switch (s ?? this.options.defaultQueryParamsHandling) {
+                    case "merge":
+                        f = A(A({}, this.currentUrlTree.queryParams), o);
+                        break;
+                    case "preserve":
+                        f = this.currentUrlTree.queryParams;
+                        break;
+                    default:
+                        f = o || null
+                }
+                f !== null && (f = this.removeEmptyProps(f));
+                let p;
+                try {
+                    let g = r ? r.snapshot : this.routerState.snapshot.root;
+                    p = iv(g)
+                } catch {
+                    (typeof e[0] != "string" || e[0][0] !== "/") && (e = []), p = this.currentUrlTree.root
+                }
+                return rv(p, e, f, m ?? null)
+            }
+            navigateByUrl(e, i = {
+                skipLocationChange: !1
+            }) {
+                let r = Hn(e) ? e : this.parseUrl(e),
+                    o = this.urlHandlingStrategy.merge(r, this.rawUrlTree);
+                return this.scheduleNavigation(o, sa, null, i)
+            }
+            navigate(e, i = {
+                skipLocationChange: !1
+            }) {
+                return L_(e), this.navigateByUrl(this.createUrlTree(e, i), i)
+            }
+            serializeUrl(e) {
+                return this.urlSerializer.serialize(e)
+            }
+            parseUrl(e) {
+                try {
+                    return this.urlSerializer.parse(e)
+                } catch {
+                    return this.console.warn(un(4018, !1)), this.urlSerializer.parse("/")
+                }
+            }
+            isActive(e, i) {
+                let r;
+                if (i === !0 ? r = A({}, R_) : i === !1 ? r = A({}, O_) : r = i, Hn(e)) return B0(this.currentUrlTree, e, r);
+                let o = this.parseUrl(e);
+                return B0(this.currentUrlTree, o, r)
+            }
+            removeEmptyProps(e) {
+                return Object.entries(e).reduce((i, [r, o]) => (o != null && (i[r] = o), i), {})
+            }
+            scheduleNavigation(e, i, r, o, a) {
+                if (this.disposed) return Promise.resolve(!1);
+                let s, l, m;
+                a ? (s = a.resolve, l = a.reject, m = a.promise) : m = new Promise((p, g) => {
+                    s = p, l = g
+                });
+                let f = this.pendingTasks.add();
+                return Xh(this, () => {
+                    queueMicrotask(() => this.pendingTasks.remove(f))
+                }), this.navigationTransitions.handleNavigationRequest({
+                    source: i,
+                    restoredState: r,
+                    currentUrlTree: this.currentUrlTree,
+                    currentRawUrl: this.currentUrlTree,
+                    rawUrl: e,
+                    extras: o,
+                    resolve: s,
+                    reject: l,
+                    promise: m,
+                    currentSnapshot: this.routerState.snapshot,
+                    currentRouterState: this.routerState
+                }), m.catch(p => Promise.reject(p))
+            }
+            static \u0275fac = function(i) {
+                return new(i || t)
+            };
+            static \u0275prov = j({
+                token: t,
+                factory: t.\u0275fac,
+                providedIn: "root"
+            })
+        }
+        return t
+    })();
+
+function L_(t) {
+    for (let n = 0; n < t.length; n++)
+        if (t[n] == null) throw new $(4008, !1)
+}
+var ac = (() => {
+    class t {
+        router;
+        route;
+        tabIndexAttribute;
+        renderer;
+        el;
+        locationStrategy;
+        reactiveHref = C(null);
+        get href() {
+            return En(this.reactiveHref)
+        }
+        set href(e) {
+            this.reactiveHref.set(e)
+        }
+        target;
+        queryParams;
+        fragment;
+        queryParamsHandling;
+        state;
+        info;
+        relativeTo;
+        isAnchorElement;
+        subscription;
+        onChanges = new Be;
+        applicationErrorHandler = E(ft);
+        options = E(Mr, {
+            optional: !0
+        });
+        constructor(e, i, r, o, a, s) {
+            this.router = e, this.route = i, this.tabIndexAttribute = r, this.renderer = o, this.el = a, this.locationStrategy = s, this.reactiveHref.set(E(new Dl("href"), {
+                optional: !0
+            }));
+            let l = a.nativeElement.tagName?.toLowerCase();
+            this.isAnchorElement = l === "a" || l === "area" || !!(typeof customElements == "object" && customElements.get(l)?.observedAttributes?.includes?.("href")), this.isAnchorElement ? this.setTabIndexIfNotOnNativeEl("0") : this.subscribeToNavigationEventsIfNecessary()
+        }
+        subscribeToNavigationEventsIfNecessary() {
+            if (this.subscription !== void 0 || !this.isAnchorElement) return;
+            let e = this.preserveFragment,
+                i = r => r === "merge" || r === "preserve";
+            e ||= i(this.queryParamsHandling), e ||= !this.queryParamsHandling && !i(this.options?.defaultQueryParamsHandling), e && (this.subscription = this.router.events.subscribe(r => {
+                r instanceof Nt && this.updateHref()
+            }))
+        }
+        preserveFragment = !1;
+        skipLocationChange = !1;
+        replaceUrl = !1;
+        setTabIndexIfNotOnNativeEl(e) {
+            this.tabIndexAttribute != null || this.isAnchorElement || this.applyAttributeValue("tabindex", e)
+        }
+        ngOnChanges(e) {
+            this.isAnchorElement && (this.updateHref(), this.subscribeToNavigationEventsIfNecessary()), this.onChanges.next(this)
+        }
+        routerLinkInput = null;
+        set routerLink(e) {
+            e == null ? (this.routerLinkInput = null, this.setTabIndexIfNotOnNativeEl(null)) : (Hn(e) ? this.routerLinkInput = e : this.routerLinkInput = Array.isArray(e) ? e : [e], this.setTabIndexIfNotOnNativeEl("0"))
+        }
+        onClick(e, i, r, o, a) {
+            let s = this.urlTree;
+            if (s === null || this.isAnchorElement && (e !== 0 || i || r || o || a || typeof this.target == "string" && this.target != "_self")) return !0;
+            let l = {
+                skipLocationChange: this.skipLocationChange,
+                replaceUrl: this.replaceUrl,
+                state: this.state,
+                info: this.info
+            };
+            return this.router.navigateByUrl(s, l)?.catch(m => {
+                this.applicationErrorHandler(m)
+            }), !this.isAnchorElement
+        }
+        ngOnDestroy() {
+            this.subscription?.unsubscribe()
+        }
+        updateHref() {
+            let e = this.urlTree;
+            this.reactiveHref.set(e !== null && this.locationStrategy ? this.locationStrategy?.prepareExternalUrl(this.router.serializeUrl(e)) ?? "" : null)
+        }
+        applyAttributeValue(e, i) {
+            let r = this.renderer,
+                o = this.el.nativeElement;
+            i !== null ? r.setAttribute(o, e, i) : r.removeAttribute(o, e)
+        }
+        get urlTree() {
+            return this.routerLinkInput === null ? null : Hn(this.routerLinkInput) ? this.routerLinkInput : this.router.createUrlTree(this.routerLinkInput, {
+                relativeTo: this.relativeTo !== void 0 ? this.relativeTo : this.route,
+                queryParams: this.queryParams,
+                fragment: this.fragment,
+                queryParamsHandling: this.queryParamsHandling,
+                preserveFragment: this.preserveFragment
+            })
+        }
+        static \u0275fac = function(i) {
+            return new(i || t)(Qt(Te), Qt(qe), Ho("tabindex"), Qt(cr), Qt(fi), Qt(Xt))
+        };
+        static \u0275dir = vn({
+            type: t,
+            selectors: [
+                ["", "routerLink", ""]
+            ],
+            hostVars: 2,
+            hostBindings: function(i, r) {
+                i & 1 && de("click", function(a) {
+                    return r.onClick(a.button, a.ctrlKey, a.shiftKey, a.altKey, a.metaKey)
+                }), i & 2 && It("href", r.reactiveHref(), Ld)("target", r.target)
+            },
+            inputs: {
+                target: "target",
+                queryParams: "queryParams",
+                fragment: "fragment",
+                queryParamsHandling: "queryParamsHandling",
+                state: "state",
+                info: "info",
+                relativeTo: "relativeTo",
+                preserveFragment: [2, "preserveFragment", "preserveFragment", bn],
+                skipLocationChange: [2, "skipLocationChange", "skipLocationChange", bn],
+                replaceUrl: [2, "replaceUrl", "replaceUrl", bn],
+                routerLink: "routerLink"
+            },
+            features: [pn]
+        })
+    }
+    return t
+})();
+var P_ = new U("");
+
+function Jh(t, ...n) {
+    return Jn([{
+            provide: Ca,
+            multi: !0,
+            useValue: t
+        },
+        [], {
+            provide: qe,
+            useFactory: B_,
+            deps: [Te]
+        }, {
+            provide: yl,
+            multi: !0,
+            useFactory: j_
+        },
+        n.map(e => e.\u0275providers)
+    ])
+}
+
+function B_(t) {
+    return t.routerState.root
+}
+
+function H_(t, n) {
+    return {
+        \u0275kind: t,
+        \u0275providers: n
+    }
+}
+
+function j_() {
+    let t = E(ct);
+    return n => {
+        let e = t.get(vi);
+        if (n !== e.components[0]) return;
+        let i = t.get(Te),
+            r = t.get(V_);
+        t.get($_) === 1 && i.initialNavigation(), t.get(U_, null, {
+            optional: !0
+        })?.setUpPreloading(), t.get(P_, null, {
+            optional: !0
+        })?.init(), i.resetRootComponentType(e.componentTypes[0]), r.closed || (r.next(), r.complete(), r.unsubscribe())
+    }
+}
+var V_ = new U("", {
+        factory: () => new Be
+    }),
+    $_ = new U("", {
+        providedIn: "root",
+        factory: () => 1
+    });
+var U_ = new U("");
+
+function em() {
+    return H_(6, [{
+        provide: Xt,
+        useClass: vh
+    }])
+}
+var xa = ["Gi\xE1p", "\u1EA4t", "B\xEDnh", "\u0110inh", "M\u1EADu", "K\u1EF7", "Canh", "T\xE2n", "Nh\xE2m", "Qu\xFD"],
+    nn = ["T\xFD", "S\u1EEDu", "D\u1EA7n", "M\xE3o", "Th\xECn", "T\u1EF5", "Ng\u1ECD", "M\xF9i", "Th\xE2n", "D\u1EADu", "Tu\u1EA5t", "H\u1EE3i"],
+    Mv = ["Gi\xEAng", "Hai", "Ba", "T\u01B0", "N\u0103m", "S\xE1u", "B\u1EA3y", "T\xE1m", "Ch\xEDn", "M\u01B0\u1EDDi", "M\u01B0\u1EDDi M\u1ED9t", "Ch\u1EA1p"],
+    Nv = ["Ch\u1EE7 Nh\u1EADt", "Th\u1EE9 Hai", "Th\u1EE9 Ba", "Th\u1EE9 T\u01B0", "Th\u1EE9 N\u0103m", "Th\u1EE9 S\xE1u", "Th\u1EE9 B\u1EA3y"],
+    _a = ["23-1", "1-3", "3-5", "5-7", "7-9", "9-11", "11-13", "13-15", "15-17", "17-19", "19-21", "21-23"],
+    Av = ["Ki\u1EBFn", "Tr\u1EEB", "M\xE3n", "B\xECnh", "\u0110\u1ECBnh", "Ch\u1EA5p", "Ph\xE1", "Nguy", "Th\xE0nh", "Th\xE2u", "Khai", "B\u1EBF"],
+    tm = [3, 7, 13, 18, 22, 27],
+    nm = [5, 14, 23],
+    im = {
+        1: "T\u1EF5",
+        2: "T\xFD",
+        3: "M\xF9i",
+        4: "M\xE3o",
+        5: "Th\xE2n",
+        6: "Tu\u1EA5t",
+        7: "S\u1EEDu",
+        8: "H\u1EE3i",
+        9: "D\u1EA7n",
+        10: "Ng\u1ECD",
+        11: "Th\xECn",
+        12: "D\u1EADu"
+    },
+    rm = {
+        1: "Tu\u1EA5t",
+        2: "Th\xECn",
+        3: "H\u1EE3i",
+        4: "T\u1EF5",
+        5: "T\xFD",
+        6: "Ng\u1ECD",
+        7: "M\xE3o",
+        8: "D\u1EADu",
+        9: "D\u1EA7n",
+        10: "Th\xE2n",
+        11: "S\u1EEDu",
+        12: "M\xF9i"
+    },
+    Nr = {
+        T\u00FD: {
+            tamHop: ["Th\xE2n", "Th\xECn"],
+            lucHop: "S\u1EEDu",
+            lucXung: "Ng\u1ECD",
+            lucHai: "M\xF9i",
+            tuHanhXung: ["Ng\u1ECD", "M\xE3o", "D\u1EADu"]
+        },
+        S\u1EEDu: {
+            tamHop: ["T\u1EF5", "D\u1EADu"],
+            lucHop: "T\xFD",
+            lucXung: "M\xF9i",
+            lucHai: "Ng\u1ECD",
+            tuHanhXung: ["M\xF9i", "Th\xECn", "Tu\u1EA5t"]
+        },
+        D\u1EA7n: {
+            tamHop: ["Ng\u1ECD", "Tu\u1EA5t"],
+            lucHop: "H\u1EE3i",
+            lucXung: "Th\xE2n",
+            lucHai: "T\u1EF5",
+            tuHanhXung: ["Th\xE2n", "T\u1EF5", "H\u1EE3i"]
+        },
+        M\u00E3o: {
+            tamHop: ["H\u1EE3i", "M\xF9i"],
+            lucHop: "Tu\u1EA5t",
+            lucXung: "D\u1EADu",
+            lucHai: "Th\xECn",
+            tuHanhXung: ["D\u1EADu", "T\xFD", "Ng\u1ECD"]
+        },
+        Th\u00ECn: {
+            tamHop: ["T\xFD", "Th\xE2n"],
+            lucHop: "D\u1EADu",
+            lucXung: "Tu\u1EA5t",
+            lucHai: "M\xE3o",
+            tuHanhXung: ["Tu\u1EA5t", "S\u1EEDu", "M\xF9i"]
+        },
+        T\u1EF5: {
+            tamHop: ["S\u1EEDu", "D\u1EADu"],
+            lucHop: "Th\xE2n",
+            lucXung: "H\u1EE3i",
+            lucHai: "D\u1EA7n",
+            tuHanhXung: ["H\u1EE3i", "D\u1EA7n", "Th\xE2n"]
+        },
+        Ng\u1ECD: {
+            tamHop: ["D\u1EA7n", "Tu\u1EA5t"],
+            lucHop: "M\xF9i",
+            lucXung: "T\xFD",
+            lucHai: "S\u1EEDu",
+            tuHanhXung: ["T\xFD", "M\xE3o", "D\u1EADu"]
+        },
+        M\u00F9i: {
+            tamHop: ["M\xE3o", "H\u1EE3i"],
+            lucHop: "Ng\u1ECD",
+            lucXung: "S\u1EEDu",
+            lucHai: "T\xFD",
+            tuHanhXung: ["S\u1EEDu", "Th\xECn", "Tu\u1EA5t"]
+        },
+        Th\u00E2n: {
+            tamHop: ["T\xFD", "Th\xECn"],
+            lucHop: "T\u1EF5",
+            lucXung: "D\u1EA7n",
+            lucHai: "H\u1EE3i",
+            tuHanhXung: ["D\u1EA7n", "T\u1EF5", "H\u1EE3i"]
+        },
+        D\u1EADu: {
+            tamHop: ["S\u1EEDu", "T\u1EF5"],
+            lucHop: "Th\xECn",
+            lucXung: "M\xE3o",
+            lucHai: "Tu\u1EA5t",
+            tuHanhXung: ["M\xE3o", "T\xFD", "Ng\u1ECD"]
+        },
+        Tu\u1EA5t: {
+            tamHop: ["D\u1EA7n", "Ng\u1ECD"],
+            lucHop: "M\xE3o",
+            lucXung: "Th\xECn",
+            lucHai: "D\u1EADu",
+            tuHanhXung: ["Th\xECn", "S\u1EEDu", "M\xF9i"]
+        },
+        H\u1EE3i: {
+            tamHop: ["M\xE3o", "M\xF9i"],
+            lucHop: "D\u1EA7n",
+            lucXung: "T\u1EF5",
+            lucHai: "Th\xE2n",
+            tuHanhXung: ["T\u1EF5", "D\u1EA7n", "Th\xE2n"]
+        }
+    },
+    kv = [4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3],
+    Rv = [
+        [0, 1, 4, 5, 7, 10],
+        [2, 3, 6, 7, 9, 11],
+        [0, 4, 5, 8, 9, 11],
+        [1, 3, 5, 8, 10, 11],
+        [0, 1, 3, 6, 8, 9],
+        [2, 3, 5, 7, 10, 11]
+    ],
+    Ov = {
+        1: ["T\xFD", "S\u1EEDu", "T\u1ECB", "M\xF9i"],
+        7: ["T\xFD", "S\u1EEDu", "T\u1ECB", "M\xF9i"],
+        2: ["D\u1EA7n", "M\xE3o", "M\xF9i", "D\u1EADu"],
+        8: ["D\u1EA7n", "M\xE3o", "M\xF9i", "D\u1EADu"],
+        3: ["Th\xECn", "T\u1ECB", "D\u1EADu", "H\u1EE3i"],
+        9: ["Th\xECn", "T\u1ECB", "D\u1EADu", "H\u1EE3i"],
+        4: ["Ng\u1ECD", "M\xF9i", "S\u1EEDu", "D\u1EADu"],
+        10: ["Ng\u1ECD", "M\xF9i", "S\u1EEDu", "D\u1EADu"],
+        5: ["S\u1EEDu", "M\xE3o", "Th\xE2n", "D\u1EADu"],
+        11: ["S\u1EEDu", "M\xE3o", "Th\xE2n", "D\u1EADu"],
+        6: ["M\xE3o", "T\u1ECB", "Tu\u1EA5t", "H\u1EE3i"],
+        12: ["M\xE3o", "T\u1ECB", "Tu\u1EA5t", "H\u1EE3i"]
+    },
+    Lv = {
+        1: ["Ng\u1ECD", "M\xE3o", "H\u1EE3i", "D\u1EADu"],
+        7: ["Ng\u1ECD", "M\xE3o", "H\u1EE3i", "D\u1EADu"],
+        2: ["Th\xE2n", "T\u1ECB", "S\u1EEDu", "H\u1EE3i"],
+        8: ["Th\xE2n", "T\u1ECB", "S\u1EEDu", "H\u1EE3i"],
+        3: ["Tu\u1EA5t", "M\xF9i", "S\u1EEDu", "H\u1EE3i"],
+        9: ["Tu\u1EA5t", "M\xF9i", "S\u1EEDu", "H\u1EE3i"],
+        4: ["T\xFD", "D\u1EADu", "T\u1ECB", "M\xE3o"],
+        10: ["T\xFD", "D\u1EADu", "T\u1ECB", "M\xE3o"],
+        5: ["D\u1EA7n", "H\u1EE3i", "M\xF9i", "T\xFD"],
+        11: ["D\u1EA7n", "H\u1EE3i", "M\xF9i", "T\xFD"],
+        6: ["Th\xECn", "S\u1EEDu", "D\u1EADu", "M\xF9i"],
+        12: ["Th\xECn", "S\u1EEDu", "D\u1EADu", "M\xF9i"]
+    },
+    Ar = {
+        "1/1": "T\u1EBFt D\u01B0\u01A1ng L\u1ECBch",
+        "9/1": "Ng\xE0y H\u1ECDc sinh \u2013 Sinh vi\xEAn Vi\u1EC7t Nam",
+        "3/2": "Ng\xE0y th\xE0nh l\u1EADp \u0110\u1EA3ng C\u1ED9ng s\u1EA3n Vi\u1EC7t Nam",
+        "14/2": "L\u1EC5 T\xECnh nh\xE2n (Valentine)",
+        "27/2": "Ng\xE0y Th\u1EA7y thu\u1ED1c Vi\u1EC7t Nam",
+        "8/3": "Ng\xE0y Qu\u1ED1c t\u1EBF Ph\u1EE5 n\u1EEF",
+        "21/3": "Ng\xE0y Qu\u1ED1c t\u1EBF H\u1EA1nh ph\xFAc",
+        "26/3": "Ng\xE0y th\xE0nh l\u1EADp \u0110o\xE0n TNCS H\u1ED3 Ch\xED Minh",
+        "1/4": "Ng\xE0y C\xE1 th\xE1ng T\u01B0",
+        "21/4": "Ng\xE0y S\xE1ch v\xE0 V\u0103n ho\xE1 \u0111\u1ECDc Vi\u1EC7t Nam",
+        "30/4": "Ng\xE0y Gi\u1EA3i ph\xF3ng mi\u1EC1n Nam, th\u1ED1ng nh\u1EA5t \u0111\u1EA5t n\u01B0\u1EDBc",
+        "1/5": "Ng\xE0y Qu\u1ED1c t\u1EBF Lao \u0111\u1ED9ng",
+        "7/5": "Chi\u1EBFn th\u1EAFng \u0110i\u1EC7n Bi\xEAn Ph\u1EE7",
+        "1/6": "Ng\xE0y Qu\u1ED1c t\u1EBF Thi\u1EBFu nhi",
+        "28/6": "Ng\xE0y Gia \u0111\xECnh Vi\u1EC7t Nam",
+        "21/6": "Ng\xE0y B\xE1o ch\xED C\xE1ch m\u1EA1ng Vi\u1EC7t Nam",
+        "27/7": "Ng\xE0y Th\u01B0\u01A1ng binh - Li\u1EC7t s\u0129",
+        "19/8": "Ng\xE0y C\xE1ch m\u1EA1ng th\xE1ng T\xE1m th\xE0nh c\xF4ng",
+        "2/9": "Ng\xE0y Qu\u1ED1c kh\xE1nh",
+        "5/9": "Ng\xE0y khai gi\u1EA3ng n\u0103m h\u1ECDc m\u1EDBi",
+        "10/10": "Ng\xE0y Gi\u1EA3i ph\xF3ng Th\u1EE7 \u0111\xF4",
+        "13/10": "Ng\xE0y Doanh nh\xE2n Vi\u1EC7t Nam",
+        "20/10": "Ng\xE0y Ph\u1EE5 n\u1EEF Vi\u1EC7t Nam",
+        "1/10": "Ng\xE0y Qu\u1ED1c t\u1EBF Ng\u01B0\u1EDDi cao tu\u1ED5i",
+        "9/11": "Ng\xE0y Ph\xE1p lu\u1EADt Vi\u1EC7t Nam",
+        "20/11": "Ng\xE0y Nh\xE0 gi\xE1o Vi\u1EC7t Nam",
+        "23/11": "Ng\xE0y Di s\u1EA3n V\u0103n ho\xE1 Vi\u1EC7t Nam",
+        "22/12": "Ng\xE0y th\xE0nh l\u1EADp Qu\xE2n \u0111\u1ED9i nh\xE2n d\xE2n Vi\u1EC7t Nam",
+        "24/12": "\u0110\xEAm Gi\xE1ng sinh",
+        "25/12": "L\u1EC5 Gi\xE1ng sinh"
+    },
+    kr = {
+        "30/12": "\u0110\xEAm Giao th\u1EEBa (c\xF3 n\u0103m l\xE0 29/12)",
+        "1/1": "T\u1EBFt Nguy\xEAn \u0110\xE1n (M\xF9ng 1 T\u1EBFt)",
+        "2/1": "M\xF9ng 2 T\u1EBFt",
+        "3/1": "M\xF9ng 3 T\u1EBFt",
+        "9/1": "V\xEDa Ng\u1ECDc Ho\xE0ng",
+        "10/1": "Ng\xE0y v\xEDa Th\u1EA7n T\xE0i",
+        "15/1": "T\u1EBFt Nguy\xEAn Ti\xEAu (R\u1EB1m th\xE1ng Gi\xEAng)",
+        "3/3": "T\u1EBFt H\xE0n Th\u1EF1c",
+        "10/3": "Gi\u1ED7 T\u1ED5 H\xF9ng V\u01B0\u01A1ng",
+        "19/2": "V\xEDa Quan \xC2m (19/2 \xE2m)",
+        "15/4": "L\u1EC5 Ph\u1EADt \u0110\u1EA3n",
+        "5/5": "T\u1EBFt \u0110oan Ng\u1ECD",
+        "7/7": "Th\u1EA5t T\u1ECBch (Ng\u01B0u Lang \u2013 Ch\u1EE9c N\u1EEF)",
+        "15/7": "L\u1EC5 Vu Lan (R\u1EB1m th\xE1ng B\u1EA3y, Trung Nguy\xEAn)",
+        "19/6": "V\xEDa Quan \xC2m (19/6 \xE2m)",
+        "15/8": "T\u1EBFt Trung Thu",
+        "9/9": "T\u1EBFt Tr\xF9ng C\u1EEDu",
+        "19/9": "V\xEDa Quan \xC2m (19/9 \xE2m)",
+        "15/10": "T\u1EBFt H\u1EA1 Nguy\xEAn",
+        "23/12": "\u0110\u01B0a \xD4ng T\xE1o v\u1EC1 tr\u1EDDi"
+    },
+    om = [{
+        text: "C\xE1ch t\u1ED1t nh\u1EA5t \u0111\u1EC3 d\u1EF1 \u0111o\xE1n t\u01B0\u01A1ng lai l\xE0 t\u1EA1o ra n\xF3.",
+        author: "Peter Drucker"
+    }, {
+        text: "Cu\u1ED9c s\u1ED1ng kh\xF4ng ph\u1EA3i l\xE0 ch\u1EDD \u0111\u1EE3i c\u01A1n b\xE3o qua \u0111i, m\xE0 l\xE0 h\u1ECDc c\xE1ch khi\xEAu v\u0169 d\u01B0\u1EDBi m\u01B0a.",
+        author: "Vivian Greene"
+    }, {
+        text: "Ng\u01B0\u1EDDi duy nh\u1EA5t b\u1EA1n n\xEAn c\u1ED1 g\u1EAFng \u0111\u1EC3 tr\u1EDF n\xEAn t\u1ED1t h\u01A1n ch\xEDnh l\xE0 b\u1EA1n c\u1EE7a ng\xE0y h\xF4m qua.",
+        author: "Khuy\u1EBFt danh"
+    }, {
+        text: "Th\u1EA5t b\u1EA1i l\xE0 m\u1EB9 th\xE0nh c\xF4ng.",
+        author: "T\u1EE5c ng\u1EEF"
+    }, {
+        text: "H\xE0nh tr\xECnh v\u1EA1n d\u1EB7m b\u1EAFt \u0111\u1EA7u b\u1EB1ng m\u1ED9t b\u01B0\u1EDBc ch\xE2n.",
+        author: "L\xE3o T\u1EED"
+    }, {
+        text: "H\xE3y s\u1ED1ng nh\u01B0 th\u1EC3 b\u1EA1n s\u1EBD ch\u1EBFt ng\xE0y mai. H\xE3y h\u1ECDc nh\u01B0 th\u1EC3 b\u1EA1n s\u1EBD s\u1ED1ng m\xE3i m\xE3i.",
+        author: "Mahatma Gandhi"
+    }, {
+        text: "C\xE1ch duy nh\u1EA5t \u0111\u1EC3 l\xE0m \u0111\u01B0\u1EE3c vi\u1EC7c l\u1EDBn l\xE0 y\xEAu nh\u1EEFng g\xEC b\u1EA1n l\xE0m.",
+        author: "Steve Jobs"
+    }, {
+        text: "D\xF9 b\u1EA1n ngh\u0129 b\u1EA1n c\xF3 th\u1EC3 hay kh\xF4ng th\u1EC3, b\u1EA1n \u0111\u1EC1u \u0111\xFAng.",
+        author: "Henry Ford"
+    }, {
+        text: "\u0110\u1EEBng ph\u1EA5n \u0111\u1EA5u \u0111\u1EC3 th\xE0nh c\xF4ng, m\xE0 h\xE3y ph\u1EA5n \u0111\u1EA5u \u0111\u1EC3 c\xF3 gi\xE1 tr\u1ECB.",
+        author: "Albert Einstein"
+    }, {
+        text: "Th\u1EDDi \u0111i\u1EC3m t\u1ED1t nh\u1EA5t \u0111\u1EC3 tr\u1ED3ng m\u1ED9t c\xE1i c\xE2y l\xE0 20 n\u0103m tr\u01B0\u1EDBc. Th\u1EDDi \u0111i\u1EC3m t\u1ED1t th\u1EE9 hai l\xE0 b\xE2y gi\u1EDD.",
+        author: "T\u1EE5c ng\u1EEF Trung Qu\u1ED1c"
+    }, {
+        text: "T\xF4i ch\u01B0a th\u1EA5t b\u1EA1i. T\xF4i ch\u1EC9 v\u1EEBa t\xECm ra 10,000 c\xE1ch kh\xF4ng ho\u1EA1t \u0111\u1ED9ng.",
+        author: "Thomas A. Edison"
+    }, {
+        text: "S\u1ED1ng l\xE0 \u0111i\u1EC1u hi\u1EBFm c\xF3 nh\u1EA5t tr\xEAn th\u1EBF gi\u1EDBi. H\u1EA7u h\u1EBFt m\u1ECDi ng\u01B0\u1EDDi ch\u1EC9 t\u1ED3n t\u1EA1i.",
+        author: "Oscar Wilde"
+    }, {
+        text: "Th\u1EDDi gian c\u1EE7a b\u1EA1n c\xF3 h\u1EA1n, v\xEC v\u1EADy \u0111\u1EEBng l\xE3ng ph\xED n\xF3 \u0111\u1EC3 s\u1ED1ng cu\u1ED9c \u0111\u1EDDi c\u1EE7a ng\u01B0\u1EDDi kh\xE1c.",
+        author: "Steve Jobs"
+    }, {
+        text: "H\u1EA1nh ph\xFAc kh\xF4ng \u0111\u1EBFn t\u1EEB vi\u1EC7c c\xF3 nhi\u1EC1u h\u01A1n, m\xE0 t\u1EEB vi\u1EC7c c\u1EA7n \xEDt \u0111i.",
+        author: "Khuy\u1EBFt danh"
+    }, {
+        text: "Bi\u1EBFt \u0111\u1EE7 l\xE0 gi\xE0u.",
+        author: "L\xE3o T\u1EED"
+    }, {
+        text: "Khi c\xE1i t\xF4i nh\u1ECF l\u1EA1i, th\u1EBF gi\u1EDBi tr\u1EDF n\xEAn r\u1ED9ng h\u01A1n.",
+        author: "Khuy\u1EBFt danh"
+    }, {
+        text: "An t\u0129nh kh\xF4ng ph\u1EA3i tr\u1ED1n \u0111\u1EDDi, m\xE0 l\xE0 th\u1EA5y r\xF5 \u0111\u1EDDi.",
+        author: "Thu Giang Nguy\u1EC5n Duy C\u1EA7n"
+    }, {
+        text: "Hi\u1EC3u bi\u1EBFt l\xE0 m\u1EB7t tr\u1EDDi xua tan s\u01B0\u01A1ng m\xF9 s\u1EE3 h\xE3i.",
+        author: "Th\xEDch Nh\u1EA5t H\u1EA1nh"
+    }, {
+        text: "\u0110\u1EEBng \u0111\u1EBFm nh\u1EEFng g\xEC b\u1EA1n m\u1EA5t, h\xE3y tr\xE2n tr\u1ECDng nh\u1EEFng g\xEC b\u1EA1n c\xF2n.",
+        author: "Khuy\u1EBFt danh"
+    }, {
+        text: "C\xE0ng tranh h\u01A1n thua, c\xE0ng thua c\xE1i an.",
+        author: "Khuy\u1EBFt danh"
+    }, {
+        text: "T\u1EF1 do l\u1EDBn nh\u1EA5t l\xE0 t\u1EF1 do kh\u1ECFi ch\xEDnh m\xECnh h\xF4m qua.",
+        author: "Khuy\u1EBFt danh"
+    }, {
+        text: "\u0110i ch\u1EADm \u0111\u1EC3 th\u1EA5y nhanh: ch\u1EADm l\xE0 n\u1EC1n \u0111\u1EC3 nhanh kh\xF4ng sai.",
+        author: "\u0110\u1EA1o An"
+    }, {
+        text: "N\u01B0\u1EDBc ch\u1EA3y kh\xF4ng tranh, m\xE0 v\u1EABn \u0111\u1EBFn bi\u1EC3n.",
+        author: "Trang T\u1EED"
+    }, {
+        text: "B\u1EA1n kh\xF4ng th\u1EC3 r\xF3t t\u1EEB chi\u1EBFc c\u1ED1c r\u1ED7ng: h\xE3y ch\u0103m s\xF3c b\u1EA3n th\xE2n tr\u01B0\u1EDBc.",
+        author: "Khuy\u1EBFt danh"
+    }, {
+        text: "Khi t\xE2m an, gi\xF3 c\u0169ng hi\u1EC1n.",
+        author: "Khuy\u1EBFt danh"
+    }],
+    Fv = [{
+        name: "Gi\xE1c",
+        element: "M\u1ED9c",
+        type: "Ki\u1EBFt",
+        interpretation: "T\u1EA1o t\xE1c m\u1ECDi vi\u1EC7c \u0111\u1EC1u t\u1ED1t, nh\u1EA5t l\xE0 x\xE2y d\u1EF1ng nh\xE0 c\u1EEDa, an t\xE1ng, c\u01B0\u1EDBi g\u1EA3."
+    }, {
+        name: "Cang",
+        element: "Kim",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng nh\xE0 c\u1EEDa, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t \u0111\u1EC1u b\u1ECB hung h\u1EA1i."
+    }, {
+        name: "\u0110\xEA",
+        element: "Th\u1ED5",
+        type: "Hung",
+        interpretation: "C\u01B0\u1EDBi g\u1EA3, x\xE2y d\u1EF1ng, \u0111\xE0o ao, ch\xF4n c\u1EA5t \u0111\u1EC1u kh\xF4ng t\u1ED1t."
+    }, {
+        name: "Ph\xF2ng",
+        element: "Nh\u1EADt",
+        type: "Ki\u1EBFt",
+        interpretation: "C\u01B0\u1EDBi g\u1EA3, x\xE2y d\u1EF1ng, l\xE0m ru\u1ED9ng, ch\xF4n c\u1EA5t, may \xE1o \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "T\xE2m",
+        element: "Nguy\u1EC7t",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, ki\u1EC7n t\u1EE5ng \u0111\u1EC1u x\u1EA5u."
+    }, {
+        name: "V\u0129",
+        element: "H\u1ECFa",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, l\xE0m ph\xFAc, ch\xF4n c\u1EA5t \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "C\u01A1",
+        element: "Th\u1EE7y",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, l\xE0m ru\u1ED9ng, ch\xF4n c\u1EA5t \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "\u0110\u1EA9u",
+        element: "M\u1ED9c",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, l\xE0m ru\u1ED9ng, ch\xF4n c\u1EA5t, m\u1EDF c\u1EEDa \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "Ng\u01B0u",
+        element: "Kim",
+        type: "Hung",
+        interpretation: "C\u01B0\u1EDBi g\u1EA3, \u0111i xa, x\xE2y d\u1EF1ng, ch\xF4n c\u1EA5t \u0111\u1EC1u x\u1EA5u."
+    }, {
+        name: "N\u1EEF",
+        element: "Th\u1ED5",
+        type: "Hung",
+        interpretation: "C\u01B0\u1EDBi g\u1EA3, \u0111i xa, x\xE2y d\u1EF1ng, ch\xF4n c\u1EA5t \u0111\u1EC1u kh\xF4ng t\u1ED1t."
+    }, {
+        name: "H\u01B0",
+        element: "Nh\u1EADt",
+        type: "Hung",
+        interpretation: "C\u01B0\u1EDBi g\u1EA3, x\xE2y d\u1EF1ng, ch\xF4n c\u1EA5t, m\u1EDF c\u1EEDa \u0111\u1EC1u x\u1EA5u."
+    }, {
+        name: "Nguy",
+        element: "Nguy\u1EC7t",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng, ch\xF4n c\u1EA5t, \u0111i xa, c\u01B0\u1EDBi g\u1EA3 \u0111\u1EC1u kh\xF4ng t\u1ED1t."
+    }, {
+        name: "Th\u1EA5t",
+        element: "H\u1ECFa",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, nh\u1EADp h\u1ECDc \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "B\xEDch",
+        element: "Th\u1EE7y",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, m\u1EDF c\u1EEDa, l\xE0m ru\u1ED9ng \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "Khu\xEA",
+        element: "M\u1ED9c",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, m\u1EDF c\u1EEDa, \u0111i xa \u0111\u1EC1u x\u1EA5u."
+    }, {
+        name: "L\xE2u",
+        element: "Kim",
+        type: "Ki\u1EBFt",
+        interpretation: "C\u01B0\u1EDBi g\u1EA3, x\xE2y d\u1EF1ng, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, may \xE1o \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "V\u1ECB",
+        element: "Th\u1ED5",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, nh\u1EADp h\u1ECDc \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "M\xE3o",
+        element: "Nh\u1EADt",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, m\u1EDF c\u1EEDa, \u0111i xa \u0111\u1EC1u x\u1EA5u."
+    }, {
+        name: "T\u1EA5t",
+        element: "Nguy\u1EC7t",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, may \xE1o \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "Ch\u1EE7y",
+        element: "H\u1ECFa",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng, ch\xF4n c\u1EA5t, \u0111i xa, c\u01B0\u1EDBi g\u1EA3 \u0111\u1EC1u kh\xF4ng t\u1ED1t."
+    }, {
+        name: "S\xE2m",
+        element: "Th\u1EE7y",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, may \xE1o \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "T\u1EC9nh",
+        element: "M\u1ED9c",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, nh\u1EADp h\u1ECDc \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "Qu\u1EF7",
+        element: "Kim",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, \u0111i xa \u0111\u1EC1u x\u1EA5u."
+    }, {
+        name: "Li\u1EC5u",
+        element: "Th\u1ED5",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ru\u1ED9ng \u0111\u1EC1u kh\xF4ng t\u1ED1t."
+    }, {
+        name: "Tinh",
+        element: "Nh\u1EADt",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, may \xE1o \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "Tr\u01B0\u01A1ng",
+        element: "Nguy\u1EC7t",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, nh\u1EADp h\u1ECDc \u0111\u1EC1u t\u1ED1t."
+    }, {
+        name: "D\u1EF1c",
+        element: "H\u1ECFa",
+        type: "Hung",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, \u0111i xa \u0111\u1EC1u x\u1EA5u."
+    }, {
+        name: "Ch\u1EA9n",
+        element: "Th\u1EE7y",
+        type: "Ki\u1EBFt",
+        interpretation: "X\xE2y d\u1EF1ng, c\u01B0\u1EDBi g\u1EA3, ch\xF4n c\u1EA5t, l\xE0m ph\xFAc, may \xE1o \u0111\u1EC1u t\u1ED1t."
+    }],
+    Pv = {
+        Ki\u1EBFn: "T\u1ED1t cho vi\u1EC7c kh\u1EDFi c\xF4ng, nh\u01B0ng x\u1EA5u cho vi\u1EC7c ch\xF4n c\u1EA5t. N\xEAn b\u1EAFt \u0111\u1EA7u nh\u1EEFng vi\u1EC7c m\u1EDBi.",
+        Tr\u1EEB: "T\u1ED1t cho vi\u1EC7c lo\u1EA1i b\u1ECF nh\u1EEFng \u0111i\u1EC1u c\u0169, x\u1EA5u, ch\u1EEFa b\u1EC7nh, d\u1ECDn d\u1EB9p. X\u1EA5u cho vi\u1EC7c kh\u1EDFi s\u1EF1.",
+        M\u00E3n: "T\u1ED1t cho vi\u1EC7c c\u1EA7u t\xE0i, c\u1EA7u ph\xFAc, t\u1EBF l\u1EC5. M\u1ECDi s\u1EF1 \u0111\u1EC1u vi\xEAn m\xE3n, \u0111\u1EA7y \u0111\u1EE7.",
+        B\u00ECnh: "M\u1ECDi vi\u1EC7c \u1EDF m\u1EE9c trung b\xECnh. T\u1ED1t cho vi\u1EC7c s\u1EEDa ch\u1EEFa, san l\u1EA5p. X\u1EA5u cho vi\u1EC7c kh\u1EDFi s\u1EF1 l\u1EDBn.",
+        \u0110\u1ECBnh: "T\u1ED1t cho vi\u1EC7c c\u1EA7u t\xE0i, k\xFD k\u1EBFt h\u1EE3p \u0111\u1ED3ng, c\u01B0\u1EDBi h\u1ECFi. M\u1ECDi s\u1EF1 \u0111\u1EC1u \u1ED5n \u0111\u1ECBnh.",
+        Ch\u1EA5p: "T\u1ED1t cho vi\u1EC7c x\xE2y d\u1EF1ng, s\u1EEDa ch\u1EEFa. X\u1EA5u cho vi\u1EC7c di chuy\u1EC3n, xu\u1EA5t h\xE0nh.",
+        Ph\u00E1: "X\u1EA5u cho m\u1ECDi vi\u1EC7c. N\xEAn tr\xE1nh l\xE0m nh\u1EEFng vi\u1EC7c quan tr\u1ECDng, d\u1EC5 g\u1EB7p \u0111\u1ED5 v\u1EE1, th\u1EA5t b\u1EA1i.",
+        Nguy: "X\u1EA5u cho m\u1ECDi vi\u1EC7c. N\xEAn c\u1EA9n th\u1EADn, \u0111\u1EC1 ph\xF2ng nguy hi\u1EC3m, tai n\u1EA1n.",
+        Th\u00E0nh: "T\u1ED1t cho m\u1ECDi vi\u1EC7c, \u0111\u1EB7c bi\u1EC7t l\xE0 khai tr\u01B0\u01A1ng, nh\u1EADp h\u1ECDc, nh\u1EADm ch\u1EE9c, c\u01B0\u1EDBi h\u1ECFi.",
+        Th\u00E2u: "T\u1ED1t cho vi\u1EC7c thu ho\u1EA1ch, c\u1EA5t gi\u1EEF, t\xEDch tr\u1EEF. X\u1EA5u cho vi\u1EC7c khai tr\u01B0\u01A1ng, xu\u1EA5t h\xE0nh.",
+        Khai: "T\u1ED1t cho m\u1ECDi vi\u1EC7c, \u0111\u1EB7c bi\u1EC7t l\xE0 khai tr\u01B0\u01A1ng, xu\u1EA5t h\xE0nh, c\u01B0\u1EDBi h\u1ECFi, \u0111\u1ED9ng th\u1ED5.",
+        B\u1EBF: "X\u1EA5u cho m\u1ECDi vi\u1EC7c, tr\u1EEB vi\u1EC7c x\xE2y \u0111\xEA, \u0111\u1EAFp \u0111\u1EADp, v\xE1 hang h\u1ED1c. M\u1ECDi s\u1EF1 \u0111\u1EC1u b\u1EBF t\u1EAFc."
+    };
+var Ta = [{
+    m: 1,
+    d: 5,
+    name: "Ti\u1EC3u H\xE0n"
+}, {
+    m: 1,
+    d: 20,
+    name: "\u0110\u1EA1i H\xE0n"
+}, {
+    m: 2,
+    d: 4,
+    name: "L\u1EADp Xu\xE2n"
+}, {
+    m: 2,
+    d: 19,
+    name: "V\u0169 Th\u1EE7y"
+}, {
+    m: 3,
+    d: 5,
+    name: "Kinh Tr\u1EADp"
+}, {
+    m: 3,
+    d: 20,
+    name: "Xu\xE2n Ph\xE2n"
+}, {
+    m: 4,
+    d: 4,
+    name: "Thanh Minh"
+}, {
+    m: 4,
+    d: 19,
+    name: "C\u1ED1c V\u0169"
+}, {
+    m: 5,
+    d: 5,
+    name: "L\u1EADp H\u1EA1"
+}, {
+    m: 5,
+    d: 20,
+    name: "Ti\u1EC3u M\xE3n"
+}, {
+    m: 6,
+    d: 5,
+    name: "Mang Ch\u1EE7ng"
+}, {
+    m: 6,
+    d: 21,
+    name: "H\u1EA1 Ch\xED"
+}, {
+    m: 7,
+    d: 6,
+    name: "Ti\u1EC3u Th\u1EED"
+}, {
+    m: 7,
+    d: 22,
+    name: "\u0110\u1EA1i Th\u1EED"
+}, {
+    m: 8,
+    d: 7,
+    name: "L\u1EADp Thu"
+}, {
+    m: 8,
+    d: 22,
+    name: "X\u1EED Th\u1EED"
+}, {
+    m: 9,
+    d: 7,
+    name: "B\u1EA1ch L\u1ED9"
+}, {
+    m: 9,
+    d: 22,
+    name: "Thu Ph\xE2n"
+}, {
+    m: 10,
+    d: 8,
+    name: "H\xE0n L\u1ED9"
+}, {
+    m: 10,
+    d: 23,
+    name: "S\u01B0\u01A1ng Gi\xE1ng"
+}, {
+    m: 11,
+    d: 7,
+    name: "L\u1EADp \u0110\xF4ng"
+}, {
+    m: 11,
+    d: 22,
+    name: "Ti\u1EC3u Tuy\u1EBFt"
+}, {
+    m: 12,
+    d: 6,
+    name: "\u0110\u1EA1i Tuy\u1EBFt"
+}, {
+    m: 12,
+    d: 21,
+    name: "\u0110\xF4ng Ch\xED"
+}];
+var $t = {
+        Gi\u00E1p: {
+            element: "M\u1ED9c",
+            color: "bg-green-600",
+            icon: "\u{1F333}",
+            yinYang: "d\u01B0\u01A1ng"
+        },
+        \u1EA4t: {
+            element: "M\u1ED9c",
+            color: "bg-green-500",
+            icon: "\u{1F33F}",
+            yinYang: "\xE2m"
+        },
+        B\u00EDnh: {
+            element: "H\u1ECFa",
+            color: "bg-red-600",
+            icon: "\u{1F525}",
+            yinYang: "d\u01B0\u01A1ng"
+        },
+        \u0110inh: {
+            element: "H\u1ECFa",
+            color: "bg-red-500",
+            icon: "\u{1F56F}\uFE0F",
+            yinYang: "\xE2m"
+        },
+        M\u1EADu: {
+            element: "Th\u1ED5",
+            color: "bg-yellow-600",
+            icon: "\u26F0\uFE0F",
+            yinYang: "d\u01B0\u01A1ng"
+        },
+        K\u1EF7: {
+            element: "Th\u1ED5",
+            color: "bg-yellow-500",
+            icon: "\u{1F3DE}\uFE0F",
+            yinYang: "\xE2m"
+        },
+        Canh: {
+            element: "Kim",
+            color: "bg-gray-400",
+            icon: "\u2694\uFE0F",
+            yinYang: "d\u01B0\u01A1ng"
+        },
+        T\u00E2n: {
+            element: "Kim",
+            color: "bg-gray-300",
+            icon: "\u{1F48D}",
+            yinYang: "\xE2m"
+        },
+        Nh\u00E2m: {
+            element: "Th\u1EE7y",
+            color: "bg-blue-600",
+            icon: "\u{1F30A}",
+            yinYang: "d\u01B0\u01A1ng"
+        },
+        Qu\u00FD: {
+            element: "Th\u1EE7y",
+            color: "bg-blue-500",
+            icon: "\u{1F4A7}",
+            yinYang: "\xE2m"
+        }
+    },
+    sc = {
+        T\u00FD: {
+            element: "Th\u1EE7y",
+            color: "bg-blue-600",
+            icon: "\u{1F400}"
+        },
+        S\u1EEDu: {
+            element: "Th\u1ED5",
+            color: "bg-yellow-500",
+            icon: "\u{1F402}"
+        },
+        D\u1EA7n: {
+            element: "M\u1ED9c",
+            color: "bg-green-600",
+            icon: "\u{1F405}"
+        },
+        M\u00E3o: {
+            element: "M\u1ED9c",
+            color: "bg-green-500",
+            icon: "\u{1F408}"
+        },
+        Th\u00ECn: {
+            element: "Th\u1ED5",
+            color: "bg-yellow-600",
+            icon: "\u{1F409}"
+        },
+        T\u1EF5: {
+            element: "H\u1ECFa",
+            color: "bg-red-500",
+            icon: "\u{1F40D}"
+        },
+        Ng\u1ECD: {
+            element: "H\u1ECFa",
+            color: "bg-red-600",
+            icon: "\u{1F40E}"
+        },
+        M\u00F9i: {
+            element: "Th\u1ED5",
+            color: "bg-yellow-500",
+            icon: "\u{1F40F}"
+        },
+        Th\u00E2n: {
+            element: "Kim",
+            color: "bg-gray-400",
+            icon: "\u{1F412}"
+        },
+        D\u1EADu: {
+            element: "Kim",
+            color: "bg-gray-300",
+            icon: "\u{1F413}"
+        },
+        Tu\u1EA5t: {
+            element: "Th\u1ED5",
+            color: "bg-yellow-600",
+            icon: "\u{1F415}"
+        },
+        H\u1EE3i: {
+            element: "Th\u1EE7y",
+            color: "bg-blue-500",
+            icon: "\u{1F416}"
+        }
+    },
+    Sa = {
+        sinh: {
+            M\u1ED9c: "H\u1ECFa",
+            H\u1ECFa: "Th\u1ED5",
+            Th\u1ED5: "Kim",
+            Kim: "Th\u1EE7y",
+            Th\u1EE7y: "M\u1ED9c"
+        },
+        khac: {
+            M\u1ED9c: "Th\u1ED5",
+            Th\u1ED5: "Th\u1EE7y",
+            Th\u1EE7y: "H\u1ECFa",
+            H\u1ECFa: "Kim",
+            Kim: "M\u1ED9c"
+        }
+    },
+    Ee = {
+        tyKien: "T\u1EF7 Ki\xEAn",
+        kiepTai: "Ki\u1EBFp T\xE0i",
+        thucThan: "Th\u1EF1c Th\u1EA7n",
+        thuongQuan: "Th\u01B0\u01A1ng Quan",
+        thienTai: "Thi\xEAn T\xE0i",
+        chinhTai: "Ch\xEDnh T\xE0i",
+        thienQuan: "Thi\xEAn Quan",
+        chinhQuan: "Ch\xEDnh Quan",
+        thienAn: "Thi\xEAn \u1EA4n",
+        chinhAn: "Ch\xEDnh \u1EA4n",
+        ty: "T\u1EF7"
+    },
+    Bv = {
+        "Gi\xE1p T\xFD": "H\u1EA3i Trung Kim",
+        "\u1EA4t S\u1EEDu": "H\u1EA3i Trung Kim",
+        "B\xEDnh D\u1EA7n": "L\u01B0 Trung H\u1ECFa",
+        "\u0110inh M\xE3o": "L\u01B0 Trung H\u1ECFa",
+        "M\u1EADu Th\xECn": "\u0110\u1EA1i L\xE2m M\u1ED9c",
+        "K\u1EF7 T\u1EF5": "\u0110\u1EA1i L\xE2m M\u1ED9c",
+        "Canh Ng\u1ECD": "L\u1ED9 B\xE0ng Th\u1ED5",
+        "T\xE2n M\xF9i": "L\u1ED9 B\xE0ng Th\u1ED5",
+        "Nh\xE2m Th\xE2n": "Ki\u1EBFm Phong Kim",
+        "Qu\xFD D\u1EADu": "Ki\u1EBFm Phong Kim",
+        "Gi\xE1p Tu\u1EA5t": "S\u01A1n \u0110\u1EA7u H\u1ECFa",
+        "\u1EA4t H\u1EE3i": "S\u01A1n \u0110\u1EA7u H\u1ECFa",
+        "B\xEDnh T\xFD": "Gi\u1EA3n H\u1EA1 Th\u1EE7y",
+        "\u0110inh S\u1EEDu": "Gi\u1EA3n H\u1EA1 Th\u1EE7y",
+        "M\u1EADu D\u1EA7n": "Th\xE0nh \u0110\u1EA7u Th\u1ED5",
+        "K\u1EF7 M\xE3o": "Th\xE0nh \u0110\u1EA7u Th\u1ED5",
+        "Canh Th\xECn": "B\u1EA1ch L\u1EA1p Kim",
+        "T\xE2n T\u1EF5": "B\u1EA1ch L\u1EA1p Kim",
+        "Nh\xE2m Ng\u1ECD": "D\u01B0\u01A1ng Li\u1EC5u M\u1ED9c",
+        "Qu\xFD M\xF9i": "D\u01B0\u01A1ng Li\u1EC5u M\u1ED9c",
+        "Gi\xE1p Th\xE2n": "Tuy\u1EC1n Trung Th\u1EE7y",
+        "\u1EA4t D\u1EADu": "Tuy\u1EC1n Trung Th\u1EE7y",
+        "B\xEDnh Tu\u1EA5t": "\u1ED0c Th\u01B0\u1EE3ng Th\u1ED5",
+        "\u0110inh H\u1EE3i": "\u1ED0c Th\u01B0\u1EE3ng Th\u1ED5",
+        "M\u1EADu T\xFD": "T\xEDch L\u1ECBch H\u1ECFa",
+        "K\u1EF7 S\u1EEDu": "T\xEDch L\u1ECBch H\u1ECFa",
+        "Canh D\u1EA7n": "T\xF9ng B\xE1ch M\u1ED9c",
+        "T\xE2n M\xE3o": "T\xF9ng B\xE1ch M\u1ED9c",
+        "Nh\xE2m Th\xECn": "Tr\u01B0\u1EDDng L\u01B0u Th\u1EE7y",
+        "Qu\xFD T\u1EF5": "Tr\u01B0\u1EDDng L\u01B0u Th\u1EE7y",
+        "Gi\xE1p Ng\u1ECD": "Sa Trung Kim",
+        "\u1EA4t M\xF9i": "Sa Trung Kim",
+        "B\xEDnh Th\xE2n": "S\u01A1n H\u1EA1 H\u1ECFa",
+        "\u0110inh D\u1EADu": "S\u01A1n H\u1EA1 H\u1ECFa",
+        "M\u1EADu Tu\u1EA5t": "B\xECnh \u0110\u1ECBa M\u1ED9c",
+        "K\u1EF7 H\u1EE3i": "B\xECnh \u0110\u1ECBa M\u1ED9c",
+        "Canh T\xFD": "B\xEDch Th\u01B0\u1EE3ng Th\u1ED5",
+        "T\xE2n S\u1EEDu": "B\xEDch Th\u01B0\u1EE3ng Th\u1ED5",
+        "Nh\xE2m D\u1EA7n": "Kim B\u1EA1ch Kim",
+        "Qu\xFD M\xE3o": "Kim B\u1EA1ch Kim",
+        "Gi\xE1p Th\xECn": "Ph\xFAc \u0110\u0103ng H\u1ECFa",
+        "\u1EA4t T\u1EF5": "Ph\xFAc \u0110\u0103ng H\u1ECFa",
+        "B\xEDnh Ng\u1ECD": "Thi\xEAn H\xE0 Th\u1EE7y",
+        "\u0110inh M\xF9i": "Thi\xEAn H\xE0 Th\u1EE7y",
+        "M\u1EADu Th\xE2n": "\u0110\u1EA1i Tr\u1EA1ch Th\u1ED5",
+        "K\u1EF7 D\u1EADu": "\u0110\u1EA1i Tr\u1EA1ch Th\u1ED5",
+        "Canh Tu\u1EA5t": "Thoa Xuy\u1EBFn Kim",
+        "T\xE2n H\u1EE3i": "Thoa Xuy\u1EBFn Kim",
+        "Nh\xE2m T\xFD": "Tang \u0110\u1ED1 M\u1ED9c",
+        "Qu\xFD S\u1EEDu": "Tang \u0110\u1ED1 M\u1ED9c",
+        "Gi\xE1p D\u1EA7n": "\u0110\u1EA1i Kh\xEA Th\u1EE7y",
+        "\u1EA4t M\xE3o": "\u0110\u1EA1i Kh\xEA Th\u1EE7y",
+        "B\xEDnh Th\xECn": "Sa Trung Th\u1ED5",
+        "\u0110inh T\u1EF5": "Sa Trung Th\u1ED5",
+        "M\u1EADu Ng\u1ECD": "Thi\xEAn Th\u01B0\u1EE3ng H\u1ECFa",
+        "K\u1EF7 M\xF9i": "Thi\xEAn Th\u01B0\u1EE3ng H\u1ECFa",
+        "Canh Th\xE2n": "Th\u1EA1ch L\u1EF1u M\u1ED9c",
+        "T\xE2n D\u1EADu": "Th\u1EA1ch L\u1EF1u M\u1ED9c",
+        "Nh\xE2m Tu\u1EA5t": "\u0110\u1EA1i H\u1EA3i Th\u1EE7y",
+        "Qu\xFD H\u1EE3i": "\u0110\u1EA1i H\u1EA3i Th\u1EE7y"
+    };
+var wi = class wi {
+    constructor() {
+        this.LUNAR_INFO = [3951576, 6441696, 5023088, 3691733, 6083168, 4512080, 3233108, 5658272, 4233936, 2774482, 5262048, 3843510, 6333648, 4772432, 3396181, 5813568, 4380320, 2928034, 5412272, 4147575, 6572400, 5022896, 3585205, 6056528, 4615504, 3222356, 5647200, 4232560, 2904818, 5261680, 3827046, 6214816, 4778576, 3369621, 5790416, 4467552, 3114723, 5411552, 4049111, 6474064, 5035168, 3528870, 5944656, 4609696, 3253684, 5645776, 4231888, 2806450, 5286224, 3716439, 6188192, 4765008, 3494741, 5787040, 4367792, 3097971, 5526192, 3975592, 6351184, 5008032, 3583654, 5942096, 4606816, 3189476, 5678448, 4215392, 2683491, 5167424, 3726151, 6084256, 4757200, 3427797, 5917392, 4367568, 2938036, 5419600, 3986776, 6337856, 4896160, 3626406, 6067632, 4606384, 3189108, 5678256, 4237904, 2730578, 5139744, 3779911, 6204256, 4756336, 3427061, 5917040, 4482224, 2913443, 5302864, 4024920, 6444704, 4893392, 3577557, 6066912, 4639072, 3070292, 5559456, 4119120, 2782546, 5133984, 3712935, 6202832, 4887216, 3320501, 5810512, 4371616, 2931364, 5287248, 3954137, 6441888, 5023152, 3625334, 6050416, 4614448, 3176756, 5532320, 4107600, 2775890, 5262176, 3712742, 6202592, 4772448, 3336805, 5690656, 4250272, 2971299, 5396176, 3951355, 6441424, 5022928, 3657910, 5943888, 4502816, 3071269, 5551520, 4085200, 2774450, 5261744, 3843447, 6202544, 4762192, 3387989, 5795104, 4238688, 2968419, 5395312, 4082152, 6343024, 5002416, 3631270, 5954128, 4479648, 3122852, 5548752, 4215520, 2675427, 5163344, 3724631, 6214816, 4643152, 3300693, 5789344, 4368080, 2905556, 5395120, 3975608, 6465840, 4895888, 3454630, 5942608, 4609440, 3058532, 5547376, 4215472, 2797939, 5138736, 3697463, 6187680, 4762960, 3353301, 5778272, 4367728, 3035876, 5296480, 3860824, 6346016, 4905616, 3496614, 5920464, 4598496, 3189204, 5546704, 4116816, 2681170, 5158176, 3725095, 6204832, 4871600, 3550645, 5916080, 4498096, 3060404, 5548368, 3978585];
+        this.HOUR_CAN_START_MAP = {
+            Gi\u00E1p: 0,
+            K\u1EF7: 0,
+            \u1EA4t: 2,
+            Canh: 2,
+            B\u00EDnh: 4,
+            T\u00E2n: 4,
+            \u0110inh: 6,
+            Nh\u00E2m: 6,
+            M\u1EADu: 8,
+            Qu\u00FD: 8
+        }
+    }
+    jdn(n, e, i) {
+        let r = Math.floor((14 - e) / 12),
+            o = i + 4800 - r,
+            a = e + 12 * r - 3;
+        return n + Math.floor((153 * a + 2) / 5) + 365 * o + Math.floor(o / 4) - Math.floor(o / 100) + Math.floor(o / 400) - 32045
+    }
+    jdnToDate(n) {
+        let e = n + 32044,
+            i = Math.floor((4 * e + 3) / 146097),
+            r = e - Math.floor(146097 * i / 4),
+            o = Math.floor((4 * r + 3) / 1461),
+            a = r - Math.floor(1461 * o / 4),
+            s = Math.floor((5 * a + 2) / 153),
+            l = a - Math.floor((153 * s + 2) / 5) + 1,
+            m = s + 3 - 12 * Math.floor(s / 10),
+            f = 100 * i + o - 4800 + Math.floor(s / 10);
+        return {
+            day: l,
+            month: m,
+            year: f
+        }
+    }
+    decodeLunarYear(n, e) {
+        let i = [29, 30],
+            r = new Array(12),
+            o = e >> 17,
+            a = e & 15,
+            s = i[e >> 16 & 1],
+            m = this.jdn(1, 1, n) + o,
+            f = e >> 4;
+        for (let g = 0; g < 12; g++) r[11 - g] = i[f & 1], f >>= 1;
+        let p = [];
+        if (a === 0)
+            for (let g = 1; g <= 12; g++) p.push({
+                day: 1,
+                month: g,
+                year: n,
+                leap: !1,
+                jd: m
+            }), m += r[g - 1];
+        else {
+            for (let g = 1; g <= a; g++) p.push({
+                day: 1,
+                month: g,
+                year: n,
+                leap: !1,
+                jd: m
+            }), m += r[g - 1];
+            p.push({
+                day: 1,
+                month: a,
+                year: n,
+                leap: !0,
+                jd: m
+            }), m += s;
+            for (let g = a + 1; g <= 12; g++) p.push({
+                day: 1,
+                month: g,
+                year: n,
+                leap: !1,
+                jd: m
+            }), m += r[g - 1]
+        }
+        return p
+    }
+    getYearInfo(n) {
+        if (n < 1900 || n > 2109) return [];
+        let e = this.LUNAR_INFO[n - 1900];
+        return e === void 0 ? [] : this.decodeLunarYear(n, e)
+    }
+    findLunarDate(n, e) {
+        if (e.length === 0) return {
+            year: 0,
+            month: 0,
+            day: 0,
+            isLeapMonth: !1
+        };
+        let i = e.length - 1;
+        for (; i >= 0 && n < e[i].jd;) i--;
+        return i < 0 ? {
+            year: 0,
+            month: 0,
+            day: 0,
+            isLeapMonth: !1
+        } : {
+            day: n - e[i].jd + 1,
+            month: e[i].month,
+            year: e[i].year,
+            isLeapMonth: e[i].leap
+        }
+    }
+    convertSolarToLunar(n) {
+        let e = n.getDate(),
+            i = n.getMonth() + 1,
+            r = n.getFullYear();
+        if (r < 1900 || r > 2109) return {
+            year: 0,
+            month: 0,
+            day: 0,
+            isLeapMonth: !1
+        };
+        let o = this.jdn(e, i, r),
+            a = this.getYearInfo(r);
+        return a.length === 0 ? {
+            year: 0,
+            month: 0,
+            day: 0,
+            isLeapMonth: !1
+        } : o < a[0].jd && (a = this.getYearInfo(r - 1), a.length === 0) ? {
+            year: 0,
+            month: 0,
+            day: 0,
+            isLeapMonth: !1
+        } : this.findLunarDate(o, a)
+    }
+    convertLunarToSolar(n, e, i, r) {
+        if (n < 1900 || n > 2109) return null;
+        let o = this.getYearInfo(n);
+        if (!o || o.length === 0) return null;
+        let a = o.find(p => p.month === e && p.leap === r);
+        if (!a) return null;
+        let s = o.findIndex(p => p.jd === a.jd),
+            l;
+        if (s < o.length - 1) l = o[s + 1].jd - a.jd;
+        else {
+            let p = this.getYearInfo(n + 1);
+            if (p.length > 0) l = p[0].jd - a.jd;
+            else {
+                let g = this.LUNAR_INFO[n - 1900];
+                if (!g) return null;
+                let v = g & 15,
+                    x = 0;
+                if (r) e === v && (x = g >> 16 & 1 ? 30 : 29);
+                else if (e >= 1 && e <= 12) {
+                    let B = g >> 4,
+                        M = [];
+                    for (let I = 0; I < 12; I++) M.push(B & 1 ? 30 : 29), B >>= 1;
+                    M.reverse(), x = M[e - 1]
+                }
+                l = x
+            }
+        }
+        if (l === 0 || i < 1 || i > l) return null;
+        let m = a.jd + i - 1,
+            f = this.jdnToDate(m);
+        return new Date(f.year, f.month - 1, f.day)
+    }
+    getCanChiOfYear(n) {
+        let e = xa[(n + 6) % 10],
+            i = nn[(n + 8) % 12];
+        return `${e} ${i}`
+    }
+    getCanChiOfMonth(n, e) {
+        let i = xa[(n * 12 + e + 3) % 10],
+            r = nn[(e + 1) % 12];
+        return `${i} ${r}`
+    }
+    getCanChiOfDay(n) {
+        let e = this.jdn(n.getDate(), n.getMonth() + 1, n.getFullYear()),
+            i = (e + 9) % 10,
+            r = (e + 1) % 12;
+        return `${xa[i]} ${nn[r]}`
+    }
+    getSolarTerm(n) {
+        let e = n.getDate(),
+            i = n.getMonth() + 1;
+        for (let r = Ta.length - 1; r >= 0; r--) {
+            let o = Ta[r];
+            if (i > o.m || i === o.m && e >= o.d) return o.name
+        }
+        return Ta[Ta.length - 1].name
+    }
+    getZodiacHours(n) {
+        let e = n.split(" ")[1],
+            i = nn.indexOf(e);
+        if (i === -1) return {
+            goodHours: [],
+            badHours: []
+        };
+        let r = kv[i],
+            o = Rv[r],
+            a = [],
+            s = [];
+        return nn.forEach((l, m) => {
+            let f = _a[m],
+                p = `${l} (${f})`;
+            o.includes(m) ? a.push(p) : s.push(p)
+        }), {
+            goodHours: a,
+            badHours: s
+        }
+    }
+    getNhiThapBatTu(n) {
+        let e = n.getFullYear(),
+            i = n.getMonth() + 1,
+            r = n.getDate(),
+            s = (this.jdn(r, i, e) + 11) % 28 + 1 - 1;
+        return Fv[s]
+    }
+    getHourlyPillars(n) {
+        let i = this.getCanChiOfDay(n).split(" ")[0],
+            r = this.HOUR_CAN_START_MAP[i];
+        if (r === void 0) return [];
+        let o = [];
+        for (let a = 0; a < 12; a++) {
+            let s = xa[(r + a) % 10],
+                l = nn[a],
+                m = _a[a],
+                f = parseInt(m.split("-")[0], 10);
+            o.push({
+                can: s,
+                chi: l,
+                hourRange: `${l} (${m})`,
+                startHour: f
+            })
+        }
+        return o
+    }
+    getDayTypeInfo(n, e) {
+        let i = Ov[n];
+        if (i && i.includes(e)) return {
+            dayType: "Ho\xE0ng \u0110\u1EA1o",
+            dayTypeDetail: "Ng\xE0y Ho\xE0ng \u0110\u1EA1o (t\u1ED1t)"
+        };
+        let r = Lv[n];
+        return r && r.includes(e) ? {
+            dayType: "H\u1EAFc \u0110\u1EA1o",
+            dayTypeDetail: "Ng\xE0y H\u1EAFc \u0110\u1EA1o (x\u1EA5u)"
+        } : {
+            dayType: "B\xECnh th\u01B0\u1EDDng",
+            dayTypeDetail: "Ng\xE0y b\xECnh th\u01B0\u1EDDng"
+        }
+    }
+    getDutyOfDay(n, e) {
+        let i = (n + 1) % 12,
+            r = nn.indexOf(e);
+        if (r === -1) return "";
+        let o = r - i;
+        return o < 0 && (o += 12), Av[o]
+    }
+    getThapThan(n, e) {
+        if (n === e) return Ee.tyKien;
+        let i = $t[n],
+            r = $t[e];
+        if (!i || !r) return "";
+        let o = i.yinYang === r.yinYang;
+        return i.element === r.element ? o ? Ee.tyKien : Ee.kiepTai : Sa.sinh[i.element] === r.element ? o ? Ee.thucThan : Ee.thuongQuan : Sa.khac[i.element] === r.element ? o ? Ee.thienTai : Ee.chinhTai : Sa.khac[r.element] === i.element ? o ? Ee.thienQuan : Ee.chinhQuan : Sa.sinh[r.element] === i.element ? o ? Ee.thienAn : Ee.chinhAn : ""
+    }
+    SunLongitude(n) {
+        let e = (n - 2451545) / 36525,
+            i = e * e,
+            r = Math.PI / 180,
+            o = 357.5291 + 35999.0503 * e - 1559e-7 * i - 48e-8 * e * i,
+            a = 280.46645 + 36000.76983 * e + 3032e-7 * i,
+            s = (1.9146 - .004817 * e - 14e-6 * i) * Math.sin(r * o);
+        s = s + (.019993 - 101e-6 * e) * Math.sin(r * 2 * o) + 29e-5 * Math.sin(r * 3 * o);
+        let l = a + s;
+        return l = l * r, l - 2 * Math.PI * Math.floor(l / (2 * Math.PI))
+    }
+    jdnToGregorianWithTime(n) {
+        let e = Math.floor(n + .5),
+            i = n + .5 - e,
+            r = e,
+            o;
+        if (r < 2299161) o = r;
+        else {
+            let I = Math.floor((r - 186721625e-2) / 36524.25);
+            o = r + 1 + I - Math.floor(I / 4)
+        }
+        let a = o + 1524,
+            s = Math.floor((a - 122.1) / 365.25),
+            l = Math.floor(365.25 * s),
+            m = Math.floor((a - l) / 30.6001),
+            f = a - l - Math.floor(30.6001 * m),
+            p = m < 14 ? m - 1 : m - 13,
+            g = p < 3 ? s - 4715 : s - 4716,
+            v = i * 86400,
+            x = Math.floor(v / 3600),
+            B = Math.floor(v % 3600 / 60),
+            M = Math.floor(v % 60);
+        return new Date(Date.UTC(g, p - 1, f, x, B, M))
+    }
+    getSolarTermsForYear(n) {
+        let i = [],
+            r = ["Xu\xE2n ph\xE2n", "Thanh minh", "C\u1ED1c v\u0169", "L\u1EADp h\u1EA1", "Ti\u1EC3u m\xE3n", "Mang ch\u1EE7ng", "H\u1EA1 ch\xED", "Ti\u1EC3u th\u1EED", "\u0110\u1EA1i th\u1EED", "L\u1EADp thu", "X\u1EED th\u1EED", "B\u1EA1ch l\u1ED9", "Thu ph\xE2n", "H\xE0n l\u1ED9", "S\u01B0\u01A1ng gi\xE1ng", "L\u1EADp \u0111\xF4ng", "Ti\u1EC3u tuy\u1EBFt", "\u0110\u1EA1i tuy\u1EBFt", "\u0110\xF4ng ch\xED", "Ti\u1EC3u h\xE0n", "\u0110\u1EA1i h\xE0n", "L\u1EADp xu\xE2n", "V\u0169 th\u1EE7y", "Kinh tr\u1EADp"],
+            o = this.jdn(21, 12, n - 1),
+            a = 270 * (Math.PI / 180);
+        for (let l = 0; l < 6; l++) {
+            let f = this.SunLongitude(o) - a;
+            f < -Math.PI && (f += 2 * Math.PI), f > Math.PI && (f -= 2 * Math.PI), o -= f * 365.2422 / (2 * Math.PI)
+        }
+        for (let l = 0; l < 25; l++) {
+            let m = (18 + l) % 24;
+            a = m * 15 * (Math.PI / 180);
+            let f = o + l * 365.2422 / 24;
+            for (let g = 0; g < 6; g++) {
+                let v = this.SunLongitude(f),
+                    x = v - a;
+                v < Math.PI / 2 && a > 3 * Math.PI / 2 && (x += 2 * Math.PI), v > 3 * Math.PI / 2 && a < Math.PI / 2 && (x -= 2 * Math.PI), f -= x * 365.2422 / (2 * Math.PI)
+            }
+            let p = this.jdnToGregorianWithTime(f);
+            i.push({
+                name: r[m],
+                date: p
+            })
+        }
+        let s = 420 * 60 * 1e3;
+        return i.filter(l => new Date(l.date.getTime() + s).getUTCFullYear() === n).sort((l, m) => l.date.getTime() - m.date.getTime()).slice(0, 24)
+    }
+};
+wi.\u0275fac = function(e) {
+    return new(e || wi)
+}, wi.\u0275prov = j({
+    token: wi,
+    factory: wi.\u0275fac,
+    providedIn: "root"
+});
+var Oe = wi;
+var Ii = class Ii {
+    constructor() {
+        this.converter = E(Oe)
+    }
+    getLunarDateInfo(n) {
+        let e = n.toLocaleDateString("vi-VN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }),
+            i = Nv[n.getDay()],
+            r = this.converter.convertSolarToLunar(n),
+            o = this.converter.getCanChiOfYear(r.year),
+            a = this.converter.getCanChiOfMonth(r.year, r.month),
+            s = this.converter.getCanChiOfDay(n),
+            l = s.split(" ")[1],
+            m = this.converter.getSolarTerm(n),
+            {
+                goodHours: f,
+                badHours: p
+            } = this.converter.getZodiacHours(s),
+            {
+                goodDeeds: g,
+                badDeeds: v
+            } = this.getDailyAdvice(l),
+            x = this.converter.getDutyOfDay(r.month, l),
+            B = Pv[x] || "Th\xF4ng tin \u0111ang \u0111\u01B0\u1EE3c c\u1EADp nh\u1EADt.",
+            M = this.converter.getNhiThapBatTu(n),
+            {
+                compatibleZodiacs: I,
+                incompatibleZodiacs: se
+            } = this.getZodiacCompatibility(l),
+            {
+                dayType: De,
+                dayTypeDetail: ye
+            } = this.converter.getDayTypeInfo(r.month, l),
+            At = this.getHolidays(n, r.day, r.month, r.isLeapMonth),
+            yt = this.getRandomQuote(),
+            Et = this.getNumerologyNumber(n);
+        return {
+            gregorianDate: e,
+            dayOfWeek: i,
+            lunarDate: {
+                day: r.day,
+                month: r.month,
+                year: r.year,
+                monthName: (r.isLeapMonth ? "Nhu\u1EADn " : "") + Mv[r.month - 1],
+                yearName: o,
+                isLeapMonth: r.isLeapMonth
+            },
+            canChi: {
+                day: s,
+                month: a,
+                year: o
+            },
+            solarTerm: m,
+            goodHours: f,
+            badHours: p,
+            goodDeeds: g,
+            badDeeds: v,
+            duty: x,
+            dutyInterpretation: B,
+            constellation: M,
+            compatibleZodiacs: I,
+            incompatibleZodiacs: se,
+            dayType: De,
+            dayTypeDetail: ye,
+            holidays: At,
+            quote: yt,
+            numerologyNumber: Et
+        }
+    }
+    getDailyAdvice(n) {
+        return {
+            T\u00FD: {
+                goodDeeds: ["C\u1EA7u ph\xFAc", "C\u1EA7u t\u1EF1", "\u0110\xEDnh h\xF4n", "\u0102n h\u1ECFi", "C\u01B0\u1EDBi g\u1EA3"],
+                badDeeds: ["L\xF3t gi\u01B0\u1EDDng", "\u0110\u1ED9ng th\u1ED5", "An t\xE1ng", "S\u1EEDa kho"]
+            },
+            S\u1EEDu: {
+                goodDeeds: ["T\u1EBF t\u1EF1", "C\u1EA7u ph\xFAc", "C\u1EA7u t\u1EF1", "\u0110\xEDnh h\xF4n", "\u0102n h\u1ECFi"],
+                badDeeds: ["Xu\u1EA5t h\xE0nh", "Di chuy\u1EC3n", "S\u1EEDa ch\u1EEFa nh\xE0 c\u1EEDa"]
+            },
+            D\u1EA7n: {
+                goodDeeds: ["Xu\u1EA5t h\xE0nh", "C\u1EA7u t\xE0i", "Giao d\u1ECBch", "M\u1EDF kho"],
+                badDeeds: ["An t\xE1ng", "S\u1EEDa kho", "\u0110\u1ED9ng th\u1ED5"]
+            },
+            M\u00E3o: {
+                goodDeeds: ["C\u1EA7u ph\xFAc", "C\u1EA7u t\u1EF1", "\u0110\xEDnh h\xF4n", "\u0102n h\u1ECFi", "An s\xE0ng"],
+                badDeeds: ["X\xE2y d\u1EF1ng", "S\u1EEDa ch\u1EEFa", "M\u1EDF kho"]
+            },
+            Th\u00ECn: {
+                goodDeeds: ["\u0110\xEDnh h\xF4n", "\u0102n h\u1ECFi", "C\u01B0\u1EDBi g\u1EA3", "An s\xE0ng"],
+                badDeeds: ["C\u1EA7u ph\xFAc", "C\u1EA7u t\u1EF1", "M\u1EDF kho", "Xu\u1EA5t h\xE0nh"]
+            },
+            T\u1EF5: {
+                goodDeeds: ["C\u01B0\u1EDBi g\u1EA3", "Di chuy\u1EC3n", "Nh\u1EADp tr\u1EA1ch", "An t\xE1ng"],
+                badDeeds: ["\u0110\u1ED9ng th\u1ED5", "S\u1EEDa ch\u1EEFa", "Khai tr\u01B0\u01A1ng"]
+            },
+            Ng\u1ECD: {
+                goodDeeds: ["C\u1EA7u t\xE0i", "Giao d\u1ECBch", "\u0110\xE0m ph\xE1n", "K\xFD k\u1EBFt"],
+                badDeeds: ["\u0110\u1ED9ng th\u1ED5", "An t\xE1ng", "S\u1EEDa ch\u1EEFa"]
+            },
+            M\u00F9i: {
+                goodDeeds: ["C\u1EA7u ph\xFAc", "T\u1EBF t\u1EF1", "\u0110\xEDnh h\xF4n", "C\u01B0\u1EDBi g\u1EA3"],
+                badDeeds: ["Khai tr\u01B0\u01A1ng", "Xu\u1EA5t h\xE0nh", "Giao d\u1ECBch"]
+            },
+            Th\u00E2n: {
+                goodDeeds: ["Xu\u1EA5t h\xE0nh", "C\u1EA7u t\xE0i", "G\u1EB7p g\u1EE1", "Di chuy\u1EC3n"],
+                badDeeds: ["\u0110\u1ED9ng th\u1ED5", "An t\xE1ng", "S\u1EEDa ch\u1EEFa"]
+            },
+            D\u1EADu: {
+                goodDeeds: ["C\u1EA7u ph\xFAc", "C\u1EA7u t\u1EF1", "\u0110\xEDnh h\xF4n", "Khai tr\u01B0\u01A1ng"],
+                badDeeds: ["Xu\u1EA5t h\xE0nh", "S\u1EEDa ch\u1EEFa", "M\u1EDF kho"]
+            },
+            Tu\u1EA5t: {
+                goodDeeds: ["\u0110\xEDnh h\xF4n", "C\u01B0\u1EDBi g\u1EA3", "Giao d\u1ECBch", "K\xFD k\u1EBFt"],
+                badDeeds: ["Di chuy\u1EC3n", "Xu\u1EA5t h\xE0nh", "C\u1EA7u ph\xFAc"]
+            },
+            H\u1EE3i: {
+                goodDeeds: ["T\u1EBF t\u1EF1", "C\u1EA7u ph\xFAc", "G\u1EB7p g\u1EE1", "H\u1ECDp m\u1EB7t"],
+                badDeeds: ["Khai tr\u01B0\u01A1ng", "Giao d\u1ECBch", "Xu\u1EA5t h\xE0nh"]
+            }
+        } [n] || {
+            goodDeeds: [],
+            badDeeds: []
+        }
+    }
+    getZodiacCompatibility(n) {
+        let e = Nr[n];
+        if (!e) return {
+            compatibleZodiacs: [],
+            incompatibleZodiacs: []
+        };
+        let i = [...e.tamHop, e.lucHop],
+            r = [...e.tuHanhXung];
+        return {
+            compatibleZodiacs: i,
+            incompatibleZodiacs: r
+        }
+    }
+    getHolidays(n, e, i, r) {
+        let o = [],
+            a = `${n.getDate()}/${n.getMonth()+1}`;
+        if (Ar[a] && o.push(Ar[a]), !r) {
+            let s = `${e}/${i}`;
+            kr[s] && o.push(kr[s])
+        }
+        return o
+    }
+    getRandomQuote() {
+        let n = Math.floor(Math.random() * om.length);
+        return om[n]
+    }
+    getNumerologyNumber(n) {
+        let i = `${n.getDate()}${n.getMonth()+1}${n.getFullYear()}`.split("").reduce((r, o) => r + parseInt(o, 10), 0);
+        for (; i > 9 && i !== 11 && i !== 22;) i = String(i).split("").reduce((r, o) => r + parseInt(o, 10), 0);
+        return i
+    }
+    getBasicLunarInfoForDate(n) {
+        let e = this.converter.convertSolarToLunar(n),
+            r = this.converter.getCanChiOfDay(n).split(" ")[1],
+            {
+                dayType: o
+            } = this.converter.getDayTypeInfo(e.month, r),
+            a = this.getHolidays(n, e.day, e.month, e.isLeapMonth),
+            s = this.getNumerologyNumber(n);
+        return {
+            lunarDay: e.day,
+            lunarMonth: e.month,
+            isLeapMonth: e.isLeapMonth,
+            dayType: o,
+            hasHoliday: a.length > 0,
+            numerologyNumber: s
+        }
+    }
+    getDayAnalysis(n, e) {
+        let i = this.getLunarDateInfo(n),
+            r = i.canChi.day.split(" ")[1],
+            o = i.lunarDate.day,
+            a = i.lunarDate.month,
+            s = [],
+            l = [],
+            m = [];
+        tm.includes(o) && s.push("Ph\u1EA1m Tam N\u01B0\u01A1ng"), nm.includes(o) && s.push("Ph\u1EA1m Nguy\u1EC7t K\u1EF5"), im[a] === r && s.push("Ph\u1EA1m S\xE1t Ch\u1EE7"), rm[a] === r && s.push("Ph\u1EA1m Th\u1ECD T\u1EED");
+        let f = Nr[e];
+        return f && (f.lucXung === r && s.push(`L\u1EE5c Xung v\u1EDBi tu\u1ED5i ${e}`), f.lucHai === r && s.push(`L\u1EE5c H\u1EA1i v\u1EDBi tu\u1ED5i ${e}`)), i.dayType === "H\u1EAFc \u0110\u1EA1o" && s.push("Ng\xE0y H\u1EAFc \u0110\u1EA1o"), i.dayType === "Ho\xE0ng \u0110\u1EA1o" && l.push("Ng\xE0y Ho\xE0ng \u0110\u1EA1o"), (o === 1 || o === 15) && m.push("Ng\xE0y S\xF3c/V\u1ECDng"), {
+            badPoints: s,
+            goodPoints: l,
+            neutralPoints: m
+        }
+    }
+    scoreDateForEvent(n, e, i) {
+        let r = 5,
+            o = 10,
+            a = [],
+            s = [],
+            l = this.getLunarDateInfo(n),
+            m = l.canChi.day.split(" ")[1],
+            f = l.lunarDate.day,
+            p = l.lunarDate.month,
+            g = l.duty,
+            v = l.constellation.type;
+        l.dayType === "H\u1EAFc \u0110\u1EA1o" && (r -= 2, s.push("Ng\xE0y H\u1EAFc \u0110\u1EA1o")), tm.includes(f) && (r -= 1.5, s.push("Ph\u1EA1m Tam N\u01B0\u01A1ng")), nm.includes(f) && (r -= 1.5, s.push("Ph\u1EA1m Nguy\u1EC7t K\u1EF5")), im[p] === m && (r -= 1.5, s.push("Ph\u1EA1m S\xE1t Ch\u1EE7")), rm[p] === m && (r -= 1.5, s.push("Ph\u1EA1m Th\u1ECD T\u1EED"));
+        let x = Nr[e];
+        x && (x.lucXung === m && (r -= 2.5, s.push(`L\u1EE5c Xung v\u1EDBi tu\u1ED5i ${e}`)), x.lucHai === m && (r -= 2.5, s.push(`L\u1EE5c H\u1EA1i v\u1EDBi tu\u1ED5i ${e}`)), x.tuHanhXung.includes(m) && (r -= 2.5, s.push(`T\u1EE9 H\xE0nh Xung v\u1EDBi tu\u1ED5i ${e}`))), v === "Hung" && (r -= 1, s.push(`Sao ${l.constellation.name} (Hung tinh)`)), l.dayType === "Ho\xE0ng \u0110\u1EA1o" && (r += 2, a.push("Ng\xE0y Ho\xE0ng \u0110\u1EA1o")), x && (x.lucHop === m && (r += 2, a.push(`L\u1EE5c H\u1EE3p v\u1EDBi tu\u1ED5i ${e}`)), x.tamHop.includes(m) && (r += 2, a.push(`Tam H\u1EE3p v\u1EDBi tu\u1ED5i ${e}`))), v === "Ki\u1EBFt" && (r += 1, a.push(`Sao ${l.constellation.name} (Ki\u1EBFt tinh)`));
+        let B = i.toLowerCase(),
+            M = {
+                khai: ["khai tr\u01B0\u01A1ng", "m\u1EDF"],
+                th\u00E0nh: ["khai tr\u01B0\u01A1ng", "c\u01B0\u1EDBi", "h\u1ECFi", "nh\u1EADm ch\u1EE9c", "nh\u1EADp tr\u1EA1ch"],
+                m\u00E3n: ["c\u1EA7u t\xE0i", "t\u1EBF l\u1EC5", "nh\u1EADp kho"],
+                \u0111\u1ECBnh: ["c\u01B0\u1EDBi", "h\u1ECFi", "k\xFD k\u1EBFt", "giao d\u1ECBch"],
+                ki\u1EBFn: ["x\xE2y", "d\u1EF1ng", "\u0111\u1ED9ng th\u1ED5", "kh\u1EDFi c\xF4ng"]
+            },
+            I = {
+                ph\u00E1: ["m\u1ECDi vi\u1EC7c"],
+                b\u1EBF: ["khai tr\u01B0\u01A1ng", "m\u1EDF", "xu\u1EA5t h\xE0nh"],
+                nguy: ["m\u1ECDi vi\u1EC7c"]
+            },
+            se = !1;
+        for (let ye in M)
+            if (g === ye.charAt(0).toUpperCase() + ye.slice(1)) {
+                a.push(`Tr\u1EF1c ${g} (T\u1ED1t)`), r += 1.5, se = !0;
+                break
+            } if (!se) {
+            for (let ye in I)
+                if (g === ye.charAt(0).toUpperCase() + ye.slice(1)) {
+                    s.push(`Tr\u1EF1c ${g} (X\u1EA5u)`), r -= 1.5;
+                    break
+                }
+        }
+        r = Math.max(0, Math.min(o, r));
+        let De = "Ng\xE0y Trung B\xECnh";
+        return r >= 9 ? De = "Ng\xE0y R\u1EA5t T\u1ED1t" : r >= 7 ? De = "Ng\xE0y Kh\xE1 T\u1ED1t" : r >= 5 ? De = "Ng\xE0y Ch\u1EA5p Nh\u1EADn \u0110\u01B0\u1EE3c" : r >= 3 ? De = "N\xEAn C\xE2n Nh\u1EAFc" : De = "Ng\xE0y X\u1EA5u, N\xEAn Tr\xE1nh", {
+            score: r,
+            maxScore: o,
+            summary: De,
+            goodPoints: a,
+            badPoints: s
+        }
+    }
+    getDepartureDirections(n) {
+        return {
+            Gi\u00E1p: {
+                joyGod: "\u0110\xF4ng B\u1EAFc",
+                wealthGod: "\u0110\xF4ng Nam",
+                craneGod: "\u0110\xF4ng Nam"
+            },
+            K\u1EF7: {
+                joyGod: "\u0110\xF4ng B\u1EAFc",
+                wealthGod: "\u0110\xF4ng Nam",
+                craneGod: "\u0110\xF4ng Nam"
+            },
+            \u1EA4t: {
+                joyGod: "T\xE2y B\u1EAFc",
+                wealthGod: "\u0110\xF4ng",
+                craneGod: "T\xE2y Nam"
+            },
+            Canh: {
+                joyGod: "T\xE2y B\u1EAFc",
+                wealthGod: "\u0110\xF4ng",
+                craneGod: "T\xE2y Nam"
+            },
+            B\u00EDnh: {
+                joyGod: "T\xE2y Nam",
+                wealthGod: "T\xE2y",
+                craneGod: "Ch\xEDnh T\xE2y"
+            },
+            T\u00E2n: {
+                joyGod: "T\xE2y Nam",
+                wealthGod: "T\xE2y",
+                craneGod: "Ch\xEDnh T\xE2y"
+            },
+            \u0110inh: {
+                joyGod: "Nam",
+                wealthGod: "B\u1EAFc",
+                craneGod: "Ch\xEDnh B\u1EAFc"
+            },
+            Nh\u00E2m: {
+                joyGod: "Nam",
+                wealthGod: "B\u1EAFc",
+                craneGod: "Ch\xEDnh B\u1EAFc"
+            },
+            M\u1EADu: {
+                joyGod: "\u0110\xF4ng Nam",
+                wealthGod: "Nam",
+                craneGod: "T\xE2y B\u1EAFc"
+            },
+            Qu\u00FD: {
+                joyGod: "\u0110\xF4ng Nam",
+                wealthGod: "Nam",
+                craneGod: "T\xE2y B\u1EAFc"
+            }
+        } [n] || {
+            joyGod: "N/A",
+            wealthGod: "N/A",
+            craneGod: "N/A"
+        }
+    }
+    getLucNham(n, e) {
+        let i = [{
+                name: "\u0110\u1EA1i An",
+                good: !0,
+                interp: "M\u1ECDi vi\u1EC7c \u0111\u1EC1u t\u1ED1t l\xE0nh. C\u1EA7u t\xE0i \u0111i h\u01B0\u1EDBng T\xE2y Nam, nh\xE0 c\u1EEDa y\xEAn l\xE0nh. Ng\u01B0\u1EDDi xu\u1EA5t h\xE0nh \u0111\u1EC1u b\xECnh y\xEAn."
+            }, {
+                name: "L\u01B0u Li\xEAn",
+                good: !1,
+                interp: "Nghi\u1EC7p kh\xF3 th\xE0nh, c\u1EA7u t\xE0i m\u1EDD m\u1ECBt. Ki\u1EC7n c\xE1o n\xEAn ho\xE3n l\u1EA1i. Ng\u01B0\u1EDDi \u0111i ch\u01B0a c\xF3 tin v\u1EC1. M\u1EA5t c\u1EE7a, \u0111i h\u01B0\u1EDBng Nam t\xECm nhanh m\u1EDBi th\u1EA5y."
+            }, {
+                name: "T\u1ED1c H\u1EF7",
+                good: !0,
+                interp: "Tin vui s\u1EAFp t\u1EDBi. C\u1EA7u t\xE0i \u0111i h\u01B0\u1EDBng Nam. \u0110i vi\u1EC7c g\u1EB7p g\u1EE1 c\xE1c quan g\u1EB7p nhi\u1EC1u may m\u1EAFn, ch\u0103n nu\xF4i \u0111\u1EC1u thu\u1EADn, ng\u01B0\u1EDDi \u0111i c\xF3 tin v\u1EC1."
+            }, {
+                name: "X\xEDch Kh\u1EA9u",
+                good: !1,
+                interp: "Hay c\xE3i c\u1ECD, g\xE2y chuy\u1EC7n \u0111\xF3i k\xE9m. Ng\u01B0\u1EDDi \u0111i n\xEAn ho\xE3n l\u1EA1i. Ph\xF2ng ng\u01B0\u1EDDi nguy\u1EC1n r\u1EE7a, tr\xE1nh l\xE2y b\u1EC7nh. N\xF3i chung vi\u1EC7c g\xEC c\u0169ng n\xEAn \u0111\u1EC1 ph\xF2ng."
+            }, {
+                name: "Ti\u1EC3u C\xE1t",
+                good: !0,
+                interp: "R\u1EA5t t\u1ED1t l\xE0nh. Bu\xF4n b\xE1n c\xF3 l\u1EDDi. Ph\u1EE5 n\u1EEF c\xF3 tin m\u1EEBng, ng\u01B0\u1EDDi \u0111i s\u1EAFp v\u1EC1 nh\xE0. M\u1ECDi vi\u1EC7c \u0111\u1EC1u h\xF2a h\u1EE3p, c\xF3 b\u1EC7nh c\u1EA7u s\u1EBD kh\u1ECFi."
+            }, {
+                name: "Kh\xF4ng Vong",
+                good: !1,
+                interp: "C\u1EA7u t\xE0i kh\xF4ng \u0111\u01B0\u1EE3c, h\u1EE3p \u0111\u1ED3ng kh\xF4ng th\xE0nh. M\u1EA5t c\u1EE7a kh\xF3 t\xECm. Ki\u1EC7n c\xE1o n\xEAn tr\xE1nh. Mi\u1EC7ng ti\u1EBFng t\u1EA7m th\u01B0\u1EDDng. Hay c\xE3i c\u1ECD."
+            }],
+            r = n - 1 + (e - 1);
+        return nn.map((o, a) => {
+            let s = (r + a) % 6,
+                l = i[s];
+            return {
+                hourName: `${o} (${_a[a]})`,
+                result: l.name,
+                interpretation: l.interp,
+                isGood: l.good
+            }
+        })
+    }
+    getSolarTermPeriod(n) {
+        let e = n.getFullYear(),
+            i = this.converter.getSolarTermsForYear(e - 1),
+            r = this.converter.getSolarTermsForYear(e),
+            o = this.converter.getSolarTermsForYear(e + 1),
+            a = [...i, ...r, ...o],
+            s = -1;
+        for (let l = a.length - 1; l >= 0; l--)
+            if (a[l].date <= n) {
+                s = l;
+                break
+            } return s === -1 || s + 1 >= a.length ? {
+            current: "N/A",
+            start: n,
+            end: n
+        } : {
+            current: a[s].name,
+            start: a[s].date,
+            end: a[s + 1].date
+        }
+    }
+    getSunInfo(n, e, i) {
+        let r = Et => Et * Math.PI / 180,
+            o = Et => Et * 180 / Math.PI,
+            s = (Et => Math.floor((Et.getTime() - new Date(Et.getFullYear(), 0, 0).getTime()) / 864e5))(n),
+            l = r(360 / 365 * (s - 81)),
+            m = 9.87 * Math.sin(2 * l) - 7.53 * Math.cos(l) - 1.5 * Math.sin(l),
+            f = r(-23.44) * Math.cos(r(360 / 365.25 * (s + 10))),
+            p = r(e),
+            g = r(90.833),
+            v = Math.acos((Math.cos(g) - Math.sin(p) * Math.sin(f)) / (Math.cos(p) * Math.cos(f))),
+            x = o(v),
+            M = 7 * 15,
+            se = 720 - 4 * (i - M) - m,
+            De = x / 15 * 60,
+            ye = se - De,
+            At = se + De,
+            yt = Et => {
+                let Lc = new Date(n);
+                return Lc.setHours(0, 0, 0, 0), Lc.setMilliseconds(Et * 60 * 1e3), Lc
+            };
+        return {
+            sunrise: yt(ye),
+            sunset: yt(At)
+        }
+    }
+    formatSunLongitude(n) {
+        let e = n * (180 / Math.PI);
+        e < 0 && (e += 360);
+        let i = Math.floor(e),
+            r = (e - i) * 60,
+            o = Math.floor(r),
+            a = (r - o) * 60,
+            s = Math.round(a);
+        return `${i}\xB0${o}'${s}"`
+    }
+    getDetailedDailyInfo(n) {
+        let e = this.getLunarDateInfo(n),
+            i = e.canChi.day.split(" ")[0],
+            r = this.getDepartureDirections(i),
+            o = this.getLucNham(e.lunarDate.month, e.lunarDate.day),
+            a = this.getSolarTermPeriod(n),
+            s = this.converter.jdn(n.getDate(), n.getMonth() + 1, n.getFullYear()),
+            l = this.converter.SunLongitude(s),
+            m = this.formatSunLongitude(l),
+            p = [{
+                direction: "\u0110\xF4ng",
+                name: "M\u0169i \u0110\xF4i \u2013 C\u1EF1c \u0110\xF4ng (Kh\xE1nh H\xF2a)",
+                lat: 12.6558,
+                lon: 109.4608,
+                coords: `109\xB027'39"\u0110 / 12\xB039'21"B`
+            }, {
+                direction: "T\xE2y",
+                name: "\u0110\u1EC9nh A Pa Ch\u1EA3i (\u0110i\u1EC7n Bi\xEAn)",
+                lat: 22.4303,
+                lon: 102.1842,
+                coords: `102\xB011'03"\u0110 / 22\xB025'49"B`
+            }, {
+                direction: "Nam",
+                name: "M\u0169i C\xE0 Mau (C\xE0 Mau)",
+                lat: 8.625,
+                lon: 104.7167,
+                coords: `104\xB043'00"\u0110 / 8\xB037'30"B`
+            }, {
+                direction: "B\u1EAFc",
+                name: "\u0110\u1EC9nh L\u0169ng C\xFA (H\xE0 Giang)",
+                lat: 23.3831,
+                lon: 105.3389,
+                coords: `105\xB020'20"\u0110 / 23\xB022'59"B`
+            }].map(v => {
+                let x = this.getSunInfo(n, v.lat, v.lon);
+                return {
+                    direction: v.direction,
+                    locationName: v.name,
+                    coordinates: v.coords,
+                    sunrise: x.sunrise,
+                    sunset: x.sunset
+                }
+            });
+        return {
+            departureDirections: r,
+            lucNham: o,
+            solarTermPeriod: a,
+            sunInfo: {
+                julianDay: s,
+                sunLongitude: m,
+                locations: p
+            }
+        }
+    }
+    getHourlyDetails(n) {
+        let e = this.converter.getHourlyPillars(n),
+            i = this.getLunarDateInfo(n),
+            r = this.getLucNham(i.lunarDate.month, i.lunarDate.day);
+        if (!i) return [];
+        let o = i.canChi.year.split(" ")[0],
+            a = i.canChi.month.split(" ")[0],
+            s = i.canChi.day.split(" ")[0];
+        return e.map((l, m) => {
+            let f = `${l.can} ${l.chi}`,
+                p = Bv[f] || "N/A",
+                g = r[m].result,
+                v = l.hourRange.indexOf("("),
+                x = l.chi,
+                B = "";
+            v > -1 && (x = l.hourRange.substring(0, v).trim(), B = l.hourRange.substring(v).trim());
+            let M = l.can,
+                I = [o, a, s, M],
+                se = {
+                    Kim: 0,
+                    M\u1ED9c: 0,
+                    Th\u1EE7y: 0,
+                    H\u1ECFa: 0,
+                    Th\u1ED5: 0
+                };
+            for (let De of I) {
+                let ye = $t[De]?.element;
+                ye && se[ye]++
+            }
+            return {
+                hourName: l.hourRange,
+                hourChi: x,
+                hourRange: B,
+                canChi: f,
+                napAm: p,
+                lucNham: g,
+                elementCounts: se,
+                startHour: l.startHour
+            }
+        })
+    }
+};
+Ii.\u0275fac = function(e) {
+    return new(e || Ii)
+}, Ii.\u0275prov = j({
+    token: Ii,
+    factory: Ii.\u0275fac,
+    providedIn: "root"
+});
+var Le = Ii;
+var vt = [{
+    name: "Aries",
+    vietnameseName: "B\u1EA1ch D\u01B0\u01A1ng",
+    icon: "\u2648\uFE0F",
+    dateRange: "21/3 - 19/4",
+    description: "N\u0103ng \u0111\u1ED9ng, can \u0111\u1EA3m v\xE0 ti\xEAn phong. B\u1EA1ch D\u01B0\u01A1ng lu\xF4n tr\xE0n \u0111\u1EA7y nhi\u1EC7t huy\u1EBFt v\xE0 s\u1EB5n s\xE0ng \u0111\u1ED1i m\u1EB7t v\u1EDBi th\u1EED th\xE1ch. H\u1ECD l\xE0 nh\u1EEFng nh\xE0 l\xE3nh \u0111\u1EA1o b\u1EA9m sinh.",
+    compatible: ["Leo", "Sagittarius", "Gemini", "Aquarius"],
+    incompatible: ["Cancer", "Capricorn"]
+}, {
+    name: "Taurus",
+    vietnameseName: "Kim Ng\u01B0u",
+    icon: "\u2649\uFE0F",
+    dateRange: "20/4 - 20/5",
+    description: "Ki\xEAn \u0111\u1ECBnh, \u0111\xE1ng tin c\u1EADy v\xE0 th\u1EF1c t\u1EBF. Kim Ng\u01B0u y\xEAu th\xEDch s\u1EF1 \u1ED5n \u0111\u1ECBnh, tho\u1EA3i m\xE1i v\xE0 tr\xE2n tr\u1ECDng nh\u1EEFng gi\xE1 tr\u1ECB v\u1EADt ch\u1EA5t c\u0169ng nh\u01B0 tinh th\u1EA7n b\u1EC1n v\u1EEFng.",
+    compatible: ["Virgo", "Capricorn", "Cancer", "Pisces"],
+    incompatible: ["Leo", "Aquarius"]
+}, {
+    name: "Gemini",
+    vietnameseName: "Song T\u1EED",
+    icon: "\u264A\uFE0F",
+    dateRange: "21/5 - 20/6",
+    description: "Th\xF4ng minh, linh ho\u1EA1t v\xE0 t\xF2 m\xF2. Song T\u1EED c\xF3 kh\u1EA3 n\u0103ng giao ti\u1EBFp tuy\u1EC7t v\u1EDDi v\xE0 lu\xF4n t\xECm ki\u1EBFm nh\u1EEFng \xFD t\u01B0\u1EDFng, tr\u1EA3i nghi\u1EC7m m\u1EDBi m\u1EBB.",
+    compatible: ["Libra", "Aquarius", "Aries", "Leo"],
+    incompatible: ["Virgo", "Pisces"]
+}, {
+    name: "Cancer",
+    vietnameseName: "C\u1EF1 Gi\u1EA3i",
+    icon: "\u264B\uFE0F",
+    dateRange: "21/6 - 22/7",
+    description: "Gi\xE0u c\u1EA3m x\xFAc, gi\xE0u tr\xED t\u01B0\u1EDFng t\u01B0\u1EE3ng v\xE0 lu\xF4n quan t\xE2m. C\u1EF1 Gi\u1EA3i l\xE0 ng\u01B0\u1EDDi c\u1EE7a gia \u0111\xECnh, h\u1ECD s\u1ED1ng t\xECnh c\u1EA3m v\xE0 c\xF3 tr\u1EF1c gi\xE1c nh\u1EA1y b\xE9n.",
+    compatible: ["Scorpio", "Pisces", "Taurus", "Virgo"],
+    incompatible: ["Aries", "Libra"]
+}, {
+    name: "Leo",
+    vietnameseName: "S\u01B0 T\u1EED",
+    icon: "\u264C\uFE0F",
+    dateRange: "23/7 - 22/8",
+    description: "H\xE0o ph\xF3ng, t\u1EF1 tin v\xE0 \u0111\u1EA7y tham v\u1ECDng. S\u01B0 T\u1EED th\xEDch tr\u1EDF th\xE0nh trung t\xE2m c\u1EE7a s\u1EF1 ch\xFA \xFD v\xE0 c\xF3 m\u1ED9t tr\xE1i tim \u1EA5m \xE1p, lu\xF4n s\u1EB5n s\xE0ng che ch\u1EDF ng\u01B0\u1EDDi kh\xE1c.",
+    compatible: ["Aries", "Sagittarius", "Gemini", "Libra"],
+    incompatible: ["Taurus", "Scorpio"]
+}, {
+    name: "Virgo",
+    vietnameseName: "X\u1EED N\u1EEF",
+    icon: "\u264D\uFE0F",
+    dateRange: "23/8 - 22/9",
+    description: "C\u1EA9n th\u1EADn, t\u1EC9 m\u1EC9 v\xE0 c\xF3 \xF3c ph\xE2n t\xEDch. X\u1EED N\u1EEF lu\xF4n h\u01B0\u1EDBng \u0111\u1EBFn s\u1EF1 ho\xE0n h\u1EA3o, s\u1ED1ng r\u1EA5t th\u1EF1c t\u1EBF v\xE0 c\xF3 kh\u1EA3 n\u0103ng gi\u1EA3i quy\u1EBFt v\u1EA5n \u0111\u1EC1 m\u1ED9t c\xE1ch hi\u1EC7u qu\u1EA3.",
+    compatible: ["Taurus", "Capricorn", "Cancer", "Scorpio"],
+    incompatible: ["Gemini", "Sagittarius"]
+}, {
+    name: "Libra",
+    vietnameseName: "Thi\xEAn B\xECnh",
+    icon: "\u264E\uFE0F",
+    dateRange: "23/9 - 22/10",
+    description: "C\xF4ng b\u1EB1ng, duy\xEAn d\xE1ng v\xE0 c\xF3 khi\u1EBFu th\u1EA9m m\u1EF9. Thi\xEAn B\xECnh y\xEAu th\xEDch s\u1EF1 h\xE0i h\xF2a, lu\xF4n t\xECm ki\u1EBFm s\u1EF1 c\xE2n b\u1EB1ng trong cu\u1ED9c s\u1ED1ng v\xE0 c\xE1c m\u1ED1i quan h\u1EC7.",
+    compatible: ["Gemini", "Aquarius", "Leo", "Sagittarius"],
+    incompatible: ["Cancer", "Capricorn"]
+}, {
+    name: "Scorpio",
+    vietnameseName: "B\u1ECD C\u1EA1p",
+    icon: "\u264F\uFE0F",
+    dateRange: "23/10 - 21/11",
+    description: "M\u1EA1nh m\u1EBD, quy\u1EBFt \u0111o\xE1n v\xE0 c\xF3 chi\u1EC1u s\xE2u. B\u1ECD C\u1EA1p c\xF3 n\u1ED9i t\xE2m ph\u1EE9c t\u1EA1p, \u0111am m\xEA m\xE3nh li\u1EC7t v\xE0 m\u1ED9t \xFD ch\xED ki\xEAn c\u01B0\u1EDDng kh\xF4ng d\u1EC5 b\u1ECB khu\u1EA5t ph\u1EE5c.",
+    compatible: ["Cancer", "Pisces", "Virgo", "Capricorn"],
+    incompatible: ["Leo", "Aquarius"]
+}, {
+    name: "Sagittarius",
+    vietnameseName: "Nh\xE2n M\xE3",
+    icon: "\u2650\uFE0F",
+    dateRange: "22/11 - 21/12",
+    description: "L\u1EA1c quan, y\xEAu t\u1EF1 do v\xE0 ham h\u1ECDc h\u1ECFi. Nh\xE2n M\xE3 l\xE0 nh\u1EEFng nh\xE0 th\xE1m hi\u1EC3m b\u1EA9m sinh, lu\xF4n khao kh\xE1t kh\xE1m ph\xE1 th\u1EBF gi\u1EDBi v\xE0 nh\u1EEFng tri\u1EBFt l\xFD m\u1EDBi.",
+    compatible: ["Aries", "Leo", "Libra", "Aquarius"],
+    incompatible: ["Virgo", "Pisces"]
+}, {
+    name: "Capricorn",
+    vietnameseName: "Ma K\u1EBFt",
+    icon: "\u2651\uFE0F",
+    dateRange: "22/12 - 19/1",
+    description: "C\xF3 tr\xE1ch nhi\u1EC7m, k\u1EF7 lu\u1EADt v\xE0 \u0111\u1EA7y tham v\u1ECDng. Ma K\u1EBFt l\xE0 ng\u01B0\u1EDDi l\xE0m vi\u1EC7c ch\u0103m ch\u1EC9, c\xF3 t\u1EA7m nh\xECn xa v\xE0 lu\xF4n n\u1ED7 l\u1EF1c \u0111\u1EC3 \u0111\u1EA1t \u0111\u01B0\u1EE3c m\u1EE5c ti\xEAu \u0111\xE3 \u0111\u1EC1 ra.",
+    compatible: ["Taurus", "Virgo", "Scorpio", "Pisces"],
+    incompatible: ["Aries", "Libra"]
+}, {
+    name: "Aquarius",
+    vietnameseName: "B\u1EA3o B\xECnh",
+    icon: "\u2652\uFE0F",
+    dateRange: "20/1 - 18/2",
+    description: "\u0110\u1ED9c \u0111\xE1o, \u0111\u1ED9c l\u1EADp v\xE0 nh\xE2n \u0111\u1EA1o. B\u1EA3o B\xECnh c\xF3 t\u01B0 duy ti\u1EBFn b\u1ED9, lu\xF4n \u0111i tr\u01B0\u1EDBc th\u1EDDi \u0111\u1EA1i v\xE0 quan t\xE2m \u0111\u1EBFn c\xE1c v\u1EA5n \u0111\u1EC1 x\xE3 h\u1ED9i, c\u1ED9ng \u0111\u1ED3ng.",
+    compatible: ["Gemini", "Libra", "Aries", "Sagittarius"],
+    incompatible: ["Taurus", "Scorpio"]
+}, {
+    name: "Pisces",
+    vietnameseName: "Song Ng\u01B0",
+    icon: "\u2653\uFE0F",
+    dateRange: "19/2 - 20/3",
+    description: "Nh\xE2n \xE1i, gi\xE0u l\xF2ng tr\u1EAFc \u1EA9n v\xE0 c\xF3 t\xE2m h\u1ED3n ngh\u1EC7 s\u0129. Song Ng\u01B0 s\u1ED1ng trong th\u1EBF gi\u1EDBi c\u1EE7a nh\u1EEFng gi\u1EA5c m\u01A1 v\xE0 c\u1EA3m x\xFAc, c\xF3 kh\u1EA3 n\u0103ng \u0111\u1ED3ng c\u1EA3m s\xE2u s\u1EAFc.",
+    compatible: ["Cancer", "Scorpio", "Taurus", "Capricorn"],
+    incompatible: ["Gemini", "Sagittarius"]
+}];
+var Mi = class Mi {
+    getZodiacSign(n) {
+        let e = n.getMonth() + 1,
+            i = n.getDate();
+        return e === 3 && i >= 21 || e === 4 && i <= 19 ? vt[0] : e === 4 && i >= 20 || e === 5 && i <= 20 ? vt[1] : e === 5 && i >= 21 || e === 6 && i <= 20 ? vt[2] : e === 6 && i >= 21 || e === 7 && i <= 22 ? vt[3] : e === 7 && i >= 23 || e === 8 && i <= 22 ? vt[4] : e === 8 && i >= 23 || e === 9 && i <= 22 ? vt[5] : e === 9 && i >= 23 || e === 10 && i <= 22 ? vt[6] : e === 10 && i >= 23 || e === 11 && i <= 21 ? vt[7] : e === 11 && i >= 22 || e === 12 && i <= 21 ? vt[8] : e === 12 && i >= 22 || e === 1 && i <= 19 ? vt[9] : e === 1 && i >= 20 || e === 2 && i <= 18 ? vt[10] : e === 2 && i >= 19 || e === 3 && i <= 20 ? vt[11] : null
+    }
+    getDailyReading(n, e) {
+        let i = this.getZodiacSign(e);
+        return !i || !n ? {
+            mood: "neutral",
+            text: "M\u1ED9t ng\xE0y b\xECnh th\u01B0\u1EDDng."
+        } : n.name === i.name ? {
+            mood: "good",
+            text: `H\xF4m nay l\xE0 ng\xE0y c\u1EE7a ${i.vietnameseName}. N\u0103ng l\u01B0\u1EE3ng t\u01B0\u01A1ng h\u1EE3p ho\xE0n to\xE0n, h\u1EE9a h\u1EB9n m\u1ED9t ng\xE0y thu\u1EADn l\u1EE3i v\xE0 \u0111\u1EA7y c\u1EA3m h\u1EE9ng cho b\u1EA1n.`
+        } : n.compatible.includes(i.name) ? {
+            mood: "good",
+            text: `H\xF4m nay l\xE0 m\u1ED9t ng\xE0y h\xE0i ho\xE0. N\u0103ng l\u01B0\u1EE3ng t\u1EEB cung ${i.vietnameseName} mang l\u1EA1i s\u1EF1 t\xEDch c\u1EF1c v\xE0 may m\u1EAFn cho b\u1EA1n.`
+        } : n.incompatible.includes(i.name) ? {
+            mood: "bad",
+            text: `N\u0103ng l\u01B0\u1EE3ng c\u1EE7a ${i.vietnameseName} h\xF4m nay c\xF3 th\u1EC3 g\xE2y ra ch\xFAt xung kh\u1EAFc. H\xE3y ki\xEAn nh\u1EABn v\xE0 c\u1EA9n tr\u1ECDng h\u01A1n trong giao ti\u1EBFp.`
+        } : {
+            mood: "neutral",
+            text: "M\u1ED9t ng\xE0y b\xECnh th\u01B0\u1EDDng, kh\xF4ng c\xF3 nhi\u1EC1u bi\u1EBFn \u0111\u1ED9ng \u0111\u1EB7c bi\u1EC7t li\xEAn quan \u0111\u1EBFn n\u0103ng l\u01B0\u1EE3ng ho\xE0ng \u0111\u1EA1o."
+        }
+    }
+};
+Mi.\u0275fac = function(e) {
+    return new(e || Mi)
+}, Mi.\u0275prov = j({
+    token: Mi,
+    factory: Mi.\u0275fac,
+    providedIn: "root"
+});
+var Rr = Mi;
+var Ni = class Ni {
+    constructor() {
+        this.lunarCalendarService = E(Le);
+        this.horoscopeService = E(Rr);
+        this.selectedDate = C(this.normalizeDate(new Date));
+        this.currentMonth = C(this.normalizeDate(new Date));
+        this.currentYear = C(new Date().getFullYear());
+        this.showCopyToast = C(!1);
+        this.userDOB = C(null);
+        this.userFullName = C(null);
+        this.userZodiacSign = C(null);
+        this.selectedLunarInfo = Z(() => {
+            try {
+                return this.lunarCalendarService.getLunarDateInfo(this.selectedDate())
+            } catch (n) {
+                return console.error("Failed to get lunar info", n), null
+            }
+        });
+        this.dailyHoroscopeReading = Z(() => {
+            let n = this.userZodiacSign();
+            return n ? this.horoscopeService.getDailyReading(n, this.selectedDate()) : null
+        });
+        this.monthYearLabel = Z(() => this.currentMonth().toLocaleDateString("vi-VN", {
+            month: "long",
+            year: "numeric"
+        }));
+        this.weekYearLabel = Z(() => {
+            let n = this.currentWeekDays();
+            if (n.length === 0) return "";
+            let e = n[0].date,
+                i = n[6].date,
+                r = {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric"
+                };
+            return `Tu\u1EA7n t\u1EEB ${e.toLocaleDateString("vi-VN",r)} \u0111\u1EBFn ${i.toLocaleDateString("vi-VN",r)}`
+        });
+        this.weekNumberLabel = Z(() => {
+            let n = this.currentWeekDays();
+            if (n.length === 0) return "";
+            let e = n[0].date;
+            return `Tu\u1EA7n th\u1EE9 ${this.getWeekNumber(e)} c\u1EE7a n\u0103m`
+        });
+        this.calendarDays = Z(() => {
+            let n = this.currentMonth(),
+                e = n.getFullYear(),
+                i = n.getMonth(),
+                r = new Date(e, i, 1),
+                o = new Date(e, i + 1, 0),
+                a = (r.getDay() + 6) % 7,
+                s = [],
+                l = this.normalizeDate(new Date);
+            for (let f = a; f > 0; f--) {
+                let p = new Date(e, i, 1 - f);
+                s.push(this.createCalendarDay(p, !1, l))
+            }
+            for (let f = 1; f <= o.getDate(); f++) {
+                let p = new Date(e, i, f);
+                s.push(this.createCalendarDay(p, !0, l))
+            }
+            let m = s.length;
+            for (let f = 1; f <= 42 - m; f++) {
+                let p = new Date(e, i + 1, f);
+                s.push(this.createCalendarDay(p, !1, l))
+            }
+            return s
+        });
+        this.yearViewMonths = Z(() => {
+            let n = this.currentYear(),
+                e = this.normalizeDate(new Date),
+                i = [],
+                r = ["Th\xE1ng 1", "Th\xE1ng 2", "Th\xE1ng 3", "Th\xE1ng 4", "Th\xE1ng 5", "Th\xE1ng 6", "Th\xE1ng 7", "Th\xE1ng 8", "Th\xE1ng 9", "Th\xE1ng 10", "Th\xE1ng 11", "Th\xE1ng 12"];
+            for (let o = 0; o < 12; o++) {
+                let a = new Date(n, o, 1),
+                    s = new Date(n, o + 1, 0),
+                    l = (a.getDay() + 6) % 7,
+                    m = [];
+                for (let p = l; p > 0; p--) m.push(this.createCalendarDay(new Date(n, o, 1 - p), !1, e));
+                for (let p = 1; p <= s.getDate(); p++) m.push(this.createCalendarDay(new Date(n, o, p), !0, e));
+                let f = 42 - m.length;
+                for (let p = 1; p <= f; p++) m.push(this.createCalendarDay(new Date(n, o + 1, p), !1, e));
+                i.push({
+                    monthIndex: o,
+                    monthName: r[o],
+                    days: m
+                })
+            }
+            return i
+        });
+        this.currentWeekDays = Z(() => {
+            let n = this.selectedDate(),
+                e = (n.getDay() + 6) % 7,
+                i = new Date(n);
+            i.setDate(n.getDate() - e);
+            let r = [],
+                o = this.normalizeDate(new Date);
+            for (let a = 0; a < 7; a++) {
+                let s = new Date(i);
+                s.setDate(i.getDate() + a), r.push({
+                    date: s,
+                    info: this.lunarCalendarService.getLunarDateInfo(s),
+                    isToday: s.getTime() === o.getTime(),
+                    isSelected: s.getTime() === n.getTime()
+                })
+            }
+            return r
+        });
+        this.userCanChi = Z(() => {
+            let n = this.userDOB();
+            if (!n) return null;
+            let e = new Date(n);
+            if (isNaN(e.getTime())) return null;
+            let i = this.lunarCalendarService.getLunarDateInfo(e).canChi.year,
+                [r, o] = i.split(" ");
+            return {
+                can: r,
+                chi: o
+            }
+        });
+        this.personalizedDaysForOverview = Z(() => {
+            let n = this.userCanChi();
+            if (!n) return {
+                good: [],
+                bad: []
+            };
+            let e = Nr[n.chi];
+            if (!e) return {
+                good: [],
+                bad: []
+            };
+            let i = [...e.tamHop, e.lucHop],
+                r = [...e.tuHanhXung],
+                o = [],
+                a = [];
+            return this.calendarDays().forEach(s => {
+                if (!s.isCurrentMonth) return;
+                let l = this.lunarCalendarService.getLunarDateInfo(s.date).canChi.day.split(" ")[1];
+                if (i.includes(l)) {
+                    let m = "";
+                    e.lucHop === l && (m = `L\u1EE5c H\u1EE3p v\u1EDBi tu\u1ED5i ${n.chi}`), e.tamHop.includes(l) && (m = `Tam H\u1EE3p v\u1EDBi tu\u1ED5i ${n.chi}`), o.push(ue(A({}, s), {
+                        reason: m
+                    }))
+                } else r.includes(l) && a.push(ue(A({}, s), {
+                    reason: `T\u1EE9 H\xE0nh Xung v\u1EDBi tu\u1ED5i ${n.chi}`
+                }))
+            }), {
+                good: o,
+                bad: a
+            }
+        });
+        this.potentiallyGoodDaysForOverview = Z(() => {
+            let n = this.userCanChi();
+            return n ? this.calendarDays().filter(r => r.isCurrentMonth).map(r => ({
+                date: r.date,
+                lunarDay: r.lunarInfo.lunarDay,
+                lunarMonth: r.lunarInfo.lunarMonth,
+                analysis: this.lunarCalendarService.getDayAnalysis(r.date, n.chi)
+            })).filter(r => r.analysis.badPoints.length === 0).sort((r, o) => r.date.getDate() - o.date.getDate()) : []
+        });
+        let n = typeof window < "u" ? localStorage.getItem("userDOB") : null;
+        n && this.setUserDOB(n);
+        let e = typeof window < "u" ? localStorage.getItem("userFullName") : null;
+        e && this.userFullName.set(e)
+    }
+    getWeekNumber(n) {
+        n = new Date(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate())), n.setUTCDate(n.getUTCDate() + 4 - (n.getUTCDay() || 7));
+        let e = new Date(Date.UTC(n.getUTCFullYear(), 0, 1));
+        return Math.ceil(((n.getTime() - e.getTime()) / 864e5 + 1) / 7)
+    }
+    selectDate(n) {
+        this.selectedDate.set(this.normalizeDate(n))
+    }
+    goToToday() {
+        let n = this.normalizeDate(new Date);
+        this.selectedDate.set(n), this.currentMonth.set(n), this.currentYear.set(n.getFullYear())
+    }
+    setUserDOB(n) {
+        if (!n) return;
+        this.userDOB.set(n), localStorage.setItem("userDOB", n);
+        let e = new Date(n);
+        isNaN(e.getTime()) || this.userZodiacSign.set(this.horoscopeService.getZodiacSign(e))
+    }
+    setUserFullName(n) {
+        let e = n.trim();
+        e ? (this.userFullName.set(e), localStorage.setItem("userFullName", e)) : (this.userFullName.set(null), localStorage.removeItem("userFullName"))
+    }
+    async shareDayInfo() {
+        let n = this.selectedLunarInfo();
+        if (!n) return;
+        let e = `
+\u{1F4C5} L\u1ECBch V\u1EA1n Ni\xEAn - ${n.gregorianDate} (${n.dayOfWeek})
+---
+\u{1F315} \xC2m l\u1ECBch: Ng\xE0y ${n.lunarDate.day} th\xE1ng ${n.lunarDate.monthName}, n\u0103m ${n.lunarDate.yearName}
+CAN CHI: Ng\xE0y ${n.canChi.day}, Th\xE1ng ${n.canChi.month}, N\u0103m ${n.canChi.year}
+\u2B50 ${n.dayTypeDetail}
+---
+\u23F0 Gi\u1EDD t\u1ED1t: ${n.goodHours.join(", ")}
+---
+\u{1F4DC} Danh ng\xF4n: "${n.quote.text}" - ${n.quote.author}
+    `.trim();
+        if (navigator.share) try {
+            await navigator.share({
+                title: `Th\xF4ng tin ng\xE0y ${n.gregorianDate}`,
+                text: e
+            })
+        } catch (i) {
+            console.error("L\u1ED7i khi chia s\u1EBB:", i)
+        } else try {
+            await navigator.clipboard.writeText(e), this.showCopyToast.set(!0), setTimeout(() => this.showCopyToast.set(!1), 3e3)
+        } catch (i) {
+            console.error("Kh\xF4ng th\u1EC3 sao ch\xE9p:", i)
+        }
+    }
+    normalizeDate(n) {
+        let e = new Date(n);
+        return e.setHours(0, 0, 0, 0), e
+    }
+    createCalendarDay(n, e, i) {
+        return {
+            date: n,
+            dayOfMonth: n.getDate(),
+            isCurrentMonth: e,
+            isToday: n.getTime() === i.getTime(),
+            isSelected: n.getTime() === this.selectedDate().getTime(),
+            lunarInfo: this.lunarCalendarService.getBasicLunarInfoForDate(n)
+        }
+    }
+    setDateFromParams(n, e, i) {
+        if (i < 1900 || i > 2109) return !1;
+        let r = new Date(i, e - 1, n);
+        if (isNaN(r.getTime()) || r.getFullYear() !== i || r.getMonth() !== e - 1 || r.getDate() !== n) return !1;
+        let o = this.normalizeDate(r);
+        return this.selectedDate.set(o), this.currentMonth.set(o), this.currentYear.set(i), !0
+    }
+    setMonthFromParams(n, e) {
+        if (e < 1900 || e > 2109) return !1;
+        let i = new Date(e, n - 1, 1);
+        if (isNaN(i.getTime()) || i.getFullYear() !== e || i.getMonth() !== n - 1) return !1;
+        let r = this.normalizeDate(i);
+        return this.currentMonth.set(r), this.selectedDate.set(r), this.currentYear.set(e), !0
+    }
+    setYearFromParams(n) {
+        if (n < 1900 || n > 2109) return !1;
+        this.currentYear.set(n);
+        let e = new Date(n, 0, 1),
+            i = this.normalizeDate(e);
+        return this.currentMonth.set(i), this.selectedDate.set(i), !0
+    }
+};
+Ni.\u0275fac = function(e) {
+    return new(e || Ni)
+}, Ni.\u0275prov = j({
+    token: Ni,
+    factory: Ni.\u0275fac,
+    providedIn: "root"
+});
+var Xe = Ni;
+var am = (t, n) => n.view;
+
+function z_(t, n) {
+    if (t & 1 && (k(0, "li")(1, "a", 40), K(), k(2, "svg", 41), _e(3, "path", 42), F(), ne(), k(4, "span"), d(5), F()()()), t & 2) {
+        let e = n.$implicit,
+            i = y(2);
+        h(), N("bg-gray-900", i.isLinkActive(e.view))("text-white", i.isLinkActive(e.view))("text-gray-300", !i.isLinkActive(e.view))("hover:bg-gray-700", !i.isLinkActive(e.view))("hover:text-white", !i.isLinkActive(e.view)), nt("routerLink", i.getLinkForItem(e.view)), h(2), It("d", e.icon), h(2), b(e.label)
+    }
+}
+
+function G_(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "li")(1, "button", 43), de("click", function() {
+            S(e);
+            let r = y(2);
+            return w(r.installApp())
+        }), K(), k(2, "svg", 41), _e(3, "path", 44), F(), ne(), k(4, "span"), d(5, "C\xE0i \u0111\u1EB7t \u1EE9ng d\u1EE5ng"), F()()()
+    }
+}
+
+function q_(t, n) {
+    t & 1 && d(0), t & 2 && L(" ", n, " ")
+}
+
+function W_(t, n) {
+    t & 1 && d(0, " C\xE1 nh\xE2n h\xF3a ")
+}
+
+function Y_(t, n) {
+    t & 1 && (k(0, "p", 14), d(1, "Nh\u1EADp th\xF4ng tin c\u1EE7a b\u1EA1n"), F())
+}
+
+function K_(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "div", 17)(1, "div", 19)(2, "div", 45), _e(3, "img", 46), F(), k(4, "div", 47)(5, "span", 48), d(6, "L\u1ECBch Kabala"), F(), k(7, "span", 49), d(8, "C\xE0i \u0111\u1EB7t \u0111\u1EC3 xem l\u1ECBch nhanh h\u01A1n"), F()()(), k(9, "div", 19)(10, "button", 50), de("click", function() {
+            S(e);
+            let r = y(2);
+            return w(r.installApp())
+        }), d(11, "C\xE0i \u0111\u1EB7t"), F(), k(12, "button", 51), de("click", function() {
+            S(e);
+            let r = y(2);
+            return w(r.dismissInstallPrompt())
+        }), K(), k(13, "svg", 52), _e(14, "path", 53), F()()()()
+    }
+}
+
+function Q_(t, n) {
+    if (t & 1 && (k(0, "li")(1, "a", 54), d(2), F()()), t & 2) {
+        let e = n.$implicit,
+            i = y(2);
+        h(), N("bg-white", i.isLinkActive(e.view))("text-gray-900", i.isLinkActive(e.view)), nt("routerLink", i.getLinkForItem(e.view)), h(), L(" ", e.label, " ")
+    }
+}
+
+function Z_(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "li")(1, "a", 55), de("click", function() {
+            S(e);
+            let r = y(3);
+            return w(r.closeMobileMenu())
+        }), d(2), F()()
+    }
+    if (t & 2) {
+        let e = n.$implicit,
+            i = y(3);
+        h(), nt("routerLink", i.getLinkForItem(e.view)), h(), L(" ", e.label, " ")
+    }
+}
+
+function X_(t, n) {
+    if (t & 1 && (k(0, "ul", 29), R(1, Z_, 3, 2, "li", null, am), F()), t & 2) {
+        let e = y(2);
+        h(), O(e.mobileSecondaryNav)
+    }
+}
+
+function J_(t, n) {
+    t & 1 && (k(0, "div", 31), d(1, " \u0110\xE3 sao ch\xE9p v\xE0o b\u1ED9 nh\u1EDB t\u1EA1m! "), F())
+}
+
+function eT(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "aside", 2)(1, "div", 3)(2, "a", 4)(3, "h1", 5), d(4, "L\u1ECBch V\u1EA1n Ni\xEAn"), F()()(), k(5, "nav", 6)(6, "ul", 7), R(7, z_, 6, 13, "li", null, am), _(9, G_, 6, 0, "li"), F()(), k(10, "div", 8)(11, "a", 9), K(), k(12, "svg", 10), _e(13, "path", 11), F(), ne(), k(14, "div", 12)(15, "p", 13), _(16, q_, 1, 1)(17, W_, 1, 0), F(), _(18, Y_, 2, 0, "p", 14), F()()()(), k(19, "div", 15)(20, "header", 16), _(21, K_, 15, 0, "div", 17), k(22, "div", 18)(23, "div", 19)(24, "a", 4)(25, "h1", 20), d(26, "L\u1ECBch V\u1EA1n Ni\xEAn"), F()(), k(27, "a", 21), K(), k(28, "svg", 22), _e(29, "path", 23), F()()(), ne(), k(30, "nav", 24)(31, "div", 25)(32, "ul", 26), R(33, Q_, 3, 6, "li", null, am), k(35, "li", 27)(36, "button", 28), de("click", function() {
+            S(e);
+            let r = y();
+            return w(r.mobileMoreMenuOpen.set(!r.mobileMoreMenuOpen()))
+        }), d(37, " ... "), F(), _(38, X_, 3, 0, "ul", 29), F()()()()()(), k(39, "main", 30), _e(40, "router-outlet"), F(), _(41, J_, 2, 0, "div", 31), k(42, "footer", 32)(43, "div", 33)(44, "div", 34)(45, "div", 35)(46, "h3", 36), d(47, "V\u1EC1 lich.kabala.vn"), F(), k(48, "p", 37), d(49, " lich.kabala.vn l\xE0 m\u1ED9t c\xF4ng c\u1EE5 L\u1ECBch V\u1EA1n Ni\xEAn hi\u1EC7n \u0111\u1EA1i, \u0111\u01B0\u1EE3c thi\u1EBFt k\u1EBF \u0111\u1EC3 mang \u0111\u1EBFn cho b\u1EA1n tr\u1EA3i nghi\u1EC7m tra c\u1EE9u l\u1ECBch \xC2m-D\u01B0\u01A1ng nhanh ch\xF3ng, ch\xEDnh x\xE1c v\xE0 \u0111\u1EA7y \u0111\u1EE7 th\xF4ng tin. S\u1EE9 m\u1EC7nh c\u1EE7a ch\xFAng t\xF4i l\xE0 gi\xFAp b\u1EA1n k\u1EBFt n\u1ED1i v\u1EDBi tr\xED tu\u1EC7 c\u1ED5 x\u01B0a qua m\u1ED9t giao di\u1EC7n th\xE2n thi\u1EC7n v\xE0 d\u1EC5 s\u1EED d\u1EE5ng. "), F()(), k(50, "div", 35)(51, "h3", 36), d(52, "\xDD Ngh\u0129a L\u1ECBch V\u1EA1n Ni\xEAn"), F(), k(53, "p", 37), d(54, " Xem L\u1ECBch V\u1EA1n Ni\xEAn kh\xF4ng ch\u1EC9 l\xE0 xem ng\xE0y th\xE1ng. \u0110\xE2y l\xE0 m\u1ED9t ph\u01B0\u01A1ng ph\xE1p gi\xFAp b\u1EA1n s\u1ED1ng h\xE0i h\xF2a h\u01A1n v\u1EDBi c\xE1c chu k\u1EF3 c\u1EE7a t\u1EF1 nhi\xEAn v\xE0 v\u0169 tr\u1EE5. B\u1EB1ng c\xE1ch hi\u1EC3u r\xF5 n\u0103ng l\u01B0\u1EE3ng c\u1EE7a t\u1EEBng ng\xE0y, b\u1EA1n c\xF3 th\u1EC3 \u0111\u01B0a ra nh\u1EEFng quy\u1EBFt \u0111\u1ECBnh s\xE1ng su\u1ED1t h\u01A1n cho c\xE1c s\u1EF1 ki\u1EC7n quan tr\u1ECDng trong cu\u1ED9c \u0111\u1EDDi, t\u1EEB vi\u1EC7c c\u01B0\u1EDBi h\u1ECFi, x\xE2y nh\xE0 \u0111\u1EBFn kh\u1EDFi s\u1EF1 kinh doanh, nh\u1EB1m t\xECm ki\u1EBFm s\u1EF1 may m\u1EAFn v\xE0 thu\u1EADn l\u1EE3i. "), F()(), k(55, "div", 35)(56, "h3", 36), d(57, "Ti\u1EC7n \xCDch \u0110\u1EB7c Bi\u1EC7t"), F(), k(58, "ul", 38)(59, "li")(60, "strong"), d(61, "Ph\xE2n T\xEDch B\xE1t T\u1EF1:"), F(), d(62, " Xem l\xE1 s\u1ED1 T\u1EE9 Tr\u1EE5 chi ti\u1EBFt cho b\u1EA5t k\u1EF3 gi\u1EDD n\xE0o trong ng\xE0y, xem n\u0103ng l\u01B0\u1EE3ng c\u1EE7a gi\u1EDD."), F(), k(63, "li")(64, "strong"), d(65, "C\xE1 Nh\xE2n H\xF3a:"), F(), d(66, " T\xECm ng\xE0y t\u1ED1t, ng\xE0y x\u1EA5u ph\xF9 h\u1EE3p v\u1EDBi tu\u1ED5i c\u1EE7a b\u1EA1n, 12 Cung Ho\xE0ng \u0111\u1EA1o, Nh\u1ECBp Sinh H\u1ECDc..."), F(), k(67, "li")(68, "strong"), d(69, "Xem l\u1ECBch #1:"), F(), d(70, " Bao g\u1ED3m m\u1ECDi t\xEDnh n\u0103ng xem ng\xE0y th\xE1ng v\xE0 gi\u1EDD, l\u1ECBch v\u1EA1n ni\xEAn, c\u1EF1c k\u1EF3 h\u1EEFu \xEDch."), F()()()(), k(71, "div", 39)(72, "p"), d(73), F()()()()()
+    }
+    if (t & 2) {
+        let e, i = y();
+        h(2), N("text-indigo-400", i.isLinkActive("overview")), h(5), O(i.navItems), h(2), T(i.showInstallButton() ? 9 : -1), h(2), N("bg-indigo-600", i.isLinkActive("personalization"))("hover:bg-indigo-700", i.isLinkActive("personalization"))("bg-indigo-500", !i.isLinkActive("personalization"))("hover:bg-indigo-600", !i.isLinkActive("personalization")), h(5), T((e = i.state.userFullName()) ? 16 : 17, e), h(2), T(i.state.userFullName() ? -1 : 18), h(3), T(i.showInstallButton() ? 21 : -1), h(3), N("text-indigo-600", i.isLinkActive("overview")), h(3), N("bg-indigo-100", i.isLinkActive("personalization"))("hover:bg-gray-200", !i.isLinkActive("personalization")), h(), N("text-indigo-600", i.isLinkActive("personalization"))("text-gray-500", !i.isLinkActive("personalization")), h(5), O(i.mobilePrimaryNav), h(5), T(i.mobileMoreMenuOpen() ? 38 : -1), h(3), T(i.state.showCopyToast() ? 41 : -1), h(32), L("\xA9 ", i.currentYear(), " lich.kabala.vn. M\u1ED9t s\u1EA3n ph\u1EA9m c\u1EE7a Kabala L\u1ECBch.")
+    }
+}
+
+function tT(t, n) {
+    t & 1 && (k(0, "div", 1)(1, "main", 56), _e(2, "router-outlet"), F()())
+}
+var Or = class Or {
+    constructor() {
+        this.state = E(Xe);
+        this.router = E(Te);
+        this.route = E(qe);
+        this.mobileMoreMenuOpen = C(!1);
+        this.isEmbedded = C(!1);
+        this.showInstallButton = C(!1);
+        this.deferredPrompt = null;
+        this.navItems = [{
+            view: "daily",
+            label: "Ng\xE0y",
+            icon: "M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18M12 15.75h.008v.008H12v-.008z"
+        }, {
+            view: "clock",
+            label: "Gi\u1EDD",
+            icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+        }, {
+            view: "weekly",
+            label: "Tu\u1EA7n",
+            icon: "M3.75 9h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5M6 20.25h12M6 3.75h12"
+        }, {
+            view: "year",
+            label: "N\u0103m",
+            icon: "M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18"
+        }, {
+            view: "lich",
+            label: "L\u1EC5 T\u1EBFt",
+            icon: "M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18M12 12h.008v.008H12V12zm-4.25 4.5h.008v.008h-.008v-.008zm0-4.5h.008v.008h-.008V12zm4.25 0h.008v.008H12V12zm-4.25 0h.008v.008h-.008V12zm8.5 4.5h.008v.008h-.008v-.008zm0-4.5h.008v.008h-.008V12zm4.25 0h.008v.008h-.008V12zm-4.25 4.5h.008v.008H12v-.008z"
+        }, {
+            view: "battu",
+            label: "B\xE1t T\u1EF1",
+            icon: "M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 4.5m1-4.5l1 4.5m0 0l.244 1.098a.75.75 0 001.442 0l.244-1.098M12 16.5l1-4.5m-1 4.5l-1-4.5M6 16.5h2.25m0 0l-1-4.5m1 4.5l1 4.5m-5.25 0h1.5"
+        }, {
+            view: "utilities",
+            label: "Ti\u1EC7n \xEDch",
+            icon: "M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 8.25V6zM3.75 14.25A2.25 2.25 0 016 12h2.25a2.25 2.25 0 012.25 2.25v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25v-2.25zM13.5 6A2.25 2.25 0 0115.75 3.75h2.25A2.25 2.25 0 0120.25 6v2.25a2.25 2.25 0 01-2.25 2.25H15.75A2.25 2.25 0 0113.5 8.25V6zM13.5 14.25A2.25 2.25 0 0115.75 12h2.25a2.25 2.25 0 012.25 2.25v2.25a2.25 2.25 0 01-2.25-2.25v-2.25z"
+        }];
+        this.mobilePrimaryNav = this.navItems.slice(0, 4);
+        this.mobileSecondaryNav = this.navItems.slice(4);
+        this.currentYear = Z(() => new Date().getFullYear());
+        this.checkEmbedStatus()
+    }
+    ngOnInit() {
+        this.updateBrowserTitle(), this.router.events.pipe(Ye(n => n instanceof Nt)).subscribe(() => {
+            this.checkEmbedStatus(), this.updateBrowserTitle()
+        }), typeof window < "u" && (window.addEventListener("beforeinstallprompt", n => {
+            n.preventDefault(), this.deferredPrompt = n, this.showInstallButton.set(!0)
+        }), window.addEventListener("appinstalled", () => {
+            this.showInstallButton.set(!1), this.deferredPrompt = null, console.log("PWA was installed")
+        }))
+    }
+    async installApp() {
+        if (!this.deferredPrompt) return;
+        this.deferredPrompt.prompt();
+        let {
+            outcome: n
+        } = await this.deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${n}`), this.deferredPrompt = null, this.showInstallButton.set(!1)
+    }
+    dismissInstallPrompt() {
+        this.showInstallButton.set(!1), sessionStorage.setItem("pwa_prompt_shown", "true")
+    }
+    checkEmbedStatus() {
+        let n = typeof window < "u" && window.location.search.includes("embed=true");
+        this.isEmbedded.set(n)
+    }
+    updateBrowserTitle() {
+        if (typeof document < "u") {
+            let n = new Date().getFullYear();
+            document.title = `L\u1ECBch V\u1EA1n Ni\xEAn ${n}-${n+1} - Xem L\u1ECBch \xC2m D\u01B0\u01A1ng, Ng\xE0y T\u1ED1t X\u1EA5u | lich.kabala.vn`
+        }
+    }
+    getLinkForItem(n) {
+        let e = new Date;
+        switch (n) {
+            case "overview":
+                return ["/overview"];
+            case "daily":
+                return ["/", e.getDate(), e.getMonth() + 1, e.getFullYear()];
+            case "year":
+                return ["/", e.getFullYear()];
+            default:
+                return ["/", n]
+        }
+    }
+    isLinkActive(n) {
+        let e = this.router.url.split("?")[0];
+        switch (n) {
+            case "daily":
+                return /^\/\d{1,2}\/\d{1,2}\/\d{4}$/.test(e);
+            case "year":
+                return /^\/\d{4}$/.test(e);
+            case "overview":
+                return e.startsWith("/overview") || /^\/\d{1,2}\/\d{4}$/.test(e);
+            case "personalization":
+                return this.router.isActive(`/${n}`, {
+                    paths: "exact",
+                    queryParams: "exact",
+                    fragment: "ignored",
+                    matrixParams: "ignored"
+                });
+            default:
+                return this.router.isActive(`/${n}`, {
+                    paths: "exact",
+                    queryParams: "exact",
+                    fragment: "ignored",
+                    matrixParams: "ignored"
+                })
+        }
+    }
+    closeMobileMenu() {
+        this.mobileMoreMenuOpen.set(!1)
+    }
+};
+Or.\u0275fac = function(e) {
+    return new(e || Or)
+}, Or.\u0275cmp = q({
+    type: Or,
+    selectors: [
+        ["app-root"]
+    ],
+    decls: 3,
+    vars: 1,
+    consts: [
+        [1, "min-h-screen", "bg-gray-100"],
+        [1, "h-screen"],
+        [1, "fixed", "top-0", "left-0", "z-40", "w-64", "h-screen", "bg-gray-800", "text-white", "hidden", "lg:flex", "flex-col"],
+        [1, "p-4", "border-b", "border-gray-700"],
+        ["routerLink", "/overview", 1, "block", "transition-colors"],
+        [1, "text-2xl", "font-bold", "text-center"],
+        [1, "flex-grow", "p-4", "overflow-y-auto"],
+        [1, "space-y-1"],
+        [1, "mt-auto", "p-4", "border-t", "border-gray-700"],
+        ["routerLink", "/personalization", 1, "w-full", "p-3", "rounded-lg", "text-left", "transition-transform", "duration-200", "flex", "items-center", "gap-3", "transform", "hover:scale-105"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", "stroke-width", "2", 1, "h-8", "w-8", "text-white", "flex-shrink-0"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"],
+        [1, "flex-grow"],
+        [1, "font-semibold", "text-white"],
+        [1, "text-xs", "text-indigo-200"],
+        [1, "lg:ml-64", "flex", "flex-col", "min-h-screen"],
+        [1, "lg:hidden", "flex", "flex-col", "bg-white", "shadow-sm"],
+        [1, "bg-indigo-600", "text-white", "px-4", "py-3", "flex", "justify-between", "items-center", "text-sm", "shadow-md"],
+        [1, "flex", "flex-col", "sm:flex-row", "justify-between", "items-center", "p-4"],
+        [1, "flex", "items-center", "gap-3"],
+        [1, "text-3xl", "font-bold"],
+        ["routerLink", "/personalization", "title", "C\xE1 nh\xE2n h\xF3a", 1, "p-1", "rounded-full", "transition-colors", "duration-200"],
+        ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 20 20", "fill", "currentColor", 1, "h-8", "w-8", "transition-colors", "duration-200"],
+        ["fill-rule", "evenodd", "d", "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z", "clip-rule", "evenodd"],
+        [1, "mt-4", "sm:mt-0", "w-full", "sm:w-auto"],
+        [1, "bg-gray-200", "p-1", "rounded-lg"],
+        [1, "flex", "items-center", "space-x-1"],
+        [1, "relative"],
+        [1, "px-3", "py-1.5", "text-sm", "font-medium", "rounded-md", "transition-colors", "text-gray-600", "hover:bg-gray-300", 3, "click"],
+        [1, "absolute", "right-0", "mt-2", "w-48", "bg-white", "rounded-lg", "shadow-xl", "border", "z-50"],
+        [1, "flex-grow", "p-4", "sm:p-6"],
+        [1, "fixed", "bottom-5", "right-5", "bg-gray-900", "text-white", "px-6", "py-3", "rounded-lg", "shadow-lg", "animate-fade-in-out"],
+        [1, "mt-auto", "bg-white", "border-t", "border-gray-200"],
+        [1, "container", "mx-auto", "py-8", "px-6"],
+        [1, "grid", "grid-cols-1", "md:grid-cols-3", "gap-8", "text-gray-700"],
+        [1, "space-y-4"],
+        [1, "text-xl", "font-bold", "text-gray-900"],
+        [1, "text-sm"],
+        [1, "space-y-2", "text-sm", "list-disc", "list-inside"],
+        [1, "mt-8", "pt-6", "border-t", "border-gray-200", "text-center", "text-sm", "text-gray-500"],
+        [1, "w-full", "flex", "items-center", "gap-3", "px-3", "py-2", "text-base", "font-medium", "rounded-md", "transition-colors", 3, "routerLink"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", "stroke-width", "2", 1, "h-6", "w-6", "flex-shrink-0"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round"],
+        [1, "w-full", "flex", "items-center", "gap-3", "px-3", "py-2", "text-base", "font-medium", "rounded-md", "transition-colors", "text-indigo-400", "hover:bg-gray-700", "hover:text-indigo-300", 3, "click"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "d", "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"],
+        [1, "bg-white", "p-1.5", "rounded-lg"],
+        ["src", "https://cdn-icons-png.flaticon.com/512/3652/3652191.png", "alt", "App Icon", 1, "h-6", "w-6"],
+        [1, "flex", "flex-col"],
+        [1, "font-bold"],
+        [1, "text-xs", "opacity-90"],
+        [1, "bg-white", "text-indigo-600", "px-4", "py-1.5", "rounded-full", "font-bold", "text-xs", "uppercase", "shadow-sm", "active:scale-95", "transition-transform", 3, "click"],
+        [1, "text-white", "opacity-70", "hover:opacity-100", "p-1", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-5", "w-5"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M6 18L18 6M6 6l12 12"],
+        [1, "px-3", "py-1.5", "text-sm", "font-medium", "rounded-md", "transition-colors", "whitespace-nowrap", "text-gray-600", 3, "routerLink"],
+        [1, "w-full", "text-left", "block", "px-4", "py-2", "text-sm", "text-gray-700", "hover:bg-gray-100", 3, "click", "routerLink"],
+        [1, "h-full", "p-2", "sm:p-4", "bg-white"]
+    ],
+    template: function(e, i) {
+        e & 1 && (k(0, "div", 0), _(1, eT, 74, 27)(2, tT, 3, 0, "div", 1), F()), e & 2 && (h(), T(i.isEmbedded() ? 2 : 1))
+    },
+    dependencies: [Q, ba, ac],
+    styles: ["@keyframes _ngcontent-%COMP%_fadeInOut{0%{opacity:0;transform:translateY(10px)}10%{opacity:1;transform:translateY(0)}90%{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(10px)}}.animate-fade-in-out[_ngcontent-%COMP%]{animation:_ngcontent-%COMP%_fadeInOut 3s ease-in-out forwards}.hide-scrollbar[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.hide-scrollbar[_ngcontent-%COMP%]{-ms-overflow-style:none;scrollbar-width:none}"],
+    changeDetection: 0
+});
+var lc = Or;
+var sm = () => ({
+        weekday: "long",
+        day: "2-digit",
+        month: "2-digit"
+    }),
+    nT = (t, n) => n.value,
+    cc = (t, n) => n.date.getTime();
+
+function iT(t, n) {
+    if (t & 1 && (u(0, "div", 38)(1, "h4", 56), d(2, "Ng\xE0y l\u1EC5"), c(), u(3, "p", 57), d(4), c()()), t & 2) {
+        let e = y();
+        h(4), b(e.holidays.join(", "))
+    }
+}
+
+function rT(t, n) {
+    if (t & 1 && (u(0, "li"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function oT(t, n) {
+    if (t & 1 && (u(0, "li"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function aT(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 2)(1, "button", 24), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.shareDayInfo())
+        }), K(), u(2, "svg", 25), P(3, "path", 26), c()(), ne(), u(4, "div", 27)(5, "p", 28), d(6), c(), u(7, "p", 29), d(8), c(), u(9, "p", 30), d(10), c()(), P(11, "hr", 31), u(12, "div", 27)(13, "h3", 32), d(14, "\xC2m L\u1ECBch"), c(), u(15, "p", 33), d(16, "Ng\xE0y "), u(17, "span", 34), d(18), c(), d(19, " Th\xE1ng "), u(20, "span", 34), d(21), c(), d(22, " N\u0103m "), u(23, "span", 34), d(24), c()(), u(25, "p", 35), d(26), c(), u(27, "div", 36)(28, "div", 37), d(29), c()()(), _(30, iT, 5, 1, "div", 38), u(31, "div", 39)(32, "div", 40)(33, "h4", 41), d(34, "Gi\u1EDD Ho\xE0ng \u0110\u1EA1o (T\u1ED1t)"), c(), u(35, "p", 42), d(36), c()(), u(37, "div", 43)(38, "h4", 44), d(39, "Gi\u1EDD H\u1EAFc \u0110\u1EA1o (X\u1EA5u)"), c(), u(40, "p", 45), d(41), c()()(), u(42, "div", 46)(43, "p")(44, "span", 47), d(45, "Ti\u1EBFt kh\xED:"), c(), d(46), c(), u(47, "div")(48, "p")(49, "span", 47), d(50, "Tr\u1EF1c:"), c(), d(51), c(), u(52, "p", 48), d(53), c()(), u(54, "div")(55, "p")(56, "span", 47), d(57, "Nh\u1ECB Th\u1EADp B\xE1t T\xFA:"), c(), d(58), u(59, "span", 49), d(60), c()(), u(61, "p", 48), d(62), c()(), u(63, "p")(64, "span", 47), d(65, "Tu\u1ED5i h\u1EE3p:"), c(), d(66), c(), u(67, "p")(68, "span", 47), d(69, "Tu\u1ED5i xung:"), c(), d(70), c()(), P(71, "hr", 31), u(72, "div")(73, "h4", 50), d(74, "Vi\u1EC7c n\xEAn l\xE0m / Kh\xF4ng n\xEAn l\xE0m"), c(), u(75, "div", 51)(76, "div")(77, "ul", 52), R(78, rT, 2, 1, "li", null, pe), c()(), u(80, "div")(81, "ul", 53), R(82, oT, 2, 1, "li", null, pe), c()()()(), P(84, "hr", 31), u(85, "div", 54)(86, "p"), d(87), c(), u(88, "p", 55), d(89), c()()()
+    }
+    if (t & 2) {
+        let e = n,
+            i = y();
+        h(6), W("", e.dayOfWeek, ", ", e.gregorianDate), h(2), b(i.state.selectedDate().getDate()), h(2), W("Th\xE1ng ", i.state.selectedDate().getMonth() + 1, ", N\u0103m ", i.state.selectedDate().getFullYear()), h(8), b(e.lunarDate.day), h(3), b(e.lunarDate.monthName), h(3), b(e.lunarDate.yearName), h(2), Ze("N\u0103m ", e.canChi.year, ", Th\xE1ng ", e.canChi.month, ", Ng\xE0y ", e.canChi.day), h(2), N("bg-yellow-200", e.dayType === "Ho\xE0ng \u0110\u1EA1o")("text-yellow-800", e.dayType === "Ho\xE0ng \u0110\u1EA1o")("bg-gray-700", e.dayType === "H\u1EAFc \u0110\u1EA1o")("text-white", e.dayType === "H\u1EAFc \u0110\u1EA1o")("bg-gray-200", e.dayType === "B\xECnh th\u01B0\u1EDDng")("text-gray-800", e.dayType === "B\xECnh th\u01B0\u1EDDng"), h(), L(" ", e.dayTypeDetail, " "), h(), T(e.holidays.length > 0 ? 30 : -1), h(6), b(e.goodHours.join(", ")), h(5), b(e.badHours.join(", ")), h(5), L(" ", e.solarTerm), h(5), L(" ", e.duty), h(2), b(e.dutyInterpretation), h(5), W(" Sao ", e.constellation.name, " (", e.constellation.element, ") "), h(), N("bg-green-100", e.constellation.type === "Ki\u1EBFt")("text-green-800", e.constellation.type === "Ki\u1EBFt")("bg-red-100", e.constellation.type === "Hung")("text-red-800", e.constellation.type === "Hung")("bg-gray-100", e.constellation.type !== "Ki\u1EBFt" && e.constellation.type !== "Hung")("text-gray-800", e.constellation.type !== "Ki\u1EBFt" && e.constellation.type !== "Hung"), h(), L(" ", e.constellation.type, " "), h(2), b(e.constellation.interpretation), h(4), L(" ", e.compatibleZodiacs.join(", ")), h(4), L(" ", e.incompatibleZodiacs.join(", ")), h(8), O(e.goodDeeds), h(4), O(e.badDeeds), h(5), L('"', e.quote.text, '"'), h(2), L("- ", e.quote.author, " -")
+    }
+}
+
+function sT(t, n) {
+    t & 1 && (u(0, "p"), d(1, "\u0110ang t\u1EA3i th\xF4ng tin..."), c())
+}
+
+function lT(t, n) {
+    if (t & 1 && (u(0, "option", 12), d(1), c()), t & 2) {
+        let e = n.$implicit,
+            i = y();
+        H("value", e.value)("selected", e.value === i.state.currentMonth().getMonth()), h(), b(e.name)
+    }
+}
+
+function cT(t, n) {
+    if (t & 1 && (u(0, "option", 12), d(1), c()), t & 2) {
+        let e = n.$implicit,
+            i = y();
+        H("value", e)("selected", e === i.state.currentMonth().getFullYear()), h(), b(e)
+    }
+}
+
+function uT(t, n) {
+    if (t & 1 && (u(0, "div"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function dT(t, n) {
+    t & 1 && (u(0, "span", 59), d(1, "M\xF9ng 1"), c())
+}
+
+function hT(t, n) {
+    t & 1 && (u(0, "span", 59), d(1, "R\u1EB1m"), c())
+}
+
+function mT(t, n) {
+    t & 1 && P(0, "span", 61)
+}
+
+function fT(t, n) {
+    t & 1 && P(0, "span", 62)
+}
+
+function pT(t, n) {
+    t & 1 && P(0, "span", 63)
+}
+
+function gT(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 58), D("click", function() {
+            let r = S(e).$implicit,
+                o = y();
+            return w(o.dateSelected(r.date))
+        }), _(1, dT, 2, 0, "span", 59)(2, hT, 2, 0, "span", 59), u(3, "span", 30), d(4), c(), u(5, "span", 60), d(6), c(), _(7, mT, 1, 0, "span", 61), _(8, fT, 1, 0, "span", 62), _(9, pT, 1, 0, "span", 63), c()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        N("bg-gray-50", !e.isCurrentMonth)("text-gray-400", !e.isCurrentMonth)("hover:bg-indigo-100", e.isCurrentMonth)("bg-indigo-500", e.isSelected)("text-white", e.isSelected)("font-bold", e.isSelected)("ring-2", e.isToday && !e.isSelected)("ring-indigo-400", e.isToday && !e.isSelected), h(), T(e.lunarInfo.lunarDay === 1 && e.isCurrentMonth ? 1 : e.lunarInfo.lunarDay === 15 && e.isCurrentMonth ? 2 : -1), h(3), b(e.dayOfMonth), h(), N("text-gray-400", !e.isCurrentMonth && !e.isSelected)("text-indigo-200", e.isSelected), h(), W(" ", e.lunarInfo.lunarDay, "/", e.lunarInfo.lunarMonth, " "), h(), T(e.lunarInfo.hasHoliday ? 7 : -1), h(), T(e.lunarInfo.dayType === "Ho\xE0ng \u0110\u1EA1o" ? 8 : -1), h(), T(e.lunarInfo.dayType === "H\u1EAFc \u0110\u1EA1o" ? 9 : -1)
+    }
+}
+
+function vT(t, n) {
+    if (t & 1 && (u(0, "span", 78), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function yT(t, n) {
+    if (t & 1 && (u(0, "span", 79), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function ET(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "li", 75), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(3);
+            return w(o.viewDayDetails(r.date))
+        }), u(1, "p", 76), d(2), c(), u(3, "div", 77), R(4, vT, 2, 1, "span", 78, pe), R(6, yT, 2, 1, "span", 79, pe), c()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        h(2), Ze(" ", e.date.toLocaleDateString("vi-VN", me(3, sm)), " (", e.lunarDay, "/", e.lunarMonth, " \xC2L) "), h(2), O(e.analysis.goodPoints), h(2), O(e.analysis.neutralPoints)
+    }
+}
+
+function bT(t, n) {
+    if (t & 1 && (u(0, "ul", 68), R(1, ET, 8, 4, "li", 74, cc), c()), t & 2) {
+        let e = y(2);
+        h(), O(e.state.potentiallyGoodDaysForOverview())
+    }
+}
+
+function DT(t, n) {
+    t & 1 && (u(0, "p", 69), d(1, "Kh\xF4ng t\xECm th\u1EA5y ng\xE0y n\xE0o th\u1EF1c s\u1EF1 t\u1ED1t trong th\xE1ng theo ti\xEAu ch\xED s\xE0ng l\u1ECDc."), c())
+}
+
+function CT(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "li", 81), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(3);
+            return w(o.viewDayDetails(r.date))
+        }), u(1, "p", 34), d(2), c(), u(3, "p", 82), d(4), c()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        h(2), Ze("", e.date.toLocaleDateString("vi-VN", me(4, sm)), " (", e.lunarInfo.lunarDay, "/", e.lunarInfo.lunarMonth, " \xC2L)"), h(2), b(e.reason)
+    }
+}
+
+function xT(t, n) {
+    if (t & 1 && (u(0, "ul", 68), R(1, CT, 5, 5, "li", 80, cc), c()), t & 2) {
+        let e = y(2);
+        h(), O(e.state.personalizedDaysForOverview().good)
+    }
+}
+
+function _T(t, n) {
+    t & 1 && (u(0, "p", 72), d(1, "Kh\xF4ng c\xF3 ng\xE0y \u0111\u1EB7c bi\u1EC7t t\u1ED1t trong th\xE1ng."), c())
+}
+
+function TT(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "li", 84), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(3);
+            return w(o.viewDayDetails(r.date))
+        }), u(1, "p", 34), d(2), c(), u(3, "p", 85), d(4), c()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        h(2), Ze("", e.date.toLocaleDateString("vi-VN", me(4, sm)), " (", e.lunarInfo.lunarDay, "/", e.lunarInfo.lunarMonth, " \xC2L)"), h(2), b(e.reason)
+    }
+}
+
+function ST(t, n) {
+    if (t & 1 && (u(0, "ul", 68), R(1, TT, 5, 5, "li", 83, cc), c()), t & 2) {
+        let e = y(2);
+        h(), O(e.state.personalizedDaysForOverview().bad)
+    }
+}
+
+function wT(t, n) {
+    t & 1 && (u(0, "p", 72), d(1, "Kh\xF4ng c\xF3 ng\xE0y xung kh\u1EAFc trong th\xE1ng."), c())
+}
+
+function IT(t, n) {
+    if (t & 1 && (u(0, "div", 23)(1, "h3", 64), d(2), c(), u(3, "div", 65)(4, "div", 66)(5, "h3", 67), d(6, "Ng\xE0y c\xF3 th\u1EC3 t\u1ED1t v\u1EDBi b\u1EA1n (Trong th\xE1ng)"), c(), _(7, bT, 3, 0, "ul", 68)(8, DT, 2, 0, "p", 69), c(), u(9, "div", 70)(10, "h3", 71), d(11, "Ng\xE0y C\xE1t L\u1EE3i (H\u1EE3p tu\u1ED5i)"), c(), _(12, xT, 3, 0, "ul", 68)(13, _T, 2, 0, "p", 72), c(), u(14, "div", 70)(15, "h3", 73), d(16, "Ng\xE0y C\u1EA7n L\u01B0u \xDD (Xung kh\u1EAFc)"), c(), _(17, ST, 3, 0, "ul", 68)(18, wT, 2, 0, "p", 72), c()()()), t & 2) {
+        let e, i = y();
+        h(2), L("Ph\xE2n t\xEDch c\xE1 nh\xE2n h\xF3a cho b\u1EA1n (Tu\u1ED5i ", (e = i.state.userCanChi()) == null ? null : e.chi, ")"), h(5), T(i.state.potentiallyGoodDaysForOverview().length > 0 ? 7 : 8), h(5), T(i.state.personalizedDaysForOverview().good.length > 0 ? 12 : 13), h(5), T(i.state.personalizedDaysForOverview().bad.length > 0 ? 17 : 18)
+    }
+}
+var Lr = class Lr {
+    constructor() {
+        this.state = E(Xe);
+        this.router = E(Te);
+        this.route = E(qe);
+        this.calendarWeekDayHeaders = ["Hai", "Ba", "T\u01B0", "N\u0103m", "S\xE1u", "B\u1EA3y", "CN"];
+        this.years = Array.from({
+            length: 201
+        }, (n, e) => 1900 + e);
+        this.months = [{
+            value: 0,
+            name: "Th\xE1ng 1"
+        }, {
+            value: 1,
+            name: "Th\xE1ng 2"
+        }, {
+            value: 2,
+            name: "Th\xE1ng 3"
+        }, {
+            value: 3,
+            name: "Th\xE1ng 4"
+        }, {
+            value: 4,
+            name: "Th\xE1ng 5"
+        }, {
+            value: 5,
+            name: "Th\xE1ng 6"
+        }, {
+            value: 6,
+            name: "Th\xE1ng 7"
+        }, {
+            value: 7,
+            name: "Th\xE1ng 8"
+        }, {
+            value: 8,
+            name: "Th\xE1ng 9"
+        }, {
+            value: 9,
+            name: "Th\xE1ng 10"
+        }, {
+            value: 10,
+            name: "Th\xE1ng 11"
+        }, {
+            value: 11,
+            name: "Th\xE1ng 12"
+        }]
+    }
+    ngOnInit() {
+        this.paramsSubscription = this.route.params.subscribe(n => {
+            let e = +n.month,
+                i = +n.year;
+            e && i ? this.state.setMonthFromParams(e, i) || this.router.navigate(["/overview"]) : this.state.goToToday()
+        })
+    }
+    ngOnDestroy() {
+        this.paramsSubscription?.unsubscribe()
+    }
+    dateSelected(n) {
+        this.state.selectDate(n)
+    }
+    goToToday() {
+        this.router.navigate(["/overview"])
+    }
+    shareDayInfo() {
+        this.state.shareDayInfo()
+    }
+    viewDayDetails(n) {
+        this.router.navigate(["/", n.getDate(), n.getMonth() + 1, n.getFullYear()])
+    }
+    onPreviousMonth() {
+        let n = this.state.currentMonth(),
+            e = new Date(n.getFullYear(), n.getMonth() - 1, 1);
+        this.router.navigate(["/", e.getMonth() + 1, e.getFullYear()])
+    }
+    onNextMonth() {
+        let n = this.state.currentMonth(),
+            e = new Date(n.getFullYear(), n.getMonth() + 1, 1);
+        this.router.navigate(["/", e.getMonth() + 1, e.getFullYear()])
+    }
+    onSelectMonth(n) {
+        let e = parseInt(n.target.value, 10),
+            i = this.state.currentMonth();
+        this.router.navigate(["/", e + 1, i.getFullYear()])
+    }
+    onSelectYear(n) {
+        let e = parseInt(n.target.value, 10),
+            i = this.state.currentMonth();
+        this.router.navigate(["/", i.getMonth() + 1, e])
+    }
+};
+Lr.\u0275fac = function(e) {
+    return new(e || Lr)
+}, Lr.\u0275cmp = q({
+    type: Lr,
+    selectors: [
+        ["app-overview-tab"]
+    ],
+    decls: 42,
+    vars: 2,
+    consts: [
+        [1, "grid", "grid-cols-1", "lg:grid-cols-3", "gap-8"],
+        [1, "bg-white", "p-6", "rounded-lg", "shadow-lg"],
+        [1, "relative"],
+        [1, "lg:col-span-2", "bg-white", "p-6", "rounded-lg", "shadow-lg"],
+        [1, "flex", "justify-between", "items-center", "mb-4"],
+        [1, "p-2", "rounded-full", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-6", "w-6"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M15 19l-7-7 7-7"],
+        [1, "flex", "flex-col", "sm:flex-row", "gap-2", "items-center"],
+        [1, "w-full", "sm:w-auto", "px-4", "py-2", "text-sm", "font-medium", "bg-indigo-500", "text-white", "rounded-md", "shadow-sm", "hover:bg-indigo-600", "transition-colors", 3, "click"],
+        [1, "flex", "gap-2"],
+        [1, "p-2", "border", "border-gray-300", "rounded-md", "shadow-sm", "focus:ring-indigo-500", "focus:border-indigo-500", "bg-white", "text-base", 3, "change"],
+        [3, "value", "selected"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 5l7 7-7 7"],
+        [1, "grid", "grid-cols-7", "gap-1", "text-center", "font-medium", "text-gray-600", "mb-2"],
+        [1, "grid", "grid-cols-7", "gap-1"],
+        [1, "relative", "p-2", "h-20", "sm:h-24", "flex", "flex-col", "justify-start", "items-center", "rounded-md", "cursor-pointer", "transition-all", "duration-200", 3, "bg-gray-50", "text-gray-400", "hover:bg-indigo-100", "bg-indigo-500", "text-white", "font-bold", "ring-2", "ring-indigo-400"],
+        [1, "mt-4", "flex", "flex-wrap", "justify-center", "items-center", "space-x-4", "text-sm"],
+        [1, "flex", "items-center"],
+        [1, "h-3", "w-3", "bg-yellow-400", "rounded-full", "mr-2"],
+        [1, "h-3", "w-3", "bg-gray-700", "rounded-full", "mr-2"],
+        [1, "h-3", "w-3", "bg-red-500", "rounded-full", "mr-2"],
+        [1, "h-3", "w-3", "ring-2", "ring-indigo-400", "rounded-full", "mr-2"],
+        [1, "mt-8", "pt-6", "border-t", "border-gray-200"],
+        ["title", "Chia s\u1EBB th\xF4ng tin ng\xE0y", 1, "absolute", "top-0", "right-0", "p-2", "rounded-full", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-6", "w-6", "text-gray-600"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6.002l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"],
+        [1, "text-center", "mb-4"],
+        [1, "text-lg", "font-semibold"],
+        [1, "text-4xl", "font-bold", "text-indigo-600"],
+        [1, "text-lg"],
+        [1, "my-4", "border-gray-200"],
+        [1, "font-semibold", "text-lg", "mb-1"],
+        [1, "text-xl"],
+        [1, "font-bold"],
+        [1, "text-sm", "text-gray-600"],
+        [1, "mt-2", "flex", "justify-center", "items-center", "gap-4"],
+        [1, "inline-block", "px-3", "py-1", "text-sm", "font-semibold", "rounded-full"],
+        [1, "mb-4", "p-3", "bg-blue-50", "rounded-lg"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-2", "gap-4", "text-sm", "mb-4"],
+        [1, "p-3", "bg-green-50", "rounded-lg"],
+        [1, "font-semibold", "text-green-800", "mb-1"],
+        [1, "text-green-700"],
+        [1, "p-3", "bg-red-50", "rounded-lg"],
+        [1, "font-semibold", "text-red-800", "mb-1"],
+        [1, "text-red-700"],
+        [1, "space-y-3", "text-sm"],
+        [1, "font-semibold"],
+        [1, "text-sm", "text-gray-500", "pl-4", "italic"],
+        [1, "ml-2", "px-2", "py-0.5", "text-xs", "font-semibold", "rounded-full"],
+        [1, "font-semibold", "text-base", "mb-2"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-2", "gap-4", "text-sm"],
+        [1, "list-disc", "list-inside", "text-green-700"],
+        [1, "list-disc", "list-inside", "text-red-700"],
+        [1, "mt-4", "text-center", "italic", "text-gray-500"],
+        [1, "font-medium"],
+        [1, "font-semibold", "text-blue-800"],
+        [1, "text-blue-700"],
+        [1, "relative", "p-2", "h-20", "sm:h-24", "flex", "flex-col", "justify-start", "items-center", "rounded-md", "cursor-pointer", "transition-all", "duration-200", 3, "click"],
+        [1, "absolute", "top-1", "right-1", "text-[10px]", "font-bold", "text-red-700", "px-1.5", "py-0.5", "bg-red-100", "rounded-full", "leading-none"],
+        [1, "text-xs", "mt-1"],
+        ["title", "Ng\xE0y l\u1EC5", 1, "absolute", "bottom-1", "right-1", "h-2", "w-2", "bg-red-500", "rounded-full"],
+        ["title", "Ng\xE0y Ho\xE0ng \u0110\u1EA1o", 1, "absolute", "bottom-1", "left-1", "h-2", "w-2", "bg-yellow-400", "rounded-full"],
+        ["title", "Ng\xE0y H\u1EAFc \u0110\u1EA1o", 1, "absolute", "bottom-1", "left-1", "h-2", "w-2", "bg-gray-700", "rounded-full"],
+        [1, "text-2xl", "font-bold", "text-center", "mb-6", "text-gray-800"],
+        [1, "grid", "grid-cols-1", "lg:grid-cols-4", "gap-8"],
+        [1, "lg:col-span-2"],
+        [1, "text-xl", "font-semibold", "text-blue-800", "mb-3"],
+        [1, "space-y-3"],
+        [1, "text-gray-600"],
+        [1, "lg:col-span-1"],
+        [1, "text-xl", "font-semibold", "text-green-700", "mb-3"],
+        [1, "text-gray-500"],
+        [1, "text-xl", "font-semibold", "text-orange-700", "mb-3"],
+        [1, "p-3", "bg-white", "rounded-lg", "border", "border-gray-200", "cursor-pointer", "hover:shadow-md", "transition-shadow"],
+        [1, "p-3", "bg-white", "rounded-lg", "border", "border-gray-200", "cursor-pointer", "hover:shadow-md", "transition-shadow", 3, "click"],
+        [1, "font-bold", "text-indigo-600"],
+        [1, "text-sm", "mt-1"],
+        [1, "inline-block", "bg-green-100", "text-green-800", "text-xs", "font-medium", "mr-2", "px-2.5", "py-0.5", "rounded-full"],
+        [1, "inline-block", "bg-gray-100", "text-gray-800", "text-xs", "font-medium", "mr-2", "px-2.5", "py-0.5", "rounded-full"],
+        [1, "p-3", "bg-green-50", "rounded-lg", "border", "border-green-200", "cursor-pointer", "hover:bg-green-100", "transition-colors"],
+        [1, "p-3", "bg-green-50", "rounded-lg", "border", "border-green-200", "cursor-pointer", "hover:bg-green-100", "transition-colors", 3, "click"],
+        [1, "text-sm", "text-green-800"],
+        [1, "p-3", "bg-orange-50", "rounded-lg", "border", "border-orange-200", "cursor-pointer", "hover:bg-orange-100", "transition-colors"],
+        [1, "p-3", "bg-orange-50", "rounded-lg", "border", "border-orange-200", "cursor-pointer", "hover:bg-orange-100", "transition-colors", 3, "click"],
+        [1, "text-sm", "text-orange-800"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div", 0)(1, "div", 1), _(2, aT, 90, 50, "div", 2)(3, sT, 2, 0, "p"), c(), u(4, "div", 3)(5, "div", 4)(6, "button", 5), D("click", function() {
+                return i.onPreviousMonth()
+            }), K(), u(7, "svg", 6), P(8, "path", 7), c()(), ne(), u(9, "div", 8)(10, "button", 9), D("click", function() {
+                return i.goToToday()
+            }), d(11, "H\xF4m nay"), c(), u(12, "div", 10)(13, "select", 11), D("change", function(o) {
+                return i.onSelectMonth(o)
+            }), R(14, lT, 2, 3, "option", 12, nT), c(), u(16, "select", 11), D("change", function(o) {
+                return i.onSelectYear(o)
+            }), R(17, cT, 2, 3, "option", 12, pe), c()()(), u(19, "button", 5), D("click", function() {
+                return i.onNextMonth()
+            }), K(), u(20, "svg", 6), P(21, "path", 13), c()()(), ne(), u(22, "div", 14), R(23, uT, 2, 1, "div", null, pe), c(), u(25, "div", 15), R(26, gT, 10, 27, "div", 16, cc), c(), u(28, "div", 17)(29, "div", 18), P(30, "span", 19), d(31, " Ho\xE0ng \u0110\u1EA1o"), c(), u(32, "div", 18), P(33, "span", 20), d(34, " H\u1EAFc \u0110\u1EA1o"), c(), u(35, "div", 18), P(36, "span", 21), d(37, " Ng\xE0y L\u1EC5"), c(), u(38, "div", 18), P(39, "span", 22), d(40, " H\xF4m Nay"), c()()()(), _(41, IT, 19, 4, "div", 23)), e & 2) {
+            let r, o;
+            h(2), T((r = i.state.selectedLunarInfo()) ? 2 : 3, r), h(12), O(i.months), h(3), O(i.years), h(6), O(i.calendarWeekDayHeaders), h(3), O(i.state.calendarDays()), h(15), T(i.state.userDOB() && ((o = i.state.userCanChi()) != null && o.chi) ? 41 : -1)
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var wa = Lr;
+var MT = () => ({
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    }),
+    NT = (t, n) => n.id,
+    AT = (t, n) => n.city;
+
+function kT(t, n) {
+    if (t & 1 && (u(0, "option", 8), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e.id), h(), b(e.name)
+    }
+}
+
+function RT(t, n) {
+    if (t & 1 && (u(0, "div", 9)(1, "p", 18), d(2, "Gi\u1EDD \xC2m l\u1ECBch hi\u1EC7n t\u1EA1i"), c(), u(3, "p", 19), d(4), c(), u(5, "p", 20), d(6), c()()), t & 2) {
+        let e = n;
+        h(4), W(" ", e.can, " ", e.chi, " "), h(2), b(e.hourRange)
+    }
+}
+
+function OT(t, n) {
+    if (t & 1 && (u(0, "div", 30), K(), u(1, "svg", 31)(2, "defs")(3, "marker", 32), P(4, "path", 33), c()(), P(5, "path", 34)(6, "path", 35)(7, "path", 36)(8, "path", 37)(9, "line", 38)(10, "line", 39)(11, "line", 40)(12, "line", 41), c(), ne(), u(13, "div", 42), d(14, "M\u1ED9c"), c(), u(15, "div", 43), d(16, "H\u1ECFa"), c(), u(17, "div", 44), d(18, "Th\u1ED5"), c(), u(19, "div", 45), d(20, "Kim"), c(), u(21, "div", 46), d(22, "Th\u1EE7y"), c()()), t & 2) {
+        let e = n;
+        h(13), N("opacity-30", e.M\u1ED9c === 0), h(2), N("opacity-30", e.H\u1ECFa === 0), h(2), N("opacity-30", e.Th\u1ED5 === 0), h(2), N("opacity-30", e.Kim === 0), h(2), N("opacity-30", e.Th\u1EE7y === 0)
+    }
+}
+
+function LT(t, n) {
+    if (t & 1 && (u(0, "div", 12)(1, "div", 21)(2, "div")(3, "div", 22), d(4, "N\u0103m"), c(), u(5, "div", 23), d(6), c(), u(7, "div", 24), d(8), c(), u(9, "div", 25), d(10), c()(), u(11, "div")(12, "div", 22), d(13, "Th\xE1ng"), c(), u(14, "div", 23), d(15), c(), u(16, "div", 24), d(17), c(), u(18, "div", 25), d(19), c()(), u(20, "div")(21, "div", 22), d(22, "Ng\xE0y"), c(), u(23, "div", 26), d(24), c(), u(25, "div", 24), d(26), c(), u(27, "div", 25), d(28), c()(), u(29, "div", 27)(30, "div", 28), d(31, "Gi\u1EDD"), c(), u(32, "div", 29), d(33), c(), u(34, "div", 24), d(35), c(), u(36, "div", 25), d(37), c()()(), _(38, OT, 23, 10, "div", 30), c()), t & 2) {
+        let e, i = n,
+            r = y();
+        h(6), b(i.year.thapThan), h(), fe(r.CAN_DETAILS[i.year.can].color), h(), W("", r.CAN_DETAILS[i.year.can].icon, " ", i.year.can), h(), fe(r.CHI_DETAILS[i.year.chi].color), h(), W("", r.CHI_DETAILS[i.year.chi].icon, " ", i.year.chi), h(5), b(i.month.thapThan), h(), fe(r.CAN_DETAILS[i.month.can].color), h(), W("", r.CAN_DETAILS[i.month.can].icon, " ", i.month.can), h(), fe(r.CHI_DETAILS[i.month.chi].color), h(), W("", r.CHI_DETAILS[i.month.chi].icon, " ", i.month.chi), h(5), b(i.day.thapThan), h(), fe(r.CAN_DETAILS[i.day.can].color), h(), W("", r.CAN_DETAILS[i.day.can].icon, " ", i.day.can), h(), fe(r.CHI_DETAILS[i.day.chi].color), h(), W("", r.CHI_DETAILS[i.day.chi].icon, " ", i.day.chi), h(5), b(i.hour.thapThan), h(), fe(r.CAN_DETAILS[i.hour.can].color), h(), W("", r.CAN_DETAILS[i.hour.can].icon, " ", i.hour.can), h(), fe(r.CHI_DETAILS[i.hour.chi].color), h(), W("", r.CHI_DETAILS[i.hour.chi].icon, " ", i.hour.chi), h(), T((e = r.elementCounts()) ? 38 : -1, e)
+    }
+}
+
+function FT(t, n) {
+    t & 1 && (u(0, "p", 13), d(1, "\u0110ang t\u1EA3i d\u1EEF li\u1EC7u B\xE1t T\u1EF1..."), c())
+}
+
+function PT(t, n) {
+    if (t & 1 && (u(0, "span", 49), d(1), c()), t & 2) {
+        let e = y().$implicit;
+        h(), L("(", e.dayOffset, ")")
+    }
+}
+
+function BT(t, n) {
+    if (t & 1 && (u(0, "div", 17)(1, "div", 47)(2, "p", 48), d(3), c(), u(4, "p", 20), d(5), _(6, PT, 2, 1, "span", 49), c()(), u(7, "p", 50), d(8), c()()), t & 2) {
+        let e = n.$implicit;
+        h(2), H("title", e.city), h(), b(e.city), h(2), L(" ", e.dateString, " "), h(), T(e.dayOffset !== "H\xF4m nay" ? 6 : -1), h(2), b(e.timeString)
+    }
+}
+var HT = [{
+        id: "Asia/Ho_Chi_Minh",
+        name: "H\xE0 N\u1ED9i, Vi\u1EC7t Nam (GMT+7)"
+    }, {
+        id: "Etc/GMT-12",
+        name: "GMT+12"
+    }, {
+        id: "Pacific/Auckland",
+        name: "Auckland, New Zealand (GMT+12)"
+    }, {
+        id: "Etc/GMT-11",
+        name: "GMT+11"
+    }, {
+        id: "Australia/Sydney",
+        name: "Sydney, \xDAc (GMT+10)"
+    }, {
+        id: "Asia/Tokyo",
+        name: "Tokyo, Nh\u1EADt B\u1EA3n (GMT+9)"
+    }, {
+        id: "Asia/Seoul",
+        name: "Seoul, H\xE0n Qu\u1ED1c (GMT+9)"
+    }, {
+        id: "Asia/Shanghai",
+        name: "B\u1EAFc Kinh, Trung Qu\u1ED1c (GMT+8)"
+    }, {
+        id: "Asia/Singapore",
+        name: "Singapore (GMT+8)"
+    }, {
+        id: "Asia/Bangkok",
+        name: "Bangkok, Th\xE1i Lan (GMT+7)"
+    }, {
+        id: "Asia/Dubai",
+        name: "Dubai, UAE (GMT+4)"
+    }, {
+        id: "Europe/Moscow",
+        name: "Moscow, Nga (GMT+3)"
+    }, {
+        id: "Europe/Paris",
+        name: "Paris, Ph\xE1p (GMT+2)"
+    }, {
+        id: "Europe/London",
+        name: "London, Anh (GMT+1)"
+    }, {
+        id: "Etc/GMT",
+        name: "GMT+0"
+    }, {
+        id: "America/Sao_Paulo",
+        name: "S\xE3o Paulo, Brazil (GMT-3)"
+    }, {
+        id: "America/New_York",
+        name: "New York, Hoa K\u1EF3 (GMT-4)"
+    }, {
+        id: "America/Chicago",
+        name: "Chicago, Hoa K\u1EF3 (GMT-5)"
+    }, {
+        id: "America/Denver",
+        name: "Denver, Hoa K\u1EF3 (GMT-6)"
+    }, {
+        id: "America/Los_Angeles",
+        name: "Los Angeles, Hoa K\u1EF3 (GMT-7)"
+    }, {
+        id: "Pacific/Honolulu",
+        name: "Honolulu, Hoa K\u1EF3 (GMT-10)"
+    }],
+    Fr = class Fr {
+        constructor() {
+            this.lunarConverterService = E(Oe);
+            this.lunarCalendarService = E(Le);
+            this.currentTime = C(new Date);
+            this.currentHourPillar = C(null);
+            this.worldClocks = C([]);
+            this.currentBatTu = C(null);
+            this.elementCounts = C({
+                Kim: 0,
+                M\u1ED9c: 0,
+                Th\u1EE7y: 0,
+                H\u1ECFa: 0,
+                Th\u1ED5: 0
+            });
+            this.selectedTimezone = C(Intl.DateTimeFormat().resolvedOptions().timeZone);
+            this.CAN_DETAILS = $t;
+            this.CHI_DETAILS = sc;
+            this.timezones = HT;
+            this.worldClockTimezones = [{
+                city: "H\xE0 N\u1ED9i",
+                timezone: "Asia/Ho_Chi_Minh"
+            }, {
+                city: "Tokyo",
+                timezone: "Asia/Tokyo"
+            }, {
+                city: "B\u1EAFc Kinh",
+                timezone: "Asia/Shanghai"
+            }, {
+                city: "Sydney",
+                timezone: "Australia/Sydney"
+            }, {
+                city: "Moscow",
+                timezone: "Europe/Moscow"
+            }, {
+                city: "London",
+                timezone: "Europe/London"
+            }, {
+                city: "New York",
+                timezone: "America/New_York"
+            }, {
+                city: "Los Angeles",
+                timezone: "America/Los_Angeles"
+            }]
+        }
+        ngOnInit() {
+            this.updateTime(), this.mainInterval = setInterval(() => this.updateTime(), 1e3)
+        }
+        ngOnDestroy() {
+            clearInterval(this.mainInterval)
+        }
+        updateTime() {
+            let n = new Date,
+                e = this.selectedTimezone(),
+                i = n.toLocaleString("en-US", {
+                    timeZone: e,
+                    year: "numeric",
+                    month: "numeric",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                    second: "numeric",
+                    hour12: !1
+                }),
+                r = new Date(i);
+            this.currentTime.set(r), this.updateCurrentInfo(r), this.updateWorldClocks(n)
+        }
+        updateCurrentInfo(n) {
+            let e = this.lunarCalendarService.getLunarDateInfo(n),
+                i = this.lunarConverterService.getHourlyPillars(n);
+            if (!e || i.length === 0) {
+                this.currentHourPillar.set(null), this.currentBatTu.set(null);
+                return
+            }
+            let r = n.getHours(),
+                o = Math.floor((r + 1) / 2) % 12,
+                a = i[o],
+                s = e.canChi.day.split(" ")[0],
+                l = e.canChi.year.split(" ")[0],
+                m = e.canChi.month.split(" ")[0],
+                f = a.can;
+            this.currentHourPillar.set({
+                can: f,
+                chi: a.chi,
+                hourRange: a.hourRange
+            });
+            let p = {
+                year: {
+                    can: l,
+                    chi: e.canChi.year.split(" ")[1],
+                    thapThan: this.lunarConverterService.getThapThan(s, l)
+                },
+                month: {
+                    can: m,
+                    chi: e.canChi.month.split(" ")[1],
+                    thapThan: this.lunarConverterService.getThapThan(s, m)
+                },
+                day: {
+                    can: s,
+                    chi: e.canChi.day.split(" ")[1],
+                    thapThan: Ee.ty
+                },
+                hour: {
+                    can: f,
+                    chi: a.chi,
+                    hourRange: a.hourRange,
+                    thapThan: this.lunarConverterService.getThapThan(s, f)
+                }
+            };
+            this.currentBatTu.set(p);
+            let g = [p.year.can, p.month.can, p.day.can, p.hour.can],
+                v = {
+                    Kim: 0,
+                    M\u1ED9c: 0,
+                    Th\u1EE7y: 0,
+                    H\u1ECFa: 0,
+                    Th\u1ED5: 0
+                };
+            for (let x of g) {
+                let B = $t[x]?.element;
+                B && v[B]++
+            }
+            this.elementCounts.set(v)
+        }
+        updateWorldClocks(n) {
+            let e = this.selectedTimezone(),
+                i = new Date(n.toLocaleString("en-US", {
+                    timeZone: e
+                })),
+                r = this.worldClockTimezones.map(o => {
+                    let a = new Date(n.toLocaleString("en-US", {
+                            timeZone: o.timezone
+                        })),
+                        s = a.toLocaleTimeString("vi-VN", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit",
+                            hour12: !1
+                        }),
+                        l = a.toLocaleDateString("vi-VN", {
+                            weekday: "short",
+                            day: "2-digit",
+                            month: "2-digit"
+                        }),
+                        m = new Date(i);
+                    m.setHours(0, 0, 0, 0);
+                    let f = new Date(a);
+                    f.setHours(0, 0, 0, 0);
+                    let p = f.getTime() - m.getTime(),
+                        g = "H\xF4m nay";
+                    return p > 0 ? g = "Ng\xE0y mai" : p < 0 && (g = "H\xF4m qua"), {
+                        city: o.city,
+                        timezone: o.timezone,
+                        timeString: s,
+                        dateString: l,
+                        dayOffset: g
+                    }
+                });
+            this.worldClocks.set(r)
+        }
+    };
+Fr.\u0275fac = function(e) {
+    return new(e || Fr)
+}, Fr.\u0275cmp = q({
+    type: Fr,
+    selectors: [
+        ["app-clock-tab"]
+    ],
+    decls: 26,
+    vars: 6,
+    consts: [
+        [1, "bg-white", "p-6", "rounded-lg", "shadow-lg"],
+        [1, "p-4", "text-center", "border-b", "border-gray-200"],
+        [1, "text-xl", "font-semibold", "mb-2", "text-gray-700"],
+        [1, "font-mono", "text-5xl", "sm:text-6xl", "font-bold", "tracking-widest", "text-gray-800", "bg-gray-100", "rounded-lg", "p-4", "mb-4"],
+        [1, "text-lg", "text-gray-600"],
+        [1, "max-w-sm", "mx-auto", "my-6"],
+        ["for", "timezone-select", 1, "block", "text-sm", "font-medium", "text-gray-700", "mb-1"],
+        ["id", "timezone-select", 1, "w-full", "p-2", "border", "border-gray-300", "rounded-md", "shadow-sm", "focus:ring-indigo-500", "focus:border-indigo-500", "bg-white", "text-base", 3, "change", "value"],
+        [3, "value"],
+        [1, "bg-blue-50", "border", "border-blue-200", "rounded-lg", "p-4", "max-w-sm", "mx-auto", "mb-6"],
+        [1, "py-8", "border-b", "border-gray-200"],
+        [1, "text-xl", "font-semibold", "mb-6", "text-gray-700", "text-center"],
+        [1, "grid", "grid-cols-1", "lg:grid-cols-2", "gap-8", "items-center"],
+        [1, "text-center", "text-gray-500"],
+        [1, "pt-8", "px-2"],
+        [1, "text-xl", "font-semibold", "mb-4", "text-gray-700", "text-center"],
+        [1, "grid", "grid-cols-1", "md:grid-cols-2", "xl:grid-cols-4", "gap-4"],
+        [1, "p-4", "bg-gray-50", "rounded-lg", "flex", "justify-between", "items-center", "border", "border-gray-200", "gap-2"],
+        [1, "text-lg", "font-medium", "text-blue-800"],
+        [1, "text-2xl", "font-bold", "text-blue-900", "mt-1"],
+        [1, "text-sm", "text-gray-500"],
+        [1, "grid", "grid-cols-2", "sm:grid-cols-4", "gap-3", "text-center", "text-sm", "sm:text-base"],
+        [1, "font-semibold", "text-gray-500", "text-xs", "sm:text-sm"],
+        [1, "text-xs", "font-medium", "bg-gray-100", "text-gray-600", "rounded", "px-1", "py-0.5", "my-1", "inline-block"],
+        [1, "p-1", "rounded", "text-white", "font-bold", "flex", "items-center", "justify-center", "gap-1"],
+        [1, "p-1", "rounded", "text-white", "font-bold", "mt-1", "flex", "items-center", "justify-center", "gap-1"],
+        [1, "text-xs", "font-bold", "bg-indigo-100", "text-indigo-700", "rounded", "px-1", "py-0.5", "my-1", "inline-block"],
+        [1, "bg-indigo-50", "p-1", "rounded-md", "border", "border-indigo-200"],
+        [1, "font-semibold", "text-indigo-700", "text-xs", "sm:text-sm"],
+        [1, "text-xs", "font-medium", "bg-white", "text-gray-600", "rounded", "px-1", "py-0.5", "my-1", "inline-block"],
+        [1, "relative", "w-64", "h-64", "sm:w-80", "sm:h-80", "mx-auto"],
+        ["viewBox", "0 0 200 200", 1, "absolute", "inset-0", "w-full", "h-full"],
+        ["id", "arrow", "viewBox", "0 0 10 10", "refX", "5", "refY", "5", "markerWidth", "4", "markerHeight", "4", "orient", "auto-start-reverse"],
+        ["d", "M 0 0 L 10 5 L 0 10 z", "fill", "#34d399"],
+        ["d", "M 100,20 A 80 80 0 0 1 180,100", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow)"],
+        ["d", "M 180,100 A 80 80 0 0 1 100,180", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow)"],
+        ["d", "M 100,180 A 80 80 0 0 1 20,100", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow)"],
+        ["d", "M 20,100 A 80 80 0 0 1 100,20", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow)"],
+        ["x1", "100", "y1", "20", "x2", "100", "y2", "180", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "20", "y1", "100", "x2", "180", "y2", "100", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "34.5", "y1", "34.5", "x2", "165.5", "y2", "165.5", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "165.5", "y1", "34.5", "x2", "34.5", "y2", "165.5", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        [1, "absolute", "top-[15%]", "left-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-bold", "text-lg", "bg-green-200", "text-green-800", "transition-opacity"],
+        [1, "absolute", "top-0", "left-1/2", "-translate-x-1/2", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-bold", "text-lg", "bg-red-200", "text-red-800", "transition-opacity"],
+        [1, "absolute", "top-[15%]", "right-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-bold", "text-lg", "bg-yellow-200", "text-yellow-800", "transition-opacity"],
+        [1, "absolute", "bottom-[15%]", "right-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-bold", "text-lg", "bg-gray-200", "text-gray-800", "transition-opacity"],
+        [1, "absolute", "bottom-[15%]", "left-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-bold", "text-lg", "bg-blue-200", "text-blue-800", "transition-opacity"],
+        [1, "flex-grow", "min-w-0"],
+        [1, "font-semibold", "text-lg", "text-gray-800", "truncate", 3, "title"],
+        [1, "font-medium", "text-indigo-500", "ml-1"],
+        [1, "font-mono", "text-3xl", "font-bold", "text-indigo-600", "flex-shrink-0"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div", 0)(1, "div", 1)(2, "h3", 2), d(3, "\u0110\u1ED3ng h\u1ED3 v\u1EA1n ni\xEAn"), c(), u(4, "div", 3), d(5), c(), u(6, "div", 4), d(7), c(), u(8, "div", 5)(9, "label", 6), d(10, "M\xFAi gi\u1EDD:"), c(), u(11, "select", 7), D("change", function(o) {
+                return i.selectedTimezone.set(o.target.value)
+            }), R(12, kT, 2, 2, "option", 8, NT), c()(), _(14, RT, 7, 3, "div", 9), c(), u(15, "div", 10)(16, "h3", 11), d(17, "N\u0103ng L\u01B0\u1EE3ng C\u1EE7a Gi\u1EDD"), c(), _(18, LT, 39, 37, "div", 12)(19, FT, 2, 0, "p", 13), c(), u(20, "div", 14)(21, "h3", 15), d(22, "Gi\u1EDD Th\u1EBF Gi\u1EDBi"), c(), u(23, "div", 16), R(24, BT, 9, 5, "div", 17, AT), c()()()), e & 2) {
+            let r, o;
+            h(5), L(" ", i.currentTime().toLocaleTimeString("vi-VN"), " "), h(2), L(" ", i.currentTime().toLocaleDateString("vi-VN", me(5, MT)), " "), h(4), H("value", i.selectedTimezone()), h(), O(i.timezones), h(2), T((r = i.currentHourPillar()) ? 14 : -1, r), h(4), T((o = i.currentBatTu()) ? 18 : 19, o), h(6), O(i.worldClocks())
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var uc = Fr;
+var jT = (t, n, e, i) => ({
+        "bg-white": t,
+        "bg-indigo-50": n,
+        "border-l-4 border-l-indigo-500": e,
+        "hover:bg-indigo-100": i
+    }),
+    VT = t => ({
+        "text-indigo-600": t
+    }),
+    $T = (t, n) => n.date;
+
+function UT(t, n) {
+    t & 1 && (u(0, "span", 21), d(1, "M\xF9ng 1"), c())
+}
+
+function zT(t, n) {
+    t & 1 && (u(0, "span", 21), d(1, "R\u1EB1m"), c())
+}
+
+function GT(t, n) {
+    t & 1 && (u(0, "span", 22), d(1, "Ho\xE0ng \u0110\u1EA1o"), c())
+}
+
+function qT(t, n) {
+    t & 1 && (u(0, "span", 23), d(1, "H\u1EAFc \u0110\u1EA1o"), c())
+}
+
+function WT(t, n) {
+    if (t & 1 && (u(0, "div")(1, "h3", 27), d(2, "Ng\xE0y l\u1EC5"), c(), u(3, "p", 31), d(4), c()()), t & 2) {
+        let e = y().$implicit;
+        h(4), b(e.info == null ? null : e.info.holidays.join(", "))
+    }
+}
+
+function YT(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 18), D("click", function() {
+            let r = S(e).$implicit,
+                o = y();
+            return w(o.viewDayDetails(r.date))
+        }), u(1, "div", 19)(2, "h2", 20)(3, "span"), d(4), c()(), _(5, UT, 2, 0, "span", 21)(6, zT, 2, 0, "span", 21)(7, GT, 2, 0, "span", 22)(8, qT, 2, 0, "span", 23), c(), u(9, "p", 24), d(10), c(), u(11, "p", 25), d(12), c(), u(13, "div", 26)(14, "div")(15, "h3", 27), d(16, "Gi\u1EDD t\u1ED1t"), c(), u(17, "p", 28), d(18), c()(), u(19, "div")(20, "h3", 27), d(21, "N\xEAn l\xE0m"), c(), u(22, "p", 29), d(23), c()(), u(24, "div")(25, "h3", 27), d(26, "N\xEAn tr\xE1nh"), c(), u(27, "p", 30), d(28), c()(), _(29, WT, 5, 1, "div"), c()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        fe(oh(15, jT, !e.isSelected, e.isSelected, e.isSelected, e.isSelected)), h(3), fe(Fn(20, VT, e.isToday)), h(), Ze(" ", e.info == null ? null : e.info.dayOfWeek, ", ", e.date.getDate(), "/", e.date.getMonth() + 1, " "), h(), T((e.info == null || e.info.lunarDate == null ? null : e.info.lunarDate.day) === 1 ? 5 : (e.info == null || e.info.lunarDate == null ? null : e.info.lunarDate.day) === 15 ? 6 : (e.info == null ? null : e.info.dayType) === "Ho\xE0ng \u0110\u1EA1o" ? 7 : (e.info == null ? null : e.info.dayType) === "H\u1EAFc \u0110\u1EA1o" ? 8 : -1), h(5), W(" Ng\xE0y ", e.info == null || e.info.lunarDate == null ? null : e.info.lunarDate.day, "/", e.info == null || e.info.lunarDate == null ? null : e.info.lunarDate.month, " \xE2m "), h(2), L(" ", e.info == null || e.info.canChi == null ? null : e.info.canChi.day, " "), h(6), b(e.info == null ? null : e.info.goodHours.join(", ")), h(5), b(e.info == null ? null : e.info.goodDeeds.join(", ")), h(5), b(e.info == null ? null : e.info.badDeeds.join(", ")), h(), T(e.info != null && e.info.holidays && e.info.holidays.length > 0 ? 29 : -1)
+    }
+}
+var Pr = class Pr {
+    constructor() {
+        this.state = E(Xe);
+        this.router = E(Te)
+    }
+    goToToday() {
+        this.state.goToToday()
+    }
+    viewDayDetails(n) {
+        this.router.navigate(["/", n.getDate(), n.getMonth() + 1, n.getFullYear()])
+    }
+    onPreviousWeek() {
+        let n = this.state.selectedDate(),
+            e = new Date(n);
+        e.setDate(e.getDate() - 7), this.state.selectDate(e)
+    }
+    onNextWeek() {
+        let n = this.state.selectedDate(),
+            e = new Date(n);
+        e.setDate(e.getDate() + 7), this.state.selectDate(e)
+    }
+};
+Pr.\u0275fac = function(e) {
+    return new(e || Pr)
+}, Pr.\u0275cmp = q({
+    type: Pr,
+    selectors: [
+        ["app-weekly-tab"]
+    ],
+    decls: 27,
+    vars: 3,
+    consts: [
+        [1, "flex", "h-full", "flex-col", "bg-gray-50"],
+        [1, "flex", "flex-none", "items-center", "justify-between", "border-b", "border-gray-200", "bg-white", "px-4", "py-4", "sm:px-6"],
+        [1, "text-lg", "font-semibold", "leading-6", "text-gray-900"],
+        [3, "dateTime"],
+        [1, "mt-1", "text-sm", "text-gray-500"],
+        [1, "flex", "items-center"],
+        [1, "relative", "flex", "items-center", "rounded-md", "bg-white", "shadow-sm", "md:items-stretch"],
+        ["type", "button", 1, "flex", "h-9", "w-12", "items-center", "justify-center", "rounded-l-md", "border-y", "border-l", "border-gray-300", "pr-1", "text-gray-400", "hover:text-gray-500", "focus:relative", "md:w-9", "md:pr-0", "md:hover:bg-gray-50", 3, "click"],
+        [1, "sr-only"],
+        ["viewBox", "0 0 20 20", "fill", "currentColor", "aria-hidden", "true", 1, "h-5", "w-5"],
+        ["fill-rule", "evenodd", "d", "M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z", "clip-rule", "evenodd"],
+        ["type", "button", 1, "hidden", "border-y", "border-gray-300", "px-3.5", "text-sm", "font-semibold", "text-gray-900", "hover:bg-gray-50", "focus:relative", "md:block", 3, "click"],
+        [1, "relative", "-mx-px", "h-5", "w-px", "bg-gray-300", "md:hidden"],
+        ["type", "button", 1, "flex", "h-9", "w-12", "items-center", "justify-center", "rounded-r-md", "border-y", "border-r", "border-gray-300", "pl-1", "text-gray-400", "hover:text-gray-500", "focus:relative", "md:w-9", "md:pl-0", "md:hover:bg-gray-50", 3, "click"],
+        ["fill-rule", "evenodd", "d", "M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z", "clip-rule", "evenodd"],
+        [1, "flex-auto", "overflow-auto"],
+        [1, "grid", "grid-cols-1", "md:grid-cols-7"],
+        [1, "flex", "flex-col", "border-b", "md:border-r", "border-gray-200", "p-4", "cursor-pointer", "hover:bg-gray-100", 3, "class"],
+        [1, "flex", "flex-col", "border-b", "md:border-r", "border-gray-200", "p-4", "cursor-pointer", "hover:bg-gray-100", 3, "click"],
+        [1, "flex", "items-baseline", "justify-between"],
+        [1, "font-semibold", "text-gray-900"],
+        [1, "text-xs", "font-semibold", "text-red-600", "bg-red-100", "rounded-full", "px-2", "py-0.5"],
+        [1, "text-xs", "font-semibold", "text-amber-600", "bg-amber-100", "rounded-full", "px-2", "py-0.5"],
+        [1, "text-xs", "font-semibold", "text-gray-600", "bg-gray-200", "rounded-full", "px-2", "py-0.5"],
+        [1, "text-sm", "text-gray-600", "mt-1"],
+        [1, "text-xs", "text-gray-500"],
+        [1, "mt-4", "space-y-3", "text-xs"],
+        [1, "font-semibold", "text-gray-700"],
+        [1, "text-gray-500", "truncate"],
+        [1, "text-green-600", "truncate"],
+        [1, "text-red-600", "truncate"],
+        [1, "text-indigo-600", "truncate"]
+    ],
+    template: function(e, i) {
+        e & 1 && (u(0, "div", 0)(1, "header", 1)(2, "div")(3, "h1", 2)(4, "time", 3), d(5), c()(), u(6, "p", 4), d(7), c()(), u(8, "div", 5)(9, "div", 6)(10, "button", 7), D("click", function() {
+            return i.onPreviousWeek()
+        }), u(11, "span", 8), d(12, "Previous week"), c(), K(), u(13, "svg", 9), P(14, "path", 10), c()(), ne(), u(15, "button", 11), D("click", function() {
+            return i.goToToday()
+        }), d(16, " H\xF4m nay "), c(), P(17, "span", 12), u(18, "button", 13), D("click", function() {
+            return i.onNextWeek()
+        }), u(19, "span", 8), d(20, "Next week"), c(), K(), u(21, "svg", 9), P(22, "path", 14), c()()()()(), ne(), u(23, "div", 15)(24, "div", 16), R(25, YT, 30, 22, "div", 17, $T), c()()()), e & 2 && (h(4), H("dateTime", i.state.selectedDate().toISOString()), h(), b(i.state.weekYearLabel()), h(2), b(i.state.weekNumberLabel()), h(18), O(i.state.currentWeekDays()))
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var dc = Pr;
+var KT = (t, n) => n.monthIndex,
+    QT = (t, n) => n.date.getTime();
+
+function ZT(t, n) {
+    if (t & 1 && (u(0, "div"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function XT(t, n) {
+    t & 1 && P(0, "span", 17)
+}
+
+function JT(t, n) {
+    t & 1 && P(0, "span", 18)
+}
+
+function eS(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 16), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(2);
+            return w(o.viewDayDetails(r.date))
+        }), u(1, "span"), d(2), c(), _(3, XT, 1, 0, "span", 17), _(4, JT, 1, 0, "span", 18), c()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        N("text-gray-400", !e.isCurrentMonth)("bg-white", e.isCurrentMonth)("hover:bg-indigo-100", e.isCurrentMonth)("ring-1", e.isToday)("ring-indigo-500", e.isToday)("z-10", e.isToday), h(2), b(e.dayOfMonth), h(), T(e.lunarInfo.hasHoliday && e.isCurrentMonth ? 3 : -1), h(), T(e.lunarInfo.dayType === "Ho\xE0ng \u0110\u1EA1o" && e.isCurrentMonth ? 4 : -1)
+    }
+}
+
+function tS(t, n) {
+    if (t & 1 && (u(0, "div", 11)(1, "h3", 12), d(2), c(), u(3, "div", 13), R(4, ZT, 2, 1, "div", null, pe), c(), u(6, "div", 14), R(7, eS, 5, 15, "div", 15, QT), c()()), t & 2) {
+        let e = n.$implicit,
+            i = y();
+        h(2), b(e.monthName), h(2), O(i.calendarWeekDayHeaders), h(3), O(e.days)
+    }
+}
+var Br = class Br {
+    constructor() {
+        this.state = E(Xe);
+        this.router = E(Te);
+        this.route = E(qe);
+        this.calendarWeekDayHeaders = ["Hai", "Ba", "T\u01B0", "N\u0103m", "S\xE1u", "B\u1EA3y", "CN"]
+    }
+    ngOnInit() {
+        this.paramsSubscription = this.route.params.subscribe(n => {
+            let e = +n.year;
+            if (e) this.state.setYearFromParams(e) || this.router.navigate(["/overview"]);
+            else {
+                let i = new Date().getFullYear();
+                this.router.navigate(["/", i])
+            }
+        })
+    }
+    ngOnDestroy() {
+        this.paramsSubscription?.unsubscribe()
+    }
+    goToToday() {
+        this.router.navigate(["/", new Date().getFullYear()])
+    }
+    viewDayDetails(n) {
+        this.router.navigate(["/", n.getDate(), n.getMonth() + 1, n.getFullYear()])
+    }
+    onPreviousYear() {
+        let n = this.state.currentYear() - 1;
+        this.router.navigate(["/", n])
+    }
+    onNextYear() {
+        let n = this.state.currentYear() + 1;
+        this.router.navigate(["/", n])
+    }
+};
+Br.\u0275fac = function(e) {
+    return new(e || Br)
+}, Br.\u0275cmp = q({
+    type: Br,
+    selectors: [
+        ["app-year-tab"]
+    ],
+    decls: 20,
+    vars: 1,
+    consts: [
+        [1, "bg-white", "p-6", "rounded-lg", "shadow-lg"],
+        [1, "flex", "justify-between", "items-center", "mb-6"],
+        [1, "p-2", "rounded-full", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-6", "w-6"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M15 19l-7-7 7-7"],
+        [1, "sr-only"],
+        [1, "flex", "items-center", "gap-4"],
+        [1, "text-2xl", "font-bold", "text-center"],
+        [1, "px-4", "py-2", "text-sm", "font-medium", "bg-indigo-500", "text-white", "rounded-md", "shadow-sm", "hover:bg-indigo-600", "transition-colors", 3, "click"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 5l7 7-7 7"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-2", "lg:grid-cols-3", "xl:grid-cols-4", "gap-6"],
+        [1, "border", "border-gray-200", "rounded-lg", "p-3"],
+        [1, "font-semibold", "text-center", "text-indigo-600", "mb-2"],
+        [1, "grid", "grid-cols-7", "gap-1", "text-center", "text-xs", "font-medium", "text-gray-500", "mb-1"],
+        [1, "grid", "grid-cols-7", "gap-px"],
+        [1, "relative", "h-9", "flex", "justify-center", "items-center", "rounded", "cursor-pointer", "transition-colors", "text-xs", 3, "text-gray-400", "bg-white", "hover:bg-indigo-100", "ring-1", "ring-indigo-500", "z-10"],
+        [1, "relative", "h-9", "flex", "justify-center", "items-center", "rounded", "cursor-pointer", "transition-colors", "text-xs", 3, "click"],
+        ["title", "Ng\xE0y l\u1EC5", 1, "absolute", "bottom-0.5", "right-0.5", "h-1.5", "w-1.5", "bg-red-500", "rounded-full"],
+        ["title", "Ng\xE0y Ho\xE0ng \u0110\u1EA1o", 1, "absolute", "bottom-0.5", "left-0.5", "h-1.5", "w-1.5", "bg-yellow-400", "rounded-full"]
+    ],
+    template: function(e, i) {
+        e & 1 && (u(0, "div", 0)(1, "div", 1)(2, "button", 2), D("click", function() {
+            return i.onPreviousYear()
+        }), K(), u(3, "svg", 3), P(4, "path", 4), c(), ne(), u(5, "span", 5), d(6, "N\u0103m tr\u01B0\u1EDBc"), c()(), u(7, "div", 6)(8, "h2", 7), d(9), c(), u(10, "button", 8), D("click", function() {
+            return i.goToToday()
+        }), d(11, "V\u1EC1 N\u0103m Nay"), c()(), u(12, "button", 2), D("click", function() {
+            return i.onNextYear()
+        }), K(), u(13, "svg", 3), P(14, "path", 9), c(), ne(), u(15, "span", 5), d(16, "N\u0103m sau"), c()()(), u(17, "div", 10), R(18, tS, 9, 1, "div", 11, KT), c()()), e & 2 && (h(9), L("N\u0103m ", i.state.currentYear()), h(9), O(i.state.yearViewMonths()))
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var hc = Br;
+var nS = () => ["\u0110\u1EA1i An", "T\u1ED1c H\u1EF7", "Ti\u1EC3u C\xE1t"],
+    iS = () => ["L\u01B0u Li\xEAn", "X\xEDch Kh\u1EA9u", "Kh\xF4ng Vong"],
+    rS = (t, n) => n.hourName,
+    oS = (t, n) => n.direction,
+    aS = (t, n) => n.canChi;
+
+function sS(t, n) {
+    t & 1 && (u(0, "li"), d(1, "H\xF4m nay l\xE0 Ng\xE0y V\u1ECDng (R\u1EB1m)."), c())
+}
+
+function lS(t, n) {
+    t & 1 && (u(0, "li"), d(1, "H\xF4m nay l\xE0 Ng\xE0y S\xF3c (M\xF9ng 1)."), c())
+}
+
+function cS(t, n) {
+    if (t & 1 && (u(0, "li"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function uS(t, n) {
+    if (t & 1 && (u(0, "div", 19)(1, "div", 40), K(), u(2, "svg", 41), P(3, "path", 42), c(), ne(), u(4, "h4", 43), d(5, "Ng\xE0y \u0110\u1EB7c Bi\u1EC7t"), c()(), u(6, "ul", 44), _(7, sS, 2, 0, "li"), _(8, lS, 2, 0, "li"), R(9, cS, 2, 1, "li", null, pe), c()()), t & 2) {
+        let e = y();
+        h(7), T(e.lunarDate.day === 15 ? 7 : -1), h(), T(e.lunarDate.day === 1 ? 8 : -1), h(), O(e.holidays)
+    }
+}
+
+function dS(t, n) {
+    if (t & 1 && (u(0, "li"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function hS(t, n) {
+    if (t & 1 && (u(0, "li"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function mS(t, n) {
+    if (t & 1 && (u(0, "div", 37)(1, "div", 45)(2, "h5", 46)(3, "span"), d(4, "Lu\u1EADn gi\u1EA3i Ho\xE0ng \u0110\u1EA1o cho b\u1EA1n"), c()(), u(5, "p", 47), d(6), c()()()), t & 2) {
+        let e = n;
+        h(), N("bg-green-100", e.mood === "good")("text-green-800", e.mood === "good")("bg-red-100", e.mood === "bad")("text-red-800", e.mood === "bad")("bg-gray-100", e.mood === "neutral"), h(5), b(e.text)
+    }
+}
+
+function fS(t, n) {
+    if (t & 1 && (u(0, "div", 70)(1, "p", 71), d(2), c(), u(3, "p", 72), d(4), c()()), t & 2) {
+        let e = n.$implicit;
+        N("bg-green-100", e.isGood)("bg-red-100", !e.isGood), h(), N("text-green-800", e.isGood)("text-red-800", !e.isGood), h(), b(e.result), h(2), b(e.hourName)
+    }
+}
+
+function pS(t, n) {
+    if (t & 1 && (u(0, "tr", 69)(1, "td", 73), d(2), c(), u(3, "td", 74), d(4), c(), u(5, "td", 75), d(6), c(), u(7, "td", 76), d(8), c(), u(9, "td", 76), d(10), c()()), t & 2) {
+        let e = n.$implicit;
+        h(2), b(e.direction), h(2), b(e.locationName), h(2), b(e.coordinates), h(2), b(e.sunrise.toLocaleTimeString("en-GB")), h(2), b(e.sunset.toLocaleTimeString("en-GB"))
+    }
+}
+
+function gS(t, n) {
+    if (t & 1 && (u(0, "div", 38)(1, "div", 48)(2, "h4", 49), d(3, "H\u01B0\u1EDBng Xu\u1EA5t H\xE0nh"), c(), u(4, "div", 50)(5, "div", 51)(6, "p", 52), d(7, "H\u1EF7 Th\u1EA7n"), c(), u(8, "p", 53), d(9), c()(), u(10, "div", 54)(11, "p", 55), d(12, "T\xE0i Th\u1EA7n"), c(), u(13, "p", 56), d(14), c()(), u(15, "div", 57)(16, "p", 58), d(17, "H\u1EA1c Th\u1EA7n (X\u1EA5u)"), c(), u(18, "p", 59), d(19), c()()()(), u(20, "div", 48)(21, "h4", 49), d(22, "Th\xF4ng Tin Ti\u1EBFt Kh\xED"), c(), u(23, "div", 60)(24, "div")(25, "p", 28), d(26, "Ti\u1EBFt kh\xED hi\u1EC7n t\u1EA1i:"), c(), u(27, "p"), d(28), c()(), u(29, "div")(30, "p", 28), d(31, "Ng\xE0y b\u1EAFt \u0111\u1EA7u:"), c(), u(32, "p"), d(33), c()(), u(34, "div")(35, "p", 28), d(36, "Ng\xE0y k\u1EBFt th\xFAc:"), c(), u(37, "p"), d(38), c()()()(), u(39, "div", 48)(40, "h4", 49), d(41, "Kh\u1ED5ng Minh L\u1EE5c Di\u1EC7u (Nh\xE2m \u0110\u1ED9n)"), c(), u(42, "div", 61), R(43, fS, 5, 10, "div", 62, rS), c()(), u(45, "div", 48)(46, "h4", 49), d(47, "M\u1EB7t Tr\u1EDDi"), c(), u(48, "div", 63)(49, "span"), d(50), c(), u(51, "span"), d(52), c()(), u(53, "div", 64)(54, "table", 65)(55, "thead", 66)(56, "tr")(57, "th", 67), d(58, "C\u1EF1c"), c(), u(59, "th", 67), d(60, "\u0110\u1ECBa \u0110i\u1EC3m"), c(), u(61, "th", 67), d(62, "Kinh \u0110\u1ED9/V\u0129 \u0110\u1ED9"), c(), u(63, "th", 68), d(64, "M\u1ECDc"), c(), u(65, "th", 68), d(66, "L\u1EB7n"), c()()(), u(67, "tbody"), R(68, pS, 11, 5, "tr", 69, oS), c()()()()()), t & 2) {
+        let e = n;
+        h(9), b(e.departureDirections.joyGod), h(5), b(e.departureDirections.wealthGod), h(5), b(e.departureDirections.craneGod), h(9), b(e.solarTermPeriod.current), h(5), b(e.solarTermPeriod.start.toLocaleDateString("vi-VN")), h(5), b(e.solarTermPeriod.end.toLocaleDateString("vi-VN")), h(5), O(e.lucNham), h(7), L("Ng\xE0y Julius: ", e.sunInfo.julianDay), h(2), L("Kinh \u0110\u1ED9 M\u1EB7t Tr\u1EDDi: ", e.sunInfo.sunLongitude), h(16), O(e.sunInfo.locations)
+    }
+}
+
+function vS(t, n) {
+    if (t & 1 && (u(0, "a", 90)(1, "div", 91), K(), u(2, "svg", 92)(3, "defs")(4, "marker", 93), P(5, "path", 94), c()(), P(6, "path", 95)(7, "path", 96)(8, "path", 97)(9, "path", 98)(10, "line", 99)(11, "line", 100)(12, "line", 101)(13, "line", 102), c(), ne(), u(14, "div", 103), d(15, "M\u1ED9c"), c(), u(16, "div", 104), d(17, "H\u1ECFa"), c(), u(18, "div", 105), d(19, "Th\u1ED5"), c(), u(20, "div", 106), d(21, "Kim"), c(), u(22, "div", 107), d(23, "Th\u1EE7y"), c()()()), t & 2) {
+        let e = n,
+            i = y().$implicit,
+            r = y(3);
+        H("href", r.getBatTuUrl(i), gn), h(14), N("opacity-30", e.M\u1ED9c === 0), h(2), N("opacity-30", e.H\u1ECFa === 0), h(2), N("opacity-30", e.Th\u1ED5 === 0), h(2), N("opacity-30", e.Kim === 0), h(2), N("opacity-30", e.Th\u1EE7y === 0)
+    }
+}
+
+function yS(t, n) {
+    if (t & 1 && (u(0, "tr", 82)(1, "td", 83)(2, "div", 84), d(3), c(), u(4, "div", 85), d(5), c()(), u(6, "td", 86), d(7), c(), u(8, "td", 87), d(9), c(), u(10, "td", 88)(11, "div", 89), _(12, vS, 24, 11, "a", 90), c()()()), t & 2) {
+        let e, i = n.$implicit;
+        h(3), b(i.canChi), h(2), b(i.hourRange), h(2), b(i.napAm), h(), N("text-green-600", me(9, nS).includes(i.lucNham))("text-red-600", me(10, iS).includes(i.lucNham)), h(), b(i.lucNham), h(3), T((e = i.elementCounts) ? 12 : -1, e)
+    }
+}
+
+function ES(t, n) {
+    if (t & 1 && (u(0, "div", 39)(1, "h3", 77), d(2, "Th\xF4ng Tin Chi Ti\u1EBFt Theo Gi\u1EDD"), c(), u(3, "div", 78)(4, "table", 79)(5, "thead", 80)(6, "tr")(7, "th", 74), d(8, "Gi\u1EDD"), c(), u(9, "th", 74), d(10, "N\u1EA1p \xC2m"), c(), u(11, "th", 74), d(12, "Nh\xE2m \u0110\u1ED9n"), c(), u(13, "th", 74), d(14, "B\xE1t T\u1EF1"), c()()(), u(15, "tbody", 81), R(16, yS, 13, 11, "tr", 82, aS), c()()()()), t & 2) {
+        let e = y(2);
+        h(16), O(e.hourlyDetails())
+    }
+}
+
+function bS(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 5)(1, "button", 6), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.shareDayInfo())
+        }), K(), u(2, "svg", 7), P(3, "path", 8), c()(), ne(), u(4, "div", 9)(5, "p", 10), d(6), c(), u(7, "p", 11), d(8), c(), u(9, "p", 12), d(10), c()(), P(11, "hr", 4), u(12, "div", 9)(13, "h3", 13), d(14, "\xC2m L\u1ECBch"), c(), u(15, "p", 14), d(16, "Ng\xE0y "), u(17, "span", 15), d(18), c(), d(19, " Th\xE1ng "), u(20, "span", 15), d(21), c(), d(22, " N\u0103m "), u(23, "span", 15), d(24), c()(), u(25, "p", 16), d(26), c(), u(27, "div", 17)(28, "div", 18), d(29), c()()(), _(30, uS, 11, 2, "div", 19), u(31, "div", 20)(32, "div", 21)(33, "h4", 22), d(34, "Gi\u1EDD Ho\xE0ng \u0110\u1EA1o (T\u1ED1t)"), c(), u(35, "p", 23), d(36), c()(), u(37, "div", 24)(38, "h4", 25), d(39, "Gi\u1EDD H\u1EAFc \u0110\u1EA1o (X\u1EA5u)"), c(), u(40, "p", 26), d(41), c()()(), u(42, "div", 27)(43, "p")(44, "span", 28), d(45, "Ti\u1EBFt kh\xED:"), c(), d(46), c(), u(47, "div")(48, "p")(49, "span", 28), d(50, "Tr\u1EF1c:"), c(), d(51), c(), u(52, "p", 29), d(53), c()(), u(54, "div")(55, "p")(56, "span", 28), d(57, "Nh\u1ECB Th\u1EADp B\xE1t T\xFA:"), c(), d(58), u(59, "span", 30), d(60), c()(), u(61, "p", 29), d(62), c()(), u(63, "p")(64, "span", 28), d(65, "Tu\u1ED5i h\u1EE3p:"), c(), d(66), c(), u(67, "p")(68, "span", 28), d(69, "Tu\u1ED5i xung:"), c(), d(70), c()(), P(71, "hr", 4), u(72, "div")(73, "h4", 31), d(74, "Vi\u1EC7c n\xEAn l\xE0m / Kh\xF4ng n\xEAn l\xE0m"), c(), u(75, "div", 32)(76, "div")(77, "ul", 33), R(78, dS, 2, 1, "li", null, pe), c()(), u(80, "div")(81, "ul", 34), R(82, hS, 2, 1, "li", null, pe), c()()()(), P(84, "hr", 4), u(85, "div", 35)(86, "p"), d(87), c(), u(88, "p", 36), d(89), c()(), _(90, mS, 7, 11, "div", 37), _(91, gS, 70, 8, "div", 38), c(), _(92, ES, 18, 0, "div", 39)
+    }
+    if (t & 2) {
+        let e, i, r = n,
+            o = y();
+        h(6), W("", r.dayOfWeek, ", ", r.gregorianDate), h(2), b(o.state.selectedDate().getDate()), h(2), W("Th\xE1ng ", o.state.selectedDate().getMonth() + 1, ", N\u0103m ", o.state.selectedDate().getFullYear()), h(8), b(r.lunarDate.day), h(3), b(r.lunarDate.monthName), h(3), b(r.lunarDate.yearName), h(2), Ze("N\u0103m ", r.canChi.year, ", Th\xE1ng ", r.canChi.month, ", Ng\xE0y ", r.canChi.day), h(2), N("bg-yellow-200", r.dayType === "Ho\xE0ng \u0110\u1EA1o")("text-yellow-800", r.dayType === "Ho\xE0ng \u0110\u1EA1o")("bg-gray-700", r.dayType === "H\u1EAFc \u0110\u1EA1o")("text-white", r.dayType === "H\u1EAFc \u0110\u1EA1o")("bg-gray-200", r.dayType === "B\xECnh th\u01B0\u1EDDng")("text-gray-800", r.dayType === "B\xECnh th\u01B0\u1EDDng"), h(), L(" ", r.dayTypeDetail, " "), h(), T(r.holidays.length > 0 || r.lunarDate.day === 1 || r.lunarDate.day === 15 ? 30 : -1), h(6), b(r.goodHours.join(", ")), h(5), b(r.badHours.join(", ")), h(5), L(" ", r.solarTerm), h(5), L(" ", r.duty), h(2), b(r.dutyInterpretation), h(5), W(" Sao ", r.constellation.name, " (", r.constellation.element, ") "), h(), N("bg-green-100", r.constellation.type === "Ki\u1EBFt")("text-green-800", r.constellation.type === "Ki\u1EBFt")("bg-red-100", r.constellation.type === "Hung")("text-red-800", r.constellation.type === "Hung")("bg-gray-100", r.constellation.type !== "Ki\u1EBFt" && r.constellation.type !== "Hung")("text-gray-800", r.constellation.type !== "Ki\u1EBFt" && r.constellation.type !== "Hung"), h(), L(" ", r.constellation.type, " "), h(2), b(r.constellation.interpretation), h(4), L(" ", r.compatibleZodiacs.join(", ")), h(4), L(" ", r.incompatibleZodiacs.join(", ")), h(8), O(r.goodDeeds), h(4), O(r.badDeeds), h(5), L('"', r.quote.text, '"'), h(2), L("- ", r.quote.author, " -"), h(), T((e = o.state.dailyHoroscopeReading()) ? 90 : -1, e), h(), T((i = o.detailedInfo()) ? 91 : -1, i), h(), T(o.hourlyDetails().length > 0 ? 92 : -1)
+    }
+}
+
+function DS(t, n) {
+    t & 1 && (u(0, "p"), d(1, "\u0110ang t\u1EA3i th\xF4ng tin..."), c())
+}
+var Hr = class Hr {
+    constructor() {
+        this.state = E(Xe);
+        this.lunarCalendarService = E(Le);
+        this.route = E(qe);
+        this.router = E(Te);
+        this.detailedInfo = C(null);
+        this.hourlyDetails = C([])
+    }
+    ngOnInit() {
+        this.paramsSubscription = this.route.params.subscribe(n => {
+            let e = +n.day,
+                i = +n.month,
+                r = +n.year;
+            e && i && r && (this.state.setDateFromParams(e, i, r) ? this.fetchDetailedInfo(this.state.selectedDate()) : this.router.navigate(["/overview"]))
+        })
+    }
+    fetchDetailedInfo(n) {
+        try {
+            let e = this.lunarCalendarService.getDetailedDailyInfo(n);
+            this.detailedInfo.set(e);
+            let i = this.lunarCalendarService.getHourlyDetails(n);
+            this.hourlyDetails.set(i)
+        } catch (e) {
+            console.error("Failed to get detailed daily info", e), this.detailedInfo.set(null), this.hourlyDetails.set([])
+        }
+    }
+    ngOnDestroy() {
+        this.paramsSubscription?.unsubscribe()
+    }
+    goToToday() {
+        let n = new Date;
+        this.router.navigate(["/", n.getDate(), n.getMonth() + 1, n.getFullYear()])
+    }
+    shareDayInfo() {
+        this.state.shareDayInfo()
+    }
+    onGoToPreviousDay() {
+        let n = this.state.selectedDate(),
+            e = new Date(n);
+        e.setDate(e.getDate() - 1), this.router.navigate(["/", e.getDate(), e.getMonth() + 1, e.getFullYear()])
+    }
+    onGoToNextDay() {
+        let n = this.state.selectedDate(),
+            e = new Date(n);
+        e.setDate(e.getDate() + 1), this.router.navigate(["/", e.getDate(), e.getMonth() + 1, e.getFullYear()])
+    }
+    getBatTuUrl(n) {
+        let e = this.state.selectedDate(),
+            i = e.getFullYear(),
+            r = e.getMonth() + 1,
+            o = e.getDate(),
+            a = e;
+        if (n.startHour === 23) {
+            let f = new Date(e);
+            f.setDate(e.getDate() - 1), a = f
+        }
+        let s = a.getFullYear(),
+            l = a.getMonth() + 1,
+            m = a.getDate();
+        return `https://battu.kabala.vn/?birth=${s}-${l}-${m}-${n.startHour}-nam`
+    }
+};
+Hr.\u0275fac = function(e) {
+    return new(e || Hr)
+}, Hr.\u0275cmp = q({
+    type: Hr,
+    selectors: [
+        ["app-daily-tab"]
+    ],
+    decls: 11,
+    vars: 1,
+    consts: [
+        [1, "bg-white", "p-6", "rounded-lg", "shadow-lg", "max-w-7xl", "mx-auto"],
+        [1, "flex", "justify-between", "items-center", "mb-4"],
+        [1, "px-4", "py-2", "bg-gray-100", "rounded", "shadow", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        [1, "px-4", "py-2", "bg-indigo-500", "text-white", "rounded", "shadow", "hover:bg-indigo-600", "transition-colors", 3, "click"],
+        [1, "my-4", "border-gray-200"],
+        [1, "relative", "max-w-2xl", "mx-auto"],
+        ["title", "Chia s\u1EBB th\xF4ng tin ng\xE0y", 1, "absolute", "top-0", "right-0", "p-2", "rounded-full", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-6", "w-6", "text-gray-600"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6.002l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"],
+        [1, "text-center", "mb-4"],
+        [1, "text-lg", "font-semibold"],
+        [1, "text-4xl", "font-bold", "text-indigo-600"],
+        [1, "text-lg"],
+        [1, "font-semibold", "text-lg", "mb-1"],
+        [1, "text-xl"],
+        [1, "font-bold"],
+        [1, "text-sm", "text-gray-600"],
+        [1, "mt-2", "flex", "justify-center", "items-center", "gap-4"],
+        [1, "inline-block", "px-3", "py-1", "text-sm", "font-semibold", "rounded-full"],
+        [1, "mb-4", "p-4", "bg-blue-50", "rounded-lg", "border", "border-blue-200"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-2", "gap-4", "text-sm", "mb-4"],
+        [1, "p-3", "bg-green-50", "rounded-lg"],
+        [1, "font-semibold", "text-green-800", "mb-1"],
+        [1, "text-green-700"],
+        [1, "p-3", "bg-red-50", "rounded-lg"],
+        [1, "font-semibold", "text-red-800", "mb-1"],
+        [1, "text-red-700"],
+        [1, "space-y-3", "text-sm"],
+        [1, "font-semibold"],
+        [1, "text-sm", "text-gray-500", "pl-4", "italic"],
+        [1, "ml-2", "px-2", "py-0.5", "text-xs", "font-semibold", "rounded-full"],
+        [1, "font-semibold", "text-base", "mb-2"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-2", "gap-4", "text-sm"],
+        [1, "list-disc", "list-inside", "text-green-700"],
+        [1, "list-disc", "list-inside", "text-red-700"],
+        [1, "mt-4", "text-center", "italic", "text-gray-500"],
+        [1, "font-medium"],
+        [1, "mt-6", "pt-4", "border-t", "border-gray-200"],
+        [1, "mt-6", "pt-6", "border-t", "border-gray-200", "space-y-6"],
+        [1, "mt-8", "pt-8", "border-t", "border-gray-200", "max-w-2xl", "mx-auto"],
+        [1, "flex", "items-center", "gap-2"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-6", "w-6", "text-blue-600", "flex-shrink-0"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"],
+        [1, "font-semibold", "text-blue-800", "text-base"],
+        [1, "pl-8", "mt-1", "text-blue-700", "list-disc", "list-inside", "space-y-1", "text-sm"],
+        [1, "p-4", "rounded-lg"],
+        [1, "font-semibold", "text-center", "flex", "items-center", "justify-center", "gap-2"],
+        [1, "text-center", "mt-1", "text-sm"],
+        [1, "p-4", "bg-gray-50", "rounded-lg", "border"],
+        [1, "text-lg", "font-semibold", "text-gray-800", "mb-3"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-3", "gap-4", "text-center"],
+        [1, "p-3", "bg-blue-100", "rounded-lg"],
+        [1, "font-medium", "text-blue-800"],
+        [1, "text-xl", "font-bold", "text-blue-900"],
+        [1, "p-3", "bg-green-100", "rounded-lg"],
+        [1, "font-medium", "text-green-800"],
+        [1, "text-xl", "font-bold", "text-green-900"],
+        [1, "p-3", "bg-red-100", "rounded-lg"],
+        [1, "font-medium", "text-red-800"],
+        [1, "text-xl", "font-bold", "text-red-900"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-3", "gap-4", "text-sm"],
+        [1, "grid", "grid-cols-2", "md:grid-cols-3", "lg:grid-cols-4", "gap-3"],
+        [1, "p-2", "rounded-lg", 3, "bg-green-100", "bg-red-100"],
+        [1, "mb-3", "p-2", "bg-blue-100", "text-blue-800", "rounded-md", "text-sm", "font-semibold", "flex", "flex-col", "sm:flex-row", "justify-around", "text-center"],
+        [1, "overflow-x-auto"],
+        [1, "w-full", "text-sm", "text-left", "text-gray-700"],
+        [1, "text-xs", "text-blue-800", "uppercase", "bg-blue-50"],
+        ["scope", "col", 1, "px-4", "py-3"],
+        ["scope", "col", 1, "px-4", "py-3", "text-center"],
+        [1, "bg-white", "border-b", "hover:bg-gray-50"],
+        [1, "p-2", "rounded-lg"],
+        [1, "font-bold", "text-sm"],
+        [1, "text-xs", "text-gray-600"],
+        [1, "px-4", "py-3", "font-medium", "text-blue-700"],
+        [1, "px-4", "py-3"],
+        [1, "px-4", "py-3", "font-mono", "text-xs"],
+        [1, "px-4", "py-3", "text-center", "font-mono"],
+        [1, "text-2xl", "font-bold", "text-center", "mb-6", "text-gray-800"],
+        [1, "overflow-x-auto", "rounded-lg", "border", "border-gray-200", "shadow-md"],
+        [1, "w-full", "min-w-[600px]", "text-sm", "text-center"],
+        [1, "bg-gray-100", "text-xs", "text-gray-600", "uppercase"],
+        [1, "divide-y", "divide-gray-200"],
+        [1, "hover:bg-gray-50"],
+        [1, "px-4", "py-4", "font-bold", "text-gray-800"],
+        [1, "font-semibold", "text-sm", "mt-1"],
+        [1, "text-xs", "font-normal", "text-gray-500"],
+        [1, "px-4", "py-4", "text-gray-700"],
+        [1, "px-4", "py-4", "font-medium"],
+        [1, "px-4", "py-4"],
+        [1, "flex", "flex-col", "items-center", "justify-center"],
+        ["target", "_blank", "title", "Xem b\xE1o c\xE1o B\xE1t T\u1EF1 chi ti\u1EBFt", 1, "block", "hover:opacity-80", "transition-opacity", 3, "href"],
+        [1, "relative", "w-24", "h-24", "flex-shrink-0"],
+        ["viewBox", "0 0 200 200", 1, "absolute", "inset-0", "w-full", "h-full"],
+        ["id", "arrow-battu-daily", "viewBox", "0 0 10 10", "refX", "5", "refY", "5", "markerWidth", "4", "markerHeight", "4", "orient", "auto-start-reverse"],
+        ["d", "M 0 0 L 10 5 L 0 10 z", "fill", "#34d399"],
+        ["d", "M 100,20 A 80 80 0 0 1 180,100", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu-daily)"],
+        ["d", "M 180,100 A 80 80 0 0 1 100,180", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu-daily)"],
+        ["d", "M 100,180 A 80 80 0 0 1 20,100", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu-daily)"],
+        ["d", "M 20,100 A 80 80 0 0 1 100,20", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu-daily)"],
+        ["x1", "100", "y1", "20", "x2", "100", "y2", "180", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "20", "y1", "100", "x2", "180", "y2", "100", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "34.5", "y1", "34.5", "x2", "165.5", "y2", "165.5", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "165.5", "y1", "34.5", "x2", "34.5", "y2", "165.5", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        [1, "absolute", "top-[15%]", "left-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-green-200", "text-green-800", "transition-opacity"],
+        [1, "absolute", "top-0", "left-1/2", "-translate-x-1/2", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-red-200", "text-red-800", "transition-opacity"],
+        [1, "absolute", "top-[15%]", "right-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-yellow-200", "text-yellow-800", "transition-opacity"],
+        [1, "absolute", "bottom-[15%]", "right-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-gray-200", "text-gray-800", "transition-opacity"],
+        [1, "absolute", "bottom-[15%]", "left-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-blue-200", "text-blue-800", "transition-opacity"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div", 0)(1, "div", 1)(2, "button", 2), D("click", function() {
+                return i.onGoToPreviousDay()
+            }), d(3, "< Ng\xE0y tr\u01B0\u1EDBc"), c(), u(4, "button", 3), D("click", function() {
+                return i.goToToday()
+            }), d(5, "H\xF4m nay"), c(), u(6, "button", 2), D("click", function() {
+                return i.onGoToNextDay()
+            }), d(7, "Ng\xE0y sau >"), c()(), P(8, "hr", 4), _(9, bS, 93, 53)(10, DS, 2, 0, "p"), c()), e & 2) {
+            let r;
+            h(9), T((r = i.state.selectedLunarInfo()) ? 9 : 10, r)
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var mc = Hr;
+var Hv = () => ({
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    }),
+    jv = (t, n) => n.hourRange,
+    Vv = (t, n) => n.name;
+
+function CS(t, n) {
+    if (t & 1 && (u(0, "div", 25), K(), u(1, "svg", 29)(2, "defs")(3, "marker", 30), P(4, "path", 31), c()(), P(5, "path", 32)(6, "path", 33)(7, "path", 34)(8, "path", 35)(9, "line", 36)(10, "line", 37)(11, "line", 38)(12, "line", 39), c(), ne(), u(13, "div", 40), d(14, "M\u1ED9c"), c(), u(15, "div", 41), d(16, "H\u1ECFa"), c(), u(17, "div", 42), d(18, "Th\u1ED5"), c(), u(19, "div", 43), d(20, "Kim"), c(), u(21, "div", 44), d(22, "Th\u1EE7y"), c()()), t & 2) {
+        let e = n;
+        h(13), N("opacity-30", e.M\u1ED9c === 0), h(2), N("opacity-30", e.H\u1ECFa === 0), h(2), N("opacity-30", e.Th\u1ED5 === 0), h(2), N("opacity-30", e.Kim === 0), h(2), N("opacity-30", e.Th\u1EE7y === 0)
+    }
+}
+
+function xS(t, n) {
+    if (t & 1 && (u(0, "div", 45)(1, "span", 46), d(2), c(), u(3, "div", 47)(4, "div", 48), d(5), c()()()), t & 2) {
+        let e = y().$implicit,
+            i = y().$implicit;
+        H("title", e.name), h(2), b(e.name), h(2), fe(e.color), yn("width", (i.thapThanCounts[e.name] || 0) * 25, "%"), h(), L(" ", i.thapThanCounts[e.name], " ")
+    }
+}
+
+function _S(t, n) {
+    if (t & 1 && _(0, xS, 6, 7, "div", 45), t & 2) {
+        let e = n.$implicit,
+            i = y().$implicit;
+        T(i.thapThanCounts[e.name] > 0 ? 0 : -1)
+    }
+}
+
+function TS(t, n) {
+    if (t & 1 && (u(0, "div", 5)(1, "div", 14)(2, "a", 15)(3, "div", 16)(4, "div")(5, "div", 17), d(6, "N\u0103m"), c(), u(7, "div", 18), d(8), c(), u(9, "div", 19), d(10), c(), u(11, "div", 20), d(12), c()(), u(13, "div")(14, "div", 17), d(15, "Th\xE1ng"), c(), u(16, "div", 18), d(17), c(), u(18, "div", 19), d(19), c(), u(20, "div", 20), d(21), c()(), u(22, "div")(23, "div", 17), d(24, "Ng\xE0y"), c(), u(25, "div", 21), d(26), c(), u(27, "div", 19), d(28), c(), u(29, "div", 20), d(30), c()(), u(31, "div", 22)(32, "div", 23), d(33), c(), u(34, "div", 24), d(35), c(), u(36, "div", 19), d(37), c(), u(38, "div", 20), d(39), c()()()(), _(40, CS, 23, 10, "div", 25), u(41, "div", 26)(42, "h5", 27), d(43, "Th\u1EADp Th\u1EA7n"), c(), u(44, "div", 28), R(45, _S, 1, 1, null, null, Vv), c()()()()), t & 2) {
+        let e, i = n.$implicit,
+            r = y();
+        h(2), H("href", r.getBatTuUrl(r.todayBatTu().date, i), gn), h(6), b(r.todayBatTu().yearPillar.thapThan), h(), fe(r.CAN_DETAILS[r.todayBatTu().yearPillar.can].color), h(), W("", r.CAN_DETAILS[r.todayBatTu().yearPillar.can].icon, " ", r.todayBatTu().yearPillar.can), h(), fe(r.CHI_DETAILS[r.todayBatTu().yearPillar.chi].color), h(), W("", r.CHI_DETAILS[r.todayBatTu().yearPillar.chi].icon, " ", r.todayBatTu().yearPillar.chi), h(5), b(r.todayBatTu().monthPillar.thapThan), h(), fe(r.CAN_DETAILS[r.todayBatTu().monthPillar.can].color), h(), W("", r.CAN_DETAILS[r.todayBatTu().monthPillar.can].icon, " ", r.todayBatTu().monthPillar.can), h(), fe(r.CHI_DETAILS[r.todayBatTu().monthPillar.chi].color), h(), W("", r.CHI_DETAILS[r.todayBatTu().monthPillar.chi].icon, " ", r.todayBatTu().monthPillar.chi), h(5), b(r.todayBatTu().dayPillar.thapThan), h(), fe(r.CAN_DETAILS[r.todayBatTu().dayPillar.can].color), h(), W("", r.CAN_DETAILS[r.todayBatTu().dayPillar.can].icon, " ", r.todayBatTu().dayPillar.can), h(), fe(r.CHI_DETAILS[r.todayBatTu().dayPillar.chi].color), h(), W("", r.CHI_DETAILS[r.todayBatTu().dayPillar.chi].icon, " ", r.todayBatTu().dayPillar.chi), h(3), b(i.hourRange), h(2), b(i.thapThan), h(), fe(r.CAN_DETAILS[i.can].color), h(), W("", r.CAN_DETAILS[i.can].icon, " ", i.can), h(), fe(r.CHI_DETAILS[i.chi].color), h(), W("", r.CHI_DETAILS[i.chi].icon, " ", i.chi), h(), T((e = i.elementCounts) ? 40 : -1, e), h(5), O(r.thapThanChartData)
+    }
+}
+
+function SS(t, n) {
+    if (t & 1 && (u(0, "div", 25), K(), u(1, "svg", 29)(2, "defs")(3, "marker", 52), P(4, "path", 31), c()(), P(5, "path", 53)(6, "path", 54)(7, "path", 55)(8, "path", 56)(9, "line", 36)(10, "line", 37)(11, "line", 38)(12, "line", 39), c(), ne(), u(13, "div", 40), d(14, "M\u1ED9c"), c(), u(15, "div", 41), d(16, "H\u1ECFa"), c(), u(17, "div", 42), d(18, "Th\u1ED5"), c(), u(19, "div", 43), d(20, "Kim"), c(), u(21, "div", 44), d(22, "Th\u1EE7y"), c()()), t & 2) {
+        let e = n;
+        h(13), N("opacity-30", e.M\u1ED9c === 0), h(2), N("opacity-30", e.H\u1ECFa === 0), h(2), N("opacity-30", e.Th\u1ED5 === 0), h(2), N("opacity-30", e.Kim === 0), h(2), N("opacity-30", e.Th\u1EE7y === 0)
+    }
+}
+
+function wS(t, n) {
+    if (t & 1 && (u(0, "div", 45)(1, "span", 46), d(2), c(), u(3, "div", 47)(4, "div", 48), d(5), c()()()), t & 2) {
+        let e = y().$implicit,
+            i = y().$implicit;
+        H("title", e.name), h(2), b(e.name), h(2), fe(e.color), yn("width", (i.thapThanCounts[e.name] || 0) * 25, "%"), h(), L(" ", i.thapThanCounts[e.name], " ")
+    }
+}
+
+function IS(t, n) {
+    if (t & 1 && _(0, wS, 6, 7, "div", 45), t & 2) {
+        let e = n.$implicit,
+            i = y().$implicit;
+        T(i.thapThanCounts[e.name] > 0 ? 0 : -1)
+    }
+}
+
+function MS(t, n) {
+    if (t & 1 && (u(0, "div", 5)(1, "div", 14)(2, "a", 15)(3, "div", 16)(4, "div")(5, "div", 50), d(6), c(), u(7, "div", 19), d(8), c(), u(9, "div", 20), d(10), c()(), u(11, "div")(12, "div", 50), d(13), c(), u(14, "div", 19), d(15), c(), u(16, "div", 20), d(17), c()(), u(18, "div")(19, "div", 51), d(20), c(), u(21, "div", 19), d(22), c(), u(23, "div", 20), d(24), c()(), u(25, "div", 22)(26, "div", 23), d(27), c(), u(28, "div", 24), d(29), c(), u(30, "div", 19), d(31), c(), u(32, "div", 20), d(33), c()()()(), _(34, SS, 23, 10, "div", 25), u(35, "div", 26)(36, "h5", 27), d(37, "Th\u1EADp Th\u1EA7n"), c(), u(38, "div", 28), R(39, IS, 1, 1, null, null, Vv), c()()()()), t & 2) {
+        let e, i = n.$implicit,
+            r = y(),
+            o = y();
+        h(2), H("href", o.getBatTuUrl(r.date, i), gn), h(4), b(r.yearPillar.thapThan), h(), fe(o.CAN_DETAILS[r.yearPillar.can].color), h(), W("", o.CAN_DETAILS[r.yearPillar.can].icon, " ", r.yearPillar.can), h(), fe(o.CHI_DETAILS[r.yearPillar.chi].color), h(), W("", o.CHI_DETAILS[r.yearPillar.chi].icon, " ", r.yearPillar.chi), h(3), b(r.monthPillar.thapThan), h(), fe(o.CAN_DETAILS[r.monthPillar.can].color), h(), W("", o.CAN_DETAILS[r.monthPillar.can].icon, " ", r.monthPillar.can), h(), fe(o.CHI_DETAILS[r.monthPillar.chi].color), h(), W("", o.CHI_DETAILS[r.monthPillar.chi].icon, " ", r.monthPillar.chi), h(3), b(r.dayPillar.thapThan), h(), fe(o.CAN_DETAILS[r.dayPillar.can].color), h(), W("", o.CAN_DETAILS[r.dayPillar.can].icon, " ", r.dayPillar.can), h(), fe(o.CHI_DETAILS[r.dayPillar.chi].color), h(), W("", o.CHI_DETAILS[r.dayPillar.chi].icon, " ", r.dayPillar.chi), h(3), b(i.hourRange), h(2), b(i.thapThan), h(), fe(o.CAN_DETAILS[i.can].color), h(), W("", o.CAN_DETAILS[i.can].icon, " ", i.can), h(), fe(o.CHI_DETAILS[i.chi].color), h(), W("", o.CHI_DETAILS[i.chi].icon, " ", i.chi), h(), T((e = i.elementCounts) ? 34 : -1, e), h(5), O(o.thapThanChartData)
+    }
+}
+
+function NS(t, n) {
+    if (t & 1 && (u(0, "div", 12)(1, "div")(2, "h4", 49), d(3), c(), u(4, "div", 4), R(5, MS, 41, 39, "div", 5, jv), c()()()), t & 2) {
+        let e = n;
+        h(3), L(" K\u1EBFt qu\u1EA3 cho ng\xE0y ", e.date.toLocaleDateString("vi-VN", me(1, Hv)), " "), h(2), O(e.hourPillars)
+    }
+}
+
+function AS(t, n) {
+    t & 1 && (u(0, "p", 13), d(1, 'Vui l\xF2ng ch\u1ECDn ng\xE0y v\xE0 nh\u1EA5n "Tra C\u1EE9u" \u0111\u1EC3 xem k\u1EBFt qu\u1EA3.'), c())
+}
+var jr = class jr {
+    constructor() {
+        this.lunarCalendarService = E(Le);
+        this.lunarConverterService = E(Oe);
+        this.CAN_DETAILS = $t;
+        this.CHI_DETAILS = sc;
+        this.thapThanChartData = [{
+            name: Ee.tyKien,
+            color: "bg-blue-500"
+        }, {
+            name: Ee.kiepTai,
+            color: "bg-blue-400"
+        }, {
+            name: Ee.thucThan,
+            color: "bg-green-500"
+        }, {
+            name: Ee.thuongQuan,
+            color: "bg-green-400"
+        }, {
+            name: Ee.chinhTai,
+            color: "bg-yellow-500"
+        }, {
+            name: Ee.thienTai,
+            color: "bg-yellow-400"
+        }, {
+            name: Ee.chinhQuan,
+            color: "bg-red-500"
+        }, {
+            name: Ee.thienQuan,
+            color: "bg-red-400"
+        }, {
+            name: Ee.chinhAn,
+            color: "bg-gray-500"
+        }, {
+            name: Ee.thienAn,
+            color: "bg-gray-400"
+        }, {
+            name: Ee.ty,
+            color: "bg-indigo-600"
+        }];
+        this.battuSearchDate = C(this.todayString());
+        this.battuSearchResult = C(null);
+        this.todayBatTu = Z(() => this.getBatTuForDate(new Date))
+    }
+    todayString() {
+        let n = new Date,
+            e = n.getFullYear(),
+            i = (n.getMonth() + 1).toString().padStart(2, "0"),
+            r = n.getDate().toString().padStart(2, "0");
+        return `${e}-${i}-${r}`
+    }
+    getBatTuForDate(n) {
+        let e = this.lunarCalendarService.getLunarDateInfo(n),
+            i = this.lunarConverterService.getHourlyPillars(n),
+            r = e.canChi.day.split(" ")[0],
+            o = e.canChi.year.split(" ")[0],
+            a = e.canChi.month.split(" ")[0],
+            s = {
+                can: o,
+                chi: e.canChi.year.split(" ")[1],
+                thapThan: this.lunarConverterService.getThapThan(r, o)
+            },
+            l = {
+                can: a,
+                chi: e.canChi.month.split(" ")[1],
+                thapThan: this.lunarConverterService.getThapThan(r, a)
+            },
+            m = {
+                can: r,
+                chi: e.canChi.day.split(" ")[1],
+                thapThan: Ee.ty
+            };
+        return {
+            date: n,
+            yearPillar: s,
+            monthPillar: l,
+            dayPillar: m,
+            hourPillars: i.map(f => {
+                let p = f.can,
+                    g = this.lunarConverterService.getThapThan(r, p),
+                    v = [o, a, r, p],
+                    x = {
+                        Kim: 0,
+                        M\u1ED9c: 0,
+                        Th\u1EE7y: 0,
+                        H\u1ECFa: 0,
+                        Th\u1ED5: 0
+                    };
+                for (let I of v) {
+                    let se = $t[I]?.element;
+                    se && x[se]++
+                }
+                let B = [s.thapThan, l.thapThan, m.thapThan, g],
+                    M = {};
+                return Object.values(Ee).forEach(I => {
+                    M[I] = 0
+                }), B.forEach(I => {
+                    I && M[I]++
+                }), {
+                    can: f.can,
+                    chi: f.chi,
+                    hourRange: f.hourRange,
+                    startHour: f.startHour,
+                    thapThan: g,
+                    elementCounts: x,
+                    thapThanCounts: M
+                }
+            })
+        }
+    }
+    getBatTuUrl(n, e) {
+        let i = n.getFullYear(),
+            r = n.getMonth() + 1,
+            o = n.getDate();
+        return `https://battu.kabala.vn/?birth=${i}-${r}-${o}-${e.startHour}-nam`
+    }
+    calculateBatTuForSelectedDate() {
+        let n = this.battuSearchDate();
+        if (!n) {
+            this.battuSearchResult.set(null);
+            return
+        }
+        let e = new Date(`${n}T12:00:00`);
+        this.battuSearchResult.set(this.getBatTuForDate(e))
+    }
+};
+jr.\u0275fac = function(e) {
+    return new(e || jr)
+}, jr.\u0275cmp = q({
+    type: jr,
+    selectors: [
+        ["app-battu-tab"]
+    ],
+    decls: 21,
+    vars: 4,
+    consts: [
+        [1, "bg-white", "p-6", "rounded-lg", "shadow-lg", "max-w-7xl", "mx-auto"],
+        [1, "text-2xl", "font-bold", "text-indigo-600", "mb-4"],
+        [1, "mb-8"],
+        [1, "text-xl", "font-semibold", "mb-3"],
+        [1, "space-y-2"],
+        [1, "p-3", "border", "border-gray-200", "rounded-lg", "hover:bg-gray-50", "transition-colors"],
+        [1, "mt-10", "pt-6", "border-t", "border-gray-200"],
+        [1, "flex", "flex-col", "sm:flex-row", "gap-4", "items-center", "p-4", "bg-gray-50", "rounded-lg"],
+        [1, "flex-1", "w-full"],
+        ["for", "battu-search-date", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "date", "id", "battu-search-date", 1, "w-full", "p-2", "border", "rounded", 3, "change", "value"],
+        [1, "w-full", "sm:w-auto", "px-6", "py-2", "bg-indigo-500", "text-white", "rounded-md", "shadow-sm", "hover:bg-indigo-600", "transition-colors", "self-end", 3, "click"],
+        [1, "mt-6", "space-y-6"],
+        [1, "text-center", "mt-4", "text-gray-500"],
+        [1, "grid", "grid-cols-1", "lg:grid-cols-[2fr_1fr_1fr]", "gap-4", "items-center"],
+        ["target", "_blank", 1, "block", "no-underline", "text-current", 3, "href"],
+        [1, "grid", "grid-cols-2", "sm:grid-cols-4", "gap-2", "text-center", "text-sm", "sm:text-base"],
+        [1, "font-semibold", "text-gray-500", "text-xs", "sm:text-sm"],
+        [1, "text-xs", "font-medium", "bg-gray-100", "text-gray-600", "rounded", "px-1", "py-0.5", "my-1", "inline-block"],
+        [1, "p-1", "rounded", "text-white", "font-bold", "flex", "items-center", "justify-center", "gap-1"],
+        [1, "p-1", "rounded", "text-white", "font-bold", "mt-1", "flex", "items-center", "justify-center", "gap-1"],
+        [1, "text-xs", "font-bold", "bg-indigo-100", "text-indigo-700", "rounded", "px-1", "py-0.5", "my-1", "inline-block"],
+        [1, "bg-indigo-50", "p-1", "rounded-md"],
+        [1, "font-bold", "text-indigo-700", "text-xs", "sm:text-sm"],
+        [1, "text-xs", "font-medium", "bg-white", "text-gray-600", "rounded", "px-1", "py-0.5", "my-1", "inline-block"],
+        [1, "relative", "w-40", "h-40", "mx-auto"],
+        [1, "text-xs"],
+        [1, "font-semibold", "text-center", "mb-1"],
+        [1, "space-y-0.5"],
+        ["viewBox", "0 0 200 200", 1, "absolute", "inset-0", "w-full", "h-full"],
+        ["id", "arrow-battu", "viewBox", "0 0 10 10", "refX", "5", "refY", "5", "markerWidth", "4", "markerHeight", "4", "orient", "auto-start-reverse"],
+        ["d", "M 0 0 L 10 5 L 0 10 z", "fill", "#34d399"],
+        ["d", "M 100,20 A 80 80 0 0 1 180,100", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu)"],
+        ["d", "M 180,100 A 80 80 0 0 1 100,180", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu)"],
+        ["d", "M 100,180 A 80 80 0 0 1 20,100", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu)"],
+        ["d", "M 20,100 A 80 80 0 0 1 100,20", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu)"],
+        ["x1", "100", "y1", "20", "x2", "100", "y2", "180", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "20", "y1", "100", "x2", "180", "y2", "100", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "34.5", "y1", "34.5", "x2", "165.5", "y2", "165.5", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        ["x1", "165.5", "y1", "34.5", "x2", "34.5", "y2", "165.5", "stroke", "#ef4444", "stroke-width", "1.5", "stroke-dasharray", "4"],
+        [1, "absolute", "top-[15%]", "left-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-green-200", "text-green-800", "transition-opacity"],
+        [1, "absolute", "top-0", "left-1/2", "-translate-x-1/2", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-red-200", "text-red-800", "transition-opacity"],
+        [1, "absolute", "top-[15%]", "right-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-yellow-200", "text-yellow-800", "transition-opacity"],
+        [1, "absolute", "bottom-[15%]", "right-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-gray-200", "text-gray-800", "transition-opacity"],
+        [1, "absolute", "bottom-[15%]", "left-[15%]", "w-[30%]", "h-[30%]", "rounded-full", "flex", "items-center", "justify-center", "font-semibold", "text-xs", "bg-blue-200", "text-blue-800", "transition-opacity"],
+        [1, "flex", "items-center", 3, "title"],
+        [1, "w-16", "text-right", "pr-2", "font-medium", "truncate"],
+        [1, "flex-1", "bg-gray-200", "rounded-full", "h-4"],
+        [1, "h-4", "rounded-full", "text-white", "text-center", "text-[10px]", "leading-4", "font-bold", "transition-all", "duration-500"],
+        [1, "text-lg", "font-semibold", "mb-2", "bg-gray-100", "p-2", "rounded-md"],
+        [1, "text-xs", "font-medium", "bg-gray-100", "text-gray-600", "rounded", "px-1", "py-0.5", "mb-1", "inline-block"],
+        [1, "text-xs", "font-bold", "bg-indigo-100", "text-indigo-700", "rounded", "px-1", "py-0.5", "mb-1", "inline-block"],
+        ["id", "arrow-battu-range", "viewBox", "0 0 10 10", "refX", "5", "refY", "5", "markerWidth", "4", "markerHeight", "4", "orient", "auto-start-reverse"],
+        ["d", "M 100,20 A 80 80 0 0 1 180,100", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu-range)"],
+        ["d", "M 180,100 A 80 80 0 0 1 100,180", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu-range)"],
+        ["d", "M 100,180 A 80 80 0 0 1 20,100", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu-range)"],
+        ["d", "M 20,100 A 80 80 0 0 1 100,20", "stroke", "#34d399", "stroke-width", "1.5", "fill", "none", "marker-end", "url(#arrow-battu-range)"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div", 0)(1, "h2", 1), d(2, "Ph\xE2n T\xEDch B\xE1t T\u1EF1 (T\u1EE9 Tr\u1EE5)"), c(), u(3, "div", 2)(4, "h3", 3), d(5), c(), u(6, "div", 4), R(7, TS, 47, 39, "div", 5, jv), c()(), u(9, "div", 6)(10, "h3", 3), d(11, "Tra C\u1EE9u B\xE1t T\u1EF1 Theo Ng\xE0y"), c(), u(12, "div", 7)(13, "div", 8)(14, "label", 9), d(15, "Ch\u1ECDn ng\xE0y"), c(), u(16, "input", 10), D("change", function(o) {
+                return i.battuSearchDate.set(o.target.value)
+            }), c()(), u(17, "button", 11), D("click", function() {
+                return i.calculateBatTuForSelectedDate()
+            }), d(18, "Tra C\u1EE9u"), c()(), _(19, NS, 7, 2, "div", 12)(20, AS, 2, 0, "p", 13), c()()), e & 2) {
+            let r;
+            h(5), L(" B\xE1t T\u1EF1 H\xF4m Nay: ", i.todayBatTu().date.toLocaleDateString("vi-VN", me(3, Hv)), " "), h(2), O(i.todayBatTu().hourPillars), h(9), H("value", i.battuSearchDate()), h(3), T((r = i.battuSearchResult()) ? 19 : 20, r)
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var fc = jr;
+var kS = () => ({
+        weekday: "short"
+    }),
+    RS = (t, n) => n.monthName,
+    OS = (t, n) => n.name + n.gregorianDate.toISOString();
+
+function LS(t, n) {
+    t & 1 && (u(0, "span", 13), d(1, "L\u1EC5 \xC2m L\u1ECBch"), c())
+}
+
+function FS(t, n) {
+    t & 1 && (u(0, "span", 14), d(1, "L\u1EC5 D\u01B0\u01A1ng L\u1ECBch"), c())
+}
+
+function PS(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "li", 6), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(3);
+            return w(o.dayDetailsViewed.emit(r.gregorianDate))
+        }), u(1, "div", 7)(2, "div", 8), d(3), c(), u(4, "div", 9), d(5), c()(), u(6, "div", 10)(7, "p", 11), d(8), c(), u(9, "p", 12), d(10), _(11, LS, 2, 0, "span", 13)(12, FS, 2, 0, "span", 14), c()()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        h(3), b(e.gregorianDate.getDate()), h(2), b(e.gregorianDate.toLocaleDateString("vi-VN", me(5, kS))), h(3), b(e.name), h(2), L(" \xC2m l\u1ECBch: Ng\xE0y ", e.lunarDateString, " "), h(), T(e.isLunar ? 11 : 12)
+    }
+}
+
+function BS(t, n) {
+    if (t & 1 && (u(0, "div")(1, "h4", 3), d(2), c(), u(3, "ul", 4), R(4, PS, 13, 6, "li", 5, OS), c()()), t & 2) {
+        let e = n.$implicit;
+        h(2), b(e.monthName), h(2), O(e.events)
+    }
+}
+
+function HS(t, n) {
+    if (t & 1 && (u(0, "div", 1), R(1, BS, 6, 1, "div", null, RS), c()), t & 2) {
+        let e = y();
+        h(), O(e.eventsByMonth())
+    }
+}
+
+function jS(t, n) {
+    t & 1 && (u(0, "p", 2), d(1, "\u0110ang t\u1EA3i danh s\xE1ch s\u1EF1 ki\u1EC7n..."), c())
+}
+var Vr = class Vr {
+    constructor() {
+        this.lunarCalendarService = E(Le);
+        this.lunarConverterService = E(Oe);
+        this.dayDetailsViewed = Ge();
+        this.currentYear = new Date().getFullYear();
+        this.eventsByMonth = C([])
+    }
+    ngOnInit() {
+        this.prepareYearlyEvents()
+    }
+    prepareYearlyEvents() {
+        let n = this.currentYear,
+            e = [];
+        for (let s in Ar) {
+            let [l, m] = s.split("/").map(Number), f = new Date(n, m - 1, l);
+            if (f.getMonth() === m - 1) {
+                let p = this.lunarCalendarService.getBasicLunarInfoForDate(f);
+                e.push({
+                    name: Ar[s],
+                    gregorianDate: f,
+                    lunarDateString: `${p.lunarDay}/${p.lunarMonth}`,
+                    isLunar: !1
+                })
+            }
+        }
+        for (let s of [n - 1, n])
+            for (let l in kr) {
+                let m = kr[l];
+                if (l === "30/12") {
+                    let f = this.lunarConverterService.convertLunarToSolar(s, 12, 30, !1),
+                        p = 30;
+                    f || (f = this.lunarConverterService.convertLunarToSolar(s, 12, 29, !1), p = 29), f && f.getFullYear() === n && e.push({
+                        name: m,
+                        gregorianDate: f,
+                        lunarDateString: `${p}/12`,
+                        isLunar: !0
+                    })
+                } else {
+                    let [f, p] = l.split("/").map(Number), g = this.lunarConverterService.convertLunarToSolar(s, p, f, !1);
+                    g && g.getFullYear() === n && e.push({
+                        name: m,
+                        gregorianDate: g,
+                        lunarDateString: `${f}/${p}`,
+                        isLunar: !0
+                    })
+                }
+            }
+        let i = Array.from(new Map(e.map(s => [`${s.name}-${s.gregorianDate.toDateString()}`, s])).values());
+        i.sort((s, l) => s.gregorianDate.getTime() - l.gregorianDate.getTime());
+        let r = {};
+        i.forEach(s => {
+            let l = s.gregorianDate.getMonth();
+            r[l] || (r[l] = []), r[l].push(s)
+        });
+        let o = ["Th\xE1ng 1", "Th\xE1ng 2", "Th\xE1ng 3", "Th\xE1ng 4", "Th\xE1ng 5", "Th\xE1ng 6", "Th\xE1ng 7", "Th\xE1ng 8", "Th\xE1ng 9", "Th\xE1ng 10", "Th\xE1ng 11", "Th\xE1ng 12"],
+            a = Object.keys(r).map(Number).sort((s, l) => s - l).map(s => ({
+                monthName: o[s],
+                events: r[s]
+            }));
+        this.eventsByMonth.set(a)
+    }
+};
+Vr.\u0275fac = function(e) {
+    return new(e || Vr)
+}, Vr.\u0275cmp = q({
+    type: Vr,
+    selectors: [
+        ["app-events-utility"]
+    ],
+    outputs: {
+        dayDetailsViewed: "dayDetailsViewed"
+    },
+    decls: 5,
+    vars: 2,
+    consts: [
+        [1, "text-xl", "font-semibold", "mb-4", "text-center"],
+        [1, "space-y-6"],
+        [1, "text-center", "text-gray-500"],
+        [1, "text-lg", "font-bold", "text-indigo-600", "mb-2", "p-2", "bg-gray-100", "rounded-md"],
+        [1, "space-y-3"],
+        [1, "flex", "items-start", "p-3", "border-b", "border-gray-200", "last:border-b-0", "cursor-pointer", "hover:bg-gray-50", "transition-colors"],
+        [1, "flex", "items-start", "p-3", "border-b", "border-gray-200", "last:border-b-0", "cursor-pointer", "hover:bg-gray-50", "transition-colors", 3, "click"],
+        [1, "flex-shrink-0", "w-20", "text-center"],
+        [1, "text-3xl", "font-bold", "text-gray-800"],
+        [1, "text-sm", "text-gray-500"],
+        [1, "ml-4", "flex-grow"],
+        [1, "font-semibold", "text-gray-900"],
+        [1, "text-sm", "text-gray-600"],
+        [1, "ml-2", "px-2", "py-0.5", "text-xs", "font-semibold", "bg-red-100", "text-red-800", "rounded-full"],
+        [1, "ml-2", "px-2", "py-0.5", "text-xs", "font-semibold", "bg-blue-100", "text-blue-800", "rounded-full"]
+    ],
+    template: function(e, i) {
+        e & 1 && (u(0, "div")(1, "h3", 0), d(2), c(), _(3, HS, 3, 0, "div", 1)(4, jS, 2, 0, "p", 2), c()), e & 2 && (h(2), L("S\u1EF1 Ki\u1EC7n & Ng\xE0y L\u1EC5 Trong N\u0103m ", i.currentYear), h(), T(i.eventsByMonth().length > 0 ? 3 : 4))
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var pc = Vr;
+var VS = () => ({
+        weekday: "short"
+    }),
+    $S = (t, n) => n.monthName,
+    US = (t, n) => n.lunarDateString + n.solarDate.toISOString();
+
+function zS(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "li", 5), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(2);
+            return w(o.dayDetailsViewed.emit(r.solarDate))
+        }), u(1, "div", 6)(2, "div", 7), d(3), c(), u(4, "div", 8), d(5), c()(), u(6, "div", 9)(7, "p", 10), d(8), c(), u(9, "p", 11), d(10), c()()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        h(3), b(e.solarDate.getDate()), h(2), b(e.solarDate.toLocaleDateString("vi-VN", me(4, VS))), h(3), b(e.name), h(2), L("\xC2m l\u1ECBch: Ng\xE0y ", e.lunarDateString)
+    }
+}
+
+function GS(t, n) {
+    if (t & 1 && (u(0, "div")(1, "h4", 2), d(2), c(), u(3, "ul", 3), R(4, zS, 11, 5, "li", 4, US), c()()), t & 2) {
+        let e = n.$implicit;
+        h(2), b(e.monthName), h(2), O(e.days)
+    }
+}
+var $r = class $r {
+    constructor() {
+        this.lunarConverter = E(Oe);
+        this.dayDetailsViewed = Ge();
+        this.currentYear = new Date().getFullYear();
+        this.specialDaysByMonth = C([])
+    }
+    ngOnInit() {
+        this.calculateSpecialDays()
+    }
+    calculateSpecialDays() {
+        let n = this.currentYear,
+            e = [],
+            i = this.lunarConverter.getYearInfo(n);
+        if (!i) return;
+        let r = i.find(m => m.leap),
+            o = r ? r.month : 0;
+        for (let m = 1; m <= 12; m++) {
+            let f = this.lunarConverter.convertLunarToSolar(n, m, 1, !1);
+            f && e.push({
+                name: "Ng\xE0y S\xF3c (M\xF9ng 1)",
+                lunarDateString: `1/${m}`,
+                solarDate: f
+            });
+            let p = this.lunarConverter.convertLunarToSolar(n, m, 15, !1);
+            p && e.push({
+                name: "Ng\xE0y V\u1ECDng (R\u1EB1m)",
+                lunarDateString: `15/${m}`,
+                solarDate: p
+            })
+        }
+        if (o > 0) {
+            let m = this.lunarConverter.convertLunarToSolar(n, o, 1, !0);
+            m && e.push({
+                name: "Ng\xE0y S\xF3c (M\xF9ng 1)",
+                lunarDateString: `1/${o} (Nhu\u1EADn)`,
+                solarDate: m
+            });
+            let f = this.lunarConverter.convertLunarToSolar(n, o, 15, !0);
+            f && e.push({
+                name: "Ng\xE0y V\u1ECDng (R\u1EB1m)",
+                lunarDateString: `15/${o} (Nhu\u1EADn)`,
+                solarDate: f
+            })
+        }
+        e.sort((m, f) => m.solarDate.getTime() - f.solarDate.getTime());
+        let a = {};
+        e.forEach(m => {
+            let f = m.solarDate.getMonth();
+            a[f] || (a[f] = []), a[f].push(m)
+        });
+        let s = ["Th\xE1ng 1", "Th\xE1ng 2", "Th\xE1ng 3", "Th\xE1ng 4", "Th\xE1ng 5", "Th\xE1ng 6", "Th\xE1ng 7", "Th\xE1ng 8", "Th\xE1ng 9", "Th\xE1ng 10", "Th\xE1ng 11", "Th\xE1ng 12"],
+            l = Object.keys(a).map(Number).sort((m, f) => m - f).map(m => ({
+                monthName: s[m],
+                days: a[m]
+            }));
+        this.specialDaysByMonth.set(l)
+    }
+};
+$r.\u0275fac = function(e) {
+    return new(e || $r)
+}, $r.\u0275cmp = q({
+    type: $r,
+    selectors: [
+        ["app-special-days"]
+    ],
+    outputs: {
+        dayDetailsViewed: "dayDetailsViewed"
+    },
+    decls: 6,
+    vars: 1,
+    consts: [
+        [1, "text-xl", "font-semibold", "mb-4", "text-center"],
+        [1, "space-y-6"],
+        [1, "text-lg", "font-bold", "text-indigo-600", "mb-2", "p-2", "bg-gray-100", "rounded-md"],
+        [1, "space-y-3"],
+        [1, "flex", "items-center", "p-3", "border-b", "border-gray-200", "last:border-b-0", "cursor-pointer", "hover:bg-gray-50", "transition-colors"],
+        [1, "flex", "items-center", "p-3", "border-b", "border-gray-200", "last:border-b-0", "cursor-pointer", "hover:bg-gray-50", "transition-colors", 3, "click"],
+        [1, "flex-shrink-0", "w-20", "text-center"],
+        [1, "text-3xl", "font-bold"],
+        [1, "text-sm", "text-gray-500"],
+        [1, "ml-4", "flex-grow"],
+        [1, "font-semibold"],
+        [1, "text-sm", "text-gray-600"]
+    ],
+    template: function(e, i) {
+        e & 1 && (u(0, "div")(1, "h3", 0), d(2), c(), u(3, "div", 1), R(4, GS, 6, 1, "div", null, $S), c()()), e & 2 && (h(2), L("L\u1ECBch Ng\xE0y S\xF3c V\u1ECDng (M\xF9ng 1 & R\u1EB1m) N\u0103m ", i.currentYear), h(2), O(i.specialDaysByMonth()))
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var gc = $r;
+var qS = () => ({
+        weekday: "short"
+    }),
+    WS = (t, n) => n.monthName,
+    YS = (t, n) => n.solarDate.toISOString();
+
+function KS(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "li", 5), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(2);
+            return w(o.dayDetailsViewed.emit(r.solarDate))
+        }), u(1, "div", 6)(2, "div", 7), d(3), c(), u(4, "div", 8), d(5), c()(), u(6, "div", 9)(7, "p", 10), d(8), c(), u(9, "p", 11), d(10), c()()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        h(3), b(e.solarDate.getDate()), h(2), b(e.solarDate.toLocaleDateString("vi-VN", me(4, qS))), h(3), b(e.reason), h(2), L("\xC2m l\u1ECBch: Ng\xE0y ", e.lunarDateString)
+    }
+}
+
+function QS(t, n) {
+    if (t & 1 && (u(0, "div")(1, "h4", 2), d(2), c(), u(3, "ul", 3), R(4, KS, 11, 5, "li", 4, YS), c()()), t & 2) {
+        let e = n.$implicit;
+        h(2), b(e.monthName), h(2), O(e.days)
+    }
+}
+var Ur = class Ur {
+    constructor() {
+        this.lunarConverter = E(Oe);
+        this.dayDetailsViewed = Ge();
+        this.currentYear = new Date().getFullYear();
+        this.vegetarianDaysByMonth = C([]);
+        this.VEGETARIAN_DAYS_MAP = {
+            1: "M\xF9ng 1 (S\xF3c)",
+            8: "T\u1EE9 trai",
+            14: "T\u1EE9 trai",
+            15: "Ng\xE0y R\u1EB1m (V\u1ECDng)",
+            23: "T\u1EE9 trai",
+            29: "T\u1EE9 trai (th\xE1ng thi\u1EBFu)",
+            30: "T\u1EE9 trai (th\xE1ng \u0111\u1EE7)"
+        }
+    }
+    ngOnInit() {
+        this.calculateVegetarianDays()
+    }
+    calculateVegetarianDays() {
+        let n = this.currentYear,
+            e = [],
+            i = this.lunarConverter.getYearInfo(n);
+        if (!i) return;
+        i.forEach(l => {
+            let m = l.leap,
+                f = l.month,
+                p = `${f}${m?" (Nhu\u1EADn)":""}`,
+                g = i.findIndex(M => M.jd > l.jd),
+                v = this.lunarConverter.getYearInfo(n + 1),
+                B = (g !== -1 ? i[g].jd : v ? v[0].jd : l.jd + 30) - l.jd;
+            for (let M in this.VEGETARIAN_DAYS_MAP) {
+                let I = parseInt(M, 10);
+                if (I > B) continue;
+                let se = this.lunarConverter.convertLunarToSolar(n, f, I, m);
+                se && e.push({
+                    lunarDay: I,
+                    reason: this.VEGETARIAN_DAYS_MAP[I],
+                    solarDate: se,
+                    lunarDateString: `${I}/${p}`
+                })
+            }
+        }), e.sort((l, m) => l.solarDate.getTime() - m.solarDate.getTime());
+        let r = Array.from(new Map(e.map(l => [l.solarDate.toDateString(), l])).values()),
+            o = {};
+        r.forEach(l => {
+            let m = l.solarDate.getMonth();
+            o[m] || (o[m] = []), o[m].push(l)
+        });
+        let a = ["Th\xE1ng 1", "Th\xE1ng 2", "Th\xE1ng 3", "Th\xE1ng 4", "Th\xE1ng 5", "Th\xE1ng 6", "Th\xE1ng 7", "Th\xE1ng 8", "Th\xE1ng 9", "Th\xE1ng 10", "Th\xE1ng 11", "Th\xE1ng 12"],
+            s = Object.keys(o).map(Number).sort((l, m) => l - m).map(l => ({
+                monthName: a[l],
+                days: o[l]
+            }));
+        this.vegetarianDaysByMonth.set(s)
+    }
+};
+Ur.\u0275fac = function(e) {
+    return new(e || Ur)
+}, Ur.\u0275cmp = q({
+    type: Ur,
+    selectors: [
+        ["app-vegetarian-days"]
+    ],
+    outputs: {
+        dayDetailsViewed: "dayDetailsViewed"
+    },
+    decls: 6,
+    vars: 1,
+    consts: [
+        [1, "text-xl", "font-semibold", "mb-4", "text-center"],
+        [1, "space-y-6"],
+        [1, "text-lg", "font-bold", "text-indigo-600", "mb-2", "p-2", "bg-gray-100", "rounded-md"],
+        [1, "space-y-3"],
+        [1, "flex", "items-center", "p-3", "border-b", "border-gray-200", "last:border-b-0", "cursor-pointer", "hover:bg-gray-50", "transition-colors"],
+        [1, "flex", "items-center", "p-3", "border-b", "border-gray-200", "last:border-b-0", "cursor-pointer", "hover:bg-gray-50", "transition-colors", 3, "click"],
+        [1, "flex-shrink-0", "w-20", "text-center"],
+        [1, "text-3xl", "font-bold"],
+        [1, "text-sm", "text-gray-500"],
+        [1, "ml-4", "flex-grow"],
+        [1, "font-semibold"],
+        [1, "text-sm", "text-gray-600"]
+    ],
+    template: function(e, i) {
+        e & 1 && (u(0, "div")(1, "h3", 0), d(2), c(), u(3, "div", 1), R(4, QS, 6, 1, "div", null, WS), c()()), e & 2 && (h(2), L("L\u1ECBch Ng\xE0y \u0102n Chay N\u0103m ", i.currentYear), h(2), O(i.vegetarianDaysByMonth()))
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var vc = Ur;
+var ZS = () => ({
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    }),
+    XS = (t, n) => n.id;
+
+function JS(t, n) {
+    if (t & 1 && (u(0, "option", 7), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e.id), h(), b(e.name)
+    }
+}
+
+function ew(t, n) {
+    if (t & 1 && R(0, JS, 2, 2, "option", 7, XS), t & 2) {
+        let e = y();
+        O(e.availableEvents())
+    }
+}
+
+function tw(t, n) {
+    t & 1 && (u(0, "option", 4), d(1, "\u0110ang t\u1EA3i s\u1EF1 ki\u1EC7n..."), c())
+}
+
+function nw(t, n) {
+    if (t & 1 && (u(0, "div", 12)(1, "div")(2, "p", 14), d(3), c(), u(4, "p", 15), d(5, "Ng\xE0y"), c()(), u(6, "div")(7, "p", 14), d(8), c(), u(9, "p", 15), d(10, "Gi\u1EDD"), c()(), u(11, "div")(12, "p", 14), d(13), c(), u(14, "p", 15), d(15, "Ph\xFAt"), c()(), u(16, "div")(17, "p", 14), d(18), c(), u(19, "p", 15), d(20, "Gi\xE2y"), c()()()), t & 2) {
+        let e = y();
+        h(3), b(e.days), h(5), b(e.hours.toString().padStart(2, "0")), h(5), b(e.minutes.toString().padStart(2, "0")), h(5), b(e.seconds.toString().padStart(2, "0"))
+    }
+}
+
+function iw(t, n) {
+    t & 1 && (u(0, "p", 13), d(1, "S\u1EF1 ki\u1EC7n \u0111\xE3 di\u1EC5n ra!"), c())
+}
+
+function rw(t, n) {
+    t & 1 && _(0, nw, 21, 4, "div", 12)(1, iw, 2, 0, "p", 13), t & 2 && T(n.total > 0 ? 0 : 1)
+}
+
+function ow(t, n) {
+    t & 1 && (u(0, "p", 11), d(1, "\u0110ang t\xEDnh to\xE1n..."), c())
+}
+
+function aw(t, n) {
+    if (t & 1 && (u(0, "div", 5)(1, "p", 8), d(2, "Th\u1EDDi gian c\xF2n l\u1EA1i \u0111\u1EBFn"), c(), u(3, "h4", 9), d(4), c(), u(5, "p", 10), d(6), c(), _(7, rw, 2, 1)(8, ow, 2, 0, "p", 11), c()), t & 2) {
+        let e, i = n,
+            r = y();
+        h(4), b(i.name), h(2), b(i.nextOccurrence.toLocaleDateString("vi-VN", me(3, ZS))), h(), T((e = r.timeLeft()) ? 7 : 8, e)
+    }
+}
+
+function sw(t, n) {
+    t & 1 && (u(0, "p", 6), d(1, "Vui l\xF2ng ch\u1ECDn m\u1ED9t s\u1EF1 ki\u1EC7n \u0111\u1EC3 b\u1EAFt \u0111\u1EA7u \u0111\u1EBFm ng\u01B0\u1EE3c."), c())
+}
+var zr = class zr {
+    constructor() {
+        this.lunarConverter = E(Oe);
+        this.availableEvents = C([]);
+        this.selectedEventId = C(null);
+        this.timeLeft = C(null);
+        this.selectedEvent = Z(() => {
+            let n = this.selectedEventId();
+            return n ? this.availableEvents().find(e => e.id === n) : null
+        })
+    }
+    ngOnInit() {
+        this.prepareEvents(), this.updateCountdown(), this.interval = setInterval(() => this.updateCountdown(), 1e3)
+    }
+    ngOnDestroy() {
+        clearInterval(this.interval)
+    }
+    getNextOccurrence(n, e, i) {
+        let r = n.getFullYear(),
+            o = new Date(r, e - 1, i);
+        return o < n && (o = new Date(r + 1, e - 1, i)), o
+    }
+    prepareEvents() {
+        let n = new Date,
+            e = n.getFullYear(),
+            i = [],
+            o = this.lunarConverter.convertLunarToSolar(e, 1, 1, !1);
+        if (!o || n.getTime() > o.getTime() + 864e5) {
+            let l = this.lunarConverter.convertLunarToSolar(e + 1, 1, 1, !1);
+            l && (o = l)
+        }
+        o && i.push({
+            id: "tet",
+            name: `T\u1EBFt Nguy\xEAn \u0110\xE1n ${o.getFullYear()}`,
+            nextOccurrence: o
+        });
+        let a = {
+            "15/1": "T\u1EBFt Nguy\xEAn Ti\xEAu (R\u1EB1m th\xE1ng Gi\xEAng)",
+            "10/3": "Gi\u1ED7 T\u1ED5 H\xF9ng V\u01B0\u01A1ng",
+            "15/4": "L\u1EC5 Ph\u1EADt \u0110\u1EA3n",
+            "5/5": "T\u1EBFt \u0110oan Ng\u1ECD",
+            "15/7": "L\u1EC5 Vu Lan",
+            "15/8": "T\u1EBFt Trung Thu"
+        };
+        for (let l in a) {
+            let [m, f] = l.split("/").map(Number), g = this.lunarConverter.convertLunarToSolar(e, f, m, !1);
+            if (!g || g < n) {
+                let v = this.lunarConverter.convertLunarToSolar(e + 1, f, m, !1);
+                v && (g = v)
+            }
+            g && i.push({
+                id: `lunar-${l}`,
+                name: a[l],
+                nextOccurrence: g
+            })
+        }
+        let s = {
+            "30/4": "Ng\xE0y Gi\u1EA3i ph\xF3ng mi\u1EC1n Nam",
+            "1/5": "Ng\xE0y Qu\u1ED1c t\u1EBF Lao \u0111\u1ED9ng",
+            "2/9": "Ng\xE0y Qu\u1ED1c kh\xE1nh",
+            "25/12": "L\u1EC5 Gi\xE1ng sinh"
+        };
+        for (let l in s) {
+            let [m, f] = l.split("/").map(Number), p = this.getNextOccurrence(n, f, m);
+            i.push({
+                id: `gregorian-${l}`,
+                name: s[l],
+                nextOccurrence: p
+            })
+        }
+        if (i.sort((l, m) => l.nextOccurrence.getTime() - m.nextOccurrence.getTime()), this.availableEvents.set(i), this.selectedEventId() === null && i.length > 0) {
+            let l = i.find(m => m.id === "tet");
+            this.selectedEventId.set(l ? l.id : i[0].id)
+        }
+    }
+    updateCountdown() {
+        let n = this.selectedEvent()?.nextOccurrence;
+        if (!n) {
+            this.timeLeft.set(null);
+            return
+        }
+        let e = new Date().getTime(),
+            i = n.getTime() - e;
+        if (i < 0) {
+            this.timeLeft.set({
+                days: 0,
+                hours: 0,
+                minutes: 0,
+                seconds: 0,
+                total: 0
+            }), this.prepareEvents();
+            return
+        }
+        this.timeLeft.set({
+            days: Math.floor(i / (1e3 * 60 * 60 * 24)),
+            hours: Math.floor(i % (1e3 * 60 * 60 * 24) / (1e3 * 60 * 60)),
+            minutes: Math.floor(i % (1e3 * 60 * 60) / (1e3 * 60)),
+            seconds: Math.floor(i % (1e3 * 60) / 1e3),
+            total: i
+        })
+    }
+    onEventChange(n) {
+        let e = n.target.value;
+        this.selectedEventId.set(e), this.updateCountdown()
+    }
+};
+zr.\u0275fac = function(e) {
+    return new(e || zr)
+}, zr.\u0275cmp = q({
+    type: zr,
+    selectors: [
+        ["app-countdown"]
+    ],
+    decls: 11,
+    vars: 3,
+    consts: [
+        [1, "text-xl", "font-semibold", "mb-4", "text-center"],
+        [1, "max-w-sm", "mx-auto", "mb-6"],
+        ["for", "event-select", 1, "block", "font-medium", "mb-1"],
+        ["id", "event-select", 1, "w-full", "p-2", "border", "border-gray-300", "rounded-md", "shadow-sm", "focus:ring-indigo-500", "focus:border-indigo-500", "bg-white", 3, "change", "value"],
+        ["disabled", ""],
+        [1, "p-6", "bg-gray-800", "rounded-lg", "text-white", "text-center", "shadow-2xl"],
+        [1, "text-center", "text-gray-500", "py-8"],
+        [3, "value"],
+        [1, "text-lg", "text-gray-300"],
+        [1, "text-3xl", "font-bold", "text-yellow-400", "my-2"],
+        [1, "text-sm", "text-gray-400"],
+        [1, "mt-6", "text-2xl"],
+        [1, "grid", "grid-cols-4", "gap-2", "sm:gap-4", "mt-6", "font-mono"],
+        [1, "mt-6", "text-2xl", "font-bold", "text-green-400"],
+        [1, "text-4xl", "sm:text-5xl", "font-bold"],
+        [1, "text-xs", "sm:text-sm", "uppercase", "tracking-wider"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div")(1, "h3", 0), d(2, "\u0110\u1EBFm Ng\u01B0\u1EE3c S\u1EF1 Ki\u1EC7n"), c(), u(3, "div", 1)(4, "label", 2), d(5, "Ch\u1ECDn s\u1EF1 ki\u1EC7n:"), c(), u(6, "select", 3), D("change", function(o) {
+                return i.onEventChange(o)
+            }), _(7, ew, 2, 0)(8, tw, 2, 0, "option", 4), c()(), _(9, aw, 9, 4, "div", 5)(10, sw, 2, 0, "p", 6), c()), e & 2) {
+            let r;
+            h(6), H("value", i.selectedEventId()), h(), T(i.availableEvents().length > 0 ? 7 : 8), h(2), T((r = i.selectedEvent()) ? 9 : 10, r)
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var yc = zr;
+
+function lw(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "app-events-utility", 4), de("dayDetailsViewed", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onDayDetailsViewed(r))
+        }), F()
+    }
+}
+
+function cw(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "app-special-days", 4), de("dayDetailsViewed", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onDayDetailsViewed(r))
+        }), F()
+    }
+}
+
+function uw(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "app-vegetarian-days", 4), de("dayDetailsViewed", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onDayDetailsViewed(r))
+        }), F()
+    }
+}
+
+function dw(t, n) {
+    t & 1 && _e(0, "app-countdown")
+}
+var Gr = class Gr {
+    constructor() {
+        this.router = E(Te);
+        this.lichView = C("events")
+    }
+    onDayDetailsViewed(n) {
+        this.router.navigate(["/", n.getDate(), n.getMonth() + 1, n.getFullYear()])
+    }
+};
+Gr.\u0275fac = function(e) {
+    return new(e || Gr)
+}, Gr.\u0275cmp = q({
+    type: Gr,
+    selectors: [
+        ["app-lich-tab"]
+    ],
+    decls: 16,
+    vars: 25,
+    consts: [
+        [1, "bg-white", "p-6", "rounded-lg", "shadow-lg", "max-w-4xl", "mx-auto"],
+        [1, "text-2xl", "font-bold", "text-indigo-600", "mb-4"],
+        [1, "flex", "flex-wrap", "border-b", "border-gray-200", "mb-6"],
+        [1, "px-4", "py-2", "font-medium", 3, "click"],
+        [3, "dayDetailsViewed"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (k(0, "div", 0)(1, "h2", 1), d(2, "L\u1ECBch \u0110\u1EB7c Bi\u1EC7t"), F(), k(3, "div", 2)(4, "button", 3), de("click", function() {
+                return i.lichView.set("events")
+            }), d(5, "S\u1EF1 Ki\u1EC7n & L\u1EC5 T\u1EBFt"), F(), k(6, "button", 3), de("click", function() {
+                return i.lichView.set("special_days")
+            }), d(7, "Ng\xE0y S\xF3c V\u1ECDng"), F(), k(8, "button", 3), de("click", function() {
+                return i.lichView.set("vegetarian")
+            }), d(9, "Ng\xE0y \u0102n Chay"), F(), k(10, "button", 3), de("click", function() {
+                return i.lichView.set("countdown")
+            }), d(11, "\u0110\u1EBFm Ng\u01B0\u1EE3c"), F()(), _(12, lw, 1, 0, "app-events-utility")(13, cw, 1, 0, "app-special-days")(14, uw, 1, 0, "app-vegetarian-days")(15, dw, 1, 0, "app-countdown"), F()), e & 2) {
+            let r;
+            h(4), N("text-indigo-600", i.lichView() === "events")("border-b-2", i.lichView() === "events")("border-indigo-600", i.lichView() === "events"), h(2), N("text-indigo-600", i.lichView() === "special_days")("border-b-2", i.lichView() === "special_days")("border-indigo-600", i.lichView() === "special_days"), h(2), N("text-indigo-600", i.lichView() === "vegetarian")("border-b-2", i.lichView() === "vegetarian")("border-indigo-600", i.lichView() === "vegetarian"), h(2), N("text-indigo-600", i.lichView() === "countdown")("border-b-2", i.lichView() === "countdown")("border-indigo-600", i.lichView() === "countdown"), h(2), T((r = i.lichView()) === "events" ? 12 : r === "special_days" ? 13 : r === "vegetarian" ? 14 : r === "countdown" ? 15 : -1)
+        }
+    },
+    dependencies: [Q, pc, gc, vc, yc],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var Ec = Gr;
+var Ai = class Ai {
+    constructor() {
+        this.PYTHAGOREAN_MAP = {
+            A: 1,
+            B: 2,
+            C: 3,
+            D: 4,
+            E: 5,
+            F: 6,
+            G: 7,
+            H: 8,
+            I: 9,
+            J: 1,
+            K: 2,
+            L: 3,
+            M: 4,
+            N: 5,
+            O: 6,
+            P: 7,
+            Q: 8,
+            R: 9,
+            S: 1,
+            T: 2,
+            U: 3,
+            V: 4,
+            W: 5,
+            X: 6,
+            Y: 7,
+            Z: 8
+        };
+        this.VOWELS = ["A", "E", "I", "O", "U", "Y"]
+    }
+    normalizeName(n) {
+        return n.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/[^A-Z]/g, "")
+    }
+    reduceNumber(n) {
+        if (n === 11 || n === 22 || n === 33) return n;
+        for (; n > 9 && (n = String(n).split("").reduce((e, i) => e + parseInt(i, 10), 0), !(n === 11 || n === 22 || n === 33)););
+        return n
+    }
+    calculateSum(n) {
+        let e = n.reduce((i, r) => i + (this.PYTHAGOREAN_MAP[r] || 0), 0);
+        return this.reduceNumber(e)
+    }
+    getDestinyNumber(n) {
+        if (!n) return 0;
+        let i = this.normalizeName(n).split("");
+        return this.calculateSum(i)
+    }
+    getSoulUrgeNumber(n) {
+        if (!n) return 0;
+        let i = this.normalizeName(n).split("").filter(r => this.VOWELS.includes(r));
+        return this.calculateSum(i)
+    }
+    getPersonalityNumber(n) {
+        if (!n) return 0;
+        let i = this.normalizeName(n).split("").filter(r => !this.VOWELS.includes(r));
+        return this.calculateSum(i)
+    }
+};
+Ai.\u0275fac = function(e) {
+    return new(e || Ai)
+}, Ai.\u0275prov = j({
+    token: Ai,
+    factory: Ai.\u0275fac,
+    providedIn: "root"
+});
+var bc = Ai;
+var hw = () => ({
+        weekday: "long",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    }),
+    mw = (t, n) => n.id,
+    fw = (t, n) => n.value,
+    pw = (t, n) => n.date.getTime();
+
+function gw(t, n) {
+    if (t & 1 && (u(0, "div", 38)(1, "p", 42), d(2, "S\u1ED1 S\u1EE9 M\u1EC7nh"), c(), u(3, "p", 43), d(4), c(), u(5, "p", 37), d(6, "Ti\u1EC1m n\u0103ng, \u0111i\u1EC1u b\u1EA1n c\xF3 th\u1EC3 \u0111\u1EA1t \u0111\u01B0\u1EE3c."), c()()), t & 2) {
+        let e = y(2);
+        h(4), b(e.destinyNumber())
+    }
+}
+
+function vw(t, n) {
+    t & 1 && (u(0, "div", 39), d(1, "Nh\u1EADp H\u1ECD T\xEAn \u0111\u1EC3 xem"), c())
+}
+
+function yw(t, n) {
+    if (t & 1 && (u(0, "div", 40)(1, "p", 44), d(2, "S\u1ED1 Linh H\u1ED3n"), c(), u(3, "p", 45), d(4), c(), u(5, "p", 37), d(6, "Khao kh\xE1t, \u0111\u1ED9ng l\u1EF1c b\xEAn trong."), c()()), t & 2) {
+        let e = y(2);
+        h(4), b(e.soulUrgeNumber())
+    }
+}
+
+function Ew(t, n) {
+    t & 1 && (u(0, "div", 39), d(1, "Nh\u1EADp H\u1ECD T\xEAn \u0111\u1EC3 xem"), c())
+}
+
+function bw(t, n) {
+    if (t & 1 && (u(0, "div", 41)(1, "p", 46), d(2, "S\u1ED1 \u0110\u1ED9ng L\u1EF1c"), c(), u(3, "p", 47), d(4, "(Nh\xE2n c\xE1ch)"), c(), u(5, "p", 48), d(6), c(), u(7, "p", 37), d(8, "C\xE1ch ng\u01B0\u1EDDi kh\xE1c nh\xECn nh\u1EADn b\u1EA1n."), c()()), t & 2) {
+        let e = y(2);
+        h(6), b(e.personalityNumber())
+    }
+}
+
+function Dw(t, n) {
+    t & 1 && (u(0, "div", 39), d(1, "Nh\u1EADp H\u1ECD T\xEAn \u0111\u1EC3 xem"), c())
+}
+
+function Cw(t, n) {
+    if (t & 1 && (u(0, "div", 11)(1, "h3", 32), d(2, "Con S\u1ED1 D\xE0nh Ri\xEAng Cho B\u1EA1n"), c(), u(3, "div", 33)(4, "div", 34)(5, "p", 35), d(6, "S\u1ED1 \u0110\u01B0\u1EDDng \u0110\u1EDDi"), c(), u(7, "p", 36), d(8), c(), u(9, "p", 37), d(10, "Con \u0111\u01B0\u1EDDng, b\xE0i h\u1ECDc ch\xEDnh c\u1EE7a b\u1EA1n."), c()(), _(11, gw, 7, 1, "div", 38)(12, vw, 2, 0, "div", 39), _(13, yw, 7, 1, "div", 40)(14, Ew, 2, 0, "div", 39), _(15, bw, 9, 1, "div", 41)(16, Dw, 2, 0, "div", 39), c()()), t & 2) {
+        let e = y();
+        h(8), b(e.lifePathNumber()), h(3), T(e.destinyNumber() !== null ? 11 : 12), h(2), T(e.soulUrgeNumber() !== null ? 13 : 14), h(2), T(e.personalityNumber() !== null ? 15 : 16)
+    }
+}
+
+function xw(t, n) {
+    t & 1 && (u(0, "span"), d(1, "Vui l\xF2ng nh\u1EADp ng\xE0y sinh"), c())
+}
+
+function _w(t, n) {
+    t & 1 && (u(0, "span"), d(1, "\u0110ang ph\xE2n t\xEDch..."), c())
+}
+
+function Tw(t, n) {
+    t & 1 && (u(0, "span"), d(1, "CH\u1EA4M \u0110I\u1EC2M NG\xC0Y"), c())
+}
+
+function Sw(t, n) {
+    t & 1 && (u(0, "div", 20), P(1, "div", 49), c())
+}
+
+function ww(t, n) {
+    if (t & 1 && (u(0, "li"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function Iw(t, n) {
+    if (t & 1 && (u(0, "ul", 62), R(1, ww, 2, 1, "li", null, pe), c()), t & 2) {
+        let e = y();
+        h(), O(e.goodPoints)
+    }
+}
+
+function Mw(t, n) {
+    t & 1 && (u(0, "p", 58), d(1, "Kh\xF4ng c\xF3 y\u1EBFu t\u1ED1 t\u1ED1t n\u1ED5i b\u1EADt."), c())
+}
+
+function Nw(t, n) {
+    if (t & 1 && (u(0, "li"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function Aw(t, n) {
+    if (t & 1 && (u(0, "ul", 62), R(1, Nw, 2, 1, "li", null, pe), c()), t & 2) {
+        let e = y();
+        h(), O(e.badPoints)
+    }
+}
+
+function kw(t, n) {
+    t & 1 && (u(0, "p", 58), d(1, "Kh\xF4ng c\xF3 y\u1EBFu t\u1ED1 x\u1EA5u n\xE0o."), c())
+}
+
+function Rw(t, n) {
+    if (t & 1 && (u(0, "div", 21)(1, "div", 50)(2, "div", 51)(3, "div", 52), K(), u(4, "svg", 53), P(5, "path", 54)(6, "path", 55), c(), ne(), u(7, "div", 56)(8, "span", 57), d(9), c(), u(10, "span", 58), d(11, "/ 10"), c()()(), u(12, "p", 59), d(13), c()(), u(14, "div", 60)(15, "div")(16, "h4", 61), d(17, "\u0110i\u1EC3m C\u1ED9ng"), c(), _(18, Iw, 3, 0, "ul", 62)(19, Mw, 2, 0, "p", 58), c(), u(20, "div")(21, "h4", 63), d(22, "\u0110i\u1EC3m Tr\u1EEB"), c(), _(23, Aw, 3, 0, "ul", 62)(24, kw, 2, 0, "p", 58), c()()()()), t & 2) {
+        let e = n;
+        h(6), It("stroke-dasharray", e.score * 10 + ", 100"), h(3), b(e.score.toFixed(1)), h(3), N("text-green-700", e.score >= 7)("text-yellow-700", e.score >= 4 && e.score < 7)("text-red-700", e.score < 4), h(), L(" ", e.summary, " "), h(5), T(e.goodPoints.length > 0 ? 18 : 19), h(5), T(e.badPoints.length > 0 ? 23 : 24)
+    }
+}
+
+function Ow(t, n) {
+    if (t & 1 && (u(0, "option", 26), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e.id), h(), b(e.name)
+    }
+}
+
+function Lw(t, n) {
+    if (t & 1 && (u(0, "option", 26), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e.value), h(), b(e.name)
+    }
+}
+
+function Fw(t, n) {
+    t & 1 && (u(0, "span"), d(1, "Vui l\xF2ng nh\u1EADp ng\xE0y sinh"), c())
+}
+
+function Pw(t, n) {
+    t & 1 && (u(0, "span"), d(1, "\u0110ang t\xECm..."), c())
+}
+
+function Bw(t, n) {
+    t & 1 && (u(0, "span"), d(1, "T\xCCM KI\u1EBEM NG\xC0Y T\u1ED0T"), c())
+}
+
+function Hw(t, n) {
+    t & 1 && (u(0, "p", 64), d(1, " Kh\xF4ng t\xECm th\u1EA5y ng\xE0y n\xE0o ph\xF9 h\u1EE3p trong kho\u1EA3ng th\u1EDDi gian \u0111\xE3 ch\u1ECDn. Vui l\xF2ng th\u1EED l\u1EA1i v\u1EDBi kho\u1EA3ng th\u1EDDi gian d\xE0i h\u01A1n. "), c())
+}
+
+function jw(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "li", 69), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(3);
+            return w(o.viewDayDetails(r.date))
+        }), u(1, "p", 70), d(2), c(), u(3, "p", 71), d(4), c()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        h(2), L(" ", e.date.toLocaleDateString("vi-VN", me(3, hw)), " "), h(2), W("(T\u1EE9c ng\xE0y ", e.lunarDay, "/", e.lunarMonth, " \xC2L)")
+    }
+}
+
+function Vw(t, n) {
+    if (t & 1 && (u(0, "div", 65)(1, "p", 66), d(2, "C\xE1c ng\xE0y t\u1ED1t \u0111\u01B0\u1EE3c t\xECm th\u1EA5y:"), c(), u(3, "ul", 67), R(4, jw, 5, 4, "li", 68, pw), c()()), t & 2) {
+        let e = y(2);
+        h(4), O(e.foundDays())
+    }
+}
+
+function $w(t, n) {
+    if (t & 1 && (u(0, "div", 31), _(1, Hw, 2, 0, "p", 64)(2, Vw, 6, 0, "div", 65), c()), t & 2) {
+        let e = y();
+        h(), T(e.wasNotFound() ? 1 : e.foundDays().length > 0 ? 2 : -1)
+    }
+}
+var qr = class qr {
+    constructor() {
+        this.state = E(Xe);
+        this.lunarCalendarService = E(Le);
+        this.numerologyService = E(bc);
+        this.router = E(Te);
+        this.localFullName = C("");
+        this.formattedDOB = Z(() => {
+            let n = this.state.userDOB();
+            if (!n) return "";
+            let e = n.split("-");
+            if (e.length !== 3) return "";
+            let [i, r, o] = e;
+            return `${o}/${r}/${i}`
+        });
+        this.lifePathNumber = Z(() => {
+            let n = this.state.userDOB();
+            if (!n) return null;
+            let e = new Date(n);
+            return isNaN(e.getTime()) ? null : this.lunarCalendarService.getNumerologyNumber(e)
+        });
+        this.destinyNumber = Z(() => {
+            let n = this.state.userFullName();
+            return !n || n.trim() === "" ? null : this.numerologyService.getDestinyNumber(n)
+        });
+        this.soulUrgeNumber = Z(() => {
+            let n = this.state.userFullName();
+            return !n || n.trim() === "" ? null : this.numerologyService.getSoulUrgeNumber(n)
+        });
+        this.personalityNumber = Z(() => {
+            let n = this.state.userFullName();
+            return !n || n.trim() === "" ? null : this.numerologyService.getPersonalityNumber(n)
+        });
+        this.goodDayTasks = [{
+            id: "xay_dung",
+            name: "Kh\u1EDFi c\xF4ng x\xE2y d\u1EF1ng"
+        }, {
+            id: "cuoi_hoi",
+            name: "C\u01B0\u1EDBi h\u1ECFi"
+        }, {
+            id: "khai_truong",
+            name: "Khai tr\u01B0\u01A1ng"
+        }, {
+            id: "nhap_trach",
+            name: "Nh\u1EADp tr\u1EA1ch"
+        }, {
+            id: "dong_tho",
+            name: "\u0110\u1ED9ng th\u1ED5"
+        }, {
+            id: "an_tang",
+            name: "An t\xE1ng"
+        }];
+        this.goodDayDurations = [{
+            value: 30,
+            name: "30 ng\xE0y"
+        }, {
+            value: 60,
+            name: "60 ng\xE0y"
+        }, {
+            value: 90,
+            name: "90 ng\xE0y"
+        }, {
+            value: 180,
+            name: "6 th\xE1ng"
+        }, {
+            value: 365,
+            name: "1 n\u0103m"
+        }];
+        this.selectedTask = C(this.goodDayTasks[0].id);
+        this.searchDuration = C(30);
+        this.goodDaySearchResult = C(null);
+        this.isFindingGoodDay = C(!1);
+        this.eventName = C("Khai tr\u01B0\u01A1ng c\u1EEDa h\xE0ng");
+        this.eventDate = C(new Date().toISOString().split("T")[0]);
+        this.eventScoreResult = C(null);
+        this.isScoringDay = C(!1);
+        this.foundDays = Z(() => {
+            let n = this.goodDaySearchResult();
+            return Array.isArray(n) ? n : []
+        });
+        this.wasNotFound = Z(() => this.goodDaySearchResult() === "not_found");
+        hh(() => {
+            this.localFullName.set(this.state.userFullName() ?? "")
+        })
+    }
+    viewDayDetails(n) {
+        this.router.navigate(["/", n.getDate(), n.getMonth() + 1, n.getFullYear()])
+    }
+    onUserDOBChange(n) {
+        let i = n.target.value.split("/");
+        if (i.length === 3) {
+            let [r, o, a] = i;
+            if (r.length === 2 && o.length === 2 && a.length === 4) {
+                let s = `${a}-${o}-${r}`,
+                    l = new Date(s);
+                l.getFullYear() === parseInt(a, 10) && l.getMonth() === parseInt(o, 10) - 1 && l.getDate() === parseInt(r, 10) && this.state.setUserDOB(s)
+            }
+        }
+    }
+    saveFullName() {
+        this.state.setUserFullName(this.localFullName())
+    }
+    findGoodDayForTask() {
+        let n = this.state.userCanChi()?.chi;
+        if (!n) {
+            this.goodDaySearchResult.set(null);
+            return
+        }
+        this.isFindingGoodDay.set(!0), this.goodDaySearchResult.set(null), setTimeout(() => {
+            let e = [],
+                i = this.searchDuration(),
+                r = new Date;
+            r.setHours(0, 0, 0, 0);
+            for (let o = 1; o <= i; o++) {
+                let a = new Date(r);
+                a.setDate(r.getDate() + o);
+                let s = this.lunarCalendarService.getDayAnalysis(a, n);
+                if (s.badPoints.length === 0) {
+                    let l = this.lunarCalendarService.getBasicLunarInfoForDate(a);
+                    e.push({
+                        date: a,
+                        lunarDay: l.lunarDay,
+                        lunarMonth: l.lunarMonth,
+                        analysis: s
+                    })
+                }
+            }
+            this.goodDaySearchResult.set(e.length > 0 ? e : "not_found"), this.isFindingGoodDay.set(!1)
+        }, 10)
+    }
+    scoreSelectedDay() {
+        let n = this.state.userCanChi()?.chi,
+            e = this.eventDate(),
+            i = this.eventName();
+        !n || !e || !i || (this.isScoringDay.set(!0), this.eventScoreResult.set(null), setTimeout(() => {
+            let r = new Date(`${e}T12:00:00`),
+                o = this.lunarCalendarService.scoreDateForEvent(r, n, i);
+            this.eventScoreResult.set(o), this.isScoringDay.set(!1)
+        }, 10))
+    }
+};
+qr.\u0275fac = function(e) {
+    return new(e || qr)
+}, qr.\u0275cmp = q({
+    type: qr,
+    selectors: [
+        ["app-personalization-tab"]
+    ],
+    decls: 62,
+    vars: 12,
+    consts: [
+        [1, "bg-white", "p-6", "rounded-lg", "shadow-lg", "max-w-4xl", "mx-auto"],
+        [1, "flex", "justify-between", "items-center", "mb-4"],
+        [1, "text-2xl", "font-bold", "text-indigo-600"],
+        [1, "mb-6", "text-gray-600"],
+        [1, "mb-6", "p-4", "bg-gray-50", "rounded-lg", "grid", "grid-cols-1", "md:grid-cols-2", "gap-4"],
+        ["for", "user-dob", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "text", "id", "user-dob", "placeholder", "dd/mm/yyyy", 1, "w-full", "p-2", "border", "rounded", 3, "change", "value"],
+        ["for", "user-fullname", 1, "block", "text-sm", "font-medium", "mb-1"],
+        [1, "flex", "gap-2"],
+        ["type", "text", "id", "user-fullname", "placeholder", "VD: Nguy\u1EC5n V\u0103n A", 1, "flex-grow", "p-2", "border", "rounded", 3, "input", "value"],
+        [1, "px-4", "py-2", "bg-indigo-500", "text-white", "rounded", "hover:bg-indigo-600", 3, "click"],
+        [1, "mt-8", "pt-8", "border-t", "border-gray-200"],
+        [1, "text-xl", "font-semibold", "text-cyan-800", "mb-4"],
+        [1, "p-4", "bg-cyan-50", "rounded-lg"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-2", "gap-4"],
+        ["for", "event-name", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "text", "id", "event-name", 1, "w-full", "p-2", "border", "rounded", 3, "input", "value"],
+        ["for", "event-date", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "date", "id", "event-date", 1, "w-full", "p-2", "border", "rounded", 3, "input", "value"],
+        [1, "w-full", "mt-4", "px-4", "py-2", "bg-cyan-500", "text-white", "font-semibold", "rounded-md", "hover:bg-cyan-600", "disabled:bg-cyan-300", "transition-colors", 3, "click", "disabled"],
+        [1, "text-center", "p-6"],
+        [1, "mt-4", "p-4", "border", "border-gray-200", "rounded-lg", "animate-fade-in"],
+        [1, "text-xl", "font-semibold", "text-purple-800", "mb-4"],
+        [1, "p-4", "bg-purple-50", "rounded-lg"],
+        ["for", "task-select", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["id", "task-select", 1, "w-full", "p-2", "border", "rounded", 3, "change"],
+        [3, "value"],
+        ["for", "duration-select", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["id", "duration-select", 1, "w-full", "p-2", "border", "rounded", 3, "change"],
+        [1, "text-xs", "text-center", "text-gray-500", "mt-2"],
+        [1, "w-full", "mt-4", "px-4", "py-2", "bg-orange-500", "text-white", "font-semibold", "rounded-md", "hover:bg-orange-600", "disabled:bg-orange-300", "transition-colors", 3, "click", "disabled"],
+        [1, "mt-4"],
+        [1, "text-xl", "font-semibold", "text-center", "text-gray-800", "mb-4"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-2", "lg:grid-cols-4", "gap-4", "text-center"],
+        [1, "p-4", "bg-teal-50", "rounded-lg"],
+        [1, "font-semibold", "text-teal-800"],
+        [1, "text-6xl", "font-bold", "my-2", "text-teal-600"],
+        [1, "text-xs", "text-gray-500"],
+        [1, "p-4", "bg-sky-50", "rounded-lg"],
+        [1, "p-4", "bg-gray-100", "rounded-lg", "flex", "items-center", "justify-center", "text-gray-500", "text-sm"],
+        [1, "p-4", "bg-rose-50", "rounded-lg"],
+        [1, "p-4", "bg-amber-50", "rounded-lg"],
+        [1, "font-semibold", "text-sky-800"],
+        [1, "text-6xl", "font-bold", "my-2", "text-sky-600"],
+        [1, "font-semibold", "text-rose-800"],
+        [1, "text-6xl", "font-bold", "my-2", "text-rose-600"],
+        [1, "font-semibold", "text-amber-800"],
+        [1, "text-xs", "text-gray-500", "mb-1"],
+        [1, "text-6xl", "font-bold", "my-2", "text-amber-600"],
+        [1, "animate-spin", "rounded-full", "h-8", "w-8", "border-b-2", "border-cyan-500", "mx-auto"],
+        [1, "grid", "grid-cols-1", "md:grid-cols-3", "gap-6", "items-center"],
+        [1, "flex", "flex-col", "items-center", "justify-center"],
+        [1, "relative", "w-32", "h-32"],
+        ["viewBox", "0 0 36 36", 1, "w-full", "h-full"],
+        ["d", "M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831", "fill", "none", "stroke-width", "3", 1, "text-gray-200"],
+        ["d", "M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831", "fill", "none", "stroke-width", "3", "stroke-linecap", "round", 1, "text-green-500"],
+        [1, "absolute", "inset-0", "flex", "flex-col", "items-center", "justify-center"],
+        [1, "text-3xl", "font-bold", "text-gray-800"],
+        [1, "text-sm", "text-gray-500"],
+        [1, "mt-3", "text-lg", "font-semibold", "text-center"],
+        [1, "md:col-span-2", "grid", "grid-cols-1", "sm:grid-cols-2", "gap-4"],
+        [1, "font-semibold", "text-green-700", "mb-2"],
+        [1, "space-y-1", "list-disc", "list-inside", "text-sm"],
+        [1, "font-semibold", "text-red-700", "mb-2"],
+        [1, "text-center", "text-red-600", "p-3", "bg-red-50", "rounded-md"],
+        [1, "p-3", "bg-green-50", "rounded-md"],
+        [1, "font-semibold", "text-center", "mb-2"],
+        [1, "space-y-2"],
+        [1, "p-2", "border", "border-green-200", "rounded-lg", "cursor-pointer", "hover:bg-green-100", "transition-colors"],
+        [1, "p-2", "border", "border-green-200", "rounded-lg", "cursor-pointer", "hover:bg-green-100", "transition-colors", 3, "click"],
+        [1, "font-bold", "text-green-800"],
+        [1, "text-sm"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div", 0)(1, "div", 1)(2, "h2", 2), d(3, "C\xE1 Nh\xE2n H\xF3a L\u1ECBch"), c()(), u(4, "p", 3), d(5, " Nh\u1EADp th\xF4ng tin c\u1EE7a b\u1EA1n \u0111\u1EC3 h\u1EC7 th\u1ED1ng t\u1EF1 \u0111\u1ED9ng t\xEDnh to\xE1n v\xE0 \u0111\u01B0a ra c\xE1c g\u1EE3i \xFD c\xE1 nh\xE2n h\xF3a tr\xEAn to\xE0n b\u1ED9 \u1EE9ng d\u1EE5ng. "), c(), u(6, "div", 4)(7, "div")(8, "label", 5), d(9, "Ng\xE0y sinh D\u01B0\u01A1ng l\u1ECBch:"), c(), u(10, "input", 6), D("change", function(o) {
+                return i.onUserDOBChange(o)
+            }), c()(), u(11, "div")(12, "label", 7), d(13, "H\u1ECD v\xE0 T\xEAn (\u0111\u1EC3 xem Th\u1EA7n s\u1ED1 h\u1ECDc):"), c(), u(14, "div", 8)(15, "input", 9), D("input", function(o) {
+                return i.localFullName.set(o.target.value)
+            }), c(), u(16, "button", 10), D("click", function() {
+                return i.saveFullName()
+            }), d(17, "L\u01B0u"), c()()()(), _(18, Cw, 17, 4, "div", 11), u(19, "div", 11)(20, "h3", 12), d(21, "L\u1EADp K\u1EBF Ho\u1EA1ch & Ch\u1EA5m \u0110i\u1EC3m Ng\xE0y"), c(), u(22, "div", 13)(23, "div", 14)(24, "div")(25, "label", 15), d(26, "T\xEAn s\u1EF1 ki\u1EC7n:"), c(), u(27, "input", 16), D("input", function(o) {
+                return i.eventName.set(o.target.value)
+            }), c()(), u(28, "div")(29, "label", 17), d(30, "Ng\xE0y d\u1EF1 ki\u1EBFn:"), c(), u(31, "input", 18), D("input", function(o) {
+                return i.eventDate.set(o.target.value)
+            }), c()()(), u(32, "button", 19), D("click", function() {
+                return i.scoreSelectedDay()
+            }), _(33, xw, 2, 0, "span")(34, _w, 2, 0, "span")(35, Tw, 2, 0, "span"), c()(), _(36, Sw, 2, 0, "div", 20), _(37, Rw, 25, 11, "div", 21), c(), u(38, "div", 11)(39, "h3", 22), d(40, "T\xECm Ng\xE0y T\u1ED1t"), c(), u(41, "div", 23)(42, "div", 14)(43, "div")(44, "label", 24), d(45, "Vi\u1EC7c c\u1EA7n l\xE0m:"), c(), u(46, "select", 25), D("change", function(o) {
+                return i.selectedTask.set(o.target.value)
+            }), R(47, Ow, 2, 2, "option", 26, mw), c()(), u(49, "div")(50, "label", 27), d(51, "T\xECm trong:"), c(), u(52, "select", 28), D("change", function(o) {
+                return i.searchDuration.set(+o.target.value)
+            }), R(53, Lw, 2, 2, "option", 26, fw), c()()(), u(55, "p", 29), d(56, "(Th\u1EDDi gian t\xEDnh t\u1EEB th\u1EDDi \u0111i\u1EC3m ng\xE0y hi\u1EC7n t\u1EA1i)"), c(), u(57, "button", 30), D("click", function() {
+                return i.findGoodDayForTask()
+            }), _(58, Fw, 2, 0, "span")(59, Pw, 2, 0, "span")(60, Bw, 2, 0, "span"), c()(), _(61, $w, 3, 1, "div", 31), c()()), e & 2) {
+            let r, o, a, s, l;
+            h(10), H("value", i.formattedDOB()), h(5), H("value", i.localFullName()), h(3), T(i.lifePathNumber() !== null ? 18 : -1), h(9), H("value", i.eventName()), h(4), H("value", i.eventDate()), h(), H("disabled", i.isScoringDay() || !((r = i.state.userCanChi()) != null && r.chi)), h(), T((o = i.state.userCanChi()) != null && o.chi ? i.isScoringDay() ? 34 : 35 : 33), h(3), T(i.isScoringDay() ? 36 : -1), h(), T((a = i.eventScoreResult()) ? 37 : -1, a), h(10), O(i.goodDayTasks), h(6), O(i.goodDayDurations), h(4), H("disabled", i.isFindingGoodDay() || !((s = i.state.userCanChi()) != null && s.chi)), h(), T((l = i.state.userCanChi()) != null && l.chi ? i.isFindingGoodDay() ? 59 : 60 : 58), h(3), T(i.goodDaySearchResult() ? 61 : -1)
+        }
+    },
+    dependencies: [Q],
+    styles: ["@keyframes _ngcontent-%COMP%_fadeIn{0%{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.animate-fade-in[_ngcontent-%COMP%]{animation:_ngcontent-%COMP%_fadeIn .5s ease-out forwards}"],
+    changeDetection: 0
+});
+var Dc = qr;
+
+function Uw(t, n) {
+    if (t & 1 && (u(0, "div", 5)(1, "h3", 8), d(2, "Bi\u1EC3u \u0111\u1ED3 Nh\u1ECBp sinh h\u1ECDc cho 30 ng\xE0y t\u1EDBi"), c(), u(3, "div", 10), K(), u(4, "svg", 11), P(5, "line", 12)(6, "line", 13)(7, "line", 14), u(8, "text", 15), d(9, "+100%"), c(), u(10, "text", 16), d(11, "0%"), c(), u(12, "text", 17), d(13, "-100%"), c(), P(14, "line", 18), u(15, "text", 19), d(16, "H\xF4m nay"), c(), P(17, "path", 20)(18, "path", 21)(19, "path", 22), c()(), ne(), u(20, "div", 23)(21, "div", 24), P(22, "span", 25), d(23, "Th\u1EC3 ch\u1EA5t"), c(), u(24, "div", 24), P(25, "span", 26), d(26, "T\xECnh c\u1EA3m"), c(), u(27, "div", 24), P(28, "span", 27), d(29, "Tr\xED tu\u1EC7"), c()()()), t & 2) {
+        let e = n;
+        h(17), It("d", e.physicalPath), h(), It("d", e.emotionalPath), h(), It("d", e.intellectualPath)
+    }
+}
+
+function zw(t, n) {
+    t & 1 && (u(0, "p", 6), d(1, "Vui l\xF2ng nh\u1EADp ng\xE0y sinh \u0111\u1EC3 xem bi\u1EC3u \u0111\u1ED3 nh\u1ECBp sinh h\u1ECDc."), c())
+}
+var Wr = class Wr {
+    constructor() {
+        this.userDOB = dr(null);
+        this.userDOBChanged = Ge();
+        this.chartData = Z(() => {
+            let n = this.userDOB();
+            if (!n) return null;
+            let e = new Date(n);
+            if (isNaN(e.getTime())) return null;
+            let i = this.calculateBiorhythmValues(e),
+                r = o => {
+                    let p = `M ${(o[0].day+1)*20} ${125-o[0].value*115}`;
+                    for (let g = 1; g < o.length; g++) p += ` L ${(o[g].day+1)*20} ${125-o[g].value*115}`;
+                    return p
+                };
+            return {
+                physicalPath: r(i.map(o => ({
+                    day: o.day,
+                    value: o.physical
+                }))),
+                emotionalPath: r(i.map(o => ({
+                    day: o.day,
+                    value: o.emotional
+                }))),
+                intellectualPath: r(i.map(o => ({
+                    day: o.day,
+                    value: o.intellectual
+                })))
+            }
+        })
+    }
+    onUserDOBChange(n) {
+        let e = n.target.value;
+        e && this.userDOBChanged.emit(e)
+    }
+    calculateBiorhythmValues(n) {
+        let e = new Date;
+        e.setHours(0, 0, 0, 0);
+        let i = e.getTime() - n.getTime(),
+            r = Math.floor(i / (1e3 * 60 * 60 * 24)),
+            o = [];
+        for (let a = -1; a < 30; a++) {
+            let s = r + a;
+            o.push({
+                day: a,
+                physical: Math.sin(2 * Math.PI * s / 23),
+                emotional: Math.sin(2 * Math.PI * s / 28),
+                intellectual: Math.sin(2 * Math.PI * s / 33)
+            })
+        }
+        return o
+    }
+};
+Wr.\u0275fac = function(e) {
+    return new(e || Wr)
+}, Wr.\u0275cmp = q({
+    type: Wr,
+    selectors: [
+        ["app-biorhythm-utility"]
+    ],
+    inputs: {
+        userDOB: [1, "userDOB"]
+    },
+    outputs: {
+        userDOBChanged: "userDOBChanged"
+    },
+    decls: 33,
+    vars: 2,
+    consts: [
+        [1, "p-4", "bg-white", "rounded-lg", "shadow"],
+        [1, "text-xl", "font-bold", "text-gray-800", "mb-4"],
+        [1, "mb-4"],
+        ["for", "biorhythm-dob", 1, "block", "mb-2", "text-sm", "font-medium", "text-gray-900"],
+        ["type", "date", "id", "biorhythm-dob", 1, "bg-gray-50", "border", "border-gray-300", "text-gray-900", "text-sm", "rounded-lg", "focus:ring-blue-500", "focus:border-blue-500", "block", "w-full", "p-2.5", 3, "change", "value"],
+        [1, "mt-6"],
+        [1, "text-center", "text-gray-500", "mt-6"],
+        [1, "mt-8", "pt-6", "border-t", "border-gray-200", "text-sm", "text-gray-600", "prose", "max-w-none"],
+        [1, "text-lg", "font-semibold", "text-gray-800"],
+        [1, "text-xs", "italic"],
+        [1, "relative", "w-full", "h-72", "mt-4", "bg-gray-50", "rounded-lg", "p-4"],
+        ["width", "100%", "height", "100%", "viewBox", "0 0 600 250", "preserveAspectRatio", "xMidYMid meet"],
+        ["x1", "0", "y1", "125", "x2", "600", "y2", "125", "stroke", "#9ca3af", "stroke-width", "1"],
+        ["x1", "0", "y1", "25", "x2", "600", "y2", "25", "stroke", "#e5e7eb", "stroke-width", "0.5", "stroke-dasharray", "2 2"],
+        ["x1", "0", "y1", "225", "x2", "600", "y2", "225", "stroke", "#e5e7eb", "stroke-width", "0.5", "stroke-dasharray", "2 2"],
+        ["x", "5", "y", "20", "fill", "#9ca3af", "font-size", "10"],
+        ["x", "5", "y", "130", "fill", "#9ca3af", "font-size", "10"],
+        ["x", "5", "y", "240", "fill", "#9ca3af", "font-size", "10"],
+        ["x1", "20", "y1", "0", "x2", "20", "y2", "250", "stroke", "#f87171", "stroke-width", "1", "stroke-dasharray", "4 4"],
+        ["x", "22", "y", "15", "fill", "#f87171", "font-size", "10"],
+        ["stroke", "#3b82f6", "fill", "none", "stroke-width", "2"],
+        ["stroke", "#10b981", "fill", "none", "stroke-width", "2"],
+        ["stroke", "#f97316", "fill", "none", "stroke-width", "2"],
+        [1, "flex", "justify-center", "space-x-4", "mt-4", "text-sm"],
+        [1, "flex", "items-center"],
+        [1, "w-4", "h-1", "bg-blue-500", "rounded-full", "mr-2"],
+        [1, "w-4", "h-1", "bg-green-500", "rounded-full", "mr-2"],
+        [1, "w-4", "h-1", "bg-orange-500", "rounded-full", "mr-2"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div", 0)(1, "h2", 1), d(2, "T\xEDnh Nh\u1ECBp Sinh H\u1ECDc"), c(), u(3, "div", 2)(4, "label", 3), d(5, "Ng\xE0y sinh c\u1EE7a b\u1EA1n:"), c(), u(6, "input", 4), D("change", function(o) {
+                return i.onUserDOBChange(o)
+            }), c()(), _(7, Uw, 30, 3, "div", 5)(8, zw, 2, 0, "p", 6), u(9, "div", 7)(10, "h4", 8), d(11, "Nh\u1ECBp sinh h\u1ECDc l\xE0 g\xEC?"), c(), u(12, "p"), d(13, " Nh\u1ECBp sinh h\u1ECDc l\xE0 m\u1ED9t l\xFD thuy\u1EBFt cho r\u1EB1ng cu\u1ED9c s\u1ED1ng c\u1EE7a ch\xFAng ta b\u1ECB \u1EA3nh h\u01B0\u1EDFng b\u1EDFi c\xE1c chu k\u1EF3 sinh h\u1ECDc c\xF3 nh\u1ECBp \u0111i\u1EC7u, b\u1EAFt \u0111\u1EA7u t\u1EEB l\xFAc sinh ra. L\xFD thuy\u1EBFt n\xE0y ph\xE2n t\xEDch ba chu k\u1EF3 ch\xEDnh: "), c(), u(14, "ul")(15, "li")(16, "strong"), d(17, "Th\u1EC3 ch\u1EA5t (chu k\u1EF3 23 ng\xE0y):"), c(), d(18, " Li\xEAn quan \u0111\u1EBFn s\u1EE9c m\u1EA1nh, s\u1EE9c b\u1EC1n, n\u0103ng l\u01B0\u1EE3ng v\xE0 th\u1EC3 tr\u1EA1ng."), c(), u(19, "li")(20, "strong"), d(21, "T\xECnh c\u1EA3m (chu k\u1EF3 28 ng\xE0y):"), c(), d(22, " \u1EA2nh h\u01B0\u1EDFng \u0111\u1EBFn c\u1EA3m x\xFAc, t\xE2m tr\u1EA1ng, s\u1EF1 s\xE1ng t\u1EA1o v\xE0 tr\u1EF1c gi\xE1c."), c(), u(23, "li")(24, "strong"), d(25, "Tr\xED tu\u1EC7 (chu k\u1EF3 33 ng\xE0y):"), c(), d(26, " T\xE1c \u0111\u1ED9ng \u0111\u1EBFn kh\u1EA3 n\u0103ng t\u01B0 duy logic, ph\xE2n t\xEDch, tr\xED nh\u1EDB v\xE0 s\u1EF1 minh m\u1EABn."), c()(), u(27, "h4", 8), d(28, "\u1EE8ng d\u1EE5ng v\xE0o \u0111\u1EDDi s\u1ED1ng:"), c(), u(29, "p"), d(30, " B\u1EB1ng c\xE1ch theo d\xF5i c\xE1c chu k\u1EF3 n\xE0y, b\u1EA1n c\xF3 th\u1EC3 nh\u1EADn bi\u1EBFt \u0111\u01B0\u1EE3c nh\u1EEFng ng\xE0y n\u0103ng l\u01B0\u1EE3ng l\xEAn cao (th\xEDch h\u1EE3p cho c\xE1c ho\u1EA1t \u0111\u1ED9ng quan tr\u1ECDng) v\xE0 nh\u1EEFng ng\xE0y n\u0103ng l\u01B0\u1EE3ng xu\u1ED1ng th\u1EA5p (c\u1EA7n ngh\u1EC9 ng\u01A1i, c\u1EA9n tr\u1ECDng h\u01A1n). \u0110\xE2y l\xE0 m\u1ED9t c\xF4ng c\u1EE5 tham kh\u1EA3o \u0111\u1EC3 b\u1EA1n hi\u1EC3u r\xF5 h\u01A1n v\u1EC1 b\u1EA3n th\xE2n v\xE0 l\u1EADp k\u1EBF ho\u1EA1ch cho cu\u1ED9c s\u1ED1ng hi\u1EC7u qu\u1EA3 h\u01A1n. "), c(), u(31, "p", 9), d(32, " L\u01B0u \xFD: Nh\u1ECBp sinh h\u1ECDc l\xE0 m\u1ED9t gi\u1EA3 thuy\u1EBFt v\xE0 ch\u01B0a \u0111\u01B0\u1EE3c khoa h\u1ECDc ch\u1EE9ng minh r\u1ED9ng r\xE3i. H\xE3y xem \u0111\xE2y l\xE0 m\u1ED9t c\xF4ng c\u1EE5 tham kh\u1EA3o \u0111\u1EC3 kh\xE1m ph\xE1 b\u1EA3n th\xE2n. "), c()()()), e & 2) {
+            let r;
+            h(6), H("value", i.userDOB()), h(), T((r = i.chartData()) ? 7 : 8, r)
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var Cc = Wr;
+var Gw = (t, n) => n.lap,
+    xc = (t, n) => n.value,
+    $v = (t, n) => n.id;
+
+function qw(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "button", 20), D("click", function() {
+            S(e);
+            let r = y(2);
+            return w(r.startStopwatch())
+        }), d(1, " \u25B6 B\u1EAFt \u0111\u1EA7u "), c()
+    }
+}
+
+function Ww(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "button", 21), D("click", function() {
+            S(e);
+            let r = y(2);
+            return w(r.pauseStopwatch())
+        }), d(1, " \u275A\u275A T\u1EA1m d\u1EEBng "), c()
+    }
+}
+
+function Yw(t, n) {
+    if (t & 1 && (u(0, "tr", 22)(1, "th", 23), d(2), c(), u(3, "td", 24), d(4), c(), u(5, "td", 24), d(6), c()()), t & 2) {
+        let e = n.$implicit,
+            i = y(3);
+        h(2), b(e.lap), h(2), W("+", i.formatStopwatchTime(e.lapTime), ".", i.formatSubSeconds(e.lapTime)), h(2), W("", i.formatStopwatchTime(e.totalTime), ".", i.formatSubSeconds(e.totalTime))
+    }
+}
+
+function Kw(t, n) {
+    if (t & 1 && R(0, Yw, 7, 5, "tr", 22, Gw), t & 2) {
+        let e = y(2);
+        O(e.laps().slice().reverse())
+    }
+}
+
+function Qw(t, n) {
+    t & 1 && (u(0, "tr")(1, "td", 25), d(2, "Ch\u01B0a c\xF3 d\u1EEF li\u1EC7u b\u1EA5m gi\u1EDD. H\xE3y click "), u(3, "strong"), d(4, "B\u1EAFt \u0111\u1EA7u"), c(), d(5, " v\xE0 th\u1EF1c hi\u1EC7n "), u(6, "strong"), d(7, "Ng\u1EAFt/V\xF2ng"), c(), d(8, " \u0111\u1EC3 l\u01B0u l\u1EA1i"), c()())
+}
+
+function Zw(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 4)(1, "div", 6)(2, "p", 7), d(3), u(4, "span", 8), d(5), c()()(), u(6, "div", 9), _(7, qw, 2, 0, "button", 10)(8, Ww, 2, 0, "button", 11), u(9, "button", 12), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.lapStopwatch())
+        }), d(10, " \u25A0 Ng\u1EAFt (V\xF2ng) "), c(), u(11, "button", 13), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.resetStopwatch())
+        }), d(12, " \u21BA \u0110\u1EB7t l\u1EA1i "), c()(), u(13, "div", 14)(14, "h4", 15), d(15, "D\u1EEF li\u1EC7u b\u1EA5m gi\u1EDD"), c(), u(16, "div", 16)(17, "table", 17)(18, "thead", 18)(19, "tr")(20, "th", 19), d(21, "TT"), c(), u(22, "th", 19), d(23, "V\xF2ng th\u1EDDi gian"), c(), u(24, "th", 19), d(25, "Th\u1EDDi gian \u0111\xE3 tr\xF4i qua"), c()()(), u(26, "tbody"), _(27, Kw, 2, 0)(28, Qw, 9, 0, "tr"), c()()()()()
+    }
+    if (t & 2) {
+        let e = y();
+        h(3), L(" ", e.stopwatchDisplay()), h(2), L(".", e.subSecondDisplay()), h(2), T(e.stopwatchRunning() ? 8 : 7), h(2), H("disabled", !e.stopwatchRunning()), h(18), T(e.laps().length > 0 ? 27 : 28)
+    }
+}
+
+function Xw(t, n) {
+    if (t & 1 && (u(0, "option", 30), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e), h(), b(e)
+    }
+}
+
+function Jw(t, n) {
+    if (t & 1 && (u(0, "option", 30), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e), h(), b(e)
+    }
+}
+
+function eI(t, n) {
+    if (t & 1 && (u(0, "option", 30), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e), h(), b(e)
+    }
+}
+
+function tI(t, n) {
+    if (t & 1 && (u(0, "option", 30), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e.value), h(), b(e.label)
+    }
+}
+
+function nI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div")(1, "input", 41), D("change", function() {
+            let r = S(e).$implicit,
+                o = y(2);
+            return w(o.timerSnoozeDuration.set(r.value))
+        }), c(), u(2, "label"), d(3), c()()
+    }
+    if (t & 2) {
+        let e = n.$implicit,
+            i = y(2);
+        h(), H("value", e.value)("checked", i.timerSnoozeDuration() === e.value), h(2), b(e.label)
+    }
+}
+
+function iI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "button", 42), D("click", function() {
+            S(e);
+            let r = y(2);
+            return w(r.startTimer())
+        }), d(1, "\u25B6 B\u1EAET \u0110\u1EA6U H\u1EB8N GI\u1EDC"), c()
+    }
+}
+
+function rI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 43), P(1, "div", 44), u(2, "div", 45), d(3), c()(), u(4, "div", 46)(5, "button", 47), D("click", function() {
+            S(e);
+            let r = y(2);
+            return w(r.timerIsPaused() ? r.startTimer() : r.pauseTimer())
+        }), d(6), c(), u(7, "button", 48), D("click", function() {
+            S(e);
+            let r = y(2);
+            return r.stopTimer(!1), w(r.timerTimeLeft.set(0))
+        }), d(8, "\u25A0 D\u1EEANG L\u1EA0I"), c()()
+    }
+    if (t & 2) {
+        let e = y(2);
+        h(), yn("width", e.getTimerProgress(), "%"), h(2), L(" ", e.formatStopwatchTime(e.timerTimeLeft() * 1e3), " "), h(3), b(e.timerIsPaused() ? "\u25B6 TI\u1EBEP T\u1EE4C" : "\u275A\u275A T\u1EA0M D\u1EEANG")
+    }
+}
+
+function oI(t, n) {
+    if (t & 1 && (u(0, "tr", 22)(1, "td", 49), d(2), c(), u(3, "td", 49), d(4), c(), u(5, "td", 49), d(6), c(), u(7, "td", 49), d(8), c()()), t & 2) {
+        let e = n.$implicit;
+        h(2), b(e.id), h(2), b(e.title), h(2), b(e.duration), h(2), b(e.startTime.toLocaleTimeString())
+    }
+}
+
+function aI(t, n) {
+    if (t & 1 && R(0, oI, 9, 4, "tr", 22, $v), t & 2) {
+        let e = y(2);
+        O(e.timersLog())
+    }
+}
+
+function sI(t, n) {
+    t & 1 && (u(0, "tr")(1, "td", 50), d(2, "Ch\u01B0a c\xF3 d\u1EEF li\u1EC7u h\u1EB9n gi\u1EDD. H\xE3y \u0111\u1EB7t h\u1EB9n gi\u1EDD c\u1EE7a b\u1EA1n \u0111\u1EC3 l\u01B0u l\u1EA1i"), c()())
+}
+
+function lI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 5)(1, "h4", 26), d(2, "\u0110\u1EB7t m\u1ED9t \u0111\u1ED3ng h\u1ED3 h\u1EB9n gi\u1EDD"), c(), u(3, "div", 27)(4, "div")(5, "label", 28), d(6, "S\u1ED1 gi\u1EDD"), c(), u(7, "select", 29), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.timerHours.set(r.target.value))
+        }), R(8, Xw, 2, 2, "option", 30, pe), c()(), u(10, "div")(11, "label", 28), d(12, "S\u1ED1 ph\xFAt"), c(), u(13, "select", 29), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.timerMinutes.set(r.target.value))
+        }), R(14, Jw, 2, 2, "option", 30, pe), c()(), u(16, "div")(17, "label", 28), d(18, "S\u1ED1 gi\xE2y"), c(), u(19, "select", 29), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.timerSeconds.set(r.target.value))
+        }), R(20, eI, 2, 2, "option", 30, pe), c()()(), u(22, "div", 31)(23, "button", 32), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setTimerPreset(15))
+        }), d(24, "15 gi\xE2y"), c(), u(25, "button", 32), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setTimerPreset(30))
+        }), d(26, "30 gi\xE2y"), c(), u(27, "button", 32), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setTimerPreset(60))
+        }), d(28, "1 ph\xFAt"), c(), u(29, "button", 32), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setTimerPreset(300))
+        }), d(30, "5 ph\xFAt"), c(), u(31, "button", 32), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setTimerPreset(600))
+        }), d(32, "10 ph\xFAt"), c(), u(33, "button", 32), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setTimerPreset(900))
+        }), d(34, "15 ph\xFAt"), c(), u(35, "button", 32), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setTimerPreset(1800))
+        }), d(36, "30 ph\xFAt"), c(), u(37, "button", 32), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setTimerPreset(3600))
+        }), d(38, "1 gi\u1EDD"), c()(), u(39, "div", 33)(40, "label", 28), d(41, "\xC2m thanh"), c(), u(42, "div", 34)(43, "select", 35), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.timerSound.set(r.target.value))
+        }), R(44, tI, 2, 2, "option", 30, xc), c(), u(46, "button", 36), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.playAlertSound(r.timerSound(), 3))
+        }), d(47, "Nghe th\u1EED"), c()()(), u(48, "div", 33)(49, "label", 28), d(50, "Gi\u1EDD \u0111\u1ED5 chu\xF4ng:"), c(), u(51, "div", 37), R(52, nI, 4, 3, "div", null, xc), c()(), u(54, "div", 33)(55, "label", 28), d(56, "Ti\xEAu \u0111\u1EC1 \u0111\u1ED3ng h\u1ED3"), c(), u(57, "input", 38), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.timerTitle.set(r.target.value))
+        }), c()(), _(58, iI, 2, 0, "button", 39)(59, rI, 9, 4), u(60, "div", 14)(61, "h4", 15), d(62, "D\u1EEF li\u1EC7u c\u1EE7a \u0111\u1ED3ng h\u1ED3 h\u1EB9n gi\u1EDD"), c(), u(63, "div", 16)(64, "table", 17)(65, "thead", 18)(66, "tr")(67, "th", 40), d(68, "TT"), c(), u(69, "th", 40), d(70, "T\xEAn"), c(), u(71, "th", 40), d(72, "\u0110\u1ED3ng h\u1ED3 h\u1EB9n gi\u1EDD"), c(), u(73, "th", 40), d(74, "\u0110\xE3 b\u1EAFt \u0111\u1EA7u"), c()()(), u(75, "tbody"), _(76, aI, 2, 0)(77, sI, 3, 0, "tr"), c()()()()()
+    }
+    if (t & 2) {
+        let e = y();
+        h(7), H("value", e.timerHours()), h(), O(e.hourOptions()), h(5), H("value", e.timerMinutes()), h(), O(e.timeOptions()), h(5), H("value", e.timerSeconds()), h(), O(e.timeOptions()), h(23), H("value", e.timerSound()), h(), O(e.soundOptions), h(8), O(e.snoozeOptions), h(5), H("value", e.timerTitle()), h(), T(e.timerIsRunning() ? 59 : 58), h(18), T(e.timersLog().length > 0 ? 76 : 77)
+    }
+}
+
+function cI(t, n) {
+    if (t & 1 && (u(0, "option", 30), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e), h(), L("", e, " gi\u1EDD")
+    }
+}
+
+function uI(t, n) {
+    if (t & 1 && (u(0, "option", 30), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e), h(), L("", e, " ph\xFAt")
+    }
+}
+
+function dI(t, n) {
+    if (t & 1 && (u(0, "option", 30), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        H("value", e.value), h(), b(e.label)
+    }
+}
+
+function hI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div")(1, "input", 56), D("change", function() {
+            let r = S(e).$implicit,
+                o = y(2);
+            return w(o.alarmSnoozeDuration.set(r.value))
+        }), c(), u(2, "label"), d(3), c()()
+    }
+    if (t & 2) {
+        let e = n.$implicit,
+            i = y(2);
+        h(), H("value", e.value)("checked", i.alarmSnoozeDuration() === e.value), h(2), b(e.label)
+    }
+}
+
+function mI(t, n) {
+    if (t & 1 && (u(0, "p", 61), d(1), c()), t & 2) {
+        let e = y().$implicit,
+            i = y(3);
+        h(), L("\u0110\u1EBFm ng\u01B0\u1EE3c: ", i.getAlarmTimeLeft(e))
+    }
+}
+
+function fI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "li", 58)(1, "div")(2, "p", 59), d(3), c(), u(4, "p", 60), d(5), c(), _(6, mI, 2, 1, "p", 61), c(), u(7, "div", 62)(8, "label", 63)(9, "input", 64), D("change", function() {
+            let r = S(e).$implicit,
+                o = y(3);
+            return w(o.toggleAlarm(r.id))
+        }), c(), P(10, "div", 65), c(), u(11, "button", 66), D("click", function() {
+            let r = S(e).$implicit,
+                o = y(3);
+            return w(o.deleteAlarm(r.id))
+        }), K(), u(12, "svg", 67), P(13, "path", 68), c()()()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        N("bg-gray-100", e.enabled)("bg-gray-50", !e.enabled)("text-gray-400", !e.enabled), h(2), N("text-gray-800", e.enabled), h(), W("", e.hour.toString().padStart(2, "0"), ":", e.minute.toString().padStart(2, "0")), h(2), b(e.title), h(), T(e.enabled ? 6 : -1), h(3), H("checked", e.enabled)
+    }
+}
+
+function pI(t, n) {
+    if (t & 1 && (u(0, "ul", 54), R(1, fI, 14, 13, "li", 57, $v), c()), t & 2) {
+        let e = y(2);
+        h(), O(e.alarms())
+    }
+}
+
+function gI(t, n) {
+    t & 1 && (u(0, "p", 55), d(1, "Ch\u01B0a c\xF3 b\xE1o th\u1EE9c n\xE0o. Th\xEAm b\xE1o th\u1EE9c c\u1EE7a b\u1EA1n."), c())
+}
+
+function vI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 5)(1, "h4", 26), d(2, "\u0110\u1EB7t th\u1EDDi gian b\xE1o th\u1EE9c"), c(), u(3, "div", 51)(4, "div", 52)(5, "select", 53), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.alarmHour.set(r.target.value))
+        }), R(6, cI, 2, 2, "option", 30, pe), c(), u(8, "select", 53), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.alarmMinute.set(r.target.value))
+        }), R(9, uI, 2, 2, "option", 30, pe), c()(), u(11, "div", 33)(12, "label", 28), d(13, "\xC2m thanh"), c(), u(14, "div", 34)(15, "select", 35), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.alarmSound.set(r.target.value))
+        }), R(16, dI, 2, 2, "option", 30, xc), c(), u(18, "button", 36), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.playAlertSound(r.alarmSound(), 3))
+        }), d(19, "Nghe th\u1EED"), c()()(), u(20, "div", 33)(21, "label", 28), d(22, "Gi\u1EDD \u0111\u1ED5 chu\xF4ng:"), c(), u(23, "div", 37), R(24, hI, 4, 3, "div", null, xc), c()(), u(26, "div", 33)(27, "label", 28), d(28, "T\xEAn b\xE1o th\u1EE9c"), c(), u(29, "input", 38), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.alarmTitle.set(r.target.value))
+        }), c()(), u(30, "button", 42), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.addAlarm())
+        }), d(31, "+ TH\xCAM B\xC1O TH\u1EE8C"), c()(), u(32, "div", 14)(33, "h4", 15), d(34, "Danh s\xE1ch h\u1EB9n gi\u1EDD b\xE1o th\u1EE9c"), c(), _(35, pI, 3, 0, "ul", 54)(36, gI, 2, 0, "p", 55), c()()
+    }
+    if (t & 2) {
+        let e = y();
+        h(5), H("value", e.alarmHour()), h(), O(e.hourOptions()), h(2), H("value", e.alarmMinute()), h(), O(e.timeOptions()), h(6), H("value", e.alarmSound()), h(), O(e.soundOptions), h(8), O(e.snoozeOptions), h(5), H("value", e.alarmTitle()), h(6), T(e.alarms().length > 0 ? 35 : 36)
+    }
+}
+var Yr = class Yr {
+    constructor() {
+        this.audio = new Audio;
+        this.activeTab = C("stopwatch");
+        this.stopwatchStartTime = 0;
+        this.stopwatchPausedTime = 0;
+        this.lastLapTime = 0;
+        this.stopwatchRunning = C(!1);
+        this.stopwatchElapsedTime = C(0);
+        this.laps = C([]);
+        this.stopwatchDisplay = Z(() => this.formatStopwatchTime(this.stopwatchElapsedTime()));
+        this.subSecondDisplay = Z(() => this.formatSubSeconds(this.stopwatchElapsedTime()));
+        this.timerHours = C("00");
+        this.timerMinutes = C("00");
+        this.timerSeconds = C("30");
+        this.timerTitle = C("\u0110\u1ED3ng h\u1ED3 \u0111\u1EBFm ng\u01B0\u1EE3c");
+        this.timerSound = C("alarm-alert-sound-effect.mp3");
+        this.timerSnoozeDuration = C(1 / 0);
+        this.timerIsRunning = C(!1);
+        this.timerIsPaused = C(!1);
+        this.timerTimeLeft = C(0);
+        this.timerInitialDuration = C(0);
+        this.timersLog = C([]);
+        this.nextTimerLogId = 1;
+        this.alarmHour = C("06");
+        this.alarmMinute = C("00");
+        this.alarmTitle = C("D\u1EADy h\u1ECDc b\xE0i");
+        this.alarmSound = C("alarm-alert-sound-effect.mp3");
+        this.alarmSnoozeDuration = C(1 / 0);
+        this.alarms = C([]);
+        this.nextAlarmId = 1;
+        this.timeOptions = Z(() => Array.from({
+            length: 60
+        }, (n, e) => e.toString().padStart(2, "0")));
+        this.hourOptions = Z(() => Array.from({
+            length: 24
+        }, (n, e) => e.toString().padStart(2, "0")));
+        this.soundOptions = [{
+            value: "alarm-alert-sound-effect.mp3",
+            label: "Alarm Alert Sound Effect"
+        }, {
+            value: "alarmclock-bell-ringing-clear-windingdown.mp3",
+            label: "Alarm Clock Bell Ringing"
+        }, {
+            value: "alarm-clock-short.mp3",
+            label: "Alarm Clock Short"
+        }, {
+            value: "beep-warning.mp3",
+            label: "Beep Warning"
+        }, {
+            value: "bell.mp3",
+            label: "Bell"
+        }, {
+            value: "civil-defense-siren.mp3",
+            label: "Civil Defense Siren"
+        }, {
+            value: "clock-alarm.mp3",
+            label: "Clock Alarm"
+        }, {
+            value: "colombia-eas-alarm.mp3",
+            label: "Colombia EAS Alarm"
+        }, {
+            value: "nokia-ringtone-with-vibration.mp3",
+            label: "Nokia Ringtone with Vibration"
+        }, {
+            value: "oversimplified-alarm-clock.mp3",
+            label: "Oversimplified Alarm Clock"
+        }, {
+            value: "police-operation-siren.mp3",
+            label: "Police Operation Siren"
+        }, {
+            value: "ppap-instrumental-remake.mp3",
+            label: "PPAP Instrumental Remake"
+        }, {
+            value: "ringtone-1.mp3",
+            label: "Ringtone 1"
+        }, {
+            value: "ringtone-2.mp3",
+            label: "Ringtone 2"
+        }, {
+            value: "simple-notification.mp3",
+            label: "Simple Notification"
+        }, {
+            value: "siren-alert.mp3",
+            label: "Siren Alert"
+        }];
+        this.snoozeOptions = [{
+            value: 2,
+            label: "2 s"
+        }, {
+            value: 4,
+            label: "4 s"
+        }, {
+            value: 10,
+            label: "10 s"
+        }, {
+            value: 20,
+            label: "20 s"
+        }, {
+            value: 30,
+            label: "30 s"
+        }, {
+            value: 60,
+            label: "1 ph\xFAt"
+        }, {
+            value: 1 / 0,
+            label: "V\xF4 h\u1EA1n"
+        }, {
+            value: 0,
+            label: "T\u1EAET"
+        }]
+    }
+    ngOnInit() {
+        this.alarmInterval = setInterval(() => this.checkAlarms(), 1e3)
+    }
+    ngOnDestroy() {
+        clearInterval(this.stopwatchInterval), clearInterval(this.timerInterval), clearInterval(this.alarmInterval)
+    }
+    startStopwatch() {
+        this.stopwatchRunning() || (this.stopwatchRunning.set(!0), this.stopwatchStartTime = Date.now() - this.stopwatchPausedTime, this.stopwatchInterval = setInterval(() => {
+            this.stopwatchElapsedTime.set(Date.now() - this.stopwatchStartTime)
+        }, 10))
+    }
+    pauseStopwatch() {
+        this.stopwatchRunning() && (this.stopwatchRunning.set(!1), this.stopwatchPausedTime = this.stopwatchElapsedTime(), clearInterval(this.stopwatchInterval))
+    }
+    resetStopwatch() {
+        this.stopwatchRunning.set(!1), clearInterval(this.stopwatchInterval), this.stopwatchElapsedTime.set(0), this.stopwatchPausedTime = 0, this.laps.set([]), this.lastLapTime = 0
+    }
+    lapStopwatch() {
+        if (!this.stopwatchRunning()) return;
+        let n = this.stopwatchElapsedTime(),
+            e = n - this.lastLapTime;
+        this.lastLapTime = n, this.laps.update(i => [...i, {
+            lap: i.length + 1,
+            lapTime: e,
+            totalTime: n
+        }])
+    }
+    formatStopwatchTime(n) {
+        let e = Math.floor(n / 1e3),
+            i = Math.floor(e / 3600).toString().padStart(2, "0"),
+            r = Math.floor(e % 3600 / 60).toString().padStart(2, "0"),
+            o = (e % 60).toString().padStart(2, "0");
+        return `${i}:${r}:${o}`
+    }
+    formatSubSeconds(n) {
+        return Math.floor(n % 1e3 / 10).toString().padStart(2, "0")
+    }
+    setTimer(n, e, i) {
+        this.timerHours.set(n), this.timerMinutes.set(e), this.timerSeconds.set(i)
+    }
+    setTimerPreset(n) {
+        let e = Math.floor(n / 3600).toString().padStart(2, "0"),
+            i = Math.floor(n % 3600 / 60).toString().padStart(2, "0"),
+            r = (n % 60).toString().padStart(2, "0");
+        this.setTimer(e, i, r)
+    }
+    startTimer() {
+        if (!(this.timerIsRunning() && !this.timerIsPaused())) {
+            if (this.timerIsPaused()) this.timerIsPaused.set(!1);
+            else {
+                let n = +this.timerHours() * 3600 + +this.timerMinutes() * 60 + +this.timerSeconds();
+                if (n <= 0) return;
+                this.timerInitialDuration.set(n), this.timerTimeLeft.set(n), this.timersLog.update(e => [{
+                    id: this.nextTimerLogId++,
+                    duration: `${this.timerHours()}:${this.timerMinutes()}:${this.timerSeconds()}`,
+                    title: this.timerTitle(),
+                    startTime: new Date
+                }, ...e])
+            }
+            this.timerIsRunning.set(!0), this.timerInterval = setInterval(() => {
+                this.timerTimeLeft.update(n => n <= 1 ? (this.stopTimer(!0), 0) : n - 1)
+            }, 1e3)
+        }
+    }
+    pauseTimer() {
+        !this.timerIsRunning() || this.timerIsPaused() || (this.timerIsPaused.set(!0), clearInterval(this.timerInterval))
+    }
+    stopTimer(n) {
+        this.timerIsRunning.set(!1), this.timerIsPaused.set(!1), clearInterval(this.timerInterval), n && this.playAlertSound(this.timerSound(), this.timerSnoozeDuration())
+    }
+    getTimerProgress() {
+        return this.timerInitialDuration() === 0 ? 0 : this.timerTimeLeft() / this.timerInitialDuration() * 100
+    }
+    addAlarm() {
+        let n = {
+            id: this.nextAlarmId++,
+            hour: +this.alarmHour(),
+            minute: +this.alarmMinute(),
+            title: this.alarmTitle(),
+            sound: this.alarmSound(),
+            snoozeDuration: this.alarmSnoozeDuration(),
+            enabled: !0
+        };
+        this.alarms.update(e => [...e, n].sort((i, r) => i.hour * 60 + i.minute - (r.hour * 60 + r.minute)))
+    }
+    toggleAlarm(n) {
+        this.alarms.update(e => e.map(i => i.id === n ? ue(A({}, i), {
+            enabled: !i.enabled
+        }) : i))
+    }
+    deleteAlarm(n) {
+        this.alarms.update(e => e.filter(i => i.id !== n))
+    }
+    getAlarmTimeLeft(n) {
+        let e = new Date,
+            i = new Date;
+        i.setHours(n.hour, n.minute, 0, 0), i < e && i.setDate(i.getDate() + 1);
+        let r = i.getTime() - e.getTime(),
+            o = Math.floor(r / 1e3),
+            a = Math.floor(o / 3600),
+            s = Math.floor(o % 3600 / 60),
+            l = o % 60;
+        return `${a.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}:${l.toString().padStart(2,"0")}`
+    }
+    checkAlarms() {
+        let n = new Date,
+            e = n.getHours(),
+            i = n.getMinutes();
+        n.getSeconds() === 0 && this.alarms().forEach(o => {
+            o.enabled && o.hour === e && o.minute === i && this.playAlertSound(o.sound, o.snoozeDuration)
+        })
+    }
+    playAlertSound(n, e) {
+        this.audio.src = `https://ngay.kabala.vn/convert/alarm/${n}`, this.audio.loop = e === 1 / 0, this.audio.play(), e !== 1 / 0 && e > 0 && setTimeout(() => {
+            this.audio.pause(), this.audio.currentTime = 0
+        }, e * 1e3)
+    }
+    stopSound() {
+        this.audio.pause(), this.audio.currentTime = 0
+    }
+};
+Yr.\u0275fac = function(e) {
+    return new(e || Yr)
+}, Yr.\u0275cmp = q({
+    type: Yr,
+    selectors: [
+        ["app-clock-utility"]
+    ],
+    decls: 12,
+    vars: 37,
+    consts: [
+        [1, "border-b", "border-gray-200"],
+        ["aria-label", "Tabs", 1, "-mb-px", "flex", "space-x-4", "sm:space-x-8", "justify-center"],
+        [1, "whitespace-nowrap", "py-4", "px-1", "border-b-2", "font-medium", "text-sm", "transition-colors", 3, "click"],
+        [1, "mt-6"],
+        [1, "flex", "flex-col", "items-center"],
+        [1, "max-w-xl", "mx-auto"],
+        [1, "w-full", "bg-gray-800", "p-4", "sm:p-6", "rounded-lg", "text-center", "mb-6"],
+        [1, "font-mono", "text-6xl", "sm:text-8xl", "text-white", "tracking-widest"],
+        [1, "text-4xl", "sm:text-5xl", "text-gray-400"],
+        [1, "flex", "flex-wrap", "justify-center", "gap-3"],
+        [1, "px-5", "py-2.5", "text-base", "font-medium", "text-white", "bg-blue-600", "rounded-lg", "hover:bg-blue-700", "focus:ring-4", "focus:ring-blue-300", "transition-all"],
+        [1, "px-5", "py-2.5", "text-base", "font-medium", "text-white", "bg-red-600", "rounded-lg", "hover:bg-red-700", "focus:ring-4", "focus:ring-red-300", "transition-all"],
+        [1, "px-5", "py-2.5", "text-base", "font-medium", "text-white", "bg-purple-600", "rounded-lg", "hover:bg-purple-700", "focus:ring-4", "focus:ring-purple-300", "disabled:bg-purple-300", "transition-all", 3, "click", "disabled"],
+        [1, "px-5", "py-2.5", "text-base", "font-medium", "text-white", "bg-orange-500", "rounded-lg", "hover:bg-orange-600", "focus:ring-4", "focus:ring-orange-300", "transition-all", 3, "click"],
+        [1, "w-full", "mt-6"],
+        [1, "text-lg", "font-semibold", "mb-2"],
+        [1, "overflow-x-auto", "border", "border-gray-200", "rounded-lg"],
+        [1, "w-full", "text-sm", "text-left", "text-gray-500"],
+        [1, "text-xs", "text-gray-700", "uppercase", "bg-gray-50"],
+        ["scope", "col", 1, "px-6", "py-3"],
+        [1, "px-5", "py-2.5", "text-base", "font-medium", "text-white", "bg-blue-600", "rounded-lg", "hover:bg-blue-700", "focus:ring-4", "focus:ring-blue-300", "transition-all", 3, "click"],
+        [1, "px-5", "py-2.5", "text-base", "font-medium", "text-white", "bg-red-600", "rounded-lg", "hover:bg-red-700", "focus:ring-4", "focus:ring-red-300", "transition-all", 3, "click"],
+        [1, "bg-white", "border-b"],
+        ["scope", "row", 1, "px-6", "py-4", "font-medium", "text-gray-900", "whitespace-nowrap"],
+        [1, "px-6", "py-4", "font-mono"],
+        ["colspan", "3", 1, "px-6", "py-4", "text-center"],
+        [1, "text-lg", "font-semibold", "mb-4", "text-center"],
+        [1, "grid", "grid-cols-3", "gap-4", "mb-4"],
+        [1, "block", "text-sm", "font-medium", "mb-1"],
+        [1, "w-full", "p-2", "border", "rounded", 3, "change", "value"],
+        [3, "value"],
+        [1, "grid", "grid-cols-3", "sm:grid-cols-4", "gap-2", "mb-4"],
+        [1, "p-2", "bg-blue-500", "text-white", "rounded", "text-sm", "hover:bg-blue-600", 3, "click"],
+        [1, "mb-4"],
+        [1, "flex", "items-center", "gap-2"],
+        [1, "flex-grow", "p-2", "border", "rounded", 3, "change", "value"],
+        [1, "p-2", "bg-gray-200", "rounded", "hover:bg-gray-300", 3, "click"],
+        [1, "flex", "flex-wrap", "gap-x-4", "gap-y-2"],
+        ["type", "text", 1, "w-full", "p-2", "border", "rounded", 3, "input", "value"],
+        [1, "w-full", "text-lg", "font-semibold", "p-3", "bg-red-600", "text-white", "rounded", "hover:bg-red-700"],
+        [1, "px-6", "py-3"],
+        ["type", "radio", "name", "timerSnooze", 3, "change", "value", "checked"],
+        [1, "w-full", "text-lg", "font-semibold", "p-3", "bg-red-600", "text-white", "rounded", "hover:bg-red-700", 3, "click"],
+        [1, "relative", "h-12", "w-full", "bg-gray-200", "rounded-full", "overflow-hidden", "mb-2"],
+        [1, "absolute", "top-0", "left-0", "h-full", "bg-green-500", "transition-all", "duration-500"],
+        [1, "absolute", "inset-0", "flex", "items-center", "justify-center", "font-mono", "text-xl", "font-bold", "text-gray-800"],
+        [1, "flex", "gap-2"],
+        [1, "flex-1", "text-lg", "font-semibold", "p-3", "bg-yellow-500", "text-white", "rounded", "hover:bg-yellow-600", 3, "click"],
+        [1, "flex-1", "text-lg", "font-semibold", "p-3", "bg-gray-500", "text-white", "rounded", "hover:bg-gray-600", 3, "click"],
+        [1, "px-6", "py-4"],
+        ["colspan", "4", 1, "px-6", "py-4", "text-center"],
+        [1, "p-4", "bg-gray-50", "rounded-lg", "border"],
+        [1, "flex", "items-center", "justify-center", "gap-2", "mb-4"],
+        [1, "p-2", "border", "rounded", "text-lg", 3, "change", "value"],
+        [1, "space-y-3"],
+        [1, "text-center", "text-gray-500", "py-4"],
+        ["type", "radio", "name", "alarmSnooze", 3, "change", "value", "checked"],
+        [1, "p-3", "rounded-lg", "flex", "items-center", "justify-between", 3, "bg-gray-100", "bg-gray-50", "text-gray-400"],
+        [1, "p-3", "rounded-lg", "flex", "items-center", "justify-between"],
+        [1, "text-2xl", "font-bold"],
+        [1, "text-sm"],
+        [1, "text-xs", "text-green-600"],
+        [1, "flex", "items-center", "gap-3"],
+        [1, "inline-flex", "items-center", "cursor-pointer"],
+        ["type", "checkbox", 1, "sr-only", "peer", 3, "change", "checked"],
+        [1, "relative", "w-11", "h-6", "bg-gray-200", "peer-focus:outline-none", "peer-focus:ring-4", "peer-focus:ring-blue-300", "rounded-full", "peer", "peer-checked:after:translate-x-full", "rtl:peer-checked:after:-translate-x-full", "peer-checked:after:border-white", "after:content-['']", "after:absolute", "after:top-[2px]", "after:start-[2px]", "after:bg-white", "after:border-gray-300", "after:border", "after:rounded-full", "after:h-5", "after:w-5", "after:transition-all", "peer-checked:bg-blue-600"],
+        [1, "p-1.5", "rounded-full", "hover:bg-red-100", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 20 20", "fill", "currentColor", 1, "h-5", "w-5", "text-red-500"],
+        ["fill-rule", "evenodd", "d", "M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z", "clip-rule", "evenodd"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div", 0)(1, "nav", 1)(2, "button", 2), D("click", function() {
+                return i.activeTab.set("stopwatch")
+            }), d(3, " \u0110\u1ED3ng h\u1ED3 b\u1EA5m gi\u1EDD "), c(), u(4, "button", 2), D("click", function() {
+                return i.activeTab.set("timer")
+            }), d(5, " \u0110\u1ED3ng h\u1ED3 \u0111\u1EBFm ng\u01B0\u1EE3c "), c(), u(6, "button", 2), D("click", function() {
+                return i.activeTab.set("alarm")
+            }), d(7, " \u0110\u1ED3ng h\u1ED3 b\xE1o th\u1EE9c "), c()()(), u(8, "div", 3), _(9, Zw, 29, 5, "div", 4)(10, lI, 78, 7, "div", 5)(11, vI, 37, 5, "div", 5), c()), e & 2) {
+            let r;
+            h(2), N("border-indigo-500", i.activeTab() === "stopwatch")("text-indigo-600", i.activeTab() === "stopwatch")("border-transparent", i.activeTab() !== "stopwatch")("text-gray-500", i.activeTab() !== "stopwatch")("hover:text-gray-700", i.activeTab() !== "stopwatch")("hover:border-gray-300", i.activeTab() !== "stopwatch"), h(2), N("border-indigo-500", i.activeTab() === "timer")("text-indigo-600", i.activeTab() === "timer")("border-transparent", i.activeTab() !== "timer")("text-gray-500", i.activeTab() !== "timer")("hover:text-gray-700", i.activeTab() !== "timer")("hover:border-gray-300", i.activeTab() !== "timer"), h(2), N("border-indigo-500", i.activeTab() === "alarm")("text-indigo-600", i.activeTab() === "alarm")("border-transparent", i.activeTab() !== "alarm")("text-gray-500", i.activeTab() !== "alarm")("hover:text-gray-700", i.activeTab() !== "alarm")("hover:border-gray-300", i.activeTab() !== "alarm"), h(3), T((r = i.activeTab()) === "stopwatch" ? 9 : r === "timer" ? 10 : r === "alarm" ? 11 : -1)
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var _c = Yr;
+var yI = () => ({
+    weekday: "long",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+});
+
+function EI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 10)(1, "p"), d(2, "Ng\xE0y \xC2m l\u1ECBch l\xE0:"), c(), u(3, "p", 18), D("click", function() {
+            let r = S(e),
+                o = y();
+            return w(o.dayDetailsViewed.emit(r.solarDate))
+        }), d(4), c()()
+    }
+    if (t & 2) {
+        let e = n;
+        h(4), Ze(" ", e.lunarDate.day, "/", e.lunarDate.monthName, "/", e.lunarDate.yearName, " ")
+    }
+}
+
+function bI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 10)(1, "p"), d(2, "Ng\xE0y D\u01B0\u01A1ng l\u1ECBch l\xE0:"), c(), u(3, "p", 18), D("click", function() {
+            let r = S(e),
+                o = y();
+            return w(o.dayDetailsViewed.emit(r.date))
+        }), d(4), c()()
+    }
+    t & 2 && (h(4), L(" ", n.date.toLocaleDateString("vi-VN", me(1, yI)), " "))
+}
+
+function DI(t, n) {
+    if (t & 1 && (u(0, "p", 17), d(1), c()), t & 2) {
+        let e = y();
+        h(), b(e.l2sError())
+    }
+}
+var Kr = class Kr {
+    constructor() {
+        this.lunarCalendarService = E(Le);
+        this.lunarConverterService = E(Oe);
+        this.dayDetailsViewed = Ge();
+        this.s2lResult = C(null);
+        this.l2sResult = C(null);
+        this.l2sError = C(null)
+    }
+    todayString() {
+        let n = new Date,
+            e = n.getFullYear(),
+            i = (n.getMonth() + 1).toString().padStart(2, "0"),
+            r = n.getDate().toString().padStart(2, "0");
+        return `${e}-${i}-${r}`
+    }
+    convertSolarToLunar(n) {
+        if (!n) return;
+        let e = new Date(n),
+            i = this.lunarCalendarService.getLunarDateInfo(e);
+        this.s2lResult.set({
+            lunarDate: i.lunarDate,
+            solarDate: e
+        })
+    }
+    convertLunarToSolar(n, e, i, r) {
+        this.l2sError.set(null);
+        let o = parseInt(n),
+            a = parseInt(e),
+            s = parseInt(i);
+        if (isNaN(o) || isNaN(a) || isNaN(s)) {
+            this.l2sError.set("Vui l\xF2ng nh\u1EADp \u0111\u1EA7y \u0111\u1EE7 ng\xE0y, th\xE1ng, n\u0103m.");
+            return
+        }
+        let l = this.lunarConverterService.convertLunarToSolar(s, a, o, r);
+        l ? this.l2sResult.set({
+            date: l
+        }) : this.l2sError.set("Ng\xE0y \xC2m l\u1ECBch kh\xF4ng h\u1EE3p l\u1EC7. Vui l\xF2ng ki\u1EC3m tra l\u1EA1i.")
+    }
+};
+Kr.\u0275fac = function(e) {
+    return new(e || Kr)
+}, Kr.\u0275cmp = q({
+    type: Kr,
+    selectors: [
+        ["app-converter-utility"]
+    ],
+    outputs: {
+        dayDetailsViewed: "dayDetailsViewed"
+    },
+    decls: 28,
+    vars: 4,
+    consts: [
+        ["s2lInput", ""],
+        ["l2sDay", ""],
+        ["l2sMonth", ""],
+        ["l2sYear", ""],
+        ["l2sLeap", ""],
+        [1, "grid", "grid-cols-1", "md:grid-cols-2", "gap-8"],
+        [1, "p-4", "bg-gray-50", "rounded-lg"],
+        [1, "text-lg", "font-semibold", "mb-3"],
+        ["type", "date", 1, "w-full", "p-2", "border", "rounded", 3, "value"],
+        [1, "w-full", "mt-3", "px-4", "py-2", "bg-indigo-500", "text-white", "rounded", "hover:bg-indigo-600", 3, "click"],
+        [1, "mt-4", "p-3", "bg-indigo-50", "rounded", "text-center"],
+        [1, "grid", "grid-cols-3", "gap-2"],
+        ["type", "number", "placeholder", "Ng\xE0y", 1, "w-full", "p-2", "border", "rounded"],
+        ["type", "number", "placeholder", "Th\xE1ng", 1, "w-full", "p-2", "border", "rounded"],
+        ["type", "number", "placeholder", "N\u0103m", 1, "w-full", "p-2", "border", "rounded"],
+        [1, "mt-2"],
+        ["type", "checkbox", 1, "mr-2"],
+        [1, "mt-4", "text-center", "text-red-500"],
+        [1, "font-bold", "text-lg", "cursor-pointer", "hover:underline", 3, "click"]
+    ],
+    template: function(e, i) {
+        if (e & 1) {
+            let r = V();
+            u(0, "div", 5)(1, "div", 6)(2, "h3", 7), d(3, "\u0110\u1ED5i D\u01B0\u01A1ng sang \xC2m"), c(), P(4, "input", 8, 0), u(6, "button", 9), D("click", function() {
+                S(r);
+                let a = Mt(5);
+                return w(i.convertSolarToLunar(a.value))
+            }), d(7, "Chuy\u1EC3n \u0111\u1ED5i"), c(), _(8, EI, 5, 3, "div", 10), c(), u(9, "div", 6)(10, "h3", 7), d(11, "\u0110\u1ED5i \xC2m sang D\u01B0\u01A1ng"), c(), u(12, "div", 11), P(13, "input", 12, 1)(15, "input", 13, 2)(17, "input", 14, 3), c(), u(19, "div", 15)(20, "label"), P(21, "input", 16, 4), d(23, "Th\xE1ng nhu\u1EADn"), c()(), u(24, "button", 9), D("click", function() {
+                S(r);
+                let a = Mt(14),
+                    s = Mt(16),
+                    l = Mt(18),
+                    m = Mt(22);
+                return w(i.convertLunarToSolar(a.value, s.value, l.value, m.checked))
+            }), d(25, "Chuy\u1EC3n \u0111\u1ED5i"), c(), _(26, bI, 5, 2, "div", 10), _(27, DI, 2, 1, "p", 17), c()()
+        }
+        if (e & 2) {
+            let r, o;
+            h(4), H("value", i.todayString()), h(4), T((r = i.s2lResult()) ? 8 : -1, r), h(18), T((o = i.l2sResult()) ? 26 : -1, o), h(), T(i.l2sError() ? 27 : -1)
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var Tc = Kr;
+var CI = (t, n) => n.date.getTime();
+
+function xI(t, n) {
+    if (t & 1 && (u(0, "div", 24)(1, "h5", 25), d(2, "Lu\u1EADn gi\u1EA3i cho ng\xE0y h\xF4m nay:"), c(), u(3, "p"), d(4), c()()), t & 2) {
+        let e = n;
+        N("bg-green-100", e.mood === "good")("text-green-800", e.mood === "good")("bg-red-100", e.mood === "bad")("text-red-800", e.mood === "bad")("bg-gray-100", e.mood === "neutral"), h(4), b(e.text)
+    }
+}
+
+function _I(t, n) {
+    if (t & 1 && (u(0, "div", 18)(1, "p", 19), d(2), c(), u(3, "h4", 20), d(4), c(), u(5, "p", 21), d(6), c(), u(7, "p", 22), d(8), c()(), _(9, xI, 5, 11, "div", 23)), t & 2) {
+        let e, i = n,
+            r = y();
+        h(2), b(i.icon), h(2), b(i.vietnameseName), h(2), b(i.dateRange), h(2), b(i.description), h(), T((e = r.todayHoroscopeReading()) ? 9 : -1, e)
+    }
+}
+
+function TI(t, n) {
+    t & 1 && (u(0, "p", 5), d(1, "Vui l\xF2ng nh\u1EADp ng\xE0y sinh \u0111\u1EC3 xem th\xF4ng tin chi ti\u1EBFt v\u1EC1 cung ho\xE0ng \u0111\u1EA1o c\u1EE7a b\u1EA1n."), c())
+}
+
+function SI(t, n) {
+    if (t & 1 && (u(0, "div"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function wI(t, n) {
+    if (t & 1 && (u(0, "span", 28), d(1), c()), t & 2) {
+        let e = y().$implicit;
+        H("title", e.zodiacSign.vietnameseName), h(), b(e.zodiacSign.icon)
+    }
+}
+
+function II(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 26), D("click", function() {
+            let r = S(e).$implicit,
+                o = y();
+            return w(o.dayDetailsViewed.emit(r.date))
+        }), u(1, "span", 27), d(2), c(), _(3, wI, 2, 2, "span", 28), c()
+    }
+    if (t & 2) {
+        let e = n.$implicit,
+            i = y();
+        N("text-gray-400", !e.isCurrentMonth)("bg-gray-50", !e.isCurrentMonth)("hover:bg-indigo-100", e.isCurrentMonth)("bg-green-100", e.isCurrentMonth && i.userZodiacSign() && e.mood === "good")("bg-red-100", e.isCurrentMonth && i.userZodiacSign() && e.mood === "bad")("bg-gray-100", e.isCurrentMonth && i.userZodiacSign() && e.mood === "neutral"), h(2), b(e.dayOfMonth), h(), T(e.zodiacSign ? 3 : -1)
+    }
+}
+var Qr = class Qr {
+    constructor() {
+        this.horoscopeService = E(Rr);
+        this.dayDetailsViewed = Ge();
+        this.userDOBChanged = Ge();
+        this.userDOB = dr(null);
+        this.horoscopeCalendarMonth = C(new Date);
+        this.calendarWeekDayHeaders = ["Hai", "Ba", "T\u01B0", "N\u0103m", "S\xE1u", "B\u1EA3y", "CN"];
+        this.userZodiacSign = Z(() => {
+            let n = this.userDOB();
+            if (!n) return null;
+            let e = new Date(n);
+            return isNaN(e.getTime()) ? null : this.horoscopeService.getZodiacSign(e)
+        });
+        this.horoscopeMonthYearLabel = Z(() => this.horoscopeCalendarMonth().toLocaleDateString("vi-VN", {
+            month: "long",
+            year: "numeric"
+        }));
+        this.todayHoroscopeReading = Z(() => {
+            let n = this.userZodiacSign();
+            return n ? this.horoscopeService.getDailyReading(n, new Date) : null
+        });
+        this.horoscopeCalendarDays = Z(() => this.generateCalendarDays(this.horoscopeCalendarMonth(), n => ({
+            zodiacSign: this.horoscopeService.getZodiacSign(n),
+            mood: this.userZodiacSign() ? this.horoscopeService.getDailyReading(this.userZodiacSign(), n).mood : "neutral"
+        })))
+    }
+    generateCalendarDays(n, e) {
+        let i = n.getFullYear(),
+            r = n.getMonth(),
+            o = new Date(i, r, 1),
+            a = new Date(i, r + 1, 0),
+            s = (o.getDay() + 6) % 7,
+            l = [];
+        for (let f = s; f > 0; f--) {
+            let p = new Date(i, r, 1 - f);
+            l.push(A({
+                date: p,
+                dayOfMonth: p.getDate(),
+                isCurrentMonth: !1
+            }, e(p)))
+        }
+        for (let f = 1; f <= a.getDate(); f++) {
+            let p = new Date(i, r, f);
+            l.push(A({
+                date: p,
+                dayOfMonth: f,
+                isCurrentMonth: !0
+            }, e(p)))
+        }
+        let m = l.length;
+        for (let f = 1; f <= 42 - m; f++) {
+            let p = new Date(i, r + 1, f);
+            l.push(A({
+                date: p,
+                dayOfMonth: p.getDate(),
+                isCurrentMonth: !1
+            }, e(p)))
+        }
+        return l
+    }
+    onUserDOBChange(n) {
+        let e = n.target.value;
+        e && this.userDOBChanged.emit(e)
+    }
+    previousHoroscopeMonth() {
+        this.horoscopeCalendarMonth.update(n => {
+            let e = new Date(n);
+            return e.setMonth(e.getMonth() - 1), e
+        })
+    }
+    nextHoroscopeMonth() {
+        this.horoscopeCalendarMonth.update(n => {
+            let e = new Date(n);
+            return e.setMonth(e.getMonth() + 1), e
+        })
+    }
+};
+Qr.\u0275fac = function(e) {
+    return new(e || Qr)
+}, Qr.\u0275cmp = q({
+    type: Qr,
+    selectors: [
+        ["app-horoscope-utility"]
+    ],
+    inputs: {
+        userDOB: [1, "userDOB"]
+    },
+    outputs: {
+        dayDetailsViewed: "dayDetailsViewed",
+        userDOBChanged: "userDOBChanged"
+    },
+    decls: 29,
+    vars: 3,
+    consts: [
+        [1, "text-center"],
+        [1, "text-xl", "font-semibold", "mb-4"],
+        [1, "max-w-sm", "mx-auto"],
+        ["for", "dob-input", 1, "block", "font-medium", "mb-1"],
+        ["type", "date", "id", "dob-input", 1, "w-full", "p-2", "border", "rounded", "mb-3", 3, "change", "value"],
+        [1, "mt-6", "text-center", "text-gray-500"],
+        [1, "mt-8", "pt-6", "border-t", "border-gray-200"],
+        [1, "text-xl", "font-semibold", "mb-4", "text-center"],
+        [1, "max-w-lm", "mx-auto", "bg-white", "p-4", "rounded-lg", "shadow"],
+        [1, "flex", "justify-between", "items-center", "mb-4"],
+        [1, "p-2", "rounded-full", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-6", "w-6"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M15 19l-7-7 7-7"],
+        [1, "text-lg", "font-semibold"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 5l7 7-7 7"],
+        [1, "grid", "grid-cols-7", "gap-1", "text-center", "font-medium", "text-gray-600", "mb-2"],
+        [1, "grid", "grid-cols-7", "gap-1"],
+        [1, "p-1", "h-16", "flex", "flex-col", "justify-center", "items-center", "rounded-md", "cursor-pointer", "transition-colors", 3, "text-gray-400", "bg-gray-50", "hover:bg-indigo-100", "bg-green-100", "bg-red-100", "bg-gray-100"],
+        [1, "mt-6", "p-6", "bg-indigo-50", "rounded-lg"],
+        [1, "text-8xl"],
+        [1, "text-3xl", "font-bold", "text-indigo-600", "my-2"],
+        [1, "font-semibold", "text-gray-600"],
+        [1, "mt-4", "text-left", "max-w-prose", "mx-auto"],
+        [1, "mt-4", "p-4", "rounded-lg", 3, "bg-green-100", "text-green-800", "bg-red-100", "text-red-800", "bg-gray-100"],
+        [1, "mt-4", "p-4", "rounded-lg"],
+        [1, "font-semibold"],
+        [1, "p-1", "h-16", "flex", "flex-col", "justify-center", "items-center", "rounded-md", "cursor-pointer", "transition-colors", 3, "click"],
+        [1, "text-sm"],
+        [1, "text-2xl", "mt-1", 3, "title"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div")(1, "div", 0)(2, "h3", 1), d(3, "Kh\xE1m Ph\xE1 Cung Ho\xE0ng \u0110\u1EA1o C\u1EE7a B\u1EA1n"), c(), u(4, "div", 2)(5, "label", 3), d(6, "Nh\u1EADp ng\xE0y sinh c\u1EE7a b\u1EA1n:"), c(), u(7, "input", 4), D("change", function(o) {
+                return i.onUserDOBChange(o)
+            }), c()(), _(8, _I, 10, 5)(9, TI, 2, 0, "p", 5), c(), u(10, "div", 6)(11, "h3", 7), d(12, "L\u1ECBch Ho\xE0ng \u0110\u1EA1o"), c(), u(13, "div", 8)(14, "div", 9)(15, "button", 10), D("click", function() {
+                return i.previousHoroscopeMonth()
+            }), K(), u(16, "svg", 11), P(17, "path", 12), c()(), ne(), u(18, "h4", 13), d(19), c(), u(20, "button", 10), D("click", function() {
+                return i.nextHoroscopeMonth()
+            }), K(), u(21, "svg", 11), P(22, "path", 14), c()()(), ne(), u(23, "div", 15), R(24, SI, 2, 1, "div", null, pe), c(), u(26, "div", 16), R(27, II, 4, 14, "div", 17, CI), c()()()()), e & 2) {
+            let r;
+            h(7), H("value", i.userDOB()), h(), T((r = i.userZodiacSign()) ? 8 : 9, r), h(11), b(i.horoscopeMonthYearLabel()), h(5), O(i.calendarWeekDayHeaders), h(3), O(i.horoscopeCalendarDays())
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var Sc = Qr;
+var Uv = () => ({
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+});
+
+function MI(t, n) {
+    if (t & 1 && (u(0, "div", 13)(1, "h4", 14), d(2, "K\u1EBFt qu\u1EA3"), c(), u(3, "div", 15)(4, "div", 16)(5, "span", 17), d(6), c(), u(7, "span", 18), d(8, "N\u0103m"), c()(), u(9, "div", 16)(10, "span", 17), d(11), c(), u(12, "span", 18), d(13, "Th\xE1ng"), c()(), u(14, "div", 16)(15, "span", 17), d(16), c(), u(17, "span", 18), d(18, "Tu\u1EA7n"), c()(), u(19, "div", 16)(20, "span", 17), d(21), c(), u(22, "span", 18), d(23, "Ng\xE0y"), c()(), u(24, "div", 16)(25, "span", 17), d(26), c(), u(27, "span", 18), d(28, "Gi\u1EDD"), c()(), u(29, "div", 16)(30, "span", 17), d(31), c(), u(32, "span", 18), d(33, "Ph\xFAt"), c()()(), u(34, "p", 19), d(35), c()()), t & 2) {
+        let e = n;
+        h(6), b(e.years), h(5), b(e.months), h(5), b(e.weeks), h(5), b(e.days), h(5), b(e.hours), h(5), b(e.minutes), h(4), L("T\u1ED5ng c\u1ED9ng: ", e.totalDays.toFixed(2), " ng\xE0y.")
+    }
+}
+
+function NI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div")(1, "h3", 7), d(2, "T\xEDnh kho\u1EA3ng c\xE1ch gi\u1EEFa 2 ng\xE0y"), c(), u(3, "div", 8)(4, "div")(5, "label", 9), d(6, "Ng\xE0y b\u1EAFt \u0111\u1EA7u"), c(), u(7, "input", 10), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.intervalStartDate.set(r.target.value))
+        }), c()(), u(8, "div")(9, "label", 11), d(10, "Ng\xE0y k\u1EBFt th\xFAc"), c(), u(11, "input", 12), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.intervalEndDate.set(r.target.value))
+        }), c()()(), _(12, MI, 36, 7, "div", 13), c()
+    }
+    if (t & 2) {
+        let e, i = y();
+        h(7), H("value", i.intervalStartDate()), h(4), H("value", i.intervalEndDate()), h(), T((e = i.intervalResult()) ? 12 : -1, e)
+    }
+}
+
+function AI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "p")(1, "span", 37), d(2, "K\u1EBFt qu\u1EA3 sau khi c\u1ED9ng th\xEAm:"), c(), u(3, "span", 38), D("click", function() {
+            let r = S(e),
+                o = y(2);
+            return w(o.dayDetailsViewed.emit(r.date))
+        }), d(4), c(), d(5), c()
+    }
+    if (t & 2) {
+        let e = n;
+        h(4), L(" ", e.date.toLocaleDateString("vi-VN", me(4, Uv)), " "), h(), Ze(" (T\u1EE9c ng\xE0y ", e.lunarInfo.lunarDate.day, "/", e.lunarInfo.lunarDate.monthName, " n\u0103m ", e.lunarInfo.lunarDate.yearName, ") ")
+    }
+}
+
+function kI(t, n) {
+    t & 1 && (u(0, "p")(1, "span", 37), d(2, "K\u1EBFt qu\u1EA3 sau khi c\u1ED9ng th\xEAm:"), c(), d(3, " Nh\u1EADp \u0111\u1EA7y \u0111\u1EE7 th\xF4ng tin \u0111\u1EC3 c\xF3 k\u1EBFt qu\u1EA3 "), c())
+}
+
+function RI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 6)(1, "div", 20)(2, "label", 21), d(3, "Ng\xE0y b\u1EAFt \u0111\u1EA7u"), c(), u(4, "button", 22), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setAddToToday())
+        }), d(5, "H\xF4m nay"), c()(), u(6, "input", 23), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.addStartDate.set(r.target.value))
+        }), c(), u(7, "div", 24)(8, "div")(9, "label", 25), d(10, "S\u1ED1 n\u0103m c\u1ED9ng"), c(), u(11, "input", 26), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.addYears.set(+r.target.value))
+        }), c()(), u(12, "div")(13, "label", 27), d(14, "S\u1ED1 th\xE1ng c\u1ED9ng"), c(), u(15, "input", 28), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.addMonths.set(+r.target.value))
+        }), c()(), u(16, "div")(17, "label", 29), d(18, "S\u1ED1 tu\u1EA7n c\u1ED9ng"), c(), u(19, "input", 30), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.addWeeks.set(+r.target.value))
+        }), c()(), u(20, "div")(21, "label", 31), d(22, "S\u1ED1 ng\xE0y c\u1ED9ng"), c(), u(23, "input", 32), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.addDays.set(+r.target.value))
+        }), c()()(), u(24, "button", 33), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.calculateAddDate())
+        }), d(25, " T\xEDnh k\u1EBFt qu\u1EA3 "), c(), u(26, "div", 34), K(), u(27, "svg", 35), P(28, "path", 36), c(), _(29, AI, 6, 5, "p")(30, kI, 4, 0, "p"), c()()
+    }
+    if (t & 2) {
+        let e, i = y();
+        h(6), H("value", i.addStartDate()), h(23), T((e = i.addResult()) ? 29 : 30, e)
+    }
+}
+
+function OI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "p")(1, "span", 37), d(2, "K\u1EBFt qu\u1EA3 sau khi tr\u1EEB \u0111i:"), c(), u(3, "span", 38), D("click", function() {
+            let r = S(e),
+                o = y(2);
+            return w(o.dayDetailsViewed.emit(r.date))
+        }), d(4), c(), d(5), c()
+    }
+    if (t & 2) {
+        let e = n;
+        h(4), L(" ", e.date.toLocaleDateString("vi-VN", me(4, Uv)), " "), h(), Ze(" (T\u1EE9c ng\xE0y ", e.lunarInfo.lunarDate.day, "/", e.lunarInfo.lunarDate.monthName, " n\u0103m ", e.lunarInfo.lunarDate.yearName, ") ")
+    }
+}
+
+function LI(t, n) {
+    t & 1 && (u(0, "p")(1, "span", 37), d(2, "K\u1EBFt qu\u1EA3 sau khi tr\u1EEB \u0111i:"), c(), d(3, " Nh\u1EADp \u0111\u1EA7y \u0111\u1EE7 th\xF4ng tin \u0111\u1EC3 c\xF3 k\u1EBFt qu\u1EA3 "), c())
+}
+
+function FI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 6)(1, "div", 20)(2, "label", 39), d(3, "Ng\xE0y b\u1EAFt \u0111\u1EA7u"), c(), u(4, "button", 22), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.setSubtractToToday())
+        }), d(5, "H\xF4m nay"), c()(), u(6, "input", 40), D("change", function(r) {
+            S(e);
+            let o = y();
+            return w(o.subtractStartDate.set(r.target.value))
+        }), c(), u(7, "div", 24)(8, "div")(9, "label", 41), d(10, "S\u1ED1 n\u0103m tr\u1EEB"), c(), u(11, "input", 42), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.subtractYears.set(+r.target.value))
+        }), c()(), u(12, "div")(13, "label", 43), d(14, "S\u1ED1 th\xE1ng tr\u1EEB"), c(), u(15, "input", 44), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.subtractMonths.set(+r.target.value))
+        }), c()(), u(16, "div")(17, "label", 45), d(18, "S\u1ED1 tu\u1EA7n tr\u1EEB"), c(), u(19, "input", 46), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.subtractWeeks.set(+r.target.value))
+        }), c()(), u(20, "div")(21, "label", 47), d(22, "S\u1ED1 ng\xE0y tr\u1EEB"), c(), u(23, "input", 48), D("input", function(r) {
+            S(e);
+            let o = y();
+            return w(o.subtractDays.set(+r.target.value))
+        }), c()()(), u(24, "button", 33), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.calculateSubtractDate())
+        }), d(25, " T\xEDnh k\u1EBFt qu\u1EA3 "), c(), u(26, "div", 34), K(), u(27, "svg", 35), P(28, "path", 36), c(), _(29, OI, 6, 5, "p")(30, LI, 4, 0, "p"), c()()
+    }
+    if (t & 2) {
+        let e, i = y();
+        h(6), H("value", i.subtractStartDate()), h(23), T((e = i.subtractResult()) ? 29 : 30, e)
+    }
+}
+var Zr = class Zr {
+    constructor() {
+        this.lunarCalendarService = E(Le);
+        this.dayDetailsViewed = Ge();
+        this.nowForInterval = new Date;
+        this.intervalMode = C("interval");
+        this.intervalStartDate = C(this.formatDateTimeLocal(new Date(this.nowForInterval.getFullYear(), this.nowForInterval.getMonth(), this.nowForInterval.getDate(), 0, 0)));
+        this.intervalEndDate = C(this.formatDateTimeLocal(this.nowForInterval));
+        this.addStartDate = C(this.todayString());
+        this.addYears = C(0);
+        this.addMonths = C(0);
+        this.addWeeks = C(0);
+        this.addDays = C(0);
+        this.addResult = C(null);
+        this.subtractStartDate = C(this.todayString());
+        this.subtractYears = C(0);
+        this.subtractMonths = C(0);
+        this.subtractWeeks = C(0);
+        this.subtractDays = C(0);
+        this.subtractResult = C(null);
+        this.intervalResult = Z(() => {
+            let n = new Date(this.intervalStartDate()),
+                e = new Date(this.intervalEndDate());
+            if (isNaN(n.getTime()) || isNaN(e.getTime()) || n > e) return null;
+            let i = e.getTime() - n.getTime(),
+                r = Math.floor(i / (1e3 * 60)) % 60,
+                o = Math.floor(i / (1e3 * 60 * 60)) % 24,
+                a = e.getFullYear() - n.getFullYear(),
+                s = e.getMonth() - n.getMonth(),
+                l = e.getDate() - n.getDate();
+            if (l < 0) {
+                s--;
+                let f = new Date(e.getFullYear(), e.getMonth(), 0);
+                l += f.getDate()
+            }
+            s < 0 && (a--, s += 12);
+            let m = i / (1e3 * 60 * 60 * 24);
+            return {
+                years: a,
+                months: s,
+                weeks: Math.floor(l / 7),
+                days: l % 7,
+                hours: o,
+                minutes: r,
+                totalDays: m
+            }
+        })
+    }
+    todayString() {
+        let n = new Date,
+            e = n.getFullYear(),
+            i = (n.getMonth() + 1).toString().padStart(2, "0"),
+            r = n.getDate().toString().padStart(2, "0");
+        return `${e}-${i}-${r}`
+    }
+    formatDateTimeLocal(n) {
+        let e = n.getFullYear(),
+            i = (n.getMonth() + 1).toString().padStart(2, "0"),
+            r = n.getDate().toString().padStart(2, "0"),
+            o = n.getHours().toString().padStart(2, "0"),
+            a = n.getMinutes().toString().padStart(2, "0");
+        return `${e}-${i}-${r}T${o}:${a}`
+    }
+    setAddToToday() {
+        this.addStartDate.set(this.todayString())
+    }
+    setSubtractToToday() {
+        this.subtractStartDate.set(this.todayString())
+    }
+    calculateAddDate() {
+        let n = new Date(this.addStartDate());
+        if (isNaN(n.getTime())) {
+            this.addResult.set(null);
+            return
+        }
+        let e = new Date(n);
+        e.setFullYear(e.getFullYear() + this.addYears()), e.setMonth(e.getMonth() + this.addMonths()), e.setDate(e.getDate() + this.addWeeks() * 7 + this.addDays());
+        let i = this.lunarCalendarService.getLunarDateInfo(e);
+        this.addResult.set({
+            date: e,
+            lunarInfo: i
+        })
+    }
+    calculateSubtractDate() {
+        let n = new Date(this.subtractStartDate());
+        if (isNaN(n.getTime())) {
+            this.subtractResult.set(null);
+            return
+        }
+        let e = new Date(n);
+        e.setFullYear(e.getFullYear() - this.subtractYears()), e.setMonth(e.getMonth() - this.subtractMonths()), e.setDate(e.getDate() - this.subtractWeeks() * 7 - this.subtractDays());
+        let i = this.lunarCalendarService.getLunarDateInfo(e);
+        this.subtractResult.set({
+            date: e,
+            lunarInfo: i
+        })
+    }
+};
+Zr.\u0275fac = function(e) {
+    return new(e || Zr)
+}, Zr.\u0275cmp = q({
+    type: Zr,
+    selectors: [
+        ["app-interval-calculator"]
+    ],
+    outputs: {
+        dayDetailsViewed: "dayDetailsViewed"
+    },
+    decls: 17,
+    vars: 25,
+    consts: [
+        [1, "flex", "items-center", "justify-start", "space-x-2", "mb-6", "p-1", "rounded-lg", "bg-gray-100", "w-full", "sm:w-auto"],
+        [1, "px-4", "py-2", "text-sm", "font-medium", "rounded-md", "flex", "items-center", "justify-center", "gap-2", "transition-colors", "flex-1", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 20 20", "fill", "currentColor", 1, "h-5", "w-5"],
+        ["fill-rule", "evenodd", "d", "M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 00-1 1v2a1 1 0 001 1h6a1 1 0 001-1V5a1 1 0 00-1-1H7zm-1 5a1 1 0 011-1h6a1 1 0 110 2H8a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H8z", "clip-rule", "evenodd"],
+        ["fill-rule", "evenodd", "d", "M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z", "clip-rule", "evenodd"],
+        ["fill-rule", "evenodd", "d", "M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z", "clip-rule", "evenodd"],
+        [1, "p-4", "border", "border-gray-200", "rounded-lg", "bg-white"],
+        [1, "text-xl", "font-semibold", "mb-4", "text-center"],
+        [1, "grid", "grid-cols-1", "md:grid-cols-2", "gap-4", "items-center"],
+        ["for", "startDate", 1, "block", "font-medium", "mb-1"],
+        ["type", "datetime-local", "id", "startDate", 1, "w-full", "p-2", "border", "rounded", 3, "change", "value"],
+        ["for", "endDate", 1, "block", "font-medium", "mb-1"],
+        ["type", "datetime-local", "id", "endDate", 1, "w-full", "p-2", "border", "rounded", 3, "change", "value"],
+        [1, "mt-6", "p-4", "bg-gray-50", "rounded-lg"],
+        [1, "text-lg", "font-semibold", "text-center", "mb-3"],
+        [1, "grid", "grid-cols-3", "sm:grid-cols-6", "gap-3", "text-center"],
+        [1, "p-3", "bg-indigo-100", "rounded"],
+        [1, "block", "text-2xl", "font-bold"],
+        [1, "text-sm"],
+        [1, "text-center", "mt-4", "text-gray-600"],
+        [1, "flex", "justify-between", "items-baseline", "mb-2"],
+        ["for", "addStartDate", 1, "block", "font-medium", "text-gray-700"],
+        [1, "text-sm", "text-indigo-500", "hover:underline", 3, "click"],
+        ["type", "date", "id", "addStartDate", 1, "w-full", "p-2", "border", "rounded", "mb-4", 3, "change", "value"],
+        [1, "grid", "grid-cols-1", "sm:grid-cols-2", "md:grid-cols-4", "gap-4", "mb-4"],
+        ["for", "addYears", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "number", "id", "addYears", "value", "0", "min", "0", 1, "w-full", "p-2", "border", "rounded", 3, "input"],
+        ["for", "addMonths", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "number", "id", "addMonths", "value", "0", "min", "0", 1, "w-full", "p-2", "border", "rounded", 3, "input"],
+        ["for", "addWeeks", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "number", "id", "addWeeks", "value", "0", "min", "0", 1, "w-full", "p-2", "border", "rounded", 3, "input"],
+        ["for", "addDays", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "number", "id", "addDays", "value", "0", "min", "0", 1, "w-full", "p-2", "border", "rounded", 3, "input"],
+        [1, "w-full", "px-4", "py-3", "bg-red-600", "text-white", "font-semibold", "rounded-lg", "hover:bg-red-700", "transition-colors", 3, "click"],
+        [1, "mt-4", "p-3", "rounded-lg", "bg-green-50", "text-green-800", "flex", "items-center", "gap-2"],
+        ["xmlns", "http://www.w3.org/2000/svg", "viewBox", "0 0 20 20", "fill", "currentColor", 1, "h-5", "w-5", "flex-shrink-0"],
+        ["fill-rule", "evenodd", "d", "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z", "clip-rule", "evenodd"],
+        [1, "font-semibold"],
+        [1, "font-bold", "cursor-pointer", "hover:underline", 3, "click"],
+        ["for", "subtractStartDate", 1, "block", "font-medium", "text-gray-700"],
+        ["type", "date", "id", "subtractStartDate", 1, "w-full", "p-2", "border", "rounded", "mb-4", 3, "change", "value"],
+        ["for", "subtractYears", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "number", "id", "subtractYears", "value", "0", "min", "0", 1, "w-full", "p-2", "border", "rounded", 3, "input"],
+        ["for", "subtractMonths", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "number", "id", "subtractMonths", "value", "0", "min", "0", 1, "w-full", "p-2", "border", "rounded", 3, "input"],
+        ["for", "subtractWeeks", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "number", "id", "subtractWeeks", "value", "0", "min", "0", 1, "w-full", "p-2", "border", "rounded", 3, "input"],
+        ["for", "subtractDays", 1, "block", "text-sm", "font-medium", "mb-1"],
+        ["type", "number", "id", "subtractDays", "value", "0", "min", "0", 1, "w-full", "p-2", "border", "rounded", 3, "input"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div")(1, "div", 0)(2, "button", 1), D("click", function() {
+                return i.intervalMode.set("interval")
+            }), K(), u(3, "svg", 2), P(4, "path", 3), c(), d(5, " \u0110\u1EBFm s\u1ED1 ng\xE0y "), c(), ne(), u(6, "button", 1), D("click", function() {
+                return i.intervalMode.set("add")
+            }), K(), u(7, "svg", 2), P(8, "path", 4), c(), d(9, " C\u1ED9ng th\xEAm ng\xE0y "), c(), ne(), u(10, "button", 1), D("click", function() {
+                return i.intervalMode.set("subtract")
+            }), K(), u(11, "svg", 2), P(12, "path", 5), c(), d(13, " Tr\u1EEB ng\xE0y "), c()(), _(14, NI, 13, 3, "div")(15, RI, 31, 2, "div", 6)(16, FI, 31, 2, "div", 6), c()), e & 2) {
+            let r;
+            h(2), N("bg-gray-200", i.intervalMode() !== "interval")("text-gray-800", i.intervalMode() !== "interval")("bg-gray-800", i.intervalMode() === "interval")("text-white", i.intervalMode() === "interval"), h(4), N("bg-gray-200", i.intervalMode() !== "add")("text-gray-800", i.intervalMode() !== "add")("bg-gray-800", i.intervalMode() === "add")("text-white", i.intervalMode() === "add"), h(4), N("bg-gray-200", i.intervalMode() !== "subtract")("text-gray-800", i.intervalMode() !== "subtract")("bg-gray-800", i.intervalMode() === "subtract")("text-white", i.intervalMode() === "subtract"), h(4), T((r = i.intervalMode()) === "interval" ? 14 : r === "add" ? 15 : r === "subtract" ? 16 : -1)
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var wc = Zr;
+var PI = (t, n) => n.date.getTime();
+
+function BI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 4)(1, "p", 17), d(2), c(), u(3, "p", 18), d(4), c(), u(5, "button", 19), D("click", function() {
+            let r = S(e),
+                o = y();
+            return w(o.dayDetailsViewed.emit(r.date))
+        }), d(6, " Xem chi ti\u1EBFt ng\xE0y \u2192 "), c()()
+    }
+    if (t & 2) {
+        let e = n;
+        h(2), L("Con s\u1ED1 ch\u1EE7 \u0111\u1EA1o c\u1EE7a ng\xE0y ", e.date.toLocaleDateString("vi-VN"), " l\xE0:"), h(2), b(e.number)
+    }
+}
+
+function HI(t, n) {
+    if (t & 1 && (u(0, "div"), d(1), c()), t & 2) {
+        let e = n.$implicit;
+        h(), b(e)
+    }
+}
+
+function jI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 20), D("click", function() {
+            let r = S(e).$implicit,
+                o = y();
+            return w(o.selectDateFromNumerologyCalendar(r.date))
+        }), u(1, "span", 21), d(2), c(), u(3, "span", 22), d(4), c()()
+    }
+    if (t & 2) {
+        let e = n.$implicit;
+        N("bg-gray-50", !e.isCurrentMonth)("text-gray-400", !e.isCurrentMonth)("hover:bg-indigo-100", e.isCurrentMonth)("bg-indigo-500", e.isSelected)("text-white", e.isSelected)("font-bold", e.isSelected), h(2), b(e.dayOfMonth), h(), N("text-indigo-200", e.isSelected)("text-indigo-600", !e.isSelected && e.isCurrentMonth), h(), L(" ", e.numerologyNumber, " ")
+    }
+}
+var Xr = class Xr {
+    constructor() {
+        this.lunarCalendarService = E(Le);
+        this.dayDetailsViewed = Ge();
+        this.numerologyDate = C(this.todayString());
+        this.numerologyResult = C(null);
+        this.numerologyCalendarMonth = C(new Date);
+        this.calendarWeekDayHeaders = ["Hai", "Ba", "T\u01B0", "N\u0103m", "S\xE1u", "B\u1EA3y", "CN"];
+        this.numerologyMonthYearLabel = Z(() => this.numerologyCalendarMonth().toLocaleDateString("vi-VN", {
+            month: "long",
+            year: "numeric"
+        }));
+        this.numerologyCalendarDays = Z(() => this.generateCalendarDays(this.numerologyCalendarMonth(), n => ({
+            numerologyNumber: this.lunarCalendarService.getNumerologyNumber(n),
+            isSelected: this.formatDateForInput(n) === this.numerologyDate()
+        })))
+    }
+    ngOnInit() {
+        this.calculateNumerology()
+    }
+    generateCalendarDays(n, e) {
+        let i = n.getFullYear(),
+            r = n.getMonth(),
+            o = new Date(i, r, 1),
+            a = new Date(i, r + 1, 0),
+            s = (o.getDay() + 6) % 7,
+            l = [];
+        for (let f = s; f > 0; f--) {
+            let p = new Date(i, r, 1 - f);
+            l.push(A({
+                date: p,
+                dayOfMonth: p.getDate(),
+                isCurrentMonth: !1
+            }, e(p)))
+        }
+        for (let f = 1; f <= a.getDate(); f++) {
+            let p = new Date(i, r, f);
+            l.push(A({
+                date: p,
+                dayOfMonth: f,
+                isCurrentMonth: !0
+            }, e(p)))
+        }
+        let m = l.length;
+        for (let f = 1; f <= 42 - m; f++) {
+            let p = new Date(i, r + 1, f);
+            l.push(A({
+                date: p,
+                dayOfMonth: p.getDate(),
+                isCurrentMonth: !1
+            }, e(p)))
+        }
+        return l
+    }
+    todayString() {
+        return this.formatDateForInput(new Date)
+    }
+    formatDateForInput(n) {
+        let e = n.getFullYear(),
+            i = (n.getMonth() + 1).toString().padStart(2, "0"),
+            r = n.getDate().toString().padStart(2, "0");
+        return `${e}-${i}-${r}`
+    }
+    calculateNumerology() {
+        let n = this.numerologyDate();
+        if (!n) {
+            this.numerologyResult.set(null);
+            return
+        }
+        let e = n.split("-").map(o => parseInt(o, 10)),
+            i = new Date(e[0], e[1] - 1, e[2]),
+            r = this.lunarCalendarService.getNumerologyNumber(i);
+        this.numerologyResult.set({
+            date: i,
+            number: r
+        })
+    }
+    previousNumerologyMonth() {
+        this.numerologyCalendarMonth.update(n => {
+            let e = new Date(n);
+            return e.setMonth(e.getMonth() - 1), e
+        })
+    }
+    nextNumerologyMonth() {
+        this.numerologyCalendarMonth.update(n => {
+            let e = new Date(n);
+            return e.setMonth(e.getMonth() + 1), e
+        })
+    }
+    selectDateFromNumerologyCalendar(n) {
+        this.numerologyDate.set(this.formatDateForInput(n)), this.calculateNumerology()
+    }
+};
+Xr.\u0275fac = function(e) {
+    return new(e || Xr)
+}, Xr.\u0275cmp = q({
+    type: Xr,
+    selectors: [
+        ["app-numerology-utility"]
+    ],
+    outputs: {
+        dayDetailsViewed: "dayDetailsViewed"
+    },
+    decls: 26,
+    vars: 3,
+    consts: [
+        [1, "text-center"],
+        [1, "text-xl", "font-semibold", "mb-4"],
+        [1, "max-w-sm", "mx-auto"],
+        ["type", "date", 1, "w-full", "p-2", "border", "rounded", "mb-3", 3, "change", "value"],
+        [1, "mt-6", "p-6", "bg-indigo-50", "rounded-lg"],
+        [1, "mt-8", "pt-6", "border-t", "border-gray-200"],
+        [1, "text-xl", "font-semibold", "mb-4", "text-center"],
+        [1, "max-w-lm", "mx-auto", "bg-white", "p-4", "rounded-lg", "shadow"],
+        [1, "flex", "justify-between", "items-center", "mb-4"],
+        [1, "p-2", "rounded-full", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-6", "w-6"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M15 19l-7-7 7-7"],
+        [1, "text-lg", "font-semibold"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 5l7 7-7 7"],
+        [1, "grid", "grid-cols-7", "gap-1", "text-center", "font-medium", "text-gray-600", "mb-2"],
+        [1, "grid", "grid-cols-7", "gap-1"],
+        [1, "p-1", "h-20", "flex", "flex-col", "justify-center", "items-center", "rounded-md", "cursor-pointer", "transition-all", "duration-200", "text-center", 3, "bg-gray-50", "text-gray-400", "hover:bg-indigo-100", "bg-indigo-500", "text-white", "font-bold"],
+        [1, "text-gray-600"],
+        [1, "text-8xl", "font-bold", "text-indigo-600", "my-4"],
+        [1, "text-indigo-500", "hover:underline", 3, "click"],
+        [1, "p-1", "h-20", "flex", "flex-col", "justify-center", "items-center", "rounded-md", "cursor-pointer", "transition-all", "duration-200", "text-center", 3, "click"],
+        [1, "text-sm"],
+        [1, "text-2xl", "font-bold", "mt-1"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div")(1, "div", 0)(2, "h3", 1), d(3, "T\xEDnh Con S\u1ED1 Ch\u1EE7 \u0110\u1EA1o C\u1EE7a Ng\xE0y"), c(), u(4, "div", 2)(5, "input", 3), D("change", function(o) {
+                return i.numerologyDate.set(o.target.value), i.calculateNumerology()
+            }), c()(), _(6, BI, 7, 2, "div", 4), c(), u(7, "div", 5)(8, "h3", 6), d(9, "Ho\u1EB7c ch\u1ECDn ng\xE0y t\u1EEB l\u1ECBch"), c(), u(10, "div", 7)(11, "div", 8)(12, "button", 9), D("click", function() {
+                return i.previousNumerologyMonth()
+            }), K(), u(13, "svg", 10), P(14, "path", 11), c()(), ne(), u(15, "h4", 12), d(16), c(), u(17, "button", 9), D("click", function() {
+                return i.nextNumerologyMonth()
+            }), K(), u(18, "svg", 10), P(19, "path", 13), c()()(), ne(), u(20, "div", 14), R(21, HI, 2, 1, "div", null, pe), c(), u(23, "div", 15), R(24, jI, 5, 18, "div", 16, PI), c()()()()), e & 2) {
+            let r;
+            h(5), H("value", i.numerologyDate()), h(), T((r = i.numerologyResult()) ? 6 : -1, r), h(10), b(i.numerologyMonthYearLabel()), h(5), O(i.calendarWeekDayHeaders), h(3), O(i.numerologyCalendarDays())
+        }
+    },
+    dependencies: [Q],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var Ic = Xr;
+var lm = [{
+    id: 1,
+    name: "C\xE0n",
+    vietnameseName: "Thu\u1EA7n C\xE0n (Tr\u1EDDi)",
+    trigrams: "Thi\xEAn Thi\xEAn",
+    lines: [!0, !0, !0, !0, !0, !0],
+    judgment: "C\xE0n: Nguy\xEAn, Hanh, L\u1EE3i, Trinh. (S\u1EF1 s\xE1ng t\u1EA1o: C\u1EA3, Th\xF4ng, Thu\u1EADn, B\u1EC1n)",
+    image: "Thi\xEAn h\xE0nh ki\u1EC7n, qu\xE2n t\u1EED d\u0129 t\u1EF1 c\u01B0\u1EDDng b\u1EA5t t\u1EE9c. (Tr\u1EDDi v\u1EADn h\xE0nh m\u1EA1nh m\u1EBD, ng\u01B0\u1EDDi qu\xE2n t\u1EED c\u0169ng theo \u0111\xF3 m\xE0 t\u1EF1 c\u01B0\u1EDDng kh\xF4ng ng\u1EEBng ngh\u1EC9.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m c\u1EE7a n\u0103ng l\u01B0\u1EE3ng s\xE1ng t\u1EA1o v\xE0 h\xE0nh \u0111\u1ED9ng m\u1EA1nh m\u1EBD. H\xE3y ch\u1EE7 \u0111\u1ED9ng, ki\xEAn tr\xEC v\xE0 gi\u1EEF v\u1EEFng m\u1EE5c ti\xEAu c\u1EE7a b\u1EA1n. S\u1EF1 th\xE0nh c\xF4ng l\u1EDBn \u0111ang ch\u1EDD \u0111\u1EE3i n\u1EBFu b\u1EA1n gi\u1EEF \u0111\u01B0\u1EE3c s\u1EF1 ch\xEDnh tr\u1EF1c v\xE0 b\u1EC1n b\u1EC9."
+}, {
+    id: 2,
+    name: "Kh\xF4n",
+    vietnameseName: "Thu\u1EA7n Kh\xF4n (\u0110\u1EA5t)",
+    trigrams: "\u0110\u1ECBa \u0110\u1ECBa",
+    lines: [!1, !1, !1, !1, !1, !1],
+    judgment: "Kh\xF4n: Nguy\xEAn Hanh, L\u1EE3i t\u1EABn m\xE3 chi trinh. Qu\xE2n t\u1EED h\u1EEFu du v\xE3ng, ti\xEAn m\xEA h\u1EADu \u0111\u1EAFc, ch\u1EE7 l\u1EE3i. (\u0110\u1EA5t: C\u1EA3 th\xF4ng, l\u1EE3i v\u1EC1 s\u1EF1 b\u1EC1n c\u1EE7a ng\u1EF1a c\xE1i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED c\xF3 \u0111i \u0111\xE2u, tr\u01B0\u1EDBc m\xEA sau \u0111\u01B0\u1EE3c, ch\u1EE7 v\u1EC1 l\u1EE3i.)",
+    image: "\u0110\u1ECBa th\u1EBF Kh\xF4n, qu\xE2n t\u1EED d\u0129 h\u1EADu \u0111\u1EE9c t\u1EA3i v\u1EADt. (Th\u1EBF \u0111\u1EA5t l\xE0 Kh\xF4n, ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 l\u1EA5y \u0111\u1EE9c d\xE0y \u0111\u1EC3 ch\u1EDF che v\u1EA1n v\u1EADt.)",
+    advice: "\u0110\xE2y l\xE0 l\xFAc c\u1EA7n s\u1EF1 ti\u1EBFp thu, ki\xEAn nh\u1EABn v\xE0 nu\xF4i d\u01B0\u1EE1ng. H\xE3y thu\u1EADn theo t\u1EF1 nhi\xEAn, \u0111\xF3ng vai tr\xF2 h\u1ED7 tr\u1EE3 v\xE0 \u0111\u1EC3 m\u1ECDi vi\u1EC7c t\u1EF1 di\u1EC5n ra. Th\xE0nh c\xF4ng s\u1EBD \u0111\u1EBFn t\u1EEB s\u1EF1 b\u1EC1n b\u1EC9 v\xE0 \u0111\u1EE9c \u0111\u1ED9, kh\xF4ng ph\u1EA3i b\u1EB1ng s\u1EF1 \xE9p bu\u1ED9c."
+}, {
+    id: 3,
+    name: "Tru\xE2n",
+    vietnameseName: "Th\u1EE7y L\xF4i Tru\xE2n (Gian nan)",
+    trigrams: "Th\u1EE7y L\xF4i",
+    lines: [!1, !0, !1, !1, !1, !0],
+    judgment: "Tru\xE2n: Nguy\xEAn, Hanh, L\u1EE3i, Trinh. V\u1EADt d\u1EE5ng h\u1EEFu du v\xE3ng. L\u1EE3i ki\u1EBFn h\u1EA7u. (Gian nan: C\u1EA3, Th\xF4ng, Thu\u1EADn, B\u1EC1n. Ch\u1EDB n\xEAn v\u1ED9i ti\u1EBFn. L\u1EE3i cho vi\u1EC7c d\u1EF1ng n\xEAn b\u1EADc h\u1EA7u.)",
+    image: "V\xE2n l\xF4i, Tru\xE2n. Qu\xE2n t\u1EED d\u0129 kinh\u7EB6. (M\xE2y v\xE0 s\u1EA5m, \u0111\xF3 l\xE0 h\xECnh \u1EA3nh c\u1EE7a s\u1EF1 gian nan. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 s\u1EAFp x\u1EBFp c\xF4ng vi\u1EC7c.)",
+    advice: "Kh\u1EDFi \u0111\u1EA7u lu\xF4n \u0111\u1EA7y kh\xF3 kh\u0103n v\xE0 h\u1ED7n lo\u1EA1n. \u0110\u1EEBng n\u1EA3n l\xF2ng. H\xE3y ki\xEAn nh\u1EABn, t\xECm ki\u1EBFm s\u1EF1 gi\xFAp \u0111\u1EE1 v\xE0 s\u1EAFp x\u1EBFp l\u1EA1i m\u1ECDi th\u1EE9 tr\u01B0\u1EDBc khi h\xE0nh \u0111\u1ED9ng. \u0110\xE2y l\xE0 giai \u0111o\u1EA1n \u0111\u1EC3 x\xE2y d\u1EF1ng n\u1EC1n t\u1EA3ng v\u1EEFng ch\u1EAFc."
+}, {
+    id: 4,
+    name: "M\xF4ng",
+    vietnameseName: "S\u01A1n Th\u1EE7y M\xF4ng (M\u1EDD t\u1ED1i)",
+    trigrams: "S\u01A1n Th\u1EE7y",
+    lines: [!0, !1, !1, !1, !0, !1],
+    judgment: "M\xF4ng: Hanh. Ph\u1EC9 ng\xE3 c\u1EA7u \u0111\u1ED3ng m\xF4ng, \u0111\u1ED3ng m\xF4ng c\u1EA7u ng\xE3. (M\u1EDD t\u1ED1i: Th\xF4ng. Kh\xF4ng ph\u1EA3i ta c\u1EA7u k\u1EBB m\u1EDD t\u1ED1i, m\xE0 k\u1EBB m\u1EDD t\u1ED1i c\u1EA7u ta.)",
+    image: "S\u01A1n h\u1EA1 xu\u1EA5t tuy\u1EC1n, M\xF4ng. Qu\xE2n t\u1EED d\u0129 qu\u1EA3 h\xE0nh d\u1EE5c \u0111\u1EE9c. (D\u01B0\u1EDBi n\xFAi c\xF3 su\u1ED1i ch\u1EA3y ra, \u0111\xF3 l\xE0 s\u1EF1 m\u1EDD t\u1ED1i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 h\xE0nh \u0111\u1ED9ng quy\u1EBFt \u0111o\xE1n \u0111\u1EC3 nu\xF4i d\u01B0\u1EE1ng \u0111\u1EE9c.)",
+    advice: "S\u1EF1 thi\u1EBFu kinh nghi\u1EC7m v\xE0 non n\u1EDBt \u0111ang hi\u1EC7n h\u1EEFu. \u0110\xE2y l\xE0 l\xFAc c\u1EA7n h\u1ECDc h\u1ECFi v\xE0 t\xECm m\u1ED9t ng\u01B0\u1EDDi th\u1EA7y d\u1EABn d\u1EAFt. H\xE3y khi\xEAm t\u1ED1n, s\u1EB5n s\xE0ng l\u1EAFng nghe v\xE0 \u0111\u1EEBng h\xE0nh \u0111\u1ED9ng khi ch\u01B0a hi\u1EC3u r\xF5 v\u1EA5n \u0111\u1EC1."
+}, {
+    id: 5,
+    name: "Nhu",
+    vietnameseName: "Th\u1EE7y Thi\xEAn Nhu (Ch\u1EDD \u0111\u1EE3i)",
+    trigrams: "Th\u1EE7y Thi\xEAn",
+    lines: [!1, !0, !1, !0, !0, !0],
+    judgment: "Nhu: H\u1EEFu phu, quang hanh, trinh c\xE1t. L\u1EE3i thi\u1EC7p \u0111\u1EA1i xuy\xEAn. (Ch\u1EDD \u0111\u1EE3i: C\xF3 l\xF2ng tin, s\xE1ng s\u1EE7a, hanh th\xF4ng, b\u1EC1n v\u1EEFng th\xEC t\u1ED1t. L\u1EE3i cho vi\u1EC7c v\u01B0\u1EE3t qua s\xF4ng l\u1EDBn.)",
+    image: "V\xE2n th\u01B0\u1EDBng vu thi\xEAn, Nhu. Qu\xE2n t\u1EED d\u0129 \u1EA9m th\u1EF1c y\u1EBFn l\u1EA1c. (M\xE2y l\xEAn tr\xEAn tr\u1EDDi, \u0111\xF3 l\xE0 s\u1EF1 ch\u1EDD \u0111\u1EE3i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 \u0103n u\u1ED1ng y\u1EBFn ti\u1EC7c vui v\u1EBB.)",
+    advice: "Ki\xEAn nh\u1EABn l\xE0 ch\xECa kh\xF3a. \u0110\u1EEBng h\xE0nh \u0111\u1ED9ng v\u1ED9i v\xE0ng, h\xE3y ch\u1EDD \u0111\u1EE3i th\u1EDDi c\u01A1 ch\xEDn mu\u1ED3i. Trong l\xFAc ch\u1EDD \u0111\u1EE3i, h\xE3y c\u1EE7ng c\u1ED1 ngu\u1ED3n l\u1EF1c, chu\u1EA9n b\u1ECB tinh th\u1EA7n v\xE0 gi\u1EEF v\u1EEFng ni\u1EC1m tin v\xE0o m\u1EE5c ti\xEAu."
+}, {
+    id: 6,
+    name: "T\u1EE5ng",
+    vietnameseName: "Thi\xEAn Th\u1EE7y T\u1EE5ng (Tranh ch\u1EA5p)",
+    trigrams: "Thi\xEAn Th\u1EE7y",
+    lines: [!0, !0, !0, !1, !0, !1],
+    judgment: "T\u1EE5ng: H\u1EEFu phu, t\u1EAFc, trinh, trung c\xE1t, chung hung. L\u1EE3i ki\u1EBFn \u0111\u1EA1i nh\xE2n, b\u1EA5t l\u1EE3i thi\u1EC7p \u0111\u1EA1i xuy\xEAn. (Tranh ch\u1EA5p: C\xF3 tin t\u01B0\u1EDFng nh\u01B0ng b\u1ECB ngh\u1EBDn, gi\u1EEF v\u1EEFng th\xEC n\u1EEDa ch\u1EEBng t\u1ED1t, cu\u1ED1i c\xF9ng x\u1EA5u. L\u1EE3i cho vi\u1EC7c g\u1EB7p ng\u01B0\u1EDDi l\u1EDBn, kh\xF4ng l\u1EE3i cho vi\u1EC7c v\u01B0\u1EE3t s\xF4ng l\u1EDBn.)",
+    image: "Thi\xEAn d\u1EEF th\u1EE7y vi h\xE0nh, T\u1EE5ng. Qu\xE2n t\u1EED d\u0129 t\xE1c s\u1EF1 m\u01B0u th\u1EE7y. (Tr\u1EDDi v\xE0 n\u01B0\u1EDBc \u0111i ng\u01B0\u1EE3c nhau, \u0111\xF3 l\xE0 s\u1EF1 tranh ch\u1EA5p. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 l\xE0m vi\u1EC7c g\xEC c\u0169ng lo t\xEDnh t\u1EEB \u0111\u1EA7u.)",
+    advice: "Xung \u0111\u1ED9t v\xE0 tranh c\xE3i c\xF3 th\u1EC3 x\u1EA3y ra. H\xE3y tr\xE1nh \u0111\u1ED1i \u0111\u1EA7u tr\u1EF1c ti\u1EBFp. T\u1ED1t nh\u1EA5t l\xE0 t\xECm ng\u01B0\u1EDDi trung gian h\xF2a gi\u1EA3i. Vi\u1EC7c ti\u1EBFp t\u1EE5c tranh \u0111\u1EA5u c\xF3 th\u1EC3 d\u1EABn \u0111\u1EBFn k\u1EBFt qu\u1EA3 x\u1EA5u cho c\u1EA3 hai b\xEAn."
+}, {
+    id: 7,
+    name: "S\u01B0",
+    vietnameseName: "\u0110\u1ECBa Th\u1EE7y S\u01B0 (Qu\xE2n \u0111\u1ED9i)",
+    trigrams: "\u0110\u1ECBa Th\u1EE7y",
+    lines: [!1, !1, !1, !1, !0, !1],
+    judgment: "S\u01B0: Trinh. Tr\u01B0\u1EE3ng nh\xE2n c\xE1t, v\xF4 c\u1EEFu. (Qu\xE2n \u0111\u1ED9i: B\u1EC1n v\u1EEFng. Ng\u01B0\u1EDDi \u0111\u1EE9ng \u0111\u1EA7u c\xF3 kinh nghi\u1EC7m th\xEC t\u1ED1t, kh\xF4ng c\xF3 l\u1ED7i.)",
+    image: "\u0110\u1ECBa trung h\u1EEFu th\u1EE7y, S\u01B0. Qu\xE2n t\u1EED d\u0129 dung d\xE2n s\xFAc ch\xFAng. (Trong \u0111\u1EA5t c\xF3 n\u01B0\u1EDBc, \u0111\xF3 l\xE0 h\xECnh \u1EA3nh qu\xE2n \u0111\u1ED9i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 bao dung d\xE2n, nu\xF4i n\u1EA5ng d\xE2n ch\xFAng.)",
+    advice: "C\u1EA7n c\xF3 k\u1EF7 lu\u1EADt, t\u1ED5 ch\u1EE9c v\xE0 chi\u1EBFn l\u01B0\u1EE3c r\xF5 r\xE0ng. H\xE3y t\u1EADp h\u1EE3p l\u1EF1c l\u01B0\u1EE3ng v\xE0 h\xE0nh \u0111\u1ED9ng c\xF3 m\u1EE5c \u0111\xEDch d\u01B0\u1EDBi s\u1EF1 l\xE3nh \u0111\u1EA1o c\u1EE7a ng\u01B0\u1EDDi c\xF3 kinh nghi\u1EC7m. S\u1EF1 \u0111o\xE0n k\u1EBFt l\xE0 s\u1EE9c m\u1EA1nh \u0111\u1EC3 v\u01B0\u1EE3t qua th\u1EED th\xE1ch."
+}, {
+    id: 8,
+    name: "T\u1EF7",
+    vietnameseName: "Th\u1EE7y \u0110\u1ECBa T\u1EF7 (G\u1EA7n g\u0169i)",
+    trigrams: "Th\u1EE7y \u0110\u1ECBa",
+    lines: [!1, !0, !1, !1, !1, !1],
+    judgment: "T\u1EF7: C\xE1t. Nguy\xEAn\u7B6E, nguy\xEAn v\u0129nh trinh, v\xF4 c\u1EEFu. (G\u1EA7n g\u0169i: T\u1ED1t. Gieo qu\u1EBB l\u1EA7n \u0111\u1EA7u, gi\u1EEF s\u1EF1 b\u1EC1n v\u1EEFng l\xE2u d\xE0i th\xEC kh\xF4ng c\xF3 l\u1ED7i.)",
+    image: "\u0110\u1ECBa th\u01B0\u1EE3ng h\u1EEFu th\u1EE7y, T\u1EF7. Ti\xEAn v\u01B0\u01A1ng d\u0129 ki\u1EBFn v\u1EA1n qu\u1ED1c, th\xE2n ch\u01B0 h\u1EA7u. (Tr\xEAn \u0111\u1EA5t c\xF3 n\u01B0\u1EDBc, \u0111\xF3 l\xE0 s\u1EF1 g\u1EA7n g\u0169i. Vua \u0111\u1EDDi tr\u01B0\u1EDBc theo \u0111\xF3 m\xE0 d\u1EF1ng n\xEAn v\u1EA1n n\u01B0\u1EDBc, th\xE2n thi\u1EC7n v\u1EDBi c\xE1c ch\u01B0 h\u1EA7u.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m c\u1EE7a s\u1EF1 h\u1EE3p t\xE1c v\xE0 \u0111o\xE0n k\u1EBFt. H\xE3y t\xECm ki\u1EBFm \u0111\u1ED3ng minh v\xE0 x\xE2y d\u1EF1ng c\xE1c m\u1ED1i quan h\u1EC7 b\u1EC1n ch\u1EB7t. S\u1EF1 t\u01B0\u01A1ng tr\u1EE3 l\u1EABn nhau s\u1EBD mang l\u1EA1i th\xE0nh c\xF4ng v\xE0 h\u1EA1nh ph\xFAc."
+}, {
+    id: 9,
+    name: "Ti\u1EC3u S\xFAc",
+    vietnameseName: "Phong Thi\xEAn Ti\u1EC3u S\xFAc (S\xFAc t\xEDch nh\u1ECF)",
+    trigrams: "Phong Thi\xEAn",
+    lines: [!1, !0, !0, !0, !0, !0],
+    judgment: "Ti\u1EC3u S\xFAc: Hanh. M\u1EADt v\xE2n b\u1EA5t v\u0169, t\u1EF1 ng\xE3 t\xE2y giao. (S\xFAc t\xEDch nh\u1ECF: Hanh th\xF4ng. M\xE2y d\xE0y \u0111\u1EB7c m\xE0 kh\xF4ng m\u01B0a, t\u1EEB ph\xEDa t\xE2y \u0111\u1EBFn.)",
+    image: "Phong h\xE0nh\u5929\u4E0A, Ti\u1EC3u S\xFAc. Qu\xE2n t\u1EED d\u0129\u61FF\u6587\u5FB7. (Gi\xF3 \u0111i tr\xEAn tr\u1EDDi, \u0111\xF3 l\xE0 s\u1EF1 s\xFAc t\xEDch nh\u1ECF. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 trau d\u1ED3i v\u0103n \u0111\u1EE9c.)",
+    advice: "Nh\u1EEFng n\u1ED7 l\u1EF1c nh\u1ECF \u0111ang d\u1EA7n t\xEDch t\u1EE5 l\u1EA1i. M\u1EB7c d\xF9 k\u1EBFt qu\u1EA3 l\u1EDBn ch\u01B0a \u0111\u1EBFn ngay, nh\u01B0ng h\xE3y ki\xEAn tr\xEC. \u0110\xE2y l\xE0 th\u1EDDi gian \u0111\u1EC3 trau d\u1ED3i, ho\xE0n thi\u1EC7n c\xE1c chi ti\u1EBFt nh\u1ECF. S\u1EAFp c\xF3 s\u1EF1 thay \u0111\u1ED5i."
+}, {
+    id: 10,
+    name: "L\xFD",
+    vietnameseName: "Thi\xEAn Tr\u1EA1ch L\xFD (B\u01B0\u1EDBc \u0111i)",
+    trigrams: "Thi\xEAn Tr\u1EA1ch",
+    lines: [!0, !0, !0, !1, !0, !0],
+    judgment: "L\xFD: L\xFD h\u1ED5 v\u0129, b\u1EA5t \u0111i\u1EC7t nh\xE2n, hanh. (B\u01B0\u1EDBc \u0111i: D\u1EABm l\xEAn \u0111u\xF4i c\u1ECDp m\xE0 n\xF3 kh\xF4ng c\u1EAFn ng\u01B0\u1EDDi, hanh th\xF4ng.)",
+    image: "Th\u01B0\u1EE3ng thi\xEAn h\u1EA1 tr\u1EA1ch, L\xFD. Qu\xE2n t\u1EED d\u0129 bi\u1EC7n th\u01B0\u1EE3ng h\u1EA1, \u0111\u1ECBnh d\xE2n ch\xED. (Tr\xEAn l\xE0 tr\u1EDDi d\u01B0\u1EDBi l\xE0 \u0111\u1EA7m, \u0111\xF3 l\xE0 s\u1EF1 b\u01B0\u1EDBc \u0111i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 ph\xE2n bi\u1EC7t tr\xEAn d\u01B0\u1EDBi, x\xE1c \u0111\u1ECBnh \xFD ch\xED c\u1EE7a d\xE2n.)",
+    advice: "H\xE3y h\xE0nh \u0111\u1ED9ng c\u1EA9n tr\u1ECDng v\xE0 l\u1EC5 \u0111\u1ED9, ngay c\u1EA3 trong t\xECnh hu\u1ED1ng nguy hi\u1EC3m. C\u1EA7n tu\xE2n th\u1EE7 c\xE1c quy t\u1EAFc v\xE0 tr\u1EADt t\u1EF1 x\xE3 h\u1ED9i. S\u1EF1 kh\xE9o l\xE9o v\xE0 \u0111\xFAng m\u1EF1c s\u1EBD gi\xFAp b\u1EA1n v\u01B0\u1EE3t qua kh\xF3 kh\u0103n."
+}, {
+    id: 11,
+    name: "Th\xE1i",
+    vietnameseName: "\u0110\u1ECBa Thi\xEAn Th\xE1i (Th\xE1i b\xECnh)",
+    trigrams: "\u0110\u1ECBa Thi\xEAn",
+    lines: [!1, !1, !1, !0, !0, !0],
+    judgment: "Th\xE1i: Ti\u1EC3u v\xE3ng \u0111\u1EA1i lai, c\xE1t, hanh. (Th\xE1i b\xECnh: C\xE1i nh\u1ECF \u0111i, c\xE1i l\u1EDBn \u0111\u1EBFn, t\u1ED1t, hanh th\xF4ng.)",
+    image: "Thi\xEAn \u0111\u1ECBa giao, Th\xE1i. H\u1EADu d\u0129 t\xE0i th\xE0nh thi\xEAn \u0111\u1ECBa chi \u0111\u1EA1o. (Tr\u1EDDi \u0111\u1EA5t giao h\xF2a, \u0111\xF3 l\xE0 s\u1EF1 th\xE1i b\xECnh. B\u1EADc vua ch\xFAa theo \u0111\xF3 m\xE0 x\u1EBFp \u0111\u1EB7t th\xE0nh t\u1EF1u \u0111\u1EA1o c\u1EE7a tr\u1EDDi \u0111\u1EA5t.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi k\u1EF3 th\u1ECBnh v\u01B0\u1EE3ng, h\xF2a h\u1EE3p v\xE0 may m\u1EAFn. M\u1ECDi vi\u1EC7c \u0111\u1EC1u thu\u1EADn l\u1EE3i. H\xE3y t\u1EADn d\u1EE5ng c\u01A1 h\u1ED9i n\xE0y \u0111\u1EC3 ph\xE1t tri\u1EC3n v\xE0 chia s\u1EBB th\xE0nh c\xF4ng v\u1EDBi m\u1ECDi ng\u01B0\u1EDDi xung quanh."
+}, {
+    id: 12,
+    name: "B\u0129",
+    vietnameseName: "Thi\xEAn \u0110\u1ECBa B\u0129 (B\u1EBF t\u1EAFc)",
+    trigrams: "Thi\xEAn \u0110\u1ECBa",
+    lines: [!0, !0, !0, !1, !1, !1],
+    judgment: "B\u0129: B\u0129 chi ph\u1EC9 nh\xE2n, b\u1EA5t l\u1EE3i qu\xE2n t\u1EED trinh, \u0111\u1EA1i v\xE3ng ti\u1EC3u lai. (B\u1EBF t\u1EAFc: B\u1EBF t\u1EAFc kh\xF4ng ph\u1EA3i do con ng\u01B0\u1EDDi, kh\xF4ng l\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng c\u1EE7a ng\u01B0\u1EDDi qu\xE2n t\u1EED, c\xE1i l\u1EDBn \u0111i, c\xE1i nh\u1ECF \u0111\u1EBFn.)",
+    image: "Thi\xEAn \u0111\u1ECBa b\u1EA5t giao, B\u0129. Qu\xE2n t\u1EED d\u0129 ki\u1EC7m \u0111\u1EE9c t\u1ECB n\u1EA1n, b\u1EA5t kh\u1EA3 vinh d\u0129 l\u1ED9c. (Tr\u1EDDi \u0111\u1EA5t kh\xF4ng giao h\xF2a, \u0111\xF3 l\xE0 s\u1EF1 b\u1EBF t\u1EAFc. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 gi\u1EEF \u0111\u1EE9c ki\u1EC7m \u0111\u1EC3 tr\xE1nh n\u1EA1n, kh\xF4ng th\u1EC3 vinh hi\u1EC3n b\u1EB1ng b\u1ED5ng l\u1ED9c.)",
+    advice: "Giao ti\u1EBFp b\u1ECB gi\xE1n \u0111o\u1EA1n v\xE0 m\u1ECDi vi\u1EC7c tr\xEC tr\u1EC7. \u0110\xE2y kh\xF4ng ph\u1EA3i l\xE0 l\xFAc \u0111\u1EC3 h\xE0nh \u0111\u1ED9ng. H\xE3y lui v\u1EC1, gi\u1EEF v\u1EEFng nguy\xEAn t\u1EAFc c\u1EE7a m\xECnh v\xE0 ch\u1EDD \u0111\u1EE3i th\u1EDDi c\u01A1 t\u1ED1t h\u01A1n. Tr\xE1nh xa nh\u1EEFng \u1EA3nh h\u01B0\u1EDFng ti\xEAu c\u1EF1c."
+}, {
+    id: 13,
+    name: "\u0110\u1ED3ng Nh\xE2n",
+    vietnameseName: "Thi\xEAn H\u1ECFa \u0110\u1ED3ng Nh\xE2n (C\xF9ng ng\u01B0\u1EDDi)",
+    trigrams: "Thi\xEAn H\u1ECFa",
+    lines: [!0, !0, !0, !0, !1, !0],
+    judgment: "\u0110\u1ED3ng Nh\xE2n: \u0110\u1ED3ng nh\xE2n vu d\xE3, hanh. L\u1EE3i thi\u1EC7p \u0111\u1EA1i xuy\xEAn. L\u1EE3i qu\xE2n t\u1EED trinh. (C\xF9ng ng\u01B0\u1EDDi: C\xF9ng ng\u01B0\u1EDDi n\u01A1i \u0111\u1ED3ng n\u1ED9i, hanh th\xF4ng. L\u1EE3i cho vi\u1EC7c v\u01B0\u1EE3t s\xF4ng l\u1EDBn. L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng c\u1EE7a ng\u01B0\u1EDDi qu\xE2n t\u1EED.)",
+    image: "Thi\xEAn d\u1EEF h\u1ECFa, \u0110\u1ED3ng Nh\xE2n. Qu\xE2n t\u1EED d\u0129 lo\u1EA1i t\u1ED9c bi\u1EC7n v\u1EADt. (Tr\u1EDDi v\xE0 l\u1EEDa, \u0111\xF3 l\xE0 s\u1EF1 c\xF9ng ng\u01B0\u1EDDi. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 ph\xE2n lo\u1EA1i c\xE1c gi\u1ED1ng lo\xE0i, l\xE0m r\xF5 s\u1EF1 v\u1EADt.)",
+    advice: "S\u1EF1 h\u1EE3p t\xE1c v\xE0 c\u1ED9ng \u0111\u1ED3ng l\xE0 ch\xECa kh\xF3a th\xE0nh c\xF4ng. H\xE3y t\u1EADp h\u1EE3p m\u1ECDi ng\u01B0\u1EDDi v\xEC m\u1ED9t m\u1EE5c ti\xEAu chung. S\u1EF1 c\xF4ng b\u1EB1ng v\xE0 c\u1EDFi m\u1EDF s\u1EBD thu h\xFAt s\u1EF1 \u1EE7ng h\u1ED9 v\xE0 d\u1EABn \u0111\u1EBFn th\xE0nh t\u1EF1u l\u1EDBn."
+}, {
+    id: 14,
+    name: "\u0110\u1EA1i H\u1EEFu",
+    vietnameseName: "H\u1ECFa Thi\xEAn \u0110\u1EA1i H\u1EEFu (S\u1EDF h\u1EEFu l\u1EDBn)",
+    trigrams: "H\u1ECFa Thi\xEAn",
+    lines: [!0, !1, !0, !0, !0, !0],
+    judgment: "\u0110\u1EA1i H\u1EEFu: Nguy\xEAn hanh. (S\u1EDF h\u1EEFu l\u1EDBn: R\u1EA5t hanh th\xF4ng.)",
+    image: "H\u1ECFa t\u1EA1i thi\xEAn th\u01B0\u1EE3ng, \u0110\u1EA1i H\u1EEFu. Qu\xE2n t\u1EED d\u0129 \xE1t \xE1c d\u01B0\u01A1ng thi\u1EC7n, thu\u1EADn thi\xEAn h\u01B0u m\u1EC7nh. (L\u1EEDa \u1EDF tr\xEAn tr\u1EDDi, \u0111\xF3 l\xE0 s\u1EF1 s\u1EDF h\u1EEFu l\u1EDBn. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 ng\u0103n c\xE1i \xE1c, n\xEAu c\xE1i thi\u1EC7n, thu\u1EADn theo m\u1EC7nh t\u1ED1t c\u1EE7a tr\u1EDDi.)",
+    advice: "B\u1EA1n \u0111ang \u1EDF \u0111\u1EC9nh cao c\u1EE7a s\u1EF1 th\u1ECBnh v\u01B0\u1EE3ng v\xE0 th\xE0nh c\xF4ng. H\xE3y khi\xEAm t\u1ED1n, h\xE0o ph\xF3ng v\xE0 h\xE0nh \u0111\u1ED9ng \u0111\xFAng \u0111\u1EAFn \u0111\u1EC3 duy tr\xEC s\u1EF1 gi\xE0u c\xF3 n\xE0y. \u0110\xE2y l\xE0 l\xFAc \u0111\u1EC3 chia s\u1EBB v\xE0 l\xE0m nh\u1EEFng \u0111i\u1EC1u t\u1ED1t \u0111\u1EB9p."
+}, {
+    id: 15,
+    name: "Khi\xEAm",
+    vietnameseName: "\u0110\u1ECBa S\u01A1n Khi\xEAm (Khi\xEAm t\u1ED1n)",
+    trigrams: "\u0110\u1ECBa S\u01A1n",
+    lines: [!1, !1, !1, !0, !1, !1],
+    judgment: "Khi\xEAm: Hanh. Qu\xE2n t\u1EED h\u1EEFu chung. (Khi\xEAm t\u1ED1n: Hanh th\xF4ng. Ng\u01B0\u1EDDi qu\xE2n t\u1EED s\u1EBD c\xF3 k\u1EBFt th\xFAc t\u1ED1t \u0111\u1EB9p.)",
+    image: "\u0110\u1ECBa trung h\u1EEFu s\u01A1n, Khi\xEAm. Qu\xE2n t\u1EED d\u0129 B\u1ED3i \u0111a \xEDch qu\u1EA3, x\u01B0ng v\u1EADt b\xECnh thi. (Trong \u0111\u1EA5t c\xF3 n\xFAi, \u0111\xF3 l\xE0 s\u1EF1 khi\xEAm t\u1ED1n. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 b\u1EDBt c\xE1i nhi\u1EC1u, th\xEAm c\xE1i \xEDt, c\xE2n nh\u1EAFc s\u1EF1 v\u1EADt m\xE0 ban ph\xE1t cho c\xF4ng b\u1EB1ng.)",
+    advice: "S\u1EF1 khi\xEAm t\u1ED1n s\u1EBD mang l\u1EA1i th\xE0nh c\xF4ng v\xE0 s\u1EF1 t\xF4n tr\u1ECDng. \u0110\u1EEBng khoe khoang, h\xE3y bi\u1EBFt l\u1EAFng nghe v\xE0 l\xE0m vi\u1EC7c ch\u0103m ch\u1EC9. Th\xE1i \u0111\u1ED9 khi\xEAm nh\u01B0\u1EDDng s\u1EBD gi\xFAp b\u1EA1n v\u01B0\u1EE3t qua m\u1ECDi tr\u1EDF ng\u1EA1i."
+}, {
+    id: 16,
+    name: "D\u1EF1",
+    vietnameseName: "L\xF4i \u0110\u1ECBa D\u1EF1 (Vui v\u1EBB)",
+    trigrams: "L\xF4i \u0110\u1ECBa",
+    lines: [!1, !1, !0, !1, !1, !1],
+    judgment: "D\u1EF1: L\u1EE3i ki\u1EBFn h\u1EA7u, h\xE0nh s\u01B0. (Vui v\u1EBB: L\u1EE3i cho vi\u1EC7c d\u1EF1ng n\xEAn b\u1EADc h\u1EA7u, xu\u1EA5t qu\xE2n.)",
+    image: "L\xF4i xu\u1EA5t \u0111\u1ECBa ph\u1EA5n, D\u1EF1. Ti\xEAn v\u01B0\u01A1ng d\u0129 t\xE1c nh\u1EA1c s\xF9ng \u0111\u1EE9c. (S\u1EA5m vang l\xEAn kh\u1ECFi m\u1EB7t \u0111\u1EA5t, \u0111\xF3 l\xE0 s\u1EF1 vui v\u1EBB. Vua \u0111\u1EDDi tr\u01B0\u1EDBc theo \u0111\xF3 m\xE0 l\xE0m ra \xE2m nh\u1EA1c, t\xF4n s\xF9ng \u0111\u1EE9c h\u1EA1nh.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m c\u1EE7a s\u1EF1 nhi\u1EC7t t\xECnh v\xE0 h\u1EE9ng kh\u1EDFi. H\xE3y t\u1EADn h\u01B0\u1EDFng v\xE0 lan t\u1ECFa ni\u1EC1m vui. N\u0103ng l\u01B0\u1EE3ng t\xEDch c\u1EF1c n\xE0y s\u1EBD thu h\xFAt ng\u01B0\u1EDDi kh\xE1c v\xE0 gi\xFAp b\u1EA1n d\u1EC5 d\xE0ng \u0111\u1EA1t \u0111\u01B0\u1EE3c m\u1EE5c ti\xEAu."
+}, {
+    id: 17,
+    name: "T\xF9y",
+    vietnameseName: "Tr\u1EA1ch L\xF4i T\xF9y (\u0110i theo)",
+    trigrams: "Tr\u1EA1ch L\xF4i",
+    lines: [!1, !0, !1, !1, !1, !0],
+    judgment: "T\xF9y: Nguy\xEAn, hanh, l\u1EE3i, trinh. V\xF4 c\u1EEFu. (\u0110i theo: C\u1EA3, th\xF4ng, thu\u1EADn, b\u1EC1n. Kh\xF4ng c\xF3 l\u1ED7i.)",
+    image: "Tr\u1EA1ch trung h\u1EEFu l\xF4i, T\xF9y. Qu\xE2n t\u1EED d\u0129 h\u01B0\u1EDBng h\u1ED1i nh\u1EADp y\u1EBFn t\u1EE9c. (Trong \u0111\u1EA7m c\xF3 s\u1EA5m, \u0111\xF3 l\xE0 s\u1EF1 \u0111i theo. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 chi\u1EC1u t\u1ED1i \u0111\u1EBFn th\xEC v\xE0o nh\xE0 ngh\u1EC9 ng\u01A1i.)",
+    advice: "H\xE3y linh ho\u1EA1t v\xE0 th\xEDch nghi v\u1EDBi ho\xE0n c\u1EA3nh. \u0110\xF4i khi, \u0111i theo ng\u01B0\u1EDDi kh\xE1c ho\u1EB7c thu\u1EADn theo d\xF2ng ch\u1EA3y l\xE0 l\u1EF1a ch\u1ECDn kh\xF4n ngoan. H\xE3y bi\u1EBFt khi n\xE0o c\u1EA7n d\u1EABn d\u1EAFt v\xE0 khi n\xE0o c\u1EA7n tu\xE2n theo."
+}, {
+    id: 18,
+    name: "C\u1ED5",
+    vietnameseName: "S\u01A1n Phong C\u1ED5 (S\u1EEDa \u0111\u1ED5i)",
+    trigrams: "S\u01A1n Phong",
+    lines: [!0, !1, !1, !1, !0, !0],
+    judgment: "C\u1ED5: Nguy\xEAn hanh. L\u1EE3i thi\u1EC7p \u0111\u1EA1i xuy\xEAn. (S\u1EEDa \u0111\u1ED5i: R\u1EA5t hanh th\xF4ng. L\u1EE3i cho vi\u1EC7c v\u01B0\u1EE3t s\xF4ng l\u1EDBn.)",
+    image: "S\u01A1n h\u1EA1 h\u1EEFu phong, C\u1ED5. Qu\xE2n t\u1EED d\u0129 ch\u1EA9n d\xE2n d\u1EE5c \u0111\u1EE9c. (D\u01B0\u1EDBi n\xFAi c\xF3 gi\xF3, \u0111\xF3 l\xE0 s\u1EF1 s\u1EEDa \u0111\u1ED5i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0\u632F kh\u1EDFi d\xE2n, nu\xF4i d\u01B0\u1EE1ng \u0111\u1EE9c.)",
+    advice: "\u0110\xE3 \u0111\u1EBFn l\xFAc ph\u1EA3i s\u1EEDa ch\u1EEFa nh\u1EEFng sai l\u1EA7m trong qu\xE1 kh\u1EE9. H\xE3y \u0111\u1ED1i m\u1EB7t v\u1EDBi nh\u1EEFng v\u1EA5n \u0111\u1EC1 \u0111\xE3 b\u1ECB b\u1ECF qua v\xE0 n\u1ED7 l\u1EF1c kh\u1EAFc ph\u1EE5c ch\xFAng. \u0110\xE2y l\xE0 c\u01A1 h\u1ED9i \u0111\u1EC3 l\xE0m m\u1EDBi v\xE0 t\u1EA1o ra m\u1ED9t kh\u1EDFi \u0111\u1EA7u t\u1ED1t \u0111\u1EB9p h\u01A1n."
+}, {
+    id: 19,
+    name: "L\xE2m",
+    vietnameseName: "\u0110\u1ECBa Tr\u1EA1ch L\xE2m (Gi\xE1m s\xE1t)",
+    trigrams: "\u0110\u1ECBa Tr\u1EA1ch",
+    lines: [!1, !1, !1, !1, !0, !0],
+    judgment: "L\xE2m: Nguy\xEAn, hanh, l\u1EE3i, trinh. (Gi\xE1m s\xE1t: C\u1EA3, th\xF4ng, thu\u1EADn, b\u1EC1n.)",
+    image: "Tr\u1EA1ch th\u01B0\u1EE3ng h\u1EEFu \u0111\u1ECBa, L\xE2m. Qu\xE2n t\u1EED d\u0129 gi\xE1o t\u01B0 v\xF4 c\xF9ng, dung b\u1EA3o d\xE2n v\xF4 c\u01B0\u01A1ng. (Tr\xEAn \u0111\u1EA7m c\xF3 \u0111\u1EA5t, \u0111\xF3 l\xE0 s\u1EF1 gi\xE1m s\xE1t. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 d\u1EA1y d\u1ED7, suy ngh\u0129 kh\xF4ng c\xF9ng, bao dung, b\u1EA3o v\u1EC7 d\xE2n kh\xF4ng b\u1EDD b\u1EBFn.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m \u0111\u1EC3 ti\u1EBFp c\u1EADn v\xE0 d\u1EABn d\u1EAFt ng\u01B0\u1EDDi kh\xE1c. H\xE3y th\u1EC3 hi\u1EC7n vai tr\xF2 l\xE3nh \u0111\u1EA1o c\u1EE7a b\u1EA1n m\u1ED9t c\xE1ch t\xEDch c\u1EF1c v\xE0 c\xF3 tr\xE1ch nhi\u1EC7m. S\u1EF1 quan t\xE2m v\xE0 ch\u1EC9 d\u1EABn c\u1EE7a b\u1EA1n s\u1EBD \u0111\u01B0\u1EE3c \u0111\xF3n nh\u1EADn."
+}, {
+    id: 20,
+    name: "Quan",
+    vietnameseName: "Phong \u0110\u1ECBa Quan (Quan s\xE1t)",
+    trigrams: "Phong \u0110\u1ECBa",
+    lines: [!1, !0, !0, !1, !1, !1],
+    judgment: "Quan: Qu\xE1n nhi b\u1EA5t\u8350, h\u1EEFu phu\u9852\u82E5. (Quan s\xE1t: R\u1EEDa tay m\xE0 ch\u01B0a c\xFAng t\u1EBF, c\xF3 l\xF2ng tin th\xE0nh k\xEDnh.)",
+    image: "Phong h\xE0nh \u0111\u1ECBa th\u01B0\u1EE3ng, Quan. Ti\xEAn v\u01B0\u01A1ng d\u0129 t\u1EC9nh ph\u01B0\u01A1ng quan d\xE2n thi\u1EBFt gi\xE1o. (Gi\xF3 \u0111i tr\xEAn \u0111\u1EA5t, \u0111\xF3 l\xE0 s\u1EF1 quan s\xE1t. Vua \u0111\u1EDDi tr\u01B0\u1EDBc theo \u0111\xF3 m\xE0 xem x\xE9t c\xE1c ph\u01B0\u01A1ng, quan s\xE1t d\xE2n t\xECnh \u0111\u1EC3 \u0111\u1EB7t ra s\u1EF1 d\u1EA1y d\u1ED7.)",
+    advice: "H\xE3y l\xF9i l\u1EA1i v\xE0 quan s\xE1t t\xECnh h\xECnh m\u1ED9t c\xE1ch kh\xE1ch quan tr\u01B0\u1EDBc khi h\xE0nh \u0111\u1ED9ng. \u0110\xE2y l\xE0 th\u1EDDi gian \u0111\u1EC3 suy ng\u1EABm v\xE0 \u0111\xE1nh gi\xE1, kh\xF4ng ph\u1EA3i \u0111\u1EC3 can thi\u1EC7p. Hi\u1EC3u bi\u1EBFt s\xE2u s\u1EAFc s\u1EBD \u0111\u1EBFn t\u1EEB s\u1EF1 t\u0129nh l\u1EB7ng."
+}, {
+    id: 21,
+    name: "Ph\u1EC7 H\u1EA1p",
+    vietnameseName: "H\u1ECFa L\xF4i Ph\u1EC7 H\u1EA1p (C\u1EAFn h\u1EE3p)",
+    trigrams: "H\u1ECFa L\xF4i",
+    lines: [!0, !1, !1, !1, !1, !0],
+    judgment: "Ph\u1EC7 H\u1EA1p: Hanh. L\u1EE3i d\u1EE5ng ng\u1EE5c. (C\u1EAFn h\u1EE3p: Hanh th\xF4ng. L\u1EE3i cho vi\u1EC7c d\xF9ng h\xECnh ng\u1EE5c.)",
+    image: "L\xF4i \u0111i\u1EC7n, Ph\u1EC7 H\u1EA1p. Ti\xEAn v\u01B0\u01A1ng d\u0129 minh ph\u1EA1t s\u1EAFc ph\xE1p. (S\u1EA5m v\xE0 ch\u1EDBp, \u0111\xF3 l\xE0 s\u1EF1 c\u1EAFn h\u1EE3p. Vua \u0111\u1EDDi tr\u01B0\u1EDBc theo \u0111\xF3 m\xE0 l\xE0m s\xE1ng t\u1ECF h\xECnh ph\u1EA1t, l\xE0m r\xF5 ph\xE1p lu\u1EADt.)",
+    advice: "C\u1EA7n ph\u1EA3i c\xF3 h\xE0nh \u0111\u1ED9ng quy\u1EBFt \u0111o\xE1n \u0111\u1EC3 gi\u1EA3i quy\u1EBFt m\u1ED9t v\u1EA5n \u0111\u1EC1. H\xE3y ph\xE1 v\u1EE1 nh\u1EEFng r\xE0o c\u1EA3n \u0111ang c\u1EA3n tr\u1EDF b\u1EA1n. S\u1EF1 c\xF4ng b\u1EB1ng v\xE0 ph\xE1p lu\u1EADt c\u1EA7n \u0111\u01B0\u1EE3c th\u1EF1c thi \u0111\u1EC3 l\u1EADp l\u1EA1i tr\u1EADt t\u1EF1."
+}, {
+    id: 22,
+    name: "B\xED",
+    vietnameseName: "S\u01A1n H\u1ECFa B\xED (Trang s\u1EE9c)",
+    trigrams: "S\u01A1n H\u1ECFa",
+    lines: [!0, !1, !1, !0, !1, !0],
+    judgment: "B\xED: Hanh. Ti\u1EC3u l\u1EE3i h\u1EEFu du v\xE3ng. (Trang s\u1EE9c: Hanh th\xF4ng. C\xF3 l\u1EE3i nh\u1ECF trong vi\u1EC7c \u0111i xa.)",
+    image: "S\u01A1n h\u1EA1 h\u1EEFu h\u1ECFa, B\xED. Qu\xE2n t\u1EED d\u0129 minh th\u1EE9 ch\xEDnh, v\xF4 chi\u1EBFt ng\u1EE5c. (D\u01B0\u1EDBi n\xFAi c\xF3 l\u1EEDa, \u0111\xF3 l\xE0 s\u1EF1 trang s\u1EE9c. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 l\xE0m s\xE1ng t\u1ECF c\xE1c vi\u1EC7c ch\xEDnh s\u1EF1 th\u01B0\u1EDDng ng\xE0y, kh\xF4ng d\xE1m x\xE9t x\u1EED vi\u1EC7c ki\u1EC7n t\u1EE5ng.)",
+    advice: "V\u1EBB \u0111\u1EB9p v\xE0 h\xECnh th\u1EE9c b\xEAn ngo\xE0i r\u1EA5t quan tr\u1ECDng l\xFAc n\xE0y. H\xE3y ch\xFA \xFD \u0111\u1EBFn th\u1EA9m m\u1EF9 v\xE0 c\xE1ch tr\xECnh b\xE0y. Tuy nhi\xEAn, \u0111\u1EEBng qu\xEAn r\u1EB1ng v\u1EBB \u0111\u1EB9p th\u1EF1c s\u1EF1 ph\u1EA3i \u0111i \u0111\xF4i v\u1EDBi n\u1ED9i dung v\xE0 ch\u1EA5t l\u01B0\u1EE3ng b\xEAn trong."
+}, {
+    id: 23,
+    name: "B\xE1c",
+    vietnameseName: "S\u01A1n \u0110\u1ECBa B\xE1c (T\u01B0\u1EDBc b\u1ECF)",
+    trigrams: "S\u01A1n \u0110\u1ECBa",
+    lines: [!0, !1, !1, !1, !1, !1],
+    judgment: "B\xE1c: B\u1EA5t l\u1EE3i h\u1EEFu du v\xE3ng. (T\u01B0\u1EDBc b\u1ECF: Kh\xF4ng c\xF3 l\u1EE3i khi \u0111i xa.)",
+    image: "S\u01A1n ph\u1EE5 vu \u0111\u1ECBa, B\xE1c. Th\u01B0\u1EE3ng d\u0129 h\u1EADu h\u1EA1 an\u5B85. (N\xFAi n\u4F9D v\xE0o \u0111\u1EA5t, \u0111\xF3 l\xE0 s\u1EF1 t\u01B0\u1EDBc b\u1ECF. B\u1EADc tr\xEAn theo \u0111\xF3 m\xE0 l\xE0m cho (ph\u1EA7n) d\u01B0\u1EDBi \u0111\u01B0\u1EE3c d\xE0y d\u1EB7n \u0111\u1EC3 y\xEAn \u1ED5n cho nh\xE0.)",
+    advice: "N\u1EC1n t\u1EA3ng \u0111ang b\u1ECB x\xF3i m\xF2n v\xE0 c\xF3 nguy c\u01A1 s\u1EE5p \u0111\u1ED5. \u0110\xE2y kh\xF4ng ph\u1EA3i l\xE0 l\xFAc \u0111\u1EC3 ti\u1EBFn l\xEAn. H\xE3y ch\u1EA5p nh\u1EADn s\u1EF1 tan r\xE3 v\xE0 chu\u1EA9n b\u1ECB cho m\u1ED9t chu k\u1EF3 m\u1EDBi. B\u1EA3o v\u1EC7 nh\u1EEFng g\xEC c\u1ED1t l\xF5i nh\u1EA5t."
+}, {
+    id: 24,
+    name: "Ph\u1EE5c",
+    vietnameseName: "\u0110\u1ECBa L\xF4i Ph\u1EE5c (Tr\u1EDF l\u1EA1i)",
+    trigrams: "\u0110\u1ECBa L\xF4i",
+    lines: [!1, !1, !1, !1, !1, !0],
+    judgment: "Ph\u1EE5c: Hanh. Xu\u1EA5t nh\u1EADp v\xF4 t\u1EADt, b\u1EB1ng lai v\xF4 c\u1EEFu. (Tr\u1EDF l\u1EA1i: Hanh th\xF4ng. Ra v\xE0o kh\xF4ng b\u1EC7nh t\u1EADt, b\u1EA1n b\xE8 \u0111\u1EBFn kh\xF4ng c\xF3 l\u1ED7i.)",
+    image: "L\xF4i t\u1EA1i \u0111\u1ECBa trung, Ph\u1EE5c. Ti\xEAn v\u01B0\u01A1ng d\u0129 ch\xED nh\u1EADt b\u1EBF quan, th\u01B0\u01A1ng l\u1EEF b\u1EA5t h\xE0nh, h\u1EADu b\u1EA5t t\u1EC9nh ph\u01B0\u01A1ng. (S\u1EA5m \u1EDF trong \u0111\u1EA5t, \u0111\xF3 l\xE0 s\u1EF1 tr\u1EDF l\u1EA1i. Vua \u0111\u1EDDi tr\u01B0\u1EDBc theo \u0111\xF3 m\xE0 v\xE0o ng\xE0y \u0111\xF4ng ch\xED th\xEC \u0111\xF3ng c\u1EEDa quan, kh\xE1ch bu\xF4n kh\xF4ng \u0111i, vua ch\xFAa kh\xF4ng \u0111i tu\u1EA7n c\xE1c ph\u01B0\u01A1ng.)",
+    advice: "\xC1nh s\xE1ng \u0111ang tr\u1EDF l\u1EA1i sau m\u1ED9t th\u1EDDi gian t\u0103m t\u1ED1i. \u0110\xE2y l\xE0 \u0111i\u1EC3m kh\u1EDFi \u0111\u1EA7u c\u1EE7a m\u1ED9t chu k\u1EF3 m\u1EDBi. H\xE3y h\xE0nh \u0111\u1ED9ng m\u1ED9t c\xE1ch c\u1EA9n tr\u1ECDng v\xE0 t\u1EF1 nhi\xEAn, \u0111\u1EEBng g\u01B0\u1EE3ng \xE9p. N\u0103ng l\u01B0\u1EE3ng t\xEDch c\u1EF1c \u0111ang d\u1EA7n quay v\u1EC1."
+}, {
+    id: 25,
+    name: "V\xF4 V\u1ECDng",
+    vietnameseName: "Thi\xEAn L\xF4i V\xF4 V\u1ECDng (Kh\xF4ng c\xE0n b\u1EADy)",
+    trigrams: "Thi\xEAn L\xF4i",
+    lines: [!0, !0, !0, !1, !1, !0],
+    judgment: "V\xF4 V\u1ECDng: Nguy\xEAn, hanh, l\u1EE3i, trinh. (Kh\xF4ng c\xE0n b\u1EADy: C\u1EA3, th\xF4ng, thu\u1EADn, b\u1EC1n.)",
+    image: "Thi\xEAn h\u1EA1 l\xF4i h\xE0nh, v\u1EADt d\u1EEF V\xF4 V\u1ECDng. Ti\xEAn v\u01B0\u01A1ng d\u0129 m\u1EADu \u0111\u1ED1i th\u1EDDi\u80B2 v\u1EA1n v\u1EADt. (D\u01B0\u1EDBi tr\u1EDDi c\xF3 s\u1EA5m \u0111\u1ED9ng, v\u1EA1n v\u1EADt \u0111\u1EC1u thu\u1EADn theo l\u1EBD t\u1EF1 nhi\xEAn, kh\xF4ng c\xE0n b\u1EADy. Vua \u0111\u1EDDi tr\u01B0\u1EDBc theo \u0111\xF3 m\xE0 c\u0103n c\u1EE9 v\xE0o th\u1EDDi ti\u1EBFt \u0111\u1EC3 nu\xF4i n\u1EA5ng v\u1EA1n v\u1EADt.)",
+    advice: "H\xE3y h\xE0nh \u0111\u1ED9ng m\u1ED9t c\xE1ch t\u1EF1 nhi\xEAn, ch\xE2n th\xE0nh v\xE0 kh\xF4ng toan t\xEDnh. Thu\u1EADn theo l\u1EBD tr\u1EDDi v\xE0 quy lu\u1EADt t\u1EF1 nhi\xEAn s\u1EBD mang l\u1EA1i k\u1EBFt qu\u1EA3 t\u1ED1t \u0111\u1EB9p. Tr\xE1nh nh\u1EEFng h\xE0nh \u0111\u1ED9ng gi\u1EA3 t\u1EA1o ho\u1EB7c sai tr\xE1i."
+}, {
+    id: 26,
+    name: "\u0110\u1EA1i S\xFAc",
+    vietnameseName: "S\u01A1n Thi\xEAn \u0110\u1EA1i S\xFAc (S\xFAc t\xEDch l\u1EDBn)",
+    trigrams: "S\u01A1n Thi\xEAn",
+    lines: [!0, !1, !1, !0, !0, !0],
+    judgment: "\u0110\u1EA1i S\xFAc: L\u1EE3i trinh. B\u1EA5t gia th\u1EF1c c\xE1t. L\u1EE3i thi\u1EC7p \u0111\u1EA1i xuy\xEAn. (S\xFAc t\xEDch l\u1EDBn: L\u1EE3i v\u1EC1 s\u1EF1 b\u1EC1n v\u1EEFng. Kh\xF4ng \u0103n c\u01A1m nh\xE0 l\xE0 t\u1ED1t. L\u1EE3i cho vi\u1EC7c v\u01B0\u1EE3t s\xF4ng l\u1EDBn.)",
+    image: "Thi\xEAn t\u1EA1i s\u01A1n trung, \u0110\u1EA1i S\xFAc. Qu\xE2n t\u1EED d\u0129 \u0111a\u8B58 ti\u1EC1n ng\xF4n v\xE3ng h\xE0nh, d\u0129 s\xFAc k\u1EF3 \u0111\u1EE9c. (Tr\u1EDDi \u1EDF trong n\xFAi, \u0111\xF3 l\xE0 s\u1EF1 s\xFAc t\xEDch l\u1EDBn. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 bi\u1EBFt nhi\u1EC1u l\u1EDDi n\xF3i v\xE0 vi\u1EC7c l\xE0m c\u1EE7a ng\u01B0\u1EDDi x\u01B0a \u0111\u1EC3 vun b\u1ED3i \u0111\u1EE9c c\u1EE7a m\xECnh.)",
+    advice: "B\u1EA1n \u0111ang c\xF3 ti\u1EC1m n\u0103ng v\xE0 ngu\u1ED3n l\u1EF1c to l\u1EDBn. H\xE3y ki\u1EC1m ch\u1EBF v\xE0 nu\xF4i d\u01B0\u1EE1ng n\u0103ng l\u01B0\u1EE3ng n\xE0y cho \u0111\u1EBFn khi th\u1EDDi c\u01A1 \u0111\u1EBFn. \u0110\xE2y l\xE0 l\xFAc \u0111\u1EC3 h\u1ECDc h\u1ECFi t\u1EEB qu\xE1 kh\u1EE9 v\xE0 t\xEDch l\u0169y ki\u1EBFn th\u1EE9c, \u0111\u1EE9c h\u1EA1nh."
+}, {
+    id: 27,
+    name: "Di",
+    vietnameseName: "S\u01A1n L\xF4i Di (Nu\xF4i d\u01B0\u1EE1ng)",
+    trigrams: "S\u01A1n L\xF4i",
+    lines: [!0, !1, !1, !1, !1, !0],
+    judgment: "Di: Trinh c\xE1t. Quan Di, t\u1EF1 c\u1EA7u kh\u1EA9u th\u1EF1c. (Nu\xF4i d\u01B0\u1EE1ng: B\u1EC1n v\u1EEFng th\xEC t\u1ED1t. Quan s\xE1t s\u1EF1 nu\xF4i d\u01B0\u1EE1ng, l\xE0 t\u1EF1 t\xECm c\xE1i \u0111\u1EC3 \u0103n v\xE0o mi\u1EC7ng.)",
+    image: "S\u01A1n h\u1EA1 h\u1EEFu l\xF4i, Di. Qu\xE2n t\u1EED d\u0129 th\u1EADn ng\xF4n ng\u1EEF, ti\u1EBFt \u1EA9m th\u1EF1c. (D\u01B0\u1EDBi n\xFAi c\xF3 s\u1EA5m, \u0111\xF3 l\xE0 s\u1EF1 nu\xF4i d\u01B0\u1EE1ng. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 c\u1EA9n th\u1EADn l\u1EDDi n\xF3i, ch\u1EEBng m\u1EF1c \u0103n u\u1ED1ng.)",
+    advice: 'H\xE3y ch\xFA \xFD \u0111\u1EBFn vi\u1EC7c nu\xF4i d\u01B0\u1EE1ng, c\u1EA3 v\u1EC1 th\u1EC3 ch\u1EA5t l\u1EABn tinh th\u1EA7n. C\u1EA9n tr\u1ECDng v\u1EDBi nh\u1EEFng g\xEC b\u1EA1n "ti\xEAu th\u1EE5", t\u1EEB th\u1EE9c \u0103n, l\u1EDDi n\xF3i cho \u0111\u1EBFn th\xF4ng tin. S\u1EF1 ch\u1EEBng m\u1EF1c v\xE0 kh\xF4n ngoan l\xE0 c\u1EA7n thi\u1EBFt.'
+}, {
+    id: 28,
+    name: "\u0110\u1EA1i Qu\xE1",
+    vietnameseName: "Tr\u1EA1ch Phong \u0110\u1EA1i Qu\xE1 (Qu\xE1 l\u1EDBn)",
+    trigrams: "Tr\u1EA1ch Phong",
+    lines: [!1, !0, !0, !0, !0, !1],
+    judgment: "\u0110\u1EA1i Qu\xE1: \u0110\u1ED1ng\u6861. L\u1EE3i h\u1EEFu du v\xE3ng, hanh. (Qu\xE1 l\u1EDBn: R\u01B0\u1EDDng c\u1ED9t b\u1ECB cong. L\u1EE3i cho vi\u1EC7c \u0111i xa, hanh th\xF4ng.)",
+    image: "Tr\u1EA1ch m\u1ED9t m\u1ED9c, \u0110\u1EA1i Qu\xE1. Qu\xE2n t\u1EED d\u0129 \u0111\u1ED9c l\u1EADp b\u1EA5t c\u1EE5, \u0111\u1ED9n th\u1EBF v\xF4 mu\u1ED9n. (\u0110\u1EA7m ng\u1EADp c\xE2y, \u0111\xF3 l\xE0 s\u1EF1 qu\xE1 l\u1EDBn. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 \u0111\u1EE9ng m\u1ED9t m\xECnh kh\xF4ng s\u1EE3, \u1EA9n l\xE1nh c\xF5i \u0111\u1EDDi kh\xF4ng bu\u1ED3n.)",
+    advice: "B\u1EA1n \u0111ang \u0111\u1ED1i m\u1EB7t v\u1EDBi m\u1ED9t \xE1p l\u1EF1c ho\u1EB7c t\xECnh hu\u1ED1ng qu\xE1 s\u1EE9c. C\u1EA7n ph\u1EA3i c\xF3 h\xE0nh \u0111\u1ED9ng phi th\u01B0\u1EDDng \u0111\u1EC3 gi\u1EA3i quy\u1EBFt. H\xE3y can \u0111\u1EA3m v\xE0 s\u1EB5n s\xE0ng tho\xE1t ra kh\u1ECFi nh\u1EEFng khu\xF4n kh\u1ED5 th\xF4ng th\u01B0\u1EDDng \u0111\u1EC3 t\xECm l\u1ED1i tho\xE1t."
+}, {
+    id: 29,
+    name: "Kh\u1EA3m",
+    vietnameseName: "Thu\u1EA7n Kh\u1EA3m (N\u01B0\u1EDBc)",
+    trigrams: "Th\u1EE7y Th\u1EE7y",
+    lines: [!1, !0, !1, !1, !0, !1],
+    judgment: "T\u1EADp Kh\u1EA3m: H\u1EEFu phu, duy t\xE2m hanh, h\xE0nh h\u1EEFu\u5C1A. (N\u01B0\u1EDBc ch\u1ED3ng ch\u1EA5t: C\xF3 l\xF2ng tin, ch\u1EC9 c\u1EA7n gi\u1EEF l\xF2ng th\xE0nh th\xEC hanh th\xF4ng, h\xE0nh \u0111\u1ED9ng s\u1EBD \u0111\u01B0\u1EE3c t\xE1n th\u01B0\u1EDFng.)",
+    image: "Th\u1EE7y\u6D0A\u81F3, t\u1EADp Kh\u1EA3m. Qu\xE2n t\u1EED d\u0129 th\u01B0\u1EDDng \u0111\u1EE9c h\xE0nh, t\u1EADp gi\xE1o s\u1EF1. (N\u01B0\u1EDBc ch\u1EA3y \u0111\u1EBFn li\u1EC1n li\u1EC1n, \u0111\xF3 l\xE0 s\u1EF1 ch\u1ED3ng ch\u1EA5t c\u1EE7a n\u01B0\u1EDBc. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 gi\u1EEF \u0111\u1EE9c h\u1EA1nh th\u01B0\u1EDDng xuy\xEAn, t\u1EADp luy\u1EC7n vi\u1EC7c d\u1EA1y d\u1ED7.)",
+    advice: "B\u1EA1n \u0111ang \u1EDF trong t\xECnh th\u1EBF nguy hi\u1EC3m v\xE0 kh\xF3 kh\u0103n. \u0110\u1EEBng ho\u1EA3ng s\u1EE3. H\xE3y gi\u1EEF v\u1EEFng s\u1EF1 ch\xE2n th\xE0nh v\xE0 b\xECnh t\u0129nh. Th\xEDch nghi v\u1EDBi ho\xE0n c\u1EA3nh v\xE0 h\u1ECDc h\u1ECFi t\u1EEB n\xF3, b\u1EA1n s\u1EBD t\xECm \u0111\u01B0\u1EE3c l\u1ED1i ra."
+}, {
+    id: 30,
+    name: "Ly",
+    vietnameseName: "Thu\u1EA7n Ly (L\u1EEDa)",
+    trigrams: "H\u1ECFa H\u1ECFa",
+    lines: [!0, !1, !0, !0, !1, !0],
+    judgment: "Ly: L\u1EE3i trinh, hanh. S\xFAc t\u1EABn ng\u01B0u, c\xE1t. (L\u1EEDa: L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng, hanh th\xF4ng. Nu\xF4i con b\xF2 c\xE1i hi\u1EC1n l\xE0nh th\xEC t\u1ED1t.)",
+    image: "Minh l\u01B0\u1EE1ng t\xE1c, Ly. \u0110\u1EA1i nh\xE2n d\u0129 k\u1EBF minh chi\u1EBFu vu t\u1EE9 ph\u01B0\u01A1ng. (\xC1nh s\xE1ng hai l\u1EA7n n\u1ED5i l\xEAn, \u0111\xF3 l\xE0 l\u1EEDa. B\u1EADc \u0111\u1EA1i nh\xE2n theo \u0111\xF3 m\xE0 ti\u1EBFp n\u1ED1i s\u1EF1 s\xE1ng soi kh\u1EAFp b\u1ED1n ph\u01B0\u01A1ng.)",
+    advice: "\u0110\xE2y l\xE0 l\xFAc c\u1EE7a s\u1EF1 s\xE1ng t\u1ECF, th\xF4ng su\u1ED1t v\xE0 ph\u1EE5 thu\u1ED9c. H\xE3y b\xE1m v\xE0o nh\u1EEFng g\xEC \u0111\xFAng \u0111\u1EAFn v\xE0 t\xECm ki\u1EBFm s\u1EF1 h\u1ED7 tr\u1EE3. Tr\xED tu\u1EC7 v\xE0 s\u1EF1 nh\u1EADn th\u1EE9c r\xF5 r\xE0ng s\u1EBD soi \u0111\u01B0\u1EDDng cho b\u1EA1n."
+}, {
+    id: 31,
+    name: "H\xE0m",
+    vietnameseName: "Tr\u1EA1ch S\u01A1n H\xE0m (C\u1EA3m \u1EE9ng)",
+    trigrams: "Tr\u1EA1ch S\u01A1n",
+    lines: [!1, !0, !1, !0, !1, !1],
+    judgment: "H\xE0m: Hanh. L\u1EE3i trinh. Th\u1EE7 n\u1EEF c\xE1t. (C\u1EA3m \u1EE9ng: Hanh th\xF4ng. L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng. L\u1EA5y con g\xE1i l\xE0 t\u1ED1t.)",
+    image: "S\u01A1n th\u01B0\u1EE3ng h\u1EEFu tr\u1EA1ch, H\xE0m. Qu\xE2n t\u1EED d\u0129 h\u01B0 th\u1EE5 nh\xE2n. (Tr\xEAn n\xFAi c\xF3 \u0111\u1EA7m, \u0111\xF3 l\xE0 s\u1EF1 c\u1EA3m \u1EE9ng. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 l\xF2ng kh\xF4ng \u0111\u1EC3 \u0111\xF3n nh\u1EADn ng\u01B0\u1EDDi.)",
+    advice: "S\u1EF1 thu h\xFAt v\xE0 c\u1EA3m \u1EE9ng l\u1EABn nhau \u0111ang di\u1EC5n ra m\u1ED9t c\xE1ch t\u1EF1 nhi\xEAn. H\xE3y c\u1EDFi m\u1EDF t\u1EA5m l\xF2ng \u0111\u1EC3 \u0111\xF3n nh\u1EADn nh\u1EEFng m\u1ED1i quan h\u1EC7 v\xE0 c\u01A1 h\u1ED9i m\u1EDBi. \u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m t\u1ED1t cho t\xECnh y\xEAu v\xE0 s\u1EF1 h\u1EE3p t\xE1c."
+}, {
+    id: 32,
+    name: "H\u1EB1ng",
+    vietnameseName: "L\xF4i Phong H\u1EB1ng (L\xE2u d\xE0i)",
+    trigrams: "L\xF4i Phong",
+    lines: [!0, !1, !1, !1, !0, !0],
+    judgment: "H\u1EB1ng: Hanh, v\xF4 c\u1EEFu, l\u1EE3i trinh. L\u1EE3i h\u1EEFu du v\xE3ng. (L\xE2u d\xE0i: Hanh th\xF4ng, kh\xF4ng c\xF3 l\u1ED7i, l\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng. L\u1EE3i cho vi\u1EC7c \u0111i xa.)",
+    image: "L\xF4i phong, H\u1EB1ng. Qu\xE2n t\u1EED d\u0129 l\u1EADp b\u1EA5t d\u1ECBch ph\u01B0\u01A1ng. (S\u1EA5m v\xE0 gi\xF3, \u0111\xF3 l\xE0 s\u1EF1 l\xE2u d\xE0i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 \u0111\u1EE9ng v\u1EEFng kh\xF4ng \u0111\u1ED5i ph\u01B0\u01A1ng h\u01B0\u1EDBng.)",
+    advice: "S\u1EF1 ki\xEAn tr\xEC v\xE0 b\u1EC1n b\u1EC9 s\u1EBD mang l\u1EA1i th\xE0nh c\xF4ng. H\xE3y gi\u1EEF v\u1EEFng con \u0111\u01B0\u1EDDng b\u1EA1n \u0111\xE3 ch\u1ECDn v\xE0 cam k\u1EBFt v\u1EDBi n\xF3. X\xE2y d\u1EF1ng nh\u1EEFng th\xF3i quen t\u1ED1t v\xE0 c\xE1c m\u1ED1i quan h\u1EC7 l\xE2u d\xE0i."
+}, {
+    id: 33,
+    name: "\u0110\u1ED9n",
+    vietnameseName: "Thi\xEAn S\u01A1n \u0110\u1ED9n (\u1EA8n lui)",
+    trigrams: "Thi\xEAn S\u01A1n",
+    lines: [!0, !0, !0, !0, !1, !1],
+    judgment: "\u0110\u1ED9n: Hanh. Ti\u1EC3u l\u1EE3i trinh. (\u1EA8n lui: Hanh th\xF4ng. Gi\u1EEF v\u1EEFng th\xEC c\xF3 l\u1EE3i nh\u1ECF.)",
+    image: "Thi\xEAn h\u1EA1 h\u1EEFu s\u01A1n, \u0110\u1ED9n. Qu\xE2n t\u1EED d\u0129 vi\u1EC5n ti\u1EC3u nh\xE2n, b\u1EA5t \xE1c nhi\u53B3. (D\u01B0\u1EDBi tr\u1EDDi c\xF3 n\xFAi, \u0111\xF3 l\xE0 s\u1EF1 \u1EA9n lui. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 xa l\xE1nh k\u1EBB ti\u1EC3u nh\xE2n, kh\xF4ng gh\xE9t m\xE0 nghi\xEAm.)",
+    advice: "\u0110\xE3 \u0111\u1EBFn l\xFAc r\xFAt lui m\u1ED9t c\xE1ch chi\u1EBFn l\u01B0\u1EE3c. \u0110\xE2y kh\xF4ng ph\u1EA3i l\xE0 s\u1EF1 ch\u1EA1y tr\u1ED1n, m\xE0 l\xE0 \u0111\u1EC3 b\u1EA3o to\xE0n n\u0103ng l\u01B0\u1EE3ng v\xE0 ch\u1EDD \u0111\u1EE3i th\u1EDDi c\u01A1 t\u1ED1t h\u01A1n. H\xE3y gi\u1EEF kho\u1EA3ng c\xE1ch v\u1EDBi nh\u1EEFng \u1EA3nh h\u01B0\u1EDFng ti\xEAu c\u1EF1c."
+}, {
+    id: 34,
+    name: "\u0110\u1EA1i Tr\xE1ng",
+    vietnameseName: "L\xF4i Thi\xEAn \u0110\u1EA1i Tr\xE1ng (R\u1EA5t m\u1EA1nh)",
+    trigrams: "L\xF4i Thi\xEAn",
+    lines: [!1, !1, !0, !0, !0, !0],
+    judgment: "\u0110\u1EA1i Tr\xE1ng: L\u1EE3i trinh. (R\u1EA5t m\u1EA1nh: L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng.)",
+    image: "L\xF4i t\u1EA1i thi\xEAn th\u01B0\u1EE3ng, \u0110\u1EA1i Tr\xE1ng. Qu\xE2n t\u1EED d\u0129 phi l\u1EC5 v\u1EADt l\xFD. (S\u1EA5m \u1EDF tr\xEAn tr\u1EDDi, \u0111\xF3 l\xE0 s\u1EF1 r\u1EA5t m\u1EA1nh. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 kh\xF4ng ph\u1EA3i l\u1EC5 th\xEC kh\xF4ng l\xE0m.)",
+    advice: "B\u1EA1n \u0111ang c\xF3 s\u1EE9c m\u1EA1nh v\xE0 quy\u1EC1n l\u1EF1c to l\u1EDBn. H\xE3y s\u1EED d\u1EE5ng n\xF3 m\u1ED9t c\xE1ch c\u1EA9n tr\u1ECDng v\xE0 \u0111\xFAng \u0111\u1EAFn. \u0110\u1EEBng l\u1EA1m d\u1EE5ng s\u1EE9c m\u1EA1nh v\xE0 lu\xF4n tu\xE2n th\u1EE7 c\xE1c nguy\xEAn t\u1EAFc \u0111\u1EA1o \u0111\u1EE9c."
+}, {
+    id: 35,
+    name: "T\u1EA5n",
+    vietnameseName: "H\u1ECFa \u0110\u1ECBa T\u1EA5n (Ti\u1EBFn l\xEAn)",
+    trigrams: "H\u1ECFa \u0110\u1ECBa",
+    lines: [!0, !1, !0, !1, !1, !1],
+    judgment: "T\u1EA5n: Khang h\u1EA7u d\u1EE5ng\u932B m\xE3 ph\u1ED3n\u5EB6, tr\xFA nh\u1EADt tam\u63A5. (Ti\u1EBFn l\xEAn: V\u1ECB h\u1EA7u y\xEAn \u1ED5n \u0111\u01B0\u1EE3c ban cho nhi\u1EC1u ng\u1EF1a, ban ng\xE0y ba l\u1EA7n \u0111\u01B0\u1EE3c ti\u1EBFp ki\u1EBFn.)",
+    image: "Minh xu\u1EA5t \u0111\u1ECBa th\u01B0\u1EE3ng, T\u1EA5n. Qu\xE2n t\u1EED d\u0129 t\u1EF1 chi\xEAu minh \u0111\u1EE9c. (\xC1nh s\xE1ng m\u1ECDc l\xEAn kh\u1ECFi m\u1EB7t \u0111\u1EA5t, \u0111\xF3 l\xE0 s\u1EF1 ti\u1EBFn l\xEAn. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 t\u1EF1 l\xE0m s\xE1ng \u0111\u1EE9c c\u1EE7a m\xECnh.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m \u0111\u1EC3 ti\u1EBFn l\xEAn v\xE0 ph\xE1t tri\u1EC3n. M\u1ECDi vi\u1EC7c \u0111\u1EC1u thu\u1EADn l\u1EE3i cho s\u1EF1 th\u0103ng ti\u1EBFn. H\xE3y th\u1EC3 hi\u1EC7n t\xE0i n\u0103ng c\u1EE7a b\u1EA1n v\xE0 n\u1EAFm b\u1EAFt c\u01A1 h\u1ED9i. S\u1EF1 n\u1ED7 l\u1EF1c s\u1EBD \u0111\u01B0\u1EE3c \u0111\u1EC1n \u0111\xE1p x\u1EE9ng \u0111\xE1ng."
+}, {
+    id: 36,
+    name: "Minh Di",
+    vietnameseName: "\u0110\u1ECBa H\u1ECFa Minh Di (\xC1nh s\xE1ng b\u1ECB th\u01B0\u01A1ng)",
+    trigrams: "\u0110\u1ECBa H\u1ECFa",
+    lines: [!1, !1, !1, !0, !1, !0],
+    judgment: "Minh Di: L\u1EE3i gian trinh. (\xC1nh s\xE1ng b\u1ECB th\u01B0\u01A1ng: L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng trong gian kh\xF3.)",
+    image: "Minh nh\u1EADp \u0111\u1ECBa trung, Minh Di. Qu\xE2n t\u1EED d\u0129\u8385\u773E, d\u1EE5ng h\u1ED1i nhi minh. (\xC1nh s\xE1ng \u0111i v\xE0o trong \u0111\u1EA5t, \u0111\xF3 l\xE0 s\u1EF1 \xE1nh s\xE1ng b\u1ECB th\u01B0\u01A1ng. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 cai tr\u1ECB d\xE2n ch\xFAng, d\xF9ng s\u1EF1 t\u1ED1i t\u0103m m\xE0 v\u1EABn s\xE1ng su\u1ED1t.)",
+    advice: "B\u1EA1n \u0111ang \u1EDF trong ho\xE0n c\u1EA3nh kh\xF3 kh\u0103n, n\u01A1i s\u1EF1 th\u1EADt v\xE0 l\u1EBD ph\u1EA3i b\u1ECB che khu\u1EA5t. H\xE3y che gi\u1EA5u t\xE0i n\u0103ng c\u1EE7a m\xECnh v\xE0 ki\xEAn nh\u1EABn ch\u1ECBu \u0111\u1EF1ng. \u0110\u1EEBng \u0111\u1EC3 b\u1ECB khi\xEAu kh\xEDch, h\xE3y gi\u1EEF v\u1EEFng s\u1EF1 kh\xF4n ngoan b\xEAn trong."
+}, {
+    id: 37,
+    name: "Gia Nh\xE2n",
+    vietnameseName: "Phong H\u1ECFa Gia Nh\xE2n (Ng\u01B0\u1EDDi nh\xE0)",
+    trigrams: "Phong H\u1ECFa",
+    lines: [!1, !0, !0, !0, !1, !0],
+    judgment: "Gia Nh\xE2n: L\u1EE3i n\u1EEF trinh. (Ng\u01B0\u1EDDi nh\xE0: L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng c\u1EE7a ng\u01B0\u1EDDi ph\u1EE5 n\u1EEF.)",
+    image: "Phong t\u1EF1 h\u1ECFa xu\u1EA5t, Gia Nh\xE2n. Qu\xE2n t\u1EED d\u0129 ng\xF4n h\u1EEFu v\u1EADt, nhi h\xE0nh h\u1EEFu h\u1EB1ng. (Gi\xF3 t\u1EEB l\u1EEDa m\xE0 ra, \u0111\xF3 l\xE0 ng\u01B0\u1EDDi nh\xE0. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 l\u1EDDi n\xF3i c\xF3 n\u1ED9i dung, h\xE0nh \u0111\u1ED9ng c\xF3 s\u1EF1 l\xE2u b\u1EC1n.)",
+    advice: "T\u1EADp trung v\xE0o gia \u0111\xECnh v\xE0 c\xE1c m\u1ED1i quan h\u1EC7 th\xE2n thi\u1EBFt. M\u1ED7i ng\u01B0\u1EDDi c\u1EA7n l\xE0m tr\xF2n vai tr\xF2 v\xE0 tr\xE1ch nhi\u1EC7m c\u1EE7a m\xECnh \u0111\u1EC3 t\u1EA1o n\xEAn s\u1EF1 h\xF2a h\u1EE3p. L\u1EDDi n\xF3i v\xE0 h\xE0nh \u0111\u1ED9ng nh\u1EA5t qu\xE1n l\xE0 r\u1EA5t quan tr\u1ECDng."
+}, {
+    id: 38,
+    name: "Khu\xEA",
+    vietnameseName: "H\u1ECFa Tr\u1EA1ch Khu\xEA (Tr\xE1i l\xECa)",
+    trigrams: "H\u1ECFa Tr\u1EA1ch",
+    lines: [!0, !1, !0, !1, !0, !0],
+    judgment: "Khu\xEA: Ti\u1EC3u s\u1EF1 c\xE1t. (Tr\xE1i l\xECa: Vi\u1EC7c nh\u1ECF th\xEC t\u1ED1t.)",
+    image: "Th\u01B0\u1EE3ng h\u1ECFa h\u1EA1 tr\u1EA1ch, Khu\xEA. Qu\xE2n t\u1EED d\u0129 \u0111\u1ED3ng nhi d\u1ECB. (Tr\xEAn l\xE0 l\u1EEDa d\u01B0\u1EDBi l\xE0 \u0111\u1EA7m, \u0111\xF3 l\xE0 s\u1EF1 tr\xE1i l\xECa. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 c\xF9ng trong c\xE1i kh\xE1c.)",
+    advice: "C\xF3 s\u1EF1 hi\u1EC3u l\u1EA7m v\xE0 xa c\xE1ch trong c\xE1c m\u1ED1i quan h\u1EC7. M\u1EB7c d\xF9 c\xF3 nh\u1EEFng kh\xE1c bi\u1EC7t, h\xE3y c\u1ED1 g\u1EAFng t\xECm \u0111i\u1EC3m chung v\xE0 ch\u1EA5p nh\u1EADn s\u1EF1 \u0111a d\u1EA1ng. T\u1EADp trung v\xE0o nh\u1EEFng vi\u1EC7c nh\u1ECF c\xF3 th\u1EC3 gi\xFAp h\xE0n g\u1EAFn."
+}, {
+    id: 39,
+    name: "Ki\u1EC3n",
+    vietnameseName: "Th\u1EE7y S\u01A1n Ki\u1EC3n (Nghi\xEAng, kh\xF3 kh\u0103n)",
+    trigrams: "Th\u1EE7y S\u01A1n",
+    lines: [!1, !0, !1, !0, !1, !1],
+    judgment: "Ki\u1EC3n: L\u1EE3i T\xE2y Nam, b\u1EA5t l\u1EE3i \u0110\xF4ng B\u1EAFc. L\u1EE3i ki\u1EBFn \u0111\u1EA1i nh\xE2n, trinh c\xE1t. (Kh\xF3 kh\u0103n: L\u1EE3i h\u01B0\u1EDBng T\xE2y Nam, kh\xF4ng l\u1EE3i h\u01B0\u1EDBng \u0110\xF4ng B\u1EAFc. L\u1EE3i cho vi\u1EC7c g\u1EB7p ng\u01B0\u1EDDi l\u1EDBn, b\u1EC1n v\u1EEFng th\xEC t\u1ED1t.)",
+    image: "S\u01A1n th\u01B0\u1EE3ng h\u1EEFu th\u1EE7y, Ki\u1EC3n. Qu\xE2n t\u1EED d\u0129 ph\u1EA3n th\xE2n tu \u0111\u1EE9c. (Tr\xEAn n\xFAi c\xF3 n\u01B0\u1EDBc, \u0111\xF3 l\xE0 s\u1EF1 kh\xF3 kh\u0103n. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 quay l\u1EA1i x\xE9t m\xECnh, s\u1EEDa \u0111\u1EE9c.)",
+    advice: "B\u1EA1n \u0111ang \u0111\u1ED1i m\u1EB7t v\u1EDBi tr\u1EDF ng\u1EA1i l\u1EDBn. \u0110\u1EEBng c\u1ED1 g\u1EAFng v\u01B0\u1EE3t qua m\u1ED9t m\xECnh. H\xE3y t\xECm ki\u1EBFm s\u1EF1 gi\xFAp \u0111\u1EE1 t\u1EEB ng\u01B0\u1EDDi c\xF3 kinh nghi\u1EC7m v\xE0 quay v\xE0o b\xEAn trong \u0111\u1EC3 ho\xE0n thi\u1EC7n b\u1EA3n th\xE2n. Ki\xEAn nh\u1EABn v\xE0 khi\xEAm t\u1ED1n s\u1EBD gi\xFAp b\u1EA1n t\xECm ra gi\u1EA3i ph\xE1p."
+}, {
+    id: 40,
+    name: "Gi\u1EA3i",
+    vietnameseName: "L\xF4i Th\u1EE7y Gi\u1EA3i (C\u1EDFi b\u1ECF)",
+    trigrams: "L\xF4i Th\u1EE7y",
+    lines: [!1, !1, !0, !1, !0, !1],
+    judgment: "Gi\u1EA3i: L\u1EE3i T\xE2y Nam. V\xF4 s\u1EDF v\xE3ng, k\u1EF3 lai ph\u1EE5c c\xE1t. H\u1EEFu s\u1EDF v\xE3ng, t\u1ED1c c\xE1t. (C\u1EDFi b\u1ECF: L\u1EE3i h\u01B0\u1EDBng T\xE2y Nam. Kh\xF4ng c\xF3 n\u01A1i n\xE0o \u0111\u1EC3 \u0111i, vi\u1EC7c quay tr\u1EDF l\u1EA1i l\xE0 t\u1ED1t. C\xF3 n\u01A1i \u0111\u1EC3 \u0111i, nhanh ch\xF3ng th\xEC t\u1ED1t.)",
+    image: "L\xF4i v\u0169 t\xE1c, Gi\u1EA3i. Qu\xE2n t\u1EED d\u0129 x\xE1 qu\xE1 v\u5BA5 t\u1ED9i. (S\u1EA5m m\u01B0a n\u1ED5i l\xEAn, \u0111\xF3 l\xE0 s\u1EF1 c\u1EDFi b\u1ECF. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 tha th\u1EE9 l\u1ED7i l\u1EA7m, dung th\u1EE9 t\u1ED9i \xE1c.)",
+    advice: "Kh\xF3 kh\u0103n \u0111\xE3 qua v\xE0 c\u0103ng th\u1EB3ng \u0111\u01B0\u1EE3c gi\u1EA3i t\u1ECFa. H\xE3y h\xE0nh \u0111\u1ED9ng nhanh ch\xF3ng \u0111\u1EC3 gi\u1EA3i quy\u1EBFt d\u1EE9t \u0111i\u1EC3m nh\u1EEFng v\u1EA5n \u0111\u1EC1 c\xF2n l\u1EA1i. \u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m c\u1EE7a s\u1EF1 tha th\u1EE9 v\xE0 b\u1EAFt \u0111\u1EA7u l\u1EA1i."
+}, {
+    id: 41,
+    name: "T\u1ED5n",
+    vietnameseName: "S\u01A1n Tr\u1EA1ch T\u1ED5n (B\u1EDBt \u0111i)",
+    trigrams: "S\u01A1n Tr\u1EA1ch",
+    lines: [!0, !1, !1, !1, !0, !0],
+    judgment: "T\u1ED5n: H\u1EEFu phu, nguy\xEAn c\xE1t, v\xF4 c\u1EEFu, kh\u1EA3 trinh. L\u1EE3i h\u1EEFu du v\xE3ng. (B\u1EDBt \u0111i: C\xF3 l\xF2ng tin, r\u1EA5t t\u1ED1t, kh\xF4ng c\xF3 l\u1ED7i, c\xF3 th\u1EC3 b\u1EC1n v\u1EEFng. L\u1EE3i cho vi\u1EC7c \u0111i xa.)",
+    image: "S\u01A1n h\u1EA1 h\u1EEFu tr\u1EA1ch, T\u1ED5n. Qu\xE2n t\u1EED d\u0129\uC9D5 ph\u1EABn tr\u1EA5t d\u1EE5c. (D\u01B0\u1EDBi n\xFAi c\xF3 \u0111\u1EA7m, \u0111\xF3 l\xE0 s\u1EF1 b\u1EDBt \u0111i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 ki\u1EC1m ch\u1EBF s\u1EF1 t\u1EE9c gi\u1EADn, ng\u0103n ch\u1EB7n l\xF2ng ham mu\u1ED1n.)",
+    advice: "\u0110\xF4i khi, hy sinh l\u1EE3i \xEDch tr\u01B0\u1EDBc m\u1EAFt \u0111\u1EC3 \u0111\u1EA1t \u0111\u01B0\u1EE3c \u0111i\u1EC1u l\u1EDBn lao h\u01A1n l\xE0 c\u1EA7n thi\u1EBFt. H\xE3y \u0111\u01A1n gi\u1EA3n h\xF3a cu\u1ED9c s\u1ED1ng, lo\u1EA1i b\u1ECF nh\u1EEFng th\u1EE9 kh\xF4ng c\u1EA7n thi\u1EBFt. S\u1EF1 ti\u1EBFt ch\u1EBF s\u1EBD mang l\u1EA1i l\u1EE3i \xEDch l\xE2u d\xE0i."
+}, {
+    id: 42,
+    name: "\xCDch",
+    vietnameseName: "Phong L\xF4i \xCDch (Th\xEAm v\xE0o)",
+    trigrams: "Phong L\xF4i",
+    lines: [!1, !0, !0, !1, !1, !0],
+    judgment: "\xCDch: L\u1EE3i h\u1EEFu du v\xE3ng. L\u1EE3i thi\u1EC7p \u0111\u1EA1i xuy\xEAn. (Th\xEAm v\xE0o: L\u1EE3i cho vi\u1EC7c \u0111i xa. L\u1EE3i cho vi\u1EC7c v\u01B0\u1EE3t s\xF4ng l\u1EDBn.)",
+    image: "Phong l\xF4i, \xCDch. Qu\xE2n t\u1EED d\u0129 ki\u1EBFn thi\u1EC7n t\u1EAFc thi\xEAn, h\u1EEFu qu\xE1 t\u1EAFc c\u1EA3i. (Gi\xF3 v\xE0 s\u1EA5m, \u0111\xF3 l\xE0 s\u1EF1 th\xEAm v\xE0o. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 th\u1EA5y \u0111i\u1EC1u thi\u1EC7n th\xEC l\xE0m theo, c\xF3 l\u1ED7i th\xEC s\u1EEDa \u0111\u1ED5i.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi k\u1EF3 ph\xE1t tri\u1EC3n v\xE0 m\u1EDF r\u1ED9ng. H\xE3y n\u1EAFm b\u1EAFt c\u01A1 h\u1ED9i \u0111\u1EC3 l\xE0m l\u1EE3i cho b\u1EA3n th\xE2n v\xE0 ng\u01B0\u1EDDi kh\xE1c. H\xE0nh \u0111\u1ED9ng nhanh ch\xF3ng v\xE0 quy\u1EBFt \u0111o\xE1n s\u1EBD mang l\u1EA1i k\u1EBFt qu\u1EA3 t\u1ED1t. H\xE3y lu\xF4n h\u1ECDc h\u1ECFi v\xE0 ho\xE0n thi\u1EC7n b\u1EA3n th\xE2n."
+}, {
+    id: 43,
+    name: "Qu\u1EA3i",
+    vietnameseName: "Tr\u1EA1ch Thi\xEAn Qu\u1EA3i (Quy\u1EBFt \u0111o\xE1n)",
+    trigrams: "Tr\u1EA1ch Thi\xEAn",
+    lines: [!1, !0, !0, !0, !0, !0],
+    judgment: "Qu\u1EA3i: D\u01B0\u01A1ng vu v\u01B0\u01A1ng\u5EAD. Phu\u53F7, h\u1EEFu l\u1EC7. (Quy\u1EBFt \u0111o\xE1n: T\u1ECF b\xE0y n\u01A1i s\xE2n vua. K\xEAu g\u1ECDi v\u1EDBi l\xF2ng tin, c\xF3 nguy hi\u1EC3m.)",
+    image: "Tr\u1EA1ch th\u01B0\u1EDBng vu thi\xEAn, Qu\u1EA3i. Qu\xE2n t\u1EED d\u0129 thi l\u1ED9c c\u1EADp h\u1EA1, c\u01B0 \u0111\u1EE9c\u5247\u5FCC. (\u0110\u1EA7m l\xEAn \u0111\u1EBFn tr\u1EDDi, \u0111\xF3 l\xE0 s\u1EF1 quy\u1EBFt \u0111o\xE1n. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 ban ph\xE1t b\u1ED5ng l\u1ED9c xu\u1ED1ng d\u01B0\u1EDBi, gi\u1EEF \u0111\u1EE9c th\xEC ph\u1EA3i c\u1EA9n tr\u1ECDng.)",
+    advice: "C\u1EA7n ph\u1EA3i c\xF3 h\xE0nh \u0111\u1ED9ng d\u1EE9t kho\xE1t \u0111\u1EC3 lo\u1EA1i b\u1ECF nh\u1EEFng y\u1EBFu t\u1ED1 ti\xEAu c\u1EF1c. H\xE3y c\xF4ng khai v\xE0 minh b\u1EA1ch. Tuy nhi\xEAn, h\xE0nh \u0111\u1ED9ng n\xE0y c\xF3 th\u1EC3 \u0111i k\xE8m r\u1EE7i ro, c\u1EA7n chu\u1EA9n b\u1ECB k\u1EF9 l\u01B0\u1EE1ng."
+}, {
+    id: 44,
+    name: "C\u1EA5u",
+    vietnameseName: "Thi\xEAn Phong C\u1EA5u (G\u1EB7p g\u1EE1)",
+    trigrams: "Thi\xEAn Phong",
+    lines: [!0, !0, !0, !0, !0, !1],
+    judgment: "C\u1EA5u: N\u1EEF tr\xE1ng, v\u1EADt d\u1EE5ng th\u1EE7 n\u1EEF. (G\u1EB7p g\u1EE1: Ng\u01B0\u1EDDi ph\u1EE5 n\u1EEF m\u1EA1nh m\u1EBD, kh\xF4ng n\xEAn l\u1EA5y ng\u01B0\u1EDDi ph\u1EE5 n\u1EEF n\xE0y.)",
+    image: "Thi\xEAn h\u1EA1 h\u1EEFu phong, C\u1EA5u. H\u1EADu d\u0129 thi m\u1EC7nh c\xE1o t\u1EE9 ph\u01B0\u01A1ng. (D\u01B0\u1EDBi tr\u1EDDi c\xF3 gi\xF3, \u0111\xF3 l\xE0 s\u1EF1 g\u1EB7p g\u1EE1. B\u1EADc vua ch\xFAa theo \u0111\xF3 m\xE0 ban ph\xE1t m\u1EC7nh l\u1EC7nh, c\xE1o th\u1ECB b\u1ED1n ph\u01B0\u01A1ng.)",
+    advice: "M\u1ED9t s\u1EF1 ki\u1EC7n ho\u1EB7c cu\u1ED9c g\u1EB7p g\u1EE1 b\u1EA5t ng\u1EDD x\u1EA3y ra, c\xF3 th\u1EC3 mang theo y\u1EBFu t\u1ED1 ti\xEAu c\u1EF1c ti\u1EC1m \u1EA9n. H\xE3y c\u1EA9n tr\u1ECDng v\xE0 \u0111\u1EEBng \u0111\u1EC3 b\u1ECB cu\u1ED1n theo nh\u1EEFng c\xE1m d\u1ED7 nh\u1EA5t th\u1EDDi. C\u1EA7n gi\u1EEF v\u1EEFng s\u1EF1 c\u1EA3nh gi\xE1c."
+}, {
+    id: 45,
+    name: "T\u1EE5y",
+    vietnameseName: "Tr\u1EA1ch \u0110\u1ECBa T\u1EE5y (T\u1EE5 t\u1EADp)",
+    trigrams: "Tr\u1EA1ch \u0110\u1ECBa",
+    lines: [!1, !0, !0, !1, !1, !1],
+    judgment: "T\u1EE5y: Hanh. V\u01B0\u01A1ng c\xE1ch h\u1EEFu mi\u1EBFu. L\u1EE3i ki\u1EBFn \u0111\u1EA1i nh\xE2n, hanh, l\u1EE3i trinh. (T\u1EE5 t\u1EADp: Hanh th\xF4ng. Vua \u0111\u1EBFn nh\xE0 mi\u1EBFu. L\u1EE3i cho vi\u1EC7c g\u1EB7p ng\u01B0\u1EDDi l\u1EDBn, hanh th\xF4ng, l\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng.)",
+    image: "Tr\u1EA1ch th\u01B0\u1EDBng vu \u0111\u1ECBa, T\u1EE5y. Qu\xE2n t\u1EED d\u0129 tr\u1EEB nhung kh\xED, gi\u1EDBi b\u1EA5t\u865E. (\u0110\u1EA7m \u1EDF tr\xEAn \u0111\u1EA5t, \u0111\xF3 l\xE0 s\u1EF1 t\u1EE5 t\u1EADp. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 s\u1EEDa sang binh kh\xED, \u0111\u1EC1 ph\xF2ng nh\u1EEFng vi\u1EC7c b\u1EA5t tr\u1EAFc.)",
+    advice: "\u0110\xE2y l\xE0 l\xFAc \u0111\u1EC3 t\u1EADp h\u1EE3p m\u1ECDi ng\u01B0\u1EDDi l\u1EA1i v\u1EDBi nhau. S\u1EF1 \u0111o\xE0n k\u1EBFt s\u1EBD t\u1EA1o ra s\u1EE9c m\u1EA1nh to l\u1EDBn. H\xE3y chu\u1EA9n b\u1ECB cho c\xE1c s\u1EF1 ki\u1EC7n chung v\xE0 \u0111\u1EC1 ph\xF2ng nh\u1EEFng r\u1EE7i ro c\xF3 th\u1EC3 ph\xE1t sinh."
+}, {
+    id: 46,
+    name: "Th\u0103ng",
+    vietnameseName: "\u0110\u1ECBa Phong Th\u0103ng (\u0110i l\xEAn)",
+    trigrams: "\u0110\u1ECBa Phong",
+    lines: [!1, !1, !1, !1, !0, !0],
+    judgment: "Th\u0103ng: Nguy\xEAn hanh. D\u1EE5ng ki\u1EBFn \u0111\u1EA1i nh\xE2n, v\u1EADt tu\u1EA5t. Nam chinh c\xE1t. (\u0110i l\xEAn: R\u1EA5t hanh th\xF4ng. D\xF9ng \u0111\u1EC3 g\u1EB7p ng\u01B0\u1EDDi l\u1EDBn, \u0111\u1EEBng lo l\u1EAFng. \u0110i v\u1EC1 ph\u01B0\u01A1ng Nam l\xE0 t\u1ED1t.)",
+    image: "\u0110\u1ECBa trung sinh m\u1ED9c, Th\u0103ng. Qu\xE2n t\u1EED d\u0129 thu\u1EADn \u0111\u1EE9c, t\xEDch ti\u1EC3u d\u0129 cao \u0111\u1EA1i. (Trong \u0111\u1EA5t m\u1ECDc l\xEAn c\xE2y, \u0111\xF3 l\xE0 s\u1EF1 \u0111i l\xEAn. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 thu\u1EADn theo \u0111\u1EE9c, t\xEDch ch\u1EE9a c\xE1i nh\u1ECF \u0111\u1EC3 l\xE0m n\xEAn c\xE1i cao l\u1EDBn.)",
+    advice: "N\u1ED7 l\u1EF1c c\u1EE7a b\u1EA1n \u0111ang \u0111\u01B0\u1EE3c \u0111\u1EC1n \u0111\xE1p v\xE0 b\u1EA1n \u0111ang tr\xEAn \u0111\xE0 th\u0103ng ti\u1EBFn. H\xE3y ki\xEAn tr\xEC v\xE0 thu\u1EADn theo qu\xE1 tr\xECnh ph\xE1t tri\u1EC3n t\u1EF1 nhi\xEAn. Th\xE0nh c\xF4ng \u0111\u1EBFn t\u1EEB vi\u1EC7c t\xEDch l\u0169y nh\u1EEFng b\u01B0\u1EDBc ti\u1EBFn nh\u1ECF."
+}, {
+    id: 47,
+    name: "Kh\u1ED1n",
+    vietnameseName: "Tr\u1EA1ch Th\u1EE7y Kh\u1ED1n (C\xF9ng kh\u1ED1n)",
+    trigrams: "Tr\u1EA1ch Th\u1EE7y",
+    lines: [!1, !0, !1, !1, !0, !1],
+    judgment: "Kh\u1ED1n: Hanh, trinh. \u0110\u1EA1i nh\xE2n c\xE1t, v\xF4 c\u1EEFu. H\u1EEFu ng\xF4n b\u1EA5t t\xEDn. (C\xF9ng kh\u1ED1n: Hanh th\xF4ng, b\u1EC1n v\u1EEFng. Ng\u01B0\u1EDDi l\u1EDBn th\xEC t\u1ED1t, kh\xF4ng c\xF3 l\u1ED7i. C\xF3 l\u1EDDi n\xF3i nh\u01B0ng kh\xF4ng \u0111\u01B0\u1EE3c tin.)",
+    image: "Tr\u1EA1ch v\xF4 th\u1EE7y, Kh\u1ED1n. Qu\xE2n t\u1EED d\u0129 tr\xED m\u1EC7nh\u9042 ch\xED. (\u0110\u1EA7m kh\xF4ng c\xF3 n\u01B0\u1EDBc, \u0111\xF3 l\xE0 s\u1EF1 c\xF9ng kh\u1ED1n. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 coi th\u01B0\u1EDDng t\xEDnh m\u1EA1ng \u0111\u1EC3 theo \u0111u\u1ED5i ch\xED h\u01B0\u1EDBng.)",
+    advice: "B\u1EA1n \u0111ang g\u1EB7p ph\u1EA3i ho\xE0n c\u1EA3nh kh\xF3 kh\u0103n v\xE0 b\u1ECB h\u1EA1n ch\u1EBF. \u0110\u1EEBng m\u1EA5t ni\u1EC1m tin. \u0110\xE2y l\xE0 th\u1EED th\xE1ch cho \xFD ch\xED c\u1EE7a b\u1EA1n. H\xE3y gi\u1EEF v\u1EEFng nguy\xEAn t\u1EAFc v\xE0 m\u1EE5c ti\xEAu, ngay c\u1EA3 khi kh\xF4ng ai tin b\u1EA1n."
+}, {
+    id: 48,
+    name: "T\u1EC9nh",
+    vietnameseName: "Th\u1EE7y Phong T\u1EC9nh (C\xE1i gi\u1EBFng)",
+    trigrams: "Th\u1EE7y Phong",
+    lines: [!1, !0, !1, !1, !0, !0],
+    judgment: "T\u1EC9nh: C\u1EA3i \u1EA5p b\u1EA5t c\u1EA3i t\u1EC9nh, v\xF4 t\xE1ng v\xF4 \u0111\u1EAFc. (C\xE1i gi\u1EBFng: Thay \u0111\u1ED5i l\xE0ng x\xF3m ch\u1EE9 kh\xF4ng thay \u0111\u1ED5i c\xE1i gi\u1EBFng, kh\xF4ng m\u1EA5t kh\xF4ng \u0111\u01B0\u1EE3c.)",
+    image: "M\u1ED9c th\u01B0\u1EE3ng h\u1EEFu th\u1EE7y, T\u1EC9nh. Qu\xE2n t\u1EED d\u0129 lao d\xE2n khuy\u1EBFn t\u01B0\u1EDBng. (Tr\xEAn c\xE2y c\xF3 n\u01B0\u1EDBc, \u0111\xF3 l\xE0 c\xE1i gi\u1EBFng. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 khuy\xEAn d\xE2n l\xE0m l\u1EE5ng, khuy\u1EBFn kh\xEDch gi\xFAp \u0111\u1EE1 nhau.)",
+    advice: "Ngu\u1ED3n l\u1EF1c c\u1ED1t l\xF5i c\u1EE7a b\u1EA1n v\u1EABn c\xF2n \u0111\xF3, d\xF9 ho\xE0n c\u1EA3nh b\xEAn ngo\xE0i thay \u0111\u1ED5i. H\xE3y ch\u0103m s\xF3c v\xE0 duy tr\xEC nh\u1EEFng gi\xE1 tr\u1ECB n\u1EC1n t\u1EA3ng. Chia s\u1EBB ngu\u1ED3n l\u1EF1c n\xE0y v\u1EDBi c\u1ED9ng \u0111\u1ED3ng s\u1EBD mang l\u1EA1i l\u1EE3i \xEDch cho t\u1EA5t c\u1EA3."
+}, {
+    id: 49,
+    name: "C\xE1ch",
+    vietnameseName: "Tr\u1EA1ch H\u1ECFa C\xE1ch (C\u1EA3i c\xE1ch)",
+    trigrams: "Tr\u1EA1ch H\u1ECFa",
+    lines: [!1, !0, !0, !0, !1, !0],
+    judgment: "C\xE1ch: D\u0129 nh\u1EADt\u8FFA phu. Nguy\xEAn, hanh, l\u1EE3i, trinh. H\u1ED1i vong. (C\u1EA3i c\xE1ch: \u0110\u1EBFn ng\xE0y th\xEC m\u1EDBi \u0111\u01B0\u1EE3c tin. C\u1EA3, th\xF4ng, thu\u1EADn, b\u1EC1n. S\u1EF1 h\u1ED1i ti\u1EBFc m\u1EA5t \u0111i.)",
+    image: "Tr\u1EA1ch trung h\u1EEFu h\u1ECFa, C\xE1ch. Qu\xE2n t\u1EED d\u0129 tr\u1ECB l\u1ECBch minh th\u1EDDi. (Trong \u0111\u1EA7m c\xF3 l\u1EEDa, \u0111\xF3 l\xE0 s\u1EF1 c\u1EA3i c\xE1ch. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 s\u1EEDa sang l\u1ECBch, l\xE0m r\xF5 th\u1EDDi gian.)",
+    advice: "M\u1ED9t cu\u1ED9c c\xE1ch m\u1EA1ng ho\u1EB7c s\u1EF1 thay \u0111\u1ED5i l\u1EDBn l\xE0 c\u1EA7n thi\u1EBFt. H\xE3y lo\u1EA1i b\u1ECF c\xE1i c\u0169 \u0111\u1EC3 nh\u01B0\u1EDDng ch\u1ED7 cho c\xE1i m\u1EDBi. H\xE0nh \u0111\u1ED9ng ph\u1EA3i \u0111\u01B0\u1EE3c chu\u1EA9n b\u1ECB k\u1EF9 l\u01B0\u1EE1ng v\xE0 th\u1EF1c hi\u1EC7n \u0111\xFAng th\u1EDDi \u0111i\u1EC3m \u0111\u1EC3 \u0111\u1EA1t \u0111\u01B0\u1EE3c th\xE0nh c\xF4ng."
+}, {
+    id: 50,
+    name: "\u0110\u1EC9nh",
+    vietnameseName: "H\u1ECFa Phong \u0110\u1EC9nh (C\xE1i \u0111\u1EC9nh)",
+    trigrams: "H\u1ECFa Phong",
+    lines: [!0, !1, !0, !1, !0, !0],
+    judgment: "\u0110\u1EC9nh: Nguy\xEAn c\xE1t, hanh. (C\xE1i \u0111\u1EC9nh: R\u1EA5t t\u1ED1t, hanh th\xF4ng.)",
+    image: "M\u1ED9c th\u01B0\u1EE3ng h\u1EEFu h\u1ECFa, \u0110\u1EC9nh. Qu\xE2n t\u1EED d\u0129 ch\xEDnh v\u1ECB\u51DD m\u1EC7nh. (Tr\xEAn c\xE2y c\xF3 l\u1EEDa, \u0111\xF3 l\xE0 c\xE1i \u0111\u1EC9nh. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 gi\u1EEF v\u1EEFng ng\xF4i v\u1ECB, l\xE0m m\u1EC7nh l\u1EC7nh \u0111\u01B0\u1EE3c v\u1EEFng ch\u1EAFc.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m c\u1EE7a s\u1EF1 th\xE0nh t\u1EF1u v\xE0 nu\xF4i d\u01B0\u1EE1ng t\xE0i n\u0103ng. Gi\u1ED1ng nh\u01B0 c\xE1i \u0111\u1EC9nh d\xF9ng \u0111\u1EC3 n\u1EA5u th\u1EE9c \u0103n, h\xE3y bi\u1EBFn nh\u1EEFng g\xEC th\xF4 s\u01A1 th\xE0nh tinh hoa. C\u1EE7ng c\u1ED1 v\u1ECB th\u1EBF v\xE0 \u0111\xF3ng g\xF3p cho c\u1ED9ng \u0111\u1ED3ng."
+}, {
+    id: 51,
+    name: "Ch\u1EA5n",
+    vietnameseName: "Thu\u1EA7n Ch\u1EA5n (S\u1EA5m)",
+    trigrams: "L\xF4i L\xF4i",
+    lines: [!1, !1, !0, !1, !1, !0],
+    judgment: "Ch\u1EA5n: Hanh. Ch\u1EA5n lai\u8669\u8669, ti\u1EBFu ng\xF4n\u555E\u555E. (S\u1EA5m: Hanh th\xF4ng. S\u1EA5m \u0111\u1EBFn g\xE2y s\u1EE3 h\xE3i, sau \u0111\xF3 l\xE0 ti\u1EBFng c\u01B0\u1EDDi n\xF3i vui v\u1EBB.)",
+    image: "\u6D0A\u96F7, Ch\u1EA5n. Qu\xE2n t\u1EED d\u0129 kh\u1EE7ng c\u1EE5 tu t\u1EC9nh. (S\u1EA5m n\u1ED5 li\u1EC1n li\u1EC1n, \u0111\xF3 l\xE0 s\u1EA5m. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 lo s\u1EE3 \u0111\u1EC3 s\u1EEDa m\xECnh, x\xE9t m\xECnh.)",
+    advice: "M\u1ED9t s\u1EF1 ki\u1EC7n g\xE2y s\u1ED1c ho\u1EB7c b\u1EA5t ng\u1EDD x\u1EA3y ra, bu\u1ED9c b\u1EA1n ph\u1EA3i th\u1EE9c t\u1EC9nh. \u0110\u1EEBng ho\u1EA3ng s\u1EE3, h\xE3y xem \u0111\xE2y l\xE0 c\u01A1 h\u1ED9i \u0111\u1EC3 xem x\xE9t l\u1EA1i b\u1EA3n th\xE2n v\xE0 con \u0111\u01B0\u1EDDng c\u1EE7a m\xECnh. S\u1EF1 thay \u0111\u1ED5i \u0111\u1ED9t ng\u1ED9t n\xE0y c\xF3 th\u1EC3 mang l\u1EA1i k\u1EBFt qu\u1EA3 t\xEDch c\u1EF1c."
+}, {
+    id: 52,
+    name: "C\u1EA5n",
+    vietnameseName: "Thu\u1EA7n C\u1EA5n (N\xFAi)",
+    trigrams: "S\u01A1n S\u01A1n",
+    lines: [!0, !1, !1, !0, !1, !1],
+    judgment: "C\u1EA5n: C\u1EA5n k\u1EF3 b\u1ED1i, b\u1EA5t ho\u1EA1ch k\u1EF3 th\xE2n. (N\xFAi: Ng\u1EEBng \u1EDF c\xE1i l\u01B0ng, kh\xF4ng th\u1EA5y \u0111\u01B0\u1EE3c th\xE2n m\xECnh.)",
+    image: "Ki\xEAm s\u01A1n, C\u1EA5n. Qu\xE2n t\u1EED d\u0129 t\u01B0 b\u1EA5t xu\u1EA5t k\u1EF3 v\u1ECB. (Hai n\xFAi li\u1EC1n nhau, \u0111\xF3 l\xE0 n\xFAi. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 suy ngh\u0129 kh\xF4ng v\u01B0\u1EE3t ra kh\u1ECFi v\u1ECB tr\xED c\u1EE7a m\xECnh.)",
+    advice: "\u0110\xE2y l\xE0 l\xFAc c\u1EA7n d\u1EEBng l\u1EA1i v\xE0 t\u0129nh t\xE2m. H\xE3y t\u1EADp trung v\xE0o hi\u1EC7n t\u1EA1i v\xE0 \u0111\u1EEBng \u0111\u1EC3 suy ngh\u0129 lang thang. S\u1EF1 t\u0129nh l\u1EB7ng s\u1EBD gi\xFAp b\u1EA1n c\xF3 \u0111\u01B0\u1EE3c s\u1EF1 b\xECnh an v\xE0 s\xE1ng su\u1ED1t. Bi\u1EBFt khi n\xE0o n\xEAn d\u1EEBng l\u1EA1i l\xE0 m\u1ED9t tr\xED tu\u1EC7 l\u1EDBn."
+}, {
+    id: 53,
+    name: "Ti\u1EC7m",
+    vietnameseName: "Phong S\u01A1n Ti\u1EC7m (Ti\u1EBFn d\u1EA7n)",
+    trigrams: "Phong S\u01A1n",
+    lines: [!1, !0, !0, !0, !1, !1],
+    judgment: "Ti\u1EC7m: N\u1EEF quy c\xE1t, l\u1EE3i trinh. (Ti\u1EBFn d\u1EA7n: Con g\xE1i v\u1EC1 nh\xE0 ch\u1ED3ng l\xE0 t\u1ED1t, l\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng.)",
+    image: "S\u01A1n th\u01B0\u1EE3ng h\u1EEFu m\u1ED9c, Ti\u1EC7m. Qu\xE2n t\u1EED d\u0129 c\u01B0 hi\u1EC1n \u0111\u1EE9c thi\u1EC7n t\u1EE5c. (Tr\xEAn n\xFAi c\xF3 c\xE2y, \u0111\xF3 l\xE0 s\u1EF1 ti\u1EBFn d\u1EA7n. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 \u1EDF n\u01A1i c\xF3 \u0111\u1EE9c hi\u1EC1n, l\xE0m cho phong t\u1EE5c \u0111\u01B0\u1EE3c t\u1ED1t \u0111\u1EB9p.)",
+    advice: "Th\xE0nh c\xF4ng \u0111\u1EBFn t\u1EEB s\u1EF1 ph\xE1t tri\u1EC3n t\u1EEB t\u1EEB v\xE0 v\u1EEFng ch\u1EAFc. \u0110\u1EEBng n\xF3ng v\u1ED9i. H\xE3y tu\xE2n theo c\xE1c quy tr\xECnh v\xE0 \u0111\u1EC3 m\u1ECDi vi\u1EC7c di\u1EC5n ra m\u1ED9t c\xE1ch t\u1EF1 nhi\xEAn. \u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m t\u1ED1t cho c\xE1c m\u1ED1i quan h\u1EC7 l\xE2u d\xE0i."
+}, {
+    id: 54,
+    name: "Quy Mu\u1ED9i",
+    vietnameseName: "L\xF4i Tr\u1EA1ch Quy Mu\u1ED9i (Em g\xE1i v\u1EC1 nh\xE0 ch\u1ED3ng)",
+    trigrams: "L\xF4i Tr\u1EA1ch",
+    lines: [!1, !1, !0, !1, !0, !0],
+    judgment: "Quy Mu\u1ED9i: Chinh hung, v\xF4 s\u1EDF l\u1EE3i. (Em g\xE1i v\u1EC1 nh\xE0 ch\u1ED3ng: \u0110i th\xEC x\u1EA5u, kh\xF4ng c\xF3 g\xEC l\u1EE3i.)",
+    image: "Tr\u1EA1ch th\u01B0\u1EE3ng h\u1EEFu l\xF4i, Quy Mu\u1ED9i. Qu\xE2n t\u1EED d\u0129 v\u0129nh chung tri t\u1EC7. (Tr\xEAn \u0111\u1EA7m c\xF3 s\u1EA5m, \u0111\xF3 l\xE0 em g\xE1i v\u1EC1 nh\xE0 ch\u1ED3ng. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 bi\u1EBFt c\xE1i k\u1EBFt l\xE2u d\xE0i \u0111\u1EC3 th\u1EA5y \u0111\u01B0\u1EE3c nh\u1EEFng sai l\u1EA7m.)",
+    advice: "M\u1ED9t m\u1ED1i quan h\u1EC7 ho\u1EB7c t\xECnh hu\u1ED1ng kh\xF4ng ph\xF9 h\u1EE3p c\xF3 th\u1EC3 x\u1EA3y ra. H\xE3y c\u1EA9n tr\u1ECDng v\xE0 suy ngh\u0129 v\u1EC1 h\u1EADu qu\u1EA3 l\xE2u d\xE0i. H\xE0nh \u0111\u1ED9ng d\u1EF1a tr\xEAn s\u1EF1 b\u1ED1c \u0111\u1ED3ng ho\u1EB7c kh\xF4ng \u0111\xFAng tr\u1EADt t\u1EF1 s\u1EBD d\u1EABn \u0111\u1EBFn k\u1EBFt qu\u1EA3 kh\xF4ng t\u1ED1t."
+}, {
+    id: 55,
+    name: "Phong",
+    vietnameseName: "L\xF4i H\u1ECFa Phong (Th\u1ECBnh \u0111\u1EA1i)",
+    trigrams: "L\xF4i H\u1ECFa",
+    lines: [!1, !1, !0, !0, !1, !0],
+    judgment: "Phong: Hanh. V\u01B0\u01A1ng c\xE1ch chi, v\u1EADt \u01B0u, nghi nh\u1EADt trung. (Th\u1ECBnh \u0111\u1EA1i: Hanh th\xF4ng. Vua \u0111\u1EBFn \u0111\xF3, \u0111\u1EEBng lo l\u1EAFng, n\xEAn nh\u01B0 m\u1EB7t tr\u1EDDi gi\u1EEFa tr\u01B0a.)",
+    image: "L\xF4i \u0111i\u1EC7n giai ch\xED, Phong. Qu\xE2n t\u1EED d\u0129 chi\u1EBFt ng\u1EE5c\u81F4\u5211. (S\u1EA5m ch\u1EDBp \u0111\u1EC1u \u0111\u1EBFn, \u0111\xF3 l\xE0 s\u1EF1 th\u1ECBnh \u0111\u1EA1i. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 x\xE9t x\u1EED vi\u1EC7c ki\u1EC7n t\u1EE5ng, thi h\xE0nh h\xECnh ph\u1EA1t.)",
+    advice: "B\u1EA1n \u0111ang \u1EDF \u0111\u1EC9nh cao c\u1EE7a s\u1EF1 sung t\xFAc v\xE0 th\xE0nh c\xF4ng. H\xE3y t\u1EADn h\u01B0\u1EDFng kho\u1EA3nh kh\u1EAFc n\xE0y, nh\u01B0ng c\u0169ng nh\u1EADn ra r\u1EB1ng n\xF3 kh\xF4ng k\xE9o d\xE0i m\xE3i m\xE3i. H\xE3y h\xE0nh \u0111\u1ED9ng quy\u1EBFt \u0111o\xE1n v\xE0 c\xF4ng b\u1EB1ng. Chu\u1EA9n b\u1ECB cho s\u1EF1 thay \u0111\u1ED5i s\u1EAFp t\u1EDBi."
+}, {
+    id: 56,
+    name: "L\u1EEF",
+    vietnameseName: "H\u1ECFa S\u01A1n L\u1EEF (L\u1EEF h\xE0nh)",
+    trigrams: "H\u1ECFa S\u01A1n",
+    lines: [!0, !1, !0, !0, !1, !1],
+    judgment: "L\u1EEF: Ti\u1EC3u hanh. L\u1EEF trinh c\xE1t. (L\u1EEF h\xE0nh: Hanh th\xF4ng nh\u1ECF. Ng\u01B0\u1EDDi \u0111i \u0111\u01B0\u1EDDng gi\u1EEF v\u1EEFng th\xEC t\u1ED1t.)",
+    image: "S\u01A1n th\u01B0\u1EE3ng h\u1EEFu h\u1ECFa, L\u1EEF. Qu\xE2n t\u1EED d\u0129 minh th\u1EADn d\u1EE5ng h\xECnh, nhi b\u1EA5t l\u01B0u ng\u1EE5c. (Tr\xEAn n\xFAi c\xF3 l\u1EEDa, \u0111\xF3 l\xE0 s\u1EF1 l\u1EEF h\xE0nh. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 s\xE1ng su\u1ED1t, c\u1EA9n th\u1EADn khi d\xF9ng h\xECnh ph\u1EA1t, v\xE0 kh\xF4ng giam gi\u1EEF t\xF9 nh\xE2n.)",
+    advice: "B\u1EA1n \u0111ang \u1EDF trong m\u1ED9t ho\xE0n c\u1EA3nh xa l\u1EA1 ho\u1EB7c t\u1EA1m th\u1EDDi. H\xE3y khi\xEAm t\u1ED1n, c\u1EA9n tr\u1ECDng v\xE0 th\xEDch nghi. \u0110\u1EEBng qu\xE1 g\u1EAFn b\xF3 v\u1EDBi b\u1EA5t c\u1EE9 \u0111i\u1EC1u g\xEC. Gi\u1EEF th\xE1i \u0111\u1ED9 \u0111\xFAng m\u1EF1c s\u1EBD gi\xFAp b\u1EA1n an to\xE0n trong cu\u1ED9c h\xE0nh tr\xECnh."
+}, {
+    id: 57,
+    name: "T\u1ED1n",
+    vietnameseName: "Thu\u1EA7n T\u1ED1n (Gi\xF3)",
+    trigrams: "Phong Phong",
+    lines: [!1, !0, !0, !1, !0, !0],
+    judgment: "T\u1ED1n: Ti\u1EC3u hanh. L\u1EE3i h\u1EEFu du v\xE3ng. L\u1EE3i ki\u1EBFn \u0111\u1EA1i nh\xE2n. (Gi\xF3: Hanh th\xF4ng nh\u1ECF. L\u1EE3i cho vi\u1EC7c \u0111i xa. L\u1EE3i cho vi\u1EC7c g\u1EB7p ng\u01B0\u1EDDi l\u1EDBn.)",
+    image: "T\xF9y phong, T\u1ED1n. Qu\xE2n t\u1EED d\u0129 th\xE2n m\u1EC7nh h\xE0nh s\u1EF1. (Gi\xF3 theo nhau, \u0111\xF3 l\xE0 gi\xF3. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 nh\u1EAFc l\u1EA1i m\u1EC7nh l\u1EC7nh, thi h\xE0nh c\xF4ng vi\u1EC7c.)",
+    advice: "H\xE3y h\xE0nh \u0111\u1ED9ng m\u1ED9t c\xE1ch nh\u1EB9 nh\xE0ng, uy\u1EC3n chuy\u1EC3n v\xE0 th\xE2m nh\u1EADp nh\u01B0 gi\xF3. \u1EA2nh h\u01B0\u1EDFng c\u1EE7a b\u1EA1n \u0111\u1EBFn t\u1EEB s\u1EF1 tinh t\u1EBF v\xE0 l\u1EB7p \u0111i l\u1EB7p l\u1EA1i. H\xE3y tu\xE2n theo s\u1EF1 ch\u1EC9 d\u1EABn v\xE0 truy\u1EC1n \u0111\u1EA1t th\xF4ng \u0111i\u1EC7p m\u1ED9t c\xE1ch r\xF5 r\xE0ng."
+}, {
+    id: 58,
+    name: "\u0110o\xE0i",
+    vietnameseName: "Thu\u1EA7n \u0110o\xE0i (\u0110\u1EA7m)",
+    trigrams: "Tr\u1EA1ch Tr\u1EA1ch",
+    lines: [!1, !0, !0, !1, !0, !0],
+    judgment: "\u0110o\xE0i: Hanh. L\u1EE3i trinh. (\u0110\u1EA7m: Hanh th\xF4ng. L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng.)",
+    image: "L\u1EC7 tr\u1EA1ch, \u0110o\xE0i. Qu\xE2n t\u1EED d\u0129 b\u1EB1ng h\u1EEFu gi\u1EA3ng t\u1EADp. (Hai \u0111\u1EA7m li\u1EC1n nhau, \u0111\xF3 l\xE0 \u0111\u1EA7m. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 c\xF9ng b\u1EA1n b\xE8 gi\u1EA3ng gi\u1EA3i, h\u1ECDc t\u1EADp.)",
+    advice: "\u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m c\u1EE7a ni\u1EC1m vui, s\u1EF1 giao ti\u1EBFp v\xE0 chia s\u1EBB. H\xE3y t\u1EADn h\u01B0\u1EDFng c\xE1c m\u1ED1i quan h\u1EC7 x\xE3 h\u1ED9i v\xE0 h\u1ECDc h\u1ECFi l\u1EABn nhau. Ni\u1EC1m vui th\u1EF1c s\u1EF1 \u0111\u1EBFn t\u1EEB s\u1EF1 t\u01B0\u01A1ng t\xE1c v\xE0 trao \u0111\u1ED5i c\u1EDFi m\u1EDF."
+}, {
+    id: 59,
+    name: "Ho\xE1n",
+    vietnameseName: "Phong Th\u1EE7y Ho\xE1n (Tan r\xE3)",
+    trigrams: "Phong Th\u1EE7y",
+    lines: [!1, !0, !0, !1, !0, !1],
+    judgment: "Ho\xE1n: Hanh. V\u01B0\u01A1ng c\xE1ch h\u1EEFu mi\u1EBFu. L\u1EE3i thi\u1EC7p \u0111\u1EA1i xuy\xEAn. L\u1EE3i trinh. (Tan r\xE3: Hanh th\xF4ng. Vua \u0111\u1EBFn nh\xE0 mi\u1EBFu. L\u1EE3i cho vi\u1EC7c v\u01B0\u1EE3t s\xF4ng l\u1EDBn. L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng.)",
+    image: "Phong h\xE0nh th\u1EE7y th\u01B0\u1EE3ng, Ho\xE1n. Ti\xEAn v\u01B0\u01A1ng d\u0129 h\u01B0\u1EDFng vu \u0111\u1EBF, l\u1EADp mi\u1EBFu. (Gi\xF3 \u0111i tr\xEAn n\u01B0\u1EDBc, \u0111\xF3 l\xE0 s\u1EF1 tan r\xE3. Vua \u0111\u1EDDi tr\u01B0\u1EDBc theo \u0111\xF3 m\xE0 c\xFAng t\u1EBF Th\u01B0\u1EE3ng \u0110\u1EBF, d\u1EF1ng nh\xE0 mi\u1EBFu.)",
+    advice: "S\u1EF1 chia r\u1EBD v\xE0 hi\u1EC3u l\u1EA7m \u0111ang tan bi\u1EBFn. \u0110\xE2y l\xE0 l\xFAc \u0111\u1EC3 v\u01B0\u1EE3t qua nh\u1EEFng tr\u1EDF ng\u1EA1i v\xE0 \u0111o\xE0n k\u1EBFt m\u1ECDi ng\u01B0\u1EDDi v\xEC m\u1ED9t m\u1EE5c ti\xEAu chung cao c\u1EA3 h\u01A1n. H\xE3y t\u1EADp trung v\xE0o tinh th\u1EA7n v\xE0 c\u1ED9ng \u0111\u1ED3ng."
+}, {
+    id: 60,
+    name: "Ti\u1EBFt",
+    vietnameseName: "Th\u1EE7y Tr\u1EA1ch Ti\u1EBFt (Ti\u1EBFt ch\u1EBF)",
+    trigrams: "Th\u1EE7y Tr\u1EA1ch",
+    lines: [!1, !0, !1, !1, !0, !0],
+    judgment: "Ti\u1EBFt: Hanh. Kh\u1ED5 ti\u1EBFt b\u1EA5t kh\u1EA3 trinh. (Ti\u1EBFt ch\u1EBF: Hanh th\xF4ng. Ti\u1EBFt ch\u1EBF m\u1ED9t c\xE1ch cay \u0111\u1EAFng th\xEC kh\xF4ng th\u1EC3 b\u1EC1n v\u1EEFng.)",
+    image: "Tr\u1EA1ch th\u01B0\u1EE3ng h\u1EEFu th\u1EE7y, Ti\u1EBFt. Qu\xE2n t\u1EED d\u0129 ch\u1EBF s\u1ED1 \u0111\u1ED9, ngh\u1ECB \u0111\u1EE9c h\xE0nh. (Tr\xEAn \u0111\u1EA7m c\xF3 n\u01B0\u1EDBc, \u0111\xF3 l\xE0 s\u1EF1 ti\u1EBFt ch\u1EBF. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 \u0111\u1EB7t ra s\u1ED1 l\u01B0\u1EE3ng, m\u1EE9c \u0111\u1ED9, b\xE0n b\u1EA1c v\u1EC1 \u0111\u1EE9c h\u1EA1nh v\xE0 h\xE0nh vi.)",
+    advice: "C\u1EA7n c\xF3 s\u1EF1 ch\u1EEBng m\u1EF1c v\xE0 gi\u1EDBi h\u1EA1n r\xF5 r\xE0ng. H\xE3y \u0111\u1EB7t ra nh\u1EEFng quy t\u1EAFc v\xE0 tu\xE2n th\u1EE7 ch\xFAng. Ti\u1EBFt ch\u1EBF \u0111\xFAng m\u1EE9c s\u1EBD mang l\u1EA1i s\u1EF1 h\xE0i h\xF2a v\xE0 th\xE0nh c\xF4ng, nh\u01B0ng \u0111\u1EEBng qu\xE1 kh\u1EAFt khe \u0111\u1EBFn m\u1EE9c ti\xEAu c\u1EF1c."
+}, {
+    id: 61,
+    name: "Trung Phu",
+    vietnameseName: "Phong Tr\u1EA1ch Trung Phu (L\xF2ng tin \u1EDF trong)",
+    trigrams: "Phong Tr\u1EA1ch",
+    lines: [!1, !0, !0, !1, !0, !0],
+    judgment: "Trung Phu: \u0110\u1ED3n ng\u01B0 c\xE1t. L\u1EE3i thi\u1EC7p \u0111\u1EA1i xuy\xEAn. L\u1EE3i trinh. (L\xF2ng tin \u1EDF trong: Heo v\xE0 c\xE1 l\xE0 t\u1ED1t. L\u1EE3i cho vi\u1EC7c v\u01B0\u1EE3t s\xF4ng l\u1EDBn. L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng.)",
+    image: "Tr\u1EA1ch th\u01B0\u1EE3ng h\u1EEFu phong, Trung Phu. Qu\xE2n t\u1EED d\u0129 ngh\u1ECB ng\u1EE5c\u7DE9 t\u1EED. (Tr\xEAn \u0111\u1EA7m c\xF3 gi\xF3, \u0111\xF3 l\xE0 l\xF2ng tin \u1EDF trong. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 b\xE0n b\u1EA1c vi\u1EC7c ki\u1EC7n t\u1EE5ng, ho\xE3n vi\u1EC7c x\u1EED t\u1EED.)",
+    advice: "L\xF2ng tin v\xE0 s\u1EF1 ch\xE2n th\xE0nh t\u1EEB b\xEAn trong l\xE0 n\u1EC1n t\u1EA3ng c\u1EE7a m\u1ECDi m\u1ED1i quan h\u1EC7. H\xE3y h\xE0nh \u0111\u1ED9ng nh\u1EA5t qu\xE1n v\u1EDBi gi\xE1 tr\u1ECB c\u1EE7a b\u1EA1n. S\u1EF1 trung th\u1EF1c s\u1EBD \u1EA3nh h\u01B0\u1EDFng \u0111\u1EBFn c\u1EA3 nh\u1EEFng \u0111i\u1EC1u t\u01B0\u1EDFng ch\u1EEBng kh\xF3 kh\u0103n nh\u1EA5t."
+}, {
+    id: 62,
+    name: "Ti\u1EC3u Qu\xE1",
+    vietnameseName: "L\xF4i S\u01A1n Ti\u1EC3u Qu\xE1 (Qu\xE1 nh\u1ECF)",
+    trigrams: "L\xF4i S\u01A1n",
+    lines: [!1, !1, !0, !0, !1, !1],
+    judgment: "Ti\u1EC3u Qu\xE1: Hanh. L\u1EE3i trinh. Kh\u1EA3 ti\u1EC3u s\u1EF1, b\u1EA5t kh\u1EA3 \u0111\u1EA1i s\u1EF1. (Qu\xE1 nh\u1ECF: Hanh th\xF4ng. L\u1EE3i cho s\u1EF1 b\u1EC1n v\u1EEFng. C\xF3 th\u1EC3 l\xE0m vi\u1EC7c nh\u1ECF, kh\xF4ng th\u1EC3 l\xE0m vi\u1EC7c l\u1EDBn.)",
+    image: "S\u01A1n th\u01B0\u1EE3ng h\u1EEFu l\xF4i, Ti\u1EC3u Qu\xE1. Qu\xE2n t\u1EED d\u0129 h\xE0nh qu\xE1 h\u1ED3 cung, tang qu\xE1 h\u1ED3 ai, d\u1EE5ng qu\xE1 h\u1ED3 ki\u1EC7m. (Tr\xEAn n\xFAi c\xF3 s\u1EA5m, \u0111\xF3 l\xE0 s\u1EF1 qu\xE1 nh\u1ECF. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 h\xE0nh vi th\xEC qu\xE1 m\u1EE9c khi\xEAm cung, vi\u1EC7c tang th\xEC qu\xE1 m\u1EE9c \u0111au bu\u1ED3n, vi\u1EC7c d\xF9ng th\xEC qu\xE1 m\u1EE9c ti\u1EBFt ki\u1EC7m.)",
+    advice: "H\xE3y ch\xFA \xFD \u0111\u1EBFn c\xE1c chi ti\u1EBFt nh\u1ECF v\xE0 h\xE0nh \u0111\u1ED9ng m\u1ED9t c\xE1ch c\u1EA9n tr\u1ECDng, khi\xEAm t\u1ED1n. \u0110\xE2y kh\xF4ng ph\u1EA3i l\xE0 l\xFAc cho nh\u1EEFng k\u1EBF ho\u1EA1ch l\u1EDBn lao. Th\xE0nh c\xF4ng \u0111\u1EBFn t\u1EEB vi\u1EC7c l\xE0m t\u1ED1t nh\u1EEFng vi\u1EC7c nh\u1ECF nh\u1EB7t."
+}, {
+    id: 63,
+    name: "K\xFD T\u1EBF",
+    vietnameseName: "Th\u1EE7y H\u1ECFa K\xFD T\u1EBF (\u0110\xE3 xong)",
+    trigrams: "Th\u1EE7y H\u1ECFa",
+    lines: [!1, !0, !1, !0, !1, !0],
+    judgment: "K\xFD T\u1EBF: Hanh. Ti\u1EC3u l\u1EE3i trinh. S\u01A1 c\xE1t chung lo\u1EA1n. (\u0110\xE3 xong: Hanh th\xF4ng. B\u1EC1n v\u1EEFng th\xEC c\xF3 l\u1EE3i nh\u1ECF. \u0110\u1EA7u t\u1ED1t cu\u1ED1i lo\u1EA1n.)",
+    image: "Th\u1EE7y t\u1EA1i h\u1ECFa th\u01B0\u1EE3ng, K\xFD T\u1EBF. Qu\xE2n t\u1EED d\u0129 t\u01B0\u60A3 nhi d\u1EF1 ph\xF2ng chi. (N\u01B0\u1EDBc \u1EDF tr\xEAn l\u1EEDa, \u0111\xF3 l\xE0 s\u1EF1 \u0111\xE3 xong. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 suy ngh\u0129 \u0111\u1EBFn ho\u1EA1n n\u1EA1n v\xE0 \u0111\u1EC1 ph\xF2ng tr\u01B0\u1EDBc.)",
+    advice: "B\u1EA1n \u0111\xE3 \u0111\u1EA1t \u0111\u01B0\u1EE3c s\u1EF1 c\xE2n b\u1EB1ng v\xE0 ho\xE0n th\xE0nh m\u1ED9t giai \u0111o\u1EA1n. Tuy nhi\xEAn, \u0111\u1EEBng ch\u1EE7 quan. H\xE3y duy tr\xEC s\u1EF1 c\u1EA3nh gi\xE1c v\xE0 chu\u1EA9n b\u1ECB cho nh\u1EEFng th\xE1ch th\u1EE9c m\u1EDBi, v\xEC tr\u1EADt t\u1EF1 hi\u1EC7n t\u1EA1i c\xF3 th\u1EC3 kh\xF4ng k\xE9o d\xE0i."
+}, {
+    id: 64,
+    name: "V\u1ECB T\u1EBF",
+    vietnameseName: "H\u1ECFa Th\u1EE7y V\u1ECB T\u1EBF (Ch\u01B0a xong)",
+    trigrams: "H\u1ECFa Th\u1EE7y",
+    lines: [!0, !1, !0, !1, !0, !1],
+    judgment: "V\u1ECB T\u1EBF: Hanh. Ti\u1EC3u h\u1ED3\u6C54\u6FDF, \u6FE1 k\u1EF3 v\u0129, v\xF4 s\u1EDF l\u1EE3i. (Ch\u01B0a xong: Hanh th\xF4ng. Con c\xE1o nh\u1ECF g\u1EA7n qua s\xF4ng, l\xE0m \u01B0\u1EDBt \u0111u\xF4i, kh\xF4ng c\xF3 g\xEC l\u1EE3i.)",
+    image: "H\u1ECFa t\u1EA1i th\u1EE7y th\u01B0\u1EE3ng, V\u1ECB T\u1EBF. Qu\xE2n t\u1EED d\u0129 th\u1EADn bi\u1EC7n v\u1EADt c\u01B0 ph\u01B0\u01A1ng. (L\u1EEDa \u1EDF tr\xEAn n\u01B0\u1EDBc, \u0111\xF3 l\xE0 s\u1EF1 ch\u01B0a xong. Ng\u01B0\u1EDDi qu\xE2n t\u1EED theo \u0111\xF3 m\xE0 c\u1EA9n th\u1EADn ph\xE2n bi\u1EC7t s\u1EF1 v\u1EADt, \u0111\u1EB7t ch\xFAng v\xE0o \u0111\xFAng v\u1ECB tr\xED.)",
+    advice: "B\u1EA1n \u0111ang \u1EDF ng\u01B0\u1EE1ng c\u1EEDa c\u1EE7a m\u1ED9t s\u1EF1 kh\u1EDFi \u0111\u1EA7u m\u1EDBi, nh\u01B0ng m\u1ECDi th\u1EE9 v\u1EABn c\xF2n h\u1ED7n lo\u1EA1n. C\u1EA7n ph\u1EA3i c\u1EA9n tr\u1ECDng v\xE0 s\u1EAFp x\u1EBFp l\u1EA1i m\u1ECDi vi\u1EC7c. Ti\u1EC1m n\u0103ng l\xE0 r\u1EA5t l\u1EDBn, nh\u01B0ng th\xE0nh c\xF4ng \u0111\xF2i h\u1ECFi s\u1EF1 ki\xEAn nh\u1EABn v\xE0 s\u1EAFp \u0111\u1EB7t \u0111\xFAng \u0111\u1EAFn."
+}];
+var cm = [{
+    name: "The Fool",
+    vietnameseName: "G\xE3 Kh\u1EDD",
+    image: "https://picsum.photos/seed/TheFool/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EF1 kh\u1EDFi \u0111\u1EA7u, ng\xE2y th\u01A1, t\u1EF1 ph\xE1t v\xE0 m\u1ED9t tinh th\u1EA7n t\u1EF1 do.",
+    upright: "S\u1EF1 kh\u1EDFi \u0111\u1EA7u m\u1EDBi, ng\xE2y th\u01A1, phi\xEAu l\u01B0u, ni\u1EC1m tin v\xE0o v\u0169 tr\u1EE5. H\xE3y d\u0169ng c\u1EA3m b\u01B0\u1EDBc \u0111i, ngay c\u1EA3 khi b\u1EA1n ch\u01B0a bi\u1EBFt r\xF5 con \u0111\u01B0\u1EDDng.",
+    reversed: "S\u1EF1 li\u1EC1u l\u0129nh, d\u1EA1i d\u1ED9t, b\u1EA5t c\u1EA9n, b\u1ECB l\u1EE3i d\u1EE5ng. C\u1EA7n suy ngh\u0129 k\u1EF9 tr\u01B0\u1EDBc khi h\xE0nh \u0111\u1ED9ng, tr\xE1nh nh\u1EEFng r\u1EE7i ro kh\xF4ng c\u1EA7n thi\u1EBFt."
+}, {
+    name: "The Magician",
+    vietnameseName: "Ph\xE1p S\u01B0",
+    image: "https://picsum.photos/seed/TheMagician/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho n\u0103ng l\u1EF1c, \xFD ch\xED, s\u1EF1 s\xE1ng t\u1EA1o v\xE0 kh\u1EA3 n\u0103ng bi\u1EBFn \xFD t\u01B0\u1EDFng th\xE0nh hi\u1EC7n th\u1EF1c.",
+    upright: "S\u1EE9c m\u1EA1nh \xFD ch\xED, s\u1EF1 s\xE1ng t\u1EA1o, k\u1EF9 n\u0103ng, t\u1EADp trung. B\u1EA1n c\xF3 \u0111\u1EE7 m\u1ECDi ngu\u1ED3n l\u1EF1c c\u1EA7n thi\u1EBFt \u0111\u1EC3 th\xE0nh c\xF4ng. H\xE3y h\xE0nh \u0111\u1ED9ng.",
+    reversed: "S\u1EF1 l\u1EEBa d\u1ED1i, thao t\xFAng, thi\u1EBFu t\u1EF1 tin, l\xE3ng ph\xED t\xE0i n\u0103ng. C\u1EA7n c\u1EA9n tr\u1ECDng v\u1EDBi nh\u1EEFng k\u1EBF ho\u1EA1ch kh\xF4ng r\xF5 r\xE0ng v\xE0 s\u1EED d\u1EE5ng n\u0103ng l\u1EF1c c\u1EE7a m\xECnh m\u1ED9t c\xE1ch \u0111\xFAng \u0111\u1EAFn."
+}, {
+    name: "The High Priestess",
+    vietnameseName: "N\u1EEF Tu",
+    image: "https://picsum.photos/seed/TheHighPriestess/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho tr\u1EF1c gi\xE1c, b\xED \u1EA9n, ti\u1EC1m th\u1EE9c v\xE0 nh\u1EEFng ki\u1EBFn th\u1EE9c ch\u01B0a \u0111\u01B0\u1EE3c h\xE9 l\u1ED9.",
+    upright: "Tr\u1EF1c gi\xE1c, s\u1EF1 th\xF4ng th\xE1i n\u1ED9i t\xE2m, b\xED m\u1EADt. H\xE3y l\u1EAFng nghe ti\u1EBFng n\xF3i b\xEAn trong v\xE0 tin v\xE0o c\u1EA3m nh\u1EADn c\u1EE7a b\u1EA1n. M\u1ECDi th\u1EE9 kh\xF4ng ph\u1EA3i l\xFAc n\xE0o c\u0169ng r\xF5 r\xE0ng.",
+    reversed: "Che gi\u1EA5u b\xED m\u1EADt, thi\u1EBFu k\u1EBFt n\u1ED1i v\u1EDBi tr\u1EF1c gi\xE1c, th\xF4ng tin sai l\u1EC7ch. C\u1EA7n t\xECm ki\u1EBFm s\u1EF1 th\u1EADt v\xE0 kh\xF4ng b\u1ECF qua nh\u1EEFng d\u1EA5u hi\u1EC7u c\u1EA3nh b\xE1o t\u1EEB b\xEAn trong."
+}, {
+    name: "The Empress",
+    vietnameseName: "N\u1EEF Ho\xE0ng",
+    image: "https://picsum.photos/seed/TheEmpress/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho s\u1EF1 sinh s\xF4i, nu\xF4i d\u01B0\u1EE1ng, v\u1EBB \u0111\u1EB9p, s\u1EF1 sung t\xFAc v\xE0 t\xECnh y\xEAu th\u01B0\u01A1ng.",
+    upright: "S\u1EF1 s\xE1ng t\u1EA1o, sinh s\u1EA3n, v\u1EBB \u0111\u1EB9p, s\u1EF1 ch\u0103m s\xF3c, sung t\xFAc. \u0110\xE2y l\xE0 th\u1EDDi k\u1EF3 c\u1EE7a s\u1EF1 ph\xE1t tri\u1EC3n v\xE0 t\u1EADn h\u01B0\u1EDFng nh\u1EEFng th\xE0nh qu\u1EA3 v\u1EADt ch\u1EA5t v\xE0 tinh th\u1EA7n.",
+    reversed: "S\u1EF1 b\u1EBF t\u1EAFc trong s\xE1ng t\u1EA1o, ph\u1EE5 thu\u1ED9c, l\u01B0\u1EDDi bi\u1EBFng. C\u1EA7n k\u1EBFt n\u1ED1i l\u1EA1i v\u1EDBi thi\xEAn nhi\xEAn v\xE0 ch\u0103m s\xF3c b\u1EA3n th\xE2n nhi\u1EC1u h\u01A1n."
+}, {
+    name: "The Emperor",
+    vietnameseName: "Ho\xE0ng \u0110\u1EBF",
+    image: "https://picsum.photos/seed/TheEmperor/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho quy\u1EC1n l\u1EF1c, tr\u1EADt t\u1EF1, s\u1EF1 l\xE3nh \u0111\u1EA1o, k\u1EF7 lu\u1EADt v\xE0 c\u1EA5u tr\xFAc.",
+    upright: "Quy\u1EC1n l\u1EF1c, s\u1EF1 \u1ED5n \u0111\u1ECBnh, k\u1EF7 lu\u1EADt, kh\u1EA3 n\u0103ng l\xE3nh \u0111\u1EA1o. H\xE3y thi\u1EBFt l\u1EADp tr\u1EADt t\u1EF1 v\xE0 ki\u1EC3m so\xE1t t\xECnh h\xECnh b\u1EB1ng l\xFD tr\xED v\xE0 kinh nghi\u1EC7m.",
+    reversed: "S\u1EF1 \u0111\u1ED9c \u0111o\xE1n, l\u1EA1m d\u1EE5ng quy\u1EC1n l\u1EF1c, thi\u1EBFu ki\u1EC3m so\xE1t, c\u1EE9ng nh\u1EAFc. C\u1EA7n linh ho\u1EA1t h\u01A1n v\xE0 s\u1EED d\u1EE5ng quy\u1EC1n l\u1EF1c m\u1ED9t c\xE1ch kh\xF4n ngoan."
+}, {
+    name: "The Hierophant",
+    vietnameseName: "Gi\xE1o Ho\xE0ng",
+    image: "https://picsum.photos/seed/TheHierophant/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho truy\u1EC1n th\u1ED1ng, \u0111\u1EE9c tin, gi\xE1o d\u1EE5c v\xE0 c\xE1c h\u1EC7 th\u1ED1ng ni\u1EC1m tin.",
+    upright: "Truy\u1EC1n th\u1ED1ng, \u0111\u1EE9c tin, s\u1EF1 h\u01B0\u1EDBng d\u1EABn tinh th\u1EA7n, tu\xE2n th\u1EE7 quy t\u1EAFc. H\xE3y t\xECm ki\u1EBFm s\u1EF1 kh\xF4n ngoan t\u1EEB nh\u1EEFng gi\xE1 tr\u1ECB truy\u1EC1n th\u1ED1ng v\xE0 nh\u1EEFng ng\u01B0\u1EDDi th\u1EA7y.",
+    reversed: "Th\xE1ch th\u1EE9c truy\u1EC1n th\u1ED1ng, ph\xE1 v\u1EE1 quy t\u1EAFc, t\u01B0 duy \u0111\u1ED9c l\u1EADp. C\u1EA7n c\u1EA9n th\u1EADn \u0111\u1EC3 kh\xF4ng tr\u1EDF n\xEAn qu\xE1 c\u1EF1c \u0111oan ho\u1EB7c m\xF9 qu\xE1ng."
+}, {
+    name: "The Lovers",
+    vietnameseName: "Ng\u01B0\u1EDDi T\xECnh",
+    image: "https://picsum.photos/seed/TheLovers/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EF1 l\u1EF1a ch\u1ECDn, m\u1ED1i quan h\u1EC7, s\u1EF1 h\xF2a h\u1EE3p v\xE0 c\xE1c gi\xE1 tr\u1ECB c\xE1 nh\xE2n.",
+    upright: "T\xECnh y\xEAu, s\u1EF1 h\xF2a h\u1EE3p, c\xE1c m\u1ED1i quan h\u1EC7, s\u1EF1 l\u1EF1a ch\u1ECDn quan tr\u1ECDng. H\xE3y \u0111\u01B0a ra quy\u1EBFt \u0111\u1ECBnh d\u1EF1a tr\xEAn tr\xE1i tim v\xE0 c\xE1c gi\xE1 tr\u1ECB c\u1ED1t l\xF5i c\u1EE7a b\u1EA1n.",
+    reversed: "Xung \u0111\u1ED9t, m\u1EA5t k\u1EBFt n\u1ED1i, l\u1EF1a ch\u1ECDn sai l\u1EA7m. C\xE1c m\u1ED1i quan h\u1EC7 c\xF3 th\u1EC3 g\u1EB7p tr\u1EE5c tr\u1EB7c, c\u1EA7n xem x\xE9t l\u1EA1i c\xE1c gi\xE1 tr\u1ECB c\u1EE7a b\u1EA3n th\xE2n."
+}, {
+    name: "The Chariot",
+    vietnameseName: "C\u1ED7 Xe",
+    image: "https://picsum.photos/seed/TheChariot/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho \xFD ch\xED, s\u1EF1 quy\u1EBFt t\xE2m, chi\u1EBFn th\u1EAFng v\xE0 s\u1EF1 ki\u1EC3m so\xE1t.",
+    upright: "S\u1EF1 ki\u1EC3m so\xE1t, \xFD ch\xED m\u1EA1nh m\u1EBD, chi\u1EBFn th\u1EAFng, s\u1EF1 quy\u1EBFt \u0111o\xE1n. H\xE3y ti\u1EBFn v\u1EC1 ph\xEDa tr\u01B0\u1EDBc v\u1EDBi s\u1EF1 t\u1EF1 tin v\xE0 quy\u1EBFt t\xE2m \u0111\u1EC3 v\u01B0\u1EE3t qua m\u1ECDi tr\u1EDF ng\u1EA1i.",
+    reversed: "Thi\u1EBFu ki\u1EC3m so\xE1t, m\u1EA5t ph\u01B0\u01A1ng h\u01B0\u1EDBng, s\u1EF1 hung h\u0103ng. C\u1EA7n t\u1EADp trung l\u1EA1i n\u0103ng l\u01B0\u1EE3ng v\xE0 x\xE1c \u0111\u1ECBnh r\xF5 m\u1EE5c ti\xEAu tr\u01B0\u1EDBc khi h\xE0nh \u0111\u1ED9ng."
+}, {
+    name: "Strength",
+    vietnameseName: "S\u1EE9c M\u1EA1nh",
+    image: "https://picsum.photos/seed/Strength/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EE9c m\u1EA1nh n\u1ED9i t\xE2m, l\xF2ng can \u0111\u1EA3m, s\u1EF1 ki\xEAn nh\u1EABn v\xE0 l\xF2ng tr\u1EAFc \u1EA9n.",
+    upright: "L\xF2ng can \u0111\u1EA3m, s\u1EF1 ki\xEAn nh\u1EABn, s\u1EE9c m\u1EA1nh n\u1ED9i t\xE2m, l\xF2ng tr\u1EAFc \u1EA9n. S\u1EE9c m\u1EA1nh th\u1EF1c s\u1EF1 \u0111\u1EBFn t\u1EEB s\u1EF1 d\u1ECBu d\xE0ng v\xE0 ki\u1EC3m so\xE1t b\u1EA3n n\u0103ng.",
+    reversed: "S\u1EF1 y\u1EBFu \u0111u\u1ED1i, thi\u1EBFu t\u1EF1 tin, m\u1EA5t ki\u1EC3m so\xE1t. C\u1EA7n t\xECm l\u1EA1i s\u1EE9c m\u1EA1nh t\u1EEB b\xEAn trong v\xE0 \u0111\u1ED1i m\u1EB7t v\u1EDBi n\u1ED7i s\u1EE3 h\xE3i."
+}, {
+    name: "The Hermit",
+    vietnameseName: "\u1EA8n S\u0129",
+    image: "https://picsum.photos/seed/TheHermit/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho s\u1EF1 t\xECm ki\u1EBFm n\u1ED9i t\xE2m, s\u1EF1 th\xF4ng th\xE1i, c\xF4 \u0111\u1ED9c v\xE0 s\u1EF1 d\u1EABn d\u1EAFt.",
+    upright: "S\u1EF1 suy ng\u1EABm, t\xECm ki\u1EBFm ch\xE2n l\xFD, c\xF4 \u0111\u1ED9c \u0111\u1EC3 chi\xEAm nghi\u1EC7m. H\xE3y d\xE0nh th\u1EDDi gian m\u1ED9t m\xECnh \u0111\u1EC3 t\xECm ki\u1EBFm c\xE2u tr\u1EA3 l\u1EDDi t\u1EEB s\xE2u b\xEAn trong.",
+    reversed: "S\u1EF1 c\xF4 l\u1EADp, c\xF4 \u0111\u01A1n, t\u1EEB ch\u1ED1i s\u1EF1 gi\xFAp \u0111\u1EE1. C\u1EA9n th\u1EADn \u0111\u1EEBng t\u1EF1 t\xE1ch m\xECnh kh\u1ECFi th\u1EBF gi\u1EDBi qu\xE1 m\u1EE9c."
+}, {
+    name: "Wheel of Fortune",
+    vietnameseName: "B\xE1nh Xe S\u1ED1 Ph\u1EADn",
+    image: "https://picsum.photos/seed/WheelOfFortune/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EF1 thay \u0111\u1ED5i, chu k\u1EF3, \u0111\u1ECBnh m\u1EC7nh, may m\u1EAFn v\xE0 b\u01B0\u1EDBc ngo\u1EB7t.",
+    upright: "S\u1EF1 thay \u0111\u1ED5i, may m\u1EAFn, b\u01B0\u1EDBc ngo\u1EB7t, \u0111\u1ECBnh m\u1EC7nh. H\xE3y ch\u1EA5p nh\u1EADn r\u1EB1ng cu\u1ED9c s\u1ED1ng lu\xF4n v\u1EADn \u0111\u1ED9ng theo chu k\u1EF3. M\u1ED9t giai \u0111o\u1EA1n m\u1EDBi \u0111ang \u0111\u1EBFn.",
+    reversed: "Pech, s\u1EF1 thay \u0111\u1ED5i kh\xF4ng mong mu\u1ED1n, b\u1EA5t \u1ED5n. H\xE3y chu\u1EA9n b\u1ECB cho nh\u1EEFng kh\xF3 kh\u0103n v\xE0 nh\u1EDB r\u1EB1ng kh\xF4ng c\xF3 g\xEC l\xE0 m\xE3i m\xE3i."
+}, {
+    name: "Justice",
+    vietnameseName: "C\xF4ng L\xFD",
+    image: "https://picsum.photos/seed/Justice/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho s\u1EF1 th\u1EADt, c\xF4ng b\u1EB1ng, lu\u1EADt nh\xE2n qu\u1EA3 v\xE0 s\u1EF1 r\xF5 r\xE0ng.",
+    upright: "C\xF4ng b\u1EB1ng, s\u1EF1 th\u1EADt, lu\u1EADt ph\xE1p, nh\xE2n qu\u1EA3. M\u1ECDi h\xE0nh \u0111\u1ED9ng \u0111\u1EC1u c\xF3 k\u1EBFt qu\u1EA3 t\u01B0\u01A1ng \u1EE9ng. H\xE3y h\xE0nh \u0111\u1ED9ng m\u1ED9t c\xE1ch c\xF4ng b\u1EB1ng v\xE0 c\xF3 tr\xE1ch nhi\u1EC7m.",
+    reversed: "S\u1EF1 b\u1EA5t c\xF4ng, gi\u1EA3 d\u1ED1i, thi\xEAn v\u1ECB. C\u1EA7n \u0111\u1ED1i m\u1EB7t v\u1EDBi s\u1EF1 th\u1EADt v\xE0 ch\u1ECBu tr\xE1ch nhi\u1EC7m cho h\xE0nh \u0111\u1ED9ng c\u1EE7a m\xECnh."
+}, {
+    name: "The Hanged Man",
+    vietnameseName: "Ng\u01B0\u1EDDi Treo Ng\u01B0\u1EE3c",
+    image: "https://picsum.photos/seed/TheHangedMan/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EF1 hy sinh, \u0111\xECnh tr\u1EC7, g\xF3c nh\xECn m\u1EDBi v\xE0 s\u1EF1 bu\xF4ng b\u1ECF.",
+    upright: "S\u1EF1 \u0111\xECnh tr\u1EC7, bu\xF4ng b\u1ECF, thay \u0111\u1ED5i g\xF3c nh\xECn. H\xE3y t\u1EA1m d\u1EEBng, hy sinh \u0111i\u1EC1u g\xEC \u0111\xF3 \u0111\u1EC3 c\xF3 \u0111\u01B0\u1EE3c c\xE1i nh\xECn m\u1EDBi m\u1EBB v\xE0 s\u1EF1 th\xF4ng th\xE1i s\xE2u s\u1EAFc h\u01A1n.",
+    reversed: "S\u1EF1 tr\xEC ho\xE3n kh\xF4ng c\u1EA7n thi\u1EBFt, c\u1EE9ng \u0111\u1EA7u, hy sinh v\xF4 \xEDch. C\u1EA7n h\xE0nh \u0111\u1ED9ng \u0111\u1EC3 tho\xE1t kh\u1ECFi t\xECnh tr\u1EA1ng b\u1EBF t\u1EAFc."
+}, {
+    name: "Death",
+    vietnameseName: "C\xE1i Ch\u1EBFt",
+    image: "https://picsum.photos/seed/Death/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho s\u1EF1 k\u1EBFt th\xFAc, chuy\u1EC3n \u0111\u1ED5i, thay \u0111\u1ED5i v\xE0 t\xE1i sinh.",
+    upright: "S\u1EF1 k\u1EBFt th\xFAc, chuy\u1EC3n h\xF3a, thay \u0111\u1ED5i t\u1EA5t y\u1EBFu. H\xE3y bu\xF4ng b\u1ECF qu\xE1 kh\u1EE9 \u0111\u1EC3 ch\xE0o \u0111\xF3n m\u1ED9t s\u1EF1 kh\u1EDFi \u0111\u1EA7u m\u1EDBi. \u0110\xE2y l\xE0 m\u1ED9t s\u1EF1 thay \u0111\u1ED5i c\u1EA7n thi\u1EBFt.",
+    reversed: "S\u1EF1 ch\u1ED1ng l\u1EA1i thay \u0111\u1ED5i, tr\xEC tr\u1EC7, s\u1EE3 h\xE3i s\u1EF1 k\u1EBFt th\xFAc. C\u1EA7n ch\u1EA5p nh\u1EADn r\u1EB1ng m\u1ECDi th\u1EE9 c\u1EA7n ph\u1EA3i thay \u0111\u1ED5i \u0111\u1EC3 ph\xE1t tri\u1EC3n."
+}, {
+    name: "Temperance",
+    vietnameseName: "S\u1EF1 \u0110i\u1EC1u \u0110\u1ED9",
+    image: "https://picsum.photos/seed/Temperance/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EF1 c\xE2n b\u1EB1ng, ki\xEAn nh\u1EABn, s\u1EF1 h\xF2a h\u1EE3p v\xE0 m\u1EE5c \u0111\xEDch.",
+    upright: "S\u1EF1 c\xE2n b\u1EB1ng, h\xF2a h\u1EE3p, ki\xEAn nh\u1EABn. H\xE3y t\xECm ki\u1EBFm s\u1EF1 \u0111i\u1EC1u \u0111\u1ED9 trong m\u1ECDi kh\xEDa c\u1EA1nh c\u1EE7a cu\u1ED9c s\u1ED1ng v\xE0 k\u1EBFt h\u1EE3p c\xE1c y\u1EBFu t\u1ED1 \u0111\u1ED1i l\u1EADp m\u1ED9t c\xE1ch h\xE0i h\xF2a.",
+    reversed: "S\u1EF1 m\u1EA5t c\xE2n b\u1EB1ng, th\xE1i qu\xE1, xung \u0111\u1ED9t. C\u1EA7n t\xECm l\u1EA1i s\u1EF1 h\xE0i h\xF2a v\xE0 tr\xE1nh \u0111i \u0111\u1EBFn nh\u1EEFng c\u1EF1c \u0111oan."
+}, {
+    name: "The Devil",
+    vietnameseName: "\xC1c Qu\u1EF7",
+    image: "https://picsum.photos/seed/TheDevil/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho s\u1EF1 tr\xF3i bu\u1ED9c, nghi\u1EC7n ng\u1EADp, v\u1EADt ch\u1EA5t v\xE0 nh\u1EEFng ham mu\u1ED1n ti\xEAu c\u1EF1c.",
+    upright: "S\u1EF1 tr\xF3i bu\u1ED9c, nghi\u1EC7n ng\u1EADp, ch\u1EE7 ngh\u0129a v\u1EADt ch\u1EA5t, ham mu\u1ED1n. B\u1EA1n \u0111ang b\u1ECB m\u1EAFc k\u1EB9t b\u1EDFi nh\u1EEFng ni\u1EC1m tin ho\u1EB7c th\xF3i quen ti\xEAu c\u1EF1c. C\u1EA7n nh\u1EADn ra v\xE0 ph\xE1 v\u1EE1 xi\u1EC1ng x\xEDch.",
+    reversed: "S\u1EF1 gi\u1EA3i tho\xE1t, ph\xE1 v\u1EE1 xi\u1EC1ng x\xEDch, nh\u1EADn th\u1EE9c \u0111\u01B0\u1EE3c s\u1EF1 tr\xF3i bu\u1ED9c. B\u1EA1n \u0111ang tr\xEAn \u0111\u01B0\u1EDDng tho\xE1t kh\u1ECFi nh\u1EEFng \u1EA3nh h\u01B0\u1EDFng ti\xEAu c\u1EF1c."
+}, {
+    name: "The Tower",
+    vietnameseName: "T\xF2a Th\xE1p",
+    image: "https://picsum.photos/seed/TheTower/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EF1 thay \u0111\u1ED5i \u0111\u1ED9t ng\u1ED9t, s\u1EE5p \u0111\u1ED5, kh\u1EE7ng ho\u1EA3ng v\xE0 s\u1EF1 gi\u1EA3i tho\xE1t.",
+    upright: "S\u1EF1 s\u1EE5p \u0111\u1ED5 \u0111\u1ED9t ng\u1ED9t, kh\u1EE7ng ho\u1EA3ng, s\u1EF1 th\u1EADt \u0111\u01B0\u1EE3c ph\u01A1i b\xE0y. M\u1ED9t s\u1EF1 ki\u1EC7n b\u1EA5t ng\u1EDD s\u1EBD ph\xE1 v\u1EE1 c\u1EA5u tr\xFAc hi\u1EC7n t\u1EA1i, mang l\u1EA1i s\u1EF1 gi\u1EA3i tho\xE1t \u0111au \u0111\u1EDBn nh\u01B0ng c\u1EA7n thi\u1EBFt.",
+    reversed: "Tr\xE1nh n\xE9 th\u1EA3m h\u1ECDa, s\u1EE3 h\xE3i s\u1EF1 thay \u0111\u1ED5i. Vi\u1EC7c ch\u1ED1ng l\u1EA1i s\u1EF1 thay \u0111\u1ED5i kh\xF4ng th\u1EC3 tr\xE1nh kh\u1ECFi ch\u1EC9 l\xE0m m\u1ECDi th\u1EE9 t\u1ED3i t\u1EC7 h\u01A1n."
+}, {
+    name: "The Star",
+    vietnameseName: "Ng\xF4i Sao",
+    image: "https://picsum.photos/seed/TheStar/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho hy v\u1ECDng, ni\u1EC1m tin, s\u1EF1 ch\u1EEFa l\xE0nh v\xE0 c\u1EA3m h\u1EE9ng.",
+    upright: "Hy v\u1ECDng, ni\u1EC1m tin, s\u1EF1 ch\u1EEFa l\xE0nh, c\u1EA3m h\u1EE9ng. Sau c\u01A1n b\xE3o, \u0111\xE2y l\xE0 l\xFAc \u0111\u1EC3 ch\u1EEFa l\xE0nh, t\xECm l\u1EA1i ni\u1EC1m tin v\xE0 h\u01B0\u1EDBng t\u1EDBi m\u1ED9t t\u01B0\u01A1ng lai t\u01B0\u01A1i s\xE1ng.",
+    reversed: "S\u1EF1 tuy\u1EC7t v\u1ECDng, m\u1EA5t ni\u1EC1m tin, ti\xEAu c\u1EF1c. C\u1EA7n t\xECm l\u1EA1i \xE1nh s\xE1ng hy v\u1ECDng v\xE0 tin t\u01B0\u1EDFng v\xE0o b\u1EA3n th\xE2n."
+}, {
+    name: "The Moon",
+    vietnameseName: "M\u1EB7t Tr\u0103ng",
+    image: "https://picsum.photos/seed/TheMoon/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EF1 \u1EA3o t\u01B0\u1EDFng, s\u1EE3 h\xE3i, lo l\u1EAFng, tr\u1EF1c gi\xE1c v\xE0 ti\u1EC1m th\u1EE9c.",
+    upright: "\u1EA2o \u1EA3nh, s\u1EF1 s\u1EE3 h\xE3i, lo l\u1EAFng, ti\u1EC1m th\u1EE9c. M\u1ECDi th\u1EE9 kh\xF4ng nh\u01B0 v\u1EBB ngo\xE0i. H\xE3y c\u1EA9n th\u1EADn v\u1EDBi nh\u1EEFng g\xEC \u1EA9n gi\u1EA5u v\xE0 tin v\xE0o tr\u1EF1c gi\xE1c c\u1EE7a b\u1EA1n.",
+    reversed: "S\u1EF1 th\u1EADt \u0111\u01B0\u1EE3c h\xE9 l\u1ED9, tho\xE1t kh\u1ECFi \u1EA3o t\u01B0\u1EDFng, n\u1ED7i s\u1EE3 \u0111\u01B0\u1EE3c xoa d\u1ECBu. M\u1ECDi th\u1EE9 \u0111ang d\u1EA7n tr\u1EDF n\xEAn r\xF5 r\xE0ng h\u01A1n."
+}, {
+    name: "The Sun",
+    vietnameseName: "M\u1EB7t Tr\u1EDDi",
+    image: "https://picsum.photos/seed/TheSun/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho ni\u1EC1m vui, s\u1EF1 th\xE0nh c\xF4ng, s\u1EF1 r\xF5 r\xE0ng v\xE0 s\u1EE9c s\u1ED1ng.",
+    upright: "Ni\u1EC1m vui, th\xE0nh c\xF4ng, s\u1EF1 r\xF5 r\xE0ng, l\u1EA1c quan. \u0110\xE2y l\xE0 th\u1EDDi \u0111i\u1EC3m c\u1EE7a h\u1EA1nh ph\xFAc, s\u1EF1 \u1EA5m \xE1p v\xE0 th\xE0nh c\xF4ng r\u1EF1c r\u1EE1. H\xE3y t\u1EADn h\u01B0\u1EDFng n\xF3.",
+    reversed: "S\u1EF1 bi quan, thi\u1EBFu nhi\u1EC7t huy\u1EBFt, th\xE0nh c\xF4ng b\u1ECB tr\xEC ho\xE3n. C\u1EA7n t\xECm l\u1EA1i ni\u1EC1m vui v\xE0 s\u1EF1 l\u1EA1c quan trong cu\u1ED9c s\u1ED1ng."
+}, {
+    name: "Judgement",
+    vietnameseName: "S\u1EF1 Ph\xE1n X\xE9t",
+    image: "https://picsum.photos/seed/Judgement/250/400",
+    description: "\u0110\u1EA1i di\u1EC7n cho s\u1EF1 t\xE1i sinh, s\u1EF1 ph\xE1n x\xE9t, s\u1EF1 tha th\u1EE9 v\xE0 ti\u1EBFng g\u1ECDi n\u1ED9i t\xE2m.",
+    upright: "S\u1EF1 ph\xE1n x\xE9t, t\xE1i sinh, s\u1EF1 k\xEAu g\u1ECDi. \u0110\xE2y l\xE0 l\xFAc \u0111\u1EC3 \u0111\xE1nh gi\xE1 l\u1EA1i qu\xE1 kh\u1EE9, tha th\u1EE9 cho b\u1EA3n th\xE2n v\xE0 ng\u01B0\u1EDDi kh\xE1c, v\xE0 tr\u1ED7i d\u1EADy m\u1ED9t c\xE1ch m\u1EA1nh m\u1EBD h\u01A1n.",
+    reversed: "S\u1EF1 t\u1EF1 ph\xEA b\xECnh, tr\u1ED1n tr\xE1nh tr\xE1ch nhi\u1EC7m, do d\u1EF1. C\u1EA7n \u0111\u1ED1i m\u1EB7t v\u1EDBi qu\xE1 kh\u1EE9 v\xE0 \u0111\u01B0a ra quy\u1EBFt \u0111\u1ECBnh \u0111\u1EC3 ti\u1EBFn l\xEAn."
+}, {
+    name: "The World",
+    vietnameseName: "Th\u1EBF Gi\u1EDBi",
+    image: "https://picsum.photos/seed/TheWorld/250/400",
+    description: "T\u01B0\u1EE3ng tr\u01B0ng cho s\u1EF1 ho\xE0n th\xE0nh, vi\xEAn m\xE3n, s\u1EF1 h\u1ED9i nh\u1EADp v\xE0 k\u1EBFt th\xFAc m\u1ED9t chu k\u1EF3.",
+    upright: "S\u1EF1 ho\xE0n th\xE0nh, vi\xEAn m\xE3n, h\u1ED9i nh\u1EADp, th\xE0nh t\u1EF1u. B\u1EA1n \u0111\xE3 ho\xE0n th\xE0nh m\u1ED9t h\xE0nh tr\xECnh quan tr\u1ECDng. H\xE3y \u0103n m\u1EEBng th\xE0nh c\xF4ng v\xE0 chu\u1EA9n b\u1ECB cho m\u1ED9t chu k\u1EF3 m\u1EDBi.",
+    reversed: "S\u1EF1 thi\u1EBFu ho\xE0n thi\u1EC7n, tr\xEC tr\u1EC7, kh\xF4ng th\u1EC3 k\u1EBFt th\xFAc. C\u1EA7n n\u1ED7 l\u1EF1c \u0111\u1EC3 ho\xE0n th\xE0nh nh\u1EEFng g\xEC b\u1EA1n \u0111\xE3 b\u1EAFt \u0111\u1EA7u."
+}];
+
+function VI(t, n) {
+    t & 1 && (u(0, "span"), d(1, "\u0110ang gieo qu\u1EBB..."), c())
+}
+
+function $I(t, n) {
+    t & 1 && (u(0, "span"), d(1, "GIEO QU\u1EBA"), c())
+}
+
+function UI(t, n) {
+    t & 1 && (u(0, "div", 7)(1, "p"), d(2, "Xin h\xE3y th\xE0nh t\xE2m v\xE0 ch\u1EDD \u0111\u1EE3i..."), c(), u(3, "div", 9), d(4, "\u262F"), c()())
+}
+
+function zI(t, n) {
+    t & 1 && P(0, "div", 20)
+}
+
+function GI(t, n) {
+    t & 1 && (u(0, "div", 21), P(1, "div", 22)(2, "div", 22), c())
+}
+
+function qI(t, n) {
+    if (t & 1 && (u(0, "div", 12), _(1, zI, 1, 0, "div", 20)(2, GI, 3, 0, "div", 21), c()), t & 2) {
+        let e = n.$implicit;
+        h(), T(e ? 1 : 2)
+    }
+}
+
+function WI(t, n) {
+    if (t & 1 && (u(0, "div", 8)(1, "div", 10)(2, "div", 11), R(3, qI, 3, 1, "div", 12, ih), c(), u(5, "div", 13)(6, "p", 14), d(7), c(), u(8, "h3", 15), d(9), c()()(), u(10, "div", 16)(11, "div")(12, "h4", 17), d(13, "Tho\xE1n T\u1EEB (L\u1EDDi qu\u1EBB):"), c(), u(14, "blockquote", 18), d(15), c()(), u(16, "div")(17, "h4", 17), d(18, "T\u01B0\u1EE3ng T\u1EEB (L\u1EDDi t\u01B0\u1EE3ng):"), c(), u(19, "blockquote", 19), d(20), c()(), u(21, "div")(22, "h4", 17), d(23, "Di\u1EC5n gi\u1EA3i & L\u1EDDi khuy\xEAn:"), c(), u(24, "p"), d(25), c()()()()), t & 2) {
+        let e = n;
+        h(3), O(e.lines.slice().reverse()), h(4), L("Qu\u1EBB s\u1ED1 ", e.id), h(2), W("", e.name, " (", e.vietnameseName, ")"), h(6), b(e.judgment), h(5), b(e.image), h(5), b(e.advice)
+    }
+}
+
+function YI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 3)(1, "h2", 4), d(2, "Gieo Qu\u1EBB Kinh D\u1ECBch"), c(), u(3, "p", 5), d(4, "T\u0129nh t\xE2m, t\u1EADp trung v\xE0o c\xE2u h\u1ECFi c\u1EE7a b\u1EA1n v\xE0 nh\u1EA5n n\xFAt \u0111\u1EC3 gieo m\u1ED9t qu\u1EBB ng\u1EABu nhi\xEAn."), c(), u(5, "button", 6), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.drawHexagram())
+        }), _(6, VI, 2, 0, "span")(7, $I, 2, 0, "span"), c(), _(8, UI, 5, 0, "div", 7), _(9, WI, 26, 6, "div", 8), c()
+    }
+    if (t & 2) {
+        let e, i = y();
+        h(5), H("disabled", i.isDrawingIching()), h(), T(i.isDrawingIching() ? 6 : 7), h(2), T(i.isDrawingIching() ? 8 : -1), h(), T((e = i.drawnHexagram()) ? 9 : -1, e)
+    }
+}
+
+function KI(t, n) {
+    t & 1 && (u(0, "span"), d(1, "\u0110ang r\xFAt b\xE0i..."), c())
+}
+
+function QI(t, n) {
+    t & 1 && (u(0, "span"), d(1, "R\xDAT B\xC0I"), c())
+}
+
+function ZI(t, n) {
+    t & 1 && (u(0, "div", 7)(1, "p"), d(2, "V\u0169 tr\u1EE5 \u0111ang g\u1EEDi \u0111\u1EBFn b\u1EA1n m\u1ED9t th\xF4ng \u0111i\u1EC7p..."), c(), u(3, "div", 9), d(4, "\u2728"), c()())
+}
+
+function XI(t, n) {
+    if (t & 1 && (u(0, "div", 24)(1, "div", 25)(2, "div", 26), P(3, "img", 27), c(), u(4, "div", 28)(5, "span", 29), d(6), c(), u(7, "h3", 30), d(8), c(), u(9, "p", 31), d(10), c(), u(11, "p", 32), d(12), c(), u(13, "div", 33)(14, "h4", 34), d(15, "Th\xF4ng \u0111i\u1EC7p:"), c(), u(16, "p"), d(17), c()()()()()), t & 2) {
+        let e = n;
+        h(3), N("rotate-180", e.isReversed), H("src", e.card.image, gn)("alt", e.card.vietnameseName), h(2), N("bg-green-200", !e.isReversed)("text-green-800", !e.isReversed)("bg-yellow-200", e.isReversed)("text-yellow-800", e.isReversed), h(), L(" L\xE1 b\xE0i ", e.isReversed ? "Ng\u01B0\u1EE3c" : "Xu\xF4i", " "), h(2), b(e.card.vietnameseName), h(2), b(e.card.name), h(2), b(e.card.description), h(5), b(e.isReversed ? e.card.reversed : e.card.upright)
+    }
+}
+
+function JI(t, n) {
+    if (t & 1) {
+        let e = V();
+        u(0, "div", 3)(1, "h2", 4), d(2, "R\xFAt B\xE0i Tarot"), c(), u(3, "p", 5), d(4, "H\xEDt th\u1EDF s\xE2u, ngh\u0129 v\u1EC1 \u0111i\u1EC1u b\u1EA1n mu\u1ED1n bi\u1EBFt v\xE0 r\xFAt m\u1ED9t l\xE1 b\xE0i \u0111\u1EC3 nh\u1EADn th\xF4ng \u0111i\u1EC7p."), c(), u(5, "button", 23), D("click", function() {
+            S(e);
+            let r = y();
+            return w(r.drawTarotCard())
+        }), _(6, KI, 2, 0, "span")(7, QI, 2, 0, "span"), c(), _(8, ZI, 5, 0, "div", 7), _(9, XI, 18, 17, "div", 24), c()
+    }
+    if (t & 2) {
+        let e, i = y();
+        h(5), H("disabled", i.isDrawingTarot()), h(), T(i.isDrawingTarot() ? 6 : 7), h(2), T(i.isDrawingTarot() ? 8 : -1), h(), T((e = i.drawnTarotCard()) ? 9 : -1, e)
+    }
+}
+var Jr = class Jr {
+    constructor() {
+        this.oracleMode = C("iching");
+        this.drawnHexagram = C(null);
+        this.isDrawingIching = C(!1);
+        this.drawnTarotCard = C(null);
+        this.isDrawingTarot = C(!1)
+    }
+    drawHexagram() {
+        this.isDrawingIching.set(!0), this.drawnHexagram.set(null), setTimeout(() => {
+            let n = Math.floor(Math.random() * lm.length);
+            this.drawnHexagram.set(lm[n]), this.isDrawingIching.set(!1)
+        }, 1200)
+    }
+    drawTarotCard() {
+        this.isDrawingTarot.set(!0), this.drawnTarotCard.set(null), setTimeout(() => {
+            let n = Math.floor(Math.random() * cm.length),
+                e = Math.random() > .5;
+            this.drawnTarotCard.set({
+                card: cm[n],
+                isReversed: e
+            }), this.isDrawingTarot.set(!1)
+        }, 1200)
+    }
+};
+Jr.\u0275fac = function(e) {
+    return new(e || Jr)
+}, Jr.\u0275cmp = q({
+    type: Jr,
+    selectors: [
+        ["app-oracle-utility"]
+    ],
+    decls: 8,
+    vars: 17,
+    consts: [
+        [1, "p-4", "bg-white", "rounded-lg", "shadow", "max-w-3xl", "mx-auto", "text-center"],
+        [1, "inline-flex", "items-center", "justify-center", "space-x-1", "mb-6", "p-1", "rounded-lg", "bg-gray-100"],
+        [1, "px-4", "py-2", "text-sm", "font-medium", "rounded-md", "transition-colors", 3, "click"],
+        [1, "animate-fade-in"],
+        [1, "text-2xl", "font-bold", "text-gray-800", "mb-2"],
+        [1, "text-gray-600", "mb-6"],
+        [1, "px-8", "py-3", "bg-indigo-600", "text-white", "font-semibold", "rounded-lg", "shadow-md", "hover:bg-indigo-700", "disabled:bg-indigo-400", "transition-all", "duration-300", "transform", "hover:scale-105", 3, "click", "disabled"],
+        [1, "mt-8", "text-gray-500"],
+        [1, "mt-8", "text-left", "p-6", "bg-gray-50", "rounded-lg", "border", "border-gray-200", "animate-fade-in"],
+        [1, "animate-pulse", "mt-4"],
+        [1, "flex", "flex-col", "sm:flex-row", "items-center", "gap-6"],
+        [1, "flex-shrink-0"],
+        [1, "h-2", "my-1.5", "w-16"],
+        [1, "flex-grow", "text-center", "sm:text-left"],
+        [1, "text-sm", "text-gray-500"],
+        [1, "text-3xl", "font-bold", "text-indigo-700"],
+        [1, "mt-6", "space-y-4", "prose", "prose-sm", "max-w-none"],
+        [1, "font-semibold", "text-gray-700"],
+        [1, "border-l-4", "border-indigo-300", "pl-4", "italic", "text-gray-600"],
+        [1, "border-l-4", "border-green-300", "pl-4", "italic", "text-gray-600"],
+        [1, "h-full", "w-full", "bg-gray-800", "rounded-sm"],
+        [1, "h-full", "w-full", "flex", "justify-between", "items-center"],
+        [1, "h-full", "w-[45%]", "bg-gray-800", "rounded-sm"],
+        [1, "px-8", "py-3", "bg-purple-600", "text-white", "font-semibold", "rounded-lg", "shadow-md", "hover:bg-purple-700", "disabled:bg-purple-400", "transition-all", "duration-300", "transform", "hover:scale-105", 3, "click", "disabled"],
+        [1, "mt-8", "text-left", "p-6", "bg-purple-50", "rounded-lg", "border", "border-purple-200", "animate-fade-in"],
+        [1, "flex", "flex-col", "md:flex-row", "gap-6"],
+        [1, "flex-shrink-0", "mx-auto"],
+        ["width", "250", "height", "400", 1, "rounded-lg", "shadow-lg", 3, "src", "alt"],
+        [1, "flex-grow"],
+        [1, "font-semibold", "px-3", "py-1", "rounded-full"],
+        [1, "text-3xl", "font-bold", "text-purple-800", "mt-2"],
+        [1, "text-sm", "text-gray-500", "mb-4"],
+        [1, "italic", "text-gray-700", "mb-4"],
+        [1, "prose", "prose-sm", "max-w-none"],
+        [1, "font-semibold", "text-gray-800"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (u(0, "div", 0)(1, "div", 1)(2, "button", 2), D("click", function() {
+                return i.oracleMode.set("iching")
+            }), d(3, " R\xFAt Qu\u1EBB Kinh D\u1ECBch "), c(), u(4, "button", 2), D("click", function() {
+                return i.oracleMode.set("tarot")
+            }), d(5, " R\xFAt B\xE0i Tarot "), c()(), _(6, YI, 10, 4, "div", 3)(7, JI, 10, 4, "div", 3), c()), e & 2) {
+            let r;
+            h(2), N("bg-white", i.oracleMode() === "iching")("shadow-sm", i.oracleMode() === "iching")("text-gray-900", i.oracleMode() === "iching")("text-gray-600", i.oracleMode() !== "iching"), h(2), N("bg-white", i.oracleMode() === "tarot")("shadow-sm", i.oracleMode() === "tarot")("text-gray-900", i.oracleMode() === "tarot")("text-gray-600", i.oracleMode() !== "tarot"), h(2), T((r = i.oracleMode()) === "iching" ? 6 : r === "tarot" ? 7 : -1)
+        }
+    },
+    dependencies: [Q],
+    styles: ["@keyframes _ngcontent-%COMP%_fadeIn{0%{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.animate-fade-in[_ngcontent-%COMP%]{animation:_ngcontent-%COMP%_fadeIn .5s ease-out forwards}"],
+    changeDetection: 0
+});
+var Mc = Jr;
+var eM = () => ({
+        day: "2-digit",
+        month: "long"
+    }),
+    tM = t => ({
+        $implicit: t,
+        title: "S\u1EF1 ki\u1EC7n"
+    }),
+    nM = t => ({
+        $implicit: t,
+        title: "Sinh"
+    }),
+    iM = t => ({
+        $implicit: t,
+        title: "M\u1EA5t"
+    }),
+    rM = t => ({
+        $implicit: t,
+        title: "Ng\xE0y l\u1EC5 v\xE0 k\u1EF7 ni\u1EC7m"
+    }),
+    oM = (t, n) => n.year + n.text;
+
+function aM(t, n) {
+    t & 1 && (k(0, "div", 3), _e(1, "div", 5), k(2, "p", 6), d(3, "\u0110ang t\u1EA3i d\u1EEF li\u1EC7u t\u1EEB Wikipedia..."), F()())
+}
+
+function sM(t, n) {
+    if (t & 1 && (k(0, "div", 4)(1, "p", 7), d(2, "L\u1ED7i!"), F(), k(3, "p", 8), d(4), F()()), t & 2) {
+        let e = y();
+        h(4), b(e.error())
+    }
+}
+
+function lM(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "button", 15), de("click", function() {
+            let r = S(e).$implicit,
+                o = y(2);
+            return w(o.activeTab.set(r))
+        }), d(1), F()
+    }
+    if (t & 2) {
+        let e = n.$implicit,
+            i = y(2);
+        N("border-indigo-500", i.activeTab() === e)("text-indigo-600", i.activeTab() === e)("border-transparent", i.activeTab() !== e)("text-gray-500", i.activeTab() !== e)("hover:text-gray-700", i.activeTab() !== e)("hover:border-gray-300", i.activeTab() !== e), h(), W(" ", e, " (", i.getCountForTab(e), ") ")
+    }
+}
+
+function cM(t, n) {}
+
+function uM(t, n) {
+    if (t & 1 && Ln(0, cM, 0, 0, "ng-template", 14), t & 2) {
+        let e = y(2),
+            i = Mt(7);
+        nt("ngTemplateOutlet", i)("ngTemplateOutletContext", Fn(2, tM, e.events()))
+    }
+}
+
+function dM(t, n) {}
+
+function hM(t, n) {
+    if (t & 1 && Ln(0, dM, 0, 0, "ng-template", 14), t & 2) {
+        let e = y(2),
+            i = Mt(7);
+        nt("ngTemplateOutlet", i)("ngTemplateOutletContext", Fn(2, nM, e.births()))
+    }
+}
+
+function mM(t, n) {}
+
+function fM(t, n) {
+    if (t & 1 && Ln(0, mM, 0, 0, "ng-template", 14), t & 2) {
+        let e = y(2),
+            i = Mt(7);
+        nt("ngTemplateOutlet", i)("ngTemplateOutletContext", Fn(2, iM, e.deaths()))
+    }
+}
+
+function pM(t, n) {}
+
+function gM(t, n) {
+    if (t & 1 && Ln(0, pM, 0, 0, "ng-template", 14), t & 2) {
+        let e = y(2),
+            i = Mt(7);
+        nt("ngTemplateOutlet", i)("ngTemplateOutletContext", Fn(2, rM, e.holidays()))
+    }
+}
+
+function vM(t, n) {
+    if (t & 1 && (k(0, "div", 9)(1, "div", 10)(2, "nav", 11), R(3, lM, 2, 14, "button", 12, pe), F()()(), k(5, "div", 13), _(6, uM, 1, 4, null, 14)(7, hM, 1, 4, null, 14)(8, fM, 1, 4, null, 14)(9, gM, 1, 4, null, 14), F()), t & 2) {
+        let e, i = y();
+        h(3), O(i.tabs), h(3), T((e = i.activeTab()) === "S\u1EF1 ki\u1EC7n" ? 6 : e === "Sinh" ? 7 : e === "M\u1EA5t" ? 8 : e === "Ng\xE0y l\u1EC5" ? 9 : -1)
+    }
+}
+
+function yM(t, n) {
+    if (t & 1 && _e(0, "img", 19), t & 2) {
+        let e = y().$implicit;
+        nt("ngSrc", (e.pages[0].thumbnail == null ? null : e.pages[0].thumbnail.source) || "")("alt", e.pages[0].title || "")
+    }
+}
+
+function EM(t, n) {
+    if (t & 1 && (k(0, "li", 18), _(1, yM, 1, 2, "img", 19), k(2, "div", 20)(3, "span", 21), d(4), F(), k(5, "p", 22), d(6), F()()()), t & 2) {
+        let e = n.$implicit;
+        h(), T(!(e == null || e.pages == null || e.pages[0] == null || e.pages[0].thumbnail == null) && e.pages[0].thumbnail.source ? 1 : -1), h(3), L(" ", e.year, " "), h(2), L(" ", e.text, " ")
+    }
+}
+
+function bM(t, n) {
+    if (t & 1 && (k(0, "ul", 16), R(1, EM, 7, 3, "li", 18, oM), F()), t & 2) {
+        let e = y().$implicit;
+        h(), O(e)
+    }
+}
+
+function DM(t, n) {
+    if (t & 1 && (k(0, "div", 17)(1, "p"), d(2), F()()), t & 2) {
+        let e = y().title;
+        h(2), L('Kh\xF4ng c\xF3 d\u1EEF li\u1EC7u cho m\u1EE5c "', e, '" trong ng\xE0y h\xF4m nay.')
+    }
+}
+
+function CM(t, n) {
+    if (t & 1 && _(0, bM, 3, 0, "ul", 16)(1, DM, 3, 1, "div", 17), t & 2) {
+        let e = n.$implicit;
+        T((e == null ? null : e.length) > 0 ? 0 : 1)
+    }
+}
+var eo = class eo {
+    constructor() {
+        this.http = E(kl);
+        this.today = new Date;
+        this.isLoading = C(!0);
+        this.error = C(null);
+        this.births = C([]);
+        this.deaths = C([]);
+        this.events = C([]);
+        this.holidays = C([]);
+        this.tabs = ["S\u1EF1 ki\u1EC7n", "Sinh", "M\u1EA5t", "Ng\xE0y l\u1EC5"];
+        this.activeTab = C("S\u1EF1 ki\u1EC7n")
+    }
+    ngOnInit() {
+        this.fetchOnThisDayData()
+    }
+    getCountForTab(n) {
+        switch (n) {
+            case "S\u1EF1 ki\u1EC7n":
+                return this.events().length;
+            case "Sinh":
+                return this.births().length;
+            case "M\u1EA5t":
+                return this.deaths().length;
+            case "Ng\xE0y l\u1EC5":
+                return this.holidays().length;
+            default:
+                return 0
+        }
+    }
+    fetchOnThisDayData() {
+        let e = (this.today.getMonth() + 1).toString().padStart(2, "0"),
+            i = this.today.getDate().toString().padStart(2, "0"),
+            r = "https://en.wikipedia.org/api/rest_v1/feed/onthisday";
+        this.isLoading.set(!0), this.error.set(null);
+        let o = this.http.get(`${r}/events/${e}/${i}?origin=*`).pipe(at(() => z({
+                events: []
+            }))),
+            a = this.http.get(`${r}/selected/${e}/${i}?origin=*`).pipe(at(() => z({
+                selected: []
+            }))),
+            s = this.http.get(`${r}/births/${e}/${i}?origin=*`).pipe(at(() => z({
+                births: []
+            }))),
+            l = this.http.get(`${r}/deaths/${e}/${i}?origin=*`).pipe(at(() => z({
+                deaths: []
+            }))),
+            m = this.http.get(`${r}/holidays/${e}/${i}?origin=*`).pipe(at(() => z({
+                holidays: []
+            })));
+        eu({
+            eventsData: o,
+            selectedData: a,
+            birthsData: s,
+            deathsData: l,
+            holidaysData: m
+        }).pipe(an(() => this.isLoading.set(!1))).subscribe({
+            next: f => {
+                let p = f.selectedData?.selected || [],
+                    g = f.eventsData?.events || [],
+                    v = [...p, ...g],
+                    x = new Map;
+                for (let M of v) x.has(M.text) || x.set(M.text, M);
+                let B = Array.from(x.values());
+                this.events.set(B.sort((M, I) => M.year - I.year)), this.births.set((f.birthsData?.births || []).sort((M, I) => M.year - I.year)), this.deaths.set((f.deathsData?.deaths || []).sort((M, I) => M.year - I.year)), this.holidays.set((f.holidaysData?.holidays || []).sort((M, I) => M.year - I.year)), this.events().length === 0 && (this.births().length > 0 ? this.activeTab.set("Sinh") : this.deaths().length > 0 ? this.activeTab.set("M\u1EA5t") : this.holidays().length > 0 && this.activeTab.set("Ng\xE0y l\u1EC5"))
+            },
+            error: f => {
+                console.error("Failed to fetch On This Day data", f), this.error.set("Kh\xF4ng th\u1EC3 t\u1EA3i d\u1EEF li\u1EC7u t\u1EEB Wikipedia. Vui l\xF2ng th\u1EED l\u1EA1i sau.")
+            }
+        })
+    }
+};
+eo.\u0275fac = function(e) {
+    return new(e || eo)
+}, eo.\u0275cmp = q({
+    type: eo,
+    selectors: [
+        ["app-on-this-day-utility"]
+    ],
+    decls: 8,
+    vars: 3,
+    consts: [
+        ["eventList", ""],
+        [1, "p-4", "bg-white", "rounded-lg", "shadow", "max-w-4xl", "mx-auto"],
+        [1, "text-2xl", "font-bold", "text-gray-800", "mb-4"],
+        [1, "text-center", "py-12"],
+        [1, "text-center", "py-12", "bg-red-50", "p-4", "rounded-lg"],
+        [1, "animate-spin", "rounded-full", "h-12", "w-12", "border-b-2", "border-indigo-500", "mx-auto"],
+        [1, "text-gray-500", "mt-4"],
+        [1, "text-red-600", "font-semibold"],
+        [1, "text-red-500", "mt-2"],
+        [1, "border-b", "border-gray-200", "mb-4"],
+        [1, "hide-scrollbar", "overflow-x-auto"],
+        ["aria-label", "Tabs", 1, "-mb-px", "flex", "space-x-4", "sm:space-x-8"],
+        [1, "whitespace-nowrap", "py-3", "px-1", "border-b-2", "font-medium", "text-sm", "transition-colors", 3, "border-indigo-500", "text-indigo-600", "border-transparent", "text-gray-500", "hover:text-gray-700", "hover:border-gray-300"],
+        [1, "min-h-[400px]"],
+        [3, "ngTemplateOutlet", "ngTemplateOutletContext"],
+        [1, "whitespace-nowrap", "py-3", "px-1", "border-b-2", "font-medium", "text-sm", "transition-colors", 3, "click"],
+        [1, "space-y-4"],
+        [1, "text-center", "py-12", "text-gray-500"],
+        [1, "flex", "flex-col", "sm:flex-row", "items-start", "gap-4", "p-3", "bg-gray-50", "rounded-lg"],
+        ["width", "80", "height", "80", 1, "w-20", "h-20", "rounded-md", "object-cover", "flex-shrink-0", "bg-gray-200", 3, "ngSrc", "alt"],
+        [1, "flex-grow"],
+        [1, "font-bold", "text-gray-800", "text-lg"],
+        [1, "text-gray-700", "mt-1"]
+    ],
+    template: function(e, i) {
+        e & 1 && (k(0, "div", 1)(1, "h2", 2), d(2), F(), _(3, aM, 4, 0, "div", 3)(4, sM, 5, 1, "div", 4)(5, vM, 10, 1), F(), Ln(6, CM, 2, 1, "ng-template", null, 0, ah)), e & 2 && (h(2), L(" Ng\xE0y N\xE0y N\u0103m X\u01B0a: ", i.today.toLocaleDateString("vi-VN", me(2, eM)), " "), h(), T(i.isLoading() ? 3 : i.error() ? 4 : 5))
+    },
+    dependencies: [Q, yh, p0],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var Nc = eo;
+var xM = () => ({
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    }),
+    _M = () => ({
+        hour: "2-digit",
+        minute: "2-digit"
+    }),
+    TM = (t, n) => n.name;
+
+function SM(t, n) {
+    if (t & 1 && (u(0, "option", 10), d(1), c()), t & 2) {
+        let e = n.$implicit,
+            i = y();
+        H("value", e)("selected", e === i.year()), h(), b(e)
+    }
+}
+
+function wM(t, n) {
+    if (t & 1 && (u(0, "div", 20)(1, "p", 21), d(2), c(), u(3, "div", 22)(4, "p", 23), d(5), c(), u(6, "p", 24), d(7), c()()()), t & 2) {
+        let e = n.$implicit;
+        h(2), b(e.name), h(3), L(" ", e.date.toLocaleString("vi-VN", me(3, xM)), " "), h(2), L(" ", e.date.toLocaleString("vi-VN", me(4, _M)), " ")
+    }
+}
+
+function IM(t, n) {
+    if (t & 1 && (u(0, "div", 14), R(1, wM, 8, 5, "div", 20, TM), c()), t & 2) {
+        let e = y();
+        h(), O(e.solarTerms())
+    }
+}
+
+function MM(t, n) {
+    t & 1 && (u(0, "div", 15), P(1, "div", 25), u(2, "p", 26), d(3, "\u0110ang t\xEDnh to\xE1n d\u1EEF li\u1EC7u ti\u1EBFt kh\xED..."), c()())
+}
+
+function NM(t, n) {
+    t & 1 && (u(0, "div", 19)(1, "h4", 27), d(2, "Ph\u01B0\u01A1ng Ph\xE1p T\xEDnh To\xE1n N\xE2ng Cao"), c(), u(3, "p", 28), d(4, " B\u1EA1n c\xF3 th\u1EC3 nh\u1EADn th\u1EA5y th\u1EDDi gian Ti\u1EBFt Kh\xED c\u1EE7a ch\xFAng t\xF4i ch\xEAnh l\u1EC7ch v\xE0i ph\xFAt so v\u1EDBi m\u1ED9t s\u1ED1 ngu\u1ED3n kh\xE1c. \u0110i\u1EC1u n\xE0y l\xE0 do ch\xFAng t\xF4i \xE1p d\u1EE5ng c\xE1c thu\u1EADt to\xE1n thi\xEAn v\u0103n hi\u1EC7n \u0111\u1EA1i \u0111\u1EC3 \u0111\u1EA1t \u0111\u1ED9 ch\xEDnh x\xE1c cao nh\u1EA5t, t\u01B0\u01A1ng \u0111\u01B0\u01A1ng v\u1EDBi d\u1EEF li\u1EC7u t\u1EEB NASA v\xE0 c\xE1c \u0111\xE0i thi\xEAn v\u0103n qu\u1ED1c t\u1EBF. "), c(), u(5, "ul", 29)(6, "li")(7, "strong"), d(8, "Hi\u1EC7u ch\u1EC9nh Delta T (\u0394T):"), c(), d(9, ' T\u1ED1c \u0111\u1ED9 quay c\u1EE7a Tr\xE1i \u0110\u1EA5t kh\xF4ng ho\xE0n to\xE0n \u1ED5n \u0111\u1ECBnh. Thu\u1EADt to\xE1n c\u1EE7a ch\xFAng t\xF4i \xE1p d\u1EE5ng hi\u1EC7u ch\u1EC9nh Delta T \u0111\u1EC3 chuy\u1EC3n \u0111\u1ED5i gi\u1EEFa "Th\u1EDDi gian Thi\xEAn v\u0103n" (c\u1EF1c k\u1EF3 \u1ED5n \u0111\u1ECBnh) v\xE0 "Th\u1EDDi gian Ph\u1ED5 qu\xE1t" (d\u1EF1a tr\xEAn v\xF2ng quay th\u1EF1c t\u1EBF c\u1EE7a Tr\xE1i \u0110\u1EA5t). C\xE1c thu\u1EADt to\xE1n c\u0169 th\u01B0\u1EDDng b\u1ECF qua hi\u1EC7u ch\u1EC9nh quan tr\u1ECDng n\xE0y, g\xE2y ra sai l\u1EC7ch h\u01A1n m\u1ED9t ph\xFAt.'), c(), u(10, "li")(11, "strong"), d(12, "Kinh \u0110\u1ED9 Bi\u1EC3u Ki\u1EBFn (Apparent Longitude):"), c(), d(13, ' Ch\xFAng t\xF4i t\xEDnh to\xE1n v\u1ECB tr\xED "bi\u1EC3u ki\u1EBFn" c\u1EE7a M\u1EB7t Tr\u1EDDi khi quan s\xE1t t\u1EEB Tr\xE1i \u0110\u1EA5t, bao g\u1ED3m c\u1EA3 c\xE1c hi\u1EC7u \u1EE9ng nh\u1ECF nh\u01B0ng quan tr\u1ECDng nh\u01B0 s\u1EF1 "l\u1EAFc l\u01B0" c\u1EE7a tr\u1EE5c Tr\xE1i \u0110\u1EA5t (Ch\u01B0\u01A1ng \u0110\u1ED9ng) v\xE0 quang sai \xE1nh s\xE1ng. \u0110\xE2y l\xE0 ph\u01B0\u01A1ng ph\xE1p ch\xEDnh x\xE1c h\u01A1n so v\u1EDBi vi\u1EC7c ch\u1EC9 t\xEDnh "Kinh \u0110\u1ED9 Th\u1EF1c" (True Longitude).'), c(), u(14, "li")(15, "strong"), d(16, "Ph\u01B0\u01A1ng Ph\xE1p T\xECm Ki\u1EBFm Ch\xEDnh X\xE1c:"), c(), d(17, ' Thay v\xEC ch\u1EC9 ki\u1EC3m tra v\u1ECB tr\xED M\u1EB7t Tr\u1EDDi v\xE0o m\u1ED9t th\u1EDDi \u0111i\u1EC3m c\u1ED1 \u0111\u1ECBnh trong ng\xE0y, c\xF4ng c\u1EE5 c\u1EE7a ch\xFAng t\xF4i s\u1EED d\u1EE5ng m\u1ED9t "b\u1ED9 gi\u1EA3i" (solver) l\u1EB7p \u0111\u1EC3 t\xECm ra th\u1EDDi \u0111i\u1EC3m ch\xEDnh x\xE1c \u0111\u1EBFn t\u1EEBng gi\xE2y khi kinh \u0111\u1ED9 M\u1EB7t Tr\u1EDDi \u0111i qua c\xE1c m\u1ED1c Ti\u1EBFt Kh\xED.'), c()(), u(18, "p"), d(19, " S\u1EF1 k\u1EBFt h\u1EE3p c\u1EE7a c\xE1c y\u1EBFu t\u1ED1 tr\xEAn mang l\u1EA1i k\u1EBFt qu\u1EA3 c\xF3 \u0111\u1ED9 ch\xEDnh x\xE1c cao. C\u1EA3m \u01A1n b\u1EA1n \u0111\xE3 tin t\u01B0\u1EDFng s\u1EED d\u1EE5ng m\u1ED9t c\xF4ng c\u1EE5 t\xEDnh to\xE1n chuy\xEAn s\xE2u! "), c()())
+}
+var to = class to {
+    constructor() {
+        this.lunarConverterService = E(Oe);
+        this.showAccuracyInfo = C(!1);
+        this.year = C(new Date().getFullYear());
+        this.years = Array.from({
+            length: 210
+        }, (n, e) => 1900 + e);
+        this.solarTerms = Z(() => {
+            try {
+                return this.lunarConverterService.getSolarTermsForYear(this.year())
+            } catch (n) {
+                return console.error("Failed to calculate solar terms", n), []
+            }
+        })
+    }
+    onYearChange(n) {
+        let e = parseInt(n.target.value, 10);
+        this.year.set(e)
+    }
+    goToPreviousYear() {
+        this.year.update(n => n > 1900 ? n - 1 : n)
+    }
+    goToNextYear() {
+        this.year.update(n => n < 2109 ? n + 1 : n)
+    }
+    goToCurrentYear() {
+        this.year.set(new Date().getFullYear())
+    }
+};
+to.\u0275fac = function(e) {
+    return new(e || to)
+}, to.\u0275cmp = q({
+    type: to,
+    selectors: [
+        ["app-solar-terms-utility"]
+    ],
+    decls: 27,
+    vars: 4,
+    consts: [
+        [1, "p-4", "bg-white", "rounded-lg", "shadow", "max-w-4xl", "mx-auto"],
+        [1, "text-center", "mb-6"],
+        [1, "text-2xl", "font-bold", "text-gray-800", "mb-4"],
+        ["for", "year-select", 1, "font-medium", "text-sm", "text-gray-700", "mb-2", "block"],
+        [1, "flex", "justify-center", "items-center", "gap-2"],
+        ["aria-label", "N\u0103m tr\u01B0\u1EDBc", 1, "p-2", "rounded-full", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        ["xmlns", "http://www.w3.org/2000/svg", "fill", "none", "viewBox", "0 0 24 24", "stroke", "currentColor", 1, "h-5", "w-5"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M15 19l-7-7 7-7"],
+        [1, "flex", "items-center", "gap-2"],
+        ["id", "year-select", 1, "p-2", "border", "border-gray-300", "rounded-md", "shadow-sm", "focus:ring-indigo-500", "focus:border-indigo-500", "bg-white", 3, "change"],
+        [3, "value", "selected"],
+        [1, "px-3", "py-2", "text-sm", "font-medium", "bg-indigo-500", "text-white", "rounded-md", "shadow-sm", "hover:bg-indigo-600", "transition-colors", 3, "click"],
+        ["aria-label", "N\u0103m sau", 1, "p-2", "rounded-full", "hover:bg-gray-200", "transition-colors", 3, "click"],
+        ["stroke-linecap", "round", "stroke-linejoin", "round", "stroke-width", "2", "d", "M9 5l7 7-7 7"],
+        [1, "space-y-3", "mt-6", "max-w-md", "mx-auto"],
+        [1, "text-center", "py-12"],
+        [1, "mt-8", "text-center", "border-t", "pt-6", "border-gray-200"],
+        [1, "text-sm", "text-indigo-600", "hover:underline", "focus:outline-none", 3, "click"],
+        [1, "inline-block", "transition-transform"],
+        [1, "mt-4", "p-4", "bg-blue-50", "border", "border-blue-200", "rounded-lg", "text-left", "text-gray-700", "animate-fade-in", "max-w-3xl", "mx-auto"],
+        [1, "flex", "justify-between", "items-center", "p-3", "bg-gray-50", "border", "border-gray-200", "rounded-lg", "hover:bg-gray-100", "transition-colors"],
+        [1, "font-semibold", "text-indigo-700"],
+        [1, "text-right", "font-mono"],
+        [1, "text-sm", "text-gray-800"],
+        [1, "text-sm", "text-gray-500"],
+        [1, "animate-spin", "rounded-full", "h-8", "w-8", "border-b-2", "border-indigo-500", "mx-auto"],
+        [1, "text-gray-500", "mt-4"],
+        [1, "font-semibold", "text-lg", "text-gray-800", "mb-2"],
+        [1, "mb-3"],
+        [1, "list-disc", "list-inside", "space-y-2", "mb-3"]
+    ],
+    template: function(e, i) {
+        e & 1 && (u(0, "div", 0)(1, "div", 1)(2, "h2", 2), d(3, "Tra C\u1EE9u 24 Ti\u1EBFt Kh\xED"), c(), u(4, "label", 3), d(5, "Ch\u1ECDn n\u0103m:"), c(), u(6, "div", 4)(7, "button", 5), D("click", function() {
+            return i.goToPreviousYear()
+        }), K(), u(8, "svg", 6), P(9, "path", 7), c()(), ne(), u(10, "div", 8)(11, "select", 9), D("change", function(o) {
+            return i.onYearChange(o)
+        }), R(12, SM, 2, 3, "option", 10, pe), c(), u(14, "button", 11), D("click", function() {
+            return i.goToCurrentYear()
+        }), d(15, "N\u0103m nay"), c()(), u(16, "button", 12), D("click", function() {
+            return i.goToNextYear()
+        }), K(), u(17, "svg", 6), P(18, "path", 13), c()()()(), _(19, IM, 3, 0, "div", 14)(20, MM, 4, 0, "div", 15), ne(), u(21, "div", 16)(22, "button", 17), D("click", function() {
+            return i.showAccuracyInfo.set(!i.showAccuracyInfo())
+        }), d(23, " Ghi ch\xFA v\u1EC1 \u0111\u1ED9 ch\xEDnh x\xE1c c\u1EE7a d\u1EEF li\u1EC7u "), u(24, "span", 18), d(25, "\u25BC"), c()(), _(26, NM, 20, 0, "div", 19), c()()), e & 2 && (h(12), O(i.years), h(7), T(i.solarTerms().length > 0 ? 19 : 20), h(5), N("rotate-180", i.showAccuracyInfo()), h(2), T(i.showAccuracyInfo() ? 26 : -1))
+    },
+    dependencies: [Q],
+    styles: ["@keyframes _ngcontent-%COMP%_fadeIn{0%{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.animate-fade-in[_ngcontent-%COMP%]{animation:_ngcontent-%COMP%_fadeIn .4s ease-out forwards}"],
+    changeDetection: 0
+});
+var Ac = to;
+
+function AM(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "app-biorhythm-utility", 8), de("userDOBChanged", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onUserDOBChanged(r))
+        }), F()
+    }
+    if (t & 2) {
+        let e = y();
+        nt("userDOB", e.state.userDOB())
+    }
+}
+
+function kM(t, n) {
+    t & 1 && _e(0, "app-clock-utility")
+}
+
+function RM(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "app-converter-utility", 9), de("dayDetailsViewed", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onDayDetailsViewed(r))
+        }), F()
+    }
+}
+
+function OM(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "app-horoscope-utility", 10), de("dayDetailsViewed", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onDayDetailsViewed(r))
+        })("userDOBChanged", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onUserDOBChanged(r))
+        }), F()
+    }
+    if (t & 2) {
+        let e = y();
+        nt("userDOB", e.state.userDOB())
+    }
+}
+
+function LM(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "app-interval-calculator", 9), de("dayDetailsViewed", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onDayDetailsViewed(r))
+        }), F()
+    }
+}
+
+function FM(t, n) {
+    if (t & 1) {
+        let e = V();
+        k(0, "app-numerology-utility", 9), de("dayDetailsViewed", function(r) {
+            S(e);
+            let o = y();
+            return w(o.onDayDetailsViewed(r))
+        }), F()
+    }
+}
+
+function PM(t, n) {
+    t & 1 && _e(0, "app-oracle-utility")
+}
+
+function BM(t, n) {
+    t & 1 && _e(0, "app-on-this-day-utility")
+}
+
+function HM(t, n) {
+    t & 1 && _e(0, "app-solar-terms-utility")
+}
+var no = class no {
+    constructor() {
+        this.state = E(Xe);
+        this.router = E(Te);
+        this.utilityView = C("clock")
+    }
+    onDayDetailsViewed(n) {
+        this.router.navigate(["/", n.getDate(), n.getMonth() + 1, n.getFullYear()])
+    }
+    onUserDOBChanged(n) {
+        this.state.setUserDOB(n)
+    }
+};
+no.\u0275fac = function(e) {
+    return new(e || no)
+}, no.\u0275cmp = q({
+    type: no,
+    selectors: [
+        ["app-utilities-tab"]
+    ],
+    decls: 41,
+    vars: 37,
+    consts: [
+        [1, "p-4", "bg-gray-50", "rounded-lg", "h-full", "overflow-y-auto"],
+        [1, "mb-4", "border-b", "border-gray-200"],
+        [1, "hide-scrollbar", "overflow-x-auto"],
+        [1, "flex", "flex-nowrap", "-mb-px", "text-sm", "font-medium", "text-center", "text-gray-500"],
+        [1, "mr-2"],
+        [1, "whitespace-nowrap", "inline-block", "p-4", "border-b-2", "border-transparent", "rounded-t-lg", "hover:text-gray-600", "hover:border-gray-300", 3, "click"],
+        [1, "mt-4"],
+        [3, "userDOB"],
+        [3, "userDOBChanged", "userDOB"],
+        [3, "dayDetailsViewed"],
+        [3, "dayDetailsViewed", "userDOBChanged", "userDOB"]
+    ],
+    template: function(e, i) {
+        if (e & 1 && (k(0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "ul", 3)(4, "li", 4)(5, "button", 5), de("click", function() {
+                return i.utilityView.set("clock")
+            }), d(6, " \u0110\u1ED3ng h\u1ED3 "), F()(), k(7, "li", 4)(8, "button", 5), de("click", function() {
+                return i.utilityView.set("converter")
+            }), d(9, " \u0110\u1ED5i ng\xE0y "), F()(), k(10, "li", 4)(11, "button", 5), de("click", function() {
+                return i.utilityView.set("solar-terms")
+            }), d(12, " Ti\u1EBFt Kh\xED "), F()(), k(13, "li", 4)(14, "button", 5), de("click", function() {
+                return i.utilityView.set("oracle")
+            }), d(15, " R\xFAt Qu\u1EBB & Tarot "), F()(), k(16, "li", 4)(17, "button", 5), de("click", function() {
+                return i.utilityView.set("on-this-day")
+            }), d(18, " Ng\xE0y N\xE0y N\u0103m X\u01B0a "), F()(), k(19, "li", 4)(20, "button", 5), de("click", function() {
+                return i.utilityView.set("horoscope")
+            }), d(21, " Horoscope "), F()(), k(22, "li", 4)(23, "button", 5), de("click", function() {
+                return i.utilityView.set("interval")
+            }), d(24, " T\xEDnh kho\u1EA3ng c\xE1ch "), F()(), k(25, "li", 4)(26, "button", 5), de("click", function() {
+                return i.utilityView.set("numerology")
+            }), d(27, " Th\u1EA7n s\u1ED1 h\u1ECDc "), F()(), k(28, "li", 4)(29, "button", 5), de("click", function() {
+                return i.utilityView.set("biorhythm")
+            }), d(30, " Nh\u1ECBp sinh h\u1ECDc "), F()()()()(), k(31, "div", 6), _(32, AM, 1, 1, "app-biorhythm-utility", 7)(33, kM, 1, 0, "app-clock-utility")(34, RM, 1, 0, "app-converter-utility")(35, OM, 1, 1, "app-horoscope-utility", 7)(36, LM, 1, 0, "app-interval-calculator")(37, FM, 1, 0, "app-numerology-utility")(38, PM, 1, 0, "app-oracle-utility")(39, BM, 1, 0, "app-on-this-day-utility")(40, HM, 1, 0, "app-solar-terms-utility"), F()()), e & 2) {
+            let r;
+            h(5), N("text-blue-600", i.utilityView() === "clock")("border-blue-600", i.utilityView() === "clock"), h(3), N("text-blue-600", i.utilityView() === "converter")("border-blue-600", i.utilityView() === "converter"), h(3), N("text-blue-600", i.utilityView() === "solar-terms")("border-blue-600", i.utilityView() === "solar-terms"), h(3), N("text-blue-600", i.utilityView() === "oracle")("border-blue-600", i.utilityView() === "oracle"), h(3), N("text-blue-600", i.utilityView() === "on-this-day")("border-blue-600", i.utilityView() === "on-this-day"), h(3), N("text-blue-600", i.utilityView() === "horoscope")("border-blue-600", i.utilityView() === "horoscope"), h(3), N("text-blue-600", i.utilityView() === "interval")("border-blue-600", i.utilityView() === "interval"), h(3), N("text-blue-600", i.utilityView() === "numerology")("border-blue-600", i.utilityView() === "numerology"), h(3), N("text-blue-600", i.utilityView() === "biorhythm")("border-blue-600", i.utilityView() === "biorhythm"), h(3), T((r = i.utilityView()) === "biorhythm" ? 32 : r === "clock" ? 33 : r === "converter" ? 34 : r === "horoscope" ? 35 : r === "interval" ? 36 : r === "numerology" ? 37 : r === "oracle" ? 38 : r === "on-this-day" ? 39 : r === "solar-terms" ? 40 : -1)
+        }
+    },
+    dependencies: [Q, Cc, _c, Tc, Sc, wc, Ic, Mc, Nc, Ac],
+    encapsulation: 2,
+    changeDetection: 0
+});
+var kc = no;
+var io = class io {
+    constructor() {
+        this.router = E(Te)
+    }
+    ngOnInit() {
+        let n = new Date;
+        this.router.navigate(["/", n.getDate(), n.getMonth() + 1, n.getFullYear()], {
+            queryParams: {
+                embed: "true"
+            },
+            replaceUrl: !0
+        })
+    }
+};
+io.\u0275fac = function(e) {
+    return new(e || io)
+}, io.\u0275cmp = q({
+    type: io,
+    selectors: [
+        ["app-embed"]
+    ],
+    decls: 2,
+    vars: 0,
+    consts: [
+        [1, "text-center", "p-8", "text-gray-500"]
+    ],
+    template: function(e, i) {
+        e & 1 && (u(0, "p", 0), d(1, "\u0110ang t\u1EA3i trang nh\xFAng..."), c())
+    },
+    encapsulation: 2
+});
+var Rc = io;
+var zv = [{
+    path: "embed",
+    component: Rc,
+    title: "L\u1ECBch V\u1EA1n Ni\xEAn Widget"
+}, {
+    path: "overview",
+    component: wa,
+    title: "L\u1ECBch V\u1EA1n Ni\xEAn H\xF4m Nay"
+}, {
+    path: "clock",
+    component: uc,
+    title: "Xem Gi\u1EDD Ho\xE0ng \u0110\u1EA1o & B\xE1t T\u1EF1"
+}, {
+    path: "weekly",
+    component: dc,
+    title: "Xem L\u1ECBch Theo Tu\u1EA7n"
+}, {
+    path: "lich",
+    component: Ec,
+    title: "S\u1EF1 Ki\u1EC7n & L\u1EC5 T\u1EBFt"
+}, {
+    path: "battu",
+    component: fc,
+    title: "Ph\xE2n T\xEDch B\xE1t T\u1EF1 (T\u1EE9 Tr\u1EE5)"
+}, {
+    path: "utilities",
+    component: kc,
+    title: "Ti\u1EC7n \xCDch M\u1EDF R\u1ED9ng"
+}, {
+    path: "personalization",
+    component: Dc,
+    title: "C\xE1 Nh\xE2n H\xF3a L\u1ECBch"
+}, {
+    path: ":day/:month/:year",
+    component: mc
+}, {
+    path: ":month/:year",
+    component: wa
+}, {
+    path: ":year",
+    component: hc,
+    canMatch: [(t, n) => {
+        let e = n[0].path;
+        return /^\d{4}$/.test(e)
+    }]
+}, {
+    path: "",
+    redirectTo: "overview",
+    pathMatch: "full"
+}, {
+    path: "**",
+    redirectTo: "overview"
+}];
+var jn = class jn extends Si {
+    constructor() {
+        super(...arguments);
+        this.title = E(Rl);
+        this.meta = E(P0)
+    }
+    updateTitle(e) {
+        let i, r = e.root;
+        for (; r;) {
+            let p = r.routeConfig?.title;
+            typeof p == "string" && (i = p), r = r.firstChild
+        }
+        let o = new Date().getFullYear(),
+            a = o + 1,
+            s = `L\u1ECBch V\u1EA1n Ni\xEAn ${o} - ${a} | Xem L\u1ECBch \xC2m D\u01B0\u01A1ng, Ng\xE0y T\u1ED1t X\u1EA5u | lich.kabala.vn`,
+            l = "Tra c\u1EE9u L\u1ECBch V\u1EA1n Ni\xEAn online ch\xEDnh x\xE1c nh\u1EA5t. Xem l\u1ECBch \xE2m d\u01B0\u01A1ng, ng\xE0y t\u1ED1t x\u1EA5u, gi\u1EDD ho\xE0ng \u0111\u1EA1o, Can Chi, B\xE1t T\u1EF1, Th\u1EADp Th\u1EA7n, v\xE0 c\xE1c ti\u1EC7n \xEDch phong th\u1EE7y kh\xE1c.",
+            m = e.root;
+        for (; m.firstChild;) m = m.firstChild;
+        let f = m.params;
+        f.day && f.month && f.year ? (s = `Xem Ng\xE0y ${f.day}/${f.month}/${f.year} - L\u1ECBch \xC2m, Gi\u1EDD Ho\xE0ng \u0110\u1EA1o | lich.kabala.vn`, l = `Xem chi ti\u1EBFt ng\xE0y ${f.day}/${f.month}/${f.year} d\u01B0\u01A1ng l\u1ECBch. Tra c\u1EE9u l\u1ECBch \xE2m, gi\u1EDD ho\xE0ng \u0111\u1EA1o, vi\u1EC7c n\xEAn l\xE0m v\xE0 ki\xEAng k\u1EF5, h\u01B0\u1EDBng xu\u1EA5t h\xE0nh ch\xEDnh x\xE1c nh\u1EA5t.`) : f.month && f.year ? (s = `L\u1ECBch \xC2m Th\xE1ng ${f.month} N\u0103m ${f.year} - Xem Ng\xE0y T\u1ED1t X\u1EA5u | lich.kabala.vn`, l = `Xem l\u1ECBch \xE2m th\xE1ng ${f.month} n\u0103m ${f.year}. Tra c\u1EE9u ng\xE0y t\u1ED1t x\u1EA5u, ng\xE0y ho\xE0ng \u0111\u1EA1o, h\u1EAFc \u0111\u1EA1o trong th\xE1ng \u0111\u1EC3 l\xEAn k\u1EBF ho\u1EA1ch c\xF4ng vi\u1EC7c.`) : f.year ? (s = `L\u1ECBch V\u1EA1n Ni\xEAn N\u0103m ${f.year} - Tra C\u1EE9u L\u1ECBch \xC2m D\u01B0\u01A1ng | lich.kabala.vn`, l = `Tra c\u1EE9u t\u1ED5ng quan L\u1ECBch V\u1EA1n Ni\xEAn n\u0103m ${f.year}. Xem c\xE1c ng\xE0y l\u1EC5 t\u1EBFt, s\u1EF1 ki\u1EC7n quan tr\u1ECDng v\xE0 th\xF4ng tin l\u1ECBch \xE2m d\u01B0\u01A1ng c\u1EA3 n\u0103m.`) : i && (s = `${i} | lich.kabala.vn`, i.includes("B\xE1t T\u1EF1") ? l = "C\xF4ng c\u1EE5 l\u1EADp l\xE1 s\u1ED1 B\xE1t T\u1EF1 (T\u1EE9 Tr\u1EE5) chi ti\u1EBFt, ph\xE2n t\xEDch ng\u0169 h\xE0nh, th\u1EADp th\u1EA7n v\xE0 n\u0103ng l\u01B0\u1EE3ng c\u1EE7a ng\xE0y gi\u1EDD sinh." : i.includes("C\xE1 Nh\xE2n H\xF3a") ? l = "T\xEDnh to\xE1n ng\xE0y t\u1ED1t x\u1EA5u, nh\u1ECBp sinh h\u1ECDc v\xE0 c\xE1c ch\u1EC9 s\u1ED1 th\u1EA7n s\u1ED1 h\u1ECDc d\u1EF1a tr\xEAn ng\xE0y sinh c\u1EE7a ri\xEAng b\u1EA1n." : i.includes("Tu\u1EA7n") ? l = "Xem l\u1ECBch theo tu\u1EA7n, l\xEAn k\u1EBF ho\u1EA1ch c\xF4ng vi\u1EC7c hi\u1EC7u qu\u1EA3 v\u1EDBi c\xE1i nh\xECn t\u1ED5ng quan v\u1EC1 tu\u1EA7n l\xE0m vi\u1EC7c." : i.includes("Ti\u1EC7n \xCDch") && (l = "T\u1ED5ng h\u1EE3p c\xE1c ti\u1EC7n \xEDch: \u0110\u1ED5i ng\xE0y \xE2m d\u01B0\u01A1ng, Nh\u1ECBp sinh h\u1ECDc, Th\u1EA7n s\u1ED1 h\u1ECDc, Gieo qu\u1EBB, Tarot v\xE0 tra c\u1EE9u ng\xE0y l\u1EC5.")), this.title.setTitle(s), this.meta.updateTag({
+            property: "og:title",
+            content: s
+        }), this.meta.updateTag({
+            name: "twitter:title",
+            content: s
+        }), this.meta.updateTag({
+            name: "description",
+            content: l
+        }), this.meta.updateTag({
+            property: "og:description",
+            content: l
+        }), this.meta.updateTag({
+            name: "twitter:description",
+            content: l
+        })
+    }
+};
+jn.\u0275fac = (() => {
+    let e;
+    return function(r) {
+        return (e || (e = lr(jn)))(r || jn)
+    }
+})(), jn.\u0275prov = j({
+    token: jn,
+    factory: jn.\u0275fac,
+    providedIn: "root"
+});
+var Oc = jn;
+var jM = window.location.protocol === "blob:" || window.location.href.includes("blob:") || window.location.hostname.includes("usercontent.goog");
+wh(lc, {
+    providers: [ch(), Nh(), Jh(zv, ...jM ? [em()] : []), {
+        provide: Si,
+        useClass: Oc
+    }, {
+        provide: mr,
+        useValue: "/"
+    }]
+}).catch(t => console.error(t));

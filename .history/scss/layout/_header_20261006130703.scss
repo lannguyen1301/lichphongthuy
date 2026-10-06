@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 30px;
+    bỏder
+
+    &__logo {
+        //
+        &-link {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}

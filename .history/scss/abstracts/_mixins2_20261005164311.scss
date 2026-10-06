@@ -1,0 +1,23 @@
+@use "sass:map";
+@use "variables" as vars;
+
+@mixin breakpoint($key) {
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+
+    @if ($breakpoint == 0) {
+        @content;
+    } @else {
+        @media (max-width: ($breakpoint - 0.02px)) {
+            @content;
+        }
+    }
+}
+
+@mixin get-infix($key) {
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+    // Sử dụng interpolation trong một chuỗi string để tránh lỗi toán tử '-'
+    $infix: if($breakpoint and $breakpoint != 0, unquote("-" + $key), "");
+    
+    // Lưu ý: Mixin này thường dùng để tạo class, 
+    // nên ta sẽ dùng nó trong các loop ở file _grid.scss
+}

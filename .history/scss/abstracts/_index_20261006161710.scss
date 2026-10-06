@@ -1,0 +1,19 @@
+// 1. Cấu hình lõi (Variables & Theme)
+@forward "variables";      
+@forward "palette";        
+@forward "theme-engine";   
+
+// 2. Các hàm và Mixins
+@forward "mixins";         
+@forward "mixins2";        
+
+// 3. Typo & Placeholders
+@forward "placeholder";    
+@forward "typography";     
+
+// 4. Các Abstract hỗ trợ layout & UI (Thứ tự nhóm này có thể linh hoạt)
+@forward "css-grid";       
+@forward "flex-box";       
+@forward "positioning";    
+@forward "images";         
+@forward "animations";

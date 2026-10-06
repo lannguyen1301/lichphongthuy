@@ -1,0 +1,3024 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up |Lịch phong thuỷ</title>
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="./assets/css/main.css">
+
+    <!-- scripts -->
+    <script src="./assets/js/script.js"></script>
+
+</head>
+
+<body>
+
+    <header id="header">
+        <!-- Header content will be inserted here -->
+    </header>
+    <script>
+        load("#header", "./templates/header.html");
+    </script>
+    <main>
+        <!-- Main content will be inserted here -->
+        <h1>Sign up pages</h1>
+    </main>
+    <footer id="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script>
+</body>
+`
+
+</html>
+
+
+<!-- nháp -->
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tòa nhà The Mett Tower | 15 Trần Bạch Đằng, An Khánh</title>
+    <meta name="description"
+        content="Tòa nhà The METT địa chỉ tại 15 Trần Bạch Đằng, An Khánh. Giá thuê văn phòng từ 44-45 USD/m²/tháng, nhiều diện tich linh hoạt. Xem ngay!" />
+    <meta name="keywords"
+        content="The Mett, The Mett thủ thiêm, tòa nhà The Mett, The Mett tower, The Mett quận 2, The Mett Tower B, 15 đường Trần Bạch Đằng, Phường Thủ Thiêm, TP Thủ Đức" />
+    <meta name="DC.title" content="Tòa nhà The Mett Tower" />
+    <meta name="geo.region" content="VN" />
+    <meta name="geo.placename" content="The Mett Tower, 15 Trần Bạch Đằng, Phường An Khánh, Thành Phố Hồ Chí Minh" />
+    <meta name="geo.position" content="10.77838;106.7116313" />
+    <meta name="ICBM" content="10.77838, 106.7116313" />
+    <meta name="google-site-verification" content="qmq9c1Z9pgMlxmNuRhn3bv6bNvvkwufrVO4YpubsReI" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0d1110;
+            --cream: #f5efe3;
+            --muted: #b8afa2;
+            --gold: #c7a45d;
+            --gold-soft: rgba(199, 164, 93, 0.14);
+            --white: #ffffff;
+            --line: rgba(255, 255, 255, 0.12);
+            --shadow: 0 30px 80px rgba(65, 16, 16, 0.35);
+            --radius: 28px;
+            --font-title: Arial, "Times New Roman", serif;
+            --font-body: Inter, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .navbar {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 100;
+            padding: 22px 0;
+            transition: 0.35s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 12px 0;
+            background: rgb(143 70 37 / 62%);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 26px;
+            letter-spacing: 4px;
+            color: var(--white);
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+            color: rgba(245, 239, 227, 0.78);
+        }
+
+        .nav-links a {
+            position: relative;
+            transition: 0.25s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 46px;
+            padding: 0 24px;
+            border-radius: 999px;
+            border: 1px solid #8f4625;
+            background: #c3450c;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(199, 164, 93, 0.22);
+        }
+
+        .btn.outline {
+            background: transparent;
+            color: var(--cream);
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--cream);
+            cursor: pointer;
+        }
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 150px 0 82px;
+            isolation: isolate;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background-image: url("assets/banner/the-mett-tower-banner-4.png");
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.04);
+            animation: slowZoom 16s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            from {
+                transform: scale(1.02);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 46px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero h1 {
+            max-width: 860px;
+            font-family: var(--font-title);
+            font-size: clamp(56px, 9vw, 132px);
+            line-height: 0.92;
+            letter-spacing: -4px;
+            margin-bottom: 28px;
+        }
+
+        .hero-panel strong {
+            display: block;
+            font-family: var(--font-title);
+            font-size: 40px;
+            color: var(--white);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .hero-carousel {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 150px 0 82px;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero-slider,
+        .hero-slide,
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-slider {
+            z-index: -3;
+        }
+
+        .hero-slide {
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(1.08);
+            transition:
+                opacity 1.2s ease,
+                transform 6s ease;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-overlay {
+            z-index: -2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: rgba(245, 239, 227, 0.78);
+            font-size: 18px;
+            margin-bottom: 34px;
+        }
+
+        .hero-panel {
+            position: absolute;
+            right: 5vw;
+            bottom: 70px;
+            width: min(380px, 34vw);
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: #8F4625;
+            backdrop-filter: blur(18px);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-panel span {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .hero-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 32px;
+            z-index: 5;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .hero-dots button {
+            width: 10px;
+            height: 10px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(245, 239, 227, 0.45);
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .hero-dots button.active {
+            width: 34px;
+            border-radius: 999px;
+            background: #8F4625;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-panel {
+                position: static;
+                width: 100%;
+                margin-top: 34px;
+            }
+
+            .hero-carousel {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-carousel {
+                padding-top: 120px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+        }
+
+        .stats-group {
+            background: #8f4625;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transform: translateY(-42px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat {
+            background: #fff;
+            padding: 34px 28px;
+        }
+
+        .stat b {
+            display: block;
+            font-family: var(--font-title);
+            font-size: 42px;
+            color: #8F4625;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat span {
+            color: #333;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-head {
+            max-width: 760px;
+            margin-bottom: 54px;
+        }
+
+        .section-head.center {
+            margin-inline: auto;
+            text-align: center;
+        }
+
+        .section-head h2 {
+            font-family: var(--font-title);
+            font-size: clamp(38px, 5vw, 72px);
+            line-height: 1.02;
+            letter-spacing: -2px;
+            margin-bottom: 22px;
+        }
+
+        .section-head p {
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1.04fr 0.96fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .split.reverse {
+            grid-template-columns: 0.96fr 1.04fr;
+        }
+
+        .image-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            min-height: 560px;
+            box-shadow: var(--shadow);
+        }
+
+        .image-card img {
+            height: 100%;
+            position: absolute;
+            inset: 0;
+        }
+
+        .image-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.46),
+                    transparent 48%);
+        }
+
+        .content-card {
+            padding: 22px 0;
+        }
+
+        .content-card h3 {
+            font-family: var(--font-title);
+            font-size: clamp(34px, 4vw, 58px);
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .content-card p {
+            color: var(--muted);
+            margin-bottom: 18px;
+            font-size: 16px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .feature {
+            padding: 36px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.055),
+                    rgba(255, 255, 255, 0.025));
+            min-height: 310px;
+            transition: 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(180deg,
+                    rgba(199, 164, 93, 0.16),
+                    rgba(255, 255, 255, 0.03));
+        }
+
+        .feature .icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 20px;
+            display: grid;
+            place-items: center;
+            background: #fff;
+            color: var(--gold);
+            font-size: 26px;
+            margin-bottom: 28px;
+        }
+
+        .feature h4 {
+            font-family: var(--font-title);
+            font-size: 28px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 0.8fr;
+            grid-template-rows: 280px 280px;
+            gap: 18px;
+        }
+
+        .gallery img {
+            height: 100%;
+            border-radius: 24px;
+            filter: saturate(0.88);
+        }
+
+        .gallery img:first-child {
+            grid-row: span 2;
+        }
+
+        .dark-panel {
+            background: #8F4625;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .floor-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .floor-card {
+            padding: 30px;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.035);
+        }
+
+        .floor-card small {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+        }
+
+        .floor-card h4 {
+            font-family: var(--font-title);
+            font-size: 32px;
+            margin: 14px 0 12px;
+        }
+
+        .floor-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .clients {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .client {
+            min-height: 120px;
+            display: grid;
+            place-items: center;
+            background: #111614;
+            color: rgba(245, 239, 227, 0.72);
+            font-family: var(--font-title);
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+
+        #floor {
+            padding: 100px 0;
+        }
+
+        .floor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .floor-card {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.005));
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease;
+        }
+
+        .floor-card-img {
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .floor-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover !important;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            border-radius: 24px;
+        }
+
+        .floor-card-content {
+            padding: 32px;
+        }
+
+        .floor-card small {
+            display: block;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .floor-card h4 {
+            font-family: var(--font-title);
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .floor-card p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .floor-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(199, 164, 93, 0.35);
+            background: linear-gradient(180deg, rgba(199, 164, 93, 0.05), rgba(255, 255, 255, 0.01));
+        }
+
+        .floor-card:hover .floor-card-img img {
+            transform: scale(1.04);
+        }
+
+        @media (max-width: 768px) {
+            .floor-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .floor-card-img {
+                height: 220px;
+            }
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 50px;
+            align-items: start;
+            padding: 56px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: linear-gradient(135deg,
+                    rgba(199, 164, 93, 0.13),
+                    rgba(255, 255, 255, 0.035));
+            box-shadow: var(--shadow);
+        }
+
+        .contact h2 {
+            font-family: var(--font-title);
+            font-size: clamp(38px, 5vw, 66px);
+            line-height: 1.04;
+            margin-bottom: 22px;
+        }
+
+        .contact p {
+            color: var(--muted);
+        }
+
+        .contact-carousel-section {
+            position: relative;
+            min-height: 760px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .contact-bg-slider {
+            position: absolute;
+            inset: 0;
+        }
+
+        .contact-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(1.08);
+            transition:
+                opacity 1.2s ease,
+                transform 6s ease;
+        }
+
+        .contact-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .contact-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .contact-carousel-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 60px;
+            padding: 60px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+        }
+
+        .contact-content {
+            color: #fff;
+        }
+
+        .contact-content h2 {
+            font-family: var(--font-title);
+            font-size: clamp(44px, 6vw, 82px);
+            line-height: 0.95;
+            margin-bottom: 24px;
+            color: #8f4625;
+        }
+
+        .contact-content p {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 17px;
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .contact-info div {
+            padding: 22px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .contact-info strong {
+            display: block;
+            font-family: var(--font-title);
+            font-size: 32px;
+            color: #8f4625;
+        }
+
+        .contact-info span {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 13px;
+        }
+
+        .form {
+            background: #fff;
+            padding: 22px;
+            border-radius: 28px;
+        }
+
+        .form iframe {
+            width: 100%;
+            height: 330px !important;
+            border-radius: 20px;
+        }
+
+        .contact-dots {
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .contact-dots button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 0;
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .contact-dots button.active {
+            width: 34px;
+            border-radius: 20px;
+            background: #8F4625;
+        }
+
+        @media (max-width: 900px) {
+            .contact {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .contact-carousel-section {
+                min-height: auto;
+                padding: 100px 0;
+            }
+        }
+
+        .form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            min-height: 56px;
+            padding: 0 18px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(0, 0, 0, 0.18);
+            color: var(--cream);
+            outline: none;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 132px;
+            padding-top: 16px;
+            resize: vertical;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(245, 239, 227, 0.45);
+        }
+
+        footer {
+            padding: 46px 0;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(34px);
+            transition: 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1024px) {
+
+            .nav-links,
+            .nav-actions .btn.outline {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-grid;
+                place-items: center;
+            }
+
+            .hero-panel {
+                position: static;
+                width: 100%;
+                margin-top: 34px;
+            }
+
+            .hero {
+                align-items: center;
+            }
+
+            .stats,
+            .feature-grid,
+            .floor-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .split,
+            .split.reverse,
+            .contact {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery img:first-child {
+                grid-row: span 1;
+            }
+
+            .clients {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                width: min(100% - 28px, 1180px);
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .stats,
+            .feature-grid,
+            .floor-grid,
+            .form-row,
+            .gallery,
+            .clients {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 72px 0;
+            }
+
+            .image-card {
+                min-height: 390px;
+            }
+
+            .contact {
+                padding: 28px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 0 18px;
+            }
+        }
+
+        .overview-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .overview-content h2 {
+            font-family: var(--font-title);
+            font-size: clamp(42px, 5vw, 76px);
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 26px;
+        }
+
+        .overview-desc {
+            color: var(--muted);
+            font-size: 17px;
+            max-width: 720px;
+            margin-bottom: 38px;
+        }
+
+        .overview-info {
+            display: grid;
+            gap: 18px;
+        }
+
+        .info-card {
+            padding: 28px;
+            border-radius: 24px;
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.08),
+                    rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--line);
+        }
+
+        .info-card span {
+            color: var(--gold);
+            letter-spacing: 3px;
+            font-size: 12px;
+        }
+
+        .info-card h3 {
+            font-family: var(--font-title);
+            font-size: 30px;
+            margin: 8px 0 12px;
+        }
+
+        .info-card p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .overview-spec {
+            position: sticky;
+            top: 120px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .spec-card {
+            min-height: 170px;
+            padding: 28px;
+            border-radius: 28px;
+            background: linear-gradient(180deg,
+                    rgba(199, 164, 93, 0.14),
+                    rgba(255, 255, 255, 0.04));
+            border: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .spec-card.highlight {
+            grid-column: span 2;
+            min-height: 220px;
+        }
+
+        .spec-card strong {
+            font-family: var(--font-title);
+            font-size: 52px;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .spec-card span {
+            margin-top: 14px;
+            color: var(--muted);
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1.3px;
+        }
+
+        @media (max-width: 900px) {
+            .overview-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-spec {
+                position: static;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .overview-spec {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-card.highlight {
+                grid-column: auto;
+            }
+        }
+
+        .maps {
+            display: block;
+            width: 100%;
+            height: 386px;
+            overflow: hidden;
+            border-radius: 30px;
+        }
+
+        #overview {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            padding: 120px 0;
+            background: var(--bg);
+        }
+
+        .overview-bg-wrapper {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .overview-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url("assets/banner/the-mett-tower-banner-5.png");
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.02);
+            animation: overviewSlowZoom 20s ease-in-out infinite alternate;
+        }
+
+        .overview-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(13, 17, 16, 0.95) 0%,
+                    rgba(13, 17, 16, 0.88) 50%,
+                    rgba(13, 17, 16, 0.96) 100%);
+            z-index: -1;
+        }
+
+        @keyframes overviewSlowZoom {
+            from {
+                transform: scale(1.02);
+            }
+
+            to {
+                transform: scale(1.12);
+            }
+        }
+
+        .overview-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .overview-content h2 {
+            font-family: var(--font-title);
+            font-size: clamp(36px, 4.5vw, 56px);
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 26px;
+            color: var(--white);
+        }
+
+        .overview-desc {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 720px;
+            margin-bottom: 42px;
+        }
+
+        .overview-info {
+            display: grid;
+            gap: 20px;
+        }
+
+        .info-card {
+            padding: 32px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: rgba(199, 164, 93, 0.3);
+            background: linear-gradient(135deg, rgba(199, 164, 93, 0.06), rgba(255, 255, 255, 0.02));
+        }
+
+        .info-card:hover p {
+            color: #fff;
+        }
+
+        .info-card .card-number {
+            display: block;
+            font-family: var(--font-title);
+            color: #8F4625;
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .info-card h3 {
+            font-family: var(--font-title);
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            color: var(--cream);
+        }
+
+        .info-card p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .overview-spec {
+            position: sticky;
+            top: 120px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .spec-card {
+            min-height: 150px;
+            padding: 24px;
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(199, 164, 93, 0.4);
+            background: linear-gradient(135deg, rgb(18 18 18 / 80%), rgb(44 44 44 / 30%));
+        }
+
+        .spec-card:hover span {
+            color: #fff;
+        }
+
+        .spec-card.highlight {
+            grid-column: span 2;
+            min-height: 180px;
+            background: linear-gradient(135deg, rgb(18 18 18 / 50%), rgb(44 44 44 / 10%));
+            border: 1px solid rgba(199, 164, 93, 0.25);
+        }
+
+        .spec-card strong {
+            font-family: var(--font-title);
+            font-size: clamp(38px, 4vw, 46px);
+            color: #8f4625;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .spec-card.highlight strong {
+            font-size: clamp(48px, 5vw, 62px);
+        }
+
+        .spec-card span {
+            margin-top: 14px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 900px) {
+            #overview {
+                padding: 80px 0;
+            }
+
+            .overview-layout {
+                grid-template-columns: 1fr;
+                gap: 46px;
+            }
+
+            .overview-spec {
+                position: static;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .overview-spec {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-card.highlight {
+                grid-column: auto;
+            }
+        }
+
+        .footer-botom {
+            background: #8f4625;
+        }
+
+        .footer-botom-contact {
+            color: var(--white);
+        }
+
+        .footer-botom-copyright {
+            color: var(--white);
+        }
+
+        #clients-carousel {
+            padding: 100px 0;
+            background: #000000;
+            overflow: hidden;
+        }
+
+        .marquee-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            mask-image: linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 15%, #000 85%, transparent 100%);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 32px;
+            animation: scrollMarquee 30s linear infinite;
+        }
+
+        .marquee-wrapper:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        .client {
+            flex-shrink: 0;
+            width: 200px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.005));
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-sizing: border-box;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .client img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 20px;
+            display: block;
+            margin: auto;
+            object-fit: cover;
+            mix-blend-mode: lighten;
+            transition: all 0.4s ease;
+        }
+
+        .client:hover {
+            border-color: rgba(199, 164, 93, 0.35);
+            background: linear-gradient(180deg, rgba(199, 164, 93, 0.06), rgba(255, 255, 255, 0.01));
+            transform: translateY(-3px);
+        }
+
+        .client:hover img {
+            filter: grayscale(0%) contrast(100%) brightness(100%) opacity(1);
+            transform: scale(1.04);
+        }
+
+        @keyframes scrollMarquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 640px) {
+            #clients-carousel {
+                padding: 72px 0;
+            }
+
+            .client {
+                width: 150px;
+                height: 80px;
+                padding: 12px;
+            }
+
+            .marquee-track {
+                gap: 20px;
+                animation-duration: 20s;
+            }
+        }
+
+        #amenities {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            padding: 120px 0;
+            background: #080b0a;
+        }
+
+        .amenities-bg-slider {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .amenities-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(1.02);
+            animation: amenitiesCrossFade 30s linear infinite;
+        }
+
+        .amenities-slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .amenities-slide:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .amenities-slide:nth-child(3) {
+            animation-delay: 10s;
+        }
+
+        .amenities-slide:nth-child(4) {
+            animation-delay: 15s;
+        }
+
+        .amenities-slide:nth-child(5) {
+            animation-delay: 20s;
+        }
+
+        .amenities-slide:nth-child(6) {
+            animation-delay: 25s;
+        }
+
+        .amenities-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(13, 17, 16, 0.26) 0%,
+                    rgba(13, 17, 16, 0.12) 50%,
+                    rgba(13, 17, 16, 0.26) 100%);
+            z-index: -1;
+        }
+
+        @keyframes amenitiesCrossFade {
+            0% {
+                opacity: 0;
+                transform: scale(1.02);
+            }
+
+            1.66% {
+                opacity: 1;
+            }
+
+            16.66% {
+                opacity: 1;
+            }
+
+            18.33% {
+                opacity: 0;
+                transform: scale(1.08);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature {
+            padding: 40px 32px;
+            border-radius: var(--radius);
+            background: #363636;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .feature:hover {
+            transform: translateY(-8px);
+            border-color: rgba(199, 164, 93, 0.45);
+            background: linear-gradient(180deg, rgba(199, 164, 93, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature .icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            background: var(--gold-soft);
+            color: var(--gold);
+            font-size: 24px;
+            margin-bottom: 24px;
+            transition: transform 0.4s ease;
+        }
+
+        .feature:hover .icon {
+            transform: scale(1.1) rotate(8deg);
+        }
+
+        .feature h4 {
+            font-family: var(--font-title);
+            font-size: 24px;
+            line-height: 1.2;
+            margin-bottom: 14px;
+            color: var(--white);
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            #amenities {
+                padding: 80px 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .feature {
+                padding: 32px 24px;
+                min-height: auto;
+            }
+        }
+
+        /* ==========================================================================
+           TỐI ƯU MOBILE MENU (Hiệu ứng mượt mà)
+           ========================================================================== */
+        .mobile-menu {
+            position: fixed;
+            inset: 76px 16px auto;
+            z-index: 99;
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: rgba(13, 17, 16, 0.96);
+            backdrop-filter: blur(18px);
+
+            /* Ghi đè display: none bằng hiệu ứng chuyển động */
+            display: grid;
+            gap: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* ==========================================================================
+           FLOATING ACTIONS (Nút gọi & Back to top)
+           ========================================================================== */
+        .floating-actions {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .float-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            color: var(--white);
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        /* Nút Gọi Điện - Màu cam chủ đạo kèm hiệu ứng tỏa sóng */
+        .call-btn {
+            background: #c3450c;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .call-btn:hover {
+            background: #8f4625;
+        }
+
+        /* Nút Back To Top - Cùng phong cách Glassmorphism */
+        .btt-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        .btt-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .btt-btn:hover {
+            transform: translateY(-5px);
+            background: rgba(199, 164, 93, 0.3);
+            border-color: var(--gold);
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(195, 69, 12, 0.6);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(195, 69, 12, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(195, 69, 12, 0);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .floating-actions {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .float-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+
+        /* ==========================================================================
+           SECTION THƯ VIỆN ẢNH THỰC TẾ (THE METT)
+           ========================================================================== */
+        #thu-vien-anh {
+            background: var(--bg);
+            padding: 100px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .photo-gallery-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 18px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 24px;
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .photo-gallery-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .photo-gallery-item {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            height: 320px;
+            border: 1px solid var(--line);
+        }
+
+        .photo-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: saturate(0.88);
+        }
+
+        .photo-gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13, 17, 16, 0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .photo-gallery-item-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            color: var(--gold);
+            font-size: 40px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .photo-gallery-item:hover img {
+            transform: scale(1.08);
+            filter: saturate(1.1);
+        }
+
+        .photo-gallery-item:hover::after,
+        .photo-gallery-item:hover .photo-gallery-item-icon {
+            opacity: 1;
+        }
+
+        .photo-gallery-item:hover .photo-gallery-item-icon {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .gallery-btn-wrapper {
+            display: none;
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .photo-gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+                overflow: visible;
+                margin: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .photo-gallery-item {
+                height: 360px;
+                flex: auto;
+            }
+
+            .photo-gallery-item.hidden-pc {
+                display: none;
+            }
+
+            .photo-gallery-grid.show-all .photo-gallery-item.hidden-pc {
+                display: block;
+            }
+
+            .gallery-btn-wrapper {
+                display: block;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .photo-gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ==========================================================================
+           LIGHTBOX TOÀN MÀN HÌNH (THE METT)
+           ========================================================================== */
+        .lightbox-mett {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            padding: 40px 0;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(13, 17, 16, 0.96);
+            backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-mett.active {
+            display: flex;
+        }
+
+        .lightbox-content-mett {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            animation: zoomInMett 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes zoomInMett {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close-mett {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            color: var(--muted);
+            font-size: 35px;
+            cursor: pointer;
+            z-index: 100000;
+            transition: 0.3s ease;
+        }
+
+        .lightbox-close-mett:hover {
+            color: var(--gold);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            border: 1px solid var(--line);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+            z-index: 100000;
+        }
+
+        .lightbox-nav-btn:hover {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev-mett {
+            left: 32px;
+        }
+
+        .lightbox-next-mett {
+            right: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .lightbox-prev-mett {
+                left: 16px;
+            }
+
+            .lightbox-next-mett {
+                right: 16px;
+            }
+
+            .lightbox-close-mett {
+                top: 16px;
+                right: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar" id="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="logo">THE <span>METT</span></a>
+            <nav class="nav-links">
+                <a href="#overview">Tổng quan</a>
+                <a href="#location">Vị trí</a>
+                <a href="#amenities">Tiện ích</a>
+                <a href="#floor">Sơ đồ tầng</a>
+                <a href="tel:888262838">
+                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        stroke="#ffffff">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path
+                                d="M15.5562 14.5477L15.1007 15.0272C15.1007 15.0272 14.0181 16.167 11.0631 13.0559C8.10812 9.94484 9.1907 8.80507 9.1907 8.80507L9.47752 8.50311C10.1841 7.75924 10.2507 6.56497 9.63424 5.6931L8.37326 3.90961C7.61028 2.8305 6.13596 2.68795 5.26145 3.60864L3.69185 5.26114C3.25823 5.71766 2.96765 6.30945 3.00289 6.96594C3.09304 8.64546 3.81071 12.259 7.81536 16.4752C12.0621 20.9462 16.0468 21.1239 17.6763 20.9631C18.1917 20.9122 18.6399 20.6343 19.0011 20.254L20.4217 18.7584C21.3806 17.7489 21.1102 16.0182 19.8833 15.312L17.9728 14.2123C17.1672 13.7486 16.1858 13.8848 15.5562 14.5477Z"
+                                fill="#ffffff"></path>
+                            <path
+                                d="M13.2595 1.87983C13.3257 1.47094 13.7122 1.19357 14.1211 1.25976C14.1464 1.26461 14.2279 1.27983 14.2705 1.28933C14.3559 1.30834 14.4749 1.33759 14.6233 1.38082C14.9201 1.46726 15.3347 1.60967 15.8323 1.8378C16.8286 2.29456 18.1544 3.09356 19.5302 4.46936C20.906 5.84516 21.705 7.17097 22.1617 8.16725C22.3899 8.66487 22.5323 9.07947 22.6187 9.37625C22.6619 9.52466 22.6912 9.64369 22.7102 9.72901C22.7197 9.77168 22.7267 9.80594 22.7315 9.83125L22.7373 9.86245C22.8034 10.2713 22.5286 10.6739 22.1197 10.7401C21.712 10.8061 21.3279 10.53 21.2601 10.1231C21.258 10.1121 21.2522 10.0828 21.2461 10.0551C21.2337 9.9997 21.2124 9.91188 21.1786 9.79572C21.1109 9.56339 20.9934 9.21806 20.7982 8.79238C20.4084 7.94207 19.7074 6.76789 18.4695 5.53002C17.2317 4.29216 16.0575 3.59117 15.2072 3.20134C14.7815 3.00618 14.4362 2.88865 14.2038 2.82097C14.0877 2.78714 13.9417 2.75363 13.8863 2.7413C13.4793 2.67347 13.1935 2.28755 13.2595 1.87983Z"
+                                fill="#ffffff"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M13.4857 5.3293C13.5995 4.93102 14.0146 4.7004 14.4129 4.81419L14.2069 5.53534C14.4129 4.81419 14.4129 4.81419 14.4129 4.81419L14.4144 4.81461L14.4159 4.81505L14.4192 4.81602L14.427 4.81834L14.4468 4.8245C14.4618 4.82932 14.4807 4.8356 14.5031 4.84357C14.548 4.85951 14.6074 4.88217 14.6802 4.91337C14.8259 4.97581 15.0249 5.07223 15.2695 5.21694C15.7589 5.50662 16.4271 5.9878 17.2121 6.77277C17.9971 7.55775 18.4782 8.22593 18.7679 8.7154C18.9126 8.95991 19.009 9.15897 19.0715 9.30466C19.1027 9.37746 19.1254 9.43682 19.1413 9.48173C19.1493 9.50418 19.1555 9.52301 19.1604 9.53809L19.1665 9.55788L19.1688 9.56563L19.1698 9.56896L19.1702 9.5705C19.1702 9.5705 19.1707 9.57194 18.4495 9.77798L19.1707 9.57194C19.2845 9.97021 19.0538 10.3853 18.6556 10.4991C18.2607 10.6119 17.8492 10.3862 17.7313 9.99413L17.7276 9.98335C17.7223 9.96832 17.7113 9.93874 17.6928 9.89554C17.6558 9.8092 17.5887 9.66797 17.4771 9.47938C17.2541 9.10264 16.8514 8.53339 16.1514 7.83343C15.4515 7.13348 14.8822 6.73078 14.5055 6.50781C14.3169 6.39619 14.1757 6.32909 14.0893 6.29209C14.0461 6.27358 14.0165 6.26254 14.0015 6.25721L13.9907 6.25352C13.5987 6.13564 13.3729 5.72419 13.4857 5.3293Z"
+                                fill="#ffffff"></path>
+                        </g>
+                    </svg>
+                    888262838
+                </a>
+            </nav>
+            <div class="nav-actions">
+                <a href="#contact" class="btn outline">Đặt lịch tham quan</a>
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#overview">Tổng quan</a>
+        <a href="#location">Vị trí</a>
+        <a href="#amenities">Tiện ích</a>
+        <a href="#floor">Sơ đồ tầng</a>
+        <a href="#contact">Liên hệ</a>
+    </div>
+
+    <main>
+        <section class="hero hero-carousel" id="home">
+            <div class="hero-slider">
+                <div class="hero-slide active" style="
+                            background-image: url(assets/banner/the-mett-tower-banner.png);
+                        "></div>
+                <div class="hero-slide" style="
+                            background-image: url(assets/banner/the-mett-tower-banner-2.jpg);
+                        "></div>
+                <div class="hero-slide" style="
+                            background-image: url(assets/banner/the-mett-tower-banner-3.jpg);
+                        "></div>
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+                <span class="eyebrow reveal">Grade A Office Tower</span>
+
+                <h1 class="reveal">
+                    Biểu tượng văn phòng mới của đô thị hiện đại
+                </h1>
+
+                <p class="reveal">
+                    Một điểm đến làm việc cao cấp dành cho các thương hiệu
+                    dẫn đầu, nơi kiến trúc, công nghệ, thiên nhiên và trải
+                    nghiệm vận hành hòa quyện trong cùng một chuẩn mực.
+                </p>
+
+                <a href="#contact" class="btn reveal">Khám phá dự án</a>
+
+                <div class="hero-panel reveal">
+                    <strong>27 tầng</strong>
+                    <span>Không gian văn phòng hạng A, tầm nhìn toàn cảnh
+                        trung tâm tài chính mới.</span>
+                </div>
+            </div>
+
+            <div class="hero-dots">
+                <button class="active" aria-label="Slide 1"></button>
+                <button aria-label="Slide 2"></button>
+                <button aria-label="Slide 3"></button>
+            </div>
+        </section>
+
+        <section class="stats-group ">
+            <div class="container">
+                <div class="stats reveal">
+                    <div class="stat"><b>$45</b><span>Giá thuê / m²</span></div>
+                    <div class="stat">
+                        <b>LEED</b><span>Định hướng xanh</span>
+                    </div>
+                    <div class="stat">
+                        <b>5★</b><span>Dịch vụ vận hành</span>
+                    </div>
+                    <div class="stat">
+                        <b>24/7</b><span>An ninh & hỗ trợ</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview">
+            <div class="overview-bg-wrapper">
+                <div class="overview-bg"></div>
+                <div class="overview-overlay"></div>
+            </div>
+
+            <div class="container overview-layout">
+                <div class="overview-content reveal">
+                    <span class="eyebrow">Tổng quan</span>
+
+                    <h2>
+                        THE METT – Biểu tượng văn phòng hạng A tại trung tâm Thủ Thiêm
+                    </h2>
+
+                    <p class="overview-desc">
+                        THE METT được phát triển theo tiêu chuẩn văn phòng quốc tế, kết hợp vị trí chiến lược, thiết kế
+                        hiện đại và hệ thống vận hành chuyên nghiệp dành cho doanh nghiệp hàng đầu.
+                    </p>
+
+                    <div class="overview-info">
+                        <article class="info-card">
+                            <span class="card-number">01</span>
+                            <h3>Chủ đầu tư Khởi Phát</h3>
+                            <p>
+                                Khởi Phát phát triển THE METT với định hướng tạo nên biểu tượng văn phòng cao cấp, đáp
+                                ứng tiêu chuẩn làm việc hiện đại của doanh nghiệp trong và ngoài nước.
+                            </p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="card-number">02</span>
+                            <h3>Văn phòng hạng A</h3>
+                            <p>
+                                Không gian văn phòng đạt chuẩn hạng A với thiết kế sang trọng, tiện ích đồng bộ, hệ
+                                thống kỹ thuật tiên tiến và dịch vụ quản lý chuyên nghiệp.
+                            </p>
+                        </article>
+
+                        <article class="info-card">
+                            <span class="card-number">03</span>
+                            <h3>Hoàn thiện năm 2023</h3>
+                            <p>
+                                Hoàn thành và đưa vào vận hành năm 2023, THE METT mang đến môi trường làm việc thế hệ
+                                mới, tối ưu trải nghiệm và hiệu quả doanh nghiệp.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+
+                <aside class="overview-spec reveal">
+                    <div class="spec-card highlight">
+                        <strong>27</strong>
+                        <span>Tầng cao</span>
+                    </div>
+
+                    <div class="spec-card">
+                        <strong>27.500+ m²</strong>
+                        <span>Tổng diện tích cho thuê</span>
+                    </div>
+
+                    <div class="spec-card">
+                        <strong>1.621 m²</strong>
+                        <span>Diện tích một sàn</span>
+                    </div>
+
+                    <div class="spec-card">
+                        <strong>2.7 m</strong>
+                        <span>Độ cao trần</span>
+                    </div>
+
+                    <div class="spec-card">
+                        <strong>3</strong>
+                        <span>Tầng hầm đậu xe</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="dark-panel" id="location">
+            <div class="container split reverse">
+                <div class="content-card reveal">
+                    <span class="eyebrow">Vị trí</span>
+                    <h3>Tâm điểm kết nối của trung tâm tài chính mới</h3>
+                    <p>
+                        Tọa lạc tại khu lõi phát triển năng động, tòa nhà sở
+                        hữu khả năng kết nối nhanh đến khu trung tâm, tuyến
+                        metro, đại lộ ven sông và các trục thương mại trọng
+                        điểm.
+                    </p>
+                    <p>
+                        Vị trí chiến lược giúp doanh nghiệp dễ dàng tiếp cận
+                        khách hàng, đối tác, nhân sự và hệ sinh thái dịch vụ
+                        cao cấp xung quanh.
+                    </p>
+                    <a href="#contact" class="btn">Đặt lịch tư vấn</a>
+                </div>
+                <div class="maps">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1959.7145667960494!2d106.71183049678802!3d10.778407818666304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f2d6178c421%3A0x849d850bcbbadd48!2sThe%20METT%20-%20Grade%20A%20Office%20Building!5e0!3m2!1svi!2s!4v1781576894611!5m2!1svi!2s"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="amenities">
+            <div class="amenities-bg-slider">
+                <div class="amenities-slide"
+                    style="background-image: url('assets/img/the-mett-tower-sanh-don-bieu-tuong.png');">
+                </div>
+                <div class="amenities-slide"
+                    style="background-image: url('assets/img/the-mett-tower-khong-gian-xanh.png');">
+                </div>
+                <div class="amenities-slide"
+                    style="background-image: url('assets/img/the-mett-tower-he-thong-dieu-hoa.png');">
+                </div>
+                <div class="amenities-slide"
+                    style="background-image: url('assets/img/the-mett-tower-he-thong-kiem-soat.png');">
+                </div>
+                <div class="amenities-slide" style="background-image: url('assets/img/the-mett-tower-thang-may.png');">
+                </div>
+                <div class="amenities-slide" style="background-image: url('assets/img/the-mett-tower-2.png');">
+                </div>
+            </div>
+            <div class="amenities-overlay"></div>
+
+            <div class="container">
+                <div class="section-head center reveal">
+                    <span class="eyebrow">Tiện ích nổi bật</span>
+                    <h2>Chuẩn mực mới cho trải nghiệm làm việc mỗi ngày</h2>
+                    <p>
+                        Từ tiện ích xanh, công nghệ vận hành đến dịch vụ chăm sóc khách thuê, mọi yếu tố được thiết kế
+                        để tối ưu hiệu suất và cảm hứng.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature reveal">
+                        <div class="icon">
+                            <svg fill="#8F4625" height="40px" width="40px" version="1.1" id="Layer_1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                viewBox="0 0 511.999 511.999" xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M409.671,119.459l-107.54-13.562L256,7.811l-46.13,98.086l-107.54,13.562l79.031,74.183L161.026,300.11L256,247.871 l94.973,52.238L330.64,193.642L409.671,119.459z M256.001,209.895l-49.015,26.96l10.494-54.948l-40.789-38.286l55.502-7 L256,85.998l23.808,50.622l55.502,7l-40.787,38.286l10.494,54.948L256.001,209.895z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M442.875,354.882l-9.065-76.098l-52.833,55.515l-75.175-14.894l36.471,67.402L304.878,453.7l75.373-13.859l52.064,56.237 l10.11-75.967l69.574-32.138L442.875,354.882z M411.857,397.578l-3.191,23.974l-16.43-17.747l-23.787,4.374l11.802-21.11 l-11.51-21.271l23.724,4.701l16.673-17.52l2.861,24.015l21.814,10.444L411.857,397.578z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M169.726,386.805l36.471-67.401l-75.175,14.894l-52.833-55.516l-9.065,76.099L0,387.973l69.573,32.138l10.111,75.966 l52.063-56.237l75.374,13.859L169.726,386.805z M119.765,403.804l-16.43,17.747l-3.191-23.974l-21.956-10.142l21.816-10.444 l2.861-24.015l16.672,17.52l23.724-4.701l-11.51,21.271l11.802,21.11L119.765,403.804z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <polygon
+                                                points="272.638,445.723 272.638,420.536 239.362,420.536 239.362,445.723 214.174,445.723 214.174,478.999 239.362,478.999 239.362,504.187 272.638,504.187 272.638,478.999 297.826,478.999 297.826,445.723 ">
+                                            </polygon>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <polygon
+                                                points="75.988,80.122 75.988,54.933 42.713,54.933 42.713,80.122 17.524,80.122 17.524,113.398 42.713,113.398 42.713,138.586 75.988,138.586 75.988,113.398 101.176,113.398 101.176,80.122 ">
+                                            </polygon>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <polygon
+                                                points="469.287,185.371 469.287,160.182 436.012,160.182 436.012,185.371 410.823,185.371 410.823,218.646 436.012,218.646 436.012,243.835 469.287,243.835 469.287,218.646 494.476,218.646 494.476,185.371 ">
+                                            </polygon>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4>Sảnh đón biểu tượng</h4>
+                        <p>Không gian lễ tân cao cấp với vật liệu tinh tuyển, ánh sáng ấm và trải nghiệm tiếp đón chuẩn
+                            quốc tế.</p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="icon">
+                            <svg width="40px" height="40px" viewBox="-1.07 0 21.124314 21.124314" id="svg8"
+                                version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+                                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                                xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                                xmlns:svg="http://www.w3.org/2000/svg" fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <defs id="defs2">
+                                        <clipPath clipPathUnits="userSpaceOnUse" id="clipPath23">
+                                            <rect height="170.00711" id="rect25"
+                                                style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.97641512"
+                                                transform="rotate(90)" width="263.84616" x="6.7847877" y="110.36194">
+                                            </rect>
+                                        </clipPath>
+                                    </defs>
+                                    <g id="layer1" transform="translate(56.656484,-341.2299)">
+                                        <rect height="58.184261" id="rect8011" ry="1.1433572"
+                                            style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.10699999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                                            width="150.11761" x="-377.22021" y="-198.90477"></rect>
+                                    </g>
+                                    <g id="g8681" transform="translate(56.656484,-341.2299)">
+                                        <rect height="58.184261" id="rect8677" ry="1.1433572"
+                                            style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.10699999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                                            width="150.11761" x="-377.22021" y="-198.90477"></rect>
+                                    </g>
+                                    <g id="g9233" transform="translate(56.656484,-341.2299)">
+                                        <rect height="58.184261" id="rect9229" ry="1.1433572"
+                                            style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.10699999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                                            width="150.11761" x="-377.22021" y="-198.90477"></rect>
+                                        <rect height="368.83194" id="rect9311" ry="1.1433572"
+                                            style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.10699999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                                            width="313.2399" x="-594.38983" y="-161.63449"></rect>
+                                        <path d="m -50.965096,354.78457 c 0,0 -0.290316,3.65164 3.424418,2.93042"
+                                            id="path972-8-5"
+                                            style="opacity:1;fill:none;fill-opacity:1;stroke:#8F4625;stroke-width:0.80890197;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+                                        </path>
+                                        <ellipse cx="-47.622818" cy="361.93448" id="path981-4-4" rx="5.1331449"
+                                            ry="0.41973439"
+                                            style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:1.0652703;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+                                        </ellipse>
+                                        <path
+                                            d="m -48.496856,361.2635 -0.04389,-11.72569 1.440074,-1.3e-4 0.08425,11.71579 z"
+                                            id="path979-1"
+                                            style="opacity:1;fill:#784421;fill-opacity:1;stroke:#8F4625;stroke-width:0.80890197;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+                                        </path>
+                                        <path d="m -43.454722,356.07224 c 0,0 0.290315,3.65164 -3.424418,2.93043"
+                                            id="path972-8-5-2"
+                                            style="opacity:1;fill:none;fill-opacity:1;stroke:#8F4625;stroke-width:0.80890197;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+                                        </path>
+                                        <ellipse cx="-42.121109" cy="355.043" id="ellipse8165" rx="3.943758"
+                                            ry="3.9453704"
+                                            style="opacity:1;fill:#2ca02c;fill-opacity:1;stroke:#8F4625;stroke-width:1.01823282;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373">
+                                        </ellipse>
+                                        <path d="m -50.663439,361.74623 h 6.222328" id="path8161"
+                                            style="opacity:1;fill:none;fill-opacity:1;stroke:#8F4625;stroke-width:0.69471091;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+                                        </path>
+                                        <ellipse cx="-47.338188" cy="348.42407" id="path837-1-2" rx="6.9551096"
+                                            ry="6.6850576"
+                                            style="opacity:1;fill:#5fd35f;fill-opacity:1;stroke:#8F4625;stroke-width:1.01823282;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98823529">
+                                        </ellipse>
+                                        <ellipse cx="-52.203609" cy="351.84134" id="ellipse8169" rx="3.943758"
+                                            ry="3.9453704"
+                                            style="opacity:1;fill:#37c837;fill-opacity:1;stroke:#8F4625;stroke-width:1.01823282;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373">
+                                        </ellipse>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4>Không gian xanh</h4>
+                        <p>Vườn cảnh quan, sân hiên thư giãn và các khoảng xanh giúp cân bằng nhịp làm việc trong ngày.
+                        </p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="icon">
+                            <svg fill="#8F4625" width="40px" height="40px" viewBox="0 0 96 96" id="Layer_1_1_"
+                                version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -26.8173 56.2574)"
+                                        width="12.728" x="48.136" y="59.5"></rect>
+                                    <rect height="12.728"
+                                        transform="matrix(0.7071 -0.7071 0.7071 0.7071 -30.6249 47.065)" width="2"
+                                        x="40.5" y="54.136"></rect>
+                                    <path
+                                        d="M28,92c0,1.105,0.895,2,2,2h36c1.105,0,2-0.895,2-2v-9H28V92z M48,85c1.657,0,3,1.343,3,3s-1.343,3-3,3s-3-1.343-3-3 S46.343,85,48,85z">
+                                    </path>
+                                    <path
+                                        d="M23,15.899V23c0,0.441,0.29,0.831,0.713,0.958L33,26.744V37h-3c-1.105,0-2,0.895-2,2v4h40v-4c0-1.105-0.895-2-2-2h-3V26.744 l9.287-2.786C72.71,23.831,73,23.441,73,23v-7.101c2.282-0.463,4-2.48,4-4.899c0-2.761-2.239-5-5-5s-5,2.239-5,5 c0,2.419,1.718,4.436,4,4.899v6.357l-9.287,2.786C61.29,25.169,61,25.559,61,26v11H49V11.899c2.282-0.463,4-2.48,4-4.899 c0-2.761-2.239-5-5-5s-5,2.239-5,5c0,2.419,1.718,4.436,4,4.899V37H35V26c0-0.441-0.29-0.831-0.713-0.958L25,22.256v-6.357 c2.282-0.463,4-2.48,4-4.899c0-2.761-2.239-5-5-5s-5,2.239-5,5C19,13.419,20.718,15.436,23,15.899z M70,11c0-1.105,0.895-2,2-2 s2,0.895,2,2c0,1.105-0.895,2-2,2S70,12.105,70,11z M46,7c0-1.105,0.895-2,2-2s2,0.895,2,2c0,1.105-0.895,2-2,2S46,8.105,46,7z M45,39h6v2h-6V39z M24,9c1.105,0,2,0.895,2,2c0,1.105-0.895,2-2,2s-2-0.895-2-2C22,9.895,22.895,9,24,9z">
+                                    </path>
+                                    <path
+                                        d="M8,40c2.419,0,4.436-1.718,4.899-4H17v26c0,0.552,0.447,1,1,1h10v7h-6c-0.553,0-1,0.448-1,1v12h-6.101 c-0.463-2.282-2.48-4-4.899-4c-2.761,0-5,2.239-5,5s2.239,5,5,5c2.419,0,4.436-1.718,4.899-4H22c0.553,0,1-0.448,1-1V72h5v9h40v-9h5 v12c0,0.552,0.447,1,1,1h7.101c0.463,2.282,2.48,4,4.899,4c2.761,0,5-2.239,5-5s-2.239-5-5-5c-2.419,0-4.436,1.718-4.899,4H75V71 c0-0.552-0.447-1-1-1h-6v-7h10c0.553,0,1-0.448,1-1V36h4.101c0.463,2.282,2.48,4,4.899,4c2.761,0,5-2.239,5-5s-2.239-5-5-5 c-2.419,0-4.436,1.718-4.899,4H78c-0.553,0-1,0.448-1,1v26h-9V45H28v16h-9V35c0-0.552-0.447-1-1-1h-5.101 c-0.463-2.282-2.48-4-4.899-4c-2.761,0-5,2.239-5,5S5.239,40,8,40z M10,86c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2s2,0.895,2,2 C12,85.105,11.105,86,10,86z M86,82c1.105,0,2,0.895,2,2c0,1.105-0.895,2-2,2s-2-0.895-2-2C84,82.895,84.895,82,86,82z M88,33 c1.105,0,2,0.895,2,2c0,1.105-0.895,2-2,2s-2-0.895-2-2C86,33.895,86.895,33,88,33z M34,53h1.501c5.949,0,10.927,4.156,12.19,9.722 c0.075,0.332,0.544,0.332,0.619,0C49.572,57.156,54.551,53,60.499,53H62v1.501C62,61.404,56.404,67,49.501,67H49v10h-2V67h-0.501 C39.596,67,34,61.404,34,54.501V53z M8,33c1.105,0,2,0.895,2,2c0,1.105-0.895,2-2,2s-2-0.895-2-2C6,33.895,6.895,33,8,33z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4>Công nghệ thông minh</h4>
+                        <p>Hệ thống kiểm soát ra vào, thang máy tốc độ cao và quản lý tòa nhà tối ưu hiệu suất vận hành.
+                        </p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="icon"><svg width="40px" height="40px" viewBox="0 0 1024 1024" class="icon"
+                                version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M433.5 468.5c0 151.8-86.1 213.9-192.4 213.9S48.8 620.3 48.8 468.5 241.1 71.9 241.1 71.9s192.4 244.8 192.4 396.6z"
+                                        fill="#72ac5d"></path>
+                                    <path
+                                        d="M241.1 692.4c-58.6 0-108.1-18.3-143.1-52.9-39.3-39-59.3-96.5-59.3-171 0-64.8 32.8-152.4 97.6-260.3 47.9-79.8 96.4-141.8 96.9-142.4 1.9-2.4 4.8-3.8 7.9-3.8s6 1.4 7.9 3.8c0.5 0.6 49 62.6 96.9 142.4 64.8 108 97.6 195.6 97.6 260.3 0 74.4-20 132-59.3 171-35 34.6-84.4 52.9-143.1 52.9z m0-604c-15.5 20.7-51.8 70.4-87.7 130.2-43.2 72-94.6 173.8-94.6 249.8 0 68.9 18 121.7 53.4 156.8 31.1 30.8 75.7 47.1 129 47.1s97.9-16.3 129-47.1c35.4-35.1 53.4-87.9 53.4-156.8 0-76.1-51.5-178-94.8-250-36-59.8-72.2-109.4-87.7-130z"
+                                        fill=""></path>
+                                    <path
+                                        d="M996.6 316.3c0 144.9-262.4 445-262.4 445s-262.4-300.1-262.4-445S589.3 53.9 734.2 53.9s262.4 117.5 262.4 262.4z"
+                                        fill="#8F4625"></path>
+                                    <path
+                                        d="M734.2 776.5l-7.5-8.6c-0.7-0.8-66.7-76.5-131.8-169-88.3-125.3-133-220.4-133-282.6 0-72.8 28.3-141.2 79.8-192.6s119.9-79.8 192.6-79.8 141.2 28.3 192.6 79.8c51.4 51.4 79.8 119.9 79.8 192.6 0 62.2-44.8 157.3-133 282.6-65.1 92.5-131.2 168.2-131.8 169l-7.7 8.6z m0-712.6c-67.4 0-130.8 26.3-178.5 73.9-47.7 47.7-73.9 111.1-73.9 178.5 0 57.2 44.7 150.9 129.4 271.1 51.7 73.5 104 136.2 123 158.6 42.7-50.3 252.4-303.7 252.4-429.7 0-67.4-26.3-130.8-73.9-178.5C865 90.1 801.6 63.9 734.2 63.9zM606.9 980.2H378.7c-81.4 0-147.5-66.2-147.5-147.5V215.9c0-5.5 4.5-10 10-10s10 4.5 10 10v616.8c0 70.3 57.2 127.5 127.5 127.5h228.2c70.3 0 127.5-57.2 127.5-127.5 0-5.5 4.5-10 10-10s10 4.5 10 10c0 81.3-66.2 147.5-147.5 147.5z"
+                                        fill=""></path>
+                                    <path
+                                        d="M741.1 881.6h-13.9c-45 0-81.4-36.4-81.4-81.4V651.9h176.7v148.3c0 44.9-36.4 81.4-81.4 81.4z"
+                                        fill="#75736F"></path>
+                                    <path
+                                        d="M741.1 891.6h-13.9c-50.4 0-91.4-41-91.4-91.4V641.9h196.7v158.3c0 50.4-41 91.4-91.4 91.4z m-85.3-229.7v138.3c0 39.4 32 71.4 71.4 71.4h13.9c39.4 0 71.4-32 71.4-71.4V661.9H655.8zM241.1 436.6c-2.7 0-5.5-1.1-7.4-3.3L134.6 323c-3.7-4.1-3.4-10.4 0.8-14.1 4.1-3.7 10.4-3.4 14.1 0.8L248.6 420c3.7 4.1 3.4 10.4-0.8 14.1-1.9 1.6-4.3 2.5-6.7 2.5zM241.1 624.7c-2.8 0-5.6-1.2-7.6-3.5L94.3 457.7c-3.6-4.2-3.1-10.5 1.1-14.1 4.2-3.6 10.5-3.1 14.1 1.1l139.2 163.5c3.6 4.2 3.1 10.5-1.1 14.1-1.9 1.7-4.2 2.4-6.5 2.4zM241.1 326.3c-2.6 0-5.1-1-7.1-2.9-3.9-3.9-3.9-10.2 0-14.1l67.1-67.1c3.9-3.9 10.2-3.9 14.1 0 3.9 3.9 3.9 10.2 0 14.1l-67.1 67.1c-1.9 1.9-4.4 2.9-7 2.9zM247.7 524c-2.7 0-5.5-1.1-7.4-3.3-3.7-4.1-3.3-10.4 0.8-14.1l97.9-87.8c4.1-3.7 10.4-3.3 14.1 0.8 3.7 4.1 3.3 10.4-0.8 14.1l-97.9 87.8c-2 1.7-4.4 2.5-6.7 2.5z"
+                                        fill=""></path>
+                                </g>
+                            </svg></div>
+                        <h4>Hạ tầng & Năng lượng chuẩn A</h4>
+                        <p>Hệ thống điều hòa trung tâm lọc không khí thế hệ mới kết hợp máy phát điện dự phòng đáp ứng
+                            100% công suất.</p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="icon"><svg width="40px" height="40px" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" stroke="">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M10.4901 2.23006L5.50015 4.10006C4.35015 4.53006 3.41016 5.89006 3.41016 7.12006V14.5501C3.41016 15.7301 4.19017 17.2801 5.14017 17.9901L9.44016 21.2001C10.8502 22.2601 13.1701 22.2601 14.5801 21.2001L18.8802 17.9901C19.8302 17.2801 20.6101 15.7301 20.6101 14.5501V7.12006C20.6101 5.89006 19.6701 4.53006 18.5201 4.10006L13.5302 2.23006C12.6802 1.92006 11.3201 1.92006 10.4901 2.23006Z"
+                                        stroke="#8F4625" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                    <path opacity="0.4"
+                                        d="M12 15.5C14.2091 15.5 16 13.7091 16 11.5C16 9.29086 14.2091 7.5 12 7.5C9.79086 7.5 8 9.29086 8 11.5C8 13.7091 9.79086 15.5 12 15.5Z"
+                                        stroke="#8F4625" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path opacity="0.4"
+                                        d="M12.25 10.25V11.18C12.25 11.53 12.07 11.86 11.76 12.04L11 12.5"
+                                        stroke="#8F4625" stroke-width="1.5" stroke-miterlimit="10"
+                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                            </svg></div>
+                        <h4>An ninh & Đỗ xe thông minh</h4>
+                        <p>Hầm đỗ xe điều phối bằng công nghệ nhận diện AI hiện đại, song hành cùng hệ thống giám sát
+                            nghiêm ngặt 24/24.</p>
+                    </div>
+
+                    <div class="feature reveal">
+                        <div class="icon"><svg width="40px" height="40px" viewBox="0 0 1024 1024" fill="#8F4625"
+                                class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M1015.848 687.82H8.156a7.992 7.992 0 0 1-7.998-7.996 7.994 7.994 0 0 1 7.998-7.998h1007.692a7.992 7.992 0 0 1 7.996 7.998 7.992 7.992 0 0 1-7.996 7.996zM512 767.766c-17.644 0-31.99-14.34-31.99-31.99s14.346-31.99 31.99-31.99c17.652 0 31.992 14.34 31.992 31.99s-14.34 31.99-31.992 31.99z m0-47.984c-8.818 0-15.996 7.184-15.996 15.994s7.178 15.994 15.996 15.994c8.816 0 15.996-7.184 15.996-15.994s-7.18-15.994-15.996-15.994zM376.136 975.732a8.01 8.01 0 0 1-7.818-9.73l31.99-143.956c0.968-4.312 5.294-6.984 9.544-6.078a8.014 8.014 0 0 1 6.078 9.544l-31.99 143.956a8 8 0 0 1-7.804 6.264zM647.864 975.732a8 8 0 0 1-7.808-6.264l-31.988-143.956a8.01 8.01 0 0 1 6.074-9.544c4.296-0.906 8.574 1.766 9.542 6.078l31.992 143.956a8.008 8.008 0 0 1-7.812 9.73z"
+                                        fill=""></path>
+                                    <path
+                                        d="M671.954 975.732H352.05a7.992 7.992 0 0 1-7.998-7.998 7.992 7.992 0 0 1 7.998-7.996h319.904a7.992 7.992 0 0 1 7.996 7.996 7.992 7.992 0 0 1-7.996 7.998zM967.86 639.836H56.14a7.994 7.994 0 0 1-7.998-7.998V104a7.994 7.994 0 0 1 7.998-7.998h911.72c4.422 0 8 3.578 8 7.998v527.838a7.994 7.994 0 0 1-8 7.998zM64.138 623.84h895.726V111.998H64.138V623.84z"
+                                        fill=""></path>
+                                    <path
+                                        d="M967.86 143.988H56.14a7.994 7.994 0 0 1-7.998-7.998 7.994 7.994 0 0 1 7.998-7.998h911.72c4.422 0 8 3.578 8 7.998a7.994 7.994 0 0 1-8 7.998z"
+                                        fill=""></path>
+                                    <path
+                                        d="M88.606 127.992c-4.412 0-8.076-3.576-8.076-7.998s3.5-7.998 7.92-7.998h0.156c4.42 0 7.998 3.576 7.998 7.998s-3.578 7.998-7.998 7.998zM120.12 143.988a7.994 7.994 0 0 1-7.998-7.998V104a7.994 7.994 0 0 1 7.998-7.998A7.994 7.994 0 0 1 128.118 104v31.99a7.992 7.992 0 0 1-7.998 7.998zM184.1 143.988a7.994 7.994 0 0 1-7.998-7.998V104c0-4.42 3.578-7.998 7.998-7.998S192.098 99.58 192.098 104v31.99a7.994 7.994 0 0 1-7.998 7.998zM248.082 143.988a7.994 7.994 0 0 1-7.998-7.998V104c0-4.42 3.578-7.998 7.998-7.998S256.08 99.58 256.08 104v31.99a7.994 7.994 0 0 1-7.998 7.998zM312.062 143.988a7.994 7.994 0 0 1-7.998-7.998V104c0-4.42 3.578-7.998 7.998-7.998S320.06 99.58 320.06 104v31.99a7.994 7.994 0 0 1-7.998 7.998zM376.042 143.988a7.994 7.994 0 0 1-7.998-7.998V104a7.994 7.994 0 0 1 7.998-7.998A7.994 7.994 0 0 1 384.04 104v31.99a7.994 7.994 0 0 1-7.998 7.998zM935.872 143.988c-4.422 0-8-3.578-8-7.998V104a7.994 7.994 0 0 1 8-7.998A7.994 7.994 0 0 1 943.868 104v31.99a7.992 7.992 0 0 1-7.996 7.998zM903.878 143.988a7.994 7.994 0 0 1-7.996-7.998V104a7.994 7.994 0 0 1 7.996-7.998c4.422 0 8 3.578 8 7.998v31.99a7.994 7.994 0 0 1-8 7.998zM855.894 143.988a7.992 7.992 0 0 1-7.996-7.998V104c0-4.42 3.574-7.998 7.996-7.998s7.996 3.578 7.996 7.998v31.99a7.99 7.99 0 0 1-7.996 7.998zM823.906 143.988c-4.422 0-8-3.578-8-7.998V104a7.994 7.994 0 0 1 8-7.998A7.994 7.994 0 0 1 831.902 104v31.99a7.992 7.992 0 0 1-7.996 7.998zM791.914 143.988a7.992 7.992 0 0 1-7.996-7.998V104c0-4.42 3.574-7.998 7.996-7.998s7.996 3.578 7.996 7.998v31.99a7.99 7.99 0 0 1-7.996 7.998zM759.926 143.988c-4.422 0-8-3.578-8-7.998V104a7.994 7.994 0 0 1 8-7.998A7.994 7.994 0 0 1 767.922 104v31.99a7.992 7.992 0 0 1-7.996 7.998zM727.934 143.988a7.992 7.992 0 0 1-7.996-7.998V104c0-4.42 3.574-7.998 7.996-7.998s8 3.578 8 7.998v31.99a7.994 7.994 0 0 1-8 7.998z"
+                                        fill=""></path>
+                                    <path
+                                        d="M384.04 575.856h-79.976a7.994 7.994 0 0 1-7.998-7.998v-79.974a7.994 7.994 0 0 1 7.998-7.998h79.976a7.994 7.994 0 0 1 7.998 7.998v79.974a7.994 7.994 0 0 1-7.998 7.998z m-71.978-15.996h63.98v-63.98h-63.98v63.98zM608.286 575.856h-80.288a8.004 8.004 0 0 1-7.156-11.574l39.988-79.976c2.718-5.42 11.59-5.42 14.308 0l39.114 78.21a7.954 7.954 0 0 1 2.032 5.342 7.996 7.996 0 0 1-7.998 7.998z m-67.356-15.996h54.11l-27.054-54.092-27.056 54.092zM703.942 575.856h-47.984a7.998 7.998 0 0 1-7.844-6.436l-15.992-79.968a8 8 0 0 1 7.84-9.568h79.976a8.006 8.006 0 0 1 7.84 9.568l-15.996 79.968a7.994 7.994 0 0 1-7.84 6.436z m-41.426-15.996h34.868l12.808-63.98h-60.484l12.808 63.98zM456.016 575.856c-12.816 0-24.86-4.998-33.926-14.058-9.068-9.058-14.058-21.118-14.058-33.926 0-12.816 4.99-24.868 14.058-33.928 18.134-18.134 49.718-18.134 67.854 0 9.068 9.06 14.058 21.112 14.058 33.928a47.66 47.66 0 0 1-14.058 33.926c-9.068 9.06-21.11 14.058-33.928 14.058z m0-79.976c-8.542 0-16.572 3.328-22.618 9.372s-9.372 14.074-9.372 22.62a31.78 31.78 0 0 0 9.372 22.618c12.09 12.09 33.146 12.09 45.236 0a31.774 31.774 0 0 0 9.372-22.618c0-8.544-3.326-16.574-9.372-22.62s-14.072-9.372-22.618-9.372z"
+                                        fill=""></path>
+                                    <path
+                                        d="M767.922 607.846H256.08a8 8 0 0 1-7.052-4.216 8.02 8.02 0 0 1 0.398-8.216l31.99-47.986a8.02 8.02 0 0 1 6.654-3.56h15.994a7.994 7.994 0 0 1 7.998 7.998v7.996h63.98v-7.996a7.992 7.992 0 0 1 7.998-7.998h40.206c2.5 0 4.858 1.172 6.374 3.154 1.234 1.656 1.93 2.624 2.782 3.468 12.09 12.09 33.146 12.09 45.236 0 0.852-0.844 1.546-1.812 2.256-2.75 1.506-2.014 4.382-3.874 6.896-3.874h40.208a7.992 7.992 0 0 1 7.996 7.998v7.996h63.98v-7.996a7.994 7.994 0 0 1 8-7.998h44.782a7.994 7.994 0 0 1 7.84 6.436l1.922 9.558h34.868l1.918-9.558a7.998 7.998 0 0 1 7.844-6.436h28.79c2.668 0 5.168 1.344 6.652 3.56l31.988 47.986a8.072 8.072 0 0 1 0.406 8.216 8.036 8.036 0 0 1-7.062 4.218z m-496.902-15.994h481.968l-21.336-31.992h-17.964l-1.906 9.56a7.994 7.994 0 0 1-7.84 6.436h-47.984a7.998 7.998 0 0 1-7.844-6.436l-1.902-9.56h-30.242v7.998a7.994 7.994 0 0 1-7.996 7.998h-79.976c-4.422 0-8-3.578-8-7.998v-7.998h-28.294c-0.586 0.704-1.148 1.328-1.758 1.938-18.134 18.136-49.718 18.136-67.854 0a31.126 31.126 0 0 1-1.758-1.938h-28.296v7.998a7.994 7.994 0 0 1-7.998 7.998h-79.976a7.994 7.994 0 0 1-7.998-7.998v-7.998h-3.718l-21.328 31.992z"
+                                        fill=""></path>
+                                    <path
+                                        d="M344.052 367.92h-143.956a7.994 7.994 0 0 1-7.998-7.998v-95.97a7.994 7.994 0 0 1 7.998-7.998h143.956a7.994 7.994 0 0 1 7.998 7.998v95.97a7.994 7.994 0 0 1-7.998 7.998z m-135.96-15.996h127.96v-79.974h-127.96v79.974z"
+                                        fill=""></path>
+                                    <path
+                                        d="M280.072 271.95h-79.976a8 8 0 0 1-7.152-11.574l15.994-31.99a8.002 8.002 0 0 1 7.154-4.42h63.98a7.994 7.994 0 0 1 7.998 7.998v31.99a7.994 7.994 0 0 1-7.998 7.996z m-67.034-15.996h59.036v-15.994h-51.04l-7.996 15.994zM328.056 399.91h-111.966a7.994 7.994 0 0 1-7.998-7.998 7.994 7.994 0 0 1 7.998-7.998h111.966a7.994 7.994 0 0 1 7.998 7.998 7.994 7.994 0 0 1-7.998 7.998z"
+                                        fill=""></path>
+                                    <path
+                                        d="M583.976 367.92h-143.954a7.994 7.994 0 0 1-7.998-7.998v-95.97a7.994 7.994 0 0 1 7.998-7.998h143.954c4.422 0 8 3.578 8 7.998v95.97a7.994 7.994 0 0 1-8 7.998z m-135.956-15.996h127.96v-79.974h-127.96v79.974z"
+                                        fill=""></path>
+                                    <path
+                                        d="M519.996 271.95h-79.974a8 8 0 0 1-7.154-11.574l15.996-31.99a8 8 0 0 1 7.154-4.42h63.98c4.422 0 8 3.578 8 7.998v31.99a7.998 7.998 0 0 1-8.002 7.996z m-67.032-15.996H512v-15.994h-51.04l-7.996 15.994zM567.984 399.91h-111.968a7.994 7.994 0 0 1-7.998-7.998 7.994 7.994 0 0 1 7.998-7.998h111.968a7.994 7.994 0 0 1 7.996 7.998 7.994 7.994 0 0 1-7.996 7.998z"
+                                        fill=""></path>
+                                    <path
+                                        d="M823.906 367.92h-143.958a7.992 7.992 0 0 1-7.996-7.998v-95.97a7.992 7.992 0 0 1 7.996-7.998h143.958a7.994 7.994 0 0 1 7.996 7.998v95.97a7.994 7.994 0 0 1-7.996 7.998z m-135.96-15.996h127.96v-79.974h-127.96v79.974z"
+                                        fill=""></path>
+                                    <path
+                                        d="M759.926 271.95h-79.976a7.994 7.994 0 0 1-7.156-11.574l15.996-31.99a8.002 8.002 0 0 1 7.156-4.42h63.98a7.994 7.994 0 0 1 7.996 7.998v31.99a7.994 7.994 0 0 1-7.996 7.996z m-67.044-15.996h59.042v-15.994h-51.046l-7.996 15.994zM807.91 399.91h-111.964c-4.422 0-8-3.578-8-7.998a7.994 7.994 0 0 1 8-7.998h111.964a7.992 7.992 0 0 1 7.996 7.998 7.992 7.992 0 0 1-7.996 7.998z"
+                                        fill=""></path>
+                                    <path
+                                        d="M967.86 800.038H56.14c-30.866 0-55.982-25.118-55.982-55.982V104.25c0-30.866 25.118-55.982 55.982-55.982h911.72c30.868 0 55.984 25.118 55.984 55.982v639.804c0 30.866-25.118 55.984-55.984 55.984zM56.14 64.262c-22.048 0-39.988 17.94-39.988 39.988v639.804c0 22.054 17.94 39.986 39.988 39.986h911.72c22.058 0 39.988-17.932 39.988-39.986V104.25c0-22.048-17.93-39.988-39.988-39.988H56.14z"
+                                        fill=""></path>
+                                    <path
+                                        d="M967.86 831.778H56.14c-31.388 0-55.982-24.586-55.982-55.982v-31.99a7.994 7.994 0 0 1 7.998-7.998 7.994 7.994 0 0 1 7.998 7.998v31.99c0 22.43 17.566 39.986 39.988 39.986h911.72c22.434 0 39.988-17.556 39.988-39.986v-31.74a7.994 7.994 0 0 1 8-7.998 7.992 7.992 0 0 1 7.996 7.998v31.74c-0.002 31.396-24.588 55.982-55.986 55.982z"
+                                        fill=""></path>
+                                </g>
+                            </svg></div>
+                        <h4>Vận hành bền vững quốc tế</h4>
+                        <p>Đội ngũ quản lý chuyên nghiệp chuẩn 5 sao cùng định hướng vận hành đạt các chứng nhận công
+                            trình xanh danh giá.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="gallery reveal">
+                    <img src="assets/img/the-mett-tower-2.png" alt="Interior" />
+                    <img src="assets/img/the-mett-tower-sanh-don-bieu-tuong.png" alt="Office" />
+                    <img src="assets/img/the-mett-tower-he-thong-kiem-soat.png" alt="Workspace" />
+                    <img src="assets/img/the-mett-tower-he-thong-dieu-hoa.png" alt="Lobby" />
+                    <img src="assets/img/the-mett-tower-thang-may.png" alt="Meeting room" />
+                </div>
+            </div>
+        </section>
+
+        <section class="dark-panel" id="floor">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="eyebrow">Sơ đồ tầng</span>
+                    <h2>Linh hoạt cho mọi quy mô doanh nghiệp</h2>
+                    <p>
+                        Các mặt bằng được quy hoạch tối ưu, dễ chia tách, phù hợp từ văn phòng đại diện đến trụ sở quy
+                        mô lớn.
+                    </p>
+                </div>
+
+                <div class="floor-grid">
+                    <div class="floor-card reveal">
+                        <div class="floor-card-img">
+                            <img src="assets/layout/foor-img-1.png" alt="Khối Văn Phòng Tiêu Chuẩn">
+                        </div>
+                    </div>
+
+                    <div class="floor-card reveal">
+                        <div class="floor-card-img">
+                            <img src="assets/layout/img17-23.png" alt="Khối Văn Phòng Đặc Quyền">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="thu-vien-anh">
+            <div class="container">
+                <div class="section-head center reveal">
+                    <span class="eyebrow">Hình ảnh thực tế</span>
+                    <h2>Chiêm ngưỡng không gian làm việc đỉnh cao</h2>
+                    <p>Mặt bằng tiêu chuẩn Hạng A hoàn thiện với kính Low-E cản nhiệt, trần thông thủy 2.7m và hệ thống
+                        sàn nâng kỹ thuật thông minh.</p>
+                </div>
+
+                <div class="gallery-wrapper reveal">
+                    <div class="photo-gallery-grid" id="photoGalleryGrid">
+                        <div class="photo-gallery-item">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong.jpg" alt="Thực tế 1">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-2.jpg" alt="Thực tế 2">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-3.jpg" alt="Thực tế 3">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-4.jpg" alt="Thực tế 4">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-5.jpg" alt="Thực tế 5">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-6.jpg" alt="Thực tế 6">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+
+                        <div class="photo-gallery-item hidden-pc">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-7.jpg" alt="Thực tế 7">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item hidden-pc">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-8.jpg" alt="Thực tế 8">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item hidden-pc">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-8.jpg" alt="Thực tế 9">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item hidden-pc">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-10.jpg" alt="Thực tế 10">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item hidden-pc">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-11.jpg" alt="Thực tế 11">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                        <div class="photo-gallery-item hidden-pc">
+                            <img src="assets/img/the-mett-tower-mat-bang-trong-12.jpg" alt="Thực tế 12">
+                            <i class="fa-solid fa-magnifying-glass-plus photo-gallery-item-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="gallery-btn-wrapper">
+                        <button class="btn outline" id="loadMorePhotos" style="cursor: pointer;">
+                            Xem thêm hình ảnh <i class="fa-solid fa-plus" style="margin-left: 4px;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="lightboxMett" class="lightbox-mett">
+            <span class="lightbox-close-mett"><i class="fa-solid fa-xmark"></i></span>
+            <button class="lightbox-nav-btn lightbox-prev-mett"><i class="fa-solid fa-chevron-left"></i></button>
+            <img id="lightboxImgMett" class="lightbox-content-mett" src="" alt="Full screen image">
+            <button class="lightbox-nav-btn lightbox-next-mett"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <section id="clients-carousel">
+            <div class="container">
+                <div class="section-head center reveal">
+                    <span class="eyebrow">Đối tác & khách hàng</span>
+                    <h2>Nơi hội tụ những thương hiệu tiên phong</h2>
+                </div>
+
+                <div class="marquee-wrapper reveal">
+                    <div class="marquee-track" id="marqueeTrack">
+                        <div class="client">
+                            <img src="assets/logo/bosch.jpg" alt="Brand 1">
+                        </div>
+                        <div class="client">
+                            <img src="assets/logo/bsh.jpg" alt="Brand 2">
+                        </div>
+                        <div class="client">
+                            <img src="assets/logo/gs25.jpg" alt="Brand 3">
+                        </div>
+                        <div class="client">
+                            <img src="assets/logo/kim-vietnam.jpg" alt="Brand 4">
+                        </div>
+                        <div class="client">
+                            <img src="assets/logo/gumada-land.jpg" alt="Brand 5">
+                        </div>
+                        <div class="client">
+                            <img src="assets/logo/knl-partners.jpg" alt="Brand 5">
+                        </div>
+                        <div class="client">
+                            <img src="assets/logo/libera.jpg" alt="Brand 5">
+                        </div>
+                        <div class="client">
+                            <img src="assets/logo/serveone.jpg" alt="Brand 5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-carousel-section">
+            <div class="contact-bg-slider">
+                <div class="contact-slide active" style="
+                            background-image: url(assets/banner/the-mett-tower-banner-6.jpg);
+                        ">
+                </div>
+
+                <div class="contact-slide" style="
+                            background-image: url(assets/banner/the-mett-tower-banner-7.jpg);
+                        "></div>
+
+                <div class="contact-slide" style="
+                            background-image: url(assets/banner/the-mett-tower-banner-8.jpg);
+                        "></div>
+            </div>
+
+            <div class="contact-overlay"></div>
+
+            <div class="container">
+                <div class="contact reveal active" style="grid-template-columns: 1fr;">
+                    <div class="contact-content">
+                        <span class="eyebrow"> Liên hệ </span>
+
+                        <h2>Đặt lịch tham quan tòa nhà</h2>
+
+                        <p>
+                            Vui lòng để lại thông tin, đội ngũ tư vấn sẽ hỗ
+                            trợ bạn lựa chọn mặt bằng phù hợp với nhu cầu
+                            vận hành và định vị thương hiệu.
+                        </p>
+                        <p>
+                            <a href="tel:888262838">
+                                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M15.5562 14.5477L15.1007 15.0272C15.1007 15.0272 14.0181 16.167 11.0631 13.0559C8.10812 9.94484 9.1907 8.80507 9.1907 8.80507L9.47752 8.50311C10.1841 7.75924 10.2507 6.56497 9.63424 5.6931L8.37326 3.90961C7.61028 2.8305 6.13596 2.68795 5.26145 3.60864L3.69185 5.26114C3.25823 5.71766 2.96765 6.30945 3.00289 6.96594C3.09304 8.64546 3.81071 12.259 7.81536 16.4752C12.0621 20.9462 16.0468 21.1239 17.6763 20.9631C18.1917 20.9122 18.6399 20.6343 19.0011 20.254L20.4217 18.7584C21.3806 17.7489 21.1102 16.0182 19.8833 15.312L17.9728 14.2123C17.1672 13.7486 16.1858 13.8848 15.5562 14.5477Z"
+                                            fill="#ffffff"></path>
+                                        <path
+                                            d="M13.2595 1.87983C13.3257 1.47094 13.7122 1.19357 14.1211 1.25976C14.1464 1.26461 14.2279 1.27983 14.2705 1.28933C14.3559 1.30834 14.4749 1.33759 14.6233 1.38082C14.9201 1.46726 15.3347 1.60967 15.8323 1.8378C16.8286 2.29456 18.1544 3.09356 19.5302 4.46936C20.906 5.84516 21.705 7.17097 22.1617 8.16725C22.3899 8.66487 22.5323 9.07947 22.6187 9.37625C22.6619 9.52466 22.6912 9.64369 22.7102 9.72901C22.7197 9.77168 22.7267 9.80594 22.7315 9.83125L22.7373 9.86245C22.8034 10.2713 22.5286 10.6739 22.1197 10.7401C21.712 10.8061 21.3279 10.53 21.2601 10.1231C21.258 10.1121 21.2522 10.0828 21.2461 10.0551C21.2337 9.9997 21.2124 9.91188 21.1786 9.79572C21.1109 9.56339 20.9934 9.21806 20.7982 8.79238C20.4084 7.94207 19.7074 6.76789 18.4695 5.53002C17.2317 4.29216 16.0575 3.59117 15.2072 3.20134C14.7815 3.00618 14.4362 2.88865 14.2038 2.82097C14.0877 2.78714 13.9417 2.75363 13.8863 2.7413C13.4793 2.67347 13.1935 2.28755 13.2595 1.87983Z"
+                                            fill="#ffffff"></path>
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M13.4857 5.3293C13.5995 4.93102 14.0146 4.7004 14.4129 4.81419L14.2069 5.53534C14.4129 4.81419 14.4129 4.81419 14.4129 4.81419L14.4144 4.81461L14.4159 4.81505L14.4192 4.81602L14.427 4.81834L14.4468 4.8245C14.4618 4.82932 14.4807 4.8356 14.5031 4.84357C14.548 4.85951 14.6074 4.88217 14.6802 4.91337C14.8259 4.97581 15.0249 5.07223 15.2695 5.21694C15.7589 5.50662 16.4271 5.9878 17.2121 6.77277C17.9971 7.55775 18.4782 8.22593 18.7679 8.7154C18.9126 8.95991 19.009 9.15897 19.0715 9.30466C19.1027 9.37746 19.1254 9.43682 19.1413 9.48173C19.1493 9.50418 19.1555 9.52301 19.1604 9.53809L19.1665 9.55788L19.1688 9.56563L19.1698 9.56896L19.1702 9.5705C19.1702 9.5705 19.1707 9.57194 18.4495 9.77798L19.1707 9.57194C19.2845 9.97021 19.0538 10.3853 18.6556 10.4991C18.2607 10.6119 17.8492 10.3862 17.7313 9.99413L17.7276 9.98335C17.7223 9.96832 17.7113 9.93874 17.6928 9.89554C17.6558 9.8092 17.5887 9.66797 17.4771 9.47938C17.2541 9.10264 16.8514 8.53339 16.1514 7.83343C15.4515 7.13348 14.8822 6.73078 14.5055 6.50781C14.3169 6.39619 14.1757 6.32909 14.0893 6.29209C14.0461 6.27358 14.0165 6.26254 14.0015 6.25721L13.9907 6.25352C13.5987 6.13564 13.3729 5.72419 13.4857 5.3293Z"
+                                            fill="#ffffff"></path>
+                                    </g>
+                                </svg>
+                                888262838
+                            </a></p>
+
+                        <div class="contact-info">
+                            <div>
+                                <strong>THE METT</strong>
+                                <span> Grade A Office Building </span>
+                            </div>
+
+                            <div>
+                                <strong>24/7</strong>
+                                <span> Hỗ trợ tư vấn nhanh </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-dots">
+                    <button class="active"></button>
+                    <button></button>
+                    <button></button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-botom">
+        <div class="container footer-inner">
+            <div class="logo">THE <span>METT</span></div>
+            <!-- <div class="footer-botom-contact">
+                
+            </div> -->
+            <div class="footer-botom-copyright">
+                Hotline: 888262838
+            </div>
+        </div>
+    </footer>
+
+    <div class="floating-actions">
+        <a href="tel:888262838" class="float-btn call-btn" aria-label="Gọi ngay">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <button id="backToTopBtn" class="float-btn btt-btn" aria-label="Lên đầu trang">
+            <i class="fa-solid fa-chevron-up"></i>
+        </button>
+    </div>
+
+    <script>
+        const navbar = document.getElementById("navbar");
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const reveals = document.querySelectorAll(".reveal");
+        const backToTopBtn = document.getElementById("backToTopBtn"); // Đã thêm nút Back To Top
+
+        window.addEventListener("scroll", () => {
+            navbar.classList.toggle("scrolled", window.scrollY > 40);
+
+            // Xử lý hiện/ẩn nút Back to top
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.add("show");
+            } else {
+                backToTopBtn.classList.remove("show");
+            }
+        });
+
+        // Xử lý click lên đầu trang
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        });
+
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () =>
+                mobileMenu.classList.remove("active")
+            );
+        });
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            },
+            { threshold: 0.14 },
+        );
+
+        reveals.forEach((item) => observer.observe(item));
+
+        document
+            .getElementById("contactForm")
+            .addEventListener("submit", (event) => {
+                event.preventDefault();
+                alert("Cảm ơn bạn! Thông tin đã được ghi nhận.");
+                event.target.reset();
+            });
+
+        const contactSlides = document.querySelectorAll(".contact-slide");
+
+        const contactDots = document.querySelectorAll(
+            ".contact-dots button",
+        );
+
+        let contactIndex = 0;
+
+        function changeContactSlide() {
+            contactSlides[contactIndex].classList.remove("active");
+
+            contactDots[contactIndex].classList.remove("active");
+
+            contactIndex++;
+
+            if (contactIndex >= contactSlides.length) {
+                contactIndex = 0;
+            }
+
+            contactSlides[contactIndex].classList.add("active");
+
+            contactDots[contactIndex].classList.add("active");
+        }
+
+        setInterval(changeContactSlide, 5000);
+
+        function createCarousel(slideSelector, dotSelector, interval = 5000) {
+            const slides = document.querySelectorAll(slideSelector);
+            const dots = document.querySelectorAll(dotSelector);
+
+            if (!slides.length || !dots.length) return;
+
+            let index = 0;
+            let timer;
+
+            function showSlide(nextIndex) {
+                slides[index].classList.remove("active");
+                dots[index].classList.remove("active");
+
+                index = nextIndex;
+
+                slides[index].classList.add("active");
+                dots[index].classList.add("active");
+            }
+
+            function nextSlide() {
+                showSlide((index + 1) % slides.length);
+            }
+
+            function start() {
+                timer = setInterval(nextSlide, interval);
+            }
+
+            function reset() {
+                clearInterval(timer);
+                start();
+            }
+
+            dots.forEach((dot, dotIndex) => {
+                dot.addEventListener("click", () => {
+                    showSlide(dotIndex);
+                    reset();
+                });
+            });
+
+            start();
+        }
+
+        createCarousel(".hero-slide", ".hero-dots button", 5200);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const marqueeTrack = document.getElementById("marqueeTrack");
+
+            if (marqueeTrack) {
+                // 1. Lấy ra toàn bộ danh sách logo gốc đang có trong HTML
+                const originalItems = Array.from(marqueeTrack.children);
+
+                // 2. Duyệt qua từng logo, tiến hành sao chép (clone) và đẩy vào cuối hàng
+                originalItems.forEach(item => {
+                    const clonedItem = item.cloneNode(true); // Sao chép sâu cả thẻ img bên trong
+
+                    // Thêm thuộc tính ẩn với trình đọc màn hình để tối ưu SEO/Accessibility
+                    clonedItem.setAttribute("aria-hidden", "true");
+
+                    // Đẩy phần tử đã copy vào trong đường ray chạy
+                    marqueeTrack.appendChild(clonedItem);
+                });
+            }
+        });
+
+        // Xử lý Section Thư Viện Ảnh & Lightbox (The Mett)
+        document.addEventListener('DOMContentLoaded', function () {
+            // Nút Xem thêm
+            const loadMoreBtn = document.getElementById('loadMorePhotos');
+            const galleryGrid = document.getElementById('photoGalleryGrid');
+
+            if (loadMoreBtn && galleryGrid) {
+                loadMoreBtn.addEventListener('click', function () {
+                    galleryGrid.classList.toggle('show-all');
+                    if (galleryGrid.classList.contains('show-all')) {
+                        loadMoreBtn.innerHTML = 'Thu gọn <i class="fa-solid fa-minus" style="margin-left: 4px;"></i>';
+                    } else {
+                        loadMoreBtn.innerHTML = 'Xem thêm hình ảnh <i class="fa-solid fa-plus" style="margin-left: 4px;"></i>';
+                        const galleryTop = document.getElementById('thu-vien-anh').offsetTop - 100;
+                        window.scrollTo({ top: galleryTop, behavior: 'smooth' });
+                    }
+                });
+            }
+
+            // Lightbox
+            const lightbox = document.getElementById('lightboxMett');
+            const lightboxImg = document.getElementById('lightboxImgMett');
+            const closeLightbox = document.querySelector('.lightbox-close-mett');
+            const lightboxPrev = document.querySelector('.lightbox-prev-mett');
+            const lightboxNext = document.querySelector('.lightbox-next-mett');
+            const galleryItems = document.querySelectorAll('.photo-gallery-item');
+            const images = document.querySelectorAll('.photo-gallery-item img');
+            let currentIndex = 0;
+
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    lightbox.classList.add('active');
+                    lightboxImg.src = images[index].src;
+                    currentIndex = index;
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function showLightboxImage(index) {
+                if (index < 0) currentIndex = images.length - 1;
+                else if (index >= images.length) currentIndex = 0;
+                else currentIndex = index;
+
+                lightboxImg.style.opacity = 0.5;
+                setTimeout(() => {
+                    lightboxImg.src = images[currentIndex].src;
+                    lightboxImg.style.opacity = 1;
+                }, 150);
+            }
+
+            if (lightboxPrev) {
+                lightboxPrev.addEventListener('click', (e) => {
+                    e.stopPropagation(); showLightboxImage(currentIndex - 1);
+                });
+            }
+            if (lightboxNext) {
+                lightboxNext.addEventListener('click', (e) => {
+                    e.stopPropagation(); showLightboxImage(currentIndex + 1);
+                });
+            }
+
+            function closeLightboxFunc() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (closeLightbox) closeLightbox.addEventListener('click', closeLightboxFunc);
+            if (lightbox) {
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) closeLightboxFunc();
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (lightbox && lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') closeLightboxFunc();
+                    else if (e.key === 'ArrowLeft') showLightboxImage(currentIndex - 1);
+                    else if (e.key === 'ArrowRight') showLightboxImage(currentIndex + 1);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+<!-- nháp -->

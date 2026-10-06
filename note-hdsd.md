@@ -1,0 +1,29 @@
+Khi bạn đang code và sửa đổi file `_nguhanh.scss` hay `index.html`, bạn **không cần** đụng tới file `prompt-AI.md` nữa. Mọi thứ đã được liên kết ngầm.
+
+Khi cần mang đoạn code này đi hỏi AI web:
+
+1. Mở file `prompt-AI.md`.
+2. Click chuột phải vào màn hình editor, chọn **Markdown Preview Enhanced: Open Preview to the Side**.
+3. Bạn sẽ thấy một bảng xem trước hiện ra, trong đó code từ các file của bạn đã được "bê" vào đầy đủ và định dạng đẹp mắt.
+4. Trong cửa sổ Preview đó, **Click chuột phải > HTML > HTML (offline)** hoặc chọn **Pandoc > Markdown** (nếu bạn có cài Pandoc) để xuất ra file tổng hợp cuối cùng.
+   _(Mẹo nhanh nhất: Bôi đen toàn bộ nội dung trong cửa sổ Preview rồi bấm Copy `Ctrl + C` và quăng thẳng lên khung chat của ChatGPT/Claude)._
+
+Bằng cách này, source code của bạn luôn là bản gốc duy nhất. File `.md` chỉ đóng vai trò như một cái "phễu" hút code lại để bạn đem đi hỏi AI một cách nhanh gọn nhất.
+
+<!-- ghi chu ve caá folder -->
+
+Cấu trúc 7 thư mục
+• base/: Chứa mã nguồn nền tảng cho toàn bộ dự án.
+• Ví dụ: Các tùy chỉnh reset CSS (\_reset.scss), thiết lập font chữ và thẻ HTML cơ bản (\_base.scss), cấu hình typography (\_typography.scss).
+• components/: Chứa các thành phần giao diện nhỏ, độc lập và có tính tái sử dụng cao.
+• Ví dụ: Các nút bấm (\_buttons.scss), thẻ bài viết (\_cards.scss), thanh tiến trình (\_progress.scss), thanh trượt (\_carousel.scss).
+• layout/: Chứa các cấu trúc khung sườn lớn của trang web hoặc các phần bố cục dùng chung.
+• Ví dụ: Tiêu đề trang (\_header.scss), chân trang (\_footer.scss), thanh điều hướng (\_navigation.scss), hệ thống lưới (\_grid.scss).
+• abstracts/ (hoặc utils/): Chứa các đoạn code bổ trợ, không trực tiếp tạo ra CSS khi biên dịch.
+• Ví dụ: Các biến cấu hình màu sắc/font (\_variables.scss), các hàm bổ trợ (\_functions.scss), các đoạn mã mixin để xử lý nhanh responsive hoặc hiệu ứng (\_mixins.scss).
+• pages/: Chứa các đoạn mã CSS đặc thù, chỉ áp dụng riêng cho một trang cụ thể.
+• Ví dụ: Giao diện trang chủ (\_home.scss), trang liên hệ (\_contact.scss), trang thông tin cá nhân (\_profile.scss).
+• themes/: Chứa mã nguồn để thay đổi giao diện theo chủ đề (dùng cho các dự án lớn có nhiều giao diện).
+• Ví dụ: Chế độ sáng/tối (\_theme.scss), giao diện mùa lễ hội (\_admin.scss).
+• vendors/: Chứa mã nguồn CSS từ các thư viện hoặc framework bên thứ ba mà bạn cần chỉnh sửa hoặc tích hợp vào dự án.
+• Ví dụ: Cấu hình tùy biến cho Bootstrap (\_bootstrap.scss), jQuery UI, FontAwesome.

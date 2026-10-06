@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Grid System</title>
+    <!-- Nhớ link tới file CSS đã compile từ SCSS của bạn -->
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        /* Thêm một chút style để dễ nhìn các cột */
+        .test-box {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border: 1px solid #fff;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Kiểm tra Hệ thống Grid</h1>
+
+        <!-- Test Row Columns (Tự động chia cột theo số lượng) -->
+        <section style="margin-bottom: 40px;">
+            <h2>1. Test Row Columns (row-cols-3)</h2>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                <div class="col"><div class="test-box">Col 1</div></div>
+                <div class="col"><div class="col-box">Col 2</div></div>
+                <div class="col"><div class="test-box">Col 3</div></div>
+                <div class="col"><div class="test-box">Col 4</div></div>
+            </div>
+        </section>
+
+        <!-- Test Manual Columns (Chia cột thủ công) -->
+        <section style="margin-bottom: 40px;">
+            <h2>2. Test Manual Columns (col-md-4)</h2>
+            <div class="row">
+                <div class="col-12"><div class="test-box">Col 12 (Full width)</div></div>
+                <div class="col-md-8"><div class="test-box">Col md-8</div></div>
+                <div class="col-md-4"><div class="test-box">Col md-4</div></div>
+            </div>
+        </section>
+
+        <!-- Test Offsets -->
+        <section>
+            <h2>3. Test Offsets (col-md-offset-4)</h2>
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <div class="test-box">Col md-4 (Offset 4)</div>
+                </div>
+            </div>
+        </sing>
+    </div>
+
+</body>
+</html>

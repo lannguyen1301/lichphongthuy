@@ -1,0 +1,83 @@
+// scss/base/_grid.scss
+@use "sass:math";
+@use "sass:map";
+@use "../abstracts/variables" as vars;
+@use "../abstracts/mixins" as mixins;
+
+// 1. Base Container & Row
+.container-fluid {
+    --grid-gutter-x: #{vars.$grid-gutter-width};
+    --grid-gutter-y: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: calc(var(--grid-gutter-x) * 0.5);
+    padding-right: calc(var(--grid-gutter-x) * 0.5);
+}
+
+.container {
+    @extend .container-fluid;
+    // Max-width sẽ được xử lý trong loop breakpoint
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--grid-gutter-y) * -1);
+    margin-left: calc(var(--grid-gutter-x) * -0.5);
+    margin-right: calc(var(--grid-gutter-x) * -0.5);
+
+    > * {
+        margin-top: var(--grid-gutter-y);
+        padding-left: calc(var(--grid-gutter-x) * 0.5);
+        padding-right: calc(var(--grid-gutter-x) * 0.5);
+    }
+}
+
+.col {
+    flex: 1 0 0%;
+}
+
+// 2. Mixins for generating classes
+@mixin make-columns($infix: "") {
+    @for $i from 1 through vars.$grid-columns {
+        .col#{$infix}-#{$i} {
+            flex: 0 0 auto;
+            width: math.div(100%, vars.$grid-columns) * $i;
+        }
+    }
+}
+
+@mixin make-offsets($infix: "") {
+    @for $i from 0 through vars.$grid-columns {
+        .offset#{$infix}-#{$i} {
+            margin-left: if($i > 0, math.div(100%, vars.$grid-columns) * $i, 0);
+        }
+    }
+}
+
+// 3. Execution
+@include make-columns("");
+@include make-offsets("");
+
+// 4. Breakpoint Loop
+@each $breakpoint, $dimension in vars.$grid-breakpoints {
+    @if $dimension != 0 {
+        @include mixins.breakpoint($breakpoint) {
+            .container {
+                max-width: map.get(vars.$container-max-widths, $breakpoint);
+            }
+
+            $infix: "-#{$breakpoint}";
+            @include make-columns($infix);
+            @include make-offsets($infix);
+
+            @each $i, $ratio in vars.$gutters {
+                .g#{$infix}-#{$i},
+                .gx#{$infix}-#{$i} {
+                    --grid-gutter-x: #{vars.$grid-gutter-width * $ratio};
+                }
+            }
+        }
+    }
+}

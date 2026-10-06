@@ -1,0 +1,30 @@
+// scscss/abstracts/_mixins.scss
+@use "sass:map";
+@use "sass:string";
+@use "variables" as vars;
+
+// 1. Mixin để xử lý Media Query (Dùng cho @content)
+@mixin screen($key) {
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+
+    @if ($breakpoint == 0) {
+        @content;
+    } @else {
+        @media (max-width: ($breakpoint - 0.02px)) {
+            @content;
+        }
+    }
+}
+
+// 2. Function để tạo chuỗi infix (Dùng để tạo class: .col-sm-12)
+// Function trả về giá trị, Mixin thực hiện hành động.
+@function get-infix($key) {
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+
+    // Kiểm tra: Nếu breakpoint tồn tại và khác 0, trả về "-key", ngược lại trả về ""
+    @if $breakpoint != null and $breakpoint != 0 {
+        @return unquote("-" + $key);
+    } @else {
+        @return "";
+    }
+}

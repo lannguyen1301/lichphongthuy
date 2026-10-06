@@ -1,0 +1,27 @@
+// scss/abstracts/_mixins.scss
+@use "sass:map";
+@use "variables" as vars; 
+
+@mixin breakpoint($key) {
+    // Thử dùng trực tiếp tên biến (nếu dùng @import) 
+    // hoặc kiểm tra kỹ xem vars.$grid-breakpoints có tồn tại không
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+
+    @if ($breakpoint == 0) {
+        @content;
+    } @else {
+        @media (max-width: ($breakpoint - 0.02px)) {
+            @content;
+        }
+    }
+}
+
+// @mixin get-infix($key) {
+//     // Sử dụng map.get từ vars
+//     $breakpoint: map.get(vars.$grid-breakpoints, $key);
+//     @if $breakpoint and $breakpoint != 0 {
+//         -#{$key}
+//     } @else {
+//         ""
+//     }
+// }

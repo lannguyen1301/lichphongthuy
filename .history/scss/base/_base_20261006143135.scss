@@ -1,0 +1,102 @@
+/* ==========================================================================
+   CSS CƠ SỞ (BASE CSS)
+   Cấu trúc reset mặc định và định dạng nền tảng cho tài liệu.
+   ========================================================================== */
+@use "../abstracts/" as abs;
+// @use "../abstracts/variables" as v;
+// @use "../abstracts/mixins" as m;
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    // Liên kết với hằng số cơ sở
+    font-size: abs.$base-font-size;
+}
+
+body {
+    // Kế thừa typography từ tệp biến trung tâm
+    font-size: abs.$body-font-size;
+    font-family: abs.$body-font-family;
+
+    // Sử dụng CSS Custom Properties cho phép chuyển đổi Theme động
+    color: var(--text-color);
+    background: var(--body-bg);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+a,
+img,
+button,
+label,
+input,
+textarea,
+select {
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    outline: none;
+    border: none;
+    // Đã khắc phục lỗi cú pháp: sửa --webkit-tab thành chuẩn của Apple
+    -webkit-tap-highlight-color: transparent;
+}
+
+input {
+    background: transparent;
+}
+
+// Xử lý ghi đè CSS autofill của trình duyệt
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:-webkit-autofill:hover {
+    transition: background-color 1s 9999s;
+    -webkit-text-fill-color: var(--text-color);
+    caret-color: var(--text-color);
+}
+
+.icon {
+    filter: var(--icon-color);
+}
+
+.container {
+    // Áp dụng mixin screen và cấu hình khoảng đệm tĩnh
+    @include m.screen(sm) {
+        padding-left: v.$container-padding-sm !important;
+        padding-right: v.$container-padding-sm !important;
+    }
+}
+
+i,
+em {
+    font-style: italic;
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+// .separate {
+//     // Bổ sung giá trị dự phòng (fallback) để chống sập layout
+//     margin: var(--margin, 10px) 0;
+//     height: 1px;
+//     background: var(--separate-color);
+// }

@@ -1,0 +1,28 @@
+// // scss/abstracts/_mixins.scss
+// @use "sass:map";
+// @use "variables" as vars;
+
+// // Mixin quan trọng nhất: Xử lý media query cho mọi loại file
+// // Dùng cho cả Mobile-first hoặc Desktop-first tùy ý
+// @mixin breakpoint($key) {
+//     $breakpoint: map.get(vars.$grid-breakpoints, $key);
+    
+//     @if ($breakpoint == 0) {
+//         @content;
+//     } @else {
+//         // Sử dụng max-width để giữ logic cũ của bạn (Desktop-first)
+//         @media (max-width: ($breakpoint - 0.02px)) {
+//             @content;
+//         }
+//     }
+// }
+
+// // Mixin để lấy infix (ví dụ: -md, -lg)
+// @mixin get-infix($key) {
+//     $breakpoint: map.get(vars.$grid-breakpoints, $key);
+//     @if $breakpoint and $breakpoint != 0 {
+//         -#{$key}
+//     } @else {
+//         ""
+//     }
+// }

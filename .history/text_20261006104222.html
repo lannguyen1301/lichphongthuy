@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Grid System</title>
+    <!-- Đảm bảo đường dẫn tới file CSS của bạn là đúng -->
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        /* Style bổ trợ để dễ quan sát */
+        .test-box {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border: 1px solid #fff;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        section {
+            padding: 20px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Kiểm tra Hệ thống Grid</h1>
+
+        <!-- 1. Test Row Columns: Tự động chia cột theo breakpoint -->
+        <section>
+            <h2>1. Test Row Columns (row-cols-1 $\rightarrow$ 2 $\rightarrow$ 3)</h2>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                <div class="col"><div class="test-box">Col 1</div></div>
+                <div class="col"><div class="test-box">Col 2</div></div>
+                <div class="col"><div class="test-box">Col 3</div></div>
+                <div class="col"><div class="test-box">Col 4</div></div>
+            </div>
+        </section>
+
+        <!-- 2. Test Manual Columns: Chia cột thủ công -->
+        <section>
+            <h2>2. Test Manual Columns (col-md-8 & col-md-4)</h2>
+            <div class="row">
+                <div class="col-12"><div class="test-box">Col 12 (Full width)</div></div>
+                <div class="col-md-8"><div class="test-box">Col md-8</div></div>
+                <div class="col-md-4"><div class="test-box">Col md-4</div></div>
+            </div>
+        </section>
+
+        <!-- 3. Test Offsets: Đẩy cột vào giữa -->
+        <section>
+            <h2>3. Test Offsets (col-md-4 offset-md-4)</h2>
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <div class="test-box">Col md-4 (Offset 4)</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

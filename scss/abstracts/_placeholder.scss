@@ -1,0 +1,431 @@
+// ==========================================
+// 1. FLEXBOX
+// ==========================================
+
+// Flex căn giữa cả 2 chiều
+%flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Căn giữa an toàn (Chống mất chữ khi cuộn trên màn hình nhỏ)
+%flexCenterSafe {
+    display: flex;
+    justify-content: safe center;
+    align-items: safe center;
+}
+
+// Chỉ căn giữa trục dọc (Đẩy sang lề phải)
+%flexYCenterRight {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+// Chỉ căn giữa trục dọc (Giữ nguyên lề trái)
+%flexYCenterLeft {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+// Căn góc trên / dưới
+%flexTopLeft {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+%flexTopCenter {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+%flexTopRight {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+%flexBottomLeft {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+%flexBottomCenter {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+%flexBottomRight {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+// Xếp cột dọc
+%flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+// Ví dụ thêm vào file _placeholders.scss
+%flexColumnCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+// Xếp cột dọc và căn giữa (Giống hệt phần .cate-item__info bạn đang làm)
+%flexColumnCenter2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+// Flex chỉ căn giữa trục dọc (thường dùng cho các item xếp ngang)
+%flexItemCenter {
+    display: flex;
+    align-items: center;
+}
+
+// Căn giữa trục dọc, đẩy 2 bên ra xa (Thường dùng cho Header, Navbar)
+%flexBetween {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// Dàn đều 2 bên, các thẻ con dãn hết chiều cao
+%flexBetweenStretch {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+// Dàn đều xung quanh
+%flexAround {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+%flexEvenly {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+// Xếp cột dọc, nằm sát trên, căn giữa ngang
+%flexColTopCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+// --- CÁC THÀNH PHẦN FLEXBOX MỚI ĐƯỢC THÊM VÀO NỐI TIẾP ---
+
+// Xếp cột dọc, các thẻ con tự dãn hết chiều ngang
+%flexColStretch {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+// List rớt dòng lề trái, item dãn chiều dọc (Card list)
+%flexWrapStart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+// Wrap kết hợp khoảng cách (Tags, Chips)
+%flexWrapGap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; // Có thể đổi thành biến $gap-sm nếu có
+    align-items: center;
+}
+
+// Nút bấm có Icon (Inline flex)
+%inlineFlexCenter {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+// Đảo ngược
+%flexRowReverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+%flexColReverse {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+// Khung cuộn ngang (Carousel)
+%flexScrollX {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+// Khung cuộn dọc (Chat, list dài)
+%flexScrollY {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+// ==========================================
+// 1.5 FLEXBOX ITEMS (Dành riêng cho thẻ con)
+// ==========================================
+
+// Nuốt trọn không gian trống (Dùng cho nội dung chính)
+%flexItemFluid {
+    flex: 1 1 0%;
+    min-width: 0; // Chống tràn text vỡ layout
+}
+
+// Co giãn tự nhiên theo chữ
+%flexItemAuto {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+// Cố định kích thước, cấm bóp méo (Avatar, Icon)
+%flexItemFixed {
+    flex: 0 0 auto;
+}
+
+// Vũ khí Margin Auto trong Flex
+%flexPushRight {
+    margin-left: auto;
+} // Đẩy dạt sang phải
+%flexPushBottom {
+    margin-top: auto;
+} // Đẩy cắm xuống đáy
+
+// Lưới giả (Fake Grid) dành cho thẻ con (Đi kèm thẻ cha %flexWrapStart)
+%flexCol50 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+%flexCol33 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+%flexCol25 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+// ==========================================
+// 2. TEXT & TYPOGRAPHY (Xử lý chữ)
+// ==========================================
+
+// Cắt chữ 3 chấm nếu quá dài (1 dòng)
+%textEllipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Cắt chữ 3 chấm (2 dòng - Chuyên dùng cho tiêu đề sản phẩm, bài viết)
+%textEllipsis2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+// Ẩn element nhưng không làm mất khỏi trình đọc màn hình (Tốt cho SEO / Accessibility)
+%srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// --- THÊM MỚI VÀO TYPOGRAPHY ---
+
+// Cắt chữ 3 chấm cho Flexbox (Kết hợp để không làm vỡ giao diện)
+%textEllipsisFlex {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// ==========================================
+// 3. RESETS (Xóa style mặc định rườm rà)
+// ==========================================
+
+// Xóa style mặc định của thẻ ul, ol
+%listReset {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+// Xóa style mặc định của thẻ a
+%linkReset {
+    text-decoration: none;
+    color: inherit;
+}
+
+// Xóa style mặc định của thẻ button
+%buttonReset {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+// Xóa style mặc định của thẻ input
+%inputReset {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+}
+
+// ==========================================
+// 4. POSITIONING (Vị trí)
+// ==========================================
+
+// Căn giữa tuyệt đối (Thường dùng cho Icon nằm trên Hình ảnh, Modal, Popup)
+%absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Phủ kín phần tử cha (Thường dùng cho lớp phủ mờ Overlay màu đen)
+%absCover {
+    position: absolute;
+    inset: 0; // Tương đương top: 0; right: 0; bottom: 0; left: 0;
+}
+
+// ==========================================
+// 5. IMAGES & BACKGROUNDS (Hình ảnh)
+// ==========================================
+
+// Hình ảnh nền luôn full viền và không bị méo
+%bgCover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+// Thẻ <img> luôn full viền thẻ cha và không bị méo
+%imgCover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+// ==========================================
+// 6. CSS GRID (Bố cục Lưới 2 Chiều - THÊM MỚI)
+// ==========================================
+
+// Kích hoạt Grid
+%grid {
+    display: grid;
+}
+
+// Tuyệt chiêu: Căn giữa tuyệt đối mọi thứ CHỈ VỚI 2 DÒNG
+%gridCenter {
+    display: grid;
+    place-items: center;
+}
+
+// Chia cột đều nhau (Equal Columns)
+%gridCols2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+%gridCols3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+%gridCols4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+%gridCols5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+// Lưới Tự Động Responsive
+%gridAutoSm {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+%gridAutoMd {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+%gridAutoLg {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+// Bố cục Layout Tổng thể (Macro Layouts)
+%gridSidebarLeft {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+}
+%gridSidebarRight {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+}
+%gridSidebarAuto {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+%gridHolyGrail {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+// ==========================================
+// 6.5 GRID ITEMS (Dành cho thẻ con trong Lưới)
+// ==========================================
+
+// Phóng to phần tử con chiếm toàn bộ chiều ngang của Grid
+%gridColFull {
+    grid-column: 1 / -1;
+}
+%gridColSpan2 {
+    grid-column: span 2;
+}
+%gridColSpan3 {
+    grid-column: span 3;
+}
+%gridRowSpan2 {
+    grid-row: span 2;
+}
+%gridRowSpan3 {
+    grid-row: span 3;
+}

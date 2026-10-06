@@ -1,0 +1,123 @@
+/* ==========================================================================
+   HỆ THỐNG LƯỚI (GRID SYSTEM)
+   Sinh mã tự động bằng các hàm toán học dựa trên cấu hình toàn cục.
+   ========================================================================== */
+
+@use "sass:map";
+@use "sass:math";
+@use "../abstracts/" as abs;
+
+%gutter-padding {
+    padding-left: calc(var(--grid-gutter-x) * 0.5);
+    padding-right: calc(var(--grid-gutter-x) * 0.5);
+}
+
+.container-fluid {
+    // Nội suy giá trị từ biến SCSS sang thuộc tính tùy chỉnh CSS
+    --grid-gutter-x: #{abs.$grid-gutter-width};
+    --grid-gutter-y: 0;
+
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    @extend %gutter-padding;
+}
+
+.container {
+    @extend .container-fluid;
+    max-width: abs.$container-max-width-custom;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    // Sử dụng calc() nguyên bản của CSS, không can thiệp nội suy SCSS
+    margin-top: calc(var(--grid-gutter-y) * -1);
+    margin-left: calc(var(--grid-gutter-x) * 0.5 * -1);
+    margin-right: calc(var(--grid-gutter-x) * 0.5 * -1);
+
+    > * {
+        margin-top: var(--grid-gutter-y);
+        @extend %gutter-padding;
+    }
+}
+
+.col {
+    flex: 1 0;
+}
+
+@mixin make-media-query($dimension) {
+    @media (max-width: ($dimension - 0.02px)) {
+        @content;
+    }
+}
+
+@mixin make-row-columns($infix: null) {
+    // Đảm bảo phép toán thực hiện an toàn trên số lượng cột gốc
+    @for $i from 1 through v.$grid-columns * 0.5 {
+        .row-cols#{$infix}-#{$i} > * {
+            flex: 0 0 auto;
+            // Áp dụng math.div để tránh lỗi deprecation division của Dart Sass
+            width: math.div(100%, $i);
+        }
+    }
+}
+
+@mixin make-columns($infix: null) {
+    @for $i from 1 through abs.$grid-columns {
+        .col#{$infix}-#{$i} {
+            flex: 0 0 auto;
+            width: math.div(100%, abs.$grid-columns) * $i;
+        }
+    }
+}
+
+@mixin make-offsets($infix: null) {
+    @for $i from 0 to abs.$grid-columns {
+        .offset#{$infix}-#{$i} {
+            // Thay thế cú pháp sass() thử nghiệm bằng hàm if() an toàn truyền thống
+            margin-left: if($i > 0, math.div(100%, abs.$grid-columns) * $i, 0);
+        }
+    }
+}
+
+@mixin make-gutters($infix: null) {
+    @each $i, $ratio in v.$gutters {
+        .g#{$infix}-#{$i},
+        .gx#{$infix}-#{$i} {
+            --grid-gutter-x: #{v.$grid-gutter-width * $ratio};
+        }
+
+        .g#{$infix}-#{$i},
+        .gy#{$infix}-#{$i} {
+            --grid-gutter-y: #{v.$grid-gutter-width * $ratio};
+        }
+    }
+}
+
+// --------------------------------------------------------------------------
+// KHỞI TẠO GRID CLASSES BẰNG VÒNG LẶP
+// --------------------------------------------------------------------------
+
+// 1. Khởi tạo lưới toàn cục (Mặc định không có tiền tố infix)
+@include make-row-columns();
+@include make-columns();
+@include make-offsets();
+@include make-gutters();
+
+// 2. Khởi tạo lưới tương thích (Responsive) theo các điểm ngắt
+@each $breakpoint, $dimension in v.$grid-breakpoints {
+    $max-width: map.get(v.$container-max-widths, $breakpoint);
+    $infix: "-#{$breakpoint}";
+
+    @include make-media-query($dimension) {
+        .container {
+            max-width: $max-width;
+        }
+
+        @include make-row-columns($infix);
+        @include make-columns($infix);
+        @include make-offsets($infix);
+        @include make-gutters($infix);
+    }
+}
