@@ -1,0 +1,273 @@
+[
+    {
+        "id": "vn_153",
+        "ten": "Vừ A Dính",
+        "ngay_sinh": "12/09",
+        "nam_sinh": "1934",
+        "ngay_mat": "15/06",
+        "nam_mat": "1949",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "vu-a-dinh-vn-153",
+        "mo_ta": "Người thiếu niên anh hùng dân tộc H'Mông. Làm nhiệm vụ liên lạc bí mật cho Việt Minh khi mới 13 tuổi, anh bị thực dân Pháp bắt, tra tấn dã man suốt nhiều ngày nhưng kiên quyết không khai nửa lời, bảo vệ an toàn cho cán bộ cách mạng trước khi anh dũng hy sinh.",
+        "quote": "Người H'Mông ta chỉ biết đánh Tây, không biết đầu hàng!",
+        "ngay_hien_thi": "01/06",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày Quốc tế Thiếu nhi (01/06) - Tôn vinh tinh thần dũng cảm, kiên trung của thiếu niên anh hùng Vừ A Dính.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%E1%BB%AB_A_D%C3%ADnh"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu khí của người thiếu niên H'Mông trước kẻ thù",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_154",
+        "ten": "Phan Phú Thứ",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1821",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1882",
+        "linh_vuc": "Văn hóa - Đổi mới",
+        "category_id": "culture",
+        "image_slug": "phan-phu-thu-vn-154",
+        "mo_ta": "Đại thần triều Nguyễn, một trong những nhà tư tưởng canh tân sớm nhất của Việt Nam. Đi sứ sang Pháp, ông đã tận mắt chứng kiến sự phát triển của phương Tây và liên tục dâng sớ xin vua Tự Đức mở cửa, chấn hưng thực nghiệp, đóng tàu sắt để tự cường cứu nước.",
+        "quote": "Nước muốn tự cường phải biết học hỏi cái hay của phương Tây, chấn hưng thực nghiệp, phát triển giao thương.",
+        "ngay_hien_thi": "02/06",
+        "hien_thi_nhan_dip": "Kỷ niệm 205 năm ngày sinh của đại thần canh tân, chí sĩ yêu nước Phan Phú Thứ.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Phan_Ph%C3%BA_Th%E1%BB%A9"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng canh tân trong các bản điều trần gửi vua Tự Đức",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_155",
+        "ten": "Đào Tấn",
+        "ngay_sinh": "27/02",
+        "nam_sinh": "1845",
+        "ngay_mat": "08/10",
+        "nam_mat": "1907",
+        "linh_vuc": "Văn hóa - Nghệ thuật",
+        "category_id": "culture",
+        "image_slug": "dao-tan-vn-155",
+        "mo_ta": "Đại thần triều Nguyễn, được suy tôn là Hậu tổ của nghệ thuật Tuồng (Hát bội) Việt Nam. Ông không chỉ là một vị quan thanh liêm mà còn sáng tác hàng chục vở tuồng kinh điển, nâng bộ môn nghệ thuật này lên đỉnh cao uyên bác và rực rỡ nhất.",
+        "quote": "Làm quan không bằng làm người tử tế, chốn quan trường đâu sánh được với vẻ đẹp của sân khấu Tuồng.",
+        "ngay_hien_thi": "03/06",
+        "hien_thi_nhan_dip": "Kỷ niệm 181 năm ngày sinh của Hậu tổ nghệ thuật Tuồng Đào Tấn.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%C3%A0o_T%E1%BA%A5n"
+            },
+            {
+                "type": "quote",
+                "name": "Giai thoại về tình yêu nghệ thuật Tuồng của Đào Tấn",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_156",
+        "ten": "Trần Khánh Dư",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1240",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1340",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "tran-khanh-du-vn-156",
+        "mo_ta": "Nhân Huệ Vương, một danh tướng có tài năng xuất chúng nhưng tính tình ngông nghênh triều Trần. Trong kháng chiến chống Nguyên Mông lần 3, ông đã lập chiến công vang dội tại Vân Đồn, đánh chìm toàn bộ đoàn thuyền lương của Trương Văn Hổ, đẩy giặc vào thế cùng kiệt.",
+        "quote": "Giặc cậy có quân đông, lương nhiều. Nay ta đánh chìm thuyền lương, giặc không đánh tất cũng phải lùi.",
+        "ngay_hien_thi": "04/06",
+        "hien_thi_nhan_dip": "Tôn vinh chiến công tiêu diệt đoàn thuyền lương giặc tại Vân Đồn của danh tướng Trần Khánh Dư.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Kh%C3%A1nh_D%C6%B0"
+            },
+            {
+                "type": "quote",
+                "name": "Chiến thuật đánh vào yết hầu lương thảo của giặc (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_157",
+        "ten": "Nguyễn Tất Thành (Chủ tịch Hồ Chí Minh)",
+        "ngay_sinh": "19/05",
+        "nam_sinh": "1890",
+        "ngay_mat": "02/09",
+        "nam_mat": "1969",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-tat-thanh-vn-157",
+        "mo_ta": "Chàng thanh niên yêu nước tuổi 21, mang trong lòng nỗi đau mất nước. Ngày 05/06/1911, từ bến cảng Nhà Rồng, Người đã lên con tàu Amiral Latouche-Tréville ra đi tìm đường cứu nước, bắt đầu cuộc hành trình vĩ đại thay đổi vận mệnh của cả một dân tộc.",
+        "quote": "Tôi muốn đi ra ngoài, xem nước Pháp và các nước khác. Sau khi xem xét họ làm như thế nào, tôi sẽ trở về giúp đồng bào chúng ta.",
+        "ngay_hien_thi": "05/06",
+        "hien_thi_nhan_dip": "Kỷ niệm 115 năm sự kiện Bác Hồ ra đi tìm đường cứu nước từ bến Cảng Nhà Rồng (05/06/1911).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Bảo tàng Hồ Chí Minh",
+                "url": "https://baotanghochiminh.vn/"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói của Nguyễn Tất Thành trước khi ra đi (Ghi chép lịch sử)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_158",
+        "ten": "Ngô Thì Nhậm",
+        "ngay_sinh": "11/09",
+        "nam_sinh": "1746",
+        "ngay_mat": "09/03",
+        "nam_mat": "1803",
+        "linh_vuc": "Lịch sử - Văn học",
+        "category_id": "historical_figure",
+        "image_slug": "ngo-thi-nham-vn-158",
+        "mo_ta": "Danh sĩ uyên bác, vị quân sư mưu lược số một của Hoàng đế Quang Trung. Ông đã hiến kế lui binh về đèo Tam Điệp, tạo thế rút lui chiến lược để nhử địch kiêu ngạo, góp phần trực tiếp làm nên chiến thắng thần tốc Ngọc Hồi - Đống Đa đại phá quân Thanh.",
+        "quote": "Nay lui quân để bảo toàn lực lượng, cho giặc ngủ trọ một đêm rồi ta sẽ đánh đuổi chúng đi.",
+        "ngay_hien_thi": "06/06",
+        "hien_thi_nhan_dip": "Kỷ niệm 280 năm ngày sinh của mưu sĩ kiệt xuất triều Tây Sơn Ngô Thì Nhậm.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ng%C3%B4_Th%C3%AC_Nh%E1%BA%ADm"
+            },
+            {
+                "type": "quote",
+                "name": "Kế sách lui binh trình lên vua Quang Trung",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_159",
+        "ten": "Nguyễn An Ninh",
+        "ngay_sinh": "15/09",
+        "nam_sinh": "1900",
+        "ngay_mat": "14/08",
+        "nam_mat": "1943",
+        "linh_vuc": "Lịch sử - Báo chí",
+        "category_id": "culture",
+        "image_slug": "nguyen-an-ninh-vn-159",
+        "mo_ta": "Nhà báo, nhà văn, nhà tư tưởng cách mạng tiên phong ở Nam Kỳ. Với tờ báo 'Tiếng chuông rè' (La Cloche Fêlée) xuất bản bằng tiếng Pháp, ông công khai đả kích chế độ thực dân, đánh thức mạnh mẽ khát vọng tự do và dân chủ của thanh niên trí thức Sài Gòn.",
+        "quote": "Khát vọng tự do của một dân tộc không bao giờ bị dập tắt bởi nhà tù hay bạo lực.",
+        "ngay_hien_thi": "07/06",
+        "hien_thi_nhan_dip": "Kỷ niệm 126 năm ngày sinh của nhà báo, nhà tư tưởng tự do Nguyễn An Ninh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_An_Ninh"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng giải phóng dân tộc trên báo Tiếng chuông rè",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_160",
+        "ten": "Nguyễn Quang Bích",
+        "ngay_sinh": "07/05",
+        "nam_sinh": "1832",
+        "ngay_mat": "24/01",
+        "nam_mat": "1890",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-quang-bich-vn-160",
+        "mo_ta": "Lãnh tụ xuất sắc của phong trào Cần Vương vùng Tây Bắc. Dù triều đình Huế đã đầu hàng, ông vẫn kiên quyết không giao nộp thành, tự tổ chức nghĩa quân liên kết với đồng bào các dân tộc thiểu số để chiến đấu chống Pháp đến hơi thở cuối cùng.",
+        "quote": "Thà muôn lần chết để giữ tròn khí tiết, còn hơn sống vinh hoa mà làm tay sai cho giặc.",
+        "ngay_hien_thi": "08/06",
+        "hien_thi_nhan_dip": "Kỷ niệm 194 năm ngày sinh của lãnh tụ phong trào Cần Vương vùng Tây Bắc Nguyễn Quang Bích.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Quang_B%C3%ADch"
+            },
+            {
+                "type": "quote",
+                "name": "Thư trả lời khước từ sự dụ hàng của tướng Pháp",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_161",
+        "ten": "Phạm Ngọc Thạch",
+        "ngay_sinh": "07/05",
+        "nam_sinh": "1909",
+        "ngay_mat": "07/11",
+        "nam_mat": "1968",
+        "linh_vuc": "Khoa học - Y tế",
+        "category_id": "culture",
+        "image_slug": "pham-ngoc-thach-vn-161",
+        "mo_ta": "Giáo sư, Bác sĩ y khoa lỗi lạc, Bộ trưởng Bộ Y tế đầu tiên của nước Việt Nam Dân chủ Cộng hòa. Từ bỏ cuộc sống giàu sang, ông đã xung phong vào chiến trường miền Nam khói lửa để cứu chữa thương binh và hy sinh oanh liệt ngay tại mặt trận.",
+        "quote": "Bác sĩ cách mạng là phải đi vào nhân dân, sống chết cùng nhân dân nơi tuyến lửa.",
+        "ngay_hien_thi": "09/06",
+        "hien_thi_nhan_dip": "Tôn vinh y đức ngời sáng và sự hy sinh vì nước của Bộ trưởng Y tế đầu tiên - Bác sĩ Phạm Ngọc Thạch.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_Ng%E1%BB%8Dc_Th%E1%BA%A1ch"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm về y tế chiến trường của Bác sĩ Phạm Ngọc Thạch",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_162",
+        "ten": "Ngô Mây",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1922",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1947",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "ngo-may-vn-162",
+        "mo_ta": "Anh hùng lực lượng vũ trang nhân dân thời kỳ kháng chiến chống Pháp. Là đội viên 'Quyết tử quân', anh đã ôm quả bom ba càng lao thẳng vào đội hình xe tăng địch tại Suối Vối, biến thân mình thành ngọn lửa để mở đường máu cho đồng đội xông lên.",
+        "quote": "Đời người ai cũng chết một lần, xin cho tôi được ôm quả bom này lao vào xe tăng giặc để bảo vệ quê hương.",
+        "ngay_hien_thi": "10/06",
+        "hien_thi_nhan_dip": "Kỷ niệm 104 năm ngày sinh của Anh hùng liệt sĩ Ngô Mây - Biểu tượng của tinh thần quyết tử quân.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ng%C3%B4_M%C3%A2y"
+            },
+            {
+                "type": "quote",
+                "name": "Lời thề xin cảm tử ôm bom ba càng lao vào xe tăng Pháp",
+                "url": null
+            }
+        ]
+    },
+    
+]

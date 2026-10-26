@@ -1,0 +1,280 @@
+// Flex căn giữa dành riêng cho các phần tử inline (như Button, Badge, Tag)
+%inlineFlexCenter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Flex căn giữa tuyệt đối cả 2 chiều (Ngang & Dọc)
+%flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Xếp cột dọc cơ bản
+%flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+// Xếp cột dọc và căn giữa theo trục dọc (Main axis)
+%flexColumnCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+// Xếp cột dọc và căn giữa tuyệt đối cả 2 trục (Đã đổi tên từ flexColumnCenter2)
+%flexColumnCenterAll {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+// Flex chỉ căn giữa trục dọc (Cross axis - Thường dùng cho các item xếp ngang)
+%flexItemCenter {
+    display: flex;
+    align-items: center;
+}
+
+// Căn giữa trục dọc, đẩy 2 phần tử ra xa sát lề (Thường dùng cho Header, Navbar)
+%flexBetween {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// abstracts/placeholders/_flex-box.scss
+
+// ==========================================
+// 1. FLEXBOX CONTAINERS (Dành cho thẻ cha)
+// ==========================================
+
+// Flex căn giữa cả 2 chiều
+%flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Căn giữa an toàn (Chống mất chữ khi cuộn trên màn hình nhỏ)
+%flexCenterSafe {
+    display: flex;
+    justify-content: safe center;
+    align-items: safe center;
+}
+
+// Chỉ căn giữa trục dọc (Đẩy sang lề phải)
+%flexYCenterRight {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+// Chỉ căn giữa trục dọc (Giữ nguyên lề trái)
+%flexYCenterLeft {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+// Căn góc trên / dưới
+%flexTopLeft {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+%flexTopCenter {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+%flexTopRight {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+%flexBottomLeft {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+%flexBottomCenter {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+%flexBottomRight {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+// Xếp cột dọc
+%flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+// Xếp cột dọc và căn giữa theo trục dọc
+%flexColumnCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+// Xếp cột dọc và căn giữa tuyệt đối cả 2 trục
+%flexColumnCenterAll {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+// Flex chỉ căn giữa trục dọc (thường dùng cho các item xếp ngang)
+%flexItemCenter {
+    display: flex;
+    align-items: center;
+}
+
+// Căn giữa trục dọc, đẩy 2 bên ra xa (Thường dùng cho Header, Navbar)
+%flexBetween {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// Dàn đều 2 bên, các thẻ con dãn hết chiều cao
+%flexBetweenStretch {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+// Dàn đều xung quanh
+%flexAround {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+%flexEvenly {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+// Xếp cột dọc, nằm sát trên, căn giữa ngang
+%flexColTopCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+// Xếp cột dọc, các thẻ con tự dãn hết chiều ngang
+%flexColStretch {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+// List rớt dòng lề trái, item dãn chiều dọc (Card list)
+%flexWrapStart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+// Wrap kết hợp khoảng cách (Tags, Chips)
+%flexWrapGap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; // Thay bằng var(--gap) hoặc biến $gap nếu có
+    align-items: center;
+}
+
+// Nút bấm có Icon (Inline flex)
+%inlineFlexCenter {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+// Đảo ngược
+%flexRowReverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+%flexColReverse {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+// Khung cuộn ngang (Carousel)
+%flexScrollX {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+// Khung cuộn dọc (Chat, list dài)
+%flexScrollY {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+// ==========================================
+// 2. FLEXBOX ITEMS (Dành riêng cho thẻ con)
+// ==========================================
+
+// Nuốt trọn không gian trống (Dùng cho nội dung chính)
+%flexItemFluid {
+    flex: 1 1 0%;
+    min-width: 0; // Chống tràn text vỡ layout
+}
+
+// Co giãn tự nhiên theo chữ
+%flexItemAuto {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+// Cố định kích thước, cấm bóp méo (Avatar, Icon)
+%flexItemFixed {
+    flex: 0 0 auto;
+}
+
+// Vũ khí Margin Auto trong Flex
+%flexPushRight {
+    margin-left: auto;
+} // Đẩy dạt sang phải
+
+%flexPushBottom {
+    margin-top: auto;
+} // Đẩy cắm xuống đáy
+
+// Lưới giả (Fake Grid) dành cho thẻ con (Đi kèm thẻ cha %flexWrapStart)
+%flexCol50 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+%flexCol33 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+%flexCol25 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}

@@ -1,0 +1,272 @@
+[
+    {
+        "id": "vn_122",
+        "ten": "Lê Hồng Phong",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1902",
+        "ngay_mat": "06/09",
+        "nam_mat": "1942",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "le-hong-phong-vn-122",
+        "mo_ta": "Nhà lãnh đạo tiền bối xuất sắc, cố Tổng Bí thư của Đảng Cộng sản Đông Dương. Cuộc đời hoạt động của ông là một tấm gương chói lọi về tinh thần đấu tranh không mệt mỏi cho giai cấp công nhân. Dù bị thực dân Pháp tra tấn đến kiệt sức và hy sinh tại Côn Đảo, ý chí của ông vẫn rực sáng.",
+        "quote": "Xin các đồng chí hãy báo cáo với Đảng rằng, tới phút cuối cùng Lê Hồng Phong vẫn một lòng tin tưởng ở thắng lợi vẻ vang của cách mạng.",
+        "ngay_hien_thi": "01/05",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày Quốc tế Lao động - Tôn vinh tinh thần đấu tranh bất khuất của Tổng Bí thư Lê Hồng Phong.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_H%E1%BB%93ng_Phong"
+            },
+            {
+                "type": "quote",
+                "name": "Lời trăng trối cuối cùng gửi lại cho các đồng chí tại nhà tù Côn Đảo",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_123",
+        "ten": "Trần Tế Xương (Tú Xương)",
+        "ngay_sinh": "05/09",
+        "nam_sinh": "1870",
+        "ngay_mat": "20/01",
+        "nam_mat": "1907",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "tran-te-xuong-vn-123",
+        "mo_ta": "Nhà thơ trào phúng xuất sắc bậc nhất của nền văn học Việt Nam. Bằng ngòi bút sắc sảo, châm biếm nhưng cũng đầy xót xa, ông đã vẽ nên bức tranh chân thực về một xã hội nửa dơi nửa chuột lúc giao thời, để lại nhiều tác phẩm bất hủ đi sâu vào lòng người.",
+        "quote": "Nào có ra gì cái chữ Nho. Ông nghè, ông cống cũng nằm co.",
+        "ngay_hien_thi": "02/05",
+        "hien_thi_nhan_dip": "Tôn vinh tài năng thi phú trào phúng, sắc sảo của nhà thơ Trần Tế Xương.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_T%E1%BA%BF_X%C6%B0%C6%A1ng"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Chữ Nho'",
+                "url": "https://vi.wikisource.org/wiki/Ch%E1%BB%AF_Nho"
+            }
+        ]
+    },
+    {
+        "id": "vn_124",
+        "ten": "Nguyễn Bặc",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "924",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "979",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-bac-vn-124",
+        "mo_ta": "Đệ nhất khai quốc công thần của triều đại nhà Đinh. Là người bạn thanh mai trúc mã, vào sinh ra tử cùng Đinh Tiên Hoàng, ông có công lớn trong việc đánh dẹp 12 sứ quân, thống nhất đất nước và được phong tước Định Quốc Công.",
+        "quote": "Làm tôi phải tận trung, vì nước phải tận nghĩa.",
+        "ngay_hien_thi": "03/05",
+        "hien_thi_nhan_dip": "Tôn vinh lòng trung nghĩa sắt son và công lao thống nhất giang sơn của Định Quốc Công Nguyễn Bặc.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_B%E1%BA%B7c"
+            },
+            {
+                "type": "quote",
+                "name": "Tương truyền về tư tưởng tận trung của khai quốc công thần nhà Đinh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_125",
+        "ten": "Phùng Chí Kiên (Nguyễn Vĩ)",
+        "ngay_sinh": "18/05",
+        "nam_sinh": "1901",
+        "ngay_mat": "22/08",
+        "nam_mat": "1941",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "phung-chi-kien-vn-125",
+        "mo_ta": "Nhà quân sự đầu tiên của Đảng, một tướng lĩnh tài ba và quả cảm. Ông từng theo học tại trường võ bị Hoàng Phố, có nhiều công lao xây dựng lực lượng vũ trang thời kỳ đầu. Ông đã anh dũng hy sinh sau khi bị kẻ thù phục kích, chặt đầu treo lên ngã ba đường để thị uy.",
+        "quote": "Cờ độc lập phải nhuộm bằng máu, hoa tự do phải tưới bằng mồ hôi.",
+        "ngay_hien_thi": "04/05",
+        "hien_thi_nhan_dip": "Tôn vinh sự hy sinh oanh liệt và khí tiết kiên cường của nhà quân sự tiền bối Phùng Chí Kiên.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ph%C3%B9ng_Ch%C3%AD_Ki%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng đấu tranh giải phóng dân tộc của các chiến sĩ tiền bối",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_126",
+        "ten": "Phan Đăng Lưu",
+        "ngay_sinh": "05/05",
+        "nam_sinh": "1902",
+        "ngay_mat": "28/08",
+        "nam_mat": "1941",
+        "linh_vuc": "Chính trị - Báo chí",
+        "category_id": "historical_figure",
+        "image_slug": "phan-dang-luu-vn-126",
+        "mo_ta": "Nhà lãnh đạo xuất sắc của Đảng Cộng sản Đông Dương, một trí thức uyên bác và nhà báo cách mạng sắc sảo. Tại Hội nghị Trung ương 7, ông đã đóng vai trò lịch sử khi kịp thời truyền đạt chỉ thị hoãn Khởi nghĩa Nam Kỳ, dù sau đó vẫn bị địch bắt và xử bắn tại Hóc Môn.",
+        "quote": "Sống vì lý tưởng cách mạng, chết cũng vì lý tưởng cách mạng.",
+        "ngay_hien_thi": "05/05",
+        "hien_thi_nhan_dip": "Kỷ niệm 124 năm ngày sinh của nhà hoạt động chính trị, trí thức cách mạng Phan Đăng Lưu.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Phan_%C4%90%C4%83ng_L%C6%B0u"
+            },
+            {
+                "type": "quote",
+                "name": "Tinh thần bất khuất tại pháp trường Hóc Môn (1941)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_127",
+        "ten": "Nguyễn Quyền",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1869",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1941",
+        "linh_vuc": "Văn hóa - Giáo dục",
+        "category_id": "culture",
+        "image_slug": "nguyen-quyen-vn-127",
+        "mo_ta": "Chí sĩ yêu nước nhiệt thành, một trong những người sáng lập và là linh hồn của Đông Kinh Nghĩa Thục. Ông chủ trương từ bỏ lối học từ chương khoa cử, cổ xúy việc học chữ Quốc ngữ và kiến thức thực dụng để khai trí cho đồng bào, chấn hưng sức mạnh dân tộc.",
+        "quote": "Không đọc sách vô dụng, không học chữ vô dụng, làm việc gì cũng phải vì ích nước lợi dân.",
+        "ngay_hien_thi": "06/05",
+        "hien_thi_nhan_dip": "Tôn vinh tư tưởng khai dân trí vĩ đại của chí sĩ phong trào Đông Kinh Nghĩa Thục Nguyễn Quyền.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Quy%E1%BB%81n"
+            },
+            {
+                "type": "quote",
+                "name": "Chủ trương đổi mới giáo dục thời Đông Kinh Nghĩa Thục",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_128",
+        "ten": "Võ Nguyên Giáp",
+        "ngay_sinh": "25/08",
+        "nam_sinh": "1911",
+        "ngay_mat": "04/10",
+        "nam_mat": "2013",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "vo-nguyen-giap-vn-128",
+        "mo_ta": "Đại tướng đầu tiên, Tổng Tư lệnh Quân đội nhân dân Việt Nam. Là thiên tài quân sự thế giới, ông đã đưa ra quyết định lịch sử 'kéo pháo ra', chuyển từ 'đánh nhanh thắng nhanh' sang 'đánh chắc tiến chắc', làm nên chiến thắng Điện Biên Phủ lừng lẫy năm châu, chấn động địa cầu.",
+        "quote": "Tôi sống ngày nào, cũng là vì đất nước ngày đó.",
+        "ngay_hien_thi": "07/05",
+        "hien_thi_nhan_dip": "Kỷ niệm 72 năm Chiến thắng Điện Biên Phủ vĩ đại (07/05/1954) - Tôn vinh tài thao lược của Đại tướng Võ Nguyên Giáp.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C3%B5_Nguy%C3%AAn_Gi%C3%A1p"
+            },
+            {
+                "type": "quote",
+                "name": "Lời chia sẻ của Đại tướng về lý tưởng cống hiến trọn đời",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_129",
+        "ten": "Trần Nhật Duật",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1255",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1330",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_figure",
+        "image_slug": "tran-nhat-duat-vn-129",
+        "mo_ta": "Chiêu Văn Vương, danh tướng và nhà ngoại giao kiệt xuất triều Trần. Giỏi nhiều ngoại ngữ, am hiểu phong tục các dân tộc thiểu số, ông không chỉ thu phục nhân tâm bằng sự mềm mỏng mà còn lập chiến công hiển hách đánh bại thủy quân Toa Đô tại bến Hàm Tử.",
+        "quote": "Quốc gia hòa hiếu là thượng sách, nhưng khi giặc xâm lăng thì phải đồng tâm giết giặc.",
+        "ngay_hien_thi": "08/05",
+        "hien_thi_nhan_dip": "Tôn vinh tài năng ngoại giao xuất chúng và chiến công hiển hách của Chiêu Văn Vương Trần Nhật Duật.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Nh%E1%BA%ADt_Du%E1%BA%ADt"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng ngoại giao và quân sự linh hoạt của Trần Nhật Duật",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_130",
+        "ten": "Trần Quang Khải",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1241",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1294",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "tran-quang-khai-vn-130",
+        "mo_ta": "Thượng tướng Thái sư triều Trần. Ông là một vị tướng tài ba, người đã vứt bỏ hiềm khích gia tộc để cùng Trần Hưng Đạo tạo nên khối đại đoàn kết, đánh đuổi giặc Nguyên Mông. Ông cũng là một nhà thơ hào sảng, tác giả bài thơ 'Tụng giá hoàn kinh sư' bất hủ.",
+        "quote": "Chương Dương cướp giáo giặc. Hàm Tử bắt quân thù. Thái bình nên gắng sức. Non nước ấy ngàn thu.",
+        "ngay_hien_thi": "09/05",
+        "hien_thi_nhan_dip": "Tôn vinh tinh thần đại đoàn kết và khí phách của Thượng tướng Thái sư Trần Quang Khải.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Quang_Kh%E1%BA%A3i"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Tụng giá hoàn kinh sư' (Phò giá về kinh)",
+                "url": "https://vi.wikisource.org/wiki/T%E1%BB%A5ng_gi%C3%A1_ho%C3%A0n_kinh_s%C6%B0"
+            }
+        ]
+    },
+    {
+        "id": "vn_131",
+        "ten": "Khúc Thừa Dụ",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "23/07",
+        "nam_mat": "907",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "khuc-thua-du-vn-131",
+        "mo_ta": "Người anh hùng dân tộc đất Hồng Châu. Tận dụng sự suy yếu của nhà Đường, ông đã nổi dậy, tự xưng là Tiết độ sứ, thiết lập chính quyền tự chủ của người Việt. Chiến công của ông được ví như viên gạch nền móng đầu tiên kết thúc hơn ngàn năm Bắc thuộc.",
+        "quote": "Người Nam tự cai quản đất Nam, không dung kẻ ngoại bang nhòm ngó.",
+        "ngay_hien_thi": "10/05",
+        "hien_thi_nhan_dip": "Tôn vinh công lao vĩ đại đặt nền móng tự chủ cho dân tộc của Khúc Thừa Dụ.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Kh%C3%BAc_Th%E1%BB%ABa_D%E1%BB%A5"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng độc lập tự chủ thời kỳ đầu của họ Khúc",
+                "url": null
+            }
+        ]
+    }
+]

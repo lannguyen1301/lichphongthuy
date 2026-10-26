@@ -1,0 +1,36 @@
+[
+    
+    
+    
+    
+    
+    
+    
+    
+    {
+        "id": "vn_180",
+        "ten": "Ngô Bảo Châu",
+        "ngay_sinh": "28/06",
+        "nam_sinh": "1972",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Khoa học",
+        "category_id": "science_education",
+        "image_slug": "ngo-bao-chau-vn-180",
+        "mo_ta": "Giáo sư Toán học lừng danh thế giới. Ông là người Việt Nam đầu tiên và duy nhất tính đến nay vinh dự được trao huy chương Fields, giải thưởng danh giá bậc nhất trong lĩnh vực Toán học.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_181",
+        "ten": "Lê Hồng Sơn",
+        "ngay_sinh": "29/06",
+        "nam_sinh": "1899",
+        "ngay_mat": "24/12",
+        "nam_mat": "1932",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "le-hong-son-vn-181",
+        "mo_ta": "Chiến sĩ cách mạng tiền bối kiên trung. Ông là học trò xuất sắc của Chủ tịch Hồ Chí Minh, một trong những người tham gia sáng lập Tân Việt Cách mạng Đảng và Đảng Cộng sản Việt Nam.",
+        "quote": "Không rõ"
+    }
+]

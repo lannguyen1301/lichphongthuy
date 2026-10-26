@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="earth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Header BEM & Theme Engine</title>
+
+    <style>
+        /* =========================================
+           1. MÔ PHỎNG THEME ENGINE (CSS VARIABLES)
+           ========================================= */
+        /* Mặc định là hệ Thổ (Earth) - Màu nâu/Be */
+        :root,
+        [data-theme="earth"] {
+            --body-bg: #f7f6f2;
+            --bg-surface: #ffffff;
+            --text-color: #3e3832;
+            --text-muted: #8c8273;
+            --border-color: #e5dfd5;
+            --primary-color: #8b5e34;
+            --primary-hover: #704b2a;
+            --shadow-color: rgba(139, 94, 52, 0.08);
+        }
+
+        /* Hệ Thuỷ (Water) - Màu xanh lam */
+        [data-theme="water"] {
+            --body-bg: #f0f7fb;
+            --bg-surface: #ffffff;
+            --text-color: #1a365d;
+            --text-muted: #6482a6;
+            --border-color: #d1e3f0;
+            --primary-color: #3182ce;
+            --primary-hover: #2b6cb0;
+            --shadow-color: rgba(49, 130, 206, 0.08);
+        }
+
+        /* CSS Cơ bản */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 20px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Fake style cho thẻ img bị mất src để bạn dễ nhìn layout */
+        img.icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-muted);
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        /* =========================================
+           2. KHỐI BUTTON LÕI (BLOCK: btn)
+           ========================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            /* Chuẩn Bento Grid */
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-color: var(--primary-color);
+        }
+
+        .btn:hover img.icon {
+            background-color: #ffffff;
+            /* Sáng icon khi hover */
+        }
+
+        .btn--login {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn--login:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* =========================================
+           3. COMPONENT HEADER (BLOCK: header)
+           ========================================= */
+        .header {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            /* Bento Grid bọc ngoài Header */
+            padding: 12px 24px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        /* Các thành phần flex con */
+        .header__logo-link,
+        .header__home-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__logo-img {
+            height: 32px;
+            background: var(--primary-color);
+            width: 100px;
+            border-radius: 8px;
+        }
+
+        .header__datetime-wrapper {
+            display: flex;
+            gap: 16px;
+            padding: 8px 16px;
+            background-color: var(--body-bg);
+            /* Khoét nền chìm xuống kiểu Bento */
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .header__date-group,
+        .header__time-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           4. STYLES CHO DROPDOWN (DETAILS / SUMMARY)
+           ========================================= */
+        /* Áp dụng chung cho cả Lang và Theme để không lặp code */
+        .header__lang-group,
+        .header__theme-group {
+            position: relative;
+        }
+
+        .header__lang-summary,
+        .header__theme-summary {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+
+        .header__lang-summary:hover,
+        .header__theme-summary:hover {
+            background-color: var(--body-bg);
+        }
+
+        /* Ẩn mũi tên mặc định của details */
+        .header__lang-summary::-webkit-details-marker,
+        .header__theme-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Box thả xuống (Menu List) */
+        .header__lang-list,
+        .header__theme-list {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: max-content;
+            min-width: 120px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 8px 24px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        /* Các item bên trong Menu Ngôn ngữ */
+        .header__lang-link {
+            display: block;
+            padding: 8px 16px;
+            color: var(--text-color);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .header__lang-link:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* Style cho nút Theme trong menu (BEM Mixes) */
+        .header__theme-btn {
+            width: 100%;
+            justify-content: flex-start;
+            /* Ép chữ và icon sang trái */
+            border: none;
+            /* Bỏ viền vì đã nằm trong box menu */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         HTML CHUẨN CỦA BẠN 
+         ========================================= -->
+    <header id="header" class="header">
+        <div class="header__container container">
+
+            <!-- 1. Logo -->
+            <div class="header__logo">
+                <a href="#!" aria-label="Logo" class="header__logo-link">
+                    <img src="./assets/icons/logo.svg" alt="lichphongthuy" class="header__logo-img">
+                </a>
+            </div>
+
+            <!-- 2. Icon Home -->
+            <div class="header__home">
+                <a href="#!" aria-label="Home" class="header__home-link">
+                    <img src="./assets/icons/home.svg" alt="home" class="header__home-icon icon">
+                </a>
+            </div>
+
+            <!-- 3. Div Date Year -->
+            <div class="header__datetime-wrapper">
+                <div class="header__date-group">
+                    <img src="./assets/icons/calendar.svg" alt="lịch" class="header__date-icon icon">
+                    <div class="header__date-text">24/05/2024</div>
+                </div>
+                <div class="header__time-group">
+                    <img src="./assets/icons/clock.svg" alt="giờ" class="header__time-icon icon">
+                    <div class="header__time-text">14:30:05</div>
+                </div>
+            </div>
+
+            <!-- 4. Group Ngôn ngữ (Đã đưa text và mũi tên vào trong summary) -->
+            <div class="header__lang-group">
+                <details class="header__lang-details">
+                    <summary class="header__lang-summary">
+                        <img src="./assets/icons/global.svg" alt="ngôn ngữ" class="header__lang-icon icon">
+                        <span class="header__lang-text">VN</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="xuống" class="header__lang-arrow icon">
+                    </summary>
+                    <ul class="header__lang-list">
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">VN</a></li>
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">EN</a></li>
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">JP</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 5. Group Đăng nhập -->
+            <div class="header__auth">
+                <button class="btn btn--login header__auth-btn">Đăng nhập</button>
+            </div>
+
+            <!-- 6. Group Theme (Dùng BEM Mixes) -->
+            <div class="header__theme-group">
+                <details class="header__theme-details">
+                    <summary class="header__theme-summary">
+                        <img src="./assets/icons/theme.svg" alt="theme" class="header__theme-icon icon">
+                        <span>Giao diện</span>
+                    </summary>
+                    <ul class="header__theme-list">
+                        <li class="header__theme-item">
+                            <!-- JS sẽ bắt thuộc tính data-theme này để đổi màu -->
+                            <button data-theme="earth" class="btn header__theme-btn">
+                                <img src="./assets/icons/earth.svg" alt="" class="header__theme-icon icon">
+                                Hệ Thổ
+                            </button>
+                        </li>
+                        <li class="header__theme-item">
+                            <button data-theme="water" class="btn header__theme-btn">
+                                <img src="./assets/icons/water.svg" alt="" class="header__theme-icon icon">
+                                Hệ Thuỷ
+                            </button>
+                        </li>
+                        <!-- Các nút khác bạn tự thêm nhé -->
+                    </ul>
+                </details>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- =========================================
+         JS ĐỂ TEST TÍNH NĂNG ĐỔI THEME & ĐÓNG MENU
+         ========================================= -->
+    <script>
+        // 1. Chức năng đổi Theme
+        const themeButtons = document.querySelectorAll('.header__theme-btn');
+        const htmlElement = document.documentElement;
+
+        themeButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Lấy data-theme từ nút được bấm (earth, water...)
+                const selectedTheme = e.currentTarget.getAttribute('data-theme');
+                // Gán vào thẻ <html>. CSS Variables sẽ tự động thay đổi toàn bộ màu web!
+                htmlElement.setAttribute('data-theme', selectedTheme);
+
+                // Đóng menu lại sau khi chọn xong
+                document.querySelector('.header__theme-details').removeAttribute('open');
+            });
+        });
+
+        // 2. Chức năng nhấp ra ngoài để đóng menu <details> (Trải nghiệm người dùng tốt)
+        document.addEventListener('click', (event) => {
+            const allDetails = document.querySelectorAll('details');
+            allDetails.forEach(details => {
+                if (!details.contains(event.target)) {
+                    details.removeAttribute('open');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

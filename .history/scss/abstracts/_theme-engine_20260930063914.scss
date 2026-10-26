@@ -1,0 +1,50 @@
+// scss/abstracts/_theme-engine.scss
+@use "sass:map";
+@use "sass:math";
+@use "variables" as vars;
+@use "palette" as pal;
+
+@mixin generate-theme($element-name) {
+    // 1. Truy xuất bảng màu của bản mệnh được chọn
+    $theme-palette: map.get(pal.$feng-shui-themes, $element-name);
+
+    // Kiểm tra nếu theme không tồn tại
+    @if $theme-palette == null {
+        @error "Lỗi: Không tìm thấy dữ liệu cho bản mệnh '#{$element-name}'. Hãy kiểm tra lại file _palette.scss";
+    }
+
+    // 2. Định nghĩa logic ánh xạ (Mapping)
+    // Chúng ta sẽ lấy các giá trị từ Palette và gán vào các biến CSS
+    // Sử dụng selector [data-theme="#{$element-name}"] để bao đóng phạm vi
+
+    [data_theme="#{$element-name}"], // Hỗ trợ cả dấu gạch dưới nếu bạn dùng
+    [data-theme="#{$element-name}"] {
+        // --- NHÓM 60%: BACKGROUND & SURFACE (Dùng màu Neutral/Neutral nhạt) ---
+        // Lấy màu Neutral cấp độ 100 làm nền chính
+        --color-bg-main: #{map.get($theme-palette, "neutral", 100)};
+
+        // Lấy màu Neutral cấp độ 200 làm bề mặt (Surface)
+        --color-bg-surface: #{map.get($theme-palette, "neutral", 200)};
+
+        // Lấy màu Neutral cấp độ 300 làm viền (Border)
+        --color-border: #{map.get($theme-palette, "neutral", 300)};
+
+        // --- NHÓM 30%: TEXT (Dùng màu Neutral đậm) ---
+        // Chữ chính: Dùng Neutral 800 để đảm bảo độ đọc (Readability)
+        --color-text-main: #{map.get($theme-palette, "neutral", 800)};
+
+        // Chữ phụ: Dùng Neutral 500
+        --color-text-muted: #{map.get($theme-palette, "neutral", 500)};
+
+        // --- NHÓM 10%: ACTION (Dùng màu Tương Sinh - Primary/Secondary) ---
+        // Đây là linh hồn của Phong Thủy: Lấy màu Secondary (màu tương sinh) làm điểm nhấn
+        // Ví dụ: Kim lấy màu Thổ (Secondary) làm Primary.
+        --color-action-primary: #{map.get($theme-palette, "secondary", 500)};
+
+        // Màu Hover: Lấy sắc độ đậm hơn của chính màu đó
+        --color-action-hover: #{map.get($theme-palette, "secondary", 700)};
+
+        // Màu Accent (Nhấn phụ): Lấy từ nhóm Accent của bản mệnh
+        --color-accent: #{map.get($theme-palette, "accent", 400)};
+    }
+}

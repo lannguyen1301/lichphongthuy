@@ -1,0 +1,27 @@
+{
+        "id": "ngay_02_03",
+        "ten": "Đồng Sĩ Nguyên (Nguyễn Hữu Vũ)",
+        "ngay_sinh": "01/03",
+        "nam_sinh": "1923",
+        "ngay_mat": "04/04",
+        "nam_mat": "2019",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "dong-si-nguyen",
+        "mo_ta": "Trung tướng, vị Tư lệnh huyền thoại của Đoàn 559. Dưới sự chỉ huy xuất chúng của ông, tuyến đường Trường Sơn từ một lối mòn nhỏ đã trở thành một hệ thống giao thông chiến lược khổng lồ, một 'trận đồ bát quái xuyên rừng rậm' làm thất bại mọi nỗ lực ngăn chặn của đế quốc Mỹ.",
+        "quote": "Đường Trường Sơn không chỉ là tuyến chi viện, mà là một chiến trường tổng hợp, một biểu tượng của ý chí thống nhất đất nước.",
+        "ngay_hien_thi": "02/03",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Đồng Sĩ Nguyên (Nguyễn Hữu Vũ).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BB%93ng_S%C4%A9_Nguy%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Hồi ký về tầm vóc của đường Hồ Chí Minh trên bộ",
+                "url": null
+            }
+        ]
+    },

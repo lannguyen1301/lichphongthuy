@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ngay_01_04",
+    "ten": "Giải phóng Tuy Hòa ngày 01/04/1975",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",
+    "nam_mat": "Không áp dụng",
+    "linh_vuc": "Sự kiện lịch sử",
+    "category_id": "historical_event",
+    "image_slug": "su-kien-01-04",
+    "mo_ta": "Ngày 1/4/1975, Sư đoàn 320 phối hợp với lực lượng vũ trang Phú Yên giải phóng thị xã Tuy Hòa. Đây là một dấu mốc trong đợt tiến công nhanh tại miền Trung mùa xuân 1975.",
+    "quote": null,
+    "ngay_hien_thi": "01/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện lịch sử ngày 01/04/1975.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Nguồn sự kiện lịch sử",
+        "url": "https://media.qdnd.vn/long-form/chien-dich-ho-chi-minh-lich-su-ban-hung-ca-bat-diet-54432"
+      },
+      {
+        "type": "quote",
+        "name": "Không đăng quote khi chưa có văn bản nguyên gốc xác thực",
+        "url": null
+      }
+    ],
+    "validation_status": "event_date_confirmed",
+    "validation_note": "Không có bằng chứng ngày sinh hoặc mất trùng ID. Cần thay bằng nhân vật hoặc sự kiện đúng ngày trước khi xuất bản.",
+    "review_note": "Đã kiểm tra ID và có nguồn sự kiện cụ thể"
+  },
+  {
+    "id": "ngay_02_04",
+    "ten": "Nguyễn Lương Bằng",
+    "ngay_sinh": "02/04",
+    "nam_sinh": "1904",
+    "ngay_mat": "20/07",
+    "nam_mat": "1979",
+    "linh_vuc": "Lịch sử - Chính trị",
+    "category_id": "historical_figure",
+    "image_slug": "nguyen-luong-bang",
+    "mo_ta": "Nguyễn Lương Bằng (1904–1979), bí danh Sao Đỏ, là nhà hoạt động cách mạng từng giữ nhiều trọng trách trong Đảng và Nhà nước, trong đó có chức Phó Chủ tịch nước. Ông sinh ngày 2/4/1904.",
+    "quote": null,
+    "ngay_hien_thi": "02/04",
+    "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Nguyễn Lương Bằng.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Đã đối chiếu ngày sinh",
+        "url": "https://www.qdnd.vn/tu-lieu-ho-so/ho-so/sang-ngoi-khi-tiet-nguoi-chien-si-cong-san-kien-trung-770956"
+      },
+      {
+        "type": "quote",
+        "name": "Không đăng quote khi chưa có văn bản nguyên gốc xác thực",
+        "url": null
+      }
+    ],
+    "validation_status": "birth_or_death_date_confirmed",
+    "validation_note": "Trường ngày sinh/mất trong dữ liệu gốc trùng ID; cần kiểm định chéo với nguồn độc lập trước khi công bố.",
+    "review_note": "Các phần mô tả gốc cần biên tập đối chiếu chi tiết; không tái sử dụng lời trích dẫn thiếu nguồn."
+  },
+  {
+    "id": "ngay_03_04",
+    "ten": "Ngày 03/04/1953: Chủ tịch Hồ Chí Minh gửi thư cho bộ đội Chiến dịch Thượng Lào",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",
+    "nam_mat": "Không áp dụng",
+    "linh_vuc": "Sự kiện lịch sử Việt Nam",
+    "category_id": "historical_event",
+    "image_slug": "su-kien-03-04-1953",
+    "mo_ta": "Ngày 3/4/1953, Chủ tịch Hồ Chí Minh gửi thư động viên bộ đội đang tác chiến tại Chiến dịch Thượng Lào, nhấn mạnh tình đoàn kết và sự phối hợp giữa nhân dân hai nước Việt Nam và Lào.",
+    "quote": null,
+    "ngay_hien_thi": "03/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện lịch sử ngày 03/04/1953.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Nguồn xác minh sự kiện",
+        "url": "https://hochiminh.vn/tin-tuc/giup-nhan-dan-nuoc-ban-la-minh-tu-giup-minh-8529"
+      },
+      {
+        "type": "quote",
+        "name": "Không đăng quote khi chưa có văn bản nguyên gốc xác thực",
+        "url": null
+      }
+    ],
+    "event_date": "03/04/1953",
+    "validation_status": "verified_event_date",
+    "validation_note": "Ngày sự kiện được đối chiếu theo nguồn liên kết. Trích dẫn chỉ giữ khi thấy trong tư liệu nguồn.",
+    "review_note": "Các phần mô tả gốc cần biên tập đối chiếu chi tiết; không tái sử dụng lời trích dẫn thiếu nguồn."
+  },
+  {
+    "id": "ngay_04_04",
+    "ten": "Đặng Văn Ngữ",
+    "ngay_sinh": "04/04",
+    "nam_sinh": "1910",
+    "ngay_mat": "01/04",
+    "nam_mat": "1967",
+    "linh_vuc": "Khoa học - Y tế",
+    "category_id": "culture",
+    "image_slug": "dang-van-ngu",
+    "mo_ta": "Giáo sư, bác sĩ Đặng Văn Ngữ (1910–1967) có nhiều đóng góp trong lĩnh vực ký sinh trùng học và y học phục vụ kháng chiến. Ông sinh ngày 4/4/1910 và hy sinh năm 1967.",
+    "quote": null,
+    "ngay_hien_thi": "04/04",
+    "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Đặng Văn Ngữ.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Wikipedia tiếng Việt",
+        "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BA%B7ng_V%C4%83n_Ng%E1%BB%AF"
+      },
+      {
+        "type": "quote",
+        "name": "Không đăng quote khi chưa có văn bản nguyên gốc xác thực",
+        "url": null
+      }
+    ],
+    "validation_status": "birth_or_death_date_needs_secondary_review",
+    "validation_note": "Trường ngày sinh/mất trong dữ liệu gốc trùng ID; cần kiểm định chéo với nguồn độc lập trước khi công bố.",
+    "review_note": "Các phần mô tả gốc cần biên tập đối chiếu chi tiết; không tái sử dụng lời trích dẫn thiếu nguồn."
+  },
+  {
+    "id": "ngay_05_04",
+    "ten": "Ngày 05/04/1975: Đại tướng Võ Nguyên Giáp gửi thư động viên Quân đoàn 2",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",

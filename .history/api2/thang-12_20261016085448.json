@@ -1,0 +1,272 @@
+[
+    {
+        "id": "vn_336",
+        "ten": "Trưng Trắc",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "14",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "43",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "trung-trac-vn-336",
+        "mo_ta": "Vị Nữ vương vĩ đại của dân tộc. Căm phẫn ách cai trị tàn bạo của Tô Định, bà cùng em gái phất cờ khởi nghĩa tại Hát Môn, đánh đuổi giặc Đông Hán, giành lại độc lập cho đất nước sau hơn 200 năm Bắc thuộc và xưng là Trưng Nữ Vương.",
+        "quote": "Một xin rửa sạch nước thù. Hai xin đem lại nghiệp xưa họ Hùng. Ba kẻo oan ức lòng chồng. Bốn xin vẹn vẹn sở công lênh này.",
+        "ngay_hien_thi": "01/12",
+        "hien_thi_nhan_dip": "Tôn vinh khí phách quật cường và công đức giành độc lập của Trưng Nữ Vương Trưng Trắc.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Hai_B%C3%A0_Tr%C6%B0ng"
+            },
+            {
+                "type": "quote",
+                "name": "Bốn lời thề trước lúc xuất quân (Thiên Nam ngữ lục)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_337",
+        "ten": "Trưng Nhị",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "14",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "43",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "trung-nhi-vn-337",
+        "mo_ta": "Nữ tướng kiệt xuất, sát cánh cùng chị ruột là Trưng Trắc trong cuộc khởi nghĩa Mê Linh chấn động lịch sử. Hình ảnh hai vị nữ tướng cưỡi voi chiến xông pha trận mạc đã trở thành biểu tượng bất diệt cho sức mạnh và ý chí giải phóng dân tộc của phụ nữ Việt Nam.",
+        "quote": "Chị em ta phận gái, nhưng thù nước nợ nhà dẫu có phải thịt nát xương tan cũng quyết không lùi bước.",
+        "ngay_hien_thi": "02/12",
+        "hien_thi_nhan_dip": "Tôn vinh tinh thần dũng liệt, sát cánh cứu nước của Nữ tướng Trưng Nhị.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Hai_B%C3%A0_Tr%C6%B0ng"
+            },
+            {
+                "type": "quote",
+                "name": "Khí chất của nữ tướng khởi nghĩa Mê Linh (Tương truyền)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_338",
+        "ten": "Phạm Văn Đồng",
+        "ngay_sinh": "01/03",
+        "nam_sinh": "1906",
+        "ngay_mat": "29/04",
+        "nam_mat": "2000",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "pham-van-dong-vn-338",
+        "mo_ta": "Nhà lãnh đạo kiệt xuất, vị Thủ tướng giữ cương vị lâu nhất trong lịch sử Việt Nam (32 năm). Là học trò xuất sắc và người bạn chiến đấu thân thiết của Bác Hồ, ông đã cống hiến trọn đời cho sự nghiệp giải phóng dân tộc, xây dựng đất nước và để lại di sản ngoại giao to lớn.",
+        "quote": "Quá khứ là rễ của hiện tại, là nền tảng của tương lai. Không hiểu rõ quá khứ thì không thể xây dựng tương lai vững chắc.",
+        "ngay_hien_thi": "03/12",
+        "hien_thi_nhan_dip": "Kỷ niệm 120 năm ngày sinh của cố Thủ tướng Phạm Văn Đồng (1906 - 2026).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_V%C4%83n_%C4%90%E1%BB%93ng"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng văn hóa và lịch sử của Thủ tướng Phạm Văn Đồng",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_339",
+        "ten": "Nguyễn Văn Linh (Nguyễn Văn Cúc)",
+        "ngay_sinh": "01/07",
+        "nam_sinh": "1915",
+        "ngay_mat": "27/04",
+        "nam_mat": "1998",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-van-linh-vn-339",
+        "mo_ta": "Cố Tổng Bí thư của Đảng, người được mệnh danh là 'Tổng Bí thư của Đổi mới'. Bằng tư duy nhạy bén và quyết tâm chính trị to lớn, ông đã lãnh đạo công cuộc đổi mới toàn diện, xóa bỏ cơ chế bao cấp, mở ra thời kỳ hội nhập và phát triển rực rỡ cho nền kinh tế đất nước.",
+        "quote": "Hãy tự cứu mình trước khi trời cứu.",
+        "ngay_hien_thi": "04/12",
+        "hien_thi_nhan_dip": "Kỷ niệm 111 năm ngày sinh của cố Tổng Bí thư Nguyễn Văn Linh - Kiến trúc sư của Đổi mới.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_V%C4%83n_Linh"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói nổi tiếng khích lệ tinh thần chủ động đổi mới, tháo gỡ bao cấp",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_340",
+        "ten": "Tô Vĩnh Diện",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1924",
+        "ngay_mat": "01/02",
+        "nam_mat": "1954",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "to-vinh-dien-vn-340",
+        "mo_ta": "Anh hùng lực lượng vũ trang nhân dân trong chiến dịch Điện Biên Phủ. Trong lúc kéo pháo trên dốc Chuối, khi dây tời bị đứt, pháo lao dốc có nguy cơ lao xuống vực, anh đã không ngần ngại lấy chính thân mình chèn vào bánh pháo để bảo vệ vũ khí cho trận đánh quyết định.",
+        "quote": "Thà hy sinh cứu pháo chứ quyết không để pháo lăn xuống vực!",
+        "ngay_hien_thi": "05/12",
+        "hien_thi_nhan_dip": "Kỷ niệm 102 năm ngày sinh của Anh hùng liệt sĩ Tô Vĩnh Diện - Tấm gương hy sinh cứu pháo.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%C3%B4_V%C4%A9nh_Di%E1%BB%87n"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu lệnh cứu pháo vang lên giữa đèo dốc Điện Biên",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_341",
+        "ten": "Trần Văn Ơn",
+        "ngay_sinh": "14/04",
+        "nam_sinh": "1931",
+        "ngay_mat": "09/01",
+        "nam_mat": "1950",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "tran-van-on-vn-341",
+        "mo_ta": "Người học sinh yêu nước kiên cường của trường Pétrus Ký (Sài Gòn). Anh là một trong những ngọn cờ đầu của phong trào học sinh, sinh viên miền Nam kháng chiến. Anh bị giặc sát hại khi mới 19 tuổi trong cuộc biểu tình đòi quyền lợi học tập, làm bùng lên ngọn lửa đấu tranh khắp cả nước.",
+        "quote": "Chúng ta là học sinh, nhưng trước hết chúng ta là người Việt Nam. Không thể cắm đầu vào sách vở khi đất nước đang rên xiết dưới gót giày ngoại bang.",
+        "ngay_hien_thi": "06/12",
+        "hien_thi_nhan_dip": "Kỷ niệm 95 năm ngày sinh của Liệt sĩ Trần Văn Ơn - Ngọn lửa phong trào học sinh sinh viên.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_V%C4%83n_%C6%A0n"
+            },
+            {
+                "type": "quote",
+                "name": "Tinh thần đấu tranh cách mạng của học sinh Sài Gòn",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_342",
+        "ten": "Mạc Đăng Dung (Mạc Thái Tổ)",
+        "ngay_sinh": "22/12",
+        "nam_sinh": "1483",
+        "ngay_mat": "22/08",
+        "nam_mat": "1541",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "mac-dang-dung-vn-342",
+        "mo_ta": "Hoàng đế sáng lập triều Mạc. Vốn xuất thân từ nghề chài lưới, nhờ tài võ nghệ vô song đỗ Đô lực sĩ, ngài đã dẹp yên các thế lực cát cứ, phế truất triều Lê Sơ đang suy tàn để lập ra nhà Mạc, tạm thời khôi phục lại trật tự và sự ổn định cho đất nước.",
+        "quote": "Vận nước đã suy, vua Lê bạc nhược. Nay ta thay mệnh trời, lập lại kỷ cương, mong bá tánh được hưởng thái bình.",
+        "ngay_hien_thi": "07/12",
+        "hien_thi_nhan_dip": "Kỷ niệm 543 năm ngày sinh của Mạc Thái Tổ Mạc Đăng Dung.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/M%E1%BA%A1c_%C4%90%C4%83ng_Dung"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng thay triều hoán đại lập ra triều Mạc",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_343",
+        "ten": "Nguyên Hồng (Nguyễn Nguyên Hồng)",
+        "ngay_sinh": "05/11",
+        "nam_sinh": "1918",
+        "ngay_mat": "02/05",
+        "nam_mat": "1982",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-hong-vn-343",
+        "mo_ta": "Nhà văn hiện thực xuất sắc, được mệnh danh là 'Nhà văn của những người cùng khổ'. Trải qua tuổi thơ cay đắng, ông dành trọn ngòi bút để thấu cảm và viết về những kiếp người dưới đáy xã hội. Các tác phẩm 'Bỉ vỏ' và 'Những ngày thơ ấu' của ông chan chứa tình nhân đạo thống thiết.",
+        "quote": "Tôi viết văn là để bênh vực những người nghèo khổ, những con người bị xã hội ruồng bỏ, bị chà đạp nhưng vẫn ánh lên vẻ đẹp của tình người.",
+        "ngay_hien_thi": "08/12",
+        "hien_thi_nhan_dip": "Kỷ niệm 108 năm ngày sinh của nhà văn của những người cùng khổ Nguyên Hồng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%C3%AAn_H%E1%BB%93ng"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm sáng tác văn chương nhân đạo của Nguyên Hồng",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_344",
+        "ten": "Đỗ Nhuận",
+        "ngay_sinh": "10/12",
+        "nam_sinh": "1922",
+        "ngay_mat": "18/05",
+        "nam_mat": "1991",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "do-nhuan-vn-344",
+        "mo_ta": "Cây đại thụ của nền âm nhạc Việt Nam hiện đại, Tổng thư ký đầu tiên của Hội Nhạc sĩ Việt Nam. Ông là tác giả của những hành khúc cách mạng bất hủ như 'Du kích sông Thao', 'Việt Nam quê hương tôi' và là người sáng tác vở nhạc kịch (opera) đầu tiên của nước nhà mang tên 'Cô Sao'.",
+        "quote": "Bạn ơi hãy đến quê hương chúng tôi. Ngắm mặt biển xanh xa tít chân trời. Nghe sóng vỗ dạt dào biển cả...",
+        "ngay_hien_thi": "09/12",
+        "hien_thi_nhan_dip": "Kỷ niệm 104 năm ngày sinh của Nhạc sĩ cách mạng kiệt xuất Đỗ Nhuận.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BB%97_Nhu%E1%BA%ADn"
+            },
+            {
+                "type": "quote",
+                "name": "Trích ca từ bài hát 'Việt Nam quê hương tôi'",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_345",
+        "ten": "Nguyễn Công Hoan",
+        "ngay_sinh": "06/03",
+        "nam_sinh": "1903",
+        "ngay_mat": "06/06",
+        "nam_mat": "1977",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-cong-hoan-vn-345",
+        "mo_ta": "Bậc thầy truyện ngắn trào phúng của văn học hiện thực Việt Nam. Bằng ngòi bút châm biếm sắc lạnh và hóm hỉnh, ông đã lột trần sự giả dối, bất công của bọn cường hào ác bá và quan lại thực dân phong kiến qua các tác phẩm nổi tiếng như 'Bước đường cùng', 'Kép Tư Bền'.",
+        "quote": "Tiếng cười trong văn chương không chỉ để giải trí, mà là một thứ vũ khí sắc bén để lật tẩy cái ác và sự giả dối ở đời.",
+        "ngay_hien_thi": "10/12",
+        "hien_thi_nhan_dip": "Kỷ niệm 123 năm ngày sinh của bậc thầy truyện ngắn trào phúng Nguyễn Công Hoan.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_C%C3%B4ng_Hoan"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm về văn học trào phúng của Nguyễn Công Hoan",
+                "url": null
+            }
+        ]
+    }
+]

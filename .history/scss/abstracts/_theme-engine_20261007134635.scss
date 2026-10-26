@@ -1,0 +1,47 @@
+
+@use "sass:map";
+@use "palette" as pal;
+
+@mixin generate-theme($element-name) {
+    // 1. Kéo toàn bộ data của 1 bản mệnh (VD: "fire") từ _palette.scss
+    $theme-data: map.get(pal.$feng-shui-themes, $element-name);
+
+    @if $theme-data == null {
+        @error "Lỗi: Không tìm thấy dữ liệu cho bản mệnh '#{$element-name}' trong _palette.scss";
+    }
+
+    // 2. Bắn data vào CSS Variables dưới lớp vỏ [data-theme="..."]
+    [data-theme="#{$element-name}"] {
+        /* =========================================================
+           CHẾ ĐỘ SÁNG (LIGHT MODE) - Mặc định khi chọn Ngũ Hành
+           ========================================================= */
+        // Nhóm Nền & Chữ: Dùng mảng "neutral" (Nền sáng 100/200, Chữ tối 800)
+        --body-bg: #{map.get($theme-data, "neutral", 100)};
+        --bg-surface: #{map.get($theme-data, "neutral", 200)};
+        --text-color: #{map.get($theme-data, "neutral", 800)};
+        --text-muted: #{map.get($theme-data, "neutral", 500)};
+        --border-color: #{map.get($theme-data, "neutral", 300)};
+
+        // Nhóm Nhấn (Ngũ Hành): Dùng mảng primary/secondary/accent (Level 500)
+        --primary-color: #{map.get($theme-data, "primary", 500)};
+        --secondary-color: #{map.get($theme-data, "secondary", 500)};
+        --accent-color: #{map.get($theme-data, "accent", 500)};
+
+        /* =========================================================
+           CHẾ ĐỘ TỐI (DARK MODE) - Tự động theo thiết bị
+           ========================================================= */
+        @media (prefers-color-scheme: dark) {
+            // Đảo ngược nhóm Nền & Chữ: Nền tối (900/800), Chữ sáng (100/400)
+            --body-bg: #{map.get($theme-data, "neutral", 900)};
+            --bg-surface: #{map.get($theme-data, "neutral", 800)};
+            --text-color: #{map.get($theme-data, "neutral", 100)};
+            --text-muted: #{map.get($theme-data, "neutral", 400)};
+            --border-color: #{map.get($theme-data, "neutral", 700)};
+
+            // Nhóm Nhấn (Ngũ Hành): Lùi về Level 400 để màu sáng hơn, dễ nhìn trên nền đen
+            --primary-color: #{map.get($theme-data, "primary", 400)};
+            --secondary-color: #{map.get($theme-data, "secondary", 400)};
+            --accent-color: #{map.get($theme-data, "accent", 400)};
+        }
+    }
+}

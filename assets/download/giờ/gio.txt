@@ -1,0 +1,49 @@
+					GIỜ
+	1. Đồng hồ vạn niên
+		1.1 hiển thị giờ phút giây(mặc định giờ việt nam/ chọn giờ trong select 1.3)
+		1.2 hiển thị thứ ngày tháng
+		1.3 select
+			- Hà Nội, Việt Nam (GMT+7)
+			- GMT+12
+			- Auckland, New Zealand (GMT+12)
+			- GMT+11
+			- Sydney, Úc (GMT+10)
+			- Tokyo, Nhật Bản (GMT+9)
+			- Seoul, Hàn Quốc (GMT+9)
+			- Bắc Kinh, Trung Quốc (GMT+8)
+			- Singapore (GMT+8)
+			- Bangkok, Thái Lan (GMT+7)
+			- Dubai, UAE (GMT+4)
+			- Moscow, Nga (GMT+3)
+			- Paris, Pháp (GMT+2)
+			- London, Anh (GMT+1)
+			- GMT+0
+			- São Paulo, Brazil (GMT-3)
+			- New York, Hoa Kỳ (GMT-4)
+			- Chicago, Hoa Kỳ (GMT-5)
+			- Denver, Hoa Kỳ (GMT-6)
+			- Los Angeles, Hoa Kỳ (GMT-7)
+			- Honolulu, Hoa Kỳ (GMT-10)
+		1.4 Lịch ÂM (theo select muối giờ 1.3)
+			-Giờ Âm lịch hiện tại
+			- Tân Dậu
+			- Dậu(gợi ý dùng icon)17-9
+	
+	2. Năng lượng của giờ
+		item năm
+		item thang
+		item ngày
+		item giờ
+		hình Ngũ mệnh
+		
+	
+	3. GIỜ THẾ GIỚI
+	(LÀM THÀNH CÁC ITEM/ card)
+	Hà Nội - giờ hiện tại theo muối giờ
+	có thứ(viết tắt) ngày tháng bên dưới Hà nội Thêm background cho nguyên card có border
+	
+	tương tự làm cho Tokyo, Moscow, London, Bắc Kinh, Newyork, Sydney, Los Angẻles
+	
+	nên làm dạng card, BG lấy hình ảnh địa điểm nổi tiếng của từng quốc gia, ví dụ: hà nội lấy hình hồ con rùa, Tokyo lấy núi...
+	
+	https://lich.kabala.vn/clock

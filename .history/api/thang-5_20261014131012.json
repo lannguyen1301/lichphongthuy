@@ -1,0 +1,35 @@
+[
+   
+
+
+    
+    {
+        "id": "vn_152",
+        "ten": "Cù Huy Cận (Huy Cận)",
+        "ngay_sinh": "31/05",
+        "nam_sinh": "1919",
+        "ngay_mat": "19/02",
+        "nam_mat": "2005",
+        "linh_vuc": "Văn học",
+        "category_id": "literature",
+        "image_slug": "cu-huy-can-vn-152",
+        "mo_ta": "Nhà thơ lớn của phong trào Thơ mới và nền văn học hiện đại Việt Nam. Sự nghiệp của ông trải dài qua nhiều giai đoạn với những thi phẩm nổi bật mang đậm triết lý vũ trụ và tình yêu quê hương.",
+        "quote": "Không rõ"
+    }
+]
+
+// đã check
+
+// {
+//     "id": "vn_002",
+//     "ten": "Văn Tiến Dũng",
+//     "ngay_sinh": "02/05",
+//     "nam_sinh": "1917",
+//     "ngay_mat": "17/03",
+//     "nam_mat": "2002",
+//     "linh_vuc": "Quân sự",
+//     "category_id": "military",
+//     "image_slug": "van-tien-dung-vn-002",
+//     "mo_ta": "Đại tướng Quân đội nhân dân Việt Nam, nguyên Bộ trưởng Bộ Quốc phòng. Ông là Tổng Tham mưu trưởng trực tiếp chỉ đạo nhiều chiến dịch lớn, tiêu biểu là Chiến dịch Hồ Chí Minh năm 1975.",
+//     "quote": "Không quân đội nào, không khí giới nào có thể đánh ngã được tinh thần hy sinh của toàn thể một dân tộc."
+// }

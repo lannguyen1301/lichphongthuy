@@ -11,7 +11,7 @@
 $base-font-size: 62.5% !default; // Thiết lập 1rem = 10px
 $body-font-size: 1.6rem !default;
 $body-font-family:
-    Gordita,
+    Plus Jakarta Sans,
     sans-serif,
     system-ui,
     -apple-system,
@@ -65,4 +65,39 @@ $gutters: (
 // Tham số điều khiển từ _utils.scss
 // --------------------------------------------------------------------------
 // Các giá trị của thuộc tính display được hỗ trợ để tự động sinh class (.d-flex, .d-block...)
+
+// 4. COLORS (Màu Sắc Mặc Định - Trạng thái chưa chọn Ngũ Hành)
+// Các giá trị nguyên thủy (Raw hex) dùng để cấp cho :root
+// --------------------------------------------------------------------------
+
+// Giao diện Light Mode (Mặc định)
+$color-bg-main-light: #ffffff !default;
+$color-bg-surface-light: #f3f4f6 !default; // Xám nhạt
+$color-text-main-light: #1f2937 !default; // Đen/Xám đậm
+$color-text-muted-light: #6b7280 !default;
+$color-primary-light: #3b82f6 !default; // Xanh dương
+
+// Giao diện Dark Mode
+$color-bg-main-dark: #111827 !default;
+$color-bg-surface-dark: #1f2937 !default;
+$color-text-main-dark: #f9fafb !default; // Trắng/Xám sáng
+$color-text-muted-dark: #9ca3af !default;
+$color-primary-dark: #60a5fa !default;
+
+$theme-transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    fill 0.3s ease;
+
+// 5. DISPLAY VALUES (Giá Trị Hiển Thị)
 $display-values: block, flex, grid, none !default;
+
+// Kích thước & Vị trí Header
+$header-top-offset: 30px !default;
+$header-height-mobile: 60px !default;
+$header-height-pc: 100px !default;
+
+// Khoảng cách (Gap / Margin) giữa các khối (Blocks/Sections)
+$gap-header-main: 30px !default; // Gap từ Header xuống Main
+$gap-section-default: 60px !default; // Gap chuẩn giữa các section (như bài toán flex-direction: column ban nãy)

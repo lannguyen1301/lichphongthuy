@@ -1,0 +1,102 @@
+// abstracts/placeholders/_css-grid.scss
+
+// ==========================================
+// 1. CSS GRID CONTAINERS (Kích hoạt & Bố cục)
+// ==========================================
+
+// Kích hoạt Grid
+%grid {
+    display: grid;
+}
+
+// Căn giữa tuyệt đối mọi thứ CHỈ VỚI 2 DÒNG
+%gridCenter {
+    display: grid;
+    place-items: center;
+}
+
+// Chia cột đều nhau (Equal Columns)
+%gridCols2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+%gridCols3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+%gridCols4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+%gridCols5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+// Lưới Tự Động Responsive (Tự rớt dòng không cần Media Query)
+%gridAutoSm {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+%gridAutoMd {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+%gridAutoLg {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+// ==========================================
+// 2. MACRO LAYOUTS (Bố cục Tổng thể)
+// ==========================================
+
+// Layout có Sidebar cố định bên trái (250px), nội dung bên phải tự co giãn
+%gridSidebarLeft {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+}
+
+// Layout có Sidebar cố định bên phải (250px), nội dung bên trái tự co giãn
+%gridSidebarRight {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+}
+
+// Layout Sidebar tự động ôm nội dung, phần còn lại co giãn
+%gridSidebarAuto {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+// Cấu trúc Kinh điển: Header - Main - Footer (Main luôn đẩy Footer xuống đáy)
+%gridHolyGrail {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+// ==========================================
+// 3. GRID ITEMS (Dành cho thẻ con trong Lưới)
+// ==========================================
+
+// Phóng to phần tử con chiếm toàn bộ chiều ngang của Grid
+%gridColFull {
+    grid-column: 1 / -1;
+}
+
+// Chiếm nhiều cột
+%gridColSpan2 {
+    grid-column: span 2;
+}
+%gridColSpan3 {
+    grid-column: span 3;
+}
+
+// Chiếm nhiều hàng dọc
+%gridRowSpan2 {
+    grid-row: span 2;
+}
+%gridRowSpan3 {
+    grid-row: span 3;
+}

@@ -1,13 +1,27 @@
-// TYPOGRAPHY PLACEHOLDERS
-// Cắt chữ hiển thị dấu 3 chấm nếu quá dài (Chỉ 1 dòng)
+// abstracts/placeholders/_typography.scss
+
+// ==========================================
+// TYPOGRAPHY & TEXT TRUNCATION
+// ==========================================
+
+// Cắt chữ hiển thị dấu 3 chấm nếu quá dài (1 dòng)
 %textEllipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-// Cắt chữ nhiều dòng (Line Clamp)
-// Đổi tên từ %textEllipsis2 thành %textClamp2 để chuẩn semantic hơn
+// Cắt chữ 3 chấm an toàn bên trong Flex Container
+// (Bắt buộc phải có min-width: 0 để chống vỡ layout)
+%textEllipsisFlex {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Cắt chữ 2 dòng (Thường dùng cho Tiêu đề bài viết / Tên component)
 %textClamp2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -15,7 +29,7 @@
     overflow: hidden;
 }
 
-// Bổ sung thêm cắt chữ 3 dòng (Rất hay dùng cho đoạn văn mô tả bài viết/sản phẩm)
+// Cắt chữ 3 dòng (Thường dùng cho Đoạn mô tả / Trích dẫn ngắn)
 %textClamp3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -23,8 +37,42 @@
     overflow: hidden;
 }
 
+// Cắt chữ 4 dòng (Dùng cho các khối nội dung rộng hơn)
+%textClamp4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+// ==========================================
+// TEXT BEHAVIORS (Hành vi văn bản)
+// ==========================================
+
+// Ép buộc ngắt dòng khi gặp chuỗi ký tự quá dài (như URL)
+%textBreak {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+// Ngăn chặn rớt dòng trong mọi trường hợp (Dùng cho Badge, Tag)
+%textNoWrap {
+    white-space: nowrap;
+}
+
+// Xóa khoảng cách thừa của đoạn văn cuối cùng trong một khối
+%textNoMarginBottom {
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// ==========================================
+// ACCESSIBILITY & SEO
+// ==========================================
+
 // Ẩn phần tử UI nhưng không làm mất khỏi trình đọc màn hình (Tốt cho SEO / Accessibility)
-// Ví dụ: Dùng cho label của ô input search nếu thiết kế không có text hiển thị
+// Dùng cho label của ô input search nếu thiết kế chỉ có icon mà không có text hiển thị
 %srOnly {
     position: absolute;
     width: 1px;

@@ -1,0 +1,38 @@
+// TYPOGRAPHY PLACEHOLDERS
+// Cắt chữ hiển thị dấu 3 chấm nếu quá dài (Chỉ 1 dòng)
+%textEllipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Cắt chữ nhiều dòng (Line Clamp)
+// Đổi tên từ %textEllipsis2 thành %textClamp2 để chuẩn semantic hơn
+%textClamp2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+// Bổ sung thêm cắt chữ 3 dòng (Rất hay dùng cho đoạn văn mô tả bài viết/sản phẩm)
+%textClamp3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+// Ẩn phần tử UI nhưng không làm mất khỏi trình đọc màn hình (Tốt cho SEO / Accessibility)
+// Ví dụ: Dùng cho label của ô input search nếu thiết kế không có text hiển thị
+%srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

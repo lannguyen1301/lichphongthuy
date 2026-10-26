@@ -1,0 +1,67 @@
+[
+    {
+        "id": "vn_001",
+        "ten": "Nguyễn Chí Thanh (Nguyễn Vịnh)",
+        "ngay_sinh": "01/01",
+        "nam_sinh": "1914",
+        "ngay_mat": "06/07",
+        "nam_mat": "1967",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-chi-thanh-vn-001",
+        "mo_ta": "Đại tướng Quân đội nhân dân Việt Nam và là Chủ nhiệm Tổng cục Chính trị. Ông có đóng góp chiến lược quan trọng trên các chiến trường trong kháng chiến.",
+        "quote": "Cứ nắm thắt lưng địch mà đánh."
+    },
+    {
+        "id": "vn_002",
+        "ten": "Ngô Đình Diệm",
+        "ngay_sinh": "03/01",
+        "nam_sinh": "1901",
+        "ngay_mat": "02/11",
+        "nam_mat": "1963",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "ngo-dinh-diem-vn-002",
+        "mo_ta": "Tổng thống đầu tiên của Việt Nam Cộng hòa. Ông là một nhân vật lịch sử quan trọng với các chính sách cai trị cứng rắn trước khi bị lật đổ năm 1963.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_003",
+        "ten": "Trần Nam Trung (Trần Oanh)",
+        "ngay_sinh": "06/01",
+        "nam_sinh": "1912",
+        "ngay_mat": "10/05",
+        "nam_mat": "2009",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "tran-nam-trung-vn-003",
+        "mo_ta": "Thượng tướng Quân đội nhân dân Việt Nam. Ông từng giữ chức vụ Bộ trưởng Bộ Quốc phòng của Chính phủ Cách mạng lâm thời Cộng hòa miền Nam Việt Nam.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_004",
+        "ten": "Cao Văn Viên",
+        "ngay_sinh": "11/01",
+        "nam_sinh": "1921",
+        "ngay_mat": "22/01",
+        "nam_mat": "2008",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "cao-van-vien-vn-004",
+        "mo_ta": "Đại tướng Quân lực Việt Nam Cộng hòa. Ông là vị tướng giữ chức Tổng tham mưu trưởng liên tục trong thời gian dài nhất từ năm 1965 đến năm 1975.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_005",
+        "ten": "Trần Hữu Dực",
+        "ngay_sinh": "15/01",
+        "nam_sinh": "1910",
+        "ngay_mat": "18/08",
+        "nam_mat": "1993",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "tran-huu-duc-vn-005",
+        "mo_ta": "Nhà lãnh đạo cấp cao của Việt Nam, nguyên Phó Thủ tướng Chính phủ. Ông có quá trình hoạt động cách mạng xuyên suốt từ những ngày đầu thành lập Đảng.",
+        "quote": "Không rõ"
+    }
+]

@@ -1,0 +1,272 @@
+[
+    {
+        "id": "vn_306",
+        "ten": "Gia Long (Nguyễn Ánh)",
+        "ngay_sinh": "08/02",
+        "nam_sinh": "1762",
+        "ngay_mat": "03/02",
+        "nam_mat": "1820",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "gia-long-nguyen-anh-vn-306",
+        "mo_ta": "Hoàng đế sáng lập triều Nguyễn. Trải qua muôn vàn gian truân, nếm mật nằm gai suốt 25 năm, ngài đã đánh bại triều Tây Sơn, thống nhất đất nước từ Nam chí Bắc. Ngài chính thức đặt quốc hiệu 'Việt Nam' vào năm 1804, mở ra một kỷ nguyên mới cho toàn vẹn lãnh thổ quốc gia.",
+        "quote": "Bản triều dẹp yên giặc loạn, khôi phục cương vực xưa, nay thống nhất giang sơn, xưng quốc hiệu là Việt Nam, để tỏ rõ sự nối nghiệp lớn.",
+        "ngay_hien_thi": "01/11",
+        "hien_thi_nhan_dip": "Kỷ niệm 264 năm ngày sinh của Hoàng đế Gia Long - Người đặt quốc hiệu Việt Nam (1762 - 2026).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Gia_Long"
+            },
+            {
+                "type": "quote",
+                "name": "Chiếu đổi quốc hiệu thành Việt Nam năm 1804 (Đại Nam thực lục)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_307",
+        "ten": "Nguyễn Phan Chánh",
+        "ngay_sinh": "21/07",
+        "nam_sinh": "1892",
+        "ngay_mat": "22/11",
+        "nam_mat": "1984",
+        "linh_vuc": "Văn hóa - Hội họa",
+        "category_id": "culture",
+        "image_slug": "nguyen-phan-chanh-vn-307",
+        "mo_ta": "Danh họa vĩ đại, người đặt nền móng và mang nghệ thuật tranh lụa Việt Nam vươn tầm thế giới. Với kỹ thuật 'rửa lụa' độc đáo và gam màu nâu trầm ấm, những kiệt tác như 'Chơi ô ăn quan', 'Rửa rau cầu ao' của ông đã khắc họa vẻ đẹp mộc mạc, tĩnh lặng của tâm hồn Việt.",
+        "quote": "Vẽ tranh cũng như làm thơ, phải lấy cái hồn mộc mạc của quê hương làm gốc, màu dẫu nhạt nhưng tình phải sâu.",
+        "ngay_hien_thi": "02/11",
+        "hien_thi_nhan_dip": "Tôn vinh tài năng kiệt xuất của Danh họa tranh lụa Nguyễn Phan Chánh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Phan_Ch%C3%A1nh"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng nghệ thuật của Danh họa Nguyễn Phan Chánh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_308",
+        "ten": "Lê Văn Duyệt",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1764",
+        "ngay_mat": "28/08",
+        "nam_mat": "1832",
+        "linh_vuc": "Lịch sử - Hành chính",
+        "category_id": "historical_figure",
+        "image_slug": "le-van-duyet-vn-308",
+        "mo_ta": "Tả quân Đại đô đốc, Tổng trấn Gia Định Thành uy quyền bậc nhất triều Nguyễn. Là một tướng tài bách chiến bách thắng, ông còn có công lao vĩ đại trong việc kinh lý, đào kênh mương, dẹp yên trộm cướp, biến vùng đất Nam Bộ thành một vựa lúa trù phú và thương cảng sầm uất.",
+        "quote": "Quan lại phải lấy việc lo cho dân làm đầu, nếu để bá tánh đói khổ, oán thán thì cái tội ấy dẫu chém đầu cũng chưa đền hết.",
+        "ngay_hien_thi": "03/11",
+        "hien_thi_nhan_dip": "Kỷ niệm 262 năm ngày sinh của Tả quân Lê Văn Duyệt - Người có công phát triển Gia Định Thành.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_V%C4%83n_Duy%E1%BB%87t"
+            },
+            {
+                "type": "quote",
+                "name": "Sự nghiêm minh và thương dân của Tả quân Lê Văn Duyệt",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_309",
+        "ten": "Hồ Nguyên Trừng",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1374",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1446",
+        "linh_vuc": "Lịch sử - Khoa học Quân sự",
+        "category_id": "military",
+        "image_slug": "ho-nguyen-trung-vn-309",
+        "mo_ta": "Con trai trưởng của Hồ Quý Ly, một thiên tài phát minh quân sự kiệt xuất của Việt Nam. Ông là 'Cha đẻ của súng thần công' (Thần cơ thương pháo) và sáng chế ra thuyền chiến Cổ lâu. Sự uyên bác của ông khiến triều Minh sau khi bắt được ông phải kính trọng phong làm quan chế tạo vũ khí.",
+        "quote": "Thần không sợ đánh, chỉ sợ lòng dân không theo.",
+        "ngay_hien_thi": "04/11",
+        "hien_thi_nhan_dip": "Kỷ niệm 652 năm ngày sinh của thiên tài khoa học quân sự Hồ Nguyên Trừng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/H%E1%BB%93_Nguy%C3%AAn_Tr%E1%BB%ABng"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói nổi tiếng can ngăn cha trước nguy cơ ngoại xâm (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_310",
+        "ten": "Lý Tế Xuyên",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "ly-te-xuyen-vn-310",
+        "mo_ta": "Danh sĩ triều Trần, tác giả của kiệt tác 'Việt điện u linh tập' (Tập sách ghi chép các vị thần thiêng liêng ở cõi Việt). Tác phẩm của ông không chỉ có giá trị tâm linh mà còn là một kho tàng lịch sử quý báu, đề cao tinh thần tự hào dân tộc và ngợi ca công đức các bậc anh hùng giữ nước.",
+        "quote": "Khí thiêng sông núi tụ lại thành thần, anh hùng giữ nước chết đi hóa thánh, đều chung một lòng âm phù bảo vệ giang sơn.",
+        "ngay_hien_thi": "05/11",
+        "hien_thi_nhan_dip": "Tôn vinh giá trị văn hóa lịch sử vô giá của danh sĩ Lý Tế Xuyên và tác phẩm 'Việt điện u linh tập'.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%BD_T%E1%BA%BF_Xuy%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng biên soạn thần tích bảo vệ bờ cõi của Lý Tế Xuyên",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_311",
+        "ten": "Nguyễn Văn Thành",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1758",
+        "ngay_mat": "11/05",
+        "nam_mat": "1817",
+        "linh_vuc": "Lịch sử - Hành chính",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-van-thanh-vn-311",
+        "mo_ta": "Đại thần khai quốc công thần bậc nhất của triều Nguyễn, từng giữ chức Tổng trấn Bắc Thành. Ông là một người văn võ toàn tài, là Tổng tài chủ trì việc biên soạn bộ luật lớn nhất thời Nguyễn - 'Hoàng Việt luật lệ' (Luật Gia Long), đặt nền móng pháp lý vững chắc cho vương triều.",
+        "quote": "Pháp luật là cán cân của thiên hạ, vua tôi đều phải tuân theo thì nước mới trị, bá tánh mới phục.",
+        "ngay_hien_thi": "06/11",
+        "hien_thi_nhan_dip": "Kỷ niệm 268 năm ngày sinh của Đại công thần, Tổng trấn Bắc Thành Nguyễn Văn Thành.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_V%C4%83n_Th%C3%A0nh"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng thượng tôn pháp luật khi biên soạn Hoàng Việt luật lệ",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_312",
+        "ten": "Phan Kế Bính",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1875",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1921",
+        "linh_vuc": "Văn hóa - Học thuật",
+        "category_id": "culture",
+        "image_slug": "phan-ke-binh-vn-312",
+        "mo_ta": "Nhà báo, học giả uyên bác thời kỳ cận đại. Với tư tưởng đổi mới, ông đã dành nhiều tâm huyết biên soạn cuốn 'Việt Nam phong tục'. Cuốn sách là một công trình khảo cứu xuất sắc, vừa giữ gìn nét đẹp truyền thống, vừa mạnh dạn phê phán những hủ tục lạc hậu để khai sáng dân trí.",
+        "quote": "Phong tục dẫu là thói quen lâu đời, nhưng cái gì tốt đẹp thì phải giữ lại, cái gì hủ bại thì phải dũng cảm mà bài trừ để nước non tiến bộ.",
+        "ngay_hien_thi": "07/11",
+        "hien_thi_nhan_dip": "Kỷ niệm 151 năm ngày sinh của học giả Phan Kế Bính - Tác giả 'Việt Nam phong tục'.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Phan_K%E1%BA%BF_B%C3%ADnh"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm về cải cách phong tục của Phan Kế Bính",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_313",
+        "ten": "Đào Duy Anh",
+        "ngay_sinh": "25/04",
+        "nam_sinh": "1904",
+        "ngay_mat": "01/04",
+        "nam_mat": "1988",
+        "linh_vuc": "Khoa học - Lịch sử",
+        "category_id": "culture",
+        "image_slug": "dao-duy-anh-vn-313",
+        "mo_ta": "Giáo sư, nhà bách khoa toàn thư kiệt xuất của Việt Nam hiện đại. Ông để lại một di sản đồ sộ trên nhiều lĩnh vực: từ điển học (Hán Việt từ điển), lịch sử học (Lịch sử cổ đại Việt Nam) và văn hóa học (Việt Nam văn hóa sử cương). Ông là người thầy mẫu mực của nhiều thế hệ trí thức.",
+        "quote": "Muốn hiểu sâu sắc hiện tại và hướng tới tương lai, con người không thể không đào sâu cội rễ văn hóa và lịch sử của dân tộc mình.",
+        "ngay_hien_thi": "08/11",
+        "hien_thi_nhan_dip": "Kỷ niệm 122 năm ngày sinh của học giả uyên bác, Giáo sư Đào Duy Anh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%C3%A0o_Duy_Anh"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm nghiên cứu văn hóa sử của Giáo sư Đào Duy Anh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_314",
+        "ten": "Chu Mạnh Trinh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1862",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1905",
+        "linh_vuc": "Văn hóa - Kiến trúc",
+        "category_id": "culture",
+        "image_slug": "chu-manh-trinh-vn-314",
+        "mo_ta": "Danh sĩ tài hoa triều Nguyễn, đỗ Tiến sĩ nhưng nổi danh bởi tài thơ phú, hội họa và kiến trúc. Không chỉ để lại kiệt tác thi ca 'Hương Sơn phong cảnh ca', ông còn là người đứng ra thiết kế và trùng tu quần thể chùa Thiên Trù (chùa Hương), biến nơi đây thành đệ nhất danh thắng.",
+        "quote": "Bầu trời, cảnh Bụt. Thú Hương Sơn ao ước bấy lâu nay. Kìa non non, nước nước, mây mây. 'Đệ nhất động' hỏi rằng đây có phải?",
+        "ngay_hien_thi": "09/11",
+        "hien_thi_nhan_dip": "Kỷ niệm 164 năm ngày sinh của Tiến sĩ tài hoa Chu Mạnh Trinh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chu_M%E1%BA%A1nh_Trinh"
+            },
+            {
+                "type": "quote",
+                "name": "Trích kiệt tác 'Hương Sơn phong cảnh ca'",
+                "url": "https://vi.wikisource.org/wiki/H%C6%B0%C6%A1ng_S%C6%B0%C6%A1n_phong_c%E1%BA%A3nh_ca"
+            }
+        ]
+    },
+    {
+        "id": "vn_315",
+        "ten": "Nguyễn Gia Thiều",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1741",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1798",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-gia-thieu-vn-315",
+        "mo_ta": "Danh sĩ, bậc quý tộc tài hoa xuất chúng cuối thời Lê Trung Hưng. Cảm thương cho thân phận người phụ nữ chốn cung cấm và sự mong manh của kiếp người trong loạn lạc, ông đã viết nên kiệt tác 'Cung oán ngâm khúc' bằng thể song thất lục bát, mang tính triết lý nhân sinh vô cùng sâu sắc.",
+        "quote": "Trải vách quế gió vàng hiu hắt. Mảnh vũ y lạnh ngắt như đồng. Oán chi những khách tiêu phòng. Mà xui phận bạc nằm trong má đào?",
+        "ngay_hien_thi": "10/11",
+        "hien_thi_nhan_dip": "Kỷ niệm 285 năm ngày sinh của danh sĩ Nguyễn Gia Thiều - Tác giả 'Cung oán ngâm khúc'.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Gia_Thi%E1%BB%81u"
+            },
+            {
+                "type": "quote",
+                "name": "Trích đoạn mở đầu kiệt tác 'Cung oán ngâm khúc'",
+                "url": "https://vi.wikisource.org/wiki/Cung_o%C3%A1n_ng%C3%A2m_kh%C3%BAc"
+            }
+        ]
+    }
+]

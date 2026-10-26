@@ -1,0 +1,45 @@
+// scss/components/_buttons.scss
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.4rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    // Nút chính (Ăn theo màu Ngũ Hành)
+    &-primary {
+        background-color: var(--primary-color);
+        color: #fff; // Chữ trắng trên nền primary
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+        &:active {
+            background-color: var(--primary-active);
+        }
+    }
+
+    // Nút viền (Outline)
+    &-outline {
+        background-color: transparent;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+    }
+
+    // Nút bị vô hiệu hóa
+    &:disabled,
+    &.disabled {
+        background-color: var(--bg-disabled);
+        color: var(--text-disabled);
+        cursor: not-allowed;
+    }
+}

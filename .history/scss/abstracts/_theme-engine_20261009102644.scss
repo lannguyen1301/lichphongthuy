@@ -1,0 +1,75 @@
+// scss/abstracts/_theme-engine.scss
+@use "sass:map";
+@use "palette" as pal;
+@use '../themes/' as theme
+
+@mixin generate-theme($element-name) {
+    $theme-data: map.get(pal.$feng-shui-themes, $element-name);
+
+    @if $theme-data == null {
+        @error "Lỗi: Không tìm thấy dữ liệu cho bản mệnh '#{$element-name}'";
+    }
+
+    [data-theme="#{$element-name}"] {
+        /* 1. NHÓM NỀN & CHỮ (Bro đã có) */
+        --body-bg: #{map.get($theme-data, "neutral", 100)};
+        --bg-surface: #{map.get($theme-data, "neutral", 200)};
+        --text-color: #{map.get($theme-data, "neutral", 800)};
+        --text-muted: #{map.get($theme-data, "neutral", 500)};
+        --border-color: #{map.get($theme-data, "neutral", 300)};
+
+        --primary-color: #{map.get($theme-data, "primary", 500)};
+        --secondary-color: #{map.get($theme-data, "secondary", 500)};
+        --accent-color: #{map.get($theme-data, "accent", 500)};
+
+        /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+        --color-success: #{map.get($theme-data, "success", 500)};
+        --color-warning: #{map.get($theme-data, "warning", 500)};
+        --color-danger: #{map.get($theme-data, "danger", 500)};
+        --color-info: #{map.get($theme-data, "info", 500)};
+
+        /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+        --primary-hover: #{map.get($theme-data, "primary", 600)};
+        --primary-active: #{map.get($theme-data, "primary", 700)};
+        --bg-disabled: #{map.get($theme-data, "neutral", 200)};
+        --text-disabled: #{map.get($theme-data, "neutral", 400)};
+
+        /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+        --icon-color: var(--text-muted); // Icon bình thường mờ mờ
+        --icon-hover: var(--primary-color); // Hover vào icon thì sáng màu Ngũ Hành
+        --shadow-color: rgba(0, 0, 0, 0.1); // Đổ bóng khối nhẹ nhàng
+        --overlay-bg: rgba(0, 0, 0, 0.4); // Lớp nền đen mờ khi mở Popup/Modal
+
+        /* =========================================================
+           CHẾ ĐỘ TỐI (DARK MODE) 
+           ========================================================= */
+        @media (prefers-color-scheme: dark) {
+            /* 1. Nhóm Nền & Chữ (Bro đã có) */
+            --body-bg: #{map.get($theme-data, "primary", 900)};
+            --bg-surface: #{map.get($theme-data, "primary", 800)};
+            --text-color: #{map.get($theme-data, "neutral", 100)};
+            --text-muted: #{map.get($theme-data, "neutral", 300)};
+            --border-color: #{map.get($theme-data, "primary", 700)};
+
+            --primary-color: #{map.get($theme-data, "primary", 500)};
+            --secondary-color: #{map.get($theme-data, "secondary", 400)};
+            --accent-color: #{map.get($theme-data, "accent", 400)};
+
+            /* 2. Nhóm Trạng thái (Giảm xuống level 400 cho đỡ chói mắt trên nền tối) */
+            --color-success: #{map.get($theme-data, "success", 400)};
+            --color-warning: #{map.get($theme-data, "warning", 400)};
+            --color-danger: #{map.get($theme-data, "danger", 400)};
+            --color-info: #{map.get($theme-data, "info", 400)};
+
+            /* 3. Nhóm Tương tác (Darkmode thì hover phải dùng màu sáng hơn mới nổi) */
+            --primary-hover: #{map.get($theme-data, "primary", 400)};
+            --primary-active: #{map.get($theme-data, "primary", 300)};
+            --bg-disabled: #{map.get($theme-data, "neutral", 800)}; // Nút disable tối thui
+            --text-disabled: #{map.get($theme-data, "neutral", 600)};
+
+            /* 4. Nhóm Thành phần khác */
+            --shadow-color: rgba(0, 0, 0, 0.5); // Nền tối thì bóng phải đen đậm hơn mới thấy
+            --overlay-bg: rgba(0, 0, 0, 0.7);
+        }
+    }
+}

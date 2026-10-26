@@ -1,0 +1,274 @@
+[
+    {
+        "id": "vn_245",
+        "ten": "Lý Chiêu Hoàng (Phật Kim)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1218",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1278",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "ly-chieu-hoang-vn-245",
+        "mo_ta": "Nữ hoàng đế đầu tiên và duy nhất trong lịch sử phong kiến Việt Nam. Bà là vị vua cuối cùng của triều Lý, người đã chứng kiến và mang trong mình bi kịch chuyển giao quyền lực lịch sử từ nhà Lý sang nhà Trần, khép lại một vương triều từng rực rỡ suốt hơn hai thế kỷ.",
+        "quote": "Cơ nghiệp nhà Lý dứt ở tay ta, đó là mệnh trời, dẫu xót xa cũng không bề xoay chuyển.",
+        "ngay_hien_thi": "01/09",
+        "hien_thi_nhan_dip": "Kỷ niệm 808 năm ngày sinh của Nữ hoàng đế đầu tiên và duy nhất - Lý Chiêu Hoàng (1218 - 2026).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%BD_Chi%C3%AAu_Ho%C3%A0ng"
+            },
+            {
+                "type": "quote",
+                "name": "Tương truyền về bi kịch chuyển giao vương triều",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_246",
+        "ten": "Trần Văn Giàu",
+        "ngay_sinh": "11/09",
+        "nam_sinh": "1911",
+        "ngay_mat": "16/12",
+        "nam_mat": "2010",
+        "linh_vuc": "Lịch sử - Khoa học",
+        "category_id": "historical_figure",
+        "image_slug": "tran-van-giau-vn-246",
+        "mo_ta": "Giáo sư, Nhà giáo nhân dân, một nhà sử học và triết học lỗi lạc. Ông là Bí thư Xứ ủy Nam Kỳ, người trực tiếp lãnh đạo cuộc Cách mạng tháng Tám năm 1945 thành công tại Sài Gòn và các tỉnh Nam Bộ, để lại một di sản khoa học và cách mạng đồ sộ.",
+        "quote": "Lịch sử không phải là đống tro tàn, mà là ngọn lửa cháy sáng để soi đường cho hiện tại và tương lai.",
+        "ngay_hien_thi": "02/09",
+        "hien_thi_nhan_dip": "Kỷ niệm Quốc khánh 02/09 - Tôn vinh Giáo sư, nhà cách mạng kiệt xuất Trần Văn Giàu.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_V%C4%83n_Gi%C3%A0u"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng nghiên cứu lịch sử của Giáo sư Trần Văn Giàu",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_247",
+        "ten": "Nguyễn Thị Lộ",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1390",
+        "ngay_mat": "16/08",
+        "nam_mat": "1442",
+        "linh_vuc": "Văn hóa - Lịch sử",
+        "category_id": "culture",
+        "image_slug": "nguyen-thi-lo-vn-247",
+        "mo_ta": "Lễ nghi Học sĩ triều Hậu Lê, người vợ hiền tài và người tri kỷ của Danh nhân Nguyễn Trãi. Bà có tài văn chương xuất chúng, được vua Lê Thái Tông giao trọng trách dạy dỗ cung nữ. Dẫu mang hàm oan thảm khốc trong vụ án Lệ Chi Viên, tài đức của bà vẫn được lịch sử minh oan và tôn kính.",
+        "quote": "Ngọc dẫu nát vẫn giữ được màu trong trắng, trúc dẫu cháy vẫn giữ được đốt ngay thẳng.",
+        "ngay_hien_thi": "03/09",
+        "hien_thi_nhan_dip": "Tôn vinh tài năng văn chương và đức hạnh thanh cao của Lễ nghi Học sĩ Nguyễn Thị Lộ.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Th%E1%BB%8B_L%E1%BB%99"
+            },
+            {
+                "type": "quote",
+                "name": "Tương truyền về khí tiết của bậc nữ nhi tài đức",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_248",
+        "ten": "Lưu Hữu Phước",
+        "ngay_sinh": "12/09",
+        "nam_sinh": "1921",
+        "ngay_mat": "12/01",
+        "nam_mat": "1989",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "luu-huu-phuoc-vn-248",
+        "mo_ta": "Nhạc sĩ vĩ đại, cây đại thụ của nền âm nhạc cách mạng Việt Nam. Những sáng tác của ông mang âm hưởng hành khúc hào hùng, trở thành vũ khí sắc bén cổ vũ lớp lớp thanh niên lên đường cứu nước như 'Lên đàng', 'Giải phóng miền Nam', 'Tiếng gọi thanh niên'.",
+        "quote": "Nào anh em ta cùng nhau xông pha lên đàng. Kiếm nguồn tươi sáng.",
+        "ngay_hien_thi": "04/09",
+        "hien_thi_nhan_dip": "Kỷ niệm 105 năm ngày sinh của Giáo sư, Nhạc sĩ cách mạng Lưu Hữu Phước.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C6%B0u_H%E1%BB%AFu_Ph%C6%B0%E1%BB%9Bc"
+            },
+            {
+                "type": "quote",
+                "name": "Trích lời bài hát phong trào 'Lên đàng'",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_249",
+        "ten": "Nguyễn Tuân",
+        "ngay_sinh": "10/07",
+        "nam_sinh": "1910",
+        "ngay_mat": "28/07",
+        "nam_mat": "1987",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-tuan-vn-249",
+        "mo_ta": "Nhà văn kiệt xuất, bậc thầy của thể loại tùy bút. Với phong cách nghệ thuật uyên bác, tài hoa và vô cùng độc đáo, ông được ví như 'Người suốt đời đi tìm cái Đẹp'. Những tác phẩm như 'Vang bóng một thời' hay 'Người lái đò Sông Đà' đã trở thành đài kỷ niệm của ngôn từ Việt Nam.",
+        "quote": "Cái đẹp cứu vớt con người. Nghệ thuật là sự vươn tới cái đẹp vĩnh cửu của nhân loại.",
+        "ngay_hien_thi": "05/09",
+        "hien_thi_nhan_dip": "Tôn vinh phong cách nghệ thuật tài hoa, uyên bác của bậc thầy tùy bút Nguyễn Tuân.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Tu%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng duy mỹ trong văn chương Nguyễn Tuân",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_250",
+        "ten": "Nguyễn Phan Vinh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1933",
+        "ngay_mat": "01/03",
+        "nam_mat": "1968",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-phan-vinh-vn-250",
+        "mo_ta": "Anh hùng lực lượng vũ trang nhân dân, vị Thuyền trưởng huyền thoại của Đoàn tàu Không số (Đường Hồ Chí Minh trên biển). Trong trận hải chiến tại vùng biển Hòn Hèo, anh đã chiến đấu đến viên đạn cuối cùng và kích nổ khối thuốc báng để hủy tàu, quyết không để vũ khí lọt vào tay giặc.",
+        "quote": "Tàu là nhà, biển cả là quê hương. Để vũ khí rơi vào tay giặc là có tội lớn với Tổ quốc.",
+        "ngay_hien_thi": "06/09",
+        "hien_thi_nhan_dip": "Kỷ niệm 93 năm ngày sinh của Anh hùng Nguyễn Phan Vinh - Thuyền trưởng Đoàn tàu Không số.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Phan_Vinh"
+            },
+            {
+                "type": "quote",
+                "name": "Khí tiết hy sinh quên mình của lính hải quân",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_251",
+        "ten": "Hồ Quý Ly",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1336",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1407",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "ho-quy-ly-vn-251",
+        "mo_ta": "Hoàng đế sáng lập triều Hồ. Dẫu là nhân vật gây nhiều tranh cãi trong lịch sử khi phế truất nhà Trần, nhưng ông lại là một nhà cải cách táo bạo, vượt thời đại với những chính sách như phát hành tiền giấy (Thông bảo hội sao), giới hạn nô tì và sở hữu ruộng đất để tự cường quốc gia.",
+        "quote": "Không sợ quân Minh mạnh, chỉ sợ lòng dân không theo.",
+        "ngay_hien_thi": "07/09",
+        "hien_thi_nhan_dip": "Tôn vinh tầm nhìn vượt thời đại của nhà cải cách táo bạo Hồ Quý Ly.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/H%E1%BB%93_Qu%C3%BD_Ly"
+            },
+            {
+                "type": "quote",
+                "name": "Lời nói của Hồ Nguyên Trừng khuyên cha (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_252",
+        "ten": "Phạm Đình Hổ",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1768",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1839",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "pham-dinh-ho-vn-252",
+        "mo_ta": "Danh sĩ uyên bác, nhà văn lỗi lạc cuối thời Lê Trung Hưng. Ông không màng công danh, ở ẩn để viết sách. Tác phẩm 'Vũ trung tùy bút' (Bút tiện viết trong mưa) của ông là một kiệt tác văn xuôi, ghi chép chân thực và sống động về phong tục, xã hội và nhân tình thế thái đương thời.",
+        "quote": "Cảnh vật dẫu có biến thiên, triều đại dẫu có thay đổi, nhưng cái hồn cốt của văn hóa dân tộc thì vẫn phải được gìn giữ qua từng trang sách.",
+        "ngay_hien_thi": "08/09",
+        "hien_thi_nhan_dip": "Kỷ niệm 258 năm ngày sinh của danh sĩ uyên bác Phạm Đình Hổ - Tác giả 'Vũ trung tùy bút'.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_%C4%90%C3%ACnh_H%E1%BB%95"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng biên chép giữ gìn sử liệu của Phạm Đình Hổ",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_253",
+        "ten": "Nguyễn Dữ",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-du-truyen-ky-vn-253",
+        "mo_ta": "Nhà văn kiệt xuất thời Lê sơ, học trò xuất sắc của Trạng Trình Nguyễn Bỉnh Khiêm. Ông là tác giả của 'Truyền kỳ mạn lục' - tác phẩm được suy tôn là 'Thiên cổ kỳ bút', dùng những câu chuyện kỳ ảo, ma quái để phản ánh sâu sắc hiện thực bất công và bênh vực khát vọng của con người.",
+        "quote": "Ma quỷ dẫu có đáng sợ, cũng không đáng sợ bằng lòng dạ hiểm độc của con người.",
+        "ngay_hien_thi": "09/09",
+        "hien_thi_nhan_dip": "Tôn vinh giá trị nhân văn và nghệ thuật kiệt xuất của 'Thiên cổ kỳ bút' Truyền kỳ mạn lục.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_D%C6%B0"
+            },
+            {
+                "type": "quote",
+                "name": "Triết lý nhân sinh gửi gắm trong Truyền kỳ mạn lục",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_254",
+        "ten": "Hoàng Xuân Hãn",
+        "ngay_sinh": "08/03",
+        "nam_sinh": "1908",
+        "ngay_mat": "10/03",
+        "nam_mat": "1996",
+        "linh_vuc": "Khoa học - Văn hóa",
+        "category_id": "culture",
+        "image_slug": "hoang-xuan-han-vn-254",
+        "mo_ta": "Giáo sư, nhà toán học, sử học và văn hóa học lỗi lạc. Ông là người đã biên soạn chương trình giáo dục trung học bằng tiếng Việt đầu tiên (Chương trình Hoàng Xuân Hãn), đặt nền móng cho thuật ngữ khoa học nước nhà, để lại di sản nghiên cứu đồ sộ về Nguyễn Trãi và Truyện Kiều.",
+        "quote": "Dùng tiếng Việt để dạy khoa học là cách tốt nhất để bảo tồn nòi giống và mở mang dân trí.",
+        "ngay_hien_thi": "10/09",
+        "hien_thi_nhan_dip": "Kỷ niệm 118 năm ngày sinh của Giáo sư Hoàng Xuân Hãn - Bậc trí thức uyên bác của dân tộc.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ho%C3%A0ng_Xu%C3%A2n_H%C3%A3n"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm giáo dục độc lập của Giáo sư Hoàng Xuân Hãn",
+                "url": null
+            }
+        ],
+        
+    },
+
+]

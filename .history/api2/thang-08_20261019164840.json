@@ -1,0 +1,663 @@
+[
+    {
+        "id": "ngay_01_08",
+        "ten": "Hai Bà Trưng",
+        "ngay_sinh": "01/08",
+        "nam_sinh": "14",
+        "ngay_mat": "06/02",
+        "nam_mat": "43",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "hai-ba-trung",
+        "mo_ta": "Hai vị nữ vương anh hùng của dân tộc Việt Nam. Căm phẫn ách đô hộ của nhà Đông Hán, Trưng Trắc và Trưng Nhị đã phất cờ khởi nghĩa, đánh đuổi thái thú Tô Định, lập nên vương triều độc lập đầu tiên trong thời kỳ Bắc thuộc.",
+        "quote": "Một xin rửa sạch nước thù. Hai xin đem lại nghiệp xưa họ Hùng.",
+        "ngay_hien_thi": "01/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Hai Bà Trưng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Hai_B%C3%A0_Tr%C6%B0ng"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Lời thề xuất quân (Thiên Nam ngữ lục)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_02_08",
+        "ten": "Lê Quý Đôn",
+        "ngay_sinh": "02/08",
+        "nam_sinh": "1726",
+        "ngay_mat": "11/06",
+        "nam_mat": "1784",
+        "linh_vuc": "Khoa học - Văn hóa",
+        "category_id": "culture",
+        "image_slug": "le-quy-don",
+        "mo_ta": "Nhà bác học lớn nhất, bộ bách khoa toàn thư sống của Việt Nam thời phong kiến. Trí tuệ của ông bao trùm mọi lĩnh vực từ triết học, sử học, địa lý đến văn học. Tác phẩm 'Vân đài loại ngữ' và 'Phủ biên tạp lục' của ông là những di sản vô giá của nền văn hiến nước nhà.",
+        "quote": "Phi nông bất ổn, phi công bất phú, phi thương bất hoạt, phi trí bất hưng.",
+        "ngay_hien_thi": "02/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Lê Quý Đôn.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Qu%C3%BD_%C4%90%C3%B4n"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng phát triển quốc gia toàn diện của Lê Quý Đôn",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_03_08",
+        "ten": "Hàm Nghi (Nguyễn Phúc Ưng Lịch)",
+        "ngay_sinh": "03/08",
+        "nam_sinh": "1871",
+        "ngay_mat": "14/01",
+        "nam_mat": "1944",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "ham-nghi",
+        "mo_ta": "Vị hoàng đế yêu nước triều Nguyễn, biểu tượng tối cao của phong trào Cần Vương. Bị thực dân Pháp phế truất, ông thà chịu cảnh lưu đày sang châu Phi (Algeria) suốt phần đời còn lại chứ tuyệt đối không chịu cúi đầu làm một ông vua bù nhìn tay sai cho giặc.",
+        "quote": "Ta thà chịu cảnh lưu đày nơi xứ lạ, còn hơn làm ông vua bù nhìn cho giặc Pháp.",
+        "ngay_hien_thi": "03/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Hàm Nghi (Nguyễn Phúc Ưng Lịch).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/H%C3%A0m_Nghi"
+            },
+            {
+                "type": "quote",
+                "name": "Ý chí từ chối hợp tác với thực dân Pháp",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_04_08",
+        "ten": "Phan Thanh Giản",
+        "ngay_sinh": "11/11",
+        "nam_sinh": "1796",
+        "ngay_mat": "04/08",
+        "nam_mat": "1867",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_figure",
+        "image_slug": "phan-thanh-gian",
+        "mo_ta": "Vị Tiến sĩ đầu tiên của vùng đất Nam Kỳ, đại thần trụ cột của triều Nguyễn. Bị giao trọng trách đàm phán với thực dân Pháp trong thế nước yếu, ông đành ngậm đắng nuốt cay giao ba tỉnh miền Tây Nam Kỳ để tránh đổ máu cho dân. Ngay sau đó, ông tuyệt thực và uống thuốc độc tự vẫn để tạ tội với non sông.",
+        "quote": "Trời thu mờ mịt mấy rặng sương. Hồn quyên về tới chốn quê hương.",
+        "ngay_hien_thi": "04/08",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Phan Thanh Giản.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Phan_Thanh_Gi%E1%BA%A3n"
+            },
+            {
+                "type": "quote",
+                "name": "Trích 'Tuyệt mệnh thi' của Phan Thanh Giản",
+                "url": "https://vi.wikisource.org/wiki/Tuy%E1%BA%B7t_m%E1%BB%87nh_thi_(Phan_Thanh_Gi%E1%BA%A3n)"
+            }
+        ]
+    },
+    {
+        "id": "ngay_05_08",
+        "ten": "Tạ Uyên",
+        "ngay_sinh": "05/08",
+        "nam_sinh": "1898",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1940",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "ta-uyen",
+        "mo_ta": "Nhà cách mạng kiên trung, cố Bí thư Xứ ủy Nam Kỳ. Ông là một trong những nhà lãnh đạo chủ chốt trực tiếp chỉ đạo và chuẩn bị cho cuộc Khởi nghĩa Nam Kỳ lịch sử. Dù bị thực dân Pháp bắt và tra tấn cực kỳ tàn khốc, ông vẫn hiên ngang giữ vững khí tiết, anh dũng hy sinh trong ngục tù để bảo vệ cơ sở đảng.",
+        "quote": "Thà hy sinh tính mạng chứ quyết không khai báo, giữ tròn khí tiết của người cộng sản đến hơi thở cuối cùng.",
+        "ngay_hien_thi": "05/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà cách mạng kiên trung, Bí thư Xứ ủy Nam Kỳ Tạ Uyên (05/08/1898).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%E1%BA%A1_Uy%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Khí tiết cách mạng bất khuất của đồng chí Tạ Uyên trong ngục tù thực dân (Tương truyền)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_06_08",
+        "ten": "Quỹ Bảo trợ trẻ em",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Kỷ niệm ngày thành lập Quỹ Bảo trợ trẻ em Việt Nam.",
+        "quote": "",
+        "ngay_hien_thi": "06/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Quỹ Bảo trợ trẻ em.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_07_08",
+        "ten": "Võ Tánh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1768",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1801",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "vo-tanh",
+        "mo_ta": "Kiến Xương Quận Công, danh tướng bậc nhất dưới trướng chúa Nguyễn Ánh. Trong trận tử thủ thành Bình Định trước quân Tây Sơn do Trần Quang Diệu vây hãm, để bảo toàn mạng sống cho binh lính trong thành, ông đã dũng cảm bước lên lầu bát giác châm lửa tự thiêu, để lại tấm gương dũng liệt hiếm có.",
+        "quote": "Tướng quân (Trần Quang Diệu) cũng là bậc anh hùng thao lược. Thành Bình Định nay đã vỡ, xin hãy tha mạng cho binh sĩ của ta, họ đều là người vô tội.",
+        "ngay_hien_thi": "07/08",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Võ Tánh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C3%B5_T%C3%A1nh"
+            },
+            {
+                "type": "quote",
+                "name": "Bức thư cuối cùng gửi tướng Tây Sơn Trần Quang Diệu",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_08_08",
+        "ten": "Thành lập ASEAN",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Ngày thành lập Hiệp hội các quốc gia Đông Nam Á - ASEAN (1967).",
+        "quote": "",
+        "ngay_hien_thi": "08/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Thành lập ASEAN.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_09_08",
+        "ten": "Thiền sư Vạn Hạnh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1018",
+        "linh_vuc": "Văn hóa - Tôn giáo",
+        "category_id": "culture",
+        "image_slug": "thien-su-van-hanh",
+        "mo_ta": "Bậc danh tăng kỳ tài, một vị cố vấn chính trị kiệt xuất thời kỳ đầu giành độc lập. Bằng học vấn uyên thâm và nhãn quan chính trị sắc bén, ngài đã ủng hộ và phò tá Lý Công Uẩn lên ngôi, lập ra triều đại nhà Lý và ủng hộ quyết định dời đô về Thăng Long.",
+        "quote": "Thân như điện ảnh hữu hoàn vô. Vạn mộc xuân vinh thu hựu khô. (Thân như bóng chớp chiều tà, Cỏ xuân tươi tốt thu qua rụng rời).",
+        "ngay_hien_thi": "09/08",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Thiền sư Vạn Hạnh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%E1%BA%A1n_H%E1%BA%A1nh"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài kệ thị tịch nổi tiếng của Thiền sư",
+                "url": "https://vi.wikisource.org/wiki/Th%E1%BB%8B_%C4%91%E1%BB%87_t%E1%BB%AD"
+            }
+        ]
+    },
+    {
+        "id": "ngay_10_08",
+        "ten": "Lê Hoàn (Lê Đại Hành)",
+        "ngay_sinh": "10/08",
+        "nam_sinh": "941",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1005",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "le-hoan",
+        "mo_ta": "Hoàng đế sáng lập nhà Tiền Lê. Ông là một vị tướng tài ba, người đã trực tiếp lãnh đạo quân dân Đại Cồ Việt đánh tan quân Tống xâm lược ở phía Bắc, bình định Chiêm Thành ở phía Nam, giữ vững nền độc lập tự chủ cho dân tộc.",
+        "quote": "Đất nước đang cơn nguy biến, ta không thể ngồi nhìn. Trẫm sẽ đích thân cầm quân dẹp giặc, giữ yên bờ cõi.",
+        "ngay_hien_thi": "10/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Lê Hoàn (Lê Đại Hành).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Ho%C3%A0n"
+            },
+            {
+                "type": "quote",
+                "name": "Trích lời nói của Hoàng đế trước khi thân chinh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_11_08",
+        "ten": "Thành lập Thể Công",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Ngày truyền thống của Đoàn Thể dục Thể thao Quân đội (Thể Công).",
+        "quote": "",
+        "ngay_hien_thi": "11/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Thành lập Thể Công.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_12_08",
+        "ten": "Thành lập Bà Rịa - Vũng Tàu",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Kỷ niệm ngày thành lập tỉnh Bà Rịa - Vũng Tàu (1991).",
+        "quote": "",
+        "ngay_hien_thi": "12/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Thành lập Bà Rịa - Vũng Tàu.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_13_08",
+        "ten": "Hội nghị toàn quốc của Đảng",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Khai mạc Hội nghị toàn quốc của Đảng tại Tân Trào, quyết định Tổng khởi nghĩa (1945).",
+        "quote": "",
+        "ngay_hien_thi": "13/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Hội nghị toàn quốc của Đảng.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_14_08",
+        "ten": "Phát lệnh Tổng khởi nghĩa",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Khởi nghĩa Tháng Tám bắt đầu nổ ra thắng lợi ở các địa phương.",
+        "quote": "",
+        "ngay_hien_thi": "14/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Phát lệnh Tổng khởi nghĩa.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_15_08",
+        "ten": "Chiến tranh Thế giới thứ hai kết thúc",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Nhật Bản đầu hàng đồng minh, tạo thời cơ vàng cho Cách mạng Tháng Tám (1945).",
+        "quote": "",
+        "ngay_hien_thi": "15/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến tranh Thế giới thứ hai kết thúc.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_16_08",
+        "ten": "Nguyễn Phúc Nguyên (Chúa Sãi)",
+        "ngay_sinh": "16/08",
+        "nam_sinh": "1563",
+        "ngay_mat": "19/11",
+        "nam_mat": "1635",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-phuc-nguyen",
+        "mo_ta": "Vị chúa Nguyễn thứ hai của Đàng Trong. Với tầm nhìn kiệt xuất, ngài đã xây dựng Đàng Trong thành một thế lực hùng mạnh độc lập với Đàng Ngoài, khuyến khích thương mại quốc tế tại Hội An và mở rộng lãnh thổ xuống phía Nam. Ngài được nhân dân suy tôn là Chúa Phật hay Chúa Sãi.",
+        "quote": "Bảo vệ bờ cõi dẫu phải dùng đến cung kiếm, nhưng hưng vượng quốc gia lại nằm ở việc giao thương mở cửa.",
+        "ngay_hien_thi": "16/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Nguyễn Phúc Nguyên (Chúa Sãi).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Ph%C3%BAc_Nguy%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng kinh bang tế thế của các chúa Nguyễn",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_17_08",
+        "ten": "Lương Thế Vinh",
+        "ngay_sinh": "17/08",
+        "nam_sinh": "1441",
+        "ngay_mat": "02/10",
+        "nam_mat": "1496",
+        "linh_vuc": "Khoa học - Toán học",
+        "category_id": "culture",
+        "image_slug": "luong-the-vinh",
+        "mo_ta": "Trạng nguyên triều Lê Thánh Tông, nhà toán học lỗi lạc được suy tôn là 'Trạng Lường'. Không chỉ giỏi thi phú, ngài am tường thuật toán học ứng dụng thực tiễn, biên soạn cuốn 'Đại thành toán pháp' làm sách giáo khoa toán học đầu tiên của Việt Nam, dạy dân cách đo ruộng, tính toán xây dựng.",
+        "quote": "Toán học là nền tảng của mọi lẽ đo đếm trong thiên hạ. Phàm việc chia ruộng, đắp đê, xây thành... không biết tính toán thì làm sao thành sự.",
+        "ngay_hien_thi": "17/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Lương Thế Vinh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C6%B0%C6%A1ng_Th%E1%BA%BF_Vinh"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm thực tiễn của Lương Thế Vinh về toán học",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_18_08",
+        "ten": "Hoàng Sâm (Trần Văn Kiến)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1915",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1968",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "hoang-sam",
+        "mo_ta": "Thiếu tướng, vị Đội trưởng đầu tiên của Đội Việt Nam Tuyên truyền Giải phóng quân (tiền thân của Quân đội nhân dân Việt Nam). Tham gia cách mạng từ thuở thiếu thời, ông là một chỉ huy mưu trí, dũng cảm, lập công đầu trong hai trận đánh lịch sử Phai Khắt và Nà Ngần.",
+        "quote": "Quyết chiến, quyết thắng, bảo vệ đến cùng nền độc lập của Tổ quốc!",
+        "ngay_hien_thi": "18/08",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Hoàng Sâm (Trần Văn Kiến).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ho%C3%A0ng_S%C3%A2m"
+            },
+            {
+                "type": "quote",
+                "name": "Tinh thần của Đội Việt Nam Tuyên truyền Giải phóng quân",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_19_08",
+        "ten": "Cách mạng Tháng Tám thành công",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Kỷ niệm ngày Cách mạng Tháng Tám thành công và Ngày truyền thống CAND.",
+        "quote": "",
+        "ngay_hien_thi": "19/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Cách mạng Tháng Tám thành công.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_20_08",
+        "ten": "Tôn Đức Thắng",
+        "ngay_sinh": "20/08",
+        "nam_sinh": "1888",
+        "ngay_mat": "30/03",
+        "nam_mat": "1980",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "ton-duc-thang",
+        "mo_ta": "Chủ tịch nước thứ hai của Việt Nam. Xuất thân là công nhân cơ khí, ông là hình mẫu của một người cộng sản kiên trung, biểu tượng của sự đoàn kết Bắc - Nam. Gắn liền với sự kiện kéo cờ trên chiến hạm Pháp ở Biển Đen bảo vệ nước Nga Xô Viết, ông được nhân dân kính trọng gọi là 'Bác Tôn'.",
+        "quote": "Thà bị chết đói đày ải, chứ quyết không chịu khuất phục kẻ thù.",
+        "ngay_hien_thi": "20/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Tôn Đức Thắng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%C3%B4n_%C4%90%E1%BB%A9c_Th%E1%BA%AFng"
+            },
+            {
+                "type": "quote",
+                "name": "Tinh thần của người cộng sản tại nhà tù Côn Đảo",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_21_08",
+        "ten": "Khởi nghĩa tại nhiều tỉnh thành",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Khởi nghĩa giành chính quyền thành công tại Nghệ An, Ninh Bình, Bắc Giang (1945).",
+        "quote": "",
+        "ngay_hien_thi": "21/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Khởi nghĩa tại nhiều tỉnh thành.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_22_08",
+        "ten": "Khởi nghĩa tại Thái Nguyên",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Việt Minh hoàn toàn kiểm soát chính quyền tại Thái Nguyên (1945).",
+        "quote": "",
+        "ngay_hien_thi": "22/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Khởi nghĩa tại Thái Nguyên.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_23_08",
+        "ten": "Khởi nghĩa tại Huế",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Khởi nghĩa giành chính quyền thắng lợi tại cố đô Huế (1945).",
+        "quote": "",
+        "ngay_hien_thi": "23/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Khởi nghĩa tại Huế.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_24_08",
+        "ten": "Ngày truyền thống Ngoại giao",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Ngày truyền thống ngành Ngoại giao Việt Nam.",
+        "quote": "",
+        "ngay_hien_thi": "24/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày truyền thống Ngoại giao.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_25_08",
+        "ten": "Võ Nguyên Giáp",
+        "ngay_sinh": "25/08",
+        "nam_sinh": "1911",
+        "ngay_mat": "04/10",
+        "nam_mat": "2013",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "vo-nguyen-giap",
+        "mo_ta": "Đại tướng đầu tiên, Tổng Tư lệnh Quân đội nhân dân Việt Nam. Là một thiên tài quân sự được thế giới kính phục, vị 'Đại tướng của nhân dân' đã trực tiếp chỉ huy làm nên chiến thắng Điện Biên Phủ 'lừng lẫy năm châu, chấn động địa cầu' và Đại thắng Mùa xuân 1975 thống nhất đất nước.",
+        "quote": "Thần tốc, thần tốc hơn nữa, táo bạo, táo bạo hơn nữa, tranh thủ từng giờ, từng phút xốc tới mặt trận, giải phóng miền Nam. Quyết chiến và toàn thắng.",
+        "ngay_hien_thi": "25/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Võ Nguyên Giáp.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C3%B5_Nguy%C3%AAn_Gi%C3%A1p"
+            },
+            {
+                "type": "quote",
+                "name": "Bức điện tín lịch sử chỉ đạo Chiến dịch Hồ Chí Minh (07/04/1975)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_26_08",
+        "ten": "Gia nhập Phong trào Không liên kết",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Việt Nam chính thức gia nhập Phong trào Không liên kết (1975).",
+        "quote": "",
+        "ngay_hien_thi": "26/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Gia nhập Phong trào Không liên kết.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_27_08",
+        "ten": "Ngày truyền thống Bưu điện",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Kỷ niệm ngày truyền thống của ngành Bưu điện Việt Nam.",
+        "quote": "",
+        "ngay_hien_thi": "27/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày truyền thống Bưu điện.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_28_08",
+        "ten": "Nguyễn Hoàng (Chúa Tiên)",
+        "ngay_sinh": "28/08",
+        "nam_sinh": "1525",
+        "ngay_mat": "20/07",
+        "nam_mat": "1613",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-hoang",
+        "mo_ta": "Vị chúa Nguyễn đầu tiên, người đặt nền móng vĩ đại cho công cuộc Nam tiến của dân tộc. Bằng tầm nhìn chiến lược 'Hoành Sơn nhất đái, vạn đại dung thân', ông đã biến xứ Thuận Hóa, Quảng Nam từ vùng đất biên viễn thành một trung tâm phát triển rực rỡ, định hình bản đồ Việt Nam hiện đại.",
+        "quote": "Đất Thuận Quảng là nơi yết hầu của miền Nam, bá tánh đông đúc, ta phải hết lòng vỗ về để lập cơ nghiệp muôn đời.",
+        "ngay_hien_thi": "28/08",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Nguyễn Hoàng (Chúa Tiên).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Ho%C3%A0ng"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng an dân lập ấp của Chúa Tiên (Đại Nam thực lục)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_29_08",
+        "ten": "Võ Bẩm",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1915",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "2008",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "vo-bam",
+        "mo_ta": "Thiếu tướng Quân đội nhân dân Việt Nam, người Đoàn trưởng đầu tiên của Đoàn 559. Là một người con miền Trung kiên cường, ông chính là người vạch tuyến, cuốc nhát cuốc đầu tiên xẻ dọc dãy Trường Sơn, đặt nền móng cho con đường Hồ Chí Minh huyền thoại nối liền Nam Bắc.",
+        "quote": "Có lệnh của Bác và Trung ương, núi cao vực sâu cũng mở được đường.",
+        "ngay_hien_thi": "29/08",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Võ Bẩm.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C3%B5_B%E1%BA%A9m"
+            },
+            {
+                "type": "quote",
+                "name": "Quyết tâm của người Đoàn trưởng đầu tiên Đoàn 559",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_30_08",
+        "ten": "Bảo Đại thoái vị",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Vua Bảo Đại thoái vị, chính thức kết thúc chế độ phong kiến tại Việt Nam (1945).",
+        "quote": "",
+        "ngay_hien_thi": "30/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Bảo Đại thoái vị.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_31_08",
+        "ten": "Pháp nổ súng tấn công Đà Nẵng",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Liên quân Pháp - Tây Ban Nha tấn công Đà Nẵng, mở đầu quá trình xâm lược (1858).",
+        "quote": "",
+        "ngay_hien_thi": "31/08",
+        "hien_thi_nhan_dip": "Kỷ niệm Pháp nổ súng tấn công Đà Nẵng.",
+        "historical_source": []
+    }
+]

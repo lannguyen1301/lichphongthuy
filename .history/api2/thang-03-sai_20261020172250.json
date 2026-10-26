@@ -1,0 +1,108 @@
+{
+        "id": "ngay_02_03",
+        "ten": "Đồng Sĩ Nguyên (Nguyễn Hữu Vũ)",
+        "ngay_sinh": "01/03",
+        "nam_sinh": "1923",
+        "ngay_mat": "04/04",
+        "nam_mat": "2019",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "dong-si-nguyen",
+        "mo_ta": "Trung tướng, vị Tư lệnh huyền thoại của Đoàn 559. Dưới sự chỉ huy xuất chúng của ông, tuyến đường Trường Sơn từ một lối mòn nhỏ đã trở thành một hệ thống giao thông chiến lược khổng lồ, một 'trận đồ bát quái xuyên rừng rậm' làm thất bại mọi nỗ lực ngăn chặn của đế quốc Mỹ.",
+        "quote": "Đường Trường Sơn không chỉ là tuyến chi viện, mà là một chiến trường tổng hợp, một biểu tượng của ý chí thống nhất đất nước.",
+        "ngay_hien_thi": "02/03",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Đồng Sĩ Nguyên (Nguyễn Hữu Vũ).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BB%93ng_S%C4%A9_Nguy%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Hồi ký về tầm vóc của đường Hồ Chí Minh trên bộ",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_03_03",
+        "ten": "Nguyễn Phan Vinh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1933",
+        "ngay_mat": "01/03",
+        "nam_mat": "1968",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-phan-vinh",
+        "mo_ta": "Anh hùng lực lượng vũ trang nhân dân, vị Thuyền trưởng huyền thoại của Đoàn tàu Không số (Đường Hồ Chí Minh trên biển). Trong trận hải chiến tại vùng biển Hòn Hèo, anh đã chiến đấu đến viên đạn cuối cùng và kích nổ khối thuốc báng để hủy tàu, quyết không để vũ khí lọt vào tay giặc.",
+        "quote": "Tàu là nhà, biển cả là quê hương. Để vũ khí rơi vào tay giặc là có tội lớn với Tổ quốc.",
+        "ngay_hien_thi": "03/03",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Nguyễn Phan Vinh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Phan_Vinh"
+            },
+            {
+                "type": "quote",
+                "name": "Khí tiết hy sinh quên mình của lính hải quân",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_04_03",
+        "ten": "Bà Triệu (Triệu Thị Trinh)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "226",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "248",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "ba-trieu",
+        "mo_ta": "Nữ anh hùng dân tộc lừng danh trong thời kỳ Bắc thuộc. Bất bình trước ách cai trị hà khắc của nhà Đông Ngô, bà đã cùng anh trai dấy binh khởi nghĩa. Hình ảnh người nữ tướng mặc giáp vàng, cưỡi voi trắng ra trận đã trở thành biểu tượng bất diệt cho khí phách phụ nữ Việt Nam.",
+        "quote": "Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông, lấy lại giang sơn, dựng nền độc lập, cởi ách nô lệ, chứ không chịu khom lưng làm tì thiếp cho người!",
+        "ngay_hien_thi": "04/03",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Bà Triệu (Triệu Thị Trinh).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/B%C3%A0_Tri%E1%BB%87u"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu khí của Bà Triệu (Ghi chép trong sử cũ)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_05_03",
+        "ten": "Nguyễn Trãi",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1380",
+        "ngay_mat": "19/09",
+        "nam_mat": "1442",
+        "linh_vuc": "Lịch sử - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-trai",
+        "mo_ta": "Danh nhân văn hóa thế giới, bậc khai quốc công thần và là mưu sĩ kiệt xuất nhất của cuộc khởi nghĩa Lam Sơn. Trí tuệ của ông đã giúp Lê Lợi đánh đuổi giặc Minh, để lại cho hậu thế áng thiên cổ hùng văn 'Bình Ngô đại cáo' rực sáng tinh thần nhân nghĩa.",
+        "quote": "Việc nhân nghĩa cốt ở yên dân. Quân điếu phạt trước lo trừ bạo.",
+        "ngay_hien_thi": "05/03",
+        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Nguyễn Trãi.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Tr%C3%A3i"
+            },
+            {
+                "type": "quote",
+                "name": "Trích 'Bình Ngô đại cáo'",
+                "url": "https://vi.wikisource.org/wiki/B%C3%ACnh_Ng%C3%B4_%C4%91%E1%BA%A1i_c%C3%A1o"
+            }
+        ]
+    },

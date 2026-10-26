@@ -1,0 +1,2749 @@
+[
+    {
+        "id": "vn_001",
+        "ten": "Lạc Long Quân",
+        "ngay_thang": "01/01",
+        "nam_sinh": "Truyền thuyết",
+        "linh_vuc": "Khai sáng dân tộc",
+        "mo_ta": "Vị vua truyền thuyết, con của Kinh Dương Vương, người được xem là thủy tổ sinh ra dân tộc Việt Nam.",
+        "quote": "Ta là loài rồng, nàng là loài tiên, thủy hỏa khắc nhau, chung hợp thật khó."
+    },
+    {
+        "id": "vn_002",
+        "ten": "Âu Cơ",
+        "ngay_thang": "02/01",
+        "nam_sinh": "Truyền thuyết",
+        "linh_vuc": "Khai sáng dân tộc",
+        "mo_ta": "Quốc mẫu của người Việt, người sinh ra bọc trăm trứng nở ra trăm người con trai, khởi nguồn của nguồn gốc 'Đồng bào'.",
+        "quote": "Thiếp vốn nòi tiên, kết duyên cùng quân trưởng, sinh ra cơ đồ này."
+    },
+    {
+        "id": "vn_003",
+        "ten": "Hùng Vương (Quốc Tổ)",
+        "ngay_thang": "03/01",
+        "nam_sinh": "Khoảng 2879 TCN",
+        "linh_vuc": "Khai quốc vương",
+        "mo_ta": "Tước hiệu của các vị vua nước Văn Lang, những người đầu tiên có công dựng nước và lập nên nhà nước sơ khai của người Việt.",
+        "quote": "Dù ai đi ngược về xuôi, nhớ ngày Giỗ Tổ mùng mười tháng ba."
+    },
+    {
+        "id": "vn_004",
+        "ten": "Trưng Trắc",
+        "ngay_thang": "04/01",
+        "nam_sinh": "Khoảng 14 CN",
+        "linh_vuc": "Lãnh đạo khởi nghĩa / Nữ vương",
+        "mo_ta": "Nữ anh hùng dân tộc, lãnh đạo cuộc khởi nghĩa chống lại ách đô hộ của nhà Đông Hán và xưng vương lập quốc.",
+        "quote": "Một xin rửa sạch nước thù / Hai xin đem lại nghiệp xưa họ Hùng."
+    },
+    {
+        "id": "vn_005",
+        "ten": "Trưng Nhị",
+        "ngay_thang": "05/01",
+        "nam_sinh": "Khoảng 14 CN",
+        "linh_vuc": "Tướng lĩnh khởi nghĩa",
+        "mo_ta": "Em gái của Trưng Trắc, người cộng sự đắc lực cùng chị phất cờ khởi nghĩa Mê Linh, đánh đuổi thái thú Tô Định.",
+        "quote": "Ba kẻo oan ức lòng chồng / Bốn xin vẹn vẹn sở công lênh này."
+    },
+    {
+        "id": "vn_006",
+        "ten": "Bà Triệu (Triệu Thị Trinh)",
+        "ngay_thang": "06/01",
+        "nam_sinh": "225",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Nữ anh hùng kiệt xuất thời kỳ Bắc thuộc, lãnh đạo nhân dân khởi nghĩa chống lại ách đô hộ của nhà Đông Ngô.",
+        "quote": "Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông..."
+    },
+    {
+        "id": "vn_007",
+        "ten": "Lý Nam Đế (Lý Bí)",
+        "ngay_thang": "07/01",
+        "nam_sinh": "503",
+        "linh_vuc": "Khai quốc vương",
+        "mo_ta": "Người lãnh đạo khởi nghĩa đánh đuổi quân Lương, lập ra nước Vạn Xuân, xưng hoàng đế đầu tiên của Việt Nam.",
+        "quote": "Giành lại non sông, xưng đế Vạn Xuân, khẳng định bình đẳng với phương Bắc."
+    },
+    {
+        "id": "vn_008",
+        "ten": "Triệu Việt Vương (Triệu Quang Phục)",
+        "ngay_thang": "08/01",
+        "nam_sinh": "Không rõ",
+        "linh_vuc": "Quân sự / Vua",
+        "mo_ta": "Vị vua kế nghiệp Lý Nam Đế, nổi tiếng với chiến thuật du kích tại đầm Dạ Trạch, đánh bại quân nhà Lương.",
+        "quote": "Dựa vào hiểm địa Dạ Trạch, kiên trì kháng chiến, ắt có ngày toàn thắng."
+    },
+    {
+        "id": "vn_009",
+        "ten": "Phùng Hưng",
+        "ngay_thang": "09/01",
+        "nam_sinh": "Không rõ",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Được nhân dân tôn là Bố Cái Đại Vương, lãnh đạo cuộc khởi nghĩa chống lại ách đô hộ tàn bạo của nhà Đường.",
+        "quote": "Dẹp loạn cứu dân, lưu danh muôn thuở."
+    },
+    {
+        "id": "vn_010",
+        "ten": "Khúc Thừa Dụ",
+        "ngay_thang": "10/01",
+        "nam_sinh": "Không rõ",
+        "linh_vuc": "Chính trị / Quân sự",
+        "mo_ta": "Người đặt cơ sở cho nền độc lập dân tộc sau hơn 1000 năm Bắc thuộc, tự xưng Tiết độ sứ cai quản Giao Châu.",
+        "quote": "Lấy danh nghĩa triều đình để giữ yên bờ cõi, tự chủ nước nhà."
+    },
+    {
+        "id": "vn_011",
+        "ten": "Ngô Quyền",
+        "ngay_thang": "11/01",
+        "nam_sinh": "898",
+        "linh_vuc": "Khai quốc vương / Quân sự",
+        "mo_ta": "Vị anh hùng vĩ đại lãnh đạo trận thủy chiến Bạch Đằng năm 938, chính thức chấm dứt 1000 năm Bắc thuộc.",
+        "quote": "Đóng cọc dưới sông Bạch Đằng, phá tan quân Nam Hán."
+    },
+    {
+        "id": "vn_012",
+        "ten": "Đinh Tiên Hoàng (Đinh Bộ Lĩnh)",
+        "ngay_thang": "12/01",
+        "nam_sinh": "924",
+        "linh_vuc": "Khai quốc vương",
+        "mo_ta": "Vị hoàng đế dẹp loạn 12 sứ quân, thống nhất đất nước, lập ra nhà nước Đại Cồ Việt hùng mạnh.",
+        "quote": "Dẹp loạn sứ quân, thống nhất cõi bờ."
+    },
+    {
+        "id": "vn_013",
+        "ten": "Thái hậu Dương Vân Nga",
+        "ngay_thang": "13/01",
+        "nam_sinh": "952",
+        "linh_vuc": "Chính trị gia",
+        "mo_ta": "Người phụ nữ quyền lực bậc nhất lịch sử, có vai trò quyết định trong việc chuyển giao quyền lực từ nhà Đinh sang nhà Tiền Lê để giữ nước.",
+        "quote": "Vì xã tắc sơn hà, khoác áo long bào cho Thập đạo Tướng quân."
+    },
+    {
+        "id": "vn_014",
+        "ten": "Lê Đại Hành (Lê Hoàn)",
+        "ngay_thang": "14/01",
+        "nam_sinh": "941",
+        "linh_vuc": "Quân sự / Vua",
+        "mo_ta": "Hoàng đế sáng lập nhà Tiền Lê, thiên tài quân sự với chiến công phá quân Tống, bình Chiêm Thành.",
+        "quote": "Phá Tống, bình Chiêm, uy danh lừng lẫy."
+    },
+    {
+        "id": "vn_015",
+        "ten": "Lý Thái Tổ (Lý Công Uẩn)",
+        "ngay_thang": "15/01",
+        "nam_sinh": "974",
+        "linh_vuc": "Khai quốc vương",
+        "mo_ta": "Vị vua sáng lập vương triều nhà Lý, tác giả 'Chiếu dời đô', dời đô về Thăng Long mở ra kỷ nguyên rực rỡ.",
+        "quote": "Thuận lòng trời, hợp dạ dân, dời đô về nơi trung tâm mưu toan nghiệp lớn."
+    },
+    {
+        "id": "vn_016",
+        "ten": "Lý Thường Kiệt",
+        "ngay_thang": "16/01",
+        "nam_sinh": "1019",
+        "linh_vuc": "Quân sự / Chính trị",
+        "mo_ta": "Danh tướng kiệt xuất thời Lý, đánh Tống bình Chiêm, tác giả bài thơ thần 'Nam quốc sơn hà'.",
+        "quote": "Nam quốc sơn hà Nam đế cư / Tiệt nhiên định phận tại thiên thư."
+    },
+    {
+        "id": "vn_017",
+        "ten": "Nguyên phi Ỷ Lan",
+        "ngay_thang": "17/01",
+        "nam_sinh": "Khoảng 1044",
+        "linh_vuc": "Chính trị gia",
+        "mo_ta": "Nữ chính trị gia kiệt xuất thời Lý, hai lần buông rèm nhiếp chính giúp nước thái bình thịnh trị.",
+        "quote": "Khuyên vua trị nước bằng lòng nhân từ, chăm lo cho trăm họ."
+    },
+    {
+        "id": "vn_018",
+        "ten": "Tô Hiến Thành",
+        "ngay_thang": "18/01",
+        "nam_sinh": "1102",
+        "linh_vuc": "Chính trị / Quân sự",
+        "mo_ta": "Đại thần nhà Lý, nổi tiếng văn võ song toàn, công tư phân minh, tấm gương sáng về lòng trung thực.",
+        "quote": "Nếu chọn người hầu hạ, thần xin cử Vũ Tán Đường. Nếu chọn người trị nước, thần xin cử Trần Trung Tá."
+    },
+    {
+        "id": "vn_019",
+        "ten": "Trần Thái Tông (Trần Cảnh)",
+        "ngay_thang": "19/01",
+        "nam_sinh": "1218",
+        "linh_vuc": "Khai quốc vương",
+        "mo_ta": "Vua đầu tiên của nhà Trần, người đặt nền móng cho triều đại hùng mạnh và trực tiếp đánh bại quân Mông Cổ lần thứ nhất.",
+        "quote": "Đầu thần chưa rơi xuống đất, xin bệ hạ đừng lo."
+    },
+    {
+        "id": "vn_020",
+        "ten": "Trần Thủ Độ",
+        "ngay_thang": "20/01",
+        "nam_sinh": "1194",
+        "linh_vuc": "Chính trị / Quân sự",
+        "mo_ta": "Thái sư nhà Trần, nhân vật quyền lực nhất giúp nhà Trần thay thế nhà Lý và bảo vệ giang sơn.",
+        "quote": "Đầu thần chưa rơi xuống đất, xin bệ hạ đừng lo."
+    },
+    {
+        "id": "vn_021",
+        "ten": "Trần Nhân Tông",
+        "ngay_thang": "21/01",
+        "nam_sinh": "1258",
+        "linh_vuc": "Vua / Triết học",
+        "mo_ta": "Vị vua anh minh, lãnh đạo thành công hai cuộc kháng chiến chống Mông-Nguyên, tổ sư thiền phái Trúc Lâm.",
+        "quote": "Xã tắc hai phen chồn ngựa đá / Non sông nghìn thuở vững âu vàng."
+    },
+    {
+        "id": "vn_022",
+        "ten": "Trần Hưng Đạo (Trần Quốc Tuấn)",
+        "ngay_thang": "22/01",
+        "nam_sinh": "1228",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Quốc công Tiết chế, thiên tài quân sự lãnh đạo đánh tan quân Nguyên Mông, tác giả 'Hịch tướng sĩ'.",
+        "quote": "Ta thường tới bữa quên ăn, nửa đêm vỗ gối, ruột đau như cắt..."
+    },
+    {
+        "id": "vn_023",
+        "ten": "Trần Quang Khải",
+        "ngay_thang": "23/01",
+        "nam_sinh": "1241",
+        "linh_vuc": "Quân sự / Thơ ca",
+        "mo_ta": "Thái sư, danh tướng nhà Trần, người chỉ huy trận Chương Dương vĩ đại và là một nhà thơ xuất sắc.",
+        "quote": "Đoạt giáo Chương Dương độ / Cầm hồ Hàm Tử quan."
+    },
+    {
+        "id": "vn_024",
+        "ten": "Trần Bình Trọng",
+        "ngay_thang": "24/01",
+        "nam_sinh": "1259",
+        "linh_vuc": "Danh tướng",
+        "mo_ta": "Danh tướng nhà Trần, biểu tượng của khí tiết bất khuất, hi sinh anh dũng khi cự tuyệt đầu hàng quân Nguyên.",
+        "quote": "Ta thà làm ma nước Nam, chứ không thèm làm vương đất Bắc."
+    },
+    {
+        "id": "vn_025",
+        "ten": "Phạm Ngũ Lão",
+        "ngay_thang": "25/01",
+        "nam_sinh": "1255",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Danh tướng xuất thân bình dân, cánh tay phải của Trần Hưng Đạo, bách chiến bách thắng.",
+        "quote": "Múa giáo non sông trải mấy thu / Ba quân khí mạnh nuốt trôi trâu."
+    },
+    {
+        "id": "vn_026",
+        "ten": "Yết Kiêu",
+        "ngay_thang": "26/01",
+        "nam_sinh": "1242",
+        "linh_vuc": "Tướng lĩnh",
+        "mo_ta": "Gia tướng tài ba của Trần Hưng Đạo, nổi tiếng với tài bơi lặn như rái cá, đục chìm hàng loạt thuyền giặc.",
+        "quote": "Chúa công chưa về, ta quyết không rời thuyền."
+    },
+    {
+        "id": "vn_027",
+        "ten": "Chu Văn An",
+        "ngay_thang": "27/01",
+        "nam_sinh": "1292",
+        "linh_vuc": "Giáo dục / Triết học",
+        "mo_ta": "Đại tư nghiệp Quốc Tử Giám, Vạn thế sư biểu, nổi tiếng với bản Thất trảm sớ dâng vua chém nịnh thần.",
+        "quote": "Giữ đạo cương thường, xin chém 7 kẻ nịnh thần để giữ nghiêm phép nước."
+    },
+    {
+        "id": "vn_028",
+        "ten": "Hồ Quý Ly",
+        "ngay_thang": "28/01",
+        "nam_sinh": "1336",
+        "linh_vuc": "Chính trị / Cải cách",
+        "mo_ta": "Vị vua sáng lập nhà Hồ, một nhà cải cách táo bạo với việc phát hành tiền giấy và xây dựng thành nhà Hồ.",
+        "quote": "Cải cách táo bạo, phát hành Thông bảo hội sao."
+    },
+    {
+        "id": "vn_029",
+        "ten": "Lê Lợi (Lê Thái Tổ)",
+        "ngay_thang": "29/01",
+        "nam_sinh": "1385",
+        "linh_vuc": "Khai quốc vương / Khởi nghĩa",
+        "mo_ta": "Lãnh tụ tối cao của cuộc khởi nghĩa Lam Sơn đánh đuổi quân Minh, sáng lập vương triều Hậu Lê.",
+        "quote": "Ta cất quân đánh giặc, không vì tham phú quý, mà vì muốn để ngàn năm sau người đời biết ta không chịu làm tôi tớ giặc."
+    },
+    {
+        "id": "vn_030",
+        "ten": "Nguyễn Trãi",
+        "ngay_thang": "30/01",
+        "nam_sinh": "1380",
+        "linh_vuc": "Chính trị / Văn hóa",
+        "mo_ta": "Danh nhân văn hóa thế giới, vị quân sư lỗi lạc của Lê Lợi, tác giả kiệt tác 'Bình Ngô đại cáo'.",
+        "quote": "Đem đại nghĩa để thắng hung tàn / Lấy chí nhân để thay cường bạo."
+    },
+    {
+        "id": "vn_031",
+        "ten": "Lê Thánh Tông",
+        "ngay_thang": "31/01",
+        "nam_sinh": "1442",
+        "linh_vuc": "Vua / Văn học",
+        "mo_ta": "Vị minh quân vĩ đại nhất thời Lê sơ, người đưa Đại Việt phát triển rực rỡ, ban hành bộ luật Hồng Đức.",
+        "quote": "Một thước núi, một tấc sông của ta, lẽ nào lại nên vứt bỏ?"
+    },
+    {
+        "id": "vn_032",
+        "ten": "Lương Thế Vinh",
+        "ngay_thang": "01/02",
+        "nam_sinh": "1441",
+        "linh_vuc": "Toán học / Văn hóa",
+        "mo_ta": "Trạng lường thời Lê sơ, nhà toán học lỗi lạc, tác giả cuốn 'Đại thành toán pháp' và có đóng góp lớn về âm nhạc.",
+        "quote": "Trí tuệ đo lường cả thiên hạ, tinh thông từ toán học đến thi ca."
+    },
+    {
+        "id": "vn_033",
+        "ten": "Ngô Sĩ Liên",
+        "ngay_thang": "02/02",
+        "nam_sinh": "1400",
+        "linh_vuc": "Sử học",
+        "mo_ta": "Đại sử gia thời Lê sơ, người biên soạn bộ quốc sử vĩ đại 'Đại Việt sử ký toàn thư'.",
+        "quote": "Ghi chép việc hưng phế của các triều đại để làm gương cho muôn đời sau."
+    },
+    {
+        "id": "vn_034",
+        "ten": "Thân Nhân Trung",
+        "ngay_thang": "03/02",
+        "nam_sinh": "1419",
+        "linh_vuc": "Giáo dục / Văn học",
+        "mo_ta": "Danh sĩ thời Lê Thánh Tông, phó nguyên súy Hội Tao Đàn, tác giả câu nói bất hủ về tầm quan trọng của nhân tài.",
+        "quote": "Hiền tài là nguyên khí của quốc gia, nguyên khí thịnh thì thế nước mạnh."
+    },
+    {
+        "id": "vn_035",
+        "ten": "Mạc Thái Tổ (Mạc Đăng Dung)",
+        "ngay_thang": "04/02",
+        "nam_sinh": "1483",
+        "linh_vuc": "Khai quốc vương",
+        "mo_ta": "Hoàng đế sáng lập nhà Mạc, xuất thân từ một đô lực sĩ đoạt ngôi vị Trạng nguyên võ, có công ổn định đất nước sau khủng hoảng cuối thời Lê.",
+        "quote": "Dẹp yên binh đao, mở ra triều đại mới trong thời kỳ đất nước đầy biến động."
+    },
+    {
+        "id": "vn_036",
+        "ten": "Nguyễn Bỉnh Khiêm",
+        "ngay_thang": "05/02",
+        "nam_sinh": "1491",
+        "linh_vuc": "Triết học / Tiên tri",
+        "mo_ta": "Trạng Trình, nhà tư tưởng lớn, nhà tiên tri đại tài thời Lê - Mạc, người đưa ra định hướng chiến lược cho các tập đoàn phong kiến.",
+        "quote": "Hoành Sơn nhất đái, vạn đại dung thân."
+    },
+    {
+        "id": "vn_037",
+        "ten": "Phùng Khắc Khoan",
+        "ngay_thang": "06/02",
+        "nam_sinh": "1528",
+        "linh_vuc": "Ngoại giao / Văn học",
+        "mo_ta": "Trạng Bùng, nhà ngoại giao lỗi lạc thời Lê Trung Hưng, người có công mang giống ngô, đậu tương từ phương Bắc về Việt Nam.",
+        "quote": "Dùng tài thi phú để khuất phục thiên triều, mang ấm no về cho bá tánh."
+    },
+    {
+        "id": "vn_038",
+        "ten": "Nguyễn Hoàng (Chúa Tiên)",
+        "ngay_thang": "07/02",
+        "nam_sinh": "1525",
+        "linh_vuc": "Khai quốc / Lãnh đạo",
+        "mo_ta": "Vị chúa Nguyễn đầu tiên, người mở đầu sự nghiệp mở mang bờ cõi xuống phía Nam, lập ra xứ Đàng Trong.",
+        "quote": "Vào Nam lập nghiệp, mở mang bờ cõi vạn dặm."
+    },
+    {
+        "id": "vn_039",
+        "ten": "Trịnh Kiểm",
+        "ngay_thang": "08/02",
+        "nam_sinh": "1503",
+        "linh_vuc": "Quân sự / Lãnh đạo",
+        "mo_ta": "Người đặt nền móng cho cơ nghiệp của các chúa Trịnh ở Đàng Ngoài, nắm thực quyền điều hành nhà Lê Trung Hưng.",
+        "quote": "Phò Lê diệt Mạc, nắm giữ binh quyền lập nghiệp chúa."
+    },
+    {
+        "id": "vn_040",
+        "ten": "Trịnh Tùng",
+        "ngay_thang": "09/02",
+        "nam_sinh": "1550",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Bình An Vương, nhà quân sự tài ba đánh đuổi nhà Mạc khỏi Thăng Long, chính thức thiết lập thể chế vua Lê - chúa Trịnh.",
+        "quote": "Khôi phục Thăng Long, xưng vương định ra luật lệ."
+    },
+    {
+        "id": "vn_041",
+        "ten": "Đào Duy Từ",
+        "ngay_thang": "10/02",
+        "nam_sinh": "1572",
+        "linh_vuc": "Quân sự / Kiến trúc",
+        "mo_ta": "Đệ nhất khai quốc công thần của nhà Nguyễn, thiết kế Lũy Thầy phòng thủ vững chắc giúp Đàng Trong chặn đứng quân Trịnh.",
+        "quote": "Nửa đêm vỗ gối hận mình chưa gặp thời, bước chân vào Nam lập nên cơ nghiệp lớn."
+    },
+    {
+        "id": "vn_042",
+        "ten": "Nguyễn Hữu Cảnh",
+        "ngay_thang": "11/02",
+        "nam_sinh": "1650",
+        "linh_vuc": "Tướng lĩnh / Khai hoang",
+        "mo_ta": "Lễ Thành Hầu, vị tướng kiệt xuất có công rất lớn trong việc mở rộng lãnh thổ, thiết lập chủ quyền tại vùng đất Sài Gòn - Gia Định.",
+        "quote": "Mang gươm đi mở cõi, lập phủ Gia Định, an dân phương Nam."
+    },
+    {
+        "id": "vn_043",
+        "ten": "Đặng Trần Côn",
+        "ngay_thang": "12/02",
+        "nam_sinh": "Khoảng đầu thế kỷ 18",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Danh sĩ thời Lê Trung Hưng, tác giả của 'Chinh phụ ngâm khúc' bản chữ Hán - một kiệt tác văn học phản chiến sâu sắc.",
+        "quote": "Trống Tràng Thành lung lay bóng nguyệt / Khói Cam Tuyền mờ mịt thức mây."
+    },
+    {
+        "id": "vn_044",
+        "ten": "Đoàn Thị Điểm",
+        "ngay_thang": "13/02",
+        "nam_sinh": "1705",
+        "linh_vuc": "Văn học / Dịch thuật",
+        "mo_ta": "Hồng Hà Nữ Sĩ, nhà văn hóa lỗi lạc, người dịch xuất sắc 'Chinh phụ ngâm' sang thể thơ song thất lục bát chữ Nôm.",
+        "quote": "Cùng trông lại mà cùng chẳng thấy / Thấy xanh xanh những mấy ngàn dâu."
+    },
+    {
+        "id": "vn_045",
+        "ten": "Lê Hữu Trác (Hải Thượng Lãn Ông)",
+        "ngay_thang": "14/02",
+        "nam_sinh": "1724",
+        "linh_vuc": "Y học",
+        "mo_ta": "Đại danh y vĩ đại nhất lịch sử Việt Nam, người soạn bộ y tông tâm lĩnh và đặt ra 9 điều y huấn cách ngôn chuẩn mực cho người thầy thuốc.",
+        "quote": "Đạo làm thuốc là một nhân thuật chuyên bảo vệ sinh mạng con người."
+    },
+    {
+        "id": "vn_046",
+        "ten": "Lê Quý Đôn",
+        "ngay_thang": "15/02",
+        "nam_sinh": "1726",
+        "linh_vuc": "Bách khoa toàn thư",
+        "mo_ta": "Nhà bác học, học giả xuất sắc nhất thời phong kiến với những tác phẩm đồ sộ về lịch sử, địa lý, triết học như 'Kiến văn tiểu lục'.",
+        "quote": "Phi nông bất ổn, phi công bất phú, phi thương bất hoạt, phi trí bất hưng."
+    },
+    {
+        "id": "vn_047",
+        "ten": "Nguyễn Thiếp (La Sơn Phu Tử)",
+        "ngay_thang": "16/02",
+        "nam_sinh": "1723",
+        "linh_vuc": "Triết học / Giáo dục",
+        "mo_ta": "Danh sĩ ẩn cư được vua Quang Trung ba lần viết thư mời ra giúp nước, có đóng góp lớn trong việc chấn hưng giáo dục chữ Nôm.",
+        "quote": "Ngọc không mài không thành đồ vạn; người không học không biết rõ đạo."
+    },
+    {
+        "id": "vn_048",
+        "ten": "Hồ Xuân Hương",
+        "ngay_thang": "17/02",
+        "nam_sinh": "Không rõ",
+        "linh_vuc": "Văn học / Thơ ca",
+        "mo_ta": "Bà chúa thơ Nôm, thi sĩ với phong cách trào phúng sắc sảo, kiên quyết đấu tranh cho quyền lợi và sự bình đẳng của phụ nữ.",
+        "quote": "Ví đây đổi phận làm trai được / Thì sự anh hùng há bấy nhiêu."
+    },
+    {
+        "id": "vn_049",
+        "ten": "Nguyễn Nhạc",
+        "ngay_thang": "18/02",
+        "nam_sinh": "1743",
+        "linh_vuc": "Lãnh đạo khởi nghĩa / Vua",
+        "mo_ta": "Thái Đức Hoàng đế, anh cả của phong trào Tây Sơn, người khởi xướng và lãnh đạo nông dân lật đổ quyền lực chúa Nguyễn.",
+        "quote": "Phất cờ khởi nghĩa Tây Sơn, lấy của nhà giàu chia cho người nghèo."
+    },
+    {
+        "id": "vn_050",
+        "ten": "Nguyễn Huệ (Quang Trung)",
+        "ngay_thang": "19/02",
+        "nam_sinh": "1753",
+        "linh_vuc": "Quân sự / Vua",
+        "mo_ta": "Thiên tài quân sự bách chiến bách thắng, người tiêu diệt 5 vạn quân Xiêm và đại phá 29 vạn quân Thanh, thống nhất đất nước.",
+        "quote": "Đánh cho để dài tóc / Đánh cho để đen răng / Đánh cho sử tri Nam quốc anh hùng chi hữu chủ."
+    },
+    {
+        "id": "vn_051",
+        "ten": "Nguyễn Lữ",
+        "ngay_thang": "20/02",
+        "nam_sinh": "1754",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Đông Định Vương, em út trong Tây Sơn tam kiệt, nổi tiếng với võ thuật cao cường và là người sáng lập môn võ 'Yến phi quyền'.",
+        "quote": "Mang hùng tài đại lược, góp sức cùng hai anh dựng nên nghiệp lớn Tây Sơn."
+    },
+    {
+        "id": "vn_052",
+        "ten": "Bùi Thị Xuân",
+        "ngay_thang": "21/02",
+        "nam_sinh": "1752",
+        "linh_vuc": "Nữ tướng",
+        "mo_ta": "Đô đốc tài ba của nghĩa quân Tây Sơn, nữ tướng chỉ huy đội tượng binh xuất sắc, biểu tượng của lòng trung thành và khí tiết.",
+        "quote": "Chí nam nhi, đấng nữ lưu, coi cái chết nhẹ tựa lông hồng."
+    },
+    {
+        "id": "vn_053",
+        "ten": "Trần Quang Diệu",
+        "ngay_thang": "22/02",
+        "nam_sinh": "1760",
+        "linh_vuc": "Tướng lĩnh",
+        "mo_ta": "Đại tướng xuất sắc của triều Tây Sơn, phu quân của Bùi Thị Xuân, người bảo vệ thành Quy Nhơn kiên cường trước quân Nguyễn Ánh.",
+        "quote": "Ta sinh ra để làm tướng đánh giặc, chứ không phải để đầu hàng."
+    },
+    {
+        "id": "vn_054",
+        "ten": "Ngô Thì Nhậm",
+        "ngay_thang": "23/02",
+        "nam_sinh": "1746",
+        "linh_vuc": "Chính trị / Ngoại giao",
+        "mo_ta": "Danh sĩ tài ba, cánh tay phải đắc lực của vua Quang Trung về mặt chính trị và ngoại giao, tác giả kế sách lui binh về cản Tam Điệp.",
+        "quote": "Lui một bước để tiến ba bước, bảo toàn lực lượng, đợi thời phản công."
+    },
+    {
+        "id": "vn_055",
+        "ten": "Nguyễn Du",
+        "ngay_thang": "24/02",
+        "nam_sinh": "1765",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Đại thi hào dân tộc, danh nhân văn hóa thế giới, tác giả kiệt tác Truyện Kiều - đỉnh cao của văn học trung đại Việt Nam.",
+        "quote": "Thiện căn ở tại lòng ta / Chữ tâm kia mới bằng ba chữ tài."
+    },
+    {
+        "id": "vn_056",
+        "ten": "Bà Huyện Thanh Quan (Nguyễn Thị Hinh)",
+        "ngay_thang": "25/02",
+        "nam_sinh": "1805",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Nữ thi sĩ tài hoa, với những bài thơ Nôm mang phong cách trang nhã, hoài cổ và đượm buồn như 'Qua đèo Ngang', 'Thăng Long thành hoài cổ'.",
+        "quote": "Bước tới đèo Ngang bóng xế tà / Cỏ cây chen đá, lá chen hoa."
+    },
+    {
+        "id": "vn_057",
+        "ten": "Phan Huy Chú",
+        "ngay_thang": "26/02",
+        "nam_sinh": "1782",
+        "linh_vuc": "Sử học / Bách khoa",
+        "mo_ta": "Học giả uyên bác thời Nguyễn, tác giả bộ bách khoa toàn thư đồ sộ 'Lịch triều hiến chương loại chí'.",
+        "quote": "Dành cả đời biên khảo sử sách, giữ lại ngọn đèn tri thức cho hậu thế."
+    },
+    {
+        "id": "vn_058",
+        "ten": "Gia Long (Nguyễn Ánh)",
+        "ngay_thang": "27/02",
+        "nam_sinh": "1762",
+        "linh_vuc": "Khai quốc vương",
+        "mo_ta": "Hoàng đế sáng lập triều đại nhà Nguyễn, thống nhất đất nước toàn vẹn từ Lạng Sơn đến mũi Cà Mau, đặt quốc hiệu Việt Nam.",
+        "quote": "Trải qua bao thăng trầm nếm mật nằm gai, khôi phục cơ đồ, thống nhất giang sơn."
+    },
+    {
+        "id": "vn_059",
+        "ten": "Minh Mạng",
+        "ngay_thang": "28/02",
+        "nam_sinh": "1791",
+        "linh_vuc": "Vua / Hành chính",
+        "mo_ta": "Vị vua thứ hai của triều Nguyễn, nhà cải cách hành chính xuất sắc với việc chia đất nước thành các tỉnh, khẳng định chủ quyền biển đảo.",
+        "quote": "Xây dựng thể chế trung ương tập quyền vững mạnh, đặt tên nước là Đại Nam."
+    },
+    {
+        "id": "vn_060",
+        "ten": "Thiệu Trị",
+        "ngay_thang": "29/02",
+        "nam_sinh": "1807",
+        "linh_vuc": "Vua / Thi ca",
+        "mo_ta": "Vị hoàng đế thứ ba của triều Nguyễn, nổi tiếng yêu chuộng hòa bình, uyên thâm Nho học và để lại nhiều tác phẩm thi ca có giá trị.",
+        "quote": "Giữ gìn cơ nghiệp thái bình, để lại danh thơm qua thi phú."
+    },
+    {
+        "id": "vn_061",
+        "ten": "Tự Đức (Nguyễn Phúc Hồng Nhậm)",
+        "ngay_thang": "01/03",
+        "nam_sinh": "1829",
+        "linh_vuc": "Vua / Thi ca",
+        "mo_ta": "Vị hoàng đế trị vì lâu nhất triều Nguyễn. Ông là một người con hiếu thảo, một nhà thơ uyên thâm, nhưng phải chứng kiến cảnh đất nước rơi vào tay thực dân Pháp.",
+        "quote": "Trẫm dẫu có tội với tiên đế, nhưng lòng không bao giờ muốn phụ bách tính."
+    },
+    {
+        "id": "vn_062",
+        "ten": "Nguyễn Đình Chiểu",
+        "ngay_thang": "02/03",
+        "nam_sinh": "1822",
+        "linh_vuc": "Văn học / Y học",
+        "mo_ta": "Nhà thơ mù yêu nước, danh nhân văn hóa thế giới, dùng ngòi bút làm vũ khí chống Pháp. Tác giả của kiệt tác truyền đời 'Lục Vân Tiên'.",
+        "quote": "Chở bao nhiêu đạo thuyền không khẳm / Đâm mấy thằng gian bút chẳng tà."
+    },
+    {
+        "id": "vn_063",
+        "ten": "Trương Định",
+        "ngay_thang": "03/03",
+        "nam_sinh": "1820",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Bình Tây Đại Nguyên Soái, vị thủ lĩnh kháng Pháp oanh liệt ở Nam Kỳ, thà trái lệnh triều đình chứ kiên quyết không bỏ rơi nhân dân.",
+        "quote": "Triều đình hòa nghị, nhưng lòng dân không thuận, ta quyết ở lại cùng dân đánh giặc."
+    },
+    {
+        "id": "vn_064",
+        "ten": "Nguyễn Trung Trực",
+        "ngay_thang": "04/03",
+        "nam_sinh": "1838",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Người anh hùng dân chài vô úy, nổi tiếng với chiến công đốt cháy chiến hạm L'Espérance của Pháp trên sông Nhật Tảo.",
+        "quote": "Bao giờ người Tây nhổ hết cỏ nước Nam thì mới hết người Nam đánh Tây."
+    },
+    {
+        "id": "vn_065",
+        "ten": "Thủ Khoa Huân (Nguyễn Hữu Huân)",
+        "ngay_thang": "05/03",
+        "nam_sinh": "1830",
+        "linh_vuc": "Khởi nghĩa / Thơ ca",
+        "mo_ta": "Nhà nho yêu nước, dù ba lần bị thực dân Pháp bắt và lưu đày nhưng vẫn kiên quyết khởi nghĩa tại Nam Kỳ đến hơi thở cuối cùng.",
+        "quote": "Hai tay dắt tay vì nước / Một cổ mang gông sá quản gì."
+    },
+    {
+        "id": "vn_066",
+        "ten": "Thiên Hộ Dương (Võ Duy Dương)",
+        "ngay_thang": "06/03",
+        "nam_sinh": "1827",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Lãnh tụ tối cao của căn cứ khởi nghĩa Đồng Tháp Mười, dùng chiến thuật du kích xuất quỷ nhập thần tiêu hao sinh lực địch.",
+        "quote": "Dựa vào hiểm địa Tháp Mười, lấy ít địch nhiều, quyết không lùi bước."
+    },
+    {
+        "id": "vn_067",
+        "ten": "Nguyễn Tri Phương",
+        "ngay_thang": "07/03",
+        "nam_sinh": "1800",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Đại danh tướng ba triều vua Nguyễn, chỉ huy phòng tuyến chống Pháp từ Đà Nẵng đến Gia Định, tuẫn tiết oanh liệt khi giữ thành Hà Nội.",
+        "quote": "Nay thành mất, bề tôi không giữ được, ta chỉ xin được chết theo thành."
+    },
+    {
+        "id": "vn_068",
+        "ten": "Hoàng Diệu",
+        "ngay_thang": "08/03",
+        "nam_sinh": "1829",
+        "linh_vuc": "Quân sự / Quan lại",
+        "mo_ta": "Tổng đốc Hà Ninh, người quyết tử bảo vệ thành Hà Nội trước sức mạnh hỏa lực của Pháp, treo cổ tuẫn tiết tại Võ Miếu để giữ tròn khí tiết.",
+        "quote": "Thành mất không cứu được, bề tôi nộp mạng là việc đương nhiên."
+    },
+    {
+        "id": "vn_069",
+        "ten": "Tôn Thất Thuyết",
+        "ngay_thang": "09/03",
+        "nam_sinh": "1839",
+        "linh_vuc": "Chính trị / Quân sự",
+        "mo_ta": "Đại thần phe chủ chiến triều Nguyễn, người trực tiếp tấn công tòa Khâm sứ Pháp và rước vua Hàm Nghi ra Sơn Phòng phát chiếu Cần Vương.",
+        "quote": "Phải đánh để giành lại giang sơn, không thể khoanh tay cúi đầu chịu nhục."
+    },
+    {
+        "id": "vn_070",
+        "ten": "Vua Hàm Nghi",
+        "ngay_thang": "10/03",
+        "nam_sinh": "1871",
+        "linh_vuc": "Vua / Yêu nước",
+        "mo_ta": "Vị hoàng đế trẻ tuổi kiên cường, từ bỏ ngai vàng phú quý để lên rừng núi lãnh đạo phong trào Cần Vương kháng Pháp.",
+        "quote": "Thà chịu khổ chốn rừng thiêng nước độc, quyết không làm vị vua bù nhìn cho giặc sai khiến."
+    },
+    {
+        "id": "vn_071",
+        "ten": "Phan Đình Phùng",
+        "ngay_thang": "11/03",
+        "nam_sinh": "1847",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Đình nguyên Tiến sĩ, thủ lĩnh tối cao của cuộc khởi nghĩa Hương Khê - đỉnh cao oanh liệt nhất của phong trào Cần Vương.",
+        "quote": "Nay ta chỉ có một ngôi mộ to là đất nước Việt Nam, quyết đánh giặc để giữ lấy."
+    },
+    {
+        "id": "vn_072",
+        "ten": "Cao Thắng",
+        "ngay_thang": "12/03",
+        "nam_sinh": "1864",
+        "linh_vuc": "Tướng lĩnh / Kỹ sư",
+        "mo_ta": "Chàng trai trẻ tài ba, tướng tiên phong của khởi nghĩa Hương Khê, người tháo lắp và sao chép chế tạo thành công súng trường kiểu Pháp.",
+        "quote": "Dùng chính vũ khí tân tiến của địch để đánh lại địch."
+    },
+    {
+        "id": "vn_073",
+        "ten": "Hoàng Hoa Thám (Đề Thám)",
+        "ngay_thang": "13/03",
+        "nam_sinh": "1858",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Hùm thiêng Yên Thế, vị thủ lĩnh nông dân kiên cường lãnh đạo cuộc kháng chiến chống Pháp kéo dài suốt gần 30 năm.",
+        "quote": "Đất Yên Thế là của người Yên Thế, kẻ thù đừng hòng tự do dẫm đạp."
+    },
+    {
+        "id": "vn_074",
+        "ten": "Nguyễn Thiện Thuật",
+        "ngay_thang": "14/03",
+        "nam_sinh": "1844",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Tán Thuật, thủ lĩnh cuộc khởi nghĩa Bãi Sậy, áp dụng xuất sắc chiến thuật du kích đồng bằng khiến quân Pháp khiếp đảm.",
+        "quote": "Dựa vào lau sậy, lấy ít địch nhiều, đánh thoắt ẩn thoắt hiện."
+    },
+    {
+        "id": "vn_075",
+        "ten": "Nguyễn Khuyến",
+        "ngay_thang": "15/03",
+        "nam_sinh": "1835",
+        "linh_vuc": "Văn học / Thơ ca",
+        "mo_ta": "Tam nguyên Yên Đổ, nhà thơ lớn của làng cảnh Việt Nam, người cáo quan về quê vì đau xót trước cảnh nước mất nhà tan.",
+        "quote": "Nghĩ mình lại gớm cho mình / Nước không cứu được, mang danh nỗi gì."
+    },
+    {
+        "id": "vn_076",
+        "ten": "Trần Tế Xương (Tú Xương)",
+        "ngay_thang": "16/03",
+        "nam_sinh": "1870",
+        "linh_vuc": "Văn học / Thơ ca",
+        "mo_ta": "Nhà thơ trào phúng sắc sảo, dùng tiếng cười để châm biếm, đả kích thói hư tật xấu của xã hội thực dân nửa phong kiến.",
+        "quote": "Biết thuốc lá hay đâu mà hút / Nào chè mạn giảo biết đâu pha."
+    },
+    {
+        "id": "vn_077",
+        "ten": "Trương Vĩnh Ký (Pétrus Ký)",
+        "ngay_thang": "17/03",
+        "nam_sinh": "1837",
+        "linh_vuc": "Học giả / Báo chí",
+        "mo_ta": "Nhà bác học, ngôn ngữ học kiệt xuất, thông thạo hàng chục ngoại ngữ, người đặt nền móng cho báo chí và văn học chữ Quốc ngữ.",
+        "quote": "Dùng chữ Quốc ngữ để phổ biến kiến thức, mở mang dân trí cho đồng bào."
+    },
+    {
+        "id": "vn_078",
+        "ten": "Lương Văn Can",
+        "ngay_thang": "18/03",
+        "nam_sinh": "1854",
+        "linh_vuc": "Giáo dục / Cách mạng",
+        "mo_ta": "Thục trưởng Đông Kinh Nghĩa Thục, nhà giáo dục yêu nước tiên phong trong phong trào truyền bá chữ Quốc ngữ và canh tân đất nước.",
+        "quote": "Quốc gia hưng vong, thất phu hữu trách. Việc cứu nước bắt đầu từ mở mang tri thức."
+    },
+    {
+        "id": "vn_079",
+        "ten": "Phan Bội Châu",
+        "ngay_thang": "19/03",
+        "nam_sinh": "1867",
+        "linh_vuc": "Cách mạng / Tư tưởng",
+        "mo_ta": "Nhà chí sĩ yêu nước vĩ đại, người khởi xướng phong trào Đông Du, khơi dậy tinh thần độc lập tự cường mạnh mẽ đầu thế kỷ 20.",
+        "quote": "Ví phỏng đường đời bằng phẳng cả / Anh hùng hào kiệt có hơn ai."
+    },
+    {
+        "id": "vn_080",
+        "ten": "Phan Châu Trinh",
+        "ngay_thang": "20/03",
+        "nam_sinh": "1872",
+        "linh_vuc": "Cách mạng / Cải cách",
+        "mo_ta": "Nhà tư tưởng dân chủ lỗi lạc, lãnh tụ phong trào Duy Tân với chủ trương bất hủ 'Khai dân trí, chấn dân khí, hậu dân sinh'.",
+        "quote": "Tự do, bình đẳng, bác ái. Không có gì quý hơn dân quyền và dân trí."
+    },
+    {
+        "id": "vn_081",
+        "ten": "Huỳnh Thúc Kháng",
+        "ngay_thang": "21/03",
+        "nam_sinh": "1876",
+        "linh_vuc": "Cách mạng / Báo chí",
+        "mo_ta": "Chí sĩ yêu nước kiên trung, chủ nhiệm báo Tiếng Dân, từng giữ chức Quyền Chủ tịch nước Việt Nam Dân chủ Cộng hòa.",
+        "quote": "Gương Thái Sơn rành rành soi để lại / Nước sông trong rửa mãi cũng không dơ."
+    },
+    {
+        "id": "vn_082",
+        "ten": "Trần Quý Cáp",
+        "ngay_thang": "22/03",
+        "nam_sinh": "1870",
+        "linh_vuc": "Tư tưởng / Cải cách",
+        "mo_ta": "Đại sĩ phu Duy Tân nhiệt thành, dùng tài văn chương xuất chúng để thức tỉnh lòng yêu nước, oanh liệt đón nhận án chém ngang lưng.",
+        "quote": "Học để cứu nước cứu dân, chứ không phải học để luồn cúi làm quan."
+    },
+    {
+        "id": "vn_083",
+        "ten": "Nguyễn Thái Học",
+        "ngay_thang": "23/03",
+        "nam_sinh": "1902",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Người sáng lập và lãnh tụ tối cao của Việt Nam Quốc Dân Đảng, trực tiếp lãnh đạo cuộc Khởi nghĩa Yên Bái chấn động lịch sử.",
+        "quote": "Không thành công cũng thành nhân."
+    },
+    {
+        "id": "vn_084",
+        "ten": "Phó Đức Chính",
+        "ngay_thang": "24/03",
+        "nam_sinh": "1907",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Nhân vật cốt cán của Việt Nam Quốc Dân Đảng, lên máy chém vẫn hiên ngang yêu cầu được nằm ngửa để nhìn lưỡi dao rơi xuống.",
+        "quote": "Đại sự không thành, chết là vinh. Yêu cầu cho tôi nằm ngửa để nhìn lưỡi chém."
+    },
+    {
+        "id": "vn_085",
+        "ten": "Cô Giang (Nguyễn Thị Giang)",
+        "ngay_thang": "25/03",
+        "nam_sinh": "1906",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Nữ chiến sĩ cách mạng quả cảm, vị hôn thê của Nguyễn Thái Học, dùng súng tự sát để giữ trọn khí tiết sau khi khởi nghĩa thất bại.",
+        "quote": "Đã là người của cách mạng, thì sống hay thác đều vì sự nghiệp cách mạng."
+    },
+    {
+        "id": "vn_086",
+        "ten": "Tản Đà (Nguyễn Khắc Hiếu)",
+        "ngay_thang": "26/03",
+        "nam_sinh": "1889",
+        "linh_vuc": "Thơ ca / Văn học",
+        "mo_ta": "Thi sĩ tài hoa, chiếc gạch nối quan trọng giữa văn học cổ điển và hiện đại, nổi tiếng với hồn thơ ngông, lãng mạn và chán đời sâu sắc.",
+        "quote": "Giang sơn tàn lụi, khóc cùng ai / Bầu rượu túi thơ vạn dặm dài."
+    },
+    {
+        "id": "vn_087",
+        "ten": "Vũ Trọng Phụng",
+        "ngay_thang": "27/03",
+        "nam_sinh": "1912",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Ông vua phóng sự đất Bắc, nhà văn hiện thực trào phúng kiệt xuất với những kiệt tác phê phán xã hội gay gắt như 'Số đỏ', 'Giông tố'.",
+        "quote": "Xã hội này là một cái xã hội khốn nạn, chó đểu."
+    },
+    {
+        "id": "vn_088",
+        "ten": "Nam Cao (Trần Hữu Tri)",
+        "ngay_thang": "28/03",
+        "nam_sinh": "1915",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Nhà văn hiện thực vĩ đại, dùng ngòi bút như dao mổ xẻ sâu sắc bi kịch tha hóa của người nông dân và nỗi đau của trí thức nghèo.",
+        "quote": "Nghệ thuật không cần phải là ánh trăng lừa dối, nghệ thuật không nên là ánh trăng lừa dối..."
+    },
+    {
+        "id": "vn_089",
+        "ten": "Ngô Tất Tố",
+        "ngay_thang": "29/03",
+        "nam_sinh": "1894",
+        "linh_vuc": "Văn học / Báo chí",
+        "mo_ta": "Nhà văn, nhà báo, học giả uyên bác. Tác giả tiểu thuyết 'Tắt đèn' phản ánh chân thực và tàn khốc nỗi thống khổ của bần nông.",
+        "quote": "Cái thứ bực mình nhất ở đời là cứ phải sống trong cái cảnh tối tăm mù mịt này mãi."
+    },
+    {
+        "id": "vn_090",
+        "ten": "Thạch Lam",
+        "ngay_thang": "30/03",
+        "nam_sinh": "1910",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Thành viên xuất sắc của Tự Lực văn đoàn, cây bút tài hoa của những câu chuyện nhẹ nhàng, thanh tao và đượm buồn về tình người.",
+        "quote": "Cái đẹp man mác khắp vũ trụ, len lỏi khắp hang cùng ngõ hẻm, tiềm tàng ở mọi vật tầm thường."
+    },
+    {
+        "id": "vn_091",
+        "ten": "Xuân Diệu",
+        "ngay_thang": "31/03",
+        "nam_sinh": "1916",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Ông hoàng thơ tình, lá cờ đầu của phong trào Thơ Mới với niềm khao khát sống, khao khát yêu và giao cảm với đời một cách mãnh liệt.",
+        "quote": "Thà một phút huy hoàng rồi chợt tối / Còn hơn buồn le lói suốt trăm năm."
+    },
+
+    {
+        "id": "vn_092",
+        "ten": "Hàn Mặc Tử",
+        "ngay_thang": "01/04",
+        "nam_sinh": "1912",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Thi sĩ tài hoa bạc mệnh, một trong những đại diện độc đáo nhất của phong trào Thơ Mới với hồn thơ mãnh liệt, kỳ bí và đầy bi thương.",
+        "quote": "Người đi một nửa hồn tôi mất / Một nửa hồn tôi bỗng dại khờ."
+    },
+    {
+        "id": "vn_093",
+        "ten": "Chế Lan Viên",
+        "ngay_thang": "02/04",
+        "nam_sinh": "1920",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Nhà thơ xuất sắc mang phong cách triết lý, suy tưởng sâu sắc. Tác giả của tập thơ 'Điêu tàn' nổi tiếng từ thuở 16 tuổi.",
+        "quote": "Khi ta ở chỉ là nơi đất ở / Khi ta đi đất đã hóa tâm hồn."
+    },
+    {
+        "id": "vn_094",
+        "ten": "Huy Cận",
+        "ngay_thang": "03/04",
+        "nam_sinh": "1919",
+        "linh_vuc": "Thơ ca / Chính trị",
+        "mo_ta": "Cây bút trụ cột của Thơ Mới, mang hồn thơ sầu vũ trụ bao la. Ông cũng là một trong những vị bộ trưởng đầu tiên của nước Việt Nam Dân chủ Cộng hòa.",
+        "quote": "Sóng gợn tràng giang buồn điệp điệp / Con thuyền xuôi mái nước song song."
+    },
+    {
+        "id": "vn_095",
+        "ten": "Nguyễn Bính",
+        "ngay_thang": "04/04",
+        "nam_sinh": "1918",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Nhà thơ của đồng quê Việt Nam, người mang trọn vẹn nét duyên mộc mạc, hồn hậu và truyền thống vào phong trào Thơ Mới.",
+        "quote": "Thôn Đoài ngồi nhớ thôn Đông / Một người chín nhớ mười mong một người."
+    },
+    {
+        "id": "vn_096",
+        "ten": "Tố Hữu",
+        "ngay_thang": "05/04",
+        "nam_sinh": "1920",
+        "linh_vuc": "Thơ ca / Cách mạng",
+        "mo_ta": "Lá cờ đầu của thơ ca cách mạng Việt Nam, dùng hồn thơ lãng mạn, hào hùng để biên niên sử lại toàn bộ cuộc đấu tranh giải phóng dân tộc.",
+        "quote": "Từ ấy trong tôi bừng nắng hạ / Mặt trời chân lý chói qua tim."
+    },
+    {
+        "id": "vn_097",
+        "ten": "Trần Phú",
+        "ngay_thang": "06/04",
+        "nam_sinh": "1904",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Tổng Bí thư đầu tiên của Đảng Cộng sản Việt Nam, tác giả của bản Luận cương Chính trị năm 1930, hi sinh oanh liệt khi tuổi đời còn rất trẻ.",
+        "quote": "Hãy giữ vững chí khí chiến đấu!"
+    },
+    {
+        "id": "vn_098",
+        "ten": "Lê Hồng Phong",
+        "ngay_thang": "07/04",
+        "nam_sinh": "1902",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Tổng Bí thư thứ hai của Đảng Cộng sản Đông Dương, người chiến sĩ cộng sản kiên trung đã hi sinh tại nhà tù Côn Đảo.",
+        "quote": "Xin chào tất cả các đồng chí, tôi chết nhưng Đảng ta sẽ sống mãi."
+    },
+    {
+        "id": "vn_099",
+        "ten": "Nguyễn Thị Minh Khai",
+        "ngay_thang": "08/04",
+        "nam_sinh": "1910",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Nữ chiến sĩ cộng sản kiên cường, lãnh đạo phong trào cách mạng tại Sài Gòn - Chợ Lớn, phu nhân của đồng chí Lê Hồng Phong.",
+        "quote": "Vững chí bền gan, quyết tâm chiến đấu đến cùng cho sự nghiệp giải phóng."
+    },
+    {
+        "id": "vn_100",
+        "ten": "Hà Huy Tập",
+        "ngay_thang": "09/04",
+        "nam_sinh": "1906",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Tổng Bí thư thứ ba của Đảng Cộng sản Đông Dương, nhà lý luận xuất sắc, có công lớn trong việc khôi phục tổ chức Đảng sau thời kỳ bị khủng bố trắng.",
+        "quote": "Nếu còn sống, tôi vẫn sẽ tiếp tục hoạt động cách mạng."
+    },
+    {
+        "id": "vn_101",
+        "ten": "Nguyễn Văn Cừ",
+        "ngay_thang": "10/04",
+        "nam_sinh": "1912",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Tổng Bí thư trẻ tuổi xuất chúng của Đảng Cộng sản Đông Dương, tác giả cuốn 'Tự chỉ trích' với tư duy lý luận chính trị sắc sảo.",
+        "quote": "Phải dũng cảm tự chỉ trích để tiến bộ, không sợ vạch trần khuyết điểm."
+    },
+    {
+        "id": "vn_102",
+        "ten": "Võ Văn Tần",
+        "ngay_thang": "11/04",
+        "nam_sinh": "1891",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Nhà lãnh đạo tiền bối kiên trung của Đảng, người Bí thư Xứ ủy Nam Kỳ đã anh dũng tổ chức phong trào đấu tranh tại miền Nam.",
+        "quote": "Thà chết chứ quyết không khai, bảo vệ an toàn cho cơ sở cách mạng."
+    },
+    {
+        "id": "vn_103",
+        "ten": "Phan Đăng Lưu",
+        "ngay_thang": "12/04",
+        "nam_sinh": "1902",
+        "linh_vuc": "Cách mạng / Báo chí",
+        "mo_ta": "Nhà lãnh đạo, nhà báo, nhà văn hóa cách mạng xuất sắc, người góp phần quan trọng chỉ đạo phong trào cách mạng và báo chí dân chủ.",
+        "quote": "Dùng ngòi bút làm vũ khí đấu tranh, đánh thức lòng yêu nước của đồng bào."
+    },
+    {
+        "id": "vn_104",
+        "ten": "Hoàng Văn Thụ",
+        "ngay_thang": "13/04",
+        "nam_sinh": "1909",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Nhà lãnh đạo tài ba của Đảng, người con ưu tú của quê hương xứ Lạng, hiên ngang trước pháp trường của thực dân Pháp.",
+        "quote": "Ngọc nát còn hơn ngói lành, thà chết vinh còn hơn sống nhục."
+    },
+    {
+        "id": "vn_105",
+        "ten": "Lý Tự Trọng",
+        "ngay_thang": "14/04",
+        "nam_sinh": "1914",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Người đoàn viên thanh niên cộng sản đầu tiên, tấm gương sáng chói về lòng dũng cảm, lên máy chém khi mới 17 tuổi.",
+        "quote": "Con đường của thanh niên chỉ là con đường cách mạng, không thể có con đường nào khác."
+    },
+    {
+        "id": "vn_106",
+        "ten": "Võ Thị Sáu",
+        "ngay_thang": "15/04",
+        "nam_sinh": "1933",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Nữ anh hùng lực lượng vũ trang nhân dân trẻ tuổi nhất, huyền thoại vùng Đất Đỏ kiên cường đối diện họng súng quân thù không chịu bịt mắt.",
+        "quote": "Không cần bịt mắt tôi. Hãy để cho đôi mắt tôi được nhìn đất nước thân yêu đến giây phút cuối cùng."
+    },
+    {
+        "id": "vn_107",
+        "ten": "Kim Đồng (Nông Văn Dền)",
+        "ngay_thang": "16/04",
+        "nam_sinh": "1929",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Đội trưởng đầu tiên của Đội Thiếu niên Tiền phong, anh dũng hi sinh khi làm nhiệm vụ giao liên bảo vệ cán bộ.",
+        "quote": "Dũng cảm mưu trí, đánh lạc hướng địch để bảo toàn lực lượng cách mạng."
+    },
+    {
+        "id": "vn_108",
+        "ten": "Nguyễn Thị Định",
+        "ngay_thang": "17/04",
+        "nam_sinh": "1920",
+        "linh_vuc": "Nữ tướng / Quân sự",
+        "mo_ta": "Nữ Thiếu tướng đầu tiên của Quân đội nhân dân Việt Nam, biểu tượng của 'Đội quân tóc dài' trong phong trào Đồng khởi Bến Tre.",
+        "quote": "Phụ nữ Việt Nam giỏi việc nước, đảm việc nhà, kiên cường đánh giặc."
+    },
+    {
+        "id": "vn_109",
+        "ten": "Nguyễn Bình",
+        "ngay_thang": "18/04",
+        "nam_sinh": "1908",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Trung tướng đầu tiên của Quân đội nhân dân Việt Nam, Tư lệnh tài ba có công thống nhất các lực lượng vũ trang Nam Bộ thời kỳ đầu chống Pháp.",
+        "quote": "Một lòng trung thành, lấy ân uy để thu phục lòng người, thống nhất quân dân."
+    },
+    {
+        "id": "vn_110",
+        "ten": "Nguyễn Sơn (Vũ Nguyên Bác)",
+        "ngay_thang": "19/04",
+        "nam_sinh": "1908",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Lưỡng quốc tướng quân huyền thoại, vị tướng duy nhất được phong tướng ở cả Việt Nam và Trung Quốc, nổi tiếng tài ba và ngang tàng.",
+        "quote": "Làm tướng phải biết sống chết với quân, đánh giặc bằng mưu trí chứ không chỉ bằng dũng lực."
+    },
+    {
+        "id": "vn_111",
+        "ten": "Hoàng Văn Thái",
+        "ngay_thang": "20/04",
+        "nam_sinh": "1915",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Đại tướng, Tổng Tham mưu trưởng đầu tiên của Quân đội nhân dân Việt Nam, người tổ chức và chỉ đạo tác chiến xuất sắc trong nhiều chiến dịch.",
+        "quote": "Tham mưu là phải đi trước một bước, tính toán mọi khả năng để giành thắng lợi."
+    },
+    {
+        "id": "vn_112",
+        "ten": "Lê Trọng Tấn",
+        "ngay_thang": "21/04",
+        "nam_sinh": "1914",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Đại tướng, được mệnh danh là 'Zukov của Việt Nam', vị tướng đánh trận giỏi hàng đầu, luôn có mặt ở những chiến trường ác liệt nhất.",
+        "quote": "Thần tốc, thần tốc hơn nữa, táo bạo, táo bạo hơn nữa, tranh thủ từng giờ, từng phút, xốc tới mặt trận..."
+    },
+    {
+        "id": "vn_113",
+        "ten": "Nguyễn Chánh",
+        "ngay_thang": "22/04",
+        "nam_sinh": "1914",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Vị tướng tài ba của chiến trường Nam Trung Bộ, tư lệnh chiến dịch Tây Nguyên, một tấm gương mẫu mực về đạo đức quân nhân.",
+        "quote": "Giữ vững địa bàn chiến lược, phát huy thế trận chiến tranh nhân dân."
+    },
+    {
+        "id": "vn_114",
+        "ten": "Trần Đại Nghĩa",
+        "ngay_thang": "23/04",
+        "nam_sinh": "1913",
+        "linh_vuc": "Khoa học quân sự",
+        "mo_ta": "Thiếu tướng, Giáo sư Viện sĩ, cha đẻ của ngành công nghiệp quốc phòng Việt Nam, người chế tạo thành công súng Bazooka và súng SKZ.",
+        "quote": "Từ bỏ mức lương kỹ sư trưởng ở Pháp, về nước chế tạo vũ khí đánh giặc cứu nước."
+    },
+    {
+        "id": "vn_115",
+        "ten": "Tôn Thất Tùng",
+        "ngay_thang": "24/04",
+        "nam_sinh": "1912",
+        "linh_vuc": "Y học / Khoa học",
+        "mo_ta": "Giáo sư, bác sĩ danh tiếng thế giới, tác giả của phương pháp cắt gan khô mang tên ông, cứu sống vô số bệnh nhân và thương binh.",
+        "quote": "Phải biết hi sinh tất cả cho khoa học, cho nhân dân, không được tự mãn."
+    },
+    {
+        "id": "vn_116",
+        "ten": "Đặng Văn Ngữ",
+        "ngay_thang": "25/04",
+        "nam_sinh": "1910",
+        "linh_vuc": "Y học / Khoa học",
+        "mo_ta": "Bác sĩ, nhà nghiên cứu ký sinh trùng kiệt xuất, người chế tạo thành công dung dịch Penicillin kháng sinh tại chiến khu Việt Bắc.",
+        "quote": "Khoa học chân chính phải gắn liền với thực tiễn chiến đấu và đời sống nhân dân."
+    },
+    {
+        "id": "vn_117",
+        "ten": "Trần Hữu Tước",
+        "ngay_thang": "26/04",
+        "nam_sinh": "1913",
+        "linh_vuc": "Y học",
+        "mo_ta": "Giáo sư y khoa uyên bác, người đặt nền móng và xây dựng chuyên ngành Tai Mũi Họng của nền y học Việt Nam hiện đại.",
+        "quote": "Mang kiến thức y học tiên tiến về phục vụ đồng bào trong những năm tháng gian khổ nhất."
+    },
+    {
+        "id": "vn_118",
+        "ten": "Lương Định Của",
+        "ngay_thang": "27/04",
+        "nam_sinh": "1920",
+        "linh_vuc": "Nông nghiệp / Khoa học",
+        "mo_ta": "Giáo sư, Tiến sĩ nông học hàng đầu, người lai tạo thành công nhiều giống lúa năng suất cao, gắn bó trọn đời với đồng ruộng Việt Nam.",
+        "quote": "Sống lăn lộn với bùn đất, ruộng đồng để tìm ra hạt lúa vàng cho quê hương."
+    },
+    {
+        "id": "vn_119",
+        "ten": "Đào Duy Anh",
+        "ngay_thang": "28/04",
+        "nam_sinh": "1904",
+        "linh_vuc": "Sử học / Văn hóa",
+        "mo_ta": "Học giả vĩ đại, nhà từ điển học, sử học kiệt xuất. Tác giả của cuốn 'Hán Việt từ điển' và 'Việt Nam văn hóa sử cương'.",
+        "quote": "Giữ gìn vốn liếng văn hóa dân tộc, nghiên cứu nghiêm cẩn để truyền lại cho mai sau."
+    },
+    {
+        "id": "vn_120",
+        "ten": "Trần Trọng Kim",
+        "ngay_thang": "29/04",
+        "nam_sinh": "1883",
+        "linh_vuc": "Học giả / Giáo dục",
+        "mo_ta": "Học giả uyên bác, nhà giáo dục lỗi lạc, tác giả của bộ 'Việt Nam sử lược' - cuốn sử Việt đầu tiên viết bằng chữ Quốc ngữ.",
+        "quote": "Biên soạn sử nước nhà để người Việt Nam hiểu rõ nguồn gốc và tự hào về dân tộc mình."
+    },
+    {
+        "id": "vn_121",
+        "ten": "Nguyễn Hiến Lê",
+        "ngay_thang": "30/04",
+        "nam_sinh": "1912",
+        "linh_vuc": "Văn học / Dịch giả",
+        "mo_ta": "Học giả, nhà văn, dịch giả đồ sộ bậc nhất Việt Nam thế kỷ 20, tác giả của hàng trăm đầu sách và là người đầu tiên dịch cuốn 'Đắc nhân tâm'.",
+        "quote": "Đọc sách là một nghệ thuật, viết sách là một cống hiến cho sự tiến bộ của con người."
+    },
+    {
+        "id": "vn_122",
+        "ten": "Tôn Đức Thắng",
+        "ngay_thang": "01/05",
+        "nam_sinh": "1888",
+        "linh_vuc": "Chính trị / Lãnh tụ",
+        "mo_ta": "Chủ tịch nước thứ hai của Việt Nam, người chiến sĩ cách mạng kiên trung, biểu tượng vĩ đại của khối đại đoàn kết toàn dân tộc.",
+        "quote": "Một lòng trung thành với Tổ quốc, với nhân dân, với Đảng."
+    },
+    {
+        "id": "vn_123",
+        "ten": "Phạm Văn Đồng",
+        "ngay_thang": "02/05",
+        "nam_sinh": "1906",
+        "linh_vuc": "Chính trị / Ngoại giao",
+        "mo_ta": "Vị Thủ tướng tại vị lâu nhất của Việt Nam, nhà ngoại giao xuất sắc, người học trò ưu tú và gần gũi của Chủ tịch Hồ Chí Minh.",
+        "quote": "Quá khứ là rễ, hiện tại là cành lá, tương lai là hoa trái."
+    },
+    {
+        "id": "vn_124",
+        "ten": "Trường Chinh (Đặng Xuân Khu)",
+        "ngay_thang": "03/05",
+        "nam_sinh": "1907",
+        "linh_vuc": "Chính trị / Tư tưởng",
+        "mo_ta": "Tổng Bí thư của Đảng, nhà lý luận kiệt xuất, người kiến trúc sư vĩ đại đặt nền móng cho công cuộc Đổi mới đất nước năm 1986.",
+        "quote": "Đổi mới là đòi hỏi bức thiết của sự sống còn và phát triển."
+    },
+    {
+        "id": "vn_125",
+        "ten": "Lê Duẩn",
+        "ngay_thang": "04/05",
+        "nam_sinh": "1907",
+        "linh_vuc": "Lãnh tụ / Cách mạng",
+        "mo_ta": "Tổng Bí thư vĩ đại, kiến trúc sư chiến lược của cuộc kháng chiến chống Mỹ cứu nước và sự nghiệp thống nhất non sông.",
+        "quote": "Chân lý là cụ thể, cách mạng là sáng tạo."
+    },
+    {
+        "id": "vn_126",
+        "ten": "Nguyễn Hữu Thọ",
+        "ngay_thang": "05/05",
+        "nam_sinh": "1910",
+        "linh_vuc": "Chính trị / Luật sư",
+        "mo_ta": "Chủ tịch Mặt trận Dân tộc Giải phóng miền Nam Việt Nam, trí thức tiêu biểu từ bỏ vinh hoa để đi theo tiếng gọi của non sông.",
+        "quote": "Sự nghiệp giải phóng miền Nam là sự nghiệp của toàn dân."
+    },
+    {
+        "id": "vn_127",
+        "ten": "Võ Chí Công",
+        "ngay_thang": "06/05",
+        "nam_sinh": "1912",
+        "linh_vuc": "Chính trị / Lãnh đạo",
+        "mo_ta": "Chủ tịch Hội đồng Nhà nước, một trong những nhà lãnh đạo tiên phong trong sự nghiệp Đổi mới và khoán trong nông nghiệp.",
+        "quote": "Phải luôn bám sát thực tiễn, lắng nghe ý kiến của nhân dân."
+    },
+    {
+        "id": "vn_128",
+        "ten": "Nguyễn Văn Linh",
+        "ngay_thang": "07/05",
+        "nam_sinh": "1915",
+        "linh_vuc": "Chính trị / Đổi mới",
+        "mo_ta": "Tổng Bí thư của thời kỳ Đổi mới, người khởi xướng công cuộc đổi mới toàn diện đất nước với tinh thần 'Nhìn thẳng vào sự thật'.",
+        "quote": "Hãy nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật."
+    },
+    {
+        "id": "vn_129",
+        "ten": "Đỗ Mười",
+        "ngay_thang": "08/05",
+        "nam_sinh": "1917",
+        "linh_vuc": "Chính trị / Lãnh đạo",
+        "mo_ta": "Tổng Bí thư của Đảng, nhà lãnh đạo xuất sắc có nhiều đóng góp to lớn trong việc xây dựng và phát triển đất nước thời kỳ công nghiệp hóa.",
+        "quote": "Việt Nam muốn làm bạn với tất cả các nước trong cộng đồng thế giới."
+    },
+    {
+        "id": "vn_130",
+        "ten": "Lê Đức Thọ",
+        "ngay_thang": "09/05",
+        "nam_sinh": "1911",
+        "linh_vuc": "Ngoại giao / Chính trị",
+        "mo_ta": "Nhà ngoại giao tài ba, người đàm phán Hiệp định Paris 1973, người châu Á đầu tiên được trao giải Nobel Hòa bình nhưng đã từ chối.",
+        "quote": "Hòa bình chưa thực sự lập lại, tôi không thể nhận giải thưởng này."
+    },
+    {
+        "id": "vn_131",
+        "ten": "Nguyễn Thị Bình",
+        "ngay_thang": "10/05",
+        "nam_sinh": "1927",
+        "linh_vuc": "Ngoại giao / Chính trị",
+        "mo_ta": "Nữ Phó Chủ tịch nước đầu tiên, 'Nữ tướng ngoại giao' kiệt xuất đại diện cho Chính phủ Cách mạng lâm thời tại hội nghị Paris.",
+        "quote": "Chúng tôi chiến đấu vì độc lập, tự do và hòa bình thực sự cho dân tộc."
+    },
+    {
+        "id": "vn_132",
+        "ten": "Xuân Thủy",
+        "ngay_thang": "11/05",
+        "nam_sinh": "1912",
+        "linh_vuc": "Ngoại giao / Báo chí",
+        "mo_ta": "Nhà báo, nhà ngoại giao lỗi lạc, Trưởng đoàn đàm phán của Việt Nam Dân chủ Cộng hòa tại Hội nghị Paris bằng 'nụ cười ngoại giao' bất hủ.",
+        "quote": "Chính nghĩa thuộc về nhân dân Việt Nam, thắng lợi cuối cùng nhất định thuộc về chúng ta."
+    },
+    {
+        "id": "vn_133",
+        "ten": "Võ Văn Kiệt",
+        "ngay_thang": "12/05",
+        "nam_sinh": "1922",
+        "linh_vuc": "Chính trị / Đổi mới",
+        "mo_ta": "Thủ tướng của hành động, kiến trúc sư của nhiều công trình vĩ đại như đường dây 500kV Bắc - Nam và công cuộc hội nhập kinh tế.",
+        "quote": "Đổi mới là không có điểm dừng, không có giới hạn."
+    },
+    {
+        "id": "vn_134",
+        "ten": "Nguyễn Chí Thanh",
+        "ngay_thang": "13/05",
+        "nam_sinh": "1914",
+        "linh_vuc": "Quân sự / Chính trị",
+        "mo_ta": "Đại tướng, nhà chính trị quân sự lỗi lạc, người đề ra chiến thuật 'Nắm thắt lưng địch mà đánh' nổi tiếng trên chiến trường miền Nam.",
+        "quote": "Cứ nắm thắt lưng Mỹ mà đánh."
+    },
+    {
+        "id": "vn_135",
+        "ten": "Văn Tiến Dũng",
+        "ngay_thang": "14/05",
+        "nam_sinh": "1917",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Đại tướng, Tổng Tham mưu trưởng, Tư lệnh chiến dịch Hồ Chí Minh lịch sử, trực tiếp chỉ đạo cuộc Tổng tiến công mùa Xuân 1975.",
+        "quote": "Đánh nhanh, đánh mạnh, đánh chắc thắng."
+    },
+    {
+        "id": "vn_136",
+        "ten": "Đồng Sỹ Nguyên",
+        "ngay_thang": "15/05",
+        "nam_sinh": "1923",
+        "linh_vuc": "Quân sự / Hậu cần",
+        "mo_ta": "Trung tướng, vị Tư lệnh huyền thoại của tuyến đường mòn Hồ Chí Minh, biến con đường mòn thành mạng lưới huyết mạch chiến lược.",
+        "quote": "Máu của chiến sĩ Trường Sơn đã hòa vào từng tấc đất, ngọn cây của tuyến đường huyền thoại."
+    },
+    {
+        "id": "vn_137",
+        "ten": "Chu Huy Mân",
+        "ngay_thang": "16/05",
+        "nam_sinh": "1913",
+        "linh_vuc": "Quân sự / Chính trị",
+        "mo_ta": "Đại tướng 'Hai giỏi' (Giỏi quân sự, giỏi chính trị), người chỉ huy xuất sắc và toàn diện trên chiến trường Tây Nguyên và khu V.",
+        "quote": "Xây dựng lực lượng vũ trang vững mạnh về chính trị là nguyên tắc hàng đầu."
+    },
+    {
+        "id": "vn_138",
+        "ten": "Hoàng Minh Thảo",
+        "ngay_thang": "17/05",
+        "nam_sinh": "1921",
+        "linh_vuc": "Quân sự / Chiến lược",
+        "mo_ta": "Thượng tướng, Giáo sư, nhà lý luận quân sự kiệt xuất, tác giả của chiến thuật nghi binh tài tình trong chiến dịch Tây Nguyên 1975.",
+        "quote": "Mưu trí sinh ra từ thực tiễn, chiến thắng đến từ sự tính toán khôn khéo."
+    },
+    {
+        "id": "vn_139",
+        "ten": "Vương Thừa Vũ",
+        "ngay_thang": "18/05",
+        "nam_sinh": "1910",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Trung tướng, vị Tư lệnh đầu tiên của Đại đoàn 308 - Đại đoàn Quân Tiên phong, người chỉ huy bộ đội tiếp quản Thủ đô năm 1954.",
+        "quote": "Phải luôn giữ vững khí tiết người quân nhân cách mạng."
+    },
+    {
+        "id": "vn_140",
+        "ten": "Hồ Chí Minh",
+        "ngay_thang": "19/05",
+        "nam_sinh": "1890",
+        "linh_vuc": "Lãnh tụ / Danh nhân văn hóa thế giới",
+        "mo_ta": "Vị lãnh tụ thiên tài, người sáng lập Đảng Cộng sản Việt Nam và khai sinh ra nước Việt Nam Dân chủ Cộng hòa.",
+        "quote": "Không có gì quý hơn độc lập, tự do."
+    },
+    {
+        "id": "vn_141",
+        "ten": "Nguyễn Tuân",
+        "ngay_thang": "20/05",
+        "nam_sinh": "1910",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Bậc thầy của tùy bút và ngôn ngữ tiếng Việt, tác giả của 'Vang bóng một thời', người luôn miệt mài đi tìm cái đẹp đích thực.",
+        "quote": "Ở cái thế giới này, cái gì cũng có thể giả được, chỉ có cái đẹp là không thể giả."
+    },
+    {
+        "id": "vn_142",
+        "ten": "Tô Hoài",
+        "ngay_thang": "21/05",
+        "nam_sinh": "1920",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Cây đại thụ của văn học hiện đại, người thổi hồn vào thiên nhiên và loài vật với kiệt tác 'Dế Mèn phiêu lưu ký' được dịch ra nhiều thứ tiếng.",
+        "quote": "Đi cho biết đó biết đây, ở nhà với mẹ biết ngày nào khôn."
+    },
+    {
+        "id": "vn_143",
+        "ten": "Nguyễn Đình Thi",
+        "ngay_thang": "22/05",
+        "nam_sinh": "1924",
+        "linh_vuc": "Văn học / Âm nhạc",
+        "mo_ta": "Nghệ sĩ đa tài ở cả thi ca, văn xuôi và âm nhạc, tác giả của bài hát hùng tráng 'Người Hà Nội' và bài thơ 'Đất nước'.",
+        "quote": "Nước chúng ta, nước những người chưa bao giờ khuất / Đêm đêm rì rầm trong tiếng đất / Những buổi ngày xưa vọng nói về."
+    },
+    {
+        "id": "vn_144",
+        "ten": "Chính Hữu",
+        "ngay_thang": "23/05",
+        "nam_sinh": "1922",
+        "linh_vuc": "Thơ ca / Quân sự",
+        "mo_ta": "Nhà thơ chiến sĩ tiêu biểu của thế hệ chống Pháp, tác giả của bài thơ 'Đồng chí' - khúc tráng ca về tình đồng đội khắc cốt ghi tâm.",
+        "quote": "Đêm nay rừng hoang sương muối / Đứng cạnh bên nhau chờ giặc tới / Đầu súng trăng treo."
+    },
+    {
+        "id": "vn_145",
+        "ten": "Quang Dũng",
+        "ngay_thang": "24/05",
+        "nam_sinh": "1921",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Nhà thơ hào hoa của xứ Đoài, mang phong cách lãng mạn, bi tráng, để lại kiệt tác 'Tây Tiến' khắc họa hình ảnh người lính vô danh.",
+        "quote": "Rải rác biên cương mồ viễn xứ / Chiến trường đi chẳng tiếc đời xanh."
+    },
+    {
+        "id": "vn_146",
+        "ten": "Hoàng Cầm",
+        "ngay_thang": "25/05",
+        "nam_sinh": "1922",
+        "linh_vuc": "Thơ ca / Kịch",
+        "mo_ta": "Nhà thơ tiêu biểu của vùng quê Kinh Bắc, tác giả của những vần thơ đẫm tình quê hương và nỗi đau chia cắt trong 'Bên kia sông Đuống'.",
+        "quote": "Sông Đuống trôi đi / Một dòng lấp lánh / Nằm nghiêng nghiêng trong kháng chiến trường kỳ."
+    },
+    {
+        "id": "vn_147",
+        "ten": "Hữu Loan",
+        "ngay_thang": "26/05",
+        "nam_sinh": "1916",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Nhà thơ yêu nước với trái tim đau đáu, tác giả của kiệt tác 'Màu tím hoa sim' - bài thơ tình bi tráng bậc nhất thế kỷ 20.",
+        "quote": "Nhưng không chết người trai khói lửa / Mà chết người em nhỏ hậu phương."
+    },
+    {
+        "id": "vn_148",
+        "ten": "Văn Cao",
+        "ngay_thang": "27/05",
+        "nam_sinh": "1923",
+        "linh_vuc": "Âm nhạc / Hội họa / Thơ ca",
+        "mo_ta": "Cây đại thụ của nền âm nhạc Việt Nam, người sáng tác 'Tiến quân ca' - Quốc ca của nước Cộng hòa Xã hội Chủ nghĩa Việt Nam.",
+        "quote": "Đoàn quân Việt Nam đi / Chung lòng cứu quốc / Bước chân dồn vang trên đường gập ghềnh xa..."
+    },
+    {
+        "id": "vn_149",
+        "ten": "Lưu Hữu Phước",
+        "ngay_thang": "28/05",
+        "nam_sinh": "1921",
+        "linh_vuc": "Âm nhạc / Cách mạng",
+        "mo_ta": "Nhạc sĩ của những bản hùng ca lịch sử, người sáng tác 'Lên đàng' và 'Giải phóng miền Nam', khơi dậy lòng yêu nước cháy bỏng của thanh niên.",
+        "quote": "Này thanh niên ơi, tiến lên đến ngày giải phóng."
+    },
+    {
+        "id": "vn_150",
+        "ten": "Đỗ Nhuận",
+        "ngay_thang": "29/05",
+        "nam_sinh": "1922",
+        "linh_vuc": "Âm nhạc",
+        "mo_ta": "Tổng thư ký đầu tiên của Hội Nhạc sĩ Việt Nam, tác giả của những ca khúc cách mạng bất hủ và vở opera đầu tiên của Việt Nam 'Cô Sao'.",
+        "quote": "Đời mình là một khúc quân hành / Đời mình là bài ca chiến đấu."
+    },
+    {
+        "id": "vn_151",
+        "ten": "Hoàng Việt",
+        "ngay_thang": "30/05",
+        "nam_sinh": "1928",
+        "linh_vuc": "Âm nhạc",
+        "mo_ta": "Nhạc sĩ tài hoa ngã xuống trên chiến trường, tác giả của bản giao hưởng đầu tiên của Việt Nam 'Quê hương' và kiệt tác 'Tình ca'.",
+        "quote": "Khi hát lên tiếng ca gửi về người yêu quê ta / Ta át tiếng gió mưa thét gào cuộn dâng phong ba."
+    },
+    {
+        "id": "vn_152",
+        "ten": "Phan Huỳnh Điểu",
+        "ngay_thang": "31/05",
+        "nam_sinh": "1924",
+        "linh_vuc": "Âm nhạc",
+        "mo_ta": "Con chim vàng của nền âm nhạc Việt Nam, phổ nhạc thành công rực rỡ nhiều bài thơ tình bất hủ như 'Thuyền và biển', 'Bóng cây Kơ-nia'.",
+        "quote": "Chỉ có thuyền mới hiểu / Biển mênh mông nhường nào."
+    },
+    {
+        "id": "vn_153",
+        "ten": "Nguyễn Sáng",
+        "ngay_thang": "01/06",
+        "nam_sinh": "1923",
+        "linh_vuc": "Hội họa",
+        "mo_ta": "Cây đại thụ của nền mỹ thuật hiện đại Việt Nam, tác giả của bức tranh sơn mài huyền thoại 'Kết nạp Đảng ở Điện Biên Phủ'.",
+        "quote": "Nghệ thuật là máu thịt của cuộc đời, là sự dấn thân vì cái đẹp và độc lập dân tộc."
+    },
+    {
+        "id": "vn_154",
+        "ten": "Bùi Xuân Phái",
+        "ngay_thang": "02/06",
+        "nam_sinh": "1920",
+        "linh_vuc": "Hội họa",
+        "mo_ta": "Danh họa nổi tiếng thế giới với dòng tranh 'Phố Phái', người đã lưu giữ trọn vẹn hồn cốt mộc mạc, thâm trầm của khu phố cổ Hà Nội.",
+        "quote": "Hà Nội có một vẻ đẹp man mác, buồn buồn mà sâu lắng, chỉ có thể cảm nhận bằng trái tim."
+    },
+    {
+        "id": "vn_155",
+        "ten": "Tô Ngọc Vân",
+        "ngay_thang": "03/06",
+        "nam_sinh": "1906",
+        "linh_vuc": "Hội họa",
+        "mo_ta": "Bậc thầy tiên phong của hội họa Việt Nam, tác giả kiệt tác 'Thiếu nữ bên hoa huệ', ngã xuống oanh liệt trên đường ra mặt trận Điện Biên Phủ.",
+        "quote": "Nghệ thuật không chỉ là cái đẹp, mà là hơi thở của dân tộc trong những thời khắc gian lao nhất."
+    },
+    {
+        "id": "vn_156",
+        "ten": "Trần Văn Cẩn",
+        "ngay_thang": "04/06",
+        "nam_sinh": "1910",
+        "linh_vuc": "Hội họa",
+        "mo_ta": "Một trong 'Bộ tứ' danh họa Việt Nam (Trí - Vân - Lân - Cẩn), tác giả của bức chân dung 'Em Thúy' mang vẻ đẹp trong sáng, thuần khiết.",
+        "quote": "Gửi trọn tâm hồn vào từng nét cọ, khắc họa vẻ đẹp chân thực của con người Việt Nam."
+    },
+    {
+        "id": "vn_157",
+        "ten": "Nguyễn Gia Trí",
+        "ngay_thang": "05/06",
+        "nam_sinh": "1908",
+        "linh_vuc": "Hội họa",
+        "mo_ta": "Người dẫn đầu và đặt nền móng cho nghệ thuật sơn mài hiện đại Việt Nam, biến chất liệu mỹ nghệ truyền thống thành hội họa đỉnh cao.",
+        "quote": "Mang chất liệu truyền thống vươn lên tầm nghệ thuật hiện đại, lưu giữ quốc hồn quốc túy."
+    },
+    {
+        "id": "vn_158",
+        "ten": "Diệp Minh Châu",
+        "ngay_thang": "06/06",
+        "nam_sinh": "1919",
+        "linh_vuc": "Hội họa / Điêu khắc",
+        "mo_ta": "Nhà điêu khắc, họa sĩ kiên trung của miền Nam, người đã chích máu từ cánh tay mình để vẽ bức chân dung Bác Hồ gửi ra Bắc.",
+        "quote": "Máu của tôi, trái tim của tôi luôn hướng về Bác và Tổ quốc."
+    },
+    {
+        "id": "vn_159",
+        "ten": "Đặng Thái Mai",
+        "ngay_thang": "07/06",
+        "nam_sinh": "1902",
+        "linh_vuc": "Giáo dục / Lý luận văn học",
+        "mo_ta": "Giáo sư, nhà lý luận, phê bình văn học lỗi lạc, Bộ trưởng Bộ Giáo dục đầu tiên của nước Việt Nam Dân chủ Cộng hòa.",
+        "quote": "Văn học là nhân học, là tấm gương phản chiếu tâm hồn và khí phách của dân tộc."
+    },
+    {
+        "id": "vn_160",
+        "ten": "Hoài Thanh (Nguyễn Đức Nguyên)",
+        "ngay_thang": "08/06",
+        "nam_sinh": "1909",
+        "linh_vuc": "Phê bình văn học",
+        "mo_ta": "Nhà phê bình văn học kiệt xuất, đồng tác giả của cuốn 'Thi nhân Việt Nam' – công trình đồ sộ tổng kết và tôn vinh phong trào Thơ Mới.",
+        "quote": "Chưa bao giờ người ta thấy xuất hiện cùng một lần một hồn thơ rộng mở như Thế Lữ, mơ màng như Lưu Trọng Lư..."
+    },
+    {
+        "id": "vn_161",
+        "ten": "Tế Hanh",
+        "ngay_thang": "09/06",
+        "nam_sinh": "1921",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Nhà thơ của quê hương, mang vào thi ca vẻ đẹp mặn mòi, trong trẻo của dòng sông Trà Bồng và những con thuyền miền duyên hải.",
+        "quote": "Làng tôi ở vốn làm nghề chài lưới / Nước bao vây, cách biển nửa ngày sông."
+    },
+    {
+        "id": "vn_162",
+        "ten": "Nguyễn Khoa Điềm",
+        "ngay_thang": "10/06",
+        "nam_sinh": "1943",
+        "linh_vuc": "Thơ ca / Chính trị",
+        "mo_ta": "Nhà thơ tiêu biểu của thế hệ kháng chiến chống Mỹ, tác giả trường ca 'Mặt đường khát vọng' định nghĩa sâu sắc về Đất Nước của Nhân dân.",
+        "quote": "Khi ta lớn lên Đất Nước đã có rồi / Đất Nước có trong những cái 'ngày xửa ngày xưa' mẹ thường hay kể."
+    },
+    {
+        "id": "vn_163",
+        "ten": "Phạm Tiến Duật",
+        "ngay_thang": "11/06",
+        "nam_sinh": "1941",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Con chim lửa của Trường Sơn huyền thoại, mang giọng điệu thơ ngang tàng, trẻ trung và đầy kiêu hãnh của người lính lái xe.",
+        "quote": "Không có kính không phải vì xe không có kính / Bom giật bom rung kính vỡ đi rồi."
+    },
+    {
+        "id": "vn_164",
+        "ten": "Lưu Quang Vũ",
+        "ngay_thang": "12/06",
+        "nam_sinh": "1948",
+        "linh_vuc": "Kịch nói / Thơ ca",
+        "mo_ta": "Hiện tượng chói sáng bậc nhất của sân khấu kịch Việt Nam thế kỷ 20, tác giả của 'Hồn Trương Ba, da hàng thịt' mang triết lý nhân sinh sâu sắc.",
+        "quote": "Trái tim anh đó / Rất chân thật chia ba phần tươi đỏ."
+    },
+    {
+        "id": "vn_165",
+        "ten": "Xuân Quỳnh",
+        "ngay_thang": "13/06",
+        "nam_sinh": "1942",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Nữ thi sĩ tài hoa với những vần thơ tình dào dạt, vừa mãnh liệt vừa đầy âu lo, nữ tính. Người bạn đời tri kỷ của Lưu Quang Vũ.",
+        "quote": "Dẫu xuôi về phương bắc / Dẫu ngược về phương nam / Nơi nào em cũng nghĩ / Hướng về anh - một phương."
+    },
+    {
+        "id": "vn_166",
+        "ten": "Nguyễn Quang Sáng",
+        "ngay_thang": "14/06",
+        "nam_sinh": "1932",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Nhà văn xuất sắc của vùng đất Nam Bộ, tác giả truyện ngắn 'Chiếc lược ngà' khắc họa cảm động tình phụ tử thiêng liêng trong chiến tranh.",
+        "quote": "Chiến tranh lấy đi nhiều thứ, nhưng không thể xóa nhòa tình phụ tử thiêng liêng."
+    },
+    {
+        "id": "vn_167",
+        "ten": "Anh Đức (Bùi Đức Ái)",
+        "ngay_thang": "15/06",
+        "nam_sinh": "1935",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Nhà văn tiêu biểu của văn học cách mạng miền Nam, tác giả tiểu thuyết 'Hòn Đất' ngợi ca vẻ đẹp kiên trung của con người vùng đồng bằng.",
+        "quote": "Gắn bó máu thịt với miền Nam kiên cường trong khói lửa kháng chiến."
+    },
+    {
+        "id": "vn_168",
+        "ten": "Nguyễn Thi (Ngọc Tấn)",
+        "ngay_thang": "16/06",
+        "nam_sinh": "1928",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Nhà văn của người nông dân Nam Bộ mặc áo lính, hi sinh anh dũng trong trận Mậu Thân 1968, tác giả 'Người mẹ cầm súng'.",
+        "quote": "Sống như những người anh hùng chân lấm tay bùn nhưng kiên trung bất khuất."
+    },
+    {
+        "id": "vn_169",
+        "ten": "Sơn Nam",
+        "ngay_thang": "17/06",
+        "nam_sinh": "1926",
+        "linh_vuc": "Văn học / Khảo cứu",
+        "mo_ta": "Ông già Nam Bộ, nhà văn và nhà nghiên cứu văn hóa vĩ đại, để lại kho tàng vô giá về quá trình khẩn hoang, mở cõi phương Nam.",
+        "quote": "Ghi lại cái hồn hậu, chất phác của những con người đi mở cõi, làm nên vóc dáng đồng bằng."
+    },
+    {
+        "id": "vn_170",
+        "ten": "Vương Hồng Sển",
+        "ngay_thang": "18/06",
+        "nam_sinh": "1902",
+        "linh_vuc": "Khảo cổ / Văn hóa",
+        "mo_ta": "Nhà văn hóa, học giả, nhà sưu tập đồ cổ uyên bác bậc nhất Nam Bộ, cống hiến trọn đời cho việc gìn giữ di sản văn hóa dân tộc.",
+        "quote": "Giữ gìn từng mảnh sành, trang sách cổ để lưu truyền quốc hồn quốc túy cho hậu thế."
+    },
+    {
+        "id": "vn_171",
+        "ten": "Trần Bạch Đằng",
+        "ngay_thang": "19/06",
+        "nam_sinh": "1926",
+        "linh_vuc": "Chính trị / Văn hóa / Tình báo",
+        "mo_ta": "Nhà chính trị, nhà văn tài hoa, nguyên Bí thư Thành ủy Sài Gòn - Gia Định, tác giả của tiểu thuyết tình báo huyền thoại 'Ván bài lật ngửa'.",
+        "quote": "Trận chiến thầm lặng giữa lòng đô thị đòi hỏi bản lĩnh và trí tuệ tuyệt vời."
+    },
+    {
+        "id": "vn_172",
+        "ten": "Cao Văn Lầu",
+        "ngay_thang": "20/06",
+        "nam_sinh": "1892",
+        "linh_vuc": "Âm nhạc cổ truyền",
+        "mo_ta": "Cây đại thụ của nền nghệ thuật đờn ca tài tử Nam Bộ, tác giả bản 'Dạ cổ hoài lang' bất hủ, tiền thân của sân khấu cải lương.",
+        "quote": "Từ là từ phu tướng / Bão kiếm sắc phán lên đàng / Vào ra luống trông tin nhạn / Năm canh mơ màng..."
+    },
+    {
+        "id": "vn_173",
+        "ten": "Phùng Há",
+        "ngay_thang": "21/06",
+        "nam_sinh": "1911",
+        "linh_vuc": "Sân khấu Cải lương",
+        "mo_ta": "Bà tổ của nghệ thuật sân khấu Cải lương, người dành trọn cuộc đời gần một thế kỷ để gìn giữ, phát triển và truyền nghề cho nhiều thế hệ.",
+        "quote": "Sống trọn vẹn với ánh đèn sân khấu, rút ruột nhả tơ cho nghệ thuật truyền thống nước nhà."
+    },
+    {
+        "id": "vn_174",
+        "ten": "Trần Hữu Trang",
+        "ngay_thang": "22/06",
+        "nam_sinh": "1906",
+        "linh_vuc": "Biên kịch Cải lương",
+        "mo_ta": "Soạn giả vĩ đại của sân khấu cải lương, tác giả của các vở tuồng kinh điển 'Đời cô Lựu', 'Tô Ánh Nguyệt', ngã xuống trong kháng chiến.",
+        "quote": "Dùng tiếng đàn, câu ca để phản ánh nỗi đau và sự kiên cường của những con người nghèo khổ."
+    },
+    {
+        "id": "vn_175",
+        "ten": "Năm Châu (Nguyễn Thành Châu)",
+        "ngay_thang": "23/06",
+        "nam_sinh": "1906",
+        "linh_vuc": "Đạo diễn / Sân khấu",
+        "mo_ta": "Bậc thầy tiên phong của sân khấu cải lương Nam Bộ, người chủ trương cách tân nghệ thuật theo hướng 'Thật và Đẹp'.",
+        "quote": "Sân khấu phải mang hơi thở của thời đại, là tấm gương soi chiếu chân thật cuộc đời."
+    },
+    {
+        "id": "vn_176",
+        "ten": "Bảy Nam",
+        "ngay_thang": "24/06",
+        "nam_sinh": "1913",
+        "linh_vuc": "Sân khấu Kịch nói",
+        "mo_ta": "Cây đại thụ của sân khấu kịch Nam Bộ, người nghệ sĩ trọn đời sống với đam mê nghệ thuật, thân mẫu của kỳ nữ Kim Cương.",
+        "quote": "Khóc cười cùng nhân vật, tận hiến cả thanh xuân cho thánh đường nghệ thuật."
+    },
+    {
+        "id": "vn_177",
+        "ten": "Y Moan",
+        "ngay_thang": "25/06",
+        "nam_sinh": "1957",
+        "linh_vuc": "Âm nhạc",
+        "mo_ta": "Giọng ca huyền thoại của đại ngàn Tây Nguyên, mang ngọn lửa đam mê rực cháy và tâm hồn hoang dã vào nền âm nhạc Việt Nam.",
+        "quote": "Giọng hát cất lên từ nắng gió Tây Nguyên, mang theo linh hồn của đại ngàn hùng vĩ."
+    },
+    {
+        "id": "vn_178",
+        "ten": "Thế Lữ",
+        "ngay_thang": "26/06",
+        "nam_sinh": "1907",
+        "linh_vuc": "Thơ ca / Kịch nói",
+        "mo_ta": "Người cắm ngọn cờ đầu cho phong trào Thơ Mới, tác giả bài thơ 'Nhớ rừng' mượn lời con hổ để diễn tả tâm sự uất hận của người dân mất nước.",
+        "quote": "Gậm một khối căm hờn trong cũi sắt / Ta nằm dài, trông ngày tháng dần qua."
+    },
+    {
+        "id": "vn_179",
+        "ten": "Nguyễn Khắc Viện",
+        "ngay_thang": "27/06",
+        "nam_sinh": "1913",
+        "linh_vuc": "Văn hóa / Y học",
+        "mo_ta": "Bác sĩ, học giả, nhà văn hóa kiệt xuất, người có công cực lớn trong việc dịch Truyện Kiều sang tiếng Pháp, giới thiệu văn hóa Việt ra thế giới.",
+        "quote": "Làm nhịp cầu văn hóa giữa Việt Nam và thế giới, dùng ngòi bút để đấu tranh cho hòa bình."
+    },
+    {
+        "id": "vn_180",
+        "ten": "Tôn Thất Bách",
+        "ngay_thang": "28/06",
+        "nam_sinh": "1946",
+        "linh_vuc": "Y học",
+        "mo_ta": "Phó Giáo sư, bác sĩ phẫu thuật tim mạch danh tiếng, người kế tục xuất sắc sự nghiệp của cha mình - Giáo sư Tôn Thất Tùng.",
+        "quote": "Bàn tay vàng nối lại nhịp đập cho hàng ngàn trái tim, tấm lòng nhân ái của người thầy thuốc chân chính."
+    },
+    {
+        "id": "vn_181",
+        "ten": "Vũ Đình Tụng",
+        "ngay_thang": "29/06",
+        "nam_sinh": "1895",
+        "linh_vuc": "Y học / Chính trị",
+        "mo_ta": "Bác sĩ, Bộ trưởng Bộ Thương binh đầu tiên, người cha vĩ đại đã nuốt nước mắt hiến dâng những người con của mình cho Tổ quốc.",
+        "quote": "Biến nỗi đau mất con thành tình yêu thương vô hạn dành cho các thương bệnh binh."
+    },
+    {
+        "id": "vn_182",
+        "ten": "Trần Duy Hưng",
+        "ngay_thang": "30/06",
+        "nam_sinh": "1912",
+        "linh_vuc": "Chính trị / Y khoa",
+        "mo_ta": "Vị bác sĩ khoác áo thị trưởng, người Chủ tịch Ủy ban Hành chính đầu tiên và tại vị lâu nhất của thủ đô Hà Nội.",
+        "quote": "Người trí thức tận tụy vì Thủ đô thanh lịch, sống mãi trong lòng người dân Hà Nội."
+    },
+    {
+        "id": "vn_183",
+        "ten": "Nguyễn Trường Tộ",
+        "ngay_thang": "01/07",
+        "nam_sinh": "1830",
+        "linh_vuc": "Tư tưởng / Cải cách",
+        "mo_ta": "Nhà cải cách kiệt xuất thời Nguyễn, tác giả của các bản điều trần tâm huyết mong muốn canh tân đất nước nhưng không được triều đình thấu hiểu.",
+        "quote": "Bậc trí giả làm việc gì, phải xét từ gốc rễ, không chạy theo ngọn."
+    },
+    {
+        "id": "vn_184",
+        "ten": "Nguyễn Thị Duệ",
+        "ngay_thang": "02/07",
+        "nam_sinh": "1574",
+        "linh_vuc": "Giáo dục / Khoa bảng",
+        "mo_ta": "Bà chúa Sao Sa, người phụ nữ tài sắc vẹn toàn, đã cải trang thành nam giới đi thi và trở thành nữ Tiến sĩ duy nhất trong lịch sử khoa bảng Việt Nam.",
+        "quote": "Dùng tài học xuất chúng vượt qua định kiến, ghi danh vào sử sách ngàn thu."
+    },
+    {
+        "id": "vn_185",
+        "ten": "Võ Trường Toản",
+        "ngay_thang": "03/07",
+        "nam_sinh": "Không rõ",
+        "linh_vuc": "Giáo dục",
+        "mo_ta": "Vạn thế sư biểu của đất Nam Bộ, nhà giáo vĩ đại đã đào tạo ra hàng loạt nhân tài, sĩ phu yêu nước kiệt xuất cho triều Nguyễn.",
+        "quote": "Lấy việc tu tâm dưỡng tính làm gốc, tài năng phải đi đôi với đức hạnh."
+    },
+    {
+        "id": "vn_186",
+        "ten": "Trịnh Hoài Đức",
+        "ngay_thang": "04/07",
+        "nam_sinh": "1765",
+        "linh_vuc": "Sử học / Văn hóa",
+        "mo_ta": "Đại công thần triều Nguyễn, một trong Gia Định tam gia, tác giả của bộ 'Gia Định thành thông chí' vô giá về phong thổ Nam Bộ.",
+        "quote": "Khảo cứu tinh tường, lưu giữ hình hài và hồn cốt của vùng đất phương Nam."
+    },
+    {
+        "id": "vn_187",
+        "ten": "Lê Quang Định",
+        "ngay_thang": "05/07",
+        "nam_sinh": "1759",
+        "linh_vuc": "Ngoại giao / Địa lý",
+        "mo_ta": "Thượng thư Bộ Binh triều Nguyễn, nhà ngoại giao sắc sảo, tác giả của 'Hoàng Việt nhất thống dư địa chí'.",
+        "quote": "Vẽ lại non sông gấm vóc, khẳng định cương vực toàn vẹn của Đại Nam."
+    },
+    {
+        "id": "vn_188",
+        "ten": "Ngô Nhân Tịnh",
+        "ngay_thang": "06/07",
+        "nam_sinh": "1761",
+        "linh_vuc": "Văn học / Quan lại",
+        "mo_ta": "Một trong Gia Định tam gia, danh sĩ vẹn toàn cả tài kinh bang tế thế lẫn thi phú văn chương, sống thanh liêm đến cuối đời.",
+        "quote": "Dùng tài văn chương để bồi đắp khí tiết, giữ mình trong sạch giữa chốn quan trường."
+    },
+    {
+        "id": "vn_189",
+        "ten": "Đặng Dung",
+        "ngay_thang": "07/07",
+        "nam_sinh": "1373",
+        "linh_vuc": "Tướng lĩnh",
+        "mo_ta": "Danh tướng nhà Hậu Trần, nổi tiếng với bài thơ 'Thuật hoài' oanh liệt, thể hiện khí phách anh hùng và nỗi uất hận chưa báo được thù nước.",
+        "quote": "Quốc thù vị báo đầu tiên bạch / Kỷ độ Long Tuyền đới nguyệt ma. (Thù nước chưa xong đầu đã bạc / Gươm báu mài dưới trăng bao phen)."
+    },
+    {
+        "id": "vn_190",
+        "ten": "Nguyễn Biểu",
+        "ngay_thang": "08/07",
+        "nam_sinh": "Không rõ",
+        "linh_vuc": "Danh sĩ / Trung thần",
+        "mo_ta": "Nghĩa liệt vĩ đại thời Hậu Trần, đi sứ vào doanh trại quân Minh, hiên ngang nuốt cỗ đầu người để thị uy rồi hi sinh lẫm liệt.",
+        "quote": "Nuốt cỗ đầu người dằn mặt giặc, một lòng trung nghĩa sáng sử xanh."
+    },
+    {
+        "id": "vn_191",
+        "ten": "Nguyễn Lộ Trạch",
+        "ngay_thang": "09/07",
+        "nam_sinh": "1853",
+        "linh_vuc": "Tư tưởng / Cải cách",
+        "mo_ta": "Nhà tư tưởng canh tân đi trước thời đại, tác giả 'Thiên hạ đại thế luận' khuyên triều đình học hỏi phương Tây để tự cường nhưng bất thành.",
+        "quote": "Muốn giữ nước, phải thức tỉnh, phải canh tân mở cửa để học hỏi cái hay của thiên hạ."
+    },
+    {
+        "id": "vn_192",
+        "ten": "Đinh Công Tráng",
+        "ngay_thang": "10/07",
+        "nam_sinh": "1842",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Thủ lĩnh kiệt xuất của khởi nghĩa Ba Đình trong phong trào Cần Vương, biến ba làng thành pháo đài thép chống Pháp.",
+        "quote": "Dựng lũy Ba Đình, thề một phen sống mái quyết tử với quân thù."
+    },
+    {
+        "id": "vn_193",
+        "ten": "Phạm Bành",
+        "ngay_thang": "11/07",
+        "nam_sinh": "1827",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Đại thần từ quan về quê cùng Đinh Công Tráng lập chiến khu Ba Đình, cuối cùng tự sát để đổi lấy mạng sống cho binh sĩ bị Pháp bắt.",
+        "quote": "Dùng cái chết của mình để bảo toàn tính mạng cho anh em nghĩa quân."
+    },
+    {
+        "id": "vn_194",
+        "ten": "Tống Duy Tân",
+        "ngay_thang": "12/07",
+        "nam_sinh": "1837",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Thủ lĩnh cuộc khởi nghĩa Hùng Lĩnh, chiến đấu kiên cường dẻo dai ở vùng rừng núi Thanh Hóa, thà chết chứ không chịu quy hàng.",
+        "quote": "Trung thần không thờ hai chủ, đã đứng lên cứu nước thì coi cái chết nhẹ tựa lông hồng."
+    },
+    {
+        "id": "vn_195",
+        "ten": "Cầm Bá Thước",
+        "ngay_thang": "13/07",
+        "nam_sinh": "1858",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Thủ lĩnh người dân tộc Thái, lãnh đạo đồng bào thiểu số miền núi sát cánh cùng phong trào Cần Vương đánh Pháp suốt 10 năm.",
+        "quote": "Gắn kết tình anh em Kinh - Thái, biến núi rừng thành mồ chôn giặc."
+    },
+    {
+        "id": "vn_196",
+        "ten": "Lương Ngọc Quyến",
+        "ngay_thang": "14/07",
+        "nam_sinh": "1885",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Nhà chí sĩ kiên cường của Việt Nam Quang Phục Hội, dù bị giặc cùm phế cả đôi chân vẫn ngồi chỉ huy khởi nghĩa Thái Nguyên oai hùng.",
+        "quote": "Chân tuy què nhưng ý chí không què, thà hi sinh để khơi dậy hồn nước."
+    },
+    {
+        "id": "vn_197",
+        "ten": "Đội Cấn (Trịnh Văn Cấn)",
+        "ngay_thang": "15/07",
+        "nam_sinh": "1881",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Vị chỉ huy quân sự tài ba, lãnh đạo binh lính người Việt trong quân đội Pháp nổi dậy khởi nghĩa Thái Nguyên năm 1917.",
+        "quote": "Đã mang dòng máu Việt, quyết không dùng súng đạn bắn vào đồng bào mình."
+    },
+    {
+        "id": "vn_198",
+        "ten": "Thái Phiên",
+        "ngay_thang": "16/07",
+        "nam_sinh": "1882",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Chí sĩ yêu nước nhiệt thành, cùng Trần Cao Vân tổ chức cuộc khởi nghĩa Duy Tân năm 1916 nhưng bị lộ và oanh liệt ra pháp trường.",
+        "quote": "Việc lớn không thành, chỉ mong cái chết này thức tỉnh được lương tri dân tộc."
+    },
+    {
+        "id": "vn_199",
+        "ten": "Trần Cao Vân",
+        "ngay_thang": "17/07",
+        "nam_sinh": "1866",
+        "linh_vuc": "Cách mạng / Phong thủy",
+        "mo_ta": "Nhà tư tưởng, chí sĩ yêu nước tài hoa trí dũng, cố vấn tối cao của vua Duy Tân trong cuộc khởi nghĩa lật đổ thực dân Pháp.",
+        "quote": "Trời chung, nguyệt điếu, khí tiết trung nghĩa sáng soi vạn đời."
+    },
+    {
+        "id": "vn_200",
+        "ten": "Phạm Hồng Thái",
+        "ngay_thang": "18/07",
+        "nam_sinh": "1895",
+        "linh_vuc": "Cách mạng / Ám sát",
+        "mo_ta": "Người thanh niên yêu nước với tiếng bom Sa Diện ám sát toàn quyền Pháp, cái chết của anh đã đánh thức mạnh mẽ hồn nước.",
+        "quote": "Một tiếng bom rung chuyển Sa Diện, cái chết hóa thành ngọn đuốc soi đường cho thanh niên."
+    },
+    {
+        "id": "vn_201",
+        "ten": "Nguyễn Quyền",
+        "ngay_thang": "19/07",
+        "nam_sinh": "1869",
+        "linh_vuc": "Giáo dục / Cách mạng",
+        "mo_ta": "Một trong những người sáng lập Đông Kinh Nghĩa Thục, chủ trương dùng giáo dục hiện đại để nâng cao dân trí, tự cường tự lập.",
+        "quote": "Mở mang dân trí, chấn hưng thực nghiệp là con đường cứu nước bền vững nhất."
+    },
+    {
+        "id": "vn_202",
+        "ten": "Lê Đại",
+        "ngay_thang": "20/07",
+        "nam_sinh": "1875",
+        "linh_vuc": "Giáo dục / Cách mạng",
+        "mo_ta": "Chí sĩ kiên trung của Đông Kinh Nghĩa Thục, cống hiến trọn đời cho công cuộc truyền bá chữ Quốc ngữ và tư tưởng Duy Tân.",
+        "quote": "Bỏ lối học khoa cử lạc hậu, rèn luyện thực tài để giúp nước giúp dân."
+    },
+    {
+        "id": "vn_203",
+        "ten": "Nguyễn Thần Hiến",
+        "ngay_thang": "21/07",
+        "nam_sinh": "1856",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Nhà hoạt động cách mạng xuất sắc, người chiêu tập và hỗ trợ tài chính cho hàng loạt thanh niên Nam Kỳ xuất dương theo phong trào Đông Du.",
+        "quote": "Dốc toàn bộ gia sản vì tương lai của thế hệ trẻ và độc lập nước nhà."
+    },
+    {
+        "id": "vn_204",
+        "ten": "Nguyễn An Ninh",
+        "ngay_thang": "22/07",
+        "nam_sinh": "1900",
+        "linh_vuc": "Tư tưởng / Báo chí",
+        "mo_ta": "Trí thức kiệt xuất, nhà báo sắc bén với tờ 'Tiếng chuông rè', thần tượng của thanh niên miền Nam những năm đầu thế kỷ 20.",
+        "quote": "Đánh thức tinh thần tự do dân chủ, khơi dậy lòng tự hào dân tộc bằng ngòi bút sắc lẹm."
+    },
+    {
+        "id": "vn_205",
+        "ten": "Huỳnh Mẫn Đạt",
+        "ngay_thang": "23/07",
+        "nam_sinh": "1807",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Tuần phủ kiêm nhà thơ nổi tiếng Nam Bộ, tác giả của những bài thơ khẳng khái ca ngợi Nguyễn Trung Trực và các nghĩa sĩ kháng Pháp.",
+        "quote": "Hỏa hồng Nhật Tảo oanh thiên địa / Kiếm bạt Kiên Giang khấp quỷ thần."
+    },
+    {
+        "id": "vn_206",
+        "ten": "Bùi Hữu Nghĩa",
+        "ngay_thang": "24/07",
+        "nam_sinh": "1807",
+        "linh_vuc": "Văn học / Quan lại",
+        "mo_ta": "Thủ khoa Nghĩa, vị quan thanh liêm bậc nhất, vì bênh vực dân nghèo mà bị hàm oan, để lại tấm gương sáng ngời về lòng chính trực.",
+        "quote": "Sống thanh liêm, chết vinh quang, ngòi bút chính trực đâm toạc Unjust."
+    },
+    {
+        "id": "vn_207",
+        "ten": "Phan Văn Trị",
+        "ngay_thang": "25/07",
+        "nam_sinh": "1830",
+        "linh_vuc": "Văn học",
+        "mo_ta": "Cử Trị, nhà thơ mang cốt cách hiệp sĩ Nam Bộ, dùng ngòi bút làm đòn xoay chế độ, vạch mặt và bút chiến nảy lửa với phe tay sai Tôn Thọ Tường.",
+        "quote": "Đứa nịnh hót theo giặc, ta quyết dùng ngòi bút đâm tới cùng."
+    },
+    {
+        "id": "vn_208",
+        "ten": "Nguyễn Thông",
+        "ngay_thang": "26/07",
+        "nam_sinh": "1827",
+        "linh_vuc": "Văn học / Quan lại",
+        "mo_ta": "Đại thần yêu nước triều Nguyễn, nhà thơ và sử gia tận tụy, dốc lòng chăm lo dân sinh và lập hội tị địa không chịu sống chung với giặc.",
+        "quote": "Dù nước mất nhà tan, khí tiết kẻ sĩ Nam Bộ quyết không bao giờ vấy bẩn."
+    },
+    {
+        "id": "vn_209",
+        "ten": "Tô Hiệu",
+        "ngay_thang": "27/07",
+        "nam_sinh": "1912",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Người chiến sĩ cộng sản kiên trung, bị đày ải ở nhà tù Sơn La vẫn bền bỉ hoạt động. 'Cây đào Tô Hiệu' là biểu tượng sức sống mãnh liệt của cách mạng.",
+        "quote": "Thân xác có thể héo tàn nơi ngục lạnh, nhưng lý tưởng cách mạng sẽ mãi đâm chồi như nhánh hoa đào."
+    },
+    {
+        "id": "vn_210",
+        "ten": "Nguyễn Văn Trỗi",
+        "ngay_thang": "28/07",
+        "nam_sinh": "1940",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Người thợ điện anh hùng biệt động Sài Gòn, hiên ngang vạch mặt kẻ thù trước mũi súng pháp trường, trở thành biểu tượng bất tử của tuổi trẻ.",
+        "quote": "Hãy nhớ lấy lời tôi! Đả đảo đế quốc Mỹ! Hồ Chí Minh muôn năm!"
+    },
+    {
+        "id": "vn_211",
+        "ten": "Nguyễn Viết Xuân",
+        "ngay_thang": "29/07",
+        "nam_sinh": "1933",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Chính trị viên tiểu đoàn pháo cao xạ, anh dũng hi sinh trên mâm pháo với lời hô vang dội truyền lửa cho toàn quân.",
+        "quote": "Nhằm thẳng quân thù mà bắn!"
+    },
+    {
+        "id": "vn_212",
+        "ten": "Bế Văn Đàn",
+        "ngay_thang": "30/07",
+        "nam_sinh": "1931",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Anh hùng lực lượng vũ trang nhân dân, trong chiến dịch Điện Biên Phủ đã hi sinh thân mình làm giá súng để đồng đội tiêu diệt địch.",
+        "quote": "Xả thân vì đồng đội, biến bờ vai thành điểm tựa thép cho hỏa lực quân ta."
+    },
+    {
+        "id": "vn_213",
+        "ten": "Tô Vĩnh Diện",
+        "ngay_thang": "31/07",
+        "nam_sinh": "1924",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Người anh hùng huyền thoại của pháo binh Việt Nam, anh dũng hi sinh dùng thân mình chèn bánh pháo để cứu pháo lăn xuống vực.",
+        "quote": "Thà hi sinh thân mình chứ quyết không để pháo lao xuống vực."
+    },
+    {
+        "id": "vn_214",
+        "ten": "Mạc Đĩnh Chi",
+        "ngay_thang": "01/08",
+        "nam_sinh": "1272",
+        "linh_vuc": "Ngoại giao / Quan lại",
+        "mo_ta": "Lưỡng quốc Trạng nguyên nổi tiếng với tài ứng đối sắc bén, khiến các học giả và vua quan nhà Nguyên phải kính phục.",
+        "quote": "Ta là đóa hoa sen trong giếng ngọc, không màng danh lợi, chỉ giữ gìn khí tiết thanh cao."
+    },
+    {
+        "id": "vn_215",
+        "ten": "Trần Nhật Duật",
+        "ngay_thang": "02/08",
+        "nam_sinh": "1255",
+        "linh_vuc": "Quân sự / Ngoại giao",
+        "mo_ta": "Chiêu Văn Vương, danh tướng kiệt xuất và nhà ngoại giao đại tài, am hiểu sâu sắc ngôn ngữ và văn hóa các dân tộc thiểu số.",
+        "quote": "Dùng sự chân thành và hiểu biết văn hóa để thu phục nhân tâm, biến thù thành bạn."
+    },
+    {
+        "id": "vn_216",
+        "ten": "Trần Khánh Dư",
+        "ngay_thang": "03/08",
+        "nam_sinh": "1240",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Nhân Huệ Vương, danh tướng thủy quân tài ba, người lập công lớn đánh chìm toàn bộ đoàn thuyền lương của Trương Văn Hổ tại Vân Đồn.",
+        "quote": "Lấy đoản binh đánh trường trận, chặn đứng nguồn lương thảo để bẻ gãy nhuệ khí quân thù."
+    },
+    {
+        "id": "vn_217",
+        "ten": "Trần Nguyên Hãn",
+        "ngay_thang": "04/08",
+        "nam_sinh": "1390",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Đệ nhất công thần của cuộc khởi nghĩa Lam Sơn, có công lớn trong việc vây hãm thành Đông Quan, ép Vương Thông phải đầu hàng.",
+        "quote": "Đem tài lược giúp minh chúa, quét sạch giặc Minh, trả lại non sông thái bình."
+    },
+    {
+        "id": "vn_218",
+        "ten": "Nguyễn Xí",
+        "ngay_thang": "05/08",
+        "nam_sinh": "1397",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Khai quốc công thần triều Hậu Lê, nổi tiếng với đội chó săn thần dũng, hai lần phò giá lập nên cơ đồ nhà Lê.",
+        "quote": "Một lòng trung nghĩa trung kiên, dẫu trải bao gian nguy vẫn không thay đổi khí tiết."
+    },
+    {
+        "id": "vn_219",
+        "ten": "Trịnh Khả",
+        "ngay_thang": "06/08",
+        "nam_sinh": "1399",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Danh tướng kiệt xuất của khởi nghĩa Lam Sơn, xông pha trăm trận, lập vô số chiến công hiển hách trên chiến trường.",
+        "quote": "Làm tướng phải lấy lòng dũng cảm làm đầu, lấy mưu lược làm trọng."
+    },
+    {
+        "id": "vn_220",
+        "ten": "Nguyễn Chích",
+        "ngay_thang": "07/08",
+        "nam_sinh": "1382",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Nhà chiến lược tài ba, tác giả của kế sách chuyển hướng tiến quân vào Nghệ An, tạo ra bước ngoặt vĩ đại cho khởi nghĩa Lam Sơn.",
+        "quote": "Hãy tiến quân vào Nghệ An làm chỗ đứng chân, rồi từ đó đánh ra thu phục Đông Đô."
+    },
+    {
+        "id": "vn_221",
+        "ten": "Giang Văn Minh",
+        "ngay_thang": "08/08",
+        "nam_sinh": "1573",
+        "linh_vuc": "Ngoại giao",
+        "mo_ta": "Vị sứ thần oanh liệt, dùng tài đối đáp khẳng định chủ quyền dân tộc trước vua Minh và hi sinh lẫm liệt để bảo vệ quốc thể.",
+        "quote": "Đằng Giang tự cổ huyết do hồng. (Sông Bạch Đằng từ xưa máu vẫn còn đỏ)."
+    },
+    {
+        "id": "vn_222",
+        "ten": "Nguyễn Hữu Dật",
+        "ngay_thang": "09/08",
+        "nam_sinh": "1603",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Danh tướng trụ cột của Đàng Trong, cánh tay đắc lực cùng Đào Duy Từ xây dựng Lũy Thầy bảo vệ cơ nghiệp chúa Nguyễn.",
+        "quote": "Dùng mưu trí và định lược để giữ vững biên cương, đẩy lùi đại quân phương Bắc."
+    },
+    {
+        "id": "vn_223",
+        "ten": "Nguyễn Hữu Tiến",
+        "ngay_thang": "10/08",
+        "nam_sinh": "1612",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Đại tướng quân Đàng Trong, bậc thầy về chiến thuật phòng ngự và phản công trong các cuộc chiến tranh Trịnh - Nguyễn.",
+        "quote": "Xây thành đắp lũy, huấn luyện binh sĩ, bách chiến bách thắng bảo vệ cõi Nam."
+    },
+    {
+        "id": "vn_224",
+        "ten": "Nguyễn Cư Trinh",
+        "ngay_thang": "11/08",
+        "nam_sinh": "1716",
+        "linh_vuc": "Ngoại giao / Mở cõi",
+        "mo_ta": "Danh thần chúa Nguyễn, có công vô cùng to lớn trong việc vỗ về dân chúng và mở rộng cương vực vùng đất Nam Bộ.",
+        "quote": "Lấy ân uy để thu phục lòng người, mở mang bờ cõi đất phương Nam vạn dặm."
+    },
+    {
+        "id": "vn_225",
+        "ten": "Võ Tánh",
+        "ngay_thang": "12/08",
+        "nam_sinh": "1768",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Danh tướng triều Nguyễn, người đã tuẫn tiết cháy trong thành Bình Định để xin tướng Tây Sơn tha mạng cho toàn bộ binh sĩ của mình.",
+        "quote": "Tướng quân chết theo thành là việc đương nhiên. Chỉ xin ông tha mạng cho quân sĩ."
+    },
+    {
+        "id": "vn_226",
+        "ten": "Ngô Tùng Châu",
+        "ngay_thang": "13/08",
+        "nam_sinh": "1752",
+        "linh_vuc": "Quan lại / Trung thần",
+        "mo_ta": "Trung thần triều Nguyễn, uống thuốc độc tự vẫn cùng Võ Tánh để giữ trọn khí tiết tại thành Bình Định khi thành thất thủ.",
+        "quote": "Sinh vi danh tướng, tử vi thần. Trung nghĩa vẹn toàn soi sử sách."
+    },
+    {
+        "id": "vn_227",
+        "ten": "Trương Đăng Quế",
+        "ngay_thang": "14/08",
+        "nam_sinh": "1793",
+        "linh_vuc": "Chính trị / Thơ ca",
+        "mo_ta": "Đại thần quyền lực trải qua 4 triều vua Nguyễn (Gia Long, Minh Mạng, Thiệu Trị, Tự Đức), là thầy dạy học cho nhiều vị vua.",
+        "quote": "Tận tụy phò tá bốn triều đại, giữ vững giường mối và luật lệ quốc gia."
+    },
+    {
+        "id": "vn_228",
+        "ten": "Phan Thanh Giản",
+        "ngay_thang": "15/08",
+        "nam_sinh": "1796",
+        "linh_vuc": "Ngoại giao / Quan lại",
+        "mo_ta": "Đại thần triều Nguyễn, Tiến sĩ đầu tiên của Nam Kỳ. Ông uống thuốc độc tự tử để nhận trách nhiệm khi không giữ được 3 tỉnh miền Tây.",
+        "quote": "Trời đã định thế, sức người không thể làm lại được. Ta xin nhận lấy mọi tội lỗi về mình."
+    },
+    {
+        "id": "vn_229",
+        "ten": "Phạm Phú Thứ",
+        "ngay_thang": "16/08",
+        "nam_sinh": "1821",
+        "linh_vuc": "Chính trị / Canh tân",
+        "mo_ta": "Nhà tư tưởng tiến bộ triều Nguyễn, dâng sớ xin mở cửa giao thương và đưa kỹ thuật, máy móc phương Tây về áp dụng tại Việt Nam.",
+        "quote": "Muốn không bị bắt nạt, phải mở cửa giao thương, canh tân học hỏi kỹ thuật phương Tây."
+    },
+    {
+        "id": "vn_230",
+        "ten": "Đặng Huy Trứ",
+        "ngay_thang": "17/08",
+        "nam_sinh": "1825",
+        "linh_vuc": "Cải cách / Kinh tế",
+        "mo_ta": "Nhà tư tưởng canh tân, người đầu tiên mang nghề nhiếp ảnh về Việt Nam và luôn chủ trương 'Tự lực tự cường' phát triển kinh tế.",
+        "quote": "Tài chính là huyết mạch của quốc gia, kinh tế phải đi đôi với giáo dục mới mong tự cường."
+    },
+    {
+        "id": "vn_231",
+        "ten": "Nguyễn Quang Bích",
+        "ngay_thang": "18/08",
+        "nam_sinh": "1832",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Tuần phủ Hưng Hóa, lãnh tụ kiên cường của phong trào Cần Vương vùng Tây Bắc, kiên quyết từ chối mọi sự dụ hàng của quân Pháp.",
+        "quote": "Chỉ thà làm ma nước Nam, chứ không thèm làm quan triều Tây."
+    },
+    {
+        "id": "vn_232",
+        "ten": "Mai Xuân Thưởng",
+        "ngay_thang": "19/08",
+        "nam_sinh": "1860",
+        "linh_vuc": "Lãnh đạo khởi nghĩa",
+        "mo_ta": "Lãnh tụ Cần Vương trẻ tuổi tài ba của tỉnh Bình Định. Khi bị giặc Pháp xử chém, ông hiên ngang không lộ chút sợ hãi.",
+        "quote": "Sống làm tướng Cần Vương, chết làm ma Cần Vương, vì nước quên thân có gì phải sợ."
+    },
+    {
+        "id": "vn_233",
+        "ten": "Ông Ích Khiêm",
+        "ngay_thang": "20/08",
+        "nam_sinh": "1829",
+        "linh_vuc": "Quân sự",
+        "mo_ta": "Danh tướng kiệt xuất triều Nguyễn, nổi tiếng thao lược, bách chiến bách thắng nhưng tính tình cương trực, hay châm biếm quan lại tham nhũng.",
+        "quote": "Làm tướng phải lấy việc thương quân, bảo vệ dân làm bổn phận hàng đầu."
+    },
+    {
+        "id": "vn_234",
+        "ten": "Nguyễn Khắc Nhu",
+        "ngay_thang": "21/08",
+        "nam_sinh": "1881",
+        "linh_vuc": "Cách mạng",
+        "mo_ta": "Xứ Nhu, một trong những lãnh tụ nòng cốt của Việt Nam Quốc Dân Đảng, chỉ huy cuộc khởi nghĩa Yên Bái và tự sát khi sa vào tay giặc.",
+        "quote": "Thành bại là việc thường của binh gia, chỉ có lòng yêu nước là vĩnh cửu."
+    },
+    {
+        "id": "vn_235",
+        "ten": "Phạm Ngọc Thạch",
+        "ngay_thang": "22/08",
+        "nam_sinh": "1909",
+        "linh_vuc": "Y học / Cách mạng",
+        "mo_ta": "Giáo sư bác sĩ, Bộ trưởng Y tế đầu tiên của Việt Nam Dân chủ Cộng hòa, hi sinh dũng cảm khi đang làm nhiệm vụ tại chiến trường miền Nam.",
+        "quote": "Bác sĩ cách mạng là người trị bệnh cứu người và hiến dâng cuộc đời để cứu cả dân tộc."
+    },
+    {
+        "id": "vn_236",
+        "ten": "Tạ Quang Bửu",
+        "ngay_thang": "23/08",
+        "nam_sinh": "1910",
+        "linh_vuc": "Khoa học / Giáo dục",
+        "mo_ta": "Giáo sư toán học, nhà khoa học vĩ đại đặt nền móng cho nền kỹ thuật quân sự Việt Nam và là Bộ trưởng Đại học và THCN đầu tiên.",
+        "quote": "Khoa học chân chính phải gắn liền với thực tiễn chiến đấu và kiến thiết đất nước."
+    },
+    {
+        "id": "vn_237",
+        "ten": "Nguyễn Văn Huyên",
+        "ngay_thang": "24/08",
+        "nam_sinh": "1905",
+        "linh_vuc": "Giáo dục / Lịch sử",
+        "mo_ta": "Giáo sư sử học, người giữ chức Bộ trưởng Bộ Quốc gia Giáo dục lâu nhất Việt Nam (29 năm), kiến trúc sư của nền giáo dục dân chủ mới.",
+        "quote": "Giáo dục là quốc sách hàng đầu để xây dựng một nước Việt Nam độc lập, tự cường."
+    },
+    {
+        "id": "vn_238",
+        "ten": "Ngụy Như Kon Tum",
+        "ngay_thang": "25/08",
+        "nam_sinh": "1913",
+        "linh_vuc": "Vật lý / Giáo dục",
+        "mo_ta": "Nhà vật lý lỗi lạc, vị Hiệu trưởng đầu tiên và lâu năm nhất của Đại học Tổng hợp Hà Nội, cống hiến trọn đời cho sự nghiệp trồng người.",
+        "quote": "Xây dựng trường đại học là xây dựng trung tâm văn hóa và trí tuệ của quốc gia."
+    },
+    {
+        "id": "vn_239",
+        "ten": "Hồ Đắc Di",
+        "ngay_thang": "26/08",
+        "nam_sinh": "1900",
+        "linh_vuc": "Y học",
+        "mo_ta": "Giáo sư phẫu thuật xuất chúng, Hiệu trưởng đầu tiên của Đại học Y Hà Nội, người thầy vĩ đại của nhiều thế hệ bác sĩ Việt Nam.",
+        "quote": "Nghề y là nghề cứu người, tài năng phải xuất phát từ một y đức trong sáng."
+    },
+    {
+        "id": "vn_240",
+        "ten": "Vũ Đình Hòe",
+        "ngay_thang": "27/08",
+        "nam_sinh": "1912",
+        "linh_vuc": "Luật học / Báo chí",
+        "mo_ta": "Bộ trưởng Bộ Tư pháp đầu tiên của nước Việt Nam độc lập, một trong những người đặt nền móng xây dựng nền tư pháp cách mạng.",
+        "quote": "Luật pháp phải dựa trên công lý và bảo vệ tuyệt đối quyền làm chủ của nhân dân."
+    },
+    {
+        "id": "vn_241",
+        "ten": "Nguyễn Xiển",
+        "ngay_thang": "28/08",
+        "nam_sinh": "1907",
+        "linh_vuc": "Khoa học / Khí tượng",
+        "mo_ta": "Nhà khoa học đa tài, Giám đốc đầu tiên của Nha Khí tượng, có công vô cùng to lớn trong việc xây dựng ngành khí tượng thủy văn Việt Nam.",
+        "quote": "Hiểu biết quy luật thiên nhiên để chinh phục và phục vụ an toàn cho đời sống con người."
+    },
+    {
+        "id": "vn_242",
+        "ten": "Hoàng Tụy",
+        "ngay_thang": "29/08",
+        "nam_sinh": "1927",
+        "linh_vuc": "Toán học",
+        "mo_ta": "Giáo sư toán học vĩ đại, người đặt nền móng cho lĩnh vực Tối ưu hóa Toàn cục, mang lại uy tín lớn lao cho khoa học Việt Nam trên trường quốc tế.",
+        "quote": "Giáo dục và khoa học là nền tảng duy nhất để đất nước thoát khỏi nghèo nàn và tụt hậu."
+    },
+    {
+        "id": "vn_243",
+        "ten": "Vũ Đình Liên",
+        "ngay_thang": "30/08",
+        "nam_sinh": "1913",
+        "linh_vuc": "Thơ ca",
+        "mo_ta": "Nhà giáo, nhà thơ nổi tiếng của phong trào Thơ Mới, tác giả bài thơ 'Ông đồ' mang nỗi hoài niệm sâu sắc về những giá trị văn hóa đang phai tàn.",
+        "quote": "Những người muôn năm cũ / Hồn ở đâu bây giờ?"
+    },
+    {
+        "id": "vn_244",
+        "ten": "Trịnh Công Sơn",
+        "ngay_thang": "31/08",
+        "nam_sinh": "1939",
+        "linh_vuc": "Âm nhạc",
+        "mo_ta": "Cây đại thụ của nền tân nhạc Việt Nam, để lại gia tài khổng lồ với hàng trăm bản tình ca và ca khúc da vàng mang tính triết lý sâu sắc.",
+        "quote": "Sống trong đời sống cần có một tấm lòng. Để làm gì em biết không? Để gió cuốn đi..."
+    },
+        {
+            "id": "vn_245",
+            "ten": "Đào Tấn",
+            "ngay_thang": "01/09",
+            "nam_sinh": "1845",
+            "linh_vuc": "Sân khấu / Nghệ thuật Tuồng",
+            "mo_ta": "Hậu tổ của nghệ thuật Tuồng Việt Nam, vị quan thanh liêm dốc trọn tâm huyết để hoàn thiện, nâng tầm và hệ thống hóa nghệ thuật hát Bội.",
+            "quote": "Tiếng trống tuồng giục giã hồn dân tộc, giữ lấy điệu hồn quê hương trong từng nét vẽ mặt."
+        },
+        {
+            "id": "vn_246",
+            "ten": "Trần Văn Giàu",
+            "ngay_thang": "02/09",
+            "nam_sinh": "1911",
+            "linh_vuc": "Sử học / Cách mạng",
+            "mo_ta": "Giáo sư sử học, nguyên Bí thư Xứ ủy Nam Kỳ, người lãnh đạo cuộc khởi nghĩa giành chính quyền tại Sài Gòn trong Cách mạng tháng Tám.",
+            "quote": "Viết sử không chỉ để ghi nhớ quá khứ, mà để truyền lại ngọn lửa yêu nước cho thế hệ mai sau."
+        },
+        {
+            "id": "vn_247",
+            "ten": "Cao Xuân Huy",
+            "ngay_thang": "03/09",
+            "nam_sinh": "1900",
+            "linh_vuc": "Triết học / Đạo học",
+            "mo_ta": "Giáo sư, học giả uyên bác về triết học phương Đông, tác giả của 'Tư tưởng phương Đông gợi những điểm nhìn tham chiếu'.",
+            "quote": "Trí thức là người biết lấy cái tâm vô ngã để thấu hiểu vạn vật trong vũ trụ."
+        },
+        {
+            "id": "vn_248",
+            "ten": "Trần Đức Thảo",
+            "ngay_thang": "04/09",
+            "nam_sinh": "1917",
+            "linh_vuc": "Triết học",
+            "mo_ta": "Triết gia kiệt xuất của Việt Nam có tầm ảnh hưởng thế giới, người kết hợp độc đáo giữa hiện tượng học và chủ nghĩa Mác.",
+            "quote": "Đi tìm chân lý triết học từ tận cùng bản thể và sự tiến hóa của nhận thức con người."
+        },
+        {
+            "id": "vn_249",
+            "ten": "Nguyễn Mạnh Tường",
+            "ngay_thang": "05/09",
+            "nam_sinh": "1909",
+            "linh_vuc": "Luật học / Giáo dục",
+            "mo_ta": "Kỳ tài hiếm có, đỗ hai bằng Tiến sĩ quốc gia Pháp (Luật học và Văn chương) khi mới 23 tuổi, cống hiến lớn cho nền giáo dục nước nhà.",
+            "quote": "Luật pháp phải là thanh gươm bảo vệ công lý và quyền sống của con người."
+        },
+        {
+            "id": "vn_250",
+            "ten": "Nguyễn Tài Thu",
+            "ngay_thang": "06/09",
+            "nam_sinh": "1931",
+            "linh_vuc": "Y học / Châm cứu",
+            "mo_ta": "Giáo sư, 'Thần kim' của nền y học cổ truyền Việt Nam, người đưa nghệ thuật châm cứu Việt Nam vươn tầm và được thế giới công nhận.",
+            "quote": "Cây kim nhỏ nhưng mang tình yêu lớn, kết nối khí huyết để cứu vãn sinh mệnh."
+        },
+        {
+            "id": "vn_251",
+            "ten": "Đỗ Tất Lợi",
+            "ngay_thang": "07/09",
+            "nam_sinh": "1919",
+            "linh_vuc": "Y học / Dược liệu",
+            "mo_ta": "Cây đại thụ của ngành dược học Việt Nam, tác giả bộ sách đồ sộ 'Những cây thuốc và vị thuốc Việt Nam' trị giá bằng cả một gia tài khoa học.",
+            "quote": "Thuốc Nam chữa bệnh cho người Nam, cây cỏ quanh nhà chính là thần dược."
+        },
+        {
+            "id": "vn_252",
+            "ten": "Từ Giấy",
+            "ngay_thang": "08/09",
+            "nam_sinh": "1921",
+            "linh_vuc": "Y học / Dinh dưỡng",
+            "mo_ta": "Giáo sư, bác sĩ, cha đẻ của ngành Dinh dưỡng học Việt Nam, người khởi xướng phong trào VAC (Vườn - Ao - Chuồng) nổi tiếng.",
+            "quote": "Bảo vệ sức khỏe nhân dân bằng chính mảnh vườn, ao cá và nguồn thực phẩm của quê hương."
+        },
+        {
+            "id": "vn_253",
+            "ten": "Tôn Thất Trình",
+            "ngay_thang": "09/09",
+            "nam_sinh": "1931",
+            "linh_vuc": "Nông nghiệp / Khoa học",
+            "mo_ta": "Giáo sư nông học xuất sắc, chuyên gia hàng đầu về lúa nhiệt đới, có công lớn trong việc áp dụng khoa học cải tạo năng suất nông nghiệp.",
+            "quote": "Nông nghiệp vững chắc là nền tảng tối thượng của một quốc gia cường thịnh."
+        },
+        {
+            "id": "vn_254",
+            "ten": "Bùi Huy Đáp",
+            "ngay_thang": "10/09",
+            "nam_sinh": "1919",
+            "linh_vuc": "Nông nghiệp / Khoa học",
+            "mo_ta": "Giáo sư nông học vĩ đại, người khởi xướng và lãnh đạo thành công cuộc cách mạng 'lúa xuân', thay đổi hoàn toàn tập quán canh tác của nông dân.",
+            "quote": "Gắn bó với bùn lầy ruộng đồng để đưa khoa học vào từng hạt lúa vàng."
+        },
+        {
+            "id": "vn_255",
+            "ten": "Hoàng Xuân Hãn",
+            "ngay_thang": "11/09",
+            "nam_sinh": "1908",
+            "linh_vuc": "Học giả / Lịch sử / Khoa học",
+            "mo_ta": "Học giả uyên bác đa lĩnh vực, tác giả của 'Danh từ khoa học' và những công trình khảo cứu lịch sử đồ sộ như 'Lý Thường Kiệt'.",
+            "quote": "Giữ gìn quốc hồn quốc túy qua từng trang sử và sự trong sáng của ngôn ngữ dân tộc."
+        },
+        {
+            "id": "vn_256",
+            "ten": "Lê Văn Thiêm",
+            "ngay_thang": "12/09",
+            "nam_sinh": "1918",
+            "linh_vuc": "Toán học / Giáo dục",
+            "mo_ta": "Cha đẻ của nền toán học Việt Nam hiện đại, từ bỏ vị trí danh giá ở châu Âu để về bưng biền tham gia kháng chiến và xây dựng đại học.",
+            "quote": "Toán học là nền tảng tối quan trọng để xây dựng tư duy khoa học độc lập."
+        },
+        {
+            "id": "vn_257",
+            "ten": "Nguyễn Cảnh Toàn",
+            "ngay_thang": "13/09",
+            "nam_sinh": "1926",
+            "linh_vuc": "Toán học / Giáo dục",
+            "mo_ta": "Giáo sư toán học xuất chúng, biểu tượng vĩ đại của tinh thần tự học, người không ngừng nghỉ nghiên cứu và truyền cảm hứng học tập suốt đời.",
+            "quote": "Tự học là con đường ngắn nhất, bền vững nhất để vươn tới kho tàng tri thức nhân loại."
+        },
+        {
+            "id": "vn_258",
+            "ten": "Nguyễn Văn Hiệu",
+            "ngay_thang": "14/09",
+            "nam_sinh": "1938",
+            "linh_vuc": "Vật lý / Khoa học",
+            "mo_ta": "Giáo sư, Viện sĩ Vật lý kiệt xuất, người có công lớn trong việc đưa khoa học cơ bản Việt Nam hội nhập với thế giới.",
+            "quote": "Đỉnh cao của khoa học là sự cống hiến vô tư, trọn vẹn cho sự tiến bộ của nhân loại."
+        },
+        {
+            "id": "vn_259",
+            "ten": "Đào Vọng Đức",
+            "ngay_thang": "15/09",
+            "nam_sinh": "1936",
+            "linh_vuc": "Vật lý lý thuyết",
+            "mo_ta": "Giáo sư, Viện sĩ nổi tiếng quốc tế trong lĩnh vực Vật lý lý thuyết và Hạt cơ bản, kết hợp xuất sắc tư duy khoa học và triết lý phương Đông.",
+            "quote": "Vật lý đưa con người chạm đến những rung động vi tế nhất ở tận cùng cấu trúc vũ trụ."
+        },
+        {
+            "id": "vn_260",
+            "ten": "Nguyễn Tài Cẩn",
+            "ngay_thang": "16/09",
+            "nam_sinh": "1926",
+            "linh_vuc": "Ngôn ngữ học",
+            "mo_ta": "Giáo sư đầu ngành, cây đại thụ của nền ngôn ngữ học Việt Nam, chuyên gia số một về lịch sử phát triển của tiếng Việt và chữ Nôm.",
+            "quote": "Tiếng Việt là tài sản vô giá, là mã gen văn hóa lưu giữ linh hồn của dân tộc Việt."
+        },
+        {
+            "id": "vn_261",
+            "ten": "Cao Xuân Hạo",
+            "ngay_thang": "17/09",
+            "nam_sinh": "1930",
+            "linh_vuc": "Ngôn ngữ học / Dịch thuật",
+            "mo_ta": "Nhà ngôn ngữ học sắc sảo, dịch giả tài hoa với những góc nhìn độc lập, đột phá về ngữ pháp và cấu trúc đặc thù của tiếng Việt.",
+            "quote": "Sự tinh tế của tiếng Việt nằm ở thanh điệu và cách chúng ta tổ chức tư duy."
+        },
+        {
+            "id": "vn_262",
+            "ten": "Trần Quốc Vượng",
+            "ngay_thang": "18/09",
+            "nam_sinh": "1934",
+            "linh_vuc": "Sử học / Khảo cổ",
+            "mo_ta": "Một trong 'Tứ trụ sử học' Việt Nam hiện đại, nhà bách khoa thư sống với những nghiên cứu xuất chúng về văn hóa và địa lý lịch sử.",
+            "quote": "Lịch sử không chỉ nằm trong sử sách, mà nằm dưới từng tấc đất và trong huyền thoại dân gian."
+        },
+        {
+            "id": "vn_263",
+            "ten": "Đinh Xuân Lâm",
+            "ngay_thang": "19/09",
+            "nam_sinh": "1925",
+            "linh_vuc": "Sử học",
+            "mo_ta": "Thành viên của 'Tứ trụ sử học' (Lâm - Lê - Tấn - Vượng), chuyên gia hàng đầu về lịch sử cận đại và phong trào cách mạng Việt Nam.",
+            "quote": "Hiểu sâu sắc lịch sử cận đại để thấy rõ cái giá của độc lập và con đường đi lên của dân tộc."
+        },
+        {
+            "id": "vn_264",
+            "ten": "Phan Huy Lê",
+            "ngay_thang": "20/09",
+            "nam_sinh": "1934",
+            "linh_vuc": "Sử học",
+            "mo_ta": "Giáo sư đầu ngành, nhân vật kiệt xuất của 'Tứ trụ sử học', người có công vĩ đại trong việc kiến tạo nền sử học Mác-xít Việt Nam hiện đại.",
+            "quote": "Nhà sử học chân chính phải lấy sự thật khách quan làm tiêu chuẩn đạo đức cao nhất."
+        },
+        {
+            "id": "vn_265",
+            "ten": "Hà Văn Tấn",
+            "ngay_thang": "21/09",
+            "nam_sinh": "1937",
+            "linh_vuc": "Sử học / Khảo cổ học",
+            "mo_ta": "Học giả uyên bác bậc nhất trong 'Tứ trụ sử học', tinh thông kim cổ, người tiên phong ứng dụng khảo cổ học để viết lại lịch sử Việt Nam.",
+            "quote": "Đọc quá khứ từ những mảnh gốm vỡ, đẽo gọt thời gian để tái hiện diện mạo tổ tiên."
+        },
+        {
+            "id": "vn_266",
+            "ten": "Vũ Ngọc Phan",
+            "ngay_thang": "22/09",
+            "nam_sinh": "1902",
+            "linh_vuc": "Phê bình văn học",
+            "mo_ta": "Nhà nghiên cứu văn học kiệt xuất, tác giả bộ sách đồ sộ 'Nhà văn hiện đại' - công trình nền tảng của lịch sử văn học Việt Nam thế kỷ 20.",
+            "quote": "Đánh giá văn học là đo lường nhịp đập tâm hồn và sự chuyển mình của một thời đại."
+        },
+        {
+            "id": "vn_267",
+            "ten": "Thiếu Sơn",
+            "ngay_thang": "23/09",
+            "nam_sinh": "1908",
+            "linh_vuc": "Phê bình văn học",
+            "mo_ta": "Người tiên phong đặt nền móng cho nghệ thuật phê bình văn học hiện đại bằng chữ Quốc ngữ, với ngòi bút sắc sảo, công tâm và tinh tế.",
+            "quote": "Văn chương không chỉ là chữ nghĩa, mà là tấm gương phản chiếu những góc khuất sâu thẳm của con người."
+        },
+        {
+            "id": "vn_268",
+            "ten": "Thu Giang Nguyễn Duy Cần",
+            "ngay_thang": "24/09",
+            "nam_sinh": "1907",
+            "linh_vuc": "Học giả / Đạo học",
+            "mo_ta": "Học giả, nhà văn, nhà biên khảo uyên bác về triết học Á Đông. Sách của ông là kim chỉ nam về thuật xử thế và tự học cho nhiều thế hệ.",
+            "quote": "Cái học của người trí thức chân chính là cái học để làm người, chứ không phải để làm quan hay cầu danh lợi."
+        },
+        {
+            "id": "vn_269",
+            "ten": "Phạm Quỳnh",
+            "ngay_thang": "25/09",
+            "nam_sinh": "1892",
+            "linh_vuc": "Học giả / Văn hóa / Báo chí",
+            "mo_ta": "Chủ bút tạp chí Nam Phong, học giả có sức ảnh hưởng lớn, dốc lòng bảo tồn văn hóa truyền thống và phát triển tiếng Việt hiện đại.",
+            "quote": "Truyện Kiều còn, tiếng ta còn; tiếng ta còn, nước ta còn."
+        },
+        {
+            "id": "vn_270",
+            "ten": "Nguyễn Văn Vĩnh",
+            "ngay_thang": "26/09",
+            "nam_sinh": "1882",
+            "linh_vuc": "Dịch giả / Báo chí",
+            "mo_ta": "Ông tổ của nghề báo chữ Quốc ngữ, dịch giả thiên tài đã đem tinh hoa văn học Pháp (Những người khốn khổ, Thơ ngụ ngôn) đến với người Việt.",
+            "quote": "Nước Nam ta mai sau này hay dở cũng ở chữ Quốc ngữ."
+        },
+        {
+            "id": "vn_271",
+            "ten": "Hoàng Ngọc Phách",
+            "ngay_thang": "27/09",
+            "nam_sinh": "1896",
+            "linh_vuc": "Văn học",
+            "mo_ta": "Nhà giáo, nhà văn, người khai mở dòng tiểu thuyết lãng mạn Việt Nam với kiệt tác 'Tố Tâm' gây chấn động văn đàn những năm đầu thế kỷ 20.",
+            "quote": "Dùng ngòi bút lãng mạn để phá vỡ những lề thói cổ hủ, khơi dậy quyền được yêu và sống thật với trái tim."
+        },
+        {
+            "id": "vn_272",
+            "ten": "Nguyễn Công Hoan",
+            "ngay_thang": "28/09",
+            "nam_sinh": "1903",
+            "linh_vuc": "Văn học",
+            "mo_ta": "Bậc thầy truyện ngắn trào phúng, cây bút hiện thực sắc lẹm chuyên bóc trần những thói hư tật xấu và bộ mặt đạo đức giả của xã hội thực dân.",
+            "quote": "Viết văn là để lột mặt nạ cái xã hội thượng lưu rởm đời, trả lại sự thật cho những kiếp người bần hàn."
+        },
+        {
+            "id": "vn_273",
+            "ten": "Vũ Bằng",
+            "ngay_thang": "29/09",
+            "nam_sinh": "1913",
+            "linh_vuc": "Văn học / Báo chí",
+            "mo_ta": "Nhà văn, nhà báo tài hoa, tác giả của 'Thương nhớ mười hai'. Ông là một điệp viên cách mạng âm thầm hoạt động dưới vỏ bọc một trí thức di cư.",
+            "quote": "Nhớ cái rét ngọt của mùa đông Hà Nội, nhớ những nét thanh lịch tinh tế không thể phai mờ của chốn ngàn năm."
+        },
+        {
+            "id": "vn_274",
+            "ten": "Nguyễn Huy Tưởng",
+            "ngay_thang": "30/09",
+            "nam_sinh": "1912",
+            "linh_vuc": "Văn học / Kịch nói",
+            "mo_ta": "Nhà văn, nhà viết kịch vĩ đại, ngòi bút chuyên chở khí phách lịch sử dân tộc qua các kiệt tác 'Vũ Như Tô', 'Sống mãi với thủ đô'.",
+            "quote": "Sống mãi với thủ đô, sống mãi với những trang sử oai hùng bi tráng của dân tộc Việt Nam."
+        },
+  {
+    "id": "vn_275",
+    "ten": "Sương Nguyệt Anh",
+    "ngay_thang": "01/10",
+    "nam_sinh": "1864",
+    "linh_vuc": "Báo chí / Văn học",
+    "mo_ta": "Nữ chủ bút đầu tiên của Việt Nam, con gái của Nguyễn Đình Chiểu, người sáng lập tờ 'Nữ giới chung' nhằm đấu tranh cho nữ quyền và dân trí.",
+    "quote": "Tài sắc phụ nữ nước nhà đâu có kém, chỉ vì nếp cũ mà tài năng bị vùi lấp đi."
+  },
+  {
+    "id": "vn_276",
+    "ten": "Bạch Thái Bưởi",
+    "ngay_thang": "02/10",
+    "nam_sinh": "1874",
+    "linh_vuc": "Kinh doanh / Doanh nhân",
+    "mo_ta": "Được mệnh danh là 'Vua tàu thủy Việt Nam', doanh nhân yêu nước kiệt xuất với tinh thần tự lực tự cường, quyết cạnh tranh sòng phẳng với tư bản ngoại bang.",
+    "quote": "Người Việt Nam đi tàu Việt Nam, giữ lấy nguồn lợi của nước nhà."
+  },
+  {
+    "id": "vn_277",
+    "ten": "Trịnh Văn Bô",
+    "ngay_thang": "03/10",
+    "nam_sinh": "1914",
+    "linh_vuc": "Kinh doanh / Cách mạng",
+    "mo_ta": "Nhà tư sản yêu nước vĩ đại, người đã hiến tặng hơn 5.000 lượng vàng cho cách mạng và dành ngôi nhà 48 Hàng Ngang làm nơi Bác Hồ viết Tuyên ngôn Độc lập.",
+    "quote": "Tài sản lớn nhất là nền độc lập của dân tộc, vàng bạc dẫu nhiều cũng chỉ là vật ngoài thân."
+  },
+  {
+    "id": "vn_278",
+    "ten": "Trương Văn Bền",
+    "ngay_thang": "04/10",
+    "nam_sinh": "1883",
+    "linh_vuc": "Kinh doanh / Công nghiệp",
+    "mo_ta": "Ông chủ hãng Xà bông Cô Ba lừng danh, nhà công nghiệp tiên phong của Nam Kỳ, người đã đánh bại các tập đoàn hóa mỹ phẩm nước ngoài trên chính sân nhà.",
+    "quote": "Phát triển công thương nghiệp là con đường thiết thực để nâng tầm vóc quốc gia."
+  },
+  {
+    "id": "vn_279",
+    "ten": "Nguyễn Sơn Hà",
+    "ngay_thang": "05/10",
+    "nam_sinh": "1894",
+    "linh_vuc": "Kinh doanh / Công nghiệp",
+    "mo_ta": "Ông tổ nghề sơn Việt Nam, nhà tư sản yêu nước đi lên từ hai bàn tay trắng, người đã nghiên cứu và sản xuất thành công sơn Résistanco cạnh tranh với hàng Pháp.",
+    "quote": "Dùng trí tuệ và sự cần cù để chứng minh người Việt không thua kém bất cứ dân tộc nào."
+  },
+  {
+    "id": "vn_280",
+    "ten": "Lê Phụng Hiểu",
+    "ngay_thang": "06/10",
+    "nam_sinh": "Không rõ",
+    "linh_vuc": "Danh tướng",
+    "mo_ta": "Đại tướng quân triều Lý, vị dũng tướng sức địch muôn người, có công dẹp 'Loạn Tam vương' phò tá vua Lý Thái Tông lên ngôi báu.",
+    "quote": "Phận làm tôi phải trung với chúa, kẻ phản nghịch tất phải chịu sự trừng phạt của thanh gươm này."
+  },
+  {
+    "id": "vn_281",
+    "ten": "Lý Đạo Thành",
+    "ngay_thang": "07/10",
+    "nam_sinh": "Không rõ",
+    "linh_vuc": "Chính trị / Quan lại",
+    "mo_ta": "Thái sư triều Lý, cột trụ của triều đình, người nổi tiếng với sự thanh liêm, chính trực và tài kinh bang tế thế giúp gìn giữ thái bình cường thịnh.",
+    "quote": "Làm quan cốt ở sự công bằng và trong sạch, pháp luật nghiêm minh thì nước mới trị."
+  },
+  {
+    "id": "vn_282",
+    "ten": "Trần Quốc Toản",
+    "ngay_thang": "08/10",
+    "nam_sinh": "1267",
+    "linh_vuc": "Danh tướng / Thiếu niên anh hùng",
+    "mo_ta": "Hoài Văn Hầu, tấm gương thanh thiếu niên yêu nước mãnh liệt, người đã bóp nát quả cam vì hận không được dự bàn việc nước, tự dựng cờ sáu chữ đánh giặc.",
+    "quote": "Phá cường địch, báo hoàng ân."
+  },
+  {
+    "id": "vn_283",
+    "ten": "Trần Khát Chân",
+    "ngay_thang": "09/10",
+    "nam_sinh": "1370",
+    "linh_vuc": "Danh tướng",
+    "mo_ta": "Danh tướng tài ba cuối thời Trần, người chỉ huy quân đội dùng súng thần cơ bắn hạ vua Chiêm Thành là Chế Bồng Nga, cứu vãn nguy cơ sụp đổ của Đại Việt.",
+    "quote": "Giữ vững trận địa, bình tĩnh quan sát, dùng mưu trí để chuyển bại thành thắng."
+  },
+  {
+    "id": "vn_284",
+    "ten": "Lê Lai",
+    "ngay_thang": "10/10",
+    "nam_sinh": "Không rõ",
+    "linh_vuc": "Tướng lĩnh / Trung thần",
+    "mo_ta": "Khai quốc công thần nhà Lê, biểu tượng vĩ đại của lòng trung quân ái quốc với sự kiện cải trang mặc áo bào liều mình cứu Lê Lợi thoát vòng vây quân Minh.",
+    "quote": "Ta thà hi sinh thân này để chúa công được thoát, nghiệp lớn từ nay trao lại cho chúa công."
+  },
+  {
+    "id": "vn_285",
+    "ten": "Thoại Ngọc Hầu (Nguyễn Văn Thoại)",
+    "ngay_thang": "11/10",
+    "nam_sinh": "1761",
+    "linh_vuc": "Khai hoang / Mở cõi",
+    "mo_ta": "Đại thần triều Nguyễn, người có công vĩ đại trong việc đào kênh Vĩnh Tế và kênh Thoại Hà, biến vùng biên viễn Tây Nam thành vựa lúa trù phú.",
+    "quote": "Khai kênh, lập ấp, trấn giữ biên cương, để lại phúc trạch muôn đời cho bá tánh Nam Bộ."
+  },
+  {
+    "id": "vn_286",
+    "ten": "Mạc Cửu",
+    "ngay_thang": "12/10",
+    "nam_sinh": "1655",
+    "linh_vuc": "Khai hoang",
+    "mo_ta": "Thương nhân gốc Hoa dâng vùng đất tự khai phá cho chúa Nguyễn, Tổng binh trấn Hà Tiên, người biến vùng đất hoang vu thành thương cảng sầm uất bậc nhất.",
+    "quote": "Dùng tài thương nghiệp để quy tụ lưu dân, mở mang vùng đất Tây Nam hiền hòa."
+  },
+  {
+    "id": "vn_287",
+    "ten": "Mạc Thiên Tứ",
+    "ngay_thang": "13/10",
+    "nam_sinh": "1718",
+    "linh_vuc": "Văn học / Quản lý",
+    "mo_ta": "Người kế tục sự nghiệp của Mạc Cửu, Đô đốc trấn Hà Tiên, không chỉ mở mang kinh tế mà còn lập ra 'Chiêu Anh Các', hội tụ tao nhân mặc khách khắp nơi.",
+    "quote": "Văn chương nghệ thuật song hành cùng kinh bang tế thế, làm cho Hà Tiên rạng danh văn hiến."
+  },
+  {
+    "id": "vn_288",
+    "ten": "Bùi Viện",
+    "ngay_thang": "14/10",
+    "nam_sinh": "1839",
+    "linh_vuc": "Ngoại giao",
+    "mo_ta": "Nhà cải cách, danh sĩ triều Nguyễn, đại diện ngoại giao đầu tiên của Việt Nam vượt đại dương sang Hoa Kỳ tìm kiếm liên minh quân sự chống Pháp.",
+    "quote": "Mở rộng tầm nhìn vượt ra ngoài biển lớn, tìm kiếm sức mạnh để tự cường."
+  },
+  {
+    "id": "vn_289",
+    "ten": "Nguyễn Thượng Hiền",
+    "ngay_thang": "15/10",
+    "nam_sinh": "1868",
+    "linh_vuc": "Danh sĩ / Cách mạng",
+    "mo_ta": "Đình nguyên Hoàng giáp, danh sĩ yêu nước nồng nàn, người đã từ bỏ vinh hoa phú quý để sang Nhật Bản và Trung Quốc sát cánh cùng Phan Bội Châu.",
+    "quote": "Làm quan trong lúc nước mất nhà tan là nỗi nhục lớn nhất của kẻ sĩ."
+  },
+  {
+    "id": "vn_290",
+    "ten": "Phan Khôi",
+    "ngay_thang": "16/10",
+    "nam_sinh": "1887",
+    "linh_vuc": "Học giả / Báo chí",
+    "mo_ta": "Nhà báo, học giả uyên bác với tư duy độc lập sắc sảo, người nổ phát súng đầu tiên khai sinh ra phong trào Thơ Mới với bài thơ 'Tình già'.",
+    "quote": "Làm báo là phải nói lên sự thật, không sợ cường quyền, không nịnh bợ đám đông."
+  },
+  {
+    "id": "vn_291",
+    "ten": "Á Nam Trần Tuấn Khải",
+    "ngay_thang": "17/10",
+    "nam_sinh": "1895",
+    "linh_vuc": "Thơ ca",
+    "mo_ta": "Nhà thơ ái quốc mượn văn chương để gửi gắm tâm sự vong quốc, tác giả của bài 'Anh hùng tiêu xót' và 'Hai chữ nước nhà' đầy bi tráng.",
+    "quote": "Chốn ải Bắc mây sầu ảm đạm / Cõi trời Nam gió thảm đìu hiu."
+  },
+  {
+    "id": "vn_292",
+    "ten": "Giang Nam",
+    "ngay_thang": "18/10",
+    "nam_sinh": "1929",
+    "linh_vuc": "Thơ ca",
+    "mo_ta": "Nhà thơ chiến sĩ gắn bó máu thịt với miền Nam, tác giả của bài thơ 'Quê hương' khắc họa tình yêu trong sáng, bi thương và mãnh liệt trong khói lửa.",
+    "quote": "Xưa yêu quê hương vì có chim có bướm / Có những ngày trốn học bị đòn roi / Nay yêu quê hương vì trong từng nắm đất / Có một phần xương thịt của em tôi."
+  },
+  {
+    "id": "vn_293",
+    "ten": "Viễn Phương",
+    "ngay_thang": "19/10",
+    "nam_sinh": "1928",
+    "linh_vuc": "Thơ ca",
+    "mo_ta": "Nhà thơ miền Nam tiêu biểu, ngòi bút thấm đẫm ân tình sâu nặng của đồng bào Nam Bộ. Tác giả bài thơ bất hủ 'Viếng lăng Bác'.",
+    "quote": "Mai về miền Nam thương trào nước mắt / Muốn làm con chim hót quanh lăng Bác."
+  },
+  {
+    "id": "vn_294",
+    "ten": "Vũ Cao",
+    "ngay_thang": "20/10",
+    "nam_sinh": "1922",
+    "linh_vuc": "Thơ ca / Quân sự",
+    "mo_ta": "Nhà thơ mặc áo lính, để lại dấu ấn không phai mờ với thi phẩm 'Núi Đôi' - bản tình ca bi tráng và lãng mạn bậc nhất thời kỳ kháng chiến chống Pháp.",
+    "quote": "Mới ngỏ lời thôi đành lỗi hẹn / Đâu ngờ từ đó bặt tin nhau."
+  },
+  {
+    "id": "vn_295",
+    "ten": "Nguyễn Bặc",
+    "ngay_thang": "21/10",
+    "nam_sinh": "924",
+    "linh_vuc": "Danh tướng",
+    "mo_ta": "Định Quốc Công, đệ nhất khai quốc công thần nhà Đinh, người bạn sinh tử sát cánh cùng Đinh Bộ Lĩnh từ thuở cờ lau tập trận, dẹp loạn 12 sứ quân.",
+    "quote": "Lòng trung với vua Đinh như núi đá, thác xuống tuyền đài cũng không thay đổi."
+  },
+  {
+    "id": "vn_296",
+    "ten": "Đinh Điền",
+    "ngay_thang": "22/10",
+    "nam_sinh": "924",
+    "linh_vuc": "Danh tướng",
+    "mo_ta": "Ngoại giáp triều Đinh, một trong tứ trụ triều đình Đinh Tiên Hoàng, cùng Nguyễn Bặc tạo nên huyền thoại về tình nghĩa vua tôi và tấm lòng tận trung.",
+    "quote": "Cùng sinh ra ở cõi Hoa Lư, nguyện chết vì cơ nghiệp nhà Đinh."
+  },
+  {
+    "id": "vn_297",
+    "ten": "Phạm Cự Lượng",
+    "ngay_thang": "23/10",
+    "nam_sinh": "944",
+    "linh_vuc": "Danh tướng",
+    "mo_ta": "Thái úy triều Tiền Lê, vị danh tướng trực tiếp khoác hoàng bào cho Lê Hoàn trong tình thế đất nước ngàn cân treo sợi tóc, có công đại phá quân Tống.",
+    "quote": "Thưởng phạt không nghiêm thì không làm tướng được. Nay quân giặc ập đến, phải có minh chúa lãnh đạo mới xong."
+  },
+  {
+    "id": "vn_298",
+    "ten": "Bùi Bằng Đoàn",
+    "ngay_thang": "24/10",
+    "nam_sinh": "1889",
+    "linh_vuc": "Chính trị / Quan lại",
+    "mo_ta": "Nguyên Thượng thư Bộ Hình triều Nguyễn, trí thức yêu nước đại tài, được Bác Hồ mời ra làm Trưởng ban Thường trực Quốc hội nước Việt Nam Dân chủ Cộng hòa.",
+    "quote": "Vị quan thanh liêm của chế độ cũ, trở thành ngọn cờ quy tụ nhân tâm của chế độ mới."
+  },
+  {
+    "id": "vn_299",
+    "ten": "Nguyễn Văn Tố",
+    "ngay_thang": "25/10",
+    "nam_sinh": "1889",
+    "linh_vuc": "Học giả / Chính trị",
+    "mo_ta": "Học giả uyên bác, Hội trưởng Hội Truyền bá Quốc ngữ, Trưởng ban Thường trực Quốc hội đầu tiên của Việt Nam độc lập. Bị giặc Pháp sát hại năm 1947.",
+    "quote": "Dùng con chữ để giải phóng dân tộc khỏi nghèo đói tăm tối, dùng cả tính mạng để giữ gìn độc lập."
+  },
+  {
+    "id": "vn_300",
+    "ten": "Dương Quảng Hàm",
+    "ngay_thang": "26/10",
+    "nam_sinh": "1898",
+    "linh_vuc": "Giáo dục / Văn học",
+    "mo_ta": "Giáo sư, nhà biên khảo vĩ đại, tác giả của bộ sách giáo khoa 'Việt Nam văn học sử yếu', liệt sĩ anh dũng trong những ngày đầu toàn quốc kháng chiến.",
+    "quote": "Giữ lấy nền văn học nước nhà là giữ lấy nền móng vững chắc nhất của hồn tộc."
+  },
+  {
+    "id": "vn_301",
+    "ten": "Lê Thương",
+    "ngay_thang": "27/10",
+    "nam_sinh": "1914",
+    "linh_vuc": "Âm nhạc",
+    "mo_ta": "Nhạc sĩ tiền chiến kiệt xuất, người đã viết nên trường ca 'Hòn Vọng Phu' bất hủ, kết hợp đỉnh cao giữa âm hưởng dân ca và cấu trúc giao hưởng phương Tây.",
+    "quote": "Qua đình ngả nón trông đình / Đình bao nhiêu ngói, thương mình bấy nhiêu..."
+  },
+  {
+    "id": "vn_302",
+    "ten": "Nguyễn Xuân Khoát",
+    "ngay_thang": "28/10",
+    "nam_sinh": "1910",
+    "linh_vuc": "Âm nhạc",
+    "mo_ta": "Nhạc sĩ được tôn vinh là 'Người anh cả của nền tân nhạc Việt Nam', tiên phong trong việc nghiên cứu và hiện đại hóa âm nhạc dân gian truyền thống.",
+    "quote": "Tân nhạc Việt Nam phải mọc lên từ mảnh đất truyền thống, chứ không phải là bản sao của âm nhạc ngoại lai."
+  },
+  {
+    "id": "vn_303",
+    "ten": "Trần Hoàn",
+    "ngay_thang": "29/10",
+    "nam_sinh": "1928",
+    "linh_vuc": "Âm nhạc / Chính trị",
+    "mo_ta": "Nhạc sĩ tài hoa và Bộ trưởng Bộ Văn hóa - Thông tin, tác giả của những ca khúc lãng mạn kinh điển thời kháng chiến như 'Sơn nữ ca', 'Lời người ra đi'.",
+    "quote": "Một đêm trong rừng vắng / Ánh trăng chênh chếch đầu cành..."
+  },
+  {
+    "id": "vn_304",
+    "ten": "Huy Du",
+    "ngay_thang": "30/10",
+    "nam_sinh": "1926",
+    "linh_vuc": "Âm nhạc / Quân sự",
+    "mo_ta": "Cây đại thụ của âm nhạc cách mạng Việt Nam, người phổ nhạc thành công những bản hùng ca đầy bi tráng và lãng mạn như 'Đường chúng ta đi'.",
+    "quote": "Đường chúng ta đi, dài theo đất nước / Đất nước vinh quang, rạng rỡ huy hoàng."
+  },
+  {
+    "id": "vn_305",
+    "ten": "Xuân Hồng",
+    "ngay_thang": "31/10",
+    "nam_sinh": "1928",
+    "linh_vuc": "Âm nhạc",
+    "mo_ta": "Nhạc sĩ của mùa xuân giải phóng, tác giả của những giai điệu rộn rã, tưng bừng và đầy sức sống như 'Bài ca may áo', 'Mùa xuân trên Thành phố Hồ Chí Minh'.",
+    "quote": "Mùa xuân này về trên quê ta / Khắp đất trời biển rộng bao la."
+  }
+]
+]

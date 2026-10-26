@@ -1,0 +1,164 @@
+[
+   
+    
+    
+    {
+        "id": "vn_125",
+        "ten": "Tôn Thất Tùng",
+        "ngay_sinh": "13/05",
+        "nam_sinh": "1912",
+        "ngay_mat": "07/05",
+        "nam_mat": "1982",
+        "linh_vuc": "Khoa học",
+        "category_id": "science_education",
+        "image_slug": "ton-that-tung-vn-125",
+        "mo_ta": "Bác sĩ phẫu thuật danh tiếng, Anh hùng Lao động của Việt Nam. Ông nổi tiếng thế giới với phương pháp phẫu thuật cắt gan khô mang tên mình và những cống hiến lớn lao cho y học.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_126",
+        "ten": "Nguyễn Cơ Thạch (Phạm Văn Cương)",
+        "ngay_sinh": "15/05",
+        "nam_sinh": "1921",
+        "ngay_mat": "10/04",
+        "nam_mat": "1998",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "nguyen-co-thach-vn-126",
+        "mo_ta": "Nhà ngoại giao lỗi lạc, nguyên Bộ trưởng Bộ Ngoại giao Việt Nam. Ông có vai trò quan trọng trong việc phá thế bao vây cấm vận và hội nhập quốc tế của Việt Nam giai đoạn Đổi Mới.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_127",
+        "ten": "Nguyễn Tuấn Anh",
+        "ngay_sinh": "16/05",
+        "nam_sinh": "1995",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Thể thao",
+        "category_id": "general",
+        "image_slug": "nguyen-tuan-anh-vn-127",
+        "mo_ta": "Cầu thủ bóng đá chuyên nghiệp người Việt Nam. Trưởng thành từ học viện HAGL Arsenal JMG, anh để lại dấu ấn qua lối chơi hào hoa, thông minh ở tuyến giữa của Đội tuyển quốc gia.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_128",
+        "ten": "Hồ Chí Minh (Nguyễn Sinh Cung)",
+        "ngay_sinh": "19/05",
+        "nam_sinh": "1890",
+        "ngay_mat": "02/09",
+        "nam_mat": "1969",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "ho-chi-minh-vn-128",
+        "mo_ta": "Vị lãnh tụ vĩ đại của dân tộc, Chủ tịch đầu tiên của nước Việt Nam Dân chủ Cộng hòa. Người sáng lập Đảng Cộng sản Việt Nam và dẫn dắt nhân dân đấu tranh giành độc lập tự do.",
+        "quote": "Không có gì quý hơn độc lập, tự do."
+    },
+    {
+        "id": "vn_129",
+        "ten": "Y Thanh Hà Niê Kđăm",
+        "ngay_sinh": "22/05",
+        "nam_sinh": "1973",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "y-thanh-ha-nie-kdam-vn-129",
+        "mo_ta": "Chính khách người dân tộc Ê Đê. Ông hiện giữ chức vụ Chủ nhiệm Hội đồng Dân tộc của Quốc hội, đóng góp quan trọng trong các chính sách bảo vệ và phát triển vùng đồng bào dân tộc.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_130",
+        "ten": "Trần Xuân Bách (Vũ Thiện Tuấn)",
+        "ngay_sinh": "23/05",
+        "nam_sinh": "1924",
+        "ngay_mat": "01/01",
+        "nam_mat": "2006",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "tran-xuan-bach-vn-130",
+        "mo_ta": "Chính khách và nhà tư tưởng của Đảng Cộng sản Việt Nam. Ông từng là Ủy viên Bộ Chính trị, nổi bật với những tư tưởng đổi mới mạnh mẽ và dân chủ hóa sâu rộng đời sống chính trị.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_131",
+        "ten": "Nguyễn Hòa Bình",
+        "ngay_sinh": "24/05",
+        "nam_sinh": "1958",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "nguyen-hoa-binh-vn-131",
+        "mo_ta": "Chính khách và Tiến sĩ Luật học người Việt Nam. Ông đảm nhiệm vị trí Chánh án Tòa án nhân dân tối cao, đóng vai trò quan trọng trong việc chỉ đạo và thực thi công lý quốc gia.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_132",
+        "ten": "Nguyễn Phúc Đảm (Minh Mạng)",
+        "ngay_sinh": "25/05",
+        "nam_sinh": "1791",
+        "ngay_mat": "20/01",
+        "nam_mat": "1841",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "nguyen-phuc-dam-vn-132",
+        "mo_ta": "Vị hoàng đế thứ 2 của triều đại nhà Nguyễn. Triều đại của ông đánh dấu thời kỳ vương quyền tập trung cao độ, mở rộng lãnh thổ và tiến hành nhiều cải cách hành chính sâu rộng.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_133",
+        "ten": "Nguyễn Ngọc Thơ",
+        "ngay_sinh": "26/05",
+        "nam_sinh": "1908",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1976",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "nguyen-ngoc-tho-vn-133",
+        "mo_ta": "Chính khách Việt Nam Cộng hòa. Ông từng giữ cương vị Phó Tổng thống dưới thời Ngô Đình Diệm và sau đó trở thành Thủ tướng đầu tiên của chính quyền Việt Nam Cộng hòa sau đảo chính năm 1963.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_134",
+        "ten": "Phương Thanh",
+        "ngay_sinh": "27/05",
+        "nam_sinh": "1973",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Nghệ thuật",
+        "category_id": "arts",
+        "image_slug": "phuong-thanh-vn-134",
+        "mo_ta": "Nữ ca sĩ nổi tiếng của dòng nhạc nhẹ Việt Nam thập niên 90 và 2000. Chị sở hữu chất giọng khàn đặc trưng và phong cách biểu diễn máu lửa, gắn liền với thời kỳ đỉnh cao của Làn Sóng Xanh.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_135",
+        "ten": "Cù Huy Cận (Huy Cận)",
+        "ngay_sinh": "31/05",
+        "nam_sinh": "1919",
+        "ngay_mat": "19/02",
+        "nam_mat": "2005",
+        "linh_vuc": "Văn học",
+        "category_id": "literature",
+        "image_slug": "cu-huy-can-vn-135",
+        "mo_ta": "Nhà thơ lớn của phong trào Thơ mới và nền văn học hiện đại Việt Nam. Sự nghiệp của ông trải dài qua nhiều giai đoạn với những thi phẩm nổi bật mang đậm triết lý vũ trụ và tình yêu quê hương.",
+        "quote": "Không rõ"
+    }
+]
+
+// đã check
+
+// {
+//     "id": "vn_002",
+//     "ten": "Văn Tiến Dũng",
+//     "ngay_sinh": "02/05",
+//     "nam_sinh": "1917",
+//     "ngay_mat": "17/03",
+//     "nam_mat": "2002",
+//     "linh_vuc": "Quân sự",
+//     "category_id": "military",
+//     "image_slug": "van-tien-dung-vn-002",
+//     "mo_ta": "Đại tướng Quân đội nhân dân Việt Nam, nguyên Bộ trưởng Bộ Quốc phòng. Ông là Tổng Tham mưu trưởng trực tiếp chỉ đạo nhiều chiến dịch lớn, tiêu biểu là Chiến dịch Hồ Chí Minh năm 1975.",
+//     "quote": "Không quân đội nào, không khí giới nào có thể đánh ngã được tinh thần hy sinh của toàn thể một dân tộc."
+// }

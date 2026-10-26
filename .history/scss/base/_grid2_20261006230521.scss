@@ -1,0 +1,87 @@
+// scss/base/_grid.scss
+@use "sass:math";
+@use "sass:map";
+@use "../abstracts/mixins" as mixins;
+@use "../abstracts" as abs;
+
+// 1. Base Container & Row
+.container-fluid {
+    --grid-gutter-x: #{abs.$grid-gutter-width};
+    --grid-gutter-y: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: calc(var(--grid-gutter-x) * 0.5);
+    padding-right: calc(var(--grid-gutter-x) * 0.5);
+}
+
+.container {
+    @extend .container-fluid;
+    // Max-width sẽ được xử lý trong loop breakpoint
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--grid-gutter-y) * -1);
+    margin-left: calc(var(--grid-gutter-x) * -0.5);
+    margin-right: calc(var(--grid-gutter-x) * -0.5);
+
+    > * {
+        margin-top: var(--grid-gutter-y);
+        padding-left: calc(var(--grid-gutter-x) * 0.5);
+        padding-right: calc(var(--grid-gutter-x) * 0.5);
+    }
+}
+
+.col {
+    flex: 1 0 0%;
+}
+
+// 2. Mixins for generating classes
+@mixin make-columns($infix: "") {
+    @for $i from 1 through abs.$grid-columns {
+        .col#{$infix}-#{$i} {
+            flex: 0 0 auto;
+            width: math.div(100%, abs.$grid-columns) * $i;
+        }
+    }
+}
+
+@mixin make-offsets($infix: "") {
+    @for $i from 0 through abs.$grid-columns {
+        .offset#{$infix}-#{$i} {
+            margin-left: if($i > 0, math.div(100%, abs.$grid-columns) * $i, 0);
+        }
+    }
+}
+
+// 3. Execution
+@include make-columns("");
+@include make-offsets("");
+
+// 4. Breakpoint Loop (Đã fix để chạy hoàn hảo với mixins)
+@each $breakpoint, $dimension in abs.$grid-breakpoints {
+    // Desktop-First: Điểm ngắt 0px (xs) không có ý nghĩa với max-width, nên bỏ qua
+    @if $dimension != 0 {
+        // Đổi "abs.breakpoint" thành "abs.screen" theo đúng file mixins
+        @include misins.screen($breakpoint) {
+            .container {
+                max-width: map.get(abs.$container-max-widths, $breakpoint);
+            }
+
+            // Gọi hàm get-infix từ mixins2 thay vì tự nối chuỗi thủ công
+            $infix: mixins.get-infix($breakpoint);
+
+            @include make-columns($infix);
+            @include make-offsets($infix);
+
+            @each $i, $ratio in abs.$gutters {
+                .g#{$infix}-#{$i},
+                .gx#{$infix}-#{$i} {
+                    --grid-gutter-x: #{abs.$grid-gutter-width * $ratio};
+                }
+            }
+        }
+    }
+}

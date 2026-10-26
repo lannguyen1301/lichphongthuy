@@ -1,0 +1,60 @@
+// abstracts/placeholders/_position.scss
+
+// ==========================================
+// POSITIONING PLACEHOLDERS
+// ==========================================
+
+// 1. CĂN GIỮA TUYỆT ĐỐI
+// Căn giữa 2 trục (Modal, Popup, Icon giữa khung hình)
+%absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Căn giữa dọc (Icon input, Nút mũi tên Slider)
+%absCenterY {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+// Căn giữa ngang (Tooltip, Badge nổi)
+%absCenterX {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+// 2. PHỦ KÍN KHÔNG GIAN (COVER)
+// Phủ kín phần tử cha (Overlay hình ảnh, Lớp phủ thẻ)
+%absCover {
+    position: absolute;
+    inset: 0;
+}
+
+// Phủ kín toàn bộ màn hình trình duyệt (Modal Backdrop, Loading Screen)
+%fixedCover {
+    position: fixed;
+    inset: 0;
+}
+
+// ==========================================
+// BỔ SUNG TỪ KINH NGHIỆM THỰC CHIẾN
+// ==========================================
+
+// 3. PSEUDO-ELEMENTS (Tiết kiệm code khi viết ::before, ::after)
+%absPseudo {
+    content: "";
+    position: absolute;
+    display: block;
+}
+
+// 4. STICKY (Cố định khi cuộn)
+// Dành cho Header, Table Head, hoặc Sidebar bám dính khi user cuộn trang
+%stickyTop {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}

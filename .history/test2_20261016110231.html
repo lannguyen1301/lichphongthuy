@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="earth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Header BEM & Theme Engine</title>
+
+    <style>
+        /* =========================================
+           1. MÔ PHỎNG THEME ENGINE (CSS VARIABLES)
+           ========================================= */
+        /* Mặc định là hệ Thổ (Earth) - Màu nâu/Be */
+        :root,
+        [data-theme="earth"] {
+            --body-bg: #f7f6f2;
+            --bg-surface: #ffffff;
+            --text-color: #3e3832;
+            --text-muted: #8c8273;
+            --border-color: #e5dfd5;
+            --primary-color: #8b5e34;
+            --primary-hover: #704b2a;
+            --shadow-color: rgba(139, 94, 52, 0.08);
+        }
+
+        /* Hệ Thuỷ (Water) - Màu xanh lam */
+        [data-theme="water"] {
+            --body-bg: #f0f7fb;
+            --bg-surface: #ffffff;
+            --text-color: #1a365d;
+            --text-muted: #6482a6;
+            --border-color: #d1e3f0;
+            --primary-color: #3182ce;
+            --primary-hover: #2b6cb0;
+            --shadow-color: rgba(49, 130, 206, 0.08);
+        }
+
+        /* CSS Cơ bản */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 20px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Fake style cho thẻ img bị mất src để bạn dễ nhìn layout */
+        img.icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-muted);
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        /* =========================================
+           2. KHỐI BUTTON LÕI (BLOCK: btn)
+           ========================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            /* Chuẩn Bento Grid */
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-color: var(--primary-color);
+        }
+
+        .btn:hover img.icon {
+            background-color: #ffffff;
+            /* Sáng icon khi hover */
+        }
+
+        .btn--login {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn--login:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* =========================================
+           3. COMPONENT HEADER (BLOCK: header)
+           ========================================= */
+        .header {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            /* Bento Grid bọc ngoài Header */
+            padding: 12px 24px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        /* Các thành phần flex con */
+        .header__logo-link,
+        .header__home-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__logo-img {
+            height: 32px;
+            background: var(--primary-color);
+            width: 100px;
+            border-radius: 8px;
+        }
+
+        .header__datetime-wrapper {
+            display: flex;
+            gap: 16px;
+            padding: 8px 16px;
+            background-color: var(--body-bg);
+            /* Khoét nền chìm xuống kiểu Bento */
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .header__date-group,
+        .header__time-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           4. STYLES CHO DROPDOWN (DETAILS / SUMMARY)
+           ========================================= */
+        /* Áp dụng chung cho cả Lang và Theme để không lặp code */
+        .header__lang-group,
+        .header__theme-group {
+            position: relative;
+        }
+
+        .header__lang-summary,
+        .header__theme-summary {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+
+        .header__lang-summary:hover,
+        .header__theme-summary:hover {
+            background-color: var(--body-bg);
+        }
+
+        /* Ẩn mũi tên mặc định của details */
+        .header__lang-summary::-webkit-details-marker,
+        .header__theme-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Box thả xuống (Menu List) */
+        .header__lang-list,
+        .header__theme-list {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: max-content;
+            min-width: 120px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 8px 24px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        /* Các item bên trong Menu Ngôn ngữ */
+        .header__lang-link {
+            display: block;
+            padding: 8px 16px;
+            color: var(--text-color);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .header__lang-link:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* Style cho nút Theme trong menu (BEM Mixes) */
+        .header__theme-btn {
+            width: 100%;
+            justify-content: flex-start;
+            /* Ép chữ và icon sang trái */
+            border: none;
+            /* Bỏ viền vì đã nằm trong box menu */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         HTML CHUẨN CỦA BẠN 
+         ========================================= -->
+    <header id="header" class="header">
+        <div class="header__container container">
+
+            <!-- 1. Logo -->
+            <div class="header__logo">
+                <a href="#!" aria-label="Logo" class="header__logo-link">
+                    <img src="./assets/icons/logo.svg" alt="lichphongthuy" class="header__logo-img">
+                </a>
+            </div>
+
+            <!-- 2. Icon Home -->
+            <div class="header__home">
+                <a href="#!" aria-label="Home" class="header__home-link">
+                    <img src="./assets/icons/home.svg" alt="home" class="header__home-icon icon">
+                </a>
+            </div>
+
+            <!-- 3. Div Date Year -->
+            <div class="header__datetime-wrapper">
+                <div class="header__date-group">
+                    <img src="./assets/icons/calendar.svg" alt="lịch" class="header__date-icon icon">
+                    <div class="header__date-text">24/05/2024</div>
+                </div>
+                <div class="header__time-group">
+                    <img src="./assets/icons/clock.svg" alt="giờ" class="header__time-icon icon">
+                    <div class="header__time-text">14:30:05</div>
+                </div>
+            </div>
+
+            <!-- 4. Group Ngôn ngữ (Đã đưa text và mũi tên vào trong summary) -->
+            <div class="header__lang-group">
+                <details class="header__lang-details">
+                    <summary class="header__lang-summary">
+                        <img src="./assets/icons/global.svg" alt="ngôn ngữ" class="header__lang-icon icon">
+                        <span class="header__lang-text">VN</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="xuống" class="header__lang-arrow icon">
+                    </summary>
+                    <ul class="header__lang-list">
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">VN</a></li>
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">EN</a></li>
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">JP</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 5. Group Đăng nhập -->
+            <div class="header__auth">
+                <button class="btn btn--login header__auth-btn">Đăng nhập</button>
+            </div>
+
+            <!-- 6. Group Theme (Dùng BEM Mixes) -->
+            <div class="header__theme-group">
+                <details class="header__theme-details">
+                    <summary class="header__theme-summary">
+                        <img src="./assets/icons/theme.svg" alt="theme" class="header__theme-icon icon">
+                        <span>Giao diện</span>
+                    </summary>
+                    <ul class="header__theme-list">
+                        <li class="header__theme-item">
+                            <!-- JS sẽ bắt thuộc tính data-theme này để đổi màu -->
+                            <button data-theme="earth" class="btn header__theme-btn">
+                                <img src="./assets/icons/earth.svg" alt="" class="header__theme-icon icon">
+                                Hệ Thổ
+                            </button>
+                        </li>
+                        <li class="header__theme-item">
+                            <button data-theme="water" class="btn header__theme-btn">
+                                <img src="./assets/icons/water.svg" alt="" class="header__theme-icon icon">
+                                Hệ Thuỷ
+                            </button>
+                        </li>
+                        <!-- Các nút khác bạn tự thêm nhé -->
+                    </ul>
+                </details>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- =========================================
+         JS ĐỂ TEST TÍNH NĂNG ĐỔI THEME & ĐÓNG MENU
+         ========================================= -->
+    <script>
+        // 1. Chức năng đổi Theme
+        const themeButtons = document.querySelectorAll('.header__theme-btn');
+        const htmlElement = document.documentElement;
+
+        themeButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Lấy data-theme từ nút được bấm (earth, water...)
+                const selectedTheme = e.currentTarget.getAttribute('data-theme');
+                // Gán vào thẻ <html>. CSS Variables sẽ tự động thay đổi toàn bộ màu web!
+                htmlElement.setAttribute('data-theme', selectedTheme);
+
+                // Đóng menu lại sau khi chọn xong
+                document.querySelector('.header__theme-details').removeAttribute('open');
+            });
+        });
+
+        // 2. Chức năng nhấp ra ngoài để đóng menu <details> (Trải nghiệm người dùng tốt)
+        document.addEventListener('click', (event) => {
+            const allDetails = document.querySelectorAll('details');
+            allDetails.forEach(details => {
+                if (!details.contains(event.target)) {
+                    details.removeAttribute('open');
+                }
+            });
+        });
+    </script>
+
+    <script src="./assets/js/check-data2.js"></script>
+</body>
+
+</html>
+check-data2.js:57 Đặng Thùy Trâm bị TRÙNG NGÀY với Chu Văn An tại slot 26/11
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Trương Định (Trương Công Định) bị TRÙNG NGÀY với Tôn Đức Thắng tại slot 20/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Hoàng Diệu (Hoàng Kim Tích) bị TRÙNG NGÀY với Hoàng Hoa Thám (Đề Thám) tại slot 10/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Văn Trỗi bị TRÙNG NGÀY với Nguyễn Du (Thủ lĩnh Cần Vương) tại slot 01/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Tô Vĩnh Diện bị TRÙNG NGÀY với Nguyễn Du (Thủ lĩnh Cần Vương) tại slot 01/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Trãi bị TRÙNG NGÀY với Bùi Bang Đoàn tại slot 19/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Sơn (Vũ Nguyên Bác) bị TRÙNG NGÀY với Lê Trọng Tấn tại slot 01/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Lý Thái Tổ (Lý Công Uẩn) bị TRÙNG NGÀY với Sương Nguyệt Anh (Nguyễn Thị Ngọc Khuê) tại slot 08/03
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Phan Châu Trinh (Phan Chu Trinh) bị TRÙNG NGÀY với Nguyễn Tri Phương tại slot 09/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Kim Đồng (Nông Văn Dền) bị TRÙNG NGÀY với Đặng Dung tại slot 15/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Vũ Trọng Phụng bị TRÙNG NGÀY với Lý Tự Trọng (Lê Hữu Trọng) tại slot 20/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Khuyến (Tam Nguyên Yên Đổ) bị TRÙNG NGÀY với Đặng Dung tại slot 15/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Lý Bí (Lý Nam Đế) bị TRÙNG NGÀY với Đào Duy Từ tại slot 17/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Huỳnh Thúc Kháng bị TRÙNG NGÀY với Lê Trọng Tấn tại slot 01/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Trần Tế Xương (Tú Xương) bị TRÙNG NGÀY với Lương Ngọc Quyến tại slot 05/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Trần Quang Khải bị TRÙNG NGÀY với Nguyễn Hữu Cảnh tại slot 09/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Bùi Hữu Nghĩa bị TRÙNG NGÀY với Tôn Thất Thuyết tại slot 12/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Thiện Thuật bị TRÙNG NGÀY với Đoàn Trần Nghiệp (Ký Con) tại slot 23/03
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Trần Cao Vân bị TRÙNG NGÀY với Trần Quý Cáp tại slot 17/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Đặng Trần Côn bị TRÙNG NGÀY với Phùng Chí Kiên (Nguyễn Vĩ) tại slot 18/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Hồ Chí Minh bị TRÙNG NGÀY với Tản Đà (Nguyễn Khắc Hiếu) tại slot 19/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Cù Chính Lan bị TRÙNG NGÀY với Nguyễn Du (Thủ lĩnh Cần Vương) tại slot 01/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Thượng Hiền bị TRÙNG NGÀY với Phan Đình Phùng tại slot 28/12
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Văn Siêu bị TRÙNG NGÀY với Trần Văn Ơn tại slot 29/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Vương Thừa Vũ bị TRÙNG NGÀY với Khúc Thừa Dụ tại slot 23/07
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Phạm Tu bị TRÙNG NGÀY với Ngô Quyền tại slot 12/03
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Đào Tấn bị TRÙNG NGÀY với Đặng Huy Trứ tại slot 27/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Tất Thành (Chủ tịch Hồ Chí Minh) bị TRÙNG NGÀY với Tản Đà (Nguyễn Khắc Hiếu) tại slot 19/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Phạm Ngọc Thạch bị TRÙNG NGÀY với Nguyễn Quang Bích tại slot 07/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Trần Bình Trọng bị TRÙNG NGÀY với Mạc Đĩnh Chi tại slot 26/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Văn Thoại (Thoại Ngọc Hầu) bị TRÙNG NGÀY với Chu Văn An tại slot 26/11
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Lý Nhân Tông (Lý Càn Đức) bị TRÙNG NGÀY với Trần Hữu Dực tại slot 15/01
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Trực bị TRÙNG NGÀY với Trần Thái Tông (Trần Cảnh) tại slot 16/06
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Dã Tượng bị TRÙNG NGÀY với Phạm Hồng Thái tại slot 19/06
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Đinh Núp (Anh hùng Núp) bị TRÙNG NGÀY với Văn Tiến Dũng tại slot 02/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Thái Phiên bị TRÙNG NGÀY với Trần Quý Cáp tại slot 17/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Hữu Huân (Thủ Khoa Huân) bị TRÙNG NGÀY với Tản Đà (Nguyễn Khắc Hiếu) tại slot 19/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Ngô Thì Sĩ bị TRÙNG NGÀY với Nguyễn Văn Cừ tại slot 09/07
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Tạ Quang Bửu bị TRÙNG NGÀY với Khúc Thừa Dụ tại slot 23/07
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Ngọc Thăng (Lãnh binh Thăng) bị TRÙNG NGÀY với Triệu Quang Phục (Triệu Việt Vương) tại slot 27/06
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Thế Lữ (Nguyễn Thứ Lễ) bị TRÙNG NGÀY với Xuân Quỳnh tại slot 06/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Hoàng Văn Thái bị TRÙNG NGÀY với Trần Phú tại slot 01/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Ngô Tất Tố bị TRÙNG NGÀY với Trần Văn Trà tại slot 20/04
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Thạch Lam (Nguyễn Tường Lân) bị TRÙNG NGÀY với Lê Văn Thịnh tại slot 07/07
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Thích Quảng Đức (Lâm Văn Tức) bị TRÙNG NGÀY với Nguyễn Phúc Chu tại slot 11/06
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Hoàng (Chúa Tiên) bị TRÙNG NGÀY với Lê Văn Duyệt tại slot 28/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Chế Lan Viên (Phan Ngọc Hoan) bị TRÙNG NGÀY với Lý Tự Trọng (Lê Hữu Trọng) tại slot 20/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Duy Tân (Nguyễn Phúc Vĩnh San) bị TRÙNG NGÀY với Bùi Bang Đoàn tại slot 19/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Hồ Đắc Di bị TRÙNG NGÀY với Trần Khát Chân tại slot 11/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Thái Bình bị TRÙNG NGÀY với Đinh Công Tráng tại slot 14/01
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Đồng Sĩ Nguyên (Nguyễn Hữu Vũ) bị TRÙNG NGÀY với Phạm Văn Đồng tại slot 01/03
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Bính (Nguyễn Trọng Phác) bị TRÙNG NGÀY với Phan Ngọc Hiển tại slot 20/01
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Cầm Bá Thước bị TRÙNG NGÀY với Tôn Đức Thắng tại slot 20/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Phạm Tiến Duật bị TRÙNG NGÀY với Đinh Công Tráng tại slot 14/01
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Sinh Sắc bị TRÙNG NGÀY với Nguyễn Bỉnh Khiêm tại slot 27/11
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Phan Thanh Giản bị TRÙNG NGÀY với Trần Nhân Tông (Trần Khâm) tại slot 11/11
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Quang Sáng bị TRÙNG NGÀY với Phạm Tuyên tại slot 12/01
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Phạm Hùng (Phạm Văn Thiện) bị TRÙNG NGÀY với Nguyễn Phúc Chu tại slot 11/06
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Lý Chiêu Hoàng (Phật Kim) bị TRÙNG NGÀY với Bùi Xuân Phái tại slot 01/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Trần Văn Giàu bị TRÙNG NGÀY với Ngô Thì Nhậm tại slot 11/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Thị Lộ bị TRÙNG NGÀY với Lương Định Của tại slot 16/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Lưu Hữu Phước bị TRÙNG NGÀY với Vừ A Dính tại slot 12/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Phan Vinh bị TRÙNG NGÀY với Phạm Văn Đồng tại slot 01/03
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Dữ bị TRÙNG NGÀY với Nguyễn Tri Phương tại slot 09/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Hoàng Xuân Hãn bị TRÙNG NGÀY với Sương Nguyệt Anh (Nguyễn Thị Ngọc Khuê) tại slot 08/03
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Võ Văn Tần bị TRÙNG NGÀY với Lê Văn Duyệt tại slot 28/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Tôn Đức Thắng (Bác Tôn) bị TRÙNG NGÀY với Tôn Đức Thắng tại slot 20/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Lương Đình Của bị TRÙNG NGÀY với Lương Định Của tại slot 16/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Phùng Hưng (Bố Cái Đại Vương) bị TRÙNG NGÀY với Tô Hoài (Nguyễn Sen) tại slot 27/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Lý Thường Kiệt bị TRÙNG NGÀY với Nguyễn Bình (Nguyễn Phương Thảo) tại slot 29/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Trãi (Ức Trai) bị TRÙNG NGÀY với Bùi Bang Đoàn tại slot 19/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Khúc Hạo bị TRÙNG NGÀY với Tố Hữu (Nguyễn Kim Thành) tại slot 04/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Sương Nguyệt Anh bị TRÙNG NGÀY với Sương Nguyệt Anh (Nguyễn Thị Ngọc Khuê) tại slot 08/03
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Bỉnh Khiêm (Trạng Trình) bị TRÙNG NGÀY với Trần Thánh Tông (Trần Hoảng) tại slot 12/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Hoàng Diệu bị TRÙNG NGÀY với Hoàng Hoa Thám (Đề Thám) tại slot 10/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Đình Chiểu (Đồ Chiểu) bị TRÙNG NGÀY với Nguyễn Đình Chiểu tại slot 01/07
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Trương Định bị TRÙNG NGÀY với Tôn Đức Thắng tại slot 20/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Phúc Chu (Quốc Chúa) bị TRÙNG NGÀY với Nguyễn Phúc Chu tại slot 11/06
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Phan Khôi bị TRÙNG NGÀY với Xuân Quỳnh tại slot 06/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Minh Châu bị TRÙNG NGÀY với Lý Tự Trọng (Lê Hữu Trọng) tại slot 20/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Gia Long (Nguyễn Ánh) bị TRÙNG NGÀY với Trần Quốc Toản tại slot 08/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Phan Chánh bị TRÙNG NGÀY với Nguyễn Hữu Dật tại slot 21/07
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Hồ Nguyên Trừng bị TRÙNG NGÀY với Hoàng Văn Thụ tại slot 04/11
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Văn Thành bị TRÙNG NGÀY với Trần Khát Chân tại slot 11/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Hoàng Việt (Lê Chí Trực) bị TRÙNG NGÀY với Trịnh Công Sơn tại slot 28/02
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Phúc Nguyên (Chúa Sãi) bị TRÙNG NGÀY với Lương Định Của tại slot 16/08
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Đặng Thai Mai bị TRÙNG NGÀY với Đặng Thái Mai tại slot 25/12
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Bùi Bằng Đoàn bị TRÙNG NGÀY với Bùi Bang Đoàn tại slot 19/09
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Thi (Nguyễn Ngọc Tấn) bị TRÙNG NGÀY với Thân Nhân Trung tại slot 15/05
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Trưng Trắc bị TRÙNG NGÀY với Nguyễn Thái Học tại slot 01/12
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyễn Văn Linh (Nguyễn Văn Cúc) bị TRÙNG NGÀY với Nguyễn Đình Chiểu tại slot 01/07
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Nguyên Hồng (Nguyễn Nguyên Hồng) bị TRÙNG NGÀY với Lý Tế Xuyên tại slot 05/11
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Sơn Nam (Phạm Minh Tài) bị TRÙNG NGÀY với Lê Hữu Trác (Hải Thượng Lãn Ông) tại slot 11/12
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Lê Trọng Tấn (Lê Trọng Tố) bị TRÙNG NGÀY với Lê Trọng Tấn tại slot 01/10
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Vũ Bằng bị TRÙNG NGÀY với Nguyễn Công Trứ tại slot 19/12
+(anonymous) @ check-data2.js:57
+(anonymous) @ check-data2.js:57
+Promise.then
+check-data2.js:57 Thành Thái (Nguyễn Phúc Bửu Lân) bị TRÙNG NGÀY với Trần Văn Phương tại slot 14/03

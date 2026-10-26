@@ -1,0 +1,143 @@
+  {
+    "id": "ngay_26_04",
+    "ten": "Ngày 26/04/1975: Mở màn Chiến dịch Hồ Chí Minh",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",
+    "nam_mat": "Không áp dụng",
+    "linh_vuc": "Sự kiện lịch sử Việt Nam",
+    "category_id": "historical_event",
+    "image_slug": "su-kien-26-04-1975",
+    "mo_ta": "17 giờ ngày 26/4/1975, Chiến dịch Hồ Chí Minh chính thức mở màn, các cánh quân đồng loạt tiến công các tuyến phòng thủ vòng ngoài Sài Gòn.",
+    "quote": null,
+    "ngay_hien_thi": "26/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện lịch sử ngày 26/04/1975.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Nguồn xác minh sự kiện",
+        "url": "https://nhandan.vn/ngay-26-4-1975-mo-man-chien-dich-ho-chi-minh-post524538.html"
+      },
+      {
+        "type": "quote",
+        "name": "Chưa có câu trích dẫn nguyên văn được xác minh",
+        "url": null
+      }
+    ],
+    "event_date": "26/04/1975",
+    "validation_status": "verified_event_date",
+    "validation_note": "Ngày sự kiện được đối chiếu theo nguồn liên kết. Trích dẫn chỉ giữ khi thấy trong tư liệu nguồn."
+  },
+  {
+    "id": "ngay_27_04",
+    "ten": "Cao Thắng",
+    "ngay_sinh": "Không rõ",
+    "nam_sinh": "1864",
+    "ngay_mat": "Không rõ",
+    "nam_mat": "1893",
+    "linh_vuc": "Lịch sử - Khoa học Quân sự",
+    "category_id": "military",
+    "image_slug": "cao-thang",
+    "mo_ta": "Vị tướng trẻ tuổi, cánh tay phải đắc lực của Phan Đình Phùng trong khởi nghĩa Hương Khê. Với tư chất thông minh xuất chúng, ông đã tự mày mò tháo lắp súng trường của Pháp, chế tạo thành công vũ khí kiểu Tây cho nghĩa quân, khiến quân đội thực dân vô cùng khiếp sợ.",
+    "quote": null,
+    "ngay_hien_thi": "27/04",
+    "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Cao Thắng.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Wikipedia tiếng Việt",
+        "url": "https://vi.wikipedia.org/wiki/Cao_Th%E1%BA%AFng"
+      },
+      {
+        "type": "quote",
+        "name": "Chưa xác minh nguồn quote",
+        "url": null
+      }
+    ],
+    "validation_status": "blocked_unmatched_id",
+    "validation_note": "Không có bằng chứng ngày sinh hoặc mất trùng ID. Cần thay bằng nhân vật hoặc sự kiện đúng ngày trước khi xuất bản."
+  },
+  {
+    "id": "ngay_28_04",
+    "ten": "Đặng Trần Côn",
+    "ngay_sinh": "Không rõ",
+    "nam_sinh": "1710",
+    "ngay_mat": "Không rõ",
+    "nam_mat": "1745",
+    "linh_vuc": "Văn hóa - Văn học",
+    "category_id": "literature",
+    "image_slug": "dang-tran-con",
+    "mo_ta": "Danh sĩ tài hoa triều Lê Trung Hưng. Cảm thương trước cảnh binh đao loạn lạc, bao người vợ phải ngóng chồng ra trận, ông đã viết nên kiệt tác 'Chinh phụ ngâm' bằng chữ Hán, một tác phẩm vĩ đại lên án chiến tranh và khao khát hòa bình.",
+    "quote": null,
+    "ngay_hien_thi": "28/04",
+    "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Đặng Trần Côn.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Wikipedia tiếng Việt",
+        "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BA%B7ng_Tr%E1%BA%A7n_C%C3%B4n"
+      },
+      {
+        "type": "quote",
+        "name": "Chưa xác minh nguồn quote",
+        "url": null
+      }
+    ],
+    "validation_status": "blocked_unmatched_id",
+    "validation_note": "Không có bằng chứng ngày sinh hoặc mất trùng ID. Cần thay bằng nhân vật hoặc sự kiện đúng ngày trước khi xuất bản."
+  },
+  {
+    "id": "ngay_29_04",
+    "ten": "Ngày 29/04/1975: Giải phóng đảo Trường Sa",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",
+    "nam_mat": "Không áp dụng",
+    "linh_vuc": "Sự kiện lịch sử Việt Nam",
+    "category_id": "historical_event",
+    "image_slug": "su-kien-29-04-1975",
+    "mo_ta": "9 giờ ngày 29/4/1975, lực lượng Hải quân Việt Nam và đơn vị phối thuộc hoàn thành làm chủ đảo Trường Sa, kết thúc nhiệm vụ giải phóng các đảo đã xác định trong chiến dịch tháng 4/1975.",
+    "quote": null,
+    "ngay_hien_thi": "29/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện lịch sử ngày 29/04/1975.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Nguồn xác minh sự kiện",
+        "url": "https://mst.gov.vn/giai-phong-truong-sa-chien-cong-khang-dinh-chu-quyen-197153562.htm"
+      },
+      {
+        "type": "quote",
+        "name": "Chưa có câu trích dẫn nguyên văn được xác minh",
+        "url": null
+      }
+    ],
+    "event_date": "29/04/1975",
+    "validation_status": "verified_event_date",
+    "validation_note": "Ngày sự kiện được đối chiếu theo nguồn liên kết. Trích dẫn chỉ giữ khi thấy trong tư liệu nguồn."
+  },
+  {
+    "id": "ngay_30_04",
+    "ten": "Ngày Giải phóng miền Nam, thống nhất đất nước",
+    "ngay_sinh": "30/04",
+    "nam_sinh": "1975",
+    "ngay_mat": "Không có",
+    "nam_mat": "Không có",
+    "linh_vuc": "Lịch sử - Quân sự",
+    "category_id": "historical_event",
+    "image_slug": "giai-phong-mien-nam-30-04-1975",
+    "mo_ta": "Đỉnh cao chói lọi của lịch sử giữ nước, mốc son vĩ đại kết thúc thắng lợi cuộc kháng chiến chống Mỹ cứu nước kéo dài 21 năm. Vào lúc 11 giờ 30 phút ngày 30/04/1975, xe tăng quân giải phóng đã húc đổ cổng Dinh Độc Lập, hiện thực hóa khát vọng hòa bình, độc lập và thống nhất non sông.",
+    "quote": null,
+    "ngay_hien_thi": "30/04",
+    "hien_thi_nhan_dip": "Kỷ niệm Ngày Giải phóng miền Nam, thống nhất đất nước (30/04/1975).",
+    "historical_sources": [
+      {
+        "type": "quote",
+        "name": "Chưa xác minh được câu trích dẫn nguyên văn",
+        "url": null
+      }
+    ],
+    "validation_status": "date_matches_source_record_needs_independent_validation",
+    "validation_note": "Trường ngày sinh/mất trong dữ liệu gốc trùng ID; cần kiểm định chéo với nguồn độc lập trước khi công bố."
+  }
+]

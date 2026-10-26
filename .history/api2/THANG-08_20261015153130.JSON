@@ -1,0 +1,273 @@
+[
+    {
+        "id": "vn_214",
+        "ten": "Thích Quảng Đức (Lâm Văn Tức)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1897",
+        "ngay_mat": "11/06",
+        "nam_mat": "1963",
+        "linh_vuc": "Văn hóa - Tôn giáo",
+        "category_id": "historical_figure",
+        "image_slug": "thich-quang-duc-vn-214",
+        "mo_ta": "Bậc cao tăng vĩ đại của Phật giáo Việt Nam. Để phản đối chính sách đàn áp tôn giáo tàn bạo của chính quyền Ngô Đình Diệm, ngài đã tẩm xăng tự thiêu giữa ngã tư đường phố Sài Gòn. Ngọn lửa bi tráng và 'trái tim xá lợi' bất diệt của ngài đã làm chấn động lương tri toàn thế giới.",
+        "quote": "Trước khi nhắm mắt về cõi Phật, tôi trân trọng kính ngỏ lời cho Tổng thống Ngô Đình Diệm, yêu cầu lấy lòng bác ái từ bi mà đối xử với quốc dân.",
+        "ngay_hien_thi": "01/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 63 năm ngày Bồ Tát Thích Quảng Đức vị pháp thiêu thân (1963 - 2026).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Th%C3%ADch_Qu%E1%BA%A3ng_%C4%90%E1%BB%A9c"
+            },
+            {
+                "type": "quote",
+                "name": "Trích 'Lời tâm huyết' trước khi tự thiêu",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_215",
+        "ten": "Nguyễn Hoàng (Chúa Tiên)",
+        "ngay_sinh": "28/08",
+        "nam_sinh": "1525",
+        "ngay_mat": "20/07",
+        "nam_mat": "1613",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-hoang-vn-215",
+        "mo_ta": "Vị chúa Nguyễn đầu tiên, người đặt nền móng vĩ đại cho công cuộc Nam tiến của dân tộc. Bằng tầm nhìn chiến lược 'Hoành Sơn nhất đái, vạn đại dung thân', ông đã biến xứ Thuận Hóa, Quảng Nam từ vùng đất biên viễn thành một trung tâm phát triển rực rỡ, định hình bản đồ Việt Nam hiện đại.",
+        "quote": "Đất Thuận Quảng là nơi yết hầu của miền Nam, bá tánh đông đúc, ta phải hết lòng vỗ về để lập cơ nghiệp muôn đời.",
+        "ngay_hien_thi": "02/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 501 năm ngày sinh của Chúa Tiên Nguyễn Hoàng - Người khởi dựng cơ nghiệp Đàng Trong.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Ho%C3%A0ng"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng an dân lập ấp của Chúa Tiên (Đại Nam thực lục)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_216",
+        "ten": "Chế Lan Viên (Phan Ngọc Hoan)",
+        "ngay_sinh": "20/10",
+        "nam_sinh": "1920",
+        "ngay_mat": "19/06",
+        "nam_mat": "1989",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "che-lan-vien-vn-216",
+        "mo_ta": "Nhà thơ lớn, một hiện tượng độc đáo của thi đàn Việt Nam. Thơ ông là sự kết hợp tuyệt mỹ giữa trí tuệ uyên bác, triết lý sâu xa và cảm xúc trào dâng. Những tác phẩm như 'Điêu tàn' hay 'Tiếng hát con tàu' đã góp phần định hình một diện mạo mới cho nền văn học nước nhà.",
+        "quote": "Khi ta ở, chỉ là nơi đất ở. Khi ta đi, đất đã hóa tâm hồn.",
+        "ngay_hien_thi": "03/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 106 năm ngày sinh của nhà thơ triết lý tài hoa Chế Lan Viên.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ch%E1%BA%BF_Lan_Vi%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Trích thi phẩm 'Tiếng hát con tàu'",
+                "url": "https://vi.wikisource.org/wiki/Ti%E1%BA%BFng_h%C3%A1t_con_t%C3%A0u"
+            }
+        ]
+    },
+    {
+        "id": "vn_217",
+        "ten": "Trần Thánh Tông (Trần Hoảng)",
+        "ngay_sinh": "12/10",
+        "nam_sinh": "1240",
+        "ngay_mat": "03/07",
+        "nam_mat": "1290",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "tran-thanh-tong-vn-217",
+        "mo_ta": "Vị hoàng đế thứ hai của vương triều Trần, một minh quân văn võ song toàn. Cùng với Trần Hưng Đạo và Thượng hoàng Trần Thái Tông, ngài đã trực tiếp lãnh đạo quân dân Đại Việt đập tan hai cuộc chiến tranh xâm lược tàn bạo của đế quốc Nguyên Mông, giữ vững giang sơn gấm vóc.",
+        "quote": "Nước có lúc hưng vong, nhưng chí của con dân Đại Việt thì ngàn năm không đổi.",
+        "ngay_hien_thi": "04/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 786 năm ngày sinh của minh quân Trần Thánh Tông - Vị vua chiến thắng quân Nguyên Mông.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Th%C3%A1nh_T%C3%B4ng"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng tự cường bảo vệ đất nước (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_218",
+        "ten": "Duy Tân (Nguyễn Phúc Vĩnh San)",
+        "ngay_sinh": "19/09",
+        "nam_sinh": "1899",
+        "ngay_mat": "26/12",
+        "nam_mat": "1945",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "duy-tan-vn-218",
+        "mo_ta": "Vị hoàng đế trẻ tuổi nhất và cũng mang tinh thần yêu nước quyết liệt bậc nhất triều Nguyễn. Được đưa lên ngai vàng khi mới 8 tuổi làm vua bù nhìn, ngài đã bí mật liên kết với các chí sĩ Thái Phiên, Trần Cao Vân để khởi nghĩa chống Pháp. Khi bại lộ, ngài thà chịu cảnh lưu đày chứ kiên quyết không thỏa hiệp.",
+        "quote": "Tay dơ lấy nước mà rửa, nước dơ lấy máu mà rửa.",
+        "ngay_hien_thi": "05/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 127 năm ngày sinh của vị Hoàng đế yêu nước, bất khuất Duy Tân.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Duy_T%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói nổi tiếng của vua Duy Tân khi nói về lòng yêu nước",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_219",
+        "ten": "Quang Dũng (Bùi Đình Diệm)",
+        "ngay_sinh": "11/10",
+        "nam_sinh": "1921",
+        "ngay_mat": "13/10",
+        "nam_mat": "1988",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "quang-dung-vn-219",
+        "mo_ta": "Nhà thơ, người lính hào hoa của trung đoàn Tây Tiến. Bằng ngòi bút tài hoa, lãng mạn và bi tráng, ông đã khắc họa bức tượng đài bất tử về người lính vệ quốc quân trong bài thơ 'Tây Tiến', lưu giữ trọn vẹn hào khí và nét phong trần của một thời đạn bom khói lửa.",
+        "quote": "Tây Tiến đoàn binh không mọc tóc. Quân xanh màu lá dữ oai hùm. Mắt trừng gửi mộng qua biên giới. Đêm mơ Hà Nội dáng kiều thơm.",
+        "ngay_hien_thi": "06/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 105 năm ngày sinh của nhà thơ, chiến sĩ Tây Tiến Quang Dũng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Quang_D%C5%A9ng"
+            },
+            {
+                "type": "quote",
+                "name": "Trích thi phẩm kiệt tác 'Tây Tiến'",
+                "url": "https://vi.wikisource.org/wiki/T%C3%A2y_Ti%E1%BA%BFn"
+            }
+        ]
+    },
+    {
+        "id": "vn_220",
+        "ten": "Võ Tánh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1768",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1801",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "vo-tanh-vn-220",
+        "mo_ta": "Kiến Xương Quận Công, danh tướng bậc nhất dưới trướng chúa Nguyễn Ánh. Trong trận tử thủ thành Bình Định trước quân Tây Sơn do Trần Quang Diệu vây hãm, để bảo toàn mạng sống cho binh lính trong thành, ông đã dũng cảm bước lên lầu bát giác châm lửa tự thiêu, để lại tấm gương dũng liệt hiếm có.",
+        "quote": "Tướng quân (Trần Quang Diệu) cũng là bậc anh hùng thao lược. Thành Bình Định nay đã vỡ, xin hãy tha mạng cho binh sĩ của ta, họ đều là người vô tội.",
+        "ngay_hien_thi": "07/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 225 năm ngày mất của danh tướng kiên trung, dũng liệt Võ Tánh (1801 - 2026).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C3%B5_T%C3%A1nh"
+            },
+            {
+                "type": "quote",
+                "name": "Bức thư cuối cùng gửi tướng Tây Sơn Trần Quang Diệu",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_221",
+        "ten": "Hồ Đắc Di",
+        "ngay_sinh": "11/05",
+        "nam_sinh": "1900",
+        "ngay_mat": "25/06",
+        "nam_mat": "1984",
+        "linh_vuc": "Khoa học - Y tế",
+        "category_id": "culture",
+        "image_slug": "ho-dac-di-vn-221",
+        "mo_ta": "Giáo sư, bác sĩ phẫu thuật hàng đầu và là Hiệu trưởng đầu tiên của Đại học Y Hà Nội nước Việt Nam Dân chủ Cộng hòa. Là một trí thức uyên bác được đào tạo tại Pháp, ông đã từ bỏ vinh hoa để theo Bác Hồ lên chiến khu Việt Bắc, cống hiến trọn đời cho nền y học cách mạng.",
+        "quote": "Thầy thuốc không chỉ chữa bệnh bằng dao kéo hay thuốc men, mà còn bằng cả trái tim và tình người.",
+        "ngay_hien_thi": "08/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 126 năm ngày sinh của Giáo sư, Bác sĩ huyền thoại Hồ Đắc Di.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/H%E1%BB%93_%C4%90%E1%BA%AFc_Di"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng y đức của Giáo sư Hồ Đắc Di",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_222",
+        "ten": "Thiền sư Vạn Hạnh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1018",
+        "linh_vuc": "Văn hóa - Tôn giáo",
+        "category_id": "culture",
+        "image_slug": "thien-su-van-hanh-vn-222",
+        "mo_ta": "Bậc danh tăng kỳ tài, một vị cố vấn chính trị kiệt xuất thời kỳ đầu giành độc lập. Bằng học vấn uyên thâm và nhãn quan chính trị sắc bén, ngài đã ủng hộ và phò tá Lý Công Uẩn lên ngôi, lập ra triều đại nhà Lý và ủng hộ quyết định dời đô về Thăng Long.",
+        "quote": "Thân như điện ảnh hữu hoàn vô. Vạn mộc xuân vinh thu hựu khô. (Thân như bóng chớp chiều tà, Cỏ xuân tươi tốt thu qua rụng rời).",
+        "ngay_hien_thi": "09/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 1008 năm ngày viên tịch của Thiền sư Vạn Hạnh - Bậc danh tăng kiến tạo cơ nghiệp triều Lý.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%E1%BA%A1n_H%E1%BA%A1nh"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài kệ thị tịch nổi tiếng của Thiền sư",
+                "url": "https://vi.wikisource.org/wiki/Th%E1%BB%8B_%C4%91%E1%BB%87_t%E1%BB%AD"
+            }
+        ]
+    },
+    {
+        "id": "vn_223",
+        "ten": "Nguyễn Thái Bình",
+        "ngay_sinh": "14/01",
+        "nam_sinh": "1948",
+        "ngay_mat": "02/07",
+        "nam_mat": "1972",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-thai-binh-vn-223",
+        "mo_ta": "Người sinh viên yêu nước dũng cảm, một biểu tượng của phong trào chống chiến tranh. Du học tại Mỹ, anh đã nhiều lần công khai phản đối cuộc chiến tranh phi nghĩa của đế quốc Mỹ tại Việt Nam. Trong chuyến bay bị trục xuất về nước năm 1972, anh đã bị ám sát để lại sự bàng hoàng trên toàn thế giới.",
+        "quote": "Nếu tôi bị giết, hàng triệu người Việt Nam sẽ thay tôi chiến đấu cho hòa bình và độc lập.",
+        "ngay_hien_thi": "10/08",
+        "hien_thi_nhan_dip": "Kỷ niệm 78 năm ngày sinh của Anh hùng liệt sĩ Nguyễn Thái Bình - Sinh viên yêu nước chống chiến tranh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Th%C3%A1i_B%C3%ACnh"
+            },
+            {
+                "type": "quote",
+                "name": "Lời khẳng định đanh thép gửi những kẻ ủng hộ chiến tranh",
+                "url": null
+            }
+        ]
+    },
+    
+]

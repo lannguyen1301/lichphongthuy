@@ -3,11 +3,13 @@
    Tự động sinh các lớp bổ trợ điều khiển hiển thị (display classes).
    ========================================================================== */
 
-@use "../abstracts/variables" as abs;
+@use "../abstracts" as abs;
 
 @mixin make-display($breakpoint: null) {
     // Phân tích nội suy tiền tố một cách an toàn
-    $infix: if($breakpoint != null, "-#{$breakpoint}", "");
+    $infix: if(
+        sass($breakpoint != null): "-#{$breakpoint}" ; else: "",
+    );
 
     @each $display in abs.$display-values {
         .d#{$infix}-#{$display} {

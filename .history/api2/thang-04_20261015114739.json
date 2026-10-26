@@ -1,0 +1,814 @@
+[
+    {
+        "id": "vn_092",
+        "ten": "Trịnh Công Sơn",
+        "ngay_sinh": "28/02",
+        "nam_sinh": "1939",
+        "ngay_mat": "01/04",
+        "nam_mat": "2001",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "trinh-cong-son-vn-092",
+        "mo_ta": "Nhạc sĩ thiên tài, một trong những tượng đài lớn nhất của nền tân nhạc Việt Nam. Với gia tài hơn 600 ca khúc, nhạc của ông mang đậm tính triết lý nhân sinh, ngợi ca tình yêu, thân phận con người và khát vọng hòa bình, làm say đắm biết bao thế hệ.",
+        "quote": "Sống trong đời sống cần có một tấm lòng. Để làm gì em biết không? Để gió cuốn đi.",
+        "ngay_hien_thi": "01/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 25 năm ngày mất của người nhạc sĩ tài hoa Trịnh Công Sơn (2001 - 2026).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BB%8Bnh_C%C3%B4ng_S%C6%A1n"
+            },
+            {
+                "type": "quote",
+                "name": "Trích lời ca khúc 'Để gió cuốn đi'",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_093",
+        "ten": "Võ Thị Sáu (Nguyễn Thị Sáu)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1933",
+        "ngay_mat": "23/01",
+        "nam_mat": "1952",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "vo-thi-sau-vn-093",
+        "mo_ta": "Nữ anh hùng lực lượng vũ trang nhân dân huyền thoại vùng Đất Đỏ. Bị thực dân Pháp kết án tử hình khi chưa tròn 18 tuổi, chị đã ngắt một đóa hoa cài lên mái tóc, hiên ngang hát vang bài 'Tiến quân ca' trước họng súng của kẻ thù tại nhà tù Côn Đảo.",
+        "quote": "Yêu nước chống bọn thực dân xâm lược không phải là tội.",
+        "ngay_hien_thi": "02/04",
+        "hien_thi_nhan_dip": "Tôn vinh khí tiết hiên ngang, bất khuất của người con gái Đất Đỏ Võ Thị Sáu.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C3%B5_Th%E1%BB%8B_S%C3%A1u"
+            },
+            {
+                "type": "quote",
+                "name": "Lời khẳng khái trả lời quan tòa thực dân Pháp",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_094",
+        "ten": "Ngô Sĩ Liên",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Văn hóa - Lịch sử",
+        "category_id": "culture",
+        "image_slug": "ngo-si-lien-vn-094",
+        "mo_ta": "Danh sĩ, nhà sử học lỗi lạc thời Lê Sơ. Đỗ Tiến sĩ dưới triều vua Lê Thánh Tông, ông là người đã biên soạn bộ 'Đại Việt sử ký toàn thư' – bộ quốc sử đồ sộ, toàn vẹn và có giá trị bậc nhất còn lưu truyền đến ngày nay của dân tộc Việt Nam.",
+        "quote": "Người làm sử cốt ở sự chân thực, không vì yêu mà khen quá lời, không vì ghét mà dìm mất thiện.",
+        "ngay_hien_thi": "03/04",
+        "hien_thi_nhan_dip": "Tôn vinh di sản sử học vô giá của danh sĩ, sử gia lỗi lạc Ngô Sĩ Liên.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ng%C3%B4_S%C4%A9_Li%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm biên soạn sử (Lời tựa Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_095",
+        "ten": "Nam Cao (Trần Hữu Tri)",
+        "ngay_sinh": "29/10",
+        "nam_sinh": "1915",
+        "ngay_mat": "28/11",
+        "nam_mat": "1951",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nam-cao-vn-095",
+        "mo_ta": "Nhà văn hiện thực xuất sắc nhất của nền văn học Việt Nam thế kỷ 20. Với ngòi bút sắc lạnh nhưng chan chứa tình nhân đạo, ông để lại những kiệt tác như 'Chí Phèo', 'Lão Hạc', phơi bày sự tàn bạo của xã hội cũ và khát vọng sống lương thiện của con người.",
+        "quote": "Nghệ thuật không cần phải là ánh trăng lừa dối, nghệ thuật không nên là ánh trăng lừa dối, nghệ thuật có thể chỉ là những tiếng đau khổ kia, thoát ra từ những kiếp lầm than.",
+        "ngay_hien_thi": "04/04",
+        "hien_thi_nhan_dip": "Tôn vinh giá trị hiện thực và tư tưởng nhân đạo sâu sắc của nhà văn Nam Cao.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nam_Cao"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Tuyên ngôn nghệ thuật trong tác phẩm 'Trăng sáng'",
+                "url": "https://vi.wikisource.org/wiki/Tr%C4%83ng_s%C3%A1ng"
+            }
+        ]
+    },
+    {
+        "id": "vn_096",
+        "ten": "Kim Đồng (Nông Văn Dền)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1929",
+        "ngay_mat": "15/02",
+        "nam_mat": "1943",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "kim-dong-vn-096",
+        "mo_ta": "Người Đội trưởng đầu tiên của Đội Nhi đồng Cứu quốc (nay là Đội TNTP Hồ Chí Minh). Là một thiếu niên dân tộc Tày thông minh, nhanh nhẹn, anh đã dũng cảm đánh lạc hướng quân thù để bảo vệ cán bộ cách mạng an toàn rút lui, và anh dũng hy sinh khi mới 14 tuổi.",
+        "quote": "Các anh cứ rút đi, để em đánh lạc hướng chúng nó!",
+        "ngay_hien_thi": "05/04",
+        "hien_thi_nhan_dip": "Tôn vinh sự hy sinh quả cảm của người đội viên thiếu niên anh hùng Kim Đồng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Kim_%C4%90%E1%BB%93ng"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói trước lúc đánh lạc hướng giặc Pháp (Tương truyền)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_097",
+        "ten": "Lê Thánh Tông (Lê Tư Thành)",
+        "ngay_sinh": "20/07",
+        "nam_sinh": "1442",
+        "ngay_mat": "03/03",
+        "nam_mat": "1497",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "le-thanh-tong-vn-097",
+        "mo_ta": "Vị minh quân vĩ đại nhất của triều đại Hậu Lê và toàn bộ lịch sử phong kiến Việt Nam. Dưới triều đại của ông, Đại Việt đạt đến đỉnh cao huy hoàng về cả lãnh thổ, quân sự, luật pháp (Bộ luật Hồng Đức) và văn hóa (Hội Tao Đàn).",
+        "quote": "Một thước núi, một tấc sông của ta, lẽ nào lại nên vứt bỏ? Kẻ nào dám đem một thước, một tấc đất của Thái Tổ làm mồi cho giặc, kẻ đó sẽ bị tru di.",
+        "ngay_hien_thi": "06/04",
+        "hien_thi_nhan_dip": "Tôn vinh uy đức, tầm nhìn trị quốc và công lao mở mang bờ cõi của minh quân Lê Thánh Tông.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Th%C3%A1nh_T%C3%B4ng"
+            },
+            {
+                "type": "quote",
+                "name": "Lời dụ gửi triều thần về việc bảo vệ bờ cõi (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_098",
+        "ten": "Vũ Trọng Phụng",
+        "ngay_sinh": "20/10",
+        "nam_sinh": "1912",
+        "ngay_mat": "13/10",
+        "nam_mat": "1939",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "vu-trong-phung-vn-098",
+        "mo_ta": "Nhà văn, nhà báo trào phúng kiệt xuất, được mệnh danh là 'Ông vua phóng sự đất Bắc'. Bằng ngòi bút châm biếm sâu cay, ông đã lột trần bộ mặt thối nát, giả dối của xã hội Âu hóa rởm đời qua các kiệt tác để đời như 'Số đỏ', 'Giông tố'.",
+        "quote": "Sự thật ở đời không phải lúc nào cũng đẹp, nhưng người cầm bút phải dám nhìn thẳng vào sự thật ấy.",
+        "ngay_hien_thi": "07/04",
+        "hien_thi_nhan_dip": "Tôn vinh tài năng trào phúng kiệt xuất và ngòi bút đanh thép của nhà văn Vũ Trọng Phụng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C5%A9_Tr%E1%BB%8Dng_Ph%E1%BB%A5ng"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm làm báo, viết văn của Vũ Trọng Phụng",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_099",
+        "ten": "Nguyễn Thái Học",
+        "ngay_sinh": "01/12",
+        "nam_sinh": "1902",
+        "ngay_mat": "17/06",
+        "nam_mat": "1930",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-thai-hoc-vn-099",
+        "mo_ta": "Nhà cách mạng lỗi lạc, người sáng lập và là lãnh tụ tối cao của Việt Nam Quốc dân Đảng. Dù Khởi nghĩa Yên Bái thất bại, ông cùng các đồng chí vẫn hiên ngang bước lên máy chém, để lại tiếng vang chấn động, đánh thức mạnh mẽ lòng yêu nước của toàn dân tộc.",
+        "quote": "Không thành công cũng thành nhân!",
+        "ngay_hien_thi": "08/04",
+        "hien_thi_nhan_dip": "Tôn vinh khí phách hiên ngang và tinh thần xả thân vì nước của chí sĩ Nguyễn Thái Học.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Th%C3%A1i_H%E1%BB%8Dc"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói bất hủ của các chiến sĩ Khởi nghĩa Yên Bái",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_100",
+        "ten": "Tôn Thất Tùng",
+        "ngay_sinh": "10/05",
+        "nam_sinh": "1912",
+        "ngay_mat": "07/05",
+        "nam_mat": "1982",
+        "linh_vuc": "Khoa học - Y tế",
+        "category_id": "culture",
+        "image_slug": "ton-that-tung-vn-100",
+        "mo_ta": "Giáo sư, Bác sĩ huyền thoại của y học Việt Nam và thế giới. Ông là người đã phát minh ra 'Phương pháp cắt gan khô Tôn Thất Tùng' chấn động y học toàn cầu. Một trí thức lớn đã cống hiến trọn đời cho cách mạng và nền y tế nước nhà.",
+        "quote": "Nghề thầy thuốc không phải chỉ có mổ xẻ và cho thuốc, mà còn phải biết truyền cho người bệnh một sức sống, một niềm tin vào cuộc đời.",
+        "ngay_hien_thi": "09/04",
+        "hien_thi_nhan_dip": "Tôn vinh tài năng xuất chúng và y đức cao cả của huyền thoại phẫu thuật Giáo sư Tôn Thất Tùng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%C3%B4n_Th%E1%BA%A5t_T%C3%B9ng"
+            },
+            {
+                "type": "quote",
+                "name": "Ghi chép về y đức của Giáo sư Tôn Thất Tùng",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_101",
+        "ten": "Nguyễn Khuyến (Tam Nguyên Yên Đổ)",
+        "ngay_sinh": "15/02",
+        "nam_sinh": "1835",
+        "ngay_mat": "05/02",
+        "nam_mat": "1909",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-khuyen-vn-101",
+        "mo_ta": "Nhà thơ lớn của dân tộc, đỗ đầu cả ba kỳ thi Hương, Hội, Đình nên được tôn xưng là Tam Nguyên Yên Đổ. Đau xót trước cảnh nước mất nhà tan, ông cáo quan về quê ở ẩn, để lại những vần thơ trào phúng sâu cay và chùm thơ Thu tuyệt bút mang nặng tình yêu quê hương.",
+        "quote": "Sách vũ trụ đành khôn gạn hỏi. Cảnh tang điền luống những ngẩn ngơ.",
+        "ngay_hien_thi": "10/04",
+        "hien_thi_nhan_dip": "Tôn vinh nhân cách thanh cao và tài thơ phú xuất chúng của Tam Nguyên Yên Đổ Nguyễn Khuyến.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Khuy%E1%BA%BFn"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Ông Phỗng đá'",
+                "url": "https://vi.wikisource.org/wiki/%C3%94ng_ph%E1%BB%97ng_%C4%91%C3%A1"
+            }
+        ]
+    },
+    {
+        "id": "vn_102",
+        "ten": "Lý Bí (Lý Nam Đế)",
+        "ngay_sinh": "17/10",
+        "nam_sinh": "503",
+        "ngay_mat": "13/04",
+        "nam_mat": "548",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "ly-nam-de-vn-102",
+        "mo_ta": "Vị hoàng đế đầu tiên của nước Vạn Xuân. Căm phẫn ách thống trị tàn bạo của nhà Lương, ông đã phất cờ khởi nghĩa, đánh đuổi giặc ngoại xâm và tự xưng là Nam Đế (Hoàng đế nước Nam), khẳng định sự bình đẳng vị thế với các hoàng đế phương Bắc.",
+        "quote": "Việc dấy binh là thuận lòng trời, cứu dân khỏi vòng đồ thán. Nước Nam ta phải do người Nam làm chủ.",
+        "ngay_hien_thi": "11/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 1523 năm ngày sinh của Lý Nam Đế - Vị vua lập nên nhà nước Vạn Xuân độc lập.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%BD_B%C3%AD"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu khí dấy binh khởi nghĩa (Tương truyền trong sử cũ)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_103",
+        "ten": "Trương Hán Siêu",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1354",
+        "linh_vuc": "Văn hóa - Lịch sử",
+        "category_id": "culture",
+        "image_slug": "truong-han-sieu-vn-103",
+        "mo_ta": "Danh sĩ, bậc đại thần trải qua bốn đời vua nhà Trần. Không chỉ là một vị quan thanh liêm, chính trực, ông còn là một nhà văn lỗi lạc. Tác phẩm 'Bạch Đằng giang phú' của ông là một tuyệt tác chan chứa niềm tự hào dân tộc và triết lý hưng vong của lịch sử.",
+        "quote": "Giặc tan muôn thuở thanh bình. Bởi đâu đất hiểm cốt mình đức cao.",
+        "ngay_hien_thi": "12/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 672 năm ngày mất của danh sĩ triều Trần Trương Hán Siêu.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%C6%B0%C6%A1ng_H%C3%A1n_Si%C3%AAu"
+            },
+            {
+                "type": "quote",
+                "name": "Trích tuyệt tác 'Bạch Đằng giang phú'",
+                "url": "https://vi.wikisource.org/wiki/B%E1%BA%A1ch_%C4%90%E1%BA%B1ng_giang_ph%C3%BA"
+            }
+        ]
+    },
+    {
+        "id": "vn_104",
+        "ten": "Nguyễn Trung Trực",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1838",
+        "ngay_mat": "27/10",
+        "nam_mat": "1868",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-trung-truc-vn-104",
+        "mo_ta": "Thủ lĩnh phong trào khởi nghĩa chống Pháp lẫy lừng ở Nam Bộ. Ông lãnh đạo nghĩa quân lập nên những chiến công vang dội, tiêu biểu là trận đốt cháy tàu chiến L'Espérance của Pháp trên sông Vàm Cỏ Đông. Khi bị bắt và dụ dỗ, ông đã cự tuyệt và hiên ngang nhận án chém.",
+        "quote": "Bao giờ người Tây nhổ hết cỏ nước Nam, thì mới hết người Nam đánh Tây.",
+        "ngay_hien_thi": "13/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 188 năm ngày sinh của Anh hùng dân tộc Nguyễn Trung Trực (1838 - 2026).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Trung_Tr%E1%BB%B1c"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói bất hủ trước mặt chỉ huy quân đội Pháp",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_105",
+        "ten": "Huỳnh Thúc Kháng",
+        "ngay_sinh": "01/10",
+        "nam_sinh": "1876",
+        "ngay_mat": "21/04",
+        "nam_mat": "1947",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "huynh-thuc-khang-vn-105",
+        "mo_ta": "Chí sĩ yêu nước nổi tiếng, người đồng sáng lập phong trào Duy Tân cùng Phan Châu Trinh. Sau Cách mạng tháng Tám, ông giữ chức Quyền Chủ tịch nước Việt Nam Dân chủ Cộng hòa. Suốt cuộc đời, cụ Huỳnh là biểu tượng của tinh thần thanh liêm, đại nghĩa.",
+        "quote": "Tướng công ở lại dốc lòng vì nước, tôi xin đem thân già này báo đáp non sông.",
+        "ngay_hien_thi": "14/04",
+        "hien_thi_nhan_dip": "Kỷ niệm tròn 150 năm ngày sinh của chí sĩ yêu nước, Quyền Chủ tịch nước Huỳnh Thúc Kháng (1876 - 2026).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Hu%E1%BB%B3nh_Th%C3%BAc_Kh%C3%A1ng"
+            },
+            {
+                "type": "quote",
+                "name": "Lời hứa với Chủ tịch Hồ Chí Minh khi nhận nhiệm vụ Quyền Chủ tịch nước",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_106",
+        "ten": "Bế Văn Đàn",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1931",
+        "ngay_mat": "12/12",
+        "nam_mat": "1953",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "be-van-dan-vn-106",
+        "mo_ta": "Anh hùng Lực lượng vũ trang nhân dân người dân tộc Tày. Trong chiến dịch Đông Xuân 1953 - 1954 tại Mường Pồn, khi hỏa lực quân ta bị tắc nghẽn, anh đã bất chấp mưa đạn, lấy chính thân mình làm giá súng trung liên cho đồng đội nã đạn vào kẻ thù cho đến lúc hy sinh.",
+        "quote": "Kẻ thù trước mặt, đồng chí bắn đi, đừng do dự!",
+        "ngay_hien_thi": "15/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 95 năm ngày sinh của Anh hùng liệt sĩ Bế Văn Đàn - Tấm gương chèn lưng làm giá súng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/B%E1%BA%BF_V%C4%83n_%C4%90%C3%A0n"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu lệnh cho đồng đội (Chu Văn Pù) xả súng vào giặc",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_107",
+        "ten": "Hàm Nghi (Nguyễn Phúc Ưng Lịch)",
+        "ngay_sinh": "03/08",
+        "nam_sinh": "1871",
+        "ngay_mat": "14/01",
+        "nam_mat": "1944",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "ham-nghi-vn-107",
+        "mo_ta": "Vị hoàng đế yêu nước triều Nguyễn, biểu tượng tối cao của phong trào Cần Vương. Bị thực dân Pháp phế truất, ông thà chịu cảnh lưu đày sang châu Phi (Algeria) suốt phần đời còn lại chứ tuyệt đối không chịu cúi đầu làm một ông vua bù nhìn tay sai cho giặc.",
+        "quote": "Ta thà chịu cảnh lưu đày nơi xứ lạ, còn hơn làm ông vua bù nhìn cho giặc Pháp.",
+        "ngay_hien_thi": "16/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 155 năm ngày sinh của vị Hoàng đế yêu nước, bất khuất Hàm Nghi.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/H%C3%A0m_Nghi"
+            },
+            {
+                "type": "quote",
+                "name": "Ý chí từ chối hợp tác với thực dân Pháp",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_108",
+        "ten": "Tản Đà (Nguyễn Khắc Hiếu)",
+        "ngay_sinh": "19/05",
+        "nam_sinh": "1889",
+        "ngay_mat": "07/06",
+        "nam_mat": "1939",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "tan-da-vn-108",
+        "mo_ta": "Nhà thơ, nhà báo, dịch giả tài hoa và ngông nghênh bậc nhất trên thi đàn Việt Nam đầu thế kỷ 20. Ông được ví như 'người của hai thế kỷ', gạch nối giữa thi ca cổ điển và hiện đại, dùng ngòi bút để bộc lộ nỗi sầu thời thế và khát vọng tự do.",
+        "quote": "Dân hai lăm triệu ai người lớn / Nước bốn nghìn năm vẫn trẻ con.",
+        "ngay_hien_thi": "17/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 137 năm ngày sinh của nhà thơ tài hoa và khí chất Tản Đà.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%E1%BA%A3n_%C4%90%C3%A0"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Vịnh bức dư đồ rách'",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_109",
+        "ten": "Phùng Khắc Khoan",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1528",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1613",
+        "linh_vuc": "Văn hóa - Ngoại giao",
+        "category_id": "culture",
+        "image_slug": "phung-khac-khoan-vn-109",
+        "mo_ta": "Danh thần, nhà ngoại giao, nhà thơ xuất sắc thời Lê Trung Hưng, được người đời kính trọng gọi là 'Trạng Bùng'. Đi sứ nhà Minh lúc tuổi đã cao, bằng tài thi phú và sự khôn khéo, ông không chỉ mang vinh quang về cho đất nước mà còn học được nghề dệt lụa và đem giống ngô về truyền cho dân.",
+        "quote": "Làm tướng cốt ở mưu, làm quan cốt ở đức. Đem cái lợi về cho bá tánh là đạo làm người lớn nhất.",
+        "ngay_hien_thi": "18/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 498 năm ngày sinh của danh thần, nhà ngoại giao xuất chúng Trạng Bùng - Phùng Khắc Khoan.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ph%C3%B9ng_Kh%E1%BA%AFc_Khoan"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng vì dân của Phùng Khắc Khoan",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_110",
+        "ten": "Nguyễn Biểu",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1413",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-bieu-vn-110",
+        "mo_ta": "Sứ thần kiên trung thời Hậu Trần. Bị tướng giặc Trương Phụ thị uy bằng cách dọn cỗ đầu người ra thết đãi, ông không hề run sợ mà ung dung khoét mắt mút óc, khiến quân Minh khiếp vía. Ông bị giặc trói dưới chân cầu cho nước triều dâng lên nhấm chìm để trả thù.",
+        "quote": "Chỉ nghe nói người phương Bắc mổ thịt người phương Nam ăn, nay ta ăn lại cỗ người phương Bắc, có gì là lạ!",
+        "ngay_hien_thi": "19/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 613 năm ngày mất của sứ thần có khí tiết lẫm liệt bậc nhất lịch sử Nguyễn Biểu.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Bi%E1%BB%83u"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu khí trước mặt tướng giặc Trương Phụ (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_111",
+        "ten": "Lương Ngọc Quyến",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1885",
+        "ngay_mat": "05/09",
+        "nam_mat": "1917",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "luong-ngoc-quyen-vn-111",
+        "mo_ta": "Chí sĩ yêu nước kiên cường, một trong những người lãnh đạo Khởi nghĩa Thái Nguyên. Dù bị thực dân Pháp bắt giam, xỏ dây thép xuyên qua gót chân đày đọa tàn khốc, ông vẫn dùng ý chí sắt đá để kêu gọi binh lính nổi dậy, lấy cái chết để đánh thức đồng bào.",
+        "quote": "Ta chẳng thà chết để thức tỉnh đồng bào, còn hơn sống chui lủi làm một kẻ nô lệ hèn nhát.",
+        "ngay_hien_thi": "20/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 141 năm ngày sinh của chí sĩ yêu nước, lãnh tụ Khởi nghĩa Thái Nguyên Lương Ngọc Quyến.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C6%B0%C6%A1ng_Ng%E1%BB%8Dc_Quy%E1%BA%BFn"
+            },
+            {
+                "type": "quote",
+                "name": "Ý chí quyết tử vì phong trào cách mạng",
+                "url": null
+            }
+        ]
+    },
+    [
+    {
+        "id": "vn_112",
+        "ten": "Lê Chân",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "20",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "43",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "le-chan-vn-112",
+        "mo_ta": "Nữ tướng tiên phong xuất chúng dưới cờ khởi nghĩa của Hai Bà Trưng. Không chỉ là một vị tướng dũng cảm đánh đuổi quân Đông Hán, bà còn là người có công chiêu dân, lập ấp, khai khẩn ra vùng đất Hải Phòng trù phú ngày nay.",
+        "quote": "Nợ nước, thù nhà, phận gái dẫu phải thịt nát xương tan cũng quyết báo đền.",
+        "ngay_hien_thi": "21/04",
+        "hien_thi_nhan_dip": "Tôn vinh công lao đánh giặc cứu nước và khai khẩn đất Hải Phòng của Nữ tướng Lê Chân.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Ch%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Tương truyền về ý chí báo thù nhà, đền nợ nước của nữ tướng",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_113",
+        "ten": "Nguyễn Công Trứ",
+        "ngay_sinh": "19/12",
+        "nam_sinh": "1778",
+        "ngay_mat": "07/12",
+        "nam_mat": "1858",
+        "linh_vuc": "Kinh tế - Văn học",
+        "category_id": "culture",
+        "image_slug": "nguyen-cong-tru-vn-113",
+        "mo_ta": "Uy Viễn Tướng Công triều Nguyễn, một con người văn võ song toàn, tài hoa và ngông nghênh bậc nhất lịch sử. Ông là một nhà thơ kiệt xuất, đồng thời là nhà kinh bang tế thế vĩ đại với công lao quai đê, lấn biển, lập ra hai huyện Kim Sơn và Tiền Hải.",
+        "quote": "Đã mang tiếng ở trong trời đất. Phải có danh gì với núi sông.",
+        "ngay_hien_thi": "22/04",
+        "hien_thi_nhan_dip": "Tôn vinh tài năng thi phú xuất chúng và công lao khẩn hoang lập ấp của Nguyễn Công Trứ.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_C%C3%B4ng_Tr%E1%BB%A9"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Đi thi tự vịnh'",
+                "url": "https://vi.wikisource.org/wiki/%C4%90i_thi_t%E1%BB%B1_v%E1%BB%8Bnh"
+            }
+        ]
+    },
+    {
+        "id": "vn_114",
+        "ten": "Trần Thủ Độ",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1194",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1264",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "tran-thu-do-vn-114",
+        "mo_ta": "Thái sư vĩ đại, người kiến tạo và đặt nền móng vững chắc cho sự ra đời của triều đại nhà Trần. Với sự quyết đoán và bản lĩnh sắt đá, ông đã đóng vai trò trụ cột, trực tiếp chỉ đạo cuộc kháng chiến chống quân Mông Cổ lần thứ nhất giành thắng lợi rực rỡ.",
+        "quote": "Đầu thần chưa rơi xuống đất, bệ hạ đừng lo gì khác.",
+        "ngay_hien_thi": "23/04",
+        "hien_thi_nhan_dip": "Tôn vinh bản lĩnh sắt đá và công trạng phò tá triều Trần của Thái sư Trần Thủ Độ.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Th%E1%BB%A7_%C4%90%E1%BB%99"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói khảng khái trấn an vua Trần Thái Tông (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_115",
+        "ten": "Tô Hiệu",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1912",
+        "ngay_mat": "07/03",
+        "nam_mat": "1944",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "to-hieu-vn-115",
+        "mo_ta": "Nhà cách mạng kiên trung, người Bí thư chi bộ nhà tù Sơn La. Bất chấp đòn roi tra tấn tàn bạo và căn bệnh lao phổi hành hạ, anh vẫn biến nhà tù thành trường học cách mạng. Cây đào do anh tự tay trồng tại ngục Sơn La đã trở thành biểu tượng bất tử của sức sống và ý chí quật cường.",
+        "quote": "Mình sinh ra là để phục vụ cách mạng, nếu phải chết cũng là vì sự nghiệp cách mạng.",
+        "ngay_hien_thi": "24/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 114 năm ngày sinh của chiến sĩ cộng sản kiên trung Tô Hiệu - Biểu tượng của sức sống ngục Sơn La.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%C3%B4_Hi%E1%BB%87u"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói thể hiện lý tưởng sống của Tô Hiệu",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_116",
+        "ten": "Nguyễn Hữu Cảnh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1650",
+        "ngay_mat": "09/05",
+        "nam_mat": "1700",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-huu-canh-vn-116",
+        "mo_ta": "Lễ Thành Hầu, bậc đại thần xuất chúng thời chúa Nguyễn. Ông là người kinh lược xứ Đồng Nai, có công lớn trong việc thiết lập hệ thống hành chính, lập ra phủ Gia Định, chính thức xác lập chủ quyền và mở mang bờ cõi đất nước ta về phương Nam.",
+        "quote": "Làm tướng phải lấy đức thu phục lòng người, mở mang bờ cõi phải lấy việc an dân làm gốc.",
+        "ngay_hien_thi": "25/04",
+        "hien_thi_nhan_dip": "Tôn vinh công lao mở cõi phương Nam và lập phủ Gia Định của Lễ Thành Hầu Nguyễn Hữu Cảnh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_H%E1%BB%AFu_C%E1%BA%A3nh"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng an dân, lập ấp của Nguyễn Hữu Cảnh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_117",
+        "ten": "Nguyễn Thị Duệ",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1574",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1654",
+        "linh_vuc": "Văn hóa - Giáo dục",
+        "category_id": "culture",
+        "image_slug": "nguyen-thi-due-vn-117",
+        "mo_ta": "Nữ Tiến sĩ đầu tiên và duy nhất trong lịch sử khoa bảng phong kiến Việt Nam. Dưới thời nhà Mạc, vì luật lệ cấm phụ nữ thi cử, bà đã cải trang thành nam giới, lấy tên giả đi thi và xuất sắc đỗ thủ khoa (Trạng nguyên), để lại giai thoại tuyệt đẹp về truyền thống hiếu học của phụ nữ Việt.",
+        "quote": "Bậc trượng phu tài đức không nằm ở giới tính, mà ở chí hướng và trí tuệ.",
+        "ngay_hien_thi": "26/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 452 năm ngày sinh của Nguyễn Thị Duệ - Nữ Tiến sĩ đầu tiên và duy nhất của phong kiến Việt Nam.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Th%E1%BB%8B_Du%E1%BB%87"
+            },
+            {
+                "type": "quote",
+                "name": "Tương truyền về ý chí học tập của nữ Trạng nguyên",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_118",
+        "ten": "Cao Thắng",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1864",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1893",
+        "linh_vuc": "Lịch sử - Khoa học Quân sự",
+        "category_id": "military",
+        "image_slug": "cao-thang-vn-118",
+        "mo_ta": "Vị tướng trẻ tuổi, cánh tay phải đắc lực của Phan Đình Phùng trong khởi nghĩa Hương Khê. Với tư chất thông minh xuất chúng, ông đã tự mày mò tháo lắp súng trường của Pháp, chế tạo thành công vũ khí kiểu Tây cho nghĩa quân, khiến quân đội thực dân vô cùng khiếp sợ.",
+        "quote": "Chết vì nước, còn sống mãi. Chết mà đầu hàng giặc, ngàn năm nhục nhã.",
+        "ngay_hien_thi": "27/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 162 năm ngày sinh của tướng trẻ tài ba Cao Thắng - Người kỹ sư quân sự của nghĩa quân Hương Khê.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Cao_Th%E1%BA%AFng"
+            },
+            {
+                "type": "quote",
+                "name": "Tinh thần kháng Pháp của nghĩa quân Hương Khê",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_119",
+        "ten": "Phạm Hồng Thái",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1896",
+        "ngay_mat": "19/06",
+        "nam_mat": "1924",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "pham-hong-thai-vn-119",
+        "mo_ta": "Liệt sĩ kiên trung của tổ chức Tâm Tâm Xã. Để đánh thức lòng yêu nước của đồng bào, anh đã thực hiện vụ ám sát Toàn quyền Đông Dương Merlin tại Sa Diện (Quảng Châu, Trung Quốc). Dù thất bại và phải gieo mình xuống dòng Châu Giang, 'tiếng bom Sa Diện' của anh đã làm chấn động toàn thế giới.",
+        "quote": "Tiếng bom của tôi hôm nay chưa giết được giặc, nhưng ngày mai sẽ đánh thức được hàng triệu trái tim đồng bào.",
+        "ngay_hien_thi": "28/04",
+        "hien_thi_nhan_dip": "Kỷ niệm 130 năm ngày sinh của liệt sĩ Phạm Hồng Thái - Người tạo ra tiếng bom Sa Diện rúng động lịch sử.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_H%E1%BB%93ng_Th%C3%A1i"
+            },
+            {
+                "type": "quote",
+                "name": "Tương truyền về ý nghĩa của tiếng bom Sa Diện (1924)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_120",
+        "ten": "Lê Anh Xuân (Ca Lê Hiến)",
+        "ngay_sinh": "05/06",
+        "nam_sinh": "1940",
+        "ngay_mat": "21/05",
+        "nam_mat": "1968",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "le-anh-xuan-vn-120",
+        "mo_ta": "Nhà thơ, liệt sĩ nổi tiếng trong kháng chiến chống Mỹ. Anh từ bỏ giảng đường đại học để vào miền Nam chiến đấu và hy sinh trong đợt Tổng tiến công Mậu Thân 1968. Bài thơ 'Dáng đứng Việt Nam' của anh đã khắc họa bức tượng đài bất tử về người giải phóng quân trên đường băng Tân Sơn Nhất.",
+        "quote": "Anh ngã xuống trên đường băng Tân Sơn Nhứt, Nhưng Anh gượng đứng lên tì súng trên xác trực thăng, Và Anh chết trong khi đang đứng bắn, Máu Anh phun theo lửa đạn cầu vồng.",
+        "ngay_hien_thi": "29/04",
+        "hien_thi_nhan_dip": "Tôn vinh tinh thần xả thân vì Tổ quốc qua bức tượng đài 'Dáng đứng Việt Nam' của nhà thơ Lê Anh Xuân.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Anh_Xu%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Dáng đứng Việt Nam'",
+                "url": "https://vi.wikisource.org/wiki/D%C3%A1ng_%C4%91%E1%BB%A9ng_Vi%E1%BB%87t_Nam"
+            }
+        ]
+    },
+    {
+        "id": "vn_121",
+        "ten": "Văn Tiến Dũng",
+        "ngay_sinh": "02/05",
+        "nam_sinh": "1917",
+        "ngay_mat": "17/03",
+        "nam_mat": "2002",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "van-tien-dung-vn-121",
+        "mo_ta": "Đại tướng Quân đội nhân dân Việt Nam, một trong những học trò xuất sắc của Chủ tịch Hồ Chí Minh. Ông là Tư lệnh trực tiếp của Chiến dịch Hồ Chí Minh lịch sử, lãnh đạo đại quân thần tốc tiến vào giải phóng Sài Gòn, thống nhất trọn vẹn non sông vào ngày 30/04/1975.",
+        "quote": "Chiến dịch này là trận quyết chiến chiến lược cuối cùng, chúng ta chỉ được phép đánh thắng, không được phép đánh thua.",
+        "ngay_hien_thi": "30/04",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày Giải phóng miền Nam, thống nhất đất nước - Tôn vinh tài thao lược của Tư lệnh chiến dịch Văn Tiến Dũng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C4%83n_Ti%E1%BA%BFn_D%C5%A9ng"
+            },
+            {
+                "type": "quote",
+                "name": "Lời chỉ đạo trước thềm Chiến dịch Hồ Chí Minh (Đại thắng Mùa Xuân)",
+                "url": null
+            }
+        ]
+    }
+]
+]

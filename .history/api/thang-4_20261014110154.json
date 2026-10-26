@@ -1,0 +1,50 @@
+[
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    {
+        "id": "vn_119",
+        "ten": "Trần Nhẫn",
+        "ngay_sinh": "28/04",
+        "nam_sinh": "1927",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "2022",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "tran-nhan-vn-119",
+        "mo_ta": "Trung tướng Quân đội nhân dân Việt Nam. Ông nguyên là Tư lệnh Quân chủng Phòng không - Không quân, từng trực tiếp chỉ huy nhiều trận đánh oai hùng bảo vệ vùng trời Tổ quốc.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_120",
+        "ten": "Nguyễn Huy Thiệp",
+        "ngay_sinh": "29/04",
+        "nam_sinh": "1950",
+        "ngay_mat": "20/03",
+        "nam_mat": "2021",
+        "linh_vuc": "Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-huy-thiep-vn-120",
+        "mo_ta": "Nhà văn vĩ đại và hiện tượng độc đáo bậc nhất của nền văn học Việt Nam thời kỳ Đổi Mới. Tác phẩm của ông, tiêu biểu là \"Tướng về hưu\", mang sức mạnh lột tả chân thực sự phức tạp của thân phận con người.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_121",
+        "ten": "Hoàng Cầm (Bùi Tằng Việt)",
+        "ngay_sinh": "30/04",
+        "nam_sinh": "1920",
+        "ngay_mat": "19/08",
+        "nam_mat": "2013",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "hoang-cam-vn-121",
+        "mo_ta": "Thượng tướng Quân đội nhân dân Việt Nam. Ông là vị Tư lệnh Quân đoàn 4 trực tiếp chỉ huy cánh quân hướng Đông Nam tiến vào Dinh Độc Lập trong chiến dịch Hồ Chí Minh lịch sử.",
+        "quote": "Không rõ"
+    }
+]

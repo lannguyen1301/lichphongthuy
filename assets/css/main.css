@@ -5,10 +5,6 @@
    Sử dụng cờ !default để cho phép ghi đè trong môi trường module hóa,
    bảo vệ mã nguồn khỏi các xung đột khi tích hợp giao diện (theming).
    ========================================================================== */
-/* 
-   Mixins hỗ trợ tính toán và hiển thị
-   Tích hợp biến hệ thống thông qua module @use.
-*/
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -192,6 +188,11 @@ table {
    CSS CƠ SỞ (BASE CSS)
    Cấu trúc reset mặc định và định dạng nền tảng cho tài liệu.
    ========================================================================== */
+:root {
+  /* Lấy chính xác thông số transition từ file variables cũ của bạn */
+  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease;
+}
+
 *,
 ::after,
 ::before {
@@ -206,14 +207,20 @@ html {
 
 body {
   font-size: 1.6rem;
-  font-family: Gordita, sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue";
+  font-family: Plus Jakarta Sans, sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue";
+  line-height: 1.5; /* Khoảng cách tối thiểu an toàn cho người chứng khó đọc */
+  -webkit-font-smoothing: antialiased;
   color: var(--text-color);
   background: var(--body-bg);
+  transition: var(--theme-transition);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Tối ưu hóa ngắt dòng thông minh (Smart text-wrapping) */
+p,
+li,
+dd {
+  text-wrap: pretty; /* Loại bỏ dòng rớt (orphans) cho văn bản dài */
+  overflow-wrap: break-word;
 }
 
 button {
@@ -239,8 +246,14 @@ select {
   -webkit-tap-highlight-color: transparent;
 }
 
-input {
+input,
+textarea {
   background: transparent;
+}
+
+/* Thay thế các giải pháp JavaScript tính toán chiều cao cuộn */
+textarea {
+  field-sizing: content;
 }
 
 input:-webkit-autofill,
@@ -252,9 +265,45 @@ input:-webkit-autofill:hover {
   caret-color: var(--text-color);
 }
 
+/* Thiết lập đa phương tiện logic (Tương thích ngôn ngữ RTL/Dọc) */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+/* ĐẢM BẢO KHẢ NĂNG TIẾP CẬN: Quản lý vòng tiêu điểm bàn phím */
+:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 4px; /* Đẩy viền ra ngoài để tránh nhiễu loạn thị giác */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* Ẩn mũi tên trên Chrome, Safari, Edge và các trình duyệt dựa trên Chromium */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Ẩn mũi tên trên Firefox */
+details summary {
+  list-style: none;
+}
+
 .icon {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 @media (max-width: 575.98px) {
@@ -274,21 +323,14 @@ strong {
   font-weight: 600;
 }
 
-/* ==========================================================================
-   HỆ THỐNG LƯỚI (GRID SYSTEM)
-   Sinh mã tự động bằng các hàm toán học dựa trên cấu hình toàn cục.
-   ========================================================================== */
-.row > *, .container-fluid, .container {
-  padding-left: calc(var(--grid-gutter-x) * 0.5);
-  padding-right: calc(var(--grid-gutter-x) * 0.5);
-}
-
 .container-fluid, .container {
   --grid-gutter-x: 30px;
   --grid-gutter-y: 0;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  padding-left: calc(var(--grid-gutter-x) * 0.5);
+  padding-right: calc(var(--grid-gutter-x) * 0.5);
 }
 
 .container {
@@ -299,45 +341,17 @@ strong {
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(var(--grid-gutter-y) * -1);
-  margin-left: calc(var(--grid-gutter-x) * 0.5 * -1);
-  margin-right: calc(var(--grid-gutter-x) * 0.5 * -1);
+  margin-left: calc(var(--grid-gutter-x) * -0.5);
+  margin-right: calc(var(--grid-gutter-x) * -0.5);
 }
 .row > * {
   margin-top: var(--grid-gutter-y);
+  padding-left: calc(var(--grid-gutter-x) * 0.5);
+  padding-right: calc(var(--grid-gutter-x) * 0.5);
 }
 
 .col {
-  flex: 1 0;
-}
-
-.row-cols-1 > * {
-  flex: 0 0 auto;
-  width: 100%;
-}
-
-.row-cols-2 > * {
-  flex: 0 0 auto;
-  width: 50%;
-}
-
-.row-cols-3 > * {
-  flex: 0 0 auto;
-  width: 33.3333333333%;
-}
-
-.row-cols-4 > * {
-  flex: 0 0 auto;
-  width: 25%;
-}
-
-.row-cols-5 > * {
-  flex: 0 0 auto;
-  width: 20%;
-}
-
-.row-cols-6 > * {
-  flex: 0 0 auto;
-  width: 16.6666666667%;
+  flex: 1 0 0%;
 }
 
 .col-1 {
@@ -448,93 +462,13 @@ strong {
   margin-left: 91.6666666667%;
 }
 
-.g-0,
-.gx-0 {
-  --grid-gutter-x: 0px;
-}
-
-.g-0,
-.gy-0 {
-  --grid-gutter-y: 0px;
-}
-
-.g-1,
-.gx-1 {
-  --grid-gutter-x: 7.5px;
-}
-
-.g-1,
-.gy-1 {
-  --grid-gutter-y: 7.5px;
-}
-
-.g-2,
-.gx-2 {
-  --grid-gutter-x: 15px;
-}
-
-.g-2,
-.gy-2 {
-  --grid-gutter-y: 15px;
-}
-
-.g-3,
-.gx-3 {
-  --grid-gutter-x: 30px;
-}
-
-.g-3,
-.gy-3 {
-  --grid-gutter-y: 30px;
-}
-
-.g-4,
-.gx-4 {
-  --grid-gutter-x: 45px;
-}
-
-.g-4,
-.gy-4 {
-  --grid-gutter-y: 45px;
-}
-
-.g-5,
-.gx-5 {
-  --grid-gutter-x: 90px;
-}
-
-.g-5,
-.gy-5 {
-  --grid-gutter-y: 90px;
+.offset-12 {
+  margin-left: 100%;
 }
 
 @media (max-width: 1399.98px) {
   .container {
     max-width: 1140px;
-  }
-  .row-cols-xxl-1 > * {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-  .row-cols-xxl-2 > * {
-    flex: 0 0 auto;
-    width: 50%;
-  }
-  .row-cols-xxl-3 > * {
-    flex: 0 0 auto;
-    width: 33.3333333333%;
-  }
-  .row-cols-xxl-4 > * {
-    flex: 0 0 auto;
-    width: 25%;
-  }
-  .row-cols-xxl-5 > * {
-    flex: 0 0 auto;
-    width: 20%;
-  }
-  .row-cols-xxl-6 > * {
-    flex: 0 0 auto;
-    width: 16.6666666667%;
   }
   .col-xxl-1 {
     flex: 0 0 auto;
@@ -620,82 +554,37 @@ strong {
   .offset-xxl-11 {
     margin-left: 91.6666666667%;
   }
+  .offset-xxl-12 {
+    margin-left: 100%;
+  }
   .g-xxl-0,
   .gx-xxl-0 {
     --grid-gutter-x: 0px;
-  }
-  .g-xxl-0,
-  .gy-xxl-0 {
-    --grid-gutter-y: 0px;
   }
   .g-xxl-1,
   .gx-xxl-1 {
     --grid-gutter-x: 7.5px;
   }
-  .g-xxl-1,
-  .gy-xxl-1 {
-    --grid-gutter-y: 7.5px;
-  }
   .g-xxl-2,
   .gx-xxl-2 {
     --grid-gutter-x: 15px;
-  }
-  .g-xxl-2,
-  .gy-xxl-2 {
-    --grid-gutter-y: 15px;
   }
   .g-xxl-3,
   .gx-xxl-3 {
     --grid-gutter-x: 30px;
   }
-  .g-xxl-3,
-  .gy-xxl-3 {
-    --grid-gutter-y: 30px;
-  }
   .g-xxl-4,
   .gx-xxl-4 {
     --grid-gutter-x: 45px;
-  }
-  .g-xxl-4,
-  .gy-xxl-4 {
-    --grid-gutter-y: 45px;
   }
   .g-xxl-5,
   .gx-xxl-5 {
     --grid-gutter-x: 90px;
   }
-  .g-xxl-5,
-  .gy-xxl-5 {
-    --grid-gutter-y: 90px;
-  }
 }
 @media (max-width: 1199.98px) {
   .container {
     max-width: 960px;
-  }
-  .row-cols-xl-1 > * {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-  .row-cols-xl-2 > * {
-    flex: 0 0 auto;
-    width: 50%;
-  }
-  .row-cols-xl-3 > * {
-    flex: 0 0 auto;
-    width: 33.3333333333%;
-  }
-  .row-cols-xl-4 > * {
-    flex: 0 0 auto;
-    width: 25%;
-  }
-  .row-cols-xl-5 > * {
-    flex: 0 0 auto;
-    width: 20%;
-  }
-  .row-cols-xl-6 > * {
-    flex: 0 0 auto;
-    width: 16.6666666667%;
   }
   .col-xl-1 {
     flex: 0 0 auto;
@@ -781,82 +670,37 @@ strong {
   .offset-xl-11 {
     margin-left: 91.6666666667%;
   }
+  .offset-xl-12 {
+    margin-left: 100%;
+  }
   .g-xl-0,
   .gx-xl-0 {
     --grid-gutter-x: 0px;
-  }
-  .g-xl-0,
-  .gy-xl-0 {
-    --grid-gutter-y: 0px;
   }
   .g-xl-1,
   .gx-xl-1 {
     --grid-gutter-x: 7.5px;
   }
-  .g-xl-1,
-  .gy-xl-1 {
-    --grid-gutter-y: 7.5px;
-  }
   .g-xl-2,
   .gx-xl-2 {
     --grid-gutter-x: 15px;
-  }
-  .g-xl-2,
-  .gy-xl-2 {
-    --grid-gutter-y: 15px;
   }
   .g-xl-3,
   .gx-xl-3 {
     --grid-gutter-x: 30px;
   }
-  .g-xl-3,
-  .gy-xl-3 {
-    --grid-gutter-y: 30px;
-  }
   .g-xl-4,
   .gx-xl-4 {
     --grid-gutter-x: 45px;
-  }
-  .g-xl-4,
-  .gy-xl-4 {
-    --grid-gutter-y: 45px;
   }
   .g-xl-5,
   .gx-xl-5 {
     --grid-gutter-x: 90px;
   }
-  .g-xl-5,
-  .gy-xl-5 {
-    --grid-gutter-y: 90px;
-  }
 }
 @media (max-width: 991.98px) {
   .container {
     max-width: 720px;
-  }
-  .row-cols-lg-1 > * {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-  .row-cols-lg-2 > * {
-    flex: 0 0 auto;
-    width: 50%;
-  }
-  .row-cols-lg-3 > * {
-    flex: 0 0 auto;
-    width: 33.3333333333%;
-  }
-  .row-cols-lg-4 > * {
-    flex: 0 0 auto;
-    width: 25%;
-  }
-  .row-cols-lg-5 > * {
-    flex: 0 0 auto;
-    width: 20%;
-  }
-  .row-cols-lg-6 > * {
-    flex: 0 0 auto;
-    width: 16.6666666667%;
   }
   .col-lg-1 {
     flex: 0 0 auto;
@@ -942,82 +786,37 @@ strong {
   .offset-lg-11 {
     margin-left: 91.6666666667%;
   }
+  .offset-lg-12 {
+    margin-left: 100%;
+  }
   .g-lg-0,
   .gx-lg-0 {
     --grid-gutter-x: 0px;
-  }
-  .g-lg-0,
-  .gy-lg-0 {
-    --grid-gutter-y: 0px;
   }
   .g-lg-1,
   .gx-lg-1 {
     --grid-gutter-x: 7.5px;
   }
-  .g-lg-1,
-  .gy-lg-1 {
-    --grid-gutter-y: 7.5px;
-  }
   .g-lg-2,
   .gx-lg-2 {
     --grid-gutter-x: 15px;
-  }
-  .g-lg-2,
-  .gy-lg-2 {
-    --grid-gutter-y: 15px;
   }
   .g-lg-3,
   .gx-lg-3 {
     --grid-gutter-x: 30px;
   }
-  .g-lg-3,
-  .gy-lg-3 {
-    --grid-gutter-y: 30px;
-  }
   .g-lg-4,
   .gx-lg-4 {
     --grid-gutter-x: 45px;
-  }
-  .g-lg-4,
-  .gy-lg-4 {
-    --grid-gutter-y: 45px;
   }
   .g-lg-5,
   .gx-lg-5 {
     --grid-gutter-x: 90px;
   }
-  .g-lg-5,
-  .gy-lg-5 {
-    --grid-gutter-y: 90px;
-  }
 }
 @media (max-width: 767.98px) {
   .container {
     max-width: 540px;
-  }
-  .row-cols-md-1 > * {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-  .row-cols-md-2 > * {
-    flex: 0 0 auto;
-    width: 50%;
-  }
-  .row-cols-md-3 > * {
-    flex: 0 0 auto;
-    width: 33.3333333333%;
-  }
-  .row-cols-md-4 > * {
-    flex: 0 0 auto;
-    width: 25%;
-  }
-  .row-cols-md-5 > * {
-    flex: 0 0 auto;
-    width: 20%;
-  }
-  .row-cols-md-6 > * {
-    flex: 0 0 auto;
-    width: 16.6666666667%;
   }
   .col-md-1 {
     flex: 0 0 auto;
@@ -1103,82 +902,37 @@ strong {
   .offset-md-11 {
     margin-left: 91.6666666667%;
   }
+  .offset-md-12 {
+    margin-left: 100%;
+  }
   .g-md-0,
   .gx-md-0 {
     --grid-gutter-x: 0px;
-  }
-  .g-md-0,
-  .gy-md-0 {
-    --grid-gutter-y: 0px;
   }
   .g-md-1,
   .gx-md-1 {
     --grid-gutter-x: 7.5px;
   }
-  .g-md-1,
-  .gy-md-1 {
-    --grid-gutter-y: 7.5px;
-  }
   .g-md-2,
   .gx-md-2 {
     --grid-gutter-x: 15px;
-  }
-  .g-md-2,
-  .gy-md-2 {
-    --grid-gutter-y: 15px;
   }
   .g-md-3,
   .gx-md-3 {
     --grid-gutter-x: 30px;
   }
-  .g-md-3,
-  .gy-md-3 {
-    --grid-gutter-y: 30px;
-  }
   .g-md-4,
   .gx-md-4 {
     --grid-gutter-x: 45px;
-  }
-  .g-md-4,
-  .gy-md-4 {
-    --grid-gutter-y: 45px;
   }
   .g-md-5,
   .gx-md-5 {
     --grid-gutter-x: 90px;
   }
-  .g-md-5,
-  .gy-md-5 {
-    --grid-gutter-y: 90px;
-  }
 }
 @media (max-width: 575.98px) {
   .container {
     max-width: 100%;
-  }
-  .row-cols-sm-1 > * {
-    flex: 0 0 auto;
-    width: 100%;
-  }
-  .row-cols-sm-2 > * {
-    flex: 0 0 auto;
-    width: 50%;
-  }
-  .row-cols-sm-3 > * {
-    flex: 0 0 auto;
-    width: 33.3333333333%;
-  }
-  .row-cols-sm-4 > * {
-    flex: 0 0 auto;
-    width: 25%;
-  }
-  .row-cols-sm-5 > * {
-    flex: 0 0 auto;
-    width: 20%;
-  }
-  .row-cols-sm-6 > * {
-    flex: 0 0 auto;
-    width: 16.6666666667%;
   }
   .col-sm-1 {
     flex: 0 0 auto;
@@ -1264,53 +1018,32 @@ strong {
   .offset-sm-11 {
     margin-left: 91.6666666667%;
   }
+  .offset-sm-12 {
+    margin-left: 100%;
+  }
   .g-sm-0,
   .gx-sm-0 {
     --grid-gutter-x: 0px;
-  }
-  .g-sm-0,
-  .gy-sm-0 {
-    --grid-gutter-y: 0px;
   }
   .g-sm-1,
   .gx-sm-1 {
     --grid-gutter-x: 7.5px;
   }
-  .g-sm-1,
-  .gy-sm-1 {
-    --grid-gutter-y: 7.5px;
-  }
   .g-sm-2,
   .gx-sm-2 {
     --grid-gutter-x: 15px;
-  }
-  .g-sm-2,
-  .gy-sm-2 {
-    --grid-gutter-y: 15px;
   }
   .g-sm-3,
   .gx-sm-3 {
     --grid-gutter-x: 30px;
   }
-  .g-sm-3,
-  .gy-sm-3 {
-    --grid-gutter-y: 30px;
-  }
   .g-sm-4,
   .gx-sm-4 {
     --grid-gutter-x: 45px;
   }
-  .g-sm-4,
-  .gy-sm-4 {
-    --grid-gutter-y: 45px;
-  }
   .g-sm-5,
   .gx-sm-5 {
     --grid-gutter-x: 90px;
-  }
-  .g-sm-5,
-  .gy-sm-5 {
-    --grid-gutter-y: 90px;
   }
 }
 /* ==========================================================================
@@ -1415,13 +1148,338 @@ strong {
     translate: -4px;
   }
 }
-.header__container {
-  display: flex;
+.header {
+  position: fixed;
+  top: 30px;
+  right: 0;
+  left: 0;
+}
+
+.btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
-  border: 1px solid red;
-  border-radius: 99px;
+  padding: 1rem 2.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+.btn-primary:active {
+  background-color: var(--primary-active);
+}
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.btn:disabled, .btn.disabled {
+  background-color: var(--bg-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.logo {
+  display: block;
+  width: 6rem;
+  height: 6rem;
+}
+.logo-img {
+  display: inherit;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:root, [data-theme=metal] {
+  /* 1. NHÓM NỀN & CHỮ */
+  --body-bg: #f8fafc;
+  --bg-surface: #f1f5f9;
+  --text-color: #334155;
+  --text-muted: #94a3b8;
+  --border-color: #e2e8f0;
+  --primary-color: #eab308;
+  --secondary-color: #f59e0b;
+  --accent-color: #6b7280;
+  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+  --color-info: #0ea5e9;
+  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  --primary-hover: #ca8a04;
+  --primary-active: #a16207;
+  --bg-disabled: #f1f5f9;
+  --text-disabled: #cbd5e1;
+  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  --icon-color: var(--text-muted);
+  --icon-hover: var(--primary-color);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  /* =========================================================
+     CHẾ ĐỘ TỐI (DARK MODE) 
+     ========================================================= */
+}
+@media (prefers-color-scheme: dark) {
+  :root, [data-theme=metal] {
+    /* 1. Nhóm Nền & Chữ */
+    --body-bg: #713f12;
+    --bg-surface: #854d0e;
+    --text-color: #f8fafc;
+    --text-muted: #e2e8f0;
+    --border-color: #a16207;
+    --primary-color: #eab308;
+    --secondary-color: #fbbf24;
+    --accent-color: #9ca3af;
+    /* 2. Nhóm Trạng thái */
+    --color-success: #4ade80;
+    --color-warning: #facc15;
+    --color-danger: #f87171;
+    --color-info: #38bdf8;
+    /* 3. Nhóm Tương tác */
+    --primary-hover: #facc15;
+    --primary-active: #fde047;
+    --bg-disabled: #334155;
+    --text-disabled: #64748b;
+    /* 4. Nhóm Thành phần khác */
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+  }
+}
+
+[data-theme=wood] {
+  /* 1. NHÓM NỀN & CHỮ */
+  --body-bg: #f3f4f6;
+  --bg-surface: #e5e7eb;
+  --text-color: #1f2937;
+  --text-muted: #6b7280;
+  --border-color: #d1d5db;
+  --primary-color: #10b981;
+  --secondary-color: #3b82f6;
+  --accent-color: #34d399;
+  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+  --color-info: #0ea5e9;
+  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  --primary-hover: #059669;
+  --primary-active: #047857;
+  --bg-disabled: #e5e7eb;
+  --text-disabled: #9ca3af;
+  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  --icon-color: var(--text-muted);
+  --icon-hover: var(--primary-color);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  /* =========================================================
+     CHẾ ĐỘ TỐI (DARK MODE) 
+     ========================================================= */
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme=wood] {
+    /* 1. Nhóm Nền & Chữ */
+    --body-bg: #064e3b;
+    --bg-surface: #065f46;
+    --text-color: #f3f4f6;
+    --text-muted: #d1d5db;
+    --border-color: #047857;
+    --primary-color: #10b981;
+    --secondary-color: #60a5fa;
+    --accent-color: #6ee7b7;
+    /* 2. Nhóm Trạng thái */
+    --color-success: #4ade80;
+    --color-warning: #facc15;
+    --color-danger: #f87171;
+    --color-info: #38bdf8;
+    /* 3. Nhóm Tương tác */
+    --primary-hover: #34d399;
+    --primary-active: #6ee7b7;
+    --bg-disabled: #1f2937;
+    --text-disabled: #4b5563;
+    /* 4. Nhóm Thành phần khác */
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+  }
+}
+
+[data-theme=water] {
+  /* 1. NHÓM NỀN & CHỮ */
+  --body-bg: #fafafa;
+  --bg-surface: #f4f4f5;
+  --text-color: #3f3f46;
+  --text-muted: #a1a1aa;
+  --border-color: #e4e4e7;
+  --primary-color: #3b82f6;
+  --secondary-color: #94a3b8;
+  --accent-color: #0ea5e9;
+  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+  --color-info: #0ea5e9;
+  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  --primary-hover: #2563eb;
+  --primary-active: #1d4ed8;
+  --bg-disabled: #f4f4f5;
+  --text-disabled: #d4d4d8;
+  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  --icon-color: var(--text-muted);
+  --icon-hover: var(--primary-color);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  /* =========================================================
+     CHẾ ĐỘ TỐI (DARK MODE) 
+     ========================================================= */
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme=water] {
+    /* 1. Nhóm Nền & Chữ */
+    --body-bg: #1e3a8a;
+    --bg-surface: #1e40af;
+    --text-color: #fafafa;
+    --text-muted: #e4e4e7;
+    --border-color: #1d4ed8;
+    --primary-color: #3b82f6;
+    --secondary-color: #cbd5e1;
+    --accent-color: #38bdf8;
+    /* 2. Nhóm Trạng thái */
+    --color-success: #4ade80;
+    --color-warning: #facc15;
+    --color-danger: #f87171;
+    --color-info: #38bdf8;
+    /* 3. Nhóm Tương tác */
+    --primary-hover: #60a5fa;
+    --primary-active: #93c5fd;
+    --bg-disabled: #3f3f46;
+    --text-disabled: #71717a;
+    /* 4. Nhóm Thành phần khác */
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+  }
+}
+
+[data-theme=fire] {
+  /* 1. NHÓM NỀN & CHỮ */
+  --body-bg: #f5f5f4;
+  --bg-surface: #e7e5e4;
+  --text-color: #292524;
+  --text-muted: #78716c;
+  --border-color: #d6d3d1;
+  --primary-color: #ef4444;
+  --secondary-color: #10b981;
+  --accent-color: #f97316;
+  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+  --color-info: #0ea5e9;
+  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  --primary-hover: #dc2626;
+  --primary-active: #b91c1c;
+  --bg-disabled: #e7e5e4;
+  --text-disabled: #a8a29e;
+  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  --icon-color: var(--text-muted);
+  --icon-hover: var(--primary-color);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  /* =========================================================
+     CHẾ ĐỘ TỐI (DARK MODE) 
+     ========================================================= */
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme=fire] {
+    /* 1. Nhóm Nền & Chữ */
+    --body-bg: #7f1d1d;
+    --bg-surface: #991b1b;
+    --text-color: #f5f5f4;
+    --text-muted: #d6d3d1;
+    --border-color: #b91c1c;
+    --primary-color: #ef4444;
+    --secondary-color: #34d399;
+    --accent-color: #fb923c;
+    /* 2. Nhóm Trạng thái */
+    --color-success: #4ade80;
+    --color-warning: #facc15;
+    --color-danger: #f87171;
+    --color-info: #38bdf8;
+    /* 3. Nhóm Tương tác */
+    --primary-hover: #f87171;
+    --primary-active: #fca5a5;
+    --bg-disabled: #292524;
+    --text-disabled: #57534e;
+    /* 4. Nhóm Thành phần khác */
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+  }
+}
+
+[data-theme=earth] {
+  /* 1. NHÓM NỀN & CHỮ */
+  --body-bg: #f5f5f4;
+  --bg-surface: #e7e5e4;
+  --text-color: #292524;
+  --text-muted: #78716c;
+  --border-color: #d6d3d1;
+  --primary-color: #f59e0b;
+  --secondary-color: #ef4444;
+  --accent-color: #eab308;
+  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+  --color-info: #0ea5e9;
+  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  --primary-hover: #d97706;
+  --primary-active: #b45309;
+  --bg-disabled: #e7e5e4;
+  --text-disabled: #a8a29e;
+  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  --icon-color: var(--text-muted);
+  --icon-hover: var(--primary-color);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  /* =========================================================
+     CHẾ ĐỘ TỐI (DARK MODE) 
+     ========================================================= */
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme=earth] {
+    /* 1. Nhóm Nền & Chữ */
+    --body-bg: #78350f;
+    --bg-surface: #92400e;
+    --text-color: #f5f5f4;
+    --text-muted: #d6d3d1;
+    --border-color: #b45309;
+    --primary-color: #f59e0b;
+    --secondary-color: #f87171;
+    --accent-color: #facc15;
+    /* 2. Nhóm Trạng thái */
+    --color-success: #4ade80;
+    --color-warning: #facc15;
+    --color-danger: #f87171;
+    --color-info: #38bdf8;
+    /* 3. Nhóm Tương tác */
+    --primary-hover: #fbbf24;
+    --primary-active: #fcd34d;
+    --bg-disabled: #292524;
+    --text-disabled: #57534e;
+    /* 4. Nhóm Thành phần khác */
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

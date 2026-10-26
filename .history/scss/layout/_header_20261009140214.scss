@@ -1,0 +1,18 @@
+@use "sass:math";
+@use "../abstracts/" as abs;
+.header {
+    position: fixed;
+    top: abs.$header-top-offset;
+    right: 0;
+    left: 0;
+    // z-index: 100;
+
+    // top: 30rem;
+    &__container {
+        @extend %flexBetween;
+
+        padding: 3rem;
+        border: var(--border-color);
+        border-radius: 99px;
+    }
+}

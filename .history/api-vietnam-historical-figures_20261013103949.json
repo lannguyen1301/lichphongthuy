@@ -1,0 +1,282 @@
+[
+  {
+    "id": "vn_001",
+    "ten": "Lạc Long Quân",
+    "ngay_thang": "01/01",
+    "nam_sinh": "Truyền thuyết",
+    "linh_vuc": "Khai sáng dân tộc",
+    "mo_ta": "Vị vua truyền thuyết, con của Kinh Dương Vương, người được xem là thủy tổ sinh ra dân tộc Việt Nam.",
+    "quote": "Ta là loài rồng, nàng là loài tiên, thủy hỏa khắc nhau, chung hợp thật khó."
+  },
+  {
+    "id": "vn_002",
+    "ten": "Âu Cơ",
+    "ngay_thang": "02/01",
+    "nam_sinh": "Truyền thuyết",
+    "linh_vuc": "Khai sáng dân tộc",
+    "mo_ta": "Quốc mẫu của người Việt, người sinh ra bọc trăm trứng nở ra trăm người con trai, khởi nguồn của nguồn gốc 'Đồng bào'.",
+    "quote": "Thiếp vốn nòi tiên, kết duyên cùng quân trưởng, sinh ra cơ đồ này."
+  },
+  {
+    "id": "vn_003",
+    "ten": "Hùng Vương (Quốc Tổ)",
+    "ngay_thang": "03/01",
+    "nam_sinh": "Khoảng 2879 TCN",
+    "linh_vuc": "Khai quốc vương",
+    "mo_ta": "Tước hiệu của các vị vua nước Văn Lang, những người đầu tiên có công dựng nước và lập nên nhà nước sơ khai của người Việt.",
+    "quote": "Dù ai đi ngược về xuôi, nhớ ngày Giỗ Tổ mùng mười tháng ba."
+  },
+  {
+    "id": "vn_004",
+    "ten": "Trưng Trắc",
+    "ngay_thang": "04/01",
+    "nam_sinh": "Khoảng 14 CN",
+    "linh_vuc": "Lãnh đạo khởi nghĩa / Nữ vương",
+    "mo_ta": "Nữ anh hùng dân tộc, lãnh đạo cuộc khởi nghĩa chống lại ách đô hộ của nhà Đông Hán và xưng vương lập quốc.",
+    "quote": "Một xin rửa sạch nước thù / Hai xin đem lại nghiệp xưa họ Hùng."
+  },
+  {
+    "id": "vn_005",
+    "ten": "Trưng Nhị",
+    "ngay_thang": "05/01",
+    "nam_sinh": "Khoảng 14 CN",
+    "linh_vuc": "Tướng lĩnh khởi nghĩa",
+    "mo_ta": "Em gái của Trưng Trắc, người cộng sự đắc lực cùng chị phất cờ khởi nghĩa Mê Linh, đánh đuổi thái thú Tô Định.",
+    "quote": "Ba kẻo oan ức lòng chồng / Bốn xin vẹn vẹn sở công lênh này."
+  },
+  {
+    "id": "vn_006",
+    "ten": "Bà Triệu (Triệu Thị Trinh)",
+    "ngay_thang": "06/01",
+    "nam_sinh": "225",
+    "linh_vuc": "Lãnh đạo khởi nghĩa",
+    "mo_ta": "Nữ anh hùng kiệt xuất thời kỳ Bắc thuộc, lãnh đạo nhân dân khởi nghĩa chống lại ách đô hộ của nhà Đông Ngô.",
+    "quote": "Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông..."
+  },
+  {
+    "id": "vn_007",
+    "ten": "Lý Nam Đế (Lý Bí)",
+    "ngay_thang": "07/01",
+    "nam_sinh": "503",
+    "linh_vuc": "Khai quốc vương",
+    "mo_ta": "Người lãnh đạo khởi nghĩa đánh đuổi quân Lương, lập ra nước Vạn Xuân, xưng hoàng đế đầu tiên của Việt Nam.",
+    "quote": "Giành lại non sông, xưng đế Vạn Xuân, khẳng định bình đẳng với phương Bắc."
+  },
+  {
+    "id": "vn_008",
+    "ten": "Triệu Việt Vương (Triệu Quang Phục)",
+    "ngay_thang": "08/01",
+    "nam_sinh": "Không rõ",
+    "linh_vuc": "Quân sự / Vua",
+    "mo_ta": "Vị vua kế nghiệp Lý Nam Đế, nổi tiếng với chiến thuật du kích tại đầm Dạ Trạch, đánh bại quân nhà Lương.",
+    "quote": "Dựa vào hiểm địa Dạ Trạch, kiên trì kháng chiến, ắt có ngày toàn thắng."
+  },
+  {
+    "id": "vn_009",
+    "ten": "Phùng Hưng",
+    "ngay_thang": "09/01",
+    "nam_sinh": "Không rõ",
+    "linh_vuc": "Lãnh đạo khởi nghĩa",
+    "mo_ta": "Được nhân dân tôn là Bố Cái Đại Vương, lãnh đạo cuộc khởi nghĩa chống lại ách đô hộ tàn bạo của nhà Đường.",
+    "quote": "Dẹp loạn cứu dân, lưu danh muôn thuở."
+  },
+  {
+    "id": "vn_010",
+    "ten": "Khúc Thừa Dụ",
+    "ngay_thang": "10/01",
+    "nam_sinh": "Không rõ",
+    "linh_vuc": "Chính trị / Quân sự",
+    "mo_ta": "Người đặt cơ sở cho nền độc lập dân tộc sau hơn 1000 năm Bắc thuộc, tự xưng Tiết độ sứ cai quản Giao Châu.",
+    "quote": "Lấy danh nghĩa triều đình để giữ yên bờ cõi, tự chủ nước nhà."
+  },
+  {
+    "id": "vn_011",
+    "ten": "Ngô Quyền",
+    "ngay_thang": "11/01",
+    "nam_sinh": "898",
+    "linh_vuc": "Khai quốc vương / Quân sự",
+    "mo_ta": "Vị anh hùng vĩ đại lãnh đạo trận thủy chiến Bạch Đằng năm 938, chính thức chấm dứt 1000 năm Bắc thuộc.",
+    "quote": "Đóng cọc dưới sông Bạch Đằng, phá tan quân Nam Hán."
+  },
+  {
+    "id": "vn_012",
+    "ten": "Đinh Tiên Hoàng (Đinh Bộ Lĩnh)",
+    "ngay_thang": "12/01",
+    "nam_sinh": "924",
+    "linh_vuc": "Khai quốc vương",
+    "mo_ta": "Vị hoàng đế dẹp loạn 12 sứ quân, thống nhất đất nước, lập ra nhà nước Đại Cồ Việt hùng mạnh.",
+    "quote": "Dẹp loạn sứ quân, thống nhất cõi bờ."
+  },
+  {
+    "id": "vn_013",
+    "ten": "Thái hậu Dương Vân Nga",
+    "ngay_thang": "13/01",
+    "nam_sinh": "952",
+    "linh_vuc": "Chính trị gia",
+    "mo_ta": "Người phụ nữ quyền lực bậc nhất lịch sử, có vai trò quyết định trong việc chuyển giao quyền lực từ nhà Đinh sang nhà Tiền Lê để giữ nước.",
+    "quote": "Vì xã tắc sơn hà, khoác áo long bào cho Thập đạo Tướng quân."
+  },
+  {
+    "id": "vn_014",
+    "ten": "Lê Đại Hành (Lê Hoàn)",
+    "ngay_thang": "14/01",
+    "nam_sinh": "941",
+    "linh_vuc": "Quân sự / Vua",
+    "mo_ta": "Hoàng đế sáng lập nhà Tiền Lê, thiên tài quân sự với chiến công phá quân Tống, bình Chiêm Thành.",
+    "quote": "Phá Tống, bình Chiêm, uy danh lừng lẫy."
+  },
+  {
+    "id": "vn_015",
+    "ten": "Lý Thái Tổ (Lý Công Uẩn)",
+    "ngay_thang": "15/01",
+    "nam_sinh": "974",
+    "linh_vuc": "Khai quốc vương",
+    "mo_ta": "Vị vua sáng lập vương triều nhà Lý, tác giả 'Chiếu dời đô', dời đô về Thăng Long mở ra kỷ nguyên rực rỡ.",
+    "quote": "Thuận lòng trời, hợp dạ dân, dời đô về nơi trung tâm mưu toan nghiệp lớn."
+  },
+  {
+    "id": "vn_016",
+    "ten": "Lý Thường Kiệt",
+    "ngay_thang": "16/01",
+    "nam_sinh": "1019",
+    "linh_vuc": "Quân sự / Chính trị",
+    "mo_ta": "Danh tướng kiệt xuất thời Lý, đánh Tống bình Chiêm, tác giả bài thơ thần 'Nam quốc sơn hà'.",
+    "quote": "Nam quốc sơn hà Nam đế cư / Tiệt nhiên định phận tại thiên thư."
+  },
+  {
+    "id": "vn_017",
+    "ten": "Nguyên phi Ỷ Lan",
+    "ngay_thang": "17/01",
+    "nam_sinh": "Khoảng 1044",
+    "linh_vuc": "Chính trị gia",
+    "mo_ta": "Nữ chính trị gia kiệt xuất thời Lý, hai lần buông rèm nhiếp chính giúp nước thái bình thịnh trị.",
+    "quote": "Khuyên vua trị nước bằng lòng nhân từ, chăm lo cho trăm họ."
+  },
+  {
+    "id": "vn_018",
+    "ten": "Tô Hiến Thành",
+    "ngay_thang": "18/01",
+    "nam_sinh": "1102",
+    "linh_vuc": "Chính trị / Quân sự",
+    "mo_ta": "Đại thần nhà Lý, nổi tiếng văn võ song toàn, công tư phân minh, tấm gương sáng về lòng trung thực.",
+    "quote": "Nếu chọn người hầu hạ, thần xin cử Vũ Tán Đường. Nếu chọn người trị nước, thần xin cử Trần Trung Tá."
+  },
+  {
+    "id": "vn_019",
+    "ten": "Trần Thái Tông (Trần Cảnh)",
+    "ngay_thang": "19/01",
+    "nam_sinh": "1218",
+    "linh_vuc": "Khai quốc vương",
+    "mo_ta": "Vua đầu tiên của nhà Trần, người đặt nền móng cho triều đại hùng mạnh và trực tiếp đánh bại quân Mông Cổ lần thứ nhất.",
+    "quote": "Đầu thần chưa rơi xuống đất, xin bệ hạ đừng lo."
+  },
+  {
+    "id": "vn_020",
+    "ten": "Trần Thủ Độ",
+    "ngay_thang": "20/01",
+    "nam_sinh": "1194",
+    "linh_vuc": "Chính trị / Quân sự",
+    "mo_ta": "Thái sư nhà Trần, nhân vật quyền lực nhất giúp nhà Trần thay thế nhà Lý và bảo vệ giang sơn.",
+    "quote": "Đầu thần chưa rơi xuống đất, xin bệ hạ đừng lo."
+  },
+  {
+    "id": "vn_021",
+    "ten": "Trần Nhân Tông",
+    "ngay_thang": "21/01",
+    "nam_sinh": "1258",
+    "linh_vuc": "Vua / Triết học",
+    "mo_ta": "Vị vua anh minh, lãnh đạo thành công hai cuộc kháng chiến chống Mông-Nguyên, tổ sư thiền phái Trúc Lâm.",
+    "quote": "Xã tắc hai phen chồn ngựa đá / Non sông nghìn thuở vững âu vàng."
+  },
+  {
+    "id": "vn_022",
+    "ten": "Trần Hưng Đạo (Trần Quốc Tuấn)",
+    "ngay_thang": "22/01",
+    "nam_sinh": "1228",
+    "linh_vuc": "Quân sự",
+    "mo_ta": "Quốc công Tiết chế, thiên tài quân sự lãnh đạo đánh tan quân Nguyên Mông, tác giả 'Hịch tướng sĩ'.",
+    "quote": "Ta thường tới bữa quên ăn, nửa đêm vỗ gối, ruột đau như cắt..."
+  },
+  {
+    "id": "vn_023",
+    "ten": "Trần Quang Khải",
+    "ngay_thang": "23/01",
+    "nam_sinh": "1241",
+    "linh_vuc": "Quân sự / Thơ ca",
+    "mo_ta": "Thái sư, danh tướng nhà Trần, người chỉ huy trận Chương Dương vĩ đại và là một nhà thơ xuất sắc.",
+    "quote": "Đoạt giáo Chương Dương độ / Cầm hồ Hàm Tử quan."
+  },
+  {
+    "id": "vn_024",
+    "ten": "Trần Bình Trọng",
+    "ngay_thang": "24/01",
+    "nam_sinh": "1259",
+    "linh_vuc": "Danh tướng",
+    "mo_ta": "Danh tướng nhà Trần, biểu tượng của khí tiết bất khuất, hi sinh anh dũng khi cự tuyệt đầu hàng quân Nguyên.",
+    "quote": "Ta thà làm ma nước Nam, chứ không thèm làm vương đất Bắc."
+  },
+  {
+    "id": "vn_025",
+    "ten": "Phạm Ngũ Lão",
+    "ngay_thang": "25/01",
+    "nam_sinh": "1255",
+    "linh_vuc": "Quân sự",
+    "mo_ta": "Danh tướng xuất thân bình dân, cánh tay phải của Trần Hưng Đạo, bách chiến bách thắng.",
+    "quote": "Múa giáo non sông trải mấy thu / Ba quân khí mạnh nuốt trôi trâu."
+  },
+  {
+    "id": "vn_026",
+    "ten": "Yết Kiêu",
+    "ngay_thang": "26/01",
+    "nam_sinh": "1242",
+    "linh_vuc": "Tướng lĩnh",
+    "mo_ta": "Gia tướng tài ba của Trần Hưng Đạo, nổi tiếng với tài bơi lặn như rái cá, đục chìm hàng loạt thuyền giặc.",
+    "quote": "Chúa công chưa về, ta quyết không rời thuyền."
+  },
+  {
+    "id": "vn_027",
+    "ten": "Chu Văn An",
+    "ngay_thang": "27/01",
+    "nam_sinh": "1292",
+    "linh_vuc": "Giáo dục / Triết học",
+    "mo_ta": "Đại tư nghiệp Quốc Tử Giám, Vạn thế sư biểu, nổi tiếng với bản Thất trảm sớ dâng vua chém nịnh thần.",
+    "quote": "Giữ đạo cương thường, xin chém 7 kẻ nịnh thần để giữ nghiêm phép nước."
+  },
+  {
+    "id": "vn_028",
+    "ten": "Hồ Quý Ly",
+    "ngay_thang": "28/01",
+    "nam_sinh": "1336",
+    "linh_vuc": "Chính trị / Cải cách",
+    "mo_ta": "Vị vua sáng lập nhà Hồ, một nhà cải cách táo bạo với việc phát hành tiền giấy và xây dựng thành nhà Hồ.",
+    "quote": "Cải cách táo bạo, phát hành Thông bảo hội sao."
+  },
+  {
+    "id": "vn_029",
+    "ten": "Lê Lợi (Lê Thái Tổ)",
+    "ngay_thang": "29/01",
+    "nam_sinh": "1385",
+    "linh_vuc": "Khai quốc vương / Khởi nghĩa",
+    "mo_ta": "Lãnh tụ tối cao của cuộc khởi nghĩa Lam Sơn đánh đuổi quân Minh, sáng lập vương triều Hậu Lê.",
+    "quote": "Ta cất quân đánh giặc, không vì tham phú quý, mà vì muốn để ngàn năm sau người đời biết ta không chịu làm tôi tớ giặc."
+  },
+  {
+    "id": "vn_030",
+    "ten": "Nguyễn Trãi",
+    "ngay_thang": "30/01",
+    "nam_sinh": "1380",
+    "linh_vuc": "Chính trị / Văn hóa",
+    "mo_ta": "Danh nhân văn hóa thế giới, vị quân sư lỗi lạc của Lê Lợi, tác giả kiệt tác 'Bình Ngô đại cáo'.",
+    "quote": "Đem đại nghĩa để thắng hung tàn / Lấy chí nhân để thay cường bạo."
+  },
+  {
+    "id": "vn_031",
+    "ten": "Lê Thánh Tông",
+    "ngay_thang": "31/01",
+    "nam_sinh": "1442",
+    "linh_vuc": "Vua / Văn học",
+    "mo_ta": "Vị minh quân vĩ đại nhất thời Lê sơ, người đưa Đại Việt phát triển rực rỡ, ban hành bộ luật Hồng Đức.",
+    "quote": "Một thước núi, một tấc sông của ta, lẽ nào lại nên vứt bỏ?"
+  }
+//   t
+]

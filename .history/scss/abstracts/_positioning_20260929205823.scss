@@ -1,0 +1,38 @@
+// POSITIONING PLACEHOLDERS
+// ==========================================
+
+// Căn giữa tuyệt đối (Cả 2 trục) - Dành cho Modal, Popup, Icon giữa khung hình
+%absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Căn giữa tuyệt đối (Chỉ trục dọc) - Dành cho Icon tìm kiếm trong ô Input, Nút mũi tên Slider
+%absCenterY {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+// Căn giữa tuyệt đối (Chỉ trục ngang) - Dành cho Tooltip, Badge nổi ở cạnh dưới/trên
+%absCenterX {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+// Phủ kín phần tử cha (Absolute) - Dành cho lớp phủ mờ (Overlay) trên hình ảnh
+%absCover {
+    position: absolute;
+    inset: 0;
+}
+
+// Phủ kín toàn bộ màn hình trình duyệt (Fixed) - Dành cho Modal Backdrop, Màn hình Loading
+%fixedCover {
+    position: fixed;
+    inset: 0;
+}
+
+

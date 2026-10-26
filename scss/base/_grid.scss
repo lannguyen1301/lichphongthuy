@@ -1,69 +1,45 @@
-/* ==========================================================================
-   HỆ THỐNG LƯỚI (GRID SYSTEM)
-   Sinh mã tự động bằng các hàm toán học dựa trên cấu hình toàn cục.
-   ========================================================================== */
-
-@use "sass:map";
+// scss/base/_grid.scss
 @use "sass:math";
-@use "../abstracts/" as abs;
+@use "sass:map";
+@use "../abstracts" as abs;
 
-%gutter-padding {
-    padding-left: calc(var(--grid-gutter-x) * 0.5);
-    padding-right: calc(var(--grid-gutter-x) * 0.5);
-}
-
+// 1. Base Container & Row
 .container-fluid {
-    // Nội suy giá trị từ biến SCSS sang thuộc tính tùy chỉnh CSS
     --grid-gutter-x: #{abs.$grid-gutter-width};
     --grid-gutter-y: 0;
-
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    @extend %gutter-padding;
+    padding-left: calc(var(--grid-gutter-x) * 0.5);
+    padding-right: calc(var(--grid-gutter-x) * 0.5);
 }
 
 .container {
     @extend .container-fluid;
     max-width: abs.$container-max-width-custom;
+    // Max-width sẽ được xử lý trong loop breakpoint
 }
 
 .row {
     display: flex;
     flex-wrap: wrap;
-    // Sử dụng calc() nguyên bản của CSS, không can thiệp nội suy SCSS
     margin-top: calc(var(--grid-gutter-y) * -1);
-    margin-left: calc(var(--grid-gutter-x) * 0.5 * -1);
-    margin-right: calc(var(--grid-gutter-x) * 0.5 * -1);
+    margin-left: calc(var(--grid-gutter-x) * -0.5);
+    margin-right: calc(var(--grid-gutter-x) * -0.5);
 
     > * {
         margin-top: var(--grid-gutter-y);
-        @extend %gutter-padding;
+        padding-left: calc(var(--grid-gutter-x) * 0.5);
+        padding-right: calc(var(--grid-gutter-x) * 0.5);
     }
 }
 
 .col {
-    flex: 1 0;
+    flex: 1 0 0%;
 }
 
-@mixin make-media-query($dimension) {
-    @media (max-width: ($dimension - 0.02px)) {
-        @content;
-    }
-}
-
-@mixin make-row-columns($infix: null) {
-    // Đảm bảo phép toán thực hiện an toàn trên số lượng cột gốc
-    @for $i from 1 through abs.$grid-columns * 0.5 {
-        .row-cols#{$infix}-#{$i} > * {
-            flex: 0 0 auto;
-            // Áp dụng math.div để tránh lỗi deprecation division của Dart Sass
-            width: math.div(100%, $i);
-        }
-    }
-}
-
-@mixin make-columns($infix: null) {
+// 2. Mixins for generating classes
+@mixin make-columns($infix: "") {
     @for $i from 1 through abs.$grid-columns {
         .col#{$infix}-#{$i} {
             flex: 0 0 auto;
@@ -72,52 +48,40 @@
     }
 }
 
-@mixin make-offsets($infix: null) {
-    @for $i from 0 to abs.$grid-columns {
+@mixin make-offsets($infix: "") {
+    @for $i from 0 through abs.$grid-columns {
         .offset#{$infix}-#{$i} {
-            // Thay thế cú pháp sass() thử nghiệm bằng hàm if() an toàn truyền thống
-            margin-left: if($i > 0, math.div(100%, abs.$grid-columns) * $i, 0);
+            margin-left: if(sass($i > 0): math.div(100%, abs.$grid-columns) * $i; else: 0);
         }
     }
 }
 
-@mixin make-gutters($infix: null) {
-    @each $i, $ratio in abs.$gutters {
-        .g#{$infix}-#{$i},
-        .gx#{$infix}-#{$i} {
-            --grid-gutter-x: #{abs.$grid-gutter-width * $ratio};
-        }
+// 3. Execution
+@include make-columns("");
+@include make-offsets("");
 
-        .g#{$infix}-#{$i},
-        .gy#{$infix}-#{$i} {
-            --grid-gutter-y: #{abs.$grid-gutter-width * $ratio};
-        }
-    }
-}
-
-// --------------------------------------------------------------------------
-// KHỞI TẠO GRID CLASSES BẰNG VÒNG LẶP
-// --------------------------------------------------------------------------
-
-// 1. Khởi tạo lưới toàn cục (Mặc định không có tiền tố infix)
-@include make-row-columns();
-@include make-columns();
-@include make-offsets();
-@include make-gutters();
-
-// 2. Khởi tạo lưới tương thích (Responsive) theo các điểm ngắt
+// 4. Breakpoint Loop (Đã fix để chạy hoàn hảo với mixins)
 @each $breakpoint, $dimension in abs.$grid-breakpoints {
-    $max-width: map.get(abs.$container-max-widths, $breakpoint);
-    $infix: "-#{$breakpoint}";
+    // Desktop-First: Điểm ngắt 0px (xs) không có ý nghĩa với max-width, nên bỏ qua
+    @if $dimension != 0 {
+        // Đổi "abs.breakpoint" thành "abs.screen" theo đúng file mixins
+        @include abs.screen($breakpoint) {
+            .container {
+                max-width: map.get(abs.$container-max-widths, $breakpoint);
+            }
 
-    @include make-media-query($dimension) {
-        .container {
-            max-width: $max-width;
+            // Gọi hàm get-infix từ mixins thay vì tự nối chuỗi thủ công
+            $infix: abs.get-infix($breakpoint);
+
+            @include make-columns($infix);
+            @include make-offsets($infix);
+
+            @each $i, $ratio in abs.$gutters {
+                .g#{$infix}-#{$i},
+                .gx#{$infix}-#{$i} {
+                    --grid-gutter-x: #{abs.$grid-gutter-width * $ratio};
+                }
+            }
         }
-
-        @include make-row-columns($infix);
-        @include make-columns($infix);
-        @include make-offsets($infix);
-        @include make-gutters($infix);
     }
 }

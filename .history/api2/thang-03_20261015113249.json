@@ -1,0 +1,274 @@
+[
+    {
+        "id": "vn_061",
+        "ten": "Phạm Văn Đồng",
+        "ngay_sinh": "01/03",
+        "nam_sinh": "1906",
+        "ngay_mat": "29/04",
+        "nam_mat": "2000",
+        "linh_vuc": "Chính trị - Văn hóa",
+        "category_id": "historical_figure",
+        "image_slug": "pham-van-dong-vn-061",
+        "mo_ta": "Nhà lãnh đạo kiệt xuất, vị Thủ tướng giữ cương vị lâu nhất trong lịch sử Việt Nam (32 năm). Không chỉ là một nhà ngoại giao, nhà chính trị tài ba, ông còn là một nhà văn hóa lớn, luôn trăn trở với việc giữ gìn sự trong sáng của tiếng Việt và bản sắc dân tộc.",
+        "quote": "Tiếng Việt của chúng ta rất giàu, tiếng Việt của chúng ta rất đẹp. Giữ gìn sự trong sáng của tiếng Việt là nghĩa vụ của mỗi người Việt Nam.",
+        "ngay_hien_thi": "01/03",
+        "hien_thi_nhan_dip": "Kỷ niệm 120 năm ngày sinh của cố Thủ tướng, Danh nhân văn hóa Phạm Văn Đồng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_V%C4%83n_%C4%90%E1%BB%93ng"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài viết 'Giữ gìn sự trong sáng của tiếng Việt'",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_062",
+        "ten": "Lương Thế Vinh",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1441",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1496",
+        "linh_vuc": "Khoa học - Văn hóa",
+        "category_id": "culture",
+        "image_slug": "luong-the-vinh-vn-062",
+        "mo_ta": "Trạng nguyên lỗi lạc thời nhà Lê sơ, được dân gian kính trọng gọi là 'Trạng Lường'. Ông là một nhà toán học thiên tài, tác giả của cuốn 'Đại thành toán pháp' - cuốn sách giáo khoa toán học đầu tiên của nước ta, đồng thời là một nghệ sĩ am tường âm nhạc và Phật học.",
+        "quote": "Vạn vật trong thiên hạ, từ việc đo ruộng đất, tính đắp thành, đến đo bóng mặt trời đều không nằm ngoài toán lý.",
+        "ngay_hien_thi": "02/03",
+        "hien_thi_nhan_dip": "Tôn vinh trí tuệ toán học và di sản văn hóa vĩ đại của Trạng Lường Lương Thế Vinh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C6%B0%C6%A1ng_Th%E1%BA%BF_Vinh"
+            },
+            {
+                "type": "quote",
+                "name": "Tóm tắt tư tưởng ứng dụng toán học của Lương Thế Vinh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_063",
+        "ten": "Nguyễn Trãi",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1380",
+        "ngay_mat": "19/09",
+        "nam_mat": "1442",
+        "linh_vuc": "Lịch sử - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-trai-vn-063",
+        "mo_ta": "Danh nhân văn hóa thế giới, bậc khai quốc công thần và là mưu sĩ kiệt xuất nhất của cuộc khởi nghĩa Lam Sơn. Trí tuệ của ông đã giúp Lê Lợi đánh đuổi giặc Minh, để lại cho hậu thế áng thiên cổ hùng văn 'Bình Ngô đại cáo' rực sáng tinh thần nhân nghĩa.",
+        "quote": "Việc nhân nghĩa cốt ở yên dân. Quân điếu phạt trước lo trừ bạo.",
+        "ngay_hien_thi": "03/03",
+        "hien_thi_nhan_dip": "Tôn vinh tư tưởng nhân nghĩa vì dân của Danh nhân văn hóa thế giới Nguyễn Trãi.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Tr%C3%A3i"
+            },
+            {
+                "type": "quote",
+                "name": "Trích 'Bình Ngô đại cáo'",
+                "url": "https://vi.wikisource.org/wiki/B%C3%ACnh_Ng%C3%B4_%C4%91%E1%BA%A1i_c%C3%A1o"
+            }
+        ]
+    },
+    {
+        "id": "vn_064",
+        "ten": "Bà Triệu (Triệu Thị Trinh)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "226",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "248",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "ba-trieu-vn-064",
+        "mo_ta": "Nữ anh hùng dân tộc lừng danh trong thời kỳ Bắc thuộc. Bất bình trước ách cai trị hà khắc của nhà Đông Ngô, bà đã cùng anh trai dấy binh khởi nghĩa. Hình ảnh người nữ tướng mặc giáp vàng, cưỡi voi trắng ra trận đã trở thành biểu tượng bất diệt cho khí phách phụ nữ Việt Nam.",
+        "quote": "Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông, lấy lại giang sơn, dựng nền độc lập, cởi ách nô lệ, chứ không chịu khom lưng làm tì thiếp cho người!",
+        "ngay_hien_thi": "04/03",
+        "hien_thi_nhan_dip": "Tôn vinh khí phách hiên ngang, lẫm liệt của Nữ anh hùng Triệu Thị Trinh.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/B%C3%A0_Tri%E1%BB%87u"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu khí của Bà Triệu (Ghi chép trong sử cũ)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_065",
+        "ten": "Nguyễn Tri Phương",
+        "ngay_sinh": "09/09",
+        "nam_sinh": "1800",
+        "ngay_mat": "20/12",
+        "nam_mat": "1873",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-tri-phuong-vn-065",
+        "mo_ta": "Danh tướng tài ba và trung liệt bậc nhất triều Nguyễn. Ông là người duy nhất từng trực tiếp thống lĩnh quân đội chiến đấu chống Pháp ở cả ba mặt trận trọng yếu: Đà Nẵng, Gia Định và Hà Nội. Dù bị thương nặng và bị giặc bắt, ông đã cự tuyệt chữa trị, nhịn ăn đến chết để bảo toàn khí tiết.",
+        "quote": "Bây giờ nếu ta chỉ gắng lay lắt mà sống, sao bằng thung dung chết vì việc nghĩa.",
+        "ngay_hien_thi": "05/03",
+        "hien_thi_nhan_dip": "Tôn vinh tấm gương trung liệt, tận trung báo quốc của danh tướng Nguyễn Tri Phương.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Tri_Ph%C6%B0%C6%A1ng"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói trước khi quyên sinh tại thành Hà Nội",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_066",
+        "ten": "Lê Lợi (Lê Thái Tổ)",
+        "ngay_sinh": "10/09",
+        "nam_sinh": "1385",
+        "ngay_mat": "05/09",
+        "nam_mat": "1433",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "le-loi-vn-066",
+        "mo_ta": "Vị hoàng đế anh minh lập nên triều Hậu Lê. Khởi nghiệp từ vùng đất Lam Sơn, ông đã nếm mật nằm gai suốt 10 năm, quy tụ anh hào khắp bốn phương để lãnh đạo cuộc khởi nghĩa đánh đuổi hoàn toàn quân Minh, giành lại độc lập trọn vẹn cho nước Đại Việt.",
+        "quote": "Ta cất quân đánh giặc không vì phú quý, mà vì muốn để ngàn năm sau người đời biết ta không chịu làm tôi tớ cho giặc thù.",
+        "ngay_hien_thi": "06/03",
+        "hien_thi_nhan_dip": "Tôn vinh công lao đánh đuổi giặc ngoại xâm, giành lại giang sơn của Bình Định Vương Lê Lợi.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_L%E1%BB%A3i"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng cứu nước của Bình Định Vương (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_067",
+        "ten": "Nguyễn Sơn (Vũ Nguyên Bác)",
+        "ngay_sinh": "01/10",
+        "nam_sinh": "1908",
+        "ngay_mat": "21/10",
+        "nam_mat": "1956",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-son-vn-067",
+        "mo_ta": "Huyền thoại quân sự của thế kỷ 20, được mệnh danh là 'Lưỡng quốc Tướng quân' khi được phong hàm Thiếu tướng ở cả Quân đội nhân dân Việt Nam và Quân Giải phóng Nhân dân Trung Quốc. Ông không chỉ là tướng cầm quân xuất quỷ nhập thần mà còn là một nhà văn hóa tài hoa.",
+        "quote": "Làm tướng mà chỉ biết dùng vũ lực là tướng tồi. Tướng giỏi phải hiểu được lòng quân, biết dùng văn hóa để giáo dục binh sĩ.",
+        "ngay_hien_thi": "07/03",
+        "hien_thi_nhan_dip": "Tôn vinh tài thao lược xuất chúng của Lưỡng quốc Tướng quân Nguyễn Sơn.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_S%C6%A1n"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng văn hóa quân sự của Tướng Nguyễn Sơn",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_068",
+        "ten": "Sương Nguyệt Anh (Nguyễn Thị Ngọc Khuê)",
+        "ngay_sinh": "08/03",
+        "nam_sinh": "1864",
+        "ngay_mat": "09/01",
+        "nam_mat": "1921",
+        "linh_vuc": "Văn hóa - Báo chí",
+        "category_id": "culture",
+        "image_slug": "suong-nguyet-anh-vn-068",
+        "mo_ta": "Nữ tổng biên tập đầu tiên của báo chí Việt Nam, người đứng đầu tờ 'Nữ giới chung' (Tiếng chuông của nữ giới). Là con gái của nhà thơ Nguyễn Đình Chiểu, bà thừa hưởng tài văn chương xuất chúng, dùng ngòi bút sắc bén để cổ vũ phong trào nữ quyền và thức tỉnh tinh thần yêu nước.",
+        "quote": "Chị em ơi, tài bộ vững vàng không thua kém gì nam giới, chị em ta phải tự cường mà đứng lên đóng góp cho xã tắc.",
+        "ngay_hien_thi": "08/03",
+        "hien_thi_nhan_dip": "Kỷ niệm 162 năm ngày sinh của Sương Nguyệt Anh - Nữ tổng biên tập đầu tiên của Việt Nam (Ngày Quốc tế Phụ nữ).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/S%C6%B0%C6%A1ng_Nguy%E1%BA%B7t_Anh"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng tự cường phái nữ trên báo Nữ giới chung",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_069",
+        "ten": "Nguyễn Thị Minh Khai",
+        "ngay_sinh": "01/11",
+        "nam_sinh": "1910",
+        "ngay_mat": "28/08",
+        "nam_mat": "1941",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-thi-minh-khai-vn-069",
+        "mo_ta": "Nữ chiến sĩ cộng sản kiên trung, nguyên Bí thư Thành ủy Sài Gòn - Chợ Lớn. Bị thực dân Pháp bắt và kết án tử hình khi tuổi đời còn rất trẻ, chị đã nêu cao tấm gương oanh liệt của phụ nữ Việt Nam, chiến đấu đến hơi thở cuối cùng vì nền độc lập của Tổ quốc.",
+        "quote": "Vững chí bền gan ai hỡi ai. Kiên tâm giữ dạ mới anh tài. Thời cuộc đẩy đưa người chiến sĩ. Gian nan lận đận ngậm đắng cay.",
+        "ngay_hien_thi": "09/03",
+        "hien_thi_nhan_dip": "Tôn vinh khí phách hiên ngang và tinh thần cống hiến trọn đời của nữ chiến sĩ Nguyễn Thị Minh Khai.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Th%C3%B4_Minh_Khai"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ viết bằng máu trên tường xà lim nhà tù Khám Lớn (Sài Gòn)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "vn_070",
+        "ten": "Các Vua Hùng (Hùng Vương)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Lịch sử - Nguồn cội",
+        "category_id": "historical_figure",
+        "image_slug": "hung-vuong-vn-070",
+        "mo_ta": "Những vị vua thủy tổ mở nước, lập nên nhà nước Văn Lang - quốc gia đầu tiên của dân tộc Việt Nam. Thời đại Hùng Vương đã tạo dựng nền tảng văn hóa rực rỡ, đúc kết sức mạnh đại đoàn kết để con cháu Lạc Hồng đời đời gìn giữ và bảo vệ non sông.",
+        "quote": "Các Vua Hùng đã có công dựng nước, Bác cháu ta phải cùng nhau giữ lấy nước. (Lời Chủ tịch Hồ Chí Minh)",
+        "ngay_hien_thi": "10/03",
+        "hien_thi_nhan_dip": "Tưởng nhớ công lao dựng nước vĩ đại của các Vua Hùng (Gắn với biểu tượng mùng 10 tháng 3).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/H%C3%B9ng_V%C6%B0%C6%A1ng"
+            },
+            {
+                "type": "quote",
+                "name": "Lời căn dặn của Bác Hồ tại Đền Hùng (1954)",
+                "url": null
+            }
+        ]
+    },
+    
+
+]

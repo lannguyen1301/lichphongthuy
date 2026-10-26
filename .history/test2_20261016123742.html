@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="earth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Header BEM & Theme Engine</title>
+
+    <style>
+        /* =========================================
+           1. MÔ PHỎNG THEME ENGINE (CSS VARIABLES)
+           ========================================= */
+        /* Mặc định là hệ Thổ (Earth) - Màu nâu/Be */
+        :root,
+        [data-theme="earth"] {
+            --body-bg: #f7f6f2;
+            --bg-surface: #ffffff;
+            --text-color: #3e3832;
+            --text-muted: #8c8273;
+            --border-color: #e5dfd5;
+            --primary-color: #8b5e34;
+            --primary-hover: #704b2a;
+            --shadow-color: rgba(139, 94, 52, 0.08);
+        }
+
+        /* Hệ Thuỷ (Water) - Màu xanh lam */
+        [data-theme="water"] {
+            --body-bg: #f0f7fb;
+            --bg-surface: #ffffff;
+            --text-color: #1a365d;
+            --text-muted: #6482a6;
+            --border-color: #d1e3f0;
+            --primary-color: #3182ce;
+            --primary-hover: #2b6cb0;
+            --shadow-color: rgba(49, 130, 206, 0.08);
+        }
+
+        /* CSS Cơ bản */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 20px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Fake style cho thẻ img bị mất src để bạn dễ nhìn layout */
+        img.icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-muted);
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        /* =========================================
+           2. KHỐI BUTTON LÕI (BLOCK: btn)
+           ========================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            /* Chuẩn Bento Grid */
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-color: var(--primary-color);
+        }
+
+        .btn:hover img.icon {
+            background-color: #ffffff;
+            /* Sáng icon khi hover */
+        }
+
+        .btn--login {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn--login:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* =========================================
+           3. COMPONENT HEADER (BLOCK: header)
+           ========================================= */
+        .header {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            /* Bento Grid bọc ngoài Header */
+            padding: 12px 24px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        /* Các thành phần flex con */
+        .header__logo-link,
+        .header__home-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__logo-img {
+            height: 32px;
+            background: var(--primary-color);
+            width: 100px;
+            border-radius: 8px;
+        }
+
+        .header__datetime-wrapper {
+            display: flex;
+            gap: 16px;
+            padding: 8px 16px;
+            background-color: var(--body-bg);
+            /* Khoét nền chìm xuống kiểu Bento */
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .header__date-group,
+        .header__time-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           4. STYLES CHO DROPDOWN (DETAILS / SUMMARY)
+           ========================================= */
+        /* Áp dụng chung cho cả Lang và Theme để không lặp code */
+        .header__lang-group,
+        .header__theme-group {
+            position: relative;
+        }
+
+        .header__lang-summary,
+        .header__theme-summary {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+
+        .header__lang-summary:hover,
+        .header__theme-summary:hover {
+            background-color: var(--body-bg);
+        }
+
+        /* Ẩn mũi tên mặc định của details */
+        .header__lang-summary::-webkit-details-marker,
+        .header__theme-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Box thả xuống (Menu List) */
+        .header__lang-list,
+        .header__theme-list {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: max-content;
+            min-width: 120px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 8px 24px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        /* Các item bên trong Menu Ngôn ngữ */
+        .header__lang-link {
+            display: block;
+            padding: 8px 16px;
+            color: var(--text-color);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .header__lang-link:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* Style cho nút Theme trong menu (BEM Mixes) */
+        .header__theme-btn {
+            width: 100%;
+            justify-content: flex-start;
+            /* Ép chữ và icon sang trái */
+            border: none;
+            /* Bỏ viền vì đã nằm trong box menu */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         HTML CHUẨN CỦA BẠN 
+         ========================================= -->
+    <header id="header" class="header">
+        <div class="header__container container">
+
+            <!-- 1. Logo -->
+            <div class="header__logo">
+                <a href="#!" aria-label="Logo" class="header__logo-link">
+                    <img src="./assets/icons/logo.svg" alt="lichphongthuy" class="header__logo-img">
+                </a>
+            </div>
+
+            <!-- 2. Icon Home -->
+            <div class="header__home">
+                <a href="#!" aria-label="Home" class="header__home-link">
+                    <img src="./assets/icons/home.svg" alt="home" class="header__home-icon icon">
+                </a>
+            </div>
+
+            <!-- 3. Div Date Year -->
+            <div class="header__datetime-wrapper">
+                <div class="header__date-group">
+                    <img src="./assets/icons/calendar.svg" alt="lịch" class="header__date-icon icon">
+                    <div class="header__date-text">24/05/2024</div>
+                </div>
+                <div class="header__time-group">
+                    <img src="./assets/icons/clock.svg" alt="giờ" class="header__time-icon icon">
+                    <div class="header__time-text">14:30:05</div>
+                </div>
+            </div>
+
+            <!-- 4. Group Ngôn ngữ (Đã đưa text và mũi tên vào trong summary) -->
+            <div class="header__lang-group">
+                <details class="header__lang-details">
+                    <summary class="header__lang-summary">
+                        <img src="./assets/icons/global.svg" alt="ngôn ngữ" class="header__lang-icon icon">
+                        <span class="header__lang-text">VN</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="xuống" class="header__lang-arrow icon">
+                    </summary>
+                    <ul class="header__lang-list">
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">VN</a></li>
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">EN</a></li>
+                        <li class="header__lang-item"><a href="#!" class="header__lang-link">JP</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 5. Group Đăng nhập -->
+            <div class="header__auth">
+                <button class="btn btn--login header__auth-btn">Đăng nhập</button>
+            </div>
+
+            <!-- 6. Group Theme (Dùng BEM Mixes) -->
+            <div class="header__theme-group">
+                <details class="header__theme-details">
+                    <summary class="header__theme-summary">
+                        <img src="./assets/icons/theme.svg" alt="theme" class="header__theme-icon icon">
+                        <span>Giao diện</span>
+                    </summary>
+                    <ul class="header__theme-list">
+                        <li class="header__theme-item">
+                            <!-- JS sẽ bắt thuộc tính data-theme này để đổi màu -->
+                            <button data-theme="earth" class="btn header__theme-btn">
+                                <img src="./assets/icons/earth.svg" alt="" class="header__theme-icon icon">
+                                Hệ Thổ
+                            </button>
+                        </li>
+                        <li class="header__theme-item">
+                            <button data-theme="water" class="btn header__theme-btn">
+                                <img src="./assets/icons/water.svg" alt="" class="header__theme-icon icon">
+                                Hệ Thuỷ
+                            </button>
+                        </li>
+                        <!-- Các nút khác bạn tự thêm nhé -->
+                    </ul>
+                </details>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- =========================================
+         JS ĐỂ TEST TÍNH NĂNG ĐỔI THEME & ĐÓNG MENU
+         ========================================= -->
+    <script>
+        // 1. Chức năng đổi Theme
+        const themeButtons = document.querySelectorAll('.header__theme-btn');
+        const htmlElement = document.documentElement;
+
+        themeButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Lấy data-theme từ nút được bấm (earth, water...)
+                const selectedTheme = e.currentTarget.getAttribute('data-theme');
+                // Gán vào thẻ <html>. CSS Variables sẽ tự động thay đổi toàn bộ màu web!
+                htmlElement.setAttribute('data-theme', selectedTheme);
+
+                // Đóng menu lại sau khi chọn xong
+                document.querySelector('.header__theme-details').removeAttribute('open');
+            });
+        });
+
+        // 2. Chức năng nhấp ra ngoài để đóng menu <details> (Trải nghiệm người dùng tốt)
+        document.addEventListener('click', (event) => {
+            const allDetails = document.querySelectorAll('details');
+            allDetails.forEach(details => {
+                if (!details.contains(event.target)) {
+                    details.removeAttribute('open');
+                }
+            });
+        });
+    </script>
+
+    <script src="./assets/js/check-data.js"></script>
+</body>
+
+</html>
+
+=== 2. BÁO CÁO SAI LỆCH NGÀY THÁNG ===
+Ngô Gia Tự: Đang xếp ngày 04/01 (Thực tế -> Sinh: 03/12 | Mất: Không rõ)
+Nguyễn Huệ (Quang Trung): Đang xếp ngày 05/01 (Thực tế -> Sinh: Không rõ | Mất: 16/09)
+Phạm Kiệt (Phạm Quang Khanh): Đang xếp ngày 07/01 (Thực tế -> Sinh: 10/01 | Mất: 23/01)
+Phạm Tuyên: Đang xếp ngày 10/01 (Thực tế -> Sinh: 12/01 | Mất: Chưa rõ)
+Lê Quý Đôn: Đang xếp ngày 12/01 (Thực tế -> Sinh: 02/08 | Mất: 01/05)
+Lý Tự Trọng (Lê Hữu Trọng): Đang xếp ngày 16/01 (Thực tế -> Sinh: 20/10 | Mất: 21/11)
+Trần Phú: Đang xếp ngày 18/01 (Thực tế -> Sinh: 01/05 | Mất: 06/09)
+Nguyễn Đình Chiểu: Đang xếp ngày 22/01 (Thực tế -> Sinh: 01/07 | Mất: 03/07)
+Tôn Đức Thắng: Đang xếp ngày 23/01 (Thực tế -> Sinh: 20/08 | Mất: 30/03)
+Trần Quý Cáp: Đang xếp ngày 24/01 (Thực tế -> Sinh: Không rõ | Mất: 17/05)
+Nguyễn Bỉnh Khiêm: Đang xếp ngày 27/01 (Thực tế -> Sinh: Không rõ | Mất: 27/11)
+Phan Bội Châu: Đang xếp ngày 28/01 (Thực tế -> Sinh: 26/12 | Mất: 29/10)
+Chu Văn An: Đang xếp ngày 29/01 (Thực tế -> Sinh: Không rõ | Mất: 26/11)
+Hai Bà Trưng: Đang xếp ngày 30/01 (Thực tế -> Sinh: 01/08 | Mất: 06/02)
+Đặng Thùy Trâm: Đang xếp ngày 31/01 (Thực tế -> Sinh: 26/11 | Mất: 22/06)
+Lê Trọng Tấn: Đang xếp ngày 02/02 (Thực tế -> Sinh: 01/10 | Mất: 05/12)
+Hoàng Hoa Thám (Đề Thám): Đang xếp ngày 03/02 (Thực tế -> Sinh: Không rõ | Mất: 10/02)
+Đào Duy Từ: Đang xếp ngày 04/02 (Thực tế -> Sinh: Không rõ | Mất: 17/10)
+Nguyễn Đình Thi: Đang xếp ngày 05/02 (Thực tế -> Sinh: 20/12 | Mất: 18/04)
+Trương Định (Trương Công Định): Đang xếp ngày 06/02 (Thực tế -> Sinh: Không rõ | Mất: 20/08)
+Lương Định Của: Đang xếp ngày 07/02 (Thực tế -> Sinh: 16/08 | Mất: 28/12)
+Lê Hoàn (Lê Đại Hành): Đang xếp ngày 10/02 (Thực tế -> Sinh: 10/08 | Mất: Không rõ)
+Hoàng Diệu (Hoàng Kim Tích): Đang xếp ngày 14/02 (Thực tế -> Sinh: 10/02 | Mất: 25/04)
+Trần Nhân Tông (Trần Khâm): Đang xếp ngày 16/02 (Thực tế -> Sinh: 11/11 | Mất: 16/12)
+Đặng Văn Ngữ: Đang xếp ngày 17/02 (Thực tế -> Sinh: 04/04 | Mất: 01/04)
+Đào Duy Anh: Đang xếp ngày 19/02 (Thực tế -> Sinh: 25/04 | Mất: 01/04)
+Nguyễn Phúc Chu: Đang xếp ngày 20/02 (Thực tế -> Sinh: 11/06 | Mất: 01/06)
+Nguyễn Văn Trỗi: Đang xếp ngày 21/02 (Thực tế -> Sinh: 01/02 | Mất: 15/10)
+Đinh Tiên Hoàng (Đinh Bộ Lĩnh): Đang xếp ngày 22/02 (Thực tế -> Sinh: 22/03 | Mất: Không rõ)
+Trần Đại Nghĩa (Phạm Quang Lễ): Đang xếp ngày 23/02 (Thực tế -> Sinh: 13/09 | Mất: 09/08)
+Hoàng Văn Thụ: Đang xếp ngày 25/02 (Thực tế -> Sinh: 04/11 | Mất: 24/05)
+Phan Đình Phùng: Đang xếp ngày 28/02 (Thực tế -> Sinh: Không rõ | Mất: 28/12)
+Tô Vĩnh Diện: Đang xếp ngày 29/02 (Thực tế -> Sinh: Không rõ | Mất: 01/02)
+Nguyễn Trãi: Đang xếp ngày 03/03 (Thực tế -> Sinh: Không rõ | Mất: 19/09)
+Nguyễn Tri Phương: Đang xếp ngày 05/03 (Thực tế -> Sinh: 09/09 | Mất: 20/12)
+Lê Lợi (Lê Thái Tổ): Đang xếp ngày 06/03 (Thực tế -> Sinh: 10/09 | Mất: 05/09)
+Nguyễn Sơn (Vũ Nguyên Bác): Đang xếp ngày 07/03 (Thực tế -> Sinh: 01/10 | Mất: 21/10)
+Nguyễn Thị Minh Khai: Đang xếp ngày 09/03 (Thực tế -> Sinh: 01/11 | Mất: 28/08)
+Lê Ngọc Hân (Công chúa Ngọc Hân): Đang xếp ngày 11/03 (Thực tế -> Sinh: Không rõ | Mất: 04/12)
+Lê Văn Duyệt: Đang xếp ngày 16/03 (Thực tế -> Sinh: Không rõ | Mất: 28/08)
+Trần Quốc Tuấn (Trần Hưng Đạo): Đang xếp ngày 17/03 (Thực tế -> Sinh: Không rõ | Mất: 03/10)
+Lê Hữu Trác (Hải Thượng Lãn Ông): Đang xếp ngày 19/03 (Thực tế -> Sinh: 11/12 | Mất: Không rõ)
+Lý Thái Tổ (Lý Công Uẩn): Đang xếp ngày 20/03 (Thực tế -> Sinh: 08/03 | Mất: 31/03)
+Nguyễn Viết Xuân: Đang xếp ngày 26/03 (Thực tế -> Sinh: Không rõ | Mất: 18/11)
+Nguyễn Văn Cừ: Đang xếp ngày 29/03 (Thực tế -> Sinh: 09/07 | Mất: 28/08)
+Lương Văn Can: Đang xếp ngày 30/03 (Thực tế -> Sinh: Không rõ | Mất: 13/06)
+Trần Thái Tông (Trần Cảnh): Đang xếp ngày 31/03 (Thực tế -> Sinh: 16/06 | Mất: 05/05)
+Võ Thị Sáu (Nguyễn Thị Sáu): Đang xếp ngày 02/04 (Thực tế -> Sinh: Không rõ | Mất: 23/01)
+Nam Cao (Trần Hữu Tri): Đang xếp ngày 04/04 (Thực tế -> Sinh: 29/10 | Mất: 28/11)
+Kim Đồng (Nông Văn Dền): Đang xếp ngày 05/04 (Thực tế -> Sinh: Không rõ | Mất: 15/02)
+Lê Thánh Tông (Lê Tư Thành): Đang xếp ngày 06/04 (Thực tế -> Sinh: 20/07 | Mất: 03/03)
+Vũ Trọng Phụng: Đang xếp ngày 07/04 (Thực tế -> Sinh: 20/10 | Mất: 13/10)
+Nguyễn Thái Học: Đang xếp ngày 08/04 (Thực tế -> Sinh: 01/12 | Mất: 17/06)
+Tôn Thất Tùng: Đang xếp ngày 09/04 (Thực tế -> Sinh: 10/05 | Mất: 07/05)
+Nguyễn Khuyến (Tam Nguyên Yên Đổ): Đang xếp ngày 10/04 (Thực tế -> Sinh: 15/02 | Mất: 05/02)
+Lý Bí (Lý Nam Đế): Đang xếp ngày 11/04 (Thực tế -> Sinh: 17/10 | Mất: 13/04)
+Nguyễn Trung Trực: Đang xếp ngày 13/04 (Thực tế -> Sinh: Không rõ | Mất: 27/10)
+Huỳnh Thúc Kháng: Đang xếp ngày 14/04 (Thực tế -> Sinh: 01/10 | Mất: 21/04)
+Bế Văn Đàn: Đang xếp ngày 15/04 (Thực tế -> Sinh: Không rõ | Mất: 12/12)
+Hàm Nghi (Nguyễn Phúc Ưng Lịch): Đang xếp ngày 16/04 (Thực tế -> Sinh: 03/08 | Mất: 14/01)
+Tản Đà (Nguyễn Khắc Hiếu): Đang xếp ngày 17/04 (Thực tế -> Sinh: 19/05 | Mất: 07/06)
+Lương Ngọc Quyến: Đang xếp ngày 20/04 (Thực tế -> Sinh: Không rõ | Mất: 05/09)
+Nguyễn Công Trứ: Đang xếp ngày 22/04 (Thực tế -> Sinh: 19/12 | Mất: 07/12)
+Tô Hiệu: Đang xếp ngày 24/04 (Thực tế -> Sinh: Không rõ | Mất: 07/03)
+Nguyễn Hữu Cảnh: Đang xếp ngày 25/04 (Thực tế -> Sinh: Không rõ | Mất: 09/05)
+Phạm Hồng Thái: Đang xếp ngày 28/04 (Thực tế -> Sinh: Không rõ | Mất: 19/06)
+Lê Anh Xuân (Ca Lê Hiến): Đang xếp ngày 29/04 (Thực tế -> Sinh: 05/06 | Mất: 21/05)
+Văn Tiến Dũng: Đang xếp ngày 30/04 (Thực tế -> Sinh: 02/05 | Mất: 17/03)
+Lê Hồng Phong: Đang xếp ngày 01/05 (Thực tế -> Sinh: Không rõ | Mất: 06/09)
+Trần Tế Xương (Tú Xương): Đang xếp ngày 02/05 (Thực tế -> Sinh: 05/09 | Mất: 20/01)
+Phùng Chí Kiên (Nguyễn Vĩ): Đang xếp ngày 04/05 (Thực tế -> Sinh: 18/05 | Mất: 22/08)
+Võ Nguyên Giáp: Đang xếp ngày 07/05 (Thực tế -> Sinh: 25/08 | Mất: 04/10)
+Khúc Thừa Dụ: Đang xếp ngày 10/05 (Thực tế -> Sinh: Không rõ | Mất: 23/07)
+Lê Văn Hưu: Đang xếp ngày 13/05 (Thực tế -> Sinh: Không rõ | Mất: 09/04)
+Nguyễn Thiện Thuật: Đang xếp ngày 16/05 (Thực tế -> Sinh: 23/03 | Mất: 25/05)
+Nguyễn Trường Tộ: Đang xếp ngày 24/05 (Thực tế -> Sinh: Không rõ | Mất: 22/11)
+Phan Văn Trị (Cử Trị): Đang xếp ngày 25/05 (Thực tế -> Sinh: Không rõ | Mất: 22/06)
+Tô Ngọc Vân: Đang xếp ngày 26/05 (Thực tế -> Sinh: 15/12 | Mất: 17/06)
+Cù Chính Lan: Đang xếp ngày 27/05 (Thực tế -> Sinh: Không rõ | Mất: 01/02)
+Nguyễn Thượng Hiền: Đang xếp ngày 28/05 (Thực tế -> Sinh: Không rõ | Mất: 28/12)
+Vương Thừa Vũ: Đang xếp ngày 30/05 (Thực tế -> Sinh: 23/07 | Mất: Không rõ)
+Phạm Tu: Đang xếp ngày 31/05 (Thực tế -> Sinh: 12/03 | Mất: 20/07)
+Vừ A Dính: Đang xếp ngày 01/06 (Thực tế -> Sinh: 12/09 | Mất: 15/06)
+Đào Tấn: Đang xếp ngày 03/06 (Thực tế -> Sinh: 27/02 | Mất: 08/10)
+Nguyễn Tất Thành (Chủ tịch Hồ Chí Minh): Đang xếp ngày 05/06 (Thực tế -> Sinh: 19/05 | Mất: 02/09)
+Ngô Thì Nhậm: Đang xếp ngày 06/06 (Thực tế -> Sinh: 11/09 | Mất: 09/03)
+Nguyễn An Ninh: Đang xếp ngày 07/06 (Thực tế -> Sinh: 15/09 | Mất: 14/08)
+Nguyễn Quang Bích: Đang xếp ngày 08/06 (Thực tế -> Sinh: 07/05 | Mất: 24/01)
+Phạm Ngọc Thạch: Đang xếp ngày 09/06 (Thực tế -> Sinh: 07/05 | Mất: 07/11)
+Trần Bình Trọng: Đang xếp ngày 11/06 (Thực tế -> Sinh: Không rõ | Mất: 26/02)
+Nguyễn Thiếp (La Sơn Phu Tử): Đang xếp ngày 12/06 (Thực tế -> Sinh: Không rõ | Mất: 06/02)
+Nguyễn Văn Thoại (Thoại Ngọc Hầu): Đang xếp ngày 13/06 (Thực tế -> Sinh: 26/11 | Mất: 06/06)
+Lý Nhân Tông (Lý Càn Đức): Đang xếp ngày 15/06 (Thực tế -> Sinh: Không rõ | Mất: 15/01)
+Mai Xuân Thưởng: Đang xếp ngày 17/06 (Thực tế -> Sinh: Không rõ | Mất: 07/06)
+Phan Huy Ích: Đang xếp ngày 20/06 (Thực tế -> Sinh: 09/01 | Mất: 13/03)
+Trương Vĩnh Ký (Pétrus Ký): Đang xếp ngày 21/06 (Thực tế -> Sinh: 06/12 | Mất: 01/09)
+Xuân Quỳnh: Đang xếp ngày 22/06 (Thực tế -> Sinh: 06/10 | Mất: 29/08)
+Lưu Quang Vũ: Đang xếp ngày 23/06 (Thực tế -> Sinh: 17/04 | Mất: 29/08)
+Tô Hoài (Nguyễn Sen): Đang xếp ngày 24/06 (Thực tế -> Sinh: 27/09 | Mất: 06/07)
+Đinh Núp (Anh hùng Núp): Đang xếp ngày 25/06 (Thực tế -> Sinh: 02/05 | Mất: 10/07)
+Thái Phiên: Đang xếp ngày 28/06 (Thực tế -> Sinh: Không rõ | Mất: 17/05)
+Nguyễn Hữu Huân (Thủ Khoa Huân): Đang xếp ngày 01/07 (Thực tế -> Sinh: Không rõ | Mất: 19/05)
+Ông Ích Khiêm: Đang xếp ngày 02/07 (Thực tế -> Sinh: 21/12 | Mất: Không rõ)
+Võ Trường Toản: Đang xếp ngày 03/07 (Thực tế -> Sinh: Không rõ | Mất: 27/07)
+Tống Duy Tân: Đang xếp ngày 06/07 (Thực tế -> Sinh: Không rõ | Mất: 15/10)
+Tạ Quang Bửu: Đang xếp ngày 10/07 (Thực tế -> Sinh: 23/07 | Mất: 21/08)
+Nguyễn Ngọc Thăng (Lãnh binh Thăng): Đang xếp ngày 17/07 (Thực tế -> Sinh: Không rõ | Mất: 27/06)
+Thế Lữ (Nguyễn Thứ Lễ): Đang xếp ngày 19/07 (Thực tế -> Sinh: 06/10 | Mất: 19/04)
+Hà Huy Tập: Đang xếp ngày 22/07 (Thực tế -> Sinh: 24/04 | Mất: 28/08)
+Trần Văn Trà: Đang xếp ngày 23/07 (Thực tế -> Sinh: Không rõ | Mất: 20/04)
+Lê Duẩn: Đang xếp ngày 24/07 (Thực tế -> Sinh: 07/04 | Mất: 10/07)
+Tố Hữu (Nguyễn Kim Thành): Đang xếp ngày 25/07 (Thực tế -> Sinh: 04/10 | Mất: 09/12)
+Hoàng Văn Thái: Đang xếp ngày 26/07 (Thực tế -> Sinh: 01/05 | Mất: 02/07)
+Nguyễn Văn Thạc: Đang xếp ngày 27/07 (Thực tế -> Sinh: 14/10 | Mất: 16/09)
+Văn Cao: Đang xếp ngày 28/07 (Thực tế -> Sinh: 15/11 | Mất: 10/07)
+Ngô Tất Tố: Đang xếp ngày 29/07 (Thực tế -> Sinh: Không rõ | Mất: 20/04)
+Huy Cận: Đang xếp ngày 30/07 (Thực tế -> Sinh: 31/05 | Mất: 19/02)
+Thạch Lam (Nguyễn Tường Lân): Đang xếp ngày 31/07 (Thực tế -> Sinh: 07/07 | Mất: 27/06)
+Thích Quảng Đức (Lâm Văn Tức): Đang xếp ngày 01/08 (Thực tế -> Sinh: Không rõ | Mất: 11/06)
+Nguyễn Hoàng (Chúa Tiên): Đang xếp ngày 02/08 (Thực tế -> Sinh: 28/08 | Mất: 20/07)
+Chế Lan Viên (Phan Ngọc Hoan): Đang xếp ngày 03/08 (Thực tế -> Sinh: 20/10 | Mất: 19/06)
+Trần Thánh Tông (Trần Hoảng): Đang xếp ngày 04/08 (Thực tế -> Sinh: 12/10 | Mất: 03/07)
+Duy Tân (Nguyễn Phúc Vĩnh San): Đang xếp ngày 05/08 (Thực tế -> Sinh: 19/09 | Mất: 26/12)
+Quang Dũng (Bùi Đình Diệm): Đang xếp ngày 06/08 (Thực tế -> Sinh: 11/10 | Mất: 13/10)
+Hồ Đắc Di: Đang xếp ngày 08/08 (Thực tế -> Sinh: 11/05 | Mất: 25/06)
+Nguyễn Thái Bình: Đang xếp ngày 10/08 (Thực tế -> Sinh: 14/01 | Mất: 02/07)
+Trường Chinh (Đặng Xuân Khu): Đang xếp ngày 11/08 (Thực tế -> Sinh: 09/02 | Mất: 30/09)
+Nguyễn Bình (Nguyễn Phương Thảo): Đang xếp ngày 12/08 (Thực tế -> Sinh: Không rõ | Mất: 29/09)
+Đồng Sĩ Nguyên (Nguyễn Hữu Vũ): Đang xếp ngày 13/08 (Thực tế -> Sinh: 01/03 | Mất: 04/04)
+Nguyễn Bính (Nguyễn Trọng Phác): Đang xếp ngày 14/08 (Thực tế -> Sinh: Không rõ | Mất: 20/01)
+Trần Huy Liệu: Đang xếp ngày 15/08 (Thực tế -> Sinh: Không rõ | Mất: 28/07)
+Hàn Mặc Tử (Nguyễn Trọng Trí): Đang xếp ngày 16/08 (Thực tế -> Sinh: 22/09 | Mất: 11/11)
+Hồ Tùng Mậu (Hồ Bá Cự): Đang xếp ngày 17/08 (Thực tế -> Sinh: 15/06 | Mất: 23/07)
+Xuân Oanh (Đỗ Xuân Oanh): Đang xếp ngày 19/08 (Thực tế -> Sinh: 04/01 | Mất: 27/03)
+Xuân Diệu (Ngô Xuân Diệu): Đang xếp ngày 21/08 (Thực tế -> Sinh: 02/02 | Mất: 18/12)
+Phạm Tiến Duật: Đang xếp ngày 22/08 (Thực tế -> Sinh: 14/01 | Mất: 04/12)
+Mạc Cửu: Đang xếp ngày 23/08 (Thực tế -> Sinh: Không rõ | Mất: 17/07)
+Nguyễn Sinh Sắc: Đang xếp ngày 24/08 (Thực tế -> Sinh: Không rõ | Mất: 27/11)
+Phan Thanh Giản: Đang xếp ngày 25/08 (Thực tế -> Sinh: 11/11 | Mất: 04/08)
+Hoàng Đạo Thúy: Đang xếp ngày 26/08 (Thực tế -> Sinh: 21/02 | Mất: 14/02)
+Bùi Xuân Phái: Đang xếp ngày 27/08 (Thực tế -> Sinh: 01/09 | Mất: 24/06)
+Nguyễn Quang Sáng: Đang xếp ngày 28/08 (Thực tế -> Sinh: 12/01 | Mất: 13/02)
+Lê Đức Thọ (Phan Đình Khải): Đang xếp ngày 30/08 (Thực tế -> Sinh: 10/10 | Mất: 13/10)
+Phạm Hùng (Phạm Văn Thiện): Đang xếp ngày 31/08 (Thực tế -> Sinh: 11/06 | Mất: 10/03)
+Trần Văn Giàu: Đang xếp ngày 02/09 (Thực tế -> Sinh: 11/09 | Mất: 16/12)
+Nguyễn Thị Lộ: Đang xếp ngày 03/09 (Thực tế -> Sinh: Không rõ | Mất: 16/08)
+Lưu Hữu Phước: Đang xếp ngày 04/09 (Thực tế -> Sinh: 12/09 | Mất: 12/01)
+Nguyễn Tuân: Đang xếp ngày 05/09 (Thực tế -> Sinh: 10/07 | Mất: 28/07)
+Nguyễn Phan Vinh: Đang xếp ngày 06/09 (Thực tế -> Sinh: Không rõ | Mất: 01/03)
+Hoàng Xuân Hãn: Đang xếp ngày 10/09 (Thực tế -> Sinh: 08/03 | Mất: 10/03)
+Đào Duy Từ: Đang xếp ngày 11/09 (Thực tế -> Sinh: Không rõ | Mất: 17/10)
+Lê Quý Đôn: Đang xếp ngày 13/09 (Thực tế -> Sinh: 02/08 | Mất: 11/06)
+Hoàng Hoa Thám (Đề Thám): Đang xếp ngày 17/09 (Thực tế -> Sinh: Không rõ | Mất: 10/02)
+Phan Bội Châu: Đang xếp ngày 18/09 (Thực tế -> Sinh: 26/12 | Mất: 29/10)
+Phan Đình Phùng: Đang xếp ngày 19/09 (Thực tế -> Sinh: Không rõ | Mất: 28/12)
+Trần Phú: Đang xếp ngày 21/09 (Thực tế -> Sinh: 01/05 | Mất: 06/09)
+Võ Văn Tần: Đang xếp ngày 22/09 (Thực tế -> Sinh: Không rõ | Mất: 28/08)
+Tôn Đức Thắng (Bác Tôn): Đang xếp ngày 23/09 (Thực tế -> Sinh: 20/08 | Mất: 30/03)
+Đoàn Thị Điểm: Đang xếp ngày 24/09 (Thực tế -> Sinh: Không rõ | Mất: 11/09)
+Lê Hoàn (Lê Đại Hành): Đang xếp ngày 28/09 (Thực tế -> Sinh: 10/08 | Mất: Không rõ)
+Nguyễn Trãi (Ức Trai): Đang xếp ngày 01/10 (Thực tế -> Sinh: Không rõ | Mất: 19/09)
+Đặng Huy Trứ: Đang xếp ngày 05/10 (Thực tế -> Sinh: 16/05 | Mất: 07/08)
+Nguyễn Huệ (Quang Trung): Đang xếp ngày 06/10 (Thực tế -> Sinh: Không rõ | Mất: 16/09)
+Sương Nguyệt Anh: Đang xếp ngày 07/10 (Thực tế -> Sinh: 08/03 | Mất: 09/01)
+Lương Thế Vinh: Đang xếp ngày 08/10 (Thực tế -> Sinh: 17/08 | Mất: 02/10)
+Lý Thái Tổ (Lý Công Uẩn): Đang xếp ngày 10/10 (Thực tế -> Sinh: 08/03 | Mất: 31/03)
+Hoàng Diệu: Đang xếp ngày 13/10 (Thực tế -> Sinh: 10/02 | Mất: 25/04)
+Nguyễn Đình Chiểu (Đồ Chiểu): Đang xếp ngày 14/10 (Thực tế -> Sinh: 01/07 | Mất: 03/07)
+Trần Nhân Tông (Trần Khâm): Đang xếp ngày 15/10 (Thực tế -> Sinh: 11/11 | Mất: 16/12)
+Lê Lợi (Lê Thái Tổ): Đang xếp ngày 16/10 (Thực tế -> Sinh: 10/09 | Mất: 05/09)
+Lê Hữu Trác (Hải Thượng Lãn Ông): Đang xếp ngày 17/10 (Thực tế -> Sinh: 11/12 | Mất: Không rõ)
+Lê Ngọc Hân (Công chúa Ngọc Hân): Đang xếp ngày 19/10 (Thực tế -> Sinh: Không rõ | Mất: 04/12)
+Triệu Thị Trinh (Bà Triệu): Đang xếp ngày 20/10 (Thực tế -> Sinh: 02/10 | Mất: Không rõ)
+Nguyễn Tri Phương: Đang xếp ngày 22/10 (Thực tế -> Sinh: 21/07 | Mất: 20/12)
+Đinh Tiên Hoàng (Đinh Bộ Lĩnh): Đang xếp ngày 23/10 (Thực tế -> Sinh: 22/03 | Mất: Không rõ)
+Trương Định: Đang xếp ngày 24/10 (Thực tế -> Sinh: Không rõ | Mất: 20/08)
+Lý Tự Trọng (Lê Hữu Trọng): Đang xếp ngày 25/10 (Thực tế -> Sinh: 20/10 | Mất: 21/11)
+Nguyễn Phúc Chu (Quốc Chúa): Đang xếp ngày 28/10 (Thực tế -> Sinh: 11/06 | Mất: 01/06)
+Phan Khôi: Đang xếp ngày 29/10 (Thực tế -> Sinh: 06/10 | Mất: 16/01)
+Nguyễn Thị Minh Khai: Đang xếp ngày 30/10 (Thực tế -> Sinh: 01/11 | Mất: 28/08)
+Nguyễn Minh Châu: Đang xếp ngày 31/10 (Thực tế -> Sinh: 20/10 | Mất: 24/01)
+Gia Long (Nguyễn Ánh): Đang xếp ngày 01/11 (Thực tế -> Sinh: 08/02 | Mất: 03/02)
+Nguyễn Phan Chánh: Đang xếp ngày 02/11 (Thực tế -> Sinh: 21/07 | Mất: 22/11)
+Lê Văn Duyệt: Đang xếp ngày 03/11 (Thực tế -> Sinh: Không rõ | Mất: 28/08)
+Nguyễn Văn Thành: Đang xếp ngày 06/11 (Thực tế -> Sinh: Không rõ | Mất: 11/05)
+Đào Duy Anh: Đang xếp ngày 08/11 (Thực tế -> Sinh: 25/04 | Mất: 01/04)
+Tô Hiến Thành: Đang xếp ngày 11/11 (Thực tế -> Sinh: Không rõ | Mất: 12/06)
+Đặng Văn Ngữ: Đang xếp ngày 12/11 (Thực tế -> Sinh: 04/04 | Mất: 01/04)
+Trần Đại Nghĩa (Phạm Quang Lễ): Đang xếp ngày 13/11 (Thực tế -> Sinh: 13/09 | Mất: 09/08)
+Hoàng Việt (Lê Chí Trực): Đang xếp ngày 14/11 (Thực tế -> Sinh: 28/02 | Mất: 31/12)
+Đặng Thùy Trâm: Đang xếp ngày 16/11 (Thực tế -> Sinh: 26/11 | Mất: 22/06)
+Hoàng Văn Thụ: Đang xếp ngày 17/11 (Thực tế -> Sinh: 04/11 | Mất: 24/05)
+Nguyên Phi Ỷ Lan (Lê Thị Yến): Đang xếp ngày 18/11 (Thực tế -> Sinh: Không rõ | Mất: 25/07)
+Nguyễn Văn Huyên: Đang xếp ngày 20/11 (Thực tế -> Sinh: 16/11 | Mất: 19/10)
+Lý Thái Tông (Lý Phật Mã): Đang xếp ngày 21/11 (Thực tế -> Sinh: 29/07 | Mất: 03/11)
+Nguyễn Phúc Nguyên (Chúa Sãi): Đang xếp ngày 22/11 (Thực tế -> Sinh: 16/08 | Mất: 19/11)
+Phan Đình Giót: Đang xếp ngày 24/11 (Thực tế -> Sinh: Không rõ | Mất: 13/03)
+Ngô Gia Tự: Đang xếp ngày 25/11 (Thực tế -> Sinh: 03/12 | Mất: Không rõ)
+Đặng Thai Mai: Đang xếp ngày 26/11 (Thực tế -> Sinh: 25/12 | Mất: 25/09)
+Hoàng Ngọc Phách: Đang xếp ngày 27/11 (Thực tế -> Sinh: Không rõ | Mất: 24/11)
+Bùi Bằng Đoàn: Đang xếp ngày 28/11 (Thực tế -> Sinh: 19/09 | Mất: 13/04)
+Nguyễn Thi (Nguyễn Ngọc Tấn): Đang xếp ngày 29/11 (Thực tế -> Sinh: 15/05 | Mất: 09/05)
+Nguyễn Đình Thi: Đang xếp ngày 30/11 (Thực tế -> Sinh: 20/12 | Mất: 18/04)
+Phạm Văn Đồng: Đang xếp ngày 03/12 (Thực tế -> Sinh: 01/03 | Mất: 29/04)
+Nguyễn Văn Linh (Nguyễn Văn Cúc): Đang xếp ngày 04/12 (Thực tế -> Sinh: 01/07 | Mất: 27/04)
+Tô Vĩnh Diện: Đang xếp ngày 05/12 (Thực tế -> Sinh: Không rõ | Mất: 01/02)
+Trần Văn Ơn: Đang xếp ngày 06/12 (Thực tế -> Sinh: 14/04 | Mất: 09/01)
+Mạc Đăng Dung (Mạc Thái Tổ): Đang xếp ngày 07/12 (Thực tế -> Sinh: 22/12 | Mất: 22/08)
+Nguyên Hồng (Nguyễn Nguyên Hồng): Đang xếp ngày 08/12 (Thực tế -> Sinh: 05/11 | Mất: 02/05)
+Đỗ Nhuận: Đang xếp ngày 09/12 (Thực tế -> Sinh: 10/12 | Mất: 18/05)
+Nguyễn Công Hoan: Đang xếp ngày 10/12 (Thực tế -> Sinh: 06/03 | Mất: 06/06)
+Minh Mạng (Nguyễn Phúc Đảm): Đang xếp ngày 12/12 (Thực tế -> Sinh: 25/05 | Mất: 20/01)
+Lý Thánh Tông (Lý Nhật Tôn): Đang xếp ngày 14/12 (Thực tế -> Sinh: 30/03 | Mất: 01/02)
+Nguyễn Văn Trỗi: Đang xếp ngày 15/12 (Thực tế -> Sinh: 01/02 | Mất: 15/10)
+Nguyễn Sơn (Vũ Nguyên Bác): Đang xếp ngày 16/12 (Thực tế -> Sinh: 01/10 | Mất: 21/10)
+Lê Trọng Tấn (Lê Trọng Tố): Đang xếp ngày 17/12 (Thực tế -> Sinh: 01/10 | Mất: 05/12)
+Trần Văn Khê: Đang xếp ngày 18/12 (Thực tế -> Sinh: 24/07 | Mất: 24/06)
+Thành Thái (Nguyễn Phúc Bửu Lân): Đang xếp ngày 20/12 (Thực tế -> Sinh: 14/03 | Mất: 24/03)
+Vũ Trọng Phụng: Đang xếp ngày 21/12 (Thực tế -> Sinh: 20/10 | Mất: 13/10)
+Võ Nguyên Giáp: Đang xếp ngày 22/12 (Thực tế -> Sinh: 25/08 | Mất: 04/10)
+Nam Cao (Trần Hữu Tri): Đang xếp ngày 24/12 (Thực tế -> Sinh: 29/10 | Mất: 28/11)
+Hàm Nghi (Nguyễn Phúc Ưng Lịch): Đang xếp ngày 25/12 (Thực tế -> Sinh: 22/07 | Mất: 14/01)
+Lê Thánh Tông (Lê Tư Thành): Đang xếp ngày 28/12 (Thực tế -> Sinh: 20/07 | Mất: 03/03)
+Tản Đà (Nguyễn Khắc Hiếu): Đang xếp ngày 30/12 (Thực tế -> Sinh: 19/05 | Mất: 07/06)
+Nguyễn Trung Trực: Đang xếp ngày 31/12 (Thực tế -> Sinh: Không rõ | Mất: 27/10)
+check-data.js:54 
+Tổng cộng có 225 nhân vật bị xếp sai ngày.

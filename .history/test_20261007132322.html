@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Theme Lịch Phong Thủy</title>
+    
+    <!-- LƯU Ý: Đổi đường dẫn này tới file CSS đã biên dịch của bro -->
+    <link rel="stylesheet" href="./assets/css/main.css"> 
+
+    <style>
+        /* CSS phụ trợ để nhìn rõ các biến màu đã tạo */
+        .test-card {
+            /* Test màu nền khối nổi và viền */
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 50px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-title {
+            /* Test màu nhấn Ngũ Hành */
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .test-text {
+            /* Test màu chữ phụ */
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            /* Test màu nút bấm Ngũ Hành */
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.8;
+        }
+
+        /* Khung chứa các nút đổi Theme */
+        .theme-switcher {
+            margin-top: 40px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-theme {
+            padding: 8px 16px;
+            border: 2px solid var(--text-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        .btn-theme:hover {
+            background-color: var(--text-color);
+            color: var(--body-bg);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Khung container test lưới (Sẽ khóa max-width 1370px trên PC) -->
+    <div class="container">
+        
+        <div class="test-card">
+            <h1 class="test-title">Lịch Phong Thủy 2026</h1>
+            <p class="test-text">Hệ thống SCSS 7-1 Desktop-First. <br>Hãy thử chuyển đổi Ngũ Hành và bật/tắt chế độ Dark Mode trên máy tính của bạn!</p>
+            <button class="btn-primary">Nút Hành Động Chính</button>
+        </div>
+
+        <!-- Bảng điều khiển Theme -->
+        <div class="theme-switcher">
+            <button class="btn-theme" onclick="changeTheme('')">Mặc Định (Gốc)</button>
+            <button class="btn-theme" onclick="changeTheme('metal')">Mệnh Kim</button>
+            <button class="btn-theme" onclick="changeTheme('wood')">Mệnh Mộc</button>
+            <button class="btn-theme" onclick="changeTheme('water')">Mệnh Thủy</button>
+            <button class="btn-theme" onclick="changeTheme('fire')">Mệnh Hỏa</button>
+            <button class="btn-theme" onclick="changeTheme('earth')">Mệnh Thổ</button>
+        </div>
+        
+    </div>
+
+    <!-- Script đổi Theme -->
+    <script>
+        function changeTheme(themeName) {
+            const body = document.body;
+            
+            if (themeName === '') {
+                // Xóa attribute data-theme để hệ thống đọc lại biến :root mặc định
+                body.removeAttribute('data-theme');
+            } else {
+                // Gắn attribute data-theme="fire" (hoặc các mệnh khác)
+                body.setAttribute('data-theme', themeName);
+            }
+        }
+    </script>
+</body>
+</html>

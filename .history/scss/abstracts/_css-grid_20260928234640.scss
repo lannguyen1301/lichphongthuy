@@ -1,0 +1,72 @@
+// Kích hoạt Grid
+%grid {
+    display: grid;
+}
+
+// Căn giữa tuyệt đối mọi thứ CHỈ VỚI 2 DÒNG
+%gridCenter {
+    display: grid;
+    place-items: center;
+}
+
+// ==========================================
+// 2. EQUAL COLUMNS (Chia cột đều nhau)
+// ==========================================
+%gridCols2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+%gridCols3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+%gridCols4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+%gridCols5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+// ==========================================
+// 3. AUTO RESPONSIVE GRIDS (Lưới tự động)
+// Tự động rớt dòng, lấp đầy khoảng trống không cần Media Query
+// ==========================================
+%gridAutoSm {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+%gridAutoMd {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+%gridAutoLg {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+// ==========================================
+// 4. GRID ITEMS (Dành cho thẻ con trong Lưới)
+// ==========================================
+
+// Phóng to phần tử con chiếm toàn bộ chiều ngang
+%gridColFull {
+    grid-column: 1 / -1;
+}
+
+// Chiếm nhiều cột
+%gridColSpan2 {
+    grid-column: span 2;
+}
+%gridColSpan3 {
+    grid-column: span 3;
+}
+
+// Chiếm nhiều hàng (Row)
+%gridRowSpan2 {
+    grid-row: span 2;
+}
+%gridRowSpan3 {
+    grid-row: span 3;
+}

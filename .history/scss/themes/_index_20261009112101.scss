@@ -1,0 +1,22 @@
+// // scss/themes/_index.scss
+// @use "../abstracts/theme-engine" as engine;
+
+// // Tạo ra 5 class [data-theme="..."] kèm luôn tính năng tự đổi Sáng/Tối
+// @include engine.generate-theme("metal");
+// @include engine.generate-theme("wood");
+// @include engine.generate-theme("water");
+// @include engine.generate-theme("fire");
+// @include engine.generate-theme("earth");
+
+// scss/themes/_index.scss
+@use "../abstracts" as abs;
+
+// Kích hoạt mệnh Kim làm mặc định (có tham số true)
+@include abs.generate-theme("metal", true);
+
+// Tạo ra 5 class [data-theme="..."] kèm luôn tính năng tự đổi Sáng/Tối
+@include abs.generate-theme("metal");
+@include abs.generate-theme("wood");
+@include abs.generate-theme("water");
+@include abs.generate-theme("fire");
+@include abs.generate-theme("earth");

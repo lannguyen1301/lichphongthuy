@@ -1,0 +1,53 @@
+// ==========================================
+// 5. IMAGES & BACKGROUNDS (Hình ảnh)
+// ==========================================
+
+// --- BACKGROUNDS ---
+// Hình nền: Phủ kín khung, tự cắt phần thừa, không méo[cite: 3]
+%bgCover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+// Hình nền: Hiển thị trọn vẹn hình ảnh, không cắt xén, căn giữa
+%bgContain {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+// Lớp phủ đen mờ trên ảnh nền (Dùng cho Header, Banner có chữ trắng)
+%bgOverlay {
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        content: "";
+        @extend %absCover; // Kế thừa từ phần POSITIONING bạn đã viết
+        background-color: rgba(#000, 0.4); // Có thể thay bằng biến $color-black
+        z-index: -1;
+    }
+}
+
+// --- IMAGES ---
+// Thẻ <img>: Phủ kín khung cha, tự động cắt phần thừa, không méo[cite: 3]
+%imgCover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+// Thẻ <img>: Thu nhỏ để vừa vặn hoàn toàn, không méo, không cắt
+%imgContain {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+// Thẻ <img>: Hình ảnh tự động co giãn theo chiều ngang màn hình, không bị vỡ tỷ lệ
+%imgResponsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

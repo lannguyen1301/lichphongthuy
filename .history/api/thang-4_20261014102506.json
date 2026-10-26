@@ -1,0 +1,164 @@
+[
+    
+    
+    
+    
+    
+   
+    {
+        "id": "vn_110",
+        "ten": "Nguyễn Thị Xuân Mỹ",
+        "ngay_sinh": "19/04",
+        "nam_sinh": "1940",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "nguyen-thi-xuan-my-vn-110",
+        "mo_ta": "Nữ chính khách xuất sắc của Đảng Cộng sản Việt Nam. Bà là người phụ nữ đầu tiên được bầu vào Bộ Chính trị và nguyên là Chủ nhiệm Ủy ban Kiểm tra Trung ương.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_111",
+        "ten": "Ngô Xuân Lịch",
+        "ngay_sinh": "20/04",
+        "nam_sinh": "1954",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "ngo-xuan-lich-vn-111",
+        "mo_ta": "Đại tướng Quân đội nhân dân Việt Nam. Ông nguyên là Bộ trưởng Bộ Quốc phòng, người có vai trò nòng cốt trong công tác củng cố tiềm lực quốc phòng và mở rộng đối ngoại quân sự.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_112",
+        "ten": "Đào Đình Bình",
+        "ngay_sinh": "21/04",
+        "nam_sinh": "1945",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "dao-dinh-binh-vn-112",
+        "mo_ta": "Chính khách và chuyên gia kinh tế vận tải. Ông từng đảm nhiệm chức vụ Bộ trưởng Bộ Giao thông Vận tải, tham gia điều hành và hoạch định chiến lược phát triển hạ tầng giao thông quốc gia.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_113",
+        "ten": "Trần Văn Hằng",
+        "ngay_sinh": "22/04",
+        "nam_sinh": "1953",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "tran-van-hang-vn-113",
+        "mo_ta": "Chính khách, Phó Giáo sư, Tiến sĩ. Ông nguyên là Chủ nhiệm Ủy ban Đối ngoại của Quốc hội và từng giữ vai trò Trưởng ban Đối ngoại Trung ương, góp phần quan trọng vào ngoại giao đa phương.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_114",
+        "ten": "Trần Quang Huy",
+        "ngay_sinh": "23/04",
+        "nam_sinh": "1922",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1995",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "tran-quang-huy-vn-114",
+        "mo_ta": "Chính khách và nhà lý luận của Đảng Cộng sản Việt Nam. Ông từng là Bộ trưởng, Chủ nhiệm Ủy ban Pháp chế của Chính phủ, góp phần nền tảng vào việc xây dựng hệ thống pháp luật thời kỳ đầu.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_115",
+        "ten": "Hà Huy Tập",
+        "ngay_sinh": "24/04",
+        "nam_sinh": "1906",
+        "ngay_mat": "28/08",
+        "nam_mat": "1941",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "ha-huy-tap-vn-115",
+        "mo_ta": "Nhà lãnh đạo tiền bối, nhà lý luận sắc bén và là cố Tổng Bí thư của Đảng Cộng sản Đông Dương. Ông đã hy sinh oanh liệt, cống hiến trọn đời vì sự nghiệp giải phóng giai cấp và dân tộc.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_116",
+        "ten": "Đào Duy Anh",
+        "ngay_sinh": "25/04",
+        "nam_sinh": "1904",
+        "ngay_mat": "01/04",
+        "nam_mat": "1988",
+        "linh_vuc": "Khoa học",
+        "category_id": "science_education",
+        "image_slug": "dao-duy-anh-vn-116",
+        "mo_ta": "Đại học giả, nhà sử học và nhà từ điển học lỗi lạc của Việt Nam. Ông là tác giả của nhiều công trình nghiên cứu sâu sắc về văn hóa, lịch sử và ngôn ngữ, đặt nền móng cho học thuật nước nhà.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_117",
+        "ten": "Phạm Ngọc Minh",
+        "ngay_sinh": "26/04",
+        "nam_sinh": "1959",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "pham-ngoc-minh-vn-117",
+        "mo_ta": "Thượng tướng Quân đội nhân dân Việt Nam. Ông nguyên là Phó Tổng Tham mưu trưởng, có vai trò to lớn trong chiến lược bảo vệ chủ quyền biển đảo và phát triển lực lượng Hải quân hiện đại.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_118",
+        "ten": "Lê Hoài Trung",
+        "ngay_sinh": "27/04",
+        "nam_sinh": "1961",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "Không rõ",
+        "linh_vuc": "Chính trị",
+        "category_id": "politics",
+        "image_slug": "le-hoai-trung-vn-118",
+        "mo_ta": "Nhà ngoại giao chuyên nghiệp và chính khách cao cấp. Ông đảm nhiệm cương vị Trưởng ban Đối ngoại Trung ương, có cống hiến đặc biệt xuất sắc trong ngoại giao song phương và đa phương.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_119",
+        "ten": "Trần Nhẫn",
+        "ngay_sinh": "28/04",
+        "nam_sinh": "1927",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "2022",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "tran-nhan-vn-119",
+        "mo_ta": "Trung tướng Quân đội nhân dân Việt Nam. Ông nguyên là Tư lệnh Quân chủng Phòng không - Không quân, từng trực tiếp chỉ huy nhiều trận đánh oai hùng bảo vệ vùng trời Tổ quốc.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_120",
+        "ten": "Nguyễn Huy Thiệp",
+        "ngay_sinh": "29/04",
+        "nam_sinh": "1950",
+        "ngay_mat": "20/03",
+        "nam_mat": "2021",
+        "linh_vuc": "Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-huy-thiep-vn-120",
+        "mo_ta": "Nhà văn vĩ đại và hiện tượng độc đáo bậc nhất của nền văn học Việt Nam thời kỳ Đổi Mới. Tác phẩm của ông, tiêu biểu là \"Tướng về hưu\", mang sức mạnh lột tả chân thực sự phức tạp của thân phận con người.",
+        "quote": "Không rõ"
+    },
+    {
+        "id": "vn_121",
+        "ten": "Hoàng Cầm (Bùi Tằng Việt)",
+        "ngay_sinh": "30/04",
+        "nam_sinh": "1920",
+        "ngay_mat": "19/08",
+        "nam_mat": "2013",
+        "linh_vuc": "Quân sự",
+        "category_id": "military",
+        "image_slug": "hoang-cam-vn-121",
+        "mo_ta": "Thượng tướng Quân đội nhân dân Việt Nam. Ông là vị Tư lệnh Quân đoàn 4 trực tiếp chỉ huy cánh quân hướng Đông Nam tiến vào Dinh Độc Lập trong chiến dịch Hồ Chí Minh lịch sử.",
+        "quote": "Không rõ"
+    }
+]
