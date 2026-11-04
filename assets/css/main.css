@@ -80,7 +80,7 @@
   inset: 0;
 }
 
-.month-cal__cell::after, .sidebar__tooltip::before {
+.sidebar__tooltip::before {
   content: "";
   position: absolute;
   display: block;
@@ -90,12 +90,6 @@
   position: sticky;
   top: 0;
   z-index: 10;
-}
-
-.month-cal__cell::after {
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .bloc-card__img {
@@ -2320,70 +2314,15 @@ strong {
     padding: 0.6rem 0.2rem;
   }
 }
-.month-cal__cell::after {
-  right: -0.4rem;
-  bottom: -0.4rem;
-  width: 4.8rem;
-  height: 4.8rem;
-  background-image: var(--zodiac-bg);
-  opacity: 0.08;
-  filter: grayscale(100%);
-  transform: scale(0.85) rotate(-10deg);
-  pointer-events: none;
-  z-index: -1;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease, filter 0.25s ease;
-}
-@media (max-width: 575.98px) {
-  .month-cal__cell::after {
-    width: 3.2rem;
-    height: 3.2rem;
-  }
-}
-.month-cal__cell[data-zodiac=ty] {
-  --zodiac-bg: url("../icons/zodiac/ty.svg");
-}
-.month-cal__cell[data-zodiac=suu] {
-  --zodiac-bg: url("../icons/zodiac/suu.svg");
-}
-.month-cal__cell[data-zodiac=dan] {
-  --zodiac-bg: url("../icons/zodiac/dan.svg");
-}
-.month-cal__cell[data-zodiac=mao] {
-  --zodiac-bg: url("../icons/zodiac/mao.svg");
-}
-.month-cal__cell[data-zodiac=thin] {
-  --zodiac-bg: url("../icons/zodiac/thin.svg");
-}
-.month-cal__cell[data-zodiac=ty-snake] {
-  --zodiac-bg: url("../icons/zodiac/ty-snake.svg");
-}
-.month-cal__cell[data-zodiac=ngo] {
-  --zodiac-bg: url("../icons/zodiac/ngo.svg");
-}
-.month-cal__cell[data-zodiac=mui] {
-  --zodiac-bg: url("../icons/zodiac/mui.svg");
-}
-.month-cal__cell[data-zodiac=than] {
-  --zodiac-bg: url("../icons/zodiac/than.svg");
-}
-.month-cal__cell[data-zodiac=dau] {
-  --zodiac-bg: url("../icons/zodiac/dau.svg");
-}
-.month-cal__cell[data-zodiac=tuat] {
-  --zodiac-bg: url("../icons/zodiac/tuat.svg");
-}
-.month-cal__cell[data-zodiac=hoi] {
-  --zodiac-bg: url("../icons/zodiac/hoi.svg");
-}
 .month-cal__cell:hover, .month-cal__cell:focus-visible {
   border-color: var(--primary-color);
   transform: translateY(-2px);
   box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
 }
-.month-cal__cell:hover::after, .month-cal__cell:focus-visible::after {
-  opacity: 0.24;
+.month-cal__cell:hover .month-cal__zodiac-img, .month-cal__cell:focus-visible .month-cal__zodiac-img {
+  opacity: 0.26;
   filter: grayscale(0%);
-  transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
+  transform: scale(1.15) rotate(0deg) translate(-0.2rem, -0.2rem);
 }
 .month-cal__cell--muted {
   opacity: 0.42;
@@ -2402,14 +2341,47 @@ strong {
 .month-cal__cell--active .month-cal__lunar {
   color: #ffffff;
 }
-.month-cal__cell--active::after {
-  opacity: 0.22;
+.month-cal__cell--active .month-cal__zodiac-img {
+  opacity: 0.24;
   filter: brightness(0) invert(1);
-  transform: scale(1.08) rotate(0deg);
+  transform: scale(1.1) rotate(0deg);
+}
+.month-cal__cell.is-highlighted {
+  opacity: 1 !important;
+  border-color: var(--primary-color);
+  background-color: var(--body-bg);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0.8rem 2rem var(--shadow-color);
+  z-index: 2;
+}
+.month-cal__cell.is-highlighted .month-cal__zodiac-img {
+  opacity: 0.25;
+  filter: grayscale(0%);
+  transform: scale(1.12) rotate(0deg);
 }
 .month-cal__cell.is-dimmed {
-  opacity: 0.2;
+  opacity: 0.18;
   transform: scale(0.96);
+}
+.month-cal__zodiac-img {
+  position: absolute;
+  right: -0.4rem;
+  bottom: -0.4rem;
+  width: 4.6rem;
+  height: 4.6rem;
+  object-fit: contain;
+  opacity: 0.08;
+  filter: grayscale(100%);
+  transform: scale(0.85) rotate(-12deg);
+  pointer-events: none;
+  z-index: -1;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease, filter 0.25s ease;
+}
+@media (max-width: 575.98px) {
+  .month-cal__zodiac-img {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 .month-cal__solar {
   font-size: 1.8rem;
@@ -2474,16 +2446,17 @@ strong {
 }
 .month-cal__legend-pill {
   gap: 0.8rem;
-  padding: 0.7rem 1.4rem;
+  height: 3.8rem;
+  padding: 0 1.4rem;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
-  border-radius: 99.9rem;
+  border-radius: 1.2rem;
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--text-color);
   cursor: pointer;
 }
-.month-cal__legend-pill:hover, .month-cal__legend-pill.is-active {
+.month-cal__legend-pill:hover, .month-cal__legend-pill:focus-visible, .month-cal__legend-pill.is-active {
   border-color: var(--primary-color);
   background-color: var(--body-bg);
   transform: translateY(-2px);

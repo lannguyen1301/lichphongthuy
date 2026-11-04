@@ -1,4 +1,4 @@
-# a ssetfolder
+# assetfolder
 
 ## css folder
 
@@ -7,6 +7,12 @@
 ## icons folder
 
 ## images folder
+
+### calendar-covers folder
+
+### events folder
+
+### figures folder
 
 ## js folder
 
