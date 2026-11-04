@@ -1,0 +1,29 @@
+// scss/components/_date-time.scss
+@use "../abstracts" as abs;
+
+.header__datetime-wrapper {
+    @extend %flexItemCenter;
+    gap: 1.4rem;
+    height: 4.2rem;
+    padding: 0 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 99.9rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: var(--theme-transition);
+}
+
+.header__date-group,
+.header__time-group {
+    @extend %flexItemCenter;
+    gap: 0.8rem;
+    @extend %textNoWrap;
+}
+
+.header__time-group {
+    padding-left: 1.4rem;
+    border-left: 1px solid var(--border-color);
+    font-variant-numeric: tabular-nums;
+}

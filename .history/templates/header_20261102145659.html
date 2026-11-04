@@ -1,0 +1,146 @@
+<header class="header">
+    <div class="header__container container">
+        <!-- 1. Logo -->
+        <div class="header__logo logo">
+            <a href="#!" aria-label="Trang chủ Lịch Phong Thủy" class="header__logo-link">
+                <img src="./assets/icons/logo.svg" alt="Lịch Phong Thủy" class="header__logo-img">
+            </a>
+        </div>
+
+        <!-- 2. Icon Home -->
+        <div class="header__home">
+            <a href="#!" aria-label="Trang chủ" class="header__home-link">
+                <img src="./assets/icons/home.svg" alt="" aria-hidden="true" class="header__home-icon icon">
+            </a>
+        </div>
+
+        <!-- 3. Điều hướng Lịch & Phong thuỷ (Đổi div thành nav) -->
+        <nav class="header__calendar" aria-label="Điều hướng chính">
+            <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true">
+            <ul class="header__calendar-list">
+                <li class="header__calendar-item">
+                    <a href="#!" class="header__calendar-link">
+                        <img src="../assets/icons/calendarDay.svg" alt="" aria-hidden="true" class="header__calendar-img icon">Ngày
+                    </a>
+                </li>
+                <li class="header__calendar-item">
+                    <a href="#!" class="header__calendar-link">
+                        <img src="../" alt="" aria-hidden="true" class="header__calendar-img icon">Giờ
+                    </a>
+                </li>
+                <li class="header__calendar-item">
+                    <a href="#!" class="header__calendar-link">
+                        <img src="" alt="" aria-hidden="true" class="header__calendar-img icon">Tuần
+                    </a>
+                </li>
+                <li class="header__calendar-item">
+                    <a href="#!" class="header__calendar-link">
+                        <img src="" alt="" aria-hidden="true" class="header__calendar-img icon">Năm
+                    </a>
+                </li>
+                <li class="header__calendar-item">
+                    <a href="#!" class="header__calendar-link">
+                        <img src="" alt="" aria-hidden="true" class="header__calendar-img icon">Lễ tết
+                    </a>
+                </li>
+                <li class="header__calendar-item">
+                    <a href="#!" class="header__calendar-link">
+                        <img src="" alt="" aria-hidden="true" class="header__calendar-img icon">Bát tự
+                    </a>
+                </li>
+                <li class="header__calendar-item">
+                    <a href="#!" class="header__calendar-link">
+                        <img src="./assets/icons/utilities.svg" alt="" aria-hidden="true"
+                            class="header__calendar-img icon">Tiện ích
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 4. Khối Ngày & Giờ (Đổi div text thành thẻ time) -->
+        <div class="header__datetime-wrapper" aria-label="Thời gian hiện tại">
+            <div class="header__date-group">
+                <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true" class="header__date-icon icon">
+                <time datetime="2024-05-24" class="header__date-text">24/05/2024</time>
+            </div>
+
+            <div class="header__time-group">
+                <img src="./assets/icons/clock.svg" alt="" aria-hidden="true" class="header__time-icon icon">
+                <time datetime="14:30:05" class="header__time-text">14:30:05</time>
+            </div>
+        </div>
+
+        <!-- 5. Khối Ngôn ngữ (Đổi thẻ a trong summary thành span) -->
+        <div class="header__lang-group">
+            <details class="header__lang-details">
+                <summary class="header__lang-summary" aria-label="Chọn ngôn ngữ, hiện tại là Tiếng Việt">
+                    <img src="./assets/icons/global.svg" alt="" aria-hidden="true" class="header__lang-icon icon">
+                    <span class="header__lang-current">VN</span>
+                    <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="header__lang-arrow icon">
+                </summary>
+                <ul class="header__lang-list">
+                    <li class="header__lang-item">
+                        <a href="#!" lang="vi" class="header__lang-link">VN</a>
+                    </li>
+                    <li class="header__lang-item">
+                        <a href="#!" lang="en" class="header__lang-link">EN</a>
+                    </li>
+                    <li class="header__lang-item">
+                        <a href="#!" lang="ja" class="header__lang-link">JP</a>
+                    </li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- 6. Khối Đăng nhập -->
+        <div class="header__auth">
+            <button type="button" class="btn btn--login header__auth-btn">Đăng nhập</button>
+        </div>
+
+        <!-- 7. Khối Theme Ngũ hành -->
+        <div class="header__theme-group">
+            <details class="header__theme-details">
+                <summary class="header__theme-summary" aria-label="Chọn giao diện Ngũ hành">
+                    <img src="./assets/icons/theme.svg" alt="" aria-hidden="true" class="header__theme-icon icon">
+                </summary>
+                <ul class="header__theme-list">
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="earth" class="btn header__theme-btn">
+                            <img src="./assets/icons/earth.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon">
+                            Thổ
+                        </button>
+                    </li>
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="fire" class="btn header__theme-btn">
+                            <img src="./assets/icons/fire.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon">
+                            Hoả
+                        </button>
+                    </li>
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="metal" class="btn header__theme-btn">
+                            <img src="./assets/icons/metal.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon">
+                            Kim
+                        </button>
+                    </li>
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="water" class="btn header__theme-btn">
+                            <img src="./assets/icons/water.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon">
+                            Thuỷ
+                        </button>
+                    </li>
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="wood" class="btn header__theme-btn">
+                            <img src="./assets/icons/wood.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon">
+                            Mộc
+                        </button>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </div>
+</header>

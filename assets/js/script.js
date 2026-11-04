@@ -10,19 +10,38 @@ const $$ = document.querySelectorAll.bind(document);
  *  load("#parent", "./path-to-template.html");
  * </script>
  */
+// Trong assets/js/script.js (Dòng 13 - 29)
 function load(selector, path) {
+    const targetEl = $(selector);
+    if (!targetEl) {
+        console.warn(`[load] Không tìm thấy thẻ "${selector}" trong index.html!`);
+        return;
+    }
+
     const cached = localStorage.getItem(path);
-    if (cached) {
-        $(selector).innerHTML = cached;
+    if (cached && cached.trim() !== "") {
+        targetEl.innerHTML = cached;
     }
 
     fetch(path)
-        .then((res) => res.text())
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(`HTTP ${res.status} - Không tìm thấy file tại đường dẫn: ${path}`);
+            }
+            return res.text();
+        })
         .then((html) => {
+            if (html.trim() === "") {
+                console.warn(`[load] File "${path}" đang RỖNG (0 ký tự). Hãy kiểm tra và bấm Ctrl+S trong VS Code!`);
+                return;
+            }
             if (html !== cached) {
-                $(selector).innerHTML = html;
+                targetEl.innerHTML = html;
                 localStorage.setItem(path, html);
             }
+        })
+        .catch((err) => {
+            console.error(`[load] Lỗi khi nạp "${path}":`, err.message);
         })
         .finally(() => {
             window.dispatchEvent(new Event("template-loaded"));

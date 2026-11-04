@@ -1,0 +1,81 @@
+// scss/components/_logo-header.scss
+@use "../abstracts" as abs;
+
+.header__logo {
+    @extend %flexItemFixed;
+
+    &-link {
+        @extend %inlineFlexCenter;
+    }
+
+    &-img {
+        height: 4.2rem;
+        width: auto;
+        @extend %imgResponsive;
+
+        @include abs.screen(md) {
+            height: 3.4rem;
+        }
+    }
+}
+
+// Nút Widget Trigger (Thay thế Icon Home trong đảo Bento trái)
+.header__widget {
+    @extend %flexItemFixed;
+    padding-left: 1.2rem;
+    border-left: 1px solid var(--border-color);
+
+    @include abs.screen(sm) {
+        padding-left: 0.8rem;
+    }
+
+    &-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4.2rem;
+        padding: 0 1.4rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %textNoWrap;
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        // Desktop-First: Xuống dưới mốc xl (1200px) thu gọn thành nút Icon vuông để tiết kiệm diện tích
+        @include abs.screen(xl) {
+            width: 4.2rem;
+            padding: 0;
+        }
+
+        @include abs.screen(sm) {
+            width: 3.8rem;
+            height: 3.8rem;
+        }
+    }
+
+    &-icon {
+        width: 2rem;
+        height: 2rem;
+        @extend %flexItemFixed;
+    }
+
+    &-label {
+        @include abs.screen(xl) {
+            display: none;
+        }
+    }
+}

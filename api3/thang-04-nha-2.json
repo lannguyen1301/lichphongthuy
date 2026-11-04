@@ -1,0 +1,130 @@
+    "category_id": "historical_event",
+    "image_slug": "su-kien-26-04-1975",
+    "mo_ta": "17 giờ ngày 26/4/1975, Chiến dịch Hồ Chí Minh chính thức mở màn, các cánh quân đồng loạt tiến công các tuyến phòng thủ vòng ngoài Sài Gòn.",
+    "quote": null,
+    "ngay_hien_thi": "26/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện ngày 26/04/1975.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Nguồn xác minh sự kiện",
+        "url": "https://nhandan.vn/ngay-26-4-1975-mo-man-chien-dich-ho-chi-minh-post524538.html"
+      }
+    ],
+    "event_date": "26/04/1975",
+    "validation_status": "event_date_supported_by_linked_source",
+    "validation_note": "Đối chiếu mốc ngày với tài liệu liên kết. Cần kiểm tra truy cập và trích dẫn toàn văn nguồn trước khi xuất bản tự động.",
+    "ngay_su_kien": "26/04/1975",
+    "quote_status": "not_verified_no_quote_published",
+    "publish_ready": false
+  },
+  {
+    "id": "ngay_27_04",
+    "ten": "Giải phóng Bà Rịa ngày 27/04/1975",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",
+    "nam_mat": "Không áp dụng",
+    "linh_vuc": "Sự kiện lịch sử",
+    "category_id": "historical_event",
+    "image_slug": "su-kien-27-04",
+    "mo_ta": "Ngày 27/4/1975, các lực lượng tham gia Chiến dịch Hồ Chí Minh giải phóng Bà Rịa và những địa bàn quan trọng tại hướng Đông Nam, tạo thế tiến công tiếp theo.",
+    "quote": null,
+    "ngay_hien_thi": "27/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện ngày 27/04/1975.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Nguồn sự kiện lịch sử",
+        "url": "https://www.qdnd.vn/45-mua-xuan-toan-thang/ngay-27-4-1975-giai-phong-ba-ria-va-nhieu-dia-ban-quan-trong-616413"
+      }
+    ],
+    "validation_status": "event_date_supported_by_linked_source",
+    "validation_note": "Đối chiếu mốc ngày với tài liệu liên kết. Cần kiểm tra truy cập và trích dẫn toàn văn nguồn trước khi xuất bản tự động.",
+    "ngay_su_kien": "27/04/1975",
+    "quote_status": "not_verified_no_quote_published",
+    "publish_ready": false
+  },
+  {
+    "id": "ngay_28_04",
+    "ten": "Phi đội Quyết Thắng đánh sân bay Tân Sơn Nhất ngày 28/04/1975",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",
+    "nam_mat": "Không áp dụng",
+    "linh_vuc": "Sự kiện lịch sử",
+    "category_id": "historical_event",
+    "image_slug": "su-kien-28-04",
+    "mo_ta": "Chiều 28/4/1975, Phi đội Quyết Thắng sử dụng năm máy bay A-37 tấn công sân bay Tân Sơn Nhất, góp phần làm suy yếu khả năng hoạt động của đối phương vào những ngày cuối chiến dịch.",
+    "quote": null,
+    "ngay_hien_thi": "28/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện ngày 28/04/1975.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Nguồn sự kiện lịch sử",
+        "url": "https://ct.qdnd.vn/ho-so-tu-lieu/phi-doi-quyet-thang-va-cuoc-khong-kich-bat-ngo-533023"
+      }
+    ],
+    "validation_status": "event_date_supported_by_linked_source",
+    "validation_note": "Đối chiếu mốc ngày với tài liệu liên kết. Cần kiểm tra truy cập và trích dẫn toàn văn nguồn trước khi xuất bản tự động.",
+    "ngay_su_kien": "28/04/1975",
+    "quote_status": "not_verified_no_quote_published",
+    "publish_ready": false
+  },
+  {
+    "id": "ngay_29_04",
+    "ten": "Ngày 29/04/1975: Giải phóng đảo Trường Sa",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",
+    "nam_mat": "Không áp dụng",
+    "linh_vuc": "Sự kiện lịch sử Việt Nam",
+    "category_id": "historical_event",
+    "image_slug": "su-kien-29-04-1975",
+    "mo_ta": "9 giờ ngày 29/4/1975, lực lượng Hải quân Việt Nam và đơn vị phối thuộc hoàn thành làm chủ đảo Trường Sa, kết thúc nhiệm vụ giải phóng các đảo đã xác định trong chiến dịch tháng 4/1975.",
+    "quote": null,
+    "ngay_hien_thi": "29/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện ngày 29/04/1975.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Nguồn xác minh sự kiện",
+        "url": "https://mst.gov.vn/giai-phong-truong-sa-chien-cong-khang-dinh-chu-quyen-197153562.htm"
+      }
+    ],
+    "event_date": "29/04/1975",
+    "validation_status": "event_date_supported_by_linked_source",
+    "validation_note": "Đối chiếu mốc ngày với tài liệu liên kết. Cần kiểm tra truy cập và trích dẫn toàn văn nguồn trước khi xuất bản tự động.",
+    "ngay_su_kien": "29/04/1975",
+    "quote_status": "not_verified_no_quote_published",
+    "publish_ready": false
+  },
+  {
+    "id": "ngay_30_04",
+    "ten": "Ngày Giải phóng miền Nam, thống nhất đất nước",
+    "ngay_sinh": "Không áp dụng",
+    "nam_sinh": "Không áp dụng",
+    "ngay_mat": "Không áp dụng",
+    "nam_mat": "Không áp dụng",
+    "linh_vuc": "Lịch sử - Quân sự",
+    "category_id": "historical_event",
+    "image_slug": "giai-phong-mien-nam-30-04-1975",
+    "mo_ta": "Đỉnh cao chói lọi của lịch sử giữ nước, mốc son vĩ đại kết thúc thắng lợi cuộc kháng chiến chống Mỹ cứu nước kéo dài 21 năm. Vào lúc 11 giờ 30 phút ngày 30/04/1975, xe tăng quân giải phóng đã húc đổ cổng Dinh Độc Lập, hiện thực hóa khát vọng hòa bình, độc lập và thống nhất non sông.",
+    "quote": null,
+    "ngay_hien_thi": "30/04",
+    "hien_thi_nhan_dip": "Kỷ niệm sự kiện ngày 30/04/1975.",
+    "historical_sources": [
+      {
+        "type": "biography",
+        "name": "Báo Quân đội nhân dân, ngày 30/4/1975",
+        "url": "https://www.qdnd.vn/45-mua-xuan-toan-thang/ngay-30-4-1975-chien-dich-ho-chi-minh-lich-su-toan-thang-616650"
+      }
+    ],
+    "validation_status": "event_date_supported_by_linked_source",
+    "validation_note": "Đối chiếu mốc ngày với tài liệu liên kết. Cần kiểm tra truy cập và trích dẫn toàn văn nguồn trước khi xuất bản tự động.",
+    "ngay_su_kien": "30/04/1975",
+    "quote_status": "not_verified_no_quote_published",
+    "publish_ready": false
+  }
+]

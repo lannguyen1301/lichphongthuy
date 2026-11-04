@@ -1,0 +1,840 @@
+đúng tất cả thì dán lại, sai kh
+[
+    {
+        "id": "ngay_01_12",
+        "ten": "Lê Đức Anh (Sáu Nam)",
+        "ngay_sinh": "01/12",
+        "nam_sinh": "1920",
+        "ngay_mat": "22/04",
+        "nam_mat": "2019",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "le-duc-anh-01-12-1920-22-04-2019",
+        "mo_ta": "Đại tướng Quân đội nhân dân Việt Nam, nguyên Chủ tịch nước Cộng hòa Xã hội Chủ nghĩa Việt Nam, nguyên Bộ trưởng Bộ Quốc phòng. Đi qua ba cuộc chiến tranh vệ quốc vĩ đại từ cương vị Phó Tư lệnh Chiến dịch Hồ Chí Minh chỉ huy Cánh quân Tây Nam đánh thẳng vào Sài Gòn năm 1975 đến Tư lệnh Quân tình nguyện Việt Nam giúp nhân dân Campuchia thoát khỏi họa diệt chủng, trên cương vị nguyên thủ quốc gia ông đã có đóng góp to lớn trong việc phá thế bao vây cấm vận và bình thường hóa quan hệ quốc tế của Việt Nam.",
+        "quote": "Quân đội ta từ nhân dân mà ra, vì nhân dân mà chiến đấu; bảo vệ độc lập chủ quyền của Tổ quốc phải luôn gắn liền với giữ vững môi trường hòa bình để xây dựng đất nước.",
+        "ngay_hien_thi": "01/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nguyên Chủ tịch nước, Đại tướng Lê Đức Anh (01/12/1920).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_%C4%90%E1%BB%A9c_Anh"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng quốc phòng và đối ngoại của Chủ tịch nước, Đại tướng Lê Đức Anh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_02_12",
+        "ten": "Mở màn Chiến dịch Bình Giã",
+        "ngay_sinh": "02/12",
+        "nam_sinh": "1964",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "mo-man-chien-dich-binh-gia-02-12-1964",
+        "mo_ta": "Chiến dịch tiến công quy mô cấp trung đoàn chủ lực đầu tiên của Quân Giải phóng miền Nam tại miền Đông Nam Bộ, đánh dấu sự phá sản hoàn toàn của chiến lược 'Chiến tranh đặc biệt' do Mỹ áp đặt. Đêm ngày 02/12/1964, Trung đoàn 1 và Trung đoàn 2 chủ lực Miền bất ngờ nổ súng tiến công ấp chiến lược Bình Giã (Bà Rịa), mở đầu gần một tháng tác chiến vận động tiêu diệt gọn những đơn vị cơ động tinh nhuệ nhất của quân đội Sài Gòn.",
+        "quote": "Chiến dịch Bình Giã là bước nhảy vọt từ đánh du kích, đánh nhỏ tiến lên đánh vận động quy mô chiến dịch, tiêu diệt từng tiểu đoàn chủ lực cơ động của địch.",
+        "ngay_hien_thi": "02/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày nổ súng mở màn Chiến dịch Bình Giã lịch sử (02/12/1964).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_B%C3%ACnh_Gi%C3%A3"
+            },
+            {
+                "type": "quote",
+                "name": "Đánh giá tầm vóc chiến lược của Chiến dịch Bình Giã trong kháng chiến chống Mỹ",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_03_12",
+        "ten": "Kết thúc thắng lợi đợt tiến công Nà Sản và hoàn thành giải phóng vùng Tây Bắc",
+        "ngay_sinh": "03/12",
+        "nam_sinh": "1952",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "hoan-thanh-chien-dich-tay-bac-03-12-1952",
+        "mo_ta": "Mốc son khép lại đợt tác chiến cuối cùng của Chiến dịch Tây Bắc Thu – Đông năm 1952. Sau các trận đánh công kiên quyết liệt vào các cứ điểm ngoại vi tập đoàn cứ điểm Nà Sản (Pú Hồng, Bản Vây) kéo dài đến đầu tháng 12 (đặc biệt ngày 03/12/1952), Bộ Tổng Tư lệnh đã chủ động kết thúc chiến dịch để bảo toàn lực lượng, giữ vững vùng giải phóng rộng hơn 28.000 km2 từ Nghĩa Lộ, Sơn La đến Điện Biên và đúc kết bài học quý báu về cách đánh tập đoàn cứ điểm cho chiến thắng Điện Biên Phủ sau này.",
+        "quote": "Thắng lợi của Chiến dịch Tây Bắc đã đập tan âm mưu lập 'Xứ Thái tự trị' của thực dân Pháp, nối liền căn cứ địa Việt Bắc với Thượng Lào.",
+        "ngay_hien_thi": "03/12",
+        "hien_thi_nhan_dip": "Kỷ niệm thắng lợi của Chiến dịch Tây Bắc giải phóng vùng rộng lớn rừng núi Tây Bắc Tổ quốc (03/12/1952).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_T%C3%A2y_B%E1%BA%AFc"
+            },
+            {
+                "type": "quote",
+                "name": "Ý nghĩa chiến lược và bài học kinh nghiệm từ Chiến dịch Tây Bắc cuối năm 1952",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_04_12",
+        "ten": "Quốc hội khóa I thông qua Luật Cải cách ruộng đất thực hiện khẩu hiệu 'Người cày có ruộng'",
+        "ngay_sinh": "04/12",
+        "nam_sinh": "1953",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "quoc-hoi-khoa-i-thong-qua-luat-cai-cach-ruong-dat-04-12-1953",
+        "mo_ta": "Sự kiện lập pháp lịch sử tại Kỳ họp thứ ba Quốc hội khóa I họp ở chiến khu Việt Bắc (Thái Nguyên). Ngày 04/12/1953, toàn thể đại biểu Quốc hội đã nhất trí biểu quyết thông qua Luật Cải cách ruộng đất nhằm xóa bỏ chế độ chiếm hữu ruộng đất phong kiến, thực hiện ước mơ ngàn đời 'Người cày có ruộng' của giai cấp nông dân Việt Nam, tạo ra luồng sinh khí cách mạng mãnh liệt thúc đẩy hậu phương và tiền tuyến dốc sức làm nên Chiến thắng Điện Biên Phủ.",
+        "quote": "Then chốt thắng lợi của kháng chiến là củng cố và mở rộng Mặt trận Dân tộc Thống nhất, củng cố công nông liên minh, củng cố chính quyền nhân dân, củng cố và phát triển quân đội, củng cố Đảng và tăng cường sự lãnh đạo của Đảng về mọi mặt. Chỉ có thực hiện cải cách ruộng đất mới làm cho những công tác nói trên có một cơ sở vững chắc.",
+        "ngay_hien_thi": "04/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Quốc hội khóa I thông qua Luật Cải cách ruộng đất tại chiến khu Việt Bắc (04/12/1953).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Cổng Thông tin Điện tử Quốc hội Việt Nam",
+                "url": "https://quochoi.vn/"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Báo cáo của Chủ tịch Hồ Chí Minh tại Kỳ họp thứ ba Quốc hội khóa I (Tháng 12/1953)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_05_12",
+        "ten": "Chiến thắng Nhà Đỏ – Bông Trang đánh thiệt hại nặng Sư đoàn Bộ binh số 1 'Anh Cả Đỏ' của Mỹ",
+        "ngay_sinh": "05/12",
+        "nam_sinh": "1965",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-thang-nha-do-bong-trang-05-12-1965",
+        "mo_ta": "Trận vận động phục kích xuất sắc tiếp nối chiến thắng Bầu Bàng của bộ đội chủ lực Miền trên chiến trường Đông Nam Bộ. Ngày 05/12/1965, tại khu vực rừng cao su Nhà Đỏ – Bông Trang (Thủ Dầu Một, Bình Dương), Sư đoàn 9 Quân Giải phóng đã mưu trí tổ chức trận địa phục kích, bất ngờ xuất kích đánh cắt đội hình hành quân của Lữ đoàn 1 thuộc Sư đoàn Bộ binh số 1 'Anh Cả Đỏ' Hoa Kỳ, tiêu diệt gọn 1 tiểu đoàn và đánh thiệt hại nặng 1 tiểu đoàn khác của Mỹ.",
+        "quote": "Bám sát thắt lưng Mỹ mà đánh giữa rừng cao su bạt ngàn, biến mỗi hàng cây thành một chiến hào chôn vùi các lữ đoàn viễn chinh sừng sỏ.",
+        "ngay_hien_thi": "05/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến thắng Nhà Đỏ – Bông Trang đánh bại Sư đoàn 'Anh Cả Đỏ' của Mỹ tại Bình Dương (05/12/1965).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Bảo tàng Lịch sử Quân sự Việt Nam",
+                "url": "https://baotanglichsuquansu.vn/"
+            },
+            {
+                "type": "quote",
+                "name": "Truyền thống quyết chiến quyết thắng của Sư đoàn 9 (Quân đoàn 4) tại chiến trường miền Đông Nam Bộ",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_06_12",
+        "ten": "Trương Vĩnh Ký (Pétrus Ký)",
+        "ngay_sinh": "06/12",
+        "nam_sinh": "1837",
+        "ngay_mat": "01/09",
+        "nam_mat": "1898",
+        "linh_vuc": "Văn hóa - Ngôn ngữ",
+        "category_id": "culture",
+        "image_slug": "truong-vinh-ky-06-12-1837-01-09-1898",
+        "mo_ta": "Nhà bác học, nhà ngôn ngữ học, nhà văn hóa kiệt xuất của Việt Nam thế kỷ 19, người từng được giới học thuật quốc tế xếp vào hàng '18 nhà bác học vĩ đại nhất thế giới đương thời' với khả năng thông thạo 27 ngôn ngữ Đông – Tây. Ông là người sáng lập tờ 'Gia Định Báo' – tờ báo chữ Quốc ngữ đầu tiên của Việt Nam và để lại 118 công trình biên khảo, phiên âm chữ Nôm (như Truyện Kiều, Lục Vân Tiên) ra chữ Quốc ngữ, đặt nền móng vô giá cho văn hóa học thuật hiện đại.",
+        "quote": "Ở với đời phải có nghĩa, với người ta phải có tình; chữ Quốc ngữ là chiếc chìa khóa mở toang cánh cửa tri thức cho đồng bào nước Nam.",
+        "ngay_hien_thi": "06/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà bác học Trương Vĩnh Ký (06/12/1837) và ngày Bộ Chính trị quyết định mở Chiến dịch Điện Biên Phủ (06/12/1953).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%C6%B0%C6%A1ng_V%C4%A9nh_K%C3%BD"
+            },
+            {
+                "type": "quote",
+                "name": "Tâm niệm học thuật và phổ biến chữ Quốc ngữ của học giả Pétrus Trương Vĩnh Ký",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_07_12",
+        "ten": "Chủ tịch Hồ Chí Minh ra Lời kêu gọi Quốc hội và Chính phủ Pháp nhằm cứu vãn hòa bình",
+        "ngay_sinh": "07/12",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_event",
+        "image_slug": "loi-keu-goi-quoc-hoi-va-chinh-phu-phap-cuu-van-hoa-binh-07-12-1946",
+        "mo_ta": "Nỗ lực ngoại giao hòa bình đầy nhân văn và kiên trì của Chủ tịch Hồ Chí Minh ngay trước ngưỡng cửa cuộc Toàn quốc kháng chiến. Trước việc quân đội Pháp liên tiếp gây hấn đẫm máu tại Hải Phòng, Lạng Sơn và Hà Nội, ngày 07/12/1946, Chủ tịch Hồ Chí Minh đã gửi Lời kêu gọi khẩn thiết tới Quốc hội và Chính phủ Pháp, khẳng định nhân dân Việt Nam tha thiết mong muốn hòa bình hữu nghị nhưng quyết không bao giờ khuất phục trước vũ lực xâm lăng.",
+        "quote": "Dân tộc Việt Nam muốn hòa bình với nhân dân Pháp, muốn hợp tác thân thiện trong khối Liên hiệp Pháp trên nền tảng độc lập và bình đẳng, song quyết không chịu làm nô lệ một lần nữa.",
+        "ngay_hien_thi": "07/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Chủ tịch Hồ Chí Minh gửi Lời kêu gọi Quốc hội và Chính phủ Pháp nhằm cứu vãn hòa bình (07/12/1946).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Bảo tàng Hồ Chí Minh",
+                "url": "https://baotanghochiminh.vn/"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Lời kêu gọi gửi Quốc hội và Chính phủ Pháp của Chủ tịch Hồ Chí Minh (07/12/1946)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_08_12",
+        "ten": "Tuyên thệ thành lập cảm tử quân bảo vệ Thủ đô Hà Nội (Liên khu I)",
+        "ngay_sinh": "08/12",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "thanh-lap-cam-tu-quan-bao-ve-thu-do-ha-noi-12-1946",
+        "mo_ta": "Biểu tượng chói ngời của hào khí Thăng Long – Đông Đô – Hà Nội trong những ngày chuẩn bị bước vào cuộc chiến đấu 60 ngày đêm khói lửa. Đầu tháng 12 (đặc biệt đợt chấn chỉnh lực lượng ngày 08/12/1946), các đội Tự vệ chiến đấu, Tự vệ thành Hoàng Diệu và Vệ quốc đoàn tại nội thành Hà Nội đã đồng loạt lập bàn thờ Tổ quốc tuyên thệ trở thành những 'Chiến sĩ Cảm tử', sẵn sàng ôm bom ba càng lao vào xe tăng giặc để giữ từng góc phố, từng ngôi nhà.",
+        "quote": "Thề sống chết với Thủ đô! Còn một người, còn một viên đạn cũng quyết đánh giặc Pháp đến cùng!",
+        "ngay_hien_thi": "08/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày các chiến sĩ Vệ quốc đoàn và Tự vệ Hà Nội lập lời thề Cảm tử bảo vệ Thủ đô (Tháng 12/1946).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_H%C3%A0_N%E1%BB%99i_1946"
+            },
+            {
+                "type": "quote",
+                "name": "Lời thề sắt đá của các chiến sĩ Cảm tử quân Liên khu I Hà Nội tháng 12/1946",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_09_12",
+        "ten": "Chiến thắng Lộ 2 trong Chiến dịch Bình Giã – Đập tan chiến thuật 'Thiết xa vận'",
+        "ngay_sinh": "09/12",
+        "nam_sinh": "1964",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-thang-lo-2-chien-dich-binh-gia-09-12-1964",
+        "mo_ta": "Trận phục kích cơ giới kinh điển làm sụp đổ hoàn toàn chiến thuật 'Thiết xa vận' của Mỹ và chính quyền Sài Gòn trong Chiến dịch Bình Giã. Ngày 09/12/1964, trên tuyến Lộ 2 nối từ Đất Đỏ đi Xuân Sơn (Bà Rịa), Trung đoàn 1 chủ lực Miền đã mưu trí khóa chặt đội hình Chi đoàn 3 Kỵ binh thiết giáp của địch, chỉ sau hơn một giờ chiến đấu dũng mãnh đã bắn cháy và phá hủy toàn bộ 14 xe bọc thép M113, diệt và bắt sống hơn 100 binh lính địch.",
+        "quote": "Chiến thắng trên Lộ 2 ngày 9 tháng 12 đã chứng minh vỏ thép xe M113 của Mỹ không thể cứu vãn nổi sự sụp đổ của chiến lược 'Chiến tranh đặc biệt'.",
+        "ngay_hien_thi": "09/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến thắng Lộ 2 tiêu diệt gọn Chi đoàn Thiết giáp M113 trong Chiến dịch Bình Giã (09/12/1964).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_B%C3%ACnh_Gi%C3%A3"
+            },
+            {
+                "type": "quote",
+                "name": "Đánh giá nghệ thuật đánh cơ giới của Trung đoàn 1 trên Lộ 2 ngày 09/12/1964",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_10_12",
+        "ten": "Chiến thắng Tu Vũ trong Chiến dịch Hòa Bình",
+        "ngay_sinh": "10/12",
+        "nam_sinh": "1951",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-thang-tu-vu-chien-dich-hoa-binh-10-12-1951",
+        "mo_ta": "Trận công kiên lớn và oanh liệt bậc nhất của Quân đội nhân dân Việt Nam trong Chiến dịch Hòa Bình Đông – Xuân 1951–1952. Đêm ngày 10/12/1951, dưới làn pháo bầy dữ dội của địch, Trung đoàn 88 (Trung đoàn Tu Vũ thuộc Đại đoàn 308) đã anh dũng đột phá tiêu diệt hoàn toàn cụm cứ điểm kiên cố Tu Vũ nằm bên tả ngạn sông Đà, đập vỡ mắt xích phòng ngự hiểm yếu nhất trên tuyến Sông Đà – Đường số 6 của tướng Pháp De Lattre de Tassigny.",
+        "quote": "Trận tiêu diệt cứ điểm Tu Vũ là trận công kiên oanh liệt nhất từ trước tới nay của bộ đội ta, mở thông cánh cửa tiến công trên toàn mặt trận Sông Đà – Hòa Bình.",
+        "ngay_hien_thi": "10/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến thắng Tu Vũ lịch sử trong Chiến dịch Hòa Bình (10/12/1951).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_H%C3%B2a_B%C3%ACnh"
+            },
+            {
+                "type": "quote",
+                "name": "Đánh giá của Bộ Tổng Tư lệnh về chiến công của Trung đoàn 88 tại cứ điểm Tu Vũ (10/12/1951)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_11_12",
+        "ten": "Bắt đầu cuộc đọ sức giải phóng thị xã Lai Châu trong Đông – Xuân 1953–1954",
+        "ngay_sinh": "11/12",
+        "nam_sinh": "1953",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "tien-cong-giai-phong-lai-chau-11-12-1953",
+        "mo_ta": "Đòn tiến công thần tốc mở màn cuộc Tiến công chiến lược Đông – Xuân 1953–1954 trên hướng Tây Bắc. Ngày 11/12/1953, phát hiện quân Pháp ở thị xã Lai Châu rục rịch rút chạy về co cụm tại Điện Biên Phủ, Đại đoàn 316 của ta đã lập tức chuyển từ hành quân sang truy kích thần tốc theo hai cánh, đánh tan các tiểu đoàn ngụy Thái của địch tại Па Há và áp sát giải phóng thị xã Lai Châu.",
+        "quote": "Bám sát gót chân địch, không cho quân Pháp ở Lai Châu rút chạy an toàn về tăng viện cho Điện Biên Phủ!",
+        "ngay_hien_thi": "11/12",
+        "hien_thi_nhan_dip": "Kỷ niệm cuộc tiến công thần tốc đánh bại quân Pháp tại Lai Châu trong Đông – Xuân 1953–1954 (11/12/1953).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_cu%E1%BB%99c_%C4%90%C3%B4ng_-_Xu%C3%A2n_1953%E2%80%931954"
+            },
+            {
+                "type": "quote",
+                "name": "Mệnh lệnh truy kích quân Pháp tại mặt trận Lai Châu của Bộ Tổng Tư lệnh (Tháng 12/1953)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_12_12",
+        "ten": "Ban Thường vụ Trung ương Đảng ra Chỉ thị lịch sử 'Toàn dân kháng chiến'",
+        "ngay_sinh": "12/12",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "chi-thi-toan-dan-khang-chien-12-12-1946",
+        "mo_ta": "Văn kiện cương lĩnh quân sự – chính trị vạch ra đường lối kháng chiến toàn dân, toàn diện, trường kỳ và tự lực cánh sinh của Đảng ta. Ngày 12/12/1946, chỉ một tuần trước khi cuộc kháng chiến bùng nổ trên phạm vi cả nước, Ban Thường vụ Trung ương Đảng đã ban hành bản Chỉ thị 'Toàn dân kháng chiến', khẳng định cuộc kháng chiến của dân tộc ta trải qua ba giai đoạn (phòng ngự, cầm cự, tổng phản công) và nhất định sẽ đi đến thắng lợi cuối cùng.",
+        "quote": "Mỗi phố là một mặt trận, mỗi làng là một pháo đài! Toàn dân, toàn diện, trường kỳ kháng chiến, nhất định thắng lợi!",
+        "ngay_hien_thi": "12/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Trung ương Đảng ban hành Chỉ thị 'Toàn dân kháng chiến' (12/12/1946) và Ngày giải phóng thị xã Lai Châu (12/12/1953).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Báo Điện tử Đảng Cộng sản Việt Nam",
+                "url": "https://tulieuvankien.dangcongsan.vn/"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Chỉ thị 'Toàn dân kháng chiến' của Ban Thường vụ Trung ương Đảng (12/12/1946)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_13_12",
+        "ten": "Mở màn Chiến dịch Đường 14 – Phước Long",
+        "ngay_sinh": "13/12",
+        "nam_sinh": "1974",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "mo-man-chien-dich-duong-14-phuoc-long-13-12-1974",
+        "mo_ta": "Đòn trinh sát chiến lược mang ý nghĩa bước ngoặt lịch sử mở đường cho Đại thắng mùa Xuân năm 1975. Rạng sáng ngày 13/12/1974, Quân đoàn 4 cùng các lực lượng vũ trang miền Đông Nam Bộ đồng loạt nổ súng mở màn Chiến dịch Đường 14 – Phước Long, lần lượt đập tan các chi khu Bù Đăng, Bù Đốp, Đôn Luân và tiến vào giải phóng hoàn toàn tỉnh Phước Long – tỉnh đầu tiên ở miền Nam được giải phóng trọn vẹn.",
+        "quote": "Chiến dịch Đường 14 – Phước Long là 'đòn trinh sát chiến lược' vô giá, củng cố quyết tâm sắt đá của Bộ Chính trị giải phóng hoàn toàn miền Nam ngay trong năm 1975.",
+        "ngay_hien_thi": "13/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày mở màn Chiến dịch Đường 14 – Phước Long lịch sử (13/12/1974).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_%C4%90%C6%B0%E1%BB%9Dng_14_%E2%80%93_Ph%C6%B0%E1%BB%9Bc_Long"
+            },
+            {
+                "type": "quote",
+                "name": "Đánh giá của Bộ Chính trị và Quân ủy Trung ương về thắng lợi Chiến dịch Phước Long (1974–1975)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_14_12",
+        "ten": "Chiến thắng Mường Pồn tiêu diệt cánh quân Pháp rút chạy từ Lai Châu về Điện Biên Phủ",
+        "ngay_sinh": "14/12",
+        "nam_sinh": "1953",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-thang-muong-pon-lai-chau-14-12-1953",
+        "mo_ta": "Đỉnh cao của cuộc truy kích thần tốc kéo dài hơn 10 ngày đêm giữa núi rừng Tây Bắc hiểm trở. Ngày 14/12/1953, tại thung lũng Mường Pồn (cách Điện Biên Phủ 15 km), các đơn vị của Đại đoàn 316 đã đuổi kịp và bao vây tiêu diệt gọn bộ phận chủ lực quân Pháp đang tháo chạy từ Lai Châu về Mường Thanh, nâng tổng số sinh lực địch bị loại khỏi vòng chiến đấu lên 24 đại đội, hoàn thành thắng lợi trọn vẹn Chiến dịch giải phóng Lai Châu.",
+        "quote": "Mười ngày đêm băng rừng vượt núi truy kích địch đến tận Mường Pồn đã biến cuộc rút lui của quân Pháp từ Lai Châu thành một cuộc tháo chạy tan xác.",
+        "ngay_hien_thi": "14/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến thắng Mường Pồn khép lại thắng lợi Chiến dịch giải phóng Lai Châu (14/12/1953).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Bảo tàng Chiến thắng lịch sử Điện Biên Phủ",
+                "url": "https://baotangdienbienphu.vn/"
+            },
+            {
+                "type": "quote",
+                "name": "Diễn biến trận truy kích Mường Pồn ngày 14/12/1953 của Đại đoàn 316",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_15_12",
+        "ten": "Tô Ngọc Vân (Tô Tử)",
+        "ngay_sinh": "15/12",
+        "nam_sinh": "1906",
+        "ngay_mat": "17/06",
+        "nam_mat": "1954",
+        "linh_vuc": "Văn hóa - Hội họa",
+        "category_id": "culture",
+        "image_slug": "to-ngoc-van-15-12-1906-17-06-1954",
+        "mo_ta": "Danh họa bậc thầy đứng hàng thứ hai trong bộ tứ huyền thoại của nền Mỹ thuật Đông Dương ('Nhất Trí, nhì Vân, tam Lân, tứ Cẩn'), tác giả kiệt tác sơn dầu 'Thiếu nữ bên hoa huệ' và 'Hai thiếu nữ và em bé' (Bảo vật Quốc gia). Sau Cách mạng Tháng Tám, ông lên chiến khu Việt Bắc làm Hiệu trưởng Trường Mỹ thuật kháng chiến; ngày 17/06/1954, ông đã anh dũng hy sinh dưới làn bom Pháp tại đèo Lũng Lô khi đang trực tiếp ký họa chiến trường Điện Biên Phủ và được truy tặng Giải thưởng Hồ Chí Minh đợt đầu tiên (1996).",
+        "quote": "Nghệ thuật không thể đứng ngoài cuộc chiến đấu sinh tử của dân tộc; nét cọ của người họa sĩ kháng chiến phải thấm đẫm mồ hôi và máu của nhân dân.",
+        "ngay_hien_thi": "15/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của danh họa, liệt sĩ Tô Ngọc Vân (15/12/1906).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%C3%B4_Ng%E1%BB%8Dc_V%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Lý tưởng nghệ thuật gắn liền với kháng chiến của danh họa Tô Ngọc Vân",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_16_12",
+        "ten": "Hội nghị Quân ủy và Bộ Tổng Chỉ huy tại Thái Hà Ấp duyệt phương án tác chiến bảo vệ Hà Nội",
+        "ngay_sinh": "16/12",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "hoi-nghi-thai-ha-ap-duyet-phuong-an-tac-chien-ha-noi-16-12-1946",
+        "mo_ta": "Cuộc họp quân sự cơ mật quyết định thế trận giam chân quân Pháp trong lòng Thủ đô trước giờ nổ súng Toàn quốc kháng chiến. Ngày 16/12/1946, tại Thái Hà Ấp (Hà Nội), Tổng Quân ủy và Bộ Tổng Chỉ huy dưới sự chủ trì của đồng chí Võ Nguyên Giáp đã triệu tập Bộ Chỉ huy Mặt trận Hà Nội (Khu XI), chính thức phê duyệt kế hoạch tác chiến 'Trong đánh ngoài vây' nhằm tiêu hao sinh lực địch và bảo vệ an toàn các cơ quan đầu não di chuyển lên căn cứ địa Việt Bắc.",
+        "quote": "Nhiệm vụ của Mặt trận Hà Nội là giam chân địch trong thành phố ít nhất một tháng để cả nước có thời gian chuyển vào thời chiến!",
+        "ngay_hien_thi": "16/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Hội nghị Thái Hà Ấp phê duyệt phương án tác chiến bảo vệ Thủ đô Hà Nội (16/12/1946).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_H%C3%A0_N%E1%BB%99i_1946"
+            },
+            {
+                "type": "quote",
+                "name": "Mệnh lệnh giao nhiệm vụ cho Mặt trận Hà Nội tại cuộc họp Thái Hà Ấp ngày 16/12/1946",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_17_12",
+        "ten": "Cuộc chiến đấu bảo vệ phố Hàng Bún – Yên Ninh (Hà Nội) chống hành động thảm sát của quân Pháp",
+        "ngay_sinh": "17/12",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "cuoc-chien-dau-pho-hang-bun-yen-ninh-17-12-1946",
+        "mo_ta": "Giọt nước tràn ly châm ngòi cho cuộc Toàn quốc kháng chiến bùng nổ. Sáng ngày 17/12/1946, quân đội Pháp huy động xe bọc thép và lính mũ đỏ ngang ngược tiến vào phá công sự tự vệ và tàn sát dã man 47 đồng bào vô tội tại khu phố Yên Ninh – Hàng Bún (Hà Nội). Không thể nhẫn nhịn thêm trước tội ác ngập trời của giặc, các chiến sĩ Tự vệ thành Hà Nội đã anh dũng nổ súng đánh trả quyết liệt, báo hiệu giờ phút toàn dân đứng lên kháng chiến đã điểm.",
+        "quote": "Máu đồng bào Yên Ninh – Hàng Bún đã đổ trên mặt đường Hà Nội, biến lòng căm thù của triệu người dân thành ngọn lửa quyết tử giữ nước!",
+        "ngay_hien_thi": "17/12",
+        "hien_thi_nhan_dip": "Tưởng niệm đồng bào hy sinh và cuộc chiến đấu kiên cường tại phố Yên Ninh – Hàng Bún, Hà Nội (17/12/1946).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Bảo tàng Lịch sử Quốc gia",
+                "url": "https://baotanglichsu.vn/"
+            },
+            {
+                "type": "quote",
+                "name": "Tư liệu tại Bia di tích lịch sử vụ thảm sát phố Yên Ninh – Hàng Bún (17/12/1946)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_18_12",
+        "ten": "Mở màn Chiến dịch 'Hà Nội – Điện Biên Phủ trên không' và bắn rơi tại chỗ pháo đài bay B-52 đầu tiên",
+        "ngay_sinh": "18/12",
+        "nam_sinh": "1972",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "mo-man-dien-bien-phu-tren-khong-ban-roi-b52-18-12-1972",
+        "mo_ta": "Đêm mở màn bản anh hùng ca vĩ đại đập tan cuộc tập kích đường không chiến lược Linebacker II của đế quốc Mỹ. Đêm ngày 18/12/1972, khi hàng chục siêu pháo đài bay B-52 ồ ạt ném bom rải thảm xuống Thủ đô Hà Nội, bộ đội Phòng không – Không quân đã bình tĩnh vạch nhiễu tìm thù; đúng 20 giờ 13 phút, Tiểu đoàn 59 (Trung đoàn Tên lửa 261) đã phóng hai quả đạn SAM-2 bắn rơi tại chỗ chiếc B-52G đầu tiên xuống cánh đồng Phù Lỗ (Đông Anh), đập tan huyền thoại 'bất khả xâm phạm' của Không lực Hoa Kỳ.",
+        "quote": "Vạch nhiễu tìm thù! Chiếc siêu pháo đài bay B-52 bốc cháy rơi xuống cánh đồng Phù Lỗ đêm 18 tháng 12 đã báo hiệu sự phá sản hoàn toàn của canh bạc quân sự cuối cùng của Nhà Trắng.",
+        "ngay_hien_thi": "18/12",
+        "hien_thi_nhan_dip": "Kỷ niệm đêm mở màn Chiến dịch 'Hà Nội – Điện Biên Phủ trên không' và chiến công bắn rơi tại chỗ chiếc B-52 đầu tiên (18/12/1972).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_Linebacker_II"
+            },
+            {
+                "type": "quote",
+                "name": "Chiến công lịch sử của Tiểu đoàn Tên lửa 59 đêm 18/12/1972 tại Phù Lỗ – Hà Nội",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_19_12",
+        "ten": "Ngày Toàn quốc kháng chiến và Lời kêu gọi Toàn quốc kháng chiến của Chủ tịch Hồ Chí Minh",
+        "ngay_sinh": "19/12",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "ngay-toan-quoc-khang-chien-19-12-1946",
+        "mo_ta": "Đêm lịch sử hào hùng mở đầu cuộc kháng chiến trường kỳ 9 năm chống thực dân Pháp xâm lược của dân tộc Việt Nam. Đúng 20 giờ ngày 19/12/1946, đèn điện Nhà máy điện Yên Phụ vụt tắt làm hiệu lệnh, pháo đài Láng gầm vang những loạt đại bác đầu tiên; tại làng Vạn Phúc (Hà Đông), Chủ tịch Hồ Chí Minh đã viết bản 'Lời kêu gọi Toàn quốc kháng chiến' bất hủ, hiệu triệu triệu người như một đứng lên bảo vệ nền độc lập tự do.",
+        "quote": "Chúng ta thà hy sinh tất cả, chứ nhất định không chịu mất nước, nhất định không chịu làm nô lệ! Hỡi đồng bào! Chúng ta phải đứng lên! Bất kỳ đàn ông, đàn bà, bất kỳ người già, người trẻ, không chia tôn giáo, đảng phái, dân tộc. Hễ là người Việt Nam thì phải đứng lên đánh thực dân Pháp để cứu Tổ quốc.",
+        "ngay_hien_thi": "19/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày Toàn quốc kháng chiến lịch sử (19/12/1946).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ng%C3%A0y_To%C3%A0n_qu%E1%BB%91c_kh%C3%A1ng_chi%E1%BA%BFn"
+            },
+            {
+                "type": "quote",
+                "name": "Trích 'Lời kêu gọi Toàn quốc kháng chiến' của Chủ tịch Hồ Chí Minh (19/12/1946)",
+                "url": "https://vi.wikisource.org/wiki/L%E1%BB%9Di_k%C3%AAu_g%E1%BB%8Di_to%C3%A0n_qu%E1%BB%91c_kh%C3%A1ng_chi%E1%BA%BFn"
+            }
+        ]
+    },
+    {
+        "id": "ngay_20_12",
+        "ten": "Nguyễn Đình Thi",
+        "ngay_sinh": "20/12",
+        "nam_sinh": "1924",
+        "ngay_mat": "18/04",
+        "nam_mat": "2003",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-dinh-thi-20-12-1924-18-04-2003",
+        "mo_ta": "Nhà văn, nhà thơ, nhà viết kịch, nhạc sĩ và nhà tư tưởng văn hóa lớn bậc nhất của nền văn nghệ cách mạng Việt Nam hiện đại, nguyên Tổng Thư ký Hội Nhà văn Việt Nam suốt hơn ba thập kỷ. Tài năng đa diện của ông kết tinh rực rỡ trong hai ca khúc bất hủ 'Diệt phát xít', 'Người Hà Nội', bộ tiểu thuyết sử thi 'Vỡ bờ' và đặc biệt là tuyệt phẩm thơ 'Đất nước', được trao tặng Giải thưởng Hồ Chí Minh về Văn học nghệ thuật đợt đầu tiên (1996).",
+        "quote": "Nước chúng ta / Nước những người chưa bao giờ khuất / Đêm đêm rì rầm trong tiếng đất / Những buổi ngày xưa vọng nói về!",
+        "ngay_hien_thi": "20/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà văn, nhà thơ, nhạc sĩ Nguyễn Đình Thi (20/12/1924) và Ngày thành lập Mặt trận Dân tộc Giải phóng miền Nam Việt Nam (20/12/1960).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_%C4%90%C3%ACnh_Thi"
+            },
+            {
+                "type": "quote",
+                "name": "Trích thi phẩm bất hủ 'Đất nước' (1948–1955) của Nguyễn Đình Thi",
+                "url": "https://vi.wikisource.org/wiki/%C4%90%E1%BA%A5t_n%C6%B0%E1%BB%9Bc_(Nguy%E1%BB%85n_%C4%90%C3%ACnh_Thi)"
+            }
+        ]
+    },
+    {
+        "id": "ngay_21_12",
+        "ten": "Mở màn Chiến dịch Trung Lào trong cuộc Tiến công chiến lược Đông – Xuân 1953–1954",
+        "ngay_sinh": "21/12",
+        "nam_sinh": "1953",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "mo-man-chien-dich-trung-lao-21-12-1953",
+        "mo_ta": "Đòn tiến công chiến lược thứ hai căng kéo và xé lẻ khối cơ động của Kế hoạch Navarre trên toàn chiến trường Đông Dương. Đêm ngày 21/12/1953, Liên quân Lào – Việt (gồm các đơn vị thuộc Đại đoàn 304 và Đại đoàn 325 phối hợp cùng Quân Giải phóng Pathet Lào) đã đồng loạt nổ súng mở màn Chiến dịch Trung Lào, đập tan cụm cứ điểm Khăm He, tiến thẳng xuống giải phóng thị xã Thà Khẹt bên bờ sông Mê Kông và cắt đôi chiến trường Đông Dương.",
+        "quote": "Đòn tiến công Trung Lào đã chặt đứt đường 12, giải phóng thị xã Thà Khẹt và buộc tướng Navarre phải vội vã xé lẻ lực lượng cơ động về giữ Xênô.",
+        "ngay_hien_thi": "21/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày mở màn Chiến dịch Trung Lào trong Đông – Xuân 1953–1954 (21/12/1953).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_Trung_L%C3%A0o"
+            },
+            {
+                "type": "quote",
+                "name": "Ý nghĩa chiến lược của Chiến dịch Trung Lào trong việc phá sản Kế hoạch Navarre",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_22_12",
+        "ten": "Thành lập Đội Việt Nam Tuyên truyền Giải phóng quân – Ngày thành lập Quân đội nhân dân Việt Nam",
+        "ngay_sinh": "22/12",
+        "nam_sinh": "1944",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "thanh-lap-quan-doi-nhan-dan-viet-nam-22-12-1944",
+        "mo_ta": "Mốc son khai sinh lực lượng vũ trang bách chiến bách thắng của dân tộc Việt Nam. Chiều ngày 22/12/1944, tại khu rừng Trần Hưng Đạo (thuộc châu Nguyên Bình, tỉnh Cao Bằng), thực hiện Chỉ thị của Lãnh tụ Hồ Chí Minh, đồng chí Võ Nguyên Giáp đã long trọng tuyên bố thành lập Đội Việt Nam Tuyên truyền Giải phóng quân gồm 34 chiến sĩ đầu tiên dưới lá cờ đỏ sao vàng và đọc Mười lời thề danh dự, mở đầu lịch sử hào hùng của Quân đội nhân dân Việt Nam.",
+        "quote": "Bây giờ quy mô của nó còn nhỏ, nhưng tiền đồ của nó rất vẻ vang. Nó là khởi điểm của giải phóng quân, nó có thể đi suốt từ Nam chí Bắc, khắp đất nước Việt Nam.",
+        "ngay_hien_thi": "22/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày thành lập Quân đội nhân dân Việt Nam và Ngày hội Quốc phòng toàn dân (22/12/1944).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Qu%C3%A2n_%C4%91%E1%BB%99i_nh%C3%A2n_d%C3%A2n_Vi%E1%BB%87t_Nam"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Chỉ thị thành lập Đội Việt Nam Tuyên truyền Giải phóng quân của Chủ tịch Hồ Chí Minh (Tháng 12/1944)",
+                "url": "https://vi.wikisource.org/wiki/Ch%E1%BB%89_th%E1%BB%8B_th%C3%A0nh_l%E1%BA%ADp_%C4%90%E1%BB%99i_Vi%E1%BB%87t_Nam_Tuy%C3%AAn_truy%E1%BB%81n_Gi%E1%BA%A3i_ph%C3%B3ng_qu%C3%A2n"
+            }
+        ]
+    },
+    {
+        "id": "ngay_23_12",
+        "ten": "Chiến thắng Sông Đà – Lạc Song bắn chìm đoàn tàu chiến Pháp trong Chiến dịch Hòa Bình",
+        "ngay_sinh": "23/12",
+        "nam_sinh": "1951",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-thang-song-da-lac-song-23-12-1951",
+        "mo_ta": "Trận phục kích đường thủy vang dội chặt đứt hoàn toàn tuyến tiếp tế trên sông Đà của thực dân Pháp trong Chiến dịch Hòa Bình. Ngày 23/12/1951, tại khúc sông Đà đoạn qua Lạc Song – Đan Thê (Phú Thọ), các đơn vị pháo binh và bộ binh thuộc Đại đoàn 308 đã bất ngờ nhả đạn chính xác vào đoàn tàu chiến tiếp viện của Pháp, bắn chìm tại chỗ 4 tàu chiến, bắn hỏng 1 chiếc khác và tiêu diệt gọn đại đội lính Âu – Phi hộ tống.",
+        "quote": "Sông Đà cuộn sóng nhấn chìm đoàn tàu chiến giặc Pháp, biến tuyến đường thủy huyết mạch nối Trung Hà với Hòa Bình thành tử địa của quân xâm lược.",
+        "ngay_hien_thi": "23/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến thắng Sông Đà – Lạc Song bắn chìm đoàn tàu chiến Pháp trong Chiến dịch Hòa Bình (23/12/1951).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_H%C3%B2a_B%C3%ACnh"
+            },
+            {
+                "type": "quote",
+                "name": "Ý nghĩa trận phục kích tàu chiến trên sông Đà ngày 23/12/1951 đối với cục diện Chiến dịch Hòa Bình",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_24_12",
+        "ten": "Biệt động Sài Gòn tập kích Cư xá sĩ quan Mỹ Brink giữa trung tâm Sài Gòn",
+        "ngay_sinh": "24/12",
+        "nam_sinh": "1964",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "biet-dong-sai-gon-tap-kich-cu-xa-brink-24-12-1964",
+        "mo_ta": "Trận đánh xuất quỷ nhập thần làm rúng động giới cầm quyền Washington ngay trước đêm Giáng sinh năm 1964. Đúng 17 giờ 45 phút chiều ngày 24/12/1964, các chiến sĩ Cụm Biệt động 679 Sài Gòn do đồng chí Nguyễn Thanh Xuân (Bảy Bê) chỉ huy trong trang phục sĩ quan Sài Gòn đã táo bạo lái ô tô chở 200 kg thuốc nổ TNT tiến thẳng vào tầng hầm tòa nhà Cư xá Brink trên đường Hai Bà Trưng và điểm hỏa, đánh sập 4 tầng lầu và loại khỏi vòng chiến đấu hơn 100 sĩ quan cao cấp Hoa Kỳ.",
+        "quote": "Tiếng nổ long trời tại Cư xá Brink ngay giữa trung tâm Sài Gòn đã giáng đòn cảnh cáo đanh thép rằng không một nơi nào trên đất miền Nam là an toàn cho quân xâm lược Mỹ!",
+        "ngay_hien_thi": "24/12",
+        "hien_thi_nhan_dip": "Kỷ niệm chiến công tập kích Cư xá sĩ quan Mỹ Brink của lực lượng Biệt động Sài Gòn (24/12/1964).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%E1%BB%A5_%C4%91%C3%A1nh_bom_c%C6%B0_x%C3%A1_Brink"
+            },
+            {
+                "type": "quote",
+                "name": "Bản lĩnh mưu trí của các chiến sĩ Biệt động Sài Gòn trong trận đánh Cư xá Brink (24/12/1964)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_25_12",
+        "ten": "Đặng Thai Mai (Đặng Thái Mai)",
+        "ngay_sinh": "25/12",
+        "nam_sinh": "1902",
+        "ngay_mat": "11/09",
+        "nam_mat": "1984",
+        "linh_vuc": "Văn hóa - Giáo dục",
+        "category_id": "literature",
+        "image_slug": "dang-thai-mai-25-12-1902-11-09-1984",
+        "mo_ta": "Giáo sư, nhà giáo dục, học giả uyên bác và là cây đại thụ đặt nền móng cho ngành lý luận phê bình văn học mác-xít ở Việt Nam. Sinh ra trong một gia đình nho học yêu nước tại Thanh Chương (Nghệ An) và là nhạc phụ của Đại tướng Võ Nguyên Giáp, ông từng giữ trọng trách Bộ trưởng Bộ Giáo dục (1946), Chủ tịch Hội Liên hiệp Văn học Nghệ thuật Việt Nam và Viện trưởng đầu tiên của Viện Văn học, được truy tặng Huân chương Hồ Chí Minh và Giải thưởng Hồ Chí Minh đợt 1 (1996).",
+        "quote": "Văn học chân chính phải bắt rễ sâu vào đời sống nhân dân và trở thành nguồn lực tinh thần mạnh mẽ thúc đẩy sự tiến bộ của toàn dân tộc.",
+        "ngay_hien_thi": "25/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Giáo sư, học giả Đặng Thai Mai (25/12/1902) và Chiến thắng Phai Khắt – Nà Ngần (25/12/1944).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BA%B7ng_Thai_Mai"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng lý luận trong tác phẩm 'Văn học khái luận' (1944) của Giáo sư Đặng Thai Mai",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_26_12",
+        "ten": "Phan Bội Châu (Sào Nam)",
+        "ngay_sinh": "26/12",
+        "nam_sinh": "1867",
+        "ngay_mat": "29/10",
+        "nam_mat": "1940",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "phan-boi-chau-26-12-1867-29-10-1940",
+        "mo_ta": "Nhà yêu nước vĩ đại bậc nhất của dân tộc Việt Nam trong những thập niên đầu thế kỷ 20, được Chủ tịch Hồ Chí Minh tôn vinh là 'Bậc anh hùng, vị thiên sứ, đấng xả thân vì độc lập'. Đỗ Giải nguyên trường Nghệ năm 1900 nhưng gác lại ấn phong hầu để bôn ba tìm đường cứu nước, cụ Sào Nam đã sáng lập Duy Tân Hội, Việt Nam Quang phục Hội, khởi xướng Phong trào Đông Du và để lại những áng văn thơ huyết lệ như 'Hải ngoại huyết thư', 'Việt Nam vong quốc sử' làm sôi sục bầu máu nóng của triệu trái tim Việt Nam.",
+        "quote": "Ví phỏng đường đời bằng phẳng cả / Anh hùng hào kiệt có hơn ai!",
+        "ngay_hien_thi": "26/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà yêu nước vĩ đại Phan Bội Châu (26/12/1867) và Đêm quyết chiến bắn rơi 8 pháo đài bay B-52 (26/12/1972).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Phan_B%E1%BB%99i_Ch%C3%A2u"
+            },
+            {
+                "type": "quote",
+                "name": "Câu thơ bất hủ thể hiện bản lĩnh anh hùng của cụ Phan Bội Châu",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_27_12",
+        "ten": "Phi công Phạm Tuân lái máy bay tiêm kích MiG-21 bắn rơi siêu pháo đài bay B-52",
+        "ngay_sinh": "27/12",
+        "nam_sinh": "1972",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "pham-tuan-ban-roi-b52-bang-mig21-27-12-1972",
+        "mo_ta": "Kỳ tích vô tiền khoáng hậu trong lịch sử không chiến thế giới hiện đại. Đêm ngày 27/12/1972, từ sân bay dã chiến Yên Bái, phi công Phạm Tuân (Trung đoàn Không quân Sao Đỏ 921) đã điều khiển chiếc máy bay tiêm kích phản lực MiG-21 vượt qua hàng rào tiêm kích F-4 hộ tống và màn nhiễu điện tử dày đặc, tiếp cận ở cự ly gần và phóng hai quả tên lửa không đối không bắn cháy một siêu pháo đài bay B-52 của Mỹ trên bầu trời Sơn La rồi hạ cánh an toàn.",
+        "quote": "Cánh én bạc MiG-21 vút lên giữa bầu trời đêm rực lửa, phóng tên lửa xé xác siêu pháo đài bay B-52 và viết nên huyền thoại bất tử của Không quân nhân dân Việt Nam.",
+        "ngay_hien_thi": "27/12",
+        "hien_thi_nhan_dip": "Kỷ niệm kỳ tích phi công Phạm Tuân lái MiG-21 bắn rơi siêu pháo đài bay B-52 trong Chiến dịch Điện Biên Phủ trên không (27/12/1972).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_Tu%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Chiến công lịch sử của Không quân nhân dân Việt Nam đêm 27/12/1972",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_28_12",
+        "ten": "Nguyễn Thượng Hiền (Mai Sơn)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1868",
+        "ngay_mat": "28/12",
+        "nam_mat": "1925",
+        "linh_vuc": "Lịch sử - Văn học",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-thuong-hien-1868-28-12-1925",
+        "mo_ta": "Nhà thơ, nhà văn hóa lớn và là chí sĩ yêu nước kiệt xuất đầu thế kỷ 20, người con của vùng đất Liên Bạt (Ứng Hòa, Hà Tây). Đỗ Hoàng giáp năm 24 tuổi và giữ chức Đốc học Nam Định, năm 1907 khi nghe tin vua Thành Thái bị thực dân Pháp phế truất, ông đã愤 phẫn nộ treo ấn từ quan, đốt hết phẩm phục rồi bí mật vượt biên sang Nhật Bản sát cánh cùng Phan Bội Châu lãnh đạo Phong trào Đông Du và Việt Nam Quang phục Hội cho đến lúc qua đời tại Hàng Châu.",
+        "quote": "Bốn biển hẹp hòi khôn đặt bước / Nghìn năm đau đớn lệ vơi đầy / Thân này dầu thác nơi quê khách / Hồn vẫn bay về giữ nước mây.",
+        "ngay_hien_thi": "28/12",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Hoàng giáp, chí sĩ yêu nước Nguyễn Thượng Hiền (28/12/1925).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Th%C6%B0%E1%BB%A3ng_Hi%E1%BB%81n"
+            },
+            {
+                "type": "quote",
+                "name": "Khí phách xuất dương cứu nước trong tập thơ 'Nam chi tập' của cụ Nguyễn Thượng Hiền",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_29_12",
+        "ten": "Toàn thắng Chiến dịch Phòng không 'Hà Nội – Điện Biên Phủ trên không'",
+        "ngay_sinh": "29/12",
+        "nam_sinh": "1972",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "toan-thang-ha-noi-dien-bien-phu-tren-khong-29-12-1972",
+        "mo_ta": "Đỉnh cao chói lọi khép lại 12 ngày đêm (18/12 – 29/12/1972) chiến đấu cực kỳ anh dũng của quân và dân miền Bắc chống cuộc tập kích chiến lược bằng không quân lớn nhất kể từ sau Thế chiến thứ hai. Kết thúc ngày 29/12/1972, lưới lửa phòng không ba thứ quân của Việt Nam đã bắn rơi tổng cộng 81 máy bay hiện đại của Mỹ (trong đó có 34 siêu pháo đài bay B-52 và 5 máy bay F-111A), đập tan hoàn toàn ý đồ 'đưa miền Bắc trở về thời kỳ đồ đá' của chính quyền Nixon.",
+        "quote": "Chiến thắng 'Hà Nội – Điện Biên Phủ trên không' là bản anh hùng ca bất diệt của trí tuệ và bản lĩnh Việt Nam, buộc siêu cường số một thế giới phải khuất phục trên bầu trời Thăng Long.",
+        "ngay_hien_thi": "29/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày toàn thắng Chiến dịch 12 ngày đêm 'Hà Nội – Điện Biên Phủ trên không' (29/12/1972).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_Linebacker_II"
+            },
+            {
+                "type": "quote",
+                "name": "Tầm vóc lịch sử thời đại của Chiến thắng 'Hà Nội – Điện Biên Phủ trên không' (Tháng 12/1972)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_30_12",
+        "ten": "Đế quốc Mỹ buộc phải tuyên bố chấm dứt ném bom miền Bắc và đề nghị nối lại đàm phán Hiệp định Paris",
+        "ngay_sinh": "30/12",
+        "nam_sinh": "1972",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_event",
+        "image_slug": "my-tuyen-bo-ngung-nem-bom-mien-bac-noi-lai-dam-phan-paris-30-12-1972",
+        "mo_ta": "Thắng lợi chính trị – ngoại giao trực tiếp được quyết định bởi chiến thắng 'Điện Biên Phủ trên không'. Đúng 7 giờ sáng ngày 30/12/1972, choáng váng trước thảm bại mất 34 pháo đài bay B-52 và làn sóng lên án dữ dội của dư luận toàn cầu, Tổng thống Mỹ Richard Nixon đã buộc phải chính thức tuyên bố chấm dứt cuộc tập kích đường không chiến lược từ Bắc vĩ tuyến 20 trở ra và gửi công hàm đề nghị Chính phủ Việt Nam Dân chủ Cộng hòa nối lại ngay hội đàm tại Paris để ký Hiệp định hòa bình.",
+        "quote": "Bầu trời Hà Nội sạch bóng B-52 sáng 30 tháng 12 đã buộc nhà cầm quyền Washington phải cúi đầu quay trở lại bàn đàm phán Paris và đặt bút ký vào văn bản chấm dứt chiến tranh.",
+        "ngay_hien_thi": "30/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày đế quốc Mỹ buộc phải tuyên bố ngừng ném bom miền Bắc và xin nối lại đàm phán Hiệp định Paris (30/12/1972).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Hi%E1%BB%87p_%C4%91%E1%BB%8Bnh_Paris_1973"
+            },
+            {
+                "type": "quote",
+                "name": "Mối quan hệ nhân quả lịch sử giữa trận Điện Biên Phủ trên không và tuyên bố ngày 30/12/1972 của Mỹ",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_31_12",
+        "ten": "Chiến thắng tiêu diệt Tiểu đoàn Thủy quân lục chiến số 4 'Cọp Biển' – Khép lại toàn thắng Chiến dịch Bình Giã",
+        "ngay_sinh": "31/12",
+        "nam_sinh": "1964",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "tieu-diet-tieu-doan-cop-bien-toan-thang-binh-gia-31-12-1964",
+        "mo_ta": "Trận đánh kết thúc hoàn hảo làm nên đỉnh cao chói lọi của Chiến dịch Bình Giã cuối năm 1964. Chiều ngày 31/12/1964, tại đồn điền cao su Quảng Giao (Bà Rịa), Trung đoàn 1 Quân Giải phóng đã dàn trận phục kích thần tốc, chỉ trong chớp nhoáng đã tiêu diệt hoàn toàn Tiểu đoàn 4 Thủy quân lục chiến ('Cọp Biển') thuộc lực lượng tổng dự bị chiến lược sừng sỏ nhất của quân đội Sài Gòn cùng toàn bộ ban chỉ huy và cố vấn Mỹ, khép lại năm 1964 bằng một đại thắng vang dội.",
+        "quote": "Sự xóa sổ của Tiểu đoàn 4 Thủy quân lục chiến chiều 31 tháng 12 tại rừng cao su Quảng Giao là tiếng chuông báo tử kết liễu chiến lược 'Chiến tranh đặc biệt' của đế quốc Mỹ ở miền Nam.",
+        "ngay_hien_thi": "31/12",
+        "hien_thi_nhan_dip": "Kỷ niệm trận đánh tiêu diệt Tiểu đoàn Thủy quân lục chiến số 4 và toàn thắng Chiến dịch Bình Giã (31/12/1964).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_B%C3%ACnh_Gi%C3%A3"
+            },
+            {
+                "type": "quote",
+                "name": "Đánh giá lịch sử về trận tiêu diệt Tiểu đoàn 4 Thủy quân lục chiến ngày 31/12/1964",
+                "url": null
+            }
+        ]
+    }
+]

@@ -1,0 +1,839 @@
+[
+    {
+        "id": "ngay_01_12",
+        "ten": "Nguyễn Thái Học",
+        "ngay_sinh": "01/12",
+        "nam_sinh": "1902",
+        "ngay_mat": "17/06",
+        "nam_mat": "1930",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-thai-hoc-01-12-1902-17-06-1930",
+        "mo_ta": "Nhà cách mạng lỗi lạc, người sáng lập và là lãnh tụ tối cao của Việt Nam Quốc dân Đảng. Dù Khởi nghĩa Yên Bái thất bại, ông cùng các đồng chí vẫn hiên ngang bước lên máy chém, để lại tiếng vang chấn động, đánh thức mạnh mẽ lòng yêu nước của toàn dân tộc.",
+        "quote": "Không thành công cũng thành nhân!",
+        "ngay_hien_thi": "01/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của lãnh tụ Nguyễn Thái Học (01/12/1902).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Th%C3%A1i_H%E1%BB%8Dc"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói bất hủ của các chiến sĩ Khởi nghĩa Yên Bái",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_02_12",
+        "ten": "Trung tướng Doãn Tuế",  sai Ông mất ngày 13 tháng 1 năm 1995, tại Hà Nội
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1917",
+        "ngay_mat": "02/12",
+        "nam_mat": "1995",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "trung-tuong-doan-tue-1917-02-12-1995",
+        "mo_ta": "Vị tướng pháo binh huyền thoại, nguyên Phó Tổng Tham mưu trưởng Quân đội nhân dân Việt Nam, Tư lệnh Binh chủng Pháo binh. Từ những khẩu sơn pháo đầu tiên giội bão lửa xuống tập đoàn cứ điểm Điện Biên Phủ đến các chiến dịch hiệp đồng binh chủng giải phóng miền Nam, ông đã dành trọn cuộc đời xây dựng lực lượng 'Chân đồng vai sắt, đánh giỏi, bắn trúng' của quân đội ta.",
+        "quote": "Pháo binh Việt Nam dù kéo bằng sức người qua đèo cao vực sâu, nhưng khi đã vào trận địa là phải trút sấm sét chính xác xuống đầu thù.",
+        "ngay_hien_thi": "02/12",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Trung tướng Doãn Tuế (02/12/1995).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Do%C3%A3n_Tu%E1%BA%BF"
+            },
+            {
+                "type": "quote",
+                "name": "Truyền thống vẻ vang của Binh chủng Pháo binh Quân đội nhân dân Việt Nam",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_03_12",
+        "ten": "Ngô Gia Tự",
+        "ngay_sinh": "03/12",
+        "nam_sinh": "1908",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "1935",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "ngo-gia-tu-03-12-1908-1935",
+        "mo_ta": "Nhà lãnh đạo tiền bối kiệt xuất, Bí thư Xứ ủy Nam Kỳ, một trong những người tham gia sáng lập Đảng Cộng sản Việt Nam. Trải qua những ngón đòn tra tấn dã man bậc nhất tại Khám Lớn Sài Gòn và Côn Đảo, ông vẫn kiên trung không khuất phục. Ông đã hy sinh trên biển Đông vào đầu năm 1935 trong một chuyến vượt ngục Côn Đảo đầy bi tráng.",
+        "quote": "Chúng ta phải dùng xương máu để xây dựng cơ sở cách mạng, dùng ngòi bút để giác ngộ quần chúng.",
+        "ngay_hien_thi": "03/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà lãnh đạo tiền bối Ngô Gia Tự (03/12/1908).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ng%C3%B4_Gia_T%E1%BB%B1"
+            },
+            {
+                "type": "quote",
+                "name": "Tinh thần đấu tranh cách mạng của Bí thư Xứ ủy Ngô Gia Tự",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_04_12",
+        "ten": "Lê Ngọc Hân (Công chúa Ngọc Hân)",
+        "ngay_sinh": "27/04",
+        "nam_sinh": "1770",
+        "ngay_mat": "04/12",
+        "nam_mat": "1799",
+        "linh_vuc": "Văn hóa - Lịch sử",
+        "category_id": "historical_figure",
+        "image_slug": "le-ngoc-han-27-04-1770-04-12-1799",
+        "mo_ta": "Bắc Cung Hoàng hậu của vương triều Tây Sơn, một giai nhân tuyệt sắc và cũng là một nữ sĩ tài hoa. Mối tình sâu nặng của bà và Hoàng đế Quang Trung đã đi vào huyền thoại. Khi vua băng hà, bà để lại tuyệt tác 'Ai tư vãn' chứa chan niềm đau xót và khí chất thanh cao.",
+        "quote": "Mà nay áo vải cờ đào, Giúp dân dựng nước, xiết bao công trình.",
+        "ngay_hien_thi": "04/12",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Bắc Cung Hoàng hậu Lê Ngọc Hân (04/12/1799).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Ng%E1%BB%8Dc_H%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Trích tuyệt tác 'Ai tư vãn' khóc vua Quang Trung",
+                "url": "https://vi.wikisource.org/wiki/Ai_t%C6%B0_v%C3%A3n"
+            }
+        ]
+    },
+    {
+        "id": "ngay_05_12",
+        "ten": "Đại tướng Lê Trọng Tấn (Lê Trọng Tố)",đã có ở tháng 10
+        "ngay_sinh": "01/10",
+        "nam_sinh": "1914",
+        "ngay_mat": "05/12",
+        "nam_mat": "1986",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "dai-tuong-le-trong-tan-01-10-1914-05-12-1986",
+        "mo_ta": "Đại tướng Quân đội nhân dân Việt Nam, nguyên Tổng Tham mưu trưởng, Thứ trưởng Bộ Quốc phòng. Được mệnh danh là 'Zhukov của Việt Nam', ông là vị tướng cầm quân bách chiến bách thắng luôn có mặt ở những chiến trường gai góc nhất, từ Chiến dịch Biên giới, Điện Biên Phủ, Đường 9 - Nam Lào cho đến trọng trách Tư lệnh Cánh quân Duyên Hải thần tốc tiến vào Dinh Độc Lập trưa ngày 30/04/1975.",
+        "quote": "Người chỉ huy giỏi không chỉ biết giành chiến thắng trên bản đồ tác chiến, mà phải tính toán từng phương án để bớt đi mỗi giọt máu của người chiến sĩ nơi chiến hào.",
+        "ngay_hien_thi": "05/12",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Đại tướng Lê Trọng Tấn (05/12/1986).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Tr%E1%BB%8Dng_T%E1%BA%A5n"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng quân sự và nhân cách cầm quân của Đại tướng Lê Trọng Tấn",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_06_12",
+        "ten": "Trương Vĩnh Ký (Pétrus Ký)",
+        "ngay_sinh": "06/12",
+        "nam_sinh": "1837",
+        "ngay_mat": "01/09",
+        "nam_mat": "1898",
+        "linh_vuc": "Văn hóa - Ngôn ngữ",
+        "category_id": "culture",
+        "image_slug": "truong-vinh-ky-06-12-1837-01-09-1898",
+        "mo_ta": "Nhà bác học, nhà ngôn ngữ học xuất chúng và là người tiên phong của báo chí Việt Nam. Thông thạo 27 ngôn ngữ, ông là Tổng biên tập của 'Gia Định báo' - tờ báo chữ Quốc ngữ đầu tiên. Cả đời ông tận tụy với việc biên dịch, gìn giữ văn hóa và phát triển chữ Quốc ngữ cho dân tộc.",
+        "quote": "Ở đời, người ta hay lấy sự thành bại mà luận anh hùng, nhưng cái quý nhất của một con người chính là tấm lòng học hỏi và truyền bá tri thức.",
+        "ngay_hien_thi": "06/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của học giả Trương Vĩnh Ký – Pétrus Ký (06/12/1837).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%C6%B0%C6%A1ng_V%C4%A9nh_K%C3%BD"
+            },
+            {
+                "type": "quote",
+                "name": "Ghi chép về tinh thần học thuật của Pétrus Ký",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_07_12",
+        "ten": "Phật hoàng Trần Nhân Tông (Trần Khâm)",
+        "ngay_sinh": "07/12",
+        "nam_sinh": "1258",
+        "ngay_mat": "16/12",
+        "nam_mat": "1308",
+        "linh_vuc": "Lịch sử - Văn hóa",
+        "category_id": "historical_figure",
+        "image_slug": "phat-hoang-tran-nhan-tong-07-12-1258-16-12-1308",
+        "mo_ta": "Vị hoàng đế anh minh kiệt xuất của vương triều Trần, người đã trực tiếp lãnh đạo quân dân Đại Việt hai lần đánh tan quân xâm lược Nguyên Mông hùng mạnh (1285 và 1288). Sau khi đất nước thái bình, ngài nhường ngôi xuất gia tu hành trên núi Yên Tử, sáng lập Thiền phái Trúc Lâm Yên Tử mang đậm bản sắc nhập thế của dân tộc Việt Nam.",
+        "quote": "Xã tắc hai phen chồn ngựa đá, Non sông nghìn thuở vững âu vàng.",
+        "ngay_hien_thi": "07/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh Dương lịch của Phật hoàng Trần Nhân Tông (07/12/1258).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Nh%C3%A2n_T%C3%B4ng"
+            },
+            {
+                "type": "quote",
+                "name": "Hai câu thơ bất hủ vua Trần Nhân Tông đọc trước lăng Thái Tổ sau đại thắng Bạch Đằng (1288)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_08_12",
+        "ten": "Giáo sư, Bác sĩ Nguyễn Xuân Nguyên", sai Giáo sư, bác sĩ Nguyễn Xuân Nguyên sinh ngày 21/01/1907 tại xã Quảng Giao, huyện Quảng Xương, Thanh Hóa.
+        "ngay_sinh": "08/12",
+        "nam_sinh": "1907",
+        "ngay_mat": "20/03",
+        "nam_mat": "1975",
+        "linh_vuc": "Khoa học - Y tế",
+        "category_id": "culture",
+        "image_slug": "nguyen-xuan-nguyen-08-12-1907-20-03-1975",
+        "mo_ta": "Giáo sư, Bác sĩ nhãn khoa đầu ngành, người đặt nền móng cho ngành Nhãn khoa hiện đại Việt Nam và là Đại biểu Quốc hội khóa I. Khước từ cuộc sống nhung lụa để đi theo kháng chiến, trên cương vị Viện trưởng Viện Mắt Trung ương, ông đã nghiên cứu phương pháp mổ quặm và thanh toán bệnh mắt hột, trả lại ánh sáng cho hàng triệu người dân Việt Nam.",
+        "quote": "Giữ gìn đôi mắt sáng cho nhân dân cũng chính là giữ gìn nguồn sáng và sức sống cho công cuộc kiến thiết Tổ quốc.",
+        "ngay_hien_thi": "08/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Giáo sư, Bác sĩ Nguyễn Xuân Nguyên (08/12/1907).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Xu%C3%A2n_Nguy%C3%AAn"
+            },
+            {
+                "type": "quote",
+                "name": "Sự nghiệp y học phụng sự nhân dân của Giáo sư Nguyễn Xuân Nguyên",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_09_12",
+        "ten": "Chiến thắng Bình Giã trên Lộ 2 – Đập tan chiến thuật 'Thiết xa vận'",
+        "ngay_sinh": "09/12",
+        "nam_sinh": "1964",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-thang-binh-gia-09-12-1964",
+        "mo_ta": "Trận đánh then chốt làm rúng động chiến trường miền Nam trong Chiến dịch Bình Giã (Bà Rịa). Ngày 09/12/1964, trên tuyến Lộ 2, Trung đoàn 1 bộ đội chủ lực Miền đã vận dụng lối đánh hiệp đồng xuất sắc, tiêu diệt hoàn toàn Chi đoàn 3 xe thiết giáp M113 của địch chỉ sau hơn một giờ giao chiến, đánh bại chiến thuật 'Thiết xa vận' tối tân và đẩy chiến lược 'Chiến tranh đặc biệt' của Mỹ đến bờ vực phá sản.",
+        "quote": "Bằng ý chí quyết thắng và lối đánh gần thần tốc, bộ đội chủ lực Miền đã biến đoàn xe thiết giáp M113 thành đống sắt vụn trên Lộ 2 Bình Giã.",
+        "ngay_hien_thi": "09/12",
+        "hien_thi_nhan_dip": "Kỷ niệm trận thắng tiêu diệt thiết giáp địch trên Lộ 2 trong Chiến dịch Bình Giã (09/12/1964).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://danviet.vn/kham-pha-nghe-thuat-chien-tranh-trong-tran-binh-gia-77771004995-d742071.html"
+            },
+            {
+                "type": "quote",
+                "name": "Ý nghĩa lịch sử của Chiến dịch Bình Giã (Đông Xuân 1964 - 1965)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_10_12",
+        "ten": "Đỗ Nhuận",
+        "ngay_sinh": "10/12",
+        "nam_sinh": "1922",
+        "ngay_mat": "18/05",
+        "nam_mat": "1991",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "do-nhuan-10-12-1922-18-05-1991",
+        "mo_ta": "Cây đại thụ của nền âm nhạc Việt Nam hiện đại, Tổng thư ký đầu tiên của Hội Nhạc sĩ Việt Nam. Ông là tác giả của những hành khúc cách mạng bất hủ như 'Du kích sông Thao', 'Việt Nam quê hương tôi' và là người sáng tác vở nhạc kịch (opera) đầu tiên của nước nhà mang tên 'Cô Sao'.",
+        "quote": "Bạn ơi hãy đến quê hương chúng tôi. Ngắm mặt biển xanh xa tít chân trời. Nghe sóng vỗ dạt dào biển cả...",
+        "ngay_hien_thi": "10/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhạc sĩ Đỗ Nhuận (10/12/1922).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BB%97_Nhu%E1%BA%ADn"
+            },
+            {
+                "type": "quote",
+                "name": "Trích ca từ bài hát 'Việt Nam quê hương tôi'",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_11_12",
+        "ten": "Sơn Nam (Phạm Minh Tài)",
+        "ngay_sinh": "11/12",
+        "nam_sinh": "1926",
+        "ngay_mat": "13/08",
+        "nam_mat": "2008",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "son-nam-11-12-1926-13-08-2008",
+        "mo_ta": "Nhà văn, nhà nghiên cứu văn hóa nổi tiếng, được mệnh danh là 'Ông già Nam Bộ'. Với những trang viết mộc mạc, đậm chất phong trần như 'Hương rừng Cà Mau', ông đã lưu giữ trọn vẹn ký ức, phong tục và cái hồn hào sảng của vùng đất phương Nam thuở khẩn hoang.",
+        "quote": "Phong sương mấy độ qua đèo. Hỏi thăm khách lạ tấc lòng cố nhân.",
+        "ngay_hien_thi": "11/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà văn Sơn Nam – Phạm Minh Tài (11/12/1926).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/S%C6%A1n_Nam_(nh%C3%A0_v%C4%83n)"
+            },
+            {
+                "type": "quote",
+                "name": "Trích thơ tựa truyện 'Hương rừng Cà Mau'",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_12_12",
+        "ten": "Bế Văn Đàn",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1931",
+        "ngay_mat": "12/12",
+        "nam_mat": "1953",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "be-van-dan-1931-12-12-1953",
+        "mo_ta": "Anh hùng Lực lượng vũ trang nhân dân người dân tộc Tày. Trong chiến dịch Đông Xuân 1953 - 1954 tại Mường Pồn, khi hỏa lực quân ta bị tắc nghẽn, anh đã bất chấp mưa đạn, lấy chính thân mình làm giá súng trung liên cho đồng đội nã đạn vào kẻ thù cho đến lúc hy sinh.",
+        "quote": "Kẻ thù trước mặt, đồng chí bắn đi, đừng do dự!",
+        "ngay_hien_thi": "12/12",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày hy sinh của Anh hùng LLVTND Bế Văn Đàn (12/12/1953).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/B%E1%BA%BF_V%C4%83n_%C4%90%C3%A0n"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu lệnh cho đồng đội (Chu Văn Pù) xả súng vào giặc",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_13_12",
+        "ten": "Khởi nghĩa Hòn Khoai", //gắn với tên nhà giáo, nhà báo, Anh hùng lực lượng vũ trang Phan Ngọc Hiển. yêu cầu gemini tạo ảnh liên quan đến
+        "ngay_sinh": "13/12",
+        "nam_sinh": "1940",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_event",
+        "image_slug": "khoi-nghia-hon-khoai-13-12-1940",
+        "mo_ta": "Đỉnh cao chói lọi của cuộc Khởi nghĩa Nam Kỳ tại vùng cực Nam Tổ quốc. Đêm ngày 13/12/1940, dưới sự chỉ huy trực tiếp của nhà giáo, chiến sĩ cộng sản Phan Ngọc Hiển, lực lượng nghĩa quân đã mưu trí nổi dậy tiêu diệt tên chúa đảo người Pháp, thu toàn bộ vũ khí và làm chủ hoàn toàn đảo Hòn Khoai (Cà Mau), viết nên trang sử bất khuất nơi đầu sóng ngọn gió.",
+        "quote": "Chúng tôi là những người cộng sản, chúng tôi coi cái chết nhẹ tựa lông hồng vì sự nghiệp giải phóng dân tộc!",
+        "ngay_hien_thi": "13/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày bùng nổ cuộc Khởi nghĩa Hòn Khoai do liệt sĩ Phan Ngọc Hiển lãnh đạo (13/12/1940).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Phan_Ng%E1%BB%8Dc_Hi%E1%BB%83n/https://nhandan.vn/tu-hao-khoi-nghia-hon-khoai-post849944.html"
+            },
+            {
+                "type": "quote",
+                "name": "Khí phách của liệt sĩ Phan Ngọc Hiển và các chiến sĩ Khởi nghĩa Hòn Khoai",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_14_12",
+        "ten": "Nhạc sĩ Châu Kỳ (Phạm Châu Kỳ)",
+        "ngay_sinh": "14/12",
+        "nam_sinh": "1923",
+        "ngay_mat": "06/01",
+        "nam_mat": "2008",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "nhac-si-chau-ky-14-12-1923-06-01-2008",
+        "mo_ta": "Nhạc sĩ gạo cội của dòng nhạc trữ tình quê hương Việt Nam. Sinh ra tại đất thần kinh Huế, ông đã gửi trọn chất thơ man mác của sông Hương núi Ngự và nỗi niềm hoài hương vào hàng trăm ca khúc đi cùng năm tháng như 'Con đường xưa em đi', 'Đón xuân này nhớ xuân xưa', 'Huế xưa', 'Giọt lệ đài trang'.",
+        "quote": "Gặp mùa xuân năm nao, anh ước mơ ngày mai nắng ấm trên quê hương nối liền nhịp cầu...",
+        "ngay_hien_thi": "14/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của cố nhạc sĩ Châu Kỳ (14/12/1923).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ch%C3%A2u_K%E1%BB%B3"
+            },
+            {
+                "type": "quote",
+                "name": "Trích ca từ bài hát 'Đón xuân này nhớ xuân xưa' của nhạc sĩ Châu Kỳ",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_15_12",
+        "ten": "Tô Ngọc Vân",
+        "ngay_sinh": "15/12",
+        "nam_sinh": "1906",
+        "ngay_mat": "17/06",
+        "nam_mat": "1954",
+        "linh_vuc": "Văn hóa - Hội họa",
+        "category_id": "culture",
+        "image_slug": "to-ngoc-van-15-12-1906-17-06-1954",
+        "mo_ta": "Danh họa kiệt xuất, một trong bộ tứ huyền thoại 'Trí - Vân - Lân - Cẩn' của mỹ thuật Việt Nam. Ông không chỉ để lại những kiệt tác như 'Thiếu nữ bên hoa huệ', mà còn xách cọ ra chiến trường và anh dũng hy sinh trên đường tham gia Chiến dịch Điện Biên Phủ.",
+        "quote": "Nghệ thuật không chỉ để ngắm, nghệ thuật phải được hít thở cùng nhịp đập của Tổ quốc.",
+        "ngay_hien_thi": "15/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của danh họa, liệt sĩ Tô Ngọc Vân (15/12/1906).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%C3%B4_Ng%E1%BB%8Dc_V%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm nghệ thuật phục vụ kháng chiến",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_16_12",
+        "ten": "Nhạc sĩ Hoàng Giác",
+        "ngay_sinh": "16/12",
+        "nam_sinh": "1924",
+        "ngay_mat": "14/09",
+        "nam_mat": "2017",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "nhac-si-hoang-giac-16-12-1924-14-09-2017",
+        "mo_ta": "Nhạc sĩ, danh cầm guitar tài hoa thuộc thế hệ đầu tiên của nền tân nhạc Việt Nam. Với phong cách sáng tác thanh lịch, lãng mạn đậm chất hào hoa của người Hà Nội, ông đã để lại những nhạc phẩm tiền chiến bất hủ như 'Mơ hoa', 'Ngày về', 'Lỡ cung đàn', làm say đắm tâm hồn người yêu nhạc qua nhiều thế hệ.",
+        "quote": "Tung cánh chim tìm về tổ ấm. Nơi sống bao ngày giờ đằm thắm...",
+        "ngay_hien_thi": "16/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của cố nhạc sĩ Hoàng Giác (16/12/1924).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ho%C3%A0ng_Gi%C3%A1c"
+            },
+            {
+                "type": "quote",
+                "name": "Trích ca khúc bất hủ 'Ngày về' (1946) của nhạc sĩ Hoàng Giác",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_17_12",
+        "ten": "Nguyễn Từ Chi (Trần Từ)",
+        "ngay_sinh": "17/12",
+        "nam_sinh": "1925",
+        "ngay_mat": "15/10",
+        "nam_mat": "1995",
+        "linh_vuc": "Khoa học - Văn hóa",
+        "category_id": "culture",
+        "image_slug": "nguyen-tu-chi-17-12-1925-15-10-1995",
+        "mo_ta": "Nhà dân tộc học, nhà văn hóa học lỗi lạc bậc nhất của Việt Nam hiện đại, con trai bác sĩ Nguyễn Kinh Chi và là cháu nội chí sĩ Nguyễn Hiệt Chi. Dành hàng chục năm điền dã sống cùng đồng bào Mường và các dân tộc Tây Nguyên, ông đã để lại những công trình khảo cứu kinh điển như 'Cơ cấu tổ chức của làng Việt cổ truyền ở Bắc Bộ', 'Hoa văn Mường', được truy tặng Giải thưởng Hồ Chí Minh năm 2000.",
+        "quote": "Muốn hiểu thấu cái hồn cốt của văn hóa dân tộc, người nghiên cứu phải bước ra khỏi bàn giấy để cùng ăn, cùng ở và cùng thở nhịp sống của buôn làng.",
+        "ngay_hien_thi": "17/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà dân tộc học Nguyễn Từ Chi – Trần Từ (17/12/1925).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_T%E1%BB%AB_Chi"
+            },
+            {
+                "type": "quote",
+                "name": "Phương pháp điền dã dân tộc học tận hiến của học giả Nguyễn Từ Chi",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_18_12",
+        "ten": "Bế mạc Đại hội VI – Khởi xướng công cuộc Đổi mới đất nước",
+        "ngay_sinh": "18/12",
+        "nam_sinh": "1986",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "be-mac-dai-hoi-vi-18-12-1986",
+        "mo_ta": "Cột mốc lịch sử trọng đại mở ra kỷ nguyên Đổi mới và phát triển của Việt Nam hiện đại. Ngày 18/12/1986, Đại hội đại biểu toàn quốc lần thứ VI của Đảng chính thức bế mạc và thông qua Nghị quyết Đại hội với phương châm 'Nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật', xóa bỏ cơ chế tập trung quan liêu bao cấp và chuyển sang nền kinh tế hàng hóa nhiều thành phần.",
+        "quote": "Nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật, quyết tâm đổi mới toàn diện để đưa đất nước vượt qua khủng hoảng.",
+        "ngay_hien_thi": "18/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Đại hội VI chính thức thông qua Nghị quyết Đổi mới đất nước (18/12/1986).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BA%A1i_h%E1%BB%99i_%C4%90%E1%BA%A3ng_C%E1%BB%99ng_s%E1%BA%A3n_Vi%E1%BB%87t_Nam_l%E1%BA%A7n_th%E1%BB%A9_VI"
+            },
+            {
+                "type": "quote",
+                "name": "Phương châm lịch sử tại Văn kiện Đại hội đại biểu toàn quốc lần thứ VI (12/1986)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_19_12",
+        "ten": "Nguyễn Công Trứ",
+        "ngay_sinh": "19/12",
+        "nam_sinh": "1778",
+        "ngay_mat": "07/12",
+        "nam_mat": "1858",
+        "linh_vuc": "Kinh tế - Văn học",
+        "category_id": "culture",
+        "image_slug": "nguyen-cong-tru-19-12-1778-07-12-1858",
+        "mo_ta": "Uy Viễn Tướng Công triều Nguyễn, một con người văn võ song toàn, tài hoa và ngông nghênh bậc nhất lịch sử. Ông là một nhà thơ kiệt xuất, đồng thời là nhà kinh bang tế thế vĩ đại với công lao quai đê, lấn biển, lập ra hai huyện Kim Sơn và Tiền Hải.",
+        "quote": "Đã mang tiếng ở trong trời đất. Phải có danh gì với núi sông.",
+        "ngay_hien_thi": "19/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Uy Viễn Tướng công Nguyễn Công Trứ (19/12/1778).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_C%C3%B4ng_Tr%E1%BB%A9"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Đi thi tự vịnh'",
+                "url": "https://vi.wikisource.org/wiki/%C4%90i_thi_t%E1%BB%B1_v%E1%BB%8Bnh"
+            }
+        ]
+    },
+    {
+        "id": "ngay_20_12",
+        "ten": "Nguyễn Đình Thi",
+        "ngay_sinh": "20/12",
+        "nam_sinh": "1924",
+        "ngay_mat": "18/04",
+        "nam_mat": "2003",
+        "linh_vuc": "Văn hóa - Đa phương tiện",
+        "category_id": "culture",
+        "image_slug": "nguyen-dinh-thi-20-12-1924-18-04-2003",
+        "mo_ta": "Trí thức đa tài bậc nhất của Việt Nam hiện đại. Ông vừa là nhà văn (Xung kích), nhà thơ (Đất nước) lại vừa là nhạc sĩ tài hoa sáng tác bản hành khúc hào hùng 'Người Hà Nội' và tuyệt phẩm 'Diệt phát xít'. Suốt 50 năm, ông là Tổng thư ký Hội Nhà văn Việt Nam, có ảnh hưởng to lớn đến nền văn học nước nhà.",
+        "quote": "Súng nổ rung trời giận dữ. Người lên như nước vỡ bờ. Nước Việt Nam từ máu lửa. Rũ bùn đứng dậy sáng lòa.",
+        "ngay_hien_thi": "20/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà văn, nhà thơ, nhạc sĩ Nguyễn Đình Thi (20/12/1924).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_%C4%90%C3%ACnh_Thi"
+            },
+            {
+                "type": "quote",
+                "name": "Trích thi phẩm kiệt tác 'Đất nước'",
+                "url": "https://vi.wikisource.org/wiki/%C4%90%E1%BA%A5t_n%C6%B0%E1%BB%9Bc_(Nguy%E1%BB%85n_%C4%90%C3%ACnh_Thi)"
+            }
+        ]
+    },
+    {
+        "id": "ngay_21_12",
+        "ten": "Chiến thắng Cầu Giấy lần thứ nhất",
+        "ngay_sinh": "21/12",
+        "nam_sinh": "1873",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-thang-cau-giay-21-12-1873",
+        "mo_ta": "Trận phục kích vang dội làm nức lòng quân dân cả nước trong buổi đầu chống thực dân Pháp xâm lược Bắc Kỳ. Ngày 21/12/1873, dưới sự chỉ huy của Thống đốc quân vụ Hoàng Tá Viêm cùng đội quân Cờ Đen của Lưu Vĩnh Phúc, quân ta đã dụ địch ra khỏi thành Hà Nội và tiêu diệt gọn toán quân Pháp cùng tên chỉ huy hiếu chiến Francis Garnier tại Cầu Giấy, làm phá sản âm mưu đánh chiếm Bắc Kỳ lần thứ nhất của Pháp.",
+        "quote": "Trận Cầu Giấy chém đầu tướng giặc Garnier đã giáng đòn sấm sét vào tham vọng bành trướng của thực dân Pháp tại Bắc Kỳ.",
+        "ngay_hien_thi": "21/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến thắng Cầu Giấy lần thứ nhất tiêu diệt tướng Pháp Francis Garnier (21/12/1873).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_C%E1%BA%A7u_Gi%E1%BA%A5y_(1873)"
+            },
+            {
+                "type": "quote",
+                "name": "Ý nghĩa lịch sử của Chiến thắng Cầu Giấy năm 1873",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_22_12",
+        "ten": "Mạc Đăng Dung (Mạc Thái Tổ)",
+        "ngay_sinh": "22/12",
+        "nam_sinh": "1483",
+        "ngay_mat": "22/08",
+        "nam_mat": "1541",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "mac-dang-dung-22-12-1483-22-08-1541",
+        "mo_ta": "Hoàng đế sáng lập triều Mạc. Vốn xuất thân từ nghề chài lưới, nhờ tài võ nghệ vô song đỗ Đô lực sĩ, ngài đã dẹp yên các thế lực cát cứ, phế truất triều Lê Sơ đang suy tàn để lập ra nhà Mạc, tạm thời khôi phục lại trật tự và sự ổn định cho đất nước.",
+        "quote": "Vận nước đã suy, vua Lê bạc nhược. Nay ta thay mệnh trời, lập lại kỷ cương, mong bá tánh được hưởng thái bình.",
+        "ngay_hien_thi": "22/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Hoàng đế Mạc Thái Tổ – Mạc Đăng Dung (22/12/1483).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/M%E1%BA%A1c_%C4%90%C4%83ng_Dung"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng thay triều hoán đại lập ra triều Mạc",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_23_12",
+        "ten": "Mở màn Chiến dịch Trung Lào (Đông Xuân 1953 - 1954)",
+        "ngay_sinh": "23/12",
+        "nam_sinh": "1953",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-dich-trung-lao-23-12-1953",
+        "mo_ta": "Đòn tiến công chiến lược sắc bén trong cuộc Tiến công chiến lược Đông Xuân 1953 - 1954. Đêm 22 rạng sáng ngày 23/12/1953, liên quân Lào - Việt bất ngờ nổ súng mở màn Chiến dịch Trung Lào, đập tan hệ thống phòng ngự của Pháp trên Đường 12, giải phóng thị xã Thà Khẹt và cắt đôi chiến trường Đông Dương, buộc tướng Navarre phải xé lẻ khối cơ động chiến lược trước thềm Chiến dịch Điện Biên Phủ.",
+        "quote": "Đánh vào những hướng địch sơ hở nhưng hiểm yếu, buộc khối chủ lực cơ động của thực dân Pháp phải phân tán khắp chiến trường Đông Dương.",
+        "ngay_hien_thi": "23/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày mở màn Chiến dịch Trung Lào trong Đông Xuân 1953 - 1954 (23/12/1953).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_Trung_L%C3%A0o"
+            },
+            {
+                "type": "quote",
+                "name": "Phương châm tác chiến chiến lược Đông Xuân 1953 - 1954 của Bộ Chính trị",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_24_12",
+        "ten": "Biệt động Sài Gòn đánh sập Cư xá sĩ quan Mỹ Brinks",
+        "ngay_sinh": "24/12",
+        "nam_sinh": "1964",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "cu-xa-brinks-24-12-1964",
+        "mo_ta": "Một trong những trận đánh táo bạo và chấn động nhất của lực lượng Biệt động Sài Gòn. Chiều tối ngày 24/12/1964, đúng vào đêm Giáng sinh, các chiến sĩ biệt động do Nguyễn Thanh Xuân (Bảy Bê) chỉ huy đã hóa trang thành sĩ quan ngụy, điều khiển ô tô chứa 200kg thuốc nổ TNT vào thẳng tầng hầm Cư xá Brinks ngay giữa trung tâm Sài Gòn. Tiếng nổ long trời đã làm sập một phần tòa nhà 6 tầng, tiêu diệt và làm bị thương hàng trăm sĩ quan Mỹ.",
+        "quote": "Đánh ngay giữa trung tâm sào huyệt kẻ thù, làm rúng động từ Sài Gòn tới tận Lầu Năm Góc.",
+        "ngay_hien_thi": "24/12",
+        "hien_thi_nhan_dip": "Kỷ niệm chiến công Biệt động Sài Gòn đánh sập Cư xá sĩ quan Mỹ Brinks (24/12/1964).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%E1%BB%A5_%C4%91%C3%A1nh_bom_c%C6%B0_x%C3%A1_Brinks"
+            },
+            {
+                "type": "quote",
+                "name": "Chiến công huyền thoại của Đội 5 Biệt động Sài Gòn - Gia Định",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_25_12",
+        "ten": "Đặng Thai Mai",
+        "ngay_sinh": "25/12",
+        "nam_sinh": "1902",
+        "ngay_mat": "25/09",
+        "nam_mat": "1984",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "culture",
+        "image_slug": "dang-thai-mai-25-12-1902-25-09-1984",
+        "mo_ta": "Giáo sư, nhà phê bình văn học và nhà văn hóa lỗi lạc của Việt Nam hiện đại. Vốn xuất thân từ gia đình khoa bảng ái quốc, ông là người thầy mẫu mực, Viện trưởng đầu tiên của Viện Văn học, đã để lại di sản nghiên cứu đồ sộ về văn học sử và chủ nghĩa nhân văn trong thi ca dân tộc.",
+        "quote": "Văn chương là tiếng nói của lương tri. Kẻ sĩ cầm bút là cầm một ngọn đuốc soi đường cho thế hệ mai sau.",
+        "ngay_hien_thi": "25/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Giáo sư, học giả Đặng Thai Mai (25/12/1902).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%E1%BA%B7ng_Thai_Mai"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm văn chương và đạo đức của Giáo sư Đặng Thai Mai",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_26_12",
+        "ten": "Phan Bội Châu",
+        "ngay_sinh": "26/12",
+        "nam_sinh": "1867",
+        "ngay_mat": "29/10",
+        "nam_mat": "1940",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "phan-boi-chau-26-12-1867-29-10-1940",
+        "mo_ta": "Bậc chí sĩ yêu nước vĩ đại, ngọn cờ đầu của phong trào giải phóng dân tộc Việt Nam đầu thế kỷ 20. Là người sáng lập phong trào Đông Du, ông bôn ba khắp hải ngoại tìm đường cứu nước, dùng thơ văn đầy máu và nước mắt để thức tỉnh hồn nước, gọi thức hồn dân.",
+        "quote": "Muốn làm nên sự nghiệp lớn, trước hết quốc dân phải có tinh thần tự lực tự cường.",
+        "ngay_hien_thi": "26/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của chí sĩ yêu nước Phan Bội Châu (26/12/1867).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Phan_B%E1%BB%99i_Ch%C3%A2u"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng tự cường trong các tác phẩm kêu gọi cứu nước",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_27_12",
+        "ten": "Nhạc sĩ Trần Hoàn (Nguyễn Tăng Hích)",
+        "ngay_sinh": "27/12",
+        "nam_sinh": "1928",
+        "ngay_mat": "23/11",
+        "nam_mat": "2003",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "nhac-si-tran-hoan-27-12-1928-23-11-2003",
+        "mo_ta": "Cây đại thụ của nền âm nhạc cách mạng Việt Nam, nguyên Bộ trưởng Bộ Văn hóa - Thông tin, người được truy tặng Giải thưởng Hồ Chí Minh năm 2000. Từ bản tình ca kháng chiến 'Sơn nữ ca' đến những tuyệt phẩm thấm đẫm chất dân ca ngọt ngào như 'Lời Bác dặn trước lúc đi xa', 'Giữa Mạc Tư Khoa nghe câu hò Nghệ Tĩnh', 'Một mùa xuân nho nhỏ', âm nhạc của ông đã chạm tới trái tim hàng triệu người Việt.",
+        "quote": "Một mùa xuân nho nhỏ, lặng lẽ dâng cho đời, dù là tuổi hai mươi, dù là khi tóc bạc...",
+        "ngay_hien_thi": "27/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của cố nhạc sĩ, Bộ trưởng Trần Hoàn (27/12/1928).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Ho%C3%A0n"
+            },
+            {
+                "type": "quote",
+                "name": "Trích ca khúc 'Một mùa xuân nho nhỏ' (Nhạc: Trần Hoàn - Thơ: Thanh Hải)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_28_12",
+        "ten": "Thiếu tướng, GS.TSKH Lê Thế Trung",
+        "ngay_sinh": "28/12",
+        "nam_sinh": "1928",
+        "ngay_mat": "23/07",
+        "nam_mat": "2018",
+        "linh_vuc": "Khoa học - Y tế",
+        "category_id": "culture",
+        "image_slug": "le-the-trung-28-12-1928-23-07-2018",
+        "mo_ta": "Thiếu tướng, Giáo sư, Tiến sĩ Khoa học, Thầy thuốc Nhân dân, nhà khoa học hiếm hoi được phong tặng cả hai danh hiệu Anh hùng Lực lượng vũ trang nhân dân và Anh hùng Lao động. Nguyên Giám đốc Học viện Quân y và Viện trưởng sáng lập Viện Bỏng Quốc gia, ông là người đặt nền móng cho chuyên ngành Bỏng học và Ghép tạng hiện đại tại Việt Nam.",
+        "quote": "Người thầy thuốc quân y phải vừa cầm chắc tay dao cứu chữa thương binh nơi chiến trường, vừa không ngừng vươn lên làm chủ những đỉnh cao khoa học y học thế giới.",
+        "ngay_hien_thi": "28/12",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Thiếu tướng, GS.TSKH Lê Thế Trung (28/12/1928).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Th%E1%BA%BF_Trung"
+            },
+            {
+                "type": "quote",
+                "name": "Sự nghiệp y học quân sự và ghép tạng của Thiếu tướng, Giáo sư Lê Thế Trung",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_29_12",
+        "ten": "Cù Chính Lan",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1930",
+        "ngay_mat": "29/12",
+        "nam_mat": "1951",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "cu-chinh-lan-1930-29-12-1951",
+        "mo_ta": "Anh hùng Lực lượng vũ trang nhân dân lừng danh trong Chiến dịch Hòa Bình. Sau kỳ tích một mình nhảy lên thành xe tăng Pháp tại Giang Mô dùng lựu đạn tiêu diệt gọn kíp lái địch ngày 13/12/1951, đến trận tiến công cứ điểm Cô Tô ngày 29/12/1951, dù hai lần bị thương nặng, anh vẫn kiên cường mở hết 9 hàng rào dây thép gai và chỉ huy đồng đội đánh sập lô cốt địch cho đến hơi thở cuối cùng.",
+        "quote": "Còn một hơi thở cũng quyết mở đường cho đồng đội xung phong tiêu diệt đồn thù!",
+        "ngay_hien_thi": "29/12",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày hy sinh của Anh hùng LLVTND Cù Chính Lan (29/12/1951).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/C%C3%B9_Ch%C3%ADnh_Lan"
+            },
+            {
+                "type": "quote",
+                "name": "Tấm gương chiến đấu quả cảm của Anh hùng Cù Chính Lan trong Chiến dịch Hòa Bình",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_30_12",
+        "ten": "Thắng lợi hoàn toàn Chiến dịch 'Điện Biên Phủ trên không'",
+        "ngay_sinh": "30/12",
+        "nam_sinh": "1972",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "dien-bien-phu-tren-khong-30-12-1972",
+        "mo_ta": "Đỉnh cao chói lọi của cuộc chiến tranh nhân dân bảo vệ miền Bắc xã hội chủ nghĩa. Sau 12 ngày đêm chiến đấu kiên cường đập tan cuộc tập kích đường không chiến lược Linebacker II của Mỹ, bắn rơi 81 máy bay (trong đó có 34 siêu pháo đài bay B-52), đúng 7 giờ sáng ngày 30/12/1972, Tổng thống Mỹ Nixon buộc phải tuyên bố chấm dứt hoàn toàn việc ném bom từ vĩ tuyến 20 trở ra và đề nghị nối lại đàm phán ký kết Hiệp định Paris.",
+        "quote": "Bầu trời Hà Nội rực lửa tên lửa Rồng Thăng Long đã bẻ gãy uy thế không lực Hoa Kỳ, buộc đối phương phải đặt bút ký Hiệp định Paris.",
+        "ngay_hien_thi": "30/12",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày thắng lợi hoàn toàn Chiến dịch 'Điện Biên Phủ trên không' (30/12/1972).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_Linebacker_II"
+            },
+            {
+                "type": "quote",
+                "name": "Ý nghĩa lịch sử của kỳ tích 12 ngày đêm 'Hà Nội - Điện Biên Phủ trên không' (12/1972)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_31_12",
+        "ten": "Hoàng Việt (Lê Chí Trực)",
+        "ngay_sinh": "28/02",
+        "nam_sinh": "1928",
+        "ngay_mat": "31/12",
+        "nam_mat": "1967",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "hoang-viet-28-02-1928-31-12-1967",
+        "mo_ta": "Nhạc sĩ tài hoa, chiến sĩ anh hùng của nền âm nhạc Việt Nam. Những giai điệu trong 'Lên ngàn', 'Nhạc rừng' và đặc biệt là tuyệt phẩm 'Tình ca' của ông đã hóa thành dòng sông dạt dào tình yêu quê hương, đất nước. Ông hy sinh anh dũng ngay bên bờ kênh Cái Thia trong lúc đang sáng tác bản giao hưởng dang dở.",
+        "quote": "Khi hát lên tiếng ca gửi về người yêu phương xa. Ta át tiếng gió mưa trút đổ đầu non.",
+        "ngay_hien_thi": "31/12",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày hy sinh của nhạc sĩ Hoàng Việt – Lê Chí Trực (31/12/1967).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ho%C3%A0ng_Vi%E1%BB%87t_(nh%E1%BA%A1c_s%C4%A9)"
+            },
+            {
+                "type": "quote",
+                "name": "Trích ca từ bài hát 'Tình ca'",
+                "url": null
+            }
+        ]
+    }
+]

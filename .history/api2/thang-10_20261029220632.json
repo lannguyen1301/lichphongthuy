@@ -1,0 +1,807 @@
+[
+    {
+        "id": "ngay_01_10",
+        "ten": "Lê Trọng Tấn",
+        "ngay_sinh": "01/10",
+        "nam_sinh": "1914",
+        "ngay_mat": "05/12",
+        "nam_mat": "1986",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "le-trong-tan-01-10-1914-05-12-1986",
+        "mo_ta": "Đại tướng Quân đội nhân dân Việt Nam, người được Đại tướng Võ Nguyên Giáp mệnh danh là 'Zhukov của Việt Nam'. Ông là vị tư lệnh của nhiều chiến dịch lớn, trực tiếp chỉ huy cánh quân phía Đông thần tốc tiến vào Dinh Độc Lập mùa xuân năm 1975.",
+        "quote": "Tướng sĩ một lòng phụ tử, hòa nước sông chén rượu ngọt ngào.",
+        "ngay_hien_thi": "01/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Đại tướng Lê Trọng Tấn (01/10/1914).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Tr%E1%BB%8Dng_T%E1%BA%A5n"
+            },
+            {
+                "type": "quote",
+                "name": "Triết lý cầm quân (Trích Hịch tướng sĩ, áp dụng trong quân đội nhân dân)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_02_10",
+        "ten": "Triệu Thị Trinh (Bà Triệu)",
+        "ngay_sinh": "02/10",
+        "nam_sinh": "225",
+        "ngay_mat": "Không rõ",
+        "nam_mat": "248",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "ba-trieu",
+        "mo_ta": "Nữ anh hùng dân tộc lừng danh thế kỷ thứ 3. Căm thù ách đô hộ của nhà Ngô tàn bạo, bà cùng anh trai là Triệu Quốc Đạt dựng cờ khởi nghĩa. Hình ảnh người nữ tướng mặc giáp vàng, cưỡi voi trắng đánh giặc đã trở thành biểu tượng bất diệt cho khí phách oai hùng của phụ nữ Việt Nam.",
+        "quote": "Tôi muốn cưỡi cơn gió mạnh, đạp luồng sóng dữ, chém cá kình ở biển Đông, đánh đuổi quân Ngô, giành lại giang sơn, cởi ách nô lệ, chứ không chịu khom lưng làm tì thiếp cho người.",
+        "ngay_hien_thi": "02/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Triệu Thị Trinh (Bà Triệu).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/B%C3%A0_Tri%E1%BB%87u"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói bất hủ lưu truyền trong sử sách dân tộc",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_03_10",
+        "ten": "Chủ tịch Hồ Chí Minh ký Sắc lệnh xóa bỏ hoàn toàn Phủ Toàn quyền Đông Dương",
+        "ngay_sinh": "03/10",
+        "nam_sinh": "1945",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "sac-lenh-xoa-bo-phu-toan-quyen-dong-duong-03-10-1945",
+        "mo_ta": "Quyết sách pháp lý đanh thép khẳng định chủ quyền độc lập tuyệt đối của nhà nước Việt Nam Dân chủ Cộng hòa non trẻ. Ngày 03/10/1945, Chủ tịch Hồ Chí Minh chính thức ký Sắc lệnh số 41-SL bãi bỏ tất cả các cơ quan trực thuộc Phủ Toàn quyền Đông Dương – bộ máy cai trị tối cao của thực dân Pháp suốt hơn nửa thế kỷ, đồng thời chuyển giao toàn bộ tài sản, công sở và quyền quản lý về các bộ của Chính phủ Việt Nam độc lập.",
+        "quote": "Bãi bỏ hẳn các cơ quan thuộc Phủ Toàn quyền Đông Dương và thu hồi toàn bộ chủ quyền quản lý quốc gia về tay Chính phủ Việt Nam Dân chủ Cộng hòa.",
+        "ngay_hien_thi": "03/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Chủ tịch Hồ Chí Minh ký Sắc lệnh 41-SL xóa bỏ hoàn toàn Phủ Toàn quyền Đông Dương (03/10/1945).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikisource tiếng Việt – Toàn văn Sắc lệnh số 41-SL (03/10/1945)",
+                "url": "https://vi.wikisource.org/wiki/S%E1%BA%AFc_l%E1%BB%87nh_41-SL_(1945)"
+            },
+            {
+                "type": "quote",
+                "name": "Nội dung cốt lõi của Sắc lệnh 41-SL xóa bỏ bộ máy cai trị thực dân Pháp tại Việt Nam",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_04_10",
+        "ten": "Tố Hữu (Nguyễn Kim Thành)",
+        "ngay_sinh": "04/10",
+        "nam_sinh": "1920",
+        "ngay_mat": "09/12",
+        "nam_mat": "2002",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "to-huu-04-10-1920-09-12-2002",
+        "mo_ta": "Lá cờ đầu của nền thơ ca cách mạng Việt Nam. Thơ của ông mang âm hưởng sử thi hào hùng, gắn bó máu thịt với những chặng đường lịch sử gian khổ mà oanh liệt của dân tộc. Những vần thơ 'Từ ấy', 'Việt Bắc' đã trở thành hành trang tinh thần của nhiều thế hệ người Việt.",
+        "quote": "Từ ấy trong tôi bừng nắng hạ. Mặt trời chân lý chói qua tim.",
+        "ngay_hien_thi": "04/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà thơ Tố Hữu – Nguyễn Kim Thành (04/10/1920).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%E1%BB%91_H%E1%BB%AFu"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Từ ấy' (1938)",
+                "url": "https://vi.wikisource.org/wiki/T%E1%BB%AB_%E1%BA%A5y"
+            }
+        ]
+    },
+    {
+        "id": "ngay_05_10",
+        "ten": "Trần Quốc Tuấn (Trần Hưng Đạo)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1228",
+        "ngay_mat": "05/10",
+        "nam_mat": "1300",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "tran-hung-dao-1228-05-10-1300",
+        "mo_ta": "Thiên tài quân sự vĩ đại bậc nhất lịch sử Việt Nam, Quốc công Tiết chế thống lĩnh toàn quân ba lần đánh tan dã tâm xâm lược của đế quốc Nguyên Mông. Không chỉ để lại kiệt tác 'Hịch tướng sĩ' và 'Binh thư yếu lược', tư tưởng lấy dân làm gốc 'Khoan thư sức dân để làm kế sâu rễ bền gốc' của ngài trước lúc lâm chung ngày 05/10/1300 đã trở thành kim chỉ nam bất diệt cho nghệ thuật giữ nước của dân tộc.",
+        "quote": "Bệ hạ muốn hàng, xin hãy chém đầu thần trước đã.",
+        "ngay_hien_thi": "05/10",
+        "hien_thi_nhan_dip": "Tưởng nhớ Hưng Đạo Đại Vương Trần Quốc Tuấn (05/10/1300).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_H%C6%B0ng_%C4%90%E1%BA%A1o"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói khảng khái trả lời vua Trần Nhân Tông (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_06_10",
+        "ten": "Giải phóng thị xã Hà Đông – Mở cửa ngõ tiếp quản Thủ đô Hà Nội",
+        "ngay_sinh": "06/10",
+        "nam_sinh": "1954",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "giai-phong-thi-xa-ha-dong-06-10-1954",
+        "mo_ta": "Cột mốc lịch sử mở toang cửa ngõ phía Tây Nam tiến vào tiếp quản Thủ đô Hà Nội sau Hiệp định Genève. Ngày 06/10/1954, khi những toán quân Pháp cuối cùng rút khỏi thị xã Hà Đông, các đơn vị bộ đội chủ lực của ta đã trang nghiêm tiến vào tiếp quản thị xã trong rừng cờ hoa đón chào của hàng vạn nhân dân, tạo bàn đạp trực tiếp cho ngày hội lớn Giải phóng Thủ đô.",
+        "quote": "Quân ta tiến về đâu, cờ đỏ sao vàng tung bay rợp trời đến đó, báo hiệu ngày hội non sông toàn thắng đã cận kề.",
+        "ngay_hien_thi": "06/10",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày giải phóng thị xã Hà Đông, mở đầu tiến trình tiếp quản Thủ đô Hà Nội (06/10/1954).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ti%E1%BA%BFp_qu%E1%BA%A3n_Th%E1%BB%A7_%C4%91%C3%B4_H%C3%A0_N%E1%BB%99i"
+            },
+            {
+                "type": "quote",
+                "name": "Khí thế tiếp quản các vùng phụ cận cửa ngõ Thủ đô tháng 10/1954",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_07_10",
+        "ten": "Mở màn Chiến dịch Việt Bắc Thu – Đông",
+        "ngay_sinh": "07/10",
+        "nam_sinh": "1947",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "mo-man-chien-dich-viet-bac-thu-dong-07-10-1947",
+        "mo_ta": "Chiến dịch phản công quy mô lớn đầu tiên của Quân đội nhân dân Việt Nam trong cuộc kháng chiến chống thực dân Pháp. Ngày 07/10/1947, khi quân Pháp huy động lực lượng tinh nhuệ mở cuộc hành quân Léa nhảy dù xuống Bắc Kạn hòng chụp bắt cơ quan đầu não kháng chiến, quân và dân ta đã lập tức giương thế trận thiên la địa võng, bẻ gãy hoàn toàn chiến lược 'đánh nhanh thắng nhanh' của địch và bảo vệ vững chắc 'Thủ đô gió ngàn' Việt Bắc.",
+        "quote": "Phải phá tan cuộc tấn công mùa đông của giặc Pháp!",
+        "ngay_hien_thi": "07/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày mở màn Chiến dịch Việt Bắc Thu – Đông lịch sử (07/10/1947).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_Vi%E1%BB%87t_B%E1%BA%AFc_Thu_-_%C4%90%C3%B4ng_1947"
+            },
+            {
+                "type": "quote",
+                "name": "Chỉ thị lịch sử của Ban Thường vụ Trung ương Đảng ngày 15/10/1947",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_08_10",
+        "ten": "Tiếp quản ga Hà Nội",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Bộ đội Cụ Hồ chính thức tiếp quản ga Hà Nội, mở đầu quá trình giải phóng thủ đô (1954).",
+        "quote": "",
+        "ngay_hien_thi": "08/10",
+        "hien_thi_nhan_dip": "Kỷ niệm Tiếp quản ga Hà Nội.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_09_10",
+        "ten": "Quân Pháp rút hết qua cầu Long Biên – Hoàn toàn làm chủ nội thành Hà Nội",
+        "ngay_sinh": "09/10",
+        "nam_sinh": "1954",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "quan-phap-rut-qua-cau-long-bien-lam-chu-ha-noi-09-10-1954",
+        "mo_ta": "Khoảnh khắc lịch sử chấm dứt vĩnh viễn sự hiện diện của quân đội thực dân Pháp tại Thủ đô Hà Nội. Ngày 09/10/1954, các đơn vị Quân đội nhân dân Việt Nam lần lượt tiếp quản 4 khu vực cuối cùng trong nội thành cùng Phủ Toàn quyền, Ga Hàng Cỏ và Bờ Hồ. Đúng 16 giờ 00 phút chiều ngày 09/10/1954, những người lính Pháp cuối cùng rút qua cầu Long Biên dưới sự giám sát chặt chẽ của ta; quân và dân ta hoàn toàn làm chủ Thủ đô, sẵn sàng cho ngày hội lớn 10/10.",
+        "quote": "Đúng 16 giờ ngày 9 tháng 10 năm 1954, bóng dáng tên lính thực dân cuối cùng khuất khỏi cầu Long Biên, trả lại bầu trời tự do trọn vẹn cho Thăng Long – Hà Nội.",
+        "ngay_hien_thi": "09/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày quân đội Pháp rút hết qua cầu Long Biên, quân và dân ta hoàn toàn làm chủ nội thành Hà Nội (09/10/1954).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ti%E1%BA%BFp_qu%E1%BA%A3n_Th%E1%BB%A7_%C4%91%C3%B4_H%C3%A0_N%E1%BB%99i"
+            },
+            {
+                "type": "quote",
+                "name": "Biên niên sử sự kiện Tiếp quản Thủ đô Hà Nội tháng 10/1954",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_10_10",
+        "ten": "Lê Đức Thọ (Phan Đình Khải)",
+        "ngay_sinh": "10/10",
+        "nam_sinh": "1911",
+        "ngay_mat": "13/10",
+        "nam_mat": "1990",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_figure",
+        "image_slug": "le-duc-tho-10-10-1911-13-10-1990",
+        "mo_ta": "Nhà chính trị, nhà ngoại giao xuất chúng của cách mạng Việt Nam. Là Cố vấn đặc biệt tại Hội nghị Paris, ông đã dùng bản lĩnh thép buộc Mỹ phải ký hiệp định rút quân. Ông là người Việt Nam duy nhất từ chối nhận giải Nobel Hòa bình để bảo vệ danh dự và lợi ích quốc gia.",
+        "quote": "Hòa bình chưa thực sự lập lại trên đất nước tôi, vì thế tôi không thể nhận giải thưởng này.",
+        "ngay_hien_thi": "10/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà ngoại giao kiệt xuất Lê Đức Thọ (10/10/1911).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_%C4%90%E1%BB%A9c_Th%E1%BB%8D"
+            },
+            {
+                "type": "quote",
+                "name": "Tuyên bố lịch sử khi khước từ giải Nobel Hòa bình năm 1973",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_11_10",
+        "ten": "Quang Dũng (Bùi Đình Diệm)",
+        "ngay_sinh": "11/10",
+        "nam_sinh": "1921",
+        "ngay_mat": "13/10",
+        "nam_mat": "1988",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "quang-dung-11-10-1921-13-10-1988",
+        "mo_ta": "Nhà thơ, người lính hào hoa của trung đoàn Tây Tiến. Bằng ngòi bút tài hoa, lãng mạn và bi tráng, ông đã khắc họa bức tượng đài bất tử về người lính vệ quốc quân trong bài thơ 'Tây Tiến', lưu giữ trọn vẹn hào khí và nét phong trần của một thời đạn bom khói lửa.",
+        "quote": "Tây Tiến đoàn binh không mọc tóc. Quân xanh màu lá dữ oai hùm. Mắt trừng gửi mộng qua biên giới. Đêm mơ Hà Nội dáng kiều thơm.",
+        "ngay_hien_thi": "11/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà thơ Quang Dũng – Bùi Đình Diệm (11/10/1921).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Quang_D%C5%A9ng"
+            },
+            {
+                "type": "quote",
+                "name": "Trích thi phẩm kiệt tác 'Tây Tiến'",
+                "url": "https://vi.wikisource.org/wiki/T%C3%A2y_Ti%E1%BA%BFn"
+            }
+        ]
+    },
+    {
+        "id": "ngay_12_10",
+        "ten": "Trần Thánh Tông (Trần Hoảng)",
+        "ngay_sinh": "12/10",
+        "nam_sinh": "1240",
+        "ngay_mat": "03/07",
+        "nam_mat": "1290",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "tran-thanh-tong-12-10-1240-03-07-1290",
+        "mo_ta": "Vị hoàng đế thứ hai của vương triều Trần, một minh quân văn võ song toàn. Cùng với Trần Hưng Đạo và Thượng hoàng Trần Thái Tông, ngài đã trực tiếp lãnh đạo quân dân Đại Việt đập tan hai cuộc chiến tranh xâm lược tàn bạo của đế quốc Nguyên Mông, giữ vững giang sơn gấm vóc.",
+        "quote": "Nước có lúc hưng vong, nhưng chí của con dân Đại Việt thì ngàn năm không đổi.",
+        "ngay_hien_thi": "12/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Hoàng đế Trần Thánh Tông (12/10/1240).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Th%C3%A1nh_T%C3%B4ng"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng tự cường bảo vệ đất nước (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_13_10",
+        "ten": "Vũ Trọng Phụng",
+        "ngay_sinh": "20/10",
+        "nam_sinh": "1912",
+        "ngay_mat": "13/10",
+        "nam_mat": "1939",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "vu-trong-phung",
+        "mo_ta": "Nhà văn, nhà báo trào phúng kiệt xuất, được mệnh danh là 'Ông vua phóng sự đất Bắc'. Dẫu mang bạo bệnh và ra đi khi mới 27 tuổi, ngòi bút sắc lẹm của ông đã để lại những kiệt tác như 'Số đỏ', 'Giông tố', vạch trần tận cùng bản chất lố lăng, thối nát của xã hội thực dân nửa phong kiến.",
+        "quote": "Sự thật dẫu có tàn nhẫn, xấu xa đến đâu, nhà văn cũng không được phép che đậy, phải phơi bày nó ra ánh sáng.",
+        "ngay_hien_thi": "13/10",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Vũ Trọng Phụng.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C5%A9_Tr%E1%BB%8Dng_Ph%E1%BB%A5ng"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm văn chương hiện thực trào phúng của Vũ Trọng Phụng",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_14_10",
+        "ten": "Nguyễn Văn Thạc",
+        "ngay_sinh": "14/10",
+        "nam_sinh": "1952",
+        "ngay_mat": "30/07",
+        "nam_mat": "1972",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-van-thac-14-10-1952-30-07-1972",
+        "mo_ta": "Chàng sinh viên ưu tú của Đại học Tổng hợp Hà Nội, một liệt sĩ anh hùng. Xếp bút nghiên lên đường ra mặt trận Quảng Trị, anh đã hy sinh khi chưa tròn 20 tuổi. Cuốn nhật ký 'Mãi mãi tuổi hai mươi' của anh để lại là một bản tráng ca tuyệt đẹp về lý tưởng sống của thế hệ trẻ Việt Nam.",
+        "quote": "Chào hậu phương. Chào gia đình và người tôi yêu. Đêm nay tôi đi. Nhất định có ngày trở về.",
+        "ngay_hien_thi": "14/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của liệt sĩ Nguyễn Văn Thạc (14/10/1952).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_V%C4%83n_Th%E1%BA%A1c"
+            },
+            {
+                "type": "quote",
+                "name": "Trích dòng nhật ký lên đường ra trận ('Mãi mãi tuổi hai mươi')",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_15_10",
+        "ten": "Hồ Hảo Hớn",
+        "ngay_sinh": "15/10",
+        "nam_sinh": "1926",
+        "ngay_mat": "11/11",
+        // ông bị bắt vào ngày "09/10" và qua đời vào ngày không rõ ràng, do có hẹn gặp vợ vào 11/11 nên gia đình quyết định chọn ngày 11/11 la
+        "nam_mat": "1967",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "ho-hao-hon-15-10-1926-09-10-1967",
+        "mo_ta": "Anh hùng Lực lượng vũ trang nhân dân, nhà trí thức cách mạng kiên trung quê hương Bến Tre. Trên cương vị Bí thư Khu đoàn kiêm Ủy viên Thường vụ Khu ủy Sài Gòn – Gia Định, ông là ngọn cờ đầu thổi bùng phong trào đấu tranh chính trị của học sinh, sinh viên và trí thức đô thị miền Nam chống Mỹ. Bị địch bắt và tra tấn đến hơi thở cuối cùng, ông vẫn giữ trọn khí tiết bất khuất của người cộng sản.",
+        "quote": "Dẫu thân xác bị đọa đày nơi ngục tối, ngọn lửa yêu nước trong tim tuổi trẻ Sài Gòn – Gia Định sẽ không bao giờ tắt.",
+        "ngay_hien_thi": "15/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Anh hùng LLVTND, liệt sĩ Hồ Hảo Hớn (15/10/1926).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/H%E1%BB%93_H%E1%BA%A3o_H%E1%BB%9Bn"
+            },
+            {
+                "type": "quote",
+                "name": "Khí tiết kiên trung của Bí thư Khu đoàn Sài Gòn – Gia Định Hồ Hảo Hớn",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_16_10",
+        "ten": "Truyền thống Kiểm tra Đảng",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Ngày truyền thống của ngành Kiểm tra Đảng.",
+        "quote": "",
+        "ngay_hien_thi": "16/10",
+        "hien_thi_nhan_dip": "Kỷ niệm Truyền thống Kiểm tra Đảng.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_17_10",
+        "ten": "Lý Bí (Lý Nam Đế)",
+        "ngay_sinh": "17/10",
+        "nam_sinh": "503",
+        "ngay_mat": "13/04",
+        "nam_mat": "548",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_figure",
+        "image_slug": "ly-nam-de-17-10-503-13-04-548",
+        "mo_ta": "Vị hoàng đế đầu tiên của nước Vạn Xuân. Căm phẫn ách thống trị tàn bạo của nhà Lương, ông đã phất cờ khởi nghĩa, đánh đuổi giặc ngoại xâm và tự xưng là Nam Đế (Hoàng đế nước Nam), khẳng định sự bình đẳng vị thế với các hoàng đế phương Bắc.",
+        "quote": "Việc dấy binh là thuận lòng trời, cứu dân khỏi vòng đồ thán. Nước Nam ta phải do người Nam làm chủ.",
+        "ngay_hien_thi": "17/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Hoàng đế Lý Nam Đế – Lý Bí (17/10/503).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%BD_B%C3%AD"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu khí dấy binh khởi nghĩa (Tương truyền trong sử cũ)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_18_10",
+        "ten": "Bảo Ninh (Hoàng Ấu Phương)",
+        "ngay_sinh": "18/10",
+        "nam_sinh": "1952",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nha-van-bao-ninh-18-10-1952",
+        "mo_ta": "Nhà văn cựu chiến binh kiệt xuất của nền văn học Việt Nam đương đại, con trai của Giáo sư ngôn ngữ học Hoàng Tuệ. Từng trực tiếp cầm súng chiến đấu tại mặt trận B3 Tây Nguyên khốc liệt, ông đã chắt lọc ký ức máu lửa để viết nên kiệt tác 'Nỗi buồn chiến tranh' – tác phẩm đưa văn học Việt Nam vươn tầm thế giới với cái nhìn nhân bản sâu sắc về thân phận con người và giá trị của hòa bình.",
+        "quote": "Viết về chiến tranh không phải để ngợi ca đạn bom, mà để nhân loại thấu hiểu cái giá đắt đỏ của hòa bình và tưởng nhớ những người đã mãi mãi nằm lại nơi cánh rừng đại ngàn.",
+        "ngay_hien_thi": "18/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà văn Bảo Ninh – tác giả 'Nỗi buồn chiến tranh' (18/10/1952).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/B%E1%BA%A3o_Ninh"
+            },
+            {
+                "type": "quote",
+                "name": "Cảm hứng nhân văn trong tiểu thuyết 'Nỗi buồn chiến tranh' của nhà văn Bảo Ninh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_19_10",
+        "ten": "Mở màn Chiến dịch Plây Me trên chiến trường Tây Nguyên",
+        "ngay_sinh": "19/10",
+        "nam_sinh": "1965",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "mo-man-chien-dich-play-me-19-10-1965",
+        "mo_ta": "Chiến dịch tiến công quy mô lớn đầu tiên của Quân Giải phóng trên chiến trường Tây Nguyên trực tiếp đọ sức với quân viễn chinh Mỹ. Đêm ngày 19/10/1965, bộ đội ta nổ súng vây ép cứ điểm Plây Me (Gia Lai) nhằm thực hiện nghệ thuật 'vây điểm diệt viện', kéo Sư đoàn Kỵ binh bay số 1 tinh nhuệ của Mỹ vào thung lũng Ia Đrăng để tiêu diệt, làm phá sản chiến thuật cơ động bằng trực thăng của Lầu Năm Góc.",
+        "quote": "Nắm thắt lưng địch mà đánh, đánh bại Sư đoàn Kỵ binh bay số 1 của Mỹ ngay trong trận đọ sức đầu tiên trên cao nguyên đất đỏ!",
+        "ngay_hien_thi": "19/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày mở màn Chiến dịch Plây Me lịch sử tại Tây Nguyên (19/10/1965).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_Pl%C3%A2y_Me"
+            },
+            {
+                "type": "quote",
+                "name": "Phương châm tác chiến của Bộ Tư lệnh Mặt trận B3 Tây Nguyên trong Chiến dịch Plây Me (1965)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_20_10",
+        "ten": "Lý Tự Trọng (Lê Hữu Trọng)",
+        "ngay_sinh": "20/10",
+        "nam_sinh": "1914",
+        "ngay_mat": "21/11",
+        "nam_mat": "1931",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "ly-tu-trong-20-10-1914-21-11-1931",
+        "mo_ta": "Người đoàn viên thanh niên cộng sản đầu tiên của Việt Nam. Dù hy sinh khi mới 17 tuổi, nhưng sự kiên cường trước tòa án thực dân và trên máy chém của anh đã trở thành biểu tượng bất diệt, thắp lên ngọn lửa cách mạng cho hàng triệu thanh niên Việt Nam.",
+        "quote": "Con đường của thanh niên chỉ là con đường cách mạng, không thể có con đường nào khác.",
+        "ngay_hien_thi": "20/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của người đoàn viên đầu tiên Lý Tự Trọng (20/10/1914).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%BD_T%E1%BB%B1_Tr%E1%BB%8Dng"
+            },
+            {
+                "type": "quote",
+                "name": "Lời tuyên bố đanh thép trước tòa án thực dân Pháp (Sài Gòn, 1931)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_21_10",
+        "ten": "Chủ tịch Hồ Chí Minh trở về Thủ đô Hà Nội sau chuyến công tác ngoại giao tại Pháp",
+        "ngay_sinh": "21/10",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_event",
+        "image_slug": "bac-ho-tro-ve-ha-noi-sau-chuyen-tham-phap-21-10-1946",
+        "mo_ta": "Sự kiện lịch sử khép lại hơn 4 tháng đấu tranh ngoại giao kiên cường và khôn khéo của Chủ tịch Hồ Chí Minh tại nước Pháp. Chiều ngày 21/10/1946, chuyến tàu hỏa đặc biệt từ Hải Phòng đã đưa Hồ Chủ tịch về đến Ga Hàng Cỏ (Hà Nội) trong biển cờ hoa chào đón của hàng chục vạn đồng bào Thủ đô. Chuyến đi lịch sử với bản Tạm ước 14/9 đã giúp cách mạng Việt Nam giành thêm thời gian quý báu để chuẩn bị lực lượng bước vào cuộc kháng chiến toàn quốc.",
+        "quote": "Tôi sang Pháp đã mang về cho đồng bào miền Nam và cả nước sự đồng tình ủng hộ của nhân dân Pháp yêu chuộng hòa bình. Chúng ta nhất định thống nhất, nhất định độc lập!",
+        "ngay_hien_thi": "21/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Chủ tịch Hồ Chí Minh trở về Hà Nội sau hơn 4 tháng đấu tranh ngoại giao tại Pháp (21/10/1946).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%E1%BA%A1m_%C6%B0%E1%BB%9Bc_Vi%E1%BB%87t_%E2%80%93_Ph%C3%A1p"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng ngoại giao hòa hoãn để chuẩn bị thực lực kháng chiến năm 1946 của Chủ tịch Hồ Chí Minh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_22_10",
+        "ten": "Thành lập Quân chủng Phòng không – Không quân Việt Nam",
+        "ngay_sinh": "22/10",
+        "nam_sinh": "1963",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "thanh-lap-quan-chung-phong-khong-khong-quan-22-10-1963",
+        "mo_ta": "Bước ngoặt chiến lược trong quá trình xây dựng Quân đội nhân dân Việt Nam tiến lên chính quy, hiện đại. Ngày 22/10/1963, Chủ tịch Hồ Chí Minh đã ký Sắc lệnh số 50/LCT hợp nhất Cục Phòng không và Cục Không quân thành Quân chủng Phòng không – Không quân. Đây chính là lực lượng nòng cốt bảo vệ vững chắc bầu trời Tổ quốc và làm nên kỳ tích 'Hà Nội – Điện Biên Phủ trên không' lừng lẫy địa cầu.",
+        "quote": "Phải luôn luôn cảnh giác, sẵn sàng chiến đấu, kiên quyết bắn rơi nhiều máy bay địch, bảo vệ vững chắc bầu trời thiêng liêng của Tổ quốc.",
+        "ngay_hien_thi": "22/10",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày thành lập Quân chủng Phòng không – Không quân Việt Nam (22/10/1963).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Qu%C3%A2n_ch%E1%BB%A7ng_Ph%C3%B2ng_kh%C3%B4ng_%E2%80%93_Kh%C3%B4ng_qu%C3%A2n,_Qu%C3%A2n_%C4%91%E1%BB%99i_nh%C3%A2n_d%C3%A2n_Vi%E1%BB%87t_Nam"
+            },
+            {
+                "type": "quote",
+                "name": "Lời huấn thị của Chủ tịch Hồ Chí Minh đối với bộ đội Phòng không – Không quân",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_23_10",
+        "ten": "Mở đường Hồ Chí Minh trên biển (Thành lập Đoàn tàu Không số)",
+        "ngay_sinh": "23/10",
+        "nam_sinh": "1961",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "mo-duong-ho-chi-minh-tren-bien-23-10-1961",
+        "mo_ta": "Kỳ tích huyền thoại của nghệ thuật quân sự Việt Nam trong kháng chiến chống Mỹ cứu nước. Ngày 23/10/1961, Bộ Quốc phòng ra Quyết định số 97/QĐ thành lập Đoàn 759 vận tải thủy (sau phát triển thành Lữ đoàn 125 Hải quân), chính thức mở tuyến chi viện chiến lược Đường Hồ Chí Minh trên biển. Những con tàu Không số quả cảm đã vượt qua trùng trùng phong tỏa của Hạm đội 7 Mỹ, vận chuyển hàng chục vạn tấn vũ khí tiếp lửa cho chiến trường miền Nam.",
+        "quote": "Thà hy sinh tính mạng và điểm nổ con tàu giữa biển khơi, chứ quyết không để vũ khí và bí mật con đường rơi vào tay giặc!",
+        "ngay_hien_thi": "23/10",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày mở đường Hồ Chí Minh trên biển và truyền thống Đoàn tàu Không số (23/10/1961).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%C4%90%C6%B0%E1%BB%9Dng_H%E1%BB%93_Ch%C3%AD_Minh_tr%C3%AAn_bi%E1%BB%83n"
+            },
+            {
+                "type": "quote",
+                "name": "Lời thề sắt đá của các cán bộ, chiến sĩ Đoàn tàu Không số trước mỗi chuyến vượt biển",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_24_10",
+        "ten": "Chiến thắng Đoan Hùng – Sông Lô",
+        "ngay_sinh": "24/10",
+        "nam_sinh": "1947",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "chien-thang-song-lo-24-10-1947",
+        "mo_ta": "Mốc son chói lọi của bộ đội Pháo binh và quân dân ta trong Chiến dịch Việt Bắc Thu – Đông năm 1947. Ngày 24/10/1947, tại khúc sông Lô đoạn Đoan Hùng – Khoan Bộ (Phú Thọ), bằng cách đánh sáng tạo đưa pháo 75mm ra sát bờ sông bắn thẳng ở cự ly gần, quân ta đã bắn chìm và bắn cháy đoàn tàu chiến Pháp, chặt đứt hoàn toàn gọng kìm đường thủy của địch tiến lên Việt Bắc. Chiến thắng hào hùng này đã đi vào lịch sử âm nhạc với tuyệt phẩm 'Trường ca Sông Lô' của Văn Cao.",
+        "quote": "Sông Lô sóng ngàn Việt Bắc bãi dài ngô lau núi rừng âm u... Đoàn quân Việt Nam đi trong sương trắng nắng tràn.",
+        "ngay_hien_thi": "24/10",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến thắng Đoan Hùng – Sông Lô lịch sử trong Chiến dịch Việt Bắc (24/10/1947).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_d%E1%BB%8Bch_Vi%E1%BB%87t_B%E1%BA%AFc_Thu_-_%C4%90%C3%B4ng_1947"
+            },
+            {
+                "type": "quote",
+                "name": "Trích 'Trường ca Sông Lô' (1947) của nhạc sĩ Văn Cao",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_25_10",
+        "ten": "Hoàng đế Trần Anh Tông (Trần Thuyên)",
+        "ngay_sinh": "25/10",
+        "nam_sinh": "1276",
+        "ngay_mat": "21/04",
+        "nam_mat": "1320",
+        "linh_vuc": "Lịch sử - Vương triều",
+        "category_id": "historical_figure",
+        "image_slug": "hoang-de-tran-anh-tong-25-10-1276-21-04-1320",
+        "mo_ta": "Vị hoàng đế thứ tư của vương triều nhà Trần, bậc minh quân giữ trọng trách chèo lái Đại Việt bước vào thời kỳ thái bình, hưng thịnh rực rỡ sau ba cuộc kháng chiến chống Nguyên Mông. Ngài nổi tiếng với việc trọng dụng các bậc hiền thần chính trực như Trương Hán Siêu, Đoàn Nhữ Hài, Phạm Ngũ Lão, đồng thời mở mang bờ cõi đất nước về phương Nam với việc tiếp nhận hai châu Ô, Lý (Thuận Châu và Hóa Châu) vào năm 1306.",
+        "quote": "Trẫm gánh vác cơ nghiệp lớn của tổ tông, chỉ sợ đức mỏng không xứng lòng trời, nên phải ngày đêm cầu lời nói thẳng của bậc trung thần để giữ yên trăm họ.",
+        "ngay_hien_thi": "25/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh Dương lịch của Hoàng đế Trần Anh Tông (25/10/1276).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Anh_T%C3%B4ng"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng cầu hiền và trị quốc thời vua Trần Anh Tông (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_26_10",
+        "ten": "Bắn rơi máy bay Mỹ, bắt sống phi công John McCain tại hồ Trúc Bạch",
+        "ngay_sinh": "26/10",
+        "nam_sinh": "1967",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "ban-roi-may-bay-john-mccain-ho-truc-bach-26-10-1967",
+        "mo_ta": "Một trong những sự kiện tiêu biểu nhất khẳng định sức mạnh của lưới lửa phòng không nhân dân bảo vệ Thủ đô Hà Nội. Trưa ngày 26/10/1967, khi 20 máy bay Hải quân Mỹ lao vào đánh phá nhà máy điện Yên Phụ, quả đạn tên lửa của Tiểu đoàn 61 (Trung đoàn 236) đã bắn trúng chiếc cường kích A-4E Skyhawk do Thiếu tá phi công John McCain điều khiển. Quân và dân Hà Nội đã bắt sống viên phi công ngay giữa lòng hồ Trúc Bạch, để lại bức phù điêu lịch sử bên đường Thanh Niên.",
+        "quote": "Bầu trời Hà Nội là bất khả xâm phạm; mọi cánh bay xâm lược gieo tội ác đều phải đền tội trước lưới lửa phòng không Thủ đô.",
+        "ngay_hien_thi": "26/10",
+        "hien_thi_nhan_dip": "Kỷ niệm chiến công bắn rơi máy bay Mỹ và bắt sống phi công John McCain tại hồ Trúc Bạch (26/10/1967).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/John_McCain"
+            },
+            {
+                "type": "quote",
+                "name": "Dấu ấn chiến thắng bảo vệ nhà máy điện Yên Phụ của quân dân Hà Nội ngày 26/10/1967",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_27_10",
+        "ten": "Nguyễn Trung Trực",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1838",
+        "ngay_mat": "27/10",
+        "nam_mat": "1868",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-trung-truc-1838-27-10-1868",
+        "mo_ta": "Anh hùng dân tộc kiệt xuất của vùng đất Nam Bộ. Ông là người chỉ huy đốt cháy tàu L'Espérance của Pháp trên sông Nhật Tảo và đánh úp đồn Kiên Giang. Khi bị giặc bắt và đem ra xử chém, ông đã hiên ngang lưu lại một câu nói khí phách, làm rạng rỡ muôn đời lịch sử chống ngoại xâm.",
+        "quote": "Bao giờ người Tây nhổ hết cỏ nước Nam, thì mới hết người Nam đánh Tây.",
+        "ngay_hien_thi": "27/10",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Anh hùng dân tộc Nguyễn Trung Trực (27/10/1868).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Trung_Tr%E1%BB%B1c"
+            },
+            {
+                "type": "quote",
+                "name": "Câu nói bất hủ đáp lời quan quân thực dân Pháp",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_28_10",
+        "ten": "Khai mạc Kỳ họp thứ hai Quốc hội khóa I – Kỳ họp thông qua Hiến pháp 1946",
+        "ngay_sinh": "28/10",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "khai-mac-ky-hop-thu-hai-quoc-hoi-khoa-i-28-10-1946",
+        "mo_ta": "Sự kiện lập hiến và chính trị trọng đại của nước Việt Nam Dân chủ Cộng hòa trước đêm trường Toàn quốc kháng chiến. Sáng ngày 28/10/1946, tại Nhà hát Lớn Hà Nội, Quốc hội khóa I chính thức khai mạc Kỳ họp thứ hai lịch sử. Kỳ họp đã thành lập Chính phủ kháng chiến do Chủ tịch Hồ Chí Minh đứng đầu và thảo luận, thông qua bản Hiến pháp năm 1946 – bản Hiến pháp dân chủ đầu tiên khẳng định quyền độc lập, thống nhất và tự do của nhân dân Việt Nam.",
+        "quote": "Chính phủ hiện thời sẽ là một Chính phủ toàn dân đoàn kết và tập hợp nhân tài không đảng phái... Chính phủ phải trong sạch, kiên quyết và biết hy sinh vì Tổ quốc.",
+        "ngay_hien_thi": "28/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày khai mạc Kỳ họp thứ hai Quốc hội khóa I thông qua Hiến pháp đầu tiên của Việt Nam (28/10/1946).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Hi%E1%BA%BFn_ph%C3%A1p_Việt_Nam_D%C3%A2n_ch%E1%BB%A7_C%E1%BB%99ng_h%C3%B2a_1946"
+            },
+            {
+                "type": "quote",
+                "name": "Trích lời tuyên bố của Chủ tịch Hồ Chí Minh tại Kỳ họp thứ hai Quốc hội khóa I (Tháng 10/1946)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_29_10",
+        "ten": "Nam Cao (Trần Hữu Tri)",
+        "ngay_sinh": "29/10",
+        "nam_sinh": "1915",
+        "ngay_mat": "28/11",
+        "nam_mat": "1951",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nam-cao-29-10-1915-28-11-1951",
+        "mo_ta": "Nhà văn hiện thực xuất sắc nhất của nền văn học Việt Nam thế kỷ 20. Với ngòi bút sắc lạnh nhưng chan chứa tình nhân đạo, ông để lại những kiệt tác như 'Chí Phèo', 'Lão Hạc', phơi bày sự tàn bạo của xã hội cũ và khát vọng sống lương thiện của con người.",
+        "quote": "Nghệ thuật không cần phải là ánh trăng lừa dối, nghệ thuật không nên là ánh trăng lừa dối, nghệ thuật có thể chỉ là những tiếng đau khổ kia, thoát ra từ những kiếp lầm than.",
+        "ngay_hien_thi": "29/10",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà văn, liệt sĩ Nam Cao – Trần Hữu Tri (29/10/1915).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nam_Cao"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Tuyên ngôn nghệ thuật trong tác phẩm 'Trăng sáng'",
+                "url": "https://vi.wikisource.org/wiki/Tr%C4%83ng_s%C3%A1ng"
+            }
+        ]
+    },
+    {
+        "id": "ngay_30_10",
+        "ten": "Thành lập lực lượng Quân tình nguyện Việt Nam tại Lào",
+        "ngay_sinh": "30/10",
+        "nam_sinh": "1949",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "thanh-lap-quan-tinh-nguyen-viet-nam-tai-lao-30-10-1949",
+        "mo_ta": "Cột mốc lịch sử mở đầu truyền thống liên minh chiến đấu đặc biệt giữa hai dân tộc Việt Nam – Lào. Ngày 30/10/1949, Ban Thường vụ Trung ương Đảng Cộng sản Đông Dương ra quyết định thống nhất các lực lượng vũ trang Việt Nam hoạt động giúp cách mạng Lào thành hệ thống tổ chức mang tên Quân tình nguyện Việt Nam. Hàng vạn cán bộ, chiến sĩ đã kề vai sát cánh cùng quân dân nước bạn chiến đấu chống kẻ thù chung, viết nên trang sử hào hùng của tình đoàn kết quốc tế trong sáng.",
+        "quote": "Giúp nhân dân nước bạn tức là mình tự giúp mình.",
+        "ngay_hien_thi": "30/10",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày truyền thống Quân tình nguyện và Chuyên gia quân sự Việt Nam tại Lào (30/10/1949).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Qu%C3%A2n_t%C3%ACnh_nguy%E1%BB%87n_Vi%E1%BB%87t_Nam"
+            },
+            {
+                "type": "quote",
+                "name": "Lời căn dặn của Chủ tịch Hồ Chí Minh đối với cán bộ, chiến sĩ Quân tình nguyện Việt Nam",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_31_10",
+        "ten": "Chiến khu Trần Hưng Đạo",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Kỷ niệm ngày thành lập Chiến khu Trần Hưng Đạo (1941).",
+        "quote": "",
+        "ngay_hien_thi": "31/10",
+        "hien_thi_nhan_dip": "Kỷ niệm Chiến khu Trần Hưng Đạo.",
+        "historical_source": []
+    }
+]

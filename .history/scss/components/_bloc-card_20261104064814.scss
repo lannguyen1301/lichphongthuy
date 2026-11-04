@@ -1,0 +1,224 @@
+// scss/components/_bloc-card.scss
+@use "../abstracts" as abs;
+
+.bloc-card {
+    @extend %flexColumn;
+    gap: 1.4rem;
+    padding: 2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.4rem;
+        border-radius: 1.8rem;
+    }
+
+    // 1. Tầng Đầu: Tháng/Năm bên trái - Số Ngày Dương khổng lồ bên phải
+    &__top {
+        @extend %flexBetween;
+        align-items: flex-start;
+        gap: 1.6rem;
+    }
+
+    &__month-box {
+        @extend %flexColumn;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+
+    &__year-badge {
+        display: inline-block;
+        padding: 0.4rem 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.8rem;
+        font-weight: 800;
+        border-radius: 99.9rem;
+        letter-spacing: 0.05em;
+    }
+
+    &__month-vn {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        margin-top: 0.4rem;
+
+        @include abs.screen(sm) {
+            font-size: 1.7rem;
+        }
+    }
+
+    &__month-en {
+        font-size: 1.5rem;
+        font-style: italic;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__day-status {
+        display: inline-block;
+        margin-top: 0.4rem;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__date-hero {
+        position: relative;
+        @extend %flexColumn;
+        align-items: flex-end;
+    }
+
+    &__share-btn {
+        @extend %inlineFlexCenter;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 1rem;
+        background-color: var(--bg-surface);
+        color: var(--text-muted);
+        @extend %transInteractive;
+
+        &:hover {
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__solar-num {
+        font-size: 8.8rem;
+        font-weight: 800;
+        line-height: 0.95;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(sm) {
+            font-size: 6.8rem;
+        }
+    }
+
+    // 2. Tầng Giữa: Khung Ảnh Sự kiện Lịch sử / Anh hùng Dân tộc chuẩn 16:9
+    &__media {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 1.6rem;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-surface);
+    }
+
+    &__img {
+        @extend %imgCover;
+        transition: transform 0.4s ease;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+
+    // 3. Tầng Băng Rôn Ngang: Năm Can Chi | Thứ trong tuần
+    &__ribbon {
+        display: grid;
+        grid-template-columns: 4fr 6fr;
+        border-radius: 1rem;
+        overflow: hidden;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__ribbon-year {
+        @extend %flexCenter;
+        padding: 0.8rem 1rem;
+        background-color: var(--secondary-color);
+        color: #ffffff;
+    }
+
+    &__ribbon-weekday {
+        @extend %flexCenter;
+        padding: 0.8rem 1rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        letter-spacing: 0.04em;
+    }
+
+    // 4. Tầng Đáy 3 Cột: Số Ngày Âm | Can Chi | Hành & Tiết Khí
+    &__bottom {
+        display: grid;
+        grid-template-columns: auto 1fr 1.15fr;
+        align-items: center;
+        gap: 1.4rem;
+        padding-top: 0.6rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: auto 1fr;
+        }
+    }
+
+    &__lunar-num-box {
+        @extend %flexColumnCenterAll;
+        min-width: 7.2rem;
+        padding: 0.8rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__lunar-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+    }
+
+    &__lunar-num {
+        font-size: 4.2rem;
+        font-weight: 800;
+        line-height: 1.05;
+        color: var(--primary-color);
+    }
+
+    &__canchi-list {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+        padding-right: 1.2rem;
+        border-right: 1px solid var(--border-color);
+
+        @include abs.screen(sm) {
+            border-right: none;
+            padding-right: 0;
+        }
+    }
+
+    &__lunar-month {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__quick-fengshui {
+        @extend %flexColumn;
+        gap: 0.4rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+
+        @include abs.screen(sm) {
+            grid-column: 1 / -1;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--border-color);
+        }
+    }
+}

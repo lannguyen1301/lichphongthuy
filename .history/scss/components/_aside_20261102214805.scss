@@ -1,0 +1,100 @@
+.sidebar {
+    position: fixed;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 10px 8px;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition:
+            background-color var(--transition-fast),
+            color var(--transition-fast);
+    }
+
+    &__link:hover,
+    &__link:focus-visible {
+        background-color: #f3f4f6;
+        color: var(--primary-color);
+        outline: none;
+    }
+    
+}
+
+/* Trạng thái Active của mục đang chọn */
+
+
+.sidebar__img {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+/* Hộp thoại Tooltip nổi bên phải Icon */
+.sidebar__tooltip {
+    position: absolute;
+    left: calc(100% + 14px);
+    top: 50%;
+    transform: translate(-8px, -50%);
+    padding: 6px 12px;
+    background-color: #111827;
+    color: #ffffff;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Tránh cản trở chuột khi lướt ngang */
+    transition:
+        opacity var(--transition-fast),
+        transform var(--transition-fast),
+        visibility var(--transition-fast);
+}
+
+/* Mũi tên nhỏ trỏ vào Icon của Tooltip */
+.sidebar__tooltip::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #111827 transparent transparent;
+}
+
+/* Kích hoạt Tooltip khi Hover hoặc Focus bằng bàn phím */
+.sidebar__link:hover .sidebar__tooltip,
+.sidebar__link:focus-visible .sidebar__tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, -50%);
+}
+
+.sidebar-backdrop {
+    display: none;
+}

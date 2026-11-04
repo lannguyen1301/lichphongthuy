@@ -121,6 +121,7 @@ details summary::-webkit-details-marker {
 /* Ẩn mũi tên trên Firefox */
 details summary {
     list-style: none;
+    display: flex;
 }
 
 .icon {

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch phong thuỷ</title>
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="./assets/css/main.css">
+
+
+    <!-- scripts -->
+    <script src="./assets/js/script.js"></script>
+    <style>
+
+
+        /* ==================== 1. HEADER & FLEXBOX LAYOUT ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            height: var(--header-height);
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            transition: box-shadow var(--transition-fast), background-color var(--transition-fast);
+        }
+
+        /* Trạng thái khi cuộn trang xuống */
+        .header--scrolled {
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header__container {
+            max-width: 1360px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            /* Flexbox đẩy Cụm Trái và Cụm Phải về 2 đầu mút */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header__left,
+        .header__right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header__logo-link {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .header__logo-img {
+            height: 38px;
+            width: auto;
+            display: block;
+        }
+
+        .header__home-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #f3f4f6;
+            transition: background-color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .header__home-link:hover {
+            background-color: var(--primary-bg-light);
+            transform: translateY(-1px);
+        }
+
+        /* Khối Ngày & Giờ */
+        .header__datetime-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 6px 14px;
+            background-color: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .header__date-group,
+        .header__time-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header__time-group {
+            padding-left: 14px;
+            border-left: 1px solid var(--border-color);
+            font-variant-numeric: tabular-nums;
+            /* Giữ số giây nhảy không làm giật chiều rộng */
+        }
+
+        /* Dropdown Ngôn ngữ & Theme (Dùng thẻ details) */
+        .header__lang-details,
+        .header__theme-details {
+            position: relative;
+        }
+
+        .header__lang-summary,
+        .header__theme-summary {
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 40px;
+            padding: 0 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            user-select: none;
+            transition: border-color var(--transition-fast), background-color var(--transition-fast);
+        }
+
+        .header__lang-summary::-webkit-details-marker,
+        .header__theme-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .header__lang-summary:hover,
+        .header__theme-summary:hover {
+            border-color: var(--primary-color);
+            background-color: #fffbeb;
+        }
+
+        .header__lang-list,
+        .header__theme-list {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            z-index: 60;
+            min-width: 130px;
+            padding: 6px;
+            list-style: none;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header__lang-link,
+        .header__theme-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color var(--transition-fast), color var(--transition-fast);
+        }
+
+        .header__lang-link:hover,
+        .header__theme-btn:hover {
+            background-color: #f3f4f6;
+        }
+
+        .header__lang-link--active,
+        .header__theme-btn.is-active {
+            background-color: var(--primary-bg-light);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Nút Đăng nhập */
+        .btn--login {
+            height: 40px;
+            padding: 0 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .btn--login:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        /* Nút Hamburger (Ẩn trên Desktop, đạt chuẩn 44x44px trên Mobile) */
+        .header__burger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--bg-surface);
+            cursor: pointer;
+        }
+
+        .header__burger-bar {
+            width: 20px;
+            height: 2px;
+            background-color: var(--text-main);
+            border-radius: 2px;
+            transition: transform var(--transition-fast), opacity var(--transition-fast);
+        }
+
+        /* Hiệu ứng biến Hamburger thành dấu X khi mở */
+        .header__burger.is-active .header__burger-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .header__burger.is-active .header__burger-bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .header__burger.is-active .header__burger-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ==================== 2. SIDEBAR TOOLTIP (NGOÀI LUỒNG BỐ CỤC) ==================== */
+
+
+        /* ==================== 3. RESPONSIVE & MOBILE DRAWER (<= 768px) ==================== */
+        @media (max-width: 768px) {
+
+            /* Ẩn bớt khối Ngày Giờ trên thanh Header nhỏ để tránh chật chội */
+            .header__datetime-wrapper {
+                display: none;
+            }
+
+            .header__right {
+                gap: 8px;
+            }
+
+            /* Hiển thị nút Hamburger 44x44px */
+            .header__burger {
+                display: inline-flex;
+            }
+
+            /* Chuyển Sidebar từ dạng Floating Tooltip sang Ngăn kéo trượt (Drawer) */
+            .sidebar {
+                top: var(--header-height);
+                left: 0;
+                bottom: 0;
+                width: 260px;
+                transform: translateX(-100%);
+                border-radius: 0;
+                border-top: none;
+                border-left: none;
+                padding: 20px 16px;
+                z-index: 55;
+                overflow-y: auto;
+            }
+
+            .sidebar.is-open {
+                transform: translateX(0);
+            }
+
+            .sidebar__link {
+                width: 100%;
+                height: 48px;
+                justify-content: flex-start;
+                padding: 0 14px;
+                gap: 12px;
+            }
+
+            /* Trên Mobile: Biến Tooltip thành nhãn văn bản hiển thị trực tiếp cạnh Icon */
+            .sidebar__tooltip {
+                position: static;
+                transform: none;
+                opacity: 1;
+                visibility: visible;
+                background-color: transparent;
+                color: inherit;
+                padding: 0;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: none;
+                pointer-events: auto;
+            }
+
+            .sidebar__tooltip::before {
+                display: none;
+            }
+
+            /* Lớp phủ mờ đằng sau khi mở menu Mobile */
+            .sidebar-backdrop {
+                display: block;
+                position: fixed;
+                inset: var(--header-height) 0 0 0;
+                background-color: rgba(17, 24, 39, 0.45);
+                backdrop-filter: blur(2px);
+                z-index: 52;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity var(--transition-fast), visibility var(--transition-fast);
+            }
+
+            .sidebar-backdrop.is-active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header" class="header">
+        <!-- Header content will be inserted here -->
+    </header>
+    <script>
+        load("#header", "./templates/header.html");
+    </script>
+    <!-- <main id="main" class="main">
+        <div class="container">
+            <h1>Home pages</h1>
+
+        </div>
+    </main> -->
+    <!-- <footer id="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script> -->
+
+    <script src="./assets/js/changeTheme.js"></script>
+</body>
+
+
+</html>

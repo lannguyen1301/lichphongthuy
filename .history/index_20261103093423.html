@@ -1,0 +1,44 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lịch phong thuỷ</title>
+
+        <!-- favicons -->
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+
+        <!-- fonts & styles -->
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+
+        <!-- scripts -->
+        <script src="./assets/js/script.js"></script>
+    </head>
+
+    <body>
+        <!-- Khung neo trung lập để nhúng <header> và <aside class="sidebar"> ngang hàng -->
+        <div id="header-root"></div>
+        <script>
+            load("#header-root", "./templates/header.html");
+        </script>
+
+        <main id="main" class="main">
+            <div class="container">
+                <h1>Trang chủ Lịch Phong Thủy</h1>
+            </div>
+        </main>
+
+        <footer id="footer-root"></footer>
+        <script>
+            load("#footer-root", "./templates/footer.html");
+        </script>
+
+        <script src="./assets/js/header.js"></script>
+    </body>
+</html>

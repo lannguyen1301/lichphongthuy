@@ -1,0 +1,17 @@
+.header__datetime-wrapper {
+    display: flex;
+    gap: 30px;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    border: 1px solid red;
+    border-radius: 999px;
+    padding: 10px;
+    &__date-group {
+        display: flex;
+    gap: 10px;
+    }
+    &__time-group {
+        display: flex;
+    gap: 10px;
+    }
+}

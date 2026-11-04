@@ -1,0 +1,71 @@
+@use "sass:math";
+@use "../abstracts/" as abs;
+.header {
+    position: fixed;
+    top: abs.$header-top-offset;
+    right: 0;
+    left: 0;
+    // z-index: 100;
+
+    // top: 30rem;
+    // &__container {
+    //     @extend %flexBetween;
+
+    //     padding: 3rem;
+    //     border: var(--border-color);
+    //     border-radius: 99px;
+    // }
+
+    &__container {
+        border: 1px solid red;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        border: 1px solid
+    }
+
+    &__home {
+        border: 1px solid red;
+        padding: 10px;
+        border-radius: 999px;
+    }
+    &__calendar {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        border: 1px solid red;
+        border-radius: 999px;
+    }
+    .header__calendar {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        border: 1px solid red;
+        border-radius: 999px;
+    }
+    .header__datetime-wrapper {
+        display: flex;
+        gap: 30px;
+        /* align-items: center; */
+        /* justify-content: space-between; */
+        border: 1px solid red;
+        border-radius: 999px;
+        padding: 10px;
+    }
+    .header__date-group {
+        display: flex;
+        gap: 10px;
+    }
+    .header__time-group {
+        display: flex;
+        gap: 10px;
+    }
+}

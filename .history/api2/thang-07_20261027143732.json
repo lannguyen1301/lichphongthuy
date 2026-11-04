@@ -1,0 +1,817 @@
+[
+    {
+        "id": "ngay_01_07",
+        "ten": "Nguyễn Đình Chiểu",
+        "ngay_sinh": "01/07",
+        "nam_sinh": "1822",
+        "ngay_mat": "03/07",
+        "nam_mat": "1888",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-dinh-chieu-01-07-1822-03-07-1888",
+        "mo_ta": "Nhà thơ mù yêu nước lớn nhất Nam Bộ, Danh nhân văn hóa thế giới được UNESCO vinh danh. Ông dùng ngòi bút rực lửa để khích lệ tinh thần chiến đấu chống Pháp và để lại kiệt tác 'Lục Vân Tiên' - bài ca về đạo lý làm người, nhân nghĩa vẹn toàn.",
+        "quote": "Chở bao nhiêu đạo thuyền không khẳm, Đâm mấy thằng gian bút chẳng tà.",
+        "ngay_hien_thi": "01/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Nguyễn Đình Chiểu.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_%C4%90%C3%ACnh_Chi%E1%BB%83u"
+            },
+            {
+                "type": "quote",
+                "name": "Trích bài thơ 'Dương Từ - Hà Mậu'",
+                "url": "https://vi.wikisource.org/wiki/D%C6%B0%C6%A1ng_T%E1%BB%AB_H%C3%A0_M%E1%BA%ADu"
+            }
+        ]
+    },
+    {
+        "id": "ngay_02_07",
+        "ten": "Đổi tên nước thành Cộng hòa Xã hội Chủ nghĩa Việt Nam",
+        "ngay_sinh": "02/07",
+        "nam_sinh": "1976",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "doi-ten-nuoc-chxhcn-viet-nam-02-07-1976",
+        "mo_ta": "Sự kiện chính trị trọng đại hoàn thành trọn vẹn quá trình thống nhất nước nhà về mặt nhà nước. Ngày 02/07/1976, tại kỳ họp thứ nhất, Quốc hội khóa VI đã chính thức thông qua nghị quyết đổi tên nước thành Cộng hòa Xã hội Chủ nghĩa Việt Nam, chọn Hà Nội làm Thủ đô, đổi tên Sài Gòn thành Thành phố Hồ Chí Minh và quy định quốc kỳ, quốc ca thống nhất.",
+        "quote": "Nước Việt Nam là một, dân tộc Việt Nam là một. Sông có thể cạn, núi có thể mòn, song chân lý ấy không bao giờ thay đổi.",
+        "ngay_hien_thi": "02/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Quốc hội khóa VI quyết định đổi tên nước thành Cộng hòa Xã hội Chủ nghĩa Việt Nam (02/07/1976).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/C%E1%BB%99ng_h%C3%B2a_X%C3%A3_h%E1%BB%99i_ch%E1%BB%A7_ngh%C4%A9a_Vi%E1%BB%87t_Nam"
+            },
+            {
+                "type": "quote",
+                "name": "Chân lý thống nhất non sông của Chủ tịch Hồ Chí Minh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_03_07",
+        "ten": "Bế mạc Quốc hội khóa VI, ra mắt Chính phủ nước Việt Nam thống nhất",
+        "ngay_sinh": "03/07",
+        "nam_sinh": "1976",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "be-mac-quoc-hoi-khoa-vi-1976",
+        "mo_ta": "Sự kiện lịch sử đánh dấu sự hoàn thiện trọn vẹn của bộ máy nhà nước Cộng hòa Xã hội Chủ nghĩa Việt Nam. Ngày 03/07/1976, Kỳ họp thứ nhất Quốc hội khóa VI chính thức bế mạc. Lần đầu tiên sau 21 năm đất nước bị chia cắt, Chính phủ của một nước Việt Nam độc lập, thống nhất do Thủ tướng Phạm Văn Đồng đứng đầu đã chính thức ra mắt trước quốc dân đồng bào và toàn thế giới.",
+        "quote": "Quốc hội khóa VI là Quốc hội của nước Việt Nam hoàn toàn độc lập, thống nhất, đánh dấu bước phát triển rực rỡ của khối đại đoàn kết toàn dân tộc.",
+        "ngay_hien_thi": "03/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày bế mạc Kỳ họp thứ nhất Quốc hội khóa VI và ra mắt Chính phủ thống nhất (03/07/1976).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Qu%E1%BB%91c_h%E1%BB%99i_Vi%E1%BB%87t_Nam_kh%C3%B3a_VI"
+            },
+            {
+                "type": "quote",
+                "name": "Tuyên bố bế mạc Kỳ họp thứ nhất Quốc hội khóa VI (03/07/1976)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_04_07",
+        "ten": "Xuân Sách (Ngô Xuân Sách)",
+        "ngay_sinh": "04/07",
+        "nam_sinh": "1932",
+        "ngay_mat": "02/06",
+        "nam_mat": "2008",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "xuan-sach-04-07-1932-02-06-2008",
+        "mo_ta": "Nhà thơ, nhà văn tiêu biểu của văn học Việt Nam hiện đại, tác giả của tiểu thuyết lừng danh 'Đội du kích thiếu niên Đình Bảng'. Đặc biệt, ông được văn đàn tôn xưng là bậc thầy thơ trào phúng qua tập 'Chân dung nhà văn' - nơi ông dùng ngòi bút hóm hỉnh, sâu cay nhưng đầy nhân văn để phác họa lại thần thái của hàng loạt cây bút lớn cùng thời.",
+        "quote": "Bao nhiêu người sống thì bấy nhiêu người viết, văn chương cũng như cuộc đời, phải chân thật và sắc sảo mới ở lại được với thời gian.",
+        "ngay_hien_thi": "04/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà thơ, nhà văn Xuân Sách (04/07/1932).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Xu%C3%A2n_S%C3%A1ch"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng văn chương của tác giả tập thơ trào phúng 'Chân dung nhà văn'",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_05_07",
+        "ten": "Sự kiện Thất thủ Kinh đô Huế (Mở màn Phong trào Cần Vương)",
+        "ngay_sinh": "05/07",
+        "nam_sinh": "1885",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "that-thu-kinh-do-hue-05-07-1885",
+        "mo_ta": "Khúc tráng ca bi hùng mở đầu cho phong trào Cần Vương cứu nước. Rạng sáng ngày 05/07/1885 (tức 22 tháng 5 âm lịch Ất Dậu), quan phụ chính đại thần Tôn Thất Thuyết đã bất ngờ nổ súng chỉ huy quân triều đình đánh úp đồn Mang Cá và tòa Khâm Sứ Pháp tại Huế. Dù cuộc tiến công thất bại và kinh đô thất thủ, sự kiện này đã trực tiếp dẫn đến việc vua Hàm Nghi xuất bôn ra Tân Sở, giương cao ngọn cờ Cần Vương kêu gọi văn thân sĩ phu cả nước đứng lên chống Pháp.",
+        "quote": "Đánh giặc dẫu không thắng, nhưng tấm lòng trung quân ái quốc và khí tiết của bá quan văn võ đã thắp lên ngọn lửa kháng chiến cháy rực khắp cả nước.",
+        "ngay_hien_thi": "05/07",
+        "hien_thi_nhan_dip": "Kỷ niệm Sự kiện Thất thủ Kinh đô Huế và ngày mở màn phong trào Cần Vương (05/07/1885).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%ADn_Kinh_th%C3%A0nh_Hu%E1%BA%BF_1885"
+            },
+            {
+                "type": "quote",
+                "name": "Ý nghĩa lịch sử của cuộc binh biến đêm 05/07/1885 tại kinh thành Huế",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_06_07",
+        "ten": "Khai mạc Hội nghị Fontainebleau",
+        "ngay_sinh": "06/07",
+        "nam_sinh": "1946",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_event",
+        "image_slug": "hoi-nghi-fontainebleau-06-07-1946",
+        "mo_ta": "Sự kiện ngoại giao trọng đại của nhà nước Việt Nam Dân chủ Cộng hòa ngay sau khi giành được độc lập. Ngày 06/07/1946, tại lâu đài Fontainebleau (Pháp), Hội nghị chính thức Pháp – Việt được khai mạc. Phái đoàn Việt Nam do đồng chí Phạm Văn Đồng làm Trưởng đoàn đã kiên quyết đấu tranh bảo vệ lập trường độc lập chính trị và thống nhất lãnh thổ, đập tan những mưu đồ áp đặt của chủ nghĩa thực dân.",
+        "quote": "Lập trường của nhân dân Việt Nam là kiên quyết bảo vệ nền độc lập tự do và quyền toàn vẹn lãnh thổ, không gì có thể lay chuyển được ý chí ấy.",
+        "ngay_hien_thi": "06/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày khai mạc Hội nghị ngoại giao Fontainebleau tại Pháp (06/07/1946).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/H%E1%BB%99i_ngh%E1%BB%8B_Fontainebleau_1946"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm đấu tranh ngoại giao cứng rắn của Trưởng đoàn Phạm Văn Đồng tại Pháp",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_07_07",
+        "ten": "Thạch Lam (Nguyễn Tường Lân)",
+        "ngay_sinh": "07/07",
+        "nam_sinh": "1910",
+        "ngay_mat": "27/06",
+        "nam_mat": "1942",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "thach-lam-07-07-1910-27-06-1942",
+        "mo_ta": "Nhà văn lãng mạn xuất sắc, thành viên nòng cốt của Tự Lực văn đoàn. Trái với những tác phẩm kịch tính ồn ào, văn Thạch Lam là những dòng chảy êm đềm, đi sâu vào thế giới nội tâm tinh tế của những con người nghèo khổ, nhỏ bé ('Gió đầu mùa', 'Hai đứa trẻ', 'Dưới bóng hoàng lan'), mang một tình người ấm áp và trong trẻo vô ngần.",
+        "quote": "Văn chương không phải là một cách đem đến cho người đọc sự thoát ly hay sự quên... Văn chương là một thứ khí giới thanh cao và đắc lực mà chúng ta có.",
+        "ngay_hien_thi": "07/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà văn Thạch Lam (07/07/1910).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Th%E1%BA%A1ch_Lam"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Lời tựa tập truyện ngắn 'Gió đầu mùa' (1937) của Thạch Lam",
+                "url": "https://vi.wikisource.org/wiki/Gi%C3%B3_%C4%91%E1%BA%A7u_m%C3%B9a"
+            }
+        ]
+    },
+    {
+        "id": "ngay_08_07",
+        "ten": "Lê Duy Ứng",
+        "ngay_sinh": "08/07",
+        "nam_sinh": "1947",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Văn hóa - Hội họa",
+        "category_id": "historical_figure",
+        "image_slug": "le-duy-ung-08-07-1947",
+        "mo_ta": "Anh hùng Lực lượng vũ trang nhân dân, Đại tá, họa sĩ và nhà điêu khắc kỳ tài của quân đội. Ngày 28/04/1975, khi đang cùng mũi thọc sâu tiến đánh căn cứ Nước Trong (Chiến dịch Hồ Chí Minh), ông bị trúng đạn hỏng cả hai mắt. Ngay giữa chiến trường mù lòa ác liệt, ông đã hứng những giọt máu chảy ra từ đôi mắt mình, vẽ nên bức chân dung Chủ tịch Hồ Chí Minh – một biểu tượng bất diệt của niềm tin chiến thắng và lòng kính yêu lãnh tụ.",
+        "quote": "Ánh sáng đời tôi là ánh sáng của Đảng, của Bác Hồ. Dẫu đôi mắt mù lòa, trái tim tôi vẫn luôn rực sáng hình bóng Tổ quốc.",
+        "ngay_hien_thi": "08/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Anh hùng LLVTND, họa sĩ thương binh Lê Duy Ứng (08/07/1947).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%AA_Duy_%E1%BB%A8ng"
+            },
+            {
+                "type": "quote",
+                "name": "Lý tưởng cống hiến của người họa sĩ thương binh vẽ Bác Hồ bằng máu",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_09_07",
+        "ten": "Nguyễn Văn Cừ",
+        "ngay_sinh": "09/07",
+        "nam_sinh": "1912",
+        "ngay_mat": "28/08",
+        "nam_mat": "1941",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-van-cu-09-07-1912-28-08-1941",
+        "mo_ta": "Nhà lãnh đạo kiệt xuất của cách mạng Việt Nam, Tổng Bí thư của Đảng khi mới 26 tuổi. Tuy tuổi đời còn rất trẻ, ông đã thể hiện tư duy lý luận xuất chúng qua tác phẩm 'Tự chỉ trích' (1939) – một tài liệu vô giá về tinh thần dân chủ, thẳng thắn thừa nhận khuyết điểm để củng cố sức mạnh đoàn kết và sự trong sạch của tổ chức.",
+        "quote": "Đảng ta phải công khai, dũng cảm thừa nhận khuyết điểm của mình để kiên quyết sửa chữa, để mà tiến bộ.",
+        "ngay_hien_thi": "09/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Tổng Bí thư Nguyễn Văn Cừ (09/07/1912).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_V%C4%83n_C%E1%BB%AB"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng trọng tâm trong tác phẩm 'Tự chỉ trích' (1939)",
+                "url": "https://vi.wikisource.org/wiki/T%E1%BB%B1_ch%E1%BB%89_tr%C3%ADch"
+            }
+        ]
+    },
+    {
+        "id": "ngay_10_07",
+        "ten": "Nguyễn Tuân",
+        "ngay_sinh": "10/07",
+        "nam_sinh": "1910",
+        "ngay_mat": "28/07",
+        "nam_mat": "1987",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "nguyen-tuan-10-07-1910-28-07-1987",
+        "mo_ta": "Nhà văn kiệt xuất, bậc thầy ngôn từ của nền văn học Việt Nam. Với phong cách nghệ thuật uyên bác, tài hoa và vô cùng độc đáo, ông được ví như 'Người suốt đời đi tìm cái Đẹp'. Những tác phẩm như 'Vang bóng một thời' hay 'Người lái đò Sông Đà' không chỉ là kiệt tác tùy bút mà đã trở thành những đài kỷ niệm lộng lẫy của ngôn ngữ tiếng Việt.",
+        "quote": "Cái đẹp cứu vớt con người. Nghệ thuật là sự vươn tới cái đẹp vĩnh cửu của nhân loại.",
+        "ngay_hien_thi": "10/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của bậc thầy tùy bút Nguyễn Tuân (10/07/1910).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Tu%C3%A2n"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng duy mỹ trong văn chương Nguyễn Tuân",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_11_07",
+        "ten": "Bình thường hóa quan hệ ngoại giao Việt Nam - Hoa Kỳ",
+        "ngay_sinh": "11/07",
+        "nam_sinh": "1995",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Ngoại giao",
+        "category_id": "historical_event",
+        "image_slug": "binh-thuong-hoa-quan-he-viet-my-11-07-1995",
+        "mo_ta": "Bước ngoặt ngoại giao vĩ đại mở ra kỷ nguyên hội nhập sâu rộng của Việt Nam. Ngày 11/07/1995, Tổng thống Mỹ Bill Clinton và Thủ tướng Việt Nam Võ Văn Kiệt đã chính thức tuyên bố bình thường hóa quan hệ ngoại giao giữa hai nước. Quyết định lịch sử này đã khép lại quá khứ đau thương, gỡ bỏ hoàn toàn lệnh cấm vận và mở ra chương mới vì hòa bình, phát triển bền vững.",
+        "quote": "Gác lại quá khứ, vượt qua khác biệt, phát huy tương đồng, hướng tới tương lai.",
+        "ngay_hien_thi": "11/07",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày thiết lập quan hệ ngoại giao Việt Nam - Hoa Kỳ (11/07/1995).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Quan_h%E1%BB%87_Hoa_K%E1%BB%B3_%E2%80%93_Vi%E1%BB%87t_Nam"
+            },
+            {
+                "type": "quote",
+                "name": "Phương châm ngoại giao lịch sử giữa hai quốc gia",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_12_07",
+        "ten": "Chiến dịch MB84 - Trận chiến Vị Xuyên",
+        "ngay_sinh": "12/07",
+        "nam_sinh": "1984",
+        "ngay_mat": "Không có",
+        "nam_mat": "1989",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "tran-chien-vi-xuyen-mb84-12-07-1984-10-1989",
+        "mo_ta": "Ngày khốc liệt và bi tráng bậc nhất trong cuộc chiến đấu bảo vệ biên giới phía Bắc của Tổ quốc. Sáng sớm ngày 12/07/1984, Quân đội nhân dân Việt Nam mở màn Chiến dịch MB84 phản kích giành lại các điểm tựa tại mặt trận Vị Xuyên (Hà Tuyên). Hàng ngàn chiến sĩ đã chiến đấu anh dũng và ngã xuống tại 'Lò vôi thế kỷ' để quyết giữ từng tấc đất thiêng liêng của non sông.",
+        "quote": "Sống bám đá đánh giặc, chết hóa đá bất tử.",
+        "ngay_hien_thi": "12/07",
+        "hien_thi_nhan_dip": "Tưởng niệm các anh hùng liệt sĩ hy sinh trong trận chiến Vị Xuyên (12/07/1984).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Xung_%C4%91%E1%BB%99t_bi%C3%AAn_gi%E1%BB%9Bi_Vi%E1%BB%87t%E2%80%93Trung_1979%E2%80%931990"
+            },
+            {
+                "type": "quote",
+                "name": "Khẩu hiệu được khắc bằng báng súng trên đá của Anh hùng Liệt sĩ Nguyễn Viết Ninh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_13_07",
+        "ten": "Vua Hàm Nghi ban Chiếu Cần Vương",
+        "ngay_sinh": "13/07",
+        "nam_sinh": "1885",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "chieu-can-vuong-13-07-1885",
+        "mo_ta": "Sự kiện thắp sáng ngọn lửa yêu nước chống thực dân Pháp rực rỡ nhất cuối thế kỷ 19. Sau sự kiện thất thủ Kinh đô Huế, ngày 13/07/1885, từ căn cứ sơn phòng Tân Sở (Quảng Trị), vị hoàng đế trẻ tuổi Hàm Nghi đã chính thức ban dụ Cần Vương. Bức hịch lịch sử đã kêu gọi văn thân, sĩ phu và nhân dân cả nước phò vua, đồng lòng đứng lên cứu nước.",
+        "quote": "Thà làm ma nước Nam, chứ không thèm làm vương đất Bắc! Khắp chốn thần dân, ai nấy đều đồng lòng dẹp giặc để đền nợ nước.",
+        "ngay_hien_thi": "13/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Vua Hàm Nghi ban Chiếu Cần Vương kêu gọi toàn dân kháng Pháp (13/07/1885).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/C%E1%BA%A7n_V%C6%B0%C6%A1ng"
+            },
+            {
+                "type": "quote",
+                "name": "Ý chí bảo vệ giang sơn trong Chiếu Cần Vương",
+                "url": "https://vi.wikisource.org/wiki/Chi%E1%BA%BFu_C%E1%BA%A7n_V%C6%B0%C6%A1ng"
+            }
+        ]
+    },
+    {
+        "id": "ngay_14_07",
+        "ten": "Đồng chí Trường Chinh được bầu làm Tổng Bí thư",
+        "ngay_sinh": "14/07",
+        "nam_sinh": "1986",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_event",
+        "image_slug": "truong-chinh-tong-bi-thu",
+        "mo_ta": "Sự kiện bản lề khởi nguồn cho công cuộc Đổi mới vĩ đại của đất nước. Ngày 14/07/1986, tại Hội nghị đặc biệt Ban Chấp hành Trung ương Đảng, đồng chí Trường Chinh được bầu làm Tổng Bí thư. Với tư duy lý luận sắc bén và tinh thần dũng cảm nhìn thẳng vào sự thật, ông đã chỉ đạo soạn thảo Văn kiện Đại hội VI, đưa đất nước thoát khỏi khủng hoảng và vững bước đổi mới.",
+        "quote": "Đổi mới là yêu cầu bức thiết của sự sống còn. Phải nhìn thẳng vào sự thật, đánh giá đúng sự thật và nói rõ sự thật.",
+        "ngay_hien_thi": "14/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày đồng chí Trường Chinh được bầu làm Tổng Bí thư, khởi xướng công cuộc Đổi mới (14/07/1986).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%C6%B0%E1%BB%9Dng_Chinh"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng Đổi mới mang tính đột phá của Tổng Bí thư Trường Chinh (1986)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_15_07",
+        "ten": "Hoài Thanh (Nguyễn Đức Nguyên)",
+        "ngay_sinh": "15/07",
+        "nam_sinh": "1909",
+        "ngay_mat": "14/03",
+        "nam_mat": "1982",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "hoai-thanh-15-07-1909-14-03-1982",
+        "mo_ta": "Nhà phê bình văn học lỗi lạc bậc nhất của nền văn học Việt Nam hiện đại. Cùng với Hoài Chân, ông đã dốc tâm huyết biên soạn kiệt tác 'Thi nhân Việt Nam' - một công trình phê bình xuất sắc đã lưu giữ trọn vẹn diện mạo rực rỡ và những hồn thơ tinh túy nhất của phong trào Thơ mới, được vinh danh bằng Giải thưởng Hồ Chí Minh đợt 1.",
+        "quote": "Chưa bao giờ người ta thấy xuất hiện cùng một lần một hồn thơ rộng mở như Thế Lữ, mơ màng như Lưu Trọng Lư, hùng tráng như Huy Thông, ảo não như Huy Cận...",
+        "ngay_hien_thi": "15/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của nhà phê bình văn học Hoài Thanh (15/07/1909).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ho%C3%A0i_Thanh"
+            },
+            {
+                "type": "quote",
+                "name": "Trích phần Nhìn chung (Một thời đại trong thi ca) - Thi nhân Việt Nam",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_16_07",
+        "ten": "Chủ tịch Hồ Chí Minh ký Lệnh động viên cục bộ",
+        "ngay_sinh": "16/07",
+        "nam_sinh": "1966",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "lenh-dong-vien-cuc-bo-1966",
+        "mo_ta": "Hành động chiến lược thể hiện ý chí quyết chiến quyết thắng của toàn dân tộc trước dã tâm mở rộng chiến tranh của đế quốc Mỹ. Ngày 16/07/1966, Chủ tịch Hồ Chí Minh đã ký Lệnh động viên cục bộ, điều động toàn bộ nhân lực và vật lực cần thiết của đất nước sẵn sàng kháng chiến. Đây chính là tiền đề lịch sử trực tiếp dẫn đến Lời kêu gọi chống Mỹ cứu nước vĩ đại phát trên đài phát thanh ngày hôm sau.",
+        "quote": "Chiến tranh có thể kéo dài 5 năm, 10 năm, 20 năm hoặc lâu hơn nữa... nhưng nhân dân Việt Nam quyết không sợ!",
+        "ngay_hien_thi": "16/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Chủ tịch Hồ Chí Minh ký Lệnh động viên cục bộ chống Mỹ cứu nước (16/07/1966).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Chi%E1%BA%BFn_tranh_Vi%E1%BB%87t_Nam"
+            },
+            {
+                "type": "quote",
+                "name": "Trích Lời kêu gọi thiêng liêng của Chủ tịch Hồ Chí Minh",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_17_07",
+        "ten": "Mạc Cửu",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "1655",
+        "ngay_mat": "17/07",
+        "nam_mat": "1735",
+        "linh_vuc": "Lịch sử - Hành chính",
+        "category_id": "historical_figure",
+        "image_slug": "mac-cuu",
+        "mo_ta": "Tổng binh trấn Hà Tiên, người có công lao vĩ đại trong việc khai phá và xác lập chủ quyền vùng đất cực Nam Tổ quốc. Từ một người Hoa lưu vong tị nạn, ông đã quy tụ bá tánh lập ra 7 thương cảng sầm uất, sau đó tự nguyện dâng toàn bộ vùng đất trù phú này cho chúa Nguyễn để hợp nhất vào bản đồ Đại Việt.",
+        "quote": "Vùng đất phương Nam dẫu xa xôi xúi khí, nhưng nếu dốc lòng khai khẩn, ắt sẽ thành nơi an cư lạc nghiệp cho muôn dân.",
+        "ngay_hien_thi": "17/07",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất Dương lịch của Tổng binh trấn Hà Tiên Mạc Cửu (17/07/1735).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/M%E1%BA%A1c_C%E1%BB%ADu"
+            },
+            {
+                "type": "quote",
+                "name": "Tương truyền về tư tưởng an dân lập ấp của Mạc Cửu",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_18_07",
+        "ten": "Nguyễn Phúc Tần (Chúa Hiền)",
+        "ngay_sinh": "18/07",
+        "nam_sinh": "1620",
+        "ngay_mat": "30/04",
+        "nam_mat": "1687",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-phuc-tan-18-07-1620-30-04-1687",
+        "mo_ta": "Vị chúa Nguyễn thứ tư của Đàng Trong, được nhân dân muôn vàn tôn kính gọi là Chúa Hiền. Trong suốt thời gian trị vì, ngài không chỉ đánh lui quân Trịnh, giữ yên biên ải mà còn mở mang bờ cõi phương Nam, khuyến khích giao thương quốc tế, mang lại một thời kỳ thái bình, phồn vinh và no ấm cho bá tánh.",
+        "quote": "Làm kẻ đứng đầu thiên hạ, lấy việc no ấm của bá tánh làm trọng, giữ yên bờ cõi để cơ nghiệp muôn đời.",
+        "ngay_hien_thi": "18/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Chúa Hiền Nguyễn Phúc Tần (18/07/1620).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Ph%C3%BAc_T%E1%BA%A7n"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng an dân lập ấp của các chúa Nguyễn",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_19_07",
+        "ten": "Chủ tịch Hồ Chí Minh thăm Quân chủng Phòng không - Không quân",
+        "ngay_sinh": "19/07",
+        "nam_sinh": "1965",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "bac-ho-tham-phong-khong-khong-quan",
+        "mo_ta": "Sự kiện lịch sử hun đúc tinh thần sắt đá cho các lực lượng vũ trang nhân dân Việt Nam. Ngày 19/07/1965, Chủ tịch Hồ Chí Minh đã đến thăm và trực tiếp động viên các chiến sĩ bộ đội tên lửa Phòng không - Không quân. Lời căn dặn của Người ngay trên trận địa đã trở thành kim chỉ nam để quân chủng lập nên những chiến công xuất thần, bắn rơi hàng ngàn máy bay Mỹ.",
+        "quote": "Dù đế quốc Mỹ có lắm súng, nhiều tiền, dù chúng có B-57, B-52 hay 'bê' gì đi chăng nữa ta cũng đánh. Từng đánh thắng là ta có cách đánh thắng.",
+        "ngay_hien_thi": "19/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày Bác Hồ đến thăm đơn vị bộ đội tên lửa Phòng không - Không quân (19/07/1965).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Qu%C3%A2n_ch%E1%BB%A7ng_Ph%C3%B2ng_kh%C3%B4ng_%E2%80%93_Kh%C3%B4ng_qu%C3%A2n_Vi%E1%BB%87t_Nam"
+            },
+            {
+                "type": "quote",
+                "name": "Lời căn dặn lịch sử của Chủ tịch Hồ Chí Minh với bộ đội tên lửa (1965)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_20_07",
+        "ten": "Ngày truyền thống Cảnh sát nhân dân Việt Nam",
+        "ngay_sinh": "20/07",
+        "nam_sinh": "1962",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Xã hội",
+        "category_id": "historical_event",
+        "image_slug": "ngay-truyen-thong-canh-sat-nhan-dan",
+        "mo_ta": "Ngày truyền thống vẻ vang của lực lượng Công an nhân dân. Ngày 20/07/1962, Chủ tịch Hồ Chí Minh đã ký Lệnh số 34/LCT công bố Pháp lệnh Cảnh sát nhân dân. Kể từ đó, lực lượng Cảnh sát nhân dân Việt Nam không ngừng lớn mạnh, luôn kiên trung bảo vệ an ninh quốc gia, giữ gìn trật tự an toàn xã hội với tinh thần 'vì nước quên thân, vì dân phục vụ'.",
+        "quote": "Đối với nhân dân, phải kính trọng, lễ phép. Đối với công việc, phải tận tụy. Đối với địch, phải cương quyết, khôn khéo.",
+        "ngay_hien_thi": "20/07",
+        "hien_thi_nhan_dip": "Kỷ niệm Ngày truyền thống lực lượng Cảnh sát nhân dân Việt Nam (20/07/1962).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/C%E1%BA%A3nh_s%C3%A1t_nh%C3%A2n_d%C3%A2n_Vi%E1%BB%87t_Nam"
+            },
+            {
+                "type": "quote",
+                "name": "Trích 6 điều Bác Hồ dạy Công an nhân dân",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_21_07",
+        "ten": "Nguyễn Tri Phương",
+        "ngay_sinh": "21/07",
+        "nam_sinh": "1800",
+        "ngay_mat": "20/12",
+        "nam_mat": "1873",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-tri-phuong-21-07-1800-20-12-1873",
+        "mo_ta": "Đại danh tướng kiệt xuất và trung thần rường cột bậc nhất của triều Nguyễn. Đảm nhận trọng trách Tổng thống quân vụ dập tắt hỏa lực phương Tây trên khắp ba miền (Đà Nẵng, Gia Định, Hà Nội), ông đã biến thân mình thành lũy thép chắn ngang quân thù. Khi thành Hà Nội vỡ, dẫu mang trọng thương và bị giặc Pháp giam giữ, ngài đã phẫn nộ cự tuyệt mọi sự chạy chữa, nhịn ăn cho đến lúc trút hơi thở cuối cùng để tạ tội với non sông.",
+        "quote": "Nay thành mất, thân ta chịu chết là đáng đạo làm tôi, thà chết chứ không để giặc làm nhục.",
+        "ngay_hien_thi": "21/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Đại danh tướng Nguyễn Tri Phương (21/07/1800).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_Tri_Ph%C6%B0%C6%A1ng"
+            },
+            {
+                "type": "quote",
+                "name": "Khí tiết lẫm liệt cự tuyệt quân Pháp lúc lâm chung",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_22_07",
+        "ten": "Hoàng Ngọc Hiến",
+        "ngay_sinh": "22/07",
+        "nam_sinh": "1930",
+        "ngay_mat": "24/01",
+        "nam_mat": "2011",
+        "linh_vuc": "Văn hóa - Văn học",
+        "category_id": "literature",
+        "image_slug": "hoang-ngoc-hien-22-07-1930-24-01-2011",
+        "mo_ta": "Giáo sư, nhà lý luận và phê bình văn học lỗi lạc của Việt Nam hiện đại, đồng thời là một dịch giả uyên bác. Sự nghiệp nghiên cứu của ông nổi bật với tư duy sắc sảo, dũng cảm đối diện với những khuôn sáo nghệ thuật đương thời để khởi xướng các cuộc tranh luận chấn động văn đàn. Ông là người đã truyền ngọn lửa sáng tạo tự do và bản lĩnh trí thức cho nhiều thế hệ nhà văn trẻ.",
+        "quote": "Văn học không thể chỉ là những tiếng vỗ tay xuôi chiều, nó phải mang hơi thở nhọc nhằn của sự thật và khao khát cái đẹp chân chính.",
+        "ngay_hien_thi": "22/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Giáo sư, nhà phê bình văn học Hoàng Ngọc Hiến (22/07/1930).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Ho%C3%A0ng_Ng%E1%BB%8Dc_Hi%E1%BA%BFn"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng đổi mới lý luận và phê bình nghệ thuật",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_23_07",
+        "ten": "Tạ Quang Bửu",
+        "ngay_sinh": "23/07",
+        "nam_sinh": "1910",
+        "ngay_mat": "21/08",
+        "nam_mat": "1986",
+        "linh_vuc": "Khoa học - Giáo dục",
+        "category_id": "culture",
+        "image_slug": "ta-quang-buu-23-07-1910-21-08-1986",
+        "mo_ta": "Giáo sư, kiến trúc sư vĩ đại đặt nền móng cho nền khoa học kỹ thuật và quốc phòng Việt Nam hiện đại. Khước từ tiền tài và danh vọng tại trời Tây, ông trở về nước phụng sự cách mạng, đảm nhiệm những chức vụ tối cao như Thứ trưởng Bộ Quốc phòng và Bộ trưởng Đại học và THCN. Bằng trí tuệ việt dã, ông đã trực tiếp chỉ đạo giải mã và rà phá thủy lôi, bom từ trường của Mỹ, bảo vệ huyết mạch giao thông đất nước.",
+        "quote": "Khoa học không có biên giới, nhưng nhà khoa học phải có Tổ quốc.",
+        "ngay_hien_thi": "23/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Giáo sư, nhà khoa học Tạ Quang Bửu (23/07/1910).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/T%E1%BA%A1_Quang_B%E1%BB%ADu"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng cống hiến tri thức vì độc lập dân tộc",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_24_07",
+        "ten": "Trần Văn Khê",
+        "ngay_sinh": "24/07",
+        "nam_sinh": "1921",
+        "ngay_mat": "24/06",
+        "nam_mat": "2015",
+        "linh_vuc": "Văn hóa - Âm nhạc",
+        "category_id": "culture",
+        "image_slug": "tran-van-khe-24-07-1921-24-06-2015",
+        "mo_ta": "Giáo sư, Tiến sĩ khoa học vĩ đại, cây đại thụ đã dành cả đời để làm nhịp cầu đưa di sản âm nhạc cổ truyền Việt Nam vươn ra thế giới. Hơn 50 năm bôn ba tại Pháp và các quốc gia, bằng vốn kiến thức uyên thâm, ông đã bảo vệ thành công và giúp Nhã nhạc cung đình Huế, Đờn ca tài tử Nam Bộ được UNESCO vinh danh là Di sản văn hóa phi vật thể của nhân loại.",
+        "quote": "Âm nhạc truyền thống là quốc hồn quốc túy. Đánh mất đi tiếng đàn bầu, điệu lý câu hò là đánh mất đi cội rễ thiêng liêng của dân tộc.",
+        "ngay_hien_thi": "24/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Giáo sư âm nhạc Trần Văn Khê (24/07/1921).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_V%C4%83n_Kh%C3%AA"
+            },
+            {
+                "type": "quote",
+                "name": "Tâm huyết bảo tồn hồn cốt âm nhạc dân gian Việt Nam",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_25_07",
+        "ten": "Nguyên Phi Ỷ Lan (Lê Thị Yến)",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "25/07",
+        "nam_mat": "1117",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "nguyen-phi-y-lan",
+        "mo_ta": "Hoàng thái hậu kiệt xuất của vương triều nhà Lý. Từ một cô gái hái dâu hiền thục, bà bước lên ngôi cao nhất hậu cung, hai lần nhiếp chính thay vua trị vì thiên hạ. Bà có công lớn khuyên bảo nông tang, trừng trị quan tham, chuộc nô tì và đưa nước Đại Việt vươn lên thái bình thịnh trị.",
+        "quote": "Gốc của thiên hạ là nhân dân. Trị nước dẫu dùng binh uy hay phép tắc, cuối cùng vẫn phải quy về sự no ấm của muôn dân.",
+        "ngay_hien_thi": "25/07",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Nguyên Phi Ỷ Lan (Lê Thị Yến).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/%E1%BB%B6_Lan"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng an dân trị quốc của Hoàng Thái hậu triều Lý",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_26_07",
+        "ten": "Tổ chức Khí tượng Thế giới",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Việt Nam chính thức trở thành thành viên của Tổ chức Khí tượng Thế giới WMO (1975).",
+        "quote": "",
+        "ngay_hien_thi": "26/07",
+        "hien_thi_nhan_dip": "Kỷ niệm Tổ chức Khí tượng Thế giới.",
+        "historical_source": []
+    },
+    {
+        "id": "ngay_27_07",
+        "ten": "Võ Trường Toản",
+        "ngay_sinh": "Không rõ",
+        "nam_sinh": "Không rõ",
+        "ngay_mat": "27/07",
+        "nam_mat": "1792",
+        "linh_vuc": "Văn hóa - Giáo dục",
+        "category_id": "culture",
+        "image_slug": "vo-truong-toan",
+        "mo_ta": "Người thầy vĩ đại, được suy tôn là 'Cụ tổ ngành giáo dục Nam Kỳ'. Với học vấn uyên thâm và nhân cách thanh cao, ông ẩn cư tại Gia Định mở trường dạy học, đào tạo ra hàng loạt nhân tài xuất chúng cho đất nước, tiêu biểu như Trịnh Hoài Đức, Lê Quang Định.",
+        "quote": "Sự học không chỉ để làm quan, mà trước hết là để làm người, thấu hiểu đạo lý tu tề trị bình.",
+        "ngay_hien_thi": "27/07",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Võ Trường Toản.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/V%C3%B5_Tr%C6%B0%E1%BB%9Dng_To%E1%BA%A3n"
+            },
+            {
+                "type": "quote",
+                "name": "Tư tưởng giáo dục của bậc hiền triết đất Gia Định",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_28_07",
+        "ten": "Trần Huy Liệu",
+        "ngay_sinh": "05/11",
+        "nam_sinh": "1901",
+        "ngay_mat": "28/07",
+        "nam_mat": "1969",
+        "linh_vuc": "Lịch sử - Khoa học",
+        "category_id": "historical_figure",
+        "image_slug": "tran-huy-lieu-05-11-1901-28-07-1969",
+        "mo_ta": "Nhà cách mạng, nhà báo, nhà sử học lỗi lạc. Ông là người đại diện cho Chính phủ Lâm thời vào Huế nhận ấn kiếm thoái vị của vua Bảo Đại, chấm dứt hoàn toàn chế độ phong kiến tại Việt Nam. Ông cũng là Viện trưởng đầu tiên của Viện Sử học Việt Nam.",
+        "quote": "Viết sử không chỉ là ghi chép dĩ vãng, mà là đúc kết sức mạnh và bài học truyền lại cho tương lai.",
+        "ngay_hien_thi": "28/07",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của Trần Huy Liệu.",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Tr%E1%BA%A7n_Huy_Li%E1%BB%87u"
+            },
+            {
+                "type": "quote",
+                "name": "Quan điểm nghiên cứu sử học của Viện trưởng Viện Sử học",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_29_07",
+        "ten": "Lý Thái Tông (Lý Phật Mã)",
+        "ngay_sinh": "29/07",
+        "nam_sinh": "1000",
+        "ngay_mat": "03/11",
+        "nam_mat": "1054",
+        "linh_vuc": "Lịch sử - Chính trị",
+        "category_id": "historical_figure",
+        "image_slug": "ly-thai-tong-29-07-1000-03-11-1054",
+        "mo_ta": "Vị hoàng đế thứ hai của triều Lý, một minh quân văn võ song toàn. Ngài là người đã ra lệnh đúc chuông quy điền, xây dựng chùa Một Cột (Diên Hựu) và đặc biệt là ban hành bộ 'Hình thư' - bộ luật thành văn đầu tiên trong lịch sử Việt Nam, mở ra kỷ nguyên trị quốc bằng pháp quyền.",
+        "quote": "Trẫm để tâm tới việc ngục tụng, xót thương kẻ thiếu hiểu biết mà lỡ sa vào pháp luật. Nay trẫm sai chép các điều luật thành sách Hình thư để bá tánh được rõ bề tuân giữ.",
+        "ngay_hien_thi": "29/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của Lý Thái Tông (Lý Phật Mã).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/L%C3%BD_Th%C3%A1i_T%C3%B4ng"
+            },
+            {
+                "type": "quote",
+                "name": "Chiếu ban hành Hình thư (Đại Việt sử ký toàn thư)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_30_07",
+        "ten": "Trung tướng Nguyễn Bình (Nguyễn Phương Thảo)",
+        "ngay_sinh": "30/07",
+        "nam_sinh": "1908",
+        "ngay_mat": "29/09",
+        "nam_mat": "1951",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "military",
+        "image_slug": "nguyen-binh-30-07-1908-29",
+        "mo_ta": "Vị Trung tướng đầu tiên của Quân đội nhân dân Việt Nam, một huyền thoại quân sự kiệt xuất và bản lĩnh hào hiệp. Từ một trí thức yêu nước, ông được Bác Hồ tin tưởng phái vào Nam bẹp nát mọi chia rẽ, thống nhất các lực lượng vũ trang thành Quân Giải phóng Nam Bộ. Tinh thần võ dũng, mưu lược và khí phách kiên trung của ông đã khiến quân thù nể sợ và đồng bào Nam Bộ suy tôn là 'Độc nhãn tướng quân'.",
+        "quote": "Bác giao miền Nam cho chú, chú phải nắm cho được, đánh cho kỳ thắng, thống nhất cho được giang sơn.",
+        "ngay_hien_thi": "30/07",
+        "hien_thi_nhan_dip": "Kỷ niệm ngày sinh của vị Trung tướng đầu tiên của quân đội - Nguyễn Bình (30/07/1908).",
+        "historical_sources": [
+            {
+                "type": "biography",
+                "name": "Wikipedia tiếng Việt",
+                "url": "https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_B%C3%ACnh"
+            },
+            {
+                "type": "quote",
+                "name": "Lời gửi gắm lịch sử của Chủ tịch Hồ Chí Minh dành cho Tướng Nguyễn Bình khi lên đường vào Nam (1945)",
+                "url": null
+            }
+        ]
+    },
+    {
+        "id": "ngay_31_07",
+        "ten": "Thành lập Ủy ban Dân số",
+        "ngay_sinh": "",
+        "nam_sinh": "",
+        "ngay_mat": "",
+        "nam_mat": "",
+        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
+        "category_id": "su-kien-lich-su",
+        "image_slug": "",
+        "mo_ta": "Kỷ niệm ngày truyền thống ngành Dân số - Kế hoạch hóa gia đình.",
+        "quote": "",
+        "ngay_hien_thi": "31/07",
+        "hien_thi_nhan_dip": "Kỷ niệm Thành lập Ủy ban Dân số.",
+        "historical_source": []
+    }
+]

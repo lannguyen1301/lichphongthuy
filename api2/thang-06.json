@@ -28,27 +28,27 @@
     },
     {
         "id": "ngay_02_06",
-        "ten": "Phan Phú Thứ",
-        "ngay_sinh": "Không rõ",
-        "nam_sinh": "1821",
-        "ngay_mat": "Không rõ",
-        "nam_mat": "1882",
-        "linh_vuc": "Văn hóa - Đổi mới",
+        "ten": "Phạm Huỳnh Tam Lang",
+        "ngay_sinh": "14/02",
+        "nam_sinh": "1942",
+        "ngay_mat": "02/06",
+        "nam_mat": "2014",
+        "linh_vuc": "Văn hóa - Thể thao",
         "category_id": "culture",
-        "image_slug": "phan-phu-thu",
-        "mo_ta": "Đại thần triều Nguyễn, một trong những nhà tư tưởng canh tân sớm nhất của Việt Nam. Đi sứ sang Pháp, ông đã tận mắt chứng kiến sự phát triển của phương Tây và liên tục dâng sớ xin vua Tự Đức mở cửa, chấn hưng thực nghiệp, đóng tàu sắt để tự cường cứu nước.",
-        "quote": "Nước muốn tự cường phải biết học hỏi cái hay của phương Tây, chấn hưng thực nghiệp, phát triển giao thương.",
+        "image_slug": "pham-huynh-tam-lang14-02-1942-02-06-2014",
+        "mo_ta": "Tượng đài bất tử của nền bóng đá Việt Nam. Sở hữu lối đá trung vệ hào hoa, điềm tĩnh và tư duy chiến thuật xuất chúng, ông là người đội trưởng huyền thoại đã nâng cao chiếc cúp vô địch Merdeka lịch sử năm 1966. Sau ngày đất nước thống nhất, ông trở thành vị huấn luyện viên vĩ đại đưa câu lạc bộ Cảng Sài Gòn bước vào kỷ nguyên hoàng kim. Không chỉ là một tài năng kiệt xuất, ông còn được nhân dân kính trọng bởi nhân cách sống khiêm nhường, đạo đức trong sáng và tận hiến.",
+        "quote": "Thể thao không chỉ là chuyện thắng thua trên sân cỏ, mà còn là nơi rèn giũa nhân cách, sự trung thực và lòng tự trọng của một con người.",
         "ngay_hien_thi": "02/06",
-        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Phan Phú Thứ.",
+        "hien_thi_nhan_dip": "Tưởng nhớ ngày mất của danh thủ, huấn luyện viên huyền thoại Phạm Huỳnh Tam Lang (02/06/2014).",
         "historical_sources": [
             {
                 "type": "biography",
                 "name": "Wikipedia tiếng Việt",
-                "url": "https://vi.wikipedia.org/wiki/Phan_Ph%C3%BA_Th%E1%BB%A9"
+                "url": "https://vi.wikipedia.org/wiki/Ph%E1%BA%A1m_Hu%E1%BB%B3nh_Tam_Lang"
             },
             {
                 "type": "quote",
-                "name": "Tư tưởng canh tân trong các bản điều trần gửi vua Tự Đức",
+                "name": "Nhân cách thể thao cao thượng của tượng đài Phạm Huỳnh Tam Lang",
                 "url": null
             }
         ]
@@ -190,27 +190,27 @@
     },
     {
         "id": "ngay_08_06",
-        "ten": "Khúc Hạo",
-        "ngay_sinh": "Không rõ",
-        "nam_sinh": "Không rõ",
-        "ngay_mat": "Không rõ",
-        "nam_mat": "917",
-        "linh_vuc": "Lịch sử - Hành chính",
-        "category_id": "historical_figure",
-        "image_slug": "khuc-hao",
-        "mo_ta": "Nhà cải cách lớn, vị cai trị tài ba thời kỳ tự chủ đầu tiên của nước nhà. Kế nghiệp cha là Khúc Thừa Dụ, ngài đã tiến hành cuộc cải cách hành chính toàn diện sâu rộng, chia lại ruộng đất, giảm nhẹ sưu thuế, đặt nền móng pháp lý vững chắc cho một quốc gia độc lập.",
-        "quote": "Chính sự cốt chuộng khoan dung, giản dị, nhân dân đều được yên vui.",
+        "ten": "Sự kiện bức ảnh lịch sử \"Em bé Napalm\"",
+        "ngay_sinh": "08/06",
+        "nam_sinh": "1972",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Sự kiện",
+        "category_id": "historical_event",
+        "image_slug": "buc-anh-em-be-napalm-08-06-1972",
+        "mo_ta": "Một trong những khoảnh khắc gây chấn động nhất trong lịch sử nhiếp ảnh thế giới và chiến tranh Việt Nam. Ngày 08/06/1972, tại Trảng Bàng (Tây Ninh), phóng viên Nick Út đã ghi lại hình ảnh cô bé Phan Thị Kim Phúc đang hoảng loạn chạy thoát thân khỏi trận bom napalm của quân đội Sài Gòn. Bức ảnh mang sức mạnh hơn vạn lời nói, lập tức thổi bùng lên làn sóng phản chiến dữ dội trên toàn cầu, thức tỉnh lương tri nhân loại.",
+        "quote": "Bức ảnh phơi bày sự khốc liệt tận cùng của chiến tranh phi nghĩa, góp phần làm thay đổi cục diện dư luận thế giới về cuộc chiến tại Việt Nam.",
         "ngay_hien_thi": "08/06",
-        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Khúc Hạo.",
+        "hien_thi_nhan_dip": "Kỷ niệm sự kiện bức ảnh lịch sử \"Em bé Napalm\" ra đời (08/06/1972).",
         "historical_sources": [
             {
-                "type": "biography",
+                "type": "history",
                 "name": "Wikipedia tiếng Việt",
-                "url": "https://vi.wikipedia.org/wiki/Kh%C3%BAc_H%E1%BA%A1o"
+                "url": "https://vi.wikipedia.org/wiki/Em_b%C3%A9_Napalm"
             },
             {
                 "type": "quote",
-                "name": "Đường lối trị quốc ghi trong sử cũ (Đại Việt sử ký toàn thư)",
+                "name": "Đánh giá của giới truyền thông quốc tế về sức mạnh của bức ảnh",
                 "url": null
             }
         ]
@@ -433,27 +433,27 @@
     },
     {
         "id": "ngay_17_06",
-        "ten": "Lý Chiêu Hoàng (Phật Kim)",
-        "ngay_sinh": "Không rõ",
-        "nam_sinh": "1218",
-        "ngay_mat": "Không rõ",
-        "nam_mat": "1278",
-        "linh_vuc": "Lịch sử - Chính trị",
-        "category_id": "historical_figure",
-        "image_slug": "ly-chieu-hoang",
-        "mo_ta": "Nữ hoàng đế đầu tiên và duy nhất trong lịch sử phong kiến Việt Nam. Bà là vị vua cuối cùng của triều Lý, người đã chứng kiến và mang trong mình bi kịch chuyển giao quyền lực lịch sử từ nhà Lý sang nhà Trần, khép lại một vương triều từng rực rỡ suốt hơn hai thế kỷ.",
-        "quote": "Cơ nghiệp nhà Lý dứt ở tay ta, đó là mệnh trời, dẫu xót xa cũng không bề xoay chuyển.",
+        "ten": "Ngày xử tử các chí sĩ Khởi nghĩa Yên Bái (Nguyễn Thái Học, Phó Đức Chính...)",
+        "ngay_sinh": "17/06",
+        "nam_sinh": "1930",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Cách mạng",
+        "category_id": "historical_event",
+        "image_slug": "ngay-xu-tu-chi-si-yen-bai-17-06-1930",
+        "mo_ta": "Bản anh hùng ca bi tráng bậc nhất của phong trào yêu nước đầu thế kỷ 20. Rạng sáng ngày 17/06/1930, tại pháp trường Yên Bái, lãnh tụ Nguyễn Thái Học, chí sĩ Phó Đức Chính cùng 11 đồng chí trong Việt Nam Quốc dân Đảng đã hiên ngang bước lên đoạn đầu đài, hô vang khẩu hiệu 'Việt Nam muôn năm!', minh chứng sáng ngời cho khí phách 'không thành công cũng thành nhân'.",
+        "quote": "Không thành công cũng thành nhân! Chết vì Tổ quốc là cái chết vinh quang nhất.",
         "ngay_hien_thi": "17/06",
-        "hien_thi_nhan_dip": "Tôn vinh cuộc đời, sự nghiệp và những cống hiến vĩ đại của Lý Chiêu Hoàng (Phật Kim).",
+        "hien_thi_nhan_dip": "Tưởng niệm ngày hy sinh anh dũng của các liệt sĩ Khởi nghĩa Yên Bái (17/06/1930).",
         "historical_sources": [
             {
-                "type": "biography",
+                "type": "history",
                 "name": "Wikipedia tiếng Việt",
-                "url": "https://vi.wikipedia.org/wiki/L%C3%BD_Chi%C3%AAu_Ho%C3%A0ng"
+                "url": "https://vi.wikipedia.org/wiki/Kh%E1%BB%9Fi_ngh%C4%A9a_Y%C3%AAn_B%C3%A1i"
             },
             {
                 "type": "quote",
-                "name": "Tương truyền về bi kịch chuyển giao vương triều",
+                "name": "Khí tiết bất khuất của nhà lãnh đạo Nguyễn Thái Học trước pháp trường thực dân Pháp",
                 "url": null
             }
         ]
@@ -649,19 +649,25 @@
     },
     {
         "id": "ngay_25_06",
-        "ten": "Luật Đầu tư nước ngoài",
-        "ngay_sinh": "",
-        "nam_sinh": "",
-        "ngay_mat": "",
-        "nam_mat": "",
-        "linh_vuc": "Sự kiện Lịch sử - Văn hóa",
-        "category_id": "su-kien-lich-su",
-        "image_slug": "",
-        "mo_ta": "Quốc hội thông qua Luật Đầu tư nước ngoài, mở cửa hội nhập kinh tế quốc tế.",
-        "quote": "",
+        "ten": "Biệt động Sài Gòn tấn công Nhà hàng nổi Mỹ Cảnh",
+        "ngay_sinh": "25/06",
+        "nam_sinh": "1965",
+        "ngay_mat": "Không có",
+        "nam_mat": "Không có",
+        "linh_vuc": "Lịch sử - Quân sự",
+        "category_id": "historical_event",
+        "image_slug": "biet-dong-sai-gon-my-canh-25-06-1965",
+        "mo_ta": "Một trong những chiến công vang dội và táo bạo nhất của lực lượng Biệt động Sài Gòn ngay giữa sào huyệt đối phương. Đêm ngày 25/06/1965, các chiến sĩ biệt động đã gài mìn tấn công Nhà hàng nổi Mỹ Cảnh trên sông Sài Gòn – tụ điểm ăn chơi được bảo vệ nghiêm ngặt của giới sĩ quan Mỹ, giáng một đòn sấm sét vào ý chí xâm lược của quân đội viễn chinh.",
+        "quote": "Xuất quỷ nhập thần, đánh trúng đầu não địch ngay giữa lòng thành phố, đó là khí phách của lực lượng Biệt động Sài Gòn.",
         "ngay_hien_thi": "25/06",
-        "hien_thi_nhan_dip": "Kỷ niệm Luật Đầu tư nước ngoài.",
-        "historical_source": []
+        "hien_thi_nhan_dip": "Kỷ niệm chiến công tấn công Nhà hàng nổi Mỹ Cảnh của Biệt động Sài Gòn (25/06/1965).",
+        "historical_sources": [
+            {
+                "type": "history",
+                "name": "Wikipedia tiếng Việt & Lịch sử Biệt động Sài Gòn",
+                "url": "https://vi.wikipedia.org/wiki/Nh%C3%A0_h%C3%A0ng_M%E1%BB%B9_C%E1%BA%A3nh"
+            }
+        ]
     },
     {
         "id": "ngay_26_06",
@@ -749,11 +755,11 @@
         "ten": "Châu Văn Liêm",
         "ngay_sinh": "29/06",
         "nam_sinh": "1902",
-        "ngay_mat": "04/06",
+        "ngay_mat": "04/05",
         "nam_mat": "1930",
         "linh_vuc": "Lịch sử - Cách mạng",
         "category_id": "historical_figure",
-        "image_slug": "chau-van-liem",
+        "image_slug": "chau-van-liem-29-06-1902-04-05-1939",
         "mo_ta": "Nhà cách mạng tiền bối kiên trung, một trong những người sáng lập An Nam Cộng sản Đảng – tổ chức tiền thân của Đảng Cộng sản Việt Nam. Trưởng thành từ phong trào yêu nước ở Nam Bộ, ông đã cống hiến trọn vẹn tuổi trẻ cho sự nghiệp tuyên truyền lý luận cách mạng, xây dựng cơ sở đảng và trực tiếp lãnh đạo phong trào đấu tranh của công nông trước khi anh dũng hy sinh.",
         "quote": "Đảng ra đời là bước ngoặt quyết định vận mệnh dân tộc, người cộng sản nguyện hiến dâng cả máu xương cho lý tưởng chung.",
         "ngay_hien_thi": "29/06",

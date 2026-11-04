@@ -1,0 +1,9 @@
+// scss/themes/_index.scss
+@use "../abstracts" as abs;
+
+// Khởi tạo 5 mệnh Ngũ hành (Mệnh Thổ làm mặc định cho :root)
+@include abs.generate-theme("earth", $is-default: true);
+@include abs.generate-theme("fire");
+@include abs.generate-theme("metal");
+@include abs.generate-theme("water");
+@include abs.generate-theme("wood");

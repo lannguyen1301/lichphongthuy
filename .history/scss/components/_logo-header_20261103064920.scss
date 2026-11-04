@@ -1,0 +1,39 @@
+// scss/components/_logo-header.scss
+@use "../abstracts" as abs;
+
+.header__logo {
+    @extend %flexItemFixed;
+
+    &-link {
+        @extend %inlineFlexCenter;
+    }
+
+    &-img {
+        height: 4.2rem;
+        width: auto;
+        @extend %imgResponsive;
+
+        @include abs.screen(md) {
+            height: 3.4rem;
+        }
+    }
+}
+
+.header__home {
+    @extend %flexItemFixed;
+
+    &-link {
+        @extend %inlineFlexCenter;
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        transition: var(--theme-transition), transform 0.2s ease;
+
+        &:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+}
