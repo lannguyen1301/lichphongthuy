@@ -5,12 +5,24 @@
    Sử dụng cờ !default để cho phép ghi đè trong môi trường module hóa,
    bảo vệ mã nguồn khỏi các xung đột khi tích hợp giao diện (theming).
    ========================================================================== */
-.month-cal__option, .header__date-group,
-.header__time-group, .header__widget-btn, .btn, .sidebar__tooltip {
+.month-cal__option, .month-cal__badge, .header__date-group,
+.header__time-group, .header__widget-btn, .btn, .sidebar__tooltip, .footer__version-badge {
   white-space: nowrap;
 }
 
-.fengshui-hours, .fengshui-card__ages, .fengshui-actions {
+.footer__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fengshui-hours, .fengshui-card__ages, .fengshui-actions, .footer__card--links {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
@@ -27,42 +39,53 @@
   justify-content: flex-start;
 }
 
-.home-page__left, .month-cal, .month-cal__dropdown-menu--year, .fengshui-stack, .fengshui-card, .fengshui-actions__box, .bloc-card, .bloc-card__month-box, .bloc-card__date-hero, .bloc-card__canchi-list, .bloc-card__quick-fengshui, .sidebar__list {
+.month-cal__cell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.home-page__left, .month-cal, .month-cal__dropdown-menu--year, .fengshui-stack, .fengshui-card, .fengshui-actions__box, .bloc-card, .bloc-card__month-box, .bloc-card__date-hero, .bloc-card__canchi-list, .bloc-card__quick-fengshui, .sidebar__list, .footer__card, .footer__list {
   display: flex;
   flex-direction: column;
 }
 
-.month-cal__cell, .bloc-card__lunar-num-box {
+.bloc-card__lunar-num-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.month-cal__controls, .fengshui-hours__title, .fengshui-card__head, .header__datetime-wrapper, .header__date-group,
-.header__time-group, .header__left, .header__right {
+.month-cal__controls, .month-cal__dots, .fengshui-hours__title, .fengshui-card__head, .header__datetime-wrapper, .header__date-group,
+.header__time-group, .footer__elements, .footer__input-group, .footer__social-list, .header__left, .header__right {
   display: flex;
   align-items: center;
 }
 
-.month-cal__toolbar, .fengshui-actions__header, .bloc-card__top, .header__container {
+.month-cal__toolbar, .fengshui-actions__header, .bloc-card__top, .footer__brand-head, .footer__contact, .footer__social, .footer__bottom-bar, .header__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.fengshui-actions__list {
+.fengshui-actions__list, .footer__elements-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
 }
 
-.month-cal__nav-btn, .month-cal__summary, .month-cal__option, .month-cal__legend-pill, .fengshui-actions__icon, .bloc-card__share-btn, .header__logo-link, .header__widget-btn, .btn, .header__lang-summary, .header__theme-summary {
+.month-cal__nav-btn, .month-cal__summary, .month-cal__option, .month-cal__legend-pill, .fengshui-actions__icon, .bloc-card__share-btn, .header__logo-link, .header__widget-btn, .btn, .footer__logo-link, .footer__social-link, .footer__top-btn, .header__lang-summary, .header__theme-summary {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
+}
+
+.footer__input {
+  flex: 1 1 0%;
+  min-width: 0;
 }
 
 .fengshui-hours__dot, .header__logo, .header__widget, .header__widget-icon {
@@ -114,11 +137,11 @@
     transform: translateY(0);
   }
 }
-.month-cal, .month-cal__summary, .month-cal__option, .fengshui-hours__box, .fengshui-card, .bloc-card, .header__datetime-wrapper, .sidebar__link, .header__lang-summary, .header__theme-summary, .header__lang-link, .header__theme-btn, .header__burger {
+.month-cal, .month-cal__summary, .month-cal__option, .fengshui-hours__box, .fengshui-card, .bloc-card, .header__datetime-wrapper, .sidebar__link, .footer__card, .footer__link, .footer__bottom-bar, .header__lang-summary, .header__theme-summary, .header__lang-link, .header__theme-btn, .header__burger {
   transition: var(--theme-transition);
 }
 
-.month-cal__nav-btn, .month-cal__cell, .month-cal__legend-pill, .bloc-card__share-btn, .header__widget-btn, .btn {
+.month-cal__nav-btn, .month-cal__cell, .month-cal__legend-pill, .bloc-card__share-btn, .header__widget-btn, .btn, .footer__element-dot, .footer__social-link, .footer__top-btn {
   transition: var(--theme-transition), transform 0.2s ease;
 }
 
@@ -169,11 +192,11 @@
   animation: pulse 2s ease-in-out infinite;
 }
 
-.month-cal, .month-cal__summary, .month-cal__option, .fengshui-hours__box, .fengshui-card, .bloc-card, .header__datetime-wrapper, .sidebar__link, .header__lang-summary, .header__theme-summary, .header__lang-link, .header__theme-btn, .header__burger {
+.month-cal, .month-cal__summary, .month-cal__option, .fengshui-hours__box, .fengshui-card, .bloc-card, .header__datetime-wrapper, .sidebar__link, .footer__card, .footer__link, .footer__bottom-bar, .header__lang-summary, .header__theme-summary, .header__lang-link, .header__theme-btn, .header__burger {
   transition: var(--theme-transition);
 }
 
-.month-cal__nav-btn, .month-cal__cell, .month-cal__legend-pill, .bloc-card__share-btn, .header__widget-btn, .btn {
+.month-cal__nav-btn, .month-cal__cell, .month-cal__legend-pill, .bloc-card__share-btn, .header__widget-btn, .btn, .footer__element-dot, .footer__social-link, .footer__top-btn {
   transition: var(--theme-transition), transform 0.2s ease;
 }
 
@@ -1484,6 +1507,228 @@ strong {
   transform: translateY(-0.7rem) rotate(-45deg);
 }
 
+.footer {
+  margin-top: 60px;
+  padding-bottom: 4rem;
+  color: var(--text-color);
+}
+.footer__bento-row {
+  --grid-gutter-y: 2.4rem;
+}
+.footer__card {
+  justify-content: space-between;
+  height: 100%;
+  padding: 2.8rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 2.4rem;
+  box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+}
+.footer__card:hover {
+  border-color: var(--primary-color);
+}
+@media (max-width: 767.98px) {
+  .footer__card {
+    padding: 2rem;
+    border-radius: 1.8rem;
+  }
+}
+.footer__card--links {
+  gap: 2rem;
+}
+@media (max-width: 575.98px) {
+  .footer__card--links {
+    grid-template-columns: 1fr;
+  }
+}
+.footer__brand-head {
+  gap: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+.footer__logo-link {
+  gap: 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+.footer__logo-img {
+  height: 3.6rem;
+  width: auto;
+}
+.footer__version-badge {
+  padding: 0.4rem 1rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.footer__desc, .footer__sub-desc {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+}
+.footer__elements {
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.6rem;
+  background-color: var(--bg-surface);
+  border-radius: 1.4rem;
+  border: 1px solid var(--border-color);
+}
+.footer__elements-label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.footer__element-dot {
+  padding: 0.4rem 1rem;
+  border-radius: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+.footer__element-dot:hover, .footer__element-dot.is-active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.footer__contact {
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-style: normal;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  padding-top: 1.4rem;
+  border-top: 1px dashed var(--border-color);
+}
+.footer__contact-link {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.footer__contact-link:hover {
+  text-decoration: underline;
+}
+.footer__heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1.4rem;
+}
+.footer__list {
+  gap: 1rem;
+}
+.footer__link {
+  font-size: 1.4rem;
+  color: var(--text-muted);
+}
+.footer__link:hover {
+  color: var(--primary-color);
+}
+.footer__link--btn {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.footer__input-group {
+  gap: 0.8rem;
+  padding: 0.4rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+.footer__input-group:focus-within {
+  border-color: var(--primary-color);
+}
+.footer__input {
+  padding: 0.8rem 1rem;
+  font-size: 1.3rem;
+  color: var(--text-color);
+}
+.footer__submit-btn {
+  height: 3.6rem;
+  padding: 0 1.4rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-radius: 1rem;
+  font-size: 1.3rem;
+}
+.footer__submit-btn:hover {
+  background-color: var(--primary-hover);
+}
+.footer__feedback {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-success);
+  margin-bottom: 1.2rem;
+}
+.footer__social {
+  padding-top: 1.4rem;
+  border-top: 1px dashed var(--border-color);
+}
+.footer__social-label {
+  font-size: 1.3rem;
+  color: var(--text-muted);
+}
+.footer__social-list {
+  gap: 0.8rem;
+}
+.footer__social-link {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 1rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+.footer__social-link:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+.footer__bottom-bar {
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  margin-top: 2.4rem;
+  padding: 1.6rem 2.4rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 2rem;
+  box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+}
+@media (max-width: 575.98px) {
+  .footer__bottom-bar {
+    padding: 1.4rem 1.6rem;
+    border-radius: 1.6rem;
+  }
+}
+.footer__copyright {
+  font-size: 1.3rem;
+  color: var(--text-muted);
+}
+.footer__top-btn {
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 1.2rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+.footer__top-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
 #sidebar-root {
   display: contents;
 }
@@ -2294,8 +2539,10 @@ strong {
 .month-cal__cell {
   position: relative;
   overflow: hidden;
-  min-height: 9rem;
-  padding: 1rem 0.6rem;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 9.6rem;
+  padding: 1rem 1rem 0.8rem;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: 1.6rem;
@@ -2304,32 +2551,40 @@ strong {
 }
 @media (max-width: 1199.98px) {
   .month-cal__cell {
-    min-height: 7.8rem;
+    min-height: 8.6rem;
+    padding: 0.8rem;
   }
 }
 @media (max-width: 575.98px) {
   .month-cal__cell {
-    min-height: 6rem;
-    border-radius: 1rem;
-    padding: 0.6rem 0.2rem;
+    min-height: 6.6rem;
+    border-radius: 1.2rem;
+    padding: 0.6rem 0.5rem;
   }
 }
 .month-cal__cell:hover, .month-cal__cell:focus-visible {
   border-color: var(--primary-color);
+  background-color: var(--body-bg);
   transform: translateY(-2px);
-  box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+  box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
 }
 .month-cal__cell:hover .month-cal__zodiac-img, .month-cal__cell:focus-visible .month-cal__zodiac-img {
-  opacity: 0.26;
-  filter: grayscale(0%);
-  transform: scale(1.15) rotate(0deg) translate(-0.2rem, -0.2rem);
+  opacity: 0.88;
+  transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
 }
 .month-cal__cell--muted {
-  opacity: 0.42;
+  opacity: 0.45;
   background-color: transparent;
+}
+.month-cal__cell--muted .month-cal__zodiac-img {
+  opacity: 0.1;
 }
 .month-cal__cell--today {
   border: 2px solid var(--primary-color);
+  background-color: var(--body-bg);
+}
+.month-cal__cell--today .month-cal__solar {
+  color: var(--primary-color);
 }
 .month-cal__cell--active {
   background-color: var(--primary-color);
@@ -2341,10 +2596,15 @@ strong {
 .month-cal__cell--active .month-cal__lunar {
   color: #ffffff;
 }
+.month-cal__cell--active .month-cal__badge {
+  background-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
 .month-cal__cell--active .month-cal__zodiac-img {
-  opacity: 0.24;
+  opacity: 0.35;
   filter: brightness(0) invert(1);
-  transform: scale(1.1) rotate(0deg);
+  transform: scale(1.06) rotate(0deg);
 }
 .month-cal__cell.is-highlighted {
   opacity: 1 !important;
@@ -2355,38 +2615,37 @@ strong {
   z-index: 2;
 }
 .month-cal__cell.is-highlighted .month-cal__zodiac-img {
-  opacity: 0.25;
-  filter: grayscale(0%);
-  transform: scale(1.12) rotate(0deg);
+  opacity: 0.85;
+  transform: scale(1.1) rotate(0deg);
 }
 .month-cal__cell.is-dimmed {
   opacity: 0.18;
   transform: scale(0.96);
 }
-.month-cal__zodiac-img {
-  position: absolute;
-  right: -0.4rem;
-  bottom: -0.4rem;
-  width: 4.6rem;
-  height: 4.6rem;
-  object-fit: contain;
-  opacity: 0.08;
-  filter: grayscale(100%);
-  transform: scale(0.85) rotate(-12deg);
-  pointer-events: none;
-  z-index: -1;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease, filter 0.25s ease;
+.month-cal__date-head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  line-height: 1;
 }
 @media (max-width: 575.98px) {
-  .month-cal__zodiac-img {
-    width: 3rem;
-    height: 3rem;
+  .month-cal__date-head {
+    flex-direction: column;
+    gap: 0.2rem;
   }
 }
 .month-cal__solar {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--text-color);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 1199.98px) {
+  .month-cal__solar {
+    font-size: 1.8rem;
+  }
 }
 @media (max-width: 575.98px) {
   .month-cal__solar {
@@ -2394,10 +2653,10 @@ strong {
   }
 }
 .month-cal__lunar {
-  margin-top: 0.4rem;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
 }
 @media (max-width: 575.98px) {
   .month-cal__lunar {
@@ -2408,36 +2667,82 @@ strong {
   position: absolute;
   top: 0.6rem;
   right: 0.6rem;
-  padding: 0.15rem 0.6rem;
+  z-index: 3;
+  padding: 0.2rem 0.65rem;
   background-color: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   color: var(--color-danger);
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   border-radius: 0.6rem;
+  line-height: 1.2;
 }
 @media (max-width: 575.98px) {
   .month-cal__badge {
-    display: none;
+    top: 0.4rem;
+    right: 0.4rem;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.9rem;
   }
 }
+.month-cal__dots {
+  position: relative;
+  z-index: 2;
+  gap: 0.5rem;
+  margin-top: auto;
+}
 .month-cal__dot {
-  position: absolute;
-  bottom: 0.8rem;
-  width: 0.65rem;
-  height: 0.65rem;
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
   border-radius: 50%;
 }
+@media (max-width: 575.98px) {
+  .month-cal__dot {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+}
 .month-cal__dot--good {
-  left: 0.8rem;
   background-color: #eab308;
+  box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.25);
 }
 .month-cal__dot--bad {
-  left: 0.8rem;
   background-color: #374151;
+  box-shadow: 0 0 0 2px rgba(55, 65, 81, 0.2);
 }
 .month-cal__dot--holiday {
-  right: 0.8rem;
   background-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25);
+}
+.month-cal__zodiac-img {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.4rem;
+  width: 4.8rem;
+  height: 4.8rem;
+  object-fit: contain;
+  opacity: 0.18;
+  filter: var(--zodiac-filter);
+  transform: scale(0.78) rotate(-8deg);
+  transform-origin: bottom right;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, filter 0.3s ease;
+}
+@media (max-width: 1199.98px) {
+  .month-cal__zodiac-img {
+    width: 4.2rem;
+    height: 4.2rem;
+  }
+}
+@media (max-width: 575.98px) {
+  .month-cal__zodiac-img {
+    width: 3rem;
+    height: 3rem;
+    right: 0.2rem;
+    bottom: 0.2rem;
+  }
 }
 .month-cal__legend {
   flex-wrap: wrap;
@@ -2511,34 +2816,26 @@ strong {
   --primary-color: #f59e0b;
   --secondary-color: #ef4444;
   --accent-color: #eab308;
-  --primary-hover: #d97706;
-  --primary-active: #b45309;
-  --focus-ring-color: var(--primary-color);
-  --bg-disabled: #e7e5e4;
-  --text-disabled: #a8a29e;
-  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  /* 2. NHÓM TRẠNG THÁI */
   --color-success: #22c55e;
   --color-warning: #eab308;
   --color-danger: #ef4444;
   --color-info: #0ea5e9;
-  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  /* 3. NHÓM TƯƠNG TÁC */
   --primary-hover: #d97706;
   --primary-active: #b45309;
   --focus-ring-color: var(--primary-color);
   --bg-disabled: #e7e5e4;
   --text-disabled: #a8a29e;
-  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  /* 4. NHÓM THÀNH PHẦN KHÁC & FILTER 12 CON GIÁP */
   --icon-color: var(--text-muted);
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  /* =========================================================
-     CHẾ ĐỘ TỐI (DARK MODE) 
-     ========================================================= */
+  --zodiac-filter: hue-rotate(28deg) saturate(1.15) brightness(0.92);
 }
 @media (prefers-color-scheme: dark) {
   :root, [data-theme=earth] {
-    /* 1. Nhóm Nền & Chữ */
     --body-bg: #78350f;
     --bg-surface: #92400e;
     --text-color: #f5f5f4;
@@ -2547,19 +2844,17 @@ strong {
     --primary-color: #f59e0b;
     --secondary-color: #f87171;
     --accent-color: #facc15;
-    /* 2. Nhóm Trạng thái */
     --color-success: #4ade80;
     --color-warning: #facc15;
     --color-danger: #f87171;
     --color-info: #38bdf8;
-    /* 3. Nhóm Tương tác */
     --primary-hover: #fbbf24;
     --primary-active: #fcd34d;
     --bg-disabled: #292524;
     --text-disabled: #57534e;
-    /* 4. Nhóm Thành phần khác */
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
+    --zodiac-filter: hue-rotate(28deg) saturate(1.15) brightness(0.92) brightness(1.2);
   }
 }
 
@@ -2573,34 +2868,26 @@ strong {
   --primary-color: #ef4444;
   --secondary-color: #10b981;
   --accent-color: #f97316;
-  --primary-hover: #dc2626;
-  --primary-active: #b91c1c;
-  --focus-ring-color: var(--primary-color);
-  --bg-disabled: #e7e5e4;
-  --text-disabled: #a8a29e;
-  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  /* 2. NHÓM TRẠNG THÁI */
   --color-success: #22c55e;
   --color-warning: #eab308;
   --color-danger: #ef4444;
   --color-info: #0ea5e9;
-  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  /* 3. NHÓM TƯƠNG TÁC */
   --primary-hover: #dc2626;
   --primary-active: #b91c1c;
   --focus-ring-color: var(--primary-color);
   --bg-disabled: #e7e5e4;
   --text-disabled: #a8a29e;
-  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  /* 4. NHÓM THÀNH PHẦN KHÁC & FILTER 12 CON GIÁP */
   --icon-color: var(--text-muted);
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  /* =========================================================
-     CHẾ ĐỘ TỐI (DARK MODE) 
-     ========================================================= */
+  --zodiac-filter: hue-rotate(0deg) saturate(1.1) brightness(0.98);
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=fire] {
-    /* 1. Nhóm Nền & Chữ */
     --body-bg: #7f1d1d;
     --bg-surface: #991b1b;
     --text-color: #f5f5f4;
@@ -2609,19 +2896,17 @@ strong {
     --primary-color: #ef4444;
     --secondary-color: #34d399;
     --accent-color: #fb923c;
-    /* 2. Nhóm Trạng thái */
     --color-success: #4ade80;
     --color-warning: #facc15;
     --color-danger: #f87171;
     --color-info: #38bdf8;
-    /* 3. Nhóm Tương tác */
     --primary-hover: #f87171;
     --primary-active: #fca5a5;
     --bg-disabled: #292524;
     --text-disabled: #57534e;
-    /* 4. Nhóm Thành phần khác */
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
+    --zodiac-filter: hue-rotate(0deg) saturate(1.1) brightness(0.98) brightness(1.2);
   }
 }
 
@@ -2635,34 +2920,26 @@ strong {
   --primary-color: #eab308;
   --secondary-color: #f59e0b;
   --accent-color: #6b7280;
-  --primary-hover: #ca8a04;
-  --primary-active: #a16207;
-  --focus-ring-color: var(--primary-color);
-  --bg-disabled: #f1f5f9;
-  --text-disabled: #cbd5e1;
-  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  /* 2. NHÓM TRẠNG THÁI */
   --color-success: #22c55e;
   --color-warning: #eab308;
   --color-danger: #ef4444;
   --color-info: #0ea5e9;
-  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  /* 3. NHÓM TƯƠNG TÁC */
   --primary-hover: #ca8a04;
   --primary-active: #a16207;
   --focus-ring-color: var(--primary-color);
   --bg-disabled: #f1f5f9;
   --text-disabled: #cbd5e1;
-  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  /* 4. NHÓM THÀNH PHẦN KHÁC & FILTER 12 CON GIÁP */
   --icon-color: var(--text-muted);
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  /* =========================================================
-     CHẾ ĐỘ TỐI (DARK MODE) 
-     ========================================================= */
+  --zodiac-filter: hue-rotate(44deg) saturate(1.35) brightness(1.05);
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=metal] {
-    /* 1. Nhóm Nền & Chữ */
     --body-bg: #713f12;
     --bg-surface: #854d0e;
     --text-color: #f8fafc;
@@ -2671,19 +2948,17 @@ strong {
     --primary-color: #eab308;
     --secondary-color: #fbbf24;
     --accent-color: #9ca3af;
-    /* 2. Nhóm Trạng thái */
     --color-success: #4ade80;
     --color-warning: #facc15;
     --color-danger: #f87171;
     --color-info: #38bdf8;
-    /* 3. Nhóm Tương tác */
     --primary-hover: #facc15;
     --primary-active: #fde047;
     --bg-disabled: #334155;
     --text-disabled: #64748b;
-    /* 4. Nhóm Thành phần khác */
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
+    --zodiac-filter: hue-rotate(44deg) saturate(1.35) brightness(1.05) brightness(1.2);
   }
 }
 
@@ -2697,34 +2972,26 @@ strong {
   --primary-color: #3b82f6;
   --secondary-color: #94a3b8;
   --accent-color: #0ea5e9;
-  --primary-hover: #2563eb;
-  --primary-active: #1d4ed8;
-  --focus-ring-color: var(--primary-color);
-  --bg-disabled: #f4f4f5;
-  --text-disabled: #d4d4d8;
-  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  /* 2. NHÓM TRẠNG THÁI */
   --color-success: #22c55e;
   --color-warning: #eab308;
   --color-danger: #ef4444;
   --color-info: #0ea5e9;
-  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  /* 3. NHÓM TƯƠNG TÁC */
   --primary-hover: #2563eb;
   --primary-active: #1d4ed8;
   --focus-ring-color: var(--primary-color);
   --bg-disabled: #f4f4f5;
   --text-disabled: #d4d4d8;
-  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  /* 4. NHÓM THÀNH PHẦN KHÁC & FILTER 12 CON GIÁP */
   --icon-color: var(--text-muted);
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  /* =========================================================
-     CHẾ ĐỘ TỐI (DARK MODE) 
-     ========================================================= */
+  --zodiac-filter: hue-rotate(215deg) saturate(1.15) brightness(0.95);
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=water] {
-    /* 1. Nhóm Nền & Chữ */
     --body-bg: #1e3a8a;
     --bg-surface: #1e40af;
     --text-color: #fafafa;
@@ -2733,19 +3000,17 @@ strong {
     --primary-color: #3b82f6;
     --secondary-color: #cbd5e1;
     --accent-color: #38bdf8;
-    /* 2. Nhóm Trạng thái */
     --color-success: #4ade80;
     --color-warning: #facc15;
     --color-danger: #f87171;
     --color-info: #38bdf8;
-    /* 3. Nhóm Tương tác */
     --primary-hover: #60a5fa;
     --primary-active: #93c5fd;
     --bg-disabled: #3f3f46;
     --text-disabled: #71717a;
-    /* 4. Nhóm Thành phần khác */
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
+    --zodiac-filter: hue-rotate(215deg) saturate(1.15) brightness(0.95) brightness(1.2);
   }
 }
 
@@ -2759,34 +3024,26 @@ strong {
   --primary-color: #10b981;
   --secondary-color: #3b82f6;
   --accent-color: #34d399;
-  --primary-hover: #059669;
-  --primary-active: #047857;
-  --focus-ring-color: var(--primary-color);
-  --bg-disabled: #e5e7eb;
-  --text-disabled: #9ca3af;
-  /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+  /* 2. NHÓM TRẠNG THÁI */
   --color-success: #22c55e;
   --color-warning: #eab308;
   --color-danger: #ef4444;
   --color-info: #0ea5e9;
-  /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+  /* 3. NHÓM TƯƠNG TÁC */
   --primary-hover: #059669;
   --primary-active: #047857;
   --focus-ring-color: var(--primary-color);
   --bg-disabled: #e5e7eb;
   --text-disabled: #9ca3af;
-  /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+  /* 4. NHÓM THÀNH PHẦN KHÁC & FILTER 12 CON GIÁP */
   --icon-color: var(--text-muted);
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  /* =========================================================
-     CHẾ ĐỘ TỐI (DARK MODE) 
-     ========================================================= */
+  --zodiac-filter: hue-rotate(142deg) saturate(1.05) brightness(0.88);
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=wood] {
-    /* 1. Nhóm Nền & Chữ */
     --body-bg: #064e3b;
     --bg-surface: #065f46;
     --text-color: #f3f4f6;
@@ -2795,19 +3052,17 @@ strong {
     --primary-color: #10b981;
     --secondary-color: #60a5fa;
     --accent-color: #6ee7b7;
-    /* 2. Nhóm Trạng thái */
     --color-success: #4ade80;
     --color-warning: #facc15;
     --color-danger: #f87171;
     --color-info: #38bdf8;
-    /* 3. Nhóm Tương tác */
     --primary-hover: #34d399;
     --primary-active: #6ee7b7;
     --bg-disabled: #1f2937;
     --text-disabled: #4b5563;
-    /* 4. Nhóm Thành phần khác */
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
+    --zodiac-filter: hue-rotate(142deg) saturate(1.05) brightness(0.88) brightness(1.2);
   }
 }
 

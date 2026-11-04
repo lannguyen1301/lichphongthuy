@@ -190,7 +190,7 @@
         }
     }
 
-    // 3. Lưới 42 ô ngày Bento + Thẻ <img> 12 Con Giáp
+    // 3. Lưới 42 ô ngày theo PHƯƠNG ÁN 1 (Bento Góc Đối Xứng)
     &__grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
@@ -204,9 +204,11 @@
     &__cell {
         position: relative;
         overflow: hidden;
-        @extend %flexColumnCenterAll;
-        min-height: 9rem;
-        padding: 1rem 0.6rem;
+        @extend %flexTopLeft;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 9.6rem;
+        padding: 1rem 1rem 0.8rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
         border-radius: 1.6rem;
@@ -215,37 +217,51 @@
         @extend %transInteractive;
 
         @include abs.screen(xl) {
-            min-height: 7.8rem;
+            min-height: 8.6rem;
+            padding: 0.8rem;
         }
 
         @include abs.screen(sm) {
-            min-height: 6rem;
-            border-radius: 1rem;
-            padding: 0.6rem 0.2rem;
+            min-height: 6.6rem;
+            border-radius: 1.2rem;
+            padding: 0.6rem 0.5rem;
         }
 
+        // Hiệu ứng Hover: Khung nhấc nhẹ + Con giáp to dần đều, xoay thẳng và rõ nét theo màu Theme
         &:hover,
         &:focus-visible {
             border-color: var(--primary-color);
+            background-color: var(--body-bg);
             transform: translateY(-2px);
-            box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+            box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
 
             .month-cal__zodiac-img {
-                opacity: 0.26;
-                filter: grayscale(0%);
-                transform: scale(1.15) rotate(0deg) translate(-0.2rem, -0.2rem);
+                opacity: 0.88;
+                transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
             }
         }
 
+        // Ngày của tháng trước / tháng sau
         &--muted {
-            opacity: 0.42;
+            opacity: 0.45;
             background-color: transparent;
+
+            .month-cal__zodiac-img {
+                opacity: 0.1;
+            }
         }
 
+        // Ngày Hôm nay
         &--today {
             border: 2px solid var(--primary-color);
+            background-color: var(--body-bg);
+
+            .month-cal__solar {
+                color: var(--primary-color);
+            }
         }
 
+        // Ngày đang được chọn (Active)
         &--active {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
@@ -257,14 +273,20 @@
                 color: #ffffff;
             }
 
+            .month-cal__badge {
+                background-color: rgba(255, 255, 255, 0.22);
+                color: #ffffff;
+                border-color: rgba(255, 255, 255, 0.4);
+            }
+
             .month-cal__zodiac-img {
-                opacity: 0.24;
-                filter: brightness(0) invert(1);
-                transform: scale(1.1) rotate(0deg);
+                opacity: 0.35;
+                filter: brightness(0) invert(1); // Chuyển sang màu trắng tinh tế trên nền Active
+                transform: scale(1.06) rotate(0deg);
             }
         }
 
-        // Trạng thái SÁNG LÊN khi người dùng di chuột vào nút chú thích bên dưới
+        // Khi người dùng di chuột vào nút chú thích ở chân lịch (Highlight Filter)
         &.is-highlighted {
             opacity: 1 !important;
             border-color: var(--primary-color);
@@ -274,47 +296,41 @@
             z-index: 2;
 
             .month-cal__zodiac-img {
-                opacity: 0.25;
-                filter: grayscale(0%);
-                transform: scale(1.12) rotate(0deg);
+                opacity: 0.85;
+                transform: scale(1.1) rotate(0deg);
             }
         }
 
-        // Trạng thái MỜ ĐI của các ngày không khớp bộ lọc chú thích
         &.is-dimmed {
             opacity: 0.18;
             transform: scale(0.96);
         }
     }
 
-    // Thẻ <img> 12 Con Giáp nằm chìm ở góc dưới phải của từng ô ngày
-    &__zodiac-img {
-        position: absolute;
-        right: -0.4rem;
-        bottom: -0.4rem;
-        width: 4.6rem;
-        height: 4.6rem;
-        object-fit: contain;
-        opacity: 0.08;
-        filter: grayscale(100%);
-        transform: scale(0.85) rotate(-12deg);
-        pointer-events: none;
-        z-index: -1;
-        transition:
-            transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-            opacity 0.25s ease,
-            filter 0.25s ease;
+    // Cụm Số Ngày Dương & Ngày Âm nằm ở Góc Trên Trái (Phương án 1 - To, rõ, thẳng hàng tuyệt đối)
+    &__date-head {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        line-height: 1;
 
         @include abs.screen(sm) {
-            width: 3rem;
-            height: 3rem;
+            flex-direction: column;
+            gap: 0.2rem;
         }
     }
 
     &__solar {
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: 800;
         color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(xl) {
+            font-size: 1.8rem;
+        }
 
         @include abs.screen(sm) {
             font-size: 1.5rem;
@@ -322,56 +338,110 @@
     }
 
     &__lunar {
-        margin-top: 0.4rem;
-        font-size: 1.2rem;
-        font-weight: 600;
+        font-size: 1.25rem;
+        font-weight: 700;
         color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
 
         @include abs.screen(sm) {
             font-size: 1.05rem;
         }
     }
 
+    // Nhãn Mùng 1 / Rằm / Ngày Lễ ở Góc Trên Phải (Hiển thị rõ ràng, có viền nhẹ)
     &__badge {
         position: absolute;
         top: 0.6rem;
         right: 0.6rem;
-        padding: 0.15rem 0.6rem;
+        z-index: 3;
+        padding: 0.2rem 0.65rem;
         background-color: rgba(239, 68, 68, 0.14);
+        border: 1px solid rgba(239, 68, 68, 0.3);
         color: var(--color-danger);
-        font-size: 1rem;
-        font-weight: 700;
+        font-size: 1.05rem;
+        font-weight: 800;
         border-radius: 0.6rem;
+        line-height: 1.2;
+        @extend %textNoWrap;
 
         @include abs.screen(sm) {
-            display: none;
+            top: 0.4rem;
+            right: 0.4rem;
+            padding: 0.1rem 0.4rem;
+            font-size: 0.9rem;
         }
+    }
+
+    // Cụm chấm tròn trạng thái (Hoàng Đạo / Hắc Đạo / Ngày Lễ) ở Góc Dưới Trái
+    &__dots {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 0.5rem;
+        margin-top: auto;
     }
 
     &__dot {
-        position: absolute;
-        bottom: 0.8rem;
-        width: 0.65rem;
-        height: 0.65rem;
+        display: inline-block;
+        width: 0.8rem;
+        height: 0.8rem;
         border-radius: 50%;
 
+        @include abs.screen(sm) {
+            width: 0.6rem;
+            height: 0.6rem;
+        }
+
         &--good {
-            left: 0.8rem;
             background-color: #eab308;
+            box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.25);
         }
 
         &--bad {
-            left: 0.8rem;
             background-color: #374151;
+            box-shadow: 0 0 0 2px rgba(55, 65, 81, 0.2);
         }
 
         &--holiday {
-            right: 0.8rem;
             background-color: #ef4444;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25);
         }
     }
 
-    // 4. Chú thích cuối bảng dạng Bo góc Bento 1.2rem (Đồng bộ với ô ngày & thứ)
+    // Thẻ <img> 12 Con Giáp (Khung chuẩn 128x128px) ở Góc Dưới Phải + Đổi màu theo Theme Filter
+    &__zodiac-img {
+        position: absolute;
+        right: 0.5rem;
+        bottom: 0.4rem;
+        width: 4.8rem;
+        height: 4.8rem;
+        object-fit: contain;
+        // Ban đầu: nhỏ hơn và mờ dịu, nhuộm màu theo Theme hiện tại
+        opacity: 0.18;
+        filter: var(--zodiac-filter);
+        transform: scale(0.78) rotate(-8deg);
+        transform-origin: bottom right;
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.35s ease,
+            filter 0.3s ease;
+
+        @include abs.screen(xl) {
+            width: 4.2rem;
+            height: 4.2rem;
+        }
+
+        @include abs.screen(sm) {
+            width: 3rem;
+            height: 3rem;
+            right: 0.2rem;
+            bottom: 0.2rem;
+        }
+    }
+
+    // 4. Chú thích cuối bảng (Bo góc Bento 1.2rem)
     &__legend {
         @extend %flexCenter;
         flex-wrap: wrap;
@@ -386,7 +456,7 @@
         padding: 0 1.4rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
-        border-radius: 1.2rem; // Bo góc vuông mềm chuẩn Bento thay vì tròn 99.9rem
+        border-radius: 1.2rem;
         font-size: 1.3rem;
         font-weight: 600;
         color: var(--text-color);

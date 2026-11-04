@@ -216,7 +216,7 @@
                         </section>
                     </div>
 
-                    <!-- ==================== CỘT PHẢI (7 CỘT PC - ĐỦ 42 Ô NGÀY CÓ THẺ IMG 12 CON GIÁP) ==================== -->
+                    <!-- CỘT PHẢI: BẢNG LỊCH THÁNG BENTO (ĐỦ 42 NGÀY - PHƯƠNG ÁN 1) -->
                     <div class="col-7 col-lg-12 home-page__right">
                         <section class="month-cal" id="month-cal-section" aria-label="Lịch tháng">
                             <!-- 1. Thanh điều khiển Tháng / Năm -->
@@ -393,7 +393,7 @@
                                 <span class="month-cal__weekday month-cal__weekday--sun">CN</span>
                             </div>
 
-                            <!-- 3. Lưới đầy đủ 42 ô ngày (6 hàng x 7 cột) kèm thẻ <img> 12 Con Giáp -->
+                            <!-- 3. Lưới đầy đủ 42 ô ngày (Phương án 1: Số trên trái, Badge trên phải, Dots dưới trái, <img> Con Giáp dưới phải) -->
                             <div class="month-cal__grid" id="month-cal-grid" role="grid">
                                 <!-- HÀNG 1 (26/10 -> 01/11) -->
                                 <button
@@ -403,9 +403,13 @@
                                     data-lunar="17/9"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">26</span>
-                                    <span class="month-cal__lunar">17/9</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">26</span>
+                                        <span class="month-cal__lunar">17/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/rooster.svg"
                                         alt=""
@@ -413,6 +417,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
@@ -420,9 +425,13 @@
                                     data-lunar="18/9"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">27</span>
-                                    <span class="month-cal__lunar">18/9</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">27</span>
+                                        <span class="month-cal__lunar">18/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/dog.svg"
                                         alt=""
@@ -430,6 +439,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
@@ -437,10 +447,14 @@
                                     data-lunar="19/9"
                                     data-status="good holiday"
                                 >
-                                    <span class="month-cal__solar">28</span>
-                                    <span class="month-cal__lunar">19/9</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
-                                    <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">28</span>
+                                        <span class="month-cal__lunar">19/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                        <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/pig.svg"
                                         alt=""
@@ -448,14 +462,18 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
                                     data-solar="29"
                                     data-lunar="20/9"
                                 >
-                                    <span class="month-cal__solar">29</span>
-                                    <span class="month-cal__lunar">20/9</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">29</span>
+                                        <span class="month-cal__lunar">20/9</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/mouse.svg"
                                         alt=""
@@ -463,6 +481,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
@@ -470,9 +489,13 @@
                                     data-lunar="21/9"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">30</span>
-                                    <span class="month-cal__lunar">21/9</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">30</span>
+                                        <span class="month-cal__lunar">21/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/buffalo.svg"
                                         alt=""
@@ -480,14 +503,18 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
                                     data-solar="31"
                                     data-lunar="22/9"
                                 >
-                                    <span class="month-cal__solar">31</span>
-                                    <span class="month-cal__lunar">22/9</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">31</span>
+                                        <span class="month-cal__lunar">22/9</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/tiger.svg"
                                         alt=""
@@ -495,9 +522,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="1" data-lunar="23/9">
-                                    <span class="month-cal__solar">1</span>
-                                    <span class="month-cal__lunar">23/9</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">1</span>
+                                        <span class="month-cal__lunar">23/9</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/cat.svg"
                                         alt=""
@@ -514,9 +545,13 @@
                                     data-lunar="24/9"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">2</span>
-                                    <span class="month-cal__lunar">24/9</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">2</span>
+                                        <span class="month-cal__lunar">24/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/dragon.svg"
                                         alt=""
@@ -524,6 +559,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--active"
@@ -531,8 +567,11 @@
                                     data-solar="3"
                                     data-lunar="25/9"
                                 >
-                                    <span class="month-cal__solar">3</span>
-                                    <span class="month-cal__lunar">25/9</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">3</span>
+                                        <span class="month-cal__lunar">25/9</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/snake.svg"
                                         alt=""
@@ -540,6 +579,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--today"
@@ -547,9 +587,13 @@
                                     data-lunar="26/9"
                                     data-status="good today"
                                 >
-                                    <span class="month-cal__solar">4</span>
-                                    <span class="month-cal__lunar">26/9</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">4</span>
+                                        <span class="month-cal__lunar">26/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/horse.svg"
                                         alt=""
@@ -557,6 +601,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -564,9 +609,13 @@
                                     data-lunar="27/9"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">5</span>
-                                    <span class="month-cal__lunar">27/9</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">5</span>
+                                        <span class="month-cal__lunar">27/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/goat.svg"
                                         alt=""
@@ -574,9 +623,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="6" data-lunar="28/9">
-                                    <span class="month-cal__solar">6</span>
-                                    <span class="month-cal__lunar">28/9</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">6</span>
+                                        <span class="month-cal__lunar">28/9</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/monkey.svg"
                                         alt=""
@@ -584,6 +637,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -591,9 +645,13 @@
                                     data-lunar="29/9"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">7</span>
-                                    <span class="month-cal__lunar">29/9</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">7</span>
+                                        <span class="month-cal__lunar">29/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/rooster.svg"
                                         alt=""
@@ -601,6 +659,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -608,9 +667,13 @@
                                     data-lunar="30/9"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">8</span>
-                                    <span class="month-cal__lunar">30/9</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">8</span>
+                                        <span class="month-cal__lunar">30/9</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/dog.svg"
                                         alt=""
@@ -628,9 +691,13 @@
                                     data-status="holiday"
                                 >
                                     <span class="month-cal__badge">Mùng 1</span>
-                                    <span class="month-cal__solar">9</span>
-                                    <span class="month-cal__lunar">1/10</span>
-                                    <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">9</span>
+                                        <span class="month-cal__lunar">1/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/pig.svg"
                                         alt=""
@@ -638,6 +705,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -645,9 +713,13 @@
                                     data-lunar="2/10"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">10</span>
-                                    <span class="month-cal__lunar">2/10</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">10</span>
+                                        <span class="month-cal__lunar">2/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/mouse.svg"
                                         alt=""
@@ -655,6 +727,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -662,9 +735,13 @@
                                     data-lunar="3/10"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">11</span>
-                                    <span class="month-cal__lunar">3/10</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">11</span>
+                                        <span class="month-cal__lunar">3/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/buffalo.svg"
                                         alt=""
@@ -672,9 +749,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="12" data-lunar="4/10">
-                                    <span class="month-cal__solar">12</span>
-                                    <span class="month-cal__lunar">4/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">12</span>
+                                        <span class="month-cal__lunar">4/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/tiger.svg"
                                         alt=""
@@ -682,6 +763,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -689,9 +771,13 @@
                                     data-lunar="5/10"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">13</span>
-                                    <span class="month-cal__lunar">5/10</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">13</span>
+                                        <span class="month-cal__lunar">5/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/cat.svg"
                                         alt=""
@@ -699,9 +785,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="14" data-lunar="6/10">
-                                    <span class="month-cal__solar">14</span>
-                                    <span class="month-cal__lunar">6/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">14</span>
+                                        <span class="month-cal__lunar">6/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/dragon.svg"
                                         alt=""
@@ -709,9 +799,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="15" data-lunar="7/10">
-                                    <span class="month-cal__solar">15</span>
-                                    <span class="month-cal__lunar">7/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">15</span>
+                                        <span class="month-cal__lunar">7/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/snake.svg"
                                         alt=""
@@ -728,9 +822,13 @@
                                     data-lunar="8/10"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">16</span>
-                                    <span class="month-cal__lunar">8/10</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">16</span>
+                                        <span class="month-cal__lunar">8/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/horse.svg"
                                         alt=""
@@ -738,6 +836,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -745,9 +844,13 @@
                                     data-lunar="9/10"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">17</span>
-                                    <span class="month-cal__lunar">9/10</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">17</span>
+                                        <span class="month-cal__lunar">9/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/goat.svg"
                                         alt=""
@@ -755,9 +858,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="18" data-lunar="10/10">
-                                    <span class="month-cal__solar">18</span>
-                                    <span class="month-cal__lunar">10/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">18</span>
+                                        <span class="month-cal__lunar">10/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/monkey.svg"
                                         alt=""
@@ -765,6 +872,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -772,9 +880,13 @@
                                     data-lunar="11/10"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">19</span>
-                                    <span class="month-cal__lunar">11/10</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">19</span>
+                                        <span class="month-cal__lunar">11/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/rooster.svg"
                                         alt=""
@@ -782,6 +894,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -789,9 +902,14 @@
                                     data-lunar="12/10"
                                     data-status="holiday"
                                 >
-                                    <span class="month-cal__solar">20</span>
-                                    <span class="month-cal__lunar">12/10</span>
-                                    <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                    <span class="month-cal__badge">20/11</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">20</span>
+                                        <span class="month-cal__lunar">12/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/dog.svg"
                                         alt=""
@@ -799,6 +917,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -806,9 +925,13 @@
                                     data-lunar="13/10"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">21</span>
-                                    <span class="month-cal__lunar">13/10</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">21</span>
+                                        <span class="month-cal__lunar">13/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/pig.svg"
                                         alt=""
@@ -816,9 +939,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="22" data-lunar="14/10">
-                                    <span class="month-cal__solar">22</span>
-                                    <span class="month-cal__lunar">14/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">22</span>
+                                        <span class="month-cal__lunar">14/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/mouse.svg"
                                         alt=""
@@ -836,10 +963,14 @@
                                     data-status="good holiday"
                                 >
                                     <span class="month-cal__badge">Rằm</span>
-                                    <span class="month-cal__solar">23</span>
-                                    <span class="month-cal__lunar">15/10</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
-                                    <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">23</span>
+                                        <span class="month-cal__lunar">15/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                        <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/buffalo.svg"
                                         alt=""
@@ -847,9 +978,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="24" data-lunar="16/10">
-                                    <span class="month-cal__solar">24</span>
-                                    <span class="month-cal__lunar">16/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">24</span>
+                                        <span class="month-cal__lunar">16/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/tiger.svg"
                                         alt=""
@@ -857,6 +992,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -864,9 +1000,13 @@
                                     data-lunar="17/10"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">25</span>
-                                    <span class="month-cal__lunar">17/10</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">25</span>
+                                        <span class="month-cal__lunar">17/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/cat.svg"
                                         alt=""
@@ -874,9 +1014,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="26" data-lunar="18/10">
-                                    <span class="month-cal__solar">26</span>
-                                    <span class="month-cal__lunar">18/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">26</span>
+                                        <span class="month-cal__lunar">18/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/dragon.svg"
                                         alt=""
@@ -884,9 +1028,13 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button type="button" class="month-cal__cell" data-solar="27" data-lunar="19/10">
-                                    <span class="month-cal__solar">27</span>
-                                    <span class="month-cal__lunar">19/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">27</span>
+                                        <span class="month-cal__lunar">19/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/snake.svg"
                                         alt=""
@@ -894,6 +1042,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -901,9 +1050,13 @@
                                     data-lunar="20/10"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">28</span>
-                                    <span class="month-cal__lunar">20/10</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">28</span>
+                                        <span class="month-cal__lunar">20/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/horse.svg"
                                         alt=""
@@ -911,6 +1064,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell"
@@ -918,9 +1072,13 @@
                                     data-lunar="21/10"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">29</span>
-                                    <span class="month-cal__lunar">21/10</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">29</span>
+                                        <span class="month-cal__lunar">21/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/goat.svg"
                                         alt=""
@@ -931,8 +1089,11 @@
 
                                 <!-- HÀNG 6 (30/11 -> 06/12) -->
                                 <button type="button" class="month-cal__cell" data-solar="30" data-lunar="22/10">
-                                    <span class="month-cal__solar">30</span>
-                                    <span class="month-cal__lunar">22/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">30</span>
+                                        <span class="month-cal__lunar">22/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/monkey.svg"
                                         alt=""
@@ -940,6 +1101,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
@@ -947,9 +1109,13 @@
                                     data-lunar="23/10"
                                     data-status="good"
                                 >
-                                    <span class="month-cal__solar">1</span>
-                                    <span class="month-cal__lunar">23/10</span>
-                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">1</span>
+                                        <span class="month-cal__lunar">23/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--good"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/rooster.svg"
                                         alt=""
@@ -957,14 +1123,18 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
                                     data-solar="2"
                                     data-lunar="24/10"
                                 >
-                                    <span class="month-cal__solar">2</span>
-                                    <span class="month-cal__lunar">24/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">2</span>
+                                        <span class="month-cal__lunar">24/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/dog.svg"
                                         alt=""
@@ -972,14 +1142,18 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
                                     data-solar="3"
                                     data-lunar="25/10"
                                 >
-                                    <span class="month-cal__solar">3</span>
-                                    <span class="month-cal__lunar">25/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">3</span>
+                                        <span class="month-cal__lunar">25/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/pig.svg"
                                         alt=""
@@ -987,6 +1161,7 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
@@ -994,9 +1169,13 @@
                                     data-lunar="26/10"
                                     data-status="bad"
                                 >
-                                    <span class="month-cal__solar">4</span>
-                                    <span class="month-cal__lunar">26/10</span>
-                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">4</span>
+                                        <span class="month-cal__lunar">26/10</span>
+                                    </div>
+                                    <div class="month-cal__dots">
+                                        <span class="month-cal__dot month-cal__dot--bad"></span>
+                                    </div>
                                     <img
                                         src="./assets/icons/zodiac/mouse.svg"
                                         alt=""
@@ -1004,14 +1183,18 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
                                     data-solar="5"
                                     data-lunar="27/10"
                                 >
-                                    <span class="month-cal__solar">5</span>
-                                    <span class="month-cal__lunar">27/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">5</span>
+                                        <span class="month-cal__lunar">27/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/buffalo.svg"
                                         alt=""
@@ -1019,14 +1202,18 @@
                                         class="month-cal__zodiac-img"
                                     />
                                 </button>
+
                                 <button
                                     type="button"
                                     class="month-cal__cell month-cal__cell--muted"
                                     data-solar="6"
                                     data-lunar="28/10"
                                 >
-                                    <span class="month-cal__solar">6</span>
-                                    <span class="month-cal__lunar">28/10</span>
+                                    <div class="month-cal__date-head">
+                                        <span class="month-cal__solar">6</span>
+                                        <span class="month-cal__lunar">28/10</span>
+                                    </div>
+                                    <div class="month-cal__dots"></div>
                                     <img
                                         src="./assets/icons/zodiac/tiger.svg"
                                         alt=""
@@ -1036,7 +1223,7 @@
                                 </button>
                             </div>
 
-                            <!-- 4. Chú thích cuối bảng (Dạng Bo góc Bento 1.2rem đồng bộ với ô ngày) -->
+                            <!-- 4. Chú thích cuối bảng (Bo góc Bento 1.2rem) -->
                             <footer class="month-cal__legend" aria-label="Bộ lọc chú thích lịch">
                                 <button type="button" class="month-cal__legend-pill" data-filter="good">
                                     <i class="month-cal__legend-dot month-cal__legend-dot--good"></i>

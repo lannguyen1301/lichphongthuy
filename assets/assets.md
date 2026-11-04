@@ -25,11 +25,9 @@
     let isGlobalBound = false;
     let clockTimer = null;
 
-    // 1. Khôi phục Theme Ngũ hành từ localStorage
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "earth";
     document.documentElement.setAttribute("data-theme", savedTheme);
 
-    // 2. Bật/tắt Sidebar Drawer trên Mobile & Khóa cuộn trang (Body Scroll Lock)
     const toggleSidebar = (forceClose = false) => {
         const sidebar = document.getElementById("calendar-sidebar");
         const burgerBtn = document.getElementById("burger-btn");
@@ -47,7 +45,6 @@
         document.body.style.overflow = nextState ? "hidden" : "";
     };
 
-    // 3. Cập nhật Ngày & Giờ thực trên Header
     const updateClock = () => {
         const dateEl = document.getElementById("current-date");
         const timeEl = document.getElementById("current-time");
@@ -69,7 +66,6 @@
         timeEl.setAttribute("datetime", `${hh}:${min}:${ss}`);
     };
 
-    // 4. Khởi tạo Lịch Tháng (Dropdown Tháng/Năm, Chọn ngày & Hover Chú thích làm sáng ngày)
     const initMonthCalendar = () => {
         const grid = document.getElementById("month-cal-grid");
         if (!grid) return;
@@ -80,7 +76,6 @@
         const solarDayEl = document.getElementById("detail-solar-day");
         const lunarDayEl = document.getElementById("detail-lunar-day");
 
-        // 4.1. Click chọn ô ngày trên Lịch Tháng -> Cập nhật sang Tờ Lịch Bloc Cột Trái
         cells.forEach((cell) => {
             cell.onclick = () => {
                 cells.forEach((item) => {
@@ -100,7 +95,6 @@
             };
         });
 
-        // 4.2. Xử lý chọn Tháng / Năm & Tự đóng khi chọn xong hoặc mở nút bên cạnh
         calDropdowns.forEach((current) => {
             current.ontoggle = () => {
                 if (current.open) {
@@ -131,7 +125,6 @@
             });
         });
 
-        // 4.3. Di chuột hoặc bấm vào Chú thích (Hoàng Đạo, Hắc Đạo, Ngày Lễ, Hôm Nay) -> Làm sáng các ngày tương ứng trên Lịch Tháng
         const highlightCellsByStatus = (statusKey) => {
             cells.forEach((cell) => {
                 if (!statusKey) {
@@ -154,7 +147,6 @@
         });
     };
 
-    // 5. Khởi tạo Header & Sidebar
     const initHeaderAndSidebar = () => {
         const header = document.getElementById("header") || document.getElementById("site-header");
         if (header) {
@@ -220,11 +212,9 @@
             clockTimer = setInterval(updateClock, 1000);
         }
 
-        // Luôn khởi tạo tương tác cho Lịch Tháng
         initMonthCalendar();
     };
 
-    // 6. Sự kiện toàn cục: Đóng cả Dropdown Header lẫn Dropdown Tháng/Năm khi click ra ngoài hoặc nhấn phím Escape
     const bindGlobalListeners = () => {
         if (isGlobalBound) return;
         isGlobalBound = true;

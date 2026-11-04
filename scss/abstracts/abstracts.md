@@ -690,26 +690,32 @@ $feng-shui-themes: (
 
 ### theme-engine.scss
 
-```scss
+````scss
 // scss/abstracts/_theme-engine.scss
 @use "sass:map";
 @use "palette" as pal;
 
-// 1. ĐÃ THÊM CÔNG TẮC: $is-default: false
+// Bộ lọc CSS Filter chuyển màu SVG Con Giáp (từ màu Đỏ gốc) sang đúng tông màu của 5 mệnh Ngũ hành
+$zodiac-theme-filters: (
+    "earth": hue-rotate(28deg) saturate(1.15) brightness(0.92),   // Mệnh Thổ: Nâu cam đất ấm
+    "fire": hue-rotate(0deg) saturate(1.1) brightness(0.98),      // Mệnh Hỏa: Đỏ chu sa rực rỡ
+    "metal": hue-rotate(44deg) saturate(1.35) brightness(1.05),   // Mệnh Kim: Vàng ánh kim
+    "water": hue-rotate(215deg) saturate(1.15) brightness(0.95),  // Mệnh Thủy: Xanh dương biển sâu
+    "wood": hue-rotate(142deg) saturate(1.05) brightness(0.88),   // Mệnh Mộc: Xanh lục bảo
+);
+
 @mixin generate-theme($element-name, $is-default: false) {
     $theme-data: map.get(pal.$feng-shui-themes, $element-name);
+    $zodiac-filter: map.get($zodiac-theme-filters, $element-name);
 
     @if $theme-data == null {
         @error "Lỗi: Không tìm thấy dữ liệu cho bản mệnh '#{$element-name}'";
     }
 
-    // 2. ĐÃ THÊM BỘ DÒ ĐƯỜNG: Sinh ra :root nếu là theme mặc định
-    // $selector: if($is-default, ":root, [data-theme='#{$element-name}']", "[data-theme='#{$element-name}']");
     $selector: if(
         sass($is-default): ":root, [data-theme='#{$element-name}']" ; else: "[data-theme='#{$element-name}']",
     );
 
-    // 3. Gọi $selector thay vì ghi cứng [data-theme]
     #{$selector} {
         /* 1. NHÓM NỀN & CHỮ */
         --body-bg: #{map.get($theme-data, "neutral", 100)};
@@ -722,36 +728,27 @@ $feng-shui-themes: (
         --secondary-color: #{map.get($theme-data, "secondary", 500)};
         --accent-color: #{map.get($theme-data, "accent", 500)};
 
-        --primary-hover: #{map.get($theme-data, "primary", 600)};
-        --primary-active: #{map.get($theme-data, "primary", 700)};
-        --focus-ring-color: var(--primary-color);
-        --bg-disabled: #{map.get($theme-data, "neutral", 200)};
-        --text-disabled: #{map.get($theme-data, "neutral", 400)};
-
-        /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+        /* 2. NHÓM TRẠNG THÁI */
         --color-success: #{map.get($theme-data, "success", 500)};
         --color-warning: #{map.get($theme-data, "warning", 500)};
         --color-danger: #{map.get($theme-data, "danger", 500)};
         --color-info: #{map.get($theme-data, "info", 500)};
 
-        /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+        /* 3. NHÓM TƯƠNG TÁC */
         --primary-hover: #{map.get($theme-data, "primary", 600)};
         --primary-active: #{map.get($theme-data, "primary", 700)};
         --focus-ring-color: var(--primary-color);
         --bg-disabled: #{map.get($theme-data, "neutral", 200)};
         --text-disabled: #{map.get($theme-data, "neutral", 400)};
 
-        /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+        /* 4. NHÓM THÀNH PHẦN KHÁC & FILTER 12 CON GIÁP */
         --icon-color: var(--text-muted);
         --icon-hover: var(--primary-color);
         --shadow-color: rgba(0, 0, 0, 0.1);
         --overlay-bg: rgba(0, 0, 0, 0.4);
+        --zodiac-filter: #{$zodiac-filter};
 
-        /* =========================================================
-           CHẾ ĐỘ TỐI (DARK MODE) 
-           ========================================================= */
         @media (prefers-color-scheme: dark) {
-            /* 1. Nhóm Nền & Chữ */
             --body-bg: #{map.get($theme-data, "primary", 900)};
             --bg-surface: #{map.get($theme-data, "primary", 800)};
             --text-color: #{map.get($theme-data, "neutral", 100)};
@@ -762,25 +759,22 @@ $feng-shui-themes: (
             --secondary-color: #{map.get($theme-data, "secondary", 400)};
             --accent-color: #{map.get($theme-data, "accent", 400)};
 
-            /* 2. Nhóm Trạng thái */
             --color-success: #{map.get($theme-data, "success", 400)};
             --color-warning: #{map.get($theme-data, "warning", 400)};
             --color-danger: #{map.get($theme-data, "danger", 400)};
             --color-info: #{map.get($theme-data, "info", 400)};
 
-            /* 3. Nhóm Tương tác */
             --primary-hover: #{map.get($theme-data, "primary", 400)};
             --primary-active: #{map.get($theme-data, "primary", 300)};
             --bg-disabled: #{map.get($theme-data, "neutral", 800)};
             --text-disabled: #{map.get($theme-data, "neutral", 600)};
 
-            /* 4. Nhóm Thành phần khác */
             --shadow-color: rgba(0, 0, 0, 0.5);
             --overlay-bg: rgba(0, 0, 0, 0.7);
+            --zodiac-filter: #{$zodiac-filter} brightness(1.2);
         }
     }
-}
-```
+}```
 
 ### mixins.scss
 
@@ -816,7 +810,7 @@ $feng-shui-themes: (
         @return "";
     }
 }
-```
+````
 
 ### typography.scss
 
