@@ -2557,38 +2557,39 @@ strong {
 }
 @media (max-width: 575.98px) {
   .month-cal__cell {
-    min-height: 6.6rem;
+    min-height: 6.8rem;
     border-radius: 1.2rem;
     padding: 0.6rem 0.5rem;
   }
-}
-.month-cal__cell:hover, .month-cal__cell:focus-visible {
-  border-color: var(--primary-color);
-  background-color: var(--body-bg);
-  transform: translateY(-2px);
-  box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
-}
-.month-cal__cell:hover .month-cal__zodiac-img, .month-cal__cell:focus-visible .month-cal__zodiac-img {
-  opacity: 0.88;
-  transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
 }
 .month-cal__cell--muted {
   opacity: 0.45;
   background-color: transparent;
 }
 .month-cal__cell--muted .month-cal__zodiac-img {
-  opacity: 0.1;
+  opacity: 0.12;
 }
-.month-cal__cell--today {
+.month-cal__cell--today:not(.month-cal__cell--active) {
   border: 2px solid var(--primary-color);
   background-color: var(--body-bg);
 }
-.month-cal__cell--today .month-cal__solar {
+.month-cal__cell--today:not(.month-cal__cell--active) .month-cal__solar {
   color: var(--primary-color);
+}
+.month-cal__cell:not(.month-cal__cell--active):hover, .month-cal__cell:not(.month-cal__cell--active):focus-visible {
+  border-color: var(--primary-color);
+  background-color: var(--body-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+}
+.month-cal__cell:not(.month-cal__cell--active):hover .month-cal__zodiac-img, .month-cal__cell:not(.month-cal__cell--active):focus-visible .month-cal__zodiac-img {
+  opacity: 0.9;
+  filter: var(--zodiac-filter);
+  transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
 }
 .month-cal__cell--active {
   background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  border: 2px solid var(--primary-color);
   color: #ffffff;
   box-shadow: 0 0.8rem 2rem var(--shadow-color);
 }
@@ -2597,16 +2598,27 @@ strong {
   color: #ffffff;
 }
 .month-cal__cell--active .month-cal__badge {
-  background-color: rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.24);
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.45);
 }
 .month-cal__cell--active .month-cal__zodiac-img {
-  opacity: 0.35;
-  filter: brightness(0) invert(1);
+  opacity: 0.58;
+  filter: var(--zodiac-filter-active);
   transform: scale(1.06) rotate(0deg);
 }
-.month-cal__cell.is-highlighted {
+.month-cal__cell--active:hover, .month-cal__cell--active:focus-visible {
+  background-color: var(--primary-color);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 1rem 2.4rem var(--shadow-color);
+}
+.month-cal__cell--active:hover .month-cal__zodiac-img, .month-cal__cell--active:focus-visible .month-cal__zodiac-img {
+  opacity: 0.78;
+  filter: var(--zodiac-filter-active);
+  transform: scale(1.14) rotate(0deg) translate(-0.2rem, -0.2rem);
+}
+.month-cal__cell.is-highlighted:not(.month-cal__cell--active) {
   opacity: 1 !important;
   border-color: var(--primary-color);
   background-color: var(--body-bg);
@@ -2614,8 +2626,9 @@ strong {
   box-shadow: 0 0.8rem 2rem var(--shadow-color);
   z-index: 2;
 }
-.month-cal__cell.is-highlighted .month-cal__zodiac-img {
-  opacity: 0.85;
+.month-cal__cell.is-highlighted:not(.month-cal__cell--active) .month-cal__zodiac-img {
+  opacity: 0.9;
+  filter: var(--zodiac-filter);
   transform: scale(1.1) rotate(0deg);
 }
 .month-cal__cell.is-dimmed {
@@ -2626,15 +2639,11 @@ strong {
   position: relative;
   z-index: 2;
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  line-height: 1;
-}
-@media (max-width: 575.98px) {
-  .month-cal__date-head {
-    flex-direction: column;
-    gap: 0.2rem;
-  }
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  max-width: 55%;
+  line-height: 1.05;
 }
 .month-cal__solar {
   font-size: 2rem;
@@ -2649,18 +2658,18 @@ strong {
 }
 @media (max-width: 575.98px) {
   .month-cal__solar {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
   }
 }
 .month-cal__lunar {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-muted);
   font-variant-numeric: tabular-nums;
 }
 @media (max-width: 575.98px) {
   .month-cal__lunar {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 }
 .month-cal__badge {
@@ -2668,21 +2677,21 @@ strong {
   top: 0.6rem;
   right: 0.6rem;
   z-index: 3;
-  padding: 0.2rem 0.65rem;
+  padding: 0.2rem 0.6rem;
   background-color: rgba(239, 68, 68, 0.14);
   border: 1px solid rgba(239, 68, 68, 0.3);
   color: var(--color-danger);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 800;
   border-radius: 0.6rem;
   line-height: 1.2;
 }
 @media (max-width: 575.98px) {
   .month-cal__badge {
-    top: 0.4rem;
-    right: 0.4rem;
-    padding: 0.1rem 0.4rem;
-    font-size: 0.9rem;
+    top: 0.35rem;
+    right: 0.35rem;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.85rem;
   }
 }
 .month-cal__dots {
@@ -2719,10 +2728,10 @@ strong {
   position: absolute;
   right: 0.5rem;
   bottom: 0.4rem;
-  width: 4.8rem;
-  height: 4.8rem;
+  width: 4.6rem;
+  height: 4.6rem;
   object-fit: contain;
-  opacity: 0.18;
+  opacity: 0.2;
   filter: var(--zodiac-filter);
   transform: scale(0.78) rotate(-8deg);
   transform-origin: bottom right;
@@ -2732,14 +2741,14 @@ strong {
 }
 @media (max-width: 1199.98px) {
   .month-cal__zodiac-img {
-    width: 4.2rem;
-    height: 4.2rem;
+    width: 4rem;
+    height: 4rem;
   }
 }
 @media (max-width: 575.98px) {
   .month-cal__zodiac-img {
-    width: 3rem;
-    height: 3rem;
+    width: 2.8rem;
+    height: 2.8rem;
     right: 0.2rem;
     bottom: 0.2rem;
   }
@@ -2832,7 +2841,8 @@ strong {
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  --zodiac-filter: hue-rotate(28deg) saturate(1.15) brightness(0.92);
+  --zodiac-filter: brightness(0) saturate(100%) invert(48%) sepia(87%) saturate(1638%) hue-rotate(2deg) brightness(97%) contrast(96%);
+  --zodiac-filter-active: brightness(0) saturate(100%) invert(19%) sepia(51%) saturate(2255%) hue-rotate(12deg) brightness(93%) contrast(92%);
 }
 @media (prefers-color-scheme: dark) {
   :root, [data-theme=earth] {
@@ -2854,7 +2864,8 @@ strong {
     --text-disabled: #57534e;
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
-    --zodiac-filter: hue-rotate(28deg) saturate(1.15) brightness(0.92) brightness(1.2);
+    --zodiac-filter: brightness(0) saturate(100%) invert(48%) sepia(87%) saturate(1638%) hue-rotate(2deg) brightness(97%) contrast(96%) brightness(1.25);
+    --zodiac-filter-active: brightness(0) saturate(100%) invert(19%) sepia(51%) saturate(2255%) hue-rotate(12deg) brightness(93%) contrast(92%);
   }
 }
 
@@ -2884,7 +2895,8 @@ strong {
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  --zodiac-filter: hue-rotate(0deg) saturate(1.1) brightness(0.98);
+  --zodiac-filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(3932%) hue-rotate(351deg) brightness(89%) contrast(95%);
+  --zodiac-filter-active: brightness(0) saturate(100%) invert(13%) sepia(56%) saturate(3426%) hue-rotate(349deg) brightness(91%) contrast(96%);
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=fire] {
@@ -2906,7 +2918,8 @@ strong {
     --text-disabled: #57534e;
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
-    --zodiac-filter: hue-rotate(0deg) saturate(1.1) brightness(0.98) brightness(1.2);
+    --zodiac-filter: brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(3932%) hue-rotate(351deg) brightness(89%) contrast(95%) brightness(1.25);
+    --zodiac-filter-active: brightness(0) saturate(100%) invert(13%) sepia(56%) saturate(3426%) hue-rotate(349deg) brightness(91%) contrast(96%);
   }
 }
 
@@ -2936,7 +2949,8 @@ strong {
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  --zodiac-filter: hue-rotate(44deg) saturate(1.35) brightness(1.05);
+  --zodiac-filter: brightness(0) saturate(100%) invert(52%) sepia(93%) saturate(1352%) hue-rotate(14deg) brightness(94%) contrast(97%);
+  --zodiac-filter-active: brightness(0) saturate(100%) invert(22%) sepia(60%) saturate(1560%) hue-rotate(16deg) brightness(92%) contrast(91%);
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=metal] {
@@ -2958,7 +2972,8 @@ strong {
     --text-disabled: #64748b;
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
-    --zodiac-filter: hue-rotate(44deg) saturate(1.35) brightness(1.05) brightness(1.2);
+    --zodiac-filter: brightness(0) saturate(100%) invert(52%) sepia(93%) saturate(1352%) hue-rotate(14deg) brightness(94%) contrast(97%) brightness(1.25);
+    --zodiac-filter-active: brightness(0) saturate(100%) invert(22%) sepia(60%) saturate(1560%) hue-rotate(16deg) brightness(92%) contrast(91%);
   }
 }
 
@@ -2988,7 +3003,8 @@ strong {
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  --zodiac-filter: hue-rotate(215deg) saturate(1.15) brightness(0.95);
+  --zodiac-filter: brightness(0) saturate(100%) invert(31%) sepia(94%) saturate(2785%) hue-rotate(213deg) brightness(96%) contrast(93%);
+  --zodiac-filter-active: brightness(0) saturate(100%) invert(18%) sepia(58%) saturate(2865%) hue-rotate(215deg) brightness(90%) contrast(95%);
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=water] {
@@ -3010,7 +3026,8 @@ strong {
     --text-disabled: #71717a;
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
-    --zodiac-filter: hue-rotate(215deg) saturate(1.15) brightness(0.95) brightness(1.2);
+    --zodiac-filter: brightness(0) saturate(100%) invert(31%) sepia(94%) saturate(2785%) hue-rotate(213deg) brightness(96%) contrast(93%) brightness(1.25);
+    --zodiac-filter-active: brightness(0) saturate(100%) invert(18%) sepia(58%) saturate(2865%) hue-rotate(215deg) brightness(90%) contrast(95%);
   }
 }
 
@@ -3040,7 +3057,8 @@ strong {
   --icon-hover: var(--primary-color);
   --shadow-color: rgba(0, 0, 0, 0.1);
   --overlay-bg: rgba(0, 0, 0, 0.4);
-  --zodiac-filter: hue-rotate(142deg) saturate(1.05) brightness(0.88);
+  --zodiac-filter: brightness(0) saturate(100%) invert(39%) sepia(82%) saturate(1105%) hue-rotate(130deg) brightness(93%) contrast(96%);
+  --zodiac-filter-active: brightness(0) saturate(100%) invert(21%) sepia(47%) saturate(1635%) hue-rotate(128deg) brightness(91%) contrast(96%);
 }
 @media (prefers-color-scheme: dark) {
   [data-theme=wood] {
@@ -3062,7 +3080,8 @@ strong {
     --text-disabled: #4b5563;
     --shadow-color: rgba(0, 0, 0, 0.5);
     --overlay-bg: rgba(0, 0, 0, 0.7);
-    --zodiac-filter: hue-rotate(142deg) saturate(1.05) brightness(0.88) brightness(1.2);
+    --zodiac-filter: brightness(0) saturate(100%) invert(39%) sepia(82%) saturate(1105%) hue-rotate(130deg) brightness(93%) contrast(96%) brightness(1.25);
+    --zodiac-filter-active: brightness(0) saturate(100%) invert(21%) sepia(47%) saturate(1635%) hue-rotate(128deg) brightness(91%) contrast(96%);
   }
 }
 

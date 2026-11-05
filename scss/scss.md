@@ -729,21 +729,57 @@ $feng-shui-themes: (
 @use "sass:map";
 @use "palette" as pal;
 
-// 1. ĐÃ THÊM CÔNG TẮC: $is-default: false
+// 1. Bộ lọc chuẩn xác từ gốc #000 (fill="#000") sang màu primary-600 của 5 mệnh (Dùng cho trạng thái Thường & Hover)
+$zodiac-theme-filters: (
+    // Mệnh Thổ (#d97706 - Cam đất đậm)
+    "earth": brightness(0) saturate(100%) invert(48%) sepia(87%) saturate(1638%) hue-rotate(2deg) brightness(97%)
+        contrast(96%),
+    // Mệnh Hỏa (#dc2626 - Đỏ chu sa)
+    "fire": brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(3932%) hue-rotate(351deg) brightness(89%)
+        contrast(95%),
+    // Mệnh Kim (#ca8a04 - Vàng kim đậm)
+    "metal": brightness(0) saturate(100%) invert(52%) sepia(93%) saturate(1352%) hue-rotate(14deg) brightness(94%)
+        contrast(97%),
+    // Mệnh Thủy (#2563eb - Xanh đại dương)
+    "water": brightness(0) saturate(100%) invert(31%) sepia(94%) saturate(2785%) hue-rotate(213deg) brightness(96%)
+        contrast(93%),
+    // Mệnh Mộc (#059669 - Xanh lục bảo)
+    "wood": brightness(0) saturate(100%) invert(39%) sepia(82%) saturate(1105%) hue-rotate(130deg) brightness(93%)
+        contrast(96%)
+);
+
+// 2. Bộ lọc từ gốc #000 sang màu trầm primary-900 cùng mệnh (Dùng cho ô --active để giữ nét cắt giấy dương bản)
+$zodiac-active-filters: (
+    // Mệnh Thổ (#78350f - Nâu đại địa sẫm trên nền cam #f59e0b)
+    "earth": brightness(0) saturate(100%) invert(19%) sepia(51%) saturate(2255%) hue-rotate(12deg) brightness(93%)
+        contrast(92%),
+    // Mệnh Hỏa (#7f1d1d - Đỏ trầm trên nền đỏ #ef4444)
+    "fire": brightness(0) saturate(100%) invert(13%) sepia(56%) saturate(3426%) hue-rotate(349deg) brightness(91%)
+        contrast(96%),
+    // Mệnh Kim (#713f12 - Đồng cổ sẫm trên nền vàng #eab308)
+    "metal": brightness(0) saturate(100%) invert(22%) sepia(60%) saturate(1560%) hue-rotate(16deg) brightness(92%)
+        contrast(91%),
+    // Mệnh Thủy (#1e3a8a - Xanh chàm sẫm trên nền xanh #3b82f6)
+    "water": brightness(0) saturate(100%) invert(18%) sepia(58%) saturate(2865%) hue-rotate(215deg) brightness(90%)
+        contrast(95%),
+    // Mệnh Mộc (#064e3b - Xanh rừng thẫm trên nền xanh #10b981)
+    "wood": brightness(0) saturate(100%) invert(21%) sepia(47%) saturate(1635%) hue-rotate(128deg) brightness(91%)
+        contrast(96%)
+);
+
 @mixin generate-theme($element-name, $is-default: false) {
     $theme-data: map.get(pal.$feng-shui-themes, $element-name);
+    $zodiac-filter: map.get($zodiac-theme-filters, $element-name);
+    $zodiac-filter-active: map.get($zodiac-active-filters, $element-name);
 
     @if $theme-data == null {
         @error "Lỗi: Không tìm thấy dữ liệu cho bản mệnh '#{$element-name}'";
     }
 
-    // 2. ĐÃ THÊM BỘ DÒ ĐƯỜNG: Sinh ra :root nếu là theme mặc định
-    // $selector: if($is-default, ":root, [data-theme='#{$element-name}']", "[data-theme='#{$element-name}']");
     $selector: if(
         sass($is-default): ":root, [data-theme='#{$element-name}']" ; else: "[data-theme='#{$element-name}']",
     );
 
-    // 3. Gọi $selector thay vì ghi cứng [data-theme]
     #{$selector} {
         /* 1. NHÓM NỀN & CHỮ */
         --body-bg: #{map.get($theme-data, "neutral", 100)};
@@ -756,36 +792,28 @@ $feng-shui-themes: (
         --secondary-color: #{map.get($theme-data, "secondary", 500)};
         --accent-color: #{map.get($theme-data, "accent", 500)};
 
-        --primary-hover: #{map.get($theme-data, "primary", 600)};
-        --primary-active: #{map.get($theme-data, "primary", 700)};
-        --focus-ring-color: var(--primary-color);
-        --bg-disabled: #{map.get($theme-data, "neutral", 200)};
-        --text-disabled: #{map.get($theme-data, "neutral", 400)};
-
-        /* 2. NHÓM TRẠNG THÁI (Báo lỗi, Thành công, Cảnh báo) */
+        /* 2. NHÓM TRẠNG THÁI */
         --color-success: #{map.get($theme-data, "success", 500)};
         --color-warning: #{map.get($theme-data, "warning", 500)};
         --color-danger: #{map.get($theme-data, "danger", 500)};
         --color-info: #{map.get($theme-data, "info", 500)};
 
-        /* 3. NHÓM TƯƠNG TÁC (Hover, Active, Disabled cho Button/Link) */
+        /* 3. NHÓM TƯƠNG TÁC */
         --primary-hover: #{map.get($theme-data, "primary", 600)};
         --primary-active: #{map.get($theme-data, "primary", 700)};
         --focus-ring-color: var(--primary-color);
         --bg-disabled: #{map.get($theme-data, "neutral", 200)};
         --text-disabled: #{map.get($theme-data, "neutral", 400)};
 
-        /* 4. NHÓM THÀNH PHẦN KHÁC (Icon, Đổ bóng, Lớp phủ Modal) */
+        /* 4. NHÓM THÀNH PHẦN KHÁC & FILTER 12 CON GIÁP */
         --icon-color: var(--text-muted);
         --icon-hover: var(--primary-color);
         --shadow-color: rgba(0, 0, 0, 0.1);
         --overlay-bg: rgba(0, 0, 0, 0.4);
+        --zodiac-filter: #{$zodiac-filter};
+        --zodiac-filter-active: #{$zodiac-filter-active};
 
-        /* =========================================================
-           CHẾ ĐỘ TỐI (DARK MODE) 
-           ========================================================= */
         @media (prefers-color-scheme: dark) {
-            /* 1. Nhóm Nền & Chữ */
             --body-bg: #{map.get($theme-data, "primary", 900)};
             --bg-surface: #{map.get($theme-data, "primary", 800)};
             --text-color: #{map.get($theme-data, "neutral", 100)};
@@ -796,58 +824,21 @@ $feng-shui-themes: (
             --secondary-color: #{map.get($theme-data, "secondary", 400)};
             --accent-color: #{map.get($theme-data, "accent", 400)};
 
-            /* 2. Nhóm Trạng thái */
             --color-success: #{map.get($theme-data, "success", 400)};
             --color-warning: #{map.get($theme-data, "warning", 400)};
             --color-danger: #{map.get($theme-data, "danger", 400)};
             --color-info: #{map.get($theme-data, "info", 400)};
 
-            /* 3. Nhóm Tương tác */
             --primary-hover: #{map.get($theme-data, "primary", 400)};
             --primary-active: #{map.get($theme-data, "primary", 300)};
             --bg-disabled: #{map.get($theme-data, "neutral", 800)};
             --text-disabled: #{map.get($theme-data, "neutral", 600)};
 
-            /* 4. Nhóm Thành phần khác */
             --shadow-color: rgba(0, 0, 0, 0.5);
             --overlay-bg: rgba(0, 0, 0, 0.7);
+            --zodiac-filter: #{$zodiac-filter} brightness(1.25);
+            --zodiac-filter-active: #{$zodiac-filter-active};
         }
-    }
-}
-```
-
-### mixins.scss
-
-```scss
-// scscss/abstracts/_mixins.scss
-@use "sass:map";
-@use "sass:math";
-@use "sass:string";
-@use "variables" as vars;
-
-// 1. Mixin để xử lý Media Query (Dùng cho @content)
-@mixin screen($key) {
-    $breakpoint: map.get(vars.$grid-breakpoints, $key);
-
-    @if ($breakpoint == 0) {
-        @content;
-    } @else {
-        @media (max-width: ($breakpoint - 0.02px)) {
-            @content;
-        }
-    }
-}
-
-// 2. Function để tạo chuỗi infix (Dùng để tạo class: .col-sm-12)
-// Function trả về giá trị, Mixin thực hiện hành động.
-@function get-infix($key) {
-    $breakpoint: map.get(vars.$grid-breakpoints, $key);
-
-    // Kiểm tra: Nếu breakpoint tồn tại và khác 0, trả về "-key", ngược lại trả về ""
-    @if $breakpoint != null and $breakpoint != 0 {
-        @return string.unquote("-" + $key);
-    } @else {
-        @return "";
     }
 }
 ```
@@ -2548,6 +2539,486 @@ strong {
 }
 ```
 
+### index.scss
+
+```scss
+@forward "./reset";
+@forward "./base";
+@forward "./grid";
+@forward "./utils";
+@forward "./keyframes";
+```
+
+### reset.scss
+
+```scss
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol,
+ul {
+    list-style: none;
+}
+blockquote,
+q {
+    quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+```
+
+### base.scss
+
+```scss
+/* ==========================================================================
+   CSS CƠ SỞ (BASE CSS)
+   Cấu trúc reset mặc định và định dạng nền tảng cho tài liệu.
+   ========================================================================== */
+@use "../abstracts/" as abs;
+// @use "../abstracts/variables" as v;
+// @use "../abstracts/mixins" as m;
+:root {
+    /* Lấy chính xác thông số transition từ file variables cũ của bạn */
+    --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    // Liên kết với hằng số cơ sở
+    font-size: abs.$base-font-size;
+}
+
+body {
+    // Kế thừa typography từ tệp biến trung tâm
+    font-size: abs.$body-font-size;
+    font-family: abs.$body-font-family;
+    line-height: 1.5; /* Khoảng cách tối thiểu an toàn cho người chứng khó đọc */
+    -webkit-font-smoothing: antialiased;
+    // Sử dụng CSS Custom Properties cho phép chuyển đổi Theme động
+    color: var(--text-color);
+    background: var(--body-bg);
+    // transition: abs.$theme-transition;
+    transition: var(--theme-transition);
+}
+
+/* Tối ưu hóa ngắt dòng thông minh (Smart text-wrapping) */
+p,
+li,
+dd {
+    text-wrap: pretty; /* Loại bỏ dòng rớt (orphans) cho văn bản dài */
+    overflow-wrap: break-word;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+a,
+img,
+button,
+label,
+input,
+textarea,
+select {
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    outline: none;
+    border: none;
+    // Đã khắc phục lỗi cú pháp: sửa --webkit-tab thành chuẩn của Apple
+    -webkit-tap-highlight-color: transparent;
+}
+
+input,
+textarea {
+    background: transparent;
+}
+/* Thay thế các giải pháp JavaScript tính toán chiều cao cuộn */
+textarea {
+    field-sizing: content;
+}
+
+// Xử lý ghi đè CSS autofill của trình duyệt
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:-webkit-autofill:hover {
+    transition: background-color 1s 9999s;
+    -webkit-text-fill-color: var(--text-color);
+    caret-color: var(--text-color);
+}
+
+/* Thiết lập đa phương tiện logic (Tương thích ngôn ngữ RTL/Dọc) */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-inline-size: 100%;
+}
+
+/* ĐẢM BẢO KHẢ NĂNG TIẾP CẬN: Quản lý vòng tiêu điểm bàn phím */
+:focus-visible {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 4px; /* Đẩy viền ra ngoài để tránh nhiễu loạn thị giác */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* Ẩn mũi tên trên Chrome, Safari, Edge và các trình duyệt dựa trên Chromium */
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Ẩn mũi tên trên Firefox */
+details summary {
+    list-style: none;
+    display: flex;
+}
+
+.icon {
+    // filter: var(--icon-color);
+    width: 24px;
+    height: 24px;
+}
+
+.container {
+    // Áp dụng mixin screen và cấu hình khoảng đệm tĩnh
+    @include abs.screen(sm) {
+        padding-left: abs.$container-padding-sm !important;
+        padding-right: abs.$container-padding-sm !important;
+    }
+}
+
+i,
+em {
+    font-style: italic;
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+```
+
+### grid.scss
+
+```scss
+// scss/base/_grid.scss
+@use "sass:math";
+@use "sass:map";
+@use "../abstracts" as abs;
+
+// 1. Base Container & Row
+.container-fluid {
+    --grid-gutter-x: #{abs.$grid-gutter-width};
+    --grid-gutter-y: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: calc(var(--grid-gutter-x) * 0.5);
+    padding-right: calc(var(--grid-gutter-x) * 0.5);
+}
+
+.container {
+    @extend .container-fluid;
+    max-width: abs.$container-max-width-custom;
+    // Max-width sẽ được xử lý trong loop breakpoint
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--grid-gutter-y) * -1);
+    margin-left: calc(var(--grid-gutter-x) * -0.5);
+    margin-right: calc(var(--grid-gutter-x) * -0.5);
+
+    > * {
+        margin-top: var(--grid-gutter-y);
+        padding-left: calc(var(--grid-gutter-x) * 0.5);
+        padding-right: calc(var(--grid-gutter-x) * 0.5);
+    }
+}
+
+.col {
+    flex: 1 0 0%;
+}
+
+// 2. Mixins for generating classes
+@mixin make-columns($infix: "") {
+    @for $i from 1 through abs.$grid-columns {
+        .col#{$infix}-#{$i} {
+            flex: 0 0 auto;
+            width: math.div(100%, abs.$grid-columns) * $i;
+        }
+    }
+}
+
+@mixin make-offsets($infix: "") {
+    @for $i from 0 through abs.$grid-columns {
+        .offset#{$infix}-#{$i} {
+            margin-left: if(sass($i > 0): math.div(100%, abs.$grid-columns) * $i; else: 0);
+        }
+    }
+}
+
+// 3. Execution
+@include make-columns("");
+@include make-offsets("");
+
+// 4. Breakpoint Loop (Đã fix để chạy hoàn hảo với mixins)
+@each $breakpoint, $dimension in abs.$grid-breakpoints {
+    // Desktop-First: Điểm ngắt 0px (xs) không có ý nghĩa với max-width, nên bỏ qua
+    @if $dimension != 0 {
+        // Đổi "abs.breakpoint" thành "abs.screen" theo đúng file mixins
+        @include abs.screen($breakpoint) {
+            .container {
+                max-width: map.get(abs.$container-max-widths, $breakpoint);
+            }
+
+            // Gọi hàm get-infix từ mixins thay vì tự nối chuỗi thủ công
+            $infix: abs.get-infix($breakpoint);
+
+            @include make-columns($infix);
+            @include make-offsets($infix);
+
+            @each $i, $ratio in abs.$gutters {
+                .g#{$infix}-#{$i},
+                .gx#{$infix}-#{$i} {
+                    --grid-gutter-x: #{abs.$grid-gutter-width * $ratio};
+                }
+            }
+        }
+    }
+}
+```
+
+### utils.scss
+
+```scss
+/* ==========================================================================
+   TIỆN ÍCH (UTILITIES)
+   Tự động sinh các lớp bổ trợ điều khiển hiển thị (display classes).
+   ========================================================================== */
+
+@use "../abstracts" as abs;
+
+@mixin make-display($breakpoint: null) {
+    // Phân tích nội suy tiền tố một cách an toàn
+    $infix: if(
+        sass($breakpoint != null): "-#{$breakpoint}" ; else: "",
+    );
+
+    @each $display in abs.$display-values {
+        .d#{$infix}-#{$display} {
+            display: $display !important;
+        }
+    }
+}
+
+// 1. Gọi lớp tiện ích hiển thị cho viewport tiêu chuẩn
+@include make-display();
+
+// 2. Khởi tạo các lớp tiện ích tương ứng với từng breakpoint
+@each $breakpoint, $dimension in abs.$grid-breakpoints {
+    @media (max-width: ($dimension - 0.02px)) {
+        @include make-display($breakpoint);
+    }
+}
+```
+
+### keyframes.scss
+
+```scss
+// scss/base/_keyframes.scss
+// Gom toàn bộ @keyframes từ abstracts/_animations.scss và base/_keyframes.scss về đúng tầng Base
+
+// 1. Hiệu ứng Fade-in (Xuất hiện nhẹ nhàng cho Dropdown Header)
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// 2. Hiệu ứng Float (Nhấp nhô như sóng nước - Dùng cho hành Thủy)
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-1rem);
+    }
+}
+
+// 3. Hiệu ứng Pulse (Nhịp đập - Dùng cho hành Hỏa)
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+// 4. Hiệu ứng Shake (Rung cảnh báo lỗi)
+@keyframes shake {
+    0%,
+    100% {
+        translate: 0;
+    }
+    25%,
+    75% {
+        translate: 0.4rem;
+    }
+    50% {
+        translate: -0.4rem;
+    }
+}
+```
+
 ## components folder
 
 ### index.scss
@@ -2556,6 +3027,9 @@ strong {
 @forward "./button";
 @forward "./logo-header";
 @forward "./date-time";
+@forward "./bloc-card";
+@forward "./fengshui-card";
+@forward "./month-calendar";
 ```
 
 ### button.scss
@@ -2719,6 +3193,1030 @@ strong {
 }
 ```
 
+### month-calendar.scss
+
+```scss
+// scss/components/_month-calendar.scss
+@use "../abstracts" as abs;
+
+.month-cal {
+    @extend %flexColumn;
+    gap: 1.8rem;
+    padding: 2.4rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.4rem;
+        border-radius: 1.8rem;
+        gap: 1.2rem;
+    }
+
+    // 1. Thanh điều khiển Tháng / Năm
+    &__toolbar {
+        @extend %flexBetween;
+        gap: 1.2rem;
+    }
+
+    &__nav-btn {
+        @extend %inlineFlexCenter;
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.4rem;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__controls {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    &__today-btn {
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 1.2rem;
+        font-size: 1.4rem;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+    }
+
+    // Custom Dropdown <details>
+    &__dropdown {
+        position: relative;
+    }
+
+    &__summary {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4.2rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+    }
+
+    &__arrow {
+        width: 1.6rem;
+        height: 1.6rem;
+        @extend %transBurgerBar;
+    }
+
+    &__dropdown[open] &__summary {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+    }
+
+    &__dropdown[open] &__arrow {
+        transform: rotate(180deg);
+    }
+
+    &__dropdown-menu {
+        position: absolute;
+        top: calc(100% + 0.8rem);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 60;
+        padding: 0.8rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+        box-shadow: 0 1.2rem 3rem var(--shadow-color);
+        @extend %animDropdownFadeIn;
+
+        &--grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+            min-width: 28rem;
+        }
+
+        &--year {
+            @extend %flexColumn;
+            gap: 0.4rem;
+            min-width: 13rem;
+        }
+    }
+
+    &__option {
+        @extend %inlineFlexCenter;
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border-radius: 1rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %textNoWrap;
+        @extend %transTheme;
+
+        &:hover {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+
+        &.is-selected {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    // 2. Hàng Thứ trong tuần (Bento Header Cells)
+    &__weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.8rem;
+
+        @include abs.screen(sm) {
+            gap: 0.4rem;
+        }
+    }
+
+    &__weekday {
+        @extend %flexCenter;
+        height: 3.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        @include abs.screen(sm) {
+            height: 3.2rem;
+            font-size: 1.15rem;
+            border-radius: 0.8rem;
+        }
+
+        &--sat {
+            color: var(--primary-color);
+        }
+
+        &--sun {
+            color: var(--color-danger);
+            background-color: rgba(239, 68, 68, 0.08);
+            border-color: rgba(239, 68, 68, 0.25);
+        }
+    }
+
+    // 3. Lưới 42 ô ngày theo PHƯƠNG ÁN 1 (Bento Góc Đối Xứng)
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.8rem;
+
+        @include abs.screen(sm) {
+            gap: 0.4rem;
+        }
+    }
+
+    &__cell {
+        position: relative;
+        overflow: hidden;
+        @extend %flexTopLeft;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 9.6rem;
+        padding: 1rem 1rem 0.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+        cursor: pointer;
+        z-index: 1;
+        @extend %transInteractive;
+
+        @include abs.screen(xl) {
+            min-height: 8.6rem;
+            padding: 0.8rem;
+        }
+
+        @include abs.screen(sm) {
+            min-height: 6.8rem;
+            border-radius: 1.2rem;
+            padding: 0.6rem 0.5rem;
+        }
+
+        // Ngày của tháng trước / tháng sau
+        &--muted {
+            opacity: 0.45;
+            background-color: transparent;
+
+            .month-cal__zodiac-img {
+                opacity: 0.12;
+            }
+        }
+
+        // Ngày Hôm nay (Khi chưa phải là ô Active)
+        &--today:not(&--active) {
+            border: 2px solid var(--primary-color);
+            background-color: var(--body-bg);
+
+            .month-cal__solar {
+                color: var(--primary-color);
+            }
+        }
+
+        // Hover vào ô thường (Tách biệt khỏi ô --active để không bao giờ bị trắng xoá)
+        &:not(&--active):hover,
+        &:not(&--active):focus-visible {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+
+            .month-cal__zodiac-img {
+                opacity: 0.9;
+                filter: var(--zodiac-filter);
+                transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
+            }
+        }
+
+        // Trạng thái Đang Chọn (--active): Nền primary-500, Chữ trắng, Con giáp màu trầm primary-900 dương bản
+        &--active {
+            background-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+            .month-cal__solar,
+            .month-cal__lunar {
+                color: #ffffff;
+            }
+
+            .month-cal__badge {
+                background-color: rgba(255, 255, 255, 0.24);
+                color: #ffffff;
+                border-color: rgba(255, 255, 255, 0.45);
+            }
+
+            .month-cal__zodiac-img {
+                opacity: 0.58;
+                filter: var(--zodiac-filter-active);
+                transform: scale(1.06) rotate(0deg);
+            }
+
+            // Khi Hover vào chính ô Active: Giữ nguyên nền đậm, làm nét thêm con giáp
+            &:hover,
+            &:focus-visible {
+                background-color: var(--primary-color);
+                border-color: var(--primary-hover);
+                transform: translateY(-2px);
+                box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+                .month-cal__zodiac-img {
+                    opacity: 0.78;
+                    filter: var(--zodiac-filter-active);
+                    transform: scale(1.14) rotate(0deg) translate(-0.2rem, -0.2rem);
+                }
+            }
+        }
+
+        // Khi di chuột vào nút chú thích ở chân lịch (Highlight Filter)
+        &.is-highlighted:not(&--active) {
+            opacity: 1 !important;
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+            z-index: 2;
+
+            .month-cal__zodiac-img {
+                opacity: 0.9;
+                filter: var(--zodiac-filter);
+                transform: scale(1.1) rotate(0deg);
+            }
+        }
+
+        &.is-dimmed {
+            opacity: 0.18;
+            transform: scale(0.96);
+        }
+    }
+
+    // Cụm Số Ngày Dương & Ngày Âm xếp dọc trên mọi màn hình (Phương án 1 - Chống đè nhãn Mùng 1 / Rằm)
+    &__date-head {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        max-width: 55%;
+        line-height: 1.05;
+    }
+
+    &__solar {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(xl) {
+            font-size: 1.8rem;
+        }
+
+        @include abs.screen(sm) {
+            font-size: 1.45rem;
+        }
+    }
+
+    &__lunar {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(sm) {
+            font-size: 1rem;
+        }
+    }
+
+    // Nhãn Mùng 1 / Rằm / Ngày Lễ ở Góc Trên Phải
+    &__badge {
+        position: absolute;
+        top: 0.6rem;
+        right: 0.6rem;
+        z-index: 3;
+        padding: 0.2rem 0.6rem;
+        background-color: rgba(239, 68, 68, 0.14);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: var(--color-danger);
+        font-size: 1rem;
+        font-weight: 800;
+        border-radius: 0.6rem;
+        line-height: 1.2;
+        @extend %textNoWrap;
+
+        @include abs.screen(sm) {
+            top: 0.35rem;
+            right: 0.35rem;
+            padding: 0.1rem 0.35rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    // Cụm chấm tròn trạng thái (Hoàng Đạo / Hắc Đạo / Ngày Lễ) ở Góc Dưới Trái
+    &__dots {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 0.5rem;
+        margin-top: auto;
+    }
+
+    &__dot {
+        display: inline-block;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+
+        @include abs.screen(sm) {
+            width: 0.6rem;
+            height: 0.6rem;
+        }
+
+        &--good {
+            background-color: #eab308;
+            box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.25);
+        }
+
+        &--bad {
+            background-color: #374151;
+            box-shadow: 0 0 0 2px rgba(55, 65, 81, 0.2);
+        }
+
+        &--holiday {
+            background-color: #ef4444;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25);
+        }
+    }
+
+    // Thẻ <img> 12 Con Giáp (128x128px, fill="#000") ở Góc Dưới Phải
+    &__zodiac-img {
+        position: absolute;
+        right: 0.5rem;
+        bottom: 0.4rem;
+        width: 4.6rem;
+        height: 4.6rem;
+        object-fit: contain;
+        opacity: 0.2;
+        filter: var(--zodiac-filter);
+        transform: scale(0.78) rotate(-8deg);
+        transform-origin: bottom right;
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.35s ease,
+            filter 0.3s ease;
+
+        @include abs.screen(xl) {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        @include abs.screen(sm) {
+            width: 2.8rem;
+            height: 2.8rem;
+            right: 0.2rem;
+            bottom: 0.2rem;
+        }
+    }
+
+    // 4. Chú thích cuối bảng (Bo góc Bento 1.2rem)
+    &__legend {
+        @extend %flexCenter;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-top: 0.6rem;
+    }
+
+    &__legend-pill {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 3.8rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-color);
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0.6rem 1.4rem var(--shadow-color);
+        }
+    }
+
+    &__legend-dot {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+
+        &--good {
+            background-color: #eab308;
+        }
+        &--bad {
+            background-color: #374151;
+        }
+        &--holiday {
+            background-color: #ef4444;
+        }
+        &--today {
+            border: 2px solid var(--primary-color);
+        }
+    }
+}
+```
+
+### fengshui-card.scss
+
+```scss
+// scss/components/_fengshui-card.scss
+@use "../abstracts" as abs;
+
+.fengshui-stack {
+    @extend %flexColumn;
+    gap: 1.6rem;
+}
+
+// 1. Hai ô Giờ Hoàng Đạo (Vàng Hoàng Kim) & Giờ Hắc Đạo (Xám Đá) đồng bộ 100% với Ảnh 3
+.fengshui-hours {
+    @extend %gridCols2;
+    gap: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__box {
+        padding: 1.6rem;
+        border-radius: 1.8rem;
+        border: 1px solid var(--border-color);
+        @extend %transTheme;
+
+        // Màu Vàng Hoàng Đạo giống chấm tròn Hoàng Đạo ở Ảnh 3 (#eab308)
+        &--good {
+            background-color: rgba(234, 179, 8, 0.12);
+            border-color: rgba(234, 179, 8, 0.4);
+
+            .fengshui-hours__title {
+                color: #b45309;
+            }
+        }
+
+        // Màu Xám Hắc Đạo giống chấm tròn Hắc Đạo ở Ảnh 3 (#374151)
+        &--bad {
+            background-color: rgba(55, 65, 81, 0.08);
+            border-color: rgba(55, 65, 81, 0.28);
+
+            .fengshui-hours__title {
+                color: #374151;
+            }
+        }
+    }
+
+    &__title {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+    }
+
+    &__dot {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        @extend %flexItemFixed;
+
+        &--good {
+            background-color: #eab308;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
+        }
+
+        &--bad {
+            background-color: #374151;
+            box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.2);
+        }
+    }
+
+    &__list {
+        font-size: 1.3rem;
+        line-height: 1.55;
+        color: var(--text-color);
+    }
+}
+
+// 2. Thẻ Bento thông số Trực, Sao & Việc nên làm
+.fengshui-card {
+    @extend %flexColumn;
+    gap: 1.4rem;
+    padding: 2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 1.8rem;
+    }
+
+    &__group {
+        padding-bottom: 1.2rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__head {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        font-size: 1.4rem;
+    }
+
+    &__label {
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__val {
+        color: var(--primary-color);
+    }
+
+    &__badge {
+        padding: 0.2rem 0.8rem;
+        border-radius: 0.6rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+
+        &--bad {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--color-danger);
+        }
+
+        &--good {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: var(--color-success);
+        }
+    }
+
+    &__desc {
+        margin-top: 0.4rem;
+        font-size: 1.35rem;
+        font-style: italic;
+        color: var(--text-muted);
+    }
+
+    &__ages {
+        @extend %gridCols2;
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__age-chip {
+        padding: 1rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.35rem;
+
+        &--good strong {
+            color: var(--color-success);
+        }
+
+        &--bad strong {
+            color: var(--color-danger);
+        }
+    }
+
+    &__section-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+}
+
+// 3. Việc Nên Làm / Không Nên Làm thiết kế dạng 2 Hộp Bento Con + Tag Chips (Ảnh 5)
+.fengshui-actions {
+    @extend %gridCols2;
+    gap: 1.2rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--border-color);
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__box {
+        @extend %flexColumn;
+        gap: 1rem;
+        padding: 1.4rem;
+        border-radius: 1.6rem;
+        border: 1px solid var(--border-color);
+
+        &--do {
+            background-color: rgba(34, 197, 94, 0.06);
+            border-color: rgba(34, 197, 94, 0.28);
+
+            .fengshui-actions__badge {
+                color: var(--color-success);
+            }
+            .fengshui-actions__icon {
+                background-color: rgba(34, 197, 94, 0.16);
+                color: var(--color-success);
+            }
+            .fengshui-actions__chip {
+                background-color: var(--body-bg);
+                border-color: rgba(34, 197, 94, 0.35);
+                color: var(--color-success);
+            }
+        }
+
+        &--dont {
+            background-color: rgba(239, 68, 68, 0.06);
+            border-color: rgba(239, 68, 68, 0.28);
+
+            .fengshui-actions__badge {
+                color: var(--color-danger);
+            }
+            .fengshui-actions__icon {
+                background-color: rgba(239, 68, 68, 0.16);
+                color: var(--color-danger);
+            }
+            .fengshui-actions__chip {
+                background-color: var(--body-bg);
+                border-color: rgba(239, 68, 68, 0.35);
+                color: var(--color-danger);
+            }
+        }
+    }
+
+    &__header {
+        @extend %flexBetween;
+    }
+
+    &__badge {
+        font-size: 1.35rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    &__icon {
+        @extend %inlineFlexCenter;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__list {
+        @extend %flexWrapGap;
+        gap: 0.8rem;
+    }
+
+    &__chip {
+        padding: 0.5rem 1.1rem;
+        border-radius: 99.9rem;
+        border: 1px solid transparent;
+        font-size: 1.3rem;
+        font-weight: 600;
+        box-shadow: 0 0.2rem 0.6rem var(--shadow-color);
+    }
+}
+
+.fengshui-quote {
+    text-align: center;
+    padding-top: 0.4rem;
+
+    &__text {
+        font-size: 1.4rem;
+        font-style: italic;
+        color: var(--text-muted);
+    }
+
+    &__author {
+        display: block;
+        margin-top: 0.4rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+```
+
+### bloc-card.scss
+
+```scss
+// scss/components/_bloc-card.scss
+@use "../abstracts" as abs;
+
+.bloc-card {
+    @extend %flexColumn;
+    gap: 1.4rem;
+    padding: 2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.4rem;
+        border-radius: 1.8rem;
+    }
+
+    // 1. Tầng Đầu: Tháng/Năm bên trái - Số Ngày Dương khổng lồ bên phải
+    &__top {
+        @extend %flexBetween;
+        align-items: flex-start;
+        gap: 1.6rem;
+    }
+
+    &__month-box {
+        @extend %flexColumn;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+
+    &__year-badge {
+        display: inline-block;
+        padding: 0.4rem 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.8rem;
+        font-weight: 800;
+        border-radius: 99.9rem;
+        letter-spacing: 0.05em;
+    }
+
+    &__month-vn {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        margin-top: 0.4rem;
+
+        @include abs.screen(sm) {
+            font-size: 1.7rem;
+        }
+    }
+
+    &__month-en {
+        font-size: 1.5rem;
+        font-style: italic;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__day-status {
+        display: inline-block;
+        margin-top: 0.4rem;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__date-hero {
+        position: relative;
+        @extend %flexColumn;
+        align-items: flex-end;
+    }
+
+    &__share-btn {
+        @extend %inlineFlexCenter;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 1rem;
+        background-color: var(--bg-surface);
+        color: var(--text-muted);
+        @extend %transInteractive;
+
+        &:hover {
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__solar-num {
+        font-size: 8.8rem;
+        font-weight: 800;
+        line-height: 0.95;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(sm) {
+            font-size: 6.8rem;
+        }
+    }
+
+    // 2. Tầng Giữa: Khung Ảnh Sự kiện Lịch sử / Anh hùng Dân tộc chuẩn 16:9
+    &__media {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 1.6rem;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-surface);
+    }
+
+    &__img {
+        @extend %imgCover;
+        transition: transform 0.4s ease;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+
+    // 3. Tầng Băng Rôn Ngang: Năm Can Chi | Thứ trong tuần
+    &__ribbon {
+        display: grid;
+        grid-template-columns: 4fr 6fr;
+        border-radius: 1rem;
+        overflow: hidden;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__ribbon-year {
+        @extend %flexCenter;
+        padding: 0.8rem 1rem;
+        background-color: var(--secondary-color);
+        color: #ffffff;
+    }
+
+    &__ribbon-weekday {
+        @extend %flexCenter;
+        padding: 0.8rem 1rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        letter-spacing: 0.04em;
+    }
+
+    // 4. Tầng Đáy 3 Cột: Số Ngày Âm | Can Chi | Hành & Tiết Khí
+    &__bottom {
+        display: grid;
+        grid-template-columns: auto 1fr 1.15fr;
+        align-items: center;
+        gap: 1.4rem;
+        padding-top: 0.6rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: auto 1fr;
+        }
+    }
+
+    &__lunar-num-box {
+        @extend %flexColumnCenterAll;
+        min-width: 7.2rem;
+        padding: 0.8rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__lunar-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+    }
+
+    &__lunar-num {
+        font-size: 4.2rem;
+        font-weight: 800;
+        line-height: 1.05;
+        color: var(--primary-color);
+    }
+
+    &__canchi-list {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+        padding-right: 1.2rem;
+        border-right: 1px solid var(--border-color);
+
+        @include abs.screen(sm) {
+            border-right: none;
+            padding-right: 0;
+        }
+    }
+
+    &__lunar-month {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__quick-fengshui {
+        @extend %flexColumn;
+        gap: 0.4rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+
+        @include abs.screen(sm) {
+            grid-column: 1 / -1;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--border-color);
+        }
+    }
+}
+```
+
 ## layout folder
 
 ### index.scss
@@ -2737,68 +4235,69 @@ strong {
 
 .header {
     @extend %stickyTop;
-    top: abs.$header-top-offset; // Mặc định cách top 30px trên mọi giao diện
+    top: abs.$header-top-offset;
     margin-top: abs.$header-top-offset;
     margin-bottom: abs.$gap-header-main;
     z-index: 50;
     height: abs.$header-height-pc;
-    background-color: transparent; // Trong suốt để lộ 2 đảo Bento
+    background-color: transparent;
     border-bottom: none;
-    pointer-events: none; // Cho phép click xuyên qua khoảng trống giữa 2 đảo Bento
 
-    // Desktop-First: Thu gọn chiều cao ở màn hình Tablet & Mobile (<= 768px)
     @include abs.screen(md) {
         height: abs.$header-height-mobile;
     }
 
+    // 1 KHUNG VIỀN BENTO DUY NHẤT BỌC CẢ CỤM TRÁI & CỤM PHẢI
     &__container {
         @extend %flexBetween;
         height: 100%;
+        padding-left: 2.4rem;
+        padding-right: 2.4rem;
         gap: 2rem;
-
-        @include abs.screen(sm) {
-            gap: 1rem;
-        }
-    }
-
-    // 2 ĐẢO BENTO ĐỘC LẬP (Cụm Trái & Cụm Phải)
-    &__left,
-    &__right {
-        pointer-events: auto; // Bật lại tương tác chuột cho 2 đảo Bento
-        @extend %flexItemCenter;
-        height: 100%;
-        padding: 0 2rem;
-        gap: 1.2rem;
         background-color: var(--body-bg);
         border: 1px solid var(--border-color);
         border-radius: 2.4rem;
         box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
         @extend %transHeaderScroll;
 
-        // Desktop-First: Giảm dần khoảng đệm từ Laptop (xl) -> Tablet (md) -> Mobile (sm)
         @include abs.screen(xl) {
-            padding: 0 1.6rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
         }
 
         @include abs.screen(md) {
-            padding: 0 1.2rem;
+            padding-left: 1.6rem;
+            padding-right: 1.6rem;
             border-radius: 1.6rem;
+            gap: 1.2rem;
+        }
+
+        @include abs.screen(sm) {
+            padding-left: 1.2rem !important;
+            padding-right: 1.2rem !important;
+            border-radius: 1.4rem;
+            gap: 0.8rem;
+        }
+    }
+
+    &--scrolled &__container {
+        box-shadow: 0 1rem 2.8rem var(--shadow-color);
+        border-color: var(--primary-color);
+        backdrop-filter: blur(10px);
+    }
+
+    &__left,
+    &__right {
+        @extend %flexItemCenter;
+        gap: 1.2rem;
+
+        @include abs.screen(md) {
             gap: 1rem;
         }
 
         @include abs.screen(sm) {
-            padding: 0 1rem;
-            border-radius: 1.4rem;
             gap: 0.6rem;
         }
-    }
-
-    // Khi cuộn trang xuống, 2 đảo Bento tăng độ nổi khối và làm mờ nền kính
-    &--scrolled &__left,
-    &--scrolled &__right {
-        box-shadow: 0 1rem 2.8rem var(--shadow-color);
-        border-color: var(--primary-color);
-        backdrop-filter: blur(10px);
     }
 
     &__lang-details,
@@ -2881,7 +4380,6 @@ strong {
         font-weight: 700;
     }
 
-    // Nút Hamburger chuẩn vùng chạm 44x44px (4.4rem) dưới mốc md (768px)
     &__burger {
         display: none;
         flex-direction: column;
@@ -2923,7 +4421,299 @@ strong {
 ### footer.scss
 
 ```scss
+// scss/layout/_footer.scss
+@use "../abstracts" as abs;
 
+.footer {
+    margin-top: abs.$gap-section-default;
+    padding-bottom: 4rem;
+    color: var(--text-color);
+
+    &__bento-row {
+        --grid-gutter-y: 2.4rem;
+    }
+
+    // Khung chuẩn cho mọi đảo Bento trong Footer
+    &__card {
+        @extend %flexColumn;
+        justify-content: space-between;
+        height: 100%;
+        padding: 2.8rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 2.4rem;
+        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+
+        @include abs.screen(md) {
+            padding: 2rem;
+            border-radius: 1.8rem;
+        }
+
+        &--links {
+            @extend %gridCols2;
+            gap: 2rem;
+
+            @include abs.screen(sm) {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+
+    &__brand-head {
+        @extend %flexBetween;
+        gap: 1.2rem;
+        margin-bottom: 1.4rem;
+    }
+
+    &__logo-link {
+        @extend %inlineFlexCenter;
+        gap: 1rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__logo-img {
+        height: 3.6rem;
+        width: auto;
+    }
+
+    &__version-badge {
+        padding: 0.4rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+    }
+
+    &__desc,
+    &__sub-desc {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 1.8rem;
+    }
+
+    // Cụm chọn nhanh Ngũ Hành trong Footer
+    &__elements {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        margin-bottom: 1.6rem;
+        background-color: var(--bg-surface);
+        border-radius: 1.4rem;
+        border: 1px solid var(--border-color);
+
+        &-label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        &-list {
+            @extend %flexWrapGap;
+        }
+    }
+
+    &__element-dot {
+        padding: 0.4rem 1rem;
+        border-radius: 0.8rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+    }
+
+    &__contact {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-style: normal;
+        font-size: 1.3rem;
+        color: var(--text-muted);
+        padding-top: 1.4rem;
+        border-top: 1px dashed var(--border-color);
+
+        &-link {
+            font-weight: 600;
+            color: var(--primary-color);
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // Cột điều hướng
+    &__heading {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 1.4rem;
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 1rem;
+    }
+
+    &__link {
+        font-size: 1.4rem;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--primary-color);
+        }
+
+        &--btn {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+    }
+
+    // Form nhận tin & Mạng xã hội
+    &__sr-only {
+        @extend %srOnly;
+    }
+
+    &__input-group {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        padding: 0.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        margin-bottom: 1.2rem;
+
+        &:focus-within {
+            border-color: var(--primary-color);
+        }
+    }
+
+    &__input {
+        @extend %flexItemFluid;
+        padding: 0.8rem 1rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+    }
+
+    &__submit-btn {
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 1rem;
+        font-size: 1.3rem;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    &__feedback {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--color-success);
+        margin-bottom: 1.2rem;
+    }
+
+    &__social {
+        @extend %flexBetween;
+        padding-top: 1.4rem;
+        border-top: 1px dashed var(--border-color);
+
+        &-label {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+        }
+
+        &-list {
+            @extend %flexItemCenter;
+            gap: 0.8rem;
+        }
+
+        &-link {
+            @extend %inlineFlexCenter;
+            width: 3.6rem;
+            height: 3.6rem;
+            border-radius: 1rem;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            @extend %transInteractive;
+
+            &:hover {
+                background-color: var(--primary-color);
+                border-color: var(--primary-color);
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    // Thanh Bento Bar dưới cùng
+    &__bottom-bar {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.6rem;
+        margin-top: 2.4rem;
+        padding: 1.6rem 2.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            padding: 1.4rem 1.6rem;
+            border-radius: 1.6rem;
+        }
+    }
+
+    &__copyright {
+        font-size: 1.3rem;
+        color: var(--text-muted);
+    }
+
+    &__top-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        padding: 0.8rem 1.4rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+    }
+}
 ```
 
 ### sidebar.scss
@@ -3079,333 +4869,61 @@ strong {
 }
 ```
 
+## pages folder
+
 ### index.scss
 
 ```scss
-@forward "./header";
-@forward "./footer";
-@forward "./sidebar";
+@forward "./home";
 ```
 
-### header.scss
+### home.scss
 
 ```scss
-// scss/layout/_header.scss
+// scss/pages/_home.scss
 @use "../abstracts" as abs;
 
-#header-root {
-    display: contents;
-}
+.home-page {
+    padding-bottom: abs.$gap-section-default;
 
-.header {
-    @extend %stickyTop;
-    z-index: 50;
-    height: abs.$header-height-pc;
-    background-color: var(--body-bg);
-    border-bottom: 1px solid var(--border-color);
-    @extend %transHeaderScroll;
-
-    @include abs.screen(md) {
-        height: abs.$header-height-mobile;
+    &__row {
+        --grid-gutter-y: 2.4rem;
+        align-items: flex-start;
     }
 
-    &--scrolled {
-        box-shadow: 0 0.6rem 2rem var(--shadow-color);
-    }
-
-    &__container {
-        @extend %flexBetween;
-        height: 100%;
-        gap: 2rem;
-    }
-
-    &__left,
-    &__right {
-        @extend %flexItemCenter;
-        gap: 1.2rem;
-
-        @include abs.screen(sm) {
-            gap: 0.8rem;
-        }
-    }
-
-    &__lang-details,
-    &__theme-details {
-        position: relative;
-    }
-
-    &__lang-summary,
-    &__theme-summary {
-        @extend %inlineFlexCenter;
-        gap: 0.6rem;
-        height: 4.2rem;
-        padding: 0 1.2rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 1.2rem;
-        font-size: 1.4rem;
-        font-weight: 600;
-        cursor: pointer;
-        user-select: none;
-        @extend %transTheme;
-
-        &:hover {
-            border-color: var(--primary-color);
-        }
-
-        @include abs.screen(sm) {
-            height: 3.8rem;
-            padding: 0 1rem;
-        }
-    }
-
-    &__lang-arrow {
-        width: 1.6rem;
-        height: 1.6rem;
-        @extend %transBurgerBar;
-    }
-
-    &__lang-details[open] &__lang-arrow {
-        transform: rotate(180deg);
-    }
-
-    &__lang-list,
-    &__theme-list {
-        position: absolute;
-        top: calc(100% + 0.8rem);
-        right: 0;
-        z-index: 60;
-        min-width: 13.5rem;
-        padding: 0.6rem;
-        background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 1.2rem;
-        box-shadow: 0 1rem 2.5rem var(--shadow-color);
-        @extend %animDropdownFadeIn;
-    }
-
-    &__lang-link,
-    &__theme-btn {
-        @extend %flexYCenterLeft;
-        gap: 1rem;
-        width: 100%;
-        padding: 0.8rem 1.2rem;
-        border-radius: 0.8rem;
-        font-size: 1.4rem;
-        font-weight: 500;
-        color: var(--text-color);
-        @extend %transTheme;
-
-        &:hover {
-            background-color: var(--bg-surface);
-            color: var(--primary-color);
-        }
-    }
-
-    &__lang-link--active,
-    &__theme-btn.is-active {
-        background-color: var(--bg-surface);
-        color: var(--primary-color);
-        font-weight: 700;
-    }
-
-    // Nút Hamburger chuẩn 44x44px (4.4rem)
-    &__burger {
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
-        width: 4.4rem;
-        height: 4.4rem;
-        border-radius: 1.2rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        @extend %transTheme;
-
-        @include abs.screen(md) {
-            display: inline-flex;
-        }
-
-        &-bar {
-            width: 2rem;
-            height: 0.2rem;
-            background-color: var(--text-color);
-            border-radius: 0.2rem;
-            @extend %transBurgerBar;
-        }
-
-        &.is-active &-bar:nth-child(1) {
-            transform: translateY(0.7rem) rotate(45deg);
-        }
-        &.is-active &-bar:nth-child(2) {
-            opacity: 0;
-        }
-        &.is-active &-bar:nth-child(3) {
-            transform: translateY(-0.7rem) rotate(-45deg);
-        }
-    }
-}
-```
-
-### footer.scss
-
-```scss
-
-```
-
-### sidebar.scss
-
-```scss
-// scss/layout/_sidebar.scss
-@use "../abstracts" as abs;
-
-.sidebar {
-    position: fixed;
-    left: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 40;
-    padding: 1rem 0.8rem;
-    background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 1.6rem;
-    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
-    @extend %transSidebarDrawer;
-
-    &__list {
+    &__left {
         @extend %flexColumn;
-        gap: 0.8rem;
+        gap: 1.6rem;
     }
 
-    &__link {
-        position: relative;
-        @extend %flexCenter;
-        width: 4.6rem;
-        height: 4.6rem;
-        border-radius: 1.2rem;
-        color: var(--text-muted);
-        @extend %transTheme;
+    &__right {
+        position: sticky;
+        top: calc(#{abs.$header-top-offset} + #{abs.$header-height-pc} + 2rem);
 
-        &:hover,
-        &:focus-visible {
-            background-color: var(--bg-surface);
-            color: var(--primary-color);
-        }
-
-        &--active {
-            background-color: var(--bg-surface);
-            color: var(--primary-color);
-            box-shadow: inset 0 0 0 0.2rem var(--primary-color);
-        }
-    }
-
-    &__tooltip {
-        @extend %absCenterY;
-        left: calc(100% + 1.4rem);
-        transform: translate(-0.8rem, -50%);
-        padding: 0.6rem 1.2rem;
-        background-color: var(--text-color);
-        color: var(--body-bg);
-        font-size: 1.3rem;
-        font-weight: 600;
-        border-radius: 0.8rem;
-        @extend %textNoWrap;
-        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        @extend %transTooltip;
-
-        &::before {
-            @extend %absPseudo;
-            right: 100%;
-            top: 50%;
-            transform: translateY(-50%);
-            border-width: 0.5rem;
-            border-style: solid;
-            border-color: transparent var(--text-color) transparent transparent;
-        }
-    }
-
-    &__link:hover &__tooltip,
-    &__link:focus-visible &__tooltip {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(0, -50%);
-    }
-
-    @include abs.screen(md) {
-        top: abs.$header-height-mobile;
-        left: 0;
-        bottom: 0;
-        width: 26rem;
-        transform: translateX(-100%);
-        border-radius: 0;
-        border-top: none;
-        border-left: none;
-        padding: 2rem 1.6rem;
-        z-index: 55;
-        overflow-y: auto;
-
-        &.is-open {
-            transform: translateX(0);
-        }
-
-        &__link {
-            @extend %flexYCenterLeft;
-            width: 100%;
-            height: 4.8rem;
-            padding: 0 1.6rem;
-            gap: 1.4rem;
-        }
-
-        &__tooltip {
+        @include abs.screen(lg) {
             position: static;
-            transform: none;
-            opacity: 1;
-            visibility: visible;
-            background-color: transparent;
-            color: inherit;
-            padding: 0;
-            font-size: 1.5rem;
-            box-shadow: none;
-            pointer-events: auto;
-
-            &::before {
-                display: none;
-            }
-        }
-    }
-}
-
-.sidebar-backdrop {
-    display: none;
-
-    @include abs.screen(md) {
-        display: block;
-        @extend %fixedCover;
-        top: abs.$header-height-mobile;
-        background-color: var(--overlay-bg);
-        backdrop-filter: blur(2px);
-        z-index: 52;
-        opacity: 0;
-        visibility: hidden;
-        @extend %transBackdrop;
-
-        &.is-active {
-            opacity: 1;
-            visibility: visible;
         }
     }
 }
 ```
 
-## pages folder
+````
+
+## themes folder
+
+### index.scss
 
 ```scss
+// scss/themes/_index.scss
+@use "../abstracts" as abs;
 
-```
+// Khởi tạo 5 mệnh Ngũ hành (Mệnh Thổ làm mặc định cho :root)
+@include abs.generate-theme("earth", $is-default: true);
+@include abs.generate-theme("fire");
+@include abs.generate-theme("metal");
+@include abs.generate-theme("water");
+@include abs.generate-theme("wood");
+````
 
 ## themes folder
 

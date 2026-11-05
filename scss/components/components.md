@@ -399,23 +399,9 @@
         }
 
         @include abs.screen(sm) {
-            min-height: 6.6rem;
+            min-height: 6.8rem;
             border-radius: 1.2rem;
             padding: 0.6rem 0.5rem;
-        }
-
-        // Hiệu ứng Hover: Khung nhấc nhẹ + Con giáp to dần đều, xoay thẳng và rõ nét theo màu Theme
-        &:hover,
-        &:focus-visible {
-            border-color: var(--primary-color);
-            background-color: var(--body-bg);
-            transform: translateY(-2px);
-            box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
-
-            .month-cal__zodiac-img {
-                opacity: 0.88;
-                transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
-            }
         }
 
         // Ngày của tháng trước / tháng sau
@@ -424,12 +410,12 @@
             background-color: transparent;
 
             .month-cal__zodiac-img {
-                opacity: 0.1;
+                opacity: 0.12;
             }
         }
 
-        // Ngày Hôm nay
-        &--today {
+        // Ngày Hôm nay (Khi chưa phải là ô Active)
+        &--today:not(&--active) {
             border: 2px solid var(--primary-color);
             background-color: var(--body-bg);
 
@@ -438,10 +424,25 @@
             }
         }
 
-        // Ngày đang được chọn (Active)
+        // Hover vào ô thường (Tách biệt khỏi ô --active để không bao giờ bị trắng xoá)
+        &:not(&--active):hover,
+        &:not(&--active):focus-visible {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+
+            .month-cal__zodiac-img {
+                opacity: 0.9;
+                filter: var(--zodiac-filter);
+                transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
+            }
+        }
+
+        // Trạng thái Đang Chọn (--active): Nền primary-500, Chữ trắng, Con giáp màu trầm primary-900 dương bản
         &--active {
             background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
             color: #ffffff;
             box-shadow: 0 0.8rem 2rem var(--shadow-color);
 
@@ -451,20 +452,35 @@
             }
 
             .month-cal__badge {
-                background-color: rgba(255, 255, 255, 0.22);
+                background-color: rgba(255, 255, 255, 0.24);
                 color: #ffffff;
-                border-color: rgba(255, 255, 255, 0.4);
+                border-color: rgba(255, 255, 255, 0.45);
             }
 
             .month-cal__zodiac-img {
-                opacity: 0.35;
-                filter: brightness(0) invert(1); // Chuyển sang màu trắng tinh tế trên nền Active
+                opacity: 0.58;
+                filter: var(--zodiac-filter-active);
                 transform: scale(1.06) rotate(0deg);
+            }
+
+            // Khi Hover vào chính ô Active: Giữ nguyên nền đậm, làm nét thêm con giáp
+            &:hover,
+            &:focus-visible {
+                background-color: var(--primary-color);
+                border-color: var(--primary-hover);
+                transform: translateY(-2px);
+                box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+                .month-cal__zodiac-img {
+                    opacity: 0.78;
+                    filter: var(--zodiac-filter-active);
+                    transform: scale(1.14) rotate(0deg) translate(-0.2rem, -0.2rem);
+                }
             }
         }
 
-        // Khi người dùng di chuột vào nút chú thích ở chân lịch (Highlight Filter)
-        &.is-highlighted {
+        // Khi di chuột vào nút chú thích ở chân lịch (Highlight Filter)
+        &.is-highlighted:not(&--active) {
             opacity: 1 !important;
             border-color: var(--primary-color);
             background-color: var(--body-bg);
@@ -473,7 +489,8 @@
             z-index: 2;
 
             .month-cal__zodiac-img {
-                opacity: 0.85;
+                opacity: 0.9;
+                filter: var(--zodiac-filter);
                 transform: scale(1.1) rotate(0deg);
             }
         }
@@ -484,19 +501,16 @@
         }
     }
 
-    // Cụm Số Ngày Dương & Ngày Âm nằm ở Góc Trên Trái (Phương án 1 - To, rõ, thẳng hàng tuyệt đối)
+    // Cụm Số Ngày Dương & Ngày Âm xếp dọc trên mọi màn hình (Phương án 1 - Chống đè nhãn Mùng 1 / Rằm)
     &__date-head {
         position: relative;
         z-index: 2;
         display: flex;
-        align-items: baseline;
-        gap: 0.5rem;
-        line-height: 1;
-
-        @include abs.screen(sm) {
-            flex-direction: column;
-            gap: 0.2rem;
-        }
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        max-width: 55%;
+        line-height: 1.05;
     }
 
     &__solar {
@@ -510,42 +524,42 @@
         }
 
         @include abs.screen(sm) {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
         }
     }
 
     &__lunar {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: var(--text-muted);
         font-variant-numeric: tabular-nums;
 
         @include abs.screen(sm) {
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
     }
 
-    // Nhãn Mùng 1 / Rằm / Ngày Lễ ở Góc Trên Phải (Hiển thị rõ ràng, có viền nhẹ)
+    // Nhãn Mùng 1 / Rằm / Ngày Lễ ở Góc Trên Phải
     &__badge {
         position: absolute;
         top: 0.6rem;
         right: 0.6rem;
         z-index: 3;
-        padding: 0.2rem 0.65rem;
+        padding: 0.2rem 0.6rem;
         background-color: rgba(239, 68, 68, 0.14);
         border: 1px solid rgba(239, 68, 68, 0.3);
         color: var(--color-danger);
-        font-size: 1.05rem;
+        font-size: 1rem;
         font-weight: 800;
         border-radius: 0.6rem;
         line-height: 1.2;
         @extend %textNoWrap;
 
         @include abs.screen(sm) {
-            top: 0.4rem;
-            right: 0.4rem;
-            padding: 0.1rem 0.4rem;
-            font-size: 0.9rem;
+            top: 0.35rem;
+            right: 0.35rem;
+            padding: 0.1rem 0.35rem;
+            font-size: 0.85rem;
         }
     }
 
@@ -585,16 +599,15 @@
         }
     }
 
-    // Thẻ <img> 12 Con Giáp (Khung chuẩn 128x128px) ở Góc Dưới Phải + Đổi màu theo Theme Filter
+    // Thẻ <img> 12 Con Giáp (128x128px, fill="#000") ở Góc Dưới Phải
     &__zodiac-img {
         position: absolute;
         right: 0.5rem;
         bottom: 0.4rem;
-        width: 4.8rem;
-        height: 4.8rem;
+        width: 4.6rem;
+        height: 4.6rem;
         object-fit: contain;
-        // Ban đầu: nhỏ hơn và mờ dịu, nhuộm màu theo Theme hiện tại
-        opacity: 0.18;
+        opacity: 0.2;
         filter: var(--zodiac-filter);
         transform: scale(0.78) rotate(-8deg);
         transform-origin: bottom right;
@@ -606,13 +619,13 @@
             filter 0.3s ease;
 
         @include abs.screen(xl) {
-            width: 4.2rem;
-            height: 4.2rem;
+            width: 4rem;
+            height: 4rem;
         }
 
         @include abs.screen(sm) {
-            width: 3rem;
-            height: 3rem;
+            width: 2.8rem;
+            height: 2.8rem;
             right: 0.2rem;
             bottom: 0.2rem;
         }

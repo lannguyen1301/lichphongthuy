@@ -1,12 +1,12 @@
-# pages folder
+## pages folder
 
-## index.scss
+### index.scss
 
 ```scss
 @forward "./home";
 ```
 
-## home.scss
+### home.scss
 
 ```scss
 // scss/pages/_home.scss

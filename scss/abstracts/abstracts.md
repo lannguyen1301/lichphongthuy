@@ -690,23 +690,53 @@ $feng-shui-themes: (
 
 ### theme-engine.scss
 
-````scss
+```scss
 // scss/abstracts/_theme-engine.scss
 @use "sass:map";
 @use "palette" as pal;
 
-// Bộ lọc CSS Filter chuyển màu SVG Con Giáp (từ màu Đỏ gốc) sang đúng tông màu của 5 mệnh Ngũ hành
+// 1. Bộ lọc chuẩn xác từ gốc #000 (fill="#000") sang màu primary-600 của 5 mệnh (Dùng cho trạng thái Thường & Hover)
 $zodiac-theme-filters: (
-    "earth": hue-rotate(28deg) saturate(1.15) brightness(0.92),   // Mệnh Thổ: Nâu cam đất ấm
-    "fire": hue-rotate(0deg) saturate(1.1) brightness(0.98),      // Mệnh Hỏa: Đỏ chu sa rực rỡ
-    "metal": hue-rotate(44deg) saturate(1.35) brightness(1.05),   // Mệnh Kim: Vàng ánh kim
-    "water": hue-rotate(215deg) saturate(1.15) brightness(0.95),  // Mệnh Thủy: Xanh dương biển sâu
-    "wood": hue-rotate(142deg) saturate(1.05) brightness(0.88),   // Mệnh Mộc: Xanh lục bảo
+    // Mệnh Thổ (#d97706 - Cam đất đậm)
+    "earth": brightness(0) saturate(100%) invert(48%) sepia(87%) saturate(1638%) hue-rotate(2deg) brightness(97%)
+        contrast(96%),
+    // Mệnh Hỏa (#dc2626 - Đỏ chu sa)
+    "fire": brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(3932%) hue-rotate(351deg) brightness(89%)
+        contrast(95%),
+    // Mệnh Kim (#ca8a04 - Vàng kim đậm)
+    "metal": brightness(0) saturate(100%) invert(52%) sepia(93%) saturate(1352%) hue-rotate(14deg) brightness(94%)
+        contrast(97%),
+    // Mệnh Thủy (#2563eb - Xanh đại dương)
+    "water": brightness(0) saturate(100%) invert(31%) sepia(94%) saturate(2785%) hue-rotate(213deg) brightness(96%)
+        contrast(93%),
+    // Mệnh Mộc (#059669 - Xanh lục bảo)
+    "wood": brightness(0) saturate(100%) invert(39%) sepia(82%) saturate(1105%) hue-rotate(130deg) brightness(93%)
+        contrast(96%)
+);
+
+// 2. Bộ lọc từ gốc #000 sang màu trầm primary-900 cùng mệnh (Dùng cho ô --active để giữ nét cắt giấy dương bản)
+$zodiac-active-filters: (
+    // Mệnh Thổ (#78350f - Nâu đại địa sẫm trên nền cam #f59e0b)
+    "earth": brightness(0) saturate(100%) invert(19%) sepia(51%) saturate(2255%) hue-rotate(12deg) brightness(93%)
+        contrast(92%),
+    // Mệnh Hỏa (#7f1d1d - Đỏ trầm trên nền đỏ #ef4444)
+    "fire": brightness(0) saturate(100%) invert(13%) sepia(56%) saturate(3426%) hue-rotate(349deg) brightness(91%)
+        contrast(96%),
+    // Mệnh Kim (#713f12 - Đồng cổ sẫm trên nền vàng #eab308)
+    "metal": brightness(0) saturate(100%) invert(22%) sepia(60%) saturate(1560%) hue-rotate(16deg) brightness(92%)
+        contrast(91%),
+    // Mệnh Thủy (#1e3a8a - Xanh chàm sẫm trên nền xanh #3b82f6)
+    "water": brightness(0) saturate(100%) invert(18%) sepia(58%) saturate(2865%) hue-rotate(215deg) brightness(90%)
+        contrast(95%),
+    // Mệnh Mộc (#064e3b - Xanh rừng thẫm trên nền xanh #10b981)
+    "wood": brightness(0) saturate(100%) invert(21%) sepia(47%) saturate(1635%) hue-rotate(128deg) brightness(91%)
+        contrast(96%)
 );
 
 @mixin generate-theme($element-name, $is-default: false) {
     $theme-data: map.get(pal.$feng-shui-themes, $element-name);
     $zodiac-filter: map.get($zodiac-theme-filters, $element-name);
+    $zodiac-filter-active: map.get($zodiac-active-filters, $element-name);
 
     @if $theme-data == null {
         @error "Lỗi: Không tìm thấy dữ liệu cho bản mệnh '#{$element-name}'";
@@ -747,6 +777,7 @@ $zodiac-theme-filters: (
         --shadow-color: rgba(0, 0, 0, 0.1);
         --overlay-bg: rgba(0, 0, 0, 0.4);
         --zodiac-filter: #{$zodiac-filter};
+        --zodiac-filter-active: #{$zodiac-filter-active};
 
         @media (prefers-color-scheme: dark) {
             --body-bg: #{map.get($theme-data, "primary", 900)};
@@ -771,46 +802,12 @@ $zodiac-theme-filters: (
 
             --shadow-color: rgba(0, 0, 0, 0.5);
             --overlay-bg: rgba(0, 0, 0, 0.7);
-            --zodiac-filter: #{$zodiac-filter} brightness(1.2);
-        }
-    }
-}```
-
-### mixins.scss
-
-```scss
-// scscss/abstracts/_mixins.scss
-@use "sass:map";
-@use "sass:math";
-@use "sass:string";
-@use "variables" as vars;
-
-// 1. Mixin để xử lý Media Query (Dùng cho @content)
-@mixin screen($key) {
-    $breakpoint: map.get(vars.$grid-breakpoints, $key);
-
-    @if ($breakpoint == 0) {
-        @content;
-    } @else {
-        @media (max-width: ($breakpoint - 0.02px)) {
-            @content;
+            --zodiac-filter: #{$zodiac-filter} brightness(1.25);
+            --zodiac-filter-active: #{$zodiac-filter-active};
         }
     }
 }
-
-// 2. Function để tạo chuỗi infix (Dùng để tạo class: .col-sm-12)
-// Function trả về giá trị, Mixin thực hiện hành động.
-@function get-infix($key) {
-    $breakpoint: map.get(vars.$grid-breakpoints, $key);
-
-    // Kiểm tra: Nếu breakpoint tồn tại và khác 0, trả về "-key", ngược lại trả về ""
-    @if $breakpoint != null and $breakpoint != 0 {
-        @return string.unquote("-" + $key);
-    } @else {
-        @return "";
-    }
-}
-````
+```
 
 ### typography.scss
 
