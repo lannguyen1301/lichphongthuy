@@ -1,0 +1,20 @@
+// scss/pages/_clock.scss
+@use "../abstracts" as abs;
+
+.clock-page {
+    padding-bottom: abs.$gap-section-default;
+
+    &__sr-only {
+        @extend %srOnly;
+    }
+
+    &__wrapper {
+        @extend %flexColumn;
+        gap: 2.4rem;
+    }
+
+    &__mid-row {
+        --grid-gutter-y: 2.4rem;
+        align-items: stretch;
+    }
+}

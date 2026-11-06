@@ -167,33 +167,54 @@ function handleActiveMenu() {
  */
 window.addEventListener("template-loaded", initJsToggle);
 
+// function initJsToggle() {
+//     $$(".js-toggle").forEach((button) => {
+//         const target = button.getAttribute("toggle-target");
+//         if (!target) {
+//             document.body.innerText = `Cần thêm toggle-target cho: ${button.outerHTML}`;
+//         }
+//         button.onclick = (e) => {
+//             e.preventDefault();
+
+//             if (!$(target)) {
+//                 return (document.body.innerText = `Không tìm thấy phần tử "${target}"`);
+//             }
+//             const isHidden = $(target).classList.contains("hide");
+
+//             requestAnimationFrame(() => {
+//                 $(target).classList.toggle("hide", !isHidden);
+//                 $(target).classList.toggle("show", isHidden);
+//             });
+//         };
+
+//         document.onclick = function (e) {
+//             if (!e.target.closest(target)) {
+//                 const isHidden = $(target).classList.contains("hide");
+//                 if (!isHidden) {
+//                     button.click();
+//                 }
+//             }
+//         };
+//     });
+// }
+
 function initJsToggle() {
     $$(".js-toggle").forEach((button) => {
-        const target = button.getAttribute("toggle-target");
-        if (!target) {
-            document.body.innerText = `Cần thêm toggle-target cho: ${button.outerHTML}`;
-        }
+        // Đọc qua dataset.toggleTarget chuẩn HTML5 (hỗ trợ lùi về toggle-target cũ nếu còn sót)
+        const target = button.dataset.toggleTarget || button.getAttribute("toggle-target");
+        if (!target) return;
+
         button.onclick = (e) => {
             e.preventDefault();
+            const targetEl = $(target);
+            if (!targetEl) return;
 
-            if (!$(target)) {
-                return (document.body.innerText = `Không tìm thấy phần tử "${target}"`);
-            }
-            const isHidden = $(target).classList.contains("hide");
-
+            const isHidden = targetEl.classList.contains("hide");
             requestAnimationFrame(() => {
-                $(target).classList.toggle("hide", !isHidden);
-                $(target).classList.toggle("show", isHidden);
+                targetEl.classList.toggle("hide", !isHidden);
+                targetEl.classList.toggle("show", isHidden);
+                button.setAttribute("aria-expanded", String(isHidden));
             });
-        };
-
-        document.onclick = function (e) {
-            if (!e.target.closest(target)) {
-                const isHidden = $(target).classList.contains("hide");
-                if (!isHidden) {
-                    button.click();
-                }
-            }
         };
     });
 }

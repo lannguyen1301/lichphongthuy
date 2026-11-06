@@ -1,0 +1,58 @@
+# clock.html
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Đồng Hồ Phong Thủy &amp; 12 Canh Giờ Âm Lịch</title>
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+        <script src="./assets/js/script.js"></script>
+    </head>
+
+    <body>
+        <!-- 1. Header chung của hệ thống -->
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "./templates/header.html");
+        </script>
+
+        <!-- 2. Sidebar điều hướng -->
+        <div id="sidebar-root"></div>
+        <script>
+            load("#sidebar-root", "./templates/sidebar.html");
+        </script>
+
+        <!-- 3. Main: Trang Giờ Bento Grid -->
+        <main id="main" class="main clock-page">
+            <div class="container">
+                <div id="clock-calendar-root" aria-busy="true"></div>
+                <script>
+                    load("#clock-calendar-root", "./templates/clock-calendar.html");
+                </script>
+            </div>
+        </main>
+
+        <!-- 4. Footer chung của hệ thống -->
+        <footer id="footer" class="footer"></footer>
+        <script>
+            load("#footer", "./templates/footer.html");
+        </script>
+
+        <!-- 5. Bộ Script Modular: CDN lunar-javascript + Core Engine + Layout + Trang Giờ -->
+        <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.min.js"></script>
+        <script src="./assets/js/lunar-engine.js"></script>
+        <script src="./assets/js/header.js"></script>
+        <script src="./assets/js/sidebar.js"></script>
+        <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/clock.js"></script>
+    </body>
+</html>
+```

@@ -1,0 +1,2035 @@
+<section class="year-cal-app" id="year-cal-app" aria-label="Lịch tổng hợp 12 tháng năm 2026"
+                data-active-year="2026">
+                <!-- THANH ĐIỀU KHIỂN NĂM: Trái (< + Về Năm Nay) | Giữa (Năm 2026) | Phải (Chọn năm + >) -->
+                <header class="month-cal year-cal-app__toolbar-card">
+                    <div class="month-cal__toolbar year-cal-app__toolbar">
+                        <div class="year-cal-app__side year-cal-app__side--left">
+                            <button type="button" class="month-cal__nav-btn" id="cal-prev-year" data-year-Step="-1"
+                                aria-label="Xem năm trước (2025)" title="Chuyển sang năm 2025">
+                                &#10094;
+                            </button>
+                            <button type="button" class="btn month-cal__today-btn" id="cal-current-year-btn"
+                                data-target-year="2026" title="Quay về năm hiện tại (2026)">
+                                Về Năm Nay
+                            </button>
+                        </div>
+
+                        <h1 class="year-cal-app__heading" id="year-main-heading" aria-live="polite">
+                            Năm <time datetime="2026" id="year-main-number">2026</time>
+                        </h1>
+
+                        <div class="year-cal-app__side year-cal-app__side--right">
+                            <details class="month-cal__dropdown js-cal-dropdown" id="cal-year-dropdown">
+                                <summary class="month-cal__summary" aria-label="Chọn năm tra cứu, hiện tại là năm 2026"
+                                    aria-expanded="false" aria-controls="year-dropdown-list"
+                                    title="Mở danh sách chọn năm">
+                                    <span class="month-cal__summary-text" id="cal-year-label">Năm 2026</span>
+                                    <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true"
+                                        class="month-cal__arrow icon" />
+                                </summary>
+                                <ul class="month-cal__dropdown-menu month-cal__dropdown-menu--year"
+                                    id="year-dropdown-list" role="listbox" aria-label="Danh sách năm">
+                                    <li>
+                                        <button type="button" role="option" aria-selected="false" data-year="2024"
+                                            class="month-cal__option" title="Xem lịch năm 2024">
+                                            Năm 2024
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" role="option" aria-selected="false" data-year="2025"
+                                            class="month-cal__option" title="Xem lịch năm 2025">
+                                            Năm 2025
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" role="option" aria-selected="true" data-year="2026"
+                                            class="month-cal__option is-selected" title="Xem lịch năm 2026">
+                                            Năm 2026
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" role="option" aria-selected="false" data-year="2027"
+                                            class="month-cal__option" title="Xem lịch năm 2027">
+                                            Năm 2027
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" role="option" aria-selected="false" data-year="2028"
+                                            class="month-cal__option" title="Xem lịch năm 2028">
+                                            Năm 2028
+                                        </button>
+                                    </li>
+                                </ul>
+                            </details>
+
+                            <button type="button" class="month-cal__nav-btn" id="cal-next-year" data-year-Step="1"
+                                aria-label="Xem năm sau (2027)" title="Chuyển sang năm 2027">
+                                &#10095;
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- LƯỚI BENTO 12 THÁNG (4 CỘT X 3 HÀNG TRÊN PC) -->
+                <div class="year-cal-app__grid" id="year-months-grid" role="group" aria-label="12 tháng trong năm 2026">
+                    <!-- ==================== THÁNG 1 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="1" data-year="2026"
+                        aria-label="Tháng 1 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 1</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 1">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2025-12-29" data-solar="29" title="29/12/2025"><span
+                                    class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2025-12-30" data-solar="30" title="30/12/2025"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2025-12-31" data-solar="31" title="31/12/2025"><span
+                                    class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-01"
+                                data-solar="1" data-status="holiday" title="01/01/2026 - Tết Dương Lịch"><span
+                                    class="month-cal__solar">1</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-02"
+                                data-solar="2" data-status="good" title="02/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">2</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-03"
+                                data-solar="3" data-status="good" title="03/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">3</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-04"
+                                data-solar="4" title="04/01/2026"><span class="month-cal__solar">4</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-05"
+                                data-solar="5" data-status="good" title="05/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">5</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-06"
+                                data-solar="6" title="06/01/2026"><span class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-07"
+                                data-solar="7" title="07/01/2026"><span class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-08"
+                                data-solar="8" data-status="good" title="08/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">8</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-09"
+                                data-solar="9" data-status="holiday"
+                                title="09/01/2026 - Ngày Học sinh Sinh viên VN"><span
+                                    class="month-cal__solar">9</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-10"
+                                data-solar="10" data-status="good" title="10/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">10</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-11"
+                                data-solar="11" data-status="good" title="11/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">11</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-12"
+                                data-solar="12" title="12/01/2026"><span class="month-cal__solar">12</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-13"
+                                data-solar="13" title="13/01/2026"><span class="month-cal__solar">13</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-14"
+                                data-solar="14" title="14/01/2026"><span class="month-cal__solar">14</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-15"
+                                data-solar="15" data-status="good" title="15/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">15</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-16"
+                                data-solar="16" title="16/01/2026"><span class="month-cal__solar">16</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-17"
+                                data-solar="17" data-status="good" title="17/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">17</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-18"
+                                data-solar="18" title="18/01/2026"><span class="month-cal__solar">18</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-19"
+                                data-solar="19" title="19/01/2026"><span class="month-cal__solar">19</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-20"
+                                data-solar="20" title="20/01/2026"><span class="month-cal__solar">20</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-21"
+                                data-solar="21" title="21/01/2026"><span class="month-cal__solar">21</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-22"
+                                data-solar="22" data-status="good" title="22/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">22</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-23"
+                                data-solar="23" title="23/01/2026"><span class="month-cal__solar">23</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-24"
+                                data-solar="24" data-status="good" title="24/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">24</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-25"
+                                data-solar="25" title="25/01/2026"><span class="month-cal__solar">25</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-26"
+                                data-solar="26" title="26/01/2026"><span class="month-cal__solar">26</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-27"
+                                data-solar="27" title="27/01/2026"><span class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-28"
+                                data-solar="28" data-status="good" title="28/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">28</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-29"
+                                data-solar="29" data-status="good" title="29/01/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">29</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-30"
+                                data-solar="30" title="30/01/2026"><span class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-01-31"
+                                data-solar="31" title="31/01/2026"><span class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-01" data-solar="1" title="01/02/2026"><span
+                                    class="month-cal__solar">1</span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-02" data-solar="2" title="02/02/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-03" data-solar="3" title="03/02/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-04" data-solar="4" title="04/02/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-05" data-solar="5" title="05/02/2026"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-06" data-solar="6" title="06/02/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-07" data-solar="7" title="07/02/2026"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-08" data-solar="8" title="08/02/2026"><span
+                                    class="month-cal__solar">8</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 2 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="2" data-year="2026"
+                        aria-label="Tháng 2 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 2</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 2">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-01-26" data-solar="26" title="26/01/2026"><span
+                                    class="month-cal__solar">26</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-01-27" data-solar="27" title="27/01/2026"><span
+                                    class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-01-28" data-solar="28" title="28/01/2026"><span
+                                    class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-01-29" data-solar="29" title="29/01/2026"><span
+                                    class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-01-30" data-solar="30" title="30/01/2026"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-01-31" data-solar="31" title="31/01/2026"><span
+                                    class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-01"
+                                data-solar="1" title="01/02/2026"><span class="month-cal__solar">1</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-02"
+                                data-solar="2" title="02/02/2026"><span class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-03"
+                                data-solar="3" data-status="holiday" title="03/02/2026 - Ngày thành lập Đảng CSVN"><span
+                                    class="month-cal__solar">3</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-04"
+                                data-solar="4" title="04/02/2026 - Lập Xuân"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-05"
+                                data-solar="5" data-status="good" title="05/02/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">5</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-06"
+                                data-solar="6" title="06/02/2026"><span class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-07"
+                                data-solar="7" title="07/02/2026"><span class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-08"
+                                data-solar="8" title="08/02/2026"><span class="month-cal__solar">8</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-09"
+                                data-solar="9" title="09/02/2026"><span class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-10"
+                                data-solar="10" data-status="good holiday"
+                                title="10/02/2026 - Ông Công Ông Táo (23 tháng Chạp)"><span
+                                    class="month-cal__solar">10</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-11"
+                                data-solar="11" title="11/02/2026"><span class="month-cal__solar">11</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-12"
+                                data-solar="12" data-status="good" title="12/02/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">12</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-13"
+                                data-solar="13" title="13/02/2026"><span class="month-cal__solar">13</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-14"
+                                data-solar="14" data-status="holiday"
+                                title="14/02/2026 - Lễ Tình Nhân (Valentine)"><span
+                                    class="month-cal__solar">14</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-15"
+                                data-solar="15" title="15/02/2026"><span class="month-cal__solar">15</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-16"
+                                data-solar="16" title="16/02/2026 - Giao Thừa Bính Ngọ"><span
+                                    class="month-cal__solar">16</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-17"
+                                data-solar="17" data-status="holiday"
+                                title="17/02/2026 - Mùng 1 Tết Nguyên Đán Bính Ngọ"><span
+                                    class="month-cal__solar">17</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-18"
+                                data-solar="18" data-status="good holiday"
+                                title="18/02/2026 - Mùng 2 Tết Nguyên Đán"><span class="month-cal__solar">18</span><span
+                                    class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-19"
+                                data-solar="19" data-status="good holiday"
+                                title="19/02/2026 - Mùng 3 Tết Nguyên Đán"><span class="month-cal__solar">19</span><span
+                                    class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-20"
+                                data-solar="20" title="20/02/2026"><span class="month-cal__solar">20</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-21"
+                                data-solar="21" data-status="good" title="21/02/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">21</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-22"
+                                data-solar="22" title="22/02/2026"><span class="month-cal__solar">22</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-23"
+                                data-solar="23" title="23/02/2026"><span class="month-cal__solar">23</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-24"
+                                data-solar="24" data-status="good" title="24/02/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">24</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-25"
+                                data-solar="25" data-status="holiday" title="25/02/2026 - Mùng 9 Vía Ngọc Hoàng"><span
+                                    class="month-cal__solar">25</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-26"
+                                data-solar="26" data-status="good holiday"
+                                title="26/02/2026 - Ngày vía Thần Tài (Mùng 10 tháng Giêng)"><span
+                                    class="month-cal__solar">26</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-27"
+                                data-solar="27" data-status="holiday"
+                                title="27/02/2026 - Ngày Thầy thuốc Việt Nam"><span
+                                    class="month-cal__solar">27</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-02-28"
+                                data-solar="28" title="28/02/2026"><span class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-01" data-solar="1" title="01/03/2026"><span
+                                    class="month-cal__solar">1</span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-02" data-solar="2" title="02/03/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-03" data-solar="3" title="03/03/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-04" data-solar="4" title="04/03/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-05" data-solar="5" title="05/03/2026"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-06" data-solar="6" title="06/03/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-07" data-solar="7" title="07/03/2026"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-08" data-solar="8" title="08/03/2026"><span
+                                    class="month-cal__solar">8</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 3 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="3" data-year="2026"
+                        aria-label="Tháng 3 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 3</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 3">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-23" data-solar="23" title="23/02/2026"><span
+                                    class="month-cal__solar">23</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-24" data-solar="24" title="24/02/2026"><span
+                                    class="month-cal__solar">24</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-25" data-solar="25" title="25/02/2026"><span
+                                    class="month-cal__solar">25</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-26" data-solar="26" title="26/02/2026"><span
+                                    class="month-cal__solar">26</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-27" data-solar="27" title="27/02/2026"><span
+                                    class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-02-28" data-solar="28" title="28/02/2026"><span
+                                    class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-01"
+                                data-solar="1" title="01/03/2026"><span class="month-cal__solar">1</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-02"
+                                data-solar="2" title="02/03/2026"><span class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-03"
+                                data-solar="3" data-status="good holiday"
+                                title="03/03/2026 - Rằm tháng Giêng (Tết Nguyên Tiêu)"><span
+                                    class="month-cal__solar">3</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-04"
+                                data-solar="4" data-status="good" title="04/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">4</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-05"
+                                data-solar="5" title="05/03/2026"><span class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-06"
+                                data-solar="6" title="06/03/2026"><span class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-07"
+                                data-solar="7" title="07/03/2026"><span class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-08"
+                                data-solar="8" data-status="holiday" title="08/03/2026 - Quốc tế Phụ nữ"><span
+                                    class="month-cal__solar">8</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-09"
+                                data-solar="9" data-status="good" title="09/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">9</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-10"
+                                data-solar="10" data-status="good" title="10/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">10</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-11"
+                                data-solar="11" title="11/03/2026"><span class="month-cal__solar">11</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-12"
+                                data-solar="12" title="12/03/2026"><span class="month-cal__solar">12</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-13"
+                                data-solar="13" title="13/03/2026"><span class="month-cal__solar">13</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-14"
+                                data-solar="14" title="14/03/2026"><span class="month-cal__solar">14</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-15"
+                                data-solar="15" data-status="good" title="15/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">15</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-16"
+                                data-solar="16" data-status="good" title="16/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">16</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-17"
+                                data-solar="17" data-status="good" title="17/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">17</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-18"
+                                data-solar="18" title="18/03/2026"><span class="month-cal__solar">18</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-19"
+                                data-solar="19" data-status="holiday" title="19/03/2026 - Mùng 1 tháng 2 ÂL"><span
+                                    class="month-cal__solar">19</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-20"
+                                data-solar="20" title="20/03/2026 - Xuân Phân"><span
+                                    class="month-cal__solar">20</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-21"
+                                data-solar="21" data-status="good holiday" title="21/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">21</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-22"
+                                data-solar="22" data-status="good" title="22/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">22</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-23"
+                                data-solar="23" title="23/03/2026"><span class="month-cal__solar">23</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-24"
+                                data-solar="24" data-status="good" title="24/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">24</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-25"
+                                data-solar="25" title="25/03/2026"><span class="month-cal__solar">25</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-26"
+                                data-solar="26" data-status="holiday"
+                                title="26/03/2026 - Ngày thành lập Đoàn TNCS Hồ Chí Minh"><span
+                                    class="month-cal__solar">26</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-27"
+                                data-solar="27" data-status="good" title="27/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">27</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-28"
+                                data-solar="28" title="28/03/2026"><span class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-29"
+                                data-solar="29" data-status="good" title="29/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">29</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-30"
+                                data-solar="30" data-status="good" title="30/03/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">30</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-03-31"
+                                data-solar="31" title="31/03/2026"><span class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-01" data-solar="1" title="01/04/2026"><span
+                                    class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-02" data-solar="2" title="02/04/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-03" data-solar="3" title="03/04/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-04" data-solar="4" title="04/04/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-05" data-solar="5" title="05/04/2026"><span
+                                    class="month-cal__solar">5</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 4 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="4" data-year="2026"
+                        aria-label="Tháng 4 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 4</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 4">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-30" data-solar="30" title="30/03/2026"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-03-31" data-solar="31" title="31/03/2026"><span
+                                    class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-01"
+                                data-solar="1" data-status="holiday" title="01/04/2026 - Cá Tháng Tư"><span
+                                    class="month-cal__solar">1</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-02"
+                                data-solar="2" data-status="good" title="02/04/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">2</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-03"
+                                data-solar="3" data-status="good" title="03/04/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">3</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-04"
+                                data-solar="4" title="04/04/2026"><span class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-05"
+                                data-solar="5" data-status="good" title="05/04/2026 - Tiết Thanh Minh (Hoàng Đạo)"><span
+                                    class="month-cal__solar">5</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-06"
+                                data-solar="6" data-status="holiday" title="06/04/2026"><span
+                                    class="month-cal__solar">6</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-07"
+                                data-solar="7" title="07/04/2026"><span class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-08"
+                                data-solar="8" title="08/04/2026"><span class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-09"
+                                data-solar="9" title="09/04/2026"><span class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-10"
+                                data-solar="10" data-status="good" title="10/04/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">10</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-11"
+                                data-solar="11" title="11/04/2026"><span class="month-cal__solar">11</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-12"
+                                data-solar="12" title="12/04/2026"><span class="month-cal__solar">12</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-13"
+                                data-solar="13" title="13/04/2026"><span class="month-cal__solar">13</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-14"
+                                data-solar="14" data-status="good" title="14/04/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">14</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-15"
+                                data-solar="15" data-status="good" title="15/04/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">15</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-16"
+                                data-solar="16" title="16/04/2026"><span class="month-cal__solar">16</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-17"
+                                data-solar="17" data-status="holiday" title="17/04/2026 - Mùng 1 tháng 3 ÂL"><span
+                                    class="month-cal__solar">17</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-18"
+                                data-solar="18" title="18/04/2026"><span class="month-cal__solar">18</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-19"
+                                data-solar="19" data-status="holiday" title="19/04/2026 - Tết Hàn Thực (3/3 ÂL)"><span
+                                    class="month-cal__solar">19</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-20"
+                                data-solar="20" title="20/04/2026"><span class="month-cal__solar">20</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-21"
+                                data-solar="21" data-status="holiday" title="21/04/2026 - Ngày Sách Việt Nam"><span
+                                    class="month-cal__solar">21</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-22"
+                                data-solar="22" title="22/04/2026"><span class="month-cal__solar">22</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-23"
+                                data-solar="23" data-status="good" title="23/04/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">23</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-24"
+                                data-solar="24" title="24/04/2026"><span class="month-cal__solar">24</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-25"
+                                data-solar="25" title="25/04/2026"><span class="month-cal__solar">25</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-26"
+                                data-solar="26" data-status="holiday"
+                                title="26/04/2026 - Giỗ Tổ Hùng Vương (10/3 ÂL)"><span
+                                    class="month-cal__solar">26</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-27"
+                                data-solar="27" title="27/04/2026"><span class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-28"
+                                data-solar="28" data-status="good" title="28/04/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">28</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-29"
+                                data-solar="29" data-status="good" title="29/04/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">29</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-04-30"
+                                data-solar="30" data-status="holiday"
+                                title="30/04/2026 - Ngày Giải phóng miền Nam"><span
+                                    class="month-cal__solar">30</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-01" data-solar="1" title="01/05/2026"><span
+                                    class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-02" data-solar="2" title="02/05/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-03" data-solar="3" title="03/05/2026"><span
+                                    class="month-cal__solar">3</span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-04" data-solar="4" title="04/05/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-05" data-solar="5" title="05/05/2026"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-06" data-solar="6" title="06/05/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-07" data-solar="7" title="07/05/2026"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-08" data-solar="8" title="08/05/2026"><span
+                                    class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-09" data-solar="9" title="09/05/2026"><span
+                                    class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-05-10" data-solar="10" title="10/05/2026"><span
+                                    class="month-cal__solar">10</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 5 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="5" data-year="2026"
+                        aria-label="Tháng 5 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 5</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 5">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-27" data-solar="27" title="27/04/2026"><span
+                                    class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-28" data-solar="28" title="28/04/2026"><span
+                                    class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-29" data-solar="29" title="29/04/2026"><span
+                                    class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-04-30" data-solar="30" title="30/04/2026"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-01"
+                                data-solar="1" data-status="good holiday" title="01/05/2026 - Quốc tế Lao động"><span
+                                    class="month-cal__solar">1</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-02"
+                                data-solar="2" title="02/05/2026"><span class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-03"
+                                data-solar="3" title="03/05/2026"><span class="month-cal__solar">3</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-04"
+                                data-solar="4" title="04/05/2026"><span class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-05"
+                                data-solar="5" title="05/05/2026"><span class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-06"
+                                data-solar="6" data-status="good" title="06/05/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">6</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-07"
+                                data-solar="7" data-status="holiday"
+                                title="07/05/2026 - Chiến thắng Điện Biên Phủ"><span
+                                    class="month-cal__solar">7</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-08"
+                                data-solar="8" title="08/05/2026"><span class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-09"
+                                data-solar="9" title="09/05/2026"><span class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-10"
+                                data-solar="10" title="10/05/2026"><span class="month-cal__solar">10</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-11"
+                                data-solar="11" data-status="good" title="11/05/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">11</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-12"
+                                data-solar="12" title="12/05/2026"><span class="month-cal__solar">12</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-13"
+                                data-solar="13" data-status="good" title="13/05/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">13</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-14"
+                                data-solar="14" title="14/05/2026"><span class="month-cal__solar">14</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-15"
+                                data-solar="15" title="15/05/2026"><span class="month-cal__solar">15</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-16"
+                                data-solar="16" title="16/05/2026"><span class="month-cal__solar">16</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-17"
+                                data-solar="17" data-status="holiday" title="17/05/2026 - Mùng 1 tháng 4 ÂL"><span
+                                    class="month-cal__solar">17</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-18"
+                                data-solar="18" title="18/05/2026"><span class="month-cal__solar">18</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-19"
+                                data-solar="19" data-status="holiday"
+                                title="19/05/2026 - Ngày sinh Chủ tịch Hồ Chí Minh"><span
+                                    class="month-cal__solar">19</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-20"
+                                data-solar="20" data-status="good" title="20/05/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">20</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-21"
+                                data-solar="21" title="21/05/2026"><span class="month-cal__solar">21</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-22"
+                                data-solar="22" title="22/05/2026"><span class="month-cal__solar">22</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-23"
+                                data-solar="23" data-status="good" title="23/05/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">23</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-24"
+                                data-solar="24" title="24/05/2026"><span class="month-cal__solar">24</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-25"
+                                data-solar="25" data-status="good" title="25/05/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">25</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-26"
+                                data-solar="26" title="26/05/2026"><span class="month-cal__solar">26</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-27"
+                                data-solar="27" data-status="good" title="27/05/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">27</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-28"
+                                data-solar="28" title="28/05/2026"><span class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-29"
+                                data-solar="29" title="29/05/2026"><span class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-30"
+                                data-solar="30" title="30/05/2026"><span class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-05-31"
+                                data-solar="31" data-status="holiday"
+                                title="31/05/2026 - Đại lễ Phật Đản (15/4 ÂL)"><span
+                                    class="month-cal__solar">31</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-01" data-solar="1" title="01/06/2026"><span
+                                    class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-02" data-solar="2" title="02/06/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-03" data-solar="3" title="03/06/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-04" data-solar="4" title="04/06/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-05" data-solar="5" title="05/06/2026"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-06" data-solar="6" title="06/06/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-07" data-solar="7" title="07/06/2026"><span
+                                    class="month-cal__solar">7</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 6 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="6" data-year="2026"
+                        aria-label="Tháng 6 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 6</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 6">
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-01"
+                                data-solar="1" data-status="good holiday" title="01/06/2026 - Quốc tế Thiếu nhi"><span
+                                    class="month-cal__solar">1</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-02"
+                                data-solar="2" title="02/06/2026"><span class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-03"
+                                data-solar="3" title="03/06/2026"><span class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-04"
+                                data-solar="4" data-status="good" title="04/06/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">4</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-05"
+                                data-solar="5" title="05/06/2026"><span class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-06"
+                                data-solar="6" title="06/06/2026"><span class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-07"
+                                data-solar="7" title="07/06/2026"><span class="month-cal__solar">7</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-08"
+                                data-solar="8" data-status="good" title="08/06/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">8</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-09"
+                                data-solar="9" title="09/06/2026"><span class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-10"
+                                data-solar="10" title="10/06/2026"><span class="month-cal__solar">10</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-11"
+                                data-solar="11" title="11/06/2026"><span class="month-cal__solar">11</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-12"
+                                data-solar="12" title="12/06/2026"><span class="month-cal__solar">12</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-13"
+                                data-solar="13" data-status="good" title="13/06/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">13</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-14"
+                                data-solar="14" title="14/06/2026"><span class="month-cal__solar">14</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-15"
+                                data-solar="15" data-status="good holiday" title="15/06/2026 - Mùng 1 tháng 5 ÂL"><span
+                                    class="month-cal__solar">15</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-16"
+                                data-solar="16" data-status="good" title="16/06/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">16</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-17"
+                                data-solar="17" title="17/06/2026"><span class="month-cal__solar">17</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-18"
+                                data-solar="18" title="18/06/2026"><span class="month-cal__solar">18</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-19"
+                                data-solar="19" data-status="holiday" title="19/06/2026 - Tết Đoan Ngọ (5/5 ÂL)"><span
+                                    class="month-cal__solar">19</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-20"
+                                data-solar="20" data-status="good" title="20/06/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">20</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-21"
+                                data-solar="21" data-status="holiday"
+                                title="21/06/2026 - Ngày Báo chí Cách mạng VN / Hạ Chí"><span
+                                    class="month-cal__solar">21</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-22"
+                                data-solar="22" data-status="good" title="22/06/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">22</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-23"
+                                data-solar="23" title="23/06/2026"><span class="month-cal__solar">23</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-24"
+                                data-solar="24" title="24/06/2026"><span class="month-cal__solar">24</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-25"
+                                data-solar="25" title="25/06/2026"><span class="month-cal__solar">25</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-26"
+                                data-solar="26" data-status="good" title="26/06/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">26</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-27"
+                                data-solar="27" data-status="good" title="27/06/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">27</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-28"
+                                data-solar="28" data-status="holiday" title="28/06/2026 - Ngày Gia đình Việt Nam"><span
+                                    class="month-cal__solar">28</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-29"
+                                data-solar="29" data-status="holiday" title="29/06/2026 - Rằm tháng 5 ÂL"><span
+                                    class="month-cal__solar">29</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-06-30"
+                                data-solar="30" title="30/06/2026"><span class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-01" data-solar="1" title="01/07/2026"><span
+                                    class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-02" data-solar="2" title="02/07/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-03" data-solar="3" title="03/07/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-04" data-solar="4" title="04/07/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-05" data-solar="5" title="05/07/2026"><span
+                                    class="month-cal__solar">5</span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-06" data-solar="6" title="06/07/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-07" data-solar="7" title="07/07/2026"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-08" data-solar="8" title="08/07/2026"><span
+                                    class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-09" data-solar="9" title="09/07/2026"><span
+                                    class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-10" data-solar="10" title="10/07/2026"><span
+                                    class="month-cal__solar">10</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-11" data-solar="11" title="11/07/2026"><span
+                                    class="month-cal__solar">11</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-12" data-solar="12" title="12/07/2026"><span
+                                    class="month-cal__solar">12</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 7 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="7" data-year="2026"
+                        aria-label="Tháng 7 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 7</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 7">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-29" data-solar="29" title="29/06/2026"><span
+                                    class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-06-30" data-solar="30" title="30/06/2026"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-01"
+                                data-solar="1" title="01/07/2026"><span class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-02"
+                                data-solar="2" data-status="good" title="02/07/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">2</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-03"
+                                data-solar="3" title="03/07/2026"><span class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-04"
+                                data-solar="4" data-status="good" title="04/07/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">4</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-05"
+                                data-solar="5" title="05/07/2026"><span class="month-cal__solar">5</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-06"
+                                data-solar="6" title="06/07/2026"><span class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-07"
+                                data-solar="7" title="07/07/2026"><span class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-08"
+                                data-solar="8" title="08/07/2026"><span class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-09"
+                                data-solar="9" data-status="good" title="09/07/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">9</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-10"
+                                data-solar="10" title="10/07/2026"><span class="month-cal__solar">10</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-11"
+                                data-solar="11" data-status="good" title="11/07/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">11</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-12"
+                                data-solar="12" title="12/07/2026"><span class="month-cal__solar">12</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-13"
+                                data-solar="13" title="13/07/2026"><span class="month-cal__solar">13</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-14"
+                                data-solar="14" data-status="holiday" title="14/07/2026 - Mùng 1 tháng 6 ÂL"><span
+                                    class="month-cal__solar">14</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-15"
+                                data-solar="15" title="15/07/2026"><span class="month-cal__solar">15</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-16"
+                                data-solar="16" data-status="good" title="16/07/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">16</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-17"
+                                data-solar="17" title="17/07/2026"><span class="month-cal__solar">17</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-18"
+                                data-solar="18" title="18/07/2026"><span class="month-cal__solar">18</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-19"
+                                data-solar="19" title="19/07/2026"><span class="month-cal__solar">19</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-20"
+                                data-solar="20" title="20/07/2026"><span class="month-cal__solar">20</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-21"
+                                data-solar="21" title="21/07/2026"><span class="month-cal__solar">21</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-22"
+                                data-solar="22" data-status="good" title="22/07/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">22</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-23"
+                                data-solar="23" title="23/07/2026 - Đại Thử"><span
+                                    class="month-cal__solar">23</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-24"
+                                data-solar="24" title="24/07/2026"><span class="month-cal__solar">24</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-25"
+                                data-solar="25" title="25/07/2026"><span class="month-cal__solar">25</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-26"
+                                data-solar="26" title="26/07/2026"><span class="month-cal__solar">26</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-27"
+                                data-solar="27" data-status="holiday"
+                                title="27/07/2026 - Ngày Thương binh Liệt sĩ"><span
+                                    class="month-cal__solar">27</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-28"
+                                data-solar="28" data-status="good holiday"
+                                title="28/07/2026 - Rằm tháng 6 ÂL / Ngày Công đoàn VN"><span
+                                    class="month-cal__solar">28</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-29"
+                                data-solar="29" title="29/07/2026"><span class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-30"
+                                data-solar="30" title="30/07/2026"><span class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-07-31"
+                                data-solar="31" title="31/07/2026"><span class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-01" data-solar="1" title="01/08/2026"><span
+                                    class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-02" data-solar="2" title="02/08/2026"><span
+                                    class="month-cal__solar">2</span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-03" data-solar="3" title="03/08/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-04" data-solar="4" title="04/08/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-05" data-solar="5" title="05/08/2026"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-06" data-solar="6" title="06/08/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-07" data-solar="7" title="07/08/2026"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-08" data-solar="8" title="08/08/2026"><span
+                                    class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-09" data-solar="9" title="09/08/2026"><span
+                                    class="month-cal__solar">9</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 8 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="8" data-year="2026"
+                        aria-label="Tháng 8 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 8</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 8">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-27" data-solar="27" title="27/07/2026"><span
+                                    class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-28" data-solar="28" title="28/07/2026"><span
+                                    class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-29" data-solar="29" title="29/07/2026"><span
+                                    class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-30" data-solar="30" title="30/07/2026"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-07-31" data-solar="31" title="31/07/2026"><span
+                                    class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-01"
+                                data-solar="1" data-status="holiday" title="01/08/2026"><span
+                                    class="month-cal__solar">1</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-02"
+                                data-solar="2" title="02/08/2026"><span class="month-cal__solar">2</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-03"
+                                data-solar="3" title="03/08/2026"><span class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-04"
+                                data-solar="4" data-status="good" title="04/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">4</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-05"
+                                data-solar="5" title="05/08/2026"><span class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-06"
+                                data-solar="6" title="06/08/2026"><span class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-07"
+                                data-solar="7" title="07/08/2026 - Lập Thu"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-08"
+                                data-solar="8" title="08/08/2026"><span class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-09"
+                                data-solar="9" data-status="good" title="09/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">9</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-10"
+                                data-solar="10" title="10/08/2026"><span class="month-cal__solar">10</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-11"
+                                data-solar="11" title="11/08/2026"><span class="month-cal__solar">11</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-12"
+                                data-solar="12" title="12/08/2026"><span class="month-cal__solar">12</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-13"
+                                data-solar="13" data-status="holiday" title="13/08/2026 - Mùng 1 tháng 7 ÂL"><span
+                                    class="month-cal__solar">13</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-14"
+                                data-solar="14" title="14/08/2026"><span class="month-cal__solar">14</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-15"
+                                data-solar="15" data-status="good" title="15/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">15</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-16"
+                                data-solar="16" title="16/08/2026"><span class="month-cal__solar">16</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-17"
+                                data-solar="17" title="17/08/2026"><span class="month-cal__solar">17</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-18"
+                                data-solar="18" data-status="good" title="18/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">18</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-19"
+                                data-solar="19" data-status="holiday"
+                                title="19/08/2026 - Cách mạng tháng Tám thành công"><span
+                                    class="month-cal__solar">19</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-20"
+                                data-solar="20" title="20/08/2026"><span class="month-cal__solar">20</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-21"
+                                data-solar="21" data-status="good" title="21/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">21</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-22"
+                                data-solar="22" title="22/08/2026"><span class="month-cal__solar">22</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-23"
+                                data-solar="23" title="23/08/2026 - Xử Thử"><span
+                                    class="month-cal__solar">23</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-24"
+                                data-solar="24" data-status="good" title="24/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">24</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-25"
+                                data-solar="25" data-status="good" title="25/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">25</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-26"
+                                data-solar="26" title="26/08/2026"><span class="month-cal__solar">26</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-27"
+                                data-solar="27" data-status="holiday"
+                                title="27/08/2026 - Lễ Vu Lan (Rằm tháng 7 ÂL)"><span
+                                    class="month-cal__solar">27</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-28"
+                                data-solar="28" title="28/08/2026"><span class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-29"
+                                data-solar="29" title="29/08/2026"><span class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-30"
+                                data-solar="30" data-status="good" title="30/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">30</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-08-31"
+                                data-solar="31" data-status="good" title="31/08/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">31</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-01" data-solar="1" title="01/09/2026"><span
+                                    class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-02" data-solar="2" title="02/09/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-03" data-solar="3" title="03/09/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-04" data-solar="4" title="04/09/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-05" data-solar="5" title="05/09/2026"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-06" data-solar="6" title="06/09/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 9 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="9" data-year="2026"
+                        aria-label="Tháng 9 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 9</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 9">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-08-31" data-solar="31" title="31/08/2026"><span
+                                    class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-01"
+                                data-solar="1" title="01/09/2026"><span class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-02"
+                                data-solar="2" data-status="holiday"
+                                title="02/09/2026 - Quốc khánh nước CHXHCN Việt Nam"><span
+                                    class="month-cal__solar">2</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-03"
+                                data-solar="3" title="03/09/2026"><span class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-04"
+                                data-solar="4" title="04/09/2026"><span class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-05"
+                                data-solar="5" data-status="good holiday"
+                                title="05/09/2026 - Ngày Khai giảng năm học mới"><span
+                                    class="month-cal__solar">5</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-06"
+                                data-solar="6" data-status="good" title="06/09/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">6</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-07"
+                                data-solar="7" title="07/09/2026 - Bạch Lộ"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-08"
+                                data-solar="8" title="08/09/2026"><span class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-09"
+                                data-solar="9" title="09/09/2026"><span class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-10"
+                                data-solar="10" data-status="holiday"
+                                title="10/09/2026 - Ngày thành lập Mặt trận Tổ quốc VN"><span
+                                    class="month-cal__solar">10</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-11"
+                                data-solar="11" data-status="holiday" title="11/09/2026 - Mùng 1 tháng 8 ÂL"><span
+                                    class="month-cal__solar">11</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-12"
+                                data-solar="12" title="12/09/2026"><span class="month-cal__solar">12</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-13"
+                                data-solar="13" data-status="good" title="13/09/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">13</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-14"
+                                data-solar="14" title="14/09/2026"><span class="month-cal__solar">14</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-15"
+                                data-solar="15" title="15/09/2026"><span class="month-cal__solar">15</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-16"
+                                data-solar="16" title="16/09/2026"><span class="month-cal__solar">16</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-17"
+                                data-solar="17" title="17/09/2026"><span class="month-cal__solar">17</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-18"
+                                data-solar="18" data-status="good" title="18/09/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">18</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-19"
+                                data-solar="19" title="19/09/2026"><span class="month-cal__solar">19</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-20"
+                                data-solar="20" data-status="good" title="20/09/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">20</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-21"
+                                data-solar="21" title="21/09/2026"><span class="month-cal__solar">21</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-22"
+                                data-solar="22" title="22/09/2026"><span class="month-cal__solar">22</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-23"
+                                data-solar="23" title="23/09/2026 - Thu Phân"><span
+                                    class="month-cal__solar">23</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-24"
+                                data-solar="24" title="24/09/2026"><span class="month-cal__solar">24</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-25"
+                                data-solar="25" data-status="good holiday"
+                                title="25/09/2026 - Tết Trung Thu (Rằm tháng 8 ÂL)"><span
+                                    class="month-cal__solar">25</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-26"
+                                data-solar="26" data-status="good" title="26/09/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">26</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-27"
+                                data-solar="27" title="27/09/2026"><span class="month-cal__solar">27</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-28"
+                                data-solar="28" title="28/09/2026"><span class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-29"
+                                data-solar="29" title="29/09/2026"><span class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-09-30"
+                                data-solar="30" data-status="good" title="30/09/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">30</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-01" data-solar="1" title="01/10/2026"><span
+                                    class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-02" data-solar="2" title="02/10/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-03" data-solar="3" title="03/10/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-04" data-solar="4" title="04/10/2026"><span
+                                    class="month-cal__solar">4</span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-05" data-solar="5" title="05/10/2026"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-06" data-solar="6" title="06/10/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-07" data-solar="7" title="07/10/2026"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-08" data-solar="8" title="08/10/2026"><span
+                                    class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-09" data-solar="9" title="09/10/2026"><span
+                                    class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-10" data-solar="10" title="10/10/2026"><span
+                                    class="month-cal__solar">10</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-11" data-solar="11" title="11/10/2026"><span
+                                    class="month-cal__solar">11</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 10 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="10" data-year="2026"
+                        aria-label="Tháng 10 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 10</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 10">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-28" data-solar="28" title="28/09/2026"><span
+                                    class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-29" data-solar="29" title="29/09/2026"><span
+                                    class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-09-30" data-solar="30" title="30/09/2026"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-01"
+                                data-solar="1" data-status="good holiday"
+                                title="01/10/2026 - Quốc tế Người cao tuổi"><span class="month-cal__solar">1</span><span
+                                    class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-02"
+                                data-solar="2" data-status="good" title="02/10/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">2</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-03"
+                                data-solar="3" title="03/10/2026"><span class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-04"
+                                data-solar="4" title="04/10/2026"><span class="month-cal__solar">4</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-05"
+                                data-solar="5" title="05/10/2026"><span class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-06"
+                                data-solar="6" title="06/10/2026"><span class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-07"
+                                data-solar="7" data-status="good" title="07/10/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">7</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-08"
+                                data-solar="8" title="08/10/2026 - Hàn Lộ"><span
+                                    class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-09"
+                                data-solar="9" title="09/10/2026"><span class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-10"
+                                data-solar="10" data-status="holiday"
+                                title="10/10/2026 - Ngày Giải phóng Thủ đô / Mùng 1 tháng 9 ÂL"><span
+                                    class="month-cal__solar">10</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-11"
+                                data-solar="11" title="11/10/2026"><span class="month-cal__solar">11</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-12"
+                                data-solar="12" data-status="good" title="12/10/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">12</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-13"
+                                data-solar="13" data-status="holiday"
+                                title="13/10/2026 - Ngày Doanh nhân Việt Nam"><span
+                                    class="month-cal__solar">13</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-14"
+                                data-solar="14" data-status="good" title="14/10/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">14</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-15"
+                                data-solar="15" title="15/10/2026"><span class="month-cal__solar">15</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-16"
+                                data-solar="16" title="16/10/2026"><span class="month-cal__solar">16</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-17"
+                                data-solar="17" title="17/10/2026"><span class="month-cal__solar">17</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-18"
+                                data-solar="18" data-status="holiday" title="18/10/2026 - Tết Trùng Cửu (9/9 ÂL)"><span
+                                    class="month-cal__solar">18</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-19"
+                                data-solar="19" title="19/10/2026"><span class="month-cal__solar">19</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-20"
+                                data-solar="20" data-status="holiday" title="20/10/2026 - Ngày Phụ nữ Việt Nam"><span
+                                    class="month-cal__solar">20</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-21"
+                                data-solar="21" data-status="good" title="21/10/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">21</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-22"
+                                data-solar="22" title="22/10/2026"><span class="month-cal__solar">22</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-23"
+                                data-solar="23" title="23/10/2026 - Sương Giáng"><span
+                                    class="month-cal__solar">23</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-24"
+                                data-solar="24" data-status="holiday" title="24/10/2026 - Rằm tháng 9 ÂL"><span
+                                    class="month-cal__solar">24</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-25"
+                                data-solar="25" title="25/10/2026"><span class="month-cal__solar">25</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-26"
+                                data-solar="26" data-status="good" title="26/10/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">26</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-27"
+                                data-solar="27" title="27/10/2026"><span class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-28"
+                                data-solar="28" data-status="good holiday" title="28/10/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">28</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-29"
+                                data-solar="29" title="29/10/2026"><span class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-30"
+                                data-solar="30" title="30/10/2026"><span class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-10-31"
+                                data-solar="31" data-status="holiday" title="31/10/2026 - Lễ hội Halloween"><span
+                                    class="month-cal__solar">31</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-11-01" data-solar="1" title="01/11/2026"><span
+                                    class="month-cal__solar">1</span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-11-02" data-solar="2" title="02/11/2026"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-11-03" data-solar="3" title="03/11/2026"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-11-04" data-solar="4" title="04/11/2026"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted month-cal__cell--today"
+                                tabindex="-1" data-date="2026-11-05" data-solar="5" data-status="today"
+                                title="05/11/2026"><span class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-11-06" data-solar="6" title="06/11/2026"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-11-07" data-solar="7" title="07/11/2026"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-11-08" data-solar="8" title="08/11/2026"><span
+                                    class="month-cal__solar">8</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 11 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="11" data-year="2026"
+                        aria-label="Tháng 11 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 11</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 11">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-26" data-solar="26" data-status="good"
+                                title="26/10/2026 (17/9 ÂL)"><span class="month-cal__solar">26</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-27" data-solar="27" data-status="bad"
+                                title="27/10/2026 (18/9 ÂL)"><span class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-28" data-solar="28" data-status="good holiday"
+                                title="28/10/2026 (19/9 ÂL)"><span class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-29" data-solar="29" title="29/10/2026 (20/9 ÂL)"><span
+                                    class="month-cal__solar">29</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-30" data-solar="30" data-status="bad"
+                                title="30/10/2026 (21/9 ÂL)"><span class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-10-31" data-solar="31" title="31/10/2026 (22/9 ÂL)"><span
+                                    class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-01"
+                                data-solar="1" title="01/11/2026 (23/9 ÂL)"><span
+                                    class="month-cal__solar">1</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-02"
+                                data-solar="2" data-status="good" title="02/11/2026 (24/9 ÂL) - Hoàng Đạo"><span
+                                    class="month-cal__solar">2</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-03"
+                                data-solar="3" title="03/11/2026 (25/9 ÂL)"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-04"
+                                data-solar="4" data-status="good" title="04/11/2026 (26/9 ÂL) - Hoàng Đạo"><span
+                                    class="month-cal__solar">4</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--today month-cal__cell--active"
+                                tabindex="0" aria-current="date" data-date="2026-11-05" data-solar="5"
+                                data-status="bad today" title="Hôm nay: 05/11/2026 (27/9 ÂL)"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-06"
+                                data-solar="6" title="06/11/2026 (28/9 ÂL)"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-07"
+                                data-solar="7" data-status="good"
+                                title="07/11/2026 (29/9 ÂL) - Lập Đông / Hoàng Đạo"><span
+                                    class="month-cal__solar">7</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-08"
+                                data-solar="8" data-status="bad" title="08/11/2026 (30/9 ÂL)"><span
+                                    class="month-cal__solar">8</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-09"
+                                data-solar="9" data-status="holiday"
+                                title="09/11/2026 (Mùng 1/10 ÂL) - Ngày Pháp luật VN"><span
+                                    class="month-cal__solar">9</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-10"
+                                data-solar="10" data-status="bad" title="10/11/2026 (2/10 ÂL)"><span
+                                    class="month-cal__solar">10</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-11"
+                                data-solar="11" data-status="good" title="11/11/2026 (3/10 ÂL) - Hoàng Đạo"><span
+                                    class="month-cal__solar">11</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-12"
+                                data-solar="12" title="12/11/2026 (4/10 ÂL)"><span
+                                    class="month-cal__solar">12</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-13"
+                                data-solar="13" data-status="bad" title="13/11/2026 (5/10 ÂL)"><span
+                                    class="month-cal__solar">13</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-14"
+                                data-solar="14" title="14/11/2026 (6/10 ÂL)"><span
+                                    class="month-cal__solar">14</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-15"
+                                data-solar="15" title="15/11/2026 (7/10 ÂL)"><span
+                                    class="month-cal__solar">15</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-16"
+                                data-solar="16" data-status="good" title="16/11/2026 (8/10 ÂL) - Hoàng Đạo"><span
+                                    class="month-cal__solar">16</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-17"
+                                data-solar="17" data-status="good" title="17/11/2026 (9/10 ÂL) - Hoàng Đạo"><span
+                                    class="month-cal__solar">17</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-18"
+                                data-solar="18" data-status="holiday"
+                                title="18/11/2026 (10/10 ÂL) - Ngày hội Đại đoàn kết toàn dân tộc"><span
+                                    class="month-cal__solar">18</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-19"
+                                data-solar="19" data-status="good" title="19/11/2026 (11/10 ÂL) - Hoàng Đạo"><span
+                                    class="month-cal__solar">19</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-20"
+                                data-solar="20" data-status="holiday"
+                                title="20/11/2026 (12/10 ÂL) - Ngày Nhà giáo Việt Nam"><span
+                                    class="month-cal__solar">20</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-21"
+                                data-solar="21" data-status="bad" title="21/11/2026 (13/10 ÂL)"><span
+                                    class="month-cal__solar">21</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-22"
+                                data-solar="22" title="22/11/2026 (14/10 ÂL) - Tiểu Tuyết"><span
+                                    class="month-cal__solar">22</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-23"
+                                data-solar="23" data-status="good holiday"
+                                title="23/11/2026 (Rằm 15/10 ÂL) - Tết Hạ Nguyên"><span
+                                    class="month-cal__solar">23</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-24"
+                                data-solar="24" data-status="holiday" title="24/11/2026 (16/10 ÂL)"><span
+                                    class="month-cal__solar">24</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-25"
+                                data-solar="25" data-status="bad" title="25/11/2026 (17/10 ÂL)"><span
+                                    class="month-cal__solar">25</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-26"
+                                data-solar="26" title="26/11/2026 (18/10 ÂL)"><span
+                                    class="month-cal__solar">26</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-27"
+                                data-solar="27" title="27/11/2026 (19/10 ÂL)"><span
+                                    class="month-cal__solar">27</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-28"
+                                data-solar="28" data-status="good" title="28/11/2026 (20/10 ÂL) - Hoàng Đạo"><span
+                                    class="month-cal__solar">28</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-29"
+                                data-solar="29" data-status="good" title="29/11/2026 (21/10 ÂL) - Hoàng Đạo"><span
+                                    class="month-cal__solar">29</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-11-30"
+                                data-solar="30" title="30/11/2026 (22/10 ÂL)"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-12-01" data-solar="1" data-status="good"
+                                title="01/12/2026 (23/10 ÂL)"><span class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-12-02" data-solar="2" title="02/12/2026 (24/10 ÂL)"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-12-03" data-solar="3" title="03/12/2026 (25/10 ÂL)"><span
+                                    class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-12-04" data-solar="4" data-status="bad"
+                                title="04/12/2026 (26/10 ÂL)"><span class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-12-05" data-solar="5" title="05/12/2026 (27/10 ÂL)"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-12-06" data-solar="6" title="06/12/2026 (28/10 ÂL)"><span
+                                    class="month-cal__solar">6</span></button>
+                        </div>
+                    </article>
+
+                    <!-- ==================== THÁNG 12 / 2026 ==================== -->
+                    <article class="month-cal month-cal--mini" data-month="12" data-year="2026"
+                        aria-label="Tháng 12 năm 2026">
+                        <h2 class="month-cal__mini-title">Tháng 12</h2>
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Hai">Hai</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Ba">Ba</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Tư">Tư</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Năm">Năm</span>
+                            <span class="month-cal__weekday" role="columnheader" title="Thứ Sáu">Sáu</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat" role="columnheader"
+                                title="Thứ Bảy">Bảy</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun" role="columnheader"
+                                title="Chủ Nhật">CN</span>
+                        </div>
+                        <div class="month-cal__grid" role="group" aria-label="Các ngày trong Tháng 12">
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2026-11-30" data-solar="30" title="30/11/2026"><span
+                                    class="month-cal__solar">30</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-01"
+                                data-solar="1" data-status="good" title="01/12/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">1</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-02"
+                                data-solar="2" title="02/12/2026"><span class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-03"
+                                data-solar="3" title="03/12/2026"><span class="month-cal__solar">3</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-04"
+                                data-solar="4" title="04/12/2026"><span class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-05"
+                                data-solar="5" data-status="good" title="05/12/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">5</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-06"
+                                data-solar="6" title="06/12/2026"><span class="month-cal__solar">6</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-07"
+                                data-solar="7" title="07/12/2026 - Đại Tuyết"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-08"
+                                data-solar="8" title="08/12/2026"><span class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-09"
+                                data-solar="9" data-status="holiday" title="09/12/2026 - Mùng 1 tháng 11 ÂL"><span
+                                    class="month-cal__solar">9</span><span class="month-cal__dots" aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-10"
+                                data-solar="10" title="10/12/2026"><span class="month-cal__solar">10</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-11"
+                                data-solar="11" data-status="good" title="11/12/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">11</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-12"
+                                data-solar="12" title="12/12/2026"><span class="month-cal__solar">12</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-13"
+                                data-solar="13" data-status="good" title="13/12/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">13</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-14"
+                                data-solar="14" title="14/12/2026"><span class="month-cal__solar">14</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-15"
+                                data-solar="15" title="15/12/2026"><span class="month-cal__solar">15</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-16"
+                                data-solar="16" title="16/12/2026"><span class="month-cal__solar">16</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-17"
+                                data-solar="17" data-status="good" title="17/12/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">17</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-18"
+                                data-solar="18" title="18/12/2026"><span class="month-cal__solar">18</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-19"
+                                data-solar="19" title="19/12/2026 - Ngày Toàn quốc kháng chiến"><span
+                                    class="month-cal__solar">19</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-20"
+                                data-solar="20" title="20/12/2026"><span class="month-cal__solar">20</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-21"
+                                data-solar="21" title="21/12/2026"><span class="month-cal__solar">21</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-22"
+                                data-solar="22" data-status="holiday"
+                                title="22/12/2026 - Ngày thành lập QĐND Việt Nam / Đông Chí"><span
+                                    class="month-cal__solar">22</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-23"
+                                data-solar="23" data-status="good holiday"
+                                title="23/12/2026 - Rằm tháng 11 ÂL (Hoàng Đạo)"><span
+                                    class="month-cal__solar">23</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i class="month-cal__dot month-cal__dot--good"></i><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-24"
+                                data-solar="24" data-status="holiday" title="24/12/2026 - Đêm Giáng Sinh"><span
+                                    class="month-cal__solar">24</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-25"
+                                data-solar="25" data-status="holiday" title="25/12/2026 - Lễ Giáng Sinh (Noel)"><span
+                                    class="month-cal__solar">25</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--holiday"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-26"
+                                data-solar="26" title="26/12/2026"><span class="month-cal__solar">26</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-27"
+                                data-solar="27" title="27/12/2026"><span class="month-cal__solar">27</span></button>
+
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-28"
+                                data-solar="28" title="28/12/2026"><span class="month-cal__solar">28</span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-29"
+                                data-solar="29" data-status="good" title="29/12/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">29</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-30"
+                                data-solar="30" data-status="good" title="30/12/2026 - Hoàng Đạo"><span
+                                    class="month-cal__solar">30</span><span class="month-cal__dots"
+                                    aria-hidden="true"><i
+                                        class="month-cal__dot month-cal__dot--good"></i></span></button>
+                            <button type="button" class="month-cal__cell" tabindex="-1" data-date="2026-12-31"
+                                data-solar="31" title="31/12/2026 - Tất niên Dương lịch"><span
+                                    class="month-cal__solar">31</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-01" data-solar="1" title="01/01/2027"><span
+                                    class="month-cal__solar">1</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-02" data-solar="2" title="02/01/2027"><span
+                                    class="month-cal__solar">2</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-03" data-solar="3" title="03/01/2027"><span
+                                    class="month-cal__solar">3</span></button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-04" data-solar="4" title="04/01/2027"><span
+                                    class="month-cal__solar">4</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-05" data-solar="5" title="05/01/2027"><span
+                                    class="month-cal__solar">5</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-06" data-solar="6" title="06/01/2027"><span
+                                    class="month-cal__solar">6</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-07" data-solar="7" title="07/01/2027"><span
+                                    class="month-cal__solar">7</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-08" data-solar="8" title="08/01/2027"><span
+                                    class="month-cal__solar">8</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-09" data-solar="9" title="09/01/2027"><span
+                                    class="month-cal__solar">9</span></button>
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" tabindex="-1"
+                                data-date="2027-01-10" data-solar="10" title="10/01/2027"><span
+                                    class="month-cal__solar">10</span></button>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- CHÚ THÍCH LỌC NHANH TOÀN NĂM (Tái sử dụng .month-cal__legend) -->
+                <footer class="month-cal month-cal__legend year-cal-app__legend" aria-label="Bộ lọc chú thích lịch năm">
+                    <button type="button" class="month-cal__legend-pill" data-filter="good" aria-pressed="false"
+                        title="Làm sáng tất cả ngày Hoàng Đạo trong 12 tháng">
+                        <i class="month-cal__legend-dot month-cal__legend-dot--good" aria-hidden="true"></i>
+                        <span>Hoàng Đạo</span>
+                    </button>
+                    <button type="button" class="month-cal__legend-pill" data-filter="bad" aria-pressed="false"
+                        title="Làm sáng tất cả ngày Hắc Đạo">
+                        <i class="month-cal__legend-dot month-cal__legend-dot--bad" aria-hidden="true"></i>
+                        <span>Hắc Đạo</span>
+                    </button>
+                    <button type="button" class="month-cal__legend-pill" data-filter="holiday" aria-pressed="false"
+                        title="Làm sáng tất cả Ngày Lễ và Rằm/Mùng 1 trong năm">
+                        <i class="month-cal__legend-dot month-cal__legend-dot--holiday" aria-hidden="true"></i>
+                        <span>Ngày Lễ</span>
+                    </button>
+                    <button type="button" class="month-cal__legend-pill" data-filter="today" aria-pressed="false"
+                        title="Làm sáng ngày Hôm Nay">
+                        <i class="month-cal__legend-dot month-cal__legend-dot--today" aria-hidden="true"></i>
+                        <span>Hôm Nay</span>
+                    </button>
+                </footer>
+            </section>

@@ -729,22 +729,48 @@ $feng-shui-themes: (
 @use "sass:map";
 @use "palette" as pal;
 
-// Bộ lọc CSS Filter chuyển màu SVG Con Giáp (từ màu Đỏ gốc) sang đúng tông màu của 5 mệnh Ngũ hành
+// 1. Bộ lọc chuẩn xác từ gốc #000 (fill="#000") sang màu primary-600 của 5 mệnh (Dùng cho trạng thái Thường & Hover)
 $zodiac-theme-filters: (
-    "earth": hue-rotate(28deg) saturate(1.15) brightness(0.92),
-    // Mệnh Thổ: Nâu cam đất ấm
-    "fire": hue-rotate(0deg) saturate(1.1) brightness(0.98),
-    // Mệnh Hỏa: Đỏ chu sa rực rỡ
-    "metal": hue-rotate(44deg) saturate(1.35) brightness(1.05),
-    // Mệnh Kim: Vàng ánh kim
-    "water": hue-rotate(215deg) saturate(1.15) brightness(0.95),
-    // Mệnh Thủy: Xanh dương biển sâu
-    "wood": hue-rotate(142deg) saturate(1.05) brightness(0.88), // Mệnh Mộc: Xanh lục bảo
+    // Mệnh Thổ (#d97706 - Cam đất đậm)
+    "earth": brightness(0) saturate(100%) invert(48%) sepia(87%) saturate(1638%) hue-rotate(2deg) brightness(97%)
+        contrast(96%),
+    // Mệnh Hỏa (#dc2626 - Đỏ chu sa)
+    "fire": brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(3932%) hue-rotate(351deg) brightness(89%)
+        contrast(95%),
+    // Mệnh Kim (#ca8a04 - Vàng kim đậm)
+    "metal": brightness(0) saturate(100%) invert(52%) sepia(93%) saturate(1352%) hue-rotate(14deg) brightness(94%)
+        contrast(97%),
+    // Mệnh Thủy (#2563eb - Xanh đại dương)
+    "water": brightness(0) saturate(100%) invert(31%) sepia(94%) saturate(2785%) hue-rotate(213deg) brightness(96%)
+        contrast(93%),
+    // Mệnh Mộc (#059669 - Xanh lục bảo)
+    "wood": brightness(0) saturate(100%) invert(39%) sepia(82%) saturate(1105%) hue-rotate(130deg) brightness(93%)
+        contrast(96%)
+);
+
+// 2. Bộ lọc từ gốc #000 sang màu trầm primary-900 cùng mệnh (Dùng cho ô --active để giữ nét cắt giấy dương bản)
+$zodiac-active-filters: (
+    // Mệnh Thổ (#78350f - Nâu đại địa sẫm trên nền cam #f59e0b)
+    "earth": brightness(0) saturate(100%) invert(19%) sepia(51%) saturate(2255%) hue-rotate(12deg) brightness(93%)
+        contrast(92%),
+    // Mệnh Hỏa (#7f1d1d - Đỏ trầm trên nền đỏ #ef4444)
+    "fire": brightness(0) saturate(100%) invert(13%) sepia(56%) saturate(3426%) hue-rotate(349deg) brightness(91%)
+        contrast(96%),
+    // Mệnh Kim (#713f12 - Đồng cổ sẫm trên nền vàng #eab308)
+    "metal": brightness(0) saturate(100%) invert(22%) sepia(60%) saturate(1560%) hue-rotate(16deg) brightness(92%)
+        contrast(91%),
+    // Mệnh Thủy (#1e3a8a - Xanh chàm sẫm trên nền xanh #3b82f6)
+    "water": brightness(0) saturate(100%) invert(18%) sepia(58%) saturate(2865%) hue-rotate(215deg) brightness(90%)
+        contrast(95%),
+    // Mệnh Mộc (#064e3b - Xanh rừng thẫm trên nền xanh #10b981)
+    "wood": brightness(0) saturate(100%) invert(21%) sepia(47%) saturate(1635%) hue-rotate(128deg) brightness(91%)
+        contrast(96%)
 );
 
 @mixin generate-theme($element-name, $is-default: false) {
     $theme-data: map.get(pal.$feng-shui-themes, $element-name);
     $zodiac-filter: map.get($zodiac-theme-filters, $element-name);
+    $zodiac-filter-active: map.get($zodiac-active-filters, $element-name);
 
     @if $theme-data == null {
         @error "Lỗi: Không tìm thấy dữ liệu cho bản mệnh '#{$element-name}'";
@@ -785,6 +811,7 @@ $zodiac-theme-filters: (
         --shadow-color: rgba(0, 0, 0, 0.1);
         --overlay-bg: rgba(0, 0, 0, 0.4);
         --zodiac-filter: #{$zodiac-filter};
+        --zodiac-filter-active: #{$zodiac-filter-active};
 
         @media (prefers-color-scheme: dark) {
             --body-bg: #{map.get($theme-data, "primary", 900)};
@@ -809,7 +836,8 @@ $zodiac-theme-filters: (
 
             --shadow-color: rgba(0, 0, 0, 0.5);
             --overlay-bg: rgba(0, 0, 0, 0.7);
-            --zodiac-filter: #{$zodiac-filter} brightness(1.2);
+            --zodiac-filter: #{$zodiac-filter} brightness(1.25);
+            --zodiac-filter-active: #{$zodiac-filter-active};
         }
     }
 }
@@ -1373,106 +1401,7 @@ $zodiac-theme-filters: (
 
 ```scss
 // scss/abstracts/_animations.scss
-// 1. Hiệu ứng Fade-in (Xuất hiện nhẹ nhàng)
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-// 2. Toàn bộ nội dung chuẩn của scss/abstracts/_animations.scss:
-
-%transTheme {
-    transition: var(--theme-transition);
-}
-
-%transInteractive {
-    transition:
-        var(--theme-transition),
-        transform 0.2s ease;
-}
-
-%transHeaderScroll {
-    transition:
-        var(--theme-transition),
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
-}
-
-%transSidebarDrawer {
-    transition:
-        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        var(--theme-transition);
-}
-
-%transTooltip {
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        visibility 0.2s ease;
-}
-
-%transBurgerBar {
-    transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
-}
-
-%transBackdrop {
-    transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease;
-}
-
-%animDropdownFadeIn {
-    animation: fadeIn 0.2s ease-out forwards;
-}
-
-%animFloat {
-    animation: float 3s ease-in-out infinite;
-}
-
-%animPulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-%animShake {
-    animation: shake 0.35s ease-in-out;
-}
-
-// 3. Hiệu ứng Pulse (Nhịp đập - Dùng cho hành Hỏa)
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-// Class sử dụng
-.animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-float {
-    animation: float 3s ease-in-out infinite;
-}
-
-.animate-pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-// scss/abstracts/_animations.scss
-// Tuân thủ đúng nguyên tắc main.scss: Tầng Abstracts không tự sinh ra CSS nếu không được @extend/@include
+// Tuân thủ đúng nguyên tắc main.scss: Tầng Abstracts chỉ chứa Placeholders, không tự sinh ra CSS nếu không được @extend
 
 // ==========================================
 // 1. TRANSITION PLACEHOLDERS (Chuyển tiếp trạng thái khi tương tác)
@@ -1483,18 +1412,19 @@ $zodiac-theme-filters: (
     transition: var(--theme-transition);
 }
 
-// Chuyển màu Theme kết hợp nhấc nhẹ nút khi Hover (Dùng cho Icon Home, Button Login)
+// Chuyển màu Theme kết hợp nhấc nhẹ nút khi Hover (Dùng cho Icon, Button, Ô lịch)
 %transInteractive {
     transition:
         var(--theme-transition),
         transform 0.2s ease;
 }
 
-// Hiệu ứng đổ bóng và thu gọn chiều cao cho Sticky Header khi cuộn trang
+// Hiệu ứng đổ bóng, đổi viền và thu gọn chiều cao cho Sticky Header khi cuộn trang
 %transHeaderScroll {
     transition:
         var(--theme-transition),
         box-shadow 0.25s ease,
+        border-color 0.25s ease,
         height 0.25s ease;
 }
 
@@ -1513,7 +1443,7 @@ $zodiac-theme-filters: (
         visibility 0.2s ease;
 }
 
-// Hiệu ứng xoay 3 thanh ngang của nút Hamburger thành dấu X
+// Hiệu ứng xoay 3 thanh ngang của nút Hamburger thành dấu X & mũi tên Dropdown
 %transBurgerBar {
     transition:
         transform 0.25s ease,
@@ -1531,7 +1461,7 @@ $zodiac-theme-filters: (
 // 2. ANIMATION PLACEHOLDERS (Chạy theo @keyframes từ base/_keyframes.scss)
 // ==========================================
 
-// Hiệu ứng xuất hiện mượt cho Dropdown Ngôn ngữ & Theme
+// Hiệu ứng xuất hiện mượt cho Dropdown Ngôn ngữ, Theme & Tháng/Năm
 %animDropdownFadeIn {
     animation: fadeIn 0.2s ease-out forwards;
 }
@@ -2996,12 +2926,17 @@ strong {
 ### index.scss
 
 ```scss
+// scss/components/_index.scss
 @forward "./button";
 @forward "./logo-header";
 @forward "./date-time";
 @forward "./bloc-card";
 @forward "./fengshui-card";
 @forward "./month-calendar";
+
+@forward "./clock-hero";
+@forward "./clock-pillars";
+@forward "./clock-zodiac";
 ```
 
 ### button.scss
@@ -3392,23 +3327,9 @@ strong {
         }
 
         @include abs.screen(sm) {
-            min-height: 6.6rem;
+            min-height: 6.8rem;
             border-radius: 1.2rem;
             padding: 0.6rem 0.5rem;
-        }
-
-        // Hiệu ứng Hover: Khung nhấc nhẹ + Con giáp to dần đều, xoay thẳng và rõ nét theo màu Theme
-        &:hover,
-        &:focus-visible {
-            border-color: var(--primary-color);
-            background-color: var(--body-bg);
-            transform: translateY(-2px);
-            box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
-
-            .month-cal__zodiac-img {
-                opacity: 0.88;
-                transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
-            }
         }
 
         // Ngày của tháng trước / tháng sau
@@ -3417,12 +3338,12 @@ strong {
             background-color: transparent;
 
             .month-cal__zodiac-img {
-                opacity: 0.1;
+                opacity: 0.12;
             }
         }
 
-        // Ngày Hôm nay
-        &--today {
+        // Ngày Hôm nay (Khi chưa phải là ô Active)
+        &--today:not(&--active) {
             border: 2px solid var(--primary-color);
             background-color: var(--body-bg);
 
@@ -3431,10 +3352,25 @@ strong {
             }
         }
 
-        // Ngày đang được chọn (Active)
+        // Hover vào ô thường (Tách biệt khỏi ô --active để không bao giờ bị trắng xoá)
+        &:not(&--active):hover,
+        &:not(&--active):focus-visible {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+
+            .month-cal__zodiac-img {
+                opacity: 0.9;
+                filter: var(--zodiac-filter);
+                transform: scale(1.12) rotate(0deg) translate(-0.2rem, -0.2rem);
+            }
+        }
+
+        // Trạng thái Đang Chọn (--active): Nền primary-500, Chữ trắng, Con giáp màu trầm primary-900 dương bản
         &--active {
             background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
             color: #ffffff;
             box-shadow: 0 0.8rem 2rem var(--shadow-color);
 
@@ -3444,20 +3380,35 @@ strong {
             }
 
             .month-cal__badge {
-                background-color: rgba(255, 255, 255, 0.22);
+                background-color: rgba(255, 255, 255, 0.24);
                 color: #ffffff;
-                border-color: rgba(255, 255, 255, 0.4);
+                border-color: rgba(255, 255, 255, 0.45);
             }
 
             .month-cal__zodiac-img {
-                opacity: 0.35;
-                filter: brightness(0) invert(1); // Chuyển sang màu trắng tinh tế trên nền Active
+                opacity: 0.58;
+                filter: var(--zodiac-filter-active);
                 transform: scale(1.06) rotate(0deg);
+            }
+
+            // Khi Hover vào chính ô Active: Giữ nguyên nền đậm, làm nét thêm con giáp
+            &:hover,
+            &:focus-visible {
+                background-color: var(--primary-color);
+                border-color: var(--primary-hover);
+                transform: translateY(-2px);
+                box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+                .month-cal__zodiac-img {
+                    opacity: 0.78;
+                    filter: var(--zodiac-filter-active);
+                    transform: scale(1.14) rotate(0deg) translate(-0.2rem, -0.2rem);
+                }
             }
         }
 
-        // Khi người dùng di chuột vào nút chú thích ở chân lịch (Highlight Filter)
-        &.is-highlighted {
+        // Khi di chuột vào nút chú thích ở chân lịch (Highlight Filter)
+        &.is-highlighted:not(&--active) {
             opacity: 1 !important;
             border-color: var(--primary-color);
             background-color: var(--body-bg);
@@ -3466,7 +3417,8 @@ strong {
             z-index: 2;
 
             .month-cal__zodiac-img {
-                opacity: 0.85;
+                opacity: 0.9;
+                filter: var(--zodiac-filter);
                 transform: scale(1.1) rotate(0deg);
             }
         }
@@ -3477,19 +3429,16 @@ strong {
         }
     }
 
-    // Cụm Số Ngày Dương & Ngày Âm nằm ở Góc Trên Trái (Phương án 1 - To, rõ, thẳng hàng tuyệt đối)
+    // Cụm Số Ngày Dương & Ngày Âm xếp dọc trên mọi màn hình (Phương án 1 - Chống đè nhãn Mùng 1 / Rằm)
     &__date-head {
         position: relative;
         z-index: 2;
         display: flex;
-        align-items: baseline;
-        gap: 0.5rem;
-        line-height: 1;
-
-        @include abs.screen(sm) {
-            flex-direction: column;
-            gap: 0.2rem;
-        }
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        max-width: 55%;
+        line-height: 1.05;
     }
 
     &__solar {
@@ -3503,42 +3452,42 @@ strong {
         }
 
         @include abs.screen(sm) {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
         }
     }
 
     &__lunar {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: var(--text-muted);
         font-variant-numeric: tabular-nums;
 
         @include abs.screen(sm) {
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
     }
 
-    // Nhãn Mùng 1 / Rằm / Ngày Lễ ở Góc Trên Phải (Hiển thị rõ ràng, có viền nhẹ)
+    // Nhãn Mùng 1 / Rằm / Ngày Lễ ở Góc Trên Phải
     &__badge {
         position: absolute;
         top: 0.6rem;
         right: 0.6rem;
         z-index: 3;
-        padding: 0.2rem 0.65rem;
+        padding: 0.2rem 0.6rem;
         background-color: rgba(239, 68, 68, 0.14);
         border: 1px solid rgba(239, 68, 68, 0.3);
         color: var(--color-danger);
-        font-size: 1.05rem;
+        font-size: 1rem;
         font-weight: 800;
         border-radius: 0.6rem;
         line-height: 1.2;
         @extend %textNoWrap;
 
         @include abs.screen(sm) {
-            top: 0.4rem;
-            right: 0.4rem;
-            padding: 0.1rem 0.4rem;
-            font-size: 0.9rem;
+            top: 0.35rem;
+            right: 0.35rem;
+            padding: 0.1rem 0.35rem;
+            font-size: 0.85rem;
         }
     }
 
@@ -3578,16 +3527,15 @@ strong {
         }
     }
 
-    // Thẻ <img> 12 Con Giáp (Khung chuẩn 128x128px) ở Góc Dưới Phải + Đổi màu theo Theme Filter
+    // Thẻ <img> 12 Con Giáp (128x128px, fill="#000") ở Góc Dưới Phải
     &__zodiac-img {
         position: absolute;
         right: 0.5rem;
         bottom: 0.4rem;
-        width: 4.8rem;
-        height: 4.8rem;
+        width: 4.6rem;
+        height: 4.6rem;
         object-fit: contain;
-        // Ban đầu: nhỏ hơn và mờ dịu, nhuộm màu theo Theme hiện tại
-        opacity: 0.18;
+        opacity: 0.2;
         filter: var(--zodiac-filter);
         transform: scale(0.78) rotate(-8deg);
         transform-origin: bottom right;
@@ -3599,13 +3547,13 @@ strong {
             filter 0.3s ease;
 
         @include abs.screen(xl) {
-            width: 4.2rem;
-            height: 4.2rem;
+            width: 4rem;
+            height: 4rem;
         }
 
         @include abs.screen(sm) {
-            width: 3rem;
-            height: 3rem;
+            width: 2.8rem;
+            height: 2.8rem;
             right: 0.2rem;
             bottom: 0.2rem;
         }
@@ -3990,6 +3938,7 @@ strong {
         font-weight: 800;
         border-radius: 99.9rem;
         letter-spacing: 0.05em;
+        @extend %transTheme;
     }
 
     &__month-vn {
@@ -3998,6 +3947,7 @@ strong {
         color: var(--primary-color);
         text-transform: uppercase;
         margin-top: 0.4rem;
+        @extend %transTheme;
 
         @include abs.screen(sm) {
             font-size: 1.7rem;
@@ -4021,6 +3971,7 @@ strong {
         font-size: 1.2rem;
         font-weight: 600;
         color: var(--text-color);
+        @extend %transTheme;
     }
 
     &__date-hero {
@@ -4050,28 +4001,202 @@ strong {
         line-height: 0.95;
         color: var(--primary-color);
         font-variant-numeric: tabular-nums;
+        @extend %transTheme;
 
         @include abs.screen(sm) {
             font-size: 6.8rem;
         }
     }
 
-    // 2. Tầng Giữa: Khung Ảnh Sự kiện Lịch sử / Anh hùng Dân tộc chuẩn 16:9
+    // 2. Tầng Giữa: Khung Ảnh 16:9 + Overlay Góc Dưới Phải (Ngoài luồng bố cục)
     &__media {
+        position: relative;
         width: 100%;
         aspect-ratio: 16 / 9;
         border-radius: 1.6rem;
         overflow: hidden;
         border: 1px solid var(--border-color);
         background-color: var(--bg-surface);
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+
+            .bloc-card__img {
+                transform: scale(1.03);
+            }
+        }
+    }
+
+    &__media-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
     }
 
     &__img {
         @extend %imgCover;
-        transition: transform 0.4s ease;
+        transition: transform 0.45s ease;
+    }
 
-        &:hover {
-            transform: scale(1.02);
+    // Cụm Overlay neo cố định ở Góc Dưới Bên Phải (Chừa trống 100% Góc Trên Trái cho Title in trên ảnh)
+    &__overlay {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 5;
+        @extend %flexColumn;
+        align-items: flex-end;
+        gap: 0.6rem;
+        max-width: calc(100% - 2rem);
+        pointer-events: none;
+
+        @include abs.screen(sm) {
+            right: 0.8rem;
+            bottom: 0.8rem;
+            gap: 0.4rem;
+            max-width: calc(100% - 1.6rem);
+        }
+    }
+
+    // Tầng trên của Overlay: 2 nút "Sự kiện cùng ngày" & "Sự kiện quốc tế"
+    &__event-pills {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.6rem;
+        pointer-events: auto;
+    }
+
+    &__event-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 3rem;
+        padding: 0 1.1rem;
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 99.9rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        backdrop-filter: blur(8px);
+        cursor: pointer;
+        @extend %textNoWrap;
+        @extend %transInteractive;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-1px);
+
+            .bloc-card__event-dot {
+                background-color: #ffffff;
+            }
+        }
+
+        &--intl {
+            border-color: var(--secondary-color);
+
+            .bloc-card__event-dot {
+                background-color: var(--secondary-color);
+            }
+
+            &:hover,
+            &:focus-visible,
+            &.is-active {
+                background-color: var(--secondary-color);
+                border-color: var(--secondary-color);
+            }
+        }
+
+        @include abs.screen(sm) {
+            height: 2.6rem;
+            padding: 0 0.8rem;
+            font-size: 1.05rem;
+        }
+    }
+
+    &__event-dot {
+        width: 0.65rem;
+        height: 0.65rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        @extend %flexItemFixed;
+        @extend %transTheme;
+    }
+
+    // Tầng dưới của Overlay (Góc dưới phải): Hộp hiển thị "hien_thi_nhan_dip" đổi màu theo Theme
+    &__caption-btn {
+        pointer-events: auto;
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        max-width: 100%;
+        padding: 0.7rem 1.2rem 0.7rem 0.8rem;
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 1.2rem;
+        box-shadow: 0 0.6rem 1.8rem var(--shadow-color);
+        backdrop-filter: blur(10px);
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-color);
+            border-color: var(--primary-hover);
+            color: #ffffff;
+            transform: translateY(-2px);
+
+            .bloc-card__caption-badge {
+                background-color: #ffffff;
+                color: var(--primary-color);
+            }
+        }
+
+        @include abs.screen(sm) {
+            padding: 0.5rem 0.9rem 0.5rem 0.6rem;
+            border-radius: 1rem;
+            gap: 0.6rem;
+        }
+    }
+
+    &__caption-badge {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        padding: 0.25rem 0.7rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 0.7rem;
+        font-size: 1.05rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            font-size: 0.95rem;
+            padding: 0.2rem 0.55rem;
+        }
+    }
+
+    &__caption-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.3;
+        @extend %textClamp2;
+
+        @include abs.screen(sm) {
+            font-size: 1.1rem;
         }
     }
 
@@ -4095,6 +4220,7 @@ strong {
         padding: 0.8rem 1rem;
         background-color: var(--secondary-color);
         color: #ffffff;
+        @extend %transTheme;
     }
 
     &__ribbon-weekday {
@@ -4103,6 +4229,7 @@ strong {
         background-color: var(--primary-color);
         color: #ffffff;
         letter-spacing: 0.04em;
+        @extend %transTheme;
     }
 
     // 4. Tầng Đáy 3 Cột: Số Ngày Âm | Can Chi | Hành & Tiết Khí
@@ -4125,6 +4252,7 @@ strong {
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
         border-radius: 1.4rem;
+        @extend %transTheme;
     }
 
     &__lunar-label {
@@ -4139,6 +4267,7 @@ strong {
         font-weight: 800;
         line-height: 1.05;
         color: var(--primary-color);
+        @extend %transTheme;
     }
 
     &__canchi-list {
@@ -4159,6 +4288,7 @@ strong {
         font-size: 1.35rem;
         font-weight: 800;
         color: var(--primary-color);
+        @extend %transTheme;
     }
 
     &__quick-fengshui {
@@ -4172,6 +4302,651 @@ strong {
             padding-top: 0.8rem;
             border-top: 1px dashed var(--border-color);
         }
+    }
+}
+```
+
+### clock-hero.scss
+
+```scss
+// scss/components/_clock-hero.scss
+@use "../abstracts" as abs;
+
+.clock-hero {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2.8rem 3.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.8rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(md) {
+        padding: 2rem 1.8rem;
+        border-radius: 2rem;
+        gap: 1.6rem;
+    }
+
+    &__header {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+    }
+
+    &__status-pill {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4.2rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        &[data-fortune="good"] .clock-hero__status-dot {
+            background-color: #eab308;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
+        }
+
+        &[data-fortune="bad"] .clock-hero__status-dot {
+            background-color: #6b7280;
+            box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.25);
+        }
+    }
+
+    &__status-dot {
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%;
+    }
+
+    &__loc-dropdown {
+        position: relative;
+    }
+
+    &__loc-summary {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+    }
+
+    &__loc-arrow {
+        width: 1.6rem;
+        height: 1.6rem;
+        @extend %transBurgerBar;
+    }
+
+    &__loc-dropdown[open] &__loc-arrow {
+        transform: rotate(180deg);
+    }
+
+    &__loc-menu {
+        position: absolute;
+        top: calc(100% + 0.8rem);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 65;
+        min-width: 28rem;
+        padding: 0.8rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.8rem;
+        box-shadow: 0 1.2rem 3.2rem var(--shadow-color);
+        @extend %flexColumn;
+        gap: 0.4rem;
+        @extend %animDropdownFadeIn;
+    }
+
+    &__loc-option {
+        @extend %flexBetween;
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border-radius: 1rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %transTheme;
+
+        small {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        &:hover {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+
+        &.is-selected {
+            background-color: var(--primary-color);
+            color: #ffffff;
+
+            small {
+                color: rgba(255, 255, 255, 0.85);
+            }
+        }
+    }
+
+    &__format-switch {
+        @extend %inlineFlexCenter;
+        padding: 0.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+    }
+
+    &__format-btn {
+        min-width: 5.2rem;
+        height: 3.4rem;
+        padding: 0 1.4rem;
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &.is-active {
+            background-color: var(--text-color);
+            color: var(--body-bg);
+        }
+    }
+
+    &__stage {
+        @extend %flexCenter;
+        align-items: baseline;
+        gap: 1.2rem;
+        padding: 1.6rem 0;
+        text-align: center;
+    }
+
+    &__digits {
+        @extend %inlineFlexCenter;
+        align-items: baseline;
+        font-size: clamp(5.2rem, 12.5vw, 14.2rem);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__colon {
+        padding: 0 0.4rem;
+        color: var(--primary-color);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    &__ampm {
+        font-size: clamp(2rem, 3.5vw, 3.6rem);
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+    }
+
+    &__meta {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1.6rem;
+        padding-top: 1.8rem;
+        border-top: 1px solid var(--border-color);
+        font-size: 1.35rem;
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+    }
+
+    &__meta-col {
+        @extend %flexItemCenter;
+        gap: 1rem;
+
+        @include abs.screen(lg) {
+            justify-content: center;
+        }
+
+        &--center {
+            @extend %flexColumnCenterAll;
+            gap: 0.2rem;
+        }
+
+        &--right {
+            justify-content: flex-end;
+
+            @include abs.screen(lg) {
+                justify-content: center;
+            }
+        }
+    }
+
+    &__meta-label {
+        color: var(--text-muted);
+        font-weight: 600;
+    }
+
+    &__utc-badge,
+    &__weather-chip,
+    &__lunar-pill {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    &__lunar-pill {
+        color: var(--primary-color);
+    }
+
+    &__sun-line {
+        color: var(--text-color);
+        font-weight: 600;
+    }
+
+    &__date-line {
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+}
+```
+
+### clock-pillars.scss
+
+```scss
+// scss/components/_clock-pillars.scss
+@use "../abstracts" as abs;
+
+.clock-location-card {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 2rem;
+    height: 100%;
+    padding: 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    &__eyebrow {
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary-color);
+    }
+
+    &__city {
+        margin-top: 0.6rem;
+        font-size: clamp(2.6rem, 3.2vw, 3.8rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--text-color);
+    }
+
+    &__quote {
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        line-height: 1.55;
+        color: var(--text-muted);
+    }
+
+    &__stats {
+        @extend %gridCols2;
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__stat-box {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        padding: 1.2rem 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__stat-label {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+    }
+
+    &__stat-val {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+}
+
+.clock-pillars {
+    height: 100%;
+
+    &__grid {
+        @extend %gridCols2;
+        gap: 1.6rem;
+        height: 100%;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.clock-pillar-card {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 2.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    &--highlight {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+
+        .clock-pillar-card__tag,
+        .clock-pillar-card__range,
+        .clock-pillar-card__canchi,
+        .clock-pillar-card__napam {
+            color: #ffffff;
+        }
+
+        .clock-pillar-card__badge {
+            background-color: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+    }
+
+    &__head,
+    &__foot {
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__tag {
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__range {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__canchi {
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--primary-color);
+    }
+
+    &__napam {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__badge {
+        padding: 0.4rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %textNoWrap;
+    }
+}
+```
+
+### clock-zodiac.scss
+
+```scss
+// scss/components/_clock-zodiac.scss
+@use "../abstracts" as abs;
+
+.clock-zodiac-section {
+    @extend %flexColumn;
+    gap: 1.8rem;
+    padding: 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+    }
+
+    &__header {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+    }
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.4rem;
+        font-size: 1.35rem;
+        color: var(--text-muted);
+    }
+
+    &__filters {
+        @extend %flexWrapGap;
+    }
+
+    &__filter-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 3.8rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &.is-active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__dot {
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%;
+
+        &--good {
+            background-color: #eab308;
+        }
+        &--bad {
+            background-color: #374151;
+        }
+    }
+}
+
+.clock-zodiac-grid {
+    @extend %gridCols4;
+    gap: 1.4rem;
+
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.clock-zodiac-card {
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    min-height: 13.2rem;
+    padding: 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 2rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .clock-zodiac-card__img {
+            opacity: 0.45;
+            transform: scale(1.08) rotate(0deg);
+        }
+    }
+
+    &.is-current {
+        background-color: var(--text-color);
+        border-color: var(--text-color);
+        color: var(--body-bg);
+        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
+
+        .clock-zodiac-card__name,
+        .clock-zodiac-card__canchi,
+        .clock-zodiac-card__fortune {
+            color: var(--body-bg);
+        }
+
+        .clock-zodiac-card__utc {
+            color: var(--body-bg);
+            opacity: 0.78;
+        }
+
+        .clock-zodiac-card__img {
+            opacity: 0.28;
+            filter: brightness(0) invert(1);
+        }
+    }
+
+    &.is-selected:not(.is-current) {
+        border: 2px solid var(--primary-color);
+        background-color: var(--body-bg);
+    }
+
+    &.is-dimmed {
+        opacity: 0.22;
+        transform: scale(0.97);
+    }
+
+    &__top,
+    &__bottom {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        width: 100%;
+    }
+
+    &__bottom {
+        align-items: flex-end;
+        margin-top: auto;
+    }
+
+    &__name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__utc {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__canchi {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__fortune {
+        @extend %inlineFlexCenter;
+        gap: 0.4rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__img {
+        position: absolute;
+        right: 0.8rem;
+        bottom: 0.6rem;
+        width: 5.4rem;
+        height: 5.4rem;
+        object-fit: contain;
+        opacity: 0.16;
+        filter: var(--zodiac-filter);
+        transform: scale(0.88) rotate(-8deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
     }
 }
 ```
@@ -4834,6 +5609,8 @@ strong {
 
 ```scss
 @forward "./home";
+@forward "./clock";
+@forward "./year";
 ```
 
 ### home.scss
@@ -4866,23 +5643,163 @@ strong {
 }
 ```
 
-````
-
-## themes folder
-
-### index.scss
+### clock.scss
 
 ```scss
-// scss/themes/_index.scss
+// scss/pages/_clock.scss
 @use "../abstracts" as abs;
 
-// Khởi tạo 5 mệnh Ngũ hành (Mệnh Thổ làm mặc định cho :root)
-@include abs.generate-theme("earth", $is-default: true);
-@include abs.generate-theme("fire");
-@include abs.generate-theme("metal");
-@include abs.generate-theme("water");
-@include abs.generate-theme("wood");
-````
+.clock-page {
+    padding-bottom: abs.$gap-section-default;
+
+    &__sr-only {
+        @extend %srOnly;
+    }
+
+    &__wrapper {
+        @extend %flexColumn;
+        gap: 2.4rem;
+    }
+
+    &__mid-row {
+        --grid-gutter-y: 2.4rem;
+        align-items: stretch;
+    }
+}
+```
+
+### year,scss
+
+```scss
+// scss/pages/_year.scss
+@use "../abstracts" as abs;
+
+.year-page {
+    padding-bottom: abs.$gap-section-default;
+}
+
+.year-cal-app {
+    @extend %flexColumn;
+    gap: 2.4rem;
+
+    &__toolbar-card {
+        padding: 1.6rem 2.4rem;
+    }
+
+    &__toolbar {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1.6rem;
+
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+            justify-items: center;
+        }
+    }
+
+    &__side {
+        @extend %flexItemCenter;
+        gap: 1rem;
+
+        &--left {
+            justify-self: start;
+        }
+
+        &--right {
+            justify-self: end;
+        }
+
+        @include abs.screen(md) {
+            justify-self: center;
+        }
+    }
+
+    &__heading {
+        font-size: 2.6rem;
+        font-weight: 800;
+        color: var(--text-color);
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+    }
+
+    // Lưới Bento 12 Tháng: 4 cột trên PC -> 3 cột (xl) -> 2 cột (lg) -> 1 cột (sm)
+    &__grid {
+        @extend %gridCols4;
+        gap: 2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include abs.screen(lg) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__legend {
+        flex-direction: row;
+        padding: 1.6rem 2.4rem;
+    }
+}
+
+// Biến thể thu gọn của .month-cal dành cho 12 thẻ tháng trong Lịch Năm
+.month-cal--mini {
+    gap: 1.2rem;
+    padding: 1.8rem 1.4rem;
+    border-radius: 2rem;
+
+    .month-cal__mini-title {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-align: center;
+    }
+
+    .month-cal__weekdays,
+    .month-cal__grid {
+        gap: 0.4rem;
+    }
+
+    .month-cal__weekday {
+        height: 2.8rem;
+        font-size: 1.15rem;
+        border-radius: 0.6rem;
+        background-color: transparent;
+        border: none;
+    }
+
+    .month-cal__cell {
+        @extend %flexColumnCenterAll;
+        min-height: 3.8rem;
+        padding: 0.4rem 0.2rem;
+        border-radius: 0.8rem;
+        background-color: transparent;
+        border: 1px solid transparent;
+    }
+
+    .month-cal__solar {
+        font-size: 1.35rem;
+        font-weight: 600;
+    }
+
+    .month-cal__dots {
+        margin-top: 0.2rem;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+
+    .month-cal__dot {
+        width: 0.55rem;
+        height: 0.55rem;
+        box-shadow: none;
+    }
+}
+```
 
 ## themes folder
 

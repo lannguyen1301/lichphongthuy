@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đồng Hồ Phong Thủy &amp; 12 Canh Giờ Âm Lịch</title>
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="./assets/js/script.js"></script>
+</head>
+
+<body>
+    <!-- 1. Header chung của hệ thống -->
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "./templates/header.html");
+    </script>
+
+    <!-- 2. Sidebar điều hướng -->
+    <div id="sidebar-root"></div>
+    <script>
+        load("#sidebar-root", "./templates/sidebar.html");
+    </script>
+
+    <!-- 3. Main: Trang Giờ Bento Grid (TimeSpot + Planet Clock + Kabala Clock) -->
+    <main id="main" class="main clock-page">
+        <div class="container">
+            <!-- đoạn này nằm trong templates/clock-calendar.html = -->
+            <section class="clock-page__wrapper" id="clock-bento-app"
+                aria-label="Không gian Đồng hồ Phong thủy thời gian thực" data-active-format="24" data-active-city="hcm"
+                data-timezone="Asia/Ho_Chi_Minh">
+                <!-- Vùng thông báo ẩn dành riêng cho Screen Reader (Chỉ đọc khi đổi canh giờ hoặc đổi cài đặt) -->
+                <div id="clock-sr-announcer" class="clock-page__sr-only" aria-live="polite" aria-atomic="true"></div>
+
+                <!-- ==================== TẦNG 1: HERO CLOCK BENTO (LẤY CẢM HỨNG TỪ TIMESPOT) ==================== -->
+                <section class="clock-hero" aria-label="Đồng hồ thời gian thực và Khu vực">
+                    <!-- Header của Section: Trạng thái Giờ Âm lịch | Select Khu Vực | Nút 12h/24h -->
+                    <header class="clock-hero__header">
+                        <div class="clock-hero__status-pill" id="clock-branch-pill" data-fortune="good"
+                            title="Trạng thái Canh giờ Âm lịch hiện tại">
+                            <span class="clock-hero__status-dot" aria-hidden="true"></span>
+                            <span id="clock-branch-status-text">Đang tính canh giờ...</span>
+                        </div>
+
+                        <!-- Bộ chọn Khu vực / Tỉnh thành (Vũ trang data-* cho JS & API Thời tiết) -->
+                        <details class="clock-hero__loc-dropdown js-cal-dropdown" id="clock-loc-dropdown">
+                            <summary class="clock-hero__loc-summary" aria-label="Chọn khu vực xem giờ và thời tiết"
+                                title="Đổi tỉnh thành hoặc múi giờ quốc tế">
+                                <span aria-hidden="true">📍</span>
+                                <span class="clock-hero__loc-summary-text" id="clock-loc-label">TP. Hồ Chí Minh, Việt
+                                    Nam</span>
+                                <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true"
+                                    class="clock-hero__loc-arrow icon" />
+                            </summary>
+
+                            <ul class="clock-hero__loc-menu" role="listbox" aria-label="Danh sách khu vực và múi giờ">
+                                <li>
+                                    <button type="button" role="option" aria-selected="true"
+                                        class="clock-hero__loc-option is-selected" data-city-id="hcm"
+                                        data-city-name="TP. Hồ Chí Minh" data-country="Việt Nam" data-lat="10.8231"
+                                        data-lon="106.6297" data-tz="Asia/Ho_Chi_Minh" data-utc="UTC+7"
+                                        title="Múi giờ Việt Nam (UTC+7)">
+                                        <span>TP. Hồ Chí Minh, Việt Nam</span>
+                                        <small>UTC+7</small>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" role="option" aria-selected="false"
+                                        class="clock-hero__loc-option" data-city-id="hn" data-city-name="Hà Nội"
+                                        data-country="Việt Nam" data-lat="21.0285" data-lon="105.8542"
+                                        data-tz="Asia/Ho_Chi_Minh" data-utc="UTC+7" title="Thủ đô Hà Nội (UTC+7)">
+                                        <span>Hà Nội, Việt Nam</span>
+                                        <small>UTC+7</small>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" role="option" aria-selected="false"
+                                        class="clock-hero__loc-option" data-city-id="dn" data-city-name="Đà Nẵng"
+                                        data-country="Việt Nam" data-lat="16.0544" data-lon="108.2022"
+                                        data-tz="Asia/Ho_Chi_Minh" data-utc="UTC+7" title="TP. Đà Nẵng (UTC+7)">
+                                        <span>Đà Nẵng, Việt Nam</span>
+                                        <small>UTC+7</small>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" role="option" aria-selected="false"
+                                        class="clock-hero__loc-option" data-city-id="hue"
+                                        data-city-name="Thừa Thiên Huế" data-country="Việt Nam" data-lat="16.4637"
+                                        data-lon="107.5909" data-tz="Asia/Ho_Chi_Minh" data-utc="UTC+7"
+                                        title="Cố đô Huế (UTC+7)">
+                                        <span>Thừa Thiên Huế, Việt Nam</span>
+                                        <small>UTC+7</small>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" role="option" aria-selected="false"
+                                        class="clock-hero__loc-option" data-city-id="ct" data-city-name="Cần Thơ"
+                                        data-country="Việt Nam" data-lat="10.0452" data-lon="105.7469"
+                                        data-tz="Asia/Ho_Chi_Minh" data-utc="UTC+7" title="TP. Cần Thơ (UTC+7)">
+                                        <span>Cần Thơ, Việt Nam</span>
+                                        <small>UTC+7</small>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" role="option" aria-selected="false"
+                                        class="clock-hero__loc-option" data-city-id="tyo" data-city-name="Tokyo"
+                                        data-country="Nhật Bản" data-lat="35.6762" data-lon="139.6503"
+                                        data-tz="Asia/Tokyo" data-utc="UTC+9" title="Tokyo, Nhật Bản (UTC+9)">
+                                        <span>Tokyo, Nhật Bản</span>
+                                        <small>UTC+9</small>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" role="option" aria-selected="false"
+                                        class="clock-hero__loc-option" data-city-id="lon" data-city-name="London"
+                                        data-country="Vương quốc Anh" data-lat="51.5074" data-lon="-0.1278"
+                                        data-tz="Europe/London" data-utc="UTC+0" title="London, Vương quốc Anh (UTC+0)">
+                                        <span>London, Vương quốc Anh</span>
+                                        <small>UTC+0</small>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" role="option" aria-selected="false"
+                                        class="clock-hero__loc-option" data-city-id="nyc" data-city-name="New York"
+                                        data-country="Hoa Kỳ" data-lat="40.7128" data-lon="-74.0060"
+                                        data-tz="America/New_York" data-utc="UTC-5" title="New York, Hoa Kỳ (UTC-5)">
+                                        <span>New York, Hoa Kỳ</span>
+                                        <small>UTC-5</small>
+                                    </button>
+                                </li>
+                            </ul>
+                        </details>
+
+                        <!-- Nút chuyển đổi 12h / 24h giống góc phải TimeSpot -->
+                        <div class="clock-hero__format-switch" role="group"
+                            aria-label="Định dạng hiển thị đồng hồ 12 giờ hoặc 24 giờ">
+                            <button type="button" class="clock-hero__format-btn" data-time-format="12"
+                                aria-pressed="false" title="Chuyển sang định dạng 12 giờ (AM/PM)">
+                                12h
+                            </button>
+                            <button type="button" class="clock-hero__format-btn is-active" data-time-format="24"
+                                aria-pressed="true" title="Chuyển sang định dạng 24 giờ">
+                                24h
+                            </button>
+                        </div>
+                    </header>
+
+                    <!-- Màn hình Đồng hồ số khổng lồ (role="timer" + aria-live="off" chống đọc lặp mỗi giây) -->
+                    <div class="clock-hero__stage">
+                        <time id="hero-clock-time" class="clock-hero__digits" datetime="08:15:40" role="timer"
+                            aria-live="off" aria-atomic="true" title="Giờ thực tế theo múi giờ khu vực đang chọn">
+                            <span class="clock-hero__digit-group" data-clock-part="hours">08</span>
+                            <span class="clock-hero__colon" aria-hidden="true">:</span>
+                            <span class="clock-hero__digit-group" data-clock-part="minutes">15</span>
+                            <span class="clock-hero__colon" aria-hidden="true">:</span>
+                            <span class="clock-hero__digit-group clock-hero__digit-group--sec"
+                                data-clock-part="seconds">40</span>
+                        </time>
+                        <!-- Hậu tố AM/PM: Dùng thuộc tính hidden chuẩn HTML5 khi đang ở chế độ 24h -->
+                        <span class="clock-hero__ampm" id="hero-clock-ampm" hidden>AM</span>
+                    </div>
+
+                    <!-- Thanh Meta 3 góc dưới chân đồng hồ (Giống bố cục TimeSpot) -->
+                    <footer class="clock-hero__meta">
+                        <div class="clock-hero__meta-col clock-hero__meta-col--left">
+                            <span class="clock-hero__meta-label">Hiện tại</span>
+                            <abbr title="Giờ Phối hợp Quốc tế (Coordinated Universal Time)"
+                                class="clock-hero__utc-badge" id="clock-meta-utc">UTC+7</abbr>
+                            <span class="clock-hero__weather-chip" id="clock-meta-weather"
+                                title="Nhiệt độ và trạng thái thời tiết thực tế tại khu vực">
+                                <span aria-hidden="true" id="clock-weather-icon">☀️</span>
+                                <strong id="clock-weather-temp">30°C</strong>
+                            </span>
+                        </div>
+
+                        <div class="clock-hero__meta-col clock-hero__meta-col--center">
+                            <p class="clock-hero__sun-line"
+                                title="Giờ Mặt trời mọc, Mặt trời lặn và tổng thời lượng ban ngày">
+                                <span>Mặt trời</span>
+                                <span aria-hidden="true">☀️</span> :
+                                <strong id="clock-sun- times">05:45 - 17:32 (11h 47m)</strong>
+                            </p>
+                            <p class="clock-hero__date-line">
+                                <time datetime="2026-11-05" id="clock-meta-solar-date">Thứ Năm, 05 tháng 11, 2026</time>
+                            </p>
+                        </div>
+
+                        <div class="clock-hero__meta-col clock-hero__meta-col--right">
+                            <span class="clock-hero__lunar-pill" id="clock-meta-lunar-date">Âm lịch: 27/09 Bính
+                                Ngọ</span>
+                        </div>
+                    </footer>
+                </section>
+
+                <!-- ==================== TẦNG 2: ĐỊA DANH & BÁT TỰ TỨ TRỤ (PLANET CLOCK + KABALA) ==================== -->
+                <div class="row clock-page__mid-row">
+                    <!-- Cột Trái (5 cột): Địa danh lớn + Luận giải giờ hiện tại (Microdata Schema.org Place) -->
+                    <div class="col-5 col-lg-12">
+                        <article class="clock-location-card" aria-label="Thông tin địa danh và luận giải giờ hiện tại"
+                            itemscope itemtype="https://schema.org/Place">
+                            <div itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates" hidden>
+                                <meta itemprop="latitude" id="schema-lat" content="10.8231" />
+                                <meta itemprop="longitude" id="schema-lon" content="106.6297" />
+                            </div>
+
+                            <div class="clock-location-card__top">
+                                <span class="clock-location-card__eyebrow">Địa danh &amp; Thời vận hiện tại</span>
+                                <h1 class="clock-location-card__city" itemprop="name" id="clock-city-heading">
+                                    TP. Hồ Chí Minh,<br />Việt Nam
+                                </h1>
+                                <p class="clock-location-card__quote" id="clock-city-advice">
+                                    "Thuận thiên hành sự, chọn đúng thời cơ. Mọi việc khởi đầu vào giờ lành đều
+                                    hanh thông."
+                                </p>
+                            </div>
+
+                            <div class="clock-location-card__stats">
+                                <div class="clock-location-card__stat-box">
+                                    <span class="clock-location-card__stat-label">Canh giờ đang xem</span>
+                                    <strong class="clock-location-card__stat-val" id="detail-selected-hour-name">Giờ
+                                        Thân (15:00 - 17:00)</strong>
+                                </div>
+                                <div class="clock-location-card__stat-box">
+                                    <span class="clock-location-card__stat-label">Nạp âm giờ</span>
+                                    <strong class="clock-location-card__stat-val" id="detail-selected-hour-napam">Tuyền
+                                        Trung Thủy</strong>
+                                </div>
+                                <div class="clock-location-card__stat-box">
+                                    <span class="clock-location-card__stat-label">Hướng Tài Thần / Hỷ Thần</span>
+                                    <strong class="clock-location-card__stat-val" id="detail-selected-directions">Đông
+                                        Nam • Đông Bắc</strong>
+                                </div>
+                                <div class="clock-location-card__stat-box">
+                                    <span class="clock-location-card__stat-label">Tiết khí hiện tại</span>
+                                    <strong class="clock-location-card__stat-val" id="detail-selected-solarterm">Sương
+                                        Giáng</strong>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Cột Phải (7 cột): 4 Ô Bento Tứ Trụ (Giờ - Ngày - Tháng - Năm Can Chi & Nạp Âm) -->
+                    <div class="col-7 col-lg-12">
+                        <section class="clock-pillars" aria-label="Bát tự Tứ trụ thời gian thực">
+                            <div class="clock-pillars__grid">
+                                <!-- Trụ Giờ (Nổi bật theo cảm hứng ô màu Cam/Vàng của Planet Clock) -->
+                                <article class="clock-pillar-card clock-pillar-card--highlight" data-pillar="hour"
+                                    title="Trụ Giờ trong Bát Tự (Thay đổi mỗi 2 tiếng)">
+                                    <header class="clock-pillar-card__head">
+                                        <span class="clock-pillar-card__tag">Trụ Giờ</span>
+                                        <span class="clock-pillar-card__range" id="pillar-hour-range">15:00 -
+                                            17:00</span>
+                                    </header>
+                                    <strong class="clock-pillar-card__canchi" id="pillar-hour-canchi">Giáp Thân</strong>
+                                    <footer class="clock-pillar-card__foot">
+                                        <span class="clock-pillar-card__napam" id="pillar-hour-napam">Hành: Tuyền Trung
+                                            Thủy</span>
+                                        <span class="clock-pillar-card__badge" id="pillar-hour-fortune">Hoàng Đạo</span>
+                                    </footer>
+                                </article>
+
+                                <!-- Trụ Ngày -->
+                                <article class="clock-pillar-card" data-pillar="day" title="Trụ Ngày trong Bát Tự">
+                                    <header class="clock-pillar-card__head">
+                                        <span class="clock-pillar-card__tag">Trụ Ngày</span>
+                                        <span class="clock-pillar-card__range" id="pillar-day-truc">Trực: Thành</span>
+                                    </header>
+                                    <strong class="clock-pillar-card__canchi" id="pillar-day-canchi">Quý Mùi</strong>
+                                    <footer class="clock-pillar-card__foot">
+                                        <span class="clock-pillar-card__napam" id="pillar-day-napam">Hành: Dương Liễu
+                                            Mộc</span>
+                                        <span class="clock-pillar-card__badge" id="pillar-day-lunar">Ngày 27/9 ÂL</span>
+                                    </footer>
+                                </article>
+
+                                <!-- Trụ Tháng -->
+                                <article class="clock-pillar-card" data-pillar="month" title="Trụ Tháng trong Bát Tự">
+                                    <header class="clock-pillar-card__head">
+                                        <span class="clock-pillar-card__tag">Trụ Tháng</span>
+                                        <span class="clock-pillar-card__range" id="pillar-month-num">Tháng 9 ÂL
+                                            (Đủ)</span>
+                                    </header>
+                                    <strong class="clock-pillar-card__canchi" id="pillar-month-canchi">Mậu Tuất</strong>
+                                    <footer class="clock-pillar-card__foot">
+                                        <span class="clock-pillar-card__napam" id="pillar-month-napam">Hành: Bình Địa
+                                            Mộc</span>
+                                        <span class="clock-pillar-card__badge">Mùa Thu</span>
+                                    </footer>
+                                </article>
+
+                                <!-- Trụ Năm -->
+                                <article class="clock-pillar-card" data-pillar="year" title="Trụ Năm trong Bát Tự">
+                                    <header class="clock-pillar-card__head">
+                                        <span class="clock-pillar-card__tag">Trụ Năm</span>
+                                        <span class="clock-pillar-card__range" id="pillar-year-solar">Năm 2026</span>
+                                    </header>
+                                    <strong class="clock-pillar-card__canchi" id="pillar-year-canchi">Bính Ngọ</strong>
+                                    <footer class="clock-pillar-card__foot">
+                                        <span class="clock-pillar-card__napam" id="pillar-year-napam">Hành: Thiên Hà
+                                            Thủy</span>
+                                        <span class="clock-pillar-card__badge">Con Ngựa</span>
+                                    </footer>
+                                </article>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- ==================== TẦNG 3: DẢI 12 THẺ BENTO CANH GIỜ ÂM LỊCH (TÝ -> HỢI) ==================== -->
+                <section class="clock-zodiac-section" aria-label="Danh sách 12 Canh giờ Âm lịch trong ngày">
+                    <header class="clock-zodiac-section__header">
+                        <div>
+                            <h2 class="clock-zodiac-section__title">12 Canh Giờ Trong Ngày (Tý &#8594; Hợi)</h2>
+                            <p class="clock-zodiac-section__sub">
+                                Canh giờ hiện tại được tô đậm tự động. Dùng phím mũi tên Trái/Phải hoặc bấm vào từng
+                                ô để xem chi tiết.
+                            </p>
+                        </div>
+
+                        <!-- Bộ lọc nhanh Hoàng Đạo / Hắc Đạo dùng data-hour-filter và aria-pressed -->
+                        <div class="clock-zodiac-section__filters" role="group"
+                            aria-label="Lọc 12 canh giờ theo Hoàng Đạo hoặc Hắc Đạo">
+                            <button type="button" class="clock-zodiac-section__filter-btn is-active"
+                                data-hour-filter="all" aria-pressed="true" title="Hiển thị toàn bộ 12 canh giờ">
+                                Tất cả (12)
+                            </button>
+                            <button type="button" class="clock-zodiac-section__filter-btn" data-hour-filter="good"
+                                aria-pressed="false" title="Chỉ làm sáng 6 giờ Hoàng Đạo (Tốt)">
+                                <span class="clock-zodiac-section__dot clock-zodiac-section__dot--good"
+                                    aria-hidden="true"></span>
+                                Hoàng Đạo (6)
+                            </button>
+                            <button type="button" class="clock-zodiac-section__filter-btn" data-hour-filter="bad"
+                                aria-pressed="false" title="Chỉ làm sáng 6 giờ Hắc Đạo (Xấu)">
+                                <span class="clock-zodiac-section__dot clock-zodiac-section__dot--bad"
+                                    aria-hidden="true"></span>
+                                Hắc Đạo (6)
+                            </button>
+                        </div>
+                    </header>
+
+                    <!-- Lưới 12 Canh Giờ (Hỗ trợ Roving Tabindex: chỉ 1 nút có tabindex="0") -->
+                    <div class="clock-zodiac-grid" id="clock-zodiac-grid" role="group"
+                        aria-label="Lưới 12 Canh Giờ Âm Lịch">
+                        <!-- JS sẽ tự động render & cập nhật 12 thẻ Bento Canh Giờ tại đây (kèm fallback tĩnh cho Giờ Tý) -->
+                        <button type="button" class="clock-zodiac-card is-current" tabindex="0" aria-current="time"
+                            data-branch-index="0" data-branch="ty" data-fortune="good"
+                            title="Giờ Tý (23:00 - 01:00) - Hoàng Đạo">
+                            <div class="clock-zodiac-card__top">
+                                <span class="clock-zodiac-card__name">Giờ Tý</span>
+                                <span class="clock-zodiac-card__utc">23:00 - 01:00</span>
+                            </div>
+                            <div class="clock-zodiac-card__bottom">
+                                <strong class="clock-zodiac-card__canchi">Nhâm Tý</strong>
+                                <span class="clock-zodiac-card__fortune">
+                                    <span aria-hidden="true">☀️</span> Hoàng Đạo
+                                </span>
+                            </div>
+                            <img src="./assets/icons/zodiac/mouse.svg" alt="" aria-hidden="true"
+                                class="clock-zodiac-card__img" />
+                        </button>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <!-- 4. Footer chung của hệ thống -->
+    <footer id="footer" class="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script>
+
+    <!-- 5. Thư viện lunar-javascript (CDN) + Script điều khiển Header & Trang Giờ -->
+    <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.min.js"></script>
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/calendar.js"></script>
+    <script src="./assets/js/clock.js"></script>
+</body>
+
+</html>

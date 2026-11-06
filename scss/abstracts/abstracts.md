@@ -1367,106 +1367,7 @@ $zodiac-active-filters: (
 
 ```scss
 // scss/abstracts/_animations.scss
-// 1. Hiệu ứng Fade-in (Xuất hiện nhẹ nhàng)
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-// 2. Toàn bộ nội dung chuẩn của scss/abstracts/_animations.scss:
-
-%transTheme {
-    transition: var(--theme-transition);
-}
-
-%transInteractive {
-    transition:
-        var(--theme-transition),
-        transform 0.2s ease;
-}
-
-%transHeaderScroll {
-    transition:
-        var(--theme-transition),
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
-}
-
-%transSidebarDrawer {
-    transition:
-        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        var(--theme-transition);
-}
-
-%transTooltip {
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        visibility 0.2s ease;
-}
-
-%transBurgerBar {
-    transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
-}
-
-%transBackdrop {
-    transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease;
-}
-
-%animDropdownFadeIn {
-    animation: fadeIn 0.2s ease-out forwards;
-}
-
-%animFloat {
-    animation: float 3s ease-in-out infinite;
-}
-
-%animPulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-%animShake {
-    animation: shake 0.35s ease-in-out;
-}
-
-// 3. Hiệu ứng Pulse (Nhịp đập - Dùng cho hành Hỏa)
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-// Class sử dụng
-.animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-float {
-    animation: float 3s ease-in-out infinite;
-}
-
-.animate-pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-// scss/abstracts/_animations.scss
-// Tuân thủ đúng nguyên tắc main.scss: Tầng Abstracts không tự sinh ra CSS nếu không được @extend/@include
+// Tuân thủ đúng nguyên tắc main.scss: Tầng Abstracts chỉ chứa Placeholders, không tự sinh ra CSS nếu không được @extend
 
 // ==========================================
 // 1. TRANSITION PLACEHOLDERS (Chuyển tiếp trạng thái khi tương tác)
@@ -1477,18 +1378,19 @@ $zodiac-active-filters: (
     transition: var(--theme-transition);
 }
 
-// Chuyển màu Theme kết hợp nhấc nhẹ nút khi Hover (Dùng cho Icon Home, Button Login)
+// Chuyển màu Theme kết hợp nhấc nhẹ nút khi Hover (Dùng cho Icon, Button, Ô lịch)
 %transInteractive {
     transition:
         var(--theme-transition),
         transform 0.2s ease;
 }
 
-// Hiệu ứng đổ bóng và thu gọn chiều cao cho Sticky Header khi cuộn trang
+// Hiệu ứng đổ bóng, đổi viền và thu gọn chiều cao cho Sticky Header khi cuộn trang
 %transHeaderScroll {
     transition:
         var(--theme-transition),
         box-shadow 0.25s ease,
+        border-color 0.25s ease,
         height 0.25s ease;
 }
 
@@ -1507,7 +1409,7 @@ $zodiac-active-filters: (
         visibility 0.2s ease;
 }
 
-// Hiệu ứng xoay 3 thanh ngang của nút Hamburger thành dấu X
+// Hiệu ứng xoay 3 thanh ngang của nút Hamburger thành dấu X & mũi tên Dropdown
 %transBurgerBar {
     transition:
         transform 0.25s ease,
@@ -1525,7 +1427,7 @@ $zodiac-active-filters: (
 // 2. ANIMATION PLACEHOLDERS (Chạy theo @keyframes từ base/_keyframes.scss)
 // ==========================================
 
-// Hiệu ứng xuất hiện mượt cho Dropdown Ngôn ngữ & Theme
+// Hiệu ứng xuất hiện mượt cho Dropdown Ngôn ngữ, Theme & Tháng/Năm
 %animDropdownFadeIn {
     animation: fadeIn 0.2s ease-out forwards;
 }

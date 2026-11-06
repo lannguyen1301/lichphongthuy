@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch phong thuỷ</title>
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="./assets/js/script.js"></script>
+</head>
+
+<body>
+    <!-- 1. Header -->
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "./templates/header.html");
+    </script>
+
+    <!-- 2. Sidebar ngoài luồng -->
+    <div id="sidebar-root"></div>
+    <script>
+        load("#sidebar-root", "./templates/sidebar.html");
+    </script>
+
+    <!-- 3. Main Bento Grid -->
+    <main id="main" class="main home-page">
+        <div class="container">
+            <div class="row home-page__row">
+
+                <!-- ==================== CỘT TRÁI (5 CỘT PC) ==================== -->
+                <div class="col-5 col-lg-12 home-page__left">
+
+                    <!-- COMPONENT 1: TỜ LỊCH BLOC 16:9 -->
+                    <article class="bloc-card" aria-label="Tờ lịch chi tiết trong ngày">
+                        <div class="bloc-card__top">
+                            <div class="bloc-card__month-box">
+                                <span class="bloc-card__year-badge" id="detail-solar-year">2026</span>
+                                <strong class="bloc-card__month-vn" id="detail-solar-month-vn">THÁNG MƯỜI MỘT</strong>
+                                <span class="bloc-card__month-en" id="detail-solar-month-en">November</span>
+                                <span class="bloc-card__day-status" id="detail-day-status">Ngày bình thường</span>
+                            </div>
+
+                            <div class="bloc-card__date-hero">
+                                <button type="button" class="bloc-card__share-btn" aria-label="Chia sẻ ngày này">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="18" cy="5" r="3"></circle>
+                                        <circle cx="6" cy="12" r="3"></circle>
+                                        <circle cx="18" cy="19" r="3"></circle>
+                                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                                    </svg>
+                                </button>
+                                <span class="bloc-card__solar-num" id="detail-solar-day">3</span>
+                            </div>
+                        </div>
+                        <figure class="bloc-card__media" id="bloc-media-box">
+                            <a href="./detail.html?type=figures&folder=nguyen-thi-minh-khai&slug=nguyen-thi-minh-khai-01-11-1910-28-08-1941"
+                                class="bloc-card__media-link" id="detail-history-link"
+                                title="Xem chi tiết sự kiện và nhân vật lịch sử">
+                                <img src="./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg"
+                                    alt="Sự kiện lịch sử và anh hùng dân tộc trong ngày" class="bloc-card__img"
+                                    id="detail-history-img" />
+                            </a>
+
+                            <!-- Cụm Overlay Góc Dưới Phải (Ngoài luồng bố cục - Tránh hoàn toàn Title góc trên trái của ảnh) -->
+                            <figcaption class="bloc-card__overlay">
+                                <!-- Tầng trên: 2 nút chờ (Mặc định OFF/Ẩn bằng hidden, tự động hiện khi JSON có dữ liệu) -->
+                                <div class="bloc-card__event-pills" id="detail-event-pills">
+                                    <button type="button" class="bloc-card__event-btn" id="btn-same-day-events"
+                                        title="Xem sự kiện lịch sử khác trong cùng ngày" hidden>
+                                        <span class="bloc-card__event-dot" aria-hidden="true"></span>
+                                        <span id="label-same-day-events">Sự kiện cùng ngày (2)</span>
+                                    </button>
+
+                                    <button type="button" class="bloc-card__event-btn bloc-card__event-btn--intl"
+                                        id="btn-intl-events" title="Xem sự kiện quốc tế diễn ra cùng ngày" hidden>
+                                        <span class="bloc-card__event-dot" aria-hidden="true"></span>
+                                        <span id="label-intl-events">Sự kiện quốc tế (1)</span>
+                                    </button>
+                                </div>
+
+                                <!-- Tầng dưới (Góc dưới phải): Nút hiển thị "hien_thi_nhan_dip" đổi màu theo Theme -->
+                                <a href="./detail.html?type=figures&folder=nguyen-thi-minh-khai&slug=nguyen-thi-minh-khai-01-11-1910-28-08-1941"
+                                    class="bloc-card__caption-btn" id="detail-history-caption"
+                                    title="Bấm để xem chi tiết tiểu sử và sự kiện">
+                                    <span class="bloc-card__caption-badge" aria-hidden="true">Chi tiết</span>
+                                    <span class="bloc-card__caption-text" id="detail-history-caption-text">
+                                        Kỷ niệm ngày sinh Nguyễn Thị Minh Khai (01/11/1910)
+                                    </span>
+                                </a>
+                            </figcaption>
+                        </figure>
+
+                        <div class="bloc-card__ribbon">
+                            <span class="bloc-card__ribbon-year" id="detail-lunar-year">NĂM BÍNH NGỌ</span>
+                            <span class="bloc-card__ribbon-weekday" id="detail-weekday">THỨ BA • TUESDAY</span>
+                        </div>
+
+                        <div class="bloc-card__bottom">
+                            <div class="bloc-card__lunar-num-box">
+                                <span class="bloc-card__lunar-label">Âm lịch</span>
+                                <strong class="bloc-card__lunar-num" id="detail-lunar-day">25</strong>
+                            </div>
+
+                            <div class="bloc-card__canchi-list">
+                                <strong class="bloc-card__lunar-month" id="detail-lunar-month">THÁNG CHÍN (Đ)</strong>
+                                <span class="bloc-card__canchi-item" id="detail-canchi-month">Tháng Mậu Tuất</span>
+                                <span class="bloc-card__canchi-item" id="detail-canchi-day">Ngày Tân Tỵ</span>
+                                <span class="bloc-card__canchi-item" id="detail-canchi-hour">Giờ Nhâm Thìn</span>
+                            </div>
+
+                            <div class="bloc-card__quick-fengshui">
+                                <span class="bloc-card__meta-line">
+                                    <b>Hành:</b> <span id="detail-element">Bạch Lạp Kim</span>
+                                </span>
+                                <span class="bloc-card__meta-line">
+                                    <b>Tiết khí:</b> <span id="detail-solar-term">Sương Giáng</span>
+                                </span>
+                                <span class="bloc-card__meta-line">
+                                    <b>Trực:</b> <span id="detail-truc-name">Nguy</span>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- COMPONENT 2: CÁC KHỐI BENTO PHONG THỦY -->
+                    <section class="fengshui-stack" aria-label="Chi tiết Phong thủy trong ngày">
+                        <div class="fengshui-hours">
+                            <div class="fengshui-hours__box fengshui-hours__box--good">
+                                <h2 class="fengshui-hours__title">
+                                    <span class="fengshui-hours__dot fengshui-hours__dot--good"></span>
+                                    Giờ Hoàng Đạo (Tốt)
+                                </h2>
+                                <p class="fengshui-hours__list" id="detail-good-hours">
+                                    Sửu (1-3), Mão (5-7), Tỵ (9-11), Thân (15-17), Tuất (19-21), Hợi (21-23)
+                                </p>
+                            </div>
+
+                            <div class="fengshui-hours__box fengshui-hours__box--bad">
+                                <h2 class="fengshui-hours__title">
+                                    <span class="fengshui-hours__dot fengshui-hours__dot--bad"></span>
+                                    Giờ Hắc Đạo (Xấu)
+                                </h2>
+                                <p class="fengshui-hours__list" id="detail-bad-hours">
+                                    Tý (23-1), Dần (3-5), Thìn (7-9), Ngọ (11-13), Mùi (13-15), Dậu (17-19)
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="fengshui-card">
+                            <div class="fengshui-card__group">
+                                <div class="fengshui-card__head">
+                                    <span class="fengshui-card__label">Trực:</span>
+                                    <strong class="fengshui-card__val" id="detail-truc-title">Nguy</strong>
+                                </div>
+                                <p class="fengshui-card__desc" id="detail-truc-desc">
+                                    Xấu cho mọi việc. Nên cẩn thận, đề phòng nguy hiểm, tai nạn.
+                                </p>
+                            </div>
+
+                            <div class="fengshui-card__group">
+                                <div class="fengshui-card__head">
+                                    <span class="fengshui-card__label">Nhị Thập Bát Tú:</span>
+                                    <strong class="fengshui-card__val" id="detail-star-title">Sao Chủy (Hỏa)</strong>
+                                    <span class="fengshui-card__badge fengshui-card__badge--bad"
+                                        id="detail-star-badge">Hung</span>
+                                </div>
+                                <p class="fengshui-card__desc" id="detail-star-desc">
+                                    Xây dựng, chôn cất, đi xa, cưới gả đều không tốt.
+                                </p>
+                            </div>
+
+                            <div class="fengshui-card__ages">
+                                <div class="fengshui-card__age-chip fengshui-card__age-chip--good">
+                                    <span>Tuổi hợp:</span>
+                                    <strong id="detail-age-good">Sửu, Dậu, Thân</strong>
+                                </div>
+                                <div class="fengshui-card__age-chip fengshui-card__age-chip--bad">
+                                    <span>Tuổi xung:</span>
+                                    <strong id="detail-age-bad">Hợi, Dần, Thân</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fengshui-card">
+                            <h2 class="fengshui-card__section-title">Việc nên làm / Không nên làm</h2>
+
+                            <div class="fengshui-actions">
+                                <div class="fengshui-actions__box fengshui-actions__box--do">
+                                    <div class="fengshui-actions__header">
+                                        <span class="fengshui-actions__badge">Nên làm</span>
+                                        <span class="fengshui-actions__icon" aria-hidden="true">&#10003;</span>
+                                    </div>
+                                    <ul class="fengshui-actions__list" id="detail-do-list">
+                                        <li class="fengshui-actions__chip">Cưới gả</li>
+                                        <li class="fengshui-actions__chip">Di chuyển</li>
+                                        <li class="fengshui-actions__chip">Nhập trạch</li>
+                                        <li class="fengshui-actions__chip">An táng</li>
+                                    </ul>
+                                </div>
+
+                                <div class="fengshui-actions__box fengshui-actions__box--dont">
+                                    <div class="fengshui-actions__header">
+                                        <span class="fengshui-actions__badge">Không nên</span>
+                                        <span class="fengshui-actions__icon" aria-hidden="true">&#10005;</span>
+                                    </div>
+                                    <ul class="fengshui-actions__list" id="detail-dont-list">
+                                        <li class="fengshui-actions__chip">Động thổ</li>
+                                        <li class="fengshui-actions__chip">Sửa chữa</li>
+                                        <li class="fengshui-actions__chip">Khai trương</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <blockquote class="fengshui-quote" id="detail-quote-box">
+                                <p class="fengshui-quote__text" id="detail-quote-text">
+                                    "Vững dạ bền gan hỡi đồng chí. Máu hồng tưới xót nẻo đường quê."
+                                </p>
+                                <cite class="fengshui-quote__author" id="detail-quote-author">- Nguyễn Thị Minh Khai
+                                    -</cite>
+                            </blockquote>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- CỘT PHẢI: BẢNG LỊCH THÁNG BENTO (ĐỦ 42 NGÀY - PHƯƠNG ÁN 1) -->
+                <div class="col-7 col-lg-12 home-page__right">
+                    <section class="month-cal" id="month-cal-section" aria-label="Lịch tháng">
+
+                        <!-- 1. Thanh điều khiển Tháng / Năm -->
+                        <header class="month-cal__toolbar">
+                            <button type="button" class="month-cal__nav-btn" id="cal-prev-month"
+                                aria-label="Tháng trước">
+                                &#10094;
+                            </button>
+
+                            <div class="month-cal__controls">
+                                <button type="button" class="btn month-cal__today-btn" id="cal-today-btn">
+                                    Hôm nay
+                                </button>
+
+                                <!-- Custom Dropdown Chọn Tháng (Lưới Bento 3x4) -->
+                                <details class="month-cal__dropdown js-cal-dropdown" id="cal-month-dropdown">
+                                    <summary class="month-cal__summary" aria-label="Chọn tháng, hiện tại là Tháng 11">
+                                        <span class="month-cal__summary-text" id="cal-month-label">Tháng 11</span>
+                                        <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true"
+                                            class="month-cal__arrow icon" />
+                                    </summary>
+                                    <ul class="month-cal__dropdown-menu month-cal__dropdown-menu--grid" role="listbox"
+                                        aria-label="Danh sách 12 tháng">
+                                        <li><button type="button" data-month="1" class="month-cal__option">Tháng
+                                                1</button></li>
+                                        <li><button type="button" data-month="2" class="month-cal__option">Tháng
+                                                2</button></li>
+                                        <li><button type="button" data-month="3" class="month-cal__option">Tháng
+                                                3</button></li>
+                                        <li><button type="button" data-month="4" class="month-cal__option">Tháng
+                                                4</button></li>
+                                        <li><button type="button" data-month="5" class="month-cal__option">Tháng
+                                                5</button></li>
+                                        <li><button type="button" data-month="6" class="month-cal__option">Tháng
+                                                6</button></li>
+                                        <li><button type="button" data-month="7" class="month-cal__option">Tháng
+                                                7</button></li>
+                                        <li><button type="button" data-month="8" class="month-cal__option">Tháng
+                                                8</button></li>
+                                        <li><button type="button" data-month="9" class="month-cal__option">Tháng
+                                                9</button></li>
+                                        <li><button type="button" data-month="10" class="month-cal__option">Tháng
+                                                10</button></li>
+                                        <li><button type="button" data-month="11" class="month-cal__option is-selected"
+                                                aria-selected="true">Tháng 11</button></li>
+                                        <li><button type="button" data-month="12" class="month-cal__option">Tháng
+                                                12</button></li>
+                                    </ul>
+                                </details>
+
+                                <!-- Custom Dropdown Chọn Năm -->
+                                <details class="month-cal__dropdown js-cal-dropdown" id="cal-year-dropdown">
+                                    <summary class="month-cal__summary" aria-label="Chọn năm, hiện tại là 2026">
+                                        <span class="month-cal__summary-text" id="cal-year-label">2026</span>
+                                        <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true"
+                                            class="month-cal__arrow icon" />
+                                    </summary>
+                                    <ul class="month-cal__dropdown-menu month-cal__dropdown-menu--year" role="listbox"
+                                        aria-label="Danh sách năm">
+                                        <li><button type="button" data-year="2024"
+                                                class="month-cal__option">2024</button></li>
+                                        <li><button type="button" data-year="2025"
+                                                class="month-cal__option">2025</button></li>
+                                        <li><button type="button" data-year="2026" class="month-cal__option is-selected"
+                                                aria-selected="true">2026</button></li>
+                                        <li><button type="button" data-year="2027"
+                                                class="month-cal__option">2027</button></li>
+                                        <li><button type="button" data-year="2028"
+                                                class="month-cal__option">2028</button></li>
+                                    </ul>
+                                </details>
+                            </div>
+
+                            <button type="button" class="month-cal__nav-btn" id="cal-next-month" aria-label="Tháng sau">
+                                &#10095;
+                            </button>
+                        </header>
+
+                        <!-- 2. Hàng Thứ trong tuần -->
+                        <div class="month-cal__weekdays" role="row">
+                            <span class="month-cal__weekday">Thứ 2</span>
+                            <span class="month-cal__weekday">Thứ 3</span>
+                            <span class="month-cal__weekday">Thứ 4</span>
+                            <span class="month-cal__weekday">Thứ 5</span>
+                            <span class="month-cal__weekday">Thứ 6</span>
+                            <span class="month-cal__weekday month-cal__weekday--sat">Thứ 7</span>
+                            <span class="month-cal__weekday month-cal__weekday--sun">CN</span>
+                        </div>
+
+                        <!-- 3. Lưới đầy đủ 42 ô ngày (Phương án 1: Số trên trái, Badge trên phải, Dots dưới trái, <img> Con Giáp dưới phải) -->
+                        <div class="month-cal__grid" id="month-cal-grid" role="grid">
+                            <!-- HÀNG 1 (26/10 -> 01/11) -->
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="26"
+                                data-lunar="17/9" data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">26</span>
+                                    <span class="month-cal__lunar">17/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/rooster.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="27"
+                                data-lunar="18/9" data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">27</span>
+                                    <span class="month-cal__lunar">18/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/dog.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="28"
+                                data-lunar="19/9" data-status="good holiday">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">28</span>
+                                    <span class="month-cal__lunar">19/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/pig.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="29"
+                                data-lunar="20/9">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">29</span>
+                                    <span class="month-cal__lunar">20/9</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/mouse.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="30"
+                                data-lunar="21/9" data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">30</span>
+                                    <span class="month-cal__lunar">21/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/buffalo.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="31"
+                                data-lunar="22/9">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">31</span>
+                                    <span class="month-cal__lunar">22/9</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/tiger.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="1" data-lunar="23/9">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">1</span>
+                                    <span class="month-cal__lunar">23/9</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/cat.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <!-- HÀNG 2 (02/11 -> 08/11) -->
+                            <button type="button" class="month-cal__cell" data-solar="2" data-lunar="24/9"
+                                data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">2</span>
+                                    <span class="month-cal__lunar">24/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--active" aria-current="date"
+                                data-solar="3" data-lunar="25/9">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">3</span>
+                                    <span class="month-cal__lunar">25/9</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/snake.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--today" data-solar="4"
+                                data-lunar="26/9" data-status="good today">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">4</span>
+                                    <span class="month-cal__lunar">26/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/horse.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="5" data-lunar="27/9"
+                                data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">5</span>
+                                    <span class="month-cal__lunar">27/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/goat.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="6" data-lunar="28/9">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">6</span>
+                                    <span class="month-cal__lunar">28/9</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/monkey.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="7" data-lunar="29/9"
+                                data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">7</span>
+                                    <span class="month-cal__lunar">29/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/rooster.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="8" data-lunar="30/9"
+                                data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">8</span>
+                                    <span class="month-cal__lunar">30/9</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/dog.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <!-- HÀNG 3 (09/11 -> 15/11) -->
+                            <button type="button" class="month-cal__cell" data-solar="9" data-lunar="1/10"
+                                data-status="holiday">
+                                <span class="month-cal__badge">Mùng 1</span>
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">9</span>
+                                    <span class="month-cal__lunar">1/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/pig.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="10" data-lunar="2/10"
+                                data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">10</span>
+                                    <span class="month-cal__lunar">2/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/mouse.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="11" data-lunar="3/10"
+                                data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">11</span>
+                                    <span class="month-cal__lunar">3/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/buffalo.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="12" data-lunar="4/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">12</span>
+                                    <span class="month-cal__lunar">4/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/tiger.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="13" data-lunar="5/10"
+                                data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">13</span>
+                                    <span class="month-cal__lunar">5/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/cat.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="14" data-lunar="6/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">14</span>
+                                    <span class="month-cal__lunar">6/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="15" data-lunar="7/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">15</span>
+                                    <span class="month-cal__lunar">7/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/snake.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <!-- HÀNG 4 (16/11 -> 22/11) -->
+                            <button type="button" class="month-cal__cell" data-solar="16" data-lunar="8/10"
+                                data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">16</span>
+                                    <span class="month-cal__lunar">8/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/horse.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="17" data-lunar="9/10"
+                                data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">17</span>
+                                    <span class="month-cal__lunar">9/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/goat.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="18" data-lunar="10/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">18</span>
+                                    <span class="month-cal__lunar">10/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/monkey.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="19" data-lunar="11/10"
+                                data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">19</span>
+                                    <span class="month-cal__lunar">11/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/rooster.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="20" data-lunar="12/10"
+                                data-status="holiday">
+                                <span class="month-cal__badge">20/11</span>
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">20</span>
+                                    <span class="month-cal__lunar">12/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/dog.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="21" data-lunar="13/10"
+                                data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">21</span>
+                                    <span class="month-cal__lunar">13/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/pig.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="22" data-lunar="14/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">22</span>
+                                    <span class="month-cal__lunar">14/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/mouse.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <!-- HÀNG 5 (23/11 -> 29/11) -->
+                            <button type="button" class="month-cal__cell" data-solar="23" data-lunar="15/10"
+                                data-status="good holiday">
+                                <span class="month-cal__badge">Rằm</span>
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">23</span>
+                                    <span class="month-cal__lunar">15/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                    <span class="month-cal__dot month-cal__dot--holiday"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/buffalo.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="24" data-lunar="16/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">24</span>
+                                    <span class="month-cal__lunar">16/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/tiger.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="25" data-lunar="17/10"
+                                data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">25</span>
+                                    <span class="month-cal__lunar">17/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/cat.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="26" data-lunar="18/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">26</span>
+                                    <span class="month-cal__lunar">18/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="27" data-lunar="19/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">27</span>
+                                    <span class="month-cal__lunar">19/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/snake.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="28" data-lunar="20/10"
+                                data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">28</span>
+                                    <span class="month-cal__lunar">20/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/horse.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell" data-solar="29" data-lunar="21/10"
+                                data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">29</span>
+                                    <span class="month-cal__lunar">21/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/goat.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <!-- HÀNG 6 (30/11 -> 06/12) -->
+                            <button type="button" class="month-cal__cell" data-solar="30" data-lunar="22/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">30</span>
+                                    <span class="month-cal__lunar">22/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/monkey.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="1"
+                                data-lunar="23/10" data-status="good">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">1</span>
+                                    <span class="month-cal__lunar">23/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--good"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/rooster.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="2"
+                                data-lunar="24/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">2</span>
+                                    <span class="month-cal__lunar">24/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/dog.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="3"
+                                data-lunar="25/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">3</span>
+                                    <span class="month-cal__lunar">25/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/pig.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="4"
+                                data-lunar="26/10" data-status="bad">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">4</span>
+                                    <span class="month-cal__lunar">26/10</span>
+                                </div>
+                                <div class="month-cal__dots">
+                                    <span class="month-cal__dot month-cal__dot--bad"></span>
+                                </div>
+                                <img src="./assets/icons/zodiac/mouse.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="5"
+                                data-lunar="27/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">5</span>
+                                    <span class="month-cal__lunar">27/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/buffalo.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+
+                            <button type="button" class="month-cal__cell month-cal__cell--muted" data-solar="6"
+                                data-lunar="28/10">
+                                <div class="month-cal__date-head">
+                                    <span class="month-cal__solar">6</span>
+                                    <span class="month-cal__lunar">28/10</span>
+                                </div>
+                                <div class="month-cal__dots"></div>
+                                <img src="./assets/icons/zodiac/tiger.svg" alt="" aria-hidden="true"
+                                    class="month-cal__zodiac-img" />
+                            </button>
+                        </div>
+
+                        <!-- 4. Chú thích cuối bảng (Bo góc Bento 1.2rem) -->
+                        <footer class="month-cal__legend" aria-label="Bộ lọc chú thích lịch">
+                            <button type="button" class="month-cal__legend-pill" data-filter="good">
+                                <i class="month-cal__legend-dot month-cal__legend-dot--good"></i>
+                                <span>Hoàng Đạo</span>
+                            </button>
+                            <button type="button" class="month-cal__legend-pill" data-filter="bad">
+                                <i class="month-cal__legend-dot month-cal__legend-dot--bad"></i>
+                                <span>Hắc Đạo</span>
+                            </button>
+                            <button type="button" class="month-cal__legend-pill" data-filter="holiday">
+                                <i class="month-cal__legend-dot month-cal__legend-dot--holiday"></i>
+                                <span>Ngày Lễ</span>
+                            </button>
+                            <button type="button" class="month-cal__legend-pill" data-filter="today">
+                                <i class="month-cal__legend-dot month-cal__legend-dot--today"></i>
+                                <span>Hôm Nay</span>
+                            </button>
+                        </footer>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer" class="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script>
+
+    <script src="./assets/js/header.js"></script>
+</body>
+
+</html>

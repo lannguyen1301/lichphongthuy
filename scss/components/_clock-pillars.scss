@@ -1,0 +1,159 @@
+// scss/components/_clock-pillars.scss
+@use "../abstracts" as abs;
+
+.clock-location-card {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 2rem;
+    height: 100%;
+    padding: 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    &__eyebrow {
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary-color);
+    }
+
+    &__city {
+        margin-top: 0.6rem;
+        font-size: clamp(2.6rem, 3.2vw, 3.8rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--text-color);
+    }
+
+    &__quote {
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        line-height: 1.55;
+        color: var(--text-muted);
+    }
+
+    &__stats {
+        @extend %gridCols2;
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__stat-box {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        padding: 1.2rem 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__stat-label {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+    }
+
+    &__stat-val {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+}
+
+.clock-pillars {
+    height: 100%;
+
+    &__grid {
+        @extend %gridCols2;
+        gap: 1.6rem;
+        height: 100%;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.clock-pillar-card {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 2.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    &--highlight {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+
+        .clock-pillar-card__tag,
+        .clock-pillar-card__range,
+        .clock-pillar-card__canchi,
+        .clock-pillar-card__napam {
+            color: #ffffff;
+        }
+
+        .clock-pillar-card__badge {
+            background-color: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+    }
+
+    &__head,
+    &__foot {
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__tag {
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__range {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__canchi {
+        font-size: 3rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--primary-color);
+    }
+
+    &__napam {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__badge {
+        padding: 0.4rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %textNoWrap;
+    }
+}
