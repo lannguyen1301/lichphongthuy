@@ -1,5 +1,5 @@
 // assets/js/sidebar.js
-// Chuyên trách duy nhất templates/sidebar.html: Ngăn kéo Mobile Drawer, Khóa cuộn Body & Active Link
+// Chuyên trách duy nhất Sidebar: Bật/tắt ngăn kéo Mobile Drawer, Khóa cuộn <body> & Đồng bộ Active Link
 (() => {
     let isSidebarGlobalBound = false;
 
@@ -17,7 +17,6 @@
         backdrop.classList.toggle("is-active", nextState);
         burgerBtn.setAttribute("aria-expanded", String(nextState));
 
-        // Khóa cuộn trang trên <body> khi mở menu Mobile
         document.body.style.overflow = nextState ? "hidden" : "";
     };
 
@@ -28,11 +27,8 @@
         sidebarLinks.forEach((link) => {
             const isMatch = link.dataset.navPage === currentPage;
             link.classList.toggle("sidebar__link--active", isMatch);
-            if (isMatch) {
-                link.setAttribute("aria-current", "page");
-            } else {
-                link.removeAttribute("aria-current");
-            }
+            if (isMatch) link.setAttribute("aria-current", "page");
+            else link.removeAttribute("aria-current");
         });
     };
 
@@ -46,8 +42,7 @@
         syncActiveSidebarLink();
     };
 
-    const bindSidebarGlobalListeners = () => {
-        if (isSidebarGlobalBound) return;
+    if (!isSidebarGlobalBound) {
         isSidebarGlobalBound = true;
 
         window.addEventListener("resize", () => {
@@ -58,16 +53,10 @@
         });
 
         document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                toggleSidebar(true);
-            }
+            if (e.key === "Escape") toggleSidebar(true);
         });
-    };
+    }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        bindSidebarGlobalListeners();
-        initSidebar();
-    });
-
+    document.addEventListener("DOMContentLoaded", initSidebar);
     window.addEventListener("template-loaded", initSidebar);
 })();

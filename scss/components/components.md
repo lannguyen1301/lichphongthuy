@@ -3,7 +3,7 @@
 ### index.scss
 
 ```scss
-// scss/components/_index.scss
+// Trong scss/components/_index.scss
 @forward "./button";
 @forward "./logo-header";
 @forward "./date-time";
@@ -15,6 +15,7 @@
 @forward "./clock-pillars";
 @forward "./clock-zodiac";
 @forward "./converter-modal";
+@forward "./week-calendar";
 ```
 
 ### button.scss
@@ -2039,113 +2040,132 @@
     @extend %fixedCover;
     z-index: 90;
     @extend %flexCenter;
-    padding: 1.6rem;
+    padding: 2.4rem;
 
     &[hidden] {
         display: none !important;
     }
 
+    @include abs.screen(sm) {
+        padding: 1rem;
+    }
+
     &__backdrop {
         @extend %absCover;
         background-color: var(--overlay-bg);
-        backdrop-filter: blur(4px);
+        backdrop-filter: blur(6px);
     }
 
+    // FIX ẢNH 5: Mở rộng khung Bento Modal lên 112rem (1120px) để các thành phần bên trong rộng thoáng, không bị nhồi nhét
     &__dialog {
         position: relative;
         z-index: 2;
         width: 100%;
-        max-width: 56rem;
-        max-height: calc(100vh - 3.2rem);
+        max-width: 112rem;
+        max-height: calc(100vh - 4rem);
         overflow-y: auto;
-        padding: 2.4rem;
+        padding: 3.2rem 3.6rem;
         background-color: var(--body-bg);
         border: 1.5px solid var(--primary-color);
-        border-radius: 2.4rem;
-        box-shadow: 0 2rem 4.8rem var(--shadow-color);
+        border-radius: 3rem;
+        box-shadow: 0 2.4rem 6.4rem var(--shadow-color);
         @extend %flexColumn;
-        gap: 1.8rem;
+        gap: 2.2rem;
         @extend %animDropdownFadeIn;
         @extend %transTheme;
 
+        @include abs.screen(xl) {
+            max-width: 96rem;
+            padding: 2.6rem 2.8rem;
+        }
+
+        @include abs.screen(lg) {
+            max-width: 76rem;
+            padding: 2.2rem;
+        }
+
         @include abs.screen(sm) {
             padding: 1.6rem;
-            border-radius: 1.8rem;
-            gap: 1.4rem;
+            border-radius: 2rem;
+            gap: 1.6rem;
+            max-height: calc(100vh - 2rem);
         }
     }
 
+    // FIX ẢNH 2: Tăng khoảng cách (margin/gap/padding) trên và dưới của cụm Tiêu đề Modal
     &__header {
         @extend %flexBetween;
-        gap: 1.2rem;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding-top: 0.4rem;
+        padding-bottom: 2.2rem;
+        border-bottom: 1px solid var(--border-color);
     }
 
     &__title-wrap {
         @extend %flexColumn;
-        gap: 0.3rem;
+        gap: 1rem; // Tăng khoảng cách giữa badge "TIỆN ÍCH VẠN NIÊN" và tiêu đề "Đổi Ngày Âm ⇄ Dương"
     }
 
     &__badge {
-        display: inline-block;
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
         width: fit-content;
-        padding: 0.25rem 0.9rem;
+        padding: 0.45rem 1.2rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
         border-radius: 99.9rem;
-        font-size: 1.15rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: var(--primary-color);
         text-transform: uppercase;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.05em;
+
+        &-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
     }
 
     &__title {
-        font-size: 2.2rem;
+        font-size: 2.6rem;
         font-weight: 800;
+        line-height: 1.2;
         color: var(--text-color);
 
         @include abs.screen(sm) {
-            font-size: 1.85rem;
+            font-size: 2rem;
         }
     }
 
-    &__close-btn {
-        @extend %inlineFlexCenter;
-        width: 4rem;
-        height: 4rem;
-        border-radius: 1.2rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        font-size: 1.6rem;
-        font-weight: 700;
-        color: var(--text-muted);
-        @extend %transInteractive;
-
-        &:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            transform: rotate(90deg);
-        }
-    }
-
-    // Tabs chuyển đổi Dương -> Âm / Âm -> Dương
+    // FIX ẢNH 3: Cố định kích thước đều nhau cho 2 nút Tab chuyển đổi chiều Âm/Dương
     &__tabs {
-        @extend %gridCols2;
-        gap: 0.8rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
         padding: 0.5rem;
+        min-width: 42rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
-        border-radius: 1.4rem;
+        border-radius: 1.6rem;
+
+        @include abs.screen(md) {
+            order: 3;
+            width: 100%;
+            min-width: 0;
+        }
     }
 
     &__tab {
         @extend %inlineFlexCenter;
-        height: 4rem;
-        padding: 0 1.2rem;
-        border-radius: 1rem;
-        font-size: 1.35rem;
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        border-radius: 1.2rem;
+        font-size: 1.4rem;
         font-weight: 700;
         color: var(--text-muted);
+        @extend %textNoWrap;
         @extend %transTheme;
 
         &:hover {
@@ -2159,186 +2179,687 @@
         }
     }
 
-    // Bộ 3 Select Ngày / Tháng / Năm
-    &__form {
-        @extend %flexColumn;
-        gap: 1rem;
+    &__close-btn {
+        @extend %inlineFlexCenter;
+        width: 4.4rem;
+        height: 4.4rem;
+        border-radius: 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
     }
 
-    &__inputs {
-        @extend %gridCols3;
-        gap: 1rem;
+    // FIX ẢNH 3 & ẢNH 5: Bộ 4 Cột Đồng Phẳng (Ngày | Tháng | Năm | Chế độ Tháng Nhuận) -> Chiều cao cố định 100%
+    &__control-bar {
+        padding: 1.8rem 2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 2.2rem;
+    }
+
+    &__pickers {
+        @extend %gridCols4;
+        gap: 1.6rem;
+
+        @include abs.screen(lg) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+        }
 
         @include abs.screen(sm) {
-            gap: 0.6rem;
+            grid-template-columns: 1fr;
         }
     }
 
     &__field {
         @extend %flexColumn;
-        gap: 0.5rem;
+        gap: 0.6rem;
+        position: relative;
     }
 
     &__label {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding-left: 0.4rem;
     }
 
-    &__select {
-        height: 4.4rem;
-        padding: 0 1.2rem;
-        background-color: var(--bg-surface);
+    &__dropdown {
+        position: relative;
+    }
+
+    &__summary {
+        @extend %flexBetween;
+        height: 4.8rem;
+        padding: 0 1.6rem;
+        background-color: var(--body-bg);
         border: 1px solid var(--border-color);
-        border-radius: 1.2rem;
-        font-size: 1.45rem;
+        border-radius: 1.4rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+
+        &-main {
+            @extend %flexItemCenter;
+            gap: 0.9rem;
+        }
+
+        &-icon {
+            width: 1.9rem;
+            height: 1.9rem;
+            opacity: 0.8;
+        }
+    }
+
+    &__arrow {
+        width: 1.6rem;
+        height: 1.6rem;
+        @extend %transBurgerBar;
+    }
+
+    &__dropdown[open] &__summary {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18);
+    }
+
+    &__dropdown[open] &__arrow {
+        transform: rotate(180deg);
+    }
+
+    // Ô Cột 4: Nút gạt Tháng Nhuận có cùng chiều cao 4.8rem với 3 ô Ngày/Tháng/Năm
+    &__leap-toggle {
+        @extend %flexYCenterLeft;
+        gap: 1rem;
+        width: 100%;
+        height: 4.8rem;
+        padding: 0 1.6rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.4rem;
         font-weight: 700;
         color: var(--text-color);
         cursor: pointer;
         @extend %transTheme;
 
-        &:hover,
-        &:focus-visible {
+        &:hover:not(.is-disabled) {
             border-color: var(--primary-color);
         }
-    }
 
-    &__leap-row {
-        padding: 0.8rem 1.2rem;
-        background-color: var(--bg-surface);
-        border: 1px dashed var(--primary-color);
-        border-radius: 1rem;
-
-        &[hidden] {
-            display: none !important;
+        &.is-active {
+            border-color: var(--primary-color);
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--primary-color);
         }
-    }
 
-    &__leap-label {
-        @extend %flexItemCenter;
-        gap: 0.8rem;
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: var(--text-color);
-        cursor: pointer;
+        &.is-disabled {
+            opacity: 0.7;
+            cursor: default;
+            background-color: var(--body-bg);
+            border-style: dashed;
+        }
     }
 
     &__checkbox {
         width: 1.8rem;
         height: 1.8rem;
         accent-color: var(--primary-color);
-        cursor: pointer;
+        pointer-events: none;
+        @extend %flexItemFixed;
     }
 
-    // Khối Kết quả Bento
-    &__result {
-        @extend %flexColumn;
-        gap: 1.2rem;
-        padding: 1.6rem;
+    &__leap-text {
+        @extend %textEllipsis;
+    }
+
+    // Popover Lưới Bento cho Ngày / Tháng / Năm
+    &__popover {
+        position: absolute;
+        top: calc(100% + 0.8rem);
+        left: 0;
+        z-index: 80;
+        width: 100%;
+        min-width: 28rem;
+        padding: 1.4rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 1.8rem;
+        box-shadow: 0 1.6rem 3.6rem var(--shadow-color);
+        @extend %animDropdownFadeIn;
+
+        &--day {
+            min-width: 32rem;
+
+            @include abs.screen(sm) {
+                min-width: 100%;
+            }
+        }
+
+        &--year {
+            right: 0;
+            left: auto;
+
+            @include abs.screen(md) {
+                left: 0;
+                right: auto;
+            }
+        }
+    }
+
+    &__popover-head {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        text-align: center;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__year-nav {
+        @extend %flexBetween;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__year-step {
+        @extend %inlineFlexCenter;
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 0.8rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
-        border-radius: 1.8rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
     }
 
-    &__result-main {
+    &__year-range-label {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__grid-options {
+        display: grid;
+        gap: 0.6rem;
+
+        &--days {
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        &--months {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &--years {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    &__option-btn {
+        @extend %inlineFlexCenter;
+        width: 100%;
+        height: 3.8rem;
+        padding: 0 0.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        &.is-selected {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.4rem 1rem var(--shadow-color);
+        }
+    }
+
+    // 3. Khối Bento Dashboard Kết quả
+    &__bento-body {
+        @extend %flexColumn;
+        gap: 1.8rem;
+    }
+
+    // Tầng A: 2 Đảo Lớn Dương Lịch ⇄ Âm Lịch
+    &__hero-compare {
         display: grid;
         grid-template-columns: 1fr auto 1fr;
         align-items: center;
+        gap: 1.8rem;
+
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+    }
+
+    &__date-card {
+        position: relative;
+        overflow: hidden;
+        @extend %flexColumn;
+        justify-content: space-between;
+        min-height: 14.2rem;
+        gap: 0.8rem;
+        padding: 2.2rem 2.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 2.2rem;
+        @extend %transTheme;
+
+        &--lunar {
+            background-color: var(--body-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+        }
+    }
+
+    &__date-top {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
         gap: 1rem;
+    }
+
+    &__date-tag {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    &__date-badge {
+        padding: 0.4rem 1.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-color);
+
+        &--primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__date-num {
+        position: relative;
+        z-index: 2;
+        font-size: 3.8rem;
+        font-weight: 800;
+        line-height: 1.05;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(sm) {
+            font-size: 2.8rem;
+        }
+    }
+
+    &__date-sub {
+        position: relative;
+        z-index: 2;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__date-watermark {
+        position: absolute;
+        right: 1.6rem;
+        bottom: 1rem;
+        width: 6.4rem;
+        height: 6.4rem;
+        opacity: 0.07;
+        pointer-events: none;
+    }
+
+    &__date-zodiac {
+        position: absolute;
+        right: 1.4rem;
+        bottom: 0.8rem;
+        width: 7rem;
+        height: 7rem;
+        object-fit: contain;
+        opacity: 0.22;
+        filter: var(--zodiac-filter);
+        transform: rotate(-8deg);
+        pointer-events: none;
+    }
+
+    &__swap-btn {
+        @extend %inlineFlexCenter;
+        width: 4.8rem;
+        height: 4.8rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 2rem;
+        font-weight: 800;
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+        margin: 0 auto;
+        @extend %transInteractive;
+
+        &:hover {
+            background-color: var(--primary-hover);
+            transform: rotate(180deg) scale(1.08);
+        }
+    }
+
+    // FIX ẢNH 4 (PHẦN TRÊN): Tăng chiều cao 4 Card Can Chi / Mệnh / Tiết khí (min-height: 11.6rem) để không còn cảm giác nhồi nhét
+    &__stats-grid {
+        @extend %gridCols4;
+        gap: 1.6rem;
+
+        @include abs.screen(lg) {
+            grid-template-columns: repeat(2, 1fr);
+        }
 
         @include abs.screen(sm) {
             grid-template-columns: 1fr;
         }
     }
 
-    &__result-box {
-        @extend %flexColumnCenterAll;
-        gap: 0.3rem;
-        padding: 1.2rem 1rem;
-        background-color: var(--body-bg);
+    &__stat-card {
+        position: relative;
+        overflow: hidden;
+        @extend %flexItemCenter;
+        min-height: 11.6rem;
+        gap: 1.5rem;
+        padding: 1.8rem 2rem;
+        background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
-        border-radius: 1.4rem;
-        text-align: center;
+        border-radius: 2rem;
+        @extend %transInteractive;
 
-        &--lunar {
+        &:hover {
             border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+            .converter-modal__stat-bg-zodiac {
+                opacity: 0.22;
+                transform: scale(1.08) rotate(0deg);
+            }
         }
     }
 
-    &__result-tag {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: var(--text-muted);
-        text-transform: uppercase;
+    &__stat-icon-box {
+        position: relative;
+        z-index: 2;
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 5.2rem;
+        height: 5.2rem;
+        border-radius: 1.5rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
     }
 
-    &__result-num {
-        font-size: 2.2rem;
+    &__stat-zodiac {
+        width: 3.4rem;
+        height: 3.4rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+    }
+
+    &__stat-element-icon {
+        width: 2.8rem;
+        height: 2.8rem;
+        object-fit: contain;
+    }
+
+    &__stat-content {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        justify-content: center;
+        gap: 0.45rem;
+        min-width: 0;
+    }
+
+    &__stat-label {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+
+    &__stat-value {
+        font-size: 1.8rem;
         font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+    }
+
+    &__stat-sub {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    &__stat-bg-zodiac {
+        position: absolute;
+        right: 0.6rem;
+        bottom: 0.4rem;
+        width: 5.6rem;
+        height: 5.6rem;
+        object-fit: contain;
+        opacity: 0.1;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        pointer-events: none;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    // FIX ẢNH 4 (PHẦN DƯỚI): Tăng chiều cao 6 Card Giờ Hoàng Đạo (min-height: 10.4rem) & Tăng cỡ chữ Title Giờ ("Giờ Giáp Tý")
+    &__hours-section {
+        @extend %flexColumn;
+        gap: 1.6rem;
+        padding: 2rem 2.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 2.2rem;
+    }
+
+    &__hours-head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+    }
+
+    &__hours-title-group {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+    }
+
+    &__fortune-pill {
+        @extend %inlineFlexCenter;
+        gap: 0.7rem;
+        padding: 0.5rem 1.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+
+        &[data-fortune="good"] {
+            border-color: rgba(234, 179, 8, 0.5);
+            background-color: rgba(234, 179, 8, 0.12);
+
+            .converter-modal__fortune-dot {
+                background-color: #eab308;
+                box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
+            }
+        }
+
+        &[data-fortune="bad"] {
+            border-color: rgba(107, 114, 128, 0.4);
+
+            .converter-modal__fortune-dot {
+                background-color: #6b7280;
+            }
+        }
+    }
+
+    &__fortune-dot {
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+    }
+
+    &__hours-heading {
+        font-size: 1.65rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__hours-note {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__hours-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.4rem;
+
+        @include abs.screen(lg) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+    }
+
+    &__hour-card {
+        position: relative;
+        overflow: hidden;
+        @extend %flexColumn;
+        justify-content: space-between;
+        min-height: 10.4rem; // Cao hơn hẳn so với 7.4rem cũ để thoáng và tôn hình con giáp
+        padding: 1.5rem 1.6rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+
+            .converter-modal__hour-zodiac {
+                opacity: 0.45;
+                transform: scale(1.1) rotate(0deg);
+            }
+        }
+    }
+
+    &__hour-top {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 0.7rem;
+    }
+
+    &__hour-dot {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background-color: #eab308;
+        box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.22);
+        @extend %flexItemFixed;
+    }
+
+    // Tăng cỡ chữ Title giờ ("Giờ Giáp Tý") lên 1.65rem to rõ, sang trọng
+    &__hour-name {
+        font-size: 1.65rem;
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+    }
+
+    &__hour-time {
+        position: relative;
+        z-index: 2;
+        margin-top: auto;
+        padding-top: 0.8rem;
+        font-size: 1.35rem;
+        font-weight: 700;
         color: var(--primary-color);
         font-variant-numeric: tabular-nums;
     }
 
-    &__result-sub {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-color);
+    &__hour-zodiac {
+        position: absolute;
+        right: 0.6rem;
+        bottom: 0.5rem;
+        width: 4.6rem;
+        height: 4.6rem;
+        object-fit: contain;
+        opacity: 0.2;
+        filter: var(--zodiac-filter);
+        transform: rotate(-8deg);
+        pointer-events: none;
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
     }
 
-    &__result-arrow {
-        @extend %inlineFlexCenter;
-        width: 3.4rem;
-        height: 3.4rem;
-        border-radius: 50%;
-        background-color: var(--primary-color);
-        color: #ffffff;
-        font-size: 1.5rem;
-        font-weight: 800;
-        margin: 0 auto;
-    }
-
-    &__meta-grid {
-        @extend %gridCols2;
-        gap: 0.8rem;
-
-        @include abs.screen(sm) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    &__meta-item {
-        @extend %flexBetween;
-        gap: 0.8rem;
-        padding: 0.8rem 1.2rem;
-        background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 1rem;
-        font-size: 1.3rem;
-
-        span {
-            color: var(--text-muted);
-        }
-
-        strong {
-            color: var(--text-color);
-            font-weight: 700;
-        }
-    }
-
-    &__fortune-bar {
-        padding: 1rem 1.2rem;
-        background-color: var(--body-bg);
-        border-left: 4px solid var(--primary-color);
-        border-radius: 0.8rem;
-        font-size: 1.25rem;
-        font-weight: 600;
-        line-height: 1.45;
-        color: var(--text-color);
-    }
-
+    // 4. Footer Modal
     &__footer {
         @extend %flexBetween;
-        gap: 1rem;
+        gap: 1.4rem;
+        padding-top: 0.4rem;
 
         @include abs.screen(sm) {
             flex-direction: column;
@@ -2350,10 +2871,11 @@
     }
 
     &__today-btn {
-        height: 4.4rem;
-        padding: 0 1.8rem;
+        height: 4.8rem;
+        padding: 0 2.2rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
+        font-size: 1.45rem;
         color: var(--text-color);
 
         &:hover {
@@ -2364,16 +2886,718 @@
 
     &__jump-btn {
         @extend %flexItemFluid;
-        height: 4.4rem;
-        padding: 0 2rem;
+        height: 4.8rem;
+        padding: 0 2.6rem;
         background-color: var(--primary-color);
         color: #ffffff;
-        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+        font-size: 1.55rem;
+        font-weight: 700;
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
 
         &:hover {
             background-color: var(--primary-hover);
             transform: translateY(-1px);
         }
+    }
+}
+```
+
+### week-calendar.scss
+
+```scss
+// scss/components/_week-calendar.scss
+@use "../abstracts" as abs;
+
+.week-cal {
+    @extend %flexColumn;
+    gap: 2rem;
+    // Yêu cầu 4: Tăng padding-bottom (thêm 2.4rem / 24px) cho container chính để Legend không bị sát mép
+    padding: 2.6rem 2.8rem 3.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.8rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    // Yêu cầu 1: Đặt line-height: 1.5 (số thập phân) cho toàn bộ văn bản thường trong layout lịch tuần
+    line-height: 1.5;
+    @extend %transTheme;
+
+    @include abs.screen(md) {
+        padding: 1.8rem 1.8rem 2.4rem;
+        border-radius: 2rem;
+        gap: 1.6rem;
+    }
+
+    // ==========================================================================
+    // 1. HEADER & THANH ĐIỀU HƯỚNG TUẦN (Yêu cầu 4: Giảm padding/margin quanh thanh điều hướng)
+    // ==========================================================================
+    &__header {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 1.2rem;
+        padding-bottom: 0.4rem;
+    }
+
+    &__intro {
+        @extend %flexColumn;
+        gap: 0.4rem;
+    }
+
+    &__title-row {
+        @extend %flexWrapGap;
+    }
+
+    &__week-badge,
+    &__lunar-badge {
+        @extend %inlineFlexCenter;
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.5;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    &__lunar-badge {
+        color: var(--text-muted);
+    }
+
+    &__heading {
+        font-size: clamp(2.2rem, 2.8vw, 3rem);
+        font-weight: 800;
+        line-height: 1.25;
+        color: var(--text-color);
+        letter-spacing: -0.02em;
+    }
+
+    // Thanh điều hướng gọn gàng, giảm padding xung quanh
+    &__toolbar {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        padding: 0.6rem 0.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+
+        @include abs.screen(md) {
+            width: 100%;
+            justify-content: space-between;
+            border-radius: 1.4rem;
+        }
+    }
+
+    &__nav-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 1.5;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__toolbar-center {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        padding: 0 0.4rem;
+    }
+
+    &__range-label {
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1.5;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(sm) {
+            display: none;
+        }
+    }
+
+    &__today-btn {
+        height: 3.4rem;
+        padding: 0 1.4rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 1.5;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    // ==========================================================================
+    // 2. KHỐI BENTO CHÍNH: CỘT TRÁI (THẺ DETAIL FLAT UI) + CỘT PHẢI (LƯỚI 7 NGÀY)
+    // ==========================================================================
+    &__body {
+        display: grid;
+        grid-template-columns: 38rem 1fr;
+        align-items: stretch;
+        gap: 2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: 34rem 1fr;
+        }
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // YÊU CẦU 5: Cải thiện thẻ Detail (Thẻ to bên trái) theo Flat UI + Flexbox space-between
+    &__hero {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.8rem;
+        padding: 2.6rem;
+        background-color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 2.4rem;
+        color: #ffffff;
+        line-height: 1.5;
+        box-shadow: 0 1rem 2.8rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            padding: 2rem;
+            border-radius: 2rem;
+        }
+
+        &-top {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 0.8rem;
+        }
+
+        &-badges {
+            @extend %flexBetween;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        &-pill,
+        &-fortune {
+            @extend %inlineFlexCenter;
+            gap: 0.6rem;
+            padding: 0.35rem 1.2rem;
+            border-radius: 99.9rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.5;
+        }
+
+        &-pill {
+            background-color: #ffffff;
+            color: var(--primary-color);
+        }
+
+        &-fortune {
+            background-color: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+        }
+
+        &-date {
+            @extend %flexItemCenter;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        &-solar {
+            font-size: clamp(5rem, 5.8vw, 6.4rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        &-weekday {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        &-lunar {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        // Gom nhóm 'Tiết khí' và 'Trực' thành 2 thẻ nhỏ nằm ngang giống style badge Hoàng Đạo
+        &-meta-pills {
+            @extend %flexWrapGap;
+            gap: 0.8rem;
+            margin-top: 0.4rem;
+        }
+
+        &-meta-badge {
+            @extend %inlineFlexCenter;
+            gap: 0.6rem;
+            padding: 0.35rem 1.1rem;
+            background-color: rgba(255, 255, 255, 0.16);
+            border-radius: 99.9rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: #ffffff;
+
+            strong {
+                font-weight: 800;
+            }
+        }
+
+        &-hours {
+            position: relative;
+            z-index: 2;
+            padding-top: 1.4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.22);
+        }
+
+        // Yêu cầu 1: Tiêu đề nhỏ có margin-bottom (0.6rem = 6px) để phân nhóm rõ ràng
+        &-label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        &-hours-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        // Yêu cầu 5: Tái sử dụng cụm .fengshui-actions của index.html nhưng theo Flat UI (Xóa nền)
+        &-actions.fengshui-actions {
+            position: relative;
+            z-index: 2;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            padding-top: 1.4rem;
+            padding-bottom: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.22);
+            border-bottom: none;
+        }
+
+        &-footer {
+            position: relative;
+            z-index: 2;
+            @extend %flexBetween;
+            padding-top: 0.6rem;
+        }
+
+        // Yêu cầu 5: Nút 'Xem trên Lịch Bloc' dạng Subtle Button (Nền tối nhẹ / rgba(255,255,255,0.15), chữ trắng, xóa viền)
+        &-link {
+            @extend %inlineFlexCenter;
+            gap: 0.8rem;
+            height: 4rem;
+            padding: 0 1.8rem;
+            background-color: var(--primary-subtle-btn, rgba(255, 255, 255, 0.15));
+            color: #ffffff;
+            border: none;
+            border-radius: 99.9rem;
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.5;
+            @extend %transInteractive;
+
+            &:hover,
+            &:focus-visible {
+                background-color: rgba(255, 255, 255, 0.26);
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+        }
+
+        &-zodiac {
+            position: absolute;
+            right: -0.8rem;
+            bottom: -0.8rem;
+            width: 14rem;
+            height: 14rem;
+            object-fit: contain;
+            opacity: 0.12;
+            filter: brightness(0) invert(1);
+            pointer-events: none;
+            z-index: 1;
+        }
+    }
+
+    // Tuỳ biến Flat UI cho 2 khối Việc nên làm / Việc nên tránh bên trong thẻ Hero
+    &__flat-action.fengshui-actions__box {
+        gap: 0.6rem;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+
+        .fengshui-actions__header {
+            justify-content: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .fengshui-actions__badge {
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+
+        // Icon hình tròn nhỏ tái sử dụng từ index.html
+        .fengshui-actions__icon {
+            width: 2.2rem;
+            height: 2.2rem;
+            font-size: 1.15rem;
+            background-color: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+
+        .fengshui-actions__list {
+            gap: 0.6rem;
+        }
+
+        .fengshui-actions__chip {
+            padding: 0.35rem 1rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            background-color: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            color: #ffffff;
+            box-shadow: none;
+        }
+    }
+
+    // ==========================================================================
+    // 3. CỘT PHẢI: LƯỚI 2 CỘT 7 NGÀY & THẺ CHỦ NHẬT .day-card--full-width
+    // ==========================================================================
+    &__grid {
+        @extend %gridCols2;
+        gap: 1.4rem;
+
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        position: relative;
+        overflow: hidden;
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+        text-align: left;
+        line-height: 1.5;
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+            .week-cal__card-zodiac {
+                opacity: 0.4;
+                transform: scale(1.08) rotate(0deg);
+            }
+        }
+
+        // YÊU CẦU 3: Trạng thái Active có nền màu chính của theme làm mờ 8-10% (--primary-soft-bg) + viền màu theme
+        &--active,
+        &[aria-current="date"] {
+            background-color: var(--primary-soft-bg, color-mix(in srgb, var(--primary-color) 9%, var(--body-bg)));
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+
+            .week-cal__card-day {
+                color: var(--primary-color);
+            }
+
+            &:hover,
+            &:focus-visible {
+                background-color: var(--primary-soft-bg, color-mix(in srgb, var(--primary-color) 12%, var(--body-bg)));
+            }
+        }
+
+        // YÊU CẦU 2: Modifier .day-card--full-width cho thẻ Chủ Nhật (Chia 2 cột: Trái Ngày/Can Chi/Giờ tốt - Phải Nên làm/Nên tránh)
+        &.day-card--full-width {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: start;
+            gap: 2.4rem;
+
+            @include abs.screen(md) {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .day-card__col-left {
+                position: relative;
+                z-index: 2;
+                @extend %flexColumn;
+                justify-content: space-between;
+                gap: 1.2rem;
+                height: 100%;
+                padding-right: 2rem;
+                border-right: 1px dashed var(--border-color);
+
+                @include abs.screen(md) {
+                    padding-right: 0;
+                    border-right: none;
+                }
+            }
+
+            .day-card__col-right {
+                position: relative;
+                z-index: 2;
+                @extend %flexColumn;
+                justify-content: center;
+                height: 100%;
+
+                .week-cal__card-meta {
+                    padding-top: 0;
+                    border-top: none;
+                    gap: 1rem;
+                }
+            }
+        }
+
+        &.is-highlighted {
+            border-color: var(--primary-color);
+            background-color: var(--primary-soft-bg, var(--body-bg));
+            transform: translateY(-2px);
+        }
+
+        &.is-dimmed {
+            opacity: 0.22;
+            transform: scale(0.98);
+        }
+
+        &-head {
+            position: relative;
+            z-index: 2;
+            @extend %flexBetween;
+            align-items: flex-start;
+            gap: 0.8rem;
+            width: 100%;
+        }
+
+        &-title-group {
+            @extend %flexColumn;
+            gap: 0.2rem;
+        }
+
+        &-day {
+            font-size: 1.7rem;
+            font-weight: 800;
+            line-height: 1.35;
+            color: var(--text-color);
+
+            &--sun {
+                color: var(--color-danger);
+            }
+        }
+
+        &-sub {
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        &-section {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+        }
+
+        // Yêu cầu 1: Tiêu đề nhỏ ('Giờ tốt', 'Nên làm', 'Nên tránh') có margin-bottom 0.5rem (5px) tách biệt nội dung
+        &-label,
+        &-meta-title {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        &-hours {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            @extend %textClamp2;
+        }
+
+        &-meta {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 0.8rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            width: 100%;
+        }
+
+        &-meta-group {
+            @extend %flexColumn;
+        }
+
+        &-do,
+        &-dont {
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        &-do {
+            color: var(--color-success);
+        }
+
+        &-dont {
+            color: var(--color-danger);
+        }
+
+        &-zodiac {
+            position: absolute;
+            right: 0.8rem;
+            bottom: 0.8rem;
+            width: 4.8rem;
+            height: 4.8rem;
+            object-fit: contain;
+            opacity: 0.14;
+            filter: var(--zodiac-filter);
+            transform: scale(0.88) rotate(-8deg);
+            pointer-events: none;
+            z-index: 1;
+            transition:
+                transform 0.35s ease,
+                opacity 0.35s ease;
+        }
+    }
+
+    // ==========================================================================
+    // 4. ĐỒNG BỘ BADGE TRÊN THẺ VÀ CHÚ THÍCH LEGEND CUỐI TRANG (Yêu cầu 6)
+    // ==========================================================================
+    &__badge,
+    &__legend-badge {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1.5;
+        border: 1px solid transparent;
+        @extend %textNoWrap;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &--good {
+            background-color: rgba(234, 179, 8, 0.15);
+            border-color: rgba(234, 179, 8, 0.35);
+            color: #b45309;
+        }
+
+        &--bad {
+            background-color: rgba(107, 114, 128, 0.14);
+            border-color: rgba(107, 114, 128, 0.3);
+            color: var(--text-color);
+        }
+
+        &--today {
+            background-color: var(--primary-soft-bg, rgba(245, 158, 11, 0.14));
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+    }
+
+    &__legend-badge {
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        font-size: 1.3rem;
+    }
+
+    &__badge-dot {
+        display: inline-block;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        @extend %flexItemFixed;
+
+        &--good {
+            background-color: #eab308;
+        }
+
+        &--bad {
+            background-color: #374151;
+        }
+
+        &--today {
+            background-color: var(--primary-color);
+        }
+
+        &--light {
+            background-color: #ffffff;
+        }
+    }
+
+    &__footer {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    &__legend {
+        padding-top: 0;
+    }
+
+    &__footnote {
+        padding: 0.6rem 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        color: var(--text-muted);
     }
 }
 ```

@@ -1,0 +1,6 @@
+// scss/pages/_week.scss
+@use "../abstracts" as abs;
+
+.week-page {
+    padding-bottom: abs.$gap-section-default;
+}

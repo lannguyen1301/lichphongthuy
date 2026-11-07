@@ -1,5 +1,5 @@
 // assets/js/month-calendar.js
-// Chuyên trách duy nhất Trang chủ (index.html): Lưới 42 ô ngày, Tờ Lịch Bloc & API ./api/thang-${month}.json
+// Chuyên trách duy nhất Trang Chủ (index.html): Lưới 42 ô ngày, Tờ Lịch Bloc & Fetch ./api/thang-${month}.json
 (() => {
     const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
 
@@ -221,15 +221,10 @@
 
         const statusEl = document.getElementById("detail-day-status");
         if (statusEl) {
-            if (info.badgeText) {
-                statusEl.textContent = `Ngày ${info.badgeText}`;
-            } else if (info.fortuneStatus === "good") {
-                statusEl.textContent = "Ngày Hoàng Đạo";
-            } else if (info.fortuneStatus === "bad") {
-                statusEl.textContent = "Ngày Hắc Đạo";
-            } else {
-                statusEl.textContent = "Ngày bình thường";
-            }
+            if (info.badgeText) statusEl.textContent = `Ngày ${info.badgeText}`;
+            else if (info.fortuneStatus === "good") statusEl.textContent = "Ngày Hoàng Đạo";
+            else if (info.fortuneStatus === "bad") statusEl.textContent = "Ngày Hắc Đạo";
+            else statusEl.textContent = "Ngày bình thường";
         }
 
         document.getElementById("detail-lunar-day").textContent = String(info.lunarDay);
@@ -543,7 +538,6 @@
             pill.onblur = () => highlightCellsByStatus(null);
         });
 
-        // ĐÃ ĐẶT ĐÚNG VỊ TRÍ BÊN TRONG initMonthCalendar():
         window.addEventListener("converter-jump-to-date", (e) => {
             if (e.detail) {
                 renderMonthCalendarGrid(e.detail.year, e.detail.month, e.detail.day);

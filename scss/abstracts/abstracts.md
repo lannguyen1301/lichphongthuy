@@ -767,6 +767,14 @@ $zodiac-active-filters: (
         /* 3. NHÓM TƯƠNG TÁC */
         --primary-hover: #{map.get($theme-data, "primary", 600)};
         --primary-active: #{map.get($theme-data, "primary", 700)};
+        --primary-soft-bg: #{rgba(map.get($theme-data, "primary", 500), 0.09)};
+        --primary-subtle-btn: #{rgba(map.get($theme-data, "primary", 800), 0.32)};
+
+        --hero-box-bg: #{rgba(map.get($theme-data, "primary", 700), 0.38)};
+        --hero-chip-bg: #{rgba(map.get($theme-data, "primary", 800), 0.45)};
+        --hero-border-color: #{rgba(map.get($theme-data, "primary", 200), 0.45)};
+        --hero-text-soft: #{map.get($theme-data, "primary", 100)};
+
         --focus-ring-color: var(--primary-color);
         --bg-disabled: #{map.get($theme-data, "neutral", 200)};
         --text-disabled: #{map.get($theme-data, "neutral", 400)};
@@ -797,6 +805,8 @@ $zodiac-active-filters: (
 
             --primary-hover: #{map.get($theme-data, "primary", 400)};
             --primary-active: #{map.get($theme-data, "primary", 300)};
+            --primary-soft-bg: #{rgba(map.get($theme-data, "primary", 400), 0.16)};
+            --primary-subtle-btn: rgba(255, 255, 255, 0.15);
             --bg-disabled: #{map.get($theme-data, "neutral", 800)};
             --text-disabled: #{map.get($theme-data, "neutral", 600)};
 

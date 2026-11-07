@@ -1,0 +1,538 @@
+// scss/components/_week-calendar.scss
+@use "../abstracts" as abs;
+
+.week-cal {
+    @extend %flexColumn;
+    gap: 2.4rem;
+    padding: 2.8rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.8rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(md) {
+        padding: 1.8rem;
+        border-radius: 2rem;
+        gap: 1.8rem;
+    }
+
+    // 1. Header & Thanh điều hướng Tuần (This week's hours style)
+    &__header {
+        @extend %flexColumn;
+        gap: 2rem;
+    }
+
+    &__intro {
+        @extend %flexColumn;
+        gap: 0.6rem;
+    }
+
+    &__title-row {
+        @extend %flexWrapGap;
+    }
+
+    &__week-badge,
+    &__lunar-badge {
+        @extend %inlineFlexCenter;
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    &__lunar-badge {
+        color: var(--text-muted);
+    }
+
+    &__heading {
+        font-size: clamp(2.4rem, 3.2vw, 3.4rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+        letter-spacing: -0.02em;
+    }
+
+    &__subtitle {
+        font-size: 1.45rem;
+        color: var(--text-muted);
+    }
+
+    &__toolbar {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        padding: 1.2rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+
+        @include abs.screen(md) {
+            border-radius: 1.8rem;
+            justify-content: center;
+        }
+    }
+
+    &__nav-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__toolbar-center {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+
+    &__range-label {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__today-btn {
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 700;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    // 2. Bố cục Bento Bất Đối Xứng: Cột Trái (Hero Card) + Cột Phải (Lưới 2 cột)
+    &__body {
+        display: grid;
+        grid-template-columns: 38rem 1fr;
+        align-items: stretch;
+        gap: 2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: 33rem 1fr;
+        }
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // CỘT TRÁI: Thẻ Hero Tiêu Điểm (Màu chủ đạo Ngũ Hành giống thẻ 10/15 Thursday màu cam)
+    &__hero {
+        position: relative;
+        overflow: hidden;
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 1.8rem;
+        padding: 2.8rem;
+        background-color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 2.4rem;
+        color: #ffffff;
+        box-shadow: 0 1.2rem 3rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            padding: 2rem;
+            border-radius: 2rem;
+        }
+
+        &-top {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 1rem;
+        }
+
+        &-badges {
+            @extend %flexBetween;
+            gap: 0.8rem;
+        }
+
+        &-pill,
+        &-fortune {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 99.9rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        &-pill {
+            background-color: #ffffff;
+            color: var(--primary-color);
+        }
+
+        &-fortune {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        &-date {
+            @extend %flexItemCenter;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.4rem;
+        }
+
+        &-solar {
+            font-size: clamp(5.2rem, 6vw, 6.8rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        &-weekday {
+            font-size: 2.4rem;
+            font-weight: 700;
+            opacity: 0.95;
+        }
+
+        &-lunar {
+            font-size: 1.4rem;
+            opacity: 0.92;
+        }
+
+        &-divider {
+            border: 0;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.28);
+        }
+
+        &-hours {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 0.5rem;
+        }
+
+        &-label {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            opacity: 0.85;
+        }
+
+        &-hours-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        &-subnote {
+            font-size: 1.3rem;
+            opacity: 0.85;
+        }
+
+        &-actions {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 1rem;
+        }
+
+        &-action-box {
+            padding: 1.2rem 1.4rem;
+            background-color: rgba(0, 0, 0, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 1.4rem;
+        }
+
+        &-action-title {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        &-action-text {
+            font-size: 1.35rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        &-footer {
+            position: relative;
+            z-index: 2;
+            @extend %flexBetween;
+            padding-top: 0.4rem;
+        }
+
+        &-link {
+            @extend %inlineFlexCenter;
+            gap: 0.8rem;
+            height: 4rem;
+            padding: 0 1.6rem;
+            background-color: #ffffff;
+            color: var(--primary-color);
+            border-radius: 99.9rem;
+            font-size: 1.35rem;
+            font-weight: 800;
+            @extend %transInteractive;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 0.6rem 1.6rem rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        &-zodiac {
+            position: absolute;
+            right: -1rem;
+            bottom: -1rem;
+            width: 15rem;
+            height: 15rem;
+            object-fit: contain;
+            opacity: 0.14;
+            filter: brightness(0) invert(1);
+            pointer-events: none;
+            z-index: 1;
+        }
+    }
+
+    // CỘT PHẢI: Lưới 2 cột chứa các thẻ ngày trong tuần
+    &__grid {
+        @extend %gridCols2;
+        gap: 1.4rem;
+
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        position: relative;
+        overflow: hidden;
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+        text-align: left;
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+            .week-cal__card-zodiac {
+                opacity: 0.42;
+                transform: scale(1.08) rotate(0deg);
+            }
+        }
+
+        // Trạng thái Ngày đang chọn (Active / aria-current="date")
+        &--active,
+        &[aria-current="date"] {
+            background-color: var(--body-bg);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+
+            .week-cal__card-day {
+                color: var(--primary-color);
+            }
+        }
+
+        // Thẻ Chủ Nhật trải ngang 2 cột để lấp đầy lưới Bento 2 cột
+        &--wide {
+            @extend %gridColFull;
+
+            .week-cal__card-wide-body {
+                @extend %gridCols2;
+                gap: 1.6rem;
+                width: 100%;
+
+                @include abs.screen(sm) {
+                    grid-template-columns: 1fr;
+                    gap: 1rem;
+                }
+            }
+        }
+
+        &.is-highlighted {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+        }
+
+        &.is-dimmed {
+            opacity: 0.22;
+            transform: scale(0.98);
+        }
+
+        &-head {
+            position: relative;
+            z-index: 2;
+            @extend %flexBetween;
+            align-items: flex-start;
+            gap: 0.8rem;
+            width: 100%;
+        }
+
+        &-title-group {
+            @extend %flexColumn;
+            gap: 0.2rem;
+        }
+
+        &-day {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--text-color);
+
+            &--sun {
+                color: var(--color-danger);
+            }
+        }
+
+        &-sub {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        &-section {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 0.2rem;
+        }
+
+        &-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        &-hours {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            @extend %textClamp2;
+        }
+
+        &-meta {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 0.4rem;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--border-color);
+            font-size: 1.25rem;
+            width: 100%;
+        }
+
+        &-do {
+            color: var(--color-success);
+
+            b {
+                color: var(--text-color);
+            }
+        }
+
+        &-dont {
+            color: var(--color-danger);
+
+            b {
+                color: var(--text-color);
+            }
+        }
+
+        &-zodiac {
+            position: absolute;
+            right: 0.8rem;
+            bottom: 0.8rem;
+            width: 4.8rem;
+            height: 4.8rem;
+            object-fit: contain;
+            opacity: 0.14;
+            filter: var(--zodiac-filter);
+            transform: scale(0.88) rotate(-8deg);
+            pointer-events: none;
+            z-index: 1;
+            transition:
+                transform 0.35s ease,
+                opacity 0.35s ease;
+        }
+    }
+
+    &__badge {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        font-size: 1.15rem;
+        font-weight: 800;
+        @extend %textNoWrap;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &--good {
+            background-color: rgba(234, 179, 8, 0.16);
+            color: #b45309;
+        }
+
+        &--bad {
+            background-color: rgba(107, 114, 128, 0.16);
+            color: var(--text-muted);
+        }
+
+        &--today {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    // 3. Footer chú thích & Ghi chú cuối bảng
+    &__footer {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    &__legend {
+        padding-top: 0;
+    }
+
+    &__footnote {
+        padding: 0.8rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        color: var(--text-muted);
+    }
+}

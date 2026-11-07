@@ -1,11 +1,11 @@
 // assets/js/header.js
-// Chuyên trách duy nhất templates/header.html: Sticky Scroll, Đồng hồ thời gian thực, Dropdown Header & Theme
+// Chuyên trách duy nhất Header: Sticky Scroll, Đồng hồ thời gian thực, Dropdown Ngôn ngữ & Theme Ngũ hành
 (() => {
     const THEME_STORAGE_KEY = "feng_shui_theme";
     let isHeaderGlobalBound = false;
     let clockTimer = null;
 
-    // Khôi phục Theme Ngũ hành ngay lập tức
+    // 1. Khôi phục Theme Ngũ hành từ localStorage
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "earth";
     document.documentElement.setAttribute("data-theme", savedTheme);
 
@@ -20,13 +20,12 @@
             btn.setAttribute("aria-pressed", String(Boolean(isMatch)));
         });
 
-        // Phát sự kiện để footer.js hoặc các component khác tự đồng bộ trạng thái
         window.dispatchEvent(new CustomEvent("theme-changed", { detail: { theme: selectedTheme } }));
     };
 
-    // Xuất hàm đổi theme toàn cục để footer.js gọi khi cần
     window.setFengShuiTheme = applyTheme;
 
+    // 2. Cập nhật Ngày & Giờ thực trên Header
     const updateHeaderClock = () => {
         const dateEl = document.getElementById("current-date");
         const timeEl = document.getElementById("current-time");
@@ -48,33 +47,22 @@
         timeEl.setAttribute("datetime", `${hh}:${min}:${ss}`);
     };
 
+    // 3. Khởi tạo Header
     const initHeader = () => {
         const header = document.getElementById("header") || document.getElementById("site-header");
         if (!header) return;
 
         const activeTheme = document.documentElement.getAttribute("data-theme") || "earth";
-        const widgetBtn = document.getElementById("widget-trigger-btn");
         const dropdowns = header.querySelectorAll(".js-header-dropdown");
         const themeBtns = header.querySelectorAll(".header__theme-btn");
 
         header.classList.toggle("header--scrolled", window.scrollY > 10);
 
-        if (widgetBtn) {
-            widgetBtn.onclick = () => {
-                const isExpanded = widgetBtn.getAttribute("aria-expanded") === "true";
-                const nextState = !isExpanded;
-                widgetBtn.classList.toggle("is-active", nextState);
-                widgetBtn.setAttribute("aria-expanded", String(nextState));
-            };
-        }
-
         dropdowns.forEach((current) => {
             current.ontoggle = () => {
                 if (current.open) {
                     document.querySelectorAll(".js-header-dropdown[open], .js-cal-dropdown[open]").forEach((other) => {
-                        if (other !== current) {
-                            other.removeAttribute("open");
-                        }
+                        if (other !== current) other.removeAttribute("open");
                     });
                 }
             };
@@ -96,6 +84,7 @@
         clockTimer = setInterval(updateHeaderClock, 1000);
     };
 
+    // 4. Sự kiện cuộn trang & đóng Dropdown
     const bindHeaderGlobalListeners = () => {
         if (isHeaderGlobalBound) return;
         isHeaderGlobalBound = true;
@@ -113,9 +102,7 @@
 
         document.addEventListener("click", (e) => {
             document.querySelectorAll(".js-header-dropdown[open], .js-cal-dropdown[open]").forEach((dropdown) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.removeAttribute("open");
-                }
+                if (!dropdown.contains(e.target)) dropdown.removeAttribute("open");
             });
         });
 

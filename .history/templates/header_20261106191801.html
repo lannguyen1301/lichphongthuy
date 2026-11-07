@@ -1,0 +1,227 @@
+<!-- templates/header.html -->
+<div class="header__container container">
+    <div class="header__left">
+        <div class="header__logo logo">
+            <a href="./index.html" class="header__logo-link">
+                <img src="./assets/icons/logo.svg" alt="Lịch Phong Thủy - Trang chủ" class="header__logo-img" />
+            </a>
+        </div>
+
+        <div class="header__widget">
+            <button type="button" class="header__widget-btn" id="widget-trigger-btn"
+                aria-label="Mở tiện ích đổi ngày Âm Dương nhanh" aria-haspopup="dialog" aria-expanded="false"
+                aria-controls="converter-modal">
+                <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" class="header__widget-icon icon" />
+                <span class="header__widget-label">Đổi Âm/Dương</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="header__right">
+        <div class="header__datetime-wrapper d-lg-none" role="group" aria-label="Thời gian hiện tại">
+            <div class="header__date-group">
+                <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true" class="header__date-icon icon" />
+                <time datetime="2026-11-03" class="header__date-text" id="current-date">03/11/2026</time>
+            </div>
+            <div class="header__time-group">
+                <img src="./assets/icons/clock.svg" alt="" aria-hidden="true" class="header__time-icon icon" />
+                <time datetime="14:12:00" class="header__time-text" id="current-time">14:12:00</time>
+            </div>
+        </div>
+
+        <div class="header__lang-group">
+            <details class="header__lang-details js-header-dropdown">
+                <summary class="header__lang-summary" aria-label="Chọn ngôn ngữ, hiện tại là Tiếng Việt">
+                    <img src="./assets/icons/global.svg" alt="" aria-hidden="true" class="header__lang-icon icon" />
+                    <span class="header__lang-current">VN</span>
+                    <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true"
+                        class="header__lang-arrow icon" />
+                </summary>
+                <ul class="header__lang-list">
+                    <li class="header__lang-item">
+                        <a href="#!" lang="vi" aria-current="true"
+                            class="header__lang-link header__lang-link--active">VN</a>
+                    </li>
+                    <li class="header__lang-item">
+                        <a href="#!" lang="en" class="header__lang-link">EN</a>
+                    </li>
+                    <li class="header__lang-item">
+                        <a href="#!" lang="ja" class="header__lang-link">JP</a>
+                    </li>
+                </ul>
+            </details>
+        </div>
+
+        <div class="header__theme-group">
+            <details class="header__theme-details js-header-dropdown">
+                <summary class="header__theme-summary" aria-label="Chọn giao diện Ngũ hành">
+                    <img src="./assets/icons/theme.svg" alt="" aria-hidden="true" class="header__theme-icon icon" />
+                </summary>
+                <ul class="header__theme-list">
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="earth" aria-pressed="true"
+                            class="btn header__theme-btn is-active">
+                            <img src="./assets/icons/earth.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon" />
+                            <span>Thổ</span>
+                        </button>
+                    </li>
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="fire" aria-pressed="false" class="btn header__theme-btn">
+                            <img src="./assets/icons/fire.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon" />
+                            <span>Hoả</span>
+                        </button>
+                    </li>
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="metal" aria-pressed="false" class="btn header__theme-btn">
+                            <img src="./assets/icons/metal.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon" />
+                            <span>Kim</span>
+                        </button>
+                    </li>
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="water" aria-pressed="false" class="btn header__theme-btn">
+                            <img src="./assets/icons/water.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon" />
+                            <span>Thuỷ</span>
+                        </button>
+                    </li>
+                    <li class="header__theme-item">
+                        <button type="button" data-theme="wood" aria-pressed="false" class="btn header__theme-btn">
+                            <img src="./assets/icons/wood.svg" alt="" aria-hidden="true"
+                                class="header__theme-icon icon" />
+                            <span>Mộc</span>
+                        </button>
+                    </li>
+                </ul>
+            </details>
+        </div>
+
+        <div class="header__auth">
+            <a href="./sign-in.html" class="btn btn--login header__auth-btn">Đăng nhập</a>
+        </div>
+
+        <button type="button" class="header__burger" id="burger-btn" aria-label="Mở danh mục Xem Ngày Tốt"
+            aria-expanded="false" aria-controls="calendar-sidebar">
+            <span class="header__burger-bar"></span>
+            <span class="header__burger-bar"></span>
+            <span class="header__burger-bar"></span>
+        </button>
+    </div>
+</div>
+
+<!-- MODAL TIỆN ÍCH ĐỔI NGÀY ÂM - DƯƠNG NHANH (GIAI ĐOẠN 3) -->
+<div class="converter-modal" id="converter-modal" role="dialog" aria-modal="true"
+    aria-labelledby="converter-modal-title" hidden>
+    <div class="converter-modal__backdrop" id="converter-modal-backdrop" aria-hidden="true"></div>
+
+    <div class="converter-modal__dialog" role="document">
+        <!-- 1. Header của Modal -->
+        <header class="converter-modal__header">
+            <div class="converter-modal__title-wrap">
+                <span class="converter-modal__badge">Tiện ích Vạn Niên</span>
+                <h2 class="converter-modal__title" id="converter-modal-title">Đổi Ngày Âm &#8644; Dương</h2>
+            </div>
+
+            <button type="button" class="converter-modal__close-btn" id="converter-modal-close"
+                aria-label="Đóng hộp thoại đổi ngày" title="Đóng (Esc)">
+                &#10005;
+            </button>
+        </header>
+
+        <!-- 2. Thanh chọn chiều quy đổi (Dương -> Âm hoặc Âm -> Dương) -->
+        <div class="converter-modal__tabs" role="tablist" aria-label="Chọn chiều quy đổi lịch">
+            <button type="button" role="tab" aria-selected="true" class="converter-modal__tab is-active"
+                data-convert-mode="solar2lunar" id="tab-solar2lunar">
+                Dương lịch &#8594; Âm lịch
+            </button>
+            <button type="button" role="tab" aria-selected="false" class="converter-modal__tab"
+                data-convert-mode="lunar2solar" id="tab-lunar2solar">
+                Âm lịch &#8594; Dương lịch
+            </button>
+        </div>
+
+        <!-- 3. Bộ chọn Ngày / Tháng / Năm -->
+        <form class="converter-modal__form" id="converter-form" novalidate>
+            <div class="converter-modal__inputs">
+                <div class="converter-modal__field">
+                    <label for="conv-day" class="converter-modal__label" id="conv-day-label">Ngày Dương</label>
+                    <select id="conv-day" class="converter-modal__select"></select>
+                </div>
+
+                <div class="converter-modal__field">
+                    <label for="conv-month" class="converter-modal__label" id="conv-month-label">Tháng Dương</label>
+                    <select id="conv-month" class="converter-modal__select"></select>
+                </div>
+
+                <div class="converter-modal__field">
+                    <label for="conv-year" class="converter-modal__label" id="conv-year-label">Năm</label>
+                    <select id="conv-year" class="converter-modal__select"></select>
+                </div>
+            </div>
+
+            <!-- Tùy chọn Tháng Nhuận (Chỉ hiện khi đang ở chế độ Âm lịch -> Dương lịch) -->
+            <div class="converter-modal__leap-row" id="conv-leap-row" hidden>
+                <label class="converter-modal__leap-label" for="conv-leap-checkbox">
+                    <input type="checkbox" id="conv-leap-checkbox" class="converter-modal__checkbox" />
+                    <span>Là tháng nhuận Âm lịch (nếu năm đó có nhuận)</span>
+                </label>
+            </div>
+        </form>
+
+        <!-- 4. Khối Bento Hiển thị Kết quả Quy đổi & Phong Thủy -->
+        <section class="converter-modal__result" aria-live="polite">
+            <div class="converter-modal__result-main">
+                <div class="converter-modal__result-box converter-modal__result-box--solar">
+                    <span class="converter-modal__result-tag">Dương lịch</span>
+                    <strong class="converter-modal__result-num" id="conv-res-solar">04/11/2026</strong>
+                    <span class="converter-modal__result-sub" id="conv-res-weekday">THỨ TƯ • WEDNESDAY</span>
+                </div>
+
+                <div class="converter-modal__result-arrow" aria-hidden="true">&#8644;</div>
+
+                <div class="converter-modal__result-box converter-modal__result-box--lunar">
+                    <span class="converter-modal__result-tag" id="conv-res-lunar-tag">Âm lịch (Tháng Đủ)</span>
+                    <strong class="converter-modal__result-num" id="conv-res-lunar">26/09/2026</strong>
+                    <span class="converter-modal__result-sub" id="conv-res-year-canchi">Năm Bính Ngọ</span>
+                </div>
+            </div>
+
+            <div class="converter-modal__meta-grid">
+                <div class="converter-modal__meta-item">
+                    <span>Can chi ngày:</span>
+                    <strong id="conv-res-day-canchi">Nhâm Ngọ</strong>
+                </div>
+                <div class="converter-modal__meta-item">
+                    <span>Can chi tháng:</span>
+                    <strong id="conv-res-month-canchi">Mậu Tuất</strong>
+                </div>
+                <div class="converter-modal__meta-item">
+                    <span>Mệnh ngày:</span>
+                    <strong id="conv-res-napam">Dương Liễu Mộc</strong>
+                </div>
+                <div class="converter-modal__meta-item">
+                    <span>Tiết khí &amp; Trực:</span>
+                    <strong id="conv-res-term-truc">Sương Giáng • Trực Thành</strong>
+                </div>
+            </div>
+
+            <div class="converter-modal__fortune-bar" id="conv-res-fortune">
+                🌟 Ngày Hoàng Đạo — Giờ tốt: Tý (23-1), Sửu (1-3), Mão (5-7), Ngọ (11-13), Thân (15-17), Dậu (17-19)
+            </div>
+        </section>
+
+        <!-- 5. Footer hành động của Modal -->
+        <footer class="converter-modal__footer">
+            <button type="button" class="btn converter-modal__today-btn" id="conv-btn-today">
+                Về Hôm Nay
+            </button>
+
+            <button type="button" class="btn converter-modal__jump-btn" id="conv-btn-jump">
+                <span>Xem chi tiết trên Lịch</span>
+                <span aria-hidden="true">&#8594;</span>
+            </button>
+        </footer>
+    </div>
+</div>

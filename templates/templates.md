@@ -3,7 +3,6 @@
 ## header.html
 
 ```html
-<!-- templates/header.html -->
 <div class="header__container container">
     <div class="header__left">
         <div class="header__logo logo">
@@ -32,7 +31,7 @@
         <div class="header__datetime-wrapper d-lg-none" role="group" aria-label="Thời gian hiện tại">
             <div class="header__date-group">
                 <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true" class="header__date-icon icon" />
-                <time datetime="2026-11-03" class="header__date-text" id="current-date">03/11/2026</time>
+                <time datetime="2026-11-06" class="header__date-text" id="current-date">06/11/2026</time>
             </div>
             <div class="header__time-group">
                 <img src="./assets/icons/clock.svg" alt="" aria-hidden="true" class="header__time-icon icon" />
@@ -157,7 +156,7 @@
     </div>
 </div>
 
-<!-- MODAL TIỆN ÍCH ĐỔI NGÀY ÂM - DƯƠNG NHANH (GIAI ĐOẠN 3) -->
+<!-- ==================== MODAL BENTO ĐỔI NGÀY ÂM - DƯƠNG (GIAI ĐOẠN 3 HOÀN THIỆN) ==================== -->
 <div
     class="converter-modal"
     id="converter-modal"
@@ -169,11 +168,42 @@
     <div class="converter-modal__backdrop" id="converter-modal-backdrop" aria-hidden="true"></div>
 
     <div class="converter-modal__dialog" role="document">
-        <!-- 1. Header của Modal -->
+        <!-- 1. Header Modal (Đã tăng khoảng cách trên/dưới thoáng rộng theo Ảnh 2) -->
         <header class="converter-modal__header">
             <div class="converter-modal__title-wrap">
-                <span class="converter-modal__badge">Tiện ích Vạn Niên</span>
+                <span class="converter-modal__badge">
+                    <img
+                        src="./assets/icons/sparkle.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="converter-modal__badge-icon"
+                    />
+                    <span>Tiện ích Vạn Niên</span>
+                </span>
                 <h2 class="converter-modal__title" id="converter-modal-title">Đổi Ngày Âm &#8644; Dương</h2>
+            </div>
+
+            <div class="converter-modal__tabs" role="tablist" aria-label="Chọn chiều quy đổi lịch">
+                <button
+                    type="button"
+                    role="tab"
+                    aria-selected="true"
+                    class="converter-modal__tab is-active"
+                    data-convert-mode="solar2lunar"
+                    id="tab-solar2lunar"
+                >
+                    Dương lịch &#8594; Âm lịch
+                </button>
+                <button
+                    type="button"
+                    role="tab"
+                    aria-selected="false"
+                    class="converter-modal__tab"
+                    data-convert-mode="lunar2solar"
+                    id="tab-lunar2solar"
+                >
+                    Âm lịch &#8594; Dương lịch
+                </button>
             </div>
 
             <button
@@ -187,106 +217,316 @@
             </button>
         </header>
 
-        <!-- 2. Thanh chọn chiều quy đổi (Dương -> Âm hoặc Âm -> Dương) -->
-        <div class="converter-modal__tabs" role="tablist" aria-label="Chọn chiều quy đổi lịch">
-            <button
-                type="button"
-                role="tab"
-                aria-selected="true"
-                class="converter-modal__tab is-active"
-                data-convert-mode="solar2lunar"
-                id="tab-solar2lunar"
-            >
-                Dương lịch &#8594; Âm lịch
-            </button>
-            <button
-                type="button"
-                role="tab"
-                aria-selected="false"
-                class="converter-modal__tab"
-                data-convert-mode="lunar2solar"
-                id="tab-lunar2solar"
-            >
-                Âm lịch &#8594; Dương lịch
-            </button>
+        <!-- 2. Bộ 4 Cột Đồng Phẳng: Ngày | Tháng | Năm | Chế độ Tháng Nhuận (Triệt tiêu 100% chênh chiều cao ở Ảnh 3) -->
+        <div class="converter-modal__control-bar">
+            <div class="converter-modal__pickers">
+                <!-- Cột 1: Chọn Ngày (Lưới Bento 7 cột) -->
+                <div class="converter-modal__field">
+                    <span class="converter-modal__label" id="conv-day-label">Ngày Dương</span>
+                    <details class="converter-modal__dropdown js-cal-dropdown" id="conv-day-dropdown">
+                        <summary class="converter-modal__summary" aria-label="Chọn ngày">
+                            <span class="converter-modal__summary-main">
+                                <img
+                                    src="./assets/icons/calendar.svg"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="converter-modal__summary-icon icon"
+                                />
+                                <span id="conv-day-text">Ngày 06</span>
+                            </span>
+                            <img
+                                src="./assets/icons/arrow-down.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="converter-modal__arrow icon"
+                            />
+                        </summary>
+                        <div class="converter-modal__popover converter-modal__popover--day">
+                            <div class="converter-modal__popover-head">Chọn ngày trong tháng</div>
+                            <ul
+                                class="converter-modal__grid-options converter-modal__grid-options--days"
+                                id="conv-day-list"
+                                role="listbox"
+                            ></ul>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Cột 2: Chọn Tháng (Lưới Bento 3x4) -->
+                <div class="converter-modal__field">
+                    <span class="converter-modal__label" id="conv-month-label">Tháng Dương</span>
+                    <details class="converter-modal__dropdown js-cal-dropdown" id="conv-month-dropdown">
+                        <summary class="converter-modal__summary" aria-label="Chọn tháng">
+                            <span class="converter-modal__summary-main">
+                                <img
+                                    src="./assets/icons/calendarCheck.svg"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="converter-modal__summary-icon icon"
+                                />
+                                <span id="conv-month-text">Tháng 11</span>
+                            </span>
+                            <img
+                                src="./assets/icons/arrow-down.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="converter-modal__arrow icon"
+                            />
+                        </summary>
+                        <div class="converter-modal__popover converter-modal__popover--month">
+                            <div class="converter-modal__popover-head">Chọn tháng (1 - 12)</div>
+                            <ul
+                                class="converter-modal__grid-options converter-modal__grid-options--months"
+                                id="conv-month-list"
+                                role="listbox"
+                            ></ul>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Cột 3: Chọn Năm (Lưới Bento 4x3) -->
+                <div class="converter-modal__field">
+                    <span class="converter-modal__label" id="conv-year-label">Năm tra cứu</span>
+                    <details class="converter-modal__dropdown js-cal-dropdown" id="conv-year-dropdown">
+                        <summary class="converter-modal__summary" aria-label="Chọn năm">
+                            <span class="converter-modal__summary-main">
+                                <img
+                                    src="./assets/icons/clock.svg"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="converter-modal__summary-icon icon"
+                                />
+                                <span id="conv-year-text">Năm 2026</span>
+                            </span>
+                            <img
+                                src="./assets/icons/arrow-down.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="converter-modal__arrow icon"
+                            />
+                        </summary>
+                        <div class="converter-modal__popover converter-modal__popover--year">
+                            <div class="converter-modal__year-nav">
+                                <button
+                                    type="button"
+                                    class="converter-modal__year-step"
+                                    id="conv-year-prev-range"
+                                    title="Lùi 12 năm"
+                                >
+                                    &#10094;
+                                </button>
+                                <span class="converter-modal__year-range-label" id="conv-year-range-label"
+                                    >2020 - 2031</span
+                                >
+                                <button
+                                    type="button"
+                                    class="converter-modal__year-step"
+                                    id="conv-year-next-range"
+                                    title="Tiến 12 năm"
+                                >
+                                    &#10095;
+                                </button>
+                            </div>
+                            <ul
+                                class="converter-modal__grid-options converter-modal__grid-options--years"
+                                id="conv-year-list"
+                                role="listbox"
+                            ></ul>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Cột 4: Chế độ Tháng Nhuận (Luôn giữ cố định vị trí để không bao giờ bị giật/chênh chiều cao) -->
+                <div class="converter-modal__field" id="conv-leap-field">
+                    <span class="converter-modal__label" id="conv-leap-label">Chế độ tháng Âm</span>
+                    <button
+                        type="button"
+                        class="converter-modal__leap-toggle is-disabled"
+                        id="conv-leap-toggle-btn"
+                        aria-pressed="false"
+                        title="Chỉ dùng khi đổi từ Âm lịch sang Dương lịch"
+                    >
+                        <input
+                            type="checkbox"
+                            id="conv-leap-checkbox"
+                            class="converter-modal__checkbox"
+                            tabindex="-1"
+                            aria-hidden="true"
+                        />
+                        <span class="converter-modal__leap-text" id="conv-leap-status-text"
+                            >Tự động (Tháng thường)</span
+                        >
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <!-- 3. Bộ chọn Ngày / Tháng / Năm -->
-        <form class="converter-modal__form" id="converter-form" novalidate>
-            <div class="converter-modal__inputs">
-                <div class="converter-modal__field">
-                    <label for="conv-day" class="converter-modal__label" id="conv-day-label">Ngày Dương</label>
-                    <select id="conv-day" class="converter-modal__select"></select>
-                </div>
+        <!-- 3. Bento Dashboard Kết quả Quy đổi & Phong Thủy -->
+        <section class="converter-modal__bento-body" aria-live="polite">
+            <!-- TẦNG A: 2 Đảo Lớn Dương Lịch ⇄ Âm Lịch -->
+            <div class="converter-modal__hero-compare">
+                <article class="converter-modal__date-card converter-modal__date-card--solar">
+                    <div class="converter-modal__date-top">
+                        <span class="converter-modal__date-tag">Dương lịch</span>
+                        <span class="converter-modal__date-badge" id="conv-res-weekday">THỨ SÁU • FRIDAY</span>
+                    </div>
+                    <strong class="converter-modal__date-num" id="conv-res-solar">06/11/2026</strong>
+                    <span class="converter-modal__date-sub" id="conv-res-solar-full"
+                        >Tháng Mười Một (November) • Năm 2026</span
+                    >
+                    <img
+                        src="./assets/icons/calendar.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="converter-modal__date-watermark"
+                    />
+                </article>
 
-                <div class="converter-modal__field">
-                    <label for="conv-month" class="converter-modal__label" id="conv-month-label">Tháng Dương</label>
-                    <select id="conv-month" class="converter-modal__select"></select>
-                </div>
+                <button
+                    type="button"
+                    class="converter-modal__swap-btn"
+                    id="conv-swap-direction-btn"
+                    title="Đảo chiều quy đổi Âm ⇄ Dương"
+                    aria-label="Đảo chiều quy đổi Âm Dương"
+                >
+                    &#8644;
+                </button>
 
-                <div class="converter-modal__field">
-                    <label for="conv-year" class="converter-modal__label" id="conv-year-label">Năm</label>
-                    <select id="conv-year" class="converter-modal__select"></select>
-                </div>
+                <article class="converter-modal__date-card converter-modal__date-card--lunar">
+                    <div class="converter-modal__date-top">
+                        <span class="converter-modal__date-tag" id="conv-res-lunar-tag">Âm lịch • Tháng Đủ</span>
+                        <span
+                            class="converter-modal__date-badge converter-modal__date-badge--primary"
+                            id="conv-res-year-canchi"
+                            >Năm Bính Ngọ</span
+                        >
+                    </div>
+                    <strong class="converter-modal__date-num" id="conv-res-lunar">28/09/2026</strong>
+                    <span class="converter-modal__date-sub" id="conv-res-year-napam">Mệnh năm: Thiên Hà Thủy</span>
+                    <img
+                        src="./assets/icons/zodiac/horse.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="converter-modal__date-zodiac"
+                        id="conv-res-year-zodiac"
+                    />
+                </article>
             </div>
 
-            <!-- Tùy chọn Tháng Nhuận (Chỉ hiện khi đang ở chế độ Âm lịch -> Dương lịch) -->
-            <div class="converter-modal__leap-row" id="conv-leap-row" hidden>
-                <label class="converter-modal__leap-label" for="conv-leap-checkbox">
-                    <input type="checkbox" id="conv-leap-checkbox" class="converter-modal__checkbox" />
-                    <span>Là tháng nhuận Âm lịch (nếu năm đó có nhuận)</span>
-                </label>
+            <!-- TẦNG B: 4 Bento Cards Thông Số Cao Ráo, Thoáng Rộng (Không bị cắt chữ "...") -->
+            <div class="converter-modal__stats-grid">
+                <!-- Card 1: Can Chi Ngày -->
+                <article class="converter-modal__stat-card">
+                    <div class="converter-modal__stat-icon-box">
+                        <img
+                            src="./assets/icons/zodiac/monkey.svg"
+                            alt=""
+                            aria-hidden="true"
+                            class="converter-modal__stat-zodiac"
+                            id="conv-icon-day-zodiac"
+                        />
+                    </div>
+                    <div class="converter-modal__stat-content">
+                        <span class="converter-modal__stat-label">Can chi ngày</span>
+                        <strong class="converter-modal__stat-value" id="conv-res-day-canchi">Giáp Thân</strong>
+                        <span class="converter-modal__stat-sub" id="conv-res-day-status-sub">Ngày Hoàng Đạo</span>
+                    </div>
+                    <img
+                        src="./assets/icons/zodiac/monkey.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="converter-modal__stat-bg-zodiac"
+                        id="conv-bg-day-zodiac"
+                    />
+                </article>
+
+                <!-- Card 2: Can Chi Tháng -->
+                <article class="converter-modal__stat-card">
+                    <div class="converter-modal__stat-icon-box">
+                        <img
+                            src="./assets/icons/zodiac/dog.svg"
+                            alt=""
+                            aria-hidden="true"
+                            class="converter-modal__stat-zodiac"
+                            id="conv-icon-month-zodiac"
+                        />
+                    </div>
+                    <div class="converter-modal__stat-content">
+                        <span class="converter-modal__stat-label">Can chi tháng</span>
+                        <strong class="converter-modal__stat-value" id="conv-res-month-canchi">Mậu Tuất</strong>
+                        <span class="converter-modal__stat-sub" id="conv-res-month-lunar-sub">Tháng Chín (Đủ)</span>
+                    </div>
+                    <img
+                        src="./assets/icons/zodiac/dog.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="converter-modal__stat-bg-zodiac"
+                        id="conv-bg-month-zodiac"
+                    />
+                </article>
+
+                <!-- Card 3: Mệnh Ngày (Nạp Âm) -->
+                <article class="converter-modal__stat-card">
+                    <div class="converter-modal__stat-icon-box converter-modal__stat-icon-box--element">
+                        <img
+                            src="./assets/icons/water.svg"
+                            alt=""
+                            aria-hidden="true"
+                            class="converter-modal__stat-element-icon"
+                            id="conv-icon-element"
+                        />
+                    </div>
+                    <div class="converter-modal__stat-content">
+                        <span class="converter-modal__stat-label">Mệnh ngày (Nạp âm)</span>
+                        <strong class="converter-modal__stat-value" id="conv-res-napam">Tuyền Trung Thủy</strong>
+                        <span class="converter-modal__stat-sub" id="conv-res-element-sub">Hành Thủy • Linh hoạt</span>
+                    </div>
+                </article>
+
+                <!-- Card 4: Tiết Khí & Trực -->
+                <article class="converter-modal__stat-card">
+                    <div class="converter-modal__stat-icon-box">
+                        <img
+                            src="./assets/icons/sparkle.svg"
+                            alt=""
+                            aria-hidden="true"
+                            class="converter-modal__stat-element-icon"
+                        />
+                    </div>
+                    <div class="converter-modal__stat-content">
+                        <span class="converter-modal__stat-label">Tiết khí &amp; Trực</span>
+                        <strong class="converter-modal__stat-value" id="conv-res-term">Sương Giáng</strong>
+                        <span class="converter-modal__stat-sub" id="conv-res-truc">Trực Khai • Khởi đầu đại cát</span>
+                    </div>
+                </article>
             </div>
-        </form>
 
-        <!-- 4. Khối Bento Hiển thị Kết quả Quy đổi & Phong Thủy -->
-        <section class="converter-modal__result" aria-live="polite">
-            <div class="converter-modal__result-main">
-                <div class="converter-modal__result-box converter-modal__result-box--solar">
-                    <span class="converter-modal__result-tag">Dương lịch</span>
-                    <strong class="converter-modal__result-num" id="conv-res-solar">04/11/2026</strong>
-                    <span class="converter-modal__result-sub" id="conv-res-weekday">THỨ TƯ • WEDNESDAY</span>
+            <!-- TẦNG C: Lưới 6 Bento Cards Giờ Hoàng Đạo Cao Thoáng & Chữ "Giờ Giáp Tý" To Rõ -->
+            <div class="converter-modal__hours-section">
+                <div class="converter-modal__hours-head">
+                    <div class="converter-modal__hours-title-group">
+                        <span class="converter-modal__fortune-pill" id="conv-res-fortune-pill" data-fortune="good">
+                            <span class="converter-modal__fortune-dot" aria-hidden="true"></span>
+                            <span id="conv-res-fortune-title">Ngày Hoàng Đạo (Tốt)</span>
+                        </span>
+                        <h3 class="converter-modal__hours-heading">6 Khung Giờ Hoàng Đạo Trong Ngày</h3>
+                    </div>
+                    <span class="converter-modal__hours-note">Chọn giờ lành để xuất hành, khai trương, cầu tài</span>
                 </div>
 
-                <div class="converter-modal__result-arrow" aria-hidden="true">&#8644;</div>
-
-                <div class="converter-modal__result-box converter-modal__result-box--lunar">
-                    <span class="converter-modal__result-tag" id="conv-res-lunar-tag">Âm lịch (Tháng Đủ)</span>
-                    <strong class="converter-modal__result-num" id="conv-res-lunar">26/09/2026</strong>
-                    <span class="converter-modal__result-sub" id="conv-res-year-canchi">Năm Bính Ngọ</span>
-                </div>
-            </div>
-
-            <div class="converter-modal__meta-grid">
-                <div class="converter-modal__meta-item">
-                    <span>Can chi ngày:</span>
-                    <strong id="conv-res-day-canchi">Nhâm Ngọ</strong>
-                </div>
-                <div class="converter-modal__meta-item">
-                    <span>Can chi tháng:</span>
-                    <strong id="conv-res-month-canchi">Mậu Tuất</strong>
-                </div>
-                <div class="converter-modal__meta-item">
-                    <span>Mệnh ngày:</span>
-                    <strong id="conv-res-napam">Dương Liễu Mộc</strong>
-                </div>
-                <div class="converter-modal__meta-item">
-                    <span>Tiết khí &amp; Trực:</span>
-                    <strong id="conv-res-term-truc">Sương Giáng • Trực Thành</strong>
-                </div>
-            </div>
-
-            <div class="converter-modal__fortune-bar" id="conv-res-fortune">
-                🌟 Ngày Hoàng Đạo — Giờ tốt: Tý (23-1), Sửu (1-3), Mão (5-7), Ngọ (11-13), Thân (15-17), Dậu (17-19)
+                <div class="converter-modal__hours-grid" id="conv-res-hours-grid"></div>
             </div>
         </section>
 
-        <!-- 5. Footer hành động của Modal -->
+        <!-- 4. Footer Modal -->
         <footer class="converter-modal__footer">
-            <button type="button" class="btn converter-modal__today-btn" id="conv-btn-today">Về Hôm Nay</button>
+            <button type="button" class="btn converter-modal__today-btn" id="conv-btn-today">
+                <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true" class="icon" />
+                <span>Về Hôm Nay</span>
+            </button>
 
             <button type="button" class="btn converter-modal__jump-btn" id="conv-btn-jump">
-                <span>Xem chi tiết trên Lịch</span>
+                <span>Xem chi tiết ngày này trên Lịch</span>
                 <span aria-hidden="true">&#8594;</span>
             </button>
         </footer>
@@ -335,7 +575,7 @@
                 </a>
             </li>
             <li class="sidebar__item">
-                <a href="#!" class="sidebar__link" data-nav-page="week.html" title="Xem Lịch Tuần">
+                <a href="./week.html" class="sidebar__link" data-nav-page="week.html" title="Xem Lịch Tuần">
                     <img src="./assets/icons/calendarRange.svg" alt="" aria-hidden="true" class="sidebar__img icon" />
                     <span class="sidebar__tooltip">Tuần</span>
                 </a>
@@ -7297,6 +7537,618 @@
             <i class="month-cal__legend-dot month-cal__legend-dot--today" aria-hidden="true"></i>
             <span>Hôm Nay</span>
         </button>
+    </footer>
+</section>
+```
+
+### week-calendar.html
+
+```html
+<!-- templates/week-calendar.html -->
+<section
+    class="week-cal"
+    id="week-cal-app"
+    aria-label="Lịch tuần phong thủy từ ngày 02/11/2026 đến 08/11/2026"
+    data-week-number="45"
+    data-week-start="2026-11-02"
+    data-week-end="2026-11-08"
+    data-active-date="2026-11-06"
+>
+    <!-- 1. HEADER & THANH ĐIỀU HƯỚNG TUẦN (Đã thu gọn khoảng cách quanh thanh điều hướng) -->
+    <header class="week-cal__header">
+        <div class="week-cal__intro">
+            <div class="week-cal__title-row">
+                <span class="week-cal__week-badge" id="week-number-badge" title="Số thứ tự tuần trong năm 2026">
+                    Tuần thứ 45 của năm
+                </span>
+                <span class="week-cal__lunar-badge" title="Tháng Âm lịch tương ứng">
+                    Tháng 9 <abbr title="Âm lịch">ÂL</abbr> • Năm Bính Ngọ
+                </span>
+            </div>
+
+            <h1 class="week-cal__heading" id="week-main-heading">
+                Tuần từ <time datetime="2026-11-02" id="week-start-text">02/11/2026</time> đến
+                <time datetime="2026-11-08" id="week-end-text">08/11/2026</time>
+            </h1>
+        </div>
+
+        <!-- Thanh điều hướng gọn gàng -->
+        <div class="week-cal__toolbar" role="group" aria-label="Điều hướng chuyển tuần">
+            <button
+                type="button"
+                class="week-cal__nav-btn"
+                id="week-prev-btn"
+                data-week-step="-1"
+                aria-label="Xem tuần trước (26/10 - 01/11)"
+                title="Chuyển về tuần trước"
+            >
+                <span aria-hidden="true">&#10094;</span>
+                <span>Tuần trước</span>
+            </button>
+
+            <div class="week-cal__toolbar-center">
+                <strong class="week-cal__range-label" id="week-range-short" aria-live="polite">
+                    Thứ Hai, 02/11 – Chủ Nhật, 08/11
+                </strong>
+                <button
+                    type="button"
+                    class="btn week-cal__today-btn"
+                    id="week-today-btn"
+                    data-target-date="2026-11-06"
+                    title="Quay về ngày hôm nay (Thứ Sáu, 06/11/2026)"
+                >
+                    Hôm nay
+                </button>
+            </div>
+
+            <button
+                type="button"
+                class="week-cal__nav-btn"
+                id="week-next-btn"
+                data-week-step="1"
+                aria-label="Xem tuần sau (09/11 - 15/11)"
+                title="Chuyển sang tuần tiếp theo"
+            >
+                <span>Tuần sau</span>
+                <span aria-hidden="true">&#10095;</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. KHỐI BENTO CHÍNH: CỘT TRÁI (THẺ DETAIL FLAT UI) + CỘT PHẢI (LƯỚI 7 NGÀY) -->
+    <div class="week-cal__body">
+        <!-- ==================== CỘT TRÁI: THẺ DETAIL (FLAT UI, FLEX SPACE-BETWEEN) ==================== -->
+        <article
+            class="week-cal__hero"
+            id="week-hero-card"
+            aria-label="Chi tiết ngày đang chọn trong tuần"
+            aria-live="polite"
+            aria-atomic="true"
+        >
+            <!-- Nhóm 1: Badges trạng thái + Số Ngày Lớn + Âm lịch + 2 Badge ngang Tiết khí & Trực -->
+            <div class="week-cal__hero-top">
+                <div class="week-cal__hero-badges">
+                    <span class="week-cal__hero-pill" id="hero-day-tag">Hôm nay • Đang chọn</span>
+                    <span
+                        class="week-cal__hero-fortune"
+                        id="hero-day-fortune"
+                        data-fortune="normal"
+                        title="Trạng thái cát hung của ngày"
+                    >
+                        <i class="week-cal__badge-dot week-cal__badge-dot--today" aria-hidden="true"></i>
+                        <span id="hero-day-fortune-text">Ngày Bình Thường</span>
+                    </span>
+                </div>
+
+                <div class="week-cal__hero-date">
+                    <time datetime="2026-11-06" class="week-cal__hero-solar" id="hero-solar-display">06/11</time>
+                    <strong class="week-cal__hero-weekday" id="hero-weekday-display">Thứ Sáu</strong>
+                </div>
+
+                <p class="week-cal__hero-lunar" id="hero-lunar-display">
+                    Ngày 28/9 Âm lịch • <strong>Giáp Thân</strong> (Tuyền Trung Thủy)
+                </p>
+
+                <!-- 2 Thẻ nhỏ nằm ngang cho Tiết khí & Trực (Đồng bộ style với badge Hoàng Đạo) -->
+                <div class="week-cal__hero-meta-pills" aria-label="Tiết khí và Trực trong ngày">
+                    <span
+                        class="week-cal__hero-meta-badge"
+                        id="hero-term-badge"
+                        title="Tiết khí hiện tại theo lịch thiên văn"
+                    >
+                        <i class="week-cal__badge-dot week-cal__badge-dot--light" aria-hidden="true"></i>
+                        <span>Tiết khí: <strong id="hero-term-val">Sương Giáng</strong></span>
+                    </span>
+                    <span
+                        class="week-cal__hero-meta-badge"
+                        id="hero-truc-badge"
+                        title="Thập Nhị Kiến Trừ (Trực của ngày)"
+                    >
+                        <i class="week-cal__badge-dot week-cal__badge-dot--light" aria-hidden="true"></i>
+                        <span>Trực: <strong id="hero-truc-val">Thành</strong></span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Nhóm 2: Giờ tốt (Có margin-bottom tách tiêu đề rõ ràng) -->
+            <div class="week-cal__hero-hours">
+                <h2 class="week-cal__hero-label">Giờ tốt (Hoàng Đạo)</h2>
+                <p class="week-cal__hero-hours-val" id="hero-good-hours">
+                    Tý (23-1), Sửu (1-3), Thìn (7-9), Tỵ (9-11), Mùi (13-15), Tuất (19-21)
+                </p>
+            </div>
+
+            <!-- Nhóm 3: Tái sử dụng cụm Việc nên làm / Không nên làm từ index.html theo phong cách Flat UI (Không nền) -->
+            <div class="fengshui-actions week-cal__hero-actions">
+                <div class="fengshui-actions__box fengshui-actions__box--do week-cal__flat-action">
+                    <div class="fengshui-actions__header">
+                        <h3 class="fengshui-actions__badge">Việc nên làm</h3>
+                        <span class="fengshui-actions__icon" aria-hidden="true">&#10003;</span>
+                    </div>
+                    <ul class="fengshui-actions__list" id="hero-do-list" aria-label="Danh sách việc nên làm">
+                        <li class="fengshui-actions__chip">Xuất hành</li>
+                        <li class="fengshui-actions__chip">Cầu tài</li>
+                        <li class="fengshui-actions__chip">Gặp gỡ</li>
+                        <li class="fengshui-actions__chip">Di chuyển</li>
+                    </ul>
+                </div>
+
+                <div class="fengshui-actions__box fengshui-actions__box--dont week-cal__flat-action">
+                    <div class="fengshui-actions__header">
+                        <h3 class="fengshui-actions__badge">Việc nên tránh</h3>
+                        <span class="fengshui-actions__icon" aria-hidden="true">&#10005;</span>
+                    </div>
+                    <ul class="fengshui-actions__list" id="hero-dont-list" aria-label="Danh sách việc nên tránh">
+                        <li class="fengshui-actions__chip">Động thổ</li>
+                        <li class="fengshui-actions__chip">An táng</li>
+                        <li class="fengshui-actions__chip">Sửa chữa</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Nhóm 4: Footer chứa Subtle Button (Nền tối nhẹ / trắng trong suốt 15%, chữ trắng, không viền) -->
+            <footer class="week-cal__hero-footer">
+                <a
+                    href="./index.html?date=2026-11-06"
+                    class="week-cal__hero-link"
+                    id="hero-detail-link"
+                    title="Mở Tờ Lịch Bloc chi tiết của ngày này"
+                >
+                    <span>Xem trên Lịch Bloc</span>
+                    <span aria-hidden="true">&#8594;</span>
+                </a>
+
+                <img
+                    src="./assets/icons/zodiac/monkey.svg"
+                    alt=""
+                    aria-hidden="true"
+                    class="week-cal__hero-zodiac"
+                    id="hero-zodiac-img"
+                />
+            </footer>
+        </article>
+
+        <!-- ==================== CỘT PHẢI: LƯỚI 2 CỘT 7 NGÀY TRONG TUẦN ==================== -->
+        <div
+            class="week-cal__grid"
+            id="week-days-grid"
+            role="group"
+            aria-label="Danh sách 7 ngày trong tuần (Dùng phím mũi tên để di chuyển)"
+        >
+            <!-- NGÀY 1: THỨ HAI, 2/11 (HOÀNG ĐẠO - CÓ CHẤM TRÒN ĐỒNG BỘ LEGEND) -->
+            <button
+                type="button"
+                class="week-cal__card day-card"
+                tabindex="-1"
+                aria-controls="week-hero-card"
+                data-date="2026-11-02"
+                data-solar="02/11"
+                data-weekday="Thứ Hai"
+                data-lunar="24/9"
+                data-canchi="Canh Thìn"
+                data-napam="Bạch Lạp Kim"
+                data-truc="Định"
+                data-term="Sương Giáng"
+                data-zodiac="dragon"
+                data-status="good"
+                data-fortune="good"
+                data-fortune-label="Hoàng Đạo"
+                data-good-hours="Tý (23-1), Thìn (7-9), Tỵ (9-11), Thân (15-17), Dậu (17-19), Hợi (21-23)"
+                data-do="Đính hôn, Ăn hỏi, Cưới gả, An sàng"
+                data-dont="Cầu phúc, Cầu tự, Mở kho, Xuất hành"
+                title="Thứ Hai, 02/11/2026 (24/9 ÂL - Canh Thìn) - Ngày Hoàng Đạo"
+            >
+                <div class="week-cal__card-head">
+                    <div class="week-cal__card-title-group">
+                        <strong class="week-cal__card-day">Thứ Hai, 2/11</strong>
+                        <span class="week-cal__card-sub">Ngày 24/9 âm • Canh Thìn</span>
+                    </div>
+                    <span class="week-cal__badge week-cal__badge--good">
+                        <i class="week-cal__badge-dot week-cal__badge-dot--good" aria-hidden="true"></i>
+                        <span>Hoàng Đạo</span>
+                    </span>
+                </div>
+
+                <div class="week-cal__card-section">
+                    <span class="week-cal__card-label">Giờ tốt</span>
+                    <p class="week-cal__card-hours">Tý (23-1), Thìn (7-9), Tỵ (9-11), Thân (15-17)...</p>
+                </div>
+
+                <div class="week-cal__card-meta">
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên làm</span>
+                        <p class="week-cal__card-do">Đính hôn, Ăn hỏi, Cưới gả, An sàng</p>
+                    </div>
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên tránh</span>
+                        <p class="week-cal__card-dont">Cầu phúc, Cầu tự, Mở kho, Xuất hành</p>
+                    </div>
+                </div>
+
+                <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true" class="week-cal__card-zodiac" />
+            </button>
+
+            <!-- NGÀY 2: THỨ BA, 3/11 -->
+            <button
+                type="button"
+                class="week-cal__card day-card"
+                tabindex="-1"
+                aria-controls="week-hero-card"
+                data-date="2026-11-03"
+                data-solar="03/11"
+                data-weekday="Thứ Ba"
+                data-lunar="25/9"
+                data-canchi="Tân Tỵ"
+                data-napam="Bạch Lạp Kim"
+                data-truc="Chấp"
+                data-term="Sương Giáng"
+                data-zodiac="snake"
+                data-status="normal"
+                data-fortune="normal"
+                data-fortune-label="Ngày Bình Thường"
+                data-good-hours="Sửu (1-3), Mão (5-7), Tỵ (9-11), Thân (15-17), Tuất (19-21), Hợi (21-23)"
+                data-do="Cưới gả, Di chuyển, Nhập trạch, An táng"
+                data-dont="Động thổ, Sửa chữa, Khai trương"
+                title="Thứ Ba, 03/11/2026 (25/9 ÂL - Tân Tỵ)"
+            >
+                <div class="week-cal__card-head">
+                    <div class="week-cal__card-title-group">
+                        <strong class="week-cal__card-day">Thứ Ba, 3/11</strong>
+                        <span class="week-cal__card-sub">Ngày 25/9 âm • Tân Tỵ</span>
+                    </div>
+                    <span class="week-cal__badge" hidden>Bình Thường</span>
+                </div>
+
+                <div class="week-cal__card-section">
+                    <span class="week-cal__card-label">Giờ tốt</span>
+                    <p class="week-cal__card-hours">Sửu (1-3), Mão (5-7), Tỵ (9-11), Thân (15-17)...</p>
+                </div>
+
+                <div class="week-cal__card-meta">
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên làm</span>
+                        <p class="week-cal__card-do">Cưới gả, Di chuyển, Nhập trạch, An táng</p>
+                    </div>
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên tránh</span>
+                        <p class="week-cal__card-dont">Động thổ, Sửa chữa, Khai trương</p>
+                    </div>
+                </div>
+
+                <img src="./assets/icons/zodiac/snake.svg" alt="" aria-hidden="true" class="week-cal__card-zodiac" />
+            </button>
+
+            <!-- NGÀY 3: THỨ TƯ, 4/11 -->
+            <button
+                type="button"
+                class="week-cal__card day-card"
+                tabindex="-1"
+                aria-controls="week-hero-card"
+                data-date="2026-11-04"
+                data-solar="04/11"
+                data-weekday="Thứ Tư"
+                data-lunar="26/9"
+                data-canchi="Nhâm Ngọ"
+                data-napam="Dương Liễu Mộc"
+                data-truc="Phá"
+                data-term="Sương Giáng"
+                data-zodiac="horse"
+                data-status="normal"
+                data-fortune="normal"
+                data-fortune-label="Ngày Bình Thường"
+                data-good-hours="Tý (23-1), Sửu (1-3), Mão (5-7), Ngọ (11-13), Thân (15-17), Dậu (17-19)"
+                data-do="Cầu tài, Giao dịch, Đàm phán, Ký kết"
+                data-dont="Động thổ, An táng, Sửa chữa"
+                title="Thứ Tư, 04/11/2026 (26/9 ÂL - Nhâm Ngọ)"
+            >
+                <div class="week-cal__card-head">
+                    <div class="week-cal__card-title-group">
+                        <strong class="week-cal__card-day">Thứ Tư, 4/11</strong>
+                        <span class="week-cal__card-sub">Ngày 26/9 âm • Nhâm Ngọ</span>
+                    </div>
+                    <span class="week-cal__badge" hidden>Bình Thường</span>
+                </div>
+
+                <div class="week-cal__card-section">
+                    <span class="week-cal__card-label">Giờ tốt</span>
+                    <p class="week-cal__card-hours">Tý (23-1), Sửu (1-3), Mão (5-7), Ngọ (11-13)...</p>
+                </div>
+
+                <div class="week-cal__card-meta">
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên làm</span>
+                        <p class="week-cal__card-do">Cầu tài, Giao dịch, Đàm phán, Ký kết</p>
+                    </div>
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên tránh</span>
+                        <p class="week-cal__card-dont">Động thổ, An táng, Sửa chữa</p>
+                    </div>
+                </div>
+
+                <img src="./assets/icons/zodiac/horse.svg" alt="" aria-hidden="true" class="week-cal__card-zodiac" />
+            </button>
+
+            <!-- NGÀY 4: THỨ NĂM, 5/11 (HẮC ĐẠO - CÓ CHẤM TRÒN ĐỒNG BỘ LEGEND) -->
+            <button
+                type="button"
+                class="week-cal__card day-card"
+                tabindex="-1"
+                aria-controls="week-hero-card"
+                data-date="2026-11-05"
+                data-solar="05/11"
+                data-weekday="Thứ Năm"
+                data-lunar="27/9"
+                data-canchi="Quý Mùi"
+                data-napam="Dương Liễu Mộc"
+                data-truc="Nguy"
+                data-term="Sương Giáng"
+                data-zodiac="goat"
+                data-status="bad"
+                data-fortune="bad"
+                data-fortune-label="Hắc Đạo"
+                data-good-hours="Dần (3-5), Mão (5-7), Tỵ (9-11), Mùi (13-15), Tuất (19-21), Hợi (21-23)"
+                data-do="Cầu phúc, Tế tự, Đính hôn, Cưới gả"
+                data-dont="Khai trương, Xuất hành, Giao dịch"
+                title="Thứ Năm, 05/11/2026 (27/9 ÂL - Quý Mùi) - Ngày Hắc Đạo"
+            >
+                <div class="week-cal__card-head">
+                    <div class="week-cal__card-title-group">
+                        <strong class="week-cal__card-day">Thứ Năm, 5/11</strong>
+                        <span class="week-cal__card-sub">Ngày 27/9 âm • Quý Mùi</span>
+                    </div>
+                    <span class="week-cal__badge week-cal__badge--bad">
+                        <i class="week-cal__badge-dot week-cal__badge-dot--bad" aria-hidden="true"></i>
+                        <span>Hắc Đạo</span>
+                    </span>
+                </div>
+
+                <div class="week-cal__card-section">
+                    <span class="week-cal__card-label">Giờ tốt</span>
+                    <p class="week-cal__card-hours">Dần (3-5), Mão (5-7), Tỵ (9-11), Mùi (13-15)...</p>
+                </div>
+
+                <div class="week-cal__card-meta">
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên làm</span>
+                        <p class="week-cal__card-do">Cầu phúc, Tế tự, Đính hôn, Cưới gả</p>
+                    </div>
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên tránh</span>
+                        <p class="week-cal__card-dont">Khai trương, Xuất hành, Giao dịch</p>
+                    </div>
+                </div>
+
+                <img src="./assets/icons/zodiac/goat.svg" alt="" aria-hidden="true" class="week-cal__card-zodiac" />
+            </button>
+
+            <!-- NGÀY 5: THỨ SÁU, 6/11 (ACTIVE - NỀN MÀU THEME MỜ 9%, VIỀN THEME) -->
+            <button
+                type="button"
+                class="week-cal__card day-card week-cal__card--today week-cal__card--active"
+                tabindex="0"
+                aria-current="date"
+                aria-controls="week-hero-card"
+                data-date="2026-11-06"
+                data-solar="06/11"
+                data-weekday="Thứ Sáu"
+                data-lunar="28/9"
+                data-canchi="Giáp Thân"
+                data-napam="Tuyền Trung Thủy"
+                data-truc="Thành"
+                data-term="Sương Giáng"
+                data-zodiac="monkey"
+                data-status="today"
+                data-fortune="normal"
+                data-fortune-label="Hôm Nay"
+                data-good-hours="Tý (23-1), Sửu (1-3), Thìn (7-9), Tỵ (9-11), Mùi (13-15), Tuất (19-21)"
+                data-do="Xuất hành, Cầu tài, Gặp gỡ, Di chuyển"
+                data-dont="Động thổ, An táng, Sửa chữa"
+                title="Hôm nay: Thứ Sáu, 06/11/2026 (28/9 ÂL - Giáp Thân)"
+            >
+                <div class="week-cal__card-head">
+                    <div class="week-cal__card-title-group">
+                        <strong class="week-cal__card-day">Thứ Sáu, 6/11</strong>
+                        <span class="week-cal__card-sub">Ngày 28/9 âm • Giáp Thân</span>
+                    </div>
+                    <span class="week-cal__badge week-cal__badge--today">
+                        <i class="week-cal__badge-dot week-cal__badge-dot--today" aria-hidden="true"></i>
+                        <span>Hôm Nay</span>
+                    </span>
+                </div>
+
+                <div class="week-cal__card-section">
+                    <span class="week-cal__card-label">Giờ tốt</span>
+                    <p class="week-cal__card-hours">Tý (23-1), Sửu (1-3), Thìn (7-9), Tỵ (9-11)...</p>
+                </div>
+
+                <div class="week-cal__card-meta">
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên làm</span>
+                        <p class="week-cal__card-do">Xuất hành, Cầu tài, Gặp gỡ, Di chuyển</p>
+                    </div>
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên tránh</span>
+                        <p class="week-cal__card-dont">Động thổ, An táng, Sửa chữa</p>
+                    </div>
+                </div>
+
+                <img src="./assets/icons/zodiac/monkey.svg" alt="" aria-hidden="true" class="week-cal__card-zodiac" />
+            </button>
+
+            <!-- NGÀY 6: THỨ BẢY, 7/11 (HOÀNG ĐẠO) -->
+            <button
+                type="button"
+                class="week-cal__card day-card"
+                tabindex="-1"
+                aria-controls="week-hero-card"
+                data-date="2026-11-07"
+                data-solar="07/11"
+                data-weekday="Thứ Bảy"
+                data-lunar="29/9"
+                data-canchi="Ất Dậu"
+                data-napam="Tuyền Trung Thủy"
+                data-truc="Thu"
+                data-term="Lập Đông"
+                data-zodiac="rooster"
+                data-status="good"
+                data-fortune="good"
+                data-fortune-label="Hoàng Đạo"
+                data-good-hours="Dần (3-5), Mão (5-7), Ngọ (11-13), Mùi (13-15), Dậu (17-19), Tý (23-1)"
+                data-do="Cầu phúc, Cầu tự, Đính hôn, Khai trương"
+                data-dont="Xuất hành, Sửa chữa, Mở kho"
+                title="Thứ Bảy, 07/11/2026 (29/9 ÂL - Ất Dậu) - Hoàng Đạo • Tiết Lập Đông"
+            >
+                <div class="week-cal__card-head">
+                    <div class="week-cal__card-title-group">
+                        <strong class="week-cal__card-day">Thứ Bảy, 7/11</strong>
+                        <span class="week-cal__card-sub">Ngày 29/9 âm • Ất Dậu</span>
+                    </div>
+                    <span class="week-cal__badge week-cal__badge--good">
+                        <i class="week-cal__badge-dot week-cal__badge-dot--good" aria-hidden="true"></i>
+                        <span>Hoàng Đạo</span>
+                    </span>
+                </div>
+
+                <div class="week-cal__card-section">
+                    <span class="week-cal__card-label">Giờ tốt</span>
+                    <p class="week-cal__card-hours">Dần (3-5), Mão (5-7), Ngọ (11-13), Mùi (13-15)...</p>
+                </div>
+
+                <div class="week-cal__card-meta">
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên làm</span>
+                        <p class="week-cal__card-do">Cầu phúc, Cầu tự, Đính hôn, Khai trương</p>
+                    </div>
+                    <div class="week-cal__card-meta-group">
+                        <span class="week-cal__card-meta-title">Nên tránh</span>
+                        <p class="week-cal__card-dont">Xuất hành, Sửa chữa, Mở kho</p>
+                    </div>
+                </div>
+
+                <img src="./assets/icons/zodiac/rooster.svg" alt="" aria-hidden="true" class="week-cal__card-zodiac" />
+            </button>
+
+            <!-- NGÀY 7: CHỦ NHẬT, 8/11 (.day-card--full-width CHIA 2 CỘT: TRÁI NGÀY/CAN CHI/GIỜ TỐT - PHẢI NÊN LÀM/NÊN TRÁNH) -->
+            <button
+                type="button"
+                class="week-cal__card day-card day-card--full-width"
+                tabindex="-1"
+                aria-controls="week-hero-card"
+                data-date="2026-11-08"
+                data-solar="08/11"
+                data-weekday="Chủ Nhật"
+                data-lunar="30/9"
+                data-canchi="Bính Tuất"
+                data-napam="Ốc Thượng Thổ"
+                data-truc="Khai"
+                data-term="Lập Đông"
+                data-zodiac="dog"
+                data-status="bad"
+                data-fortune="bad"
+                data-fortune-label="Hắc Đạo"
+                data-good-hours="Tý (23-1), Thìn (7-9), Tỵ (9-11), Thân (15-17), Dậu (17-19), Hợi (21-23)"
+                data-do="Đính hôn, Cưới gả, Giao dịch, Ký kết"
+                data-dont="Di chuyển, Xuất hành, Cầu phúc"
+                title="Chủ Nhật, 08/11/2026 (30/9 ÂL - Bính Tuất) - Ngày Hắc Đạo"
+            >
+                <!-- Cột Trái của thẻ Chủ Nhật: Thông tin Ngày / Can Chi / Giờ tốt -->
+                <div class="day-card__col-left">
+                    <div class="week-cal__card-head">
+                        <div class="week-cal__card-title-group">
+                            <strong class="week-cal__card-day week-cal__card-day--sun">Chủ Nhật, 8/11</strong>
+                            <span class="week-cal__card-sub">Ngày 30/9 âm • Bính Tuất (Ốc Thượng Thổ)</span>
+                        </div>
+                        <span class="week-cal__badge week-cal__badge--bad">
+                            <i class="week-cal__badge-dot week-cal__badge-dot--bad" aria-hidden="true"></i>
+                            <span>Hắc Đạo</span>
+                        </span>
+                    </div>
+
+                    <div class="week-cal__card-section">
+                        <span class="week-cal__card-label">Giờ tốt</span>
+                        <p class="week-cal__card-hours">
+                            Tý (23-1), Thìn (7-9), Tỵ (9-11), Thân (15-17), Dậu (17-19), Hợi (21-23)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Cột Phải của thẻ Chủ Nhật: Nên làm / Nên tránh lấp đầy khoảng trắng -->
+                <div class="day-card__col-right">
+                    <div class="week-cal__card-meta">
+                        <div class="week-cal__card-meta-group">
+                            <span class="week-cal__card-meta-title">Nên làm</span>
+                            <p class="week-cal__card-do">Đính hôn, Cưới gả, Giao dịch, Ký kết</p>
+                        </div>
+                        <div class="week-cal__card-meta-group">
+                            <span class="week-cal__card-meta-title">Nên tránh</span>
+                            <p class="week-cal__card-dont">Di chuyển, Xuất hành, Cầu phúc</p>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="./assets/icons/zodiac/dog.svg" alt="" aria-hidden="true" class="week-cal__card-zodiac" />
+            </button>
+        </div>
+    </div>
+
+    <!-- 3. THANH CHÚ THÍCH LEGEND ĐỒNG BỘ 100% HÌNH DÁNG & CHẤM TRÒN VỚI BADGE TRÊN THẺ -->
+    <footer class="week-cal__footer" aria-label="Bộ lọc nhanh và ghi chú lịch tuần">
+        <div class="month-cal__legend week-cal__legend" role="group" aria-label="Lọc nhanh ngày trong tuần">
+            <button
+                type="button"
+                class="month-cal__legend-pill week-cal__legend-badge week-cal__legend-badge--good"
+                data-filter="good"
+                aria-pressed="false"
+                title="Làm sáng các ngày Hoàng Đạo trong tuần"
+            >
+                <i class="week-cal__badge-dot week-cal__badge-dot--good" aria-hidden="true"></i>
+                <span>Hoàng Đạo</span>
+            </button>
+            <button
+                type="button"
+                class="month-cal__legend-pill week-cal__legend-badge week-cal__legend-badge--bad"
+                data-filter="bad"
+                aria-pressed="false"
+                title="Làm sáng các ngày Hắc Đạo trong tuần"
+            >
+                <i class="week-cal__badge-dot week-cal__badge-dot--bad" aria-hidden="true"></i>
+                <span>Hắc Đạo</span>
+            </button>
+            <button
+                type="button"
+                class="month-cal__legend-pill week-cal__legend-badge week-cal__legend-badge--today"
+                data-filter="today"
+                aria-pressed="false"
+                title="Làm sáng ngày Hôm Nay"
+            >
+                <i class="week-cal__badge-dot week-cal__badge-dot--today" aria-hidden="true"></i>
+                <span>Hôm Nay</span>
+            </button>
+        </div>
+
+        <p class="week-cal__footnote">
+            * Bấm vào bất kỳ thẻ ngày nào bên phải (hoặc dùng phím mũi tên) để xem chi tiết trên thẻ Tiêu Điểm bên trái.
+        </p>
     </footer>
 </section>
 ```

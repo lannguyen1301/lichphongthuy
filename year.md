@@ -30,7 +30,7 @@
             load("#sidebar-root", "./templates/sidebar.html");
         </script>
 
-        <!-- 3. Main Bento Grid: Lịch Năm (Đủ 12 Tháng) -->
+        <!-- 3. Main Bento Grid: Lịch Năm 2026 (Đủ 12 Tháng) -->
         <main id="main" class="main year-page">
             <div class="container">
                 <div id="year-calendar-root" aria-busy="true"></div>
@@ -46,11 +46,12 @@
             load("#footer", "./templates/footer.html");
         </script>
 
-        <!-- 5. Bộ Script Modular: Core Engine + Layout + Trang Năm -->
+        <!-- 5. Bộ Script Modular (Đã xóa calendar.js thừa và nhúng year-calendar.js) -->
         <script src="./assets/js/lunar-engine.js"></script>
         <script src="./assets/js/header.js"></script>
         <script src="./assets/js/sidebar.js"></script>
         <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/converter-modal.js"></script>
         <script src="./assets/js/year-calendar.js"></script>
     </body>
 </html>

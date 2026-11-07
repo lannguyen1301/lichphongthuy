@@ -226,13 +226,13 @@ window.addEventListener("template-loaded", () => {
 
 ```js
 // assets/js/header.js
-// Chuyên trách duy nhất templates/header.html: Sticky Scroll, Đồng hồ thời gian thực, Dropdown Header & Theme
+// Chuyên trách duy nhất Header: Sticky Scroll, Đồng hồ thời gian thực, Dropdown Ngôn ngữ & Theme Ngũ hành
 (() => {
     const THEME_STORAGE_KEY = "feng_shui_theme";
     let isHeaderGlobalBound = false;
     let clockTimer = null;
 
-    // Khôi phục Theme Ngũ hành ngay lập tức
+    // 1. Khôi phục Theme Ngũ hành từ localStorage
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "earth";
     document.documentElement.setAttribute("data-theme", savedTheme);
 
@@ -247,13 +247,12 @@ window.addEventListener("template-loaded", () => {
             btn.setAttribute("aria-pressed", String(Boolean(isMatch)));
         });
 
-        // Phát sự kiện để footer.js hoặc các component khác tự đồng bộ trạng thái
         window.dispatchEvent(new CustomEvent("theme-changed", { detail: { theme: selectedTheme } }));
     };
 
-    // Xuất hàm đổi theme toàn cục để footer.js gọi khi cần
     window.setFengShuiTheme = applyTheme;
 
+    // 2. Cập nhật Ngày & Giờ thực trên Header
     const updateHeaderClock = () => {
         const dateEl = document.getElementById("current-date");
         const timeEl = document.getElementById("current-time");
@@ -275,33 +274,22 @@ window.addEventListener("template-loaded", () => {
         timeEl.setAttribute("datetime", `${hh}:${min}:${ss}`);
     };
 
+    // 3. Khởi tạo Header
     const initHeader = () => {
         const header = document.getElementById("header") || document.getElementById("site-header");
         if (!header) return;
 
         const activeTheme = document.documentElement.getAttribute("data-theme") || "earth";
-        const widgetBtn = document.getElementById("widget-trigger-btn");
         const dropdowns = header.querySelectorAll(".js-header-dropdown");
         const themeBtns = header.querySelectorAll(".header__theme-btn");
 
         header.classList.toggle("header--scrolled", window.scrollY > 10);
 
-        if (widgetBtn) {
-            widgetBtn.onclick = () => {
-                const isExpanded = widgetBtn.getAttribute("aria-expanded") === "true";
-                const nextState = !isExpanded;
-                widgetBtn.classList.toggle("is-active", nextState);
-                widgetBtn.setAttribute("aria-expanded", String(nextState));
-            };
-        }
-
         dropdowns.forEach((current) => {
             current.ontoggle = () => {
                 if (current.open) {
                     document.querySelectorAll(".js-header-dropdown[open], .js-cal-dropdown[open]").forEach((other) => {
-                        if (other !== current) {
-                            other.removeAttribute("open");
-                        }
+                        if (other !== current) other.removeAttribute("open");
                     });
                 }
             };
@@ -323,6 +311,7 @@ window.addEventListener("template-loaded", () => {
         clockTimer = setInterval(updateHeaderClock, 1000);
     };
 
+    // 4. Sự kiện cuộn trang & đóng Dropdown
     const bindHeaderGlobalListeners = () => {
         if (isHeaderGlobalBound) return;
         isHeaderGlobalBound = true;
@@ -340,9 +329,7 @@ window.addEventListener("template-loaded", () => {
 
         document.addEventListener("click", (e) => {
             document.querySelectorAll(".js-header-dropdown[open], .js-cal-dropdown[open]").forEach((dropdown) => {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.removeAttribute("open");
-                }
+                if (!dropdown.contains(e.target)) dropdown.removeAttribute("open");
             });
         });
 
@@ -366,9 +353,9 @@ window.addEventListener("template-loaded", () => {
 
 ### sidebar.js
 
-```js
+````js
 // assets/js/sidebar.js
-// Chuyên trách duy nhất templates/sidebar.html: Ngăn kéo Mobile Drawer, Khóa cuộn Body & Active Link
+// Chuyên trách duy nhất Sidebar: Bật/tắt ngăn kéo Mobile Drawer, Khóa cuộn <body> & Đồng bộ Active Link
 (() => {
     let isSidebarGlobalBound = false;
 
@@ -386,7 +373,6 @@ window.addEventListener("template-loaded", () => {
         backdrop.classList.toggle("is-active", nextState);
         burgerBtn.setAttribute("aria-expanded", String(nextState));
 
-        // Khóa cuộn trang trên <body> khi mở menu Mobile
         document.body.style.overflow = nextState ? "hidden" : "";
     };
 
@@ -397,11 +383,8 @@ window.addEventListener("template-loaded", () => {
         sidebarLinks.forEach((link) => {
             const isMatch = link.dataset.navPage === currentPage;
             link.classList.toggle("sidebar__link--active", isMatch);
-            if (isMatch) {
-                link.setAttribute("aria-current", "page");
-            } else {
-                link.removeAttribute("aria-current");
-            }
+            if (isMatch) link.setAttribute("aria-current", "page");
+            else link.removeAttribute("aria-current");
         });
     };
 
@@ -415,8 +398,7 @@ window.addEventListener("template-loaded", () => {
         syncActiveSidebarLink();
     };
 
-    const bindSidebarGlobalListeners = () => {
-        if (isSidebarGlobalBound) return;
+    if (!isSidebarGlobalBound) {
         isSidebarGlobalBound = true;
 
         window.addEventListener("resize", () => {
@@ -427,21 +409,13 @@ window.addEventListener("template-loaded", () => {
         });
 
         document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                toggleSidebar(true);
-            }
+            if (e.key === "Escape") toggleSidebar(true);
         });
-    };
+    }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        bindSidebarGlobalListeners();
-        initSidebar();
-    });
-
+    document.addEventListener("DOMContentLoaded", initSidebar);
     window.addEventListener("template-loaded", initSidebar);
-})();
-```
-
+})();```
 ### footer.js
 
 ```js
@@ -511,7 +485,7 @@ window.addEventListener("template-loaded", () => {
     document.addEventListener("DOMContentLoaded", initFooter);
     window.addEventListener("template-loaded", initFooter);
 })();
-```
+````
 
 <!-- clock.js -->
 
@@ -1137,7 +1111,7 @@ window.addEventListener("template-loaded", () => {
 
 ```js
 // assets/js/month-calendar.js
-// Chuyên trách duy nhất Trang chủ (index.html): Lưới 42 ô ngày, Tờ Lịch Bloc & API ./api/thang-${month}.json
+// Chuyên trách duy nhất Trang Chủ (index.html): Lưới 42 ô ngày, Tờ Lịch Bloc & Fetch ./api/thang-${month}.json
 (() => {
     const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
 
@@ -1359,15 +1333,10 @@ window.addEventListener("template-loaded", () => {
 
         const statusEl = document.getElementById("detail-day-status");
         if (statusEl) {
-            if (info.badgeText) {
-                statusEl.textContent = `Ngày ${info.badgeText}`;
-            } else if (info.fortuneStatus === "good") {
-                statusEl.textContent = "Ngày Hoàng Đạo";
-            } else if (info.fortuneStatus === "bad") {
-                statusEl.textContent = "Ngày Hắc Đạo";
-            } else {
-                statusEl.textContent = "Ngày bình thường";
-            }
+            if (info.badgeText) statusEl.textContent = `Ngày ${info.badgeText}`;
+            else if (info.fortuneStatus === "good") statusEl.textContent = "Ngày Hoàng Đạo";
+            else if (info.fortuneStatus === "bad") statusEl.textContent = "Ngày Hắc Đạo";
+            else statusEl.textContent = "Ngày bình thường";
         }
 
         document.getElementById("detail-lunar-day").textContent = String(info.lunarDay);
@@ -1681,7 +1650,6 @@ window.addEventListener("template-loaded", () => {
             pill.onblur = () => highlightCellsByStatus(null);
         });
 
-        // ĐÃ ĐẶT ĐÚNG VỊ TRÍ BÊN TRONG initMonthCalendar():
         window.addEventListener("converter-jump-to-date", (e) => {
             if (e.detail) {
                 renderMonthCalendarGrid(e.detail.year, e.detail.month, e.detail.day);
@@ -1705,9 +1673,9 @@ window.addEventListener("template-loaded", () => {
 
 ```js
 // assets/js/lunar-engine.js
-// Lớp Adapter trung gian (Service Layer): Tự động tích hợp @dqcai/vn-lunar, lunar-javascript (window.Solar)
-// và thuật toán Hồ Ngọc Đức (UTC+7). Khi lên React/Node.js chỉ cần import thư viện vào đầu file này.
+// Lõi tính toán dùng chung (Service Layer): Đổi Âm <-> Dương 2 chiều, Can Chi, Nạp Âm, Tiết Khí, 12 Trực & 6 Giờ Hoàng Đạo
 (() => {
+    const INT = (d) => Math.floor(d);
     const viWeekdayFormatter = new Intl.DateTimeFormat("vi-VN", { weekday: "long" });
     const enWeekdayFormatter = new Intl.DateTimeFormat("en-US", { weekday: "long" });
     const enMonthFormatter = new Intl.DateTimeFormat("en-US", { month: "long" });
@@ -1727,117 +1695,6 @@ window.addEventListener("template-loaded", () => {
         "rooster",
         "dog",
         "pig",
-    ];
-
-    const ZODIAC_BRANCHES = [
-        {
-            index: 0,
-            key: "ty",
-            vn: "Tý",
-            han: "子",
-            range: "23:00 - 01:00",
-            shortRange: "Tý (23-1)",
-            icon: "mouse.svg",
-        },
-        {
-            index: 1,
-            key: "suu",
-            vn: "Sửu",
-            han: "丑",
-            range: "01:00 - 03:00",
-            shortRange: "Sửu (1-3)",
-            icon: "buffalo.svg",
-        },
-        {
-            index: 2,
-            key: "dan",
-            vn: "Dần",
-            han: "寅",
-            range: "03:00 - 05:00",
-            shortRange: "Dần (3-5)",
-            icon: "tiger.svg",
-        },
-        {
-            index: 3,
-            key: "mao",
-            vn: "Mão",
-            han: "卯",
-            range: "05:00 - 07:00",
-            shortRange: "Mão (5-7)",
-            icon: "cat.svg",
-        },
-        {
-            index: 4,
-            key: "thin",
-            vn: "Thìn",
-            han: "辰",
-            range: "07:00 - 09:00",
-            shortRange: "Thìn (7-9)",
-            icon: "dragon.svg",
-        },
-        {
-            index: 5,
-            key: "ty_snake",
-            vn: "Tỵ",
-            han: "巳",
-            range: "09:00 - 11:00",
-            shortRange: "Tỵ (9-11)",
-            icon: "snake.svg",
-        },
-        {
-            index: 6,
-            key: "ngo",
-            vn: "Ngọ",
-            han: "午",
-            range: "11:00 - 13:00",
-            shortRange: "Ngọ (11-13)",
-            icon: "horse.svg",
-        },
-        {
-            index: 7,
-            key: "mui",
-            vn: "Mùi",
-            han: "未",
-            range: "13:00 - 15:00",
-            shortRange: "Mùi (13-15)",
-            icon: "goat.svg",
-        },
-        {
-            index: 8,
-            key: "than",
-            vn: "Thân",
-            han: "申",
-            range: "15:00 - 17:00",
-            shortRange: "Thân (15-17)",
-            icon: "monkey.svg",
-        },
-        {
-            index: 9,
-            key: "dau",
-            vn: "Dậu",
-            han: "酉",
-            range: "17:00 - 19:00",
-            shortRange: "Dậu (17-19)",
-            icon: "rooster.svg",
-        },
-        {
-            index: 10,
-            key: "tuat",
-            vn: "Tuất",
-            han: "戌",
-            range: "19:00 - 21:00",
-            shortRange: "Tuất (19-21)",
-            icon: "dog.svg",
-        },
-        {
-            index: 11,
-            key: "hoi",
-            vn: "Hợi",
-            han: "亥",
-            range: "21:00 - 23:00",
-            shortRange: "Hợi (21-23)",
-            icon: "pig.svg",
-        },
     ];
 
     const VI_TRADITIONAL_SOLAR_MONTHS = [
@@ -1870,6 +1727,21 @@ window.addEventListener("template-loaded", () => {
         "THÁNG MƯỜI",
         "THÁNG MƯỜI MỘT",
         "THÁNG CHẠP",
+    ];
+
+    const HOUR_SLOTS = [
+        { index: 0, key: "ty", vn: "Tý", range: "23:00 - 01:00", shortRange: "Tý (23-1)", icon: "mouse.svg" },
+        { index: 1, key: "suu", vn: "Sửu", range: "01:00 - 03:00", shortRange: "Sửu (1-3)", icon: "buffalo.svg" },
+        { index: 2, key: "dan", vn: "Dần", range: "03:00 - 05:00", shortRange: "Dần (3-5)", icon: "tiger.svg" },
+        { index: 3, key: "mao", vn: "Mão", range: "05:00 - 07:00", shortRange: "Mão (5-7)", icon: "cat.svg" },
+        { index: 4, key: "thin", vn: "Thìn", range: "07:00 - 09:00", shortRange: "Thìn (7-9)", icon: "dragon.svg" },
+        { index: 5, key: "ty_snake", vn: "Tỵ", range: "09:00 - 11:00", shortRange: "Tỵ (9-11)", icon: "snake.svg" },
+        { index: 6, key: "ngo", vn: "Ngọ", range: "11:00 - 13:00", shortRange: "Ngọ (11-13)", icon: "horse.svg" },
+        { index: 7, key: "mui", vn: "Mùi", range: "13:00 - 15:00", shortRange: "Mùi (13-15)", icon: "goat.svg" },
+        { index: 8, key: "than", vn: "Thân", range: "15:00 - 17:00", shortRange: "Thân (15-17)", icon: "monkey.svg" },
+        { index: 9, key: "dau", vn: "Dậu", range: "17:00 - 19:00", shortRange: "Dậu (17-19)", icon: "rooster.svg" },
+        { index: 10, key: "tuat", vn: "Tuất", range: "19:00 - 21:00", shortRange: "Tuất (19-21)", icon: "dog.svg" },
+        { index: 11, key: "hoi", vn: "Hợi", range: "21:00 - 23:00", shortRange: "Hợi (21-23)", icon: "pig.svg" },
     ];
 
     const GOOD_HOUR_INDICES = {
@@ -1921,18 +1793,66 @@ window.addEventListener("template-loaded", () => {
     ];
 
     const TRUC_LIST = [
-        { name: "Kiến", desc: "Tốt cho xuất hành, khai trương, giá thú; kỵ động thổ, đào đất." },
-        { name: "Trừ", desc: "Tốt cho cầu an, dọn dẹp, giải trừ điều xấu, khám chữa bệnh." },
-        { name: "Mãn", desc: "Tốt cho tế tự, cầu tài, khai trương, xuất hành, sửa kho." },
-        { name: "Bình", desc: "Tốt cho tu tạo, sửa chữa, nhập trạch, cưới gả, giao dịch." },
-        { name: "Định", desc: "Tốt cho ký kết, thương lượng, cầu danh, nhập học, làm chuồng trại." },
-        { name: "Chấp", desc: "Tốt cho xây dựng, tu bổ, tuyển dụng; kỵ xuất hành đi xa." },
-        { name: "Phá", desc: "Chỉ hợp dỡ bỏ nhà cũ, chữa bệnh; kỵ khai trương, cưới hỏi." },
-        { name: "Nguy", desc: "Xấu cho mọi việc lớn. Nên cẩn thận, đề phòng nguy hiểm, tai nạn." },
-        { name: "Thành", desc: "Tốt cho khai trương, nhập học, cưới gả, dọn nhà, xuất hành." },
-        { name: "Thu", desc: "Tốt cho thu hoạch, cất trữ, mua sắm tài sản; kỵ an táng." },
-        { name: "Khai", desc: "Tốt cho khai trương, động thổ, cưới hỏi, xuất hành, nhậm chức." },
-        { name: "Bế", desc: "Hợp đắp đê, lấp lỗ, tu dưỡng; kỵ khai trương, xuất hành, động thổ." },
+        {
+            name: "Kiến",
+            short: "Tốt xuất hành, khai trương",
+            desc: "Tốt cho xuất hành, khai trương, giá thú; kỵ động thổ, đào đất.",
+        },
+        {
+            name: "Trừ",
+            short: "Tốt cầu an, giải trừ xấu",
+            desc: "Tốt cho cầu an, dọn dẹp, giải trừ điều xấu, khám chữa bệnh.",
+        },
+        {
+            name: "Mãn",
+            short: "Tốt cầu tài, khai trương",
+            desc: "Tốt cho tế tự, cầu tài, khai trương, xuất hành, sửa kho.",
+        },
+        {
+            name: "Bình",
+            short: "Tốt tu tạo, nhập trạch",
+            desc: "Tốt cho tu tạo, sửa chữa, nhập trạch, cưới gả, giao dịch.",
+        },
+        {
+            name: "Định",
+            short: "Tốt ký kết, cầu danh",
+            desc: "Tốt cho ký kết, thương lượng, cầu danh, nhập học, làm chuồng trại.",
+        },
+        {
+            name: "Chấp",
+            short: "Tốt xây dựng, tu bổ",
+            desc: "Tốt cho xây dựng, tu bổ, tuyển dụng; kỵ xuất hành đi xa.",
+        },
+        {
+            name: "Phá",
+            short: "Hợp dỡ bỏ cũ, chữa bệnh",
+            desc: "Chỉ hợp dỡ bỏ nhà cũ, chữa bệnh; kỵ khai trương, cưới hỏi.",
+        },
+        {
+            name: "Nguy",
+            short: "Nên cẩn trọng việc lớn",
+            desc: "Xấu cho mọi việc lớn. Nên cẩn thận, đề phòng nguy hiểm, tai nạn.",
+        },
+        {
+            name: "Thành",
+            short: "Tốt khai trương, cưới gả",
+            desc: "Tốt cho khai trương, nhập học, cưới gả, dọn nhà, xuất hành.",
+        },
+        {
+            name: "Thu",
+            short: "Tốt thu hoạch, tích trữ",
+            desc: "Tốt cho thu hoạch, cất trữ, mua sắm tài sản; kỵ an táng.",
+        },
+        {
+            name: "Khai",
+            short: "Khởi đầu đại cát",
+            desc: "Tốt cho khai trương, động thổ, cưới hỏi, xuất hành, nhậm chức.",
+        },
+        {
+            name: "Bế",
+            short: "Hợp tu dưỡng, bồi đắp",
+            desc: "Hợp đắp đê, lấp lỗ, tu dưỡng; kỵ khai trương, xuất hành, động thổ.",
+        },
     ];
 
     const AGE_HARMONY_MAP = {
@@ -1952,35 +1872,22 @@ window.addEventListener("template-loaded", () => {
 
     const SOLAR_HOLIDAYS = {
         "1/1": "Tết DL",
-        "3/2": "Đảng CSVN",
         "14/2": "Valentine",
-        "27/2": "Thầy thuốc VN",
         "8/3": "Quốc tế PN",
-        "26/3": "Đoàn TNCS",
         "30/4": "Giải phóng",
         "1/5": "Quốc tế LĐ",
-        "7/5": "Điện Biên Phủ",
-        "19/5": "SN Bác Hồ",
         "1/6": "Thiếu nhi",
-        "21/6": "Báo chí VN",
-        "28/6": "Gia đình VN",
-        "27/7": "Thương binh LS",
-        "19/8": "CM Tháng Tám",
         "2/9": "Quốc khánh",
-        "10/10": "GP Thủ đô",
-        "13/10": "Doanh nhân VN",
         "20/10": "PN Việt Nam",
         "20/11": "20/11",
         "22/12": "QĐND VN",
         "24/12": "Giáng sinh",
-        "25/12": "Noel",
     };
 
     const LUNAR_HOLIDAYS = {
         "1/1": "Tết Nguyên Đán",
         "2/1": "Mùng 2 Tết",
         "3/1": "Mùng 3 Tết",
-        "10/1": "Vía Thần Tài",
         "15/1": "Rằm Tháng Giêng",
         "3/3": "Tết Hàn Thực",
         "10/3": "Giỗ Tổ Hùng Vương",
@@ -1988,40 +1895,8 @@ window.addEventListener("template-loaded", () => {
         "5/5": "Tết Đoan Ngọ",
         "15/7": "Lễ Vu Lan",
         "15/8": "Tết Trung Thu",
-        "9/9": "Tết Trùng Cửu",
-        "15/10": "Tết Hạ Nguyên",
         "23/12": "Ông Công Ông Táo",
     };
-
-    const JIEQI_TRANSLATION = {
-        立春: "Lập Xuân",
-        雨水: "Vũ Thủy",
-        惊蛰: "Kinh Trập",
-        春分: "Xuân Phân",
-        清明: "Thanh Minh",
-        谷雨: "Cốc Vũ",
-        立夏: "Lập Hạ",
-        小满: "Tiểu Mãn",
-        芒种: "Mang Chủng",
-        夏至: "Hạ Chí",
-        小暑: "Tiểu Thử",
-        大暑: "Đại Thử",
-        立秋: "Lập Thu",
-        处暑: "Xử Thử",
-        白露: "Bạch Lộ",
-        秋分: "Thu Phân",
-        寒露: "Hàn Lộ",
-        霜降: "Sương Giáng",
-        立冬: "Lập Đông",
-        小雪: "Tiểu Tuyết",
-        大雪: "Đại Tuyết",
-        冬至: "Đông Chí",
-        小寒: "Tiểu Hàn",
-        大寒: "Đại Hàn",
-    };
-
-    // Thuật toán Hồ Ngọc Đức chuẩn múi giờ Việt Nam (UTC+7)
-    const INT = (d) => Math.floor(d);
 
     const jdFromDate = (dd, mm, yy) => {
         const a = INT((14 - mm) / 12);
@@ -2032,6 +1907,25 @@ window.addEventListener("template-loaded", () => {
             jd = dd + INT((153 * m + 2) / 5) + 365 * y + INT(y / 4) - 32083;
         }
         return jd;
+    };
+
+    const jdToDate = (jd) => {
+        let a, b, c;
+        if (jd > 2299160) {
+            a = jd + 32044;
+            b = INT((4 * a + 3) / 146097);
+            c = a - INT((b * 146097) / 4);
+        } else {
+            b = 0;
+            c = jd + 32082;
+        }
+        const d = INT((4 * c + 3) / 1461);
+        const e = c - INT((1461 * d) / 4);
+        const m = INT((5 * e + 2) / 153);
+        const day = e - INT((153 * m + 2) / 5) + 1;
+        const month = m + 3 - 12 * INT(m / 10);
+        const year = b * 100 + d - 4800 + INT(m / 10);
+        return { sDay: day, sMonth: month, sYear: year };
     };
 
     const getNewMoonDay = (k, timeZone = 7) => {
@@ -2099,28 +1993,8 @@ window.addEventListener("template-loaded", () => {
         return i - 1;
     };
 
-    // Hàm lõi chuyển Dương sang Âm: Tự động ưu tiên @dqcai/vn-lunar nếu được nạp, fallback về thuật toán nội bộ
     const convertSolar2Lunar = (dd, mm, yy, timeZone = 7) => {
         const dayNumber = jdFromDate(dd, mm, yy);
-
-        if (window.vnLunar && typeof window.vnLunar.getLunarDate === "function") {
-            try {
-                const res = window.vnLunar.getLunarDate(dd, mm, yy);
-                if (res && res.day) {
-                    return {
-                        lunarDay: res.day,
-                        lunarMonth: res.month,
-                        lunarYear: res.year,
-                        lunarLeap: res.leap ? 1 : 0,
-                        isFullMonth: true,
-                        jd: res.jd || dayNumber,
-                    };
-                }
-            } catch (e) {
-                // Fallback xuống thuật toán Hồ Ngọc Đức bên dưới
-            }
-        }
-
         const k = INT((dayNumber - 2415021.076998695) / 29.530588853);
         let monthStart = getNewMoonDay(k + 1, timeZone);
         if (monthStart > dayNumber) {
@@ -2161,19 +2035,47 @@ window.addEventListener("template-loaded", () => {
         if (lunarMonth >= 11 && diff < 4) {
             lunarYear -= 1;
         }
-        return {
-            lunarDay,
-            lunarMonth,
-            lunarYear,
-            lunarLeap,
-            isFullMonth,
-            jd: dayNumber,
-        };
+        return { lunarDay, lunarMonth, lunarYear, lunarLeap, isFullMonth, jd: dayNumber };
+    };
+
+    const convertLunar2Solar = (lunarDay, lunarMonth, lunarYear, lunarLeap = 0, timeZone = 7) => {
+        let a11, b11;
+        if (lunarMonth < 11) {
+            a11 = getLunarMonth11(lunarYear - 1, timeZone);
+            b11 = getLunarMonth11(lunarYear, timeZone);
+        } else {
+            a11 = getLunarMonth11(lunarYear, timeZone);
+            b11 = getLunarMonth11(lunarYear + 1, timeZone);
+        }
+        const k = INT(0.5 + (a11 - 2415021.076998695) / 29.530588853);
+        let off = lunarMonth - 11;
+        if (off < 0) off += 12;
+        if (b11 - a11 > 365) {
+            const leapOff = getLeapMonthOffset(a11, timeZone);
+            let leapMonth = leapOff - 2;
+            if (leapMonth < 0) leapMonth += 12;
+            if (lunarLeap !== 0 && lunarMonth !== leapMonth) {
+                return { sDay: 0, sMonth: 0, sYear: 0 };
+            } else if (lunarLeap !== 0 || off >= leapOff) {
+                off += 1;
+            }
+        }
+        const monthStart = getNewMoonDay(k + off, timeZone);
+        return jdToDate(monthStart + lunarDay - 1);
     };
 
     const getNapAm = (stemIdx, branchIdx) => {
         const idx = (((6 * stemIdx - 5 * branchIdx) % 60) + 60) % 60;
         return NAP_AM_LIST[Math.floor(idx / 2)] || "Bạch Lạp Kim";
+    };
+
+    const resolveElementInfo = (napAmStr) => {
+        const text = String(napAmStr || "").trim();
+        if (text.endsWith("Kim")) return { icon: "metal.svg", label: "Hành Kim • Kim khí" };
+        if (text.endsWith("Mộc")) return { icon: "wood.svg", label: "Hành Mộc • Sinh trưởng" };
+        if (text.endsWith("Thủy")) return { icon: "water.svg", label: "Hành Thủy • Linh hoạt" };
+        if (text.endsWith("Hỏa")) return { icon: "fire.svg", label: "Hành Hỏa • Nhiệt huyết" };
+        return { icon: "earth.svg", label: "Hành Thổ • Vững chãi" };
     };
 
     const getDayAuspiciousStatus = (lunarMonth, dayChiIndex) => {
@@ -2184,20 +2086,7 @@ window.addEventListener("template-loaded", () => {
         return "";
     };
 
-    // Lấy Tiết Khí: Tự động ưu tiên thư viện lunar-javascript (window.Solar) nếu có mặt trên trang
-    const getSolarTermName = (dd, mm, yy = 2026) => {
-        if (window.Solar && typeof window.Solar.fromYmd === "function") {
-            try {
-                const lunarObj = window.Solar.fromYmd(yy, mm, dd).getLunar();
-                const jieQi = lunarObj.getPrevJieQi(true);
-                if (jieQi && JIEQI_TRANSLATION[jieQi.getName()]) {
-                    return JIEQI_TRANSLATION[jieQi.getName()];
-                }
-            } catch (e) {
-                // Fallback xuống bảng Tiết Khí nội bộ
-            }
-        }
-
+    const getSolarTermName = (dd, mm) => {
         const code = mm * 100 + dd;
         if (code < 105) return "Đông Chí";
         if (code < 120) return "Tiểu Hàn";
@@ -2230,39 +2119,14 @@ window.addEventListener("template-loaded", () => {
         const solarKey = `${sDay}/${sMonth}`;
         const lunarKey = `${lDay}/${lMonth}`;
 
-        if (SOLAR_HOLIDAYS[solarKey]) {
-            return { badgeText: SOLAR_HOLIDAYS[solarKey], isHoliday: true };
-        }
-        if (!lLeap && LUNAR_HOLIDAYS[lunarKey]) {
-            return { badgeText: LUNAR_HOLIDAYS[lunarKey], isHoliday: true };
-        }
-        if (lDay === 1) {
-            return { badgeText: "Mùng 1", isHoliday: true };
-        }
-        if (lDay === 15) {
-            return { badgeText: "Rằm", isHoliday: true };
-        }
+        if (SOLAR_HOLIDAYS[solarKey]) return { badgeText: SOLAR_HOLIDAYS[solarKey], isHoliday: true };
+        if (!lLeap && LUNAR_HOLIDAYS[lunarKey]) return { badgeText: LUNAR_HOLIDAYS[lunarKey], isHoliday: true };
+        if (lDay === 1) return { badgeText: "Mùng 1", isHoliday: true };
+        if (lDay === 15) return { badgeText: "Rằm", isHoliday: true };
         return { badgeText: "", isHoliday: false };
     };
 
-    const formatBilingualWeekday = (year, month, day) => {
-        const dateObj = new Date(year, month - 1, day);
-        const viDay = viWeekdayFormatter.format(dateObj).toUpperCase();
-        const enDay = enWeekdayFormatter.format(dateObj).toUpperCase();
-        return `${viDay} • ${enDay}`;
-    };
-
-    const formatEnglishMonth = (year, month) => {
-        return enMonthFormatter.format(new Date(year, month - 1, 1));
-    };
-
-    const getBranchIndexFromHour = (hour24) => {
-        if (hour24 === 23 || hour24 === 0) return 0;
-        return Math.floor((hour24 + 1) / 2);
-    };
-
-    // API tổng hợp trả về đầy đủ thông tin Âm Dương, Can Chi, Nạp Âm, Trực, Giờ Hoàng Đạo cho 1 ngày bất kỳ
-    const getFullDayInfo = (sDay, sMonth, sYear, hour24 = 0) => {
+    const getFullDayInfo = (sDay, sMonth, sYear) => {
         const lunar = convertSolar2Lunar(sDay, sMonth, sYear);
         const { lunarDay, lunarMonth, lunarYear, lunarLeap, isFullMonth, jd } = lunar;
 
@@ -2272,41 +2136,48 @@ window.addEventListener("template-loaded", () => {
         const monthChiIdx = (lunarMonth + 1) % 12;
         const dayCanIdx = (jd + 9) % 10;
         const dayChiIdx = (jd + 1) % 12;
-
         const ratHourStemIdx = ((dayCanIdx % 5) * 2) % 10;
-        const currentBranchIdx = getBranchIndexFromHour(hour24);
-        const currentHourStemIdx = (ratHourStemIdx + currentBranchIdx) % 10;
+
+        const yearCanChi = `${THIEN_CAN[yearCanIdx]} ${DIA_CHI[yearChiIdx]}`;
+        const monthCanChi = `${THIEN_CAN[monthCanIdx]} ${DIA_CHI[monthChiIdx]}`;
+        const dayCanChi = `${THIEN_CAN[dayCanIdx]} ${DIA_CHI[dayChiIdx]}`;
+        const yearNapAm = getNapAm(yearCanIdx, yearChiIdx);
+        const monthNapAm = getNapAm(monthCanIdx, monthChiIdx);
+        const dayNapAm = getNapAm(dayCanIdx, dayChiIdx);
+
+        const dateObj = new Date(sYear, sMonth - 1, sDay);
+        const bilingualWeekday = `${viWeekdayFormatter.format(dateObj).toUpperCase()} • ${enWeekdayFormatter.format(dateObj).toUpperCase()}`;
+        const solarMonthEnLabel = enMonthFormatter.format(new Date(sYear, sMonth - 1, 1));
+        const solarMonthVnLabel = VI_TRADITIONAL_SOLAR_MONTHS[sMonth] || `THÁNG ${sMonth}`;
+
+        const baseLunarMonthName = VI_TRADITIONAL_LUNAR_MONTHS[lunarMonth] || `THÁNG ${lunarMonth}`;
+        const lunarMonthFullLabel = `${baseLunarMonthName}${lunarLeap ? " NHUẬN" : ""}${isFullMonth ? " (Đ)" : " (T)"}`;
 
         const fortuneStatus = getDayAuspiciousStatus(lunarMonth, dayChiIdx);
         const holidayInfo = getHolidayBadge(sDay, sMonth, lunarDay, lunarMonth, lunarLeap);
-        const solarTerm = getSolarTermName(sDay, sMonth, sYear);
-        const trucIdx = (dayChiIdx - monthChiIdx + 12) % 12;
-        const trucObj = TRUC_LIST[trucIdx] || TRUC_LIST[0];
+        const solarTerm = getSolarTermName(sDay, sMonth);
+        const trucObj = TRUC_LIST[(dayChiIdx - monthChiIdx + 12) % 12] || TRUC_LIST[0];
         const ageHarmony = AGE_HARMONY_MAP[dayChiIdx] || AGE_HARMONY_MAP[0];
         const goodIndices = GOOD_HOUR_INDICES[dayChiIdx] || [0, 1, 3, 6, 8, 9];
 
         const goodHoursShort = [];
         const badHoursShort = [];
-        const hours12 = ZODIAC_BRANCHES.map((b) => {
-            const hStemIdx = (ratHourStemIdx + b.index) % 10;
-            const canchi = `${THIEN_CAN[hStemIdx]} ${b.vn}`;
-            const isGood = goodIndices.includes(b.index);
-            if (isGood) {
-                goodHoursShort.push(b.shortRange);
-            } else {
-                badHoursShort.push(b.shortRange);
-            }
-            return {
-                ...b,
-                stemIdx: hStemIdx,
-                canchi,
-                napAm: getNapAm(hStemIdx, b.index),
-                isGood,
-            };
-        });
+        const goodHourCards = [];
 
-        const baseLunarMonthName = VI_TRADITIONAL_LUNAR_MONTHS[lunarMonth] || `THÁNG ${lunarMonth}`;
-        const lunarMonthFullLabel = `${baseLunarMonthName}${lunarLeap ? " NHUẬN" : ""}${isFullMonth ? " (Đ)" : " (T)"}`;
+        HOUR_SLOTS.forEach((slot, idx) => {
+            const hStemIdx = (ratHourStemIdx + idx) % 10;
+            const hourCanChi = `Giờ ${THIEN_CAN[hStemIdx]} ${slot.vn}`;
+            if (goodIndices.includes(idx)) {
+                goodHoursShort.push(slot.shortRange);
+                goodHourCards.push({
+                    hourCanChi,
+                    range: slot.range,
+                    icon: slot.icon,
+                });
+            } else {
+                badHoursShort.push(slot.shortRange);
+            }
+        });
 
         return {
             sDay,
@@ -2318,16 +2189,20 @@ window.addEventListener("template-loaded", () => {
             lunarLeap,
             isFullMonth,
             jd,
-            yearCanChi: `${THIEN_CAN[yearCanIdx]} ${DIA_CHI[yearChiIdx]}`,
-            yearNapAm: getNapAm(yearCanIdx, yearChiIdx),
-            monthCanChi: `${THIEN_CAN[monthCanIdx]} ${DIA_CHI[monthChiIdx]}`,
-            monthNapAm: getNapAm(monthCanIdx, monthChiIdx),
-            dayCanChi: `${THIEN_CAN[dayCanIdx]} ${DIA_CHI[dayChiIdx]}`,
-            dayNapAm: getNapAm(dayCanIdx, dayChiIdx),
-            hourCanChi: `${THIEN_CAN[currentHourStemIdx]} ${DIA_CHI[currentBranchIdx]}`,
-            ratHourCanChi: `${THIEN_CAN[ratHourStemIdx]} Tý`,
+            yearChiIdx,
+            monthChiIdx,
             dayChiIdx,
+            yearCanChi,
+            monthCanChi,
+            dayCanChi,
+            ratHourCanChi: `${THIEN_CAN[ratHourStemIdx]} Tý`,
+            yearNapAm,
+            monthNapAm,
+            dayNapAm,
+            elementInfo: resolveElementInfo(dayNapAm),
             zodiacFile: ZODIAC_FILES[dayChiIdx] || "mouse",
+            monthZodiacFile: ZODIAC_FILES[monthChiIdx] || "dog",
+            yearZodiacFile: ZODIAC_FILES[yearChiIdx] || "horse",
             fortuneStatus,
             badgeText: holidayInfo.badgeText,
             isHoliday: holidayInfo.isHoliday,
@@ -2336,12 +2211,11 @@ window.addEventListener("template-loaded", () => {
             ageHarmony,
             goodHoursStr: goodHoursShort.join(", "),
             badHoursStr: badHoursShort.join(", "),
-            hours12,
-            currentBranchIdx,
-            solarMonthVnLabel: VI_TRADITIONAL_SOLAR_MONTHS[sMonth] || `THÁNG ${sMonth}`,
-            solarMonthEnLabel: formatEnglishMonth(sYear, sMonth),
+            goodHourCards,
+            bilingualWeekday,
+            solarMonthVnLabel,
+            solarMonthEnLabel,
             lunarMonthFullLabel,
-            bilingualWeekday: formatBilingualWeekday(sYear, sMonth, sDay),
         };
     };
 
@@ -2349,16 +2223,8 @@ window.addEventListener("template-loaded", () => {
         THIEN_CAN,
         DIA_CHI,
         ZODIAC_FILES,
-        ZODIAC_BRANCHES,
-        jdFromDate,
         convertSolar2Lunar,
-        getNapAm,
-        getDayAuspiciousStatus,
-        getSolarTermName,
-        getHolidayBadge,
-        getBranchIndexFromHour,
-        formatBilingualWeekday,
-        formatEnglishMonth,
+        convertLunar2Solar,
         getFullDayInfo,
     };
 })();
@@ -2393,95 +2259,157 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
 
 ```js
 // assets/js/converter-modal.js
-// Chuyên trách Giai đoạn 3: Hộp thoại Đổi Ngày Âm - Dương 2 chiều & Nhảy nhanh tới ngày trên Lịch
+// Chuyên trách duy nhất Bento Modal Đổi Ngày Âm ⇄ Dương (Không chứa công thức lặp nhờ gọi window.LunarEngine)
 (() => {
-    let isModalGlobalBound = false;
+    let isModalKeyBound = false;
     let convertMode = "solar2lunar"; // "solar2lunar" | "lunar2solar"
-    let resolvedSolarDate = { day: 4, month: 11, year: 2026 };
+    let selectedInputDay = 6;
+    let selectedInputMonth = 11;
+    let selectedInputYear = 2026;
+    let yearGridStart = 2020;
+    let resolvedSolarDate = { day: 6, month: 11, year: 2026 };
 
     const pad = (n) => String(n).padStart(2, "0");
+
+    const VI_SOLAR_MONTH_NAMES = [
+        "",
+        "Tháng Một",
+        "Tháng Hai",
+        "Tháng Ba",
+        "Tháng Tư",
+        "Tháng Năm",
+        "Tháng Sáu",
+        "Tháng Bảy",
+        "Tháng Tám",
+        "Tháng Chín",
+        "Tháng Mười",
+        "Tháng Mười Một",
+        "Tháng Mười Hai",
+    ];
+
+    const VI_LUNAR_MONTH_NAMES = [
+        "",
+        "Tháng Giêng",
+        "Tháng Hai",
+        "Tháng Ba",
+        "Tháng Tư",
+        "Tháng Năm",
+        "Tháng Sáu",
+        "Tháng Bảy",
+        "Tháng Tám",
+        "Tháng Chín",
+        "Tháng Mười",
+        "Tháng Mười Một",
+        "Tháng Chạp",
+    ];
 
     const toggleConverterModal = (forceOpen = null) => {
         const modal = document.getElementById("converter-modal");
         const triggerBtn = document.getElementById("widget-trigger-btn");
         if (!modal) return;
 
-        const isCurrentlyHidden = modal.hidden;
-        const shouldOpen = forceOpen !== null ? forceOpen : isCurrentlyHidden;
-
+        const shouldOpen = forceOpen !== null ? forceOpen : modal.hidden;
         modal.hidden = !shouldOpen;
+
         if (triggerBtn) {
             triggerBtn.classList.toggle("is-active", shouldOpen);
             triggerBtn.setAttribute("aria-expanded", String(shouldOpen));
         }
 
-        // Khóa cuộn trang trên <body> khi Modal đang mở
         document.body.style.overflow = shouldOpen ? "hidden" : "";
-
-        if (shouldOpen) {
-            document.getElementById("conv-day")?.focus();
-        } else {
-            triggerBtn?.focus();
-        }
     };
 
-    const populateSelectOptions = (daySelect, monthSelect, yearSelect) => {
-        if (!daySelect || !monthSelect || !yearSelect) return;
+    window.openConverterModal = toggleConverterModal;
 
-        if (yearSelect.options.length === 0) {
-            let yearHtml = "";
-            for (let y = 1920; y <= 2100; y++) {
-                yearHtml += `<option value="${y}">Năm ${y}</option>`;
-            }
-            yearSelect.innerHTML = yearHtml;
-        }
+    const renderCustomBentoPickers = () => {
+        const dayListEl = document.getElementById("conv-day-list");
+        const monthListEl = document.getElementById("conv-month-list");
+        const yearListEl = document.getElementById("conv-year-list");
+        const dayTextEl = document.getElementById("conv-day-text");
+        const monthTextEl = document.getElementById("conv-month-text");
+        const yearTextEl = document.getElementById("conv-year-text");
+        const yearRangeLabel = document.getElementById("conv-year-range-label");
 
-        if (monthSelect.options.length === 0) {
-            let monthHtml = "";
-            for (let m = 1; m <= 12; m++) {
-                monthHtml += `<option value="${m}">Tháng ${pad(m)}</option>`;
-            }
-            monthSelect.innerHTML = monthHtml;
-        }
+        if (!dayListEl || !monthListEl || !yearListEl) return;
 
-        const selectedYear = Number(yearSelect.value) || 2026;
-        const selectedMonth = Number(monthSelect.value) || 11;
-        const prevDay = Number(daySelect.value) || 4;
+        const maxDays =
+            convertMode === "solar2lunar" ? new Date(selectedInputYear, selectedInputMonth, 0).getDate() : 30;
 
-        const maxDays = convertMode === "solar2lunar" ? new Date(selectedYear, selectedMonth, 0).getDate() : 30;
+        if (selectedInputDay > maxDays) selectedInputDay = maxDays;
 
-        let dayHtml = "";
+        if (dayTextEl) dayTextEl.textContent = `Ngày ${pad(selectedInputDay)}`;
+        if (monthTextEl) monthTextEl.textContent = `Tháng ${pad(selectedInputMonth)}`;
+        if (yearTextEl) yearTextEl.textContent = `Năm ${selectedInputYear}`;
+
+        let daysHtml = "";
         for (let d = 1; d <= maxDays; d++) {
-            dayHtml += `<option value="${d}">Ngày ${pad(d)}</option>`;
+            const isSel = d === selectedInputDay;
+            daysHtml += `<li><button type="button" role="option" aria-selected="${isSel}" data-conv-day="${d}" class="converter-modal__option-btn ${isSel ? "is-selected" : ""}">${pad(d)}</button></li>`;
         }
-        daySelect.innerHTML = dayHtml;
-        daySelect.value = String(Math.min(prevDay, maxDays));
+        dayListEl.innerHTML = daysHtml;
+
+        let monthsHtml = "";
+        for (let m = 1; m <= 12; m++) {
+            const isSel = m === selectedInputMonth;
+            monthsHtml += `<li><button type="button" role="option" aria-selected="${isSel}" data-conv-month="${m}" class="converter-modal__option-btn ${isSel ? "is-selected" : ""}">Tháng ${m}</button></li>`;
+        }
+        monthListEl.innerHTML = monthsHtml;
+
+        if (yearRangeLabel) yearRangeLabel.textContent = `${yearGridStart} - ${yearGridStart + 11}`;
+        let yearsHtml = "";
+        for (let y = yearGridStart; y < yearGridStart + 12; y++) {
+            const isSel = y === selectedInputYear;
+            yearsHtml += `<li><button type="button" role="option" aria-selected="${isSel}" data-conv-year="${y}" class="converter-modal__option-btn ${isSel ? "is-selected" : ""}">${y}</button></li>`;
+        }
+        yearListEl.innerHTML = yearsHtml;
+    };
+
+    const syncLeapToggleUI = (lunarLeapFromResult = 0) => {
+        const leapToggleBtn = document.getElementById("conv-leap-toggle-btn");
+        const leapCheckbox = document.getElementById("conv-leap-checkbox");
+        const leapStatusText = document.getElementById("conv-leap-status-text");
+        if (!leapToggleBtn || !leapCheckbox || !leapStatusText) return;
+
+        if (convertMode === "solar2lunar") {
+            leapToggleBtn.classList.add("is-disabled");
+            leapToggleBtn.classList.remove("is-active");
+            leapCheckbox.checked = Boolean(lunarLeapFromResult);
+            leapToggleBtn.setAttribute("aria-pressed", String(Boolean(lunarLeapFromResult)));
+            leapStatusText.textContent = lunarLeapFromResult ? "Tự động (Tháng nhuận)" : "Tự động (Tháng thường)";
+        } else {
+            leapToggleBtn.classList.remove("is-disabled");
+            const isChecked = Boolean(leapCheckbox.checked);
+            leapToggleBtn.classList.toggle("is-active", isChecked);
+            leapToggleBtn.setAttribute("aria-pressed", String(isChecked));
+            leapStatusText.textContent = isChecked ? "Đang chọn: Tháng Nhuận" : "Tính theo: Tháng thường";
+        }
     };
 
     const runConversionAndRender = () => {
         if (!window.LunarEngine) return;
 
-        const daySelect = document.getElementById("conv-day");
-        const monthSelect = document.getElementById("conv-month");
-        const yearSelect = document.getElementById("conv-year");
         const leapCheckbox = document.getElementById("conv-leap-checkbox");
-        if (!daySelect || !monthSelect || !yearSelect) return;
-
-        const inputDay = Number(daySelect.value) || 1;
-        const inputMonth = Number(monthSelect.value) || 1;
-        const inputYear = Number(yearSelect.value) || 2026;
         const isLeapChecked = leapCheckbox?.checked ? 1 : 0;
 
-        let sDay = inputDay;
-        let sMonth = inputMonth;
-        let sYear = inputYear;
+        let sDay = selectedInputDay;
+        let sMonth = selectedInputMonth;
+        let sYear = selectedInputYear;
 
-        if (convertMode === "lunar2solar" && typeof window.LunarEngine.convertLunar2Solar === "function") {
-            let converted = window.LunarEngine.convertLunar2Solar(inputDay, inputMonth, inputYear, isLeapChecked);
-            // Nếu năm đó không có tháng nhuận mà người dùng lỡ tích chọn nhuận -> tự động tính theo tháng thường
+        if (convertMode === "lunar2solar") {
+            let converted = window.LunarEngine.convertLunar2Solar(
+                selectedInputDay,
+                selectedInputMonth,
+                selectedInputYear,
+                isLeapChecked,
+            );
             if (!converted || converted.sDay === 0) {
                 if (leapCheckbox) leapCheckbox.checked = false;
-                converted = window.LunarEngine.convertLunar2Solar(inputDay, inputMonth, inputYear, 0);
+                converted = window.LunarEngine.convertLunar2Solar(
+                    selectedInputDay,
+                    selectedInputMonth,
+                    selectedInputYear,
+                    0,
+                );
             }
             if (converted && converted.sDay > 0) {
                 sDay = converted.sDay;
@@ -2493,119 +2421,241 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         resolvedSolarDate = { day: sDay, month: sMonth, year: sYear };
         const info = window.LunarEngine.getFullDayInfo(sDay, sMonth, sYear);
 
-        document.getElementById("conv-res-solar").textContent = `${pad(info.sDay)}/${pad(info.sMonth)}/${info.sYear}`;
+        syncLeapToggleUI(info.lunarLeap);
+
+        document.getElementById("conv-res-solar").textContent = `${pad(sDay)}/${pad(sMonth)}/${sYear}`;
         document.getElementById("conv-res-weekday").textContent = info.bilingualWeekday;
+        document.getElementById("conv-res-solar-full").textContent =
+            `${VI_SOLAR_MONTH_NAMES[sMonth]} (${info.solarMonthEnLabel}) • Năm ${sYear}`;
 
         const lunarTagEl = document.getElementById("conv-res-lunar-tag");
         if (lunarTagEl) {
             const sizeText = info.isFullMonth ? "Tháng Đủ" : "Tháng Thiếu";
             const leapText = info.lunarLeap ? " • Nhuận" : "";
-            lunarTagEl.textContent = `Âm lịch (${sizeText}${leapText})`;
+            lunarTagEl.textContent = `Âm lịch • ${sizeText}${leapText}`;
         }
 
         document.getElementById("conv-res-lunar").textContent =
             `${pad(info.lunarDay)}/${pad(info.lunarMonth)}/${info.lunarYear}`;
-        document.getElementById("conv-res-year-canchi").textContent = `Năm ${info.yearCanChi} (${info.yearNapAm})`;
+        document.getElementById("conv-res-year-canchi").textContent = `Năm ${info.yearCanChi}`;
+        document.getElementById("conv-res-year-napam").textContent = `Mệnh năm: ${info.yearNapAm}`;
+        document
+            .getElementById("conv-res-year-zodiac")
+            ?.setAttribute("src", `./assets/icons/zodiac/${info.yearZodiacFile}.svg`);
 
+        const dayZodiacPath = `./assets/icons/zodiac/${info.zodiacFile}.svg`;
+        const monthZodiacPath = `./assets/icons/zodiac/${info.monthZodiacFile}.svg`;
+
+        document.getElementById("conv-icon-day-zodiac")?.setAttribute("src", dayZodiacPath);
+        document.getElementById("conv-bg-day-zodiac")?.setAttribute("src", dayZodiacPath);
         document.getElementById("conv-res-day-canchi").textContent = info.dayCanChi;
-        document.getElementById("conv-res-month-canchi").textContent = info.monthCanChi;
-        document.getElementById("conv-res-napam").textContent = info.dayNapAm;
-        document.getElementById("conv-res-term-truc").textContent = `${info.solarTerm} • Trực ${info.trucObj.name}`;
+        document.getElementById("conv-res-day-status-sub").textContent =
+            info.fortuneStatus === "good"
+                ? "Ngày Hoàng Đạo"
+                : info.fortuneStatus === "bad"
+                  ? "Ngày Hắc Đạo"
+                  : "Ngày Bình Thường";
 
-        const fortuneEl = document.getElementById("conv-res-fortune");
-        if (fortuneEl) {
-            const statusTitle =
+        document.getElementById("conv-icon-month-zodiac")?.setAttribute("src", monthZodiacPath);
+        document.getElementById("conv-bg-month-zodiac")?.setAttribute("src", monthZodiacPath);
+        document.getElementById("conv-res-month-canchi").textContent = info.monthCanChi;
+        document.getElementById("conv-res-month-lunar-sub").textContent =
+            `${VI_LUNAR_MONTH_NAMES[info.lunarMonth]} (${info.isFullMonth ? "Đủ" : "Thiếu"})`;
+
+        document.getElementById("conv-icon-element")?.setAttribute("src", `./assets/icons/${info.elementInfo.icon}`);
+        document.getElementById("conv-res-napam").textContent = info.dayNapAm;
+        document.getElementById("conv-res-element-sub").textContent = info.elementInfo.label;
+
+        document.getElementById("conv-res-term").textContent = info.solarTerm;
+        document.getElementById("conv-res-truc").textContent = `Trực ${info.trucObj.name} • ${info.trucObj.short}`;
+
+        const fortunePill = document.getElementById("conv-res-fortune-pill");
+        const fortuneTitle = document.getElementById("conv-res-fortune-title");
+        const hoursGrid = document.getElementById("conv-res-hours-grid");
+
+        if (fortunePill) fortunePill.dataset.fortune = info.fortuneStatus || "normal";
+        if (fortuneTitle) {
+            fortuneTitle.textContent =
                 info.fortuneStatus === "good"
-                    ? "🌟 Ngày Hoàng Đạo (Tốt)"
+                    ? "Ngày Hoàng Đạo (Tốt)"
                     : info.fortuneStatus === "bad"
-                      ? "🌙 Ngày Hắc Đạo (Xấu)"
-                      : "⚖️ Ngày Bình Thường";
-            fortuneEl.textContent = `${statusTitle} — Giờ Hoàng Đạo: ${info.goodHoursStr}`;
+                      ? "Ngày Hắc Đạo (Xấu)"
+                      : "Ngày Bình Thường";
+        }
+
+        if (hoursGrid) {
+            hoursGrid.innerHTML = info.goodHourCards
+                .map(
+                    (card) => `
+                        <article class="converter-modal__hour-card" title="Giờ Hoàng Đạo: ${card.hourCanChi} (${card.range})">
+                            <div class="converter-modal__hour-top">
+                                <span class="converter-modal__hour-dot" aria-hidden="true"></span>
+                                <strong class="converter-modal__hour-name">${card.hourCanChi}</strong>
+                            </div>
+                            <span class="converter-modal__hour-time">${card.range}</span>
+                            <img
+                                src="./assets/icons/zodiac/${card.icon}"
+                                alt=""
+                                aria-hidden="true"
+                                class="converter-modal__hour-zodiac"
+                            />
+                        </article>
+                    `,
+                )
+                .join("");
         }
     };
 
     const setConverterToToday = () => {
-        const daySelect = document.getElementById("conv-day");
-        const monthSelect = document.getElementById("conv-month");
-        const yearSelect = document.getElementById("conv-year");
-        const leapCheckbox = document.getElementById("conv-leap-checkbox");
-        if (!daySelect || !monthSelect || !yearSelect || !window.LunarEngine) return;
-
+        if (!window.LunarEngine) return;
         const now = new Date();
+        const leapCheckbox = document.getElementById("conv-leap-checkbox");
         if (leapCheckbox) leapCheckbox.checked = false;
 
         if (convertMode === "solar2lunar") {
-            yearSelect.value = String(now.getFullYear());
-            monthSelect.value = String(now.getMonth() + 1);
-            populateSelectOptions(daySelect, monthSelect, yearSelect);
-            daySelect.value = String(now.getDate());
+            selectedInputDay = now.getDate();
+            selectedInputMonth = now.getMonth() + 1;
+            selectedInputYear = now.getFullYear();
         } else {
             const lunarToday = window.LunarEngine.convertSolar2Lunar(
                 now.getDate(),
                 now.getMonth() + 1,
                 now.getFullYear(),
             );
-            yearSelect.value = String(lunarToday.lunarYear);
-            monthSelect.value = String(lunarToday.lunarMonth);
-            populateSelectOptions(daySelect, monthSelect, yearSelect);
-            daySelect.value = String(lunarToday.lunarDay);
+            selectedInputDay = lunarToday.lunarDay;
+            selectedInputMonth = lunarToday.lunarMonth;
+            selectedInputYear = lunarToday.lunarYear;
             if (leapCheckbox) leapCheckbox.checked = Boolean(lunarToday.lunarLeap);
         }
 
+        yearGridStart = Math.floor(selectedInputYear / 12) * 12 - 4;
+        renderCustomBentoPickers();
         runConversionAndRender();
     };
 
     const initConverterModal = () => {
         const modal = document.getElementById("converter-modal");
-        const triggerBtn = document.getElementById("widget-trigger-btn");
-        if (!modal || modal.dataset.bound === "true") return;
+        const widgetBtn = document.getElementById("widget-trigger-btn");
+        if (!modal) return;
+
+        if (widgetBtn) {
+            widgetBtn.onclick = (e) => {
+                e.preventDefault();
+                toggleConverterModal();
+            };
+        }
+
+        if (modal.dataset.bound === "true") return;
         modal.dataset.bound = "true";
 
         const closeBtn = document.getElementById("converter-modal-close");
         const backdrop = document.getElementById("converter-modal-backdrop");
-        const daySelect = document.getElementById("conv-day");
-        const monthSelect = document.getElementById("conv-month");
-        const yearSelect = document.getElementById("conv-year");
-        const leapRow = document.getElementById("conv-leap-row");
+        const dayDropdown = document.getElementById("conv-day-dropdown");
+        const monthDropdown = document.getElementById("conv-month-dropdown");
+        const yearDropdown = document.getElementById("conv-year-dropdown");
+        const prevRangeBtn = document.getElementById("conv-year-prev-range");
+        const nextRangeBtn = document.getElementById("conv-year-next-range");
+        const leapToggleBtn = document.getElementById("conv-leap-toggle-btn");
         const leapCheckbox = document.getElementById("conv-leap-checkbox");
+        const swapBtn = document.getElementById("conv-swap-direction-btn");
         const todayBtn = document.getElementById("conv-btn-today");
         const jumpBtn = document.getElementById("conv-btn-jump");
         const tabs = modal.querySelectorAll(".converter-modal__tab");
 
-        if (triggerBtn) {
-            triggerBtn.onclick = () => toggleConverterModal();
-        }
         if (closeBtn) closeBtn.onclick = () => toggleConverterModal(false);
         if (backdrop) backdrop.onclick = () => toggleConverterModal(false);
 
+        const switchConvertMode = (nextMode) => {
+            convertMode = nextMode;
+            tabs.forEach((t) => {
+                const isMatch = t.dataset.convertMode === convertMode;
+                t.classList.toggle("is-active", isMatch);
+                t.setAttribute("aria-selected", String(isMatch));
+            });
+
+            const isLunarInput = convertMode === "lunar2solar";
+            document.getElementById("conv-day-label").textContent = isLunarInput ? "Ngày Âm" : "Ngày Dương";
+            document.getElementById("conv-month-label").textContent = isLunarInput ? "Tháng Âm" : "Tháng Dương";
+            if (!isLunarInput && leapCheckbox) leapCheckbox.checked = false;
+
+            renderCustomBentoPickers();
+            runConversionAndRender();
+        };
+
         tabs.forEach((tab) => {
-            tab.onclick = () => {
-                convertMode = tab.dataset.convertMode || "solar2lunar";
-                tabs.forEach((t) => {
-                    const isMatch = t === tab;
-                    t.classList.toggle("is-active", isMatch);
-                    t.setAttribute("aria-selected", String(isMatch));
-                });
+            tab.onclick = () => switchConvertMode(tab.dataset.convertMode || "solar2lunar");
+        });
 
-                const isLunarInput = convertMode === "lunar2solar";
-                document.getElementById("conv-day-label").textContent = isLunarInput ? "Ngày Âm" : "Ngày Dương";
-                document.getElementById("conv-month-label").textContent = isLunarInput ? "Tháng Âm" : "Tháng Dương";
-                if (leapRow) leapRow.hidden = !isLunarInput;
+        if (swapBtn) {
+            swapBtn.onclick = () => {
+                switchConvertMode(convertMode === "solar2lunar" ? "lunar2solar" : "solar2lunar");
+            };
+        }
 
-                populateSelectOptions(daySelect, monthSelect, yearSelect);
+        if (leapToggleBtn && leapCheckbox) {
+            leapToggleBtn.onclick = () => {
+                if (convertMode !== "lunar2solar") return;
+                leapCheckbox.checked = !leapCheckbox.checked;
                 runConversionAndRender();
+            };
+        }
+
+        [dayDropdown, monthDropdown, yearDropdown].forEach((current) => {
+            if (!current) return;
+            current.ontoggle = () => {
+                if (current.open) {
+                    [dayDropdown, monthDropdown, yearDropdown].forEach((other) => {
+                        if (other && other !== current) other.removeAttribute("open");
+                    });
+                }
             };
         });
 
-        [monthSelect, yearSelect].forEach((sel) => {
-            sel?.addEventListener("change", () => {
-                populateSelectOptions(daySelect, monthSelect, yearSelect);
-                runConversionAndRender();
-            });
+        dayDropdown?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-conv-day]");
+            if (!btn) return;
+            e.stopPropagation();
+            selectedInputDay = Number(btn.dataset.convDay);
+            dayDropdown.removeAttribute("open");
+            renderCustomBentoPickers();
+            runConversionAndRender();
         });
 
-        daySelect?.addEventListener("change", runConversionAndRender);
-        leapCheckbox?.addEventListener("change", runConversionAndRender);
+        monthDropdown?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-conv-month]");
+            if (!btn) return;
+            e.stopPropagation();
+            selectedInputMonth = Number(btn.dataset.convMonth);
+            monthDropdown.removeAttribute("open");
+            renderCustomBentoPickers();
+            runConversionAndRender();
+        });
+
+        yearDropdown?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-conv-year]");
+            if (!btn) return;
+            e.stopPropagation();
+            selectedInputYear = Number(btn.dataset.convYear);
+            yearDropdown.removeAttribute("open");
+            renderCustomBentoPickers();
+            runConversionAndRender();
+        });
+
+        if (prevRangeBtn) {
+            prevRangeBtn.onclick = (e) => {
+                e.stopPropagation();
+                yearGridStart -= 12;
+                renderCustomBentoPickers();
+            };
+        }
+
+        if (nextRangeBtn) {
+            nextRangeBtn.onclick = (e) => {
+                e.stopPropagation();
+                yearGridStart += 12;
+                renderCustomBentoPickers();
+            };
+        }
 
         if (todayBtn) todayBtn.onclick = setConverterToToday;
 
@@ -2614,7 +2664,6 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 const { day, month, year } = resolvedSolarDate;
                 toggleConverterModal(false);
 
-                // Nếu đang ở Trang chủ (có hàm nhảy ngày hoặc lưới lịch tháng), phát sự kiện nhảy thẳng tới ngày đó
                 if (document.getElementById("month-cal-grid")) {
                     window.dispatchEvent(
                         new CustomEvent("converter-jump-to-date", {
@@ -2631,8 +2680,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         setConverterToToday();
     };
 
-    if (!isModalGlobalBound) {
-        isModalGlobalBound = true;
+    if (!isModalKeyBound) {
+        isModalKeyBound = true;
         document.addEventListener("keydown", (e) => {
             const modal = document.getElementById("converter-modal");
             if (e.key === "Escape" && modal && !modal.hidden) {
@@ -2643,5 +2692,653 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
 
     document.addEventListener("DOMContentLoaded", initConverterModal);
     window.addEventListener("template-loaded", initConverterModal);
+})();
+```
+
+### week-calendar.js
+
+```js
+// assets/js/week-calendar.js
+(() => {
+    const renderActionChips = (listEl, rawCsv) => {
+        if (!listEl) return;
+        const items = String(rawCsv || "")
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+        listEl.innerHTML = items.map((text) => `<li class="fengshui-actions__chip">${text}</li>`).join("");
+    };
+
+    const initWeekCalendar = () => {
+        const rootEl = document.getElementById("week-calendar-root");
+        const app = document.getElementById("week-cal-app");
+        if (!app) return;
+
+        if (rootEl) rootEl.setAttribute("aria-busy", "false");
+        if (app.dataset.bound === "true") return;
+        app.dataset.bound = "true";
+
+        const cards = Array.from(app.querySelectorAll(".week-cal__card"));
+        const legendPills = app.querySelectorAll(".month-cal__legend-pill");
+        const todayBtn = document.getElementById("week-today-btn");
+
+        const selectDayCard = (targetCard, shouldFocus = false) => {
+            if (!targetCard) return;
+
+            // 1. Đọc dữ liệu từ data-* thông qua dataset
+            const {
+                date,
+                solar,
+                weekday,
+                lunar,
+                canchi,
+                napam,
+                truc,
+                term,
+                zodiac,
+                fortune,
+                fortuneLabel,
+                goodHours,
+                do: doCsv,
+                dont: dontCsv,
+            } = targetCard.dataset;
+
+            // 2. Đồng bộ trạng thái Active (Nền màu theme mờ 9%) & Roving Tabindex
+            cards.forEach((card) => {
+                const isSelected = card === targetCard;
+                card.classList.toggle("week-cal__card--active", isSelected);
+                card.setAttribute("tabindex", isSelected ? "0" : "-1");
+                if (isSelected) card.setAttribute("aria-current", "date");
+                else card.removeAttribute("aria-current");
+            });
+
+            // 3. Cập nhật Thẻ Detail bên trái (Flat UI)
+            app.dataset.activeDate = date;
+            document.getElementById("hero-solar-display").textContent = solar;
+            document.getElementById("hero-solar-display").setAttribute("datetime", date);
+            document.getElementById("hero-weekday-display").textContent = weekday;
+            document.getElementById("hero-lunar-display").innerHTML =
+                `Ngày ${lunar} Âm lịch • <strong>${canchi}</strong> (${napam})`;
+
+            const fortuneTextEl = document.getElementById("hero-day-fortune-text");
+            if (fortuneTextEl) fortuneTextEl.textContent = fortuneLabel;
+            document.getElementById("hero-day-fortune").dataset.fortune = fortune;
+
+            // Cập nhật 2 badge ngang Tiết khí & Trực
+            document.getElementById("hero-term-val").textContent = term;
+            document.getElementById("hero-truc-val").textContent = truc;
+
+            // Cập nhật Giờ tốt & Danh sách Chip Nên làm / Không nên làm
+            document.getElementById("hero-good-hours").textContent = goodHours;
+            renderActionChips(document.getElementById("hero-do-list"), doCsv);
+            renderActionChips(document.getElementById("hero-dont-list"), dontCsv);
+
+            document.getElementById("hero-detail-link").href = `./index.html?date=${date}`;
+            document.getElementById("hero-zodiac-img").src = `./assets/icons/zodiac/${zodiac}.svg`;
+
+            if (shouldFocus) targetCard.focus();
+        };
+
+        cards.forEach((card, idx) => {
+            card.addEventListener("click", () => selectDayCard(card));
+
+            card.addEventListener("keydown", (e) => {
+                let nextIdx = -1;
+                if (e.key === "ArrowRight" || e.key === "ArrowDown") nextIdx = (idx + 1) % cards.length;
+                if (e.key === "ArrowLeft" || e.key === "ArrowUp") nextIdx = (idx - 1 + cards.length) % cards.length;
+
+                if (nextIdx !== -1) {
+                    e.preventDefault();
+                    selectDayCard(cards[nextIdx], true);
+                }
+            });
+        });
+
+        if (todayBtn) {
+            todayBtn.addEventListener("click", () => {
+                const todayCard = app.querySelector(".week-cal__card--today") || cards[4];
+                if (todayCard) selectDayCard(todayCard, true);
+            });
+        }
+
+        // Lọc sáng Hoàng Đạo / Hắc Đạo / Hôm Nay từ thanh Legend đồng bộ
+        const highlightWeekCards = (statusKey, activePill = null) => {
+            legendPills.forEach((p) => {
+                const isMatch = p === activePill && Boolean(statusKey);
+                p.classList.toggle("is-active", isMatch);
+                p.setAttribute("aria-pressed", String(isMatch));
+            });
+
+            cards.forEach((card) => {
+                if (!statusKey) {
+                    card.classList.remove("is-dimmed", "is-highlighted");
+                    return;
+                }
+                const cardStatus = card.dataset.status || "";
+                const isMatch = cardStatus.split(" ").includes(statusKey);
+                card.classList.toggle("is-highlighted", isMatch);
+                card.classList.toggle("is-dimmed", !isMatch);
+            });
+        };
+
+        legendPills.forEach((pill) => {
+            const filterKey = pill.dataset.filter;
+            pill.addEventListener("mouseenter", () => highlightWeekCards(filterKey, pill));
+            pill.addEventListener("mouseleave", () => highlightWeekCards(null));
+            pill.addEventListener("focus", () => highlightWeekCards(filterKey, pill));
+            pill.addEventListener("blur", () => highlightWeekCards(null));
+        });
+    };
+
+    document.addEventListener("DOMContentLoaded", initWeekCalendar);
+    window.addEventListener("template-loaded", initWeekCalendar);
+})();
+```
+
+<!-- detail.js -->
+
+### detail.js
+
+```js
+// assets/js/detail.js
+// Chuyên trách Giai đoạn 4 (detail.html): Đọc tham số URL, nạp ./api/thang-${month}.json,
+// đồng bộ 4 Bento Card Con Giáp/Ngũ Hành, Bộ lọc sự kiện cùng tháng & Lightbox phóng to ảnh
+// ĐÃ FIX: Khóa scrollRestoration và thay scrollIntoView() bằng scrollTop nội bộ để trang không tự cuộn lên trên
+(() => {
+    const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
+
+    let allMonthItemsCache = [];
+    let currentSelectedItem = null;
+    let currentEventMonth = 11;
+    let activeRelatedFilter = "all"; // "all" | "vn" | "intl"
+
+    const pad = (n) => String(n).padStart(2, "0");
+
+    // 1. Tắt chế độ tự ghi nhớ vị trí cuộn cũ của trình duyệt & đưa trang về đỉnh tuyệt đối (top: 0)
+    if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+    const fetchMonthData = async (monthNum) => {
+        const m = Number(monthNum) || 11;
+        const candidatePaths = [`./api/thang-${m}.json`, `./api/thang-${pad(m)}.json`];
+
+        for (const path of candidatePaths) {
+            try {
+                const res = await fetch(path);
+                if (res.ok) {
+                    const data = await res.json();
+                    return Array.isArray(data) ? data : data?.data || data?.events || [];
+                }
+            } catch (err) {
+                // Thử đường dẫn tiếp theo
+            }
+        }
+        return [];
+    };
+
+    const parseDayMonthFromItem = (item, fallbackMonth) => {
+        const displayDate = String(item?.ngay_hien_thi || item?.ngay_duong || "").trim();
+        if (/^\d{1,2}\/\d{1,2}/.test(displayDate)) {
+            const [d, m] = displayDate.split("/").map(Number);
+            return { day: d || 1, month: m || fallbackMonth };
+        }
+        const slugStr = String(item?.image_slug || "");
+        const match = slugStr.match(/-(\d{2})-(\d{2})-\d{4}/);
+        if (match) {
+            return { day: Number(match[1]) || 1, month: Number(match[2]) || fallbackMonth };
+        }
+        return { day: Number(item?.day) || 1, month: fallbackMonth };
+    };
+
+    const isInternationalEvent = (entry) => {
+        const scope = String(entry?.pham_vi || entry?.scope || entry?.category_id || "").toLowerCase();
+        return Boolean(entry?.is_international) || scope.includes("quoc-te") || scope.includes("international");
+    };
+
+    const buildDetailHref = (item, monthNum) => {
+        if (!item) return "./index.html";
+        const rawSlug = item.image_slug || item.slug || "";
+        const cleanFolder = rawSlug.replace(/-\d{2}-\d{2}-\d{4}.*$/, "") || rawSlug;
+        const catStr = String(item.category_id || item.loai || "").toLowerCase();
+        const typeFolder = catStr.includes("event") || catStr.includes("su-kien") ? "events" : "figures";
+
+        const params = new URLSearchParams({
+            type: typeFolder,
+            folder: cleanFolder,
+            slug: rawSlug,
+            month: String(monthNum),
+        });
+        return `./detail.html?${params.toString()}`;
+    };
+
+    // Điều khiển Lightbox phóng to ảnh
+    const openLightbox = (imgSrc, captionText) => {
+        const lightbox = document.getElementById("detail-lightbox");
+        const lightboxImg = document.getElementById("detail-lightbox-img");
+        const lightboxCap = document.getElementById("detail-lightbox-caption");
+        if (!lightbox || !lightboxImg) return;
+
+        lightboxImg.src = imgSrc;
+        lightboxImg.alt = captionText || "Hình ảnh tư liệu lịch sử";
+        if (lightboxCap) lightboxCap.textContent = captionText || "";
+
+        lightbox.hidden = false;
+        document.body.style.overflow = "hidden";
+    };
+
+    const closeLightbox = () => {
+        const lightbox = document.getElementById("detail-lightbox");
+        if (!lightbox) return;
+        lightbox.hidden = true;
+        document.body.style.overflow = "";
+    };
+
+    const setHeroImageWithFallback = (imgEl, typeFolder, actorFolder, monthNum, rawSlug, altText) => {
+        if (!imgEl) return;
+        if (altText) imgEl.alt = altText;
+
+        const cleanSlug = String(rawSlug || "")
+            .split("/")
+            .pop()
+            .replace(/\.(jpg|jpeg|png|webp)$/i, "");
+
+        const candidateUrls = [
+            `./assets/images/calendar-covers/thang-${monthNum}/${cleanSlug}.jpg`,
+            `./assets/images/calendar-covers/thang-${monthNum}/${cleanSlug}.webp`,
+            `./assets/images/${typeFolder}/${actorFolder}/${actorFolder}.webp`,
+            `./assets/images/${typeFolder}/${actorFolder}/${actorFolder}.jpg`,
+            `./assets/images/${typeFolder}/${actorFolder}/1.webp`,
+            `./assets/images/${typeFolder}/${actorFolder}/1.jpg`,
+            DEFAULT_COVER_IMG,
+        ];
+
+        let idx = 0;
+        const tryNext = () => {
+            if (idx >= candidateUrls.length) {
+                imgEl.onerror = null;
+                return;
+            }
+            imgEl.src = candidateUrls[idx++];
+        };
+
+        imgEl.onerror = tryNext;
+        tryNext();
+    };
+
+    // THAY THẾ HÀM renderActorGallery TRONG assets/js/detail.js
+    const renderActorGallery = (item, typeFolder, actorFolder, monthNum, rawSlug) => {
+        const gridEl = document.getElementById("article-gallery-grid");
+        if (!gridEl) return;
+
+        const folderBasePath = `./assets/images/${typeFolder}/${actorFolder}`;
+        const cleanSlug = String(rawSlug || "")
+            .split("/")
+            .pop()
+            .replace(/\.(jpg|jpeg|png|webp)$/i, "");
+        const coverUrl = `./assets/images/calendar-covers/thang-${monthNum}/${cleanSlug}.jpg`;
+
+        const customImages = Array.isArray(item?.images)
+            ? item.images
+            : Array.isArray(item?.gallery)
+              ? item.gallery
+              : [];
+
+        const galleryCards = [
+            {
+                primaryUrl: `${folderBasePath}/${actorFolder}.webp`,
+                fallback1: `${folderBasePath}/1.jpg`,
+                fallback2: coverUrl,
+                badge: "Tư liệu",
+                caption: item?.ten || actorFolder,
+            },
+            {
+                primaryUrl: customImages[0] ? `${folderBasePath}/${customImages[0]}` : `${folderBasePath}/2.webp`,
+                fallback1: `${folderBasePath}/2.jpg`,
+                fallback2: "",
+                badge: "Mở rộng",
+                caption: item?.hien_thi_nhan_dip || "Tư liệu lịch sử lưu trữ",
+            },
+        ];
+
+        gridEl.classList.remove("detail-gallery__grid--single");
+
+        gridEl.innerHTML = galleryCards
+            .map(
+                (card) => `
+                    <figure class="detail-gallery__item js-gallery-figure" data-caption="${card.caption}">
+                        <img
+                            src="${card.primaryUrl}"
+                            data-fallback-one="${card.fallback1}"
+                            data-fallback-two="${card.fallback2}"
+                            alt="${card.caption}"
+                            class="detail-gallery__img js-gallery-img"
+                            loading="lazy"
+                        />
+                        <figcaption class="detail-gallery__caption">
+                            <span class="detail-gallery__caption-badge" aria-hidden="true">${card.badge}</span>
+                            <span class="detail-gallery__caption-text">${card.caption}</span>
+                        </figcaption>
+                    </figure>
+                `,
+            )
+            .join("");
+
+        gridEl.querySelectorAll(".js-gallery-img").forEach((img) => {
+            let step = 0;
+            img.onerror = () => {
+                step++;
+                if (step === 1 && img.dataset.fallbackOne) {
+                    img.src = img.dataset.fallbackOne;
+                } else if (step === 2 && img.dataset.fallbackTwo) {
+                    img.src = img.dataset.fallbackTwo;
+                } else {
+                    img.onerror = null;
+                    const parentFig = img.closest(".js-gallery-figure");
+                    if (parentFig) parentFig.remove();
+                    if (gridEl.children.length === 1) {
+                        gridEl.classList.add("detail-gallery__grid--single");
+                    }
+                }
+            };
+        });
+
+        gridEl.querySelectorAll(".js-gallery-figure").forEach((fig) => {
+            fig.onclick = () => {
+                const img = fig.querySelector("img");
+                if (img?.src) openLightbox(img.src, fig.dataset.caption);
+            };
+        });
+    };
+
+    // Vẽ danh sách sự kiện cùng tháng ở Cột Phải (CHỈ cuộn nội bộ thẻ #related-events-list, KHÔNG cuộn window)
+    const renderRelatedSidebarList = () => {
+        const relatedCountEl = document.getElementById("related-events-count");
+        const relatedListEl = document.getElementById("related-events-list");
+        if (!relatedListEl) return;
+
+        const filteredItems = allMonthItemsCache.filter((entry) => {
+            if (activeRelatedFilter === "vn") return !isInternationalEvent(entry);
+            if (activeRelatedFilter === "intl") return isInternationalEvent(entry);
+            return true;
+        });
+
+        if (relatedCountEl) relatedCountEl.textContent = `${filteredItems.length} mục`;
+
+        relatedListEl.innerHTML = filteredItems
+            .map((item) => {
+                const dm = parseDayMonthFromItem(item, currentEventMonth);
+                const isCurrent = item === currentSelectedItem;
+                const href = buildDetailHref(item, currentEventMonth);
+                return `
+                    <a
+                        href="${href}"
+                        class="detail-sidebar__item ${isCurrent ? "is-current" : ""}"
+                        ${isCurrent ? 'aria-current="page"' : ""}
+                    >
+                        <div class="detail-sidebar__date-box">
+                            <small>T${dm.month}</small>
+                            <strong>${pad(dm.day)}</strong>
+                        </div>
+                        <div class="detail-sidebar__item-info">
+                            <strong class="detail-sidebar__item-name">${item.ten || "Sự kiện lịch sử"}</strong>
+                            <span class="detail-sidebar__item-occasion">${item.hien_thi_nhan_dip || ""}</span>
+                        </div>
+                    </a>
+                `;
+            })
+            .join("");
+
+        // ✅ ĐÃ FIX: Chỉ tính toán scrollTop bên trong khung #related-events-list, tuyệt đối không dùng scrollIntoView()
+        const activeSidebarItem = relatedListEl.querySelector(".detail-sidebar__item.is-current");
+        if (activeSidebarItem) {
+            const targetScrollTop =
+                activeSidebarItem.offsetTop -
+                relatedListEl.offsetTop -
+                relatedListEl.clientHeight / 2 +
+                activeSidebarItem.clientHeight / 2;
+
+            relatedListEl.scrollTo({
+                top: Math.max(0, targetScrollTop),
+                behavior: "smooth",
+            });
+        }
+    };
+
+    const initDetailPage = async () => {
+        // Đảm bảo cửa sổ trình duyệt luôn ở vị trí trên cùng (top: 0) khi bắt đầu khởi tạo trang
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+        const params = new URLSearchParams(window.location.search);
+        const typeParam = params.get("type") || "figures";
+        const folderParam = params.get("folder") || "nguyen-thi-minh-khai";
+        const slugParam = params.get("slug") || "nguyen-thi-minh-khai-01-11-1910-28-08-1941";
+        const monthParam = Number(params.get("month")) || 11;
+        const dayParam = Number(params.get("day")) || null;
+
+        currentEventMonth = monthParam;
+        allMonthItemsCache = await fetchMonthData(monthParam);
+
+        currentSelectedItem =
+            allMonthItemsCache.find((entry) => entry.image_slug === slugParam || entry.slug === slugParam) ||
+            allMonthItemsCache.find((entry) => String(entry.image_slug || "").startsWith(folderParam)) ||
+            (dayParam
+                ? allMonthItemsCache.find((entry) => {
+                      const dm = parseDayMonthFromItem(entry, monthParam);
+                      return dm.day === dayParam;
+                  })
+                : null) ||
+            allMonthItemsCache[0] ||
+            null;
+
+        const { day: eventDay, month: eventMonth } = parseDayMonthFromItem(currentSelectedItem, monthParam);
+        const currentYear = 2026;
+        const calendarJumpUrl = `./index.html?date=${currentYear}-${pad(eventMonth)}-${pad(eventDay)}`;
+
+        document.getElementById("detail-back-link")?.setAttribute("href", calendarJumpUrl);
+        document.getElementById("article-view-on-cal-btn")?.setAttribute("href", calendarJumpUrl);
+
+        // Nút Sự kiện Trước / Tiếp theo trên thanh điều hướng đầu trang
+        if (allMonthItemsCache.length > 0 && currentSelectedItem) {
+            const currentIndex = allMonthItemsCache.indexOf(currentSelectedItem);
+            const prevIndex = (currentIndex - 1 + allMonthItemsCache.length) % allMonthItemsCache.length;
+            const nextIndex = (currentIndex + 1) % allMonthItemsCache.length;
+
+            document
+                .getElementById("detail-prev-item-btn")
+                ?.setAttribute("href", buildDetailHref(allMonthItemsCache[prevIndex], eventMonth));
+            document
+                .getElementById("detail-next-item-btn")
+                ?.setAttribute("href", buildDetailHref(allMonthItemsCache[nextIndex], eventMonth));
+        }
+
+        const isEventCategory =
+            typeParam === "events" ||
+            String(currentSelectedItem?.category_id || "")
+                .toLowerCase()
+                .includes("event") ||
+            String(currentSelectedItem?.category_id || "")
+                .toLowerCase()
+                .includes("su-kien");
+
+        const titleText = currentSelectedItem?.ten || "Nguyễn Thị Minh Khai";
+        const occasionText =
+            currentSelectedItem?.hien_thi_nhan_dip ||
+            `Sự kiện & Nhân vật lịch sử ngày ${pad(eventDay)}/${pad(eventMonth)}`;
+        const rawSlug = currentSelectedItem?.image_slug || slugParam;
+        const resolvedFolder = rawSlug.replace(/-\d{2}-\d{2}-\d{4}.*$/, "") || folderParam;
+
+        document.title = `${titleText} - Lịch Phong Thủy`;
+
+        document.getElementById("article-cat-badge").textContent = isEventCategory
+            ? "Sự kiện lịch sử"
+            : "Nhân vật lịch sử";
+        document.getElementById("article-date-badge").textContent = `Ngày ${pad(eventDay)}/${pad(eventMonth)}`;
+        document.getElementById("article-occasion-text").textContent = occasionText;
+        document.getElementById("article-main-title").textContent = titleText;
+        document.getElementById("article-type-label").textContent = isEventCategory
+            ? "Sự kiện Trọng đại"
+            : "Danh nhân Việt Nam";
+
+        const quoteTextEl = document.getElementById("article-quote-text");
+        const quoteAuthorEl = document.getElementById("article-quote-author");
+        const rawQuote = (currentSelectedItem?.quote || currentSelectedItem?.danh_ngon || "").trim();
+        if (quoteTextEl) {
+            quoteTextEl.textContent = rawQuote
+                ? rawQuote.startsWith('"')
+                    ? rawQuote
+                    : `"${rawQuote}"`
+                : `"${occasionText}"`;
+        }
+        if (quoteAuthorEl) {
+            quoteAuthorEl.textContent = `— ${currentSelectedItem?.tac_gia || titleText}`;
+        }
+
+        // Đồng bộ 4 Bento Stat Cards bằng window.LunarEngine (Con Giáp + Ngũ Hành)
+        document.getElementById("article-solar-date").textContent =
+            `${pad(eventDay)}/${pad(eventMonth)}/${currentYear}`;
+
+        if (window.LunarEngine) {
+            const info = window.LunarEngine.getFullDayInfo(eventDay, eventMonth, currentYear);
+
+            document.getElementById("article-weekday-sub").textContent = info.bilingualWeekday;
+            document.getElementById("article-lunar-date").textContent =
+                `${pad(info.lunarDay)}/${pad(info.lunarMonth)} ${info.yearCanChi}`;
+            document.getElementById("article-lunar-month-sub").textContent = info.lunarMonthFullLabel;
+
+            const yearZodiacPath = `./assets/icons/zodiac/${info.yearZodiacFile}.svg`;
+            document.getElementById("article-year-zodiac-icon")?.setAttribute("src", yearZodiacPath);
+            document.getElementById("article-year-zodiac-bg")?.setAttribute("src", yearZodiacPath);
+
+            const dayZodiacPath = `./assets/icons/zodiac/${info.zodiacFile}.svg`;
+            document.getElementById("article-day-zodiac-icon")?.setAttribute("src", dayZodiacPath);
+            document.getElementById("article-day-zodiac-bg")?.setAttribute("src", dayZodiacPath);
+            document.getElementById("article-canchi-date").textContent = `Ngày ${info.dayCanChi}`;
+            document.getElementById("article-fortune-sub").textContent =
+                info.fortuneStatus === "good"
+                    ? "🌟 Ngày Hoàng Đạo"
+                    : info.fortuneStatus === "bad"
+                      ? "🌙 Ngày Hắc Đạo"
+                      : `Tháng ${info.monthCanChi}`;
+
+            document
+                .getElementById("article-element-icon")
+                ?.setAttribute("src", `./assets/icons/${info.elementInfo.icon}`);
+            document.getElementById("article-napam-val").textContent = info.dayNapAm;
+            document.getElementById("article-term-sub").textContent =
+                `Tiết ${info.solarTerm} • Trực ${info.trucObj.name}`;
+        }
+
+        // Nạp ảnh Hero 16:9 & Gắn sự kiện phóng to Lightbox
+        const heroImgEl = document.getElementById("article-hero-img");
+        const heroFigureEl = document.getElementById("detail-hero-figure");
+        setHeroImageWithFallback(
+            heroImgEl,
+            isEventCategory ? "events" : "figures",
+            resolvedFolder,
+            eventMonth,
+            rawSlug,
+            titleText,
+        );
+
+        if (heroFigureEl && heroImgEl) {
+            heroFigureEl.onclick = () => openLightbox(heroImgEl.src, occasionText);
+        }
+
+        // Đổ nội dung bài viết
+        const bodyEl = document.getElementById("article-body-content");
+        if (bodyEl) {
+            const rawDesc =
+                currentSelectedItem?.mo_ta ||
+                currentSelectedItem?.noi_dung ||
+                currentSelectedItem?.description ||
+                occasionText;
+            const paragraphs = String(rawDesc)
+                .split(/\n+/)
+                .map((p) => p.trim())
+                .filter(Boolean);
+
+            bodyEl.innerHTML = paragraphs.map((p) => `<p>${p}</p>`).join("");
+        }
+
+        renderActorGallery(
+            currentSelectedItem,
+            isEventCategory ? "events" : "figures",
+            resolvedFolder,
+            eventMonth,
+            rawSlug,
+        );
+
+        const sourcesListEl = document.getElementById("article-sources-list");
+        if (sourcesListEl) {
+            const sources = Array.isArray(currentSelectedItem?.historical_sources)
+                ? currentSelectedItem.historical_sources
+                : currentSelectedItem?.nguon_su_lieu
+                  ? [currentSelectedItem.nguon_su_lieu]
+                  : ["Đại cương Lịch sử Việt Nam", "Bảo tàng Lịch sử Quốc gia Việt Nam"];
+
+            sourcesListEl.innerHTML = sources
+                .map((src) => {
+                    const label =
+                        typeof src === "string" ? src : src.ten_nguon || src.title || src.name || "Tài liệu lịch sử";
+                    return `<li class="detail-sources__item">${label}</li>`;
+                })
+                .join("");
+        }
+
+        // Bộ lọc Tất cả / Việt Nam / Quốc tế trên Cột Phải
+        document.getElementById("related-month-title").textContent = `Sự kiện Tháng ${eventMonth}`;
+        document.querySelectorAll(".detail-sidebar__filter-btn").forEach((btn) => {
+            btn.onclick = () => {
+                activeRelatedFilter = btn.dataset.relatedFilter || "all";
+                document.querySelectorAll(".detail-sidebar__filter-btn").forEach((b) => {
+                    b.classList.toggle("is-active", b === btn);
+                });
+                renderRelatedSidebarList();
+            };
+        });
+
+        renderRelatedSidebarList();
+
+        // Nút Sao chép liên kết chia sẻ
+        const copyBtn = document.getElementById("detail-copy-link-btn");
+        const copyLabel = document.getElementById("detail-copy-label");
+        if (copyBtn && copyLabel) {
+            copyBtn.onclick = async () => {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    copyLabel.textContent = "Đã sao chép!";
+                    setTimeout(() => {
+                        copyLabel.textContent = "Chia sẻ";
+                    }, 2000);
+                } catch (e) {
+                    copyLabel.textContent = "Chia sẻ";
+                }
+            };
+        }
+
+        // Sự kiện đóng Lightbox
+        document.getElementById("detail-lightbox-close")?.addEventListener("click", closeLightbox);
+        document.getElementById("detail-lightbox-backdrop")?.addEventListener("click", closeLightbox);
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeLightbox();
+        });
+    };
+
+    // Giữ trạng thái Active cho mục "Ngày - tháng" trên Sidebar khi đang ở trang detail.html
+    const keepSidebarActiveOnDetail = () => {
+        const homeSidebarLink = document.querySelector('.sidebar__link[data-nav-page="index.html"]');
+        if (homeSidebarLink) {
+            homeSidebarLink.classList.add("sidebar__link--active");
+            homeSidebarLink.setAttribute("aria-current", "page");
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        initDetailPage();
+        keepSidebarActiveOnDetail();
+    });
+    window.addEventListener("template-loaded", keepSidebarActiveOnDetail);
 })();
 ```

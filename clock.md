@@ -46,12 +46,13 @@
             load("#footer", "./templates/footer.html");
         </script>
 
-        <!-- 5. Bộ Script Modular: CDN lunar-javascript + Core Engine + Layout + Trang Giờ -->
+        <!-- 5. Bộ Script Modular (Đã xóa calendar.js thừa) -->
         <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.min.js"></script>
         <script src="./assets/js/lunar-engine.js"></script>
         <script src="./assets/js/header.js"></script>
         <script src="./assets/js/sidebar.js"></script>
         <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/converter-modal.js"></script>
         <script src="./assets/js/clock.js"></script>
     </body>
 </html>
