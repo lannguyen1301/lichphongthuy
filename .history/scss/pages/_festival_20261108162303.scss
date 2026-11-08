@@ -1,0 +1,6 @@
+// scss/pages/_festival.scss
+@use "../abstracts" as abs;
+
+.festival-page {
+    padding-bottom: abs.$gap-section-default;
+}

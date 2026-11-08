@@ -10,6 +10,7 @@
 @forward "./week";
 @forward "./year";
 @forward "./detail";
+@forward "./festival";
 ```
 
 ### home.scss
@@ -2114,5 +2115,16 @@
         font-weight: 700;
         color: var(--text-color);
     }
+}
+```
+
+### festival.scss
+
+```scss
+// scss/pages/_festival.scss
+@use "../abstracts" as abs;
+
+.festival-page {
+    padding-bottom: abs.$gap-section-default;
 }
 ```

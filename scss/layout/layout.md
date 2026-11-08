@@ -11,7 +11,7 @@
 ### header.scss
 
 ```scss
-// scss/layout/_header.scss
+// 1. scss/layout/_header.scss
 @use "../abstracts" as abs;
 
 .header {
@@ -28,7 +28,6 @@
         height: abs.$header-height-mobile;
     }
 
-    // 1 KHUNG VIỀN BENTO DUY NHẤT BỌC CẢ CỤM TRÁI & CỤM PHẢI
     &__container {
         @extend %flexBetween;
         height: 100%;
@@ -500,7 +499,6 @@
 ### sidebar.scss
 
 ```scss
-// scss/layout/_sidebar.scss
 @use "../abstracts" as abs;
 
 #sidebar-root {
@@ -540,7 +538,6 @@
             color: var(--primary-color);
         }
 
-        // Trạng thái Active nổi bật cho mục hiện tại
         &--active {
             background-color: var(--bg-surface);
             color: var(--primary-color);
@@ -548,19 +545,19 @@
         }
     }
 
-    // Nhãn Tooltip nổi bên phải Icon trên PC
     &__tooltip {
         @extend %absCenterY;
         left: calc(100% + 1.4rem);
         transform: translate(-0.8rem, -50%);
         padding: 0.6rem 1.2rem;
-        background-color: var(--text-color);
-        color: var(--body-bg);
+        background-color: var(--tooltip-bg, var(--bg-surface));
+        color: var(--tooltip-text, var(--text-color));
+        border: 1.5px solid var(--tooltip-border, var(--primary-color));
         font-size: 1.3rem;
-        font-weight: 600;
-        border-radius: 0.8rem;
+        font-weight: 700;
+        border-radius: 1rem;
         @extend %textNoWrap;
-        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -571,9 +568,9 @@
             right: 100%;
             top: 50%;
             transform: translateY(-50%);
-            border-width: 0.5rem;
+            border-width: 0.55rem;
             border-style: solid;
-            border-color: transparent var(--text-color) transparent transparent;
+            border-color: transparent var(--tooltip-border, var(--primary-color)) transparent transparent;
         }
     }
 
@@ -584,7 +581,6 @@
         transform: translate(0, -50%);
     }
 
-    // Responsive dưới 768px (md): Không dùng @extend bên trong @media để tránh lỗi Sass
     @include abs.screen(md) {
         top: calc(#{abs.$header-top-offset} + #{abs.$header-height-mobile} + 1.5rem);
         left: 1.6rem;
@@ -601,7 +597,6 @@
         }
 
         &__link {
-            // Đã có display: flex và align-items: center từ %flexCenter ở trên, chỉ cần đổi justify-content
             justify-content: flex-start;
             width: 100%;
             height: 4.8rem;
@@ -615,6 +610,7 @@
             opacity: 1;
             visibility: visible;
             background-color: transparent;
+            border: none;
             color: inherit;
             padding: 0;
             font-size: 1.5rem;
@@ -629,7 +625,6 @@
 }
 
 .sidebar-backdrop {
-    // Đặt @extend ở cấp gốc (ngoài @media) để tuân thủ quy tắc của Dart Sass
     @extend %fixedCover;
     @extend %transBackdrop;
     display: none;

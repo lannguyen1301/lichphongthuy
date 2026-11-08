@@ -1,0 +1,57 @@
+// scss/components/_festival-calendar.scss
+@use "../abstracts" as abs;
+
+.festival-cal {
+    @extend %flexColumn;
+    gap: 2.4rem;
+    line-height: 1.5;
+
+    // ==========================================================================
+    // 1. TẦNG 1: BENTO DASHBOARD (THẺ HERO ĐẾM NGƯỢC + BẢNG ĐIỀU KHIỂN LỌC/THÁNG)
+    // ==========================================================================
+    &__top-bento {
+        display: grid;
+        grid-template-columns: 38rem 1fr;
+        align-items: stretch;
+        gap: 2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: 34rem 1fr;
+        }
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // Thẻ Hero Sự Kiện Sắp Diễn Ra (Đồng bộ biến màu Theme _palette.scss với week-calendar)
+    &__hero {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.8rem;
+        padding: 2.6rem;
+        background-color: var(--primary-color);
+        border: 1px solid var(--primary-hover);
+        border-radius: 2.6rem;
+        color: #ffffff;
+        box-shadow: 0 1rem 2.8rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            padding: 2rem;
+            border-radius: 2rem;
+        }
+
+        &-top {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 1rem;
+        }
+
+        &-badges {
+            @extend %flexBetween;
+            flex-wrap: wrap

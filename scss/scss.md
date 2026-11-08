@@ -2067,13 +2067,13 @@ strong {
 @forward "./date-time";
 @forward "./bloc-card";
 @forward "./fengshui-card";
-
 @forward "./clock-hero";
 @forward "./clock-pillars";
 @forward "./clock-zodiac";
 @forward "./week-calendar";
 @forward "./month-calendar";
 @forward "./converter-modal";
+@forward "./festival-calendar";
 ```
 
 ### button.scss
@@ -5946,6 +5946,556 @@ strong {
 }
 ```
 
+### festival-calendar.scss
+
+```scss
+// scss/components/_festival-calendar.scss
+@use "../abstracts" as abs;
+
+.festival-cal {
+    @extend %flexColumn;
+    gap: 2.4rem;
+    line-height: 1.5;
+
+    // 1. TẦNG TRÊN: HERO ĐẾM NGƯỢC (TRÁI) & BỘ ĐIỀU KHIỂN NĂM / BỘ LỌC (PHẢI)
+    &__top-bento {
+        display: grid;
+        grid-template-columns: 38rem 1fr;
+        align-items: stretch;
+        gap: 2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: 34rem 1fr;
+        }
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__dot {
+        display: inline-block;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        @extend %flexItemFixed;
+
+        &--lunar {
+            background-color: #ef4444;
+        }
+
+        &--solar {
+            background-color: #2563eb;
+        }
+
+        &--upcoming {
+            background-color: #10b981;
+        }
+    }
+
+    // 2. TẦNG DƯỚI: LƯỚI BENTO 12 THÁNG (2 CỘT TRÊN PC)
+    &__months-grid {
+        @extend %gridCols2;
+        align-items: start;
+        gap: 2rem;
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+// CỘT TRÁI TẦNG 1: THẺ HERO TIÊU ĐIỂM (Hỗ trợ cả .festival-hero và .festival-cal__hero)
+.festival-hero,
+.festival-cal__hero {
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.6rem;
+    padding: 2.6rem;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-hover);
+    border-radius: 2.6rem;
+    color: #ffffff;
+    box-shadow: 0 1rem 2.8rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 2rem;
+        border-radius: 2rem;
+    }
+
+    .festival-hero__top,
+    .festival-cal__hero-top {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.8rem;
+        padding-bottom: 1.4rem;
+        border-bottom: 1px solid var(--hero-border-color);
+    }
+
+    .festival-hero__badges,
+    .festival-cal__hero-badges {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .festival-hero__pill,
+    .festival-cal__hero-pill,
+    .festival-hero__type-badge,
+    .festival-cal__hero-type {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        padding: 0.35rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+    }
+
+    .festival-hero__pill,
+    .festival-cal__hero-pill {
+        background-color: #ffffff;
+        color: var(--primary-active);
+    }
+
+    .festival-hero__type-badge,
+    .festival-cal__hero-type {
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        color: #ffffff;
+    }
+
+    .festival-hero__date-row,
+    .festival-cal__hero-date {
+        @extend %flexItemCenter;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 0.2rem;
+    }
+
+    .festival-hero__solar,
+    .festival-cal__hero-solar {
+        font-size: clamp(4.6rem, 5.2vw, 5.8rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .festival-hero__weekday,
+    .festival-cal__hero-weekday {
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: var(--hero-text-soft);
+    }
+
+    .festival-hero__title,
+    .festival-cal__hero-title {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.3;
+        color: #ffffff;
+    }
+
+    .festival-hero__lunar,
+    .festival-cal__hero-lunar {
+        font-size: 1.35rem;
+        color: var(--hero-text-soft);
+    }
+
+    .festival-hero__footer,
+    .festival-cal__hero-footer {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        padding-top: 0.4rem;
+    }
+
+    .festival-hero__link,
+    .festival-cal__hero-link {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4rem;
+        padding: 0 1.8rem;
+        background-color: var(--hero-chip-bg);
+        color: #ffffff;
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-active);
+            transform: translateY(-2px);
+        }
+    }
+
+    // Khóa kích thước hình Con Ngựa chìm góc dưới phải (Tránh bị phóng to đen kịt như trong ảnh)
+    .festival-hero__zodiac,
+    .festival-cal__hero-zodiac,
+    > img,
+    footer > img {
+        position: absolute;
+        right: -0.8rem;
+        bottom: -0.8rem;
+        width: 14rem;
+        height: 14rem;
+        object-fit: contain;
+        opacity: 0.14;
+        filter: var(--zodiac-filter-active);
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+
+// CỘT PHẢI TẦNG 1: KHỐI BỘ ĐIỀU KHIỂN NĂM (< Năm 2026 >), BỘ LỌC & NHẢY THÁNG
+.festival-controls,
+.festival-cal__controls,
+.festival-cal__header {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.8rem;
+    padding: 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.8rem;
+        border-radius: 2rem;
+    }
+
+    .festival-controls__head,
+    .festival-cal__controls-head {
+        @extend %flexBetween;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1.6rem;
+    }
+
+    .festival-controls__intro,
+    .festival-cal__intro {
+        @extend %flexColumn;
+        gap: 0.5rem;
+    }
+
+    .festival-controls__eyebrow-row,
+    .festival-cal__eyebrow-row {
+        @extend %flexWrapGap;
+    }
+
+    .festival-controls__badge,
+    .festival-controls__count-pill,
+    .festival-cal__badge,
+    .festival-cal__count-pill {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.35rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    .festival-controls__count-pill,
+    .festival-cal__count-pill {
+        color: var(--text-muted);
+    }
+
+    .festival-controls__heading,
+    .festival-cal__heading {
+        font-size: clamp(2.2rem, 2.8vw, 3rem);
+        font-weight: 800;
+        line-height: 1.25;
+        color: var(--text-color);
+    }
+
+    // Cụm nút < | Năm 2026 | > xếp ngang trên 1 hàng thay vì bị rớt dọc như ảnh
+    .festival-controls__year-toolbar,
+    .festival-cal__year-toolbar,
+    .festival-cal__toolbar {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        padding: 0.5rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+    }
+
+    .festival-controls__filter-bar,
+    .festival-cal__filter-bar,
+    .festival-cal__filters {
+        @extend %flexWrapGap;
+        gap: 1rem;
+        padding-top: 1.4rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    .festival-controls__filter-btn,
+    .festival-cal__filter-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.7rem;
+        height: 4rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        small {
+            padding: 0.1rem 0.65rem;
+            border-radius: 99.9rem;
+            background-color: var(--body-bg);
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-muted);
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+
+            small {
+                background-color: rgba(255, 255, 255, 0.22);
+                color: #ffffff;
+            }
+        }
+    }
+
+    .festival-controls__month-jump,
+    .festival-cal__month-jump {
+        @extend %flexColumn;
+        gap: 0.8rem;
+    }
+
+    .festival-controls__jump-label,
+    .festival-cal__jump-label {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    .festival-controls__jump-grid,
+    .festival-cal__jump-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 0.6rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .festival-controls__jump-btn,
+    .festival-cal__jump-btn {
+        @extend %inlineFlexCenter;
+        height: 3.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transInteractive;
+
+        &:hover,
+        &.is-active {
+            background-color: var(--primary-soft-bg);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+}
+
+// TẦNG 2: THẺ BENTO CỦA TỪNG THÁNG (THÁNG 1 -> THÁNG 12)
+.festival-month-card {
+    @extend %flexColumn;
+    gap: 1.4rem;
+    padding: 2.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    scroll-margin-top: 13rem;
+    @extend %transTheme;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &--current {
+        border: 2px solid var(--primary-color);
+    }
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 1.8rem;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        align-items: flex-start;
+        gap: 1rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title {
+        font-size: 1.9rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__sub {
+        margin-top: 0.2rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__count {
+        padding: 0.3rem 1.1rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 1rem;
+    }
+}
+
+// TỪNG DÒNG SỰ KIỆN LỄ TẾT BÊN TRONG THÁNG
+.festival-item {
+    @extend %flexItemCenter;
+    gap: 1.4rem;
+    padding: 1.2rem 1.4rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-decoration: none;
+    color: inherit;
+    @extend %transInteractive;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &:hover,
+    &:focus-visible,
+    &.is-active {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+    }
+
+    &__date-box {
+        @extend %flexColumnCenterAll;
+        @extend %flexItemFixed;
+        width: 5.8rem;
+        height: 5.8rem;
+        border-radius: 1.5rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--border-color);
+        line-height: 1.1;
+
+        &--lunar {
+            border-color: rgba(239, 68, 68, 0.45);
+            background-color: rgba(239, 68, 68, 0.06);
+
+            .festival-item__day-num {
+                color: var(--color-danger);
+            }
+        }
+    }
+
+    &__day-num {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__month-sub {
+        margin-top: 0.2rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__body {
+        @extend %flexColumn;
+        gap: 0.35rem;
+        min-width: 0;
+        flex: 1;
+    }
+
+    &__name {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--text-color);
+        line-height: 1.35;
+    }
+
+    &__meta {
+        @extend %flexWrapGap;
+        gap: 0.6rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__badge {
+        @extend %inlineFlexCenter;
+        gap: 0.5rem;
+        padding: 0.2rem 0.9rem;
+        border-radius: 99.9rem;
+        font-size: 1.15rem;
+        font-weight: 800;
+
+        &--solar {
+            background-color: rgba(37, 99, 235, 0.12);
+            color: #1d4ed8;
+        }
+
+        &--lunar {
+            background-color: rgba(239, 68, 68, 0.12);
+            color: #b91c1c;
+        }
+    }
+}
+```
+
 ## layout folder
 
 ### index.scss
@@ -5959,7 +6509,7 @@ strong {
 ### header.scss
 
 ```scss
-// scss/layout/_header.scss
+// 1. scss/layout/_header.scss
 @use "../abstracts" as abs;
 
 .header {
@@ -5976,7 +6526,6 @@ strong {
         height: abs.$header-height-mobile;
     }
 
-    // 1 KHUNG VIỀN BENTO DUY NHẤT BỌC CẢ CỤM TRÁI & CỤM PHẢI
     &__container {
         @extend %flexBetween;
         height: 100%;
@@ -6448,7 +6997,6 @@ strong {
 ### sidebar.scss
 
 ```scss
-// scss/layout/_sidebar.scss
 @use "../abstracts" as abs;
 
 #sidebar-root {
@@ -6488,7 +7036,6 @@ strong {
             color: var(--primary-color);
         }
 
-        // Trạng thái Active nổi bật cho mục hiện tại
         &--active {
             background-color: var(--bg-surface);
             color: var(--primary-color);
@@ -6496,19 +7043,19 @@ strong {
         }
     }
 
-    // Nhãn Tooltip nổi bên phải Icon trên PC
     &__tooltip {
         @extend %absCenterY;
         left: calc(100% + 1.4rem);
         transform: translate(-0.8rem, -50%);
         padding: 0.6rem 1.2rem;
-        background-color: var(--text-color);
-        color: var(--body-bg);
+        background-color: var(--tooltip-bg, var(--bg-surface));
+        color: var(--tooltip-text, var(--text-color));
+        border: 1.5px solid var(--tooltip-border, var(--primary-color));
         font-size: 1.3rem;
-        font-weight: 600;
-        border-radius: 0.8rem;
+        font-weight: 700;
+        border-radius: 1rem;
         @extend %textNoWrap;
-        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -6519,9 +7066,9 @@ strong {
             right: 100%;
             top: 50%;
             transform: translateY(-50%);
-            border-width: 0.5rem;
+            border-width: 0.55rem;
             border-style: solid;
-            border-color: transparent var(--text-color) transparent transparent;
+            border-color: transparent var(--tooltip-border, var(--primary-color)) transparent transparent;
         }
     }
 
@@ -6532,7 +7079,6 @@ strong {
         transform: translate(0, -50%);
     }
 
-    // Responsive dưới 768px (md): Không dùng @extend bên trong @media để tránh lỗi Sass
     @include abs.screen(md) {
         top: calc(#{abs.$header-top-offset} + #{abs.$header-height-mobile} + 1.5rem);
         left: 1.6rem;
@@ -6549,7 +7095,6 @@ strong {
         }
 
         &__link {
-            // Đã có display: flex và align-items: center từ %flexCenter ở trên, chỉ cần đổi justify-content
             justify-content: flex-start;
             width: 100%;
             height: 4.8rem;
@@ -6563,6 +7108,7 @@ strong {
             opacity: 1;
             visibility: visible;
             background-color: transparent;
+            border: none;
             color: inherit;
             padding: 0;
             font-size: 1.5rem;
@@ -6577,7 +7123,6 @@ strong {
 }
 
 .sidebar-backdrop {
-    // Đặt @extend ở cấp gốc (ngoài @media) để tuân thủ quy tắc của Dart Sass
     @extend %fixedCover;
     @extend %transBackdrop;
     display: none;
@@ -6610,6 +7155,7 @@ strong {
 @forward "./week";
 @forward "./year";
 @forward "./detail";
+@forward "./festival";
 ```
 
 ### home.scss
@@ -8714,6 +9260,17 @@ strong {
         font-weight: 700;
         color: var(--text-color);
     }
+}
+```
+
+### festival.scss
+
+```scss
+// scss/pages/_festival.scss
+@use "../abstracts" as abs;
+
+.festival-page {
+    padding-bottom: abs.$gap-section-default;
 }
 ```
 

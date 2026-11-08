@@ -1,4 +1,4 @@
-// scss/layout/_header.scss
+// 1. scss/layout/_header.scss
 @use "../abstracts" as abs;
 
 .header {
@@ -15,7 +15,6 @@
         height: abs.$header-height-mobile;
     }
 
-    // 1 KHUNG VIỀN BENTO DUY NHẤT BỌC CẢ CỤM TRÁI & CỤM PHẢI
     &__container {
         @extend %flexBetween;
         height: 100%;
