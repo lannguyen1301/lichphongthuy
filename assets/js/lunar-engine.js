@@ -395,13 +395,82 @@
         return NAP_AM_LIST[Math.floor(idx / 2)] || "Bạch Lạp Kim";
     };
 
+    // Thay thế từ hàm resolveElementInfo đến hết file trong assets/js/lunar-engine.js
     const resolveElementInfo = (napAmStr) => {
         const text = String(napAmStr || "").trim();
-        if (text.endsWith("Kim")) return { icon: "metal.svg", label: "Hành Kim • Kim khí" };
-        if (text.endsWith("Mộc")) return { icon: "wood.svg", label: "Hành Mộc • Sinh trưởng" };
-        if (text.endsWith("Thủy")) return { icon: "water.svg", label: "Hành Thủy • Linh hoạt" };
-        if (text.endsWith("Hỏa")) return { icon: "fire.svg", label: "Hành Hỏa • Nhiệt huyết" };
-        return { icon: "earth.svg", label: "Hành Thổ • Vững chãi" };
+        if (text.endsWith("Kim")) return { key: "metal", name: "Kim", icon: "metal.svg", label: "Hành Kim • Kim khí" };
+        if (text.endsWith("Mộc"))
+            return { key: "wood", name: "Mộc", icon: "wood.svg", label: "Hành Mộc • Sinh trưởng" };
+        if (text.endsWith("Thủy"))
+            return { key: "water", name: "Thủy", icon: "water.svg", label: "Hành Thủy • Linh hoạt" };
+        if (text.endsWith("Hỏa"))
+            return { key: "fire", name: "Hỏa", icon: "fire.svg", label: "Hành Hỏa • Nhiệt huyết" };
+        return { key: "earth", name: "Thổ", icon: "earth.svg", label: "Hành Thổ • Vững chãi" };
+    };
+
+    const LUC_DIEU_6 = [
+        {
+            name: "Đại An",
+            isGood: true,
+            bonus: 14,
+            desc: "Mọi việc đều tốt lành, cầu tài đi hướng Tây Nam, nhà cửa yên lành.",
+        },
+        {
+            name: "Lưu Niên",
+            isGood: false,
+            bonus: -8,
+            desc: "Mưu sự khó thành, cầu lộc chưa thông, cần đề phòng khẩu thiệt.",
+        },
+        { name: "Tốc Hỷ", isGood: true, bonus: 12, desc: "Tin vui đến nhanh, mưu sự đại cát, tốt nhất vào buổi sáng." },
+        {
+            name: "Xích Khẩu",
+            isGood: false,
+            bonus: -10,
+            desc: "Dễ xảy ra bất hòa, tranh cãi; nên cẩn trọng lời ăn tiếng nói.",
+        },
+        {
+            name: "Tiểu Cát",
+            isGood: true,
+            bonus: 10,
+            desc: "Cát lành, hòa hợp, mưu sự suôn sẻ và dễ gặp quý nhân phù trợ.",
+        },
+        {
+            name: "Không Vong",
+            isGood: false,
+            bonus: -12,
+            desc: "Cầu tài không lợi, mưu sự dễ trắc trở, không nên tiến hành việc lớn.",
+        },
+    ];
+
+    const HY_THAN_BY_STEM = [
+        "Đông Bắc",
+        "Tây Bắc",
+        "Tây Nam",
+        "Chính Nam",
+        "Đông Nam",
+        "Đông Bắc",
+        "Tây Bắc",
+        "Tây Nam",
+        "Chính Nam",
+        "Đông Nam",
+    ];
+    const TAI_THAN_BY_STEM = [
+        "Đông Nam",
+        "Đông Nam",
+        "Chính Đông",
+        "Chính Đông",
+        "Chính Bắc",
+        "Chính Nam",
+        "Tây Nam",
+        "Tây Nam",
+        "Chính Tây",
+        "Tây Bắc",
+    ];
+
+    const getBranchIndexFromHour = (hour24 = 0) => {
+        const h = Number(hour24) % 24;
+        if (h === 23 || h === 0) return 0;
+        return Math.floor((h + 1) / 2);
     };
 
     const getDayAuspiciousStatus = (lunarMonth, dayChiIndex) => {
@@ -452,17 +521,18 @@
         return { badgeText: "", isHoliday: false };
     };
 
-    const getFullDayInfo = (sDay, sMonth, sYear) => {
+    const getFullDayInfo = (sDay, sMonth, sYear, sHour = new Date().getHours()) => {
         const lunar = convertSolar2Lunar(sDay, sMonth, sYear);
         const { lunarDay, lunarMonth, lunarYear, lunarLeap, isFullMonth, jd } = lunar;
 
         const yearCanIdx = (lunarYear + 6) % 10;
         const yearChiIdx = (lunarYear + 8) % 12;
-        const monthCanIdx = (yearCanIdx * 2 + lunarMonth + 1) % 10;
+        const monthCanIdx = ((yearCanIdx % 5) * 2 + lunarMonth + 1) % 10;
         const monthChiIdx = (lunarMonth + 1) % 12;
         const dayCanIdx = (jd + 9) % 10;
         const dayChiIdx = (jd + 1) % 12;
         const ratHourStemIdx = ((dayCanIdx % 5) * 2) % 10;
+        const currentBranchIdx = getBranchIndexFromHour(sHour);
 
         const yearCanChi = `${THIEN_CAN[yearCanIdx]} ${DIA_CHI[yearChiIdx]}`;
         const monthCanChi = `${THIEN_CAN[monthCanIdx]} ${DIA_CHI[monthChiIdx]}`;
@@ -485,15 +555,24 @@
         const trucObj = TRUC_LIST[(dayChiIdx - monthChiIdx + 12) % 12] || TRUC_LIST[0];
         const ageHarmony = AGE_HARMONY_MAP[dayChiIdx] || AGE_HARMONY_MAP[0];
         const goodIndices = GOOD_HOUR_INDICES[dayChiIdx] || [0, 1, 3, 6, 8, 9];
+        const dayLucDieuIdx = (lunarMonth + lunarDay - 2) % 6;
 
         const goodHoursShort = [];
         const badHoursShort = [];
         const goodHourCards = [];
+        const hours12 = [];
 
         HOUR_SLOTS.forEach((slot, idx) => {
             const hStemIdx = (ratHourStemIdx + idx) % 10;
-            const hourCanChi = `Giờ ${THIEN_CAN[hStemIdx]} ${slot.vn}`;
-            if (goodIndices.includes(idx)) {
+            const canchi = `${THIEN_CAN[hStemIdx]} ${slot.vn}`;
+            const hourCanChi = `Giờ ${canchi}`;
+            const napAm = getNapAm(hStemIdx, idx);
+            const elemObj = resolveElementInfo(napAm);
+            const isGood = goodIndices.includes(idx);
+            const lucDieuObj = LUC_DIEU_6[(dayLucDieuIdx + idx) % 6] || LUC_DIEU_6[0];
+            const energyScore = Math.min(98, Math.max(42, (isGood ? 78 : 58) + lucDieuObj.bonus));
+
+            if (isGood) {
                 goodHoursShort.push(slot.shortRange);
                 goodHourCards.push({
                     hourCanChi,
@@ -503,6 +582,22 @@
             } else {
                 badHoursShort.push(slot.shortRange);
             }
+
+            hours12.push({
+                ...slot,
+                stemIdx: hStemIdx,
+                canchi,
+                hourCanChi,
+                napAm,
+                elementKey: elemObj.key,
+                elementName: elemObj.name,
+                elementIcon: elemObj.icon,
+                isGood,
+                lucDieuName: lucDieuObj.name,
+                lucDieuGood: lucDieuObj.isGood,
+                lucDieuDesc: lucDieuObj.desc,
+                energyScore,
+            });
         });
 
         return {
@@ -518,6 +613,7 @@
             yearChiIdx,
             monthChiIdx,
             dayChiIdx,
+            currentBranchIdx,
             yearCanChi,
             monthCanChi,
             dayCanChi,
@@ -529,6 +625,10 @@
             zodiacFile: ZODIAC_FILES[dayChiIdx] || "mouse",
             monthZodiacFile: ZODIAC_FILES[monthChiIdx] || "dog",
             yearZodiacFile: ZODIAC_FILES[yearChiIdx] || "horse",
+            directions: {
+                hy: HY_THAN_BY_STEM[dayCanIdx] || "Tây Bắc",
+                tai: TAI_THAN_BY_STEM[dayCanIdx] || "Đông Nam",
+            },
             fortuneStatus,
             badgeText: holidayInfo.badgeText,
             isHoliday: holidayInfo.isHoliday,
@@ -538,6 +638,7 @@
             goodHoursStr: goodHoursShort.join(", "),
             badHoursStr: badHoursShort.join(", "),
             goodHourCards,
+            hours12,
             bilingualWeekday,
             solarMonthVnLabel,
             solarMonthEnLabel,
@@ -549,6 +650,7 @@
         THIEN_CAN,
         DIA_CHI,
         ZODIAC_FILES,
+        getBranchIndexFromHour,
         convertSolar2Lunar,
         convertLunar2Solar,
         getFullDayInfo,

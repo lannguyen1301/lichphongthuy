@@ -1,0 +1,309 @@
+// scss/components/_clock-pillars.scss
+@use "../abstracts" as abs;
+
+.clock-location-card {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.8rem;
+    height: 100%;
+    padding: 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    &__eyebrow {
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary-color);
+    }
+
+    &__city {
+        margin-top: 0.6rem;
+        font-size: clamp(2.6rem, 3.2vw, 3.6rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--text-color);
+    }
+
+    &__quote {
+        margin-top: 0.8rem;
+        font-size: 1.35rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+    }
+
+    &__stats {
+        @extend %gridCols2;
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__stat-box {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        padding: 1.2rem 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__stat-label {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+    }
+
+    &__stat-val {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+}
+
+// Khối Đo Năng Lượng Canh Giờ (<meter>)
+.clock-energy {
+    @extend %flexColumn;
+    gap: 0.8rem;
+    padding: 1.4rem 1.6rem;
+    background-color: var(--primary-soft-bg, var(--bg-surface));
+    border: 1px solid var(--primary-color);
+    border-radius: 1.8rem;
+    @extend %transTheme;
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    &__title-wrap {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+    }
+
+    &__icon {
+        width: 2rem;
+        height: 2rem;
+        object-fit: contain;
+    }
+
+    &__label {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__badge {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__meter {
+        width: 100%;
+        height: 1rem;
+        border-radius: 99.9rem;
+        overflow: hidden;
+        accent-color: var(--primary-color);
+
+        &::-webkit-meter-bar {
+            background: var(--body-bg);
+            border-radius: 99.9rem;
+            border: 1px solid var(--border-color);
+        }
+
+        &::-webkit-meter-optimum-value,
+        &::-webkit-meter-suboptimum-value,
+        &::-webkit-meter-even-less-good-value {
+            background: var(--primary-color);
+            border-radius: 99.9rem;
+        }
+    }
+
+    &__desc {
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.45;
+        color: var(--text-muted);
+    }
+}
+
+// 4 Ô Bento Tứ Trụ có Hộp Icon Con Giáp & Bóng Con Giáp chìm
+.clock-pillars {
+    height: 100%;
+
+    &__grid {
+        @extend %gridCols2;
+        gap: 1.6rem;
+        height: 100%;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.clock-pillar-card {
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 2.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+
+        .clock-pillar-card__bg-zodiac {
+            opacity: 0.24;
+            transform: scale(1.08) rotate(0deg);
+        }
+    }
+
+    &--highlight {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+
+        .clock-pillar-card__tag,
+        .clock-pillar-card__range,
+        .clock-pillar-card__canchi,
+        .clock-pillar-card__sub,
+        .clock-pillar-card__napam {
+            color: #ffffff;
+        }
+
+        .clock-pillar-card__icon-box {
+            background-color: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .clock-pillar-card__zodiac {
+            filter: brightness(0) invert(1);
+        }
+
+        .clock-pillar-card__badge {
+            background-color: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+
+        .clock-pillar-card__bg-zodiac {
+            opacity: 0.18;
+            filter: var(--zodiac-filter-active);
+        }
+    }
+
+    &__head,
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 1.4rem;
+    }
+
+    &__icon-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 5.4rem;
+        height: 5.4rem;
+        border-radius: 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+    }
+
+    &__zodiac {
+        width: 3.6rem;
+        height: 3.6rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+    }
+
+    &__title-group {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__tag {
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__range {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__canchi {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--primary-color);
+    }
+
+    &__sub {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__napam {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__badge {
+        padding: 0.4rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %textNoWrap;
+    }
+
+    &__bg-zodiac {
+        position: absolute;
+        right: 0.8rem;
+        bottom: 0.6rem;
+        width: 6.8rem;
+        height: 6.8rem;
+        object-fit: contain;
+        opacity: 0.11;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+}

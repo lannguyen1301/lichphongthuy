@@ -1,0 +1,13 @@
+// Trong scss/components/_index.scss
+@forward "./button";
+@forward "./logo-header";
+@forward "./date-time";
+@forward "./bloc-card";
+@forward "./fengshui-card";
+
+@forward "./clock-hero";
+@forward "./clock-pillars";
+@forward "./clock-zodiac";
+@forward "./week-calendar";
+@forward "./month-calendar";
+@forward "./converter-modal";

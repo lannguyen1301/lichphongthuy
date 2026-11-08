@@ -1,0 +1,7 @@
+// Trong scss/pages/_index.scss
+@forward "./home";
+@forward "./clock";
+@forward "./day";
+@forward "./week";
+@forward "./year";
+@forward "./detail";

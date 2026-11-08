@@ -94,6 +94,11 @@ $zodiac-active-filters: (
         --zodiac-filter: #{$zodiac-filter};
         --zodiac-filter-active: #{$zodiac-filter-active};
 
+        /* 5. NHÓM TOOLTIP NỀN NHẠT PASTEL THEO MỆNH ĐANG CHỌN */
+        --tooltip-bg: #{map.get($theme-data, "primary", 100)};
+        --tooltip-text: #{map.get($theme-data, "neutral", 900)};
+        --tooltip-border: #{map.get($theme-data, "primary", 400)};
+
         @media (prefers-color-scheme: dark) {
             --body-bg: #{map.get($theme-data, "primary", 900)};
             --bg-surface: #{map.get($theme-data, "primary", 800)};
@@ -121,6 +126,10 @@ $zodiac-active-filters: (
             --overlay-bg: rgba(0, 0, 0, 0.7);
             --zodiac-filter: #{$zodiac-filter} brightness(1.25);
             --zodiac-filter-active: #{$zodiac-filter-active};
+
+            --tooltip-bg: #{map.get($theme-data, "primary", 800)};
+            --tooltip-text: #{map.get($theme-data, "neutral", 100)};
+            --tooltip-border: #{map.get($theme-data, "primary", 400)};
         }
     }
 }

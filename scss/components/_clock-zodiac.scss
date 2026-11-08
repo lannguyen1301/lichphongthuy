@@ -206,4 +206,42 @@
             transform 0.35s ease,
             opacity 0.35s ease;
     }
+
+    &__mid {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.35rem;
+        margin: 0.4rem 0;
+    }
+
+    &__element-tag {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.2rem 0.8rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__lucdieu {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &.is-current {
+        .clock-zodiac-card__element-tag {
+            background-color: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.28);
+            color: var(--body-bg);
+        }
+
+        .clock-zodiac-card__lucdieu {
+            color: var(--body-bg);
+        }
+    }
 }

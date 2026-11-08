@@ -1,0 +1,115 @@
+// scss/abstracts/_theme-engine.scss
+@use "sass:map";
+@use "palette" as pal;
+
+// 1. Bộ lọc chuẩn xác từ gốc #000 (fill="#000") sang màu primary-600 của 5 mệnh (Dùng cho trạng thái Thường & Hover)
+$zodiac-theme-filters: (
+    "earth": brightness(0) saturate(100%) invert(48%) sepia(87%) saturate(1638%) hue-rotate(2deg) brightness(97%)
+        contrast(96%),
+    "fire": brightness(0) saturate(100%) invert(21%) sepia(85%) saturate(3932%) hue-rotate(351deg) brightness(89%)
+        contrast(95%),
+    "metal": brightness(0) saturate(100%) invert(52%) sepia(93%) saturate(1352%) hue-rotate(14deg) brightness(94%)
+        contrast(97%),
+    "water": brightness(0) saturate(100%) invert(31%) sepia(94%) saturate(2785%) hue-rotate(213deg) brightness(96%)
+        contrast(93%),
+    "wood": brightness(0) saturate(100%) invert(39%) sepia(82%) saturate(1105%) hue-rotate(130deg) brightness(93%)
+        contrast(96%)
+);
+
+// 2. Bộ lọc từ gốc #000 sang màu trầm primary-900 cùng mệnh (Dùng cho ô --active)
+$zodiac-active-filters: (
+    "earth": brightness(0) saturate(100%) invert(19%) sepia(51%) saturate(2255%) hue-rotate(12deg) brightness(93%)
+        contrast(92%),
+    "fire": brightness(0) saturate(100%) invert(13%) sepia(56%) saturate(3426%) hue-rotate(349deg) brightness(91%)
+        contrast(96%),
+    "metal": brightness(0) saturate(100%) invert(22%) sepia(60%) saturate(1560%) hue-rotate(16deg) brightness(92%)
+        contrast(91%),
+    "water": brightness(0) saturate(100%) invert(18%) sepia(58%) saturate(2865%) hue-rotate(215deg) brightness(90%)
+        contrast(95%),
+    "wood": brightness(0) saturate(100%) invert(21%) sepia(47%) saturate(1635%) hue-rotate(128deg) brightness(91%)
+        contrast(96%)
+);
+
+@mixin generate-theme($element-name, $is-default: false) {
+    $theme-data: map.get(pal.$feng-shui-themes, $element-name);
+    $zodiac-filter: map.get($zodiac-theme-filters, $element-name);
+    $zodiac-filter-active: map.get($zodiac-active-filters, $element-name);
+
+    @if $theme-data == null {
+        @error "Lỗi: Không tìm thấy dữ liệu cho bản mệnh '#{$element-name}'";
+    }
+
+    $selector: if(
+        sass($is-default): ":root, [data-theme='#{$element-name}']" ; else: "[data-theme='#{$element-name}']",
+    );
+
+    #{$selector} {
+        /* 1. NHÓM NỀN & CHỮ */
+        --body-bg: #{map.get($theme-data, "neutral", 100)};
+        --bg-surface: #{map.get($theme-data, "neutral", 200)};
+        --text-color: #{map.get($theme-data, "neutral", 800)};
+        --text-muted: #{map.get($theme-data, "neutral", 500)};
+        --border-color: #{map.get($theme-data, "neutral", 300)};
+
+        --primary-color: #{map.get($theme-data, "primary", 500)};
+        --secondary-color: #{map.get($theme-data, "secondary", 500)};
+        --accent-color: #{map.get($theme-data, "accent", 500)};
+
+        /* 2. NHÓM TOOLTIP NỀN NHẠT PASTEL THEO MỆNH ĐANG CHỌN */
+        --tooltip-bg: #{map.get($theme-data, "primary", 100)};
+        --tooltip-text: #{map.get($theme-data, "neutral", 900)};
+        --tooltip-border: #{map.get($theme-data, "primary", 400)};
+
+        /* 3. NHÓM TRẠNG THÁI */
+        --color-success: #{map.get($theme-data, "success", 500)};
+        --color-warning: #{map.get($theme-data, "warning", 500)};
+        --color-danger: #{map.get($theme-data, "danger", 500)};
+        --color-info: #{map.get($theme-data, "info", 500)};
+
+        /* 4. NHÓM TƯƠNG TÁC */
+        --primary-hover: #{map.get($theme-data, "primary", 600)};
+        --primary-active: #{map.get($theme-data, "primary", 700)};
+        --focus-ring-color: var(--primary-color);
+        --bg-disabled: #{map.get($theme-data, "neutral", 200)};
+        --text-disabled: #{map.get($theme-data, "neutral", 400)};
+
+        /* 5. NHÓM THÀNH PHẦN KHÁC & FILTER 12 CON GIÁP */
+        --icon-color: var(--text-muted);
+        --icon-hover: var(--primary-color);
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --overlay-bg: rgba(0, 0, 0, 0.4);
+        --zodiac-filter: #{$zodiac-filter};
+        --zodiac-filter-active: #{$zodiac-filter-active};
+
+        @media (prefers-color-scheme: dark) {
+            --body-bg: #{map.get($theme-data, "primary", 900)};
+            --bg-surface: #{map.get($theme-data, "primary", 800)};
+            --text-color: #{map.get($theme-data, "neutral", 100)};
+            --text-muted: #{map.get($theme-data, "neutral", 300)};
+            --border-color: #{map.get($theme-data, "primary", 700)};
+
+            --primary-color: #{map.get($theme-data, "primary", 500)};
+            --secondary-color: #{map.get($theme-data, "secondary", 400)};
+            --accent-color: #{map.get($theme-data, "accent", 400)};
+
+            --tooltip-bg: #{map.get($theme-data, "primary", 800)};
+            --tooltip-text: #{map.get($theme-data, "neutral", 100)};
+            --tooltip-border: #{map.get($theme-data, "primary", 400)};
+
+            --color-success: #{map.get($theme-data, "success", 400)};
+            --color-warning: #{map.get($theme-data, "warning", 400)};
+            --color-danger: #{map.get($theme-data, "danger", 400)};
+            --color-info: #{map.get($theme-data, "info", 400)};
+
+            --primary-hover: #{map.get($theme-data, "primary", 400)};
+            --primary-active: #{map.get($theme-data, "primary", 300)};
+            --bg-disabled: #{map.get($theme-data, "neutral", 800)};
+            --text-disabled: #{map.get($theme-data, "neutral", 600)};
+
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --overlay-bg: rgba(0, 0, 0, 0.7);
+            --zodiac-filter: #{$zodiac-filter} brightness(1.25);
+            --zodiac-filter-active: #{$zodiac-filter-active};
+        }
+    }
+}

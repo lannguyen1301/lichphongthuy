@@ -4,7 +4,6 @@
 
 ```scss
 // 1. Cấu hình lõi (Variables & Theme)
-// @forward "resets";
 @forward "variables";
 @forward "palette";
 @forward "theme-engine";
@@ -15,11 +14,12 @@
 // 3. Typo & Placeholders
 // @forward "placeholder"; // đã xé lẻ thành các file riêng biệt như css-grid, flex-box, positioning, images, animations
 @forward "typography";
+@forward "reset-placeholders";
 
 // 4. Các Abstract hỗ trợ layout & UI (Thứ tự nhóm này có thể linh hoạt)
+@forward "positioning";
 @forward "css-grid";
 @forward "flex-box";
-@forward "positioning";
 @forward "images";
 @forward "animations";
 ```
@@ -787,6 +787,11 @@ $zodiac-active-filters: (
         --zodiac-filter: #{$zodiac-filter};
         --zodiac-filter-active: #{$zodiac-filter-active};
 
+        /* 5. NHÓM TOOLTIP NỀN NHẠT PASTEL THEO MỆNH ĐANG CHỌN */
+        --tooltip-bg: #{map.get($theme-data, "primary", 100)};
+        --tooltip-text: #{map.get($theme-data, "neutral", 900)};
+        --tooltip-border: #{map.get($theme-data, "primary", 400)};
+
         @media (prefers-color-scheme: dark) {
             --body-bg: #{map.get($theme-data, "primary", 900)};
             --bg-surface: #{map.get($theme-data, "primary", 800)};
@@ -814,7 +819,47 @@ $zodiac-active-filters: (
             --overlay-bg: rgba(0, 0, 0, 0.7);
             --zodiac-filter: #{$zodiac-filter} brightness(1.25);
             --zodiac-filter-active: #{$zodiac-filter-active};
+
+            --tooltip-bg: #{map.get($theme-data, "primary", 800)};
+            --tooltip-text: #{map.get($theme-data, "neutral", 100)};
+            --tooltip-border: #{map.get($theme-data, "primary", 400)};
         }
+    }
+}
+```
+
+### mixins.scss
+
+```scss
+// scscss/abstracts/_mixins.scss
+@use "sass:map";
+@use "sass:math";
+@use "sass:string";
+@use "variables" as vars;
+
+// 1. Mixin để xử lý Media Query (Dùng cho @content)
+@mixin screen($key) {
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+
+    @if ($breakpoint == 0) {
+        @content;
+    } @else {
+        @media (max-width: ($breakpoint - 0.02px)) {
+            @content;
+        }
+    }
+}
+
+// 2. Function để tạo chuỗi infix (Dùng để tạo class: .col-sm-12)
+// Function trả về giá trị, Mixin thực hiện hành động.
+@function get-infix($key) {
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+
+    // Kiểm tra: Nếu breakpoint tồn tại và khác 0, trả về "-key", ngược lại trả về ""
+    @if $breakpoint != null and $breakpoint != 0 {
+        @return string.unquote("-" + $key);
+    } @else {
+        @return "";
     }
 }
 ```
@@ -907,6 +952,111 @@ $zodiac-active-filters: (
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+```
+
+### reset-placeholders.scss
+
+```scss
+// abstracts/placeholders/_resets.scss
+// dùng cho reactjs
+// ==========================================
+// RESETS (Module tĩnh triệt tiêu style mặc định)
+// ==========================================
+
+// Triệt tiêu style mặc định của thẻ ul, ol
+%listReset {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+// Triệt tiêu style mặc định của thẻ a
+%linkReset {
+    text-decoration: none;
+    color: inherit;
+}
+
+// Triệt tiêu style mặc định của thẻ button
+%buttonReset {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+// Triệt tiêu style mặc định của thẻ input
+%inputReset {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+}
+```
+
+### positioning.scss
+
+```scss
+// abstracts/placeholders/_position.scss
+
+// ==========================================
+// POSITIONING PLACEHOLDERS
+// ==========================================
+
+// 1. CĂN GIỮA TUYỆT ĐỐI
+// Căn giữa 2 trục (Modal, Popup, Icon giữa khung hình)
+%absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Căn giữa dọc (Icon input, Nút mũi tên Slider)
+%absCenterY {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+// Căn giữa ngang (Tooltip, Badge nổi)
+%absCenterX {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+// 2. PHỦ KÍN KHÔNG GIAN (COVER)
+// Phủ kín phần tử cha (Overlay hình ảnh, Lớp phủ thẻ)
+%absCover {
+    position: absolute;
+    inset: 0;
+}
+
+// Phủ kín toàn bộ màn hình trình duyệt (Modal Backdrop, Loading Screen)
+%fixedCover {
+    position: fixed;
+    inset: 0;
+}
+
+// ==========================================
+// BỔ SUNG TỪ KINH NGHIỆM THỰC CHIẾN
+// ==========================================
+
+// 3. PSEUDO-ELEMENTS (Tiết kiệm code khi viết ::before, ::after)
+%absPseudo {
+    content: "";
+    position: absolute;
+    display: block;
+}
+
+// 4. STICKY (Cố định khi cuộn)
+// Dành cho Header, Table Head, hoặc Sidebar bám dính khi user cuộn trang
+%stickyTop {
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 ```
 
@@ -1246,71 +1396,6 @@ $zodiac-active-filters: (
 %flexCol25 {
     flex: 0 0 25%;
     max-width: 25%;
-}
-```
-
-### positioning.scss
-
-```scss
-// abstracts/placeholders/_position.scss
-
-// ==========================================
-// POSITIONING PLACEHOLDERS
-// ==========================================
-
-// 1. CĂN GIỮA TUYỆT ĐỐI
-// Căn giữa 2 trục (Modal, Popup, Icon giữa khung hình)
-%absCenter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-// Căn giữa dọc (Icon input, Nút mũi tên Slider)
-%absCenterY {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-// Căn giữa ngang (Tooltip, Badge nổi)
-%absCenterX {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-// 2. PHỦ KÍN KHÔNG GIAN (COVER)
-// Phủ kín phần tử cha (Overlay hình ảnh, Lớp phủ thẻ)
-%absCover {
-    position: absolute;
-    inset: 0;
-}
-
-// Phủ kín toàn bộ màn hình trình duyệt (Modal Backdrop, Loading Screen)
-%fixedCover {
-    position: fixed;
-    inset: 0;
-}
-
-// ==========================================
-// BỔ SUNG TỪ KINH NGHIỆM THỰC CHIẾN
-// ==========================================
-
-// 3. PSEUDO-ELEMENTS (Tiết kiệm code khi viết ::before, ::after)
-%absPseudo {
-    content: "";
-    position: absolute;
-    display: block;
-}
-
-// 4. STICKY (Cố định khi cuộn)
-// Dành cho Header, Table Head, hoặc Sidebar bám dính khi user cuộn trang
-%stickyTop {
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 ```
 

@@ -1,5 +1,5 @@
 // assets/js/footer.js
-// Chuyên trách duy nhất templates/footer.html: Đổi nhanh bản mệnh, Cuộn lên đầu trang & Form bản tin
+// Chuyên trách duy nhất Footer: Chấm đổi nhanh Ngũ hành, Nút cuộn đầu trang, Mở Modal từ Footer & Form Email
 (() => {
     const syncFooterThemeDots = (activeTheme) => {
         document.querySelectorAll(".footer__element-dot").forEach((dot) => {
@@ -32,9 +32,11 @@
         const converterBtn = footer.querySelector('[data-footer-action="open-converter"]');
         if (converterBtn) {
             converterBtn.onclick = () => {
-                const headerWidgetBtn = document.getElementById("widget-trigger-btn");
-                headerWidgetBtn?.click();
-                headerWidgetBtn?.focus();
+                if (typeof window.openConverterModal === "function") {
+                    window.openConverterModal(true);
+                } else {
+                    document.getElementById("widget-trigger-btn")?.click();
+                }
             };
         }
 
@@ -45,12 +47,11 @@
         if (newsletterForm && emailInput && feedbackEl) {
             newsletterForm.onsubmit = (e) => {
                 e.preventDefault();
+                feedbackEl.hidden = false;
                 if (!emailInput.value.trim() || !emailInput.checkValidity()) {
-                    feedbackEl.hidden = false;
                     feedbackEl.textContent = "Vui lòng nhập địa chỉ email hợp lệ!";
                     return;
                 }
-                feedbackEl.hidden = false;
                 feedbackEl.textContent = "Đăng ký nhận lịch ngày tốt thành công!";
                 emailInput.value = "";
             };

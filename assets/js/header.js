@@ -5,7 +5,6 @@
     let isHeaderGlobalBound = false;
     let clockTimer = null;
 
-    // 1. Khôi phục Theme Ngũ hành từ localStorage
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || "earth";
     document.documentElement.setAttribute("data-theme", savedTheme);
 
@@ -25,7 +24,6 @@
 
     window.setFengShuiTheme = applyTheme;
 
-    // 2. Cập nhật Ngày & Giờ thực trên Header
     const updateHeaderClock = () => {
         const dateEl = document.getElementById("current-date");
         const timeEl = document.getElementById("current-time");
@@ -47,7 +45,6 @@
         timeEl.setAttribute("datetime", `${hh}:${min}:${ss}`);
     };
 
-    // 3. Khởi tạo Header
     const initHeader = () => {
         const header = document.getElementById("header") || document.getElementById("site-header");
         if (!header) return;
@@ -84,7 +81,6 @@
         clockTimer = setInterval(updateHeaderClock, 1000);
     };
 
-    // 4. Sự kiện cuộn trang & đóng Dropdown
     const bindHeaderGlobalListeners = () => {
         if (isHeaderGlobalBound) return;
         isHeaderGlobalBound = true;

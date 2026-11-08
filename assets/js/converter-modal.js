@@ -1,13 +1,13 @@
 // assets/js/converter-modal.js
-// Chuyên trách duy nhất Bento Modal Đổi Ngày Âm ⇄ Dương (Không chứa công thức lặp nhờ gọi window.LunarEngine)
+// Chuyên trách duy nhất Bento Modal Đổi Ngày Âm ⇄ Dương (Gọi trực tiếp window.LunarEngine)
 (() => {
     let isModalKeyBound = false;
-    let convertMode = "solar2lunar"; // "solar2lunar" | "lunar2solar"
-    let selectedInputDay = 6;
+    let convertMode = "solar2lunar";
+    let selectedInputDay = 7;
     let selectedInputMonth = 11;
     let selectedInputYear = 2026;
     let yearGridStart = 2020;
-    let resolvedSolarDate = { day: 6, month: 11, year: 2026 };
+    let resolvedSolarDate = { day: 7, month: 11, year: 2026 };
 
     const pad = (n) => String(n).padStart(2, "0");
 
@@ -404,7 +404,7 @@
                 const { day, month, year } = resolvedSolarDate;
                 toggleConverterModal(false);
 
-                if (document.getElementById("month-cal-grid")) {
+                if (document.getElementById("month-cal-grid") || document.getElementById("day-lucdieu-grid")) {
                     window.dispatchEvent(
                         new CustomEvent("converter-jump-to-date", {
                             detail: { year, month, day },

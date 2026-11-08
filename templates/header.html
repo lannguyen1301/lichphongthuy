@@ -1,7 +1,7 @@
 <div class="header__container container">
     <div class="header__left">
         <div class="header__logo logo">
-            <a href="./index.html" class="header__logo-link">
+            <a href="./index.html" class="header__logo-link" aria-label="Lịch Phong Thủy - Trang chủ">
                 <img src="./assets/icons/logo.svg" alt="Lịch Phong Thủy - Trang chủ" class="header__logo-img" />
             </a>
         </div>
@@ -20,7 +20,7 @@
         <div class="header__datetime-wrapper d-lg-none" role="group" aria-label="Thời gian hiện tại">
             <div class="header__date-group">
                 <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true" class="header__date-icon icon" />
-                <time datetime="2026-11-06" class="header__date-text" id="current-date">06/11/2026</time>
+                <time datetime="2026-11-07" class="header__date-text" id="current-date">07/11/2026</time>
             </div>
             <div class="header__time-group">
                 <img src="./assets/icons/clock.svg" alt="" aria-hidden="true" class="header__time-icon icon" />
@@ -110,13 +110,13 @@
     </div>
 </div>
 
-<!-- ==================== MODAL BENTO ĐỔI NGÀY ÂM - DƯƠNG (GIAI ĐOẠN 3 HOÀN THIỆN) ==================== -->
+<!-- ==================== MODAL BENTO ĐỔI NGÀY ÂM - DƯƠNG (BẢN HOÀN THIỆN 112REM CHỐNG GIẬT LAYOUT) ==================== -->
 <div class="converter-modal" id="converter-modal" role="dialog" aria-modal="true"
     aria-labelledby="converter-modal-title" hidden>
     <div class="converter-modal__backdrop" id="converter-modal-backdrop" aria-hidden="true"></div>
 
     <div class="converter-modal__dialog" role="document">
-        <!-- 1. Header Modal (Đã tăng khoảng cách trên/dưới thoáng rộng theo Ảnh 2) -->
+        <!-- 1. Header Modal (Khoảng cách trên/dưới thoáng rộng) -->
         <header class="converter-modal__header">
             <div class="converter-modal__title-wrap">
                 <span class="converter-modal__badge">
@@ -144,10 +144,10 @@
             </button>
         </header>
 
-        <!-- 2. Bộ 4 Cột Đồng Phẳng: Ngày | Tháng | Năm | Chế độ Tháng Nhuận (Triệt tiêu 100% chênh chiều cao ở Ảnh 3) -->
+        <!-- 2. Bộ 4 Cột Đồng Phẳng: Ngày | Tháng | Năm | Chế độ Tháng Nhuận (Cố định chiều cao 100%) -->
         <div class="converter-modal__control-bar">
             <div class="converter-modal__pickers">
-                <!-- Cột 1: Chọn Ngày (Lưới Bento 7 cột) -->
+                <!-- Cột 1: Chọn Ngày -->
                 <div class="converter-modal__field">
                     <span class="converter-modal__label" id="conv-day-label">Ngày Dương</span>
                     <details class="converter-modal__dropdown js-cal-dropdown" id="conv-day-dropdown">
@@ -155,7 +155,7 @@
                             <span class="converter-modal__summary-main">
                                 <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true"
                                     class="converter-modal__summary-icon icon" />
-                                <span id="conv-day-text">Ngày 06</span>
+                                <span id="conv-day-text">Ngày 07</span>
                             </span>
                             <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true"
                                 class="converter-modal__arrow icon" />
@@ -168,7 +168,7 @@
                     </details>
                 </div>
 
-                <!-- Cột 2: Chọn Tháng (Lưới Bento 3x4) -->
+                <!-- Cột 2: Chọn Tháng -->
                 <div class="converter-modal__field">
                     <span class="converter-modal__label" id="conv-month-label">Tháng Dương</span>
                     <details class="converter-modal__dropdown js-cal-dropdown" id="conv-month-dropdown">
@@ -189,7 +189,7 @@
                     </details>
                 </div>
 
-                <!-- Cột 3: Chọn Năm (Lưới Bento 4x3) -->
+                <!-- Cột 3: Chọn Năm -->
                 <div class="converter-modal__field">
                     <span class="converter-modal__label" id="conv-year-label">Năm tra cứu</span>
                     <details class="converter-modal__dropdown js-cal-dropdown" id="conv-year-dropdown">
@@ -217,7 +217,7 @@
                     </details>
                 </div>
 
-                <!-- Cột 4: Chế độ Tháng Nhuận (Luôn giữ cố định vị trí để không bao giờ bị giật/chênh chiều cao) -->
+                <!-- Cột 4: Chế độ Tháng Nhuận -->
                 <div class="converter-modal__field" id="conv-leap-field">
                     <span class="converter-modal__label" id="conv-leap-label">Chế độ tháng Âm</span>
                     <button type="button" class="converter-modal__leap-toggle is-disabled" id="conv-leap-toggle-btn"
@@ -238,9 +238,9 @@
                 <article class="converter-modal__date-card converter-modal__date-card--solar">
                     <div class="converter-modal__date-top">
                         <span class="converter-modal__date-tag">Dương lịch</span>
-                        <span class="converter-modal__date-badge" id="conv-res-weekday">THỨ SÁU • FRIDAY</span>
+                        <span class="converter-modal__date-badge" id="conv-res-weekday">THỨ BẢY • SATURDAY</span>
                     </div>
-                    <strong class="converter-modal__date-num" id="conv-res-solar">06/11/2026</strong>
+                    <strong class="converter-modal__date-num" id="conv-res-solar">07/11/2026</strong>
                     <span class="converter-modal__date-sub" id="conv-res-solar-full">Tháng Mười Một (November) • Năm
                         2026</span>
                     <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true"
@@ -258,31 +258,29 @@
                         <span class="converter-modal__date-badge converter-modal__date-badge--primary"
                             id="conv-res-year-canchi">Năm Bính Ngọ</span>
                     </div>
-                    <strong class="converter-modal__date-num" id="conv-res-lunar">28/09/2026</strong>
+                    <strong class="converter-modal__date-num" id="conv-res-lunar">29/09/2026</strong>
                     <span class="converter-modal__date-sub" id="conv-res-year-napam">Mệnh năm: Thiên Hà Thủy</span>
                     <img src="./assets/icons/zodiac/horse.svg" alt="" aria-hidden="true"
                         class="converter-modal__date-zodiac" id="conv-res-year-zodiac" />
                 </article>
             </div>
 
-            <!-- TẦNG B: 4 Bento Cards Thông Số Cao Ráo, Thoáng Rộng (Không bị cắt chữ "...") -->
+            <!-- TẦNG B: 4 Bento Cards Thông Số Cao Ráo -->
             <div class="converter-modal__stats-grid">
-                <!-- Card 1: Can Chi Ngày -->
                 <article class="converter-modal__stat-card">
                     <div class="converter-modal__stat-icon-box">
-                        <img src="./assets/icons/zodiac/monkey.svg" alt="" aria-hidden="true"
+                        <img src="./assets/icons/zodiac/rooster.svg" alt="" aria-hidden="true"
                             class="converter-modal__stat-zodiac" id="conv-icon-day-zodiac" />
                     </div>
                     <div class="converter-modal__stat-content">
                         <span class="converter-modal__stat-label">Can chi ngày</span>
-                        <strong class="converter-modal__stat-value" id="conv-res-day-canchi">Giáp Thân</strong>
+                        <strong class="converter-modal__stat-value" id="conv-res-day-canchi">Ất Dậu</strong>
                         <span class="converter-modal__stat-sub" id="conv-res-day-status-sub">Ngày Hoàng Đạo</span>
                     </div>
-                    <img src="./assets/icons/zodiac/monkey.svg" alt="" aria-hidden="true"
+                    <img src="./assets/icons/zodiac/rooster.svg" alt="" aria-hidden="true"
                         class="converter-modal__stat-bg-zodiac" id="conv-bg-day-zodiac" />
                 </article>
 
-                <!-- Card 2: Can Chi Tháng -->
                 <article class="converter-modal__stat-card">
                     <div class="converter-modal__stat-icon-box">
                         <img src="./assets/icons/zodiac/dog.svg" alt="" aria-hidden="true"
@@ -297,7 +295,6 @@
                         class="converter-modal__stat-bg-zodiac" id="conv-bg-month-zodiac" />
                 </article>
 
-                <!-- Card 3: Mệnh Ngày (Nạp Âm) -->
                 <article class="converter-modal__stat-card">
                     <div class="converter-modal__stat-icon-box converter-modal__stat-icon-box--element">
                         <img src="./assets/icons/water.svg" alt="" aria-hidden="true"
@@ -310,7 +307,6 @@
                     </div>
                 </article>
 
-                <!-- Card 4: Tiết Khí & Trực -->
                 <article class="converter-modal__stat-card">
                     <div class="converter-modal__stat-icon-box">
                         <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true"
@@ -318,13 +314,13 @@
                     </div>
                     <div class="converter-modal__stat-content">
                         <span class="converter-modal__stat-label">Tiết khí &amp; Trực</span>
-                        <strong class="converter-modal__stat-value" id="conv-res-term">Sương Giáng</strong>
-                        <span class="converter-modal__stat-sub" id="conv-res-truc">Trực Khai • Khởi đầu đại cát</span>
+                        <strong class="converter-modal__stat-value" id="conv-res-term">Lập Đông</strong>
+                        <span class="converter-modal__stat-sub" id="conv-res-truc">Trực Bế • Hợp tu dưỡng</span>
                     </div>
                 </article>
             </div>
 
-            <!-- TẦNG C: Lưới 6 Bento Cards Giờ Hoàng Đạo Cao Thoáng & Chữ "Giờ Giáp Tý" To Rõ -->
+            <!-- TẦNG C: Lưới 6 Bento Cards Giờ Hoàng Đạo -->
             <div class="converter-modal__hours-section">
                 <div class="converter-modal__hours-head">
                     <div class="converter-modal__hours-title-group">

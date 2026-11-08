@@ -38,7 +38,6 @@
 
 ```scss
 // 1. Cấu hình lõi (Variables & Theme)
-// @forward "resets";
 @forward "variables";
 @forward "palette";
 @forward "theme-engine";
@@ -49,11 +48,12 @@
 // 3. Typo & Placeholders
 // @forward "placeholder"; // đã xé lẻ thành các file riêng biệt như css-grid, flex-box, positioning, images, animations
 @forward "typography";
+@forward "reset-placeholders";
 
 // 4. Các Abstract hỗ trợ layout & UI (Thứ tự nhóm này có thể linh hoạt)
+@forward "positioning";
 @forward "css-grid";
 @forward "flex-box";
-@forward "positioning";
 @forward "images";
 @forward "animations";
 ```
@@ -821,6 +821,11 @@ $zodiac-active-filters: (
         --zodiac-filter: #{$zodiac-filter};
         --zodiac-filter-active: #{$zodiac-filter-active};
 
+        /* 5. NHÓM TOOLTIP NỀN NHẠT PASTEL THEO MỆNH ĐANG CHỌN */
+        --tooltip-bg: #{map.get($theme-data, "primary", 100)};
+        --tooltip-text: #{map.get($theme-data, "neutral", 900)};
+        --tooltip-border: #{map.get($theme-data, "primary", 400)};
+
         @media (prefers-color-scheme: dark) {
             --body-bg: #{map.get($theme-data, "primary", 900)};
             --bg-surface: #{map.get($theme-data, "primary", 800)};
@@ -848,7 +853,47 @@ $zodiac-active-filters: (
             --overlay-bg: rgba(0, 0, 0, 0.7);
             --zodiac-filter: #{$zodiac-filter} brightness(1.25);
             --zodiac-filter-active: #{$zodiac-filter-active};
+
+            --tooltip-bg: #{map.get($theme-data, "primary", 800)};
+            --tooltip-text: #{map.get($theme-data, "neutral", 100)};
+            --tooltip-border: #{map.get($theme-data, "primary", 400)};
         }
+    }
+}
+```
+
+### mixins.scss
+
+```scss
+// scscss/abstracts/_mixins.scss
+@use "sass:map";
+@use "sass:math";
+@use "sass:string";
+@use "variables" as vars;
+
+// 1. Mixin để xử lý Media Query (Dùng cho @content)
+@mixin screen($key) {
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+
+    @if ($breakpoint == 0) {
+        @content;
+    } @else {
+        @media (max-width: ($breakpoint - 0.02px)) {
+            @content;
+        }
+    }
+}
+
+// 2. Function để tạo chuỗi infix (Dùng để tạo class: .col-sm-12)
+// Function trả về giá trị, Mixin thực hiện hành động.
+@function get-infix($key) {
+    $breakpoint: map.get(vars.$grid-breakpoints, $key);
+
+    // Kiểm tra: Nếu breakpoint tồn tại và khác 0, trả về "-key", ngược lại trả về ""
+    @if $breakpoint != null and $breakpoint != 0 {
+        @return string.unquote("-" + $key);
+    } @else {
+        @return "";
     }
 }
 ```
@@ -941,6 +986,111 @@ $zodiac-active-filters: (
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+```
+
+### reset-placeholders.scss
+
+```scss
+// abstracts/placeholders/_resets.scss
+// dùng cho reactjs
+// ==========================================
+// RESETS (Module tĩnh triệt tiêu style mặc định)
+// ==========================================
+
+// Triệt tiêu style mặc định của thẻ ul, ol
+%listReset {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+// Triệt tiêu style mặc định của thẻ a
+%linkReset {
+    text-decoration: none;
+    color: inherit;
+}
+
+// Triệt tiêu style mặc định của thẻ button
+%buttonReset {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+// Triệt tiêu style mặc định của thẻ input
+%inputReset {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+}
+```
+
+### positioning.scss
+
+```scss
+// abstracts/placeholders/_position.scss
+
+// ==========================================
+// POSITIONING PLACEHOLDERS
+// ==========================================
+
+// 1. CĂN GIỮA TUYỆT ĐỐI
+// Căn giữa 2 trục (Modal, Popup, Icon giữa khung hình)
+%absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Căn giữa dọc (Icon input, Nút mũi tên Slider)
+%absCenterY {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+// Căn giữa ngang (Tooltip, Badge nổi)
+%absCenterX {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+// 2. PHỦ KÍN KHÔNG GIAN (COVER)
+// Phủ kín phần tử cha (Overlay hình ảnh, Lớp phủ thẻ)
+%absCover {
+    position: absolute;
+    inset: 0;
+}
+
+// Phủ kín toàn bộ màn hình trình duyệt (Modal Backdrop, Loading Screen)
+%fixedCover {
+    position: fixed;
+    inset: 0;
+}
+
+// ==========================================
+// BỔ SUNG TỪ KINH NGHIỆM THỰC CHIẾN
+// ==========================================
+
+// 3. PSEUDO-ELEMENTS (Tiết kiệm code khi viết ::before, ::after)
+%absPseudo {
+    content: "";
+    position: absolute;
+    display: block;
+}
+
+// 4. STICKY (Cố định khi cuộn)
+// Dành cho Header, Table Head, hoặc Sidebar bám dính khi user cuộn trang
+%stickyTop {
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 ```
 
@@ -1280,71 +1430,6 @@ $zodiac-active-filters: (
 %flexCol25 {
     flex: 0 0 25%;
     max-width: 25%;
-}
-```
-
-### positioning.scss
-
-```scss
-// abstracts/placeholders/_position.scss
-
-// ==========================================
-// POSITIONING PLACEHOLDERS
-// ==========================================
-
-// 1. CĂN GIỮA TUYỆT ĐỐI
-// Căn giữa 2 trục (Modal, Popup, Icon giữa khung hình)
-%absCenter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-// Căn giữa dọc (Icon input, Nút mũi tên Slider)
-%absCenterY {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-// Căn giữa ngang (Tooltip, Badge nổi)
-%absCenterX {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-// 2. PHỦ KÍN KHÔNG GIAN (COVER)
-// Phủ kín phần tử cha (Overlay hình ảnh, Lớp phủ thẻ)
-%absCover {
-    position: absolute;
-    inset: 0;
-}
-
-// Phủ kín toàn bộ màn hình trình duyệt (Modal Backdrop, Loading Screen)
-%fixedCover {
-    position: fixed;
-    inset: 0;
-}
-
-// ==========================================
-// BỔ SUNG TỪ KINH NGHIỆM THỰC CHIẾN
-// ==========================================
-
-// 3. PSEUDO-ELEMENTS (Tiết kiệm code khi viết ::before, ::after)
-%absPseudo {
-    content: "";
-    position: absolute;
-    display: block;
-}
-
-// 4. STICKY (Cố định khi cuộn)
-// Dành cho Header, Table Head, hoặc Sidebar bám dính khi user cuộn trang
-%stickyTop {
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 ```
 
@@ -1971,966 +2056,6 @@ strong {
 }
 ```
 
-### index.scss
-
-```scss
-@forward "./reset";
-@forward "./base";
-@forward "./grid";
-@forward "./utils";
-@forward "./keyframes";
-```
-
-### reset.scss
-
-```scss
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
-}
-body {
-    line-height: 1;
-}
-ol,
-ul {
-    list-style: none;
-}
-blockquote,
-q {
-    quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: "";
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-```
-
-### base.scss
-
-```scss
-/* ==========================================================================
-   CSS CƠ SỞ (BASE CSS)
-   Cấu trúc reset mặc định và định dạng nền tảng cho tài liệu.
-   ========================================================================== */
-@use "../abstracts/" as abs;
-// @use "../abstracts/variables" as v;
-// @use "../abstracts/mixins" as m;
-:root {
-    /* Lấy chính xác thông số transition từ file variables cũ của bạn */
-    --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease;
-}
-
-*,
-::after,
-::before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    // Liên kết với hằng số cơ sở
-    font-size: abs.$base-font-size;
-}
-
-body {
-    // Kế thừa typography từ tệp biến trung tâm
-    font-size: abs.$body-font-size;
-    font-family: abs.$body-font-family;
-    line-height: 1.5; /* Khoảng cách tối thiểu an toàn cho người chứng khó đọc */
-    -webkit-font-smoothing: antialiased;
-    // Sử dụng CSS Custom Properties cho phép chuyển đổi Theme động
-    color: var(--text-color);
-    background: var(--body-bg);
-    // transition: abs.$theme-transition;
-    transition: var(--theme-transition);
-}
-
-/* Tối ưu hóa ngắt dòng thông minh (Smart text-wrapping) */
-p,
-li,
-dd {
-    text-wrap: pretty; /* Loại bỏ dòng rớt (orphans) cho văn bản dài */
-    overflow-wrap: break-word;
-}
-
-button {
-    border: none;
-    outline: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-}
-
-a,
-img,
-button,
-label,
-input,
-textarea,
-select {
-    padding: 0;
-    font-family: inherit;
-    color: inherit;
-    outline: none;
-    border: none;
-    // Đã khắc phục lỗi cú pháp: sửa --webkit-tab thành chuẩn của Apple
-    -webkit-tap-highlight-color: transparent;
-}
-
-input,
-textarea {
-    background: transparent;
-}
-/* Thay thế các giải pháp JavaScript tính toán chiều cao cuộn */
-textarea {
-    field-sizing: content;
-}
-
-// Xử lý ghi đè CSS autofill của trình duyệt
-input:-webkit-autofill,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active,
-input:-webkit-autofill:hover {
-    transition: background-color 1s 9999s;
-    -webkit-text-fill-color: var(--text-color);
-    caret-color: var(--text-color);
-}
-
-/* Thiết lập đa phương tiện logic (Tương thích ngôn ngữ RTL/Dọc) */
-img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
-    max-inline-size: 100%;
-}
-
-/* ĐẢM BẢO KHẢ NĂNG TIẾP CẬN: Quản lý vòng tiêu điểm bàn phím */
-:focus-visible {
-    outline: 2px solid var(--focus-ring-color);
-    outline-offset: 4px; /* Đẩy viền ra ngoài để tránh nhiễu loạn thị giác */
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-ul,
-ol {
-    list-style: none;
-}
-
-/* Ẩn mũi tên trên Chrome, Safari, Edge và các trình duyệt dựa trên Chromium */
-details summary::-webkit-details-marker {
-    display: none;
-}
-
-/* Ẩn mũi tên trên Firefox */
-details summary {
-    list-style: none;
-    display: flex;
-}
-
-.icon {
-    // filter: var(--icon-color);
-    width: 24px;
-    height: 24px;
-}
-
-.container {
-    // Áp dụng mixin screen và cấu hình khoảng đệm tĩnh
-    @include abs.screen(sm) {
-        padding-left: abs.$container-padding-sm !important;
-        padding-right: abs.$container-padding-sm !important;
-    }
-}
-
-i,
-em {
-    font-style: italic;
-}
-
-b,
-strong {
-    font-weight: 600;
-}
-```
-
-### grid.scss
-
-```scss
-// scss/base/_grid.scss
-@use "sass:math";
-@use "sass:map";
-@use "../abstracts" as abs;
-
-// 1. Base Container & Row
-.container-fluid {
-    --grid-gutter-x: #{abs.$grid-gutter-width};
-    --grid-gutter-y: 0;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: calc(var(--grid-gutter-x) * 0.5);
-    padding-right: calc(var(--grid-gutter-x) * 0.5);
-}
-
-.container {
-    @extend .container-fluid;
-    max-width: abs.$container-max-width-custom;
-    // Max-width sẽ được xử lý trong loop breakpoint
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(var(--grid-gutter-y) * -1);
-    margin-left: calc(var(--grid-gutter-x) * -0.5);
-    margin-right: calc(var(--grid-gutter-x) * -0.5);
-
-    > * {
-        margin-top: var(--grid-gutter-y);
-        padding-left: calc(var(--grid-gutter-x) * 0.5);
-        padding-right: calc(var(--grid-gutter-x) * 0.5);
-    }
-}
-
-.col {
-    flex: 1 0 0%;
-}
-
-// 2. Mixins for generating classes
-@mixin make-columns($infix: "") {
-    @for $i from 1 through abs.$grid-columns {
-        .col#{$infix}-#{$i} {
-            flex: 0 0 auto;
-            width: math.div(100%, abs.$grid-columns) * $i;
-        }
-    }
-}
-
-@mixin make-offsets($infix: "") {
-    @for $i from 0 through abs.$grid-columns {
-        .offset#{$infix}-#{$i} {
-            margin-left: if(sass($i > 0): math.div(100%, abs.$grid-columns) * $i; else: 0);
-        }
-    }
-}
-
-// 3. Execution
-@include make-columns("");
-@include make-offsets("");
-
-// 4. Breakpoint Loop (Đã fix để chạy hoàn hảo với mixins)
-@each $breakpoint, $dimension in abs.$grid-breakpoints {
-    // Desktop-First: Điểm ngắt 0px (xs) không có ý nghĩa với max-width, nên bỏ qua
-    @if $dimension != 0 {
-        // Đổi "abs.breakpoint" thành "abs.screen" theo đúng file mixins
-        @include abs.screen($breakpoint) {
-            .container {
-                max-width: map.get(abs.$container-max-widths, $breakpoint);
-            }
-
-            // Gọi hàm get-infix từ mixins thay vì tự nối chuỗi thủ công
-            $infix: abs.get-infix($breakpoint);
-
-            @include make-columns($infix);
-            @include make-offsets($infix);
-
-            @each $i, $ratio in abs.$gutters {
-                .g#{$infix}-#{$i},
-                .gx#{$infix}-#{$i} {
-                    --grid-gutter-x: #{abs.$grid-gutter-width * $ratio};
-                }
-            }
-        }
-    }
-}
-```
-
-### utils.scss
-
-```scss
-/* ==========================================================================
-   TIỆN ÍCH (UTILITIES)
-   Tự động sinh các lớp bổ trợ điều khiển hiển thị (display classes).
-   ========================================================================== */
-
-@use "../abstracts" as abs;
-
-@mixin make-display($breakpoint: null) {
-    // Phân tích nội suy tiền tố một cách an toàn
-    $infix: if(
-        sass($breakpoint != null): "-#{$breakpoint}" ; else: "",
-    );
-
-    @each $display in abs.$display-values {
-        .d#{$infix}-#{$display} {
-            display: $display !important;
-        }
-    }
-}
-
-// 1. Gọi lớp tiện ích hiển thị cho viewport tiêu chuẩn
-@include make-display();
-
-// 2. Khởi tạo các lớp tiện ích tương ứng với từng breakpoint
-@each $breakpoint, $dimension in abs.$grid-breakpoints {
-    @media (max-width: ($dimension - 0.02px)) {
-        @include make-display($breakpoint);
-    }
-}
-```
-
-### keyframes.scss
-
-```scss
-// scss/base/_keyframes.scss
-// Gom toàn bộ @keyframes từ abstracts/_animations.scss và base/_keyframes.scss về đúng tầng Base
-
-// 1. Hiệu ứng Fade-in (Xuất hiện nhẹ nhàng cho Dropdown Header)
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(1rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-// 2. Hiệu ứng Float (Nhấp nhô như sóng nước - Dùng cho hành Thủy)
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-1rem);
-    }
-}
-
-// 3. Hiệu ứng Pulse (Nhịp đập - Dùng cho hành Hỏa)
-@keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-// 4. Hiệu ứng Shake (Rung cảnh báo lỗi)
-@keyframes shake {
-    0%,
-    100% {
-        translate: 0;
-    }
-    25%,
-    75% {
-        translate: 0.4rem;
-    }
-    50% {
-        translate: -0.4rem;
-    }
-}
-```
-
-### index.scss
-
-```scss
-@forward "./reset";
-@forward "./base";
-@forward "./grid";
-@forward "./utils";
-@forward "./keyframes";
-```
-
-### reset.scss
-
-```scss
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
-}
-body {
-    line-height: 1;
-}
-ol,
-ul {
-    list-style: none;
-}
-blockquote,
-q {
-    quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: "";
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-```
-
-### base.scss
-
-```scss
-/* ==========================================================================
-   CSS CƠ SỞ (BASE CSS)
-   Cấu trúc reset mặc định và định dạng nền tảng cho tài liệu.
-   ========================================================================== */
-@use "../abstracts/" as abs;
-// @use "../abstracts/variables" as v;
-// @use "../abstracts/mixins" as m;
-:root {
-    /* Lấy chính xác thông số transition từ file variables cũ của bạn */
-    --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease;
-}
-
-*,
-::after,
-::before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    // Liên kết với hằng số cơ sở
-    font-size: abs.$base-font-size;
-}
-
-body {
-    // Kế thừa typography từ tệp biến trung tâm
-    font-size: abs.$body-font-size;
-    font-family: abs.$body-font-family;
-    line-height: 1.5; /* Khoảng cách tối thiểu an toàn cho người chứng khó đọc */
-    -webkit-font-smoothing: antialiased;
-    // Sử dụng CSS Custom Properties cho phép chuyển đổi Theme động
-    color: var(--text-color);
-    background: var(--body-bg);
-    // transition: abs.$theme-transition;
-    transition: var(--theme-transition);
-}
-
-/* Tối ưu hóa ngắt dòng thông minh (Smart text-wrapping) */
-p,
-li,
-dd {
-    text-wrap: pretty; /* Loại bỏ dòng rớt (orphans) cho văn bản dài */
-    overflow-wrap: break-word;
-}
-
-button {
-    border: none;
-    outline: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-}
-
-a,
-img,
-button,
-label,
-input,
-textarea,
-select {
-    padding: 0;
-    font-family: inherit;
-    color: inherit;
-    outline: none;
-    border: none;
-    // Đã khắc phục lỗi cú pháp: sửa --webkit-tab thành chuẩn của Apple
-    -webkit-tap-highlight-color: transparent;
-}
-
-input,
-textarea {
-    background: transparent;
-}
-/* Thay thế các giải pháp JavaScript tính toán chiều cao cuộn */
-textarea {
-    field-sizing: content;
-}
-
-// Xử lý ghi đè CSS autofill của trình duyệt
-input:-webkit-autofill,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active,
-input:-webkit-autofill:hover {
-    transition: background-color 1s 9999s;
-    -webkit-text-fill-color: var(--text-color);
-    caret-color: var(--text-color);
-}
-
-/* Thiết lập đa phương tiện logic (Tương thích ngôn ngữ RTL/Dọc) */
-img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
-    max-inline-size: 100%;
-}
-
-/* ĐẢM BẢO KHẢ NĂNG TIẾP CẬN: Quản lý vòng tiêu điểm bàn phím */
-:focus-visible {
-    outline: 2px solid var(--focus-ring-color);
-    outline-offset: 4px; /* Đẩy viền ra ngoài để tránh nhiễu loạn thị giác */
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-ul,
-ol {
-    list-style: none;
-}
-
-/* Ẩn mũi tên trên Chrome, Safari, Edge và các trình duyệt dựa trên Chromium */
-details summary::-webkit-details-marker {
-    display: none;
-}
-
-/* Ẩn mũi tên trên Firefox */
-details summary {
-    list-style: none;
-    display: flex;
-}
-
-.icon {
-    // filter: var(--icon-color);
-    width: 24px;
-    height: 24px;
-}
-
-.container {
-    // Áp dụng mixin screen và cấu hình khoảng đệm tĩnh
-    @include abs.screen(sm) {
-        padding-left: abs.$container-padding-sm !important;
-        padding-right: abs.$container-padding-sm !important;
-    }
-}
-
-i,
-em {
-    font-style: italic;
-}
-
-b,
-strong {
-    font-weight: 600;
-}
-```
-
-### grid.scss
-
-```scss
-// scss/base/_grid.scss
-@use "sass:math";
-@use "sass:map";
-@use "../abstracts" as abs;
-
-// 1. Base Container & Row
-.container-fluid {
-    --grid-gutter-x: #{abs.$grid-gutter-width};
-    --grid-gutter-y: 0;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: calc(var(--grid-gutter-x) * 0.5);
-    padding-right: calc(var(--grid-gutter-x) * 0.5);
-}
-
-.container {
-    @extend .container-fluid;
-    max-width: abs.$container-max-width-custom;
-    // Max-width sẽ được xử lý trong loop breakpoint
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(var(--grid-gutter-y) * -1);
-    margin-left: calc(var(--grid-gutter-x) * -0.5);
-    margin-right: calc(var(--grid-gutter-x) * -0.5);
-
-    > * {
-        margin-top: var(--grid-gutter-y);
-        padding-left: calc(var(--grid-gutter-x) * 0.5);
-        padding-right: calc(var(--grid-gutter-x) * 0.5);
-    }
-}
-
-.col {
-    flex: 1 0 0%;
-}
-
-// 2. Mixins for generating classes
-@mixin make-columns($infix: "") {
-    @for $i from 1 through abs.$grid-columns {
-        .col#{$infix}-#{$i} {
-            flex: 0 0 auto;
-            width: math.div(100%, abs.$grid-columns) * $i;
-        }
-    }
-}
-
-@mixin make-offsets($infix: "") {
-    @for $i from 0 through abs.$grid-columns {
-        .offset#{$infix}-#{$i} {
-            margin-left: if(sass($i > 0): math.div(100%, abs.$grid-columns) * $i; else: 0);
-        }
-    }
-}
-
-// 3. Execution
-@include make-columns("");
-@include make-offsets("");
-
-// 4. Breakpoint Loop (Đã fix để chạy hoàn hảo với mixins)
-@each $breakpoint, $dimension in abs.$grid-breakpoints {
-    // Desktop-First: Điểm ngắt 0px (xs) không có ý nghĩa với max-width, nên bỏ qua
-    @if $dimension != 0 {
-        // Đổi "abs.breakpoint" thành "abs.screen" theo đúng file mixins
-        @include abs.screen($breakpoint) {
-            .container {
-                max-width: map.get(abs.$container-max-widths, $breakpoint);
-            }
-
-            // Gọi hàm get-infix từ mixins thay vì tự nối chuỗi thủ công
-            $infix: abs.get-infix($breakpoint);
-
-            @include make-columns($infix);
-            @include make-offsets($infix);
-
-            @each $i, $ratio in abs.$gutters {
-                .g#{$infix}-#{$i},
-                .gx#{$infix}-#{$i} {
-                    --grid-gutter-x: #{abs.$grid-gutter-width * $ratio};
-                }
-            }
-        }
-    }
-}
-```
-
-### utils.scss
-
-```scss
-/* ==========================================================================
-   TIỆN ÍCH (UTILITIES)
-   Tự động sinh các lớp bổ trợ điều khiển hiển thị (display classes).
-   ========================================================================== */
-
-@use "../abstracts" as abs;
-
-@mixin make-display($breakpoint: null) {
-    // Phân tích nội suy tiền tố một cách an toàn
-    $infix: if(
-        sass($breakpoint != null): "-#{$breakpoint}" ; else: "",
-    );
-
-    @each $display in abs.$display-values {
-        .d#{$infix}-#{$display} {
-            display: $display !important;
-        }
-    }
-}
-
-// 1. Gọi lớp tiện ích hiển thị cho viewport tiêu chuẩn
-@include make-display();
-
-// 2. Khởi tạo các lớp tiện ích tương ứng với từng breakpoint
-@each $breakpoint, $dimension in abs.$grid-breakpoints {
-    @media (max-width: ($dimension - 0.02px)) {
-        @include make-display($breakpoint);
-    }
-}
-```
-
-### keyframes.scss
-
-```scss
-// scss/base/_keyframes.scss
-// Gom toàn bộ @keyframes từ abstracts/_animations.scss và base/_keyframes.scss về đúng tầng Base
-
-// 1. Hiệu ứng Fade-in (Xuất hiện nhẹ nhàng cho Dropdown Header)
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(1rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-// 2. Hiệu ứng Float (Nhấp nhô như sóng nước - Dùng cho hành Thủy)
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-1rem);
-    }
-}
-
-// 3. Hiệu ứng Pulse (Nhịp đập - Dùng cho hành Hỏa)
-@keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-// 4. Hiệu ứng Shake (Rung cảnh báo lỗi)
-@keyframes shake {
-    0%,
-    100% {
-        translate: 0;
-    }
-    25%,
-    75% {
-        translate: 0.4rem;
-    }
-    50% {
-        translate: -0.4rem;
-    }
-}
-```
-
 ## components folder
 
 ### index.scss
@@ -2942,13 +2067,13 @@ strong {
 @forward "./date-time";
 @forward "./bloc-card";
 @forward "./fengshui-card";
-@forward "./month-calendar";
 
 @forward "./clock-hero";
 @forward "./clock-pillars";
 @forward "./clock-zodiac";
-@forward "./converter-modal";
 @forward "./week-calendar";
+@forward "./month-calendar";
+@forward "./converter-modal";
 ```
 
 ### button.scss
@@ -2989,40 +2114,6 @@ strong {
             font-size: 1.3rem;
         }
     }
-}
-```
-
-### date-time.scss
-
-```scss
-// scss/components/_date-time.scss
-@use "../abstracts" as abs;
-
-.header__datetime-wrapper {
-    @extend %flexItemCenter;
-    gap: 1.4rem;
-    height: 4.2rem;
-    padding: 0 1.6rem;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 99.9rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--text-color);
-    @extend %transTheme;
-}
-
-.header__date-group,
-.header__time-group {
-    @extend %flexItemCenter;
-    gap: 0.8rem;
-    @extend %textNoWrap;
-}
-
-.header__time-group {
-    padding-left: 1.4rem;
-    border-left: 1px solid var(--border-color);
-    font-variant-numeric: tabular-nums;
 }
 ```
 
@@ -3108,6 +2199,2364 @@ strong {
         @include abs.screen(xl) {
             display: none;
         }
+    }
+}
+```
+
+### date-time.scss
+
+```scss
+// scss/components/_date-time.scss
+@use "../abstracts" as abs;
+
+.header__datetime-wrapper {
+    @extend %flexItemCenter;
+    gap: 1.4rem;
+    height: 4.2rem;
+    padding: 0 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 99.9rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-color);
+    @extend %transTheme;
+}
+
+.header__date-group,
+.header__time-group {
+    @extend %flexItemCenter;
+    gap: 0.8rem;
+    @extend %textNoWrap;
+}
+
+.header__time-group {
+    padding-left: 1.4rem;
+    border-left: 1px solid var(--border-color);
+    font-variant-numeric: tabular-nums;
+}
+```
+
+### bloc-card.scss
+
+```scss
+// scss/components/_bloc-card.scss
+@use "../abstracts" as abs;
+
+.bloc-card {
+    @extend %flexColumn;
+    gap: 1.4rem;
+    padding: 2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.4rem;
+        border-radius: 1.8rem;
+    }
+
+    // 1. Tầng Đầu: Tháng/Năm bên trái - Số Ngày Dương khổng lồ bên phải
+    &__top {
+        @extend %flexBetween;
+        align-items: flex-start;
+        gap: 1.6rem;
+    }
+
+    &__month-box {
+        @extend %flexColumn;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+
+    &__year-badge {
+        display: inline-block;
+        padding: 0.4rem 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.8rem;
+        font-weight: 800;
+        border-radius: 99.9rem;
+        letter-spacing: 0.05em;
+        @extend %transTheme;
+    }
+
+    &__month-vn {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        margin-top: 0.4rem;
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            font-size: 1.7rem;
+        }
+    }
+
+    &__month-en {
+        font-size: 1.5rem;
+        font-style: italic;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__day-status {
+        display: inline-block;
+        margin-top: 0.4rem;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %transTheme;
+    }
+
+    &__date-hero {
+        position: relative;
+        @extend %flexColumn;
+        align-items: flex-end;
+    }
+
+    &__share-btn {
+        @extend %inlineFlexCenter;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 1rem;
+        background-color: var(--bg-surface);
+        color: var(--text-muted);
+        @extend %transInteractive;
+
+        &:hover {
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__solar-num {
+        font-size: 8.8rem;
+        font-weight: 800;
+        line-height: 0.95;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            font-size: 6.8rem;
+        }
+    }
+
+    // 2. Tầng Giữa: Khung Ảnh 16:9 + Overlay Góc Dưới Phải (Ngoài luồng bố cục)
+    &__media {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 1.6rem;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-surface);
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+
+            .bloc-card__img {
+                transform: scale(1.03);
+            }
+        }
+    }
+
+    &__media-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    &__img {
+        @extend %imgCover;
+        transition: transform 0.45s ease;
+    }
+
+    // Cụm Overlay neo cố định ở Góc Dưới Bên Phải (Chừa trống 100% Góc Trên Trái cho Title in trên ảnh)
+    &__overlay {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 5;
+        @extend %flexColumn;
+        align-items: flex-end;
+        gap: 0.6rem;
+        max-width: calc(100% - 2rem);
+        pointer-events: none;
+
+        @include abs.screen(sm) {
+            right: 0.8rem;
+            bottom: 0.8rem;
+            gap: 0.4rem;
+            max-width: calc(100% - 1.6rem);
+        }
+    }
+
+    // Tầng trên của Overlay: 2 nút "Sự kiện cùng ngày" & "Sự kiện quốc tế"
+    &__event-pills {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.6rem;
+        pointer-events: auto;
+    }
+
+    &__event-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 3rem;
+        padding: 0 1.1rem;
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 99.9rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        backdrop-filter: blur(8px);
+        cursor: pointer;
+        @extend %textNoWrap;
+        @extend %transInteractive;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-1px);
+
+            .bloc-card__event-dot {
+                background-color: #ffffff;
+            }
+        }
+
+        &--intl {
+            border-color: var(--secondary-color);
+
+            .bloc-card__event-dot {
+                background-color: var(--secondary-color);
+            }
+
+            &:hover,
+            &:focus-visible,
+            &.is-active {
+                background-color: var(--secondary-color);
+                border-color: var(--secondary-color);
+            }
+        }
+
+        @include abs.screen(sm) {
+            height: 2.6rem;
+            padding: 0 0.8rem;
+            font-size: 1.05rem;
+        }
+    }
+
+    &__event-dot {
+        width: 0.65rem;
+        height: 0.65rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        @extend %flexItemFixed;
+        @extend %transTheme;
+    }
+
+    // Tầng dưới của Overlay (Góc dưới phải): Hộp hiển thị "hien_thi_nhan_dip" đổi màu theo Theme
+    &__caption-btn {
+        pointer-events: auto;
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        max-width: 100%;
+        padding: 0.7rem 1.2rem 0.7rem 0.8rem;
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 1.2rem;
+        box-shadow: 0 0.6rem 1.8rem var(--shadow-color);
+        backdrop-filter: blur(10px);
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-color);
+            border-color: var(--primary-hover);
+            color: #ffffff;
+            transform: translateY(-2px);
+
+            .bloc-card__caption-badge {
+                background-color: #ffffff;
+                color: var(--primary-color);
+            }
+        }
+
+        @include abs.screen(sm) {
+            padding: 0.5rem 0.9rem 0.5rem 0.6rem;
+            border-radius: 1rem;
+            gap: 0.6rem;
+        }
+    }
+
+    &__caption-badge {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        padding: 0.25rem 0.7rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 0.7rem;
+        font-size: 1.05rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            font-size: 0.95rem;
+            padding: 0.2rem 0.55rem;
+        }
+    }
+
+    &__caption-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.3;
+        @extend %textClamp2;
+
+        @include abs.screen(sm) {
+            font-size: 1.1rem;
+        }
+    }
+
+    // 3. Tầng Băng Rôn Ngang: Năm Can Chi | Thứ trong tuần
+    &__ribbon {
+        display: grid;
+        grid-template-columns: 4fr 6fr;
+        border-radius: 1rem;
+        overflow: hidden;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__ribbon-year {
+        @extend %flexCenter;
+        padding: 0.8rem 1rem;
+        background-color: var(--secondary-color);
+        color: #ffffff;
+        @extend %transTheme;
+    }
+
+    &__ribbon-weekday {
+        @extend %flexCenter;
+        padding: 0.8rem 1rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        letter-spacing: 0.04em;
+        @extend %transTheme;
+    }
+
+    // 4. Tầng Đáy 3 Cột: Số Ngày Âm | Can Chi | Hành & Tiết Khí
+    &__bottom {
+        display: grid;
+        grid-template-columns: auto 1fr 1.15fr;
+        align-items: center;
+        gap: 1.4rem;
+        padding-top: 0.6rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: auto 1fr;
+        }
+    }
+
+    &__lunar-num-box {
+        @extend %flexColumnCenterAll;
+        min-width: 7.2rem;
+        padding: 0.8rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        @extend %transTheme;
+    }
+
+    &__lunar-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+    }
+
+    &__lunar-num {
+        font-size: 4.2rem;
+        font-weight: 800;
+        line-height: 1.05;
+        color: var(--primary-color);
+        @extend %transTheme;
+    }
+
+    &__canchi-list {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+        padding-right: 1.2rem;
+        border-right: 1px solid var(--border-color);
+
+        @include abs.screen(sm) {
+            border-right: none;
+            padding-right: 0;
+        }
+    }
+
+    &__lunar-month {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %transTheme;
+    }
+
+    &__quick-fengshui {
+        @extend %flexColumn;
+        gap: 0.4rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+
+        @include abs.screen(sm) {
+            grid-column: 1 / -1;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--border-color);
+        }
+    }
+}
+```
+
+### fengshui-card.scss
+
+```scss
+// scss/components/_fengshui-card.scss
+@use "../abstracts" as abs;
+
+.fengshui-stack {
+    @extend %flexColumn;
+    gap: 1.6rem;
+}
+
+// 1. Hai ô Giờ Hoàng Đạo (Vàng Hoàng Kim) & Giờ Hắc Đạo (Xám Đá) đồng bộ 100% với Ảnh 3
+.fengshui-hours {
+    @extend %gridCols2;
+    gap: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__box {
+        padding: 1.6rem;
+        border-radius: 1.8rem;
+        border: 1px solid var(--border-color);
+        @extend %transTheme;
+
+        // Màu Vàng Hoàng Đạo giống chấm tròn Hoàng Đạo ở Ảnh 3 (#eab308)
+        &--good {
+            background-color: rgba(234, 179, 8, 0.12);
+            border-color: rgba(234, 179, 8, 0.4);
+
+            .fengshui-hours__title {
+                color: #b45309;
+            }
+        }
+
+        // Màu Xám Hắc Đạo giống chấm tròn Hắc Đạo ở Ảnh 3 (#374151)
+        &--bad {
+            background-color: rgba(55, 65, 81, 0.08);
+            border-color: rgba(55, 65, 81, 0.28);
+
+            .fengshui-hours__title {
+                color: #374151;
+            }
+        }
+    }
+
+    &__title {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+    }
+
+    &__dot {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        @extend %flexItemFixed;
+
+        &--good {
+            background-color: #eab308;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
+        }
+
+        &--bad {
+            background-color: #374151;
+            box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.2);
+        }
+    }
+
+    &__list {
+        font-size: 1.3rem;
+        line-height: 1.55;
+        color: var(--text-color);
+    }
+}
+
+// 2. Thẻ Bento thông số Trực, Sao & Việc nên làm
+.fengshui-card {
+    @extend %flexColumn;
+    gap: 1.4rem;
+    padding: 2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 1.8rem;
+    }
+
+    &__group {
+        padding-bottom: 1.2rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__head {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        font-size: 1.4rem;
+    }
+
+    &__label {
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__val {
+        color: var(--primary-color);
+    }
+
+    &__badge {
+        padding: 0.2rem 0.8rem;
+        border-radius: 0.6rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+
+        &--bad {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--color-danger);
+        }
+
+        &--good {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: var(--color-success);
+        }
+    }
+
+    &__desc {
+        margin-top: 0.4rem;
+        font-size: 1.35rem;
+        font-style: italic;
+        color: var(--text-muted);
+    }
+
+    &__ages {
+        @extend %gridCols2;
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__age-chip {
+        padding: 1rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.35rem;
+
+        &--good strong {
+            color: var(--color-success);
+        }
+
+        &--bad strong {
+            color: var(--color-danger);
+        }
+    }
+
+    &__section-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+}
+
+// 3. Việc Nên Làm / Không Nên Làm thiết kế dạng 2 Hộp Bento Con + Tag Chips (Ảnh 5)
+.fengshui-actions {
+    @extend %gridCols2;
+    gap: 1.2rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--border-color);
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__box {
+        @extend %flexColumn;
+        gap: 1rem;
+        padding: 1.4rem;
+        border-radius: 1.6rem;
+        border: 1px solid var(--border-color);
+
+        &--do {
+            background-color: rgba(34, 197, 94, 0.06);
+            border-color: rgba(34, 197, 94, 0.28);
+
+            .fengshui-actions__badge {
+                color: var(--color-success);
+            }
+            .fengshui-actions__icon {
+                background-color: rgba(34, 197, 94, 0.16);
+                color: var(--color-success);
+            }
+            .fengshui-actions__chip {
+                background-color: var(--body-bg);
+                border-color: rgba(34, 197, 94, 0.35);
+                color: var(--color-success);
+            }
+        }
+
+        &--dont {
+            background-color: rgba(239, 68, 68, 0.06);
+            border-color: rgba(239, 68, 68, 0.28);
+
+            .fengshui-actions__badge {
+                color: var(--color-danger);
+            }
+            .fengshui-actions__icon {
+                background-color: rgba(239, 68, 68, 0.16);
+                color: var(--color-danger);
+            }
+            .fengshui-actions__chip {
+                background-color: var(--body-bg);
+                border-color: rgba(239, 68, 68, 0.35);
+                color: var(--color-danger);
+            }
+        }
+    }
+
+    &__header {
+        @extend %flexBetween;
+    }
+
+    &__badge {
+        font-size: 1.35rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    &__icon {
+        @extend %inlineFlexCenter;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__list {
+        @extend %flexWrapGap;
+        gap: 0.8rem;
+    }
+
+    &__chip {
+        padding: 0.5rem 1.1rem;
+        border-radius: 99.9rem;
+        border: 1px solid transparent;
+        font-size: 1.3rem;
+        font-weight: 600;
+        box-shadow: 0 0.2rem 0.6rem var(--shadow-color);
+    }
+}
+
+.fengshui-quote {
+    text-align: center;
+    padding-top: 0.4rem;
+
+    &__text {
+        font-size: 1.4rem;
+        font-style: italic;
+        color: var(--text-muted);
+    }
+
+    &__author {
+        display: block;
+        margin-top: 0.4rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+```
+
+### clock-hero.scss
+
+```scss
+// scss/components/_clock-hero.scss
+@use "../abstracts" as abs;
+
+.clock-hero {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2.8rem 3.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.8rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(md) {
+        padding: 2rem 1.8rem;
+        border-radius: 2rem;
+        gap: 1.6rem;
+    }
+
+    &__header {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+    }
+
+    &__status-pill {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4.2rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        &[data-fortune="good"] .clock-hero__status-dot {
+            background-color: #eab308;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
+        }
+
+        &[data-fortune="bad"] .clock-hero__status-dot {
+            background-color: #6b7280;
+            box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.25);
+        }
+    }
+
+    &__status-dot {
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%;
+    }
+
+    &__loc-dropdown {
+        position: relative;
+    }
+
+    &__loc-summary {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+    }
+
+    &__loc-arrow {
+        width: 1.6rem;
+        height: 1.6rem;
+        @extend %transBurgerBar;
+    }
+
+    &__loc-dropdown[open] &__loc-arrow {
+        transform: rotate(180deg);
+    }
+
+    &__loc-menu {
+        position: absolute;
+        top: calc(100% + 0.8rem);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 65;
+        min-width: 28rem;
+        padding: 0.8rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.8rem;
+        box-shadow: 0 1.2rem 3.2rem var(--shadow-color);
+        @extend %flexColumn;
+        gap: 0.4rem;
+        @extend %animDropdownFadeIn;
+    }
+
+    &__loc-option {
+        @extend %flexBetween;
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border-radius: 1rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %transTheme;
+
+        small {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        &:hover {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+
+        &.is-selected {
+            background-color: var(--primary-color);
+            color: #ffffff;
+
+            small {
+                color: rgba(255, 255, 255, 0.85);
+            }
+        }
+    }
+
+    &__format-switch {
+        @extend %inlineFlexCenter;
+        padding: 0.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+    }
+
+    &__format-btn {
+        min-width: 5.2rem;
+        height: 3.4rem;
+        padding: 0 1.4rem;
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &.is-active {
+            background-color: var(--text-color);
+            color: var(--body-bg);
+        }
+    }
+
+    &__stage {
+        @extend %flexCenter;
+        align-items: baseline;
+        gap: 1.2rem;
+        padding: 1.6rem 0;
+        text-align: center;
+    }
+
+    &__digits {
+        @extend %inlineFlexCenter;
+        align-items: baseline;
+        font-size: clamp(5.2rem, 12.5vw, 14.2rem);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__colon {
+        padding: 0 0.4rem;
+        color: var(--primary-color);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    &__ampm {
+        font-size: clamp(2rem, 3.5vw, 3.6rem);
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+    }
+
+    &__meta {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1.6rem;
+        padding-top: 1.8rem;
+        border-top: 1px solid var(--border-color);
+        font-size: 1.35rem;
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+    }
+
+    &__meta-col {
+        @extend %flexItemCenter;
+        gap: 1rem;
+
+        @include abs.screen(lg) {
+            justify-content: center;
+        }
+
+        &--center {
+            @extend %flexColumnCenterAll;
+            gap: 0.2rem;
+        }
+
+        &--right {
+            justify-content: flex-end;
+
+            @include abs.screen(lg) {
+                justify-content: center;
+            }
+        }
+    }
+
+    &__meta-label {
+        color: var(--text-muted);
+        font-weight: 600;
+    }
+
+    &__utc-badge,
+    &__weather-chip,
+    &__lunar-pill {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    &__lunar-pill {
+        color: var(--primary-color);
+    }
+
+    &__sun-line {
+        color: var(--text-color);
+        font-weight: 600;
+    }
+
+    &__date-line {
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+}
+
+// Dải 6 Thẻ Bento Giờ Quốc Tế (TimeSpot World Clock Strip)
+.clock-world-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.2rem;
+    padding-top: 1.6rem;
+    border-top: 1px dashed var(--border-color);
+
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+}
+
+.clock-world-card {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 1.4rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+    }
+
+    &.is-active {
+        background-color: var(--text-color);
+        border-color: var(--text-color);
+        color: var(--body-bg);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .clock-world-card__city,
+        .clock-world-card__time {
+            color: var(--body-bg);
+        }
+
+        .clock-world-card__utc,
+        .clock-world-card__tag {
+            color: var(--body-bg);
+            opacity: 0.82;
+        }
+    }
+
+    &__top,
+    &__bottom {
+        @extend %flexBetween;
+        width: 100%;
+        gap: 0.6rem;
+    }
+
+    &__bottom {
+        align-items: baseline;
+    }
+
+    &__city {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %textEllipsis;
+    }
+
+    &__utc {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+
+    &__time {
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__tag {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+}
+```
+
+### clock-pillars.scss
+
+```scss
+// scss/components/_clock-pillars.scss
+@use "../abstracts" as abs;
+
+.clock-location-card {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.8rem;
+    height: 100%;
+    padding: 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    &__eyebrow {
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary-color);
+    }
+
+    &__city {
+        margin-top: 0.6rem;
+        font-size: clamp(2.6rem, 3.2vw, 3.6rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--text-color);
+    }
+
+    &__quote {
+        margin-top: 0.8rem;
+        font-size: 1.35rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+    }
+
+    &__stats {
+        @extend %gridCols2;
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__stat-box {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        padding: 1.2rem 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__stat-label {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+    }
+
+    &__stat-val {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+}
+
+// Khối Đo Năng Lượng Canh Giờ (<meter>)
+.clock-energy {
+    @extend %flexColumn;
+    gap: 0.8rem;
+    padding: 1.4rem 1.6rem;
+    background-color: var(--primary-soft-bg, var(--bg-surface));
+    border: 1px solid var(--primary-color);
+    border-radius: 1.8rem;
+    @extend %transTheme;
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    &__title-wrap {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+    }
+
+    &__icon {
+        width: 2rem;
+        height: 2rem;
+        object-fit: contain;
+    }
+
+    &__label {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__badge {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__meter {
+        width: 100%;
+        height: 1rem;
+        border-radius: 99.9rem;
+        overflow: hidden;
+        accent-color: var(--primary-color);
+
+        &::-webkit-meter-bar {
+            background: var(--body-bg);
+            border-radius: 99.9rem;
+            border: 1px solid var(--border-color);
+        }
+
+        &::-webkit-meter-optimum-value,
+        &::-webkit-meter-suboptimum-value,
+        &::-webkit-meter-even-less-good-value {
+            background: var(--primary-color);
+            border-radius: 99.9rem;
+        }
+    }
+
+    &__desc {
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.45;
+        color: var(--text-muted);
+    }
+}
+
+// 4 Ô Bento Tứ Trụ có Hộp Icon Con Giáp & Bóng Con Giáp chìm
+.clock-pillars {
+    height: 100%;
+
+    &__grid {
+        @extend %gridCols2;
+        gap: 1.6rem;
+        height: 100%;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.clock-pillar-card {
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 2.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+
+        .clock-pillar-card__bg-zodiac {
+            opacity: 0.24;
+            transform: scale(1.08) rotate(0deg);
+        }
+    }
+
+    &--highlight {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+
+        .clock-pillar-card__tag,
+        .clock-pillar-card__range,
+        .clock-pillar-card__canchi,
+        .clock-pillar-card__sub,
+        .clock-pillar-card__napam {
+            color: #ffffff;
+        }
+
+        .clock-pillar-card__icon-box {
+            background-color: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .clock-pillar-card__zodiac {
+            filter: brightness(0) invert(1);
+        }
+
+        .clock-pillar-card__badge {
+            background-color: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+
+        .clock-pillar-card__bg-zodiac {
+            opacity: 0.18;
+            filter: var(--zodiac-filter-active);
+        }
+    }
+
+    &__head,
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 1.4rem;
+    }
+
+    &__icon-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 5.4rem;
+        height: 5.4rem;
+        border-radius: 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+    }
+
+    &__zodiac {
+        width: 3.6rem;
+        height: 3.6rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+    }
+
+    &__title-group {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__tag {
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__range {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__canchi {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--primary-color);
+    }
+
+    &__sub {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__napam {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__badge {
+        padding: 0.4rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %textNoWrap;
+    }
+
+    &__bg-zodiac {
+        position: absolute;
+        right: 0.8rem;
+        bottom: 0.6rem;
+        width: 6.8rem;
+        height: 6.8rem;
+        object-fit: contain;
+        opacity: 0.11;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+}
+```
+
+### clock-zodiac.scss
+
+```scss
+// scss/components/_clock-zodiac.scss
+@use "../abstracts" as abs;
+
+.clock-zodiac-section {
+    @extend %flexColumn;
+    gap: 1.8rem;
+    padding: 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+    }
+
+    &__header {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+    }
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.4rem;
+        font-size: 1.35rem;
+        color: var(--text-muted);
+    }
+
+    &__filters {
+        @extend %flexWrapGap;
+    }
+
+    &__filter-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 3.8rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &.is-active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__dot {
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%;
+
+        &--good {
+            background-color: #eab308;
+        }
+        &--bad {
+            background-color: #374151;
+        }
+    }
+}
+
+.clock-zodiac-grid {
+    @extend %gridCols4;
+    gap: 1.4rem;
+
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.clock-zodiac-card {
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    min-height: 13.2rem;
+    padding: 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 2rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .clock-zodiac-card__img {
+            opacity: 0.45;
+            transform: scale(1.08) rotate(0deg);
+        }
+    }
+
+    &.is-current {
+        background-color: var(--text-color);
+        border-color: var(--text-color);
+        color: var(--body-bg);
+        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
+
+        .clock-zodiac-card__name,
+        .clock-zodiac-card__canchi,
+        .clock-zodiac-card__fortune {
+            color: var(--body-bg);
+        }
+
+        .clock-zodiac-card__utc {
+            color: var(--body-bg);
+            opacity: 0.78;
+        }
+
+        .clock-zodiac-card__img {
+            opacity: 0.28;
+            filter: brightness(0) invert(1);
+        }
+    }
+
+    &.is-selected:not(.is-current) {
+        border: 2px solid var(--primary-color);
+        background-color: var(--body-bg);
+    }
+
+    &.is-dimmed {
+        opacity: 0.22;
+        transform: scale(0.97);
+    }
+
+    &__top,
+    &__bottom {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        width: 100%;
+    }
+
+    &__bottom {
+        align-items: flex-end;
+        margin-top: auto;
+    }
+
+    &__name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__utc {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__canchi {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__fortune {
+        @extend %inlineFlexCenter;
+        gap: 0.4rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__img {
+        position: absolute;
+        right: 0.8rem;
+        bottom: 0.6rem;
+        width: 5.4rem;
+        height: 5.4rem;
+        object-fit: contain;
+        opacity: 0.16;
+        filter: var(--zodiac-filter);
+        transform: scale(0.88) rotate(-8deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    &__mid {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.35rem;
+        margin: 0.4rem 0;
+    }
+
+    &__element-tag {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.2rem 0.8rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__lucdieu {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &.is-current {
+        .clock-zodiac-card__element-tag {
+            background-color: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.28);
+            color: var(--body-bg);
+        }
+
+        .clock-zodiac-card__lucdieu {
+            color: var(--body-bg);
+        }
+    }
+}
+```
+
+### week-calendar.scss
+
+```scss
+// scss/components/_week-calendar.scss
+@use "../abstracts" as abs;
+
+.week-cal {
+    @extend %flexColumn;
+    gap: 2rem;
+    // Yêu cầu 4: Tăng padding-bottom (thêm 2.4rem / 24px) cho container chính để Legend không bị sát mép
+    padding: 2.6rem 2.8rem 3.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.8rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    // Yêu cầu 1: Đặt line-height: 1.5 (số thập phân) cho toàn bộ văn bản thường trong layout lịch tuần
+    line-height: 1.5;
+    @extend %transTheme;
+
+    @include abs.screen(md) {
+        padding: 1.8rem 1.8rem 2.4rem;
+        border-radius: 2rem;
+        gap: 1.6rem;
+    }
+
+    // ==========================================================================
+    // 1. HEADER & THANH ĐIỀU HƯỚNG TUẦN (Yêu cầu 4: Giảm padding/margin quanh thanh điều hướng)
+    // ==========================================================================
+    &__header {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 1.2rem;
+        padding-bottom: 0.4rem;
+    }
+
+    &__intro {
+        @extend %flexColumn;
+        gap: 0.4rem;
+    }
+
+    &__title-row {
+        @extend %flexWrapGap;
+    }
+
+    &__week-badge,
+    &__lunar-badge {
+        @extend %inlineFlexCenter;
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.5;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    &__lunar-badge {
+        color: var(--text-muted);
+    }
+
+    &__heading {
+        font-size: clamp(2.2rem, 2.8vw, 3rem);
+        font-weight: 800;
+        line-height: 1.25;
+        color: var(--text-color);
+        letter-spacing: -0.02em;
+    }
+
+    // Thanh điều hướng gọn gàng, giảm padding xung quanh
+    &__toolbar {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        padding: 0.6rem 0.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+
+        @include abs.screen(md) {
+            width: 100%;
+            justify-content: space-between;
+            border-radius: 1.4rem;
+        }
+    }
+
+    &__nav-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 1.5;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__toolbar-center {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        padding: 0 0.4rem;
+    }
+
+    &__range-label {
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1.5;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(sm) {
+            display: none;
+        }
+    }
+
+    &__today-btn {
+        height: 3.4rem;
+        padding: 0 1.4rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 1.5;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    // ==========================================================================
+    // 2. KHỐI BENTO CHÍNH: CỘT TRÁI (THẺ DETAIL FLAT UI) + CỘT PHẢI (LƯỚI 7 NGÀY)
+    // ==========================================================================
+    &__body {
+        display: grid;
+        grid-template-columns: 38rem 1fr;
+        align-items: stretch;
+        gap: 2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: 34rem 1fr;
+        }
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // YÊU CẦU 5: Cải thiện thẻ Detail (Thẻ to bên trái) theo Flat UI + Flexbox space-between
+    &__hero {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.6rem;
+        padding: 2.6rem;
+        background-color: var(--primary-color);
+        border: 1px solid var(--primary-hover);
+        border-radius: 2.4rem;
+        color: #ffffff;
+        line-height: 1.5;
+        box-shadow: 0 1rem 2.8rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            padding: 2rem;
+            border-radius: 2rem;
+        }
+
+        &-top {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 0.8rem;
+            padding-bottom: 1.6rem;
+            border-bottom: 1px solid var(--hero-border-color);
+        }
+
+        &-badges {
+            @extend %flexBetween;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        &-pill,
+        &-fortune {
+            @extend %inlineFlexCenter;
+            gap: 0.6rem;
+            padding: 0.35rem 1.2rem;
+            border-radius: 99.9rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.5;
+        }
+
+        &-pill {
+            background-color: #ffffff;
+            color: var(--primary-active);
+        }
+
+        &-fortune {
+            background-color: var(--hero-box-bg);
+            border: 1px solid var(--hero-border-color);
+            color: #ffffff;
+        }
+
+        &-date {
+            @extend %flexItemCenter;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        &-solar {
+            font-size: clamp(5rem, 5.8vw, 6.4rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        &-weekday {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--hero-text-soft);
+        }
+
+        &-lunar {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            color: var(--hero-text-soft);
+        }
+
+        // 2 Tag ngang Tiết khí & Trực đổi màu theo Theme
+        &-meta-pills {
+            @extend %flexWrapGap;
+            gap: 0.8rem;
+            margin-top: 0.4rem;
+        }
+
+        &-meta-badge {
+            @extend %inlineFlexCenter;
+            gap: 0.6rem;
+            padding: 0.35rem 1.1rem;
+            background-color: var(--hero-box-bg);
+            border: 1px solid var(--hero-border-color);
+            border-radius: 99.9rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: #ffffff;
+
+            strong {
+                font-weight: 800;
+            }
+        }
+
+        &-hours {
+            position: relative;
+            z-index: 2;
+        }
+
+        &-label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            line-height: 1.5;
+            color: var(--hero-text-soft);
+        }
+
+        &-hours-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        // Yêu cầu 5: Tái sử dụng cụm .fengshui-actions của index.html nhưng theo Flat UI (Xóa nền)
+        &-actions.fengshui-actions {
+            position: relative;
+            z-index: 2;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            padding: 0;
+            border: none;
+        }
+
+        &-footer {
+            position: relative;
+            z-index: 2;
+            @extend %flexBetween;
+            padding-top: 0.4rem;
+        }
+
+        // Nút Subtle Button lấy màu --hero-chip-bg từ _palette.scss
+        &-link {
+            @extend %inlineFlexCenter;
+            gap: 0.8rem;
+            height: 4rem;
+            padding: 0 1.8rem;
+            background-color: var(--hero-chip-bg);
+            color: #ffffff;
+            border: none;
+            border-radius: 99.9rem;
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.5;
+            @extend %transInteractive;
+
+            &:hover,
+            &:focus-visible {
+                background-color: var(--primary-active);
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+        }
+
+        &-zodiac {
+            position: absolute;
+            right: -0.8rem;
+            bottom: -0.8rem;
+            width: 14rem;
+            height: 14rem;
+            object-fit: contain;
+            opacity: 0.14;
+            filter: var(--zodiac-filter-active);
+            pointer-events: none;
+            z-index: 1;
+        }
+    }
+
+    // Tuỳ biến Flat UI cho 2 khối Việc nên làm / Việc nên tránh bên trong thẻ Hero
+    &__flat-action.fengshui-actions__box {
+        gap: 0.8rem;
+        padding: 1.4rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.6rem;
+        @extend %transTheme;
+
+        .fengshui-actions__header {
+            justify-content: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .fengshui-actions__badge {
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+
+        .fengshui-actions__icon {
+            width: 2.2rem;
+            height: 2.2rem;
+            font-size: 1.15rem;
+            background-color: var(--hero-chip-bg);
+            border: 1px solid var(--hero-border-color);
+            color: #ffffff;
+        }
+
+        .fengshui-actions__list {
+            gap: 0.6rem;
+        }
+
+        .fengshui-actions__chip {
+            padding: 0.4rem 1.1rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            background-color: var(--hero-chip-bg);
+            border: 1px solid var(--hero-border-color);
+            color: #ffffff;
+            box-shadow: none;
+        }
+    }
+
+    // ==========================================================================
+    // 3. CỘT PHẢI: LƯỚI 2 CỘT 7 NGÀY & THẺ CHỦ NHẬT .day-card--full-width
+    // ==========================================================================
+    &__grid {
+        @extend %gridCols2;
+        gap: 1.4rem;
+
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        position: relative;
+        overflow: hidden;
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+        text-align: left;
+        line-height: 1.5;
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+            .week-cal__card-zodiac {
+                opacity: 0.4;
+                transform: scale(1.08) rotate(0deg);
+            }
+        }
+
+        // YÊU CẦU 3: Trạng thái Active có nền màu chính của theme làm mờ 8-10% (--primary-soft-bg) + viền màu theme
+        &--active,
+        &[aria-current="date"] {
+            background-color: var(--primary-soft-bg, color-mix(in srgb, var(--primary-color) 9%, var(--body-bg)));
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+
+            .week-cal__card-day {
+                color: var(--primary-color);
+            }
+
+            &:hover,
+            &:focus-visible {
+                background-color: var(--primary-soft-bg, color-mix(in srgb, var(--primary-color) 12%, var(--body-bg)));
+            }
+        }
+
+        // YÊU CẦU 2: Modifier .day-card--full-width cho thẻ Chủ Nhật (Chia 2 cột: Trái Ngày/Can Chi/Giờ tốt - Phải Nên làm/Nên tránh)
+        &.day-card--full-width {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: start;
+            gap: 2.4rem;
+
+            @include abs.screen(md) {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .day-card__col-left {
+                position: relative;
+                z-index: 2;
+                @extend %flexColumn;
+                justify-content: space-between;
+                gap: 1.2rem;
+                height: 100%;
+                padding-right: 2rem;
+                border-right: 1px dashed var(--border-color);
+
+                @include abs.screen(md) {
+                    padding-right: 0;
+                    border-right: none;
+                }
+            }
+
+            .day-card__col-right {
+                position: relative;
+                z-index: 2;
+                @extend %flexColumn;
+                justify-content: center;
+                height: 100%;
+
+                .week-cal__card-meta {
+                    padding-top: 0;
+                    border-top: none;
+                    gap: 1rem;
+                }
+            }
+        }
+
+        &.is-highlighted {
+            border-color: var(--primary-color);
+            background-color: var(--primary-soft-bg, var(--body-bg));
+            transform: translateY(-2px);
+        }
+
+        &.is-dimmed {
+            opacity: 0.22;
+            transform: scale(0.98);
+        }
+
+        &-head {
+            position: relative;
+            z-index: 2;
+            @extend %flexBetween;
+            align-items: flex-start;
+            gap: 0.8rem;
+            width: 100%;
+        }
+
+        &-title-group {
+            @extend %flexColumn;
+            gap: 0.2rem;
+        }
+
+        &-day {
+            font-size: 1.7rem;
+            font-weight: 800;
+            line-height: 1.35;
+            color: var(--text-color);
+
+            &--sun {
+                color: var(--color-danger);
+            }
+        }
+
+        &-sub {
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        &-section {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+        }
+
+        // Yêu cầu 1: Tiêu đề nhỏ ('Giờ tốt', 'Nên làm', 'Nên tránh') có margin-bottom 0.5rem (5px) tách biệt nội dung
+        &-label,
+        &-meta-title {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        &-hours {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            @extend %textClamp2;
+        }
+
+        &-meta {
+            position: relative;
+            z-index: 2;
+            @extend %flexColumn;
+            gap: 0.8rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            width: 100%;
+        }
+
+        &-meta-group {
+            @extend %flexColumn;
+        }
+
+        &-do,
+        &-dont {
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        &-do {
+            color: var(--color-success);
+        }
+
+        &-dont {
+            color: var(--color-danger);
+        }
+
+        &-zodiac {
+            position: absolute;
+            right: 0.8rem;
+            bottom: 0.8rem;
+            width: 4.8rem;
+            height: 4.8rem;
+            object-fit: contain;
+            opacity: 0.14;
+            filter: var(--zodiac-filter);
+            transform: scale(0.88) rotate(-8deg);
+            pointer-events: none;
+            z-index: 1;
+            transition:
+                transform 0.35s ease,
+                opacity 0.35s ease;
+        }
+    }
+
+    // ==========================================================================
+    // 4. ĐỒNG BỘ BADGE TRÊN THẺ VÀ CHÚ THÍCH LEGEND CUỐI TRANG (Yêu cầu 6)
+    // ==========================================================================
+    &__badge,
+    &__legend-badge {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1.5;
+        border: 1px solid transparent;
+        @extend %textNoWrap;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &--good {
+            background-color: rgba(234, 179, 8, 0.15);
+            border-color: rgba(234, 179, 8, 0.35);
+            color: #b45309;
+        }
+
+        &--bad {
+            background-color: rgba(107, 114, 128, 0.14);
+            border-color: rgba(107, 114, 128, 0.3);
+            color: var(--text-color);
+        }
+
+        &--today {
+            background-color: var(--primary-soft-bg, rgba(245, 158, 11, 0.14));
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+    }
+
+    &__legend-badge {
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        font-size: 1.3rem;
+    }
+
+    &__badge-dot {
+        display: inline-block;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        @extend %flexItemFixed;
+
+        &--good {
+            background-color: #eab308;
+        }
+
+        &--bad {
+            background-color: #374151;
+        }
+
+        &--today {
+            background-color: var(--primary-color);
+        }
+
+        &--light {
+            background-color: #ffffff;
+        }
+    }
+
+    &__footer {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    &__legend {
+        padding-top: 0;
+    }
+
+    &__footnote {
+        padding: 0.6rem 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        color: var(--text-muted);
     }
 }
 ```
@@ -3621,1344 +5070,6 @@ strong {
         &--today {
             border: 2px solid var(--primary-color);
         }
-    }
-}
-```
-
-### fengshui-card.scss
-
-```scss
-// scss/components/_fengshui-card.scss
-@use "../abstracts" as abs;
-
-.fengshui-stack {
-    @extend %flexColumn;
-    gap: 1.6rem;
-}
-
-// 1. Hai ô Giờ Hoàng Đạo (Vàng Hoàng Kim) & Giờ Hắc Đạo (Xám Đá) đồng bộ 100% với Ảnh 3
-.fengshui-hours {
-    @extend %gridCols2;
-    gap: 1.2rem;
-
-    @include abs.screen(sm) {
-        grid-template-columns: 1fr;
-    }
-
-    &__box {
-        padding: 1.6rem;
-        border-radius: 1.8rem;
-        border: 1px solid var(--border-color);
-        @extend %transTheme;
-
-        // Màu Vàng Hoàng Đạo giống chấm tròn Hoàng Đạo ở Ảnh 3 (#eab308)
-        &--good {
-            background-color: rgba(234, 179, 8, 0.12);
-            border-color: rgba(234, 179, 8, 0.4);
-
-            .fengshui-hours__title {
-                color: #b45309;
-            }
-        }
-
-        // Màu Xám Hắc Đạo giống chấm tròn Hắc Đạo ở Ảnh 3 (#374151)
-        &--bad {
-            background-color: rgba(55, 65, 81, 0.08);
-            border-color: rgba(55, 65, 81, 0.28);
-
-            .fengshui-hours__title {
-                color: #374151;
-            }
-        }
-    }
-
-    &__title {
-        @extend %flexItemCenter;
-        gap: 0.8rem;
-        font-size: 1.4rem;
-        font-weight: 700;
-        margin-bottom: 0.6rem;
-    }
-
-    &__dot {
-        width: 1rem;
-        height: 1rem;
-        border-radius: 50%;
-        @extend %flexItemFixed;
-
-        &--good {
-            background-color: #eab308;
-            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
-        }
-
-        &--bad {
-            background-color: #374151;
-            box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.2);
-        }
-    }
-
-    &__list {
-        font-size: 1.3rem;
-        line-height: 1.55;
-        color: var(--text-color);
-    }
-}
-
-// 2. Thẻ Bento thông số Trực, Sao & Việc nên làm
-.fengshui-card {
-    @extend %flexColumn;
-    gap: 1.4rem;
-    padding: 2rem;
-    background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 2.4rem;
-    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
-    @extend %transTheme;
-
-    @include abs.screen(sm) {
-        padding: 1.6rem;
-        border-radius: 1.8rem;
-    }
-
-    &__group {
-        padding-bottom: 1.2rem;
-        border-bottom: 1px dashed var(--border-color);
-    }
-
-    &__head {
-        @extend %flexItemCenter;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-        font-size: 1.4rem;
-    }
-
-    &__label {
-        font-weight: 700;
-        color: var(--text-color);
-    }
-
-    &__val {
-        color: var(--primary-color);
-    }
-
-    &__badge {
-        padding: 0.2rem 0.8rem;
-        border-radius: 0.6rem;
-        font-size: 1.2rem;
-        font-weight: 700;
-
-        &--bad {
-            background-color: rgba(239, 68, 68, 0.15);
-            color: var(--color-danger);
-        }
-
-        &--good {
-            background-color: rgba(34, 197, 94, 0.15);
-            color: var(--color-success);
-        }
-    }
-
-    &__desc {
-        margin-top: 0.4rem;
-        font-size: 1.35rem;
-        font-style: italic;
-        color: var(--text-muted);
-    }
-
-    &__ages {
-        @extend %gridCols2;
-        gap: 1rem;
-
-        @include abs.screen(sm) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    &__age-chip {
-        padding: 1rem 1.2rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 1.2rem;
-        font-size: 1.35rem;
-
-        &--good strong {
-            color: var(--color-success);
-        }
-
-        &--bad strong {
-            color: var(--color-danger);
-        }
-    }
-
-    &__section-title {
-        font-size: 1.6rem;
-        font-weight: 700;
-        color: var(--text-color);
-    }
-}
-
-// 3. Việc Nên Làm / Không Nên Làm thiết kế dạng 2 Hộp Bento Con + Tag Chips (Ảnh 5)
-.fengshui-actions {
-    @extend %gridCols2;
-    gap: 1.2rem;
-    padding-bottom: 1.4rem;
-    border-bottom: 1px solid var(--border-color);
-
-    @include abs.screen(sm) {
-        grid-template-columns: 1fr;
-    }
-
-    &__box {
-        @extend %flexColumn;
-        gap: 1rem;
-        padding: 1.4rem;
-        border-radius: 1.6rem;
-        border: 1px solid var(--border-color);
-
-        &--do {
-            background-color: rgba(34, 197, 94, 0.06);
-            border-color: rgba(34, 197, 94, 0.28);
-
-            .fengshui-actions__badge {
-                color: var(--color-success);
-            }
-            .fengshui-actions__icon {
-                background-color: rgba(34, 197, 94, 0.16);
-                color: var(--color-success);
-            }
-            .fengshui-actions__chip {
-                background-color: var(--body-bg);
-                border-color: rgba(34, 197, 94, 0.35);
-                color: var(--color-success);
-            }
-        }
-
-        &--dont {
-            background-color: rgba(239, 68, 68, 0.06);
-            border-color: rgba(239, 68, 68, 0.28);
-
-            .fengshui-actions__badge {
-                color: var(--color-danger);
-            }
-            .fengshui-actions__icon {
-                background-color: rgba(239, 68, 68, 0.16);
-                color: var(--color-danger);
-            }
-            .fengshui-actions__chip {
-                background-color: var(--body-bg);
-                border-color: rgba(239, 68, 68, 0.35);
-                color: var(--color-danger);
-            }
-        }
-    }
-
-    &__header {
-        @extend %flexBetween;
-    }
-
-    &__badge {
-        font-size: 1.35rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-    }
-
-    &__icon {
-        @extend %inlineFlexCenter;
-        width: 2.4rem;
-        height: 2.4rem;
-        border-radius: 50%;
-        font-size: 1.2rem;
-        font-weight: 800;
-    }
-
-    &__list {
-        @extend %flexWrapGap;
-        gap: 0.8rem;
-    }
-
-    &__chip {
-        padding: 0.5rem 1.1rem;
-        border-radius: 99.9rem;
-        border: 1px solid transparent;
-        font-size: 1.3rem;
-        font-weight: 600;
-        box-shadow: 0 0.2rem 0.6rem var(--shadow-color);
-    }
-}
-
-.fengshui-quote {
-    text-align: center;
-    padding-top: 0.4rem;
-
-    &__text {
-        font-size: 1.4rem;
-        font-style: italic;
-        color: var(--text-muted);
-    }
-
-    &__author {
-        display: block;
-        margin-top: 0.4rem;
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: var(--text-muted);
-    }
-}
-```
-
-### bloc-card.scss
-
-```scss
-// scss/components/_bloc-card.scss
-@use "../abstracts" as abs;
-
-.bloc-card {
-    @extend %flexColumn;
-    gap: 1.4rem;
-    padding: 2rem;
-    background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 2.4rem;
-    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
-    @extend %transTheme;
-
-    @include abs.screen(sm) {
-        padding: 1.4rem;
-        border-radius: 1.8rem;
-    }
-
-    // 1. Tầng Đầu: Tháng/Năm bên trái - Số Ngày Dương khổng lồ bên phải
-    &__top {
-        @extend %flexBetween;
-        align-items: flex-start;
-        gap: 1.6rem;
-    }
-
-    &__month-box {
-        @extend %flexColumn;
-        align-items: flex-start;
-        gap: 0.4rem;
-    }
-
-    &__year-badge {
-        display: inline-block;
-        padding: 0.4rem 1.4rem;
-        background-color: var(--primary-color);
-        color: #ffffff;
-        font-size: 1.8rem;
-        font-weight: 800;
-        border-radius: 99.9rem;
-        letter-spacing: 0.05em;
-        @extend %transTheme;
-    }
-
-    &__month-vn {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--primary-color);
-        text-transform: uppercase;
-        margin-top: 0.4rem;
-        @extend %transTheme;
-
-        @include abs.screen(sm) {
-            font-size: 1.7rem;
-        }
-    }
-
-    &__month-en {
-        font-size: 1.5rem;
-        font-style: italic;
-        font-weight: 600;
-        color: var(--text-muted);
-    }
-
-    &__day-status {
-        display: inline-block;
-        margin-top: 0.4rem;
-        padding: 0.4rem 1.2rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--text-color);
-        @extend %transTheme;
-    }
-
-    &__date-hero {
-        position: relative;
-        @extend %flexColumn;
-        align-items: flex-end;
-    }
-
-    &__share-btn {
-        @extend %inlineFlexCenter;
-        width: 3.6rem;
-        height: 3.6rem;
-        border-radius: 1rem;
-        background-color: var(--bg-surface);
-        color: var(--text-muted);
-        @extend %transInteractive;
-
-        &:hover {
-            color: var(--primary-color);
-            transform: translateY(-1px);
-        }
-    }
-
-    &__solar-num {
-        font-size: 8.8rem;
-        font-weight: 800;
-        line-height: 0.95;
-        color: var(--primary-color);
-        font-variant-numeric: tabular-nums;
-        @extend %transTheme;
-
-        @include abs.screen(sm) {
-            font-size: 6.8rem;
-        }
-    }
-
-    // 2. Tầng Giữa: Khung Ảnh 16:9 + Overlay Góc Dưới Phải (Ngoài luồng bố cục)
-    &__media {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        border-radius: 1.6rem;
-        overflow: hidden;
-        border: 1px solid var(--border-color);
-        background-color: var(--bg-surface);
-        @extend %transTheme;
-
-        &:hover {
-            border-color: var(--primary-color);
-
-            .bloc-card__img {
-                transform: scale(1.03);
-            }
-        }
-    }
-
-    &__media-link {
-        display: block;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-    }
-
-    &__img {
-        @extend %imgCover;
-        transition: transform 0.45s ease;
-    }
-
-    // Cụm Overlay neo cố định ở Góc Dưới Bên Phải (Chừa trống 100% Góc Trên Trái cho Title in trên ảnh)
-    &__overlay {
-        position: absolute;
-        right: 1rem;
-        bottom: 1rem;
-        z-index: 5;
-        @extend %flexColumn;
-        align-items: flex-end;
-        gap: 0.6rem;
-        max-width: calc(100% - 2rem);
-        pointer-events: none;
-
-        @include abs.screen(sm) {
-            right: 0.8rem;
-            bottom: 0.8rem;
-            gap: 0.4rem;
-            max-width: calc(100% - 1.6rem);
-        }
-    }
-
-    // Tầng trên của Overlay: 2 nút "Sự kiện cùng ngày" & "Sự kiện quốc tế"
-    &__event-pills {
-        @extend %flexItemCenter;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 0.6rem;
-        pointer-events: auto;
-    }
-
-    &__event-btn {
-        @extend %inlineFlexCenter;
-        gap: 0.6rem;
-        height: 3rem;
-        padding: 0 1.1rem;
-        background-color: var(--body-bg);
-        color: var(--text-color);
-        border: 1px solid var(--primary-color);
-        border-radius: 99.9rem;
-        font-size: 1.15rem;
-        font-weight: 700;
-        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
-        backdrop-filter: blur(8px);
-        cursor: pointer;
-        @extend %textNoWrap;
-        @extend %transInteractive;
-
-        &[hidden] {
-            display: none !important;
-        }
-
-        &:hover,
-        &:focus-visible,
-        &.is-active {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: #ffffff;
-            transform: translateY(-1px);
-
-            .bloc-card__event-dot {
-                background-color: #ffffff;
-            }
-        }
-
-        &--intl {
-            border-color: var(--secondary-color);
-
-            .bloc-card__event-dot {
-                background-color: var(--secondary-color);
-            }
-
-            &:hover,
-            &:focus-visible,
-            &.is-active {
-                background-color: var(--secondary-color);
-                border-color: var(--secondary-color);
-            }
-        }
-
-        @include abs.screen(sm) {
-            height: 2.6rem;
-            padding: 0 0.8rem;
-            font-size: 1.05rem;
-        }
-    }
-
-    &__event-dot {
-        width: 0.65rem;
-        height: 0.65rem;
-        border-radius: 50%;
-        background-color: var(--primary-color);
-        @extend %flexItemFixed;
-        @extend %transTheme;
-    }
-
-    // Tầng dưới của Overlay (Góc dưới phải): Hộp hiển thị "hien_thi_nhan_dip" đổi màu theo Theme
-    &__caption-btn {
-        pointer-events: auto;
-        @extend %flexItemCenter;
-        gap: 0.8rem;
-        max-width: 100%;
-        padding: 0.7rem 1.2rem 0.7rem 0.8rem;
-        background-color: var(--body-bg);
-        color: var(--text-color);
-        border: 1.5px solid var(--primary-color);
-        border-radius: 1.2rem;
-        box-shadow: 0 0.6rem 1.8rem var(--shadow-color);
-        backdrop-filter: blur(10px);
-        cursor: pointer;
-        @extend %transInteractive;
-
-        &:hover,
-        &:focus-visible {
-            background-color: var(--primary-color);
-            border-color: var(--primary-hover);
-            color: #ffffff;
-            transform: translateY(-2px);
-
-            .bloc-card__caption-badge {
-                background-color: #ffffff;
-                color: var(--primary-color);
-            }
-        }
-
-        @include abs.screen(sm) {
-            padding: 0.5rem 0.9rem 0.5rem 0.6rem;
-            border-radius: 1rem;
-            gap: 0.6rem;
-        }
-    }
-
-    &__caption-badge {
-        @extend %inlineFlexCenter;
-        @extend %flexItemFixed;
-        padding: 0.25rem 0.7rem;
-        background-color: var(--primary-color);
-        color: #ffffff;
-        border-radius: 0.7rem;
-        font-size: 1.05rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        @extend %transTheme;
-
-        @include abs.screen(sm) {
-            font-size: 0.95rem;
-            padding: 0.2rem 0.55rem;
-        }
-    }
-
-    &__caption-text {
-        font-size: 1.25rem;
-        font-weight: 700;
-        line-height: 1.3;
-        @extend %textClamp2;
-
-        @include abs.screen(sm) {
-            font-size: 1.1rem;
-        }
-    }
-
-    // 3. Tầng Băng Rôn Ngang: Năm Can Chi | Thứ trong tuần
-    &__ribbon {
-        display: grid;
-        grid-template-columns: 4fr 6fr;
-        border-radius: 1rem;
-        overflow: hidden;
-        font-size: 1.3rem;
-        font-weight: 700;
-        text-transform: uppercase;
-
-        @include abs.screen(sm) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    &__ribbon-year {
-        @extend %flexCenter;
-        padding: 0.8rem 1rem;
-        background-color: var(--secondary-color);
-        color: #ffffff;
-        @extend %transTheme;
-    }
-
-    &__ribbon-weekday {
-        @extend %flexCenter;
-        padding: 0.8rem 1rem;
-        background-color: var(--primary-color);
-        color: #ffffff;
-        letter-spacing: 0.04em;
-        @extend %transTheme;
-    }
-
-    // 4. Tầng Đáy 3 Cột: Số Ngày Âm | Can Chi | Hành & Tiết Khí
-    &__bottom {
-        display: grid;
-        grid-template-columns: auto 1fr 1.15fr;
-        align-items: center;
-        gap: 1.4rem;
-        padding-top: 0.6rem;
-
-        @include abs.screen(sm) {
-            grid-template-columns: auto 1fr;
-        }
-    }
-
-    &__lunar-num-box {
-        @extend %flexColumnCenterAll;
-        min-width: 7.2rem;
-        padding: 0.8rem 1.2rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 1.4rem;
-        @extend %transTheme;
-    }
-
-    &__lunar-label {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        text-transform: uppercase;
-    }
-
-    &__lunar-num {
-        font-size: 4.2rem;
-        font-weight: 800;
-        line-height: 1.05;
-        color: var(--primary-color);
-        @extend %transTheme;
-    }
-
-    &__canchi-list {
-        @extend %flexColumn;
-        gap: 0.3rem;
-        font-size: 1.3rem;
-        color: var(--text-color);
-        padding-right: 1.2rem;
-        border-right: 1px solid var(--border-color);
-
-        @include abs.screen(sm) {
-            border-right: none;
-            padding-right: 0;
-        }
-    }
-
-    &__lunar-month {
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: var(--primary-color);
-        @extend %transTheme;
-    }
-
-    &__quick-fengshui {
-        @extend %flexColumn;
-        gap: 0.4rem;
-        font-size: 1.3rem;
-        color: var(--text-color);
-
-        @include abs.screen(sm) {
-            grid-column: 1 / -1;
-            padding-top: 0.8rem;
-            border-top: 1px dashed var(--border-color);
-        }
-    }
-}
-```
-
-### clock-hero.scss
-
-```scss
-// scss/components/_clock-hero.scss
-@use "../abstracts" as abs;
-
-.clock-hero {
-    @extend %flexColumn;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 2.8rem 3.2rem;
-    background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 2.8rem;
-    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
-    @extend %transTheme;
-
-    @include abs.screen(md) {
-        padding: 2rem 1.8rem;
-        border-radius: 2rem;
-        gap: 1.6rem;
-    }
-
-    &__header {
-        @extend %flexBetween;
-        flex-wrap: wrap;
-        gap: 1.4rem;
-    }
-
-    &__status-pill {
-        @extend %inlineFlexCenter;
-        gap: 0.8rem;
-        height: 4.2rem;
-        padding: 0 1.6rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-        font-size: 1.35rem;
-        font-weight: 700;
-        color: var(--text-color);
-
-        &[data-fortune="good"] .clock-hero__status-dot {
-            background-color: #eab308;
-            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
-        }
-
-        &[data-fortune="bad"] .clock-hero__status-dot {
-            background-color: #6b7280;
-            box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.25);
-        }
-    }
-
-    &__status-dot {
-        width: 0.9rem;
-        height: 0.9rem;
-        border-radius: 50%;
-    }
-
-    &__loc-dropdown {
-        position: relative;
-    }
-
-    &__loc-summary {
-        @extend %inlineFlexCenter;
-        gap: 0.8rem;
-        height: 4.2rem;
-        padding: 0 1.8rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--text-color);
-        cursor: pointer;
-        user-select: none;
-        @extend %transTheme;
-
-        &:hover {
-            border-color: var(--primary-color);
-        }
-    }
-
-    &__loc-arrow {
-        width: 1.6rem;
-        height: 1.6rem;
-        @extend %transBurgerBar;
-    }
-
-    &__loc-dropdown[open] &__loc-arrow {
-        transform: rotate(180deg);
-    }
-
-    &__loc-menu {
-        position: absolute;
-        top: calc(100% + 0.8rem);
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 65;
-        min-width: 28rem;
-        padding: 0.8rem;
-        background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 1.8rem;
-        box-shadow: 0 1.2rem 3.2rem var(--shadow-color);
-        @extend %flexColumn;
-        gap: 0.4rem;
-        @extend %animDropdownFadeIn;
-    }
-
-    &__loc-option {
-        @extend %flexBetween;
-        width: 100%;
-        padding: 0.9rem 1.2rem;
-        border-radius: 1rem;
-        font-size: 1.35rem;
-        font-weight: 600;
-        color: var(--text-color);
-        @extend %transTheme;
-
-        small {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
-
-        &:hover {
-            background-color: var(--bg-surface);
-            color: var(--primary-color);
-        }
-
-        &.is-selected {
-            background-color: var(--primary-color);
-            color: #ffffff;
-
-            small {
-                color: rgba(255, 255, 255, 0.85);
-            }
-        }
-    }
-
-    &__format-switch {
-        @extend %inlineFlexCenter;
-        padding: 0.4rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-    }
-
-    &__format-btn {
-        min-width: 5.2rem;
-        height: 3.4rem;
-        padding: 0 1.4rem;
-        border-radius: 99.9rem;
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: var(--text-muted);
-        @extend %transTheme;
-
-        &.is-active {
-            background-color: var(--text-color);
-            color: var(--body-bg);
-        }
-    }
-
-    &__stage {
-        @extend %flexCenter;
-        align-items: baseline;
-        gap: 1.2rem;
-        padding: 1.6rem 0;
-        text-align: center;
-    }
-
-    &__digits {
-        @extend %inlineFlexCenter;
-        align-items: baseline;
-        font-size: clamp(5.2rem, 12.5vw, 14.2rem);
-        font-weight: 800;
-        line-height: 0.95;
-        letter-spacing: -0.03em;
-        color: var(--text-color);
-        font-variant-numeric: tabular-nums;
-    }
-
-    &__colon {
-        padding: 0 0.4rem;
-        color: var(--primary-color);
-        animation: pulse 2s ease-in-out infinite;
-    }
-
-    &__ampm {
-        font-size: clamp(2rem, 3.5vw, 3.6rem);
-        font-weight: 800;
-        color: var(--primary-color);
-        text-transform: uppercase;
-    }
-
-    &__meta {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: 1.6rem;
-        padding-top: 1.8rem;
-        border-top: 1px solid var(--border-color);
-        font-size: 1.35rem;
-
-        @include abs.screen(lg) {
-            grid-template-columns: 1fr;
-            text-align: center;
-        }
-    }
-
-    &__meta-col {
-        @extend %flexItemCenter;
-        gap: 1rem;
-
-        @include abs.screen(lg) {
-            justify-content: center;
-        }
-
-        &--center {
-            @extend %flexColumnCenterAll;
-            gap: 0.2rem;
-        }
-
-        &--right {
-            justify-content: flex-end;
-
-            @include abs.screen(lg) {
-                justify-content: center;
-            }
-        }
-    }
-
-    &__meta-label {
-        color: var(--text-muted);
-        font-weight: 600;
-    }
-
-    &__utc-badge,
-    &__weather-chip,
-    &__lunar-pill {
-        @extend %inlineFlexCenter;
-        gap: 0.6rem;
-        padding: 0.4rem 1.2rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-        font-size: 1.3rem;
-        font-weight: 700;
-        text-decoration: none;
-    }
-
-    &__lunar-pill {
-        color: var(--primary-color);
-    }
-
-    &__sun-line {
-        color: var(--text-color);
-        font-weight: 600;
-    }
-
-    &__date-line {
-        color: var(--text-muted);
-        font-weight: 500;
-    }
-}
-```
-
-### clock-pillars.scss
-
-```scss
-// scss/components/_clock-pillars.scss
-@use "../abstracts" as abs;
-
-.clock-location-card {
-    @extend %flexColumn;
-    justify-content: space-between;
-    gap: 2rem;
-    height: 100%;
-    padding: 2.6rem;
-    background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 2.4rem;
-    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
-    @extend %transTheme;
-
-    &__eyebrow {
-        font-size: 1.25rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--primary-color);
-    }
-
-    &__city {
-        margin-top: 0.6rem;
-        font-size: clamp(2.6rem, 3.2vw, 3.8rem);
-        font-weight: 800;
-        line-height: 1.15;
-        color: var(--text-color);
-    }
-
-    &__quote {
-        margin-top: 1rem;
-        font-size: 1.4rem;
-        line-height: 1.55;
-        color: var(--text-muted);
-    }
-
-    &__stats {
-        @extend %gridCols2;
-        gap: 1rem;
-
-        @include abs.screen(sm) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    &__stat-box {
-        @extend %flexColumn;
-        gap: 0.3rem;
-        padding: 1.2rem 1.4rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 1.4rem;
-    }
-
-    &__stat-label {
-        font-size: 1.2rem;
-        color: var(--text-muted);
-    }
-
-    &__stat-val {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--text-color);
-    }
-}
-
-.clock-pillars {
-    height: 100%;
-
-    &__grid {
-        @extend %gridCols2;
-        gap: 1.6rem;
-        height: 100%;
-
-        @include abs.screen(sm) {
-            grid-template-columns: 1fr;
-        }
-    }
-}
-
-.clock-pillar-card {
-    @extend %flexColumn;
-    justify-content: space-between;
-    gap: 1.4rem;
-    padding: 2.2rem;
-    background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 2.4rem;
-    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
-    @extend %transInteractive;
-
-    &:hover {
-        border-color: var(--primary-color);
-        transform: translateY(-2px);
-    }
-
-    &--highlight {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
-        color: #ffffff;
-
-        .clock-pillar-card__tag,
-        .clock-pillar-card__range,
-        .clock-pillar-card__canchi,
-        .clock-pillar-card__napam {
-            color: #ffffff;
-        }
-
-        .clock-pillar-card__badge {
-            background-color: rgba(255, 255, 255, 0.22);
-            color: #ffffff;
-        }
-    }
-
-    &__head,
-    &__foot {
-        @extend %flexBetween;
-        gap: 0.8rem;
-    }
-
-    &__tag {
-        font-size: 1.3rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: var(--text-muted);
-    }
-
-    &__range {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        font-variant-numeric: tabular-nums;
-    }
-
-    &__canchi {
-        font-size: 3rem;
-        font-weight: 800;
-        line-height: 1.1;
-        color: var(--primary-color);
-    }
-
-    &__napam {
-        font-size: 1.35rem;
-        font-weight: 600;
-        color: var(--text-color);
-    }
-
-    &__badge {
-        padding: 0.4rem 1rem;
-        border-radius: 99.9rem;
-        background-color: var(--bg-surface);
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-color);
-        @extend %textNoWrap;
-    }
-}
-```
-
-### clock-zodiac.scss
-
-```scss
-// scss/components/_clock-zodiac.scss
-@use "../abstracts" as abs;
-
-.clock-zodiac-section {
-    @extend %flexColumn;
-    gap: 1.8rem;
-    padding: 2.6rem;
-    background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 2.4rem;
-    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
-    @extend %transTheme;
-
-    @include abs.screen(sm) {
-        padding: 1.6rem;
-    }
-
-    &__header {
-        @extend %flexBetween;
-        flex-wrap: wrap;
-        gap: 1.4rem;
-    }
-
-    &__title {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--text-color);
-    }
-
-    &__sub {
-        margin-top: 0.4rem;
-        font-size: 1.35rem;
-        color: var(--text-muted);
-    }
-
-    &__filters {
-        @extend %flexWrapGap;
-    }
-
-    &__filter-btn {
-        @extend %inlineFlexCenter;
-        gap: 0.8rem;
-        height: 3.8rem;
-        padding: 0 1.4rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: var(--text-color);
-        @extend %transInteractive;
-
-        &:hover,
-        &.is-active {
-            border-color: var(--primary-color);
-            background-color: var(--primary-color);
-            color: #ffffff;
-        }
-    }
-
-    &__dot {
-        width: 0.9rem;
-        height: 0.9rem;
-        border-radius: 50%;
-
-        &--good {
-            background-color: #eab308;
-        }
-        &--bad {
-            background-color: #374151;
-        }
-    }
-}
-
-.clock-zodiac-grid {
-    @extend %gridCols4;
-    gap: 1.4rem;
-
-    @include abs.screen(xl) {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    @include abs.screen(md) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include abs.screen(sm) {
-        grid-template-columns: 1fr;
-    }
-}
-
-.clock-zodiac-card {
-    position: relative;
-    overflow: hidden;
-    @extend %flexColumn;
-    justify-content: space-between;
-    min-height: 13.2rem;
-    padding: 1.8rem;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 2rem;
-    text-align: left;
-    cursor: pointer;
-    @extend %transInteractive;
-
-    &:hover,
-    &:focus-visible {
-        border-color: var(--primary-color);
-        transform: translateY(-3px);
-        box-shadow: 0 0.8rem 2rem var(--shadow-color);
-
-        .clock-zodiac-card__img {
-            opacity: 0.45;
-            transform: scale(1.08) rotate(0deg);
-        }
-    }
-
-    &.is-current {
-        background-color: var(--text-color);
-        border-color: var(--text-color);
-        color: var(--body-bg);
-        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
-
-        .clock-zodiac-card__name,
-        .clock-zodiac-card__canchi,
-        .clock-zodiac-card__fortune {
-            color: var(--body-bg);
-        }
-
-        .clock-zodiac-card__utc {
-            color: var(--body-bg);
-            opacity: 0.78;
-        }
-
-        .clock-zodiac-card__img {
-            opacity: 0.28;
-            filter: brightness(0) invert(1);
-        }
-    }
-
-    &.is-selected:not(.is-current) {
-        border: 2px solid var(--primary-color);
-        background-color: var(--body-bg);
-    }
-
-    &.is-dimmed {
-        opacity: 0.22;
-        transform: scale(0.97);
-    }
-
-    &__top,
-    &__bottom {
-        position: relative;
-        z-index: 2;
-        @extend %flexBetween;
-        width: 100%;
-    }
-
-    &__bottom {
-        align-items: flex-end;
-        margin-top: auto;
-    }
-
-    &__name {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-color);
-    }
-
-    &__utc {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        font-variant-numeric: tabular-nums;
-    }
-
-    &__canchi {
-        font-size: 2.6rem;
-        font-weight: 800;
-        line-height: 1;
-        color: var(--text-color);
-        font-variant-numeric: tabular-nums;
-    }
-
-    &__fortune {
-        @extend %inlineFlexCenter;
-        gap: 0.4rem;
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-muted);
-    }
-
-    &__img {
-        position: absolute;
-        right: 0.8rem;
-        bottom: 0.6rem;
-        width: 5.4rem;
-        height: 5.4rem;
-        object-fit: contain;
-        opacity: 0.16;
-        filter: var(--zodiac-filter);
-        transform: scale(0.88) rotate(-8deg);
-        pointer-events: none;
-        z-index: 1;
-        transition:
-            transform 0.35s ease,
-            opacity 0.35s ease;
     }
 }
 ```
@@ -5835,706 +5946,6 @@ strong {
 }
 ```
 
-### week-calendar.scss
-
-```scss
-// scss/components/_week-calendar.scss
-@use "../abstracts" as abs;
-
-.week-cal {
-    @extend %flexColumn;
-    gap: 2rem;
-    // Yêu cầu 4: Tăng padding-bottom (thêm 2.4rem / 24px) cho container chính để Legend không bị sát mép
-    padding: 2.6rem 2.8rem 3.2rem;
-    background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 2.8rem;
-    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
-    // Yêu cầu 1: Đặt line-height: 1.5 (số thập phân) cho toàn bộ văn bản thường trong layout lịch tuần
-    line-height: 1.5;
-    @extend %transTheme;
-
-    @include abs.screen(md) {
-        padding: 1.8rem 1.8rem 2.4rem;
-        border-radius: 2rem;
-        gap: 1.6rem;
-    }
-
-    // ==========================================================================
-    // 1. HEADER & THANH ĐIỀU HƯỚNG TUẦN (Yêu cầu 4: Giảm padding/margin quanh thanh điều hướng)
-    // ==========================================================================
-    &__header {
-        @extend %flexBetween;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        gap: 1.2rem;
-        padding-bottom: 0.4rem;
-    }
-
-    &__intro {
-        @extend %flexColumn;
-        gap: 0.4rem;
-    }
-
-    &__title-row {
-        @extend %flexWrapGap;
-    }
-
-    &__week-badge,
-    &__lunar-badge {
-        @extend %inlineFlexCenter;
-        padding: 0.35rem 1.1rem;
-        border-radius: 99.9rem;
-        font-size: 1.25rem;
-        font-weight: 700;
-        line-height: 1.5;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        color: var(--primary-color);
-    }
-
-    &__lunar-badge {
-        color: var(--text-muted);
-    }
-
-    &__heading {
-        font-size: clamp(2.2rem, 2.8vw, 3rem);
-        font-weight: 800;
-        line-height: 1.25;
-        color: var(--text-color);
-        letter-spacing: -0.02em;
-    }
-
-    // Thanh điều hướng gọn gàng, giảm padding xung quanh
-    &__toolbar {
-        @extend %flexItemCenter;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        padding: 0.6rem 0.8rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-
-        @include abs.screen(md) {
-            width: 100%;
-            justify-content: space-between;
-            border-radius: 1.4rem;
-        }
-    }
-
-    &__nav-btn {
-        @extend %inlineFlexCenter;
-        gap: 0.6rem;
-        height: 3.6rem;
-        padding: 0 1.4rem;
-        background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-        font-size: 1.3rem;
-        font-weight: 700;
-        line-height: 1.5;
-        color: var(--text-color);
-        @extend %transInteractive;
-
-        &:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            transform: translateY(-1px);
-        }
-    }
-
-    &__toolbar-center {
-        @extend %flexItemCenter;
-        gap: 0.8rem;
-        padding: 0 0.4rem;
-    }
-
-    &__range-label {
-        font-size: 1.4rem;
-        font-weight: 700;
-        line-height: 1.5;
-        color: var(--text-color);
-        font-variant-numeric: tabular-nums;
-
-        @include abs.screen(sm) {
-            display: none;
-        }
-    }
-
-    &__today-btn {
-        height: 3.4rem;
-        padding: 0 1.4rem;
-        border-radius: 99.9rem;
-        background-color: var(--primary-color);
-        color: #ffffff;
-        font-size: 1.3rem;
-        font-weight: 700;
-        line-height: 1.5;
-
-        &:hover {
-            background-color: var(--primary-hover);
-        }
-    }
-
-    // ==========================================================================
-    // 2. KHỐI BENTO CHÍNH: CỘT TRÁI (THẺ DETAIL FLAT UI) + CỘT PHẢI (LƯỚI 7 NGÀY)
-    // ==========================================================================
-    &__body {
-        display: grid;
-        grid-template-columns: 38rem 1fr;
-        align-items: stretch;
-        gap: 2rem;
-
-        @include abs.screen(xl) {
-            grid-template-columns: 34rem 1fr;
-        }
-
-        @include abs.screen(lg) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    // YÊU CẦU 5: Cải thiện thẻ Detail (Thẻ to bên trái) theo Flat UI + Flexbox space-between
-    &__hero {
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 1.8rem;
-        padding: 2.6rem;
-        background-color: var(--primary-color);
-        border: 1px solid var(--primary-color);
-        border-radius: 2.4rem;
-        color: #ffffff;
-        line-height: 1.5;
-        box-shadow: 0 1rem 2.8rem var(--shadow-color);
-        @extend %transTheme;
-
-        @include abs.screen(sm) {
-            padding: 2rem;
-            border-radius: 2rem;
-        }
-
-        &-top {
-            position: relative;
-            z-index: 2;
-            @extend %flexColumn;
-            gap: 0.8rem;
-        }
-
-        &-badges {
-            @extend %flexBetween;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        &-pill,
-        &-fortune {
-            @extend %inlineFlexCenter;
-            gap: 0.6rem;
-            padding: 0.35rem 1.2rem;
-            border-radius: 99.9rem;
-            font-size: 1.25rem;
-            font-weight: 800;
-            line-height: 1.5;
-        }
-
-        &-pill {
-            background-color: #ffffff;
-            color: var(--primary-color);
-        }
-
-        &-fortune {
-            background-color: rgba(255, 255, 255, 0.18);
-            color: #ffffff;
-        }
-
-        &-date {
-            @extend %flexItemCenter;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 0.2rem;
-        }
-
-        &-solar {
-            font-size: clamp(5rem, 5.8vw, 6.4rem);
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -0.03em;
-            font-variant-numeric: tabular-nums;
-        }
-
-        &-weekday {
-            font-size: 2.2rem;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        &-lunar {
-            font-size: 1.4rem;
-            line-height: 1.5;
-            opacity: 0.95;
-        }
-
-        // Gom nhóm 'Tiết khí' và 'Trực' thành 2 thẻ nhỏ nằm ngang giống style badge Hoàng Đạo
-        &-meta-pills {
-            @extend %flexWrapGap;
-            gap: 0.8rem;
-            margin-top: 0.4rem;
-        }
-
-        &-meta-badge {
-            @extend %inlineFlexCenter;
-            gap: 0.6rem;
-            padding: 0.35rem 1.1rem;
-            background-color: rgba(255, 255, 255, 0.16);
-            border-radius: 99.9rem;
-            font-size: 1.25rem;
-            font-weight: 600;
-            line-height: 1.5;
-            color: #ffffff;
-
-            strong {
-                font-weight: 800;
-            }
-        }
-
-        &-hours {
-            position: relative;
-            z-index: 2;
-            padding-top: 1.4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.22);
-        }
-
-        // Yêu cầu 1: Tiêu đề nhỏ có margin-bottom (0.6rem = 6px) để phân nhóm rõ ràng
-        &-label {
-            display: block;
-            margin-bottom: 0.6rem;
-            font-size: 1.25rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            line-height: 1.5;
-            opacity: 0.9;
-        }
-
-        &-hours-val {
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1.5;
-        }
-
-        // Yêu cầu 5: Tái sử dụng cụm .fengshui-actions của index.html nhưng theo Flat UI (Xóa nền)
-        &-actions.fengshui-actions {
-            position: relative;
-            z-index: 2;
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-            padding-top: 1.4rem;
-            padding-bottom: 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.22);
-            border-bottom: none;
-        }
-
-        &-footer {
-            position: relative;
-            z-index: 2;
-            @extend %flexBetween;
-            padding-top: 0.6rem;
-        }
-
-        // Yêu cầu 5: Nút 'Xem trên Lịch Bloc' dạng Subtle Button (Nền tối nhẹ / rgba(255,255,255,0.15), chữ trắng, xóa viền)
-        &-link {
-            @extend %inlineFlexCenter;
-            gap: 0.8rem;
-            height: 4rem;
-            padding: 0 1.8rem;
-            background-color: var(--primary-subtle-btn, rgba(255, 255, 255, 0.15));
-            color: #ffffff;
-            border: none;
-            border-radius: 99.9rem;
-            font-size: 1.35rem;
-            font-weight: 700;
-            line-height: 1.5;
-            @extend %transInteractive;
-
-            &:hover,
-            &:focus-visible {
-                background-color: rgba(255, 255, 255, 0.26);
-                color: #ffffff;
-                transform: translateY(-2px);
-            }
-        }
-
-        &-zodiac {
-            position: absolute;
-            right: -0.8rem;
-            bottom: -0.8rem;
-            width: 14rem;
-            height: 14rem;
-            object-fit: contain;
-            opacity: 0.12;
-            filter: brightness(0) invert(1);
-            pointer-events: none;
-            z-index: 1;
-        }
-    }
-
-    // Tuỳ biến Flat UI cho 2 khối Việc nên làm / Việc nên tránh bên trong thẻ Hero
-    &__flat-action.fengshui-actions__box {
-        gap: 0.6rem;
-        padding: 0;
-        background-color: transparent;
-        border: none;
-        border-radius: 0;
-
-        .fengshui-actions__header {
-            justify-content: flex-start;
-            gap: 0.8rem;
-            margin-bottom: 0.6rem;
-        }
-
-        .fengshui-actions__badge {
-            font-size: 1.25rem;
-            font-weight: 800;
-            line-height: 1.5;
-            color: #ffffff;
-        }
-
-        // Icon hình tròn nhỏ tái sử dụng từ index.html
-        .fengshui-actions__icon {
-            width: 2.2rem;
-            height: 2.2rem;
-            font-size: 1.15rem;
-            background-color: rgba(255, 255, 255, 0.22);
-            color: #ffffff;
-        }
-
-        .fengshui-actions__list {
-            gap: 0.6rem;
-        }
-
-        .fengshui-actions__chip {
-            padding: 0.35rem 1rem;
-            font-size: 1.25rem;
-            line-height: 1.5;
-            background-color: rgba(255, 255, 255, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.24);
-            color: #ffffff;
-            box-shadow: none;
-        }
-    }
-
-    // ==========================================================================
-    // 3. CỘT PHẢI: LƯỚI 2 CỘT 7 NGÀY & THẺ CHỦ NHẬT .day-card--full-width
-    // ==========================================================================
-    &__grid {
-        @extend %gridCols2;
-        gap: 1.4rem;
-
-        @include abs.screen(md) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    &__card {
-        position: relative;
-        overflow: hidden;
-        @extend %flexColumn;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 1.8rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 2rem;
-        text-align: left;
-        line-height: 1.5;
-        cursor: pointer;
-        @extend %transInteractive;
-
-        &:hover,
-        &:focus-visible {
-            border-color: var(--primary-color);
-            background-color: var(--body-bg);
-            transform: translateY(-2px);
-            box-shadow: 0 0.8rem 2rem var(--shadow-color);
-
-            .week-cal__card-zodiac {
-                opacity: 0.4;
-                transform: scale(1.08) rotate(0deg);
-            }
-        }
-
-        // YÊU CẦU 3: Trạng thái Active có nền màu chính của theme làm mờ 8-10% (--primary-soft-bg) + viền màu theme
-        &--active,
-        &[aria-current="date"] {
-            background-color: var(--primary-soft-bg, color-mix(in srgb, var(--primary-color) 9%, var(--body-bg)));
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
-
-            .week-cal__card-day {
-                color: var(--primary-color);
-            }
-
-            &:hover,
-            &:focus-visible {
-                background-color: var(--primary-soft-bg, color-mix(in srgb, var(--primary-color) 12%, var(--body-bg)));
-            }
-        }
-
-        // YÊU CẦU 2: Modifier .day-card--full-width cho thẻ Chủ Nhật (Chia 2 cột: Trái Ngày/Can Chi/Giờ tốt - Phải Nên làm/Nên tránh)
-        &.day-card--full-width {
-            grid-column: span 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: start;
-            gap: 2.4rem;
-
-            @include abs.screen(md) {
-                grid-column: span 1;
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-            }
-
-            .day-card__col-left {
-                position: relative;
-                z-index: 2;
-                @extend %flexColumn;
-                justify-content: space-between;
-                gap: 1.2rem;
-                height: 100%;
-                padding-right: 2rem;
-                border-right: 1px dashed var(--border-color);
-
-                @include abs.screen(md) {
-                    padding-right: 0;
-                    border-right: none;
-                }
-            }
-
-            .day-card__col-right {
-                position: relative;
-                z-index: 2;
-                @extend %flexColumn;
-                justify-content: center;
-                height: 100%;
-
-                .week-cal__card-meta {
-                    padding-top: 0;
-                    border-top: none;
-                    gap: 1rem;
-                }
-            }
-        }
-
-        &.is-highlighted {
-            border-color: var(--primary-color);
-            background-color: var(--primary-soft-bg, var(--body-bg));
-            transform: translateY(-2px);
-        }
-
-        &.is-dimmed {
-            opacity: 0.22;
-            transform: scale(0.98);
-        }
-
-        &-head {
-            position: relative;
-            z-index: 2;
-            @extend %flexBetween;
-            align-items: flex-start;
-            gap: 0.8rem;
-            width: 100%;
-        }
-
-        &-title-group {
-            @extend %flexColumn;
-            gap: 0.2rem;
-        }
-
-        &-day {
-            font-size: 1.7rem;
-            font-weight: 800;
-            line-height: 1.35;
-            color: var(--text-color);
-
-            &--sun {
-                color: var(--color-danger);
-            }
-        }
-
-        &-sub {
-            font-size: 1.3rem;
-            font-weight: 600;
-            line-height: 1.5;
-            color: var(--text-muted);
-        }
-
-        &-section {
-            position: relative;
-            z-index: 2;
-            @extend %flexColumn;
-        }
-
-        // Yêu cầu 1: Tiêu đề nhỏ ('Giờ tốt', 'Nên làm', 'Nên tránh') có margin-bottom 0.5rem (5px) tách biệt nội dung
-        &-label,
-        &-meta-title {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            line-height: 1.5;
-            color: var(--text-color);
-        }
-
-        &-hours {
-            font-size: 1.3rem;
-            line-height: 1.5;
-            color: var(--text-muted);
-            @extend %textClamp2;
-        }
-
-        &-meta {
-            position: relative;
-            z-index: 2;
-            @extend %flexColumn;
-            gap: 0.8rem;
-            padding-top: 1rem;
-            border-top: 1px dashed var(--border-color);
-            width: 100%;
-        }
-
-        &-meta-group {
-            @extend %flexColumn;
-        }
-
-        &-do,
-        &-dont {
-            font-size: 1.3rem;
-            font-weight: 600;
-            line-height: 1.5;
-        }
-
-        &-do {
-            color: var(--color-success);
-        }
-
-        &-dont {
-            color: var(--color-danger);
-        }
-
-        &-zodiac {
-            position: absolute;
-            right: 0.8rem;
-            bottom: 0.8rem;
-            width: 4.8rem;
-            height: 4.8rem;
-            object-fit: contain;
-            opacity: 0.14;
-            filter: var(--zodiac-filter);
-            transform: scale(0.88) rotate(-8deg);
-            pointer-events: none;
-            z-index: 1;
-            transition:
-                transform 0.35s ease,
-                opacity 0.35s ease;
-        }
-    }
-
-    // ==========================================================================
-    // 4. ĐỒNG BỘ BADGE TRÊN THẺ VÀ CHÚ THÍCH LEGEND CUỐI TRANG (Yêu cầu 6)
-    // ==========================================================================
-    &__badge,
-    &__legend-badge {
-        @extend %inlineFlexCenter;
-        gap: 0.6rem;
-        padding: 0.35rem 1.1rem;
-        border-radius: 99.9rem;
-        font-size: 1.2rem;
-        font-weight: 700;
-        line-height: 1.5;
-        border: 1px solid transparent;
-        @extend %textNoWrap;
-
-        &[hidden] {
-            display: none !important;
-        }
-
-        &--good {
-            background-color: rgba(234, 179, 8, 0.15);
-            border-color: rgba(234, 179, 8, 0.35);
-            color: #b45309;
-        }
-
-        &--bad {
-            background-color: rgba(107, 114, 128, 0.14);
-            border-color: rgba(107, 114, 128, 0.3);
-            color: var(--text-color);
-        }
-
-        &--today {
-            background-color: var(--primary-soft-bg, rgba(245, 158, 11, 0.14));
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-    }
-
-    &__legend-badge {
-        height: 3.6rem;
-        padding: 0 1.4rem;
-        font-size: 1.3rem;
-    }
-
-    &__badge-dot {
-        display: inline-block;
-        width: 0.8rem;
-        height: 0.8rem;
-        border-radius: 50%;
-        @extend %flexItemFixed;
-
-        &--good {
-            background-color: #eab308;
-        }
-
-        &--bad {
-            background-color: #374151;
-        }
-
-        &--today {
-            background-color: var(--primary-color);
-        }
-
-        &--light {
-            background-color: #ffffff;
-        }
-    }
-
-    &__footer {
-        @extend %flexBetween;
-        flex-wrap: wrap;
-        gap: 1.4rem;
-        padding-top: 1.2rem;
-        border-top: 1px solid var(--border-color);
-    }
-
-    &__legend {
-        padding-top: 0;
-    }
-
-    &__footnote {
-        padding: 0.6rem 1.4rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-        font-size: 1.25rem;
-        line-height: 1.5;
-        color: var(--text-muted);
-    }
-}
-```
-
 ## layout folder
 
 ### index.scss
@@ -7195,8 +6606,9 @@ strong {
 // Trong scss/pages/_index.scss
 @forward "./home";
 @forward "./clock";
-@forward "./year";
+@forward "./day";
 @forward "./week";
+@forward "./year";
 @forward "./detail";
 ```
 
@@ -7255,7 +6667,1097 @@ strong {
 }
 ```
 
-### year,scss
+### day.scss
+
+```scss
+// scss/pages/_day.scss
+@use "../abstracts" as abs;
+
+.day-page {
+    padding-bottom: abs.$gap-section-default;
+
+    // 1. Thanh điều hướng Ngày trước / Hôm nay / Ngày sau
+    &__toolbar {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        margin-bottom: 2.4rem;
+        padding: 1.4rem 2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 2.2rem;
+        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            padding: 1.2rem;
+            border-radius: 1.8rem;
+        }
+    }
+
+    &__nav-btn {
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__center-group {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+
+    &__today-btn {
+        height: 4rem;
+        padding: 0 1.6rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 1.2rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    &__current-heading {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-color);
+
+        @include abs.screen(sm) {
+            font-size: 1.6rem;
+        }
+    }
+
+    // 2. TẦNG TRÊN: Khóa Cột Trái (5) và Cột Phải (7) luôn bằng chiều cao nhau
+    &__top-row {
+        --grid-gutter-y: 2.4rem;
+        align-items: stretch;
+    }
+
+    &__left,
+    &__right-stack,
+    &__fengshui-grow {
+        @extend %flexColumn;
+        gap: 1.6rem;
+    }
+
+    &__fengshui-grow {
+        flex: 1;
+    }
+
+    &__card-stretch {
+        flex: 1;
+        justify-content: space-between;
+    }
+}
+
+.day-bento-card {
+    @extend %flexColumn;
+    gap: 1.6rem;
+    padding: 2.2rem 2.4rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 1.8rem;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title {
+        font-size: 1.85rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.3rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__tag,
+    &__badge {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    &__tag {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    &__badge {
+        background-color: var(--primary-color);
+        color: #ffffff;
+    }
+}
+
+// 1. Hướng Xuất Hành
+.day-directions-grid {
+    @extend %gridCols3;
+    gap: 1.4rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.day-dir-box {
+    @extend %flexColumnCenterAll;
+    gap: 0.4rem;
+    padding: 1.8rem 1.2rem;
+    border-radius: 1.8rem;
+    border: 1.5px solid var(--border-color);
+    text-align: center;
+    @extend %transInteractive;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &--hy {
+        background-color: rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.35);
+
+        .day-dir-box__label,
+        .day-dir-box__value {
+            color: #1d4ed8;
+        }
+    }
+
+    &--tai {
+        background-color: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.38);
+
+        .day-dir-box__label,
+        .day-dir-box__value {
+            color: #047857;
+        }
+    }
+
+    &--hac {
+        background-color: rgba(239, 68, 68, 0.08);
+        border-color: rgba(239, 68, 68, 0.35);
+
+        .day-dir-box__label,
+        .day-dir-box__value {
+            color: #b91c1c;
+        }
+    }
+
+    &__label {
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    &__value {
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    &__sub {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+
+// 2. Thông Tin Tiết Khí
+.day-solarterm-grid {
+    @extend %gridCols3;
+    gap: 1.4rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.day-solarterm-box {
+    @extend %flexColumn;
+    gap: 0.4rem;
+    padding: 1.5rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.6rem;
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__val {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+}
+
+// 3. Khổng Minh Lục Diệu
+.day-lucdieu-grid {
+    @extend %gridCols4;
+    gap: 1rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.day-lucdieu-cell {
+    @extend %flexColumn;
+    gap: 0.35rem;
+    padding: 1.3rem 1.4rem;
+    border-radius: 1.4rem;
+    border: 1px solid var(--border-color);
+    @extend %transInteractive;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &--good {
+        background-color: rgba(16, 185, 129, 0.12);
+        border-color: rgba(16, 185, 129, 0.38);
+
+        .day-lucdieu-cell__name {
+            color: #065f46;
+        }
+    }
+
+    &--bad {
+        background-color: rgba(239, 68, 68, 0.09);
+        border-color: rgba(239, 68, 68, 0.32);
+
+        .day-lucdieu-cell__name {
+            color: #991b1b;
+        }
+    }
+
+    &__name {
+        font-size: 1.45rem;
+        font-weight: 800;
+    }
+
+    &__time {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+
+// 4. Thông Tin Mặt Trời
+.day-sun-summary {
+    @extend %gridCols2;
+    gap: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__pill {
+        @extend %flexBetween;
+        padding: 1.2rem 1.6rem;
+        background-color: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 1.4rem;
+        font-size: 1.35rem;
+
+        span {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        strong {
+            font-weight: 800;
+            color: var(--text-color);
+        }
+    }
+}
+
+.day-sun-table {
+    @extend %flexColumn;
+    border: 1px solid var(--border-color);
+    border-radius: 1.6rem;
+    overflow: hidden;
+
+    &__head,
+    &__row {
+        display: grid;
+        grid-template-columns: 0.8fr 2.3fr 1fr 1fr;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.35rem 1.6rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 0.8fr 1.6fr 1fr 1fr;
+            padding: 1rem;
+            font-size: 1.2rem;
+        }
+    }
+
+    &__head {
+        background-color: var(--bg-surface);
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+    }
+
+    &__row {
+        background-color: var(--body-bg);
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.35rem;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__region {
+        font-weight: 800;
+        color: #1d4ed8;
+    }
+
+    &__place {
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__time {
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        color: var(--text-color);
+    }
+}
+
+// ==========================================================================
+// 5. TẦNG DƯỚI (1 CỘT LỚN FULL-WIDTH 12 DÒNG): TOOLTIP PASTEL THEO THEME
+// ==========================================================================
+.day-hourly-section {
+    margin-top: 2.8rem;
+
+    &__header {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        padding-bottom: 1.4rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__filters {
+        @extend %flexWrapGap;
+    }
+
+    &__filter-btn {
+        height: 4rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+}
+
+.day-hourly-table {
+    @extend %flexColumn;
+    gap: 1.2rem;
+
+    &__head {
+        display: grid;
+        grid-template-columns: 1.15fr 1.45fr 1.25fr 1.15fr 1.35fr;
+        align-items: center;
+        gap: 1.6rem;
+        padding: 1.2rem 2.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+
+        span:nth-child(4) {
+            text-align: center;
+        }
+
+        @include abs.screen(lg) {
+            display: none;
+        }
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 1.4rem;
+    }
+}
+
+.day-hour-row {
+    position: relative;
+    overflow: visible;
+    display: grid;
+    grid-template-columns: 1.15fr 1.45fr 1.25fr 1.15fr 1.35fr;
+    align-items: center;
+    gap: 1.6rem;
+    min-height: 10.8rem;
+    padding: 1.6rem 2.2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.2rem;
+    @extend %transInteractive;
+
+    &:hover {
+        background-color: var(--body-bg);
+        border-color: var(--primary-color);
+        box-shadow: 0 1rem 2.6rem var(--shadow-color);
+        z-index: 20;
+    }
+
+    &.is-dimmed {
+        opacity: 0.22;
+        transform: scale(0.99);
+    }
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 1.6rem;
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    // Các ô cột vừa là Link SEO vừa mở Modal Quick-View & hiện Tooltip nền nhạt theo Theme
+    &__col-link {
+        position: relative;
+        padding: 0.8rem 1rem;
+        border-radius: 1.4rem;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--tooltip-bg, var(--bg-surface));
+            box-shadow: inset 0 0 0 1px var(--tooltip-border, var(--primary-color));
+            z-index: 30;
+        }
+
+        // HỘP BENTO TOOLTIP NỀN MÀU NHẠT PASTEL THEO THEME ĐANG CHỌN (--tooltip-bg)
+        &[data-tooltip]::before {
+            content: "✦ " attr(data-tooltip-title) ": " attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 1.1rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(0.6rem);
+            z-index: 60;
+            width: 31rem;
+            padding: 1.2rem 1.5rem;
+            background-color: var(--tooltip-bg, var(--body-bg));
+            color: var(--tooltip-text, var(--text-color));
+            border: 1.5px solid var(--tooltip-border, var(--primary-color));
+            border-radius: 1.6rem;
+            box-shadow:
+                0 1.2rem 2.8rem var(--shadow-color),
+                0 0 0 3px var(--body-bg);
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.55;
+            text-align: left;
+            white-space: normal;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            @extend %transTooltip;
+        }
+
+        // Mũi tên tam giác đồng bộ màu nền nhạt của Theme
+        &[data-tooltip]::after {
+            content: "";
+            position: absolute;
+            bottom: calc(100% + 0.1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 61;
+            border-width: 0.65rem;
+            border-style: solid;
+            border-color: var(--tooltip-border, var(--primary-color)) transparent transparent transparent;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            @extend %transTooltip;
+        }
+
+        &:hover[data-tooltip]::before,
+        &:hover[data-tooltip]::after,
+        &:focus-visible[data-tooltip]::before,
+        &:focus-visible[data-tooltip]::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+
+    // Cột 1: Canh Giờ
+    &__col-time {
+        @extend %flexColumn;
+        gap: 0.35rem;
+
+        strong {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-color);
+            @extend %transTheme;
+        }
+
+        span {
+            display: inline-block;
+            width: fit-content;
+            padding: 0.25rem 0.9rem;
+            background-color: var(--body-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 99.9rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-variant-numeric: tabular-nums;
+        }
+
+        &:hover strong {
+            color: var(--primary-color);
+        }
+    }
+
+    // Cột 2: Nạp Âm
+    &__col-napam {
+        @extend %flexItemCenter;
+        gap: 1.2rem;
+    }
+
+    &__napam-icon-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.6rem;
+        height: 4.6rem;
+        border-radius: 1.4rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--border-color);
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
+        @extend %transTheme;
+
+        img {
+            width: 2.6rem;
+            height: 2.6rem;
+            object-fit: contain;
+        }
+    }
+
+    &__napam-info {
+        @extend %flexColumn;
+        gap: 0.2rem;
+
+        strong {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+
+        small {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+    }
+
+    // Cột 3: Lục Diệu
+    &__col-lucdieu {
+        @extend %flexColumn;
+        align-items: flex-start;
+        gap: 0.45rem;
+    }
+
+    &__badge {
+        padding: 0.4rem 1.3rem;
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+
+        &--good {
+            background-color: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #047857;
+        }
+
+        &--bad {
+            background-color: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.32);
+            color: #b91c1c;
+        }
+    }
+
+    &__dao-sub {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    // Cột 4: Vòng SVG Ngũ Hành Động Cỡ Lớn
+    &__col-wuxing {
+        @extend %flexCenter;
+    }
+
+    // Cột 5: Linh Vật & Bát Quái
+    &__col-bagua {
+        @extend %flexItemCenter;
+        justify-content: flex-start;
+        gap: 1.2rem;
+    }
+
+    &__bagua-ring {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 5.6rem;
+        height: 5.6rem;
+        border-radius: 50%;
+        background-color: var(--body-bg);
+        border: 2px dashed var(--primary-color);
+        padding: 0.8rem;
+        box-shadow: 0 0.6rem 1.4rem var(--shadow-color);
+        @extend %transInteractive;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__col-bagua:hover &__bagua-ring {
+        transform: scale(1.08) rotate(6deg);
+        border-style: solid;
+    }
+
+    &__bagua-text {
+        @extend %flexColumn;
+        gap: 0.25rem;
+
+        strong {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+
+        small {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+    }
+}
+
+// VÒNG TRÒN SVG NGŨ HÀNH ĐỘNG (9.2REM X 9.2REM)
+.wuxing-mini {
+    width: 9.2rem;
+    height: 9.2rem;
+    overflow: visible;
+    @extend %flexItemFixed;
+
+    &--lg {
+        width: 14rem;
+        height: 14rem;
+    }
+
+    &__cycle {
+        fill: none;
+        stroke: #10b981;
+        stroke-width: 1.8;
+        stroke-dasharray: 6 4;
+        opacity: 0.65;
+        transform-origin: 60px 60px;
+        animation: wuxingCycleSpin 24s linear infinite;
+    }
+
+    &__star {
+        fill: none;
+        stroke: #ef4444;
+        stroke-width: 1.3;
+        opacity: 0.45;
+    }
+
+    &__node {
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        text {
+            font-size: 10.5px;
+            font-weight: 800;
+            text-anchor: middle;
+            dominant-baseline: central;
+            user-select: none;
+        }
+
+        &.is-dimmed {
+            opacity: 0.18;
+        }
+
+        &.is-active {
+            opacity: 1;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22));
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        &.is-hour-element {
+            circle {
+                stroke: #ffffff;
+                stroke-width: 2;
+            }
+        }
+
+        &--fire {
+            transform-origin: 60px 21px;
+            circle {
+                fill: #ef4444;
+            }
+            text {
+                fill: #ffffff;
+            }
+        }
+
+        &--earth {
+            transform-origin: 97px 48px;
+            circle {
+                fill: #f59e0b;
+            }
+            text {
+                fill: #ffffff;
+            }
+        }
+
+        &--metal {
+            transform-origin: 83px 91px;
+            circle {
+                fill: #e2e8f0;
+                stroke: #64748b;
+                stroke-width: 1.2;
+            }
+            text {
+                fill: #0f172a;
+            }
+        }
+
+        &--water {
+            transform-origin: 37px 91px;
+            circle {
+                fill: #3b82f6;
+            }
+            text {
+                fill: #ffffff;
+            }
+        }
+
+        &--wood {
+            transform-origin: 23px 48px;
+            circle {
+                fill: #10b981;
+            }
+            text {
+                fill: #ffffff;
+            }
+        }
+    }
+}
+
+@keyframes wuxingCycleSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// ==========================================================================
+// 6. BENTO MODAL QUICK-VIEW GIẢI NGHĨA CHUYÊN SÂU (#day-term-modal)
+// ==========================================================================
+.day-term-modal {
+    @extend %fixedCover;
+    z-index: 120;
+    @extend %flexCenterSafe;
+    padding: 2rem;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &__backdrop {
+        @extend %absCover;
+        background-color: var(--overlay-bg);
+        backdrop-filter: blur(6px);
+    }
+
+    &__dialog {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 68rem;
+        background-color: var(--body-bg);
+        border: 2px solid var(--primary-color);
+        border-radius: 2.8rem;
+        box-shadow: 0 2.4rem 5rem var(--shadow-color);
+        overflow: hidden;
+        @extend %animDropdownFadeIn;
+    }
+
+    &__header {
+        @extend %flexBetween;
+        gap: 1.6rem;
+        padding: 2rem 2.6rem;
+        background-color: var(--tooltip-bg, var(--bg-surface));
+        border-bottom: 1px solid var(--tooltip-border, var(--border-color));
+    }
+
+    &__title-group {
+        @extend %flexColumn;
+        gap: 0.4rem;
+    }
+
+    &__category {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.3rem 1.2rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 99.9rem;
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    &__title {
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: var(--tooltip-text, var(--text-color));
+    }
+
+    &__close {
+        @extend %inlineFlexCenter;
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 50%;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__body {
+        display: grid;
+        grid-template-columns: 18rem 1fr;
+        gap: 2.2rem;
+        padding: 2.4rem 2.6rem;
+        align-items: center;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+            padding: 1.8rem;
+        }
+    }
+
+    &__visual {
+        @extend %flexColumnCenterAll;
+        gap: 1rem;
+        min-height: 18rem;
+        padding: 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1.5px dashed var(--primary-color);
+        border-radius: 2.2rem;
+        text-align: center;
+
+        img {
+            width: 8.4rem;
+            height: 8.4rem;
+            object-fit: contain;
+        }
+
+        &.is-zodiac-filtered img {
+            filter: var(--zodiac-filter);
+        }
+
+        strong {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+    }
+
+    &__content {
+        @extend %flexColumn;
+        gap: 1.4rem;
+    }
+
+    &__meta-pills {
+        @extend %flexWrapGap;
+    }
+
+    &__pill {
+        padding: 0.45rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        &--highlight {
+            background-color: var(--tooltip-bg, var(--bg-surface));
+            border-color: var(--tooltip-border, var(--primary-color));
+            color: var(--tooltip-text, var(--primary-color));
+        }
+    }
+
+    &__box {
+        @extend %flexColumn;
+        gap: 0.5rem;
+        padding: 1.4rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+
+        &--advice {
+            background-color: var(--tooltip-bg, var(--bg-surface));
+            border-color: var(--tooltip-border, var(--primary-color));
+        }
+    }
+
+    &__box-title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--primary-color);
+    }
+
+    &__desc,
+    &__advice {
+        font-size: 1.45rem;
+        line-height: 1.6;
+        color: var(--text-color);
+    }
+
+    &__footer {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        padding: 1.6rem 2.6rem;
+        background-color: var(--bg-surface);
+        border-top: 1px solid var(--border-color);
+    }
+
+    &__btn-close {
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+    }
+
+    &__btn-seo {
+        height: 4.2rem;
+        padding: 0 2rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 800;
+        box-shadow: 0 0.4rem 1.4rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+    }
+}
+```
+
+### week.scss
+
+```scss
+// scss/pages/_week.scss
+@use "../abstracts" as abs;
+
+.week-page {
+    padding-bottom: abs.$gap-section-default;
+}
+```
+
+### year.scss
 
 ```scss
 // scss/pages/_year.scss
@@ -7409,17 +7911,6 @@ strong {
         height: 0.55rem;
         box-shadow: none;
     }
-}
-```
-
-### week.scss
-
-```scss
-// scss/pages/_week.scss
-@use "../abstracts" as abs;
-
-.week-page {
-    padding-bottom: abs.$gap-section-default;
 }
 ```
 

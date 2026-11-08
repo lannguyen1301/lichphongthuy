@@ -1,0 +1,534 @@
+// scss/pages/_day.scss
+@use "../abstracts" as abs;
+
+.day-page {
+    padding-bottom: abs.$gap-section-default;
+
+    // 1. Thanh điều hướng Ngày trước / Hôm nay / Ngày sau
+    &__toolbar {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        margin-bottom: 2.2rem;
+        padding: 1.4rem 2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 2.2rem;
+        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            padding: 1.2rem;
+            border-radius: 1.8rem;
+        }
+    }
+
+    &__nav-btn {
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__center-group {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+
+    &__today-btn {
+        height: 4rem;
+        padding: 0 1.6rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 1.2rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    &__current-heading {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-color);
+
+        @include abs.screen(sm) {
+            font-size: 1.6rem;
+        }
+    }
+
+    &__right-stack {
+        @extend %flexColumn;
+        gap: 1.8rem;
+    }
+}
+
+// Khung Bento Card dùng chung cho cột phải của Trang Ngày
+.day-bento-card {
+    @extend %flexColumn;
+    gap: 1.6rem;
+    padding: 2.2rem 2.4rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 1.8rem;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title {
+        font-size: 1.85rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.3rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__tag,
+    &__badge {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    &__tag {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    &__badge {
+        background-color: var(--primary-color);
+        color: #ffffff;
+    }
+}
+
+// 1. Hướng Xuất Hành (3 Bento Cards: Hỷ Thần, Tài Thần, Hạc Thần)
+.day-directions-grid {
+    @extend %gridCols3;
+    gap: 1.4rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.day-dir-box {
+    @extend %flexColumnCenterAll;
+    gap: 0.4rem;
+    padding: 1.6rem 1.2rem;
+    border-radius: 1.8rem;
+    border: 1.5px solid var(--border-color);
+    text-align: center;
+    @extend %transInteractive;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &--hy {
+        background-color: rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.35);
+
+        .day-dir-box__label,
+        .day-dir-box__value {
+            color: #1d4ed8;
+        }
+    }
+
+    &--tai {
+        background-color: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.38);
+
+        .day-dir-box__label,
+        .day-dir-box__value {
+            color: #047857;
+        }
+    }
+
+    &--hac {
+        background-color: rgba(239, 68, 68, 0.08);
+        border-color: rgba(239, 68, 68, 0.35);
+
+        .day-dir-box__label,
+        .day-dir-box__value {
+            color: #b91c1c;
+        }
+    }
+
+    &__label {
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    &__value {
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    &__sub {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+
+// 2. Thông Tin Tiết Khí (3 Cards)
+.day-solarterm-grid {
+    @extend %gridCols3;
+    gap: 1.4rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.day-solarterm-box {
+    @extend %flexColumn;
+    gap: 0.4rem;
+    padding: 1.4rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.6rem;
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__val {
+        font-size: 1.65rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+}
+
+// 3. Khổng Minh Lục Diệu (Lưới 4 cột x 3 hàng = 12 Canh Giờ)
+.day-lucdieu-grid {
+    @extend %gridCols4;
+    gap: 1rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.day-lucdieu-cell {
+    @extend %flexColumn;
+    gap: 0.3rem;
+    padding: 1.2rem 1.4rem;
+    border-radius: 1.4rem;
+    border: 1px solid var(--border-color);
+    @extend %transInteractive;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+
+    &--good {
+        background-color: rgba(16, 185, 129, 0.12);
+        border-color: rgba(16, 185, 129, 0.38);
+
+        .day-lucdieu-cell__name {
+            color: #065f46;
+        }
+    }
+
+    &--bad {
+        background-color: rgba(239, 68, 68, 0.09);
+        border-color: rgba(239, 68, 68, 0.32);
+
+        .day-lucdieu-cell__name {
+            color: #991b1b;
+        }
+    }
+
+    &__name {
+        font-size: 1.45rem;
+        font-weight: 800;
+    }
+
+    &__time {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+
+// 4. Thông Tin Mặt Trời (Bình minh / Hoàng hôn 4 miền)
+.day-sun-summary {
+    @extend %gridCols2;
+    gap: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__pill {
+        @extend %flexBetween;
+        padding: 1.1rem 1.6rem;
+        background-color: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        border-radius: 1.4rem;
+        font-size: 1.35rem;
+
+        span {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        strong {
+            font-weight: 800;
+            color: var(--text-color);
+        }
+    }
+}
+
+.day-sun-table {
+    @extend %flexColumn;
+    border: 1px solid var(--border-color);
+    border-radius: 1.6rem;
+    overflow: hidden;
+
+    &__head,
+    &__row {
+        display: grid;
+        grid-template-columns: 0.9fr 2.2fr 1fr 1fr;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.2rem 1.6rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 0.8fr 1.6fr 1fr 1fr;
+            padding: 1rem;
+            font-size: 1.2rem;
+        }
+    }
+
+    &__head {
+        background-color: var(--bg-surface);
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+    }
+
+    &__row {
+        background-color: var(--body-bg);
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.35rem;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__region {
+        font-weight: 800;
+        color: #1d4ed8;
+    }
+
+    &__place {
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    &__time {
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        color: var(--text-color);
+    }
+}
+
+// 5. Thông Tin Chi Tiết Theo 12 Giờ Trong Ngày
+.day-hourly-table {
+    @extend %flexColumn;
+    gap: 0.8rem;
+
+    &__head {
+        display: grid;
+        grid-template-columns: 1.1fr 1.3fr 1.1fr 1fr;
+        gap: 1rem;
+        padding: 1rem 1.6rem;
+        background-color: var(--bg-surface);
+        border-radius: 1.2rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+
+        @include abs.screen(sm) {
+            display: none;
+        }
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 0.8rem;
+    }
+}
+
+.day-hour-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1.3fr 1.1fr 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.6rem;
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-1px);
+        box-shadow: 0 0.6rem 1.4rem var(--shadow-color);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    &__col-time {
+        @extend %flexColumn;
+        gap: 0.2rem;
+
+        strong {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+
+        span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+    }
+
+    &__col-napam {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        img {
+            width: 2.2rem;
+            height: 2.2rem;
+            object-fit: contain;
+        }
+    }
+
+    &__col-lucdieu {
+        @extend %flexColumn;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    &__badge {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+
+        &--good {
+            background-color: rgba(16, 185, 129, 0.14);
+            color: #047857;
+        }
+
+        &--bad {
+            background-color: rgba(239, 68, 68, 0.12);
+            color: #b91c1c;
+        }
+    }
+
+    &__dao-sub {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__col-bagua {
+        @extend %flexItemCenter;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    &__bagua-ring {
+        @extend %inlineFlexCenter;
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 50%;
+        background-color: var(--body-bg);
+        border: 1.5px dashed var(--primary-color);
+        padding: 0.6rem;
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__bagua-text {
+        @extend %flexColumn;
+        gap: 0.15rem;
+
+        strong {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+
+        small {
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+    }
+}

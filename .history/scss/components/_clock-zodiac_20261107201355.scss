@@ -1,0 +1,211 @@
+// scss/components/_clock-zodiac.scss
+@use "../abstracts" as abs;
+
+.clock-zodiac-section {
+    @extend %flexColumn;
+    gap: 1.8rem;
+    padding: 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.4rem;
+    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+    }
+
+    &__header {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+    }
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.4rem;
+        font-size: 1.35rem;
+        color: var(--text-muted);
+    }
+
+    &__filters {
+        @extend %flexWrapGap;
+    }
+
+    &__filter-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 3.8rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &.is-active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__dot {
+        width: 0.9rem;
+        height: 0.9rem;
+        border-radius: 50%;
+
+        &--good {
+            background-color: #eab308;
+        }
+        &--bad {
+            background-color: #374151;
+        }
+    }
+}
+
+.clock-zodiac-grid {
+    @extend %gridCols4;
+    gap: 1.4rem;
+
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.clock-zodiac-card {
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    min-height: 13.2rem;
+    padding: 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 2rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .clock-zodiac-card__img {
+            opacity: 0.45;
+            transform: scale(1.08) rotate(0deg);
+        }
+    }
+
+    &.is-current {
+        background-color: var(--text-color);
+        border-color: var(--text-color);
+        color: var(--body-bg);
+        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
+
+        .clock-zodiac-card__name,
+        .clock-zodiac-card__canchi,
+        .clock-zodiac-card__fortune {
+            color: var(--body-bg);
+        }
+
+        .clock-zodiac-card__utc {
+            color: var(--body-bg);
+            opacity: 0.78;
+        }
+
+        .clock-zodiac-card__img {
+            opacity: 0.28;
+            filter: brightness(0) invert(1);
+        }
+    }
+
+    &.is-selected:not(.is-current) {
+        border: 2px solid var(--primary-color);
+        background-color: var(--body-bg);
+    }
+
+    &.is-dimmed {
+        opacity: 0.22;
+        transform: scale(0.97);
+    }
+
+    &__top,
+    &__bottom {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        width: 100%;
+    }
+
+    &__bottom {
+        align-items: flex-end;
+        margin-top: auto;
+    }
+
+    &__name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__utc {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__canchi {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__fortune {
+        @extend %inlineFlexCenter;
+        gap: 0.4rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__img {
+        position: absolute;
+        right: 0.8rem;
+        bottom: 0.6rem;
+        width: 5.4rem;
+        height: 5.4rem;
+        object-fit: contain;
+        opacity: 0.16;
+        filter: var(--zodiac-filter);
+        transform: scale(0.88) rotate(-8deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    
+}

@@ -21,11 +21,12 @@
     };
 
     const syncActiveSidebarLink = () => {
-        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+        const rawPage = window.location.pathname.split("/").pop() || "index.html";
+        const targetNavPage = rawPage === "detail.html" ? "index.html" : rawPage;
         const sidebarLinks = document.querySelectorAll(".sidebar__link[data-nav-page]");
 
         sidebarLinks.forEach((link) => {
-            const isMatch = link.dataset.navPage === currentPage;
+            const isMatch = link.dataset.navPage === targetNavPage;
             link.classList.toggle("sidebar__link--active", isMatch);
             if (isMatch) link.setAttribute("aria-current", "page");
             else link.removeAttribute("aria-current");
