@@ -8469,9 +8469,9 @@
     data-active-month="all"
     data-expanded="false"
 >
-    <!-- ==================== TẦNG 1: HERO ĐẾM NGƯỢC (TRÁI) & BỘ ĐIỀU KHIỂN NĂM / LỌC / CHỌN THÁNG (PHẢI) ==================== -->
+    <!-- ==================== TẦNG 1: HERO ĐẾM NGƯỢC (TRÁI) & BỘ ĐIỀU KHIỂN NĂM / LỌC / QUÝ (PHẢI) ==================== -->
     <div class="festival-cal__top-bento">
-        <!-- CỘT TRÁI: THẺ HERO SỰ KIỆN TIÊU ĐIỂM ĐANG CHỌN / SẮP DIỄN RA -->
+        <!-- CỘT TRÁI: THẺ HERO SỰ KIỆN TIÊU ĐIỂM -->
         <article
             class="festival-hero"
             id="festival-hero-card"
@@ -8529,14 +8529,19 @@
             </footer>
         </article>
 
-        <!-- CỘT PHẢI: BỘ ĐIỀU KHIỂN NĂM (< Năm 2026 >), BỘ LỌC LOẠI LỄ & THANH CHỌN THÁNG ROVING TABINDEX -->
-        <header class="festival-controls">
+        <!-- CỘT PHẢI TẦNG 1: BỘ ĐIỀU KHIỂN NĂM, BỘ LỌC LOẠI LỄ & BENTO 4 QUÝ (PHƯƠNG ÁN 3) -->
+        <header class="festival-controls" aria-label="Bộ điều khiển và lọc sự kiện lễ tết theo 4 quý">
             <div class="festival-controls__head">
                 <div class="festival-controls__intro">
                     <div class="festival-controls__eyebrow-row">
                         <span class="festival-controls__badge">Lịch Điểm Thời Gian</span>
-                        <span class="festival-controls__count-pill" id="festival-total-count" aria-live="polite">
-                            Đang hiển thị 15 / 38 sự kiện tiêu biểu
+                        <span
+                            class="festival-controls__count-pill"
+                            id="festival-total-count"
+                            aria-live="polite"
+                            aria-atomic="true"
+                        >
+                            Đang hiển thị 15 / 38 sự kiện
                         </span>
                     </div>
                     <h1 class="festival-controls__heading" id="festival-main-heading">
@@ -8544,7 +8549,6 @@
                     </h1>
                 </div>
 
-                <!-- Cụm điều hướng Năm (< | Năm 2026 | >) -->
                 <div class="festival-controls__year-toolbar" role="group" aria-label="Chọn năm tra cứu sự kiện lễ tết">
                     <button
                         type="button"
@@ -8631,239 +8635,328 @@
                 </div>
             </div>
 
-            <!-- Thanh 4 Nút Lọc Loại Sự Kiện (Có aria-pressed, aria-controls & data-festival-filter) -->
-            <div class="festival-controls__filter-bar" role="group" aria-label="Lọc danh sách theo loại lịch">
-                <button
-                    type="button"
-                    class="festival-controls__filter-btn is-active"
-                    data-festival-filter="all"
-                    aria-pressed="true"
-                    aria-controls="festival-bento-grid"
-                    title="Hiển thị cả sự kiện Âm lịch và Dương lịch"
-                >
-                    <span>Tất cả sự kiện</span>
-                    <small id="count-filter-all">38</small>
-                </button>
+            <!-- Hàng giữa: 4 nút lọc loại lễ & nút Reset -->
+            <div class="festival-controls__filter-row">
+                <div class="festival-controls__filter-bar" role="group" aria-label="Lọc danh sách theo loại lịch">
+                    <button
+                        type="button"
+                        class="festival-controls__filter-btn is-active"
+                        data-festival-filter="all"
+                        aria-pressed="true"
+                        aria-controls="festival-bento-grid"
+                        title="Hiển thị cả sự kiện Âm lịch và Dương lịch"
+                    >
+                        <span>Tất cả sự kiện</span>
+                        <small id="count-filter-all">38</small>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="festival-controls__filter-btn"
+                        data-festival-filter="lunar"
+                        aria-pressed="false"
+                        aria-controls="festival-bento-grid"
+                        title="Chỉ hiển thị các ngày Lễ Tết truyền thống tính theo Âm lịch"
+                    >
+                        <i class="festival-cal__dot festival-cal__dot--lunar" aria-hidden="true"></i>
+                        <span>Lễ Âm lịch</span>
+                        <small id="count-filter-lunar">15</small>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="festival-controls__filter-btn"
+                        data-festival-filter="solar"
+                        aria-pressed="false"
+                        aria-controls="festival-bento-grid"
+                        title="Chỉ hiển thị các ngày Lễ kỷ niệm tính theo Dương lịch"
+                    >
+                        <i class="festival-cal__dot festival-cal__dot--solar" aria-hidden="true"></i>
+                        <span>Lễ Dương lịch</span>
+                        <small id="count-filter-solar">23</small>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="festival-controls__filter-btn"
+                        data-festival-filter="upcoming"
+                        aria-pressed="false"
+                        aria-controls="festival-bento-grid"
+                        title="Chỉ hiển thị các sự kiện sắp diễn ra tính từ hôm nay"
+                    >
+                        <span aria-hidden="true">✨</span>
+                        <span>Sắp diễn ra</span>
+                        <small id="count-filter-upcoming">6</small>
+                    </button>
+                </div>
 
                 <button
                     type="button"
-                    class="festival-controls__filter-btn"
-                    data-festival-filter="lunar"
-                    aria-pressed="false"
+                    class="festival-controls__reset-btn"
+                    id="festival-reset-btn"
+                    data-action="reset-filters"
                     aria-controls="festival-bento-grid"
-                    title="Chỉ hiển thị các ngày Lễ Tết truyền thống tính theo Âm lịch"
+                    title="Quay về chế độ xem Tất cả sự kiện Cả năm"
+                    hidden
                 >
-                    <i class="festival-cal__dot festival-cal__dot--lunar" aria-hidden="true"></i>
-                    <span>Lễ Âm lịch</span>
-                    <small id="count-filter-lunar">15</small>
-                </button>
-
-                <button
-                    type="button"
-                    class="festival-controls__filter-btn"
-                    data-festival-filter="solar"
-                    aria-pressed="false"
-                    aria-controls="festival-bento-grid"
-                    title="Chỉ hiển thị các ngày Lễ kỷ niệm tính theo Dương lịch"
-                >
-                    <i class="festival-cal__dot festival-cal__dot--solar" aria-hidden="true"></i>
-                    <span>Lễ Dương lịch</span>
-                    <small id="count-filter-solar">23</small>
-                </button>
-
-                <button
-                    type="button"
-                    class="festival-controls__filter-btn"
-                    data-festival-filter="upcoming"
-                    aria-pressed="false"
-                    aria-controls="festival-bento-grid"
-                    title="Chỉ hiển thị các sự kiện sắp diễn ra từ hôm nay"
-                >
-                    <span aria-hidden="true">✨</span>
-                    <span>Sắp diễn ra</span>
+                    <span aria-hidden="true">&#8634;</span>
+                    <span>Xem cả năm</span>
                 </button>
             </div>
 
-            <!-- Thanh Lọc Nhanh Theo Tháng (Roving Tabindex: 0 cho nút đang chọn, -1 cho các nút còn lại) -->
+            <!-- Khối Bento 4 Quý (Phương án 3) -->
             <div
-                class="festival-controls__month-jump"
+                class="festival-seasons-bento"
+                id="festival-jump-grid"
                 role="tablist"
-                aria-label="Lọc sự kiện theo tháng (Dùng phím mũi tên trái/phải để di chuyển)"
+                aria-label="Lọc sự kiện theo 4 quý Xuân Hạ Thu Đông (Dùng phím mũi tên trái/phải để di chuyển)"
             >
-                <span class="festival-controls__jump-label">Lọc nhanh theo tháng:</span>
-                <div class="festival-controls__jump-grid" id="festival-jump-grid">
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="true"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn is-active"
-                        tabindex="0"
-                        data-month-filter="all"
-                        title="Xem sự kiện tiêu biểu của cả 12 tháng"
-                    >
-                        Cả năm
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="1"
-                        title="Lọc sự kiện Tháng 1"
-                    >
-                        T1
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="2"
-                        title="Lọc sự kiện Tháng 2 (Tết Nguyên Đán)"
-                    >
-                        T2
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="3"
-                        title="Lọc sự kiện Tháng 3"
-                    >
-                        T3
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="4"
-                        title="Lọc sự kiện Tháng 4 (Giỗ Tổ Hùng Vương & 30/4)"
-                    >
-                        T4
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="5"
-                        title="Lọc sự kiện Tháng 5"
-                    >
-                        T5
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="6"
-                        title="Lọc sự kiện Tháng 6"
-                    >
-                        T6
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="7"
-                        title="Lọc sự kiện Tháng 7"
-                    >
-                        T7
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="8"
-                        title="Lọc sự kiện Tháng 8 (Lễ Vu Lan)"
-                    >
-                        T8
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="9"
-                        title="Lọc sự kiện Tháng 9 (Quốc khánh & Trung Thu)"
-                    >
-                        T9
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="10"
-                        title="Lọc sự kiện Tháng 10"
-                    >
-                        T10
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="11"
-                        title="Lọc sự kiện Tháng 11"
-                    >
-                        T11
-                    </button>
-                    <button
-                        type="button"
-                        role="tab"
-                        aria-selected="false"
-                        aria-controls="festival-bento-grid"
-                        class="festival-controls__jump-btn"
-                        tabindex="-1"
-                        data-month-filter="12"
-                        title="Lọc sự kiện Tháng 12"
-                    >
-                        T12
-                    </button>
+                <button
+                    type="button"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="festival-bento-grid"
+                    class="festival-seasons-bento__master festival-controls__jump-btn is-active"
+                    tabindex="0"
+                    data-month-filter="all"
+                    data-quarter="all"
+                    title="Hiển thị toàn bộ sự kiện tiêu biểu trong cả 4 quý của năm"
+                >
+                    <img
+                        src="./assets/icons/calendarRange.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="festival-seasons-bento__master-icon icon"
+                    />
+                    <span class="festival-seasons-bento__master-text">Cả năm</span>
+                </button>
+
+                <!-- Quý I • Mùa Xuân -->
+                <div
+                    class="festival-seasons-bento__quarter"
+                    role="group"
+                    aria-labelledby="festival-q1-label"
+                    data-quarter="1"
+                    data-season="spring"
+                >
+                    <span class="festival-seasons-bento__q-label" id="festival-q1-label">Quý I • Mùa Xuân</span>
+                    <div class="festival-seasons-bento__q-grid" role="presentation">
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="1"
+                            data-quarter="1"
+                            title="Tháng 1 (Mùa Xuân): Tết Dương lịch, Ngày Học sinh - Sinh viên VN"
+                        >
+                            T1
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="2"
+                            data-quarter="1"
+                            data-has-major="true"
+                            title="Tháng 2 (Mùa Xuân): Có Đại lễ Tết Nguyên Đán Bính Ngọ"
+                        >
+                            T2
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="3"
+                            data-quarter="1"
+                            title="Tháng 3 (Mùa Xuân): Tết Nguyên Tiêu, Quốc tế Phụ nữ 8/3"
+                        >
+                            T3
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quý II • Mùa Hạ -->
+                <div
+                    class="festival-seasons-bento__quarter"
+                    role="group"
+                    aria-labelledby="festival-q2-label"
+                    data-quarter="2"
+                    data-season="summer"
+                >
+                    <span class="festival-seasons-bento__q-label" id="festival-q2-label">Quý II • Mùa Hạ</span>
+                    <div class="festival-seasons-bento__q-grid" role="presentation">
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="4"
+                            data-quarter="2"
+                            data-has-major="true"
+                            title="Tháng 4 (Mùa Hạ): Có Đại lễ Giỗ Tổ Hùng Vương & 30/4"
+                        >
+                            T4
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="5"
+                            data-quarter="2"
+                            data-has-major="true"
+                            title="Tháng 5 (Mùa Hạ): Quốc tế Lao động 1/5 & Đại lễ Phật Đản"
+                        >
+                            T5
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="6"
+                            data-quarter="2"
+                            title="Tháng 6 (Mùa Hạ): Quốc tế Thiếu nhi 1/6, Tết Đoan Ngọ"
+                        >
+                            T6
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quý III • Mùa Thu -->
+                <div
+                    class="festival-seasons-bento__quarter"
+                    role="group"
+                    aria-labelledby="festival-q3-label"
+                    data-quarter="3"
+                    data-season="autumn"
+                >
+                    <span class="festival-seasons-bento__q-label" id="festival-q3-label">Quý III • Mùa Thu</span>
+                    <div class="festival-seasons-bento__q-grid" role="presentation">
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="7"
+                            data-quarter="3"
+                            title="Tháng 7 (Mùa Thu): Ngày Thương binh - Liệt sĩ 27/7"
+                        >
+                            T7
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="8"
+                            data-quarter="3"
+                            title="Tháng 8 (Mùa Thu): Cách mạng Tháng Tám, Lễ Vu Lan"
+                        >
+                            T8
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="9"
+                            data-quarter="3"
+                            data-has-major="true"
+                            title="Tháng 9 (Mùa Thu): Có Đại lễ Quốc khánh 2/9 & Tết Trung Thu"
+                        >
+                            T9
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quý IV • Mùa Đông -->
+                <div
+                    class="festival-seasons-bento__quarter"
+                    role="group"
+                    aria-labelledby="festival-q4-label"
+                    data-quarter="4"
+                    data-season="winter"
+                >
+                    <span class="festival-seasons-bento__q-label" id="festival-q4-label">Quý IV • Mùa Đông</span>
+                    <div class="festival-seasons-bento__q-grid" role="presentation">
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="10"
+                            data-quarter="4"
+                            title="Tháng 10 (Mùa Đông): Giải phóng Thủ đô, Phụ nữ VN 20/10"
+                        >
+                            T10
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="11"
+                            data-quarter="4"
+                            title="Tháng 11 (Mùa Đông): Ngày Nhà giáo Việt Nam 20/11"
+                        >
+                            T11
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn"
+                            tabindex="-1"
+                            data-month-filter="12"
+                            data-quarter="4"
+                            data-has-major="true"
+                            title="Tháng 12 (Mùa Đông): Ngày QĐND Việt Nam & Lễ Giáng Sinh"
+                        >
+                            T12
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
     </div>
 
-    <!-- ==================== TẦNG 2 (PHƯƠNG ÁN 2): LƯỚI BENTO ĐẠI TIỆC SỰ KIỆN (Ô ĐẠI LỄ 2x2 + Ô LỄ THƯỜNG 1x1) ==================== -->
+    <!-- ==================== TẦNG 2: LƯỚI BENTO ĐẠI TIỆC SỰ KIỆN (Phương án 2) ==================== -->
     <div class="festival-bento-box" role="region" aria-label="Lưới Bento Sự kiện và Đại lễ trong năm">
         <div class="festival-bento-grid" id="festival-bento-grid">
-            <!-- ==================== NHÓM MẶC ĐỊNH: 3 Ô ĐẠI LỄ 2x2 (12 ĐƠN VỊ) + 12 Ô LỄ THƯỜNG 1x1 (12 ĐƠN VỊ) = 24 Ô KHÍT 6 HÀNG ==================== -->
-
-            <!-- [ĐẠI LỄ 2x2 #1] GIỖ TỔ HÙNG VƯƠNG (10/3 ÂL -> 26/04/2026) -->
+            <!-- [ĐẠI LỄ 2x2 #1] GIỖ TỔ HÙNG VƯƠNG (26/04/2026) -->
             <a
                 href="./day.html?date=2026-04-26"
                 class="festival-tile festival-tile--major"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="gio-to-hung-vuong"
                 data-major="true"
                 data-extra="false"
@@ -8876,13 +8969,12 @@
                 data-month="4"
                 data-calendar-type="lunar"
                 data-zodiac="dragon"
-                title="Đại lễ Quốc giỗ: Giỗ Tổ Hùng Vương (Mùng 10 tháng 3 Âm lịch - 26/04/2026)"
+                title="Đại lễ Quốc giỗ: Giỗ Tổ Hùng Vương (26/04/2026)"
             >
                 <div class="festival-tile__head">
                     <span class="festival-tile__major-tag">Đại Lễ Quốc Gia</span>
                     <span class="festival-tile__type-pill">10/3 Âm Lịch</span>
                 </div>
-
                 <div class="festival-tile__main">
                     <h3 class="festival-tile__title" itemprop="name">Giỗ Tổ Hùng Vương</h3>
                     <p class="festival-tile__desc" itemprop="description">
@@ -8890,7 +8982,6 @@
                         dựng nước của các Vua Hùng.
                     </p>
                 </div>
-
                 <div class="festival-tile__foot">
                     <div class="festival-tile__big-date">
                         <time itemprop="startDate" datetime="2026-04-26" class="festival-tile__big-num">26/04</time>
@@ -8898,7 +8989,6 @@
                     </div>
                     <span class="festival-tile__cta" aria-hidden="true">&#8599;</span>
                 </div>
-
                 <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true" class="festival-tile__zodiac" />
             </a>
 
@@ -8908,6 +8998,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="tet-duong-lich"
                 data-major="false"
                 data-extra="false"
@@ -8918,7 +9009,7 @@
                 data-month="1"
                 data-calendar-type="solar"
                 data-zodiac="horse"
-                title="Tết Dương lịch (01/01/2026 - 13/11 Âm lịch)"
+                title="Tết Dương lịch (01/01/2026)"
             >
                 <div class="festival-tile__head">
                     <span class="festival-tile__day-badge">01/01</span>
@@ -8933,12 +9024,13 @@
                 </div>
             </a>
 
-            <!-- [LỄ THƯỜNG 1x1 #2] TẾT ÔNG CÔNG ÔNG TÁO (23/12 ÂL -> 10/02) -->
+            <!-- [LỄ THƯỜNG 1x1 #2] TẾT ÔNG CÔNG ÔNG TÁO (10/02) -->
             <a
                 href="./day.html?date=2026-02-10"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="ong-cong-ong-tao"
                 data-major="false"
                 data-extra="false"
@@ -8951,7 +9043,7 @@
                 data-month="2"
                 data-calendar-type="lunar"
                 data-zodiac="dog"
-                title="Tết Ông Công Ông Táo (23 tháng Chạp - 10/02/2026)"
+                title="Tết Ông Công Ông Táo (10/02/2026)"
             >
                 <div class="festival-tile__head">
                     <span class="festival-tile__day-badge festival-tile__day-badge--lunar">10/02</span>
@@ -8965,12 +9057,13 @@
                 </div>
             </a>
 
-            <!-- [LỄ THƯỜNG 1x1 #3] LỄ TÌNH NHÂN VALENTINE (14/02) -->
+            <!-- [LỄ THƯỜNG 1x1 #3] VALENTINE (14/02) -->
             <a
                 href="./day.html?date=2026-02-14"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="valentine"
                 data-major="false"
                 data-extra="false"
@@ -8995,12 +9088,13 @@
                 </div>
             </a>
 
-            <!-- [ĐẠI LỄ 2x2 #2] TẾT NGUYÊN ĐÁN BÍNH NGỌ (1/1 ÂL -> 17/02/2026) -->
+            <!-- [ĐẠI LỄ 2x2 #2] TẾT NGUYÊN ĐÁN BÍNH NGỌ (17/02/2026) -->
             <a
                 href="./day.html?date=2026-02-17"
                 class="festival-tile festival-tile--major is-active"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="tet-nguyen-dan"
                 data-major="true"
                 data-extra="false"
@@ -9019,7 +9113,6 @@
                     <span class="festival-tile__major-tag">Đại Lễ Cổ Truyền</span>
                     <span class="festival-tile__type-pill">Mùng 1/1 Âm Lịch</span>
                 </div>
-
                 <div class="festival-tile__main">
                     <h3 class="festival-tile__title" itemprop="name">Tết Nguyên Đán Bính Ngọ</h3>
                     <p class="festival-tile__desc" itemprop="description">
@@ -9027,7 +9120,6 @@
                         Thìn, Ngọ.
                     </p>
                 </div>
-
                 <div class="festival-tile__foot">
                     <div class="festival-tile__big-date">
                         <time itemprop="startDate" datetime="2026-02-17" class="festival-tile__big-num">17/02</time>
@@ -9035,16 +9127,16 @@
                     </div>
                     <span class="festival-tile__cta" aria-hidden="true">&#8599;</span>
                 </div>
-
                 <img src="./assets/icons/zodiac/horse.svg" alt="" aria-hidden="true" class="festival-tile__zodiac" />
             </a>
 
-            <!-- [LỄ THƯỜNG 1x1 #4] NGÀY VÍA THẦN TÀI (10/1 ÂL -> 26/02) -->
+            <!-- [LỄ THƯỜNG 1x1 #4] VÍA THẦN TÀI (26/02) -->
             <a
                 href="./day.html?date=2026-02-26"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="via-than-tai"
                 data-major="false"
                 data-extra="false"
@@ -9057,7 +9149,7 @@
                 data-month="2"
                 data-calendar-type="lunar"
                 data-zodiac="tiger"
-                title="Ngày vía Thần Tài (Mùng 10 tháng Giêng - 26/02/2026)"
+                title="Ngày vía Thần Tài (26/02/2026)"
             >
                 <div class="festival-tile__head">
                     <span class="festival-tile__day-badge festival-tile__day-badge--lunar">26/02</span>
@@ -9071,12 +9163,13 @@
                 </div>
             </a>
 
-            <!-- [LỄ THƯỜNG 1x1 #5] TẾT NGUYÊN TIÊU - RẰM THÁNG GIÊNG (15/1 ÂL -> 03/03) -->
+            <!-- [LỄ THƯỜNG 1x1 #5] TẾT NGUYÊN TIÊU (03/03) -->
             <a
                 href="./day.html?date=2026-03-03"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="tet-nguyen-tieu"
                 data-major="false"
                 data-extra="false"
@@ -9109,6 +9202,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="quoc-te-phu-nu"
                 data-major="false"
                 data-extra="false"
@@ -9139,6 +9233,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="giai-phong-mien-nam"
                 data-major="false"
                 data-extra="false"
@@ -9149,7 +9244,7 @@
                 data-month="4"
                 data-calendar-type="solar"
                 data-zodiac="snake"
-                title="Ngày Giải phóng miền Nam, thống nhất đất nước (30/04/2026)"
+                title="Ngày Giải phóng miền Nam (30/04/2026)"
             >
                 <div class="festival-tile__head">
                     <span class="festival-tile__day-badge">30/04</span>
@@ -9169,6 +9264,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="quoc-te-lao-dong"
                 data-major="false"
                 data-extra="false"
@@ -9199,6 +9295,7 @@
                 class="festival-tile festival-tile--major"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="quoc-khanh-2-9"
                 data-major="true"
                 data-extra="false"
@@ -9215,7 +9312,6 @@
                     <span class="festival-tile__major-tag">Đại Lễ Quốc Khánh</span>
                     <span class="festival-tile__type-pill">Dương Lịch</span>
                 </div>
-
                 <div class="festival-tile__main">
                     <h3 class="festival-tile__title" itemprop="name">Quốc Khánh Việt Nam 2/9</h3>
                     <p class="festival-tile__desc" itemprop="description">
@@ -9223,7 +9319,6 @@
                         nước Việt Nam Dân chủ Cộng hòa.
                     </p>
                 </div>
-
                 <div class="festival-tile__foot">
                     <div class="festival-tile__big-date">
                         <time itemprop="startDate" datetime="2026-09-02" class="festival-tile__big-num">02/09</time>
@@ -9231,16 +9326,16 @@
                     </div>
                     <span class="festival-tile__cta" aria-hidden="true">&#8599;</span>
                 </div>
-
                 <img src="./assets/icons/zodiac/dog.svg" alt="" aria-hidden="true" class="festival-tile__zodiac" />
             </a>
 
-            <!-- [LỄ THƯỜNG 1x1 #9] TẾT ĐOAN NGỌ (5/5 ÂL -> 19/06) -->
+            <!-- [LỄ THƯỜNG 1x1 #9] TẾT ĐOAN NGỌ (19/06) -->
             <a
                 href="./day.html?date=2026-06-19"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="tet-doan-ngo"
                 data-major="false"
                 data-extra="false"
@@ -9253,7 +9348,7 @@
                 data-month="6"
                 data-calendar-type="lunar"
                 data-zodiac="goat"
-                title="Tết Đoan Ngọ (Mùng 5 tháng 5 ÂL - 19/06/2026)"
+                title="Tết Đoan Ngọ (19/06/2026)"
             >
                 <div class="festival-tile__head">
                     <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/06</span>
@@ -9267,12 +9362,13 @@
                 </div>
             </a>
 
-            <!-- [LỄ THƯỜNG 1x1 #10] LỄ VU LAN BÁO HIẾU (15/7 ÂL -> 27/08) -->
+            <!-- [LỄ THƯỜNG 1x1 #10] LỄ VU LAN (27/08) -->
             <a
                 href="./day.html?date=2026-08-27"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="le-vu-lan"
                 data-major="false"
                 data-extra="false"
@@ -9285,7 +9381,7 @@
                 data-month="8"
                 data-calendar-type="lunar"
                 data-zodiac="dragon"
-                title="Lễ Vu Lan Báo Hiếu - Rằm tháng Bảy (27/08/2026)"
+                title="Lễ Vu Lan Báo Hiếu (27/08/2026)"
             >
                 <div class="festival-tile__head">
                     <span class="festival-tile__day-badge festival-tile__day-badge--lunar">27/08</span>
@@ -9299,12 +9395,13 @@
                 </div>
             </a>
 
-            <!-- [LỄ THƯỜNG 1x1 #11] TẾT TRUNG THU (15/8 ÂL -> 25/09) -->
+            <!-- [LỄ THƯỜNG 1x1 #11] TRUNG THU (25/09) -->
             <a
                 href="./day.html?date=2026-09-25"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="tet-trung-thu"
                 data-major="false"
                 data-extra="false"
@@ -9317,7 +9414,7 @@
                 data-month="9"
                 data-calendar-type="lunar"
                 data-zodiac="rooster"
-                title="Tết Trung Thu - Rằm tháng Tám (25/09/2026)"
+                title="Tết Trung Thu (25/09/2026)"
             >
                 <div class="festival-tile__head">
                     <span class="festival-tile__day-badge festival-tile__day-badge--lunar">25/09</span>
@@ -9331,12 +9428,13 @@
                 </div>
             </a>
 
-            <!-- [LỄ THƯỜNG 1x1 #12] NGÀY NHÀ GIÁO VIỆT NAM (20/11) -->
+            <!-- [LỄ THƯỜNG 1x1 #12] 20/11 (20/11) -->
             <a
                 href="./day.html?date=2026-11-20"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="nha-giao-viet-nam"
                 data-major="false"
                 data-extra="false"
@@ -9361,14 +9459,13 @@
                 </div>
             </a>
 
-            <!-- ==================== NHÓM MỞ RỘNG (data-extra="true" + hidden): BẤM "XEM THÊM" SẼ BUNG RA THÊM 3 ĐẠI LỄ 2x2 + 20 LỄ THƯỜNG 1x1 ==================== -->
-
-            <!-- [ĐẠI LỄ MỞ RỘNG 2x2 #4] ĐÊM GIAO THỪA TẾT NGUYÊN ĐÁN (29/12 ÂL -> 16/02/2026) -->
+            <!-- ==================== NHÓM MỞ RỘNG (data-extra="true" + hidden): 3 ĐẠI LỄ 2x2 + 20 LỄ THƯỜNG 1x1 ==================== -->
             <a
                 href="./day.html?date=2026-02-16"
                 class="festival-tile festival-tile--major"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="giao-thua-tet"
                 data-major="true"
                 data-extra="true"
@@ -9405,12 +9502,13 @@
                 <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true" class="festival-tile__zodiac" />
             </a>
 
-            <!-- [LỄ THƯỜNG MỞ RỘNG #13..#32] -->
+            <!-- Các lễ thường mở rộng khác (09/01, 03/02, 18/02, 19/02, 25/02, 27/02, 20/03, 26/03, 05/04, 19/04, 21/04, 07/05, 01/06, 21/06, 28/06, 27/07, 19/08, 10/10, 20/10, 22/12) -->
             <a
                 href="./day.html?date=2026-01-09"
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="hoc-sinh-sinh-vien"
                 data-major="false"
                 data-extra="true"
@@ -9441,6 +9539,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="thanh-lap-dang"
                 data-major="false"
                 data-extra="true"
@@ -9471,6 +9570,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="mung-2-tet"
                 data-major="false"
                 data-extra="true"
@@ -9503,6 +9603,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="mung-3-tet"
                 data-major="false"
                 data-extra="true"
@@ -9535,6 +9636,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="via-ngoc-hoang"
                 data-major="false"
                 data-extra="true"
@@ -9547,7 +9649,7 @@
                 data-month="2"
                 data-calendar-type="lunar"
                 data-zodiac="buffalo"
-                title="Ngày vía Ngọc Hoàng (Mùng 9 tháng Giêng - 25/02/2026)"
+                title="Ngày vía Ngọc Hoàng (25/02/2026)"
                 hidden
             >
                 <div class="festival-tile__head">
@@ -9567,6 +9669,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="thay-thuoc-vn"
                 data-major="false"
                 data-extra="true"
@@ -9597,6 +9700,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="quoc-te-hanh-phuc"
                 data-major="false"
                 data-extra="true"
@@ -9627,6 +9731,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="thanh-lap-doan"
                 data-major="false"
                 data-extra="true"
@@ -9652,12 +9757,13 @@
                 </div>
             </a>
 
-            <!-- [ĐẠI LỄ MỞ RỘNG 2x2 #5] ĐẠI LỄ PHẬT ĐẢN (15/4 ÂL -> 31/05/2026) -->
+            <!-- [ĐẠI LỄ MỞ RỘNG 2x2 #5] PHẬT ĐẢN (31/05/2026) -->
             <a
                 href="./day.html?date=2026-05-31"
                 class="festival-tile festival-tile--major"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="dai-le-phat-dan"
                 data-major="true"
                 data-extra="true"
@@ -9670,7 +9776,7 @@
                 data-month="5"
                 data-calendar-type="lunar"
                 data-zodiac="mouse"
-                title="Đại lễ Phật Đản - Rằm tháng Tư Âm lịch (31/05/2026)"
+                title="Đại lễ Phật Đản (31/05/2026)"
                 hidden
             >
                 <div class="festival-tile__head">
@@ -9699,17 +9805,20 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="tiet-thanh-minh"
                 data-major="false"
                 data-extra="true"
                 data-date="2026-04-05"
                 data-solar="05/04"
                 data-lunar="18/02"
+                data-lunar-day="18"
+                data-lunar-month="2"
                 data-weekday="Chủ Nhật"
                 data-month="4"
                 data-calendar-type="lunar"
                 data-zodiac="dragon"
-                title="Tết Thanh Minh - Lễ Tảo mộ (05/04/2026)"
+                title="Tết Thanh Minh (05/04/2026)"
                 hidden
             >
                 <div class="festival-tile__head">
@@ -9729,6 +9838,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="tet-han-thuc"
                 data-major="false"
                 data-extra="true"
@@ -9741,7 +9851,7 @@
                 data-month="4"
                 data-calendar-type="lunar"
                 data-zodiac="horse"
-                title="Tết Hàn Thực (Mùng 3 tháng 3 ÂL - 19/04/2026)"
+                title="Tết Hàn Thực (19/04/2026)"
                 hidden
             >
                 <div class="festival-tile__head">
@@ -9761,6 +9871,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="ngay-sach-vn"
                 data-major="false"
                 data-extra="true"
@@ -9771,7 +9882,7 @@
                 data-month="4"
                 data-calendar-type="solar"
                 data-zodiac="monkey"
-                title="Ngày Sách và Văn hóa đọc Việt Nam (21/04/2026)"
+                title="Ngày Sách Việt Nam (21/04/2026)"
                 hidden
             >
                 <div class="festival-tile__head">
@@ -9791,6 +9902,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="dien-bien-phu"
                 data-major="false"
                 data-extra="true"
@@ -9801,7 +9913,7 @@
                 data-month="5"
                 data-calendar-type="solar"
                 data-zodiac="mouse"
-                title="Ngày Chiến thắng Điện Biên Phủ (07/05/2026)"
+                title="Chiến thắng Điện Biên Phủ (07/05/2026)"
                 hidden
             >
                 <div class="festival-tile__head">
@@ -9821,6 +9933,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="quoc-te-thieu-nhi"
                 data-major="false"
                 data-extra="true"
@@ -9851,6 +9964,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="bao-chi-vn"
                 data-major="false"
                 data-extra="true"
@@ -9881,6 +9995,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="gia-dinh-vn"
                 data-major="false"
                 data-extra="true"
@@ -9911,6 +10026,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="thuong-binh-liet-si"
                 data-major="false"
                 data-extra="true"
@@ -9936,12 +10052,13 @@
                 </div>
             </a>
 
-            <!-- [ĐẠI LỄ MỞ RỘNG 2x2 #6] LỄ GIÁNG SINH NOEL (25/12/2026) -->
+            <!-- [ĐẠI LỄ MỞ RỘNG 2x2 #6] GIÁNG SINH NOEL (25/12/2026) -->
             <a
                 href="./day.html?date=2026-12-25"
                 class="festival-tile festival-tile--major"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="giang-sinh-noel"
                 data-major="true"
                 data-extra="true"
@@ -9981,6 +10098,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="le-that-tich"
                 data-major="false"
                 data-extra="true"
@@ -9993,7 +10111,7 @@
                 data-month="8"
                 data-calendar-type="lunar"
                 data-zodiac="monkey"
-                title="Lễ Thất Tịch - Ông Ngâu Bà Ngâu (7/7 ÂL - 19/08/2026)"
+                title="Lễ Thất Tịch (19/08/2026)"
                 hidden
             >
                 <div class="festival-tile__head">
@@ -10013,6 +10131,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="giai-phong-thu-do"
                 data-major="false"
                 data-extra="true"
@@ -10043,6 +10162,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="phu-nu-viet-nam"
                 data-major="false"
                 data-extra="true"
@@ -10073,6 +10193,7 @@
                 class="festival-tile"
                 itemscope
                 itemtype="https://schema.org/Event"
+                itemprop="url"
                 data-event-id="quan-doi-nhan-dan"
                 data-major="false"
                 data-extra="true"
@@ -10099,7 +10220,12 @@
             </a>
         </div>
 
-        <!-- THANH NÚT "XEM THÊM TẤT CẢ SỰ KIỆN" CHUẨN ACCORDION A11Y (aria-expanded + aria-controls) -->
+        <!-- Khối thông báo rỗng khi bộ lọc không có kết quả -->
+        <div class="festival-bento-box__empty" id="festival-empty-state" role="status" aria-live="polite" hidden>
+            <p class="festival-bento-box__empty-text">Không có sự kiện nào khớp với bộ lọc hiện tại trong tháng này.</p>
+        </div>
+
+        <!-- Thanh nút "Xem thêm tất cả sự kiện" chuẩn Accordion a11y -->
         <footer class="festival-bento-box__footer">
             <button
                 type="button"

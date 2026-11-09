@@ -1,0 +1,719 @@
+<!-- templates/festival-calendar.html -->
+<section class="festival-cal" id="festival-cal-app" aria-label="Sự kiện và Lễ Tết trong năm 2026"
+    data-active-year="2026" data-active-filter="all" data-active-month="all" data-active-quarter="all"
+    data-expanded="false">
+    <!-- ==================== TẦNG 1: HERO ĐẾM NGƯỢC (TRÁI) & BỘ ĐIỀU KHIỂN NĂM / LỌC / 4 QUÝ (PHẢI) ==================== -->
+    <div class="festival-cal__top-bento">
+        <!-- CỘT TRÁI: THẺ HERO SỰ KIỆN TIÊU ĐIỂM -->
+        <article class="festival-hero" id="festival-hero-card" aria-label="Sự kiện tiêu điểm đang chọn"
+            aria-live="polite" aria-atomic="true">
+            <div class="festival-hero__top">
+                <div class="festival-hero__badges">
+                    <span class="festival-hero__pill" id="festival-hero-countdown">Đại lễ tâm điểm</span>
+                    <span class="festival-hero__type-badge" id="festival-hero-type" data-calendar-type="lunar"
+                        title="Phân loại sự kiện theo Âm lịch hoặc Dương lịch">
+                        <i class="festival-cal__dot festival-cal__dot--lunar" aria-hidden="true"></i>
+                        <span id="festival-hero-type-text">Đại lễ Âm lịch</span>
+                    </span>
+                </div>
+
+                <div class="festival-hero__date-row">
+                    <time datetime="2026-02-17" class="festival-hero__solar" id="festival-hero-solar">17/02</time>
+                    <div class="festival-hero__weekday-group">
+                        <strong class="festival-hero__weekday" id="festival-hero-weekday">Thứ Ba</strong>
+                        <span class="festival-hero__year" id="festival-hero-year">Năm 2026 (Bính Ngọ)</span>
+                    </div>
+                </div>
+
+                <h2 class="festival-hero__title" id="festival-hero-title">Tết Nguyên Đán Bính Ngọ</h2>
+
+                <p class="festival-hero__lunar" id="festival-hero-lunar">
+                    Nhằm ngày <strong>01/01 Âm lịch</strong> (Mùng 1 tháng Giêng • Ngày Quý Tỵ)
+                </p>
+            </div>
+
+            <footer class="festival-hero__footer">
+                <a href="./day.html?date=2026-02-17" class="festival-hero__link" id="festival-hero-link"
+                    title="Mở trang Chi tiết Ngày để xem Giờ Hoàng Đạo và Khổng Minh Lục Diệu của ngày lễ này">
+                    <span>Xem chi tiết ngày lễ</span>
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <img src="./assets/icons/zodiac/horse.svg" alt="" aria-hidden="true" class="festival-hero__zodiac"
+                    id="festival-hero-zodiac" />
+            </footer>
+        </article>
+
+        <!-- CỘT PHẢI: BỘ ĐIỀU KHIỂN NĂM, BỘ LỌC LOẠI LỄ & BENTO 4 QUÝ (XUÂN - HẠ - THU - ĐÔNG) -->
+        <header class="festival-controls" aria-label="Bộ điều khiển và lọc sự kiện lễ tết theo 4 quý">
+            <!-- 1. Hàng đầu: Tiêu đề + Bộ đếm aria-live + Cụm chọn Năm (< Năm 2026 >) -->
+            <div class="festival-controls__head">
+                <div class="festival-controls__intro">
+                    <div class="festival-controls__eyebrow-row">
+                        <span class="festival-controls__badge">Lịch Điểm Thời Gian</span>
+                        <span class="festival-controls__count-pill" id="festival-total-count" aria-live="polite"
+                            aria-atomic="true">
+                            Đang hiển thị 15 / 38 sự kiện
+                        </span>
+                    </div>
+                    <h1 class="festival-controls__heading" id="festival-main-heading">
+                        Sự Kiện &amp; Ngày Lễ Trong Năm <time datetime="2026" id="festival-heading-year">2026</time>
+                    </h1>
+                </div>
+
+                <div class="festival-controls__year-toolbar" role="group" aria-label="Chọn năm tra cứu sự kiện lễ tết">
+                    <button type="button" class="month-cal__nav-btn" id="festival-prev-year" data-year-step="-1"
+                        aria-label="Xem lễ tết năm trước (2025)" title="Chuyển sang năm 2025">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+
+                    <details class="month-cal__dropdown js-cal-dropdown" id="festival-year-dropdown">
+                        <summary class="month-cal__summary" aria-label="Chọn năm tra cứu, hiện tại là Năm 2026"
+                            aria-expanded="false" aria-controls="festival-year-list" title="Mở danh sách chọn năm">
+                            <span class="month-cal__summary-text" id="festival-year-label">Năm 2026</span>
+                            <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true"
+                                class="month-cal__arrow icon" />
+                        </summary>
+                        <ul class="month-cal__dropdown-menu month-cal__dropdown-menu--year" id="festival-year-list"
+                            role="listbox" aria-label="Danh sách năm">
+                            <li>
+                                <button type="button" role="option" aria-selected="false" data-year="2025"
+                                    class="month-cal__option" title="Xem lễ tết năm 2025">
+                                    Năm 2025
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" role="option" aria-selected="true" data-year="2026"
+                                    class="month-cal__option is-selected" title="Xem lễ tết năm 2026">
+                                    Năm 2026
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" role="option" aria-selected="false" data-year="2027"
+                                    class="month-cal__option" title="Xem lễ tết năm 2027">
+                                    Năm 2027
+                                </button>
+                            </li>
+                        </ul>
+                    </details>
+
+                    <button type="button" class="month-cal__nav-btn" id="festival-next-year" data-year-step="1"
+                        aria-label="Xem lễ tết năm sau (2027)" title="Chuyển sang năm 2027">
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Hàng giữa: 4 Nút Lọc Loại Lễ (data-festival-filter + aria-pressed) & Nút Reset (hidden) -->
+            <div class="festival-controls__filter-row">
+                <div class="festival-controls__filter-bar" role="group" aria-label="Lọc danh sách theo loại lịch">
+                    <button type="button" class="festival-controls__filter-btn is-active" data-festival-filter="all"
+                        aria-pressed="true" aria-controls="festival-bento-grid"
+                        title="Hiển thị cả sự kiện Âm lịch và Dương lịch">
+                        <span>Tất cả sự kiện</span>
+                        <small id="count-filter-all">38</small>
+                    </button>
+
+                    <button type="button" class="festival-controls__filter-btn" data-festival-filter="lunar"
+                        aria-pressed="false" aria-controls="festival-bento-grid"
+                        title="Chỉ hiển thị các ngày Lễ Tết truyền thống tính theo Âm lịch">
+                        <i class="festival-cal__dot festival-cal__dot--lunar" aria-hidden="true"></i>
+                        <span>Lễ Âm lịch</span>
+                        <small id="count-filter-lunar">15</small>
+                    </button>
+
+                    <button type="button" class="festival-controls__filter-btn" data-festival-filter="solar"
+                        aria-pressed="false" aria-controls="festival-bento-grid"
+                        title="Chỉ hiển thị các ngày Lễ kỷ niệm tính theo Dương lịch">
+                        <i class="festival-cal__dot festival-cal__dot--solar" aria-hidden="true"></i>
+                        <span>Lễ Dương lịch</span>
+                        <small id="count-filter-solar">23</small>
+                    </button>
+
+                    <button type="button" class="festival-controls__filter-btn" data-festival-filter="upcoming"
+                        aria-pressed="false" aria-controls="festival-bento-grid"
+                        title="Chỉ hiển thị các sự kiện sắp diễn ra tính từ hôm nay">
+                        <span aria-hidden="true">✨</span>
+                        <span>Sắp diễn ra</span>
+                        <small id="count-filter-upcoming">6</small>
+                    </button>
+                </div>
+
+                <button type="button" class="festival-controls__reset-btn" id="festival-reset-btn"
+                    data-action="reset-filters" aria-controls="festival-bento-grid"
+                    title="Quay về chế độ xem Tất cả sự kiện Cả năm" hidden>
+                    <span aria-hidden="true">↺</span>
+                    <span>Xem cả năm</span>
+                </button>
+            </div>
+
+            <!-- 3. Hàng đáy: BENTO 4 QUÝ (XUÂN - HẠ - THU - ĐÔNG) + Ô MASTER "CẢ NĂM" -->
+            <div class="festival-seasons-bento" id="festival-jump-grid" role="tablist"
+                aria-label="Lọc sự kiện theo 4 quý Xuân Hạ Thu Đông (Dùng phím mũi tên trái/phải để di chuyển)">
+                <button type="button" role="tab" aria-selected="true" aria-controls="festival-bento-grid"
+                    class="festival-seasons-bento__master festival-controls__jump-btn is-active" tabindex="0"
+                    data-month-filter="all" data-quarter="all"
+                    title="Hiển thị toàn bộ sự kiện tiêu biểu trong cả 4 quý của năm">
+                    <img src="./assets/icons/calendarRange.svg" alt="" aria-hidden="true"
+                        class="festival-seasons-bento__master-icon icon" />
+                    <span class="festival-seasons-bento__master-text">Cả năm</span>
+                </button>
+
+                <!-- Quý I • Mùa Xuân -->
+                <div class="festival-seasons-bento__quarter" role="group" aria-labelledby="festival-q1-label"
+                    data-quarter="1" data-season="spring">
+                    <span class="festival-seasons-bento__q-label" id="festival-q1-label">Quý I • Mùa Xuân</span>
+                    <div class="festival-seasons-bento__q-grid" role="presentation">
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="1" data-quarter="1"
+                            title="Tháng 1 (Mùa Xuân): Tết Dương lịch, Ngày Học sinh - Sinh viên VN">
+                            T1
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="2" data-quarter="1" data-has-major="true"
+                            title="Tháng 2 (Mùa Xuân): Có Đại lễ Tết Nguyên Đán Bính Ngọ">
+                            T2
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="3" data-quarter="1"
+                            title="Tháng 3 (Mùa Xuân): Tết Nguyên Tiêu, Quốc tế Phụ nữ 8/3">
+                            T3
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quý II • Mùa Hạ -->
+                <div class="festival-seasons-bento__quarter" role="group" aria-labelledby="festival-q2-label"
+                    data-quarter="2" data-season="summer">
+                    <span class="festival-seasons-bento__q-label" id="festival-q2-label">Quý II • Mùa Hạ</span>
+                    <div class="festival-seasons-bento__q-grid" role="presentation">
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="4" data-quarter="2" data-has-major="true"
+                            title="Tháng 4 (Mùa Hạ): Có Đại lễ Giỗ Tổ Hùng Vương & 30/4">
+                            T4
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="5" data-quarter="2" data-has-major="true"
+                            title="Tháng 5 (Mùa Hạ): Quốc tế Lao động 1/5 & Đại lễ Phật Đản">
+                            T5
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="6" data-quarter="2"
+                            title="Tháng 6 (Mùa Hạ): Quốc tế Thiếu nhi 1/6, Tết Đoan Ngọ">
+                            T6
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quý III • Mùa Thu -->
+                <div class="festival-seasons-bento__quarter" role="group" aria-labelledby="festival-q3-label"
+                    data-quarter="3" data-season="autumn">
+                    <span class="festival-seasons-bento__q-label" id="festival-q3-label">Quý III • Mùa Thu</span>
+                    <div class="festival-seasons-bento__q-grid" role="presentation">
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="7" data-quarter="3"
+                            title="Tháng 7 (Mùa Thu): Ngày Thương binh - Liệt sĩ 27/7">
+                            T7
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="8" data-quarter="3"
+                            title="Tháng 8 (Mùa Thu): Cách mạng Tháng Tám, Lễ Vu Lan">
+                            T8
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="9" data-quarter="3" data-has-major="true"
+                            title="Tháng 9 (Mùa Thu): Có Đại lễ Quốc khánh 2/9 & Tết Trung Thu">
+                            T9
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quý IV • Mùa Đông -->
+                <div class="festival-seasons-bento__quarter" role="group" aria-labelledby="festival-q4-label"
+                    data-quarter="4" data-season="winter">
+                    <span class="festival-seasons-bento__q-label" id="festival-q4-label">Quý IV • Mùa Đông</span>
+                    <div class="festival-seasons-bento__q-grid" role="presentation">
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="10" data-quarter="4"
+                            title="Tháng 10 (Mùa Đông): Giải phóng Thủ đô, Phụ nữ VN 20/10">
+                            T10
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="11" data-quarter="4"
+                            title="Tháng 11 (Mùa Đông): Ngày Nhà giáo Việt Nam 20/11">
+                            T11
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" aria-controls="festival-bento-grid"
+                            class="festival-seasons-bento__btn festival-controls__jump-btn" tabindex="-1"
+                            data-month-filter="12" data-quarter="4" data-has-major="true"
+                            title="Tháng 12 (Mùa Đông): Ngày QĐND Việt Nam & Lễ Giáng Sinh">
+                            T12
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- ==================== TẦNG 2: LƯỚI BENTO ĐẠI TIỆC SỰ KIỆN (Ô ĐẠI LỄ 2x2 + Ô LỄ THƯỜNG 1x1) ==================== -->
+    <div class="festival-bento-box" role="region" aria-label="Lưới Bento Sự kiện và Đại lễ trong năm">
+        <div class="festival-bento-grid" id="festival-bento-grid" itemscope itemtype="https://schema.org/ItemList">
+            <!-- [ĐẠI LỄ 2x2 #1] GIỖ TỔ HÙNG VƯƠNG (26/04/2026) -->
+            <a href="./day.html?date=2026-04-26" class="festival-tile festival-tile--major" itemscope
+                itemtype="https://schema.org/Event" itemprop="url" data-event-id="gio-to-hung-vuong" data-major="true"
+                data-extra="false" data-date="2026-04-26" data-solar="26/04" data-lunar="10/03" data-lunar-day="10"
+                data-lunar-month="3" data-weekday="Chủ Nhật" data-month="4" data-calendar-type="lunar"
+                data-zodiac="dragon" title="Đại lễ Quốc giỗ: Giỗ Tổ Hùng Vương (26/04/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__major-tag">Đại Lễ Quốc Gia</span>
+                    <span class="festival-tile__type-pill">10/3 Âm Lịch</span>
+                </div>
+                <div class="festival-tile__main">
+                    <h3 class="festival-tile__title" itemprop="name">Giỗ Tổ Hùng Vương</h3>
+                    <p class="festival-tile__desc" itemprop="description">
+                        "Dù ai đi ngược về xuôi, nhớ ngày Giỗ Tổ mùng Mười tháng Ba" — Ngày Quốc giỗ tưởng nhớ công đức
+                        dựng nước của các Vua Hùng.
+                    </p>
+                </div>
+                <div class="festival-tile__foot">
+                    <div class="festival-tile__big-date">
+                        <time itemprop="startDate" datetime="2026-04-26" class="festival-tile__big-num">26/04</time>
+                        <span class="festival-tile__big-sub">Chủ Nhật • Tháng 4 Dương lịch</span>
+                    </div>
+                    <span class="festival-tile__cta" aria-hidden="true">↗</span>
+                </div>
+                <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true" class="festival-tile__zodiac" />
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #1] TẾT DƯƠNG LỊCH (01/01) -->
+            <a href="./day.html?date=2026-01-01" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="tet-duong-lich" data-major="false" data-extra="false"
+                data-date="2026-01-01" data-solar="01/01" data-lunar="13/11" data-weekday="Thứ Năm" data-month="1"
+                data-calendar-type="solar" data-zodiac="horse" title="Tết Dương lịch (01/01/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">01/01</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Tết Dương Lịch Năm Mới</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-01-01">Thứ Năm</time> • 13/11
+                        <abbr title="Âm lịch">ÂL</abbr>
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #2] TẾT ÔNG CÔNG ÔNG TÁO (10/02) -->
+            <a href="./day.html?date=2026-02-10" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="ong-cong-ong-tao" data-major="false" data-extra="false"
+                data-date="2026-02-10" data-solar="10/02" data-lunar="23/12" data-lunar-day="23" data-lunar-month="12"
+                data-weekday="Thứ Ba" data-month="2" data-calendar-type="lunar" data-zodiac="dog"
+                title="Tết Ông Công Ông Táo (10/02/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">10/02</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">23/12 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Tết Ông Công Ông Táo</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-02-10">Thứ Ba</time> • 23 tháng Chạp
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #3] VALENTINE (14/02) -->
+            <a href="./day.html?date=2026-02-14" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="valentine" data-major="false" data-extra="false" data-date="2026-02-14"
+                data-solar="14/02" data-lunar="27/12" data-weekday="Thứ Bảy" data-month="2" data-calendar-type="solar"
+                data-zodiac="tiger" title="Lễ Tình nhân Valentine (14/02/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">14/02</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Lễ Tình Nhân (Valentine)</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-02-14">Thứ Bảy</time> • 27/12 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <!-- [ĐẠI LỄ 2x2 #2] TẾT NGUYÊN ĐÁN BÍNH NGỌ (17/02/2026) -->
+            <a href="./day.html?date=2026-02-17" class="festival-tile festival-tile--major is-active" itemscope
+                itemtype="https://schema.org/Event" itemprop="url" data-event-id="tet-nguyen-dan" data-major="true"
+                data-extra="false" data-date="2026-02-17" data-solar="17/02" data-lunar="01/01" data-lunar-day="1"
+                data-lunar-month="1" data-weekday="Thứ Ba" data-month="2" data-calendar-type="lunar" data-zodiac="horse"
+                title="Đại lễ Cổ truyền: Mùng 1 Tết Nguyên Đán Bính Ngọ (17/02/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__major-tag">Đại Lễ Cổ Truyền</span>
+                    <span class="festival-tile__type-pill">Mùng 1/1 Âm Lịch</span>
+                </div>
+                <div class="festival-tile__main">
+                    <h3 class="festival-tile__title" itemprop="name">Tết Nguyên Đán Bính Ngọ</h3>
+                    <p class="festival-tile__desc" itemprop="description">
+                        Khởi đầu năm mới Bính Ngọ (Thiên Hà Thủy) • Ngày Quý Tỵ • Giờ Hoàng Đạo xuất hành đầu năm: Sửu,
+                        Thìn, Ngọ.
+                    </p>
+                </div>
+                <div class="festival-tile__foot">
+                    <div class="festival-tile__big-date">
+                        <time itemprop="startDate" datetime="2026-02-17" class="festival-tile__big-num">17/02</time>
+                        <span class="festival-tile__big-sub">Thứ Ba • Mùng 1 Tết Âm lịch</span>
+                    </div>
+                    <span class="festival-tile__cta" aria-hidden="true">↗</span>
+                </div>
+                <img src="./assets/icons/zodiac/horse.svg" alt="" aria-hidden="true" class="festival-tile__zodiac" />
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #4] VÍA THẦN TÀI (26/02) -->
+            <a href="./day.html?date=2026-02-26" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="via-than-tai" data-major="false" data-extra="false" data-date="2026-02-26"
+                data-solar="26/02" data-lunar="10/01" data-lunar-day="10" data-lunar-month="1" data-weekday="Thứ Năm"
+                data-month="2" data-calendar-type="lunar" data-zodiac="tiger" title="Ngày vía Thần Tài (26/02/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">26/02</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">10/01 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Ngày Vía Thần Tài</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-02-26">Thứ Năm</time> • Cầu tài khai lộc
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #5] TẾT NGUYÊN TIÊU (03/03) -->
+            <a href="./day.html?date=2026-03-03" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="tet-nguyen-tieu" data-major="false" data-extra="false"
+                data-date="2026-03-03" data-solar="03/03" data-lunar="15/01" data-lunar-day="15" data-lunar-month="1"
+                data-weekday="Thứ Ba" data-month="3" data-calendar-type="lunar" data-zodiac="goat"
+                title="Tết Nguyên Tiêu - Rằm tháng Giêng (03/03/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">03/03</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">15/01 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Tết Nguyên Tiêu (Rằm Tháng Giêng)</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-03-03">Thứ Ba</time> • Thượng Nguyên
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #6] QUỐC TẾ PHỤ NỮ (08/03) -->
+            <a href="./day.html?date=2026-03-08" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="quoc-te-phu-nu" data-major="false" data-extra="false"
+                data-date="2026-03-08" data-solar="08/03" data-lunar="20/01" data-weekday="Chủ Nhật" data-month="3"
+                data-calendar-type="solar" data-zodiac="mouse" title="Ngày Quốc tế Phụ nữ 8/3 (08/03/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">08/03</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Ngày Quốc Tế Phụ Nữ</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-03-08">Chủ Nhật</time> • 20/01 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #7] GIẢI PHÓNG MIỀN NAM (30/04) -->
+            <a href="./day.html?date=2026-04-30" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="giai-phong-mien-nam" data-major="false" data-extra="false"
+                data-date="2026-04-30" data-solar="30/04" data-lunar="14/03" data-weekday="Thứ Năm" data-month="4"
+                data-calendar-type="solar" data-zodiac="snake" title="Ngày Giải phóng miền Nam (30/04/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">30/04</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Giải Phóng Miền Nam, Thống Nhất</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-04-30">Thứ Năm</time> • 14/03 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #8] QUỐC TẾ LAO ĐỘNG (01/05) -->
+            <a href="./day.html?date=2026-05-01" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="quoc-te-lao-dong" data-major="false" data-extra="false"
+                data-date="2026-05-01" data-solar="01/05" data-lunar="15/03" data-weekday="Thứ Sáu" data-month="5"
+                data-calendar-type="solar" data-zodiac="horse" title="Ngày Quốc tế Lao động 1/5 (01/05/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">01/05</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Ngày Quốc Tế Lao Động</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-05-01">Thứ Sáu</time> • 15/03 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <!-- [ĐẠI LỄ 2x2 #3] QUỐC KHÁNH VIỆT NAM (02/09/2026) -->
+            <a href="./day.html?date=2026-09-02" class="festival-tile festival-tile--major" itemscope
+                itemtype="https://schema.org/Event" itemprop="url" data-event-id="quoc-khanh-2-9" data-major="true"
+                data-extra="false" data-date="2026-09-02" data-solar="02/09" data-lunar="21/07" data-weekday="Thứ Tư"
+                data-month="9" data-calendar-type="solar" data-zodiac="dog"
+                title="Đại lễ Quốc gia: Ngày Quốc khánh nước CHXHCN Việt Nam (02/09/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__major-tag">Đại Lễ Quốc Khánh</span>
+                    <span class="festival-tile__type-pill">Dương Lịch</span>
+                </div>
+                <div class="festival-tile__main">
+                    <h3 class="festival-tile__title" itemprop="name">Quốc Khánh Việt Nam 2/9</h3>
+                    <p class="festival-tile__desc" itemprop="description">
+                        Kỷ niệm ngày Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập tại Quảng trường Ba Đình, khai sinh
+                        nước Việt Nam Dân chủ Cộng hòa.
+                    </p>
+                </div>
+                <div class="festival-tile__foot">
+                    <div class="festival-tile__big-date">
+                        <time itemprop="startDate" datetime="2026-09-02" class="festival-tile__big-num">02/09</time>
+                        <span class="festival-tile__big-sub">Thứ Tư • 21/07 Âm lịch</span>
+                    </div>
+                    <span class="festival-tile__cta" aria-hidden="true">↗</span>
+                </div>
+                <img src="./assets/icons/zodiac/dog.svg" alt="" aria-hidden="true" class="festival-tile__zodiac" />
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #9] TẾT ĐOAN NGỌ (19/06) -->
+            <a href="./day.html?date=2026-06-19" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="tet-doan-ngo" data-major="false" data-extra="false" data-date="2026-06-19"
+                data-solar="19/06" data-lunar="05/05" data-lunar-day="5" data-lunar-month="5" data-weekday="Thứ Sáu"
+                data-month="6" data-calendar-type="lunar" data-zodiac="goat" title="Tết Đoan Ngọ (19/06/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/06</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">05/05 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Tết Đoan Ngọ (Mùng 5/5)</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-06-19">Thứ Sáu</time> • Tết giữa năm
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #10] LỄ VU LAN (27/08) -->
+            <a href="./day.html?date=2026-08-27" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="le-vu-lan" data-major="false" data-extra="false" data-date="2026-08-27"
+                data-solar="27/08" data-lunar="15/07" data-lunar-day="15" data-lunar-month="7" data-weekday="Thứ Năm"
+                data-month="8" data-calendar-type="lunar" data-zodiac="dragon" title="Lễ Vu Lan Báo Hiếu (27/08/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">27/08</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">15/07 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Đại Lễ Vu Lan Báo Hiếu</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-08-27">Thứ Năm</time> • Rằm tháng Bảy
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #11] TRUNG THU (25/09) -->
+            <a href="./day.html?date=2026-09-25" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="tet-trung-thu" data-major="false" data-extra="false"
+                data-date="2026-09-25" data-solar="25/09" data-lunar="15/08" data-lunar-day="15" data-lunar-month="8"
+                data-weekday="Thứ Sáu" data-month="9" data-calendar-type="lunar" data-zodiac="rooster"
+                title="Tết Trung Thu (25/09/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">25/09</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">15/08 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Tết Trung Thu Đoàn Viên</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-09-25">Thứ Sáu</time> • Rằm tháng Tám
+                    </span>
+                </div>
+            </a>
+
+            <!-- [LỄ THƯỜNG 1x1 #12] NHÀ GIÁO VN (20/11) -->
+            <a href="./day.html?date=2026-11-20" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="nha-giao-viet-nam" data-major="false" data-extra="false"
+                data-date="2026-11-20" data-solar="20/11" data-lunar="12/10" data-weekday="Thứ Sáu" data-month="11"
+                data-calendar-type="solar" data-zodiac="snake" title="Ngày Nhà giáo Việt Nam 20/11 (20/11/2026)">
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">20/11</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Ngày Nhà Giáo Việt Nam</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-11-20">Thứ Sáu</time> • 12/10 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <!-- ==================== NHÓM MỞ RỘNG (data-extra="true" + hidden): 3 ĐẠI LỄ 2x2 + 20 LỄ THƯỜNG 1x1 ==================== -->
+            <a href="./day.html?date=2026-02-16" class="festival-tile festival-tile--major" itemscope
+                itemtype="https://schema.org/Event" itemprop="url" data-event-id="giao-thua-tet" data-major="true"
+                data-extra="true" data-date="2026-02-16" data-solar="16/02" data-lunar="29/12" data-lunar-day="29"
+                data-lunar-month="12" data-weekday="Thứ Hai" data-month="2" data-calendar-type="lunar"
+                data-zodiac="dragon" title="Đêm Giao Thừa Tết Nguyên Đán Bính Ngọ (16/02/2026)" hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__major-tag">Thời Khắc Thiêng Liêng</span>
+                    <span class="festival-tile__type-pill">29 Tháng Chạp</span>
+                </div>
+                <div class="festival-tile__main">
+                    <h3 class="festival-tile__title" itemprop="name">Đêm Giao Thừa Bính Ngọ</h3>
+                    <p class="festival-tile__desc" itemprop="description">
+                        Lễ Trừ Tịch tiễn năm cũ Ất Tỵ, đón tân niên Bính Ngọ và thực hành nghi lễ cúng Giao Thừa ngoài
+                        trời, trong nhà.
+                    </p>
+                </div>
+                <div class="festival-tile__foot">
+                    <div class="festival-tile__big-date">
+                        <time itemprop="startDate" datetime="2026-02-16" class="festival-tile__big-num">16/02</time>
+                        <span class="festival-tile__big-sub">Thứ Hai • Tất niên tháng Chạp</span>
+                    </div>
+                    <span class="festival-tile__cta" aria-hidden="true">↗</span>
+                </div>
+                <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true" class="festival-tile__zodiac" />
+            </a>
+
+            <a href="./day.html?date=2026-01-09" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="hoc-sinh-sinh-vien" data-major="false" data-extra="true"
+                data-date="2026-01-09" data-solar="09/01" data-lunar="21/11" data-weekday="Thứ Sáu" data-month="1"
+                data-calendar-type="solar" data-zodiac="tiger" title="Ngày Học sinh - Sinh viên Việt Nam (09/01/2026)"
+                hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">09/01</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Ngày Học Sinh - Sinh Viên VN</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-01-09">Thứ Sáu</time> • 21/11 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <a href="./day.html?date=2026-02-03" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="thanh-lap-dang" data-major="false" data-extra="true"
+                data-date="2026-02-03" data-solar="03/02" data-lunar="16/12" data-weekday="Thứ Ba" data-month="2"
+                data-calendar-type="solar" data-zodiac="cat" title="Ngày thành lập Đảng Cộng sản Việt Nam (03/02/2026)"
+                hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">03/02</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Thành Lập Đảng CSVN</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-02-03">Thứ Ba</time> • 16/12 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <a href="./day.html?date=2026-02-18" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="mung-2-tet" data-major="false" data-extra="true" data-date="2026-02-18"
+                data-solar="18/02" data-lunar="02/01" data-lunar-day="2" data-lunar-month="1" data-weekday="Thứ Tư"
+                data-month="2" data-calendar-type="lunar" data-zodiac="horse" title="Mùng 2 Tết Nguyên Đán (18/02/2026)"
+                hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">18/02</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">02/01 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Mùng 2 Tết Nguyên Đán</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-02-18">Thứ Tư</time> • Tết bên ngoại
+                    </span>
+                </div>
+            </a>
+
+            <a href="./day.html?date=2026-02-19" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="mung-3-tet" data-major="false" data-extra="true" data-date="2026-02-19"
+                data-solar="19/02" data-lunar="03/01" data-lunar-day="3" data-lunar-month="1" data-weekday="Thứ Năm"
+                data-month="2" data-calendar-type="lunar" data-zodiac="goat" title="Mùng 3 Tết Nguyên Đán (19/02/2026)"
+                hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/02</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">03/01 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Mùng 3 Tết Nguyên Đán</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-02-19">Thứ Năm</time> • Tết thầy cô
+                    </span>
+                </div>
+            </a>
+
+            <a href="./day.html?date=2026-02-25" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="via-ngoc-hoang" data-major="false" data-extra="true"
+                data-date="2026-02-25" data-solar="25/02" data-lunar="09/01" data-lunar-day="9" data-lunar-month="1"
+                data-weekday="Thứ Tư" data-month="2" data-calendar-type="lunar" data-zodiac="buffalo"
+                title="Ngày vía Ngọc Hoàng (25/02/2026)" hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge festival-tile__day-badge--lunar">25/02</span>
+                    <span class="festival-tile__badge festival-tile__badge--lunar">09/01 ÂL</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Ngày Vía Ngọc Hoàng</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-02-25">Thứ Tư</time> • Mùng 9 tháng Giêng
+                    </span>
+                </div>
+            </a>
+
+            <a href="./day.html?date=2026-02-27" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="thay-thuoc-vn" data-major="false" data-extra="true" data-date="2026-02-27"
+                data-solar="27/02" data-lunar="11/01" data-weekday="Thứ Sáu" data-month="2" data-calendar-type="solar"
+                data-zodiac="cat" title="Ngày Thầy thuốc Việt Nam (27/02/2026)" hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">27/02</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Ngày Thầy Thuốc Việt Nam</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-02-27">Thứ Sáu</time> • 11/01 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <a href="./day.html?date=2026-03-20" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="quoc-te-hanh-phuc" data-major="false" data-extra="true"
+                data-date="2026-03-20" data-solar="20/03" data-lunar="02/02" data-weekday="Thứ Sáu" data-month="3"
+                data-calendar-type="solar" data-zodiac="mouse" title="Ngày Quốc tế Hạnh phúc (20/03/2026)" hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">20/03</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Ngày Quốc Tế Hạnh Phúc</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-03-20">Thứ Sáu</time> • 02/02 ÂL
+                    </span>
+                </div>
+            </a>
+
+            <a href="./day.html?date=2026-03-26" class="festival-tile" itemscope itemtype="https://schema.org/Event"
+                itemprop="url" data-event-id="thanh-lap-doan" data-major="false" data-extra="true"
+                data-date="2026-03-26" data-solar="26/03" data-lunar="08/02" data-weekday="Thứ Năm" data-month="3"
+                data-calendar-type="solar" data-zodiac="horse" title="Ngày thành lập Đoàn TNCS Hồ Chí Minh (26/03/2026)"
+                hidden>
+                <div class="festival-tile__head">
+                    <span class="festival-tile__day-badge">26/03</span>
+                    <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                </div>
+                <div class="festival-tile__body">
+                    <strong class="festival-tile__name" itemprop="name">Thành Lập Đoàn TNCS HCM</strong>
+                    <span class="festival-tile__meta">
+                        <time itemprop="startDate" datetime="2026-03-26">Thứ Năm</time> • 08/02 ÂL
+                    </span>
+                </div>

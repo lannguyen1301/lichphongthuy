@@ -5957,7 +5957,6 @@ strong {
     gap: 2.2rem;
     line-height: 1.5;
 
-    // 1. TẦNG TRÊN: HERO ĐẾM NGƯỢC (TRÁI) & BỘ ĐIỀU KHIỂN NĂM / BỘ LỌC (PHẢI)
     &__top-bento {
         display: grid;
         grid-template-columns: 38rem 1fr;
@@ -6135,13 +6134,13 @@ strong {
 }
 
 // ==========================================================================
-// CỘT PHẢI TẦNG 1: KHỐI BỘ ĐIỀU KHIỂN NĂM, BỘ LỌC & CHỌN THÁNG
+// CỘT PHẢI TẦNG 1: KHỐI BỘ ĐIỀU KHIỂN & BENTO 4 QUÝ
 // ==========================================================================
 .festival-controls {
     @extend %flexColumn;
     justify-content: space-between;
-    gap: 1.6rem;
-    padding: 2.6rem;
+    gap: 1.5rem;
+    padding: 2.4rem 2.6rem;
     background-color: var(--body-bg);
     border: 1px solid var(--border-color);
     border-radius: 2.6rem;
@@ -6155,14 +6154,14 @@ strong {
 
     &__head {
         @extend %flexBetween;
-        align-items: flex-start;
+        align-items: center;
         flex-wrap: wrap;
         gap: 1.4rem;
     }
 
     &__intro {
         @extend %flexColumn;
-        gap: 0.4rem;
+        gap: 0.45rem;
     }
 
     &__eyebrow-row {
@@ -6185,33 +6184,39 @@ strong {
     }
 
     &__heading {
-        font-size: clamp(2.2rem, 2.8vw, 3rem);
+        font-size: clamp(2.2rem, 2.6vw, 2.8rem);
         font-weight: 800;
-        line-height: 1.25;
+        line-height: 1.2;
         color: var(--text-color);
     }
 
     &__year-toolbar {
         @extend %flexItemCenter;
-        gap: 0.8rem;
-        padding: 0.5rem;
+        gap: 0.6rem;
+        padding: 0.45rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
-        border-radius: 1.6rem;
+        border-radius: 1.5rem;
+    }
+
+    &__filter-row {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-top: 1.2rem;
+        border-top: 1px dashed var(--border-color);
     }
 
     &__filter-bar {
         @extend %flexWrapGap;
-        gap: 1rem;
-        padding-top: 1.4rem;
-        border-top: 1px dashed var(--border-color);
+        gap: 0.8rem;
     }
 
     &__filter-btn {
         @extend %inlineFlexCenter;
-        gap: 0.7rem;
-        height: 4rem;
-        padding: 0 1.6rem;
+        gap: 0.65rem;
+        height: 3.8rem;
+        padding: 0 1.5rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
         border-radius: 99.9rem;
@@ -6221,12 +6226,13 @@ strong {
         @extend %transInteractive;
 
         small {
-            padding: 0.1rem 0.65rem;
+            padding: 0.1rem 0.6rem;
             border-radius: 99.9rem;
             background-color: var(--body-bg);
             font-size: 1.15rem;
             font-weight: 800;
             color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
         }
 
         &:hover {
@@ -6246,44 +6252,63 @@ strong {
         }
     }
 
-    &__month-jump {
-        @extend %flexColumn;
-        gap: 0.8rem;
-    }
-
-    &__jump-label {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-muted);
-    }
-
-    &__jump-grid {
-        display: grid;
-        grid-template-columns: auto repeat(12, 1fr);
-        gap: 0.6rem;
-
-        @include abs.screen(xl) {
-            grid-template-columns: repeat(7, 1fr);
-        }
-
-        @include abs.screen(sm) {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-
-    &__jump-btn {
+    &__reset-btn {
         @extend %inlineFlexCenter;
+        gap: 0.5rem;
         height: 3.6rem;
-        padding: 0 1rem;
+        padding: 0 1.3rem;
+        background-color: var(--primary-soft-bg);
+        border: 1px solid var(--primary-color);
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %transInteractive;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+}
+
+// BENTO 4 QUÝ (1 Ô MASTER "CẢ NĂM" + 4 HỘP QUÝ XUÂN - HẠ - THU - ĐÔNG)
+.festival-seasons-bento {
+    display: grid;
+    grid-template-columns: auto repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1rem;
+
+    @include abs.screen(xxl) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__master {
+        @extend %inlineFlexCenter;
+        gap: 0.7rem;
+        min-width: 11.4rem;
+        padding: 1.2rem 1.6rem;
         background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 1rem;
-        font-size: 1.3rem;
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.8rem;
+        font-size: 1.4rem;
         font-weight: 800;
         color: var(--text-color);
-        font-variant-numeric: tabular-nums;
         @extend %textNoWrap;
         @extend %transInteractive;
+
+        @include abs.screen(xxl) {
+            grid-column: 1 / -1;
+            min-height: 4.4rem;
+        }
 
         &:hover {
             border-color: var(--primary-color);
@@ -6294,12 +6319,99 @@ strong {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
             color: #ffffff;
+            box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+
+            .festival-seasons-bento__master-icon {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+
+    &__master-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        opacity: 0.85;
+    }
+
+    &__quarter {
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 0.65rem;
+        padding: 0.9rem 1rem 1rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.8rem;
+        @extend %transTheme;
+
+        &:has(.is-active),
+        &.is-quarter-active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-soft-bg, var(--bg-surface));
+        }
+    }
+
+    &__q-label {
+        display: block;
+        text-align: center;
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        letter-spacing: 0.01em;
+        @extend %textNoWrap;
+    }
+
+    &__q-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    &__btn {
+        position: relative;
+        @extend %inlineFlexCenter;
+        height: 3.4rem;
+        padding: 0 0.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transInteractive;
+
+        &[data-has-major="true"]::after {
+            content: "";
+            position: absolute;
+            top: 0.35rem;
+            right: 0.35rem;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+            &[data-has-major="true"]::after {
+                background-color: #ffffff;
+            }
         }
     }
 }
 
 // ==========================================================================
-// TẦNG 2 (PHƯƠNG ÁN 2): KHUNG BENTO ĐẠI TIỆC SỰ KIỆN (2x2 ĐẠI LỄ + 1x1 LỄ THƯỜNG)
+// TẦNG 2: KHUNG BENTO ĐẠI TIỆC SỰ KIỆN (2x2 ĐẠI LỄ + 1x1 LỄ THƯỜNG)
 // ==========================================================================
 .festival-bento-box {
     @extend %flexColumn;
@@ -6317,6 +6429,24 @@ strong {
         gap: 1.6rem;
     }
 
+    &__empty {
+        padding: 3.2rem 2rem;
+        text-align: center;
+        background-color: var(--bg-surface);
+        border: 1px dashed var(--border-color);
+        border-radius: 2rem;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__empty-text {
+        font-size: 1.45rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
     &__footer {
         @extend %flexColumn;
         align-items: center;
@@ -6324,7 +6454,6 @@ strong {
         padding-top: 0.8rem;
     }
 
-    // Nút "+ Xem thêm sự kiện" trải ngang giống đúng mẫu Phương án 2
     &__more-btn {
         @extend %inlineFlexCenter;
         gap: 0.8rem;
@@ -6351,6 +6480,10 @@ strong {
             color: #ffffff;
             transform: translateY(-2px);
             box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+            .festival-bento-box__more-arrow {
+                filter: brightness(0) invert(1);
+            }
         }
 
         &[aria-expanded="true"] .festival-bento-box__more-arrow {
@@ -6359,7 +6492,8 @@ strong {
     }
 
     &__more-arrow {
-        display: inline-block;
+        width: 1.6rem;
+        height: 1.6rem;
         transition: transform 0.25s ease;
     }
 
@@ -6386,7 +6520,6 @@ strong {
     }
 }
 
-// LƯỚI BENTO DENSE 4 CỘT (TỰ ĐỘNG LẤP KHÍT CÁC Ô 2x2 VÀ 1x1 KHÔNG ĐỂ TRỐNG LỖ NÀO)
 .festival-bento-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -6431,7 +6564,6 @@ strong {
         display: none !important;
     }
 
-    // Tự động co giãn lấp đầy hàng cuối khi người dùng lọc theo Tháng / Loại lễ
     &[data-fill-span="2"] {
         grid-column: span 2;
 
@@ -6461,9 +6593,6 @@ strong {
         box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
     }
 
-    // ----------------------------------------------------------------------
-    // Ô ĐẠI LỄ 2x2 (data-major="true" / .festival-tile--major) GIỐNG HỆT ẢNH MẪU PHƯƠNG ÁN 2
-    // ----------------------------------------------------------------------
     &[data-major="true"],
     &--major {
         grid-column: span 2;
@@ -6496,7 +6625,6 @@ strong {
         }
     }
 
-    // Style cho Ô Lễ Thường 1x1
     &__head {
         position: relative;
         z-index: 2;
@@ -6560,7 +6688,6 @@ strong {
         color: var(--text-muted);
     }
 
-    // Style chuyên biệt bên trong Ô Đại Lễ 2x2
     &__major-tag {
         padding: 0.4rem 1.2rem;
         border-radius: 99.9rem;

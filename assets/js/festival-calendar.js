@@ -1,16 +1,15 @@
 // assets/js/festival-calendar.js
-// Chuyên trách Trang Lễ Tết (festival.html - Phương án 2):
-// Lưới Bento Đại Lễ 2x2 + Lễ Thường 1x1, Nút Xem thêm chuẩn a11y, Lọc Tháng Roving Tabindex & Tự động quy đổi Âm-Dương khi đổi Năm
+// Chuyên trách Trang Lễ Tết (festival.html):
+// Lưới Bento Đại Lễ 2x2 + Lễ Thường 1x1, Bento 4 Quý (Xuân-Hạ-Thu-Đông), Lọc đơn tuyến & Đổi Năm động qua LunarEngine
 (() => {
     const pad = (n) => String(n).padStart(2, "0");
     const viWeekdayFormatter = new Intl.DateTimeFormat("vi-VN", { weekday: "long" });
 
-    // 1. Tự động lấp đầy hàng cuối của Lưới Bento 4 cột (Không bao giờ để hở ô trống khi lọc)
+    // 1. Tự động lấp đầy hàng cuối của Lưới Bento 4 cột
     const syncBentoRowFill = (visibleTiles) => {
         visibleTiles.forEach((t) => t.removeAttribute("data-fill-span"));
         if (!visibleTiles.length) return;
 
-        // Tính tổng số ô đơn vị trên lưới 4 cột (Ô Đại Lễ 2x2 = 4 đơn vị, Ô Lễ Thường 1x1 = 1 đơn vị)
         const totalUnits = visibleTiles.reduce((sum, tile) => sum + (tile.dataset.major === "true" ? 4 : 1), 0);
         const remainder = totalUnits % 4;
         if (remainder === 0) return;
@@ -80,10 +79,19 @@
             document.getElementById("festival-hero-solar").textContent = solar;
             document.getElementById("festival-hero-solar").setAttribute("datetime", date);
             document.getElementById("festival-hero-weekday").textContent = weekday;
-            document.getElementById("festival-hero-year").textContent = `Năm ${activeYear}`;
+
+            if (window.LunarEngine && y && m && d) {
+                const info = window.LunarEngine.getFullDayInfo(d, m, y);
+                document.getElementById("festival-hero-year").textContent = `Năm ${activeYear} (${info.yearCanChi})`;
+                document.getElementById("festival-hero-lunar").innerHTML =
+                    `Nhằm ngày <strong>${lunar} Âm lịch</strong> (Ngày ${info.dayCanChi} • ${info.dayNapAm})`;
+            } else {
+                document.getElementById("festival-hero-year").textContent = `Năm ${activeYear}`;
+                document.getElementById("festival-hero-lunar").innerHTML =
+                    `Nhằm ngày <strong>${lunar} Âm lịch</strong> • Năm ${activeYear}`;
+            }
+
             document.getElementById("festival-hero-title").textContent = titleText;
-            document.getElementById("festival-hero-lunar").innerHTML =
-                `Nhằm ngày <strong>${lunar} Âm lịch</strong> • Năm ${activeYear}`;
             document.getElementById("festival-hero-link").href = `./day.html?date=${date}`;
             document.getElementById("festival-hero-zodiac").src = `./assets/icons/zodiac/${zodiac || "horse"}.svg`;
 
@@ -95,40 +103,93 @@
             tile.addEventListener("focus", () => syncTileToHero(tile));
         });
 
-        // 3. Hàm lọc tổng hợp theo Loại lịch + Tháng + Trạng thái "Xem thêm" (dùng thuộc tính hidden chuẩn HTML5)
+        // 3. Hàm lọc trong 1 vòng lặp duy nhất (Cập nhật số đếm theo tháng & trạng thái hidden)
         const applyGridFilters = () => {
-            const activeFilter = app.dataset.activeFilter || "all";
-            const activeMonth = app.dataset.activeMonth || "all";
-            const isExpanded = app.dataset.expanded === "true";
-            const todayIso = new Date().toISOString().slice(0, 10);
+            const { activeFilter = "all", activeMonth = "all", expanded } = app.dataset;
+            const isExpanded = expanded === "true";
 
-            // Khi người dùng đang lọc theo 1 tháng cụ thể hoặc lọc loại lễ, tự động bung hết sự kiện khớp bộ lọc
+            const now = new Date();
+            const todayIso = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+
             const isFilteringSpecific = activeFilter !== "all" || activeMonth !== "all";
 
             const matchingAll = [];
             const visibleTiles = [];
 
-            allTiles.forEach((tile) => {
-                const { calendarType, month, date, extra } = tile.dataset;
-                let matchesCriteria = true;
+            let countMonthAll = 0;
+            let countMonthLunar = 0;
+            let countMonthSolar = 0;
+            let countMonthUpcoming = 0;
 
+            allTiles.forEach((tile) => {
+                const { calendarType, month, date = "", extra } = tile.dataset;
+
+                const isBelongToMonth = activeMonth === "all" || String(month) === String(activeMonth);
+                if (isBelongToMonth) {
+                    countMonthAll++;
+                    if (calendarType === "lunar") countMonthLunar++;
+                    if (calendarType === "solar") countMonthSolar++;
+                    if (date >= todayIso) countMonthUpcoming++;
+                }
+
+                let matchesCriteria = isBelongToMonth;
                 if (activeFilter === "lunar" && calendarType !== "lunar") matchesCriteria = false;
                 if (activeFilter === "solar" && calendarType !== "solar") matchesCriteria = false;
-                if (activeFilter === "upcoming" && (date || "") < todayIso) matchesCriteria = false;
-                if (activeMonth !== "all" && String(month) !== String(activeMonth)) matchesCriteria = false;
+                if (activeFilter === "upcoming" && date < todayIso) matchesCriteria = false;
 
-                if (matchesCriteria) matchingAll.push(tile);
-
-                const shouldShow = matchesCriteria && (isFilteringSpecific || isExpanded || extra !== "true");
-                tile.hidden = !shouldShow;
-                if (shouldShow) visibleTiles.push(tile);
+                if (matchesCriteria) {
+                    matchingAll.push(tile);
+                    const shouldShow = isFilteringSpecific || isExpanded || extra !== "true";
+                    tile.hidden = !shouldShow;
+                    if (shouldShow) visibleTiles.push(tile);
+                } else {
+                    tile.hidden = true;
+                }
             });
+
+            const countAllEl = document.getElementById("count-filter-all");
+            const countLunarEl = document.getElementById("count-filter-lunar");
+            const countSolarEl = document.getElementById("count-filter-solar");
+            const countUpcomingEl = document.getElementById("count-filter-upcoming");
+
+            if (countAllEl) countAllEl.textContent = String(countMonthAll);
+            if (countLunarEl) countLunarEl.textContent = String(countMonthLunar);
+            if (countSolarEl) countSolarEl.textContent = String(countMonthSolar);
+            if (countUpcomingEl) countUpcomingEl.textContent = String(countMonthUpcoming);
 
             syncBentoRowFill(visibleTiles);
 
-            const hiddenExtraCount = matchingAll.length - visibleTiles.length;
+            const emptyStateEl = document.getElementById("festival-empty-state");
+            if (emptyStateEl) {
+                emptyStateEl.hidden = visibleTiles.length > 0;
+            }
+
+            const hasActiveVisible = visibleTiles.some((t) => t.classList.contains("is-active"));
+            if (!hasActiveVisible && visibleTiles.length > 0) {
+                syncTileToHero(visibleTiles[0]);
+            }
+
+            const resetBtn = document.getElementById("festival-reset-btn");
+            if (resetBtn) {
+                resetBtn.hidden = activeMonth === "all" && activeFilter === "all";
+
+                if (!resetBtn.dataset.hasListener) {
+                    resetBtn.addEventListener("click", () => {
+                        app.dataset.activeFilter = "all";
+                        filterBtns.forEach((b) => {
+                            const isAll = b.dataset.festivalFilter === "all";
+                            b.classList.toggle("is-active", isAll);
+                            b.setAttribute("aria-pressed", String(isAll));
+                        });
+                        selectMonthTab(app.querySelector('[data-month-filter="all"]'), false);
+                    });
+                    resetBtn.dataset.hasListener = "true";
+                }
+            }
+
             if (moreBtn && moreLabel) {
-                if (isFilteringSpecific) {
+                const hiddenExtraCount = matchingAll.length - visibleTiles.length;
+                if (isFilteringSpecific || (hiddenExtraCount === 0 && !isExpanded)) {
                     moreBtn.hidden = true;
                 } else {
                     moreBtn.hidden = false;
@@ -144,7 +205,7 @@
             }
         };
 
-        // 4. Sự kiện nút "+ Xem thêm tất cả sự kiện" (Accordion a11y)
+        // 4. Sự kiện nút "+ Xem thêm tất cả sự kiện"
         if (moreBtn) {
             moreBtn.addEventListener("click", () => {
                 const nextExpanded = app.dataset.expanded !== "true";
@@ -153,7 +214,7 @@
             });
         }
 
-        // 5. Sự kiện 4 nút lọc Loại sự kiện (Tất cả / Lễ Âm lịch / Lễ Dương lịch / Sắp diễn ra)
+        // 5. Sự kiện 4 nút lọc Loại sự kiện
         filterBtns.forEach((btn) => {
             btn.addEventListener("click", () => {
                 app.dataset.activeFilter = btn.dataset.festivalFilter || "all";
@@ -166,16 +227,23 @@
             });
         });
 
-        // 6. Sự kiện thanh chọn Tháng (Cả năm, T1 -> T12) kèm Roving Tabindex (0 và -1)
+        // 6. Đọc data-month-filter & data-quarter qua dataset trên Bento 4 Quý
         const selectMonthTab = (targetTab, shouldFocus = false) => {
             if (!targetTab) return;
-            app.dataset.activeMonth = targetTab.dataset.monthFilter || "all";
+
+            const { monthFilter = "all", quarter = "all" } = targetTab.dataset;
+            app.dataset.activeMonth = monthFilter;
+            app.dataset.activeQuarter = quarter;
 
             monthTabs.forEach((tab) => {
                 const isSelected = tab === targetTab;
                 tab.classList.toggle("is-active", isSelected);
                 tab.setAttribute("aria-selected", String(isSelected));
                 tab.setAttribute("tabindex", isSelected ? "0" : "-1");
+            });
+
+            app.querySelectorAll(".festival-seasons-bento__quarter").forEach((qBox) => {
+                qBox.classList.toggle("is-quarter-active", qBox.dataset.quarter === quarter);
             });
 
             applyGridFilters();
@@ -198,7 +266,7 @@
             });
         });
 
-        // 7. Tự động quy đổi lại ngày Dương/Âm cho toàn bộ 38 sự kiện khi đổi Năm (< Năm 2026 >)
+        // 7. Tự động quy đổi lại ngày Dương/Âm cho toàn bộ sự kiện khi đổi Năm
         const updateFestivalYear = (newYear) => {
             const targetYear = Number(newYear) || 2026;
             app.dataset.activeYear = String(targetYear);
@@ -225,7 +293,6 @@
                     if (calType === "lunar" && tile.dataset.lunarDay && tile.dataset.lunarMonth) {
                         const lDay = Number(tile.dataset.lunarDay);
                         const lMonth = Number(tile.dataset.lunarMonth);
-                        // Tháng Chạp (12 ÂL) như Ông Công Ông Táo / Giao Thừa nằm ở đầu năm Dương lịch nên thuộc năm Âm lịch trước đó
                         const lYearForConvert = lMonth === 12 ? targetYear - 1 : targetYear;
                         const converted = window.LunarEngine.convertLunar2Solar(lDay, lMonth, lYearForConvert, 0);
                         if (converted && converted.sDay > 0) {
@@ -266,8 +333,6 @@
             }
 
             applyGridFilters();
-            const firstVisible = allTiles.find((t) => !t.hidden);
-            if (firstVisible) syncTileToHero(firstVisible);
         };
 
         if (yearDropdown) {
