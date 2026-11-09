@@ -3896,7 +3896,7 @@
 
 .festival-cal {
     @extend %flexColumn;
-    gap: 2.4rem;
+    gap: 2.2rem;
     line-height: 1.5;
 
     // 1. TẦNG TRÊN: HERO ĐẾM NGƯỢC (TRÁI) & BỘ ĐIỀU KHIỂN NĂM / BỘ LỌC (PHẢI)
@@ -3917,8 +3917,8 @@
 
     &__dot {
         display: inline-block;
-        width: 0.8rem;
-        height: 0.8rem;
+        width: 0.75rem;
+        height: 0.75rem;
         border-radius: 50%;
         @extend %flexItemFixed;
 
@@ -3929,27 +3929,13 @@
         &--solar {
             background-color: #2563eb;
         }
-
-        &--upcoming {
-            background-color: #10b981;
-        }
-    }
-
-    // 2. TẦNG DƯỚI: LƯỚI BENTO 12 THÁNG (2 CỘT TRÊN PC)
-    &__months-grid {
-        @extend %gridCols2;
-        align-items: start;
-        gap: 2rem;
-
-        @include abs.screen(lg) {
-            grid-template-columns: 1fr;
-        }
     }
 }
 
-// CỘT TRÁI TẦNG 1: THẺ HERO TIÊU ĐIỂM (Hỗ trợ cả .festival-hero và .festival-cal__hero)
-.festival-hero,
-.festival-cal__hero {
+// ==========================================================================
+// CỘT TRÁI TẦNG 1: THẺ HERO TIÊU ĐIỂM ĐẾM NGƯỢC
+// ==========================================================================
+.festival-hero {
     position: relative;
     overflow: hidden;
     @extend %flexColumn;
@@ -3968,8 +3954,7 @@
         border-radius: 2rem;
     }
 
-    .festival-hero__top,
-    .festival-cal__hero-top {
+    &__top {
         position: relative;
         z-index: 2;
         @extend %flexColumn;
@@ -3978,17 +3963,14 @@
         border-bottom: 1px solid var(--hero-border-color);
     }
 
-    .festival-hero__badges,
-    .festival-cal__hero-badges {
+    &__badges {
         @extend %flexBetween;
         flex-wrap: wrap;
         gap: 0.8rem;
     }
 
-    .festival-hero__pill,
-    .festival-cal__hero-pill,
-    .festival-hero__type-badge,
-    .festival-cal__hero-type {
+    &__pill,
+    &__type-badge {
         @extend %inlineFlexCenter;
         gap: 0.6rem;
         padding: 0.35rem 1.2rem;
@@ -3997,21 +3979,18 @@
         font-weight: 800;
     }
 
-    .festival-hero__pill,
-    .festival-cal__hero-pill {
+    &__pill {
         background-color: #ffffff;
         color: var(--primary-active);
     }
 
-    .festival-hero__type-badge,
-    .festival-cal__hero-type {
+    &__type-badge {
         background-color: var(--hero-box-bg);
         border: 1px solid var(--hero-border-color);
         color: #ffffff;
     }
 
-    .festival-hero__date-row,
-    .festival-cal__hero-date {
+    &__date-row {
         @extend %flexItemCenter;
         align-items: baseline;
         flex-wrap: wrap;
@@ -4019,8 +3998,7 @@
         margin-top: 0.2rem;
     }
 
-    .festival-hero__solar,
-    .festival-cal__hero-solar {
+    &__solar {
         font-size: clamp(4.6rem, 5.2vw, 5.8rem);
         font-weight: 800;
         line-height: 1;
@@ -4028,37 +4006,44 @@
         font-variant-numeric: tabular-nums;
     }
 
-    .festival-hero__weekday,
-    .festival-cal__hero-weekday {
-        font-size: 2.1rem;
+    &__weekday-group {
+        @extend %flexColumn;
+        gap: 0.15rem;
+    }
+
+    &__weekday {
+        font-size: 2rem;
         font-weight: 800;
+        line-height: 1.2;
+        color: #ffffff;
+    }
+
+    &__year {
+        font-size: 1.25rem;
+        font-weight: 600;
         color: var(--hero-text-soft);
     }
 
-    .festival-hero__title,
-    .festival-cal__hero-title {
+    &__title {
         font-size: 2rem;
         font-weight: 800;
         line-height: 1.3;
         color: #ffffff;
     }
 
-    .festival-hero__lunar,
-    .festival-cal__hero-lunar {
+    &__lunar {
         font-size: 1.35rem;
         color: var(--hero-text-soft);
     }
 
-    .festival-hero__footer,
-    .festival-cal__hero-footer {
+    &__footer {
         position: relative;
         z-index: 2;
         @extend %flexBetween;
         padding-top: 0.4rem;
     }
 
-    .festival-hero__link,
-    .festival-cal__hero-link {
+    &__link {
         @extend %inlineFlexCenter;
         gap: 0.8rem;
         height: 4rem;
@@ -4077,11 +4062,7 @@
         }
     }
 
-    // Khóa kích thước hình Con Ngựa chìm góc dưới phải (Tránh bị phóng to đen kịt như trong ảnh)
-    .festival-hero__zodiac,
-    .festival-cal__hero-zodiac,
-    > img,
-    footer > img {
+    &__zodiac {
         position: absolute;
         right: -0.8rem;
         bottom: -0.8rem;
@@ -4095,13 +4076,13 @@
     }
 }
 
-// CỘT PHẢI TẦNG 1: KHỐI BỘ ĐIỀU KHIỂN NĂM (< Năm 2026 >), BỘ LỌC & NHẢY THÁNG
-.festival-controls,
-.festival-cal__controls,
-.festival-cal__header {
+// ==========================================================================
+// CỘT PHẢI TẦNG 1: KHỐI BỘ ĐIỀU KHIỂN NĂM, BỘ LỌC & CHỌN THÁNG
+// ==========================================================================
+.festival-controls {
     @extend %flexColumn;
     justify-content: space-between;
-    gap: 1.8rem;
+    gap: 1.6rem;
     padding: 2.6rem;
     background-color: var(--body-bg);
     border: 1px solid var(--border-color);
@@ -4114,31 +4095,24 @@
         border-radius: 2rem;
     }
 
-    .festival-controls__head,
-    .festival-cal__controls-head {
+    &__head {
         @extend %flexBetween;
         align-items: flex-start;
         flex-wrap: wrap;
-        gap: 1.6rem;
+        gap: 1.4rem;
     }
 
-    .festival-controls__intro,
-    .festival-cal__intro {
+    &__intro {
         @extend %flexColumn;
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
 
-    .festival-controls__eyebrow-row,
-    .festival-cal__eyebrow-row {
+    &__eyebrow-row {
         @extend %flexWrapGap;
     }
 
-    .festival-controls__badge,
-    .festival-controls__count-pill,
-    .festival-cal__badge,
-    .festival-cal__count-pill {
-        display: inline-block;
-        width: fit-content;
+    &__badge,
+    &__count-pill {
         padding: 0.35rem 1.2rem;
         border-radius: 99.9rem;
         font-size: 1.25rem;
@@ -4148,23 +4122,18 @@
         color: var(--primary-color);
     }
 
-    .festival-controls__count-pill,
-    .festival-cal__count-pill {
+    &__count-pill {
         color: var(--text-muted);
     }
 
-    .festival-controls__heading,
-    .festival-cal__heading {
+    &__heading {
         font-size: clamp(2.2rem, 2.8vw, 3rem);
         font-weight: 800;
         line-height: 1.25;
         color: var(--text-color);
     }
 
-    // Cụm nút < | Năm 2026 | > xếp ngang trên 1 hàng thay vì bị rớt dọc như ảnh
-    .festival-controls__year-toolbar,
-    .festival-cal__year-toolbar,
-    .festival-cal__toolbar {
+    &__year-toolbar {
         @extend %flexItemCenter;
         gap: 0.8rem;
         padding: 0.5rem;
@@ -4173,17 +4142,14 @@
         border-radius: 1.6rem;
     }
 
-    .festival-controls__filter-bar,
-    .festival-cal__filter-bar,
-    .festival-cal__filters {
+    &__filter-bar {
         @extend %flexWrapGap;
         gap: 1rem;
         padding-top: 1.4rem;
         border-top: 1px dashed var(--border-color);
     }
 
-    .festival-controls__filter-btn,
-    .festival-cal__filter-btn {
+    &__filter-btn {
         @extend %inlineFlexCenter;
         gap: 0.7rem;
         height: 4rem;
@@ -4222,27 +4188,24 @@
         }
     }
 
-    .festival-controls__month-jump,
-    .festival-cal__month-jump {
+    &__month-jump {
         @extend %flexColumn;
         gap: 0.8rem;
     }
 
-    .festival-controls__jump-label,
-    .festival-cal__jump-label {
+    &__jump-label {
         font-size: 1.25rem;
         font-weight: 700;
         color: var(--text-muted);
     }
 
-    .festival-controls__jump-grid,
-    .festival-cal__jump-grid {
+    &__jump-grid {
         display: grid;
-        grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: auto repeat(12, 1fr);
         gap: 0.6rem;
 
         @include abs.screen(xl) {
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(7, 1fr);
         }
 
         @include abs.screen(sm) {
@@ -4250,10 +4213,10 @@
         }
     }
 
-    .festival-controls__jump-btn,
-    .festival-cal__jump-btn {
+    &__jump-btn {
         @extend %inlineFlexCenter;
         height: 3.6rem;
+        padding: 0 1rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
         border-radius: 1rem;
@@ -4261,89 +4224,147 @@
         font-weight: 800;
         color: var(--text-color);
         font-variant-numeric: tabular-nums;
+        @extend %textNoWrap;
         @extend %transInteractive;
 
-        &:hover,
-        &.is-active {
-            background-color: var(--primary-soft-bg);
+        &:hover {
             border-color: var(--primary-color);
             color: var(--primary-color);
-            transform: translateY(-1px);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
         }
     }
 }
 
-// TẦNG 2: THẺ BENTO CỦA TỪNG THÁNG (THÁNG 1 -> THÁNG 12)
-.festival-month-card {
+// ==========================================================================
+// TẦNG 2 (PHƯƠNG ÁN 2): KHUNG BENTO ĐẠI TIỆC SỰ KIỆN (2x2 ĐẠI LỄ + 1x1 LỄ THƯỜNG)
+// ==========================================================================
+.festival-bento-box {
     @extend %flexColumn;
-    gap: 1.4rem;
-    padding: 2.2rem;
+    gap: 2.2rem;
+    padding: 2.6rem;
     background-color: var(--body-bg);
     border: 1px solid var(--border-color);
-    border-radius: 2.4rem;
-    box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
-    scroll-margin-top: 13rem;
+    border-radius: 2.8rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
     @extend %transTheme;
-
-    &[hidden] {
-        display: none !important;
-    }
-
-    &--current {
-        border: 2px solid var(--primary-color);
-    }
 
     @include abs.screen(sm) {
         padding: 1.6rem;
-        border-radius: 1.8rem;
+        border-radius: 2rem;
+        gap: 1.6rem;
     }
 
-    &__head {
-        @extend %flexBetween;
-        align-items: flex-start;
-        gap: 1rem;
-        padding-bottom: 1.2rem;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    &__title {
-        font-size: 1.9rem;
-        font-weight: 800;
-        color: var(--primary-color);
-    }
-
-    &__sub {
-        margin-top: 0.2rem;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-muted);
-    }
-
-    &__count {
-        padding: 0.3rem 1.1rem;
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 99.9rem;
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-muted);
-        @extend %textNoWrap;
-    }
-
-    &__list {
+    &__footer {
         @extend %flexColumn;
+        align-items: center;
+        gap: 1.4rem;
+        padding-top: 0.8rem;
+    }
+
+    // Nút "+ Xem thêm sự kiện" trải ngang giống đúng mẫu Phương án 2
+    &__more-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        width: 100%;
+        max-width: 48rem;
+        height: 4.8rem;
+        padding: 0 2.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+        }
+
+        &[aria-expanded="true"] .festival-bento-box__more-arrow {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__more-arrow {
+        display: inline-block;
+        transition: transform 0.25s ease;
+    }
+
+    &__subnote {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        width: 100%;
         gap: 1rem;
+        padding-top: 1.2rem;
+        border-top: 1px dashed var(--border-color);
+        font-size: 1.25rem;
+        color: var(--text-muted);
+    }
+
+    &__ext-link {
+        @extend %inlineFlexCenter;
+        gap: 0.4rem;
+        font-weight: 700;
+        color: var(--primary-color);
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 
-// TỪNG DÒNG SỰ KIỆN LỄ TẾT BÊN TRONG THÁNG
-.festival-item {
-    @extend %flexItemCenter;
-    gap: 1.4rem;
-    padding: 1.2rem 1.4rem;
+// LƯỚI BENTO DENSE 4 CỘT (TỰ ĐỘNG LẤP KHÍT CÁC Ô 2x2 VÀ 1x1 KHÔNG ĐỂ TRỐNG LỖ NÀO)
+.festival-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(13.6rem, auto);
+    grid-auto-flow: dense;
+    gap: 1.6rem;
+
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ==========================================================================
+// Ô GẠCH SỰ KIỆN (.festival-tile): MẶC ĐỊNH 1x1, ĐẠI LỄ (data-major="true") 2x2
+// ==========================================================================
+.festival-tile {
+    position: relative;
+    overflow: hidden;
+    grid-column: span 1;
+    grid-row: span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: 1.6rem;
     background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 1.8rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
     text-decoration: none;
     color: inherit;
     @extend %transInteractive;
@@ -4352,75 +4373,98 @@
         display: none !important;
     }
 
+    // Tự động co giãn lấp đầy hàng cuối khi người dùng lọc theo Tháng / Loại lễ
+    &[data-fill-span="2"] {
+        grid-column: span 2;
+
+        @include abs.screen(sm) {
+            grid-column: span 1;
+        }
+    }
+
+    &[data-fill-span="3"] {
+        grid-column: span 3;
+
+        @include abs.screen(md) {
+            grid-column: span 2;
+        }
+
+        @include abs.screen(sm) {
+            grid-column: span 1;
+        }
+    }
+
     &:hover,
     &:focus-visible,
     &.is-active {
         background-color: var(--primary-soft-bg, var(--body-bg));
         border-color: var(--primary-color);
-        transform: translateY(-2px);
-        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+        transform: translateY(-3px);
+        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
     }
 
-    &__date-box {
-        @extend %flexColumnCenterAll;
-        @extend %flexItemFixed;
-        width: 5.8rem;
-        height: 5.8rem;
-        border-radius: 1.5rem;
-        background-color: var(--body-bg);
-        border: 1.5px solid var(--border-color);
-        line-height: 1.1;
+    // ----------------------------------------------------------------------
+    // Ô ĐẠI LỄ 2x2 (data-major="true" / .festival-tile--major) GIỐNG HỆT ẢNH MẪU PHƯƠNG ÁN 2
+    // ----------------------------------------------------------------------
+    &[data-major="true"],
+    &--major {
+        grid-column: span 2;
+        grid-row: span 2;
+        padding: 2.4rem;
+        background-color: var(--primary-color);
+        border-color: var(--primary-hover);
+        color: #ffffff;
+        box-shadow: 0 1rem 2.6rem var(--shadow-color);
 
-        &--lunar {
-            border-color: rgba(239, 68, 68, 0.45);
-            background-color: rgba(239, 68, 68, 0.06);
+        @include abs.screen(sm) {
+            grid-column: span 1;
+            grid-row: span 1;
+            padding: 1.8rem;
+        }
 
-            .festival-item__day-num {
-                color: var(--color-danger);
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+            background-color: var(--primary-hover);
+            border-color: #ffffff;
+            color: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: 0 1.4rem 3.2rem var(--shadow-color);
+
+            .festival-tile__zodiac {
+                opacity: 0.26;
+                transform: scale(1.06) rotate(0deg);
             }
         }
     }
 
-    &__day-num {
-        font-size: 2.2rem;
+    // Style cho Ô Lễ Thường 1x1
+    &__head {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    &__day-badge {
+        padding: 0.35rem 1rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.45rem;
         font-weight: 800;
-        color: var(--text-color);
+        color: var(--primary-color);
         font-variant-numeric: tabular-nums;
-    }
 
-    &__month-sub {
-        margin-top: 0.2rem;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--text-muted);
-    }
-
-    &__body {
-        @extend %flexColumn;
-        gap: 0.35rem;
-        min-width: 0;
-        flex: 1;
-    }
-
-    &__name {
-        font-size: 1.6rem;
-        font-weight: 800;
-        color: var(--text-color);
-        line-height: 1.35;
-    }
-
-    &__meta {
-        @extend %flexWrapGap;
-        gap: 0.6rem;
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: var(--text-muted);
+        &--lunar {
+            border-color: rgba(239, 68, 68, 0.4);
+            color: var(--color-danger);
+        }
     }
 
     &__badge {
-        @extend %inlineFlexCenter;
-        gap: 0.5rem;
-        padding: 0.2rem 0.9rem;
+        padding: 0.25rem 0.9rem;
         border-radius: 99.9rem;
         font-size: 1.15rem;
         font-weight: 800;
@@ -4434,6 +4478,128 @@
             background-color: rgba(239, 68, 68, 0.12);
             color: #b91c1c;
         }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.35rem;
+        margin-top: auto;
+    }
+
+    &__name {
+        font-size: 1.55rem;
+        font-weight: 800;
+        line-height: 1.35;
+        color: var(--text-color);
+        @extend %textClamp2;
+    }
+
+    &__meta {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    // Style chuyên biệt bên trong Ô Đại Lễ 2x2
+    &__major-tag {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: #ffffff;
+        color: var(--primary-active);
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__type-pill {
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    &__main {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.6rem;
+        margin: auto 0;
+    }
+
+    &__title {
+        font-size: clamp(2rem, 2.2vw, 2.5rem);
+        font-weight: 800;
+        line-height: 1.25;
+        color: #ffffff;
+    }
+
+    &__desc {
+        font-size: 1.35rem;
+        line-height: 1.5;
+        color: var(--hero-text-soft);
+        @extend %textClamp3;
+    }
+
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        align-items: flex-end;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--hero-border-color);
+    }
+
+    &__big-date {
+        @extend %flexColumn;
+        gap: 0.2rem;
+    }
+
+    &__big-num {
+        font-size: clamp(3.4rem, 4vw, 4.4rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: #ffffff;
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__big-sub {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--hero-text-soft);
+    }
+
+    &__cta {
+        @extend %inlineFlexCenter;
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 50%;
+        background-color: var(--hero-chip-bg);
+        border: 1px solid var(--hero-border-color);
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: #ffffff;
+    }
+
+    &__zodiac {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 15rem;
+        height: 15rem;
+        object-fit: contain;
+        opacity: 0.16;
+        filter: var(--zodiac-filter-active);
+        transform: rotate(-8deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
     }
 }
 ```
