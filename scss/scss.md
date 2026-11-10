@@ -5957,21 +5957,6 @@ strong {
     gap: 2.2rem;
     line-height: 1.5;
 
-    &__top-bento {
-        display: grid;
-        grid-template-columns: 38rem 1fr;
-        align-items: stretch;
-        gap: 2rem;
-
-        @include abs.screen(xl) {
-            grid-template-columns: 34rem 1fr;
-        }
-
-        @include abs.screen(lg) {
-            grid-template-columns: 1fr;
-        }
-    }
-
     &__dot {
         display: inline-block;
         width: 0.75rem;
@@ -5987,17 +5972,245 @@ strong {
             background-color: #2563eb;
         }
     }
+
+    // ==========================================================================
+    // ROW 2: WORKSPACE 2 CỘT (TRÁI: STICKY HERO CỐ ĐỊNH | PHẢI: CONTROLS + SCROLL CARDS)
+    // ==========================================================================
+    &__workspace {
+        display: grid;
+        grid-template-columns: 38rem 1fr;
+        align-items: start;
+        gap: 2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: 34rem 1fr;
+        }
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // Ghim cố định Hero bên trái khi cuộn trang (Giống cột phải ở home.scss)
+    &__sticky-left {
+        position: sticky;
+        top: calc(#{abs.$header-top-offset} + #{abs.$header-height-pc} + 2rem);
+        z-index: 15;
+
+        @include abs.screen(lg) {
+            position: static;
+        }
+    }
+
+    &__main-right {
+        @extend %flexColumn;
+        gap: 2rem;
+        min-width: 0;
+    }
 }
 
 // ==========================================================================
-// CỘT TRÁI TẦNG 1: THẺ HERO TIÊU ĐIỂM ĐẾM NGƯỢC
+// ROW 1 (MỚI): THANH ĐỒNG HỒ ĐẾM NGƯỢC (MASTER COUNTDOWN + SELECT SỰ KIỆN)
+// ==========================================================================
+.festival-countdown-bar {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    align-items: center;
+    gap: 2.4rem;
+    padding: 2.4rem 2.8rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 1rem 2.8rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(xl) {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+
+    @include abs.screen(sm) {
+        padding: 1.8rem;
+        border-radius: 2rem;
+    }
+
+    &__info {
+        @extend %flexColumn;
+        gap: 0.8rem;
+        min-width: 0;
+    }
+
+    &__top-row {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    &__badge {
+        @extend %inlineFlexCenter;
+        gap: 0.65rem;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--primary-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__pulse-dot {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    &__selector {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    &__select-label {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+
+    &__select-wrap {
+        position: relative;
+        @extend %inlineFlexCenter;
+    }
+
+    &__select {
+        appearance: none;
+        height: 3.8rem;
+        padding: 0 3.6rem 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+        cursor: pointer;
+        @extend %transTheme;
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--primary-color);
+        }
+    }
+
+    &__select-arrow {
+        position: absolute;
+        right: 1.1rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        pointer-events: none;
+    }
+
+    &__heading {
+        font-size: clamp(2rem, 2.4vw, 2.6rem);
+        font-weight: 800;
+        line-height: 1.25;
+        color: var(--text-color);
+        @extend %textEllipsis;
+
+        strong {
+            color: var(--primary-color);
+        }
+    }
+
+    &__date-detail {
+        @extend %flexWrapGap;
+        gap: 0.6rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__clock-wrap {
+        @extend %flexYCenterRight;
+
+        @include abs.screen(xl) {
+            justify-content: flex-start;
+        }
+    }
+
+    &__timer {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+        align-items: center;
+        gap: 0.8rem;
+        width: 100%;
+        padding: 1.4rem 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+
+        @include abs.screen(sm) {
+            padding: 1rem;
+            gap: 0.4rem;
+        }
+    }
+
+    &__unit {
+        @extend %flexColumnCenterAll;
+        gap: 0.2rem;
+        padding: 0.8rem 0.6rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        min-width: 6.8rem;
+
+        @include abs.screen(sm) {
+            min-width: 5.2rem;
+            padding: 0.6rem 0.4rem;
+        }
+    }
+
+    &__num {
+        font-size: clamp(2.6rem, 3.2vw, 3.6rem);
+        font-weight: 800;
+        line-height: 1;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+
+        &--sec {
+            color: var(--primary-color);
+        }
+    }
+
+    &__unit-label {
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-muted);
+    }
+
+    &__sep {
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        animation: pulse 2s ease-in-out infinite;
+    }
+}
+
+// ==========================================================================
+// CỘT TRÁI: THẺ HERO TIÊU ĐIỂM (KHÓA CHIỀU CAO TUYỆT ĐỐI CHỐNG LAYOUT SHIFT)
 // ==========================================================================
 .festival-hero {
     position: relative;
     overflow: hidden;
     @extend %flexColumn;
     justify-content: space-between;
-    gap: 1.6rem;
+    // Khóa chiều cao cố định trên PC để khi Hover các card có nội dung dài/ngắn khác nhau không bao giờ đẩy sụt layout
+    min-height: 46rem;
+    max-height: 46rem;
+    gap: 1.4rem;
     padding: 2.6rem;
     background-color: var(--primary-color);
     border: 1px solid var(--primary-hover);
@@ -6005,6 +6218,11 @@ strong {
     color: #ffffff;
     box-shadow: 0 1rem 2.8rem var(--shadow-color);
     @extend %transTheme;
+
+    @include abs.screen(lg) {
+        min-height: auto;
+        max-height: none;
+    }
 
     @include abs.screen(sm) {
         padding: 2rem;
@@ -6016,13 +6234,14 @@ strong {
         z-index: 2;
         @extend %flexColumn;
         gap: 0.8rem;
-        padding-bottom: 1.4rem;
+        padding-bottom: 1.2rem;
         border-bottom: 1px solid var(--hero-border-color);
     }
 
     &__badges {
-        @extend %flexBetween;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
         gap: 0.8rem;
     }
 
@@ -6030,21 +6249,26 @@ strong {
     &__type-badge {
         @extend %inlineFlexCenter;
         gap: 0.6rem;
-        padding: 0.35rem 1.2rem;
+        height: 3.2rem;
+        padding: 0 1.2rem;
         border-radius: 99.9rem;
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 800;
     }
 
+    // Dòng "Dự đoán/Đếm ngày tinh tế" khóa 1 dòng an toàn
     &__pill {
+        justify-content: flex-start;
         background-color: #ffffff;
         color: var(--primary-active);
+        @extend %textEllipsis;
     }
 
     &__type-badge {
         background-color: var(--hero-box-bg);
         border: 1px solid var(--hero-border-color);
         color: #ffffff;
+        @extend %textNoWrap;
     }
 
     &__date-row {
@@ -6056,7 +6280,7 @@ strong {
     }
 
     &__solar {
-        font-size: clamp(4.6rem, 5.2vw, 5.8rem);
+        font-size: clamp(4.6rem, 5vw, 5.6rem);
         font-weight: 800;
         line-height: 1;
         letter-spacing: -0.03em;
@@ -6069,7 +6293,7 @@ strong {
     }
 
     &__weekday {
-        font-size: 2rem;
+        font-size: 1.9rem;
         font-weight: 800;
         line-height: 1.2;
         color: #ffffff;
@@ -6081,23 +6305,69 @@ strong {
         color: var(--hero-text-soft);
     }
 
+    // Khóa đúng chiều cao 2 dòng cho tên sự kiện
     &__title {
         font-size: 2rem;
         font-weight: 800;
         line-height: 1.3;
+        min-height: 5.2rem;
         color: #ffffff;
+        @extend %textClamp2;
     }
 
     &__lunar {
         font-size: 1.35rem;
         color: var(--hero-text-soft);
+        @extend %textEllipsis;
+    }
+
+    // Khung nội dung mô tả & Giờ Hoàng Đạo cố định chiều cao bên trong Hero
+    &__detail-box {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 0.8rem;
+        padding: 1.2rem 1.4rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.6rem;
+    }
+
+    &__desc {
+        font-size: 1.3rem;
+        line-height: 1.45;
+        min-height: 3.8rem;
+        color: #ffffff;
+        @extend %textClamp2;
+    }
+
+    &__hours-line {
+        @extend %flexColumn;
+        gap: 0.2rem;
+        padding-top: 0.6rem;
+        border-top: 1px dashed var(--hero-border-color);
+    }
+
+    &__hours-label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--hero-text-soft);
+    }
+
+    &__hours-val {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #ffffff;
+        @extend %textEllipsis;
     }
 
     &__footer {
         position: relative;
         z-index: 2;
         @extend %flexBetween;
-        padding-top: 0.4rem;
+        padding-top: 0.2rem;
     }
 
     &__link {
@@ -6134,13 +6404,13 @@ strong {
 }
 
 // ==========================================================================
-// CỘT PHẢI TẦNG 1: KHỐI BỘ ĐIỀU KHIỂN & BENTO 4 QUÝ
+// CỘT PHẢI (TRÊN): KHỐI BỘ ĐIỀU KHIỂN & BENTO 4 QUÝ
 // ==========================================================================
 .festival-controls {
     @extend %flexColumn;
     justify-content: space-between;
-    gap: 1.5rem;
-    padding: 2.4rem 2.6rem;
+    gap: 1.4rem;
+    padding: 2.2rem 2.4rem;
     background-color: var(--body-bg);
     border: 1px solid var(--border-color);
     border-radius: 2.6rem;
@@ -6148,7 +6418,7 @@ strong {
     @extend %transTheme;
 
     @include abs.screen(sm) {
-        padding: 1.8rem;
+        padding: 1.6rem;
         border-radius: 2rem;
     }
 
@@ -6161,7 +6431,7 @@ strong {
 
     &__intro {
         @extend %flexColumn;
-        gap: 0.45rem;
+        gap: 0.4rem;
     }
 
     &__eyebrow-row {
@@ -6184,7 +6454,7 @@ strong {
     }
 
     &__heading {
-        font-size: clamp(2.2rem, 2.6vw, 2.8rem);
+        font-size: clamp(2.1rem, 2.4vw, 2.6rem);
         font-weight: 800;
         line-height: 1.2;
         color: var(--text-color);
@@ -6276,12 +6546,11 @@ strong {
     }
 }
 
-// BENTO 4 QUÝ (1 Ô MASTER "CẢ NĂM" + 4 HỘP QUÝ XUÂN - HẠ - THU - ĐÔNG)
 .festival-seasons-bento {
     display: grid;
     grid-template-columns: auto repeat(4, minmax(0, 1fr));
     align-items: stretch;
-    gap: 1rem;
+    gap: 0.8rem;
 
     @include abs.screen(xxl) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -6294,12 +6563,12 @@ strong {
     &__master {
         @extend %inlineFlexCenter;
         gap: 0.7rem;
-        min-width: 11.4rem;
-        padding: 1.2rem 1.6rem;
+        min-width: 10.6rem;
+        padding: 1rem 1.4rem;
         background-color: var(--bg-surface);
         border: 1.5px solid var(--border-color);
-        border-radius: 1.8rem;
-        font-size: 1.4rem;
+        border-radius: 1.6rem;
+        font-size: 1.35rem;
         font-weight: 800;
         color: var(--text-color);
         @extend %textNoWrap;
@@ -6307,7 +6576,7 @@ strong {
 
         @include abs.screen(xxl) {
             grid-column: 1 / -1;
-            min-height: 4.4rem;
+            min-height: 4.2rem;
         }
 
         &:hover {
@@ -6336,11 +6605,11 @@ strong {
     &__quarter {
         @extend %flexColumn;
         justify-content: space-between;
-        gap: 0.65rem;
-        padding: 0.9rem 1rem 1rem;
+        gap: 0.55rem;
+        padding: 0.8rem 0.9rem 0.9rem;
         background-color: var(--bg-surface);
         border: 1.5px solid var(--border-color);
-        border-radius: 1.8rem;
+        border-radius: 1.6rem;
         @extend %transTheme;
 
         &:has(.is-active),
@@ -6353,28 +6622,27 @@ strong {
     &__q-label {
         display: block;
         text-align: center;
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         font-weight: 800;
         color: var(--text-muted);
-        letter-spacing: 0.01em;
         @extend %textNoWrap;
     }
 
     &__q-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.5rem;
+        gap: 0.45rem;
     }
 
     &__btn {
         position: relative;
         @extend %inlineFlexCenter;
-        height: 3.4rem;
+        height: 3.2rem;
         padding: 0 0.4rem;
         background-color: var(--body-bg);
         border: 1px solid var(--border-color);
-        border-radius: 1rem;
-        font-size: 1.3rem;
+        border-radius: 0.9rem;
+        font-size: 1.25rem;
         font-weight: 800;
         color: var(--text-color);
         font-variant-numeric: tabular-nums;
@@ -6383,10 +6651,10 @@ strong {
         &[data-has-major="true"]::after {
             content: "";
             position: absolute;
-            top: 0.35rem;
-            right: 0.35rem;
-            width: 0.5rem;
-            height: 0.5rem;
+            top: 0.3rem;
+            right: 0.3rem;
+            width: 0.45rem;
+            height: 0.45rem;
             border-radius: 50%;
             background-color: var(--primary-color);
         }
@@ -6411,22 +6679,46 @@ strong {
 }
 
 // ==========================================================================
-// TẦNG 2: KHUNG BENTO ĐẠI TIỆC SỰ KIỆN (2x2 ĐẠI LỄ + 1x1 LỄ THƯỜNG)
+// CỘT PHẢI (DƯỚI): KHUNG BENTO SỰ KIỆN CÓ VÙNG CUỘN ĐỘC LẬP (INTERNAL SCROLL)
 // ==========================================================================
 .festival-bento-box {
     @extend %flexColumn;
-    gap: 2.2rem;
-    padding: 2.6rem;
+    gap: 1.6rem;
+    padding: 2.2rem 2.4rem;
     background-color: var(--body-bg);
     border: 1px solid var(--border-color);
-    border-radius: 2.8rem;
+    border-radius: 2.6rem;
     box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
     @extend %transTheme;
 
     @include abs.screen(sm) {
         padding: 1.6rem;
         border-radius: 2rem;
-        gap: 1.6rem;
+    }
+
+    &__bar {
+        @extend %flexBetween;
+        padding-bottom: 1rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__hint {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    // Vùng cuộn độc lập cho các card sự kiện (Giữ Hero trái & Countdown đứng yên 100%)
+    &__scroll-viewport {
+        max-height: 56rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0.4rem 0.6rem 0.4rem 0.2rem;
+        scroll-behavior: smooth;
+
+        @include abs.screen(lg) {
+            max-height: 52rem;
+        }
     }
 
     &__empty {
@@ -6450,21 +6742,21 @@ strong {
     &__footer {
         @extend %flexColumn;
         align-items: center;
-        gap: 1.4rem;
-        padding-top: 0.8rem;
+        gap: 1.2rem;
+        padding-top: 0.4rem;
     }
 
     &__more-btn {
         @extend %inlineFlexCenter;
         gap: 0.8rem;
         width: 100%;
-        max-width: 48rem;
-        height: 4.8rem;
-        padding: 0 2.4rem;
+        max-width: 46rem;
+        height: 4.4rem;
+        padding: 0 2.2rem;
         background-color: var(--bg-surface);
         border: 1.5px solid var(--border-color);
         border-radius: 99.9rem;
-        font-size: 1.45rem;
+        font-size: 1.4rem;
         font-weight: 800;
         color: var(--text-color);
         @extend %transInteractive;
@@ -6502,7 +6794,7 @@ strong {
         flex-wrap: wrap;
         width: 100%;
         gap: 1rem;
-        padding-top: 1.2rem;
+        padding-top: 1rem;
         border-top: 1px dashed var(--border-color);
         font-size: 1.25rem;
         color: var(--text-muted);
@@ -6522,14 +6814,10 @@ strong {
 
 .festival-bento-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-auto-rows: minmax(13.6rem, auto);
     grid-auto-flow: dense;
-    gap: 1.6rem;
-
-    @include abs.screen(xl) {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+    gap: 1.4rem;
 
     @include abs.screen(md) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -6541,13 +6829,14 @@ strong {
 }
 
 // ==========================================================================
-// Ô GẠCH SỰ KIỆN (.festival-tile): MẶC ĐỊNH 1x1, ĐẠI LỄ (data-major="true") 2x2
+// Ô GẠCH SỰ KIỆN (<button class="festival-tile">): TƯƠNG TÁC TẠI CHỖ
 // ==========================================================================
 .festival-tile {
     position: relative;
     overflow: hidden;
     grid-column: span 1;
     grid-row: span 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -6556,8 +6845,9 @@ strong {
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
     border-radius: 2rem;
-    text-decoration: none;
+    text-align: left;
     color: inherit;
+    cursor: pointer;
     @extend %transInteractive;
 
     &[hidden] {
@@ -6589,15 +6879,19 @@ strong {
     &.is-active {
         background-color: var(--primary-soft-bg, var(--body-bg));
         border-color: var(--primary-color);
-        transform: translateY(-3px);
-        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+    }
+
+    &.is-active {
+        border-width: 2px;
     }
 
     &[data-major="true"],
     &--major {
         grid-column: span 2;
         grid-row: span 2;
-        padding: 2.4rem;
+        padding: 2.2rem;
         background-color: var(--primary-color);
         border-color: var(--primary-hover);
         color: #ffffff;
@@ -6615,8 +6909,7 @@ strong {
             background-color: var(--primary-hover);
             border-color: #ffffff;
             color: #ffffff;
-            transform: translateY(-4px);
-            box-shadow: 0 1.4rem 3.2rem var(--shadow-color);
+            transform: translateY(-3px);
 
             .festival-tile__zodiac {
                 opacity: 0.26;
@@ -6671,6 +6964,7 @@ strong {
         z-index: 2;
         @extend %flexColumn;
         gap: 0.35rem;
+        width: 100%;
         margin-top: auto;
     }
 
@@ -6716,7 +7010,7 @@ strong {
     }
 
     &__title {
-        font-size: clamp(2rem, 2.2vw, 2.5rem);
+        font-size: clamp(1.9rem, 2.1vw, 2.4rem);
         font-weight: 800;
         line-height: 1.25;
         color: #ffffff;
@@ -6734,6 +7028,7 @@ strong {
         z-index: 2;
         @extend %flexBetween;
         align-items: flex-end;
+        width: 100%;
         padding-top: 1.2rem;
         border-top: 1px solid var(--hero-border-color);
     }
@@ -6744,7 +7039,7 @@ strong {
     }
 
     &__big-num {
-        font-size: clamp(3.4rem, 4vw, 4.4rem);
+        font-size: clamp(3.2rem, 3.8vw, 4.2rem);
         font-weight: 800;
         line-height: 1;
         letter-spacing: -0.03em;
@@ -6753,20 +7048,19 @@ strong {
     }
 
     &__big-sub {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         font-weight: 700;
         color: var(--hero-text-soft);
     }
 
     &__cta {
         @extend %inlineFlexCenter;
-        width: 3.8rem;
-        height: 3.8rem;
+        width: 3.6rem;
+        height: 3.6rem;
         border-radius: 50%;
         background-color: var(--hero-chip-bg);
         border: 1px solid var(--hero-border-color);
-        font-size: 1.6rem;
-        font-weight: 800;
+        font-size: 1.5rem;
         color: #ffffff;
     }
 
@@ -6774,8 +7068,8 @@ strong {
         position: absolute;
         right: -0.6rem;
         bottom: -0.6rem;
-        width: 15rem;
-        height: 15rem;
+        width: 14rem;
+        height: 14rem;
         object-fit: contain;
         opacity: 0.16;
         filter: var(--zodiac-filter-active);
