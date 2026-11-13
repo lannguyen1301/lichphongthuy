@@ -1,6 +1,6 @@
 # day.html
 
-```html
+````html
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -51,7 +51,7 @@
                     </button>
                 </nav>
 
-                <!-- ==================== TẦNG 1: 2 CỘT TRÁI (5) & PHẢI (7) KHÓA ĐÁY BẰNG NHAU 100% ==================== -->
+                <!-- ==================== TẦNG 1: 2 CỘT TRÁI (5) & PHẢI (7) CÂN XỨNG ĐỘ CAO 100% ==================== -->
                 <div class="row day-page__top-row">
                     <!-- CỘT TRÁI (5 CỘT PC): TỜ LỊCH BLOC + PHONG THỦY NGÀY -->
                     <div class="col-5 col-lg-12 day-page__left">
@@ -60,9 +60,9 @@
                             <div class="bloc-card__top">
                                 <div class="bloc-card__month-box">
                                     <span class="bloc-card__year-badge" id="detail-solar-year">2026</span>
-                                    <strong class="bloc-card__month-vn" id="detail-solar-month-vn"
-                                        >THÁNG MƯỜI MỘT</strong
-                                    >
+                                    <strong class="bloc-card__month-vn" id="detail-solar-month-vn">
+                                        THÁNG MƯỜI MỘT
+                                    </strong>
                                     <span class="bloc-card__month-en" id="detail-solar-month-en">November</span>
                                     <span class="bloc-card__day-status" id="detail-day-status">Ngày Hoàng Đạo</span>
                                 </div>
@@ -160,9 +160,9 @@
                                 </div>
 
                                 <div class="bloc-card__canchi-list">
-                                    <strong class="bloc-card__lunar-month" id="detail-lunar-month"
-                                        >THÁNG CHÍN (Đ)</strong
-                                    >
+                                    <strong class="bloc-card__lunar-month" id="detail-lunar-month">
+                                        THÁNG CHÍN (Đ)
+                                    </strong>
                                     <span class="bloc-card__canchi-item" id="detail-canchi-month">Tháng Mậu Tuất</span>
                                     <span class="bloc-card__canchi-item" id="detail-canchi-day">Ngày Ất Dậu</span>
                                     <span class="bloc-card__canchi-item" id="detail-canchi-hour">Giờ Bính Tý</span>
@@ -223,9 +223,9 @@
                                 <div class="fengshui-card__group">
                                     <div class="fengshui-card__head">
                                         <span class="fengshui-card__label">Nhị Thập Bát Tú:</span>
-                                        <strong class="fengshui-card__val" id="detail-star-title"
-                                            >Sao Sâm (Thủy)</strong
-                                        >
+                                        <strong class="fengshui-card__val" id="detail-star-title">
+                                            Sao Sâm (Thủy)
+                                        </strong>
                                         <span
                                             class="fengshui-card__badge fengshui-card__badge--good"
                                             id="detail-star-badge"
@@ -251,7 +251,7 @@
                                 </div>
                             </div>
 
-                            <div class="fengshui-card day-page__card-stretch">
+                            <div class="fengshui-card day-page__card-stretch day-page__card-stretch--left">
                                 <h2 class="fengshui-card__section-title">Việc nên làm / Không nên làm</h2>
 
                                 <div class="fengshui-actions">
@@ -292,60 +292,39 @@
                         </section>
                     </div>
 
-                    <!-- CỘT PHẢI (7 CỘT PC): 4 KHỐI BENTO CÂN XỨNG ĐỘ CAO VỚI CỘT TRÁI -->
-                    <div class="col-7 col-lg-12 day-page__right-stack">
-                        <!-- KHỐI BENTO 1: HƯỚNG XUẤT HÀNH -->
+                    <!-- CỘT PHẢI (7 CỘT PC): 4 KHỐI BENTO ĐẦY ĐỦ ICON SVG, TOOLTIP TAG & ĐỒNG ĐỀU CHIỀU CAO -->
+                    <div class="col-7 col-lg-12 day-page__right-stack" id="day-right-interactive">
+                        <!-- KHỐI BENTO 1: HƯỚNG XUẤT HÀNH (3 VỊ THẦN CÓ ICON SVG + WATERMARK + TOOLTIP TAG) -->
                         <section class="day-bento-card" aria-labelledby="heading-directions">
                             <header class="day-bento-card__head">
-                                <h2 class="day-bento-card__title" id="heading-directions">Hướng Xuất Hành</h2>
+                                <div>
+                                    <h2 class="day-bento-card__title" id="heading-directions">Hướng Xuất Hành</h2>
+                                    <p class="day-bento-card__sub">
+                                        Chọn phương vị cát thần theo Thiên Can ngày để đón hỷ sự và tài lộc
+                                    </p>
+                                </div>
                                 <span class="day-bento-card__tag">Theo Thiên Can Ngày</span>
                             </header>
 
-                            <div class="day-directions-grid">
-                                <article class="day-dir-box day-dir-box--hy">
-                                    <span class="day-dir-box__label">Hỷ Thần (Tốt)</span>
-                                    <strong class="day-dir-box__value" id="day-dir-hy">Tây Bắc</strong>
-                                    <span class="day-dir-box__sub">Hướng niềm vui, cưới hỏi</span>
-                                </article>
-
-                                <article class="day-dir-box day-dir-box--tai">
-                                    <span class="day-dir-box__label">Tài Thần (Tốt)</span>
-                                    <strong class="day-dir-box__value" id="day-dir-tai">Đông Nam</strong>
-                                    <span class="day-dir-box__sub">Hướng cầu tài, khai trương</span>
-                                </article>
-
-                                <article class="day-dir-box day-dir-box--hac">
-                                    <span class="day-dir-box__label">Hạc Thần (Xấu)</span>
-                                    <strong class="day-dir-box__value" id="day-dir-hac">Chính Nam</strong>
-                                    <span class="day-dir-box__sub">Hướng xấu cần tránh</span>
-                                </article>
-                            </div>
+                            <div class="day-directions-grid" id="day-directions-grid"></div>
                         </section>
 
-                        <!-- KHỐI BENTO 2: THÔNG TIN TIẾT KHÍ -->
+                        <!-- KHỐI BENTO 2: THÔNG TIN TIẾT KHÍ (24 ICON THỜI TIẾT + WATERMARK + TOOLTIP TAG) -->
                         <section class="day-bento-card" aria-labelledby="heading-solarterm">
                             <header class="day-bento-card__head">
-                                <h2 class="day-bento-card__title" id="heading-solarterm">Thông Tin Tiết Khí</h2>
+                                <div>
+                                    <h2 class="day-bento-card__title" id="heading-solarterm">Thông Tin Tiết Khí</h2>
+                                    <p class="day-bento-card__sub" id="day-term-summary-sub">
+                                        Chu kỳ 24 Tiết khí phản ánh sự vận hành của Mặt Trời và khí hậu nông lịch
+                                    </p>
+                                </div>
                                 <span class="day-bento-card__tag">24 Tiết Khí</span>
                             </header>
 
-                            <div class="day-solarterm-grid">
-                                <div class="day-solarterm-box">
-                                    <span class="day-solarterm-box__label">Tiết khí hiện tại</span>
-                                    <strong class="day-solarterm-box__val" id="day-term-current">Lập Đông</strong>
-                                </div>
-                                <div class="day-solarterm-box">
-                                    <span class="day-solarterm-box__label">Ngày bắt đầu</span>
-                                    <strong class="day-solarterm-box__val" id="day-term-start">07/11/2026</strong>
-                                </div>
-                                <div class="day-solarterm-box">
-                                    <span class="day-solarterm-box__label">Ngày kết thúc</span>
-                                    <strong class="day-solarterm-box__val" id="day-term-end">21/11/2026</strong>
-                                </div>
-                            </div>
+                            <div class="day-solarterm-grid" id="day-solarterm-grid"></div>
                         </section>
 
-                        <!-- KHỐI BENTO 3: KHỔNG MINH LỤC DIỆU (12 CANH GIỜ) -->
+                        <!-- KHỐI BENTO 3: KHỔNG MINH LỤC DIỆU (6 ICON SVG + HỢP MỆNH NGŨ HÀNH + TOOLTIP TAG) -->
                         <section class="day-bento-card" aria-labelledby="heading-lucdieu">
                             <header class="day-bento-card__head">
                                 <div>
@@ -362,8 +341,11 @@
                             <div class="day-lucdieu-grid" id="day-lucdieu-grid"></div>
                         </section>
 
-                        <!-- KHỐI BENTO 4: MẶT TRỜI 4 MIỀN (Khóa đáy bằng Cột Trái) -->
-                        <section class="day-bento-card day-page__card-stretch" aria-labelledby="heading-sun">
+                        <!-- KHỐI BENTO 4: MẶT TRỜI 4 MIỀN (ĐÃ SỬA LỖI KHOẢNG TRẮNG LOÃNG + THÊM 4 ICON WEATHER) -->
+                        <section
+                            class="day-bento-card day-page__card-stretch day-page__card-stretch--sun"
+                            aria-labelledby="heading-sun"
+                        >
                             <header class="day-bento-card__head">
                                 <h2 class="day-bento-card__title" id="heading-sun">Mặt Trời &amp; Độ Dài Ban Ngày</h2>
                                 <span class="day-bento-card__tag">Múi giờ UTC+7</span>
@@ -382,10 +364,42 @@
 
                             <div class="day-sun-table" role="table" aria-label="Giờ mặt trời mọc và lặn theo 4 miền">
                                 <div class="day-sun-table__head" role="row">
-                                    <span role="columnheader">Miền</span>
-                                    <span role="columnheader">Địa điểm đại diện</span>
-                                    <span role="columnheader">Mọc</span>
-                                    <span role="columnheader">Lặn</span>
+                                    <span class="day-sun-table__th" role="columnheader">
+                                        <img
+                                            src="./assets/icons/weather/region-compass.svg"
+                                            alt=""
+                                            aria-hidden="true"
+                                            class="day-sun-table__th-icon"
+                                        />
+                                        <span>Miền</span>
+                                    </span>
+                                    <span class="day-sun-table__th" role="columnheader">
+                                        <img
+                                            src="./assets/icons/weather/location-pin.svg"
+                                            alt=""
+                                            aria-hidden="true"
+                                            class="day-sun-table__th-icon"
+                                        />
+                                        <span>Địa điểm đại diện</span>
+                                    </span>
+                                    <span class="day-sun-table__th" role="columnheader">
+                                        <img
+                                            src="./assets/icons/weather/sun-rise.svg"
+                                            alt=""
+                                            aria-hidden="true"
+                                            class="day-sun-table__th-icon"
+                                        />
+                                        <span>Mọc</span>
+                                    </span>
+                                    <span class="day-sun-table__th" role="columnheader">
+                                        <img
+                                            src="./assets/icons/weather/sun-set.svg"
+                                            alt=""
+                                            aria-hidden="true"
+                                            class="day-sun-table__th-icon"
+                                        />
+                                        <span>Lặn</span>
+                                    </span>
                                 </div>
                                 <div class="day-sun-rows-wrap" id="day-sun-rows"></div>
                             </div>
@@ -393,7 +407,7 @@
                     </div>
                 </div>
 
-                <!-- ==================== TẦNG 2 (1 CỘT LỚN FULL-WIDTH 12 DÒNG): BẢNG 12 CANH GIỜ + TOOLTIP PASTEL & MODAL QUICK-VIEW ==================== -->
+                <!-- ==================== TẦNG 2 (1 CỘT LỚN FULL-WIDTH 12 DÒNG): ICON SVG HOÀNG/HẮC ĐẠO + TOOLTIP TAG TÁCH DÒNG ==================== -->
                 <section class="day-bento-card day-hourly-section" aria-labelledby="heading-hourly-detail">
                     <header class="day-hourly-section__header">
                         <div>
@@ -401,25 +415,37 @@
                                 Thông Tin Chi Tiết Theo 12 Giờ Trong Ngày
                             </h2>
                             <p class="day-bento-card__sub" id="day-bazi-pillars-note">
-                                Rê chuột vào từng mục để xem nhanh Tooltip hoặc bấm trực tiếp vào Canh Giờ, Nạp Âm, Lục
-                                Diệu, Vòng Ngũ Hành, Bát Quái để mở hộp thoại luận giải chi tiết.
+                                Rê chuột vào từng mục để xem nhanh giải nghĩa hoặc bấm vào nhãn Tag trong Tooltip để mở
+                                thẻ luận giải chuyên sâu.
                             </p>
                         </div>
 
-                        <!-- Bộ lọc nhanh 12 Canh Giờ -->
+                        <!-- Bộ lọc nhanh 12 Canh Giờ (Đã thay Emoji bằng SVG hoang-dao.svg & hac-dao.svg) -->
                         <div class="day-hourly-section__filters" role="group" aria-label="Lọc danh sách 12 canh giờ">
                             <button
                                 type="button"
                                 class="day-hourly-section__filter-btn is-active"
                                 data-day-hour-filter="all"
                             >
-                                Tất cả (12 giờ)
+                                <span>Tất cả (12 giờ)</span>
                             </button>
                             <button type="button" class="day-hourly-section__filter-btn" data-day-hour-filter="good">
-                                ☀️ Giờ Hoàng Đạo (6)
+                                <img
+                                    src="./assets/icons/fengshui/hoang-dao.svg"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="day-hourly-section__dao-icon"
+                                />
+                                <span>Giờ Hoàng Đạo (6)</span>
                             </button>
                             <button type="button" class="day-hourly-section__filter-btn" data-day-hour-filter="bad">
-                                🌙 Giờ Hắc Đạo (6)
+                                <img
+                                    src="./assets/icons/fengshui/hac-dao.svg"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="day-hourly-section__dao-icon"
+                                />
+                                <span>Giờ Hắc Đạo (6)</span>
                             </button>
                         </div>
                     </header>
@@ -480,7 +506,7 @@
                             </div>
 
                             <div class="day-term-modal__box day-term-modal__box--advice">
-                                <h4 class="day-term-modal__box-title">Lời khuyên ứng dụng trong khung giờ này</h4>
+                                <h4 class="day-term-modal__box-title">Lời khuyên ứng dụng &amp; Bản mệnh phù hợp</h4>
                                 <p class="day-term-modal__advice" id="day-term-modal-advice"></p>
                             </div>
                         </div>
@@ -516,3 +542,4 @@
     </body>
 </html>
 ```
+````

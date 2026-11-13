@@ -1,0 +1,20 @@
+// scss/pages/_festival.scss
+@use "../abstracts" as abs;
+
+.festival-page {
+    padding-bottom: abs.$gap-section-default;
+}
+
+// scss/pages/_festival.scss
+@use "../abstracts" as abs;
+
+// Tắt sticky của Header tổng chỉ riêng trên trang Festival (các trang khác giữ nguyên 100%)
+body[data-page="festival"] .header,
+.festival-body .header {
+    position: relative;
+    top: 0;
+}
+
+.festival-page {
+    padding-bottom: abs.$gap-section-default;
+}

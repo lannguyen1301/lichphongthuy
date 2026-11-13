@@ -533,7 +533,6 @@
 ## sidebar.html
 
 ```html
-<!-- 2. Tệp templates/sidebar.html (Đã nối chuẩn link ./day.html và ./year.html) -->
 <aside class="sidebar" id="calendar-sidebar" aria-label="Thanh công cụ tra cứu lịch">
     <nav class="sidebar__nav" aria-label="Xem Ngày Tốt">
         <ul class="sidebar__list">
@@ -567,7 +566,7 @@
                 </a>
             </li>
             <li class="sidebar__item">
-                <a href="#!" class="sidebar__link" data-nav-page="week.html" title="Xem Lịch Tuần">
+                <a href="./week.html" class="sidebar__link" data-nav-page="week.html" title="Xem Lịch Tuần">
                     <img src="./assets/icons/calendarRange.svg" alt="" aria-hidden="true" class="sidebar__img icon" />
                     <span class="sidebar__tooltip">Tuần</span>
                 </a>
@@ -8469,9 +8468,10 @@
     data-active-month="all"
     data-active-quarter="all"
     data-active-event="nha-giao-viet-nam"
+    data-picker-tab="upcoming"
     data-expanded="false"
 >
-    <!-- ==================== ROW 1 (MỚI): KHU VỰC ĐỒNG HỒ ĐẾM NGƯỢC (MASTER COUNTDOWN + SELECT SỰ KIỆN) ==================== -->
+    <!-- ==================== ROW 1 (STICKY): ĐỒNG HỒ ĐẾM NGƯỢC LỚN + CUSTOM DROPDOWN KIỂU A ==================== -->
     <section
         class="festival-countdown-bar"
         id="festival-countdown-bar"
@@ -8479,35 +8479,42 @@
         itemscope
         itemtype="https://schema.org/Event"
     >
-        <!-- Cột Trái: Tiêu đề "Thời gian còn lại đến...", Thứ/Ngày/Tháng/Năm chi tiết & Select chọn sự kiện chủ động -->
+        <!-- Cột Trái: Custom Select Kiểu A + Row Title 1 dòng (%textEllipsis) + Row Subtitle tách 2 dòng riêng biệt -->
         <div class="festival-countdown-bar__info">
             <div class="festival-countdown-bar__top-row">
                 <span class="festival-countdown-bar__badge">
                     <span class="festival-countdown-bar__pulse-dot" aria-hidden="true"></span>
-                    <span id="festival-countdown-rollover-tag">Đếm ngược thời gian thực</span>
+                    <span id="festival-countdown-rollover-tag">Sắp diễn ra • Còn 10 ngày</span>
                 </span>
 
-                <!-- Bộ chọn sự kiện chủ động (<select> chuẩn a11y + đồng bộ Custom Dropdown) -->
                 <div class="festival-countdown-bar__selector">
-                    <label for="festival-countdown-select" class="festival-countdown-bar__select-label">
-                        🎯 Chọn sự kiện:
-                    </label>
-                    <div class="festival-countdown-bar__select-wrap">
-                        <select
-                            id="festival-countdown-select"
-                            class="festival-countdown-bar__select"
-                            aria-controls="festival-master-timer festival-countdown-heading festival-hero-card"
-                            title="Chọn nhanh ngày lễ để xem đồng hồ đếm ngược và chi tiết"
+                    <span class="festival-countdown-bar__select-label" id="festival-picker-label">
+                        <span aria-hidden="true">🎯</span> Sự kiện:
+                    </span>
+
+                    <details class="festival-picker js-cal-dropdown" id="festival-countdown-dropdown">
+                        <summary
+                            class="festival-picker__summary"
+                            aria-labelledby="festival-picker-label"
+                            aria-expanded="false"
+                            aria-controls="festival-picker-popover"
+                            title="Bấm để mở danh sách chọn sự kiện đếm ngược"
                         >
-                            <option value="nha-giao-viet-nam">20/11 — Ngày Nhà Giáo Việt Nam</option>
-                        </select>
-                        <img
-                            src="./assets/icons/arrow-down.svg"
-                            alt=""
-                            aria-hidden="true"
-                            class="festival-countdown-bar__select-arrow icon"
-                        />
-                    </div>
+                            <span class="festival-picker__summary-name" id="festival-picker-current-name">
+                                Ngày Nhà Giáo Việt Nam
+                            </span>
+                            <span class="festival-picker__summary-date" id="festival-picker-current-date">
+                                20/11/2026
+                            </span>
+                            <img
+                                src="./assets/icons/arrow-down.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="festival-picker__arrow icon"
+                            />
+                        </summary>
+                        <!-- Popover giữ nguyên -->
+                    </details>
                 </div>
             </div>
 
@@ -8516,19 +8523,62 @@
                 id="festival-countdown-heading"
                 aria-live="polite"
                 aria-atomic="true"
+                title="Thời gian còn lại đến Ngày Nhà Giáo Việt Nam"
             >
                 Thời gian còn lại đến
                 <strong itemprop="name" id="festival-countdown-event-name">Ngày Nhà Giáo Việt Nam</strong>
             </h2>
 
-            <p class="festival-countdown-bar__date-detail" id="festival-countdown-date-detail">
-                <span id="festival-countdown-full-solar">Thứ Sáu, ngày 20 tháng 11 năm 2026 Dương lịch</span>
-                <span aria-hidden="true">•</span>
-                <span id="festival-countdown-full-lunar">Nhằm ngày 12/10 Âm lịch (Năm Bính Ngọ)</span>
-            </p>
+            <div class="festival-countdown-bar__subtitles" id="festival-countdown-date-detail">
+                <p
+                    class="festival-countdown-bar__sub-line"
+                    id="festival-countdown-full-solar"
+                    title="Thứ Sáu, ngày 20 tháng 11 năm 2026 Dương lịch"
+                >
+                    <span aria-hidden="true">📅</span> Thứ Sáu, ngày 20 tháng 11 năm 2026 Dương lịch
+                </p>
+                <p
+                    class="festival-countdown-bar__sub-line festival-countdown-bar__sub-line--lunar"
+                    id="festival-countdown-full-lunar"
+                    title="Nhằm ngày 12/10 Âm lịch (Năm Bính Ngọ • Ngày Mậu Tuất)"
+                >
+                    <span aria-hidden="true">🌙</span> Nhằm ngày 12/10 Âm lịch (Năm Bính Ngọ • Ngày Mậu Tuất)
+                </p>
+            </div>
         </div>
 
-        <!-- Cột Phải: Đồng hồ đếm ngược lớn (Ngày : Giờ : Phút : Giây) dùng role="timer" + aria-live="off" -->
+        <!-- Cột Phải (Mục 5): Đồng hồ đếm ngược kích thước lớn, đồng bộ font Theme, số Giây nổi bật -->
+        <!-- <div class="festival-countdown-bar__clock-wrap">
+            <time id="festival-master-timer" class="festival-countdown-bar__timer" itemprop="startDate"
+                datetime="2026-11-20T00:00:00+07:00" role="timer" aria-live="off" aria-atomic="true"
+                data-target-iso="2026-11-20T00:00:00"
+                title="Bộ đếm ngược thời gian thực (Ngày, Giờ, Phút, Giây) tính đến 00:00 ngày diễn ra sự kiện">
+                <div class="festival-countdown-bar__unit">
+                    <strong class="festival-countdown-bar__num" data-timer-part="days">10</strong>
+                    <span class="festival-countdown-bar__unit-label">Ngày</span>
+                </div>
+                <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
+                <div class="festival-countdown-bar__unit">
+                    <strong class="festival-countdown-bar__num" data-timer-part="hours">12</strong>
+                    <span class="festival-countdown-bar__unit-label">Giờ</span>
+                </div>
+                <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
+                <div class="festival-countdown-bar__unit">
+                    <strong class="festival-countdown-bar__num" data-timer-part="minutes">08</strong>
+                    <span class="festival-countdown-bar__unit-label">Phút</span>
+                </div>
+                <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
+                <div class="festival-countdown-bar__unit festival-countdown-bar__unit--sec">
+                    <strong class="festival-countdown-bar__num festival-countdown-bar__num--sec"
+                        data-timer-part="seconds">
+                        00
+                    </strong>
+                    <span class="festival-countdown-bar__unit-label">Giây</span>
+                </div>
+            </time>
+        </div> -->
+
+        <!-- nháp -->
         <div class="festival-countdown-bar__clock-wrap">
             <time
                 id="festival-master-timer"
@@ -8547,30 +8597,31 @@
                 </div>
                 <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
                 <div class="festival-countdown-bar__unit">
-                    <strong class="festival-countdown-bar__num" data-timer-part="hours">16</strong>
+                    <strong class="festival-countdown-bar__num" data-timer-part="hours">12</strong>
                     <span class="festival-countdown-bar__unit-label">Giờ</span>
                 </div>
                 <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
                 <div class="festival-countdown-bar__unit">
-                    <strong class="festival-countdown-bar__num" data-timer-part="minutes">55</strong>
+                    <strong class="festival-countdown-bar__num" data-timer-part="minutes">08</strong>
                     <span class="festival-countdown-bar__unit-label">Phút</span>
                 </div>
                 <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
-                <div class="festival-countdown-bar__unit">
+                <div class="festival-countdown-bar__unit festival-countdown-bar__unit--sec">
                     <strong
                         class="festival-countdown-bar__num festival-countdown-bar__num--sec"
                         data-timer-part="seconds"
-                        >00</strong
                     >
+                        00
+                    </strong>
                     <span class="festival-countdown-bar__unit-label">Giây</span>
                 </div>
             </time>
         </div>
     </section>
 
-    <!-- ==================== ROW 2: CỘT TRÁI (HERO STICKY CỐ ĐỊNH CHIỀU CAO) & CỘT PHẢI (BỘ LỌC + KHUNG CUỘN ĐỘC LẬP) ==================== -->
+    <!-- ==================== ROW 2: CỘT TRÁI (HERO STICKY) & CỘT PHẢI (BỘ LỌC ĐỨNG YÊN + LIST CARD CUỘN ĐỘC LẬP) ==================== -->
     <div class="festival-cal__workspace">
-        <!-- CỘT TRÁI (STICKY): THẺ HERO TIÊU ĐIỂM ĐÃ KHÓA CHIỀU CAO CHỐNG LAYOUT SHIFT 100% -->
+        <!-- CỘT TRÁI: THẺ HERO TIÊU ĐIỂM KHÓA CHIỀU CAO CHỐNG LAYOUT SHIFT 100% -->
         <aside class="festival-cal__sticky-left" aria-label="Khung thông tin tiêu điểm cố định">
             <article
                 class="festival-hero"
@@ -8581,13 +8632,12 @@
             >
                 <div class="festival-hero__top">
                     <div class="festival-hero__badges">
-                        <!-- Tính năng "Dự đoán/Đếm ngày tinh tế" có text-ellipsis khóa 1 dòng -->
                         <span
                             class="festival-hero__pill"
                             id="festival-hero-countdown"
-                            title="Trạng thái dự đoán số ngày đến sự kiện"
+                            title="Còn 10 ngày nữa là đến Ngày Nhà Giáo Việt Nam"
                         >
-                            Còn 10 ngày nữa là đến Ngày Nhà Giáo VN
+                            Còn 10 ngày nữa là đến Ngày Nhà Giáo Việt Nam
                         </span>
 
                         <span
@@ -8609,29 +8659,40 @@
                         </div>
                     </div>
 
-                    <!-- Khóa cố định chiều cao 2 dòng (%textClamp2) để tên ngắn hay dài không bao giờ làm nhảy Layout -->
-                    <h2 class="festival-hero__title" id="festival-hero-title">Ngày Nhà Giáo Việt Nam 20/11</h2>
+                    <h2 class="festival-hero__title" id="festival-hero-title" title="Ngày Nhà Giáo Việt Nam">
+                        Ngày Nhà Giáo Việt Nam
+                    </h2>
 
-                    <p class="festival-hero__lunar" id="festival-hero-lunar">
+                    <p
+                        class="festival-hero__lunar"
+                        id="festival-hero-lunar"
+                        title="Nhằm ngày 12/10 Âm lịch (Ngày Mậu Thân • Đại Trạch Thổ)"
+                    >
                         Nhằm ngày <strong>12/10 Âm lịch</strong> (Ngày Mậu Thân • Đại Trạch Thổ)
                     </p>
                 </div>
 
-                <!-- Hộp mô tả ý nghĩa và Giờ tốt trong Hero (Khóa chiều cao cố định chống Layout Shift) -->
                 <div class="festival-hero__detail-box">
-                    <p class="festival-hero__desc" id="festival-hero-desc">
+                    <p
+                        class="festival-hero__desc"
+                        id="festival-hero-desc"
+                        title="Ngày tôn vinh các nhà giáo và truyền thống Tôn sư trọng đạo tốt đẹp của dân tộc Việt Nam."
+                    >
                         Ngày tôn vinh các nhà giáo và truyền thống "Tôn sư trọng đạo" tốt đẹp của dân tộc Việt Nam.
                     </p>
                     <div class="festival-hero__hours-line">
                         <span class="festival-hero__hours-label">Giờ Hoàng Đạo trong ngày:</span>
-                        <strong class="festival-hero__hours-val" id="festival-hero-hours">
+                        <strong
+                            class="festival-hero__hours-val"
+                            id="festival-hero-hours"
+                            title="Tý (23-1), Sửu (1-3), Thìn (7-9), Tỵ (9-11), Mùi (13-15), Tuất (19-21)"
+                        >
                             Tý (23-1), Sửu (1-3), Thìn (7-9), Tỵ (9-11), Mùi (13-15), Tuất (19-21)
                         </strong>
                     </div>
                 </div>
 
                 <footer class="festival-hero__footer">
-                    <!-- Chỉ giữ duy nhất 1 liên kết chủ động ở chân Hero nếu người dùng thực sự muốn mở trang Ngày -->
                     <a
                         href="./day.html?date=2026-11-20"
                         class="festival-hero__link"
@@ -8653,9 +8714,9 @@
             </article>
         </aside>
 
-        <!-- CỘT PHẢI: BỘ ĐIỀU KHIỂN 4 QUÝ Ở TRÊN + KHUNG CUỘN ĐỘC LẬP DANH SÁCH CARD Ở DƯỚI -->
+        <!-- CỘT PHẢI: BỘ LỌC NĂM/QUÝ ĐỨNG YÊN (KHÔNG BỊ KẸT GIỮA COUNTDOWN) + VÙNG CUỘN CARD ĐỘC LẬP -->
         <div class="festival-cal__main-right">
-            <!-- 1. BỘ ĐIỀU KHIỂN NĂM, BỘ LỌC LOẠI LỄ & BENTO 4 QUÝ (XUÂN - HẠ - THU - ĐÔNG) -->
+            <!-- 1. BỘ ĐIỀU KHIỂN NĂM (KHÓA TRONG 2025 - 2027), BỘ LỌC LOẠI LỄ & BENTO 4 QUÝ -->
             <header class="festival-controls" aria-label="Bộ điều khiển và lọc sự kiện lễ tết theo 4 quý">
                 <div class="festival-controls__head">
                     <div class="festival-controls__intro">
@@ -8678,7 +8739,7 @@
                     <div
                         class="festival-controls__year-toolbar"
                         role="group"
-                        aria-label="Chọn năm tra cứu sự kiện lễ tết"
+                        aria-label="Chọn năm tra cứu (Giới hạn 2025 - 2027)"
                     >
                         <button
                             type="button"
@@ -8697,7 +8758,7 @@
                                 aria-label="Chọn năm tra cứu, hiện tại là Năm 2026"
                                 aria-expanded="false"
                                 aria-controls="festival-year-list"
-                                title="Mở danh sách chọn năm"
+                                title="Mở danh sách chọn năm (2025 - 2027)"
                             >
                                 <span class="month-cal__summary-text" id="festival-year-label">Năm 2026</span>
                                 <img
@@ -8765,7 +8826,6 @@
                     </div>
                 </div>
 
-                <!-- Hàng giữa: 4 Nút Lọc Loại Lễ & Nút Reset -->
                 <div class="festival-controls__filter-row">
                     <div class="festival-controls__filter-bar" role="group" aria-label="Lọc danh sách theo loại lịch">
                         <button
@@ -8834,7 +8894,7 @@
                     </button>
                 </div>
 
-                <!-- Hàng đáy: Bento 4 Quý (Xuân - Hạ - Thu - Đông) + Ô Master "Cả năm" -->
+                <!-- Bento 4 Quý (Xuân - Hạ - Thu - Đông) + Ô Master "Cả năm" -->
                 <div
                     class="festival-seasons-bento"
                     id="festival-jump-grid"
@@ -8861,7 +8921,6 @@
                         <span class="festival-seasons-bento__master-text">Cả năm</span>
                     </button>
 
-                    <!-- Hộp Bento Quý I • Mùa Xuân -->
                     <div
                         class="festival-seasons-bento__quarter"
                         role="group"
@@ -8914,7 +8973,6 @@
                         </div>
                     </div>
 
-                    <!-- Hộp Bento Quý II • Mùa Hạ -->
                     <div
                         class="festival-seasons-bento__quarter"
                         role="group"
@@ -8968,7 +9026,6 @@
                         </div>
                     </div>
 
-                    <!-- Hộp Bento Quý III • Mùa Thu -->
                     <div
                         class="festival-seasons-bento__quarter"
                         role="group"
@@ -9021,7 +9078,6 @@
                         </div>
                     </div>
 
-                    <!-- Hộp Bento Quý IV • Mùa Đông -->
                     <div
                         class="festival-seasons-bento__quarter"
                         role="group"
@@ -9076,21 +9132,20 @@
                 </div>
             </header>
 
-            <!-- 2. KHUNG LƯỚI BENTO SỰ KIỆN CÓ SCROLL ĐỘC LẬP (GIỮ HERO & COUNTDOWN ĐỨNG YÊN 100%) -->
+            <!-- 2. KHUNG LƯỚI BENTO SỰ KIỆN CÓ SCROLL ĐỘC LẬP -->
             <div
                 class="festival-bento-box"
                 role="region"
-                aria-label="Danh sách các ngày lễ trong năm (Bấm hoặc di chuột để xem trên khung tiêu điểm bên trái)"
+                aria-label="Danh sách các ngày lễ trong năm"
                 itemscope
                 itemtype="https://schema.org/ItemList"
             >
                 <div class="festival-bento-box__bar">
                     <span class="festival-bento-box__hint">
-                        💡 Rê chuột vào card để xem nhanh trên Hero trái • Bấm chọn card để ghim đồng hồ đếm ngược
+                        💡 Rê chuột vào card để xem nhanh trên Hero trái • Bấm chọn card để ghim lên Đồng hồ đếm ngược
                     </span>
                 </div>
 
-                <!-- Khung cuộn độc lập (Internal Scroll Viewport) có tabindex="0" hỗ trợ cuộn bằng bàn phím -->
                 <div
                     class="festival-bento-box__scroll-viewport"
                     id="festival-scroll-viewport"
@@ -9099,8 +9154,6 @@
                     aria-label="Vùng cuộn danh sách thẻ sự kiện lễ tết"
                 >
                     <div class="festival-bento-grid" id="festival-bento-grid">
-                        <!-- ==================== NHÓM MẶC ĐỊNH: 3 ĐẠI LỄ 2x2 + 12 LỄ THƯỜNG 1x1 (ĐỔI TỪ <a> SANG <button>) ==================== -->
-
                         <!-- [ĐẠI LỄ 2x2 #1] GIỖ TỔ HÙNG VƯƠNG -->
                         <button
                             type="button"
@@ -9671,7 +9724,7 @@
                             </div>
                         </button>
 
-                        <!-- [LỄ THƯỜNG 1x1 #12 - ĐANG ACTIVE MẶC ĐỊNH VÌ SẮP TỚI] NGÀY NHÀ GIÁO VIỆT NAM -->
+                        <!-- [LỄ THƯỜNG 1x1 #12] NGÀY NHÀ GIÁO VIỆT NAM -->
                         <button
                             type="button"
                             class="festival-tile is-active"
@@ -9707,9 +9760,7 @@
                             </div>
                         </button>
 
-                        <!-- ==================== NHÓM MỞ RỘNG (data-extra="true" + hidden): 3 ĐẠI LỄ 2x2 + 20 LỄ THƯỜNG 1x1 ==================== -->
-
-                        <!-- [ĐẠI LỄ MỞ RỘNG 2x2 #4] ĐÊM GIAO THỪA -->
+                        <!-- ==================== NHÓM MỞ RỘNG (data-extra="true" + hidden) ==================== -->
                         <button
                             type="button"
                             class="festival-tile festival-tile--major"
@@ -9787,14 +9838,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-01-09" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">09/01</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">09/01</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name"
-                                    >Ngày Học Sinh - Sinh Viên VN</strong
-                                >
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Học Sinh - Sinh Viên VN</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-01-09">Thứ Sáu</time> • 21/11 ÂL</span
                                 >
                             </div>
@@ -9824,12 +9873,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-02-03" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">03/02</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">03/02</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Thành Lập Đảng CSVN</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Thành Lập Đảng CSVN</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-02-03">Thứ Ba</time> • 16/12 ÂL</span
                                 >
                             </div>
@@ -9861,12 +9910,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-02-18" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">18/02</span>
-                                <span class="festival-tile__badge festival-tile__badge--lunar">02/01 ÂL</span>
+                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">18/02</span
+                                ><span class="festival-tile__badge festival-tile__badge--lunar">02/01 ÂL</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Mùng 2 Tết Nguyên Đán</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Mùng 2 Tết Nguyên Đán</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-02-18">Thứ Tư</time> • Tết bên
                                     ngoại</span
                                 >
@@ -9899,12 +9948,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-02-19" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/02</span>
-                                <span class="festival-tile__badge festival-tile__badge--lunar">03/01 ÂL</span>
+                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/02</span
+                                ><span class="festival-tile__badge festival-tile__badge--lunar">03/01 ÂL</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Mùng 3 Tết Nguyên Đán</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Mùng 3 Tết Nguyên Đán</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-02-19">Thứ Năm</time> • Tết thầy cô</span
                                 >
                             </div>
@@ -9936,12 +9985,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-02-25" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">25/02</span>
-                                <span class="festival-tile__badge festival-tile__badge--lunar">09/01 ÂL</span>
+                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">25/02</span
+                                ><span class="festival-tile__badge festival-tile__badge--lunar">09/01 ÂL</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Vía Ngọc Hoàng</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Vía Ngọc Hoàng</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-02-25">Thứ Tư</time> • Mùng 9 tháng
                                     Giêng</span
                                 >
@@ -9972,12 +10021,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-02-27" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">27/02</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">27/02</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Thầy Thuốc Việt Nam</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Thầy Thuốc Việt Nam</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-02-27">Thứ Sáu</time> • 11/01 ÂL</span
                                 >
                             </div>
@@ -10007,12 +10056,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-03-20" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">20/03</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">20/03</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Quốc Tế Hạnh Phúc</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Quốc Tế Hạnh Phúc</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-03-20">Thứ Sáu</time> • 02/02 ÂL</span
                                 >
                             </div>
@@ -10042,18 +10091,17 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-03-26" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">26/03</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">26/03</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Thành Lập Đoàn TNCS HCM</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Thành Lập Đoàn TNCS HCM</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-03-26">Thứ Năm</time> • 08/02 ÂL</span
                                 >
                             </div>
                         </button>
 
-                        <!-- [ĐẠI LỄ MỞ RỘNG 2x2 #5] ĐẠI LỄ PHẬT ĐẢN -->
                         <button
                             type="button"
                             class="festival-tile festival-tile--major"
@@ -10133,12 +10181,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-04-05" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">05/04</span>
-                                <span class="festival-tile__badge festival-tile__badge--lunar">18/02 ÂL</span>
+                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">05/04</span
+                                ><span class="festival-tile__badge festival-tile__badge--lunar">18/02 ÂL</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Tết Thanh Minh (Tảo Mộ)</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Tết Thanh Minh (Tảo Mộ)</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-04-05">Chủ Nhật</time> • Tiết Thanh
                                     Minh</span
                                 >
@@ -10171,12 +10219,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-04-19" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/04</span>
-                                <span class="festival-tile__badge festival-tile__badge--lunar">03/03 ÂL</span>
+                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/04</span
+                                ><span class="festival-tile__badge festival-tile__badge--lunar">03/03 ÂL</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Tết Hàn Thực (Mùng 3/3)</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Tết Hàn Thực (Mùng 3/3)</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-04-19">Chủ Nhật</time> • Bánh trôi bánh
                                     chay</span
                                 >
@@ -10207,12 +10255,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-04-21" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">21/04</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">21/04</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Sách Việt Nam</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Sách Việt Nam</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-04-21">Thứ Ba</time> • 05/03 ÂL</span
                                 >
                             </div>
@@ -10242,12 +10290,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-05-07" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">07/05</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">07/05</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Chiến Thắng Điện Biên Phủ</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Chiến Thắng Điện Biên Phủ</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-05-07">Thứ Năm</time> • 21/03 ÂL</span
                                 >
                             </div>
@@ -10277,12 +10325,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-06-01" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">01/06</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">01/06</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Quốc Tế Thiếu Nhi</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Quốc Tế Thiếu Nhi</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-06-01">Thứ Hai</time> • 16/04 ÂL</span
                                 >
                             </div>
@@ -10312,12 +10360,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-06-21" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">21/06</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">21/06</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Báo Chí Cách Mạng VN</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Báo Chí Cách Mạng VN</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-06-21">Chủ Nhật</time> • 07/05 ÂL</span
                                 >
                             </div>
@@ -10347,12 +10395,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-06-28" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">28/06</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">28/06</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Gia Đình Việt Nam</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Gia Đình Việt Nam</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-06-28">Chủ Nhật</time> • 14/05 ÂL</span
                                 >
                             </div>
@@ -10382,18 +10430,17 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-07-27" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">27/07</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">27/07</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Thương Binh - Liệt Sĩ</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Thương Binh - Liệt Sĩ</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-07-27">Thứ Hai</time> • 14/06 ÂL</span
                                 >
                             </div>
                         </button>
 
-                        <!-- [ĐẠI LỄ MỞ RỘNG 2x2 #6] GIÁNG SINH NOEL -->
                         <button
                             type="button"
                             class="festival-tile festival-tile--major"
@@ -10471,12 +10518,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-08-19" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/08</span>
-                                <span class="festival-tile__badge festival-tile__badge--lunar">07/07 ÂL</span>
+                                <span class="festival-tile__day-badge festival-tile__day-badge--lunar">19/08</span
+                                ><span class="festival-tile__badge festival-tile__badge--lunar">07/07 ÂL</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Lễ Thất Tịch (Mùng 7/7)</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Lễ Thất Tịch (Mùng 7/7)</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-08-19">Thứ Tư</time> • Cách mạng Tháng
                                     Tám</span
                                 >
@@ -10507,12 +10554,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-10-10" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">10/10</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">10/10</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Giải Phóng Thủ Đô</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Giải Phóng Thủ Đô</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-10-10">Thứ Bảy</time> • 01/09 ÂL</span
                                 >
                             </div>
@@ -10542,12 +10589,12 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-10-20" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">20/10</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">20/10</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Ngày Phụ Nữ Việt Nam</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Ngày Phụ Nữ Việt Nam</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-10-20">Thứ Ba</time> • 11/09 ÂL</span
                                 >
                             </div>
@@ -10577,19 +10624,18 @@
                         >
                             <link itemprop="url" href="./day.html?date=2026-12-22" />
                             <div class="festival-tile__head">
-                                <span class="festival-tile__day-badge">22/12</span>
-                                <span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
+                                <span class="festival-tile__day-badge">22/12</span
+                                ><span class="festival-tile__badge festival-tile__badge--solar">Dương lịch</span>
                             </div>
                             <div class="festival-tile__body">
-                                <strong class="festival-tile__name" itemprop="name">Quân Đội Nhân Dân VN</strong>
-                                <span class="festival-tile__meta"
+                                <strong class="festival-tile__name" itemprop="name">Quân Đội Nhân Dân VN</strong
+                                ><span class="festival-tile__meta"
                                     ><time itemprop="startDate" datetime="2026-12-22">Thứ Ba</time> • 14/11 ÂL</span
                                 >
                             </div>
                         </button>
                     </div>
 
-                    <!-- Khối thông báo rỗng khi bộ lọc có 0 kết quả -->
                     <div
                         class="festival-bento-box__empty"
                         id="festival-empty-state"
@@ -10603,7 +10649,6 @@
                     </div>
                 </div>
 
-                <!-- Thanh nút "Xem thêm tất cả sự kiện" chuẩn Accordion a11y -->
                 <footer class="festival-bento-box__footer">
                     <button
                         type="button"

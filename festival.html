@@ -15,8 +15,8 @@
     <script src="./assets/js/script.js"></script>
 </head>
 
-<body>
-    <!-- 1. Header dùng chung -->
+<body class="festival-body" data-page="festival">
+    <!-- 1. Header dùng chung (Đã tắt sticky riêng trên trang Festival qua data-page="festival") -->
     <header id="header" class="header"></header>
     <script>
         load("#header", "./templates/header.html");
@@ -28,7 +28,7 @@
         load("#sidebar-root", "./templates/sidebar.html");
     </script>
 
-    <!-- 3. Main Bento Grid: Sự Kiện & Lễ Tết (Phương án 2: Ô Đại Lễ 2x2 + Ô Lễ Thường 1x1) -->
+    <!-- 3. Main Bento Grid: Sự Kiện & Lễ Tết -->
     <main id="main" class="main festival-page">
         <div class="container">
             <div id="festival-calendar-root" aria-busy="true"></div>

@@ -7877,7 +7877,7 @@ strong {
         }
     }
 
-    // 2. TẦNG TRÊN: Khóa Cột Trái (5) và Cột Phải (7) luôn bằng chiều cao nhau
+    // 2. TẦNG TRÊN: Khóa Cột Trái (5) và Cột Phải (7) luôn bằng chiều cao nhau 100%
     &__top-row {
         --grid-gutter-y: 2.4rem;
         align-items: stretch;
@@ -7894,13 +7894,27 @@ strong {
         flex: 1;
     }
 
+    // ĐÃ FIX MỤC 1 & 5A: Không dùng space-between đẩy rỗng giữa thẻ Mặt Trời nữa,
+    // giữ các khối bám sát nhau đúng gap 1.6rem và cho bảng 4 miền tự giãn lấp đầy
     &__card-stretch {
         flex: 1;
-        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+
+        &--left {
+            justify-content: space-between;
+        }
+
+        &--sun {
+            justify-content: flex-start;
+            gap: 1.4rem;
+        }
     }
 }
 
 .day-bento-card {
+    position: relative;
+    overflow: visible;
     @extend %flexColumn;
     gap: 1.6rem;
     padding: 2.2rem 2.4rem;
@@ -7942,6 +7956,7 @@ strong {
         border-radius: 99.9rem;
         font-size: 1.2rem;
         font-weight: 700;
+        @extend %textNoWrap;
     }
 
     &__tag {
@@ -7956,9 +7971,109 @@ strong {
     }
 }
 
-// 1. Hướng Xuất Hành
+// ==========================================================================
+// COMPONENT DÙNG CHUNG: BENTO TOOLTIP 3 TẦNG (TÁCH RIÊNG TAG HÀNH ĐỘNG XUỐNG DÒNG)
+// ==========================================================================
+.has-bento-tooltip {
+    position: relative;
+    overflow: visible;
+
+    .bento-tooltip {
+        position: absolute;
+        bottom: calc(100% + 1.1rem);
+        left: 50%;
+        transform: translateX(-50%) translateY(0.6rem);
+        z-index: 80;
+        width: 31rem;
+        padding: 1.3rem 1.5rem;
+        background-color: var(--tooltip-bg, var(--body-bg));
+        color: var(--tooltip-text, var(--text-color));
+        border: 1.5px solid var(--tooltip-border, var(--primary-color));
+        border-radius: 1.6rem;
+        box-shadow:
+            0 1.4rem 3rem var(--shadow-color),
+            0 0 0 3px var(--body-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.65rem;
+        text-align: left;
+        white-space: normal;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+            opacity 0.2s ease 0s,
+            transform 0.2s ease 0s,
+            visibility 0.2s ease 0s;
+
+        // Mũi tên tam giác dưới đáy Tooltip
+        &::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0.65rem;
+            border-style: solid;
+            border-color: var(--tooltip-border, var(--primary-color)) transparent transparent transparent;
+        }
+
+        &__title {
+            display: block;
+            font-size: 1.35rem;
+            font-weight: 800;
+            line-height: 1.3;
+            color: var(--primary-color);
+        }
+
+        &__desc {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--tooltip-text, var(--text-color));
+        }
+
+        // Dòng "Bấm để mở..." được tách hẳn xuống hàng dưới và đóng khung thành Tag nổi bật
+        &__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 0.2rem;
+            padding: 0.35rem 1.1rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-radius: 99.9rem;
+            font-size: 1.15rem;
+            font-weight: 800;
+            line-height: 1.2;
+            box-shadow: 0 0.3rem 0.8rem var(--shadow-color);
+        }
+    }
+
+    // Chỉ bật Tooltip khi người dùng dừng chuột 0.14s (Chống nhấp nháy khi lướt cuộn trang nhanh)
+    @media (hover: hover) {
+        &:hover,
+        &:focus-visible {
+            z-index: 45;
+
+            > .bento-tooltip {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(0);
+                transition-delay: 0.14s;
+            }
+        }
+    }
+}
+
+// ==========================================================================
+// 1. HƯỚNG XUẤT HÀNH (3 CARD ĐỒNG ĐỀU + ICON 4.2REM + WATERMARK + TOOLTIP TAG)
+// ==========================================================================
 .day-directions-grid {
     @extend %gridCols3;
+    align-items: stretch;
     gap: 1.4rem;
 
     @include abs.screen(sm) {
@@ -7967,16 +8082,85 @@ strong {
 }
 
 .day-dir-box {
-    @extend %flexColumnCenterAll;
-    gap: 0.4rem;
-    padding: 1.8rem 1.2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 13.8rem;
+    gap: 0.8rem;
+    padding: 1.6rem;
     border-radius: 1.8rem;
     border: 1.5px solid var(--border-color);
-    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
     @extend %transInteractive;
+
+    &__card-bg {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 6.6rem;
+        height: 6.6rem;
+        object-fit: contain;
+        opacity: 0.12;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
 
     &:hover {
         transform: translateY(-2px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .day-dir-box__watermark {
+            opacity: 0.25;
+            transform: scale(1.08) rotate(0deg);
+        }
+    }
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__icon-wrap {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+        img {
+            width: 2.6rem;
+            height: 2.6rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.25rem;
+        margin-top: auto;
     }
 
     &--hy {
@@ -8010,13 +8194,14 @@ strong {
     }
 
     &__label {
-        font-size: 1.25rem;
-        font-weight: 700;
+        font-size: 1.2rem;
+        font-weight: 800;
         text-transform: uppercase;
+        letter-spacing: 0.03em;
     }
 
     &__value {
-        font-size: 2.2rem;
+        font-size: 2.1rem;
         font-weight: 800;
         line-height: 1.2;
     }
@@ -8028,9 +8213,12 @@ strong {
     }
 }
 
-// 2. Thông Tin Tiết Khí
+// ==========================================================================
+// 2. THÔNG TIN TIẾT KHÍ (24 ICON WEATHER 3.6REM + WATERMARK + TOOLTIP TAG)
+// ==========================================================================
 .day-solarterm-grid {
     @extend %gridCols3;
+    align-items: stretch;
     gap: 1.4rem;
 
     @include abs.screen(sm) {
@@ -8039,12 +8227,93 @@ strong {
 }
 
 .day-solarterm-box {
-    @extend %flexColumn;
-    gap: 0.4rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 11.4rem;
+    gap: 0.8rem;
     padding: 1.5rem 1.6rem;
     background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 1.6rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &--primary {
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border-color: var(--primary-color);
+    }
+
+    &__card-bg {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.4rem;
+        bottom: -0.4rem;
+        width: 5.8rem;
+        height: 5.8rem;
+        object-fit: contain;
+        opacity: 0.12;
+        filter: var(--zodiac-filter);
+        transform: rotate(-8deg);
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+
+        .day-solarterm-box__watermark {
+            opacity: 0.24;
+            transform: scale(1.08) rotate(0deg);
+        }
+    }
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__icon-wrap {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 1.1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 2.4rem;
+            height: 2.4rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.2rem;
+        margin-top: auto;
+    }
 
     &__label {
         font-size: 1.2rem;
@@ -8053,16 +8322,26 @@ strong {
     }
 
     &__val {
-        font-size: 1.7rem;
+        font-size: 1.75rem;
         font-weight: 800;
         color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__sub {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
     }
 }
 
-// 3. Khổng Minh Lục Diệu
+// ==========================================================================
+// 3. KHỔNG MINH LỤC DIỆU (12 Ô CÓ ICON SVG + DÒNG HỢP MỆNH + TOOLTIP TAG)
+// ==========================================================================
 .day-lucdieu-grid {
     @extend %gridCols4;
-    gap: 1rem;
+    align-items: stretch;
+    gap: 1.1rem;
 
     @include abs.screen(md) {
         grid-template-columns: repeat(3, 1fr);
@@ -8074,19 +8353,56 @@ strong {
 }
 
 .day-lucdieu-cell {
-    @extend %flexColumn;
-    gap: 0.35rem;
-    padding: 1.3rem 1.4rem;
-    border-radius: 1.4rem;
-    border: 1px solid var(--border-color);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 10.6rem;
+    gap: 0.5rem;
+    padding: 1.25rem 1.35rem;
+    border-radius: 1.6rem;
+    border: 1.5px solid var(--border-color);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
     @extend %transInteractive;
+
+    &__card-bg {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.3rem;
+        bottom: -0.3rem;
+        width: 4.8rem;
+        height: 4.8rem;
+        object-fit: contain;
+        opacity: 0.1;
+        filter: var(--zodiac-filter);
+        transform: rotate(-8deg);
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+    }
 
     &:hover {
         transform: translateY(-2px);
+        box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+
+        .day-lucdieu-cell__watermark {
+            opacity: 0.22;
+            transform: scale(1.08) rotate(0deg);
+        }
     }
 
     &--good {
-        background-color: rgba(16, 185, 129, 0.12);
+        background-color: rgba(16, 185, 129, 0.11);
         border-color: rgba(16, 185, 129, 0.38);
 
         .day-lucdieu-cell__name {
@@ -8095,12 +8411,27 @@ strong {
     }
 
     &--bad {
-        background-color: rgba(239, 68, 68, 0.09);
+        background-color: rgba(239, 68, 68, 0.08);
         border-color: rgba(239, 68, 68, 0.32);
 
         .day-lucdieu-cell__name {
             color: #991b1b;
         }
+    }
+
+    &__head {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.6rem;
+    }
+
+    &__icon {
+        width: 2.2rem;
+        height: 2.2rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+        @extend %flexItemFixed;
     }
 
     &__name {
@@ -8109,13 +8440,37 @@ strong {
     }
 
     &__time {
+        position: relative;
+        z-index: 2;
         font-size: 1.2rem;
-        font-weight: 600;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    // Dòng gợi ý Tốt cho người mệnh nào ngay trên mặt thẻ
+    &__harmony {
+        position: relative;
+        z-index: 2;
+        display: inline-block;
+        width: fit-content;
+        padding: 0.2rem 0.7rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.1rem;
+        font-weight: 700;
         color: var(--text-muted);
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 800;
+        }
     }
 }
 
-// 4. Thông Tin Mặt Trời
+// ==========================================================================
+// 4. THÔNG TIN MẶT TRỜI (ĐÃ KHẮC PHỤC KHOẢNG TRẮNG LOÃNG + THÊM 4 ICON SVG 20X20PX)
+// ==========================================================================
 .day-sun-summary {
     @extend %gridCols2;
     gap: 1.2rem;
@@ -8126,9 +8481,9 @@ strong {
 
     &__pill {
         @extend %flexBetween;
-        padding: 1.2rem 1.6rem;
-        background-color: rgba(59, 130, 246, 0.1);
-        border: 1px solid rgba(59, 130, 246, 0.3);
+        padding: 1.15rem 1.6rem;
+        background-color: var(--primary-soft-bg, rgba(59, 130, 246, 0.1));
+        border: 1px solid var(--primary-color);
         border-radius: 1.4rem;
         font-size: 1.35rem;
 
@@ -8145,7 +8500,9 @@ strong {
 }
 
 .day-sun-table {
-    @extend %flexColumn;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--border-color);
     border-radius: 1.6rem;
     overflow: hidden;
@@ -8153,13 +8510,13 @@ strong {
     &__head,
     &__row {
         display: grid;
-        grid-template-columns: 0.8fr 2.3fr 1fr 1fr;
+        grid-template-columns: 0.85fr 2.2fr 1.05fr 1.05fr;
         align-items: center;
         gap: 1rem;
-        padding: 1.35rem 1.6rem;
+        padding: 1.25rem 1.6rem;
 
         @include abs.screen(sm) {
-            grid-template-columns: 0.8fr 1.6fr 1fr 1fr;
+            grid-template-columns: 0.8fr 1.5fr 1fr 1fr;
             padding: 1rem;
             font-size: 1.2rem;
         }
@@ -8174,7 +8531,27 @@ strong {
         text-transform: uppercase;
     }
 
+    &__th {
+        @extend %flexItemCenter;
+        gap: 0.55rem;
+    }
+
+    &__th-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+        @extend %flexItemFixed;
+    }
+
+    .day-sun-rows-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
     &__row {
+        flex: 1;
         background-color: var(--body-bg);
         border-bottom: 1px solid var(--border-color);
         font-size: 1.35rem;
@@ -8186,7 +8563,7 @@ strong {
 
     &__region {
         font-weight: 800;
-        color: #1d4ed8;
+        color: var(--primary-color);
     }
 
     &__place {
@@ -8195,14 +8572,24 @@ strong {
     }
 
     &__time {
+        @extend %flexItemCenter;
+        gap: 0.6rem;
         font-weight: 700;
         font-variant-numeric: tabular-nums;
         color: var(--text-color);
     }
+
+    &__time-icon {
+        width: 2rem;
+        height: 2rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+        @extend %flexItemFixed;
+    }
 }
 
 // ==========================================================================
-// 5. TẦNG DƯỚI (1 CỘT LỚN FULL-WIDTH 12 DÒNG): TOOLTIP PASTEL THEO THEME
+// 5. TẦNG DƯỚI (1 CỘT LỚN FULL-WIDTH 12 DÒNG): ICON SVG HOÀNG/HẮC ĐẠO + TOOLTIP TAG
 // ==========================================================================
 .day-hourly-section {
     margin-top: 2.8rem;
@@ -8220,6 +8607,8 @@ strong {
     }
 
     &__filter-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.7rem;
         height: 4rem;
         padding: 0 1.6rem;
         background-color: var(--bg-surface);
@@ -8235,7 +8624,19 @@ strong {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
             color: #ffffff;
+
+            .day-hourly-section__dao-icon {
+                filter: brightness(0) invert(1);
+            }
         }
+    }
+
+    &__dao-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+        @extend %flexItemFixed;
     }
 }
 
@@ -8308,7 +8709,6 @@ strong {
         grid-template-columns: 1fr;
     }
 
-    // Các ô cột vừa là Link SEO vừa mở Modal Quick-View & hiện Tooltip nền nhạt theo Theme
     &__col-link {
         position: relative;
         padding: 0.8rem 1rem;
@@ -8324,60 +8724,6 @@ strong {
             box-shadow: inset 0 0 0 1px var(--tooltip-border, var(--primary-color));
             z-index: 30;
         }
-
-        // HỘP BENTO TOOLTIP NỀN MÀU NHẠT PASTEL THEO THEME ĐANG CHỌN (--tooltip-bg)
-        &[data-tooltip]::before {
-            content: "✦ " attr(data-tooltip-title) ": " attr(data-tooltip);
-            position: absolute;
-            bottom: calc(100% + 1.1rem);
-            left: 50%;
-            transform: translateX(-50%) translateY(0.6rem);
-            z-index: 60;
-            width: 31rem;
-            padding: 1.2rem 1.5rem;
-            background-color: var(--tooltip-bg, var(--body-bg));
-            color: var(--tooltip-text, var(--text-color));
-            border: 1.5px solid var(--tooltip-border, var(--primary-color));
-            border-radius: 1.6rem;
-            box-shadow:
-                0 1.2rem 2.8rem var(--shadow-color),
-                0 0 0 3px var(--body-bg);
-            font-size: 1.25rem;
-            font-weight: 600;
-            line-height: 1.55;
-            text-align: left;
-            white-space: normal;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            @extend %transTooltip;
-        }
-
-        // Mũi tên tam giác đồng bộ màu nền nhạt của Theme
-        &[data-tooltip]::after {
-            content: "";
-            position: absolute;
-            bottom: calc(100% + 0.1rem);
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 61;
-            border-width: 0.65rem;
-            border-style: solid;
-            border-color: var(--tooltip-border, var(--primary-color)) transparent transparent transparent;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            @extend %transTooltip;
-        }
-
-        &:hover[data-tooltip]::before,
-        &:hover[data-tooltip]::after,
-        &:focus-visible[data-tooltip]::before,
-        &:focus-visible[data-tooltip]::after {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
     }
 
     // Cột 1: Canh Giờ
@@ -8392,7 +8738,7 @@ strong {
             @extend %transTheme;
         }
 
-        span {
+        span:not(.bento-tooltip):not(.bento-tooltip__desc):not(.bento-tooltip__tag) {
             display: inline-block;
             width: fit-content;
             padding: 0.25rem 0.9rem;
@@ -8405,7 +8751,7 @@ strong {
             font-variant-numeric: tabular-nums;
         }
 
-        &:hover strong {
+        &:hover > strong {
             color: var(--primary-color);
         }
     }
@@ -8451,7 +8797,7 @@ strong {
         }
     }
 
-    // Cột 3: Lục Diệu
+    // Cột 3: Lục Diệu & Icon SVG Hoàng/Hắc Đạo
     &__col-lucdieu {
         @extend %flexColumn;
         align-items: flex-start;
@@ -8459,10 +8805,19 @@ strong {
     }
 
     &__badge {
-        padding: 0.4rem 1.3rem;
+        @extend %inlineFlexCenter;
+        gap: 0.5rem;
+        padding: 0.4rem 1.2rem;
         border-radius: 99.9rem;
         font-size: 1.35rem;
         font-weight: 800;
+
+        img {
+            width: 1.6rem;
+            height: 1.6rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
 
         &--good {
             background-color: rgba(16, 185, 129, 0.15);
@@ -8478,9 +8833,19 @@ strong {
     }
 
     &__dao-sub {
+        @extend %flexItemCenter;
+        gap: 0.5rem;
         font-size: 1.25rem;
         font-weight: 700;
         color: var(--text-muted);
+    }
+
+    &__dao-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+        @extend %flexItemFixed;
     }
 
     // Cột 4: Vòng SVG Ngũ Hành Động Cỡ Lớn
@@ -8793,6 +9158,8 @@ strong {
     }
 
     &__pill {
+        @extend %inlineFlexCenter;
+        gap: 0.5rem;
         padding: 0.45rem 1.2rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
@@ -8800,6 +9167,13 @@ strong {
         font-size: 1.25rem;
         font-weight: 700;
         color: var(--text-color);
+
+        img {
+            width: 1.6rem;
+            height: 1.6rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
 
         &--highlight {
             background-color: var(--tooltip-bg, var(--bg-surface));
@@ -9855,6 +10229,13 @@ strong {
 ```scss
 // scss/pages/_festival.scss
 @use "../abstracts" as abs;
+
+// Tắt sticky của Header tổng chỉ riêng trên trang Festival (các trang khác giữ nguyên 100%)
+body[data-page="festival"] .header,
+.festival-body .header {
+    position: relative;
+    top: 0;
+}
 
 .festival-page {
     padding-bottom: abs.$gap-section-default;

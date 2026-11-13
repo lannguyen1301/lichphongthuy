@@ -1,0 +1,1361 @@
+// scss/components/_festival-calendar.scss
+@use "../abstracts" as abs;
+
+.festival-cal {
+    @extend %flexColumn;
+    gap: 2rem;
+    line-height: 1.5;
+
+    &__dot {
+        display: inline-block;
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        @extend %flexItemFixed;
+
+        &--lunar {
+            background-color: #ef4444;
+        }
+
+        &--solar {
+            background-color: #2563eb;
+        }
+    }
+
+    // ==========================================================================
+    // ROW 2: WORKSPACE 2 CỘT (TRÁI: STICKY HERO | PHẢI: CONTROLS + LIST EVENT)
+    // ==========================================================================
+    &__workspace {
+        display: grid;
+        grid-template-columns: 38rem minmax(0, 1fr);
+        align-items: start;
+        gap: 2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: 34rem minmax(0, 1fr);
+        }
+
+        @include abs.screen(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // FIX GAP CHUẨN 2REM: 1.6rem (top của Countdown) + chiều cao Countdown + 2rem (gap chuẩn)
+    &__sticky-left {
+        position: sticky;
+        top: calc(1.6rem + var(--countdown-exact-h, 15.2rem) + 2rem);
+        z-index: 20;
+
+        @include abs.screen(lg) {
+            position: static;
+        }
+    }
+
+    &__main-right {
+        @extend %flexColumn;
+        gap: 2rem;
+        min-width: 0;
+    }
+}
+
+// ==========================================================================
+// ROW 1 (STICKY): THANH ĐỒNG HỒ ĐẾM NGƯỢC LỚN + CUSTOM DROPDOWN KIỂU A
+// ==========================================================================
+.festival-countdown-bar {
+    position: sticky;
+    top: 1.6rem;
+    z-index: 45;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 2.4rem;
+    padding: 2.2rem 2.8rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 1.2rem 3.2rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(xl) {
+        position: relative;
+        top: 0;
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 2rem;
+    }
+
+    &__info {
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 0.75rem;
+        min-width: 0;
+    }
+
+    &__top-row {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 1.2rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__badge {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        gap: 0.65rem;
+        height: 3.8rem;
+        padding: 0 1.3rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--primary-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+    }
+
+    &__pulse-dot {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    &__selector {
+        @extend %flexYCenterRight;
+        gap: 0.8rem;
+        min-width: 0;
+
+        @include abs.screen(sm) {
+            justify-content: flex-start;
+        }
+    }
+
+    &__select-label {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+
+    &__heading {
+        font-size: clamp(2rem, 2.3vw, 2.5rem);
+        font-weight: 800;
+        line-height: 1.3;
+        min-height: 3.25rem;
+        color: var(--text-color);
+        @extend %textEllipsis;
+
+        strong {
+            color: var(--primary-color);
+        }
+    }
+
+    &__subtitles {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__sub-line {
+        font-size: 1.35rem;
+        font-weight: 600;
+        line-height: 1.45;
+        min-height: 1.95rem;
+        color: var(--text-color);
+        @extend %textEllipsis;
+
+        &--lunar {
+            color: var(--text-muted);
+        }
+    }
+
+    // ==========================================================================
+    // ĐỒNG HỒ ĐẾM NGƯỢC: CHỮ SỐ ĐỔI MÀU THEO ĐÚNG THEME ĐƯỢC CHỌN
+    // ==========================================================================
+    &__clock-wrap {
+        @extend %flexYCenterRight;
+        width: 100%;
+    }
+
+    &__timer {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+        align-items: center;
+        gap: 0.8rem;
+        width: 100%;
+        padding: 1.4rem 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 2.2rem;
+        font-family: abs.$body-font-family;
+
+        @include abs.screen(sm) {
+            padding: 1rem;
+            gap: 0.4rem;
+        }
+    }
+
+    &__unit {
+        @extend %flexColumnCenterAll;
+        gap: 0.35rem;
+        height: 9.6rem;
+        padding: 1rem 0.6rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.6rem;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            height: 7.4rem;
+            padding: 0.6rem 0.3rem;
+            border-radius: 1.2rem;
+        }
+
+        &--sec {
+            background-color: var(--primary-soft-bg, var(--body-bg));
+            border-color: var(--primary-color);
+        }
+    }
+
+    // FIX MÀU SỐ ĐỒNG HỒ: Ngày, Giờ, Phút dùng --primary-color; Giây dùng --primary-active của chính Theme đó
+    &__num {
+        font-family: abs.$body-font-family;
+        font-size: clamp(3.2rem, 3.8vw, 4.4rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            font-size: 2.4rem;
+        }
+
+        &--sec {
+            color: var(--primary-active);
+        }
+    }
+
+    &__unit-label {
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+    }
+
+    &__sep {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        animation: pulse 2s ease-in-out infinite;
+    }
+}
+
+// ==========================================================================
+// CUSTOM DROPDOWN CHỌN SỰ KIỆN KIỂU A
+// ==========================================================================
+.festival-picker {
+    position: relative;
+    width: 31rem;
+    max-width: 100%;
+    @extend %flexItemFixed;
+
+    @include abs.screen(sm) {
+        width: 100%;
+        flex: 1;
+    }
+
+    &__sr-only {
+        @extend %srOnly;
+    }
+
+    &__summary {
+        @extend %flexBetween;
+        gap: 0.8rem;
+        width: 100%;
+        height: 4rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.3rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+    }
+
+    &[open] &__summary {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        box-shadow: 0 0 0 3px var(--primary-soft-bg);
+    }
+
+    &__summary-name {
+        @extend %textEllipsisFlex;
+        text-align: left;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__summary-date {
+        @extend %flexItemFixed;
+        padding: 0.2rem 0.7rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 0.7rem;
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__arrow {
+        @extend %flexItemFixed;
+        width: 1.5rem;
+        height: 1.5rem;
+        @extend %transBurgerBar;
+    }
+
+    &[open] &__arrow {
+        transform: rotate(180deg);
+    }
+
+    &__popover {
+        position: absolute;
+        top: calc(100% + 0.8rem);
+        right: 0;
+        z-index: 80;
+        width: 38rem;
+        max-width: calc(100vw - 3.2rem);
+        padding: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 2rem;
+        box-shadow: 0 1.6rem 3.8rem var(--shadow-color);
+        @extend %flexColumn;
+        gap: 1rem;
+        @extend %animDropdownFadeIn;
+
+        @include abs.screen(sm) {
+            left: 0;
+            right: auto;
+            width: 100%;
+        }
+    }
+
+    &__search-box {
+        width: 100%;
+    }
+
+    &__search-input {
+        width: 100%;
+        height: 3.8rem;
+        padding: 0 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.1rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-color);
+
+        &:focus {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+    }
+
+    &__tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.4rem;
+        padding: 0.35rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.1rem;
+    }
+
+    &__tab {
+        @extend %inlineFlexCenter;
+        height: 3rem;
+        border-radius: 0.8rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--text-color);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 0.35rem;
+        max-height: 24rem;
+        overflow-y: auto;
+        padding-right: 0.3rem;
+    }
+
+    &__option {
+        @extend %flexBetween;
+        gap: 1rem;
+        width: 100%;
+        padding: 0.85rem 1.1rem;
+        border-radius: 1rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+        text-align: left;
+        @extend %transTheme;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+
+        &.is-selected {
+            background-color: var(--primary-color);
+            color: #ffffff;
+
+            .festival-picker__opt-name,
+            .festival-picker__opt-date {
+                color: #ffffff;
+            }
+
+            .festival-picker__opt-date {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.35);
+            }
+        }
+    }
+
+    &__opt-name {
+        @extend %textEllipsisFlex;
+        font-weight: 700;
+    }
+
+    &__opt-date {
+        @extend %flexItemFixed;
+        padding: 0.2rem 0.65rem;
+        border-radius: 0.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__foot {
+        padding-top: 0.6rem;
+        border-top: 1px dashed var(--border-color);
+        text-align: center;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+
+// ==========================================================================
+// CỘT TRÁI: THẺ HERO TIÊU ĐIỂM
+// ==========================================================================
+.festival-hero {
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    min-height: 46rem;
+    max-height: 46rem;
+    gap: 1.4rem;
+    padding: 2.6rem;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-hover);
+    border-radius: 2.6rem;
+    color: #ffffff;
+    box-shadow: 0 1rem 2.8rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(lg) {
+        min-height: auto;
+        max-height: none;
+    }
+
+    @include abs.screen(sm) {
+        padding: 2rem;
+        border-radius: 2rem;
+    }
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.8rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--hero-border-color);
+    }
+
+    &__badges {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    &__pill {
+        height: 3.2rem;
+        line-height: 3.2rem;
+        padding: 0 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        background-color: #ffffff;
+        color: var(--primary-active);
+        @extend %textEllipsis;
+    }
+
+    &__type-badge {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 3.2rem;
+        padding: 0 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        color: #ffffff;
+        @extend %textNoWrap;
+    }
+
+    &__date-row {
+        @extend %flexItemCenter;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 0.2rem;
+    }
+
+    &__solar {
+        font-size: clamp(4.6rem, 5vw, 5.6rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__weekday-group {
+        @extend %flexColumn;
+        gap: 0.15rem;
+    }
+
+    &__weekday {
+        font-size: 1.9rem;
+        font-weight: 800;
+        line-height: 1.2;
+        color: #ffffff;
+    }
+
+    &__year {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--hero-text-soft);
+    }
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.3;
+        min-height: 2.6rem;
+        color: #ffffff;
+        @extend %textEllipsis;
+    }
+
+    &__lunar {
+        font-size: 1.35rem;
+        color: var(--hero-text-soft);
+        @extend %textEllipsis;
+    }
+
+    &__detail-box {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 0.8rem;
+        padding: 1.2rem 1.4rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.6rem;
+    }
+
+    &__desc {
+        font-size: 1.3rem;
+        line-height: 1.45;
+        min-height: 3.8rem;
+        color: #ffffff;
+        @extend %textClamp2;
+    }
+
+    &__hours-line {
+        @extend %flexColumn;
+        gap: 0.2rem;
+        padding-top: 0.6rem;
+        border-top: 1px dashed var(--hero-border-color);
+    }
+
+    &__hours-label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--hero-text-soft);
+    }
+
+    &__hours-val {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #ffffff;
+        @extend %textEllipsis;
+    }
+
+    &__footer {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        padding-top: 0.2rem;
+    }
+
+    &__link {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4rem;
+        padding: 0 1.8rem;
+        background-color: var(--hero-chip-bg);
+        color: #ffffff;
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-active);
+            transform: translateY(-2px);
+        }
+    }
+
+    &__zodiac {
+        position: absolute;
+        right: -0.8rem;
+        bottom: -0.8rem;
+        width: 14rem;
+        height: 14rem;
+        object-fit: contain;
+        opacity: 0.14;
+        filter: var(--zodiac-filter-active);
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+
+// ==========================================================================
+// CỘT PHẢI (TRÊN): KHỐI BỘ ĐIỀU KHIỂN & BENTO 4 QUÝ
+// ==========================================================================
+.festival-controls {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 2.2rem 2.4rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 2rem;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+    }
+
+    &__intro {
+        @extend %flexColumn;
+        gap: 0.4rem;
+    }
+
+    &__eyebrow-row {
+        @extend %flexWrapGap;
+    }
+
+    &__badge,
+    &__count-pill {
+        padding: 0.35rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    &__count-pill {
+        color: var(--text-muted);
+    }
+
+    &__heading {
+        font-size: clamp(2.1rem, 2.4vw, 2.6rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+    }
+
+    &__year-toolbar {
+        @extend %flexItemCenter;
+        gap: 0.6rem;
+        padding: 0.45rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.5rem;
+    }
+
+    &__filter-row {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-top: 1.2rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__filter-bar {
+        @extend %flexWrapGap;
+        gap: 0.8rem;
+    }
+
+    &__filter-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.65rem;
+        height: 3.8rem;
+        padding: 0 1.5rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        small {
+            padding: 0.1rem 0.6rem;
+            border-radius: 99.9rem;
+            background-color: var(--body-bg);
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+
+            small {
+                background-color: rgba(255, 255, 255, 0.22);
+                color: #ffffff;
+            }
+        }
+    }
+
+    &__reset-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.5rem;
+        height: 3.6rem;
+        padding: 0 1.3rem;
+        background-color: var(--primary-soft-bg);
+        border: 1px solid var(--primary-color);
+        border-radius: 99.9rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %transInteractive;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+}
+
+.festival-seasons-bento {
+    display: grid;
+    grid-template-columns: auto repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 0.8rem;
+
+    @include abs.screen(xxl) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__master {
+        @extend %inlineFlexCenter;
+        gap: 0.7rem;
+        min-width: 10.6rem;
+        padding: 1rem 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.6rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %textNoWrap;
+        @extend %transInteractive;
+
+        @include abs.screen(xxl) {
+            grid-column: 1 / -1;
+            min-height: 4.2rem;
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+
+            .festival-seasons-bento__master-icon {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+
+    &__master-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        opacity: 0.85;
+    }
+
+    &__quarter {
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 0.55rem;
+        padding: 0.8rem 0.9rem 0.9rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.6rem;
+        @extend %transTheme;
+
+        &:has(.is-active),
+        &.is-quarter-active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-soft-bg, var(--bg-surface));
+        }
+    }
+
+    &__q-label {
+        display: block;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+
+    &__q-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.45rem;
+    }
+
+    &__btn {
+        position: relative;
+        @extend %inlineFlexCenter;
+        height: 3.2rem;
+        padding: 0 0.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 0.9rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transInteractive;
+
+        &[data-has-major="true"]::after {
+            content: "";
+            position: absolute;
+            top: 0.3rem;
+            right: 0.3rem;
+            width: 0.45rem;
+            height: 0.45rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+            &[data-has-major="true"]::after {
+                background-color: #ffffff;
+            }
+        }
+    }
+}
+
+// ==========================================================================
+// CỘT PHẢI (DƯỚI): KHUNG BENTO SỰ KIỆN CÓ VÙNG CUỘN ĐỘC LẬP (54REM)
+// ==========================================================================
+.festival-bento-box {
+    @extend %flexColumn;
+    gap: 1.6rem;
+    padding: 2.2rem 2.4rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 2rem;
+    }
+
+    &__bar {
+        @extend %flexBetween;
+        padding-bottom: 1rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__hint {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__scroll-viewport {
+        max-height: 54rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0.4rem 0.6rem 0.4rem 0.2rem;
+        scroll-behavior: smooth;
+
+        @include abs.screen(lg) {
+            max-height: 50rem;
+        }
+    }
+
+    &__empty {
+        padding: 3.2rem 2rem;
+        text-align: center;
+        background-color: var(--bg-surface);
+        border: 1px dashed var(--border-color);
+        border-radius: 2rem;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__empty-text {
+        font-size: 1.45rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__footer {
+        @extend %flexColumn;
+        align-items: center;
+        gap: 1.2rem;
+        padding-top: 0.4rem;
+    }
+
+    &__more-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        width: 100%;
+        max-width: 46rem;
+        height: 4.4rem;
+        padding: 0 2.2rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+            .festival-bento-box__more-arrow {
+                filter: brightness(0) invert(1);
+            }
+        }
+
+        &[aria-expanded="true"] .festival-bento-box__more-arrow {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__more-arrow {
+        width: 1.6rem;
+        height: 1.6rem;
+        transition: transform 0.25s ease;
+    }
+
+    &__subnote {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 1rem;
+        padding-top: 1rem;
+        border-top: 1px dashed var(--border-color);
+        font-size: 1.25rem;
+        color: var(--text-muted);
+    }
+
+    &__ext-link {
+        @extend %inlineFlexCenter;
+        gap: 0.4rem;
+        font-weight: 700;
+        color: var(--primary-color);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.festival-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: minmax(13.6rem, auto);
+    grid-auto-flow: dense;
+    gap: 1.4rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.festival-tile {
+    position: relative;
+    overflow: hidden;
+    grid-column: span 1;
+    grid-row: span 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+    text-align: left;
+    color: inherit;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &[data-fill-span="2"] {
+        grid-column: span 2;
+
+        @include abs.screen(sm) {
+            grid-column: span 1;
+        }
+    }
+
+    &[data-fill-span="3"] {
+        grid-column: span 3;
+
+        @include abs.screen(md) {
+            grid-column: span 2;
+        }
+
+        @include abs.screen(sm) {
+            grid-column: span 1;
+        }
+    }
+
+    &:hover,
+    &:focus-visible,
+    &.is-active {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+    }
+
+    &.is-active {
+        border-width: 2px;
+    }
+
+    &[data-major="true"],
+    &--major {
+        grid-column: span 2;
+        grid-row: span 2;
+        padding: 2.2rem;
+        background-color: var(--primary-color);
+        border-color: var(--primary-hover);
+        color: #ffffff;
+        box-shadow: 0 1rem 2.6rem var(--shadow-color);
+
+        @include abs.screen(sm) {
+            grid-column: span 1;
+            grid-row: span 1;
+            padding: 1.8rem;
+        }
+
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+            background-color: var(--primary-hover);
+            border-color: #ffffff;
+            color: #ffffff;
+            transform: translateY(-3px);
+
+            .festival-tile__zodiac {
+                opacity: 0.26;
+                transform: scale(1.06) rotate(0deg);
+            }
+        }
+    }
+
+    &__head {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    &__day-badge {
+        padding: 0.35rem 1rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+
+        &--lunar {
+            border-color: rgba(239, 68, 68, 0.4);
+            color: var(--color-danger);
+        }
+    }
+
+    &__badge {
+        padding: 0.25rem 0.9rem;
+        border-radius: 99.9rem;
+        font-size: 1.15rem;
+        font-weight: 800;
+
+        &--solar {
+            background-color: rgba(37, 99, 235, 0.12);
+            color: #1d4ed8;
+        }
+
+        &--lunar {
+            background-color: rgba(239, 68, 68, 0.12);
+            color: #b91c1c;
+        }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.35rem;
+        width: 100%;
+        margin-top: auto;
+    }
+
+    &__name {
+        font-size: 1.55rem;
+        font-weight: 800;
+        line-height: 1.35;
+        color: var(--text-color);
+        @extend %textClamp2;
+    }
+
+    &__meta {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__major-tag {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: #ffffff;
+        color: var(--primary-active);
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__type-pill {
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    &__main {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.6rem;
+        margin: auto 0;
+    }
+
+    &__title {
+        font-size: clamp(1.9rem, 2.1vw, 2.4rem);
+        font-weight: 800;
+        line-height: 1.25;
+        color: #ffffff;
+    }
+
+    &__desc {
+        font-size: 1.35rem;
+        line-height: 1.5;
+        color: var(--hero-text-soft);
+        @extend %textClamp3;
+    }
+
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        align-items: flex-end;
+        width: 100%;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--hero-border-color);
+    }
+
+    &__big-date {
+        @extend %flexColumn;
+        gap: 0.2rem;
+    }
+
+    &__big-num {
+        font-size: clamp(3.2rem, 3.8vw, 4.2rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: #ffffff;
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__big-sub {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--hero-text-soft);
+    }
+
+    &__cta {
+        @extend %inlineFlexCenter;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 50%;
+        background-color: var(--hero-chip-bg);
+        border: 1px solid var(--hero-border-color);
+        font-size: 1.5rem;
+        color: #ffffff;
+    }
+
+    &__zodiac {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 14rem;
+        height: 14rem;
+        object-fit: contain;
+        opacity: 0.16;
+        filter: var(--zodiac-filter-active);
+        transform: rotate(-8deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+}
