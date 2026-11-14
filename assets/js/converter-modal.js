@@ -404,7 +404,11 @@
                 const { day, month, year } = resolvedSolarDate;
                 toggleConverterModal(false);
 
-                if (document.getElementById("month-cal-grid") || document.getElementById("day-lucdieu-grid")) {
+                if (
+                    document.getElementById("month-cal-grid") ||
+                    document.getElementById("day-lucdieu-grid") ||
+                    document.getElementById("bazi-pillars-grid")
+                ) {
                     window.dispatchEvent(
                         new CustomEvent("converter-jump-to-date", {
                             detail: { year, month, day },
@@ -412,7 +416,7 @@
                     );
                     document.getElementById("bloc-media-box")?.scrollIntoView({ behavior: "smooth" });
                 } else {
-                    window.location.href = `./index.html?date=${year}-${pad(month)}-${pad(day)}`;
+                    window.location.href = `./day.html?date=${year}-${pad(month)}-${pad(day)}`;
                 }
             };
         }

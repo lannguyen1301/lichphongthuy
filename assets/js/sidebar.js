@@ -1,4 +1,5 @@
 // assets/js/sidebar.js
+// Chuyên trách duy nhất Sidebar: Bật/tắt ngăn kéo Mobile Drawer, Khóa cuộn <body> & Đồng bộ Active Link
 (() => {
     let isSidebarGlobalBound = false;
 

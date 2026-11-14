@@ -29,14 +29,9 @@
 ```scss
 /* ==========================================================================
    BIẾN HỆ THỐNG TOÀN CỤC (GLOBAL VARIABLES)
-   Mọi tham số thiết kế lõi phải được định nghĩa tại đây.
-   Sử dụng cờ !default để cho phép ghi đè trong môi trường module hóa,
-   bảo vệ mã nguồn khỏi các xung đột khi tích hợp giao diện (theming).
    ========================================================================== */
 
 // 1. TYPOGRAPHY (Kiểu Chữ)
-// Khai báo các giá trị nền tảng thay thế cho các chuỗi hardcoded trong _base.scss
-// --------------------------------------------------------------------------
 $base-font-size: 62.5% !default; // Thiết lập 1rem = 10px
 $body-font-size: 1.6rem !default;
 $body-font-family:
@@ -53,10 +48,7 @@ $body-font-family:
     "Open Sans",
     "Helvetica Neue" !default;
 
-// 2. GRID SYSTEM (Hệ Thống Lưới & Điểm Ngắt)
-// Tổng hợp từ _grid.scss, _utils.scss và _mixins.scss
-// --------------------------------------------------------------------------
-// Điểm ngắt cho Media Queries (Breakpoint dictionary)
+// 2. GRID SYSTEM (Hệ Thống Lưới & Điểm Ngắt Desktop-First: max-width)
 $grid-breakpoints: (
     xxl: 1400px,
     xl: 1200px,
@@ -65,22 +57,20 @@ $grid-breakpoints: (
     sm: 576px,
 ) !default;
 
-// Chiều rộng tối đa của container theo từng điểm ngắt
+// Chiều rộng tối đa của .container theo từng điểm ngắt Desktop-First
 $container-max-widths: (
-    xxl: 1140px,
-    xl: 960px,
-    lg: 720px,
-    md: 540px,
+    xxl: 1240px,
+    xl: 1024px,
+    lg: 100%,
+    md: 100%,
     sm: 100%,
 ) !default;
 
-// Tham số cấu trúc lưới và kích thước thành phần
 $grid-columns: 12 !default;
 $grid-gutter-width: 30px !default;
 $container-max-width-custom: 1370px !default;
-$container-padding-sm: 20px !default;
+$container-padding-sm: 16px !default;
 
-// Các hệ số nhân của khoảng cách (Gutters ratio map)
 $gutters: (
     0: 0,
     1: 0.25,
@@ -90,26 +80,16 @@ $gutters: (
     5: 3,
 ) !default;
 
-// 3. UTILITIES (Tiện Ích Hiển Thị)
-// Tham số điều khiển từ _utils.scss
-// --------------------------------------------------------------------------
-// Các giá trị của thuộc tính display được hỗ trợ để tự động sinh class (.d-flex, .d-block...)
-
-// 4. COLORS (Màu Sắc Mặc Định - Trạng thái chưa chọn Ngũ Hành)
-// Các giá trị nguyên thủy (Raw hex) dùng để cấp cho :root
-// --------------------------------------------------------------------------
-
-// Giao diện Light Mode (Mặc định)
+// 3. COLORS (Màu Sắc Mặc Định)
 $color-bg-main-light: #ffffff !default;
-$color-bg-surface-light: #f3f4f6 !default; // Xám nhạt
-$color-text-main-light: #1f2937 !default; // Đen/Xám đậm
+$color-bg-surface-light: #f3f4f6 !default;
+$color-text-main-light: #1f2937 !default;
 $color-text-muted-light: #6b7280 !default;
-$color-primary-light: #3b82f6 !default; // Xanh dương
+$color-primary-light: #3b82f6 !default;
 
-// Giao diện Dark Mode
 $color-bg-main-dark: #111827 !default;
 $color-bg-surface-dark: #1f2937 !default;
-$color-text-main-dark: #f9fafb !default; // Trắng/Xám sáng
+$color-text-main-dark: #f9fafb !default;
 $color-text-muted-dark: #9ca3af !default;
 $color-primary-dark: #60a5fa !default;
 
@@ -119,17 +99,15 @@ $theme-transition:
     border-color 0.3s ease,
     fill 0.3s ease;
 
-// 5. DISPLAY VALUES (Giá Trị Hiển Thị)
+// 4. DISPLAY VALUES & HEADER DIMENSIONS
 $display-values: block, flex, grid, none !default;
 
-// Kích thước & Vị trí Header
 $header-top-offset: 30px !default;
 $header-height-mobile: 60px !default;
 $header-height-pc: 100px !default;
 
-// Khoảng cách (Gap / Margin) giữa các khối (Blocks/Sections)
-$gap-header-main: 30px !default; // Gap từ Header xuống Main
-$gap-section-default: 60px !default; // Gap chuẩn giữa các section (như bài toán flex-direction: column ban nãy)
+$gap-header-main: 30px !default;
+$gap-section-default: 60px !default;
 ```
 
 ### palette.scss
@@ -1504,6 +1482,28 @@ $zodiac-active-filters: (
         visibility 0.2s ease;
 }
 
+// Hiệu ứng bật/tắt Bento Tooltip 3 tầng (Tắt ngay 0s khi rời chuột, trễ 0.14s khi dừng chuột)
+%transBentoTooltip {
+    transition:
+        opacity 0.2s ease 0s,
+        transform 0.2s ease 0s,
+        visibility 0.2s ease 0s;
+}
+
+// Hiệu ứng phóng nhẹ và làm rõ bóng chìm Watermark ở góc dưới thẻ Bento khi Hover
+%transWatermark {
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+}
+
+// Hiệu ứng chuyển đổi độ sáng & độ nảy của 5 đỉnh Ngũ Hành trong biểu đồ SVG
+%transWuXingNode {
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 // Hiệu ứng xoay 3 thanh ngang của nút Hamburger thành dấu X & mũi tên Dropdown
 %transBurgerBar {
     transition:
@@ -1537,5 +1537,75 @@ $zodiac-active-filters: (
 
 %animShake {
     animation: shake 0.35s ease-in-out;
+}
+
+// Vòng tròn Ngũ Hành Tứ Trụ
+%animWuXingSpin {
+    animation: wuxingCycleSpin 24s linear infinite;
+}
+
+%animWuXingPulse {
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
+// 6 Cung Khổng Minh Lục Diệu (Dùng chung cho Lưới 12 ô Tầng 1 & Badge Cột 3 Bảng 12 Giờ)
+%animLucDieuDaiAn {
+    animation: lucdieuCloverBreathe 3.2s ease-in-out infinite;
+}
+
+%animLucDieuLuuNien {
+    animation: lucdieuHourglass 4.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+%animLucDieuTocHy {
+    animation: lucdieuShootingStar 2.4s ease-in-out infinite;
+}
+
+%animLucDieuXichKhau {
+    animation: lucdieuThunderFlash 2.8s ease-in-out infinite;
+}
+
+%animLucDieuTieuCat {
+    transform-origin: bottom center;
+    animation: lucdieuCloverSway 2.8s ease-in-out infinite;
+}
+
+%animLucDieuKhongVong {
+    animation: lucdieuRingSpin 12s linear infinite;
+}
+
+// 6 Nhóm Thời Tiết của 24 Tiết Khí
+%animTermWind {
+    animation: termWindBreeze 3s ease-in-out infinite;
+}
+
+%animTermRain {
+    animation: termRainDrop 2.4s ease-in-out infinite;
+}
+
+%animTermSun {
+    animation: termSunRadiate 3s ease-in-out infinite;
+}
+
+%animTermThunder {
+    animation: termThunderBolt 2.6s ease-in-out infinite;
+}
+
+%animTermSprout {
+    transform-origin: bottom center;
+    animation: termSproutSway 2.8s ease-in-out infinite;
+}
+
+%animTermSnow {
+    animation: termSnowFloat 3.2s ease-in-out infinite;
+}
+
+// 2 Trạng thái Giờ Hoàng Đạo & Giờ Hắc Đạo
+%animHoangDaoSun {
+    animation: daoSunSpin 16s linear infinite;
+}
+
+%animHacDaoMoon {
+    animation: daoMoonRock 3.2s ease-in-out infinite;
 }
 ```

@@ -1,6 +1,6 @@
-# day.html
+## day.html
 
-````html
+```html
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -42,7 +42,7 @@
 
                     <div class="day-page__center-group">
                         <button type="button" class="btn day-page__today-btn" id="day-today-btn">Hôm nay</button>
-                        <h1 class="day-page__current-heading" id="day-toolbar-heading">Thứ Bảy, 07/11/2026</h1>
+                        <h1 class="day-page__current-heading" id="day-toolbar-heading">Thứ Sáu, 13/11/2026</h1>
                     </div>
 
                     <button type="button" class="btn day-page__nav-btn" id="day-next-btn">
@@ -51,147 +51,187 @@
                     </button>
                 </nav>
 
-                <!-- ==================== TẦNG 1: 2 CỘT TRÁI (5) & PHẢI (7) CÂN XỨNG ĐỘ CAO 100% ==================== -->
-                <div class="row day-page__top-row">
-                    <!-- CỘT TRÁI (5 CỘT PC): TỜ LỊCH BLOC + PHONG THỦY NGÀY -->
-                    <div class="col-5 col-lg-12 day-page__left">
-                        <!-- COMPONENT 1: TỜ LỊCH BLOC 16:9 -->
-                        <article class="bloc-card" aria-label="Tờ lịch chi tiết trong ngày">
-                            <div class="bloc-card__top">
-                                <div class="bloc-card__month-box">
-                                    <span class="bloc-card__year-badge" id="detail-solar-year">2026</span>
-                                    <strong class="bloc-card__month-vn" id="detail-solar-month-vn">
-                                        THÁNG MƯỜI MỘT
-                                    </strong>
-                                    <span class="bloc-card__month-en" id="detail-solar-month-en">November</span>
-                                    <span class="bloc-card__day-status" id="detail-day-status">Ngày Hoàng Đạo</span>
-                                </div>
-
-                                <div class="bloc-card__date-hero">
-                                    <button
-                                        type="button"
-                                        class="bloc-card__share-btn"
-                                        id="day-share-btn"
-                                        aria-label="Chia sẻ ngày này"
-                                        title="Sao chép liên kết ngày này"
-                                    >
-                                        <svg
-                                            width="18"
-                                            height="18"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                        >
-                                            <circle cx="18" cy="5" r="3"></circle>
-                                            <circle cx="6" cy="12" r="3"></circle>
-                                            <circle cx="18" cy="19" r="3"></circle>
-                                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                                        </svg>
-                                    </button>
-                                    <span class="bloc-card__solar-num" id="detail-solar-day">7</span>
-                                </div>
-                            </div>
-
-                            <figure class="bloc-card__media" id="bloc-media-box">
-                                <a
-                                    href="./detail.html"
-                                    class="bloc-card__media-link"
-                                    id="detail-history-link"
-                                    title="Xem chi tiết sự kiện và nhân vật lịch sử"
-                                >
-                                    <img
-                                        src="./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg"
-                                        alt="Sự kiện lịch sử và anh hùng dân tộc trong ngày"
-                                        class="bloc-card__img"
-                                        id="detail-history-img"
-                                    />
-                                </a>
-
-                                <figcaption class="bloc-card__overlay">
-                                    <div class="bloc-card__event-pills" id="detail-event-pills">
-                                        <button
-                                            type="button"
-                                            class="bloc-card__event-btn"
-                                            id="btn-same-day-events"
-                                            title="Xem sự kiện lịch sử khác trong cùng ngày"
-                                            hidden
-                                        >
-                                            <span class="bloc-card__event-dot" aria-hidden="true"></span>
-                                            <span id="label-same-day-events">Sự kiện cùng ngày (2)</span>
-                                        </button>
-
-                                        <button
-                                            type="button"
-                                            class="bloc-card__event-btn bloc-card__event-btn--intl"
-                                            id="btn-intl-events"
-                                            title="Xem sự kiện quốc tế diễn ra cùng ngày"
-                                            hidden
-                                        >
-                                            <span class="bloc-card__event-dot" aria-hidden="true"></span>
-                                            <span id="label-intl-events">Sự kiện quốc tế (1)</span>
-                                        </button>
+                <!-- ==================== TẦNG 1: KHÓA 3 CẶP HÀNG NGANG ĐỘC LẬP (2 NGÃ TƯ THẲNG TẮP 100% VỚI MỌI ĐỘ DÀI CONTENT) ==================== -->
+                <div class="day-page__pairs-wrapper" id="day-right-interactive">
+                    <!-- ==================== CẶP NGANG 1 (NGÃ TƯ SỐ 1): TỜ LỊCH BLOC (TRÁI) <-> HƯỚNG XUẤT HÀNH + TIẾT KHÍ (PHẢI) ==================== -->
+                    <div class="row day-page__pair-row">
+                        <!-- Cột Trái Cặp 1 (5 cột): Tờ Lịch Bloc 16:9 -->
+                        <div class="col-5 col-lg-12 day-page__pair-col">
+                            <article class="bloc-card day-page__fill-card" aria-label="Tờ lịch chi tiết trong ngày">
+                                <div class="bloc-card__top">
+                                    <div class="bloc-card__month-box">
+                                        <span class="bloc-card__year-badge" id="detail-solar-year">2026</span>
+                                        <strong class="bloc-card__month-vn" id="detail-solar-month-vn">
+                                            THÁNG MƯỜI MỘT
+                                        </strong>
+                                        <span class="bloc-card__month-en" id="detail-solar-month-en">November</span>
+                                        <span class="bloc-card__day-status" id="detail-day-status">Ngày Hoàng Đạo</span>
                                     </div>
 
+                                    <div class="bloc-card__date-hero">
+                                        <button
+                                            type="button"
+                                            class="bloc-card__share-btn"
+                                            id="day-share-btn"
+                                            aria-label="Chia sẻ ngày này"
+                                            title="Sao chép liên kết ngày này"
+                                        >
+                                            <svg
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <circle cx="18" cy="5" r="3"></circle>
+                                                <circle cx="6" cy="12" r="3"></circle>
+                                                <circle cx="18" cy="19" r="3"></circle>
+                                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                                            </svg>
+                                        </button>
+                                        <span class="bloc-card__solar-num" id="detail-solar-day">13</span>
+                                    </div>
+                                </div>
+
+                                <figure class="bloc-card__media" id="bloc-media-box">
                                     <a
                                         href="./detail.html"
-                                        class="bloc-card__caption-btn"
-                                        id="detail-history-caption"
-                                        title="Bấm để xem chi tiết tiểu sử và sự kiện"
+                                        class="bloc-card__media-link"
+                                        id="detail-history-link"
+                                        title="Xem chi tiết sự kiện và nhân vật lịch sử"
                                     >
-                                        <span class="bloc-card__caption-badge" aria-hidden="true">Chi tiết</span>
-                                        <span class="bloc-card__caption-text" id="detail-history-caption-text">
-                                            Sự kiện &amp; Nhân vật lịch sử trong ngày
-                                        </span>
+                                        <img
+                                            src="./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg"
+                                            alt="Sự kiện lịch sử và anh hùng dân tộc trong ngày"
+                                            class="bloc-card__img"
+                                            id="detail-history-img"
+                                        />
                                     </a>
-                                </figcaption>
-                            </figure>
 
-                            <div class="bloc-card__ribbon">
-                                <span class="bloc-card__ribbon-year" id="detail-lunar-year">NĂM BÍNH NGỌ</span>
-                                <span class="bloc-card__ribbon-weekday" id="detail-weekday">THỨ BẢY • SATURDAY</span>
-                            </div>
+                                    <figcaption class="bloc-card__overlay">
+                                        <div class="bloc-card__event-pills" id="detail-event-pills">
+                                            <button
+                                                type="button"
+                                                class="bloc-card__event-btn"
+                                                id="btn-same-day-events"
+                                                title="Xem sự kiện lịch sử khác trong cùng ngày"
+                                                hidden
+                                            >
+                                                <span class="bloc-card__event-dot" aria-hidden="true"></span>
+                                                <span id="label-same-day-events">Sự kiện cùng ngày (2)</span>
+                                            </button>
 
-                            <div class="bloc-card__bottom">
-                                <div class="bloc-card__lunar-num-box">
-                                    <span class="bloc-card__lunar-label">Âm lịch</span>
-                                    <strong class="bloc-card__lunar-num" id="detail-lunar-day">29</strong>
+                                            <button
+                                                type="button"
+                                                class="bloc-card__event-btn bloc-card__event-btn--intl"
+                                                id="btn-intl-events"
+                                                title="Xem sự kiện quốc tế diễn ra cùng ngày"
+                                                hidden
+                                            >
+                                                <span class="bloc-card__event-dot" aria-hidden="true"></span>
+                                                <span id="label-intl-events">Sự kiện quốc tế (1)</span>
+                                            </button>
+                                        </div>
+
+                                        <a
+                                            href="./detail.html"
+                                            class="bloc-card__caption-btn"
+                                            id="detail-history-caption"
+                                            title="Bấm để xem chi tiết tiểu sử và sự kiện"
+                                        >
+                                            <span class="bloc-card__caption-badge" aria-hidden="true">Chi tiết</span>
+                                            <span class="bloc-card__caption-text" id="detail-history-caption-text">
+                                                Sự kiện &amp; Nhân vật lịch sử trong ngày
+                                            </span>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+
+                                <div class="bloc-card__ribbon">
+                                    <span class="bloc-card__ribbon-year" id="detail-lunar-year">NĂM BÍNH NGỌ</span>
+                                    <span class="bloc-card__ribbon-weekday" id="detail-weekday">THỨ SÁU • FRIDAY</span>
                                 </div>
 
-                                <div class="bloc-card__canchi-list">
-                                    <strong class="bloc-card__lunar-month" id="detail-lunar-month">
-                                        THÁNG CHÍN (Đ)
-                                    </strong>
-                                    <span class="bloc-card__canchi-item" id="detail-canchi-month">Tháng Mậu Tuất</span>
-                                    <span class="bloc-card__canchi-item" id="detail-canchi-day">Ngày Ất Dậu</span>
-                                    <span class="bloc-card__canchi-item" id="detail-canchi-hour">Giờ Bính Tý</span>
-                                </div>
+                                <div class="bloc-card__bottom">
+                                    <div class="bloc-card__lunar-num-box">
+                                        <span class="bloc-card__lunar-label">Âm lịch</span>
+                                        <strong class="bloc-card__lunar-num" id="detail-lunar-day">5</strong>
+                                    </div>
 
-                                <div class="bloc-card__quick-fengshui">
-                                    <span class="bloc-card__meta-line">
-                                        <b>Hành:</b> <span id="detail-element">Tuyền Trung Thủy</span>
-                                    </span>
-                                    <span class="bloc-card__meta-line">
-                                        <b>Tiết khí:</b> <span id="detail-solar-term">Lập Đông</span>
-                                    </span>
-                                    <span class="bloc-card__meta-line">
-                                        <b>Trực:</b> <span id="detail-truc-name">Bế</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </article>
+                                    <div class="bloc-card__canchi-list">
+                                        <strong class="bloc-card__lunar-month" id="detail-lunar-month">
+                                            THÁNG MƯỜI (Đ)
+                                        </strong>
+                                        <span class="bloc-card__canchi-item" id="detail-canchi-month">
+                                            Tháng Kỷ Hợi
+                                        </span>
+                                        <span class="bloc-card__canchi-item" id="detail-canchi-day">Ngày Tân Mão</span>
+                                        <span class="bloc-card__canchi-item" id="detail-canchi-hour">Giờ Mậu Tý</span>
+                                    </div>
 
-                        <!-- COMPONENT 2: CÁC KHỐI BENTO PHONG THỦY -->
-                        <section
-                            class="fengshui-stack day-page__fengshui-grow"
-                            aria-label="Chi tiết Phong thủy trong ngày"
-                        >
-                            <div class="fengshui-hours">
+                                    <div class="bloc-card__quick-fengshui">
+                                        <span class="bloc-card__meta-line">
+                                            <b>Hành:</b> <span id="detail-element">Tùng Bách Mộc</span>
+                                        </span>
+                                        <span class="bloc-card__meta-line">
+                                            <b>Tiết khí:</b> <span id="detail-solar-term">Lập Đông</span>
+                                        </span>
+                                        <span class="bloc-card__meta-line">
+                                            <b>Trực:</b> <span id="detail-truc-name">Định</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Cột Phải Cặp 1 (7 cột): Hướng Xuất Hành + Thông Tin Tiết Khí (Khóa đáy bằng Tờ Lịch Bloc) -->
+                        <div class="col-7 col-lg-12 day-page__pair-col">
+                            <section class="day-bento-card day-bento-card--grow" aria-labelledby="heading-directions">
+                                <header class="day-bento-card__head">
+                                    <div>
+                                        <h2 class="day-bento-card__title" id="heading-directions">Hướng Xuất Hành</h2>
+                                        <p class="day-bento-card__sub">
+                                            Chọn phương vị cát thần theo Thiên Can ngày để đón hỷ sự và tài lộc
+                                        </p>
+                                    </div>
+                                    <span class="day-bento-card__tag">Theo Thiên Can Ngày</span>
+                                </header>
+
+                                <div class="day-directions-grid" id="day-directions-grid"></div>
+                            </section>
+
+                            <section class="day-bento-card day-bento-card--grow" aria-labelledby="heading-solarterm">
+                                <header class="day-bento-card__head">
+                                    <div>
+                                        <h2 class="day-bento-card__title" id="heading-solarterm">Thông Tin Tiết Khí</h2>
+                                        <p class="day-bento-card__sub" id="day-term-summary-sub">
+                                            Chu kỳ 24 Tiết khí phản ánh sự vận hành của Mặt Trời và khí hậu nông lịch
+                                        </p>
+                                    </div>
+                                    <span class="day-bento-card__tag">24 Tiết Khí</span>
+                                </header>
+
+                                <div class="day-solarterm-grid" id="day-solarterm-grid"></div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- ==================== CẶP NGANG 2 (NGÃ TƯ SỐ 2): GIỜ HOÀNG/HẮC ĐẠO + TRỰC/SAO (TRÁI) <-> KHỔNG MINH LỤC DIỆU (PHẢI) ==================== -->
+                    <div class="row day-page__pair-row">
+                        <!-- Cột Trái Cặp 2 (5 cột): 2 Hộp Giờ Hoàng/Hắc Đạo + Card Trực & Nhị Thập Bát Tú -->
+                        <div class="col-5 col-lg-12 day-page__pair-col">
+                            <div class="fengshui-hours day-page__hours-boxes">
                                 <div class="fengshui-hours__box fengshui-hours__box--good">
                                     <h2 class="fengshui-hours__title">
-                                        <span class="fengshui-hours__dot fengshui-hours__dot--good"></span>
-                                        Giờ Hoàng Đạo (Tốt)
+                                        <img
+                                            src="./assets/icons/fengshui/hoang-dao.svg"
+                                            alt=""
+                                            aria-hidden="true"
+                                            class="day-page__hours-icon"
+                                        />
+                                        <span>Giờ Hoàng Đạo (Tốt)</span>
                                     </h2>
                                     <p class="fengshui-hours__list" id="detail-good-hours">
                                         Tý (23-1), Dần (3-5), Mão (5-7), Ngọ (11-13), Mùi (13-15), Dậu (17-19)
@@ -200,8 +240,13 @@
 
                                 <div class="fengshui-hours__box fengshui-hours__box--bad">
                                     <h2 class="fengshui-hours__title">
-                                        <span class="fengshui-hours__dot fengshui-hours__dot--bad"></span>
-                                        Giờ Hắc Đạo (Xấu)
+                                        <img
+                                            src="./assets/icons/fengshui/hac-dao.svg"
+                                            alt=""
+                                            aria-hidden="true"
+                                            class="day-page__hours-icon"
+                                        />
+                                        <span>Giờ Hắc Đạo (Xấu)</span>
                                     </h2>
                                     <p class="fengshui-hours__list" id="detail-bad-hours">
                                         Sửu (1-3), Thìn (7-9), Tỵ (9-11), Thân (15-17), Tuất (19-21), Hợi (21-23)
@@ -209,14 +254,14 @@
                                 </div>
                             </div>
 
-                            <div class="fengshui-card">
+                            <div class="fengshui-card day-page__fill-card">
                                 <div class="fengshui-card__group">
                                     <div class="fengshui-card__head">
                                         <span class="fengshui-card__label">Trực:</span>
-                                        <strong class="fengshui-card__val" id="detail-truc-title">Bế</strong>
+                                        <strong class="fengshui-card__val" id="detail-truc-title">Định</strong>
                                     </div>
                                     <p class="fengshui-card__desc" id="detail-truc-desc">
-                                        Hợp đắp đê, lấp lỗ, tu dưỡng; kỵ khai trương, xuất hành, động thổ.
+                                        Tốt cho ký kết, thương lượng, cầu danh, nhập học, làm chuồng trại.
                                     </p>
                                 </div>
 
@@ -242,19 +287,45 @@
                                 <div class="fengshui-card__ages">
                                     <div class="fengshui-card__age-chip fengshui-card__age-chip--good">
                                         <span>Tuổi hợp:</span>
-                                        <strong id="detail-age-good">Sửu, Tỵ, Thìn</strong>
+                                        <strong id="detail-age-good">Mùi, Hợi, Tuất</strong>
                                     </div>
                                     <div class="fengshui-card__age-chip fengshui-card__age-chip--bad">
                                         <span>Tuổi xung:</span>
-                                        <strong id="detail-age-bad">Mão, Tuất, Dậu</strong>
+                                        <strong id="detail-age-bad">Dậu, Tý, Thìn</strong>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="fengshui-card day-page__card-stretch day-page__card-stretch--left">
+                        <!-- Cột Phải Cặp 2 (7 cột): Khổng Minh Lục Diệu 12 Canh Giờ (Khóa đáy bằng Card Trực/Sao) -->
+                        <div class="col-7 col-lg-12 day-page__pair-col">
+                            <section class="day-bento-card day-bento-card--grow" aria-labelledby="heading-lucdieu">
+                                <header class="day-bento-card__head">
+                                    <div>
+                                        <h2 class="day-bento-card__title" id="heading-lucdieu">
+                                            Khổng Minh Lục Diệu (12 Canh Giờ)
+                                        </h2>
+                                        <p class="day-bento-card__sub" id="day-lucdieu-summary">
+                                            Ngày Lưu Niên — Mưu sự dễ chậm trễ, cầu lộc chưa thông, cần đề phòng khẩu
+                                            thiệt.
+                                        </p>
+                                    </div>
+                                    <span class="day-bento-card__badge" id="day-lucdieu-day-badge">Lưu Niên</span>
+                                </header>
+
+                                <div class="day-lucdieu-grid" id="day-lucdieu-grid"></div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- ==================== CẶP NGANG 3 (ĐÁY TẦNG 1): VIỆC NÊN LÀM & QUOTE (TRÁI) <-> MẶT TRỜI 4 MIỀN (PHẢI) ==================== -->
+                    <div class="row day-page__pair-row">
+                        <!-- Cột Trái Cặp 3 (5 cột): Việc nên làm / Không nên làm & Danh ngôn (Đã xóa khoảng trống thừa) -->
+                        <div class="col-5 col-lg-12 day-page__pair-col">
+                            <div class="fengshui-card day-page__actions-card">
                                 <h2 class="fengshui-card__section-title">Việc nên làm / Không nên làm</h2>
 
-                                <div class="fengshui-actions">
+                                <div class="fengshui-actions day-page__actions-grid">
                                     <div class="fengshui-actions__box fengshui-actions__box--do">
                                         <div class="fengshui-actions__header">
                                             <span class="fengshui-actions__badge">Nên làm</span>
@@ -281,129 +352,89 @@
                                     </div>
                                 </div>
 
-                                <blockquote class="fengshui-quote" id="detail-quote-box">
+                                <blockquote class="fengshui-quote day-page__quote-box" id="detail-quote-box">
                                     <p class="fengshui-quote__text" id="detail-quote-text">
-                                        "Bậc sĩ phu sống ở đời phải biết trung quân ái quốc, thấy việc nghĩa dẫu phải
-                                        thác cũng không được lùi bước."
+                                        "Thao trường đổ mồ hôi, chiến trường bớt đổ máu. Rèn quân phải nghiêm, nhưng
+                                        tình đồng chí phải sâu nặng như ruột thịt."
                                     </p>
-                                    <cite class="fengshui-quote__author" id="detail-quote-author"> - Doãn Khuê - </cite>
+                                    <cite class="fengshui-quote__author" id="detail-quote-author">
+                                        - Thượng tướng Nguyễn Khắc Nghiên -
+                                    </cite>
                                 </blockquote>
                             </div>
-                        </section>
-                    </div>
+                        </div>
 
-                    <!-- CỘT PHẢI (7 CỘT PC): 4 KHỐI BENTO ĐẦY ĐỦ ICON SVG, TOOLTIP TAG & ĐỒNG ĐỀU CHIỀU CAO -->
-                    <div class="col-7 col-lg-12 day-page__right-stack" id="day-right-interactive">
-                        <!-- KHỐI BENTO 1: HƯỚNG XUẤT HÀNH (3 VỊ THẦN CÓ ICON SVG + WATERMARK + TOOLTIP TAG) -->
-                        <section class="day-bento-card" aria-labelledby="heading-directions">
-                            <header class="day-bento-card__head">
-                                <div>
-                                    <h2 class="day-bento-card__title" id="heading-directions">Hướng Xuất Hành</h2>
-                                    <p class="day-bento-card__sub">
-                                        Chọn phương vị cát thần theo Thiên Can ngày để đón hỷ sự và tài lộc
-                                    </p>
-                                </div>
-                                <span class="day-bento-card__tag">Theo Thiên Can Ngày</span>
-                            </header>
-
-                            <div class="day-directions-grid" id="day-directions-grid"></div>
-                        </section>
-
-                        <!-- KHỐI BENTO 2: THÔNG TIN TIẾT KHÍ (24 ICON THỜI TIẾT + WATERMARK + TOOLTIP TAG) -->
-                        <section class="day-bento-card" aria-labelledby="heading-solarterm">
-                            <header class="day-bento-card__head">
-                                <div>
-                                    <h2 class="day-bento-card__title" id="heading-solarterm">Thông Tin Tiết Khí</h2>
-                                    <p class="day-bento-card__sub" id="day-term-summary-sub">
-                                        Chu kỳ 24 Tiết khí phản ánh sự vận hành của Mặt Trời và khí hậu nông lịch
-                                    </p>
-                                </div>
-                                <span class="day-bento-card__tag">24 Tiết Khí</span>
-                            </header>
-
-                            <div class="day-solarterm-grid" id="day-solarterm-grid"></div>
-                        </section>
-
-                        <!-- KHỐI BENTO 3: KHỔNG MINH LỤC DIỆU (6 ICON SVG + HỢP MỆNH NGŨ HÀNH + TOOLTIP TAG) -->
-                        <section class="day-bento-card" aria-labelledby="heading-lucdieu">
-                            <header class="day-bento-card__head">
-                                <div>
-                                    <h2 class="day-bento-card__title" id="heading-lucdieu">
-                                        Khổng Minh Lục Diệu (12 Canh Giờ)
+                        <!-- Cột Phải Cặp 3 (7 cột): Mặt Trời & Độ Dài Ban Ngày (Khóa đáy bằng Việc nên làm) -->
+                        <div class="col-7 col-lg-12 day-page__pair-col">
+                            <section
+                                class="day-bento-card day-bento-card--grow day-page__sun-card"
+                                aria-labelledby="heading-sun"
+                            >
+                                <header class="day-bento-card__head">
+                                    <h2 class="day-bento-card__title" id="heading-sun">
+                                        Mặt Trời &amp; Độ Dài Ban Ngày
                                     </h2>
-                                    <p class="day-bento-card__sub" id="day-lucdieu-summary">
-                                        Ngày Đại An — Mọi việc đều tốt lành, cầu tài đi hướng Tây Nam, nhà cửa yên lành.
-                                    </p>
-                                </div>
-                                <span class="day-bento-card__badge" id="day-lucdieu-day-badge">Đại An</span>
-                            </header>
+                                    <span class="day-bento-card__tag">Múi giờ UTC+7</span>
+                                </header>
 
-                            <div class="day-lucdieu-grid" id="day-lucdieu-grid"></div>
-                        </section>
-
-                        <!-- KHỐI BENTO 4: MẶT TRỜI 4 MIỀN (ĐÃ SỬA LỖI KHOẢNG TRẮNG LOÃNG + THÊM 4 ICON WEATHER) -->
-                        <section
-                            class="day-bento-card day-page__card-stretch day-page__card-stretch--sun"
-                            aria-labelledby="heading-sun"
-                        >
-                            <header class="day-bento-card__head">
-                                <h2 class="day-bento-card__title" id="heading-sun">Mặt Trời &amp; Độ Dài Ban Ngày</h2>
-                                <span class="day-bento-card__tag">Múi giờ UTC+7</span>
-                            </header>
-
-                            <div class="day-sun-summary">
-                                <div class="day-sun-summary__pill">
-                                    <span>Ngày Dương lịch:</span>
-                                    <strong id="day-sun-date-label">07/11/2026</strong>
+                                <div class="day-sun-summary">
+                                    <div class="day-sun-summary__pill">
+                                        <span>Ngày Dương lịch:</span>
+                                        <strong id="day-sun-date-label">13/11/2026</strong>
+                                    </div>
+                                    <div class="day-sun-summary__pill">
+                                        <span>Độ dài ban ngày TB:</span>
+                                        <strong id="day-sun-length-label">11 giờ 28 phút</strong>
+                                    </div>
                                 </div>
-                                <div class="day-sun-summary__pill">
-                                    <span>Độ dài ban ngày TB:</span>
-                                    <strong id="day-sun-length-label">11 giờ 30 phút</strong>
-                                </div>
-                            </div>
 
-                            <div class="day-sun-table" role="table" aria-label="Giờ mặt trời mọc và lặn theo 4 miền">
-                                <div class="day-sun-table__head" role="row">
-                                    <span class="day-sun-table__th" role="columnheader">
-                                        <img
-                                            src="./assets/icons/weather/region-compass.svg"
-                                            alt=""
-                                            aria-hidden="true"
-                                            class="day-sun-table__th-icon"
-                                        />
-                                        <span>Miền</span>
-                                    </span>
-                                    <span class="day-sun-table__th" role="columnheader">
-                                        <img
-                                            src="./assets/icons/weather/location-pin.svg"
-                                            alt=""
-                                            aria-hidden="true"
-                                            class="day-sun-table__th-icon"
-                                        />
-                                        <span>Địa điểm đại diện</span>
-                                    </span>
-                                    <span class="day-sun-table__th" role="columnheader">
-                                        <img
-                                            src="./assets/icons/weather/sun-rise.svg"
-                                            alt=""
-                                            aria-hidden="true"
-                                            class="day-sun-table__th-icon"
-                                        />
-                                        <span>Mọc</span>
-                                    </span>
-                                    <span class="day-sun-table__th" role="columnheader">
-                                        <img
-                                            src="./assets/icons/weather/sun-set.svg"
-                                            alt=""
-                                            aria-hidden="true"
-                                            class="day-sun-table__th-icon"
-                                        />
-                                        <span>Lặn</span>
-                                    </span>
+                                <div
+                                    class="day-sun-table"
+                                    role="table"
+                                    aria-label="Giờ mặt trời mọc và lặn theo 4 miền"
+                                >
+                                    <div class="day-sun-table__head" role="row">
+                                        <span class="day-sun-table__th" role="columnheader">
+                                            <img
+                                                src="./assets/icons/weather/region-compass.svg"
+                                                alt=""
+                                                aria-hidden="true"
+                                                class="day-sun-table__th-icon"
+                                            />
+                                            <span>Miền</span>
+                                        </span>
+                                        <span class="day-sun-table__th" role="columnheader">
+                                            <img
+                                                src="./assets/icons/weather/location-pin.svg"
+                                                alt=""
+                                                aria-hidden="true"
+                                                class="day-sun-table__th-icon"
+                                            />
+                                            <span>Địa điểm đại diện</span>
+                                        </span>
+                                        <span class="day-sun-table__th" role="columnheader">
+                                            <img
+                                                src="./assets/icons/weather/sun-rise.svg"
+                                                alt=""
+                                                aria-hidden="true"
+                                                class="day-sun-table__th-icon"
+                                            />
+                                            <span>Mọc</span>
+                                        </span>
+                                        <span class="day-sun-table__th" role="columnheader">
+                                            <img
+                                                src="./assets/icons/weather/sun-set.svg"
+                                                alt=""
+                                                aria-hidden="true"
+                                                class="day-sun-table__th-icon"
+                                            />
+                                            <span>Lặn</span>
+                                        </span>
+                                    </div>
+                                    <div class="day-sun-rows-wrap" id="day-sun-rows"></div>
                                 </div>
-                                <div class="day-sun-rows-wrap" id="day-sun-rows"></div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>
                 </div>
 
@@ -420,7 +451,6 @@
                             </p>
                         </div>
 
-                        <!-- Bộ lọc nhanh 12 Canh Giờ (Đã thay Emoji bằng SVG hoang-dao.svg & hac-dao.svg) -->
                         <div class="day-hourly-section__filters" role="group" aria-label="Lọc danh sách 12 canh giờ">
                             <button
                                 type="button"
@@ -450,7 +480,6 @@
                         </div>
                     </header>
 
-                    <!-- BẢNG 1 CỘT LỚN 12 DÒNG RỘNG RÃI (5 CỘT TRONG MỖI DÒNG) -->
                     <div class="day-hourly-table">
                         <div class="day-hourly-table__head">
                             <span>Canh Giờ</span>
@@ -542,4 +571,3 @@
     </body>
 </html>
 ```
-````

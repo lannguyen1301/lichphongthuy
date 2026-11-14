@@ -1,0 +1,1774 @@
+// scss/pages/_bazi.scss
+@use "../abstracts" as abs;
+
+.bazi-page {
+    padding-bottom: abs.$gap-section-default;
+    overflow-x: clip;
+
+    &__pairs-wrapper {
+        @extend %flexColumn;
+        gap: 2.2rem;
+        margin-top: 2.2rem;
+    }
+
+    &__pair-row {
+        --grid-gutter-y: 2.2rem;
+        align-items: stretch;
+    }
+
+    &__pair-col {
+        display: flex;
+        flex-direction: column;
+        gap: 2.2rem;
+    }
+
+    // Bento Tooltip 3 tầng độc lập
+    .has-bento-tooltip {
+        position: relative;
+        overflow: visible;
+
+        .bento-tooltip {
+            position: absolute;
+            bottom: calc(100% + 1.1rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(0.6rem);
+            z-index: 80;
+            width: 31rem;
+            padding: 1.3rem 1.5rem;
+            background-color: var(--tooltip-bg, var(--body-bg));
+            color: var(--tooltip-text, var(--text-color));
+            border: 1.5px solid var(--tooltip-border, var(--primary-color));
+            border-radius: 1.6rem;
+            box-shadow:
+                0 1.4rem 3rem var(--shadow-color),
+                0 0 0 3px var(--body-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.65rem;
+            text-align: left;
+            white-space: normal;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition:
+                opacity 0.2s ease 0s,
+                transform 0.2s ease 0s,
+                visibility 0.2s ease 0s;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border-width: 0.65rem;
+                border-style: solid;
+                border-color: var(--tooltip-border, var(--primary-color)) transparent transparent transparent;
+            }
+
+            &__title {
+                display: block;
+                font-size: 1.35rem;
+                font-weight: 800;
+                line-height: 1.3;
+                color: var(--primary-color);
+            }
+
+            &__desc {
+                display: block;
+                font-size: 1.25rem;
+                font-weight: 600;
+                line-height: 1.5;
+                color: var(--tooltip-text, var(--text-color));
+            }
+
+            &__tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                margin-top: 0.2rem;
+                padding: 0.35rem 1.1rem;
+                background-color: var(--primary-color);
+                color: #ffffff;
+                border-radius: 99.9rem;
+                font-size: 1.15rem;
+                font-weight: 800;
+                line-height: 1.2;
+                box-shadow: 0 0.3rem 0.8rem var(--shadow-color);
+            }
+        }
+
+        @media (hover: hover) {
+            &:hover,
+            &:focus-visible {
+                z-index: 45;
+
+                > .bento-tooltip {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateX(-50%) translateY(0);
+                    transition-delay: 0.14s;
+                }
+            }
+        }
+    }
+}
+
+.bazi-card {
+    position: relative;
+    overflow: visible;
+    @extend %flexColumn;
+    gap: 1.8rem;
+    padding: 2.4rem 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 0.6rem 2rem var(--shadow-color);
+    @extend %transTheme;
+
+    &--grow {
+        flex: 1;
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 2rem;
+        gap: 1.4rem;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title {
+        font-size: 1.9rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.3rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__tag,
+    &__badge {
+        padding: 0.45rem 1.3rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        @extend %textNoWrap;
+    }
+
+    &__tag {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    &__badge {
+        background-color: var(--primary-color);
+        color: #ffffff;
+    }
+}
+
+// ==========================================================================
+// 1. THANH CÔNG CỤ LẬP LÁ SỐ BÁT TỰ (.bazi-toolbar) & CUSTOM BENTO PICKER
+// ==========================================================================
+.bazi-toolbar {
+    gap: 2rem;
+    z-index: 35;
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.6rem;
+        padding-bottom: 1.6rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title-wrap {
+        @extend %flexColumn;
+        gap: 0.6rem;
+    }
+
+    &__eyebrow {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        width: fit-content;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+
+        &-icon {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+    }
+
+    &__title {
+        font-size: clamp(2.1rem, 2.5vw, 2.7rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+    }
+
+    &__quick-actions {
+        @extend %flexWrapGap;
+        gap: 1rem;
+    }
+
+    // FIX ẢNH 1: Nút "Lập theo Giờ hiện tại" nổi bật, có hộp icon lớn và hiệu ứng xoay kim đồng hồ khi hover
+    &__preset-btn {
+        height: 4.4rem;
+        padding: 0 1.8rem 0 0.8rem;
+        border-radius: 1.4rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1.5px solid var(--primary-color);
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+
+            .bazi-toolbar__preset-icon-box {
+                background-color: #ffffff;
+            }
+
+            .bazi-toolbar__preset-icon {
+                transform: rotate(360deg) scale(1.1);
+            }
+        }
+    }
+
+    &__preset-icon-box {
+        @extend %inlineFlexCenter;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        @extend %transTheme;
+    }
+
+    &__preset-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        filter: var(--zodiac-filter);
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &__share-btn {
+        height: 4.4rem;
+        padding: 0 2rem;
+        border-radius: 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.4rem;
+        font-weight: 800;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+    }
+
+    &__form {
+        display: grid;
+        grid-template-columns: 0.85fr 0.9fr 0.9fr 1.35fr 1.25fr 1.45fr;
+        align-items: end;
+        gap: 1.4rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include abs.screen(md) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__field {
+        @extend %flexColumn;
+        gap: 0.6rem;
+        min-width: 0;
+        position: relative;
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        padding-left: 0.2rem;
+    }
+
+    &__gender-group {
+        @extend %gridCols2;
+        gap: 0.5rem;
+        height: 4.8rem;
+        padding: 0.45rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__gender-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 100%;
+        border-radius: 1rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--text-color);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.3rem 0.8rem var(--shadow-color);
+
+            .bazi-toolbar__gender-dot {
+                background-color: #ffffff;
+                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+            }
+        }
+    }
+
+    &__gender-dot {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background-color: var(--text-muted);
+        @extend %flexItemFixed;
+    }
+}
+
+// CUSTOM BENTO DROPDOWN PICKER (Thay thế hoàn toàn <select> mặc định ở Ảnh 1)
+.bazi-picker {
+    position: relative;
+
+    &__summary {
+        @extend %flexBetween;
+        gap: 0.8rem;
+        height: 4.8rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+    }
+
+    &__summary-text {
+        @extend %textEllipsis;
+    }
+
+    &__arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+        @extend %flexItemFixed;
+        @extend %transBurgerBar;
+    }
+
+    &[open] &__summary {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        box-shadow: 0 0 0 3px var(--primary-soft-bg);
+    }
+
+    &[open] &__arrow {
+        transform: rotate(180deg);
+    }
+
+    &__popover {
+        position: absolute;
+        top: calc(100% + 0.8rem);
+        left: 0;
+        z-index: 90;
+        min-width: 28rem;
+        padding: 1.4rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 1.8rem;
+        box-shadow: 0 1.6rem 3.6rem var(--shadow-color);
+        @extend %animDropdownFadeIn;
+
+        &--days {
+            min-width: 31rem;
+        }
+
+        &--hours {
+            min-width: 34rem;
+
+            @include abs.screen(sm) {
+                min-width: 28rem;
+            }
+        }
+
+        &--regions {
+            right: 0;
+            left: auto;
+            min-width: 31rem;
+
+            @include abs.screen(md) {
+                left: 0;
+                right: auto;
+            }
+        }
+    }
+
+    &__popover-head {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__year-nav {
+        @extend %flexBetween;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__year-step {
+        @extend %inlineFlexCenter;
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 0.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+    }
+
+    &__year-range {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__grid {
+        display: grid;
+        gap: 0.55rem;
+
+        &--days {
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        &--months {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &--years {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        &--hours {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 0.5rem;
+    }
+
+    &__option {
+        @extend %inlineFlexCenter;
+        width: 100%;
+        min-height: 3.8rem;
+        padding: 0.6rem 0.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transInteractive;
+
+        &--row {
+            justify-content: space-between;
+            padding: 0.9rem 1.2rem;
+        }
+
+        small {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        &.is-selected {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+            small {
+                color: rgba(255, 255, 255, 0.88);
+            }
+        }
+    }
+}
+
+// ==========================================================================
+// 2. CỘT TRÁI CẶP 1: HỒ SƠ BẢN MỆNH & NHẬT CHỦ (.bazi-master-card)
+// ==========================================================================
+.bazi-master-card {
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    border-color: var(--primary-hover);
+    color: #ffffff;
+    box-shadow: 0 1rem 2.8rem var(--shadow-color);
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 1.4rem;
+    }
+
+    &__badges {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    &__pill,
+    &__term-pill {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__pill {
+        background-color: #ffffff;
+        color: var(--primary-active);
+    }
+
+    &__term-pill {
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        color: #ffffff;
+    }
+
+    &__hero {
+        @extend %flexItemCenter;
+        gap: 1.5rem;
+        padding-top: 0.4rem;
+    }
+
+    &__icon-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 6.4rem;
+        height: 6.4rem;
+        border-radius: 2rem;
+        background-color: #ffffff;
+        box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.18);
+    }
+
+    &__elem-icon {
+        width: 3.8rem;
+        height: 3.8rem;
+        object-fit: contain;
+    }
+
+    &__title-group {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--hero-text-soft);
+    }
+
+    &__name {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1.15;
+        color: #ffffff;
+    }
+
+    &__archetype {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--hero-text-soft);
+    }
+
+    &__desc {
+        padding: 1.3rem 1.5rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.6rem;
+        font-size: 1.35rem;
+        line-height: 1.55;
+        color: #ffffff;
+    }
+
+    &__meta-grid {
+        position: relative;
+        z-index: 2;
+        @extend %gridCols2;
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__meta-item {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        padding: 1.1rem 1.3rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__meta-label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--hero-text-soft);
+    }
+
+    &__meta-val {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #ffffff;
+    }
+
+    &__footer {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        padding-top: 0.4rem;
+    }
+
+    &__day-link {
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--hero-chip-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 99.9rem;
+        color: #ffffff;
+        font-size: 1.35rem;
+        font-weight: 800;
+
+        img {
+            width: 1.8rem;
+            height: 1.8rem;
+            filter: brightness(0) invert(1);
+        }
+
+        &:hover {
+            background-color: #ffffff;
+            color: var(--primary-active);
+
+            img {
+                filter: var(--zodiac-filter);
+            }
+        }
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -1rem;
+        bottom: -1rem;
+        width: 14rem;
+        height: 14rem;
+        object-fit: contain;
+        opacity: 0.15;
+        filter: var(--zodiac-filter-active);
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+
+// ==========================================================================
+// 3. CỘT PHẢI CẶP 1: BÀN LÁ SỐ TỨ TRỤ 4 CỘT (ĐÃ KHÓA TITLE 1 DÒNG & CĂN THẲNG HÀNG NGANG)
+// ==========================================================================
+.bazi-pillars-grid {
+    flex: 1;
+    @extend %gridCols4;
+    align-items: stretch;
+    gap: 1.4rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bazi-pillar-col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    gap: 1.1rem;
+    padding: 1.6rem 1.5rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+    text-align: center;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &--daymaster {
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+    }
+
+    &__bg-wrap {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 6.4rem;
+        height: 6.4rem;
+        object-fit: contain;
+        opacity: 0.1;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+        .bazi-pillar-col__watermark {
+            opacity: 0.24;
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .bazi-pillar-col__char-icon img {
+            transform: scale(1.14) rotate(8deg);
+        }
+    }
+
+    // FIX ẢNH 2: Khóa chiều cao phần đầu trụ & ép tên trụ 1 dòng không bao giờ rớt chữ
+    &__head {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumnCenterAll;
+        gap: 0.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__pillar-name {
+        font-size: 1.35rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-color);
+        @extend %textNoWrap;
+    }
+
+    &__ten-god {
+        padding: 0.3rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+
+        &--master {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__main-chars {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.9rem;
+    }
+
+    &__stem-box,
+    &__branch-box {
+        @extend %flexBetween;
+        padding: 1rem 1.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        text-align: left;
+    }
+
+    &__char-info {
+        @extend %flexColumn;
+        gap: 0.15rem;
+
+        small {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            @extend %textNoWrap;
+        }
+
+        strong {
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--text-color);
+        }
+    }
+
+    &__char-icon {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 1.1rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 2.4rem;
+            height: 2.4rem;
+            object-fit: contain;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        &--zodiac img {
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    // Đặt flex: 1 để hộp Tàng Can tự bù trừ độ cao giữa trụ có 1 tàng can và trụ có 3 tàng can
+    &__hidden-stems {
+        flex: 1;
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        justify-content: flex-start;
+        gap: 0.55rem;
+        padding: 1rem;
+        background-color: var(--body-bg);
+        border: 1px dashed var(--border-color);
+        border-radius: 1.4rem;
+        text-align: left;
+    }
+
+    &__section-label {
+        font-size: 1.1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__hidden-list {
+        @extend %flexWrapGap;
+        gap: 0.45rem;
+    }
+
+    &__hidden-chip {
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        em {
+            font-style: normal;
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+    }
+
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.45rem;
+        margin-top: auto;
+        padding-top: 0.9rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__napam {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__stage-pill {
+        display: inline-block;
+        width: fit-content;
+        margin: 0 auto;
+        padding: 0.25rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+}
+
+// ==========================================================================
+// 4. CỘT TRÁI CẶP 2: BIỂU ĐỒ NGŨ HÀNH & THẬP THẦN (CÓ SCROLL ANIMATION)
+// ==========================================================================
+.bazi-wuxing-card {
+    &__stage {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 1.8rem;
+        padding: 1.4rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+            justify-items: center;
+            text-align: center;
+        }
+    }
+
+    &__svg-box {
+        @extend %flexCenter;
+    }
+
+    &__legend {
+        @extend %flexColumn;
+        gap: 0.8rem;
+    }
+
+    &__legend-item {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+
+        @include abs.screen(sm) {
+            justify-content: center;
+        }
+    }
+
+    &__dot {
+        width: 1.2rem;
+        height: 1.2rem;
+        border-radius: 50%;
+        @extend %flexItemFixed;
+
+        &--gen {
+            border: 2px dashed #10b981;
+        }
+
+        &--ctrl {
+            background-color: #ef4444;
+        }
+    }
+
+    &__summary-note {
+        padding-top: 0.6rem;
+        border-top: 1px dashed var(--border-color);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+}
+
+.bazi-elements-bars {
+    @extend %flexColumn;
+    gap: 0.9rem;
+
+    // FIX ẢNH 3: Khi phần tử lọt vào khung nhìn (.is-in-view), các cột % trượt mượt từ 0% lên --target-w
+    &.is-in-view .bazi-element-row__fill {
+        width: var(--target-w, 8%);
+    }
+}
+
+.bazi-element-row {
+    @extend %flexColumn;
+    gap: 0.45rem;
+    padding: 0.95rem 1.3rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.4rem;
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateX(3px);
+
+        .bazi-element-row__name img {
+            transform: scale(1.18) rotate(10deg);
+        }
+    }
+
+    &__top {
+        @extend %flexBetween;
+        gap: 0.8rem;
+        font-size: 1.3rem;
+    }
+
+    &__name {
+        @extend %flexItemCenter;
+        gap: 0.7rem;
+        font-weight: 800;
+        color: var(--text-color);
+
+        img {
+            width: 1.9rem;
+            height: 1.9rem;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    &__meta {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__state {
+        padding: 0.15rem 0.8rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__track {
+        width: 100%;
+        height: 0.9rem;
+        background-color: var(--body-bg);
+        border-radius: 99.9rem;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+    }
+
+    &__fill {
+        position: relative;
+        width: 0;
+        height: 100%;
+        border-radius: 99.9rem;
+        transition: width 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+
+        &--metal {
+            background: linear-gradient(90deg, #ca8a04, #facc15);
+        }
+        &--wood {
+            background: linear-gradient(90deg, #059669, #34d399);
+        }
+        &--water {
+            background: linear-gradient(90deg, #2563eb, #60a5fa);
+        }
+        &--fire {
+            background: linear-gradient(90deg, #dc2626, #f87171);
+        }
+        &--earth {
+            background: linear-gradient(90deg, #b45309, #fbbf24);
+        }
+    }
+}
+
+// KHỐI CẤU TRÚC 5 NHÓM THẬP THẦN (Giải pháp nâng cấp thay cho Ảnh 6 của Kabala)
+.bazi-tengods-summary {
+    @extend %flexColumn;
+    gap: 0.9rem;
+    margin-top: auto;
+    padding: 1.3rem 1.4rem;
+    background-color: var(--bg-surface);
+    border: 1px dashed var(--border-color);
+    border-radius: 1.8rem;
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+
+    &__title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__hint {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__grid {
+        @extend %flexColumn;
+        gap: 0.65rem;
+
+        &.is-in-view .bazi-tengods-row__fill {
+            width: var(--target-w, 10%);
+        }
+    }
+}
+
+.bazi-tengods-row {
+    display: grid;
+    grid-template-columns: 14.5rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 12rem 1fr auto;
+    }
+
+    &__label {
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %textNoWrap;
+
+        small {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+    }
+
+    &__track {
+        height: 0.7rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        overflow: hidden;
+    }
+
+    &__fill {
+        width: 0;
+        height: 100%;
+        background-color: var(--primary-color);
+        border-radius: 99.9rem;
+        transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &__val {
+        min-width: 3.4rem;
+        text-align: right;
+        font-weight: 800;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+// ==========================================================================
+// 5. CỘT PHẢI CẶP 2: DỤNG THẦN, HỶ THẦN, KỴ THẦN & 4 HỘP CẢI VẬN (CÓ HOVER ICON ANIMATION - ẢNH 4)
+// ==========================================================================
+.bazi-gods-grid {
+    @extend %gridCols3;
+    align-items: stretch;
+    gap: 1.3rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bazi-god-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 0.8rem;
+    padding: 1.6rem;
+    border-radius: 1.8rem;
+    border: 1.5px solid var(--border-color);
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &__bg-wrap {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 6.2rem;
+        height: 6.2rem;
+        object-fit: contain;
+        opacity: 0.1;
+        transform: rotate(-10deg);
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    // FIX ẢNH 4: Khi hover vào thẻ Dụng Thần / Hỷ Thần / Kỵ Thần, icon chính chuyển động nảy/xoay & watermark sáng rõ
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .bazi-god-box__icon-wrap img {
+            animation: baziIconHoverBounce 0.85s ease-in-out infinite;
+        }
+
+        .bazi-god-box__watermark {
+            opacity: 0.24;
+            transform: scale(1.1) rotate(0deg);
+        }
+    }
+
+    &--yong {
+        background-color: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.4);
+
+        .bazi-god-box__role,
+        .bazi-god-box__elem {
+            color: #047857;
+        }
+    }
+
+    &--xi {
+        background-color: rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.35);
+
+        .bazi-god-box__role,
+        .bazi-god-box__elem {
+            color: #1d4ed8;
+        }
+    }
+
+    &--ji {
+        background-color: rgba(239, 68, 68, 0.08);
+        border-color: rgba(239, 68, 68, 0.35);
+
+        .bazi-god-box__role,
+        .bazi-god-box__elem {
+            color: #b91c1c;
+        }
+    }
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__icon-wrap {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.4rem;
+        height: 4.4rem;
+        border-radius: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+        img {
+            width: 2.6rem;
+            height: 2.6rem;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    &__role {
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    &__elem {
+        position: relative;
+        z-index: 2;
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    &__desc {
+        position: relative;
+        z-index: 2;
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.5;
+        color: var(--text-color);
+    }
+}
+
+.bazi-remedy-grid {
+    flex: 1;
+    @extend %gridCols2;
+    align-items: stretch;
+    gap: 1.3rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bazi-remedy-box {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 0.8rem;
+    padding: 1.6rem 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+
+        .bazi-remedy-box__icon-wrap img {
+            animation: baziIconHoverBounce 0.85s ease-in-out infinite;
+        }
+
+        .bazi-remedy-box__watermark {
+            opacity: 0.22;
+            transform: scale(1.1) rotate(0deg);
+        }
+    }
+
+    &__head {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__title-wrap {
+        @extend %flexItemCenter;
+        gap: 0.9rem;
+    }
+
+    &__icon-wrap {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 2rem;
+            height: 2rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__label {
+        font-size: 1.25rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__tag {
+        padding: 0.25rem 0.9rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+    }
+
+    &__val {
+        position: relative;
+        z-index: 2;
+        font-size: 1.65rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        position: relative;
+        z-index: 2;
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.45;
+        color: var(--text-muted);
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.5rem;
+        bottom: -0.5rem;
+        width: 5.4rem;
+        height: 5.4rem;
+        object-fit: contain;
+        opacity: 0.08;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+}
+
+@keyframes baziIconHoverBounce {
+    0%,
+    100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-2.5px) scale(1.15) rotate(8deg);
+    }
+}
+
+// ==========================================================================
+// 6. TẦNG 4 (FIX ẢNH 5): CHU KỲ 8 ĐẠI VẬN BENTO SOLE 3 - 4 - 1 + ICON 12 CON GIÁP
+// ==========================================================================
+.bazi-luck-section {
+    margin-top: 2.2rem;
+}
+
+// Lưới 12 cột để xếp Sole: Hàng 1 (3 card x 4 cột) | Hàng 2 (4 card x 3 cột) | Hàng 3 (Card 8 chiếm trọn 12 cột)
+.bazi-luck-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: stretch;
+    gap: 1.5rem;
+}
+
+.bazi-luck-card {
+    position: relative;
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 17.4rem;
+    gap: 1rem;
+    padding: 1.8rem 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.2rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    // HÀNG 1 (3 CARD ĐẦU: ĐẠI VẬN 1, 2, 3) -> Mỗi card chiếm 4/12 cột (3 card trên 1 hàng)
+    &:nth-child(-n + 3) {
+        grid-column: span 4;
+    }
+
+    // HÀNG 2 (4 CARD TIẾP: ĐẠI VẬN 4, 5, 6, 7) -> Mỗi card chiếm 3/12 cột (4 card trên 1 hàng)
+    &:nth-child(n + 4):nth-child(-n + 7) {
+        grid-column: span 3;
+    }
+
+    // HÀNG 3 (CARD CUỐI: ĐẠI VẬN 8) -> Chiếm trọn 12/12 cột chia 2 cột Trái/Phải ấn tượng
+    &--wide,
+    &:nth-child(8) {
+        grid-column: span 12;
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        align-items: center;
+        gap: 2.4rem;
+        min-height: 14rem;
+        padding: 2rem 2.4rem;
+
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+    }
+
+    @include abs.screen(lg) {
+        &:nth-child(-n + 7) {
+            grid-column: span 6;
+        }
+    }
+
+    @include abs.screen(sm) {
+        &:nth-child(-n + 8) {
+            grid-column: span 12;
+        }
+    }
+
+    &__bg-wrap {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: 0.6rem;
+        bottom: 0.4rem;
+        width: 6.4rem;
+        height: 6.4rem;
+        object-fit: contain;
+        opacity: 0.12;
+        filter: var(--zodiac-filter);
+        transform: scale(0.9) rotate(-10deg);
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    &.is-current-luck {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+        .bazi-luck-card__watermark {
+            opacity: 0.32;
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .bazi-luck-card__zodiac-box img {
+            transform: scale(1.15) rotate(8deg);
+        }
+    }
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    &__step {
+        font-size: 1.25rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--text-muted);
+    }
+
+    &__ages {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__mid {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 1.3rem;
+        margin: 0.2rem 0;
+    }
+
+    &__zodiac-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.8rem;
+        height: 4.8rem;
+        border-radius: 1.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+        img {
+            width: 3rem;
+            height: 3rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    }
+
+    &__canchi-group {
+        @extend %flexColumn;
+        gap: 0.2rem;
+    }
+
+    &__canchi {
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--text-color);
+    }
+
+    &__tengod {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+        width: 100%;
+        margin-top: auto;
+        padding-top: 0.9rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__napam {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__stage {
+        padding: 0.2rem 0.85rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    // Cột phải của Thẻ Đại Vận số 8 (Full-Width Hậu Vận)
+    &__wide-left {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 1rem;
+        padding-right: 2rem;
+        border-right: 1px dashed var(--border-color);
+
+        @include abs.screen(md) {
+            padding-right: 0;
+            border-right: none;
+        }
+    }
+
+    &__wide-right {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.6rem;
+
+        strong {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        p {
+            font-size: 1.35rem;
+            line-height: 1.55;
+            color: var(--text-color);
+        }
+    }
+}

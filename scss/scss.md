@@ -63,14 +63,9 @@
 ```scss
 /* ==========================================================================
    BIẾN HỆ THỐNG TOÀN CỤC (GLOBAL VARIABLES)
-   Mọi tham số thiết kế lõi phải được định nghĩa tại đây.
-   Sử dụng cờ !default để cho phép ghi đè trong môi trường module hóa,
-   bảo vệ mã nguồn khỏi các xung đột khi tích hợp giao diện (theming).
    ========================================================================== */
 
 // 1. TYPOGRAPHY (Kiểu Chữ)
-// Khai báo các giá trị nền tảng thay thế cho các chuỗi hardcoded trong _base.scss
-// --------------------------------------------------------------------------
 $base-font-size: 62.5% !default; // Thiết lập 1rem = 10px
 $body-font-size: 1.6rem !default;
 $body-font-family:
@@ -87,10 +82,7 @@ $body-font-family:
     "Open Sans",
     "Helvetica Neue" !default;
 
-// 2. GRID SYSTEM (Hệ Thống Lưới & Điểm Ngắt)
-// Tổng hợp từ _grid.scss, _utils.scss và _mixins.scss
-// --------------------------------------------------------------------------
-// Điểm ngắt cho Media Queries (Breakpoint dictionary)
+// 2. GRID SYSTEM (Hệ Thống Lưới & Điểm Ngắt Desktop-First: max-width)
 $grid-breakpoints: (
     xxl: 1400px,
     xl: 1200px,
@@ -99,22 +91,20 @@ $grid-breakpoints: (
     sm: 576px,
 ) !default;
 
-// Chiều rộng tối đa của container theo từng điểm ngắt
+// Chiều rộng tối đa của .container theo từng điểm ngắt Desktop-First
 $container-max-widths: (
-    xxl: 1140px,
-    xl: 960px,
-    lg: 720px,
-    md: 540px,
+    xxl: 1240px,
+    xl: 1024px,
+    lg: 100%,
+    md: 100%,
     sm: 100%,
 ) !default;
 
-// Tham số cấu trúc lưới và kích thước thành phần
 $grid-columns: 12 !default;
 $grid-gutter-width: 30px !default;
 $container-max-width-custom: 1370px !default;
-$container-padding-sm: 20px !default;
+$container-padding-sm: 16px !default;
 
-// Các hệ số nhân của khoảng cách (Gutters ratio map)
 $gutters: (
     0: 0,
     1: 0.25,
@@ -124,26 +114,16 @@ $gutters: (
     5: 3,
 ) !default;
 
-// 3. UTILITIES (Tiện Ích Hiển Thị)
-// Tham số điều khiển từ _utils.scss
-// --------------------------------------------------------------------------
-// Các giá trị của thuộc tính display được hỗ trợ để tự động sinh class (.d-flex, .d-block...)
-
-// 4. COLORS (Màu Sắc Mặc Định - Trạng thái chưa chọn Ngũ Hành)
-// Các giá trị nguyên thủy (Raw hex) dùng để cấp cho :root
-// --------------------------------------------------------------------------
-
-// Giao diện Light Mode (Mặc định)
+// 3. COLORS (Màu Sắc Mặc Định)
 $color-bg-main-light: #ffffff !default;
-$color-bg-surface-light: #f3f4f6 !default; // Xám nhạt
-$color-text-main-light: #1f2937 !default; // Đen/Xám đậm
+$color-bg-surface-light: #f3f4f6 !default;
+$color-text-main-light: #1f2937 !default;
 $color-text-muted-light: #6b7280 !default;
-$color-primary-light: #3b82f6 !default; // Xanh dương
+$color-primary-light: #3b82f6 !default;
 
-// Giao diện Dark Mode
 $color-bg-main-dark: #111827 !default;
 $color-bg-surface-dark: #1f2937 !default;
-$color-text-main-dark: #f9fafb !default; // Trắng/Xám sáng
+$color-text-main-dark: #f9fafb !default;
 $color-text-muted-dark: #9ca3af !default;
 $color-primary-dark: #60a5fa !default;
 
@@ -153,17 +133,15 @@ $theme-transition:
     border-color 0.3s ease,
     fill 0.3s ease;
 
-// 5. DISPLAY VALUES (Giá Trị Hiển Thị)
+// 4. DISPLAY VALUES & HEADER DIMENSIONS
 $display-values: block, flex, grid, none !default;
 
-// Kích thước & Vị trí Header
 $header-top-offset: 30px !default;
 $header-height-mobile: 60px !default;
 $header-height-pc: 100px !default;
 
-// Khoảng cách (Gap / Margin) giữa các khối (Blocks/Sections)
-$gap-header-main: 30px !default; // Gap từ Header xuống Main
-$gap-section-default: 60px !default; // Gap chuẩn giữa các section (như bài toán flex-direction: column ban nãy)
+$gap-header-main: 30px !default;
+$gap-section-default: 60px !default;
 ```
 
 ### palette.scss
@@ -1538,6 +1516,28 @@ $zodiac-active-filters: (
         visibility 0.2s ease;
 }
 
+// Hiệu ứng bật/tắt Bento Tooltip 3 tầng (Tắt ngay 0s khi rời chuột, trễ 0.14s khi dừng chuột)
+%transBentoTooltip {
+    transition:
+        opacity 0.2s ease 0s,
+        transform 0.2s ease 0s,
+        visibility 0.2s ease 0s;
+}
+
+// Hiệu ứng phóng nhẹ và làm rõ bóng chìm Watermark ở góc dưới thẻ Bento khi Hover
+%transWatermark {
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+}
+
+// Hiệu ứng chuyển đổi độ sáng & độ nảy của 5 đỉnh Ngũ Hành trong biểu đồ SVG
+%transWuXingNode {
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 // Hiệu ứng xoay 3 thanh ngang của nút Hamburger thành dấu X & mũi tên Dropdown
 %transBurgerBar {
     transition:
@@ -1571,6 +1571,76 @@ $zodiac-active-filters: (
 
 %animShake {
     animation: shake 0.35s ease-in-out;
+}
+
+// Vòng tròn Ngũ Hành Tứ Trụ
+%animWuXingSpin {
+    animation: wuxingCycleSpin 24s linear infinite;
+}
+
+%animWuXingPulse {
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
+// 6 Cung Khổng Minh Lục Diệu (Dùng chung cho Lưới 12 ô Tầng 1 & Badge Cột 3 Bảng 12 Giờ)
+%animLucDieuDaiAn {
+    animation: lucdieuCloverBreathe 3.2s ease-in-out infinite;
+}
+
+%animLucDieuLuuNien {
+    animation: lucdieuHourglass 4.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+%animLucDieuTocHy {
+    animation: lucdieuShootingStar 2.4s ease-in-out infinite;
+}
+
+%animLucDieuXichKhau {
+    animation: lucdieuThunderFlash 2.8s ease-in-out infinite;
+}
+
+%animLucDieuTieuCat {
+    transform-origin: bottom center;
+    animation: lucdieuCloverSway 2.8s ease-in-out infinite;
+}
+
+%animLucDieuKhongVong {
+    animation: lucdieuRingSpin 12s linear infinite;
+}
+
+// 6 Nhóm Thời Tiết của 24 Tiết Khí
+%animTermWind {
+    animation: termWindBreeze 3s ease-in-out infinite;
+}
+
+%animTermRain {
+    animation: termRainDrop 2.4s ease-in-out infinite;
+}
+
+%animTermSun {
+    animation: termSunRadiate 3s ease-in-out infinite;
+}
+
+%animTermThunder {
+    animation: termThunderBolt 2.6s ease-in-out infinite;
+}
+
+%animTermSprout {
+    transform-origin: bottom center;
+    animation: termSproutSway 2.8s ease-in-out infinite;
+}
+
+%animTermSnow {
+    animation: termSnowFloat 3.2s ease-in-out infinite;
+}
+
+// 2 Trạng thái Giờ Hoàng Đạo & Giờ Hắc Đạo
+%animHoangDaoSun {
+    animation: daoSunSpin 16s linear infinite;
+}
+
+%animHacDaoMoon {
+    animation: daoMoonRock 3.2s ease-in-out infinite;
 }
 ```
 
@@ -2004,9 +2074,13 @@ strong {
 
 ```scss
 // scss/base/_keyframes.scss
-// Gom toàn bộ @keyframes từ abstracts/_animations.scss và base/_keyframes.scss về đúng tầng Base
+// Gom toàn bộ @keyframes của hệ thống về đúng tầng Base theo kiến trúc 7-1
 
-// 1. Hiệu ứng Fade-in (Xuất hiện nhẹ nhàng cho Dropdown Header)
+// ==========================================================================
+// 1. KEYFRAMES CƠ BẢN CỦA HỆ THỐNG (HEADER, DROPDOWN, THEME)
+// ==========================================================================
+
+// 1.1. Hiệu ứng Fade-in (Xuất hiện nhẹ nhàng cho Dropdown Header & Modal)
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -2018,7 +2092,7 @@ strong {
     }
 }
 
-// 2. Hiệu ứng Float (Nhấp nhô như sóng nước - Dùng cho hành Thủy)
+// 1.2. Hiệu ứng Float (Nhấp nhô như sóng nước - Dùng cho hành Thủy)
 @keyframes float {
     0%,
     100% {
@@ -2029,7 +2103,7 @@ strong {
     }
 }
 
-// 3. Hiệu ứng Pulse (Nhịp đập - Dùng cho hành Hỏa)
+// 1.3. Hiệu ứng Pulse (Nhịp đập năng lượng - Dùng cho hành Hỏa & Node Ngũ Hành)
 @keyframes pulse {
     0%,
     100% {
@@ -2040,7 +2114,7 @@ strong {
     }
 }
 
-// 4. Hiệu ứng Shake (Rung cảnh báo lỗi)
+// 1.4. Hiệu ứng Shake (Rung cảnh báo lỗi)
 @keyframes shake {
     0%,
     100% {
@@ -2052,6 +2126,199 @@ strong {
     }
     50% {
         translate: -0.4rem;
+    }
+}
+
+// 1.5. Hiệu ứng xoay vòng Tương Sinh Ngũ Hành (360 độ)
+@keyframes wuxingCycleSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// ==========================================================================
+// 2. KEYFRAMES 6 CUNG KHỔNG MINH LỤC DIỆU (TẦNG 1 & BẢNG 12 GIỜ TẦNG 2)
+// ==========================================================================
+
+// 2.1. Đại An (Cỏ 4 lá may mắn): Nhịp thở sinh khí & xoay nhẹ đón nắng
+@keyframes lucdieuCloverBreathe {
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.15) rotate(12deg);
+    }
+}
+
+// 2.2. Lưu Niên (Đồng hồ cát): Nhịp cát rơi nhấp nhẹ rồi xoay lật 180 độ
+@keyframes lucdieuHourglass {
+    0%,
+    65% {
+        transform: translateY(0) rotate(0deg);
+    }
+    30% {
+        transform: translateY(2px) rotate(0deg);
+    }
+    85%,
+    100% {
+        transform: translateY(0) rotate(180deg);
+    }
+}
+
+// 2.3. Tốc Hỷ (Ngôi sao băng): Bay vút chéo lên góc phải báo tin vui
+@keyframes lucdieuShootingStar {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(3px, -3px) scale(1.14);
+    }
+}
+
+// 2.4. Xích Khẩu (Mây sấm chớp): Rung tia sét cảnh báo khẩu thiệt
+@keyframes lucdieuThunderFlash {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    15% {
+        transform: translate(-1.5px, 1px) scale(1.1);
+    }
+    30% {
+        transform: translate(1.5px, -1px) scale(1.08);
+    }
+    45% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+// 2.5. Tiểu Cát (Cỏ 3 lá có cuống): Đong đưa mềm mại quanh gốc cuống lá
+@keyframes lucdieuCloverSway {
+    0%,
+    100% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+// 2.6. Không Vong (Vòng tròn nét đứt): Xoay tròn 360 độ liên tục
+@keyframes lucdieuRingSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// ==========================================================================
+// 3. KEYFRAMES 6 NHÓM THỜI TIẾT CỦA 24 TIẾT KHÍ (THÔNG TIN TIẾT KHÍ)
+// ==========================================================================
+
+// 3.1. Nhóm Gió & Khí thu (Lập Thu, Xử Thử, Lập Đông): Lướt ngang bồng bềnh theo làn gió
+@keyframes termWindBreeze {
+    0%,
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    35% {
+        transform: translateX(3px) rotate(6deg);
+    }
+    70% {
+        transform: translateX(-2px) rotate(-4deg);
+    }
+}
+
+// 3.2. Nhóm Mưa & Sương giáng (Vũ Thủy, Cốc Vũ, Bạch Lộ, Hàn Lộ, Sương Giáng): Giọt nước/sương rơi
+@keyframes termRainDrop {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(2.5px) scale(1.06);
+    }
+}
+
+// 3.3. Nhóm Nắng hạ & Nhiệt kế (Lập Hạ, Hạ Chí, Tiểu Thử, Đại Thử, Tiểu Hàn, Đại Hàn): Tỏa nhiệt nhịp nhàng
+@keyframes termSunRadiate {
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.14) rotate(8deg);
+    }
+}
+
+// 3.4. Nhóm Sấm xuân (Kinh Trập): Chớp giật thức tỉnh mùa xuân
+@keyframes termThunderBolt {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    20% {
+        transform: translate(-1.5px, 1.5px) scale(1.12);
+    }
+    40% {
+        transform: translate(1.5px, -1px) scale(1.06);
+    }
+    60% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+// 3.5. Nhóm Mầm xuân & Bông lúa (Lập Xuân, Thanh Minh, Tiểu Mãn, Mang Chủng): Đong đưa sinh trưởng
+@keyframes termSproutSway {
+    0%,
+    100% {
+        transform: rotate(-8deg) scale(1);
+    }
+    50% {
+        transform: rotate(8deg) scale(1.06);
+    }
+}
+
+// 3.6. Nhóm Tuyết đông & Cân bằng Âm Dương (Tiểu Tuyết, Đại Tuyết, Xuân Phân, Thu Phân, Đông Chí)
+@keyframes termSnowFloat {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-6deg);
+    }
+    50% {
+        transform: translateY(-2.5px) rotate(6deg);
+    }
+}
+
+// ==========================================================================
+// 4. KEYFRAMES ICON HOÀNG ĐẠO (MẶT TRỜI) & HẮC ĐẠO (TRĂNG KHUYẾT)
+// ==========================================================================
+
+// 4.1. Hoàng Đạo (Mặt trời tỏa sáng xoay nhẹ)
+@keyframes daoSunSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// 4.2. Hắc Đạo (Trăng khuyết nghiêng nhịp nhẹ)
+@keyframes daoMoonRock {
+    0%,
+    100% {
+        transform: rotate(-10deg) scale(1);
+    }
+    50% {
+        transform: rotate(10deg) scale(1.06);
     }
 }
 ```
@@ -5954,7 +6221,7 @@ strong {
 
 .festival-cal {
     @extend %flexColumn;
-    gap: 2.2rem;
+    gap: 2rem;
     line-height: 1.5;
 
     &__dot {
@@ -5974,16 +6241,16 @@ strong {
     }
 
     // ==========================================================================
-    // ROW 2: WORKSPACE 2 CỘT (TRÁI: STICKY HERO CỐ ĐỊNH | PHẢI: CONTROLS + SCROLL CARDS)
+    // ROW 2: WORKSPACE 2 CỘT (TRÁI: STICKY HERO | PHẢI: CONTROLS + LIST EVENT)
     // ==========================================================================
     &__workspace {
         display: grid;
-        grid-template-columns: 38rem 1fr;
+        grid-template-columns: 38rem minmax(0, 1fr);
         align-items: start;
         gap: 2rem;
 
         @include abs.screen(xl) {
-            grid-template-columns: 34rem 1fr;
+            grid-template-columns: 34rem minmax(0, 1fr);
         }
 
         @include abs.screen(lg) {
@@ -5991,11 +6258,11 @@ strong {
         }
     }
 
-    // Ghim cố định Hero bên trái khi cuộn trang (Giống cột phải ở home.scss)
+    // FIX GAP CHUẨN 2REM: 1.6rem (top của Countdown) + chiều cao Countdown + 2rem (gap chuẩn)
     &__sticky-left {
         position: sticky;
-        top: calc(#{abs.$header-top-offset} + #{abs.$header-height-pc} + 2rem);
-        z-index: 15;
+        top: calc(1.6rem + var(--countdown-exact-h, 15.2rem) + 2rem);
+        z-index: 20;
 
         @include abs.screen(lg) {
             position: static;
@@ -6010,52 +6277,73 @@ strong {
 }
 
 // ==========================================================================
-// ROW 1 (MỚI): THANH ĐỒNG HỒ ĐẾM NGƯỢC (MASTER COUNTDOWN + SELECT SỰ KIỆN)
+// ROW 1 (STICKY): THANH ĐỒNG HỒ ĐẾM NGƯỢC LỚN + CUSTOM DROPDOWN KIỂU A
+// ==========================================================================
+// ==========================================================================
+// ROW 1 (STICKY): THANH ĐỒNG HỒ ĐẾM NGƯỢC LỚN + CUSTOM DROPDOWN KIỂU A
 // ==========================================================================
 .festival-countdown-bar {
+    position: sticky;
+    top: 1.6rem;
+    z-index: 45;
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     align-items: center;
     gap: 2.4rem;
-    padding: 2.4rem 2.8rem;
+    padding: 2.2rem 2.8rem;
     background-color: var(--body-bg);
     border: 1.5px solid var(--primary-color);
     border-radius: 2.6rem;
-    box-shadow: 0 1rem 2.8rem var(--shadow-color);
+    box-shadow: 0 1.2rem 3.2rem var(--shadow-color);
     @extend %transTheme;
 
     @include abs.screen(xl) {
+        position: relative;
+        top: 0;
         grid-template-columns: 1fr;
         gap: 1.8rem;
     }
 
     @include abs.screen(sm) {
-        padding: 1.8rem;
+        padding: 1.6rem;
         border-radius: 2rem;
+        gap: 1.4rem;
     }
 
     &__info {
         @extend %flexColumn;
-        gap: 0.8rem;
+        justify-content: space-between;
+        gap: 0.85rem;
         min-width: 0;
     }
 
     &__top-row {
-        @extend %flexBetween;
-        flex-wrap: wrap;
-        gap: 1rem;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 1.2rem;
+
+        // FIX MOBILE: Xuống dưới 768px (md) xếp dọc Badge và thanh Chọn sự kiện để không bao giờ tràn viền phải
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
     }
 
     &__badge {
         @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
         gap: 0.65rem;
-        padding: 0.4rem 1.2rem;
+        width: fit-content;
+        height: 3.6rem;
+        padding: 0 1.3rem;
         background-color: var(--primary-soft-bg, var(--bg-surface));
         border: 1px solid var(--primary-color);
         border-radius: 99.9rem;
         font-size: 1.2rem;
         font-weight: 800;
         color: var(--primary-color);
+        @extend %textNoWrap;
     }
 
     &__pulse-dot {
@@ -6067,76 +6355,75 @@ strong {
     }
 
     &__selector {
-        @extend %flexItemCenter;
-        flex-wrap: wrap;
+        @extend %flexYCenterRight;
         gap: 0.8rem;
+        width: 100%;
+        min-width: 0;
+
+        @include abs.screen(md) {
+            justify-content: flex-start;
+        }
     }
 
     &__select-label {
+        @extend %flexItemFixed;
         font-size: 1.3rem;
         font-weight: 800;
         color: var(--text-muted);
         @extend %textNoWrap;
     }
 
-    &__select-wrap {
-        position: relative;
-        @extend %inlineFlexCenter;
-    }
-
-    &__select {
-        appearance: none;
-        height: 3.8rem;
-        padding: 0 3.6rem 0 1.4rem;
-        background-color: var(--bg-surface);
-        border: 1.5px solid var(--border-color);
-        border-radius: 1.2rem;
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: var(--text-color);
-        cursor: pointer;
-        @extend %transTheme;
-
-        &:hover,
-        &:focus-visible {
-            border-color: var(--primary-color);
-        }
-    }
-
-    &__select-arrow {
-        position: absolute;
-        right: 1.1rem;
-        width: 1.5rem;
-        height: 1.5rem;
-        pointer-events: none;
-    }
-
     &__heading {
-        font-size: clamp(2rem, 2.4vw, 2.6rem);
+        font-size: clamp(1.9rem, 2.3vw, 2.5rem);
         font-weight: 800;
-        line-height: 1.25;
+        line-height: 1.3;
+        min-height: 3.25rem;
         color: var(--text-color);
         @extend %textEllipsis;
 
         strong {
             color: var(--primary-color);
         }
+
+        // FIX MOBILE: Cho phép tiêu đề tự xuống dòng trên màn hình nhỏ để không bị cắt mất tên ngày lễ
+        @include abs.screen(md) {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            min-height: 0;
+        }
     }
 
-    &__date-detail {
-        @extend %flexWrapGap;
-        gap: 0.6rem;
+    &__subtitles {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        min-width: 0;
+    }
+
+    &__sub-line {
         font-size: 1.35rem;
         font-weight: 600;
-        color: var(--text-muted);
+        line-height: 1.45;
+        min-height: 1.95rem;
+        color: var(--text-color);
+        @extend %textEllipsis;
+
+        &--lunar {
+            color: var(--text-muted);
+        }
+
+        @include abs.screen(md) {
+            font-size: 1.25rem;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            min-height: 0;
+        }
     }
 
     &__clock-wrap {
         @extend %flexYCenterRight;
-
-        @include abs.screen(xl) {
-            justify-content: flex-start;
-        }
+        width: 100%;
     }
 
     &__timer {
@@ -6147,39 +6434,56 @@ strong {
         width: 100%;
         padding: 1.4rem 1.8rem;
         background-color: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 2rem;
+        border: 1.5px solid var(--border-color);
+        border-radius: 2.2rem;
+        font-family: abs.$body-font-family;
 
         @include abs.screen(sm) {
             padding: 1rem;
             gap: 0.4rem;
+            border-radius: 1.6rem;
         }
     }
 
     &__unit {
         @extend %flexColumnCenterAll;
-        gap: 0.2rem;
-        padding: 0.8rem 0.6rem;
+        gap: 0.35rem;
+        height: 9.6rem;
+        padding: 1rem 0.6rem;
         background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 1.4rem;
-        min-width: 6.8rem;
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.6rem;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        @extend %transTheme;
 
         @include abs.screen(sm) {
-            min-width: 5.2rem;
-            padding: 0.6rem 0.4rem;
+            height: 7.2rem;
+            padding: 0.6rem 0.2rem;
+            border-radius: 1.2rem;
+        }
+
+        &--sec {
+            background-color: var(--primary-soft-bg, var(--body-bg));
+            border-color: var(--primary-color);
         }
     }
 
     &__num {
-        font-size: clamp(2.6rem, 3.2vw, 3.6rem);
+        font-family: abs.$body-font-family;
+        font-size: clamp(2.6rem, 3.8vw, 4.4rem);
         font-weight: 800;
         line-height: 1;
-        color: var(--text-color);
+        letter-spacing: -0.03em;
+        color: var(--primary-color);
         font-variant-numeric: tabular-nums;
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            font-size: 2.2rem;
+        }
 
         &--sec {
-            color: var(--primary-color);
+            color: var(--primary-active);
         }
     }
 
@@ -6189,25 +6493,264 @@ strong {
         text-transform: uppercase;
         letter-spacing: 0.04em;
         color: var(--text-muted);
+
+        @include abs.screen(sm) {
+            font-size: 1rem;
+        }
     }
 
     &__sep {
-        font-size: 2.4rem;
+        font-size: 2.6rem;
         font-weight: 800;
         color: var(--primary-color);
         animation: pulse 2s ease-in-out infinite;
+
+        @include abs.screen(sm) {
+            font-size: 1.8rem;
+        }
     }
 }
 
 // ==========================================================================
-// CỘT TRÁI: THẺ HERO TIÊU ĐIỂM (KHÓA CHIỀU CAO TUYỆT ĐỐI CHỐNG LAYOUT SHIFT)
+// CUSTOM DROPDOWN CHỌN SỰ KIỆN KIỂU A (KHÔNG TRÀN VIỀN TRÊN MOBILE)
+// ==========================================================================
+.festival-picker {
+    position: relative;
+    width: 31rem;
+    max-width: 100%;
+    min-width: 0;
+
+    // FIX MOBILE: Cho phép co giãn linh hoạt (flex: 1 1 0%) để nằm gọn 100% trong khung Countdown
+    @include abs.screen(md) {
+        flex: 1 1 0%;
+        width: auto;
+    }
+
+    &__sr-only {
+        @extend %srOnly;
+    }
+
+    &__summary {
+        @extend %flexBetween;
+        gap: 0.6rem;
+        width: 100%;
+        height: 4rem;
+        padding: 0 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.3rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+
+        @include abs.screen(sm) {
+            padding: 0 1rem;
+            font-size: 1.25rem;
+        }
+    }
+
+    &[open] &__summary {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        box-shadow: 0 0 0 3px var(--primary-soft-bg);
+    }
+
+    &__summary-name {
+        @extend %textEllipsisFlex;
+        text-align: left;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__summary-date {
+        @extend %flexItemFixed;
+        padding: 0.2rem 0.65rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 0.7rem;
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+
+        @include abs.screen(sm) {
+            font-size: 1.05rem;
+            padding: 0.15rem 0.5rem;
+        }
+    }
+
+    &__arrow {
+        @extend %flexItemFixed;
+        width: 1.5rem;
+        height: 1.5rem;
+        @extend %transBurgerBar;
+    }
+
+    &[open] &__arrow {
+        transform: rotate(180deg);
+    }
+
+    &__popover {
+        position: absolute;
+        top: calc(100% + 0.8rem);
+        right: 0;
+        z-index: 80;
+        width: 38rem;
+        max-width: calc(100vw - 3.2rem);
+        padding: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 2rem;
+        box-shadow: 0 1.6rem 3.8rem var(--shadow-color);
+        @extend %flexColumn;
+        gap: 1rem;
+        @extend %animDropdownFadeIn;
+
+        @include abs.screen(md) {
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+    }
+
+    &__search-box {
+        width: 100%;
+    }
+
+    &__search-input {
+        width: 100%;
+        height: 3.8rem;
+        padding: 0 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.1rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-color);
+
+        &:focus {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+    }
+
+    &__tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.4rem;
+        padding: 0.35rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.1rem;
+    }
+
+    &__tab {
+        @extend %inlineFlexCenter;
+        height: 3rem;
+        border-radius: 0.8rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--text-color);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 0.35rem;
+        max-height: 24rem;
+        overflow-y: auto;
+        padding-right: 0.3rem;
+    }
+
+    &__option {
+        @extend %flexBetween;
+        gap: 1rem;
+        width: 100%;
+        padding: 0.85rem 1.1rem;
+        border-radius: 1rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+        text-align: left;
+        @extend %transTheme;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+
+        &.is-selected {
+            background-color: var(--primary-color);
+            color: #ffffff;
+
+            .festival-picker__opt-name,
+            .festival-picker__opt-date {
+                color: #ffffff;
+            }
+
+            .festival-picker__opt-date {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.35);
+            }
+        }
+    }
+
+    &__opt-name {
+        @extend %textEllipsisFlex;
+        font-weight: 700;
+    }
+
+    &__opt-date {
+        @extend %flexItemFixed;
+        padding: 0.2rem 0.65rem;
+        border-radius: 0.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__foot {
+        padding-top: 0.6rem;
+        border-top: 1px dashed var(--border-color);
+        text-align: center;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+
+// ==========================================================================
+// CỘT TRÁI: THẺ HERO TIÊU ĐIỂM (MỞ KHÓA CẮT DÒNG TRÊN MOBILE)
 // ==========================================================================
 .festival-hero {
     position: relative;
     overflow: hidden;
     @extend %flexColumn;
     justify-content: space-between;
-    // Khóa chiều cao cố định trên PC để khi Hover các card có nội dung dài/ngắn khác nhau không bao giờ đẩy sụt layout
     min-height: 46rem;
     max-height: 46rem;
     gap: 1.4rem;
@@ -6225,7 +6768,7 @@ strong {
     }
 
     @include abs.screen(sm) {
-        padding: 2rem;
+        padding: 1.8rem;
         border-radius: 2rem;
     }
 
@@ -6240,12 +6783,29 @@ strong {
 
     &__badges {
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: minmax(0, 1fr) auto;
         align-items: center;
         gap: 0.8rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+            justify-items: start;
+        }
     }
 
-    &__pill,
+    &__pill {
+        max-width: 100%;
+        height: 3.2rem;
+        line-height: 3.2rem;
+        padding: 0 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        background-color: #ffffff;
+        color: var(--primary-active);
+        @extend %textEllipsis;
+    }
+
     &__type-badge {
         @extend %inlineFlexCenter;
         gap: 0.6rem;
@@ -6254,17 +6814,6 @@ strong {
         border-radius: 99.9rem;
         font-size: 1.2rem;
         font-weight: 800;
-    }
-
-    // Dòng "Dự đoán/Đếm ngày tinh tế" khóa 1 dòng an toàn
-    &__pill {
-        justify-content: flex-start;
-        background-color: #ffffff;
-        color: var(--primary-active);
-        @extend %textEllipsis;
-    }
-
-    &__type-badge {
         background-color: var(--hero-box-bg);
         border: 1px solid var(--hero-border-color);
         color: #ffffff;
@@ -6280,7 +6829,7 @@ strong {
     }
 
     &__solar {
-        font-size: clamp(4.6rem, 5vw, 5.6rem);
+        font-size: clamp(4.4rem, 5vw, 5.6rem);
         font-weight: 800;
         line-height: 1;
         letter-spacing: -0.03em;
@@ -6305,23 +6854,32 @@ strong {
         color: var(--hero-text-soft);
     }
 
-    // Khóa đúng chiều cao 2 dòng cho tên sự kiện
     &__title {
         font-size: 2rem;
         font-weight: 800;
         line-height: 1.3;
-        min-height: 5.2rem;
+        min-height: 2.6rem;
         color: #ffffff;
-        @extend %textClamp2;
+        @extend %textEllipsis;
+
+        @include abs.screen(lg) {
+            white-space: normal;
+            overflow: visible;
+            min-height: 0;
+        }
     }
 
     &__lunar {
         font-size: 1.35rem;
         color: var(--hero-text-soft);
         @extend %textEllipsis;
+
+        @include abs.screen(lg) {
+            white-space: normal;
+            overflow: visible;
+        }
     }
 
-    // Khung nội dung mô tả & Giờ Hoàng Đạo cố định chiều cao bên trong Hero
     &__detail-box {
         position: relative;
         z-index: 2;
@@ -6340,6 +6898,11 @@ strong {
         min-height: 3.8rem;
         color: #ffffff;
         @extend %textClamp2;
+
+        @include abs.screen(lg) {
+            display: block;
+            min-height: 0;
+        }
     }
 
     &__hours-line {
@@ -6361,6 +6924,11 @@ strong {
         font-weight: 700;
         color: #ffffff;
         @extend %textEllipsis;
+
+        @include abs.screen(lg) {
+            white-space: normal;
+            overflow: visible;
+        }
     }
 
     &__footer {
@@ -6679,7 +7247,7 @@ strong {
 }
 
 // ==========================================================================
-// CỘT PHẢI (DƯỚI): KHUNG BENTO SỰ KIỆN CÓ VÙNG CUỘN ĐỘC LẬP (INTERNAL SCROLL)
+// CỘT PHẢI (DƯỚI): KHUNG BENTO SỰ KIỆN CÓ VÙNG CUỘN ĐỘC LẬP (54REM)
 // ==========================================================================
 .festival-bento-box {
     @extend %flexColumn;
@@ -6708,16 +7276,15 @@ strong {
         color: var(--text-muted);
     }
 
-    // Vùng cuộn độc lập cho các card sự kiện (Giữ Hero trái & Countdown đứng yên 100%)
     &__scroll-viewport {
-        max-height: 56rem;
+        max-height: 54rem;
         overflow-y: auto;
         overflow-x: hidden;
         padding: 0.4rem 0.6rem 0.4rem 0.2rem;
         scroll-behavior: smooth;
 
         @include abs.screen(lg) {
-            max-height: 52rem;
+            max-height: 50rem;
         }
     }
 
@@ -6828,9 +7395,6 @@ strong {
     }
 }
 
-// ==========================================================================
-// Ô GẠCH SỰ KIỆN (<button class="festival-tile">): TƯƠNG TÁC TẠI CHỖ
-// ==========================================================================
 .festival-tile {
     position: relative;
     overflow: hidden;
@@ -7743,6 +8307,8 @@ strong {
 @forward "./year";
 @forward "./detail";
 @forward "./festival";
+@forward "./bazi";
+@forward "./utilities";
 ```
 
 ### home.scss
@@ -7877,38 +8443,97 @@ strong {
         }
     }
 
-    // 2. TẦNG TRÊN: Khóa Cột Trái (5) và Cột Phải (7) luôn bằng chiều cao nhau 100%
-    &__top-row {
-        --grid-gutter-y: 2.4rem;
+    // ==========================================================================
+    // 2. HỆ THỐNG 3 CẶP HÀNG NGANG KHÓA CHẶT 2 NGÃ TƯ (CHỐNG LỆCH VỚI MỌI ĐỘ DÀI CONTENT)
+    // ==========================================================================
+    &__pairs-wrapper {
+        @extend %flexColumn;
+        gap: 2rem;
+    }
+
+    &__pair-row {
+        --grid-gutter-y: 2rem;
         align-items: stretch;
     }
 
-    &__left,
-    &__right-stack,
-    &__fengshui-grow {
-        @extend %flexColumn;
+    &__pair-col {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__fill-card {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__hours-boxes {
+        align-items: stretch;
+
+        .fengshui-hours__box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .fengshui-hours__box--good .day-page__hours-icon {
+            @extend %animHoangDaoSun;
+        }
+
+        .fengshui-hours__box--bad .day-page__hours-icon {
+            @extend %animHacDaoMoon;
+        }
+    }
+
+    &__hours-icon {
+        width: 1.9rem;
+        height: 1.9rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+        @extend %flexItemFixed;
+        will-change: transform;
+    }
+
+    &__actions-card {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         gap: 1.6rem;
     }
 
-    &__fengshui-grow {
+    &__actions-grid {
         flex: 1;
+        align-items: stretch;
+        padding-bottom: 0;
+        border-bottom: none;
+
+        .fengshui-actions__box {
+            height: 100%;
+            justify-content: flex-start;
+        }
+
+        .fengshui-actions__list {
+            align-content: flex-start;
+        }
     }
 
-    // ĐÃ FIX MỤC 1 & 5A: Không dùng space-between đẩy rỗng giữa thẻ Mặt Trời nữa,
-    // giữ các khối bám sát nhau đúng gap 1.6rem và cho bảng 4 miền tự giãn lấp đầy
-    &__card-stretch {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
+    &__quote-box {
+        margin-top: auto;
+        padding: 1.4rem 1.8rem;
+        background-color: var(--bg-surface);
+        border: 1px dashed var(--border-color);
+        border-radius: 1.6rem;
+    }
 
-        &--left {
-            justify-content: space-between;
-        }
-
-        &--sun {
-            justify-content: flex-start;
-            gap: 1.4rem;
-        }
+    &__sun-card {
+        justify-content: flex-start;
+        gap: 1.5rem;
     }
 }
 
@@ -7916,13 +8541,18 @@ strong {
     position: relative;
     overflow: visible;
     @extend %flexColumn;
-    gap: 1.6rem;
+    gap: 1.5rem;
     padding: 2.2rem 2.4rem;
     background-color: var(--body-bg);
     border: 1px solid var(--border-color);
     border-radius: 2.4rem;
     box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
     @extend %transTheme;
+
+    &--grow {
+        flex: 1;
+        justify-content: space-between;
+    }
 
     @include abs.screen(sm) {
         padding: 1.6rem;
@@ -7972,7 +8602,7 @@ strong {
 }
 
 // ==========================================================================
-// COMPONENT DÙNG CHUNG: BENTO TOOLTIP 3 TẦNG (TÁCH RIÊNG TAG HÀNH ĐỘNG XUỐNG DÒNG)
+// COMPONENT DÙNG CHUNG: BENTO TOOLTIP 3 TẦNG (KẾ THỪA %transBentoTooltip)
 // ==========================================================================
 .has-bento-tooltip {
     position: relative;
@@ -8002,12 +8632,8 @@ strong {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition:
-            opacity 0.2s ease 0s,
-            transform 0.2s ease 0s,
-            visibility 0.2s ease 0s;
+        @extend %transBentoTooltip;
 
-        // Mũi tên tam giác dưới đáy Tooltip
         &::after {
             content: "";
             position: absolute;
@@ -8035,7 +8661,6 @@ strong {
             color: var(--tooltip-text, var(--text-color));
         }
 
-        // Dòng "Bấm để mở..." được tách hẳn xuống hàng dưới và đóng khung thành Tag nổi bật
         &__tag {
             display: inline-flex;
             align-items: center;
@@ -8052,7 +8677,6 @@ strong {
         }
     }
 
-    // Chỉ bật Tooltip khi người dùng dừng chuột 0.14s (Chống nhấp nháy khi lướt cuộn trang nhanh)
     @media (hover: hover) {
         &:hover,
         &:focus-visible {
@@ -8072,6 +8696,7 @@ strong {
 // 1. HƯỚNG XUẤT HÀNH (3 CARD ĐỒNG ĐỀU + ICON 4.2REM + WATERMARK + TOOLTIP TAG)
 // ==========================================================================
 .day-directions-grid {
+    flex: 1;
     @extend %gridCols3;
     align-items: stretch;
     gap: 1.4rem;
@@ -8087,9 +8712,9 @@ strong {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    min-height: 13.8rem;
+    min-height: 12.8rem;
     gap: 0.8rem;
-    padding: 1.6rem;
+    padding: 1.5rem 1.6rem;
     border-radius: 1.8rem;
     border: 1.5px solid var(--border-color);
     text-decoration: none;
@@ -8109,15 +8734,13 @@ strong {
         position: absolute;
         right: -0.6rem;
         bottom: -0.6rem;
-        width: 6.6rem;
-        height: 6.6rem;
+        width: 6.2rem;
+        height: 6.2rem;
         object-fit: contain;
         opacity: 0.12;
         filter: var(--zodiac-filter);
         transform: rotate(-10deg);
-        transition:
-            transform 0.35s ease,
-            opacity 0.35s ease;
+        @extend %transWatermark;
     }
 
     &:hover {
@@ -8161,6 +8784,7 @@ strong {
         @extend %flexColumn;
         gap: 0.25rem;
         margin-top: auto;
+        padding-right: 2.4rem;
     }
 
     &--hy {
@@ -8214,9 +8838,10 @@ strong {
 }
 
 // ==========================================================================
-// 2. THÔNG TIN TIẾT KHÍ (24 ICON WEATHER 3.6REM + WATERMARK + TOOLTIP TAG)
+// 2. THÔNG TIN TIẾT KHÍ (24 ICON WEATHER + 6 NHÓM ANIMATION THỜI TIẾT PHƯƠNG ÁN 1)
 // ==========================================================================
 .day-solarterm-grid {
+    flex: 1;
     @extend %gridCols3;
     align-items: stretch;
     gap: 1.4rem;
@@ -8258,17 +8883,15 @@ strong {
 
     &__watermark {
         position: absolute;
-        right: -0.4rem;
-        bottom: -0.4rem;
-        width: 5.8rem;
-        height: 5.8rem;
+        right: -0.8rem;
+        bottom: -0.8rem;
+        width: 5.2rem;
+        height: 5.2rem;
         object-fit: contain;
-        opacity: 0.12;
+        opacity: 0.11;
         filter: var(--zodiac-filter);
         transform: rotate(-8deg);
-        transition:
-            transform 0.35s ease,
-            opacity 0.35s ease;
+        @extend %transWatermark;
     }
 
     &:hover {
@@ -8304,7 +8927,39 @@ strong {
             height: 2.4rem;
             object-fit: contain;
             filter: var(--zodiac-filter);
+            will-change: transform;
         }
+    }
+
+    // PHƯƠNG ÁN 1: Ô số 1 (Tiết khí hiện tại) chuyển động liên tục, 2 ô phụ chuyển động khi Hover
+    &--primary[data-term-anim="wind"] &__icon-wrap img,
+    &:hover[data-term-anim="wind"] &__icon-wrap img {
+        @extend %animTermWind;
+    }
+
+    &--primary[data-term-anim="rain"] &__icon-wrap img,
+    &:hover[data-term-anim="rain"] &__icon-wrap img {
+        @extend %animTermRain;
+    }
+
+    &--primary[data-term-anim="sun"] &__icon-wrap img,
+    &:hover[data-term-anim="sun"] &__icon-wrap img {
+        @extend %animTermSun;
+    }
+
+    &--primary[data-term-anim="thunder"] &__icon-wrap img,
+    &:hover[data-term-anim="thunder"] &__icon-wrap img {
+        @extend %animTermThunder;
+    }
+
+    &--primary[data-term-anim="sprout"] &__icon-wrap img,
+    &:hover[data-term-anim="sprout"] &__icon-wrap img {
+        @extend %animTermSprout;
+    }
+
+    &--primary[data-term-anim="snow"] &__icon-wrap img,
+    &:hover[data-term-anim="snow"] &__icon-wrap img {
+        @extend %animTermSnow;
     }
 
     &__body {
@@ -8313,6 +8968,7 @@ strong {
         @extend %flexColumn;
         gap: 0.2rem;
         margin-top: auto;
+        padding-right: 2.8rem;
     }
 
     &__label {
@@ -8336,10 +8992,12 @@ strong {
 }
 
 // ==========================================================================
-// 3. KHỔNG MINH LỤC DIỆU (12 Ô CÓ ICON SVG + DÒNG HỢP MỆNH + TOOLTIP TAG)
+// 3. KHỔNG MINH LỤC DIỆU (12 Ô TỰ GIÃN + KẾ THỪA 6 %animLucDieu* TỪ ABSTRACTS)
 // ==========================================================================
 .day-lucdieu-grid {
+    flex: 1;
     @extend %gridCols4;
+    grid-auto-rows: 1fr;
     align-items: stretch;
     gap: 1.1rem;
 
@@ -8378,17 +9036,15 @@ strong {
 
     &__watermark {
         position: absolute;
-        right: -0.3rem;
-        bottom: -0.3rem;
-        width: 4.8rem;
-        height: 4.8rem;
+        right: -0.4rem;
+        bottom: -0.4rem;
+        width: 4.6rem;
+        height: 4.6rem;
         object-fit: contain;
         opacity: 0.1;
         filter: var(--zodiac-filter);
         transform: rotate(-8deg);
-        transition:
-            transform 0.3s ease,
-            opacity 0.3s ease;
+        @extend %transWatermark;
     }
 
     &:hover {
@@ -8427,11 +9083,36 @@ strong {
     }
 
     &__icon {
-        width: 2.2rem;
-        height: 2.2rem;
+        width: 2.3rem;
+        height: 2.3rem;
         object-fit: contain;
         filter: var(--zodiac-filter);
         @extend %flexItemFixed;
+        will-change: transform;
+    }
+
+    &[data-lucdieu-slug="dai-an"] &__icon {
+        @extend %animLucDieuDaiAn;
+    }
+
+    &[data-lucdieu-slug="luu-nien"] &__icon {
+        @extend %animLucDieuLuuNien;
+    }
+
+    &[data-lucdieu-slug="toc-hy"] &__icon {
+        @extend %animLucDieuTocHy;
+    }
+
+    &[data-lucdieu-slug="xich-khau"] &__icon {
+        @extend %animLucDieuXichKhau;
+    }
+
+    &[data-lucdieu-slug="tieu-cat"] &__icon {
+        @extend %animLucDieuTieuCat;
+    }
+
+    &[data-lucdieu-slug="khong-vong"] &__icon {
+        @extend %animLucDieuKhongVong;
     }
 
     &__name {
@@ -8447,7 +9128,6 @@ strong {
         color: var(--text-color);
     }
 
-    // Dòng gợi ý Tốt cho người mệnh nào ngay trên mặt thẻ
     &__harmony {
         position: relative;
         z-index: 2;
@@ -8469,7 +9149,7 @@ strong {
 }
 
 // ==========================================================================
-// 4. THÔNG TIN MẶT TRỜI (ĐÃ KHẮC PHỤC KHOẢNG TRẮNG LOÃNG + THÊM 4 ICON SVG 20X20PX)
+// 4. THÔNG TIN MẶT TRỜI (4 ICON WEATHER 20X20PX + TỰ DÀN ĐỀU CHIỀU CAO 4 MIỀN)
 // ==========================================================================
 .day-sun-summary {
     @extend %gridCols2;
@@ -8589,7 +9269,7 @@ strong {
 }
 
 // ==========================================================================
-// 5. TẦNG DƯỚI (1 CỘT LỚN FULL-WIDTH 12 DÒNG): ICON SVG HOÀNG/HẮC ĐẠO + TOOLTIP TAG
+// 5. TẦNG DƯỚI (1 CỘT LỚN FULL-WIDTH 12 DÒNG): ĐỒNG BỘ ANIMATION LỤC DIỆU & ĐẠO
 // ==========================================================================
 .day-hourly-section {
     margin-top: 2.8rem;
@@ -8619,6 +9299,14 @@ strong {
         color: var(--text-color);
         @extend %transInteractive;
 
+        &[data-day-hour-filter="good"] .day-hourly-section__dao-icon {
+            @extend %animHoangDaoSun;
+        }
+
+        &[data-day-hour-filter="bad"] .day-hourly-section__dao-icon {
+            @extend %animHacDaoMoon;
+        }
+
         &:hover,
         &.is-active {
             background-color: var(--primary-color);
@@ -8637,6 +9325,7 @@ strong {
         object-fit: contain;
         filter: var(--zodiac-filter);
         @extend %flexItemFixed;
+        will-change: transform;
     }
 }
 
@@ -8726,7 +9415,6 @@ strong {
         }
     }
 
-    // Cột 1: Canh Giờ
     &__col-time {
         @extend %flexColumn;
         gap: 0.35rem;
@@ -8756,7 +9444,6 @@ strong {
         }
     }
 
-    // Cột 2: Nạp Âm
     &__col-napam {
         @extend %flexItemCenter;
         gap: 1.2rem;
@@ -8797,7 +9484,7 @@ strong {
         }
     }
 
-    // Cột 3: Lục Diệu & Icon SVG Hoàng/Hắc Đạo
+    // Cột 3: Đồng bộ 100% 6 Animation Khổng Minh Lục Diệu & 2 Animation Hoàng/Hắc Đạo
     &__col-lucdieu {
         @extend %flexColumn;
         align-items: flex-start;
@@ -8806,17 +9493,42 @@ strong {
 
     &__badge {
         @extend %inlineFlexCenter;
-        gap: 0.5rem;
+        gap: 0.55rem;
         padding: 0.4rem 1.2rem;
         border-radius: 99.9rem;
         font-size: 1.35rem;
         font-weight: 800;
 
         img {
-            width: 1.6rem;
-            height: 1.6rem;
+            width: 1.7rem;
+            height: 1.7rem;
             object-fit: contain;
             filter: var(--zodiac-filter);
+            will-change: transform;
+        }
+
+        &[data-lucdieu-slug="dai-an"] img {
+            @extend %animLucDieuDaiAn;
+        }
+
+        &[data-lucdieu-slug="luu-nien"] img {
+            @extend %animLucDieuLuuNien;
+        }
+
+        &[data-lucdieu-slug="toc-hy"] img {
+            @extend %animLucDieuTocHy;
+        }
+
+        &[data-lucdieu-slug="xich-khau"] img {
+            @extend %animLucDieuXichKhau;
+        }
+
+        &[data-lucdieu-slug="tieu-cat"] img {
+            @extend %animLucDieuTieuCat;
+        }
+
+        &[data-lucdieu-slug="khong-vong"] img {
+            @extend %animLucDieuKhongVong;
         }
 
         &--good {
@@ -8846,14 +9558,21 @@ strong {
         object-fit: contain;
         filter: var(--zodiac-filter);
         @extend %flexItemFixed;
+        will-change: transform;
+
+        &[data-dao-type="good"] {
+            @extend %animHoangDaoSun;
+        }
+
+        &[data-dao-type="bad"] {
+            @extend %animHacDaoMoon;
+        }
     }
 
-    // Cột 4: Vòng SVG Ngũ Hành Động Cỡ Lớn
     &__col-wuxing {
         @extend %flexCenter;
     }
 
-    // Cột 5: Linh Vật & Bát Quái
     &__col-bagua {
         @extend %flexItemCenter;
         justify-content: flex-start;
@@ -8903,7 +9622,7 @@ strong {
     }
 }
 
-// VÒNG TRÒN SVG NGŨ HÀNH ĐỘNG (9.2REM X 9.2REM)
+// VÒNG TRÒN SVG NGŨ HÀNH ĐỘNG (KẾ THỪA %animWuXingSpin, %animWuXingPulse & %transWuXingNode)
 .wuxing-mini {
     width: 9.2rem;
     height: 9.2rem;
@@ -8922,7 +9641,7 @@ strong {
         stroke-dasharray: 6 4;
         opacity: 0.65;
         transform-origin: 60px 60px;
-        animation: wuxingCycleSpin 24s linear infinite;
+        @extend %animWuXingSpin;
     }
 
     &__star {
@@ -8933,9 +9652,7 @@ strong {
     }
 
     &__node {
-        transition:
-            opacity 0.3s ease,
-            transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        @extend %transWuXingNode;
 
         text {
             font-size: 10.5px;
@@ -8952,7 +9669,7 @@ strong {
         &.is-active {
             opacity: 1;
             filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22));
-            animation: pulse 2.4s ease-in-out infinite;
+            @extend %animWuXingPulse;
         }
 
         &.is-hour-element {
@@ -9013,15 +9730,6 @@ strong {
                 fill: #ffffff;
             }
         }
-    }
-}
-
-@keyframes wuxingCycleSpin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
     }
 }
 
@@ -10239,6 +10947,3443 @@ body[data-page="festival"] .header,
 
 .festival-page {
     padding-bottom: abs.$gap-section-default;
+}
+```
+
+### bazi.scss
+
+```scss
+// scss/pages/_bazi.scss
+// BẢN FULL 100% ĐÃ FIX TRIỆT ĐỂ LỖI TRÀN CỘT TỨ TRỤ (minmax(0, 1fr) + min-width: 0)
+@use "../abstracts" as abs;
+
+.bazi-page {
+    padding-bottom: abs.$gap-section-default;
+    overflow-x: clip;
+
+    // Hệ thống Cặp Hàng Ngang khóa chặt chiều cao 2 cột Trái/Phải chống lệch ngã tư 100%
+    &__pairs-wrapper {
+        @extend %flexColumn;
+        gap: 2.2rem;
+        margin-top: 2.2rem;
+    }
+
+    &__pair-row {
+        --grid-gutter-y: 2.2rem;
+        align-items: stretch;
+    }
+
+    &__pair-col {
+        display: flex;
+        flex-direction: column;
+        gap: 2.2rem;
+        min-width: 0; // Khóa chống tràn Flex/Grid từ cấp cột Bootstrap
+    }
+
+    // Bento Tooltip 3 tầng độc lập trên trang Bát Tự
+    .has-bento-tooltip {
+        position: relative;
+        overflow: visible;
+
+        .bento-tooltip {
+            position: absolute;
+            bottom: calc(100% + 1.1rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(0.6rem);
+            z-index: 80;
+            width: 31rem;
+            padding: 1.3rem 1.5rem;
+            background-color: var(--tooltip-bg, var(--body-bg));
+            color: var(--tooltip-text, var(--text-color));
+            border: 1.5px solid var(--tooltip-border, var(--primary-color));
+            border-radius: 1.6rem;
+            box-shadow:
+                0 1.4rem 3rem var(--shadow-color),
+                0 0 0 3px var(--body-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.65rem;
+            text-align: left;
+            white-space: normal;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition:
+                opacity 0.2s ease 0s,
+                transform 0.2s ease 0s,
+                visibility 0.2s ease 0s;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border-width: 0.65rem;
+                border-style: solid;
+                border-color: var(--tooltip-border, var(--primary-color)) transparent transparent transparent;
+            }
+
+            &__title {
+                display: block;
+                font-size: 1.35rem;
+                font-weight: 800;
+                line-height: 1.3;
+                color: var(--primary-color);
+            }
+
+            &__desc {
+                display: block;
+                font-size: 1.25rem;
+                font-weight: 600;
+                line-height: 1.5;
+                color: var(--tooltip-text, var(--text-color));
+            }
+
+            &__tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                margin-top: 0.2rem;
+                padding: 0.35rem 1.1rem;
+                background-color: var(--primary-color);
+                color: #ffffff;
+                border-radius: 99.9rem;
+                font-size: 1.15rem;
+                font-weight: 800;
+                line-height: 1.2;
+                box-shadow: 0 0.3rem 0.8rem var(--shadow-color);
+            }
+        }
+
+        @media (hover: hover) {
+            &:hover,
+            &:focus-visible {
+                z-index: 45;
+
+                > .bento-tooltip {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateX(-50%) translateY(0);
+                    transition-delay: 0.14s;
+                }
+            }
+        }
+    }
+}
+
+.bazi-card {
+    position: relative;
+    overflow: visible;
+    min-width: 0;
+    @extend %flexColumn;
+    gap: 1.8rem;
+    padding: 2.2rem 2.4rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 0.6rem 2rem var(--shadow-color);
+    @extend %transTheme;
+
+    &--grow {
+        flex: 1;
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 2rem;
+        gap: 1.4rem;
+    }
+
+    // FIX HEADER CARD: Giữ nhãn Badge luôn nằm thẳng hàng ở góc phải trên cùng, không bị rớt dòng
+    &__head {
+        @extend %flexBetween;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+        gap: 1.4rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+
+        > div:first-child {
+            flex: 1 1 0%;
+            min-width: 0;
+        }
+
+        @include abs.screen(sm) {
+            flex-wrap: wrap;
+        }
+    }
+
+    &__title {
+        font-size: 1.9rem;
+        font-weight: 800;
+        line-height: 1.25;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.35rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        line-height: 1.45;
+        color: var(--text-muted);
+    }
+
+    &__tag,
+    &__badge {
+        @extend %flexItemFixed;
+        padding: 0.45rem 1.3rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        @extend %textNoWrap;
+    }
+
+    &__tag {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--primary-color);
+    }
+
+    &__badge {
+        background-color: var(--primary-color);
+        color: #ffffff;
+    }
+}
+
+// ==========================================================================
+// 1. THANH CÔNG CỤ LẬP LÁ SỐ BÁT TỰ (.bazi-toolbar) & CUSTOM BENTO PICKER
+// ==========================================================================
+.bazi-toolbar {
+    gap: 2rem;
+    z-index: 35;
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.6rem;
+        padding-bottom: 1.6rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title-wrap {
+        @extend %flexColumn;
+        gap: 0.6rem;
+    }
+
+    &__eyebrow {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        width: fit-content;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+
+        &-icon {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+    }
+
+    &__title {
+        font-size: clamp(2.1rem, 2.5vw, 2.7rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+    }
+
+    &__quick-actions {
+        @extend %flexWrapGap;
+        gap: 1rem;
+    }
+
+    &__preset-btn {
+        height: 4.4rem;
+        padding: 0 1.8rem 0 0.8rem;
+        border-radius: 1.4rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1.5px solid var(--primary-color);
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+
+            .bazi-toolbar__preset-icon-box {
+                background-color: #ffffff;
+            }
+
+            .bazi-toolbar__preset-icon {
+                transform: rotate(360deg) scale(1.1);
+            }
+        }
+    }
+
+    &__preset-icon-box {
+        @extend %inlineFlexCenter;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        @extend %transTheme;
+    }
+
+    &__preset-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        filter: var(--zodiac-filter);
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &__share-btn {
+        height: 4.4rem;
+        padding: 0 2rem;
+        border-radius: 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.4rem;
+        font-weight: 800;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+    }
+
+    &__form {
+        display: grid;
+        grid-template-columns: 0.85fr 0.9fr 0.9fr 1.35fr 1.25fr 1.45fr;
+        align-items: end;
+        gap: 1.4rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        @include abs.screen(md) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__field {
+        @extend %flexColumn;
+        gap: 0.6rem;
+        min-width: 0;
+        position: relative;
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        padding-left: 0.2rem;
+    }
+
+    &__gender-group {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+        height: 4.8rem;
+        padding: 0.45rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__gender-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 100%;
+        border-radius: 1rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--text-color);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.3rem 0.8rem var(--shadow-color);
+
+            .bazi-toolbar__gender-dot {
+                background-color: #ffffff;
+                box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+            }
+        }
+    }
+
+    &__gender-dot {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background-color: var(--text-muted);
+        @extend %flexItemFixed;
+    }
+}
+
+// CUSTOM BENTO DROPDOWN PICKER
+.bazi-picker {
+    position: relative;
+    min-width: 0;
+
+    &__summary {
+        @extend %flexBetween;
+        gap: 0.8rem;
+        height: 4.8rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-color);
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+    }
+
+    &__summary-text {
+        @extend %textEllipsis;
+    }
+
+    &__arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+        @extend %flexItemFixed;
+        @extend %transBurgerBar;
+    }
+
+    &[open] &__summary {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        box-shadow: 0 0 0 3px var(--primary-soft-bg);
+    }
+
+    &[open] &__arrow {
+        transform: rotate(180deg);
+    }
+
+    &__popover {
+        position: absolute;
+        top: calc(100% + 0.8rem);
+        left: 0;
+        z-index: 90;
+        width: max-content;
+        min-width: 28rem;
+        max-width: calc(100vw - 3.2rem);
+        padding: 1.4rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 1.8rem;
+        box-shadow: 0 1.6rem 3.6rem var(--shadow-color);
+        @extend %animDropdownFadeIn;
+
+        &--days {
+            min-width: 31rem;
+        }
+
+        &--hours {
+            min-width: 34rem;
+        }
+
+        &--regions {
+            right: 0;
+            left: auto;
+            min-width: 31rem;
+
+            @include abs.screen(md) {
+                left: 0;
+                right: auto;
+            }
+        }
+
+        @include abs.screen(sm) {
+            min-width: 100%;
+            width: 100%;
+        }
+    }
+
+    &__popover-head {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__year-nav {
+        @extend %flexBetween;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__year-step {
+        @extend %inlineFlexCenter;
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 0.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+    }
+
+    &__year-range {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__grid {
+        display: grid;
+        gap: 0.55rem;
+
+        &--days {
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        &--months {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &--years {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        &--hours {
+            grid-template-columns: repeat(2, 1fr);
+
+            @include abs.screen(sm) {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 0.5rem;
+    }
+
+    &__option {
+        @extend %inlineFlexCenter;
+        width: 100%;
+        min-height: 3.8rem;
+        padding: 0.6rem 0.8rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transInteractive;
+
+        &--row {
+            justify-content: space-between;
+            padding: 0.9rem 1.2rem;
+            gap: 1rem;
+        }
+
+        small {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        &.is-selected {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+            small {
+                color: rgba(255, 255, 255, 0.88);
+            }
+        }
+    }
+}
+
+// ==========================================================================
+// 2. CỘT TRÁI CẶP 1: HỒ SƠ BẢN MỆNH & NHẬT CHỦ (.bazi-master-card)
+// ==========================================================================
+.bazi-master-card {
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    border-color: var(--primary-hover);
+    color: #ffffff;
+    box-shadow: 0 1rem 2.8rem var(--shadow-color);
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 1.4rem;
+    }
+
+    &__badges {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    &__pill,
+    &__term-pill {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__pill {
+        background-color: #ffffff;
+        color: var(--primary-active);
+    }
+
+    &__term-pill {
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        color: #ffffff;
+    }
+
+    &__hero {
+        @extend %flexItemCenter;
+        gap: 1.5rem;
+        padding-top: 0.4rem;
+    }
+
+    &__icon-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 6.4rem;
+        height: 6.4rem;
+        border-radius: 2rem;
+        background-color: #ffffff;
+        box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.18);
+    }
+
+    &__elem-icon {
+        width: 3.8rem;
+        height: 3.8rem;
+        object-fit: contain;
+    }
+
+    &__title-group {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--hero-text-soft);
+    }
+
+    &__name {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1.15;
+        color: #ffffff;
+    }
+
+    &__archetype {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--hero-text-soft);
+    }
+
+    &__desc {
+        padding: 1.3rem 1.5rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.6rem;
+        font-size: 1.35rem;
+        line-height: 1.55;
+        color: #ffffff;
+    }
+
+    &__meta-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__meta-item {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+        padding: 1.1rem 1.3rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.4rem;
+    }
+
+    &__meta-label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--hero-text-soft);
+    }
+
+    &__meta-val {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #ffffff;
+    }
+
+    &__footer {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        padding-top: 0.4rem;
+    }
+
+    &__day-link {
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--hero-chip-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 99.9rem;
+        color: #ffffff;
+        font-size: 1.35rem;
+        font-weight: 800;
+
+        img {
+            width: 1.8rem;
+            height: 1.8rem;
+            filter: brightness(0) invert(1);
+        }
+
+        &:hover {
+            background-color: #ffffff;
+            color: var(--primary-active);
+
+            img {
+                filter: var(--zodiac-filter);
+            }
+        }
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -1rem;
+        bottom: -1rem;
+        width: 14rem;
+        height: 14rem;
+        object-fit: contain;
+        opacity: 0.15;
+        filter: var(--zodiac-filter-active);
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+
+// ==========================================================================
+// 3. CỘT PHẢI CẶP 1: BÀN LÁ SỐ TỨ TRỤ 4 CỘT (ĐÃ KHÓA minmax(0, 1fr) CHỐNG TRÀN 100%)
+// ==========================================================================
+.bazi-pillars-grid {
+    flex: 1;
+    width: 100%;
+    display: grid;
+    // Khóa cứng minmax(0, 1fr) để 4 cột luôn nằm gọn 100% bên trong .bazi-pillars-board
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.2rem;
+
+    // Khi màn hình dưới 1200px (xl) mà 2 cột lớn Trái/Phải vẫn đứng cạnh nhau, chuyển thành lưới 2x2 thoáng đẹp
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bazi-pillar-col {
+    position: relative;
+    min-width: 0; // Bắt buộc có để thẻ con không đẩy rộng cột Grid
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    gap: 1rem;
+    padding: 1.4rem 1.2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+    text-align: center;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &--daymaster {
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+    }
+
+    &__bg-wrap {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 6rem;
+        height: 6rem;
+        object-fit: contain;
+        opacity: 0.1;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+        .bazi-pillar-col__watermark {
+            opacity: 0.24;
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .bazi-pillar-col__char-icon img {
+            transform: scale(1.14) rotate(8deg);
+        }
+    }
+
+    &__head {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumnCenterAll;
+        gap: 0.45rem;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__pillar-name {
+        font-size: 1.3rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-color);
+        @extend %textNoWrap;
+    }
+
+    &__ten-god {
+        padding: 0.25rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+
+        &--master {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__main-chars {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.8rem;
+        min-width: 0;
+    }
+
+    &__stem-box,
+    &__branch-box {
+        @extend %flexBetween;
+        gap: 0.6rem;
+        min-width: 0;
+        padding: 0.9rem 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        text-align: left;
+    }
+
+    // Đã gỡ bỏ %textNoWrap trên small để chữ "Thiên Can (Dương Thủy)" tự co giãn mềm mại, không đẩy tràn cột 4
+    &__char-info {
+        @extend %flexColumn;
+        gap: 0.2rem;
+        flex: 1 1 0%;
+        min-width: 0;
+
+        small {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--text-muted);
+            white-space: normal;
+        }
+
+        strong {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--text-color);
+        }
+    }
+
+    &__char-icon {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 1rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 2.1rem;
+            height: 2.1rem;
+            object-fit: contain;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        &--zodiac img {
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__hidden-stems {
+        flex: 1;
+        position: relative;
+        z-index: 2;
+        min-width: 0;
+        @extend %flexColumn;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        padding: 0.9rem;
+        background-color: var(--body-bg);
+        border: 1px dashed var(--border-color);
+        border-radius: 1.4rem;
+        text-align: left;
+    }
+
+    &__section-label {
+        font-size: 1.05rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__hidden-list {
+        @extend %flexWrapGap;
+        gap: 0.4rem;
+    }
+
+    &__hidden-chip {
+        padding: 0.2rem 0.65rem;
+        border-radius: 0.75rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        em {
+            font-style: normal;
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+    }
+
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.4rem;
+        margin-top: auto;
+        padding-top: 0.8rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__napam {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__stage-pill {
+        display: inline-block;
+        width: fit-content;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0.2rem 0.9rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        @extend %textEllipsis;
+    }
+}
+
+// ==========================================================================
+// 4. CỘT TRÁI CẶP 2: BIỂU ĐỒ NGŨ HÀNH & THẬP THẦN (CÓ SCROLL ANIMATION)
+// ==========================================================================
+.bazi-wuxing-card {
+    &__stage {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 1.8rem;
+        padding: 1.4rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+            justify-items: center;
+            text-align: center;
+        }
+    }
+
+    &__svg-box {
+        @extend %flexCenter;
+    }
+
+    &__legend {
+        @extend %flexColumn;
+        gap: 0.8rem;
+        min-width: 0;
+    }
+
+    &__legend-item {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+
+        @include abs.screen(sm) {
+            justify-content: center;
+        }
+    }
+
+    &__dot {
+        width: 1.2rem;
+        height: 1.2rem;
+        border-radius: 50%;
+        @extend %flexItemFixed;
+
+        &--gen {
+            border: 2px dashed #10b981;
+        }
+
+        &--ctrl {
+            background-color: #ef4444;
+        }
+    }
+
+    &__summary-note {
+        padding-top: 0.6rem;
+        border-top: 1px dashed var(--border-color);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+}
+
+.bazi-elements-bars {
+    @extend %flexColumn;
+    gap: 0.9rem;
+
+    &.is-in-view .bazi-element-row__fill {
+        width: var(--target-w, 8%);
+    }
+}
+
+.bazi-element-row {
+    @extend %flexColumn;
+    gap: 0.45rem;
+    padding: 0.95rem 1.3rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.4rem;
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateX(3px);
+
+        .bazi-element-row__name img {
+            transform: scale(1.18) rotate(10deg);
+        }
+    }
+
+    &__top {
+        @extend %flexBetween;
+        gap: 0.8rem;
+        font-size: 1.3rem;
+    }
+
+    &__name {
+        @extend %flexItemCenter;
+        gap: 0.7rem;
+        font-weight: 800;
+        color: var(--text-color);
+
+        img {
+            width: 1.9rem;
+            height: 1.9rem;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    &__meta {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__state {
+        padding: 0.15rem 0.8rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__track {
+        width: 100%;
+        height: 0.9rem;
+        background-color: var(--body-bg);
+        border-radius: 99.9rem;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+    }
+
+    &__fill {
+        position: relative;
+        width: 0;
+        height: 100%;
+        border-radius: 99.9rem;
+        transition: width 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+
+        &--metal {
+            background: linear-gradient(90deg, #ca8a04, #facc15);
+        }
+        &--wood {
+            background: linear-gradient(90deg, #059669, #34d399);
+        }
+        &--water {
+            background: linear-gradient(90deg, #2563eb, #60a5fa);
+        }
+        &--fire {
+            background: linear-gradient(90deg, #dc2626, #f87171);
+        }
+        &--earth {
+            background: linear-gradient(90deg, #b45309, #fbbf24);
+        }
+    }
+}
+
+// KHỐI CẤU TRÚC 5 NHÓM THẬP THẦN
+.bazi-tengods-summary {
+    @extend %flexColumn;
+    gap: 0.9rem;
+    margin-top: auto;
+    padding: 1.3rem 1.4rem;
+    background-color: var(--bg-surface);
+    border: 1px dashed var(--border-color);
+    border-radius: 1.8rem;
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+
+    &__title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__hint {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__grid {
+        @extend %flexColumn;
+        gap: 0.65rem;
+
+        &.is-in-view .bazi-tengods-row__fill {
+            width: var(--target-w, 10%);
+        }
+    }
+}
+
+.bazi-tengods-row {
+    display: grid;
+    grid-template-columns: 14.5rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 12rem 1fr auto;
+    }
+
+    &__label {
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %textNoWrap;
+
+        small {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+    }
+
+    &__track {
+        height: 0.7rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        overflow: hidden;
+    }
+
+    &__fill {
+        width: 0;
+        height: 100%;
+        background-color: var(--primary-color);
+        border-radius: 99.9rem;
+        transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &__val {
+        min-width: 3.4rem;
+        text-align: right;
+        font-weight: 800;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+// ==========================================================================
+// 5. CỘT PHẢI CẶP 2: DỤNG THẦN, HỶ THẦN, KỴ THẦN & 4 HỘP CẢI VẬN (KHÓA minmax(0, 1fr))
+// ==========================================================================
+.bazi-gods-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bazi-god-box {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    border-radius: 1.8rem;
+    border: 1.5px solid var(--border-color);
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &__bg-wrap {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 6.2rem;
+        height: 6.2rem;
+        object-fit: contain;
+        opacity: 0.1;
+        transform: rotate(-10deg);
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .bazi-god-box__icon-wrap img {
+            animation: baziIconHoverBounce 0.85s ease-in-out infinite;
+        }
+
+        .bazi-god-box__watermark {
+            opacity: 0.24;
+            transform: scale(1.1) rotate(0deg);
+        }
+    }
+
+    &--yong {
+        background-color: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.4);
+
+        .bazi-god-box__role,
+        .bazi-god-box__elem {
+            color: #047857;
+        }
+    }
+
+    &--xi {
+        background-color: rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.35);
+
+        .bazi-god-box__role,
+        .bazi-god-box__elem {
+            color: #1d4ed8;
+        }
+    }
+
+    &--ji {
+        background-color: rgba(239, 68, 68, 0.08);
+        border-color: rgba(239, 68, 68, 0.35);
+
+        .bazi-god-box__role,
+        .bazi-god-box__elem {
+            color: #b91c1c;
+        }
+    }
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__icon-wrap {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+        img {
+            width: 2.5rem;
+            height: 2.5rem;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    &__role {
+        font-size: 1.15rem;
+        font-weight: 800;
+        line-height: 1.3;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        text-align: right;
+    }
+
+    &__elem {
+        position: relative;
+        z-index: 2;
+        font-size: 1.95rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    &__desc {
+        position: relative;
+        z-index: 2;
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.5;
+        color: var(--text-color);
+    }
+}
+
+.bazi-remedy-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bazi-remedy-box {
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 0.8rem;
+    padding: 1.5rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+
+        .bazi-remedy-box__icon-wrap img {
+            animation: baziIconHoverBounce 0.85s ease-in-out infinite;
+        }
+
+        .bazi-remedy-box__watermark {
+            opacity: 0.22;
+            transform: scale(1.1) rotate(0deg);
+        }
+    }
+
+    &__head {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__title-wrap {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        min-width: 0;
+    }
+
+    &__icon-wrap {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 2rem;
+            height: 2rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__tag {
+        @extend %flexItemFixed;
+        padding: 0.25rem 0.9rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+    }
+
+    &__val {
+        position: relative;
+        z-index: 2;
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        position: relative;
+        z-index: 2;
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.45;
+        color: var(--text-muted);
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.5rem;
+        bottom: -0.5rem;
+        width: 5.4rem;
+        height: 5.4rem;
+        object-fit: contain;
+        opacity: 0.08;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+}
+
+@keyframes baziIconHoverBounce {
+    0%,
+    100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-2.5px) scale(1.15) rotate(8deg);
+    }
+}
+
+// ==========================================================================
+// 6. TẦNG 4: CHU KỲ 8 ĐẠI VẬN (BENTO SOLE 3 - 4 - 1 TRÊN PC + 2 CỘT Ở 690PX + 1 CỘT Ở 520PX)
+// ==========================================================================
+.bazi-luck-section {
+    margin-top: 2.2rem;
+}
+
+.bazi-luck-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.5rem;
+
+    @include abs.screen(sm) {
+        gap: 1.2rem;
+    }
+}
+
+.bazi-luck-card {
+    position: relative;
+    min-width: 0;
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 17.4rem;
+    gap: 1rem;
+    padding: 1.8rem 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.2rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:nth-child(-n + 3) {
+        grid-column: span 4;
+    }
+
+    @include abs.screen(lg) {
+        grid-column: span 6;
+
+        &:nth-child(-n + 3) {
+            grid-column: span 6;
+        }
+
+        &:nth-child(7) {
+            grid-column: span 12;
+        }
+    }
+
+    @include abs.screen(sm) {
+        grid-column: span 12;
+        min-height: auto;
+        padding: 1.6rem;
+
+        &:nth-child(-n + 3),
+        &:nth-child(7) {
+            grid-column: span 12;
+        }
+    }
+
+    &--wide,
+    &:nth-child(8) {
+        grid-column: span 12;
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        align-items: center;
+        gap: 2.4rem;
+        min-height: 14rem;
+        padding: 2rem 2.4rem;
+
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            padding: 1.6rem;
+        }
+    }
+
+    &__bg-wrap {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: 0.6rem;
+        bottom: 0.4rem;
+        width: 6.4rem;
+        height: 6.4rem;
+        object-fit: contain;
+        opacity: 0.12;
+        filter: var(--zodiac-filter);
+        transform: scale(0.9) rotate(-10deg);
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+
+    &.is-current-luck {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+        .bazi-luck-card__watermark {
+            opacity: 0.32;
+            transform: scale(1.1) rotate(0deg);
+        }
+
+        .bazi-luck-card__zodiac-box img {
+            transform: scale(1.15) rotate(8deg);
+        }
+    }
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    &__step {
+        font-size: 1.25rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+
+    &__ages {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+        @extend %textNoWrap;
+    }
+
+    &__mid {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 1.3rem;
+        margin: 0.2rem 0;
+    }
+
+    &__zodiac-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.8rem;
+        height: 4.8rem;
+        border-radius: 1.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+        img {
+            width: 3rem;
+            height: 3rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    }
+
+    &__canchi-group {
+        @extend %flexColumn;
+        gap: 0.2rem;
+        min-width: 0;
+    }
+
+    &__canchi {
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--text-color);
+        @extend %textNoWrap;
+    }
+
+    &__tengod {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        width: 100%;
+        margin-top: auto;
+        padding-top: 0.9rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__napam {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__stage {
+        padding: 0.2rem 0.85rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+
+    &__wide-left {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 1rem;
+        padding-right: 2rem;
+        border-right: 1px dashed var(--border-color);
+
+        @include abs.screen(md) {
+            padding-right: 0;
+            border-right: none;
+        }
+    }
+
+    &__wide-right {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.6rem;
+
+        strong {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        p {
+            font-size: 1.35rem;
+            line-height: 1.55;
+            color: var(--text-color);
+        }
+    }
+}
+```
+
+### utilities.scss
+
+```scss
+// scss/pages/_utilities.scss
+// BẢN FULL 100% ĐÃ FIX TRIỆT ĐỂ LỖI "@extend selectors across media queries" TẠI DÒNG 286
+@use "../abstracts" as abs;
+
+.util-page {
+    padding-bottom: abs.$gap-section-default;
+    overflow-x: clip;
+
+    &__spotlight-row {
+        --grid-gutter-y: 2.2rem;
+        align-items: stretch;
+    }
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        min-width: 0;
+    }
+}
+
+// ==========================================================================
+// 1. HEADER & BENTO DUAL-NAVBAR 2 TẦNG (.util-header) CHUẨN CHECKLIST
+// ==========================================================================
+.util-header {
+    position: relative;
+    z-index: 30;
+    @extend %flexColumn;
+    gap: 1.2rem;
+    margin-bottom: 2.4rem;
+
+    &__top-card {
+        @extend %flexColumn;
+        gap: 1.4rem;
+        padding: 1.8rem 2.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 2.4rem;
+        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        @extend %transHeaderScroll;
+
+        @include abs.screen(sm) {
+            padding: 1.4rem 1.6rem;
+            border-radius: 1.8rem;
+        }
+    }
+
+    &--scrolled &__top-card {
+        box-shadow: 0 1.2rem 3rem var(--shadow-color);
+        border-color: var(--primary-color);
+        backdrop-filter: blur(10px);
+    }
+
+    &__brand-row {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__brand-link {
+        @extend %flexItemCenter;
+        gap: 1.2rem;
+        min-width: 0;
+    }
+
+    &__logo-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.4rem;
+        height: 4.4rem;
+        border-radius: 1.3rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1.5px solid var(--primary-color);
+    }
+
+    &__logo-img {
+        width: 2.4rem;
+        height: 2.4rem;
+        filter: var(--zodiac-filter);
+    }
+
+    &__title-group {
+        @extend %flexColumn;
+        gap: 0.2rem;
+        min-width: 0;
+    }
+
+    &__eyebrow {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        width: fit-content;
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+
+        &-icon {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+    }
+
+    &__title {
+        font-size: clamp(1.85rem, 2.2vw, 2.3rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+        @extend %textEllipsis;
+    }
+
+    &__actions,
+    &__quick-links {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    &__modal-trigger,
+    &__shortcut-btn {
+        height: 4.2rem;
+        padding: 0 1.6rem;
+        border-radius: 1.2rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1.5px solid var(--primary-color);
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+
+        .icon {
+            width: 1.7rem;
+            height: 1.7rem;
+            filter: var(--zodiac-filter);
+        }
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-1px);
+
+            .icon {
+                filter: brightness(0) invert(1);
+            }
+        }
+
+        &--outline {
+            background-color: var(--bg-surface);
+            border-color: var(--border-color);
+            color: var(--text-color);
+
+            &:hover {
+                border-color: var(--primary-color);
+                background-color: var(--primary-color);
+                color: #ffffff;
+            }
+        }
+    }
+
+    &__modal-trigger {
+        @include abs.screen(sm) {
+            span {
+                display: none;
+            }
+            width: 4.4rem;
+            height: 4.4rem;
+            padding: 0;
+        }
+    }
+
+    // Nút Hamburger 44x44px chuẩn Checklist trên Mobile (< 768px)
+    &__burger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        width: 4.4rem;
+        height: 4.4rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        @extend %transTheme;
+
+        @include abs.screen(md) {
+            display: inline-flex;
+        }
+
+        &-bar {
+            width: 2rem;
+            height: 0.2rem;
+            background-color: var(--text-color);
+            border-radius: 0.2rem;
+            @extend %transBurgerBar;
+        }
+
+        &.is-active {
+            border-color: var(--primary-color);
+        }
+        &.is-active &-bar:nth-child(1) {
+            transform: translateY(0.7rem) rotate(45deg);
+        }
+        &.is-active &-bar:nth-child(2) {
+            opacity: 0;
+        }
+        &.is-active &-bar:nth-child(3) {
+            transform: translateY(-0.7rem) rotate(-45deg);
+        }
+    }
+
+    // Tầng 2: Segmented Pill Sub-Navbar
+    &__sub-bar {
+        @extend %flexCenter;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+}
+
+// Tầng 1: Primary Utility Navbar (Đã đưa @extend %animDropdownFadeIn ra ngoài @media)
+.util-primary-nav {
+    width: 100%;
+
+    // ✅ ĐÃ FIX: Đặt @extend %animDropdownFadeIn ở cấp gốc (bên ngoài @include abs.screen(md))
+    &.is-open {
+        @extend %animDropdownFadeIn;
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0.2rem;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &__item {
+        @extend %flexItemFixed;
+    }
+
+    &__link {
+        @extend %inlineFlexCenter;
+        gap: 0.7rem;
+        height: 4.2rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.3rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %textNoWrap;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        &.is-active,
+        &[aria-current="page"] {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.5rem 1.4rem var(--shadow-color);
+
+            .util-primary-nav__icon {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+
+    &__icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        object-fit: contain;
+        @extend %flexItemFixed;
+
+        &--filtered {
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    // Bên trong @include abs.screen(md) tuyệt đối không gọi @extend
+    @include abs.screen(md) {
+        display: none;
+        padding-top: 0.8rem;
+
+        &.is-open {
+            display: block;
+        }
+
+        &__list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            overflow: visible;
+            gap: 0.8rem;
+        }
+
+        &__link {
+            width: 100%;
+            justify-content: flex-start;
+        }
+    }
+
+    @include abs.screen(sm) {
+        &__list {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.util-mobile-backdrop {
+    @extend %fixedCover;
+    z-index: 25;
+    background-color: var(--overlay-bg);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    @extend %transBackdrop;
+
+    &.is-active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.util-sub-nav {
+    display: inline-flex;
+    max-width: 100%;
+    padding: 0.5rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 99.9rem;
+    box-shadow: 0 0.6rem 1.8rem var(--shadow-color);
+
+    &__list {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    &__link {
+        @extend %inlineFlexCenter;
+        height: 3.8rem;
+        padding: 0 1.8rem;
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--text-color);
+        }
+
+        &.is-active,
+        &[aria-current="page"] {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        }
+    }
+}
+
+// ==========================================================================
+// 2. KHUNG CARD CHUNG & HỆ THỐNG FORM TRONG UTILITIES
+// ==========================================================================
+.util-panel,
+.util-subpanel {
+    &[hidden] {
+        display: none !important;
+    }
+}
+
+.util-card {
+    position: relative;
+    min-width: 0;
+    @extend %flexColumn;
+    gap: 2rem;
+    padding: 2.6rem 2.8rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 0.6rem 2rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 2rem;
+        gap: 1.6rem;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        padding-bottom: 1.4rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.3rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__tag {
+        padding: 0.45rem 1.4rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--primary-color);
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+    }
+}
+
+.util-section-subtitle {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.util-form-grid {
+    display: grid;
+    gap: 1.4rem;
+    align-items: end;
+
+    &--2cols {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &--4cols {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+        @include abs.screen(lg) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &--5cols {
+        grid-template-columns: 1.3fr repeat(4, minmax(0, 1fr));
+
+        @include abs.screen(lg) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.util-field {
+    @extend %flexColumn;
+    gap: 0.6rem;
+    min-width: 0;
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--text-muted);
+    }
+
+    &__input {
+        width: 100%;
+        height: 4.6rem;
+        padding: 0 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+        @extend %transTheme;
+
+        &:focus {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            box-shadow: 0 0 0 3px var(--primary-soft-bg);
+        }
+    }
+
+    &__hint {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &--action .util-btn {
+        width: 100%;
+        height: 4.6rem;
+    }
+}
+
+.util-btn {
+    height: 4.6rem;
+    padding: 0 2.4rem;
+    border-radius: 1.4rem;
+    font-size: 1.45rem;
+    font-weight: 800;
+
+    &--primary {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+
+        &:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+    }
+
+    &--secondary {
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1.5px solid var(--primary-color);
+        color: var(--primary-color);
+
+        &:hover:not(:disabled) {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &--outline {
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        color: var(--text-color);
+
+        &:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+    }
+
+    &:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+    }
+}
+
+// ==========================================================================
+// 3. MỤC 1 & 2: ĐỒNG HỒ ĐA NĂNG & ĐỔI NGÀY TRỰC TIẾP
+// ==========================================================================
+.util-clock-stage {
+    @extend %flexColumnCenterAll;
+    gap: 0.8rem;
+    padding: 3.2rem 2rem;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--border-color);
+    border-radius: 2.4rem;
+    text-align: center;
+
+    &--compact {
+        padding: 2.4rem 2rem;
+    }
+
+    &__tag {
+        padding: 0.35rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+    }
+
+    &__digits {
+        font-size: clamp(4.6rem, 9vw, 8.6rem);
+        font-weight: 800;
+        line-height: 1;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
+
+        small {
+            font-size: 0.48em;
+            color: var(--primary-color);
+            margin-left: 0.2rem;
+        }
+    }
+}
+
+.util-clock-controls {
+    @extend %flexCenter;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.util-preset-chips {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 0.8rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.util-preset-chip {
+    height: 4rem;
+    border-radius: 1.2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-color);
+    @extend %transInteractive;
+
+    &:hover,
+    &.is-active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+}
+
+.util-data-table {
+    border: 1px solid var(--border-color);
+    border-radius: 1.8rem;
+    overflow: hidden;
+
+    &__head,
+    &__row {
+        display: grid;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 1.3rem 1.8rem;
+    }
+
+    &__head--3cols,
+    &__row--3cols {
+        grid-template-columns: 0.8fr 1.2fr 1.2fr;
+    }
+
+    &__head--4cols,
+    &__row--4cols {
+        grid-template-columns: 0.5fr 1.5fr 1fr 1fr;
+    }
+
+    &__head {
+        background-color: var(--bg-surface);
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    &__row {
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.4rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__empty {
+        padding: 2.4rem;
+        text-align: center;
+        font-size: 1.35rem;
+        color: var(--text-muted);
+    }
+}
+
+.util-alarms-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-alarm-item {
+    @extend %flexBetween;
+    gap: 1.2rem;
+    padding: 1.6rem 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+
+    &__time {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__title {
+        display: block;
+        margin-top: 0.3rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__del {
+        padding: 0.6rem 1.2rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--color-danger);
+    }
+}
+
+.util-conv-result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ==========================================================================
+// 4. MỤC 3, 4, 5: TIẾT KHÍ, KINH DỊCH, TAROT & NGÀY NÀY NĂM XƯA
+// ==========================================================================
+.util-year-Step-bar {
+    @extend %flexItemCenter;
+    gap: 0.8rem;
+    padding: 0.45rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.4rem;
+}
+
+.util-year-step {
+    &__btn {
+        @extend %inlineFlexCenter;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-weight: 800;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+    }
+
+    &__label {
+        padding: 0 0.8rem;
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__today {
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        border-radius: 1rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 800;
+    }
+}
+
+.util-solarterms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-term-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 1.6rem 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+    @extend %transInteractive;
+
+    &.is-current-term {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border: 2px solid var(--primary-color);
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+    }
+
+    &__top {
+        @extend %flexBetween;
+        gap: 1rem;
+    }
+
+    &__icon-box {
+        @extend %inlineFlexCenter;
+        width: 4.4rem;
+        height: 4.4rem;
+        border-radius: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 2.6rem;
+            height: 2.6rem;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__date-box {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+
+        strong {
+            display: block;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        small {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+    }
+
+    &__name {
+        font-size: 1.85rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__desc {
+        font-size: 1.3rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+    }
+}
+
+.util-divination-hero {
+    @extend %flexColumnCenterAll;
+    gap: 0.8rem;
+    text-align: center;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.util-iching-result,
+.util-tarot-result {
+    display: grid;
+    grid-template-columns: 22rem 1fr;
+    align-items: center;
+    gap: 2.6rem;
+    padding: 2.4rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.4rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+        padding: 1.8rem;
+    }
+
+    &__visual {
+        @extend %flexColumn;
+        gap: 1rem;
+        padding: 2.2rem 2rem;
+        background-color: var(--body-bg);
+        border: 2px solid var(--primary-color);
+        border-radius: 2rem;
+    }
+
+    &__content,
+    &__info {
+        @extend %flexColumn;
+        gap: 1.2rem;
+    }
+
+    &__num,
+    &__status {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.35rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__name {
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__block {
+        padding: 1.2rem 1.5rem;
+        background-color: var(--body-bg);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 0 1.4rem 1.4rem 0;
+        font-size: 1.4rem;
+        line-height: 1.6;
+
+        strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--text-color);
+        }
+    }
+}
+
+.util-hex-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.4rem;
+    height: 1.3rem;
+
+    span {
+        flex: 1;
+        height: 100%;
+        background-color: var(--text-color);
+        border-radius: 0.4rem;
+    }
+
+    &--yang span {
+        background-color: var(--primary-color);
+    }
+}
+
+.util-tarot-card-art {
+    @extend %flexColumnCenterAll;
+    justify-content: space-between;
+    min-height: 31rem;
+    padding: 2.4rem 1.8rem;
+    background: linear-gradient(145deg, var(--primary-color), var(--primary-active));
+    border: 3px solid #ffffff;
+    border-radius: 2.2rem;
+    color: #ffffff;
+    box-shadow: 0 1.4rem 3rem var(--shadow-color);
+    text-align: center;
+
+    &__roman {
+        padding: 0.3rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+    }
+
+    &__emblem {
+        font-size: 7.2rem;
+        line-height: 1;
+        filter: drop-shadow(0 0.6rem 1.2rem rgba(0, 0, 0, 0.25));
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+}
+
+// ==========================================================================
+// 5. MỤC 6, 7, 8, 9, 10: HOROSCOPE, KHOẢNG CÁCH, THẦN SỐ HỌC, NHỊP SINH HỌC & TỪ ĐIỂN
+// ==========================================================================
+.util-inline-birth-picker {
+    @extend %flexItemCenter;
+    gap: 1rem;
+
+    label {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %textNoWrap;
+    }
+}
+
+.util-horoscope-hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 2.2rem;
+    padding: 2.4rem;
+    background-color: var(--primary-soft-bg, var(--bg-surface));
+    border: 1.5px solid var(--primary-color);
+    border-radius: 2.4rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    &__badge {
+        @extend %inlineFlexCenter;
+        width: 8.8rem;
+        height: 8.8rem;
+        border-radius: 2.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 4.8rem;
+        margin: 0 auto;
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+    }
+
+    &__main {
+        @extend %flexColumn;
+        gap: 0.7rem;
+    }
+
+    &__pills {
+        @extend %flexWrapGap;
+    }
+
+    &__pill {
+        padding: 0.3rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__name {
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__traits {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        color: var(--text-color);
+    }
+
+    &__daily {
+        padding: 1.2rem 1.5rem;
+        background-color: var(--body-bg);
+        border-radius: 1.4rem;
+        border: 1px solid var(--border-color);
+        font-size: 1.35rem;
+        line-height: 1.55;
+    }
+}
+
+.util-horoscope-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.util-sign-btn {
+    @extend %flexColumnCenterAll;
+    gap: 0.35rem;
+    padding: 1.3rem 1rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.6rem;
+    @extend %transInteractive;
+
+    span {
+        font-size: 2.4rem;
+    }
+
+    strong {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    small {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+    }
+
+    &:hover,
+    &.is-active {
+        border-color: var(--primary-color);
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        transform: translateY(-2px);
+    }
+}
+
+.util-diff-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.2rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.util-diff-stat {
+    @extend %flexColumnCenterAll;
+    gap: 0.4rem;
+    padding: 2rem 1.2rem;
+    background-color: var(--primary-soft-bg, var(--bg-surface));
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-align: center;
+
+    strong {
+        font-size: 2.8rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    span {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+}
+
+.util-date-result-banner {
+    @extend %flexBetween;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    padding: 2.2rem 2.4rem;
+    background-color: var(--primary-soft-bg, var(--bg-surface));
+    border: 1.5px solid var(--primary-color);
+    border-radius: 2.2rem;
+
+    &__main {
+        @extend %flexColumn;
+        gap: 0.45rem;
+    }
+
+    &__tag {
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--primary-color);
+    }
+
+    &__solar {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__lunar {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+
+.util-num-hero {
+    @extend %flexColumn;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1.6rem;
+    padding: 2.4rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.2rem;
+
+    &__top {
+        @extend %flexItemCenter;
+        gap: 1.8rem;
+    }
+
+    &__circle {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 7.6rem;
+        height: 7.6rem;
+        border-radius: 2.2rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 4rem;
+        font-weight: 800;
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+    }
+
+    &__eyebrow {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__title {
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__desc {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        color: var(--text-color);
+    }
+}
+
+.util-num-Cycles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-num-cycle-box {
+    @extend %flexColumn;
+    gap: 0.25rem;
+    padding: 1.3rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1.4rem;
+
+    span {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    strong {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    small {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+}
+
+.util-birth-chart-box {
+    @extend %flexColumn;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1.2rem;
+    padding: 2.2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.2rem;
+
+    &__note {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+}
+
+.util-pythagoras-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.util-pythagoras-cell {
+    @extend %flexColumnCenterAll;
+    min-height: 6.8rem;
+    padding: 0.8rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.4rem;
+
+    &.has-val {
+        border-color: var(--primary-color);
+        background-color: var(--primary-soft-bg);
+    }
+
+    small {
+        font-size: 1.05rem;
+        color: var(--text-muted);
+    }
+
+    strong {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        letter-spacing: 0.08em;
+    }
+}
+
+.util-num-month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.util-num-day-cell {
+    @extend %flexColumnCenterAll;
+    gap: 0.3rem;
+    min-height: 7.4rem;
+    padding: 0.8rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.4rem;
+    @extend %transInteractive;
+
+    small {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    strong {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &.is-muted {
+        opacity: 0.35;
+    }
+
+    &:hover,
+    &.is-active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+
+        small,
+        strong {
+            color: #ffffff;
+        }
+    }
+}
+
+.util-bio-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.2rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-bio-stat-card {
+    @extend %flexColumn;
+    gap: 0.4rem;
+    padding: 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+
+    &__head {
+        @extend %flexBetween;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-muted);
+    }
+
+    &__val {
+        font-size: 2.6rem;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__advice {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+}
+
+.util-bio-chart-stage {
+    width: 100%;
+    padding: 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 2.2rem;
+    overflow-x: auto;
+
+    svg {
+        width: 100%;
+        min-width: 68rem;
+        height: auto;
+    }
+}
+
+.util-bio-legend {
+    @extend %flexWrapGap;
+    justify-content: center;
+    gap: 1.8rem;
+    font-size: 1.3rem;
+
+    &__item {
+        @extend %flexItemCenter;
+        gap: 0.6rem;
+    }
+
+    &__dot {
+        width: 1.2rem;
+        height: 1.2rem;
+        border-radius: 50%;
+
+        &--phys {
+            background-color: #2563eb;
+        }
+        &--emo {
+            background-color: #10b981;
+        }
+        &--intel {
+            background-color: #f97316;
+        }
+        &--intuit {
+            background-color: #8b5cf6;
+        }
+    }
+}
+
+.util-search-wrap {
+    flex: 1 1 32rem;
+    max-width: 42rem;
+}
+
+.util-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-item-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+    text-decoration: none;
+    color: inherit;
+    @extend %transInteractive;
+
+    &.is-selected {
+        border: 2px solid var(--primary-color);
+        background-color: var(--primary-soft-bg, var(--body-bg));
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+    }
+
+    &__head {
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__icon-wrap {
+        @extend %inlineFlexCenter;
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 2.5rem;
+            height: 2.5rem;
+            object-fit: contain;
+        }
+
+        &--filtered img {
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__tag {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__desc {
+        font-size: 1.3rem;
+        line-height: 1.55;
+        color: var(--text-muted);
+    }
 }
 ```
 

@@ -3,7 +3,7 @@
 
 .festival-cal {
     @extend %flexColumn;
-    gap: 2.2rem;
+    gap: 2rem;
     line-height: 1.5;
 
     &__dot {
@@ -23,7 +23,7 @@
     }
 
     // ==========================================================================
-    // ROW 2: WORKSPACE 2 CỘT (TRÁI: STICKY HERO | PHẢI: CONTROLS ĐỨNG YÊN + SCROLL CARDS)
+    // ROW 2: WORKSPACE 2 CỘT (TRÁI: STICKY HERO | PHẢI: CONTROLS + LIST EVENT)
     // ==========================================================================
     &__workspace {
         display: grid;
@@ -40,10 +40,10 @@
         }
     }
 
-    // Khi Header tổng đã tắt sticky, Hero bên trái bám sát ngay dưới gầm Countdown Bar
+    // FIX GAP CHUẨN 2REM: 1.6rem (top của Countdown) + chiều cao Countdown + 2rem (gap chuẩn)
     &__sticky-left {
         position: sticky;
-        top: 19.6rem;
+        top: calc(1.6rem + var(--countdown-exact-h, 15.2rem) + 2rem);
         z-index: 20;
 
         @include abs.screen(lg) {
@@ -60,7 +60,9 @@
 
 // ==========================================================================
 // ROW 1 (STICKY): THANH ĐỒNG HỒ ĐẾM NGƯỢC LỚN + CUSTOM DROPDOWN KIỂU A
-// Khóa cứng minmax(0, ...) cho 2 cột để trị dứt điểm 100% lỗi nhảy Layout (Layout Shift)
+// ==========================================================================
+// ==========================================================================
+// ROW 1 (STICKY): THANH ĐỒNG HỒ ĐẾM NGƯỢC LỚN + CUSTOM DROPDOWN KIỂU A
 // ==========================================================================
 .festival-countdown-bar {
     position: sticky;
@@ -87,12 +89,13 @@
     @include abs.screen(sm) {
         padding: 1.6rem;
         border-radius: 2rem;
+        gap: 1.4rem;
     }
 
     &__info {
         @extend %flexColumn;
         justify-content: space-between;
-        gap: 0.75rem;
+        gap: 0.85rem;
         min-width: 0;
     }
 
@@ -102,8 +105,10 @@
         align-items: center;
         gap: 1.2rem;
 
-        @include abs.screen(sm) {
+        // FIX MOBILE: Xuống dưới 768px (md) xếp dọc Badge và thanh Chọn sự kiện để không bao giờ tràn viền phải
+        @include abs.screen(md) {
             grid-template-columns: 1fr;
+            gap: 1rem;
         }
     }
 
@@ -111,7 +116,8 @@
         @extend %inlineFlexCenter;
         @extend %flexItemFixed;
         gap: 0.65rem;
-        height: 3.8rem;
+        width: fit-content;
+        height: 3.6rem;
         padding: 0 1.3rem;
         background-color: var(--primary-soft-bg, var(--bg-surface));
         border: 1px solid var(--primary-color);
@@ -133,23 +139,24 @@
     &__selector {
         @extend %flexYCenterRight;
         gap: 0.8rem;
+        width: 100%;
         min-width: 0;
 
-        @include abs.screen(sm) {
+        @include abs.screen(md) {
             justify-content: flex-start;
         }
     }
 
     &__select-label {
+        @extend %flexItemFixed;
         font-size: 1.3rem;
         font-weight: 800;
         color: var(--text-muted);
         @extend %textNoWrap;
     }
 
-    // MỤC 3: Row Title ép 1 dòng duy nhất bằng %textEllipsis từ _typography.scss
     &__heading {
-        font-size: clamp(2rem, 2.3vw, 2.5rem);
+        font-size: clamp(1.9rem, 2.3vw, 2.5rem);
         font-weight: 800;
         line-height: 1.3;
         min-height: 3.25rem;
@@ -159,12 +166,19 @@
         strong {
             color: var(--primary-color);
         }
+
+        // FIX MOBILE: Cho phép tiêu đề tự xuống dòng trên màn hình nhỏ để không bị cắt mất tên ngày lễ
+        @include abs.screen(md) {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            min-height: 0;
+        }
     }
 
-    // MỤC 4: Row Subtitle ngắt thành 2 dòng riêng biệt, mỗi dòng đều áp dụng %textEllipsis
     &__subtitles {
         @extend %flexColumn;
-        gap: 0.25rem;
+        gap: 0.3rem;
         min-width: 0;
     }
 
@@ -179,9 +193,16 @@
         &--lunar {
             color: var(--text-muted);
         }
+
+        @include abs.screen(md) {
+            font-size: 1.25rem;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            min-height: 0;
+        }
     }
 
-    // MỤC 5: Giao diện Đồng hồ lớn (To, cao, đồng bộ font Theme, số Giây custom sắc độ/màu phụ)
     &__clock-wrap {
         @extend %flexYCenterRight;
         width: 100%;
@@ -202,6 +223,7 @@
         @include abs.screen(sm) {
             padding: 1rem;
             gap: 0.4rem;
+            border-radius: 1.6rem;
         }
     }
 
@@ -217,78 +239,85 @@
         @extend %transTheme;
 
         @include abs.screen(sm) {
-            height: 7.4rem;
-            padding: 0.6rem 0.3rem;
+            height: 7.2rem;
+            padding: 0.6rem 0.2rem;
             border-radius: 1.2rem;
         }
 
-        // Hộp số Giây có viền và nền nhạt theo màu Theme/Secondary
         &--sec {
             background-color: var(--primary-soft-bg, var(--body-bg));
-            border-color: var(--secondary-color, var(--primary-color));
+            border-color: var(--primary-color);
         }
     }
 
     &__num {
         font-family: abs.$body-font-family;
-        font-size: clamp(3.2rem, 3.8vw, 4.4rem);
+        font-size: clamp(2.6rem, 3.8vw, 4.4rem);
         font-weight: 800;
         line-height: 1;
         letter-spacing: -0.03em;
-        color: var(--text-color);
+        color: var(--primary-color);
         font-variant-numeric: tabular-nums;
+        @extend %transTheme;
 
         @include abs.screen(sm) {
-            font-size: 2.4rem;
+            font-size: 2.2rem;
         }
 
-        // Chữ số hàng Giây dùng màu phụ tương sinh (--secondary-color) kết hợp sắc độ đậm của Theme
         &--sec {
-            color: var(--secondary-color, var(--primary-active));
+            color: var(--primary-active);
         }
     }
 
     &__unit-label {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.04em;
         color: var(--text-muted);
+
+        @include abs.screen(sm) {
+            font-size: 1rem;
+        }
     }
 
     &__sep {
-        font-size: 2.8rem;
+        font-size: 2.6rem;
         font-weight: 800;
         color: var(--primary-color);
         animation: pulse 2s ease-in-out infinite;
+
+        @include abs.screen(sm) {
+            font-size: 1.8rem;
+        }
     }
 }
 
 // ==========================================================================
-// MỤC 2: CUSTOM DROPDOWN CHỌN SỰ KIỆN KIỂU A (TRÁI: TÊN | PHẢI: NGÀY + SEARCH & TABS)
+// CUSTOM DROPDOWN CHỌN SỰ KIỆN KIỂU A (KHÔNG TRÀN VIỀN TRÊN MOBILE)
 // ==========================================================================
 .festival-picker {
     position: relative;
     width: 31rem;
     max-width: 100%;
-    @extend %flexItemFixed;
+    min-width: 0;
 
-    @include abs.screen(sm) {
-        width: 100%;
-        flex: 1;
+    // FIX MOBILE: Cho phép co giãn linh hoạt (flex: 1 1 0%) để nằm gọn 100% trong khung Countdown
+    @include abs.screen(md) {
+        flex: 1 1 0%;
+        width: auto;
     }
 
     &__sr-only {
         @extend %srOnly;
     }
 
-    // Nút bấm Summary cố định kích thước 100% để tên dài hay ngắn không bao giờ làm nhảy Layout
     &__summary {
         @extend %flexBetween;
-        gap: 0.8rem;
+        gap: 0.6rem;
         width: 100%;
         height: 4rem;
-        padding: 0 1.4rem;
+        padding: 0 1.2rem;
         background-color: var(--bg-surface);
         border: 1.5px solid var(--border-color);
         border-radius: 1.3rem;
@@ -302,6 +331,11 @@
         &:hover {
             border-color: var(--primary-color);
         }
+
+        @include abs.screen(sm) {
+            padding: 0 1rem;
+            font-size: 1.25rem;
+        }
     }
 
     &[open] &__summary {
@@ -310,7 +344,6 @@
         box-shadow: 0 0 0 3px var(--primary-soft-bg);
     }
 
-    // [Tên sự kiện] đứng trước, tự cắt 3 chấm nếu quá dài
     &__summary-name {
         @extend %textEllipsisFlex;
         text-align: left;
@@ -318,10 +351,9 @@
         color: var(--text-color);
     }
 
-    // [Ngày diễn ra] đứng sau sát lề phải
     &__summary-date {
         @extend %flexItemFixed;
-        padding: 0.2rem 0.7rem;
+        padding: 0.2rem 0.65rem;
         background-color: var(--body-bg);
         border: 1px solid var(--border-color);
         border-radius: 0.7rem;
@@ -329,6 +361,11 @@
         font-weight: 800;
         color: var(--primary-color);
         font-variant-numeric: tabular-nums;
+
+        @include abs.screen(sm) {
+            font-size: 1.05rem;
+            padding: 0.15rem 0.5rem;
+        }
     }
 
     &__arrow {
@@ -342,7 +379,6 @@
         transform: rotate(180deg);
     }
 
-    // Khung Popover 3 tầng (Search + 3 Tabs + Danh sách Kiểu A)
     &__popover {
         position: absolute;
         top: calc(100% + 0.8rem);
@@ -359,9 +395,9 @@
         gap: 1rem;
         @extend %animDropdownFadeIn;
 
-        @include abs.screen(sm) {
+        @include abs.screen(md) {
             left: 0;
-            right: auto;
+            right: 0;
             width: 100%;
         }
     }
@@ -424,7 +460,6 @@
         padding-right: 0.3rem;
     }
 
-    // Mục chọn Kiểu A giống clock.html: [Tên sự kiện] bên trái — [Ngày diễn ra] sát lề phải
     &__option {
         @extend %flexBetween;
         gap: 1rem;
@@ -491,7 +526,7 @@
 }
 
 // ==========================================================================
-// CỘT TRÁI: THẺ HERO TIÊU ĐIỂM (KHÓA CHIỀU CAO TUYỆT ĐỐI CHỐNG LAYOUT SHIFT)
+// CỘT TRÁI: THẺ HERO TIÊU ĐIỂM (MỞ KHÓA CẮT DÒNG TRÊN MOBILE)
 // ==========================================================================
 .festival-hero {
     position: relative;
@@ -515,7 +550,7 @@
     }
 
     @include abs.screen(sm) {
-        padding: 2rem;
+        padding: 1.8rem;
         border-radius: 2rem;
     }
 
@@ -533,9 +568,26 @@
         grid-template-columns: minmax(0, 1fr) auto;
         align-items: center;
         gap: 0.8rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+            justify-items: start;
+        }
     }
 
-    &__pill,
+    &__pill {
+        max-width: 100%;
+        height: 3.2rem;
+        line-height: 3.2rem;
+        padding: 0 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        background-color: #ffffff;
+        color: var(--primary-active);
+        @extend %textEllipsis;
+    }
+
     &__type-badge {
         @extend %inlineFlexCenter;
         gap: 0.6rem;
@@ -544,17 +596,6 @@
         border-radius: 99.9rem;
         font-size: 1.2rem;
         font-weight: 800;
-    }
-
-    &__pill {
-        display: block;
-        line-height: 3.2rem;
-        background-color: #ffffff;
-        color: var(--primary-active);
-        @extend %textEllipsis;
-    }
-
-    &__type-badge {
         background-color: var(--hero-box-bg);
         border: 1px solid var(--hero-border-color);
         color: #ffffff;
@@ -570,7 +611,7 @@
     }
 
     &__solar {
-        font-size: clamp(4.6rem, 5vw, 5.6rem);
+        font-size: clamp(4.4rem, 5vw, 5.6rem);
         font-weight: 800;
         line-height: 1;
         letter-spacing: -0.03em;
@@ -602,12 +643,23 @@
         min-height: 2.6rem;
         color: #ffffff;
         @extend %textEllipsis;
+
+        @include abs.screen(lg) {
+            white-space: normal;
+            overflow: visible;
+            min-height: 0;
+        }
     }
 
     &__lunar {
         font-size: 1.35rem;
         color: var(--hero-text-soft);
         @extend %textEllipsis;
+
+        @include abs.screen(lg) {
+            white-space: normal;
+            overflow: visible;
+        }
     }
 
     &__detail-box {
@@ -628,6 +680,11 @@
         min-height: 3.8rem;
         color: #ffffff;
         @extend %textClamp2;
+
+        @include abs.screen(lg) {
+            display: block;
+            min-height: 0;
+        }
     }
 
     &__hours-line {
@@ -649,6 +706,11 @@
         font-weight: 700;
         color: #ffffff;
         @extend %textEllipsis;
+
+        @include abs.screen(lg) {
+            white-space: normal;
+            overflow: visible;
+        }
     }
 
     &__footer {
@@ -967,7 +1029,7 @@
 }
 
 // ==========================================================================
-// CỘT PHẢI (DƯỚI): KHUNG BENTO SỰ KIỆN CÓ VÙNG CUỘN ĐỘC LẬP (INTERNAL SCROLL)
+// CỘT PHẢI (DƯỚI): KHUNG BENTO SỰ KIỆN CÓ VÙNG CUỘN ĐỘC LẬP (54REM)
 // ==========================================================================
 .festival-bento-box {
     @extend %flexColumn;

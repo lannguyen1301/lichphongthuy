@@ -41,6 +41,28 @@
         visibility 0.2s ease;
 }
 
+// Hiệu ứng bật/tắt Bento Tooltip 3 tầng (Tắt ngay 0s khi rời chuột, trễ 0.14s khi dừng chuột)
+%transBentoTooltip {
+    transition:
+        opacity 0.2s ease 0s,
+        transform 0.2s ease 0s,
+        visibility 0.2s ease 0s;
+}
+
+// Hiệu ứng phóng nhẹ và làm rõ bóng chìm Watermark ở góc dưới thẻ Bento khi Hover
+%transWatermark {
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+}
+
+// Hiệu ứng chuyển đổi độ sáng & độ nảy của 5 đỉnh Ngũ Hành trong biểu đồ SVG
+%transWuXingNode {
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 // Hiệu ứng xoay 3 thanh ngang của nút Hamburger thành dấu X & mũi tên Dropdown
 %transBurgerBar {
     transition:
@@ -74,4 +96,74 @@
 
 %animShake {
     animation: shake 0.35s ease-in-out;
+}
+
+// Vòng tròn Ngũ Hành Tứ Trụ
+%animWuXingSpin {
+    animation: wuxingCycleSpin 24s linear infinite;
+}
+
+%animWuXingPulse {
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
+// 6 Cung Khổng Minh Lục Diệu (Dùng chung cho Lưới 12 ô Tầng 1 & Badge Cột 3 Bảng 12 Giờ)
+%animLucDieuDaiAn {
+    animation: lucdieuCloverBreathe 3.2s ease-in-out infinite;
+}
+
+%animLucDieuLuuNien {
+    animation: lucdieuHourglass 4.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+%animLucDieuTocHy {
+    animation: lucdieuShootingStar 2.4s ease-in-out infinite;
+}
+
+%animLucDieuXichKhau {
+    animation: lucdieuThunderFlash 2.8s ease-in-out infinite;
+}
+
+%animLucDieuTieuCat {
+    transform-origin: bottom center;
+    animation: lucdieuCloverSway 2.8s ease-in-out infinite;
+}
+
+%animLucDieuKhongVong {
+    animation: lucdieuRingSpin 12s linear infinite;
+}
+
+// 6 Nhóm Thời Tiết của 24 Tiết Khí
+%animTermWind {
+    animation: termWindBreeze 3s ease-in-out infinite;
+}
+
+%animTermRain {
+    animation: termRainDrop 2.4s ease-in-out infinite;
+}
+
+%animTermSun {
+    animation: termSunRadiate 3s ease-in-out infinite;
+}
+
+%animTermThunder {
+    animation: termThunderBolt 2.6s ease-in-out infinite;
+}
+
+%animTermSprout {
+    transform-origin: bottom center;
+    animation: termSproutSway 2.8s ease-in-out infinite;
+}
+
+%animTermSnow {
+    animation: termSnowFloat 3.2s ease-in-out infinite;
+}
+
+// 2 Trạng thái Giờ Hoàng Đạo & Giờ Hắc Đạo
+%animHoangDaoSun {
+    animation: daoSunSpin 16s linear infinite;
+}
+
+%animHacDaoMoon {
+    animation: daoMoonRock 3.2s ease-in-out infinite;
 }

@@ -1,0 +1,728 @@
+
+// scss/pages/_utilities.scss
+@use "../abstracts" as abs;
+
+.util-page {
+    padding-bottom: abs.$gap-section-default;
+
+    &__sr-only {
+        @extend %srOnly;
+    }
+
+    &__spotlight-row {
+        --grid-gutter-y: 2.2rem;
+        margin-top: 2.2rem;
+        align-items: stretch;
+    }
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+        gap: 2.2rem;
+    }
+}
+
+.util-card {
+    position: relative;
+    overflow: visible;
+    @extend %flexColumn;
+    gap: 1.8rem;
+    padding: 2.4rem 2.6rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.6rem;
+    box-shadow: 0 0.6rem 2rem var(--shadow-color);
+    @extend %transTheme;
+
+    &--grow {
+        flex: 1;
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    @include abs.screen(sm) {
+        padding: 1.6rem;
+        border-radius: 2rem;
+        gap: 1.4rem;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title {
+        font-size: 1.9rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        margin-top: 0.3rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__tag {
+        padding: 0.45rem 1.3rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+    }
+}
+
+// ==========================================================================
+// 1. TẦNG 1: BENTO HUB TOOLBAR & 5 TABS CỔ HỌC (.util-hub-bar)
+// ==========================================================================
+.util-hub-bar {
+    gap: 2rem;
+
+    &__top {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.8rem;
+        padding-bottom: 1.6rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__title-group {
+        @extend %flexColumn;
+        gap: 0.6rem;
+    }
+
+    &__eyebrow {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        width: fit-content;
+        padding: 0.4rem 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+
+        &-icon {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+    }
+
+    &__title {
+        font-size: clamp(2.1rem, 2.5vw, 2.7rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+    }
+
+    &__search-box {
+        position: relative;
+        flex: 1 1 34rem;
+        max-width: 44rem;
+
+        @include abs.screen(md) {
+            max-width: 100%;
+        }
+    }
+
+    &__search-input {
+        width: 100%;
+        height: 4.6rem;
+        padding: 0 4rem 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %transTheme;
+
+        &::placeholder {
+            color: var(--text-muted);
+        }
+
+        &:focus {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            box-shadow: 0 0 0 3px var(--primary-soft-bg);
+        }
+    }
+
+    &__search-clear {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2.8rem;
+        height: 2.8rem;
+        border-radius: 50%;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        &:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    }
+
+    // Lưới 5 Bento Tabs
+    &__tabs {
+        @extend %gridCols5;
+        gap: 1.2rem;
+
+        @include abs.screen(xl) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include abs.screen(md) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__tab {
+        @extend %flexItemCenter;
+        gap: 1.2rem;
+        padding: 1.3rem 1.4rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.8rem;
+        text-align: left;
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+            transform: translateY(-2px);
+        }
+
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+            .util-hub-bar__tab-text strong,
+            .util-hub-bar__tab-text small {
+                color: #ffffff;
+            }
+
+            .util-hub-bar__tab-icon--filtered {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+
+    &__tab-icon {
+        width: 2.8rem;
+        height: 2.8rem;
+        object-fit: contain;
+        @extend %flexItemFixed;
+
+        &--filtered {
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__tab-text {
+        @extend %flexColumn;
+        gap: 0.15rem;
+        min-width: 0;
+
+        strong {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--text-color);
+            @extend %textEllipsis;
+        }
+
+        small {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            @extend %textEllipsis;
+        }
+    }
+}
+
+// ==========================================================================
+// 2. TẦNG 2: THẺ SPOTLIGHT TIÊU ĐIỂM (TRÁI) & ĐỐI CHIẾU HÔM NAY (PHẢI)
+// ==========================================================================
+.util-spotlight-card {
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    border-color: var(--primary-hover);
+    color: #ffffff;
+    box-shadow: 0 1rem 2.8rem var(--shadow-color);
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 1.4rem;
+    }
+
+    &__badges {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    &__cat-pill,
+    &__meta-pill {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    &__cat-pill {
+        background-color: #ffffff;
+        color: var(--primary-active);
+    }
+
+    &__meta-pill {
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        color: #ffffff;
+    }
+
+    &__hero {
+        @extend %flexItemCenter;
+        gap: 1.5rem;
+    }
+
+    &__icon-box {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 6.4rem;
+        height: 6.4rem;
+        border-radius: 2rem;
+        background-color: #ffffff;
+        box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.18);
+
+        img {
+            width: 3.8rem;
+            height: 3.8rem;
+            object-fit: contain;
+        }
+
+        &.is-zodiac-filtered img {
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__title-wrap {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__eyebrow {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--hero-text-soft);
+    }
+
+    &__title {
+        font-size: 2.6rem;
+        font-weight: 800;
+        line-height: 1.15;
+        color: #ffffff;
+    }
+
+    &__desc {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        color: #ffffff;
+    }
+
+    &__advice-box {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.4rem;
+        padding: 1.4rem 1.6rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.6rem;
+    }
+
+    &__advice-label {
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--hero-text-soft);
+    }
+
+    &__advice-text {
+        font-size: 1.35rem;
+        line-height: 1.55;
+        color: #ffffff;
+    }
+
+    &__footer {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        padding-top: 0.4rem;
+    }
+
+    &__modal-btn {
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--hero-chip-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 99.9rem;
+        color: #ffffff;
+        font-size: 1.35rem;
+        font-weight: 800;
+
+        &:hover {
+            background-color: #ffffff;
+            color: var(--primary-active);
+        }
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -1rem;
+        bottom: -1rem;
+        width: 14rem;
+        height: 14rem;
+        object-fit: contain;
+        opacity: 0.15;
+        filter: var(--zodiac-filter-active);
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+
+.util-today-bridge {
+    &__grid {
+        flex: 1;
+        @extend %gridCols2;
+        align-items: stretch;
+        gap: 1.3rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__actions {
+        @extend %gridCols3;
+        gap: 1.2rem;
+        padding-top: 1.4rem;
+        border-top: 1px dashed var(--border-color);
+
+        @include abs.screen(md) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__action-btn {
+        height: 4.4rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+
+        .icon {
+            width: 1.8rem;
+            height: 1.8rem;
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        &--primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+
+            .icon {
+                filter: brightness(0) invert(1);
+            }
+
+            &:hover {
+                background-color: var(--primary-hover);
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+.util-today-pill {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 0.45rem;
+    padding: 1.5rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+    }
+
+    &__label {
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--text-muted);
+    }
+
+    &__val {
+        font-size: 1.85rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__sub {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+}
+
+// ==========================================================================
+// 3. TẦNG 3: KHU VỰC DANH MỤC TỪ ĐIỂN & LƯỚI BENTO THẺ TRA CỨU (.util-catalog-section)
+// ==========================================================================
+.util-catalog-section {
+    margin-top: 2.2rem;
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.4rem;
+        padding-bottom: 1.4rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    &__subfilters {
+        @extend %flexWrapGap;
+        gap: 0.8rem;
+    }
+}
+
+.util-subfilter-btn {
+    @extend %inlineFlexCenter;
+    height: 3.8rem;
+    padding: 0 1.5rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 99.9rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-color);
+    @extend %transInteractive;
+
+    &:hover,
+    &.is-active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+    }
+}
+
+.util-catalog-grid {
+    @extend %gridCols3;
+    align-items: stretch;
+    gap: 1.6rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-item-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 17.6rem;
+    gap: 0.9rem;
+    padding: 1.8rem 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.2rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+        .util-item-card__watermark {
+            opacity: 0.22;
+            transform: scale(1.08) rotate(0deg);
+        }
+    }
+
+    &.is-selected {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+    }
+
+    &__head {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        gap: 1rem;
+    }
+
+    &__icon-wrap {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.4rem;
+        height: 4.4rem;
+        border-radius: 1.3rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
+
+        img {
+            width: 2.6rem;
+            height: 2.6rem;
+            object-fit: contain;
+        }
+
+        &--filtered img {
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__tag {
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+
+        &--good {
+            background-color: rgba(16, 185, 129, 0.14);
+            border-color: rgba(16, 185, 129, 0.38);
+            color: #047857;
+        }
+
+        &--bad {
+            background-color: rgba(239, 68, 68, 0.12);
+            border-color: rgba(239, 68, 68, 0.32);
+            color: #b91c1c;
+        }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.35rem;
+    }
+
+    &__title {
+        font-size: 1.85rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__desc {
+        position: relative;
+        z-index: 2;
+        font-size: 1.3rem;
+        line-height: 1.55;
+        color: var(--text-muted);
+    }
+
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        margin-top: auto;
+        padding-top: 0.9rem;
+        border-top: 1px dashed var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__more {
+        color: var(--primary-color);
+        font-weight: 800;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 6.4rem;
+        height: 6.4rem;
+        object-fit: contain;
+        opacity: 0.1;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        pointer-events: none;
+        z-index: 1;
+        transition:
+            transform 0.35s ease,
+            opacity 0.35s ease;
+    }
+}

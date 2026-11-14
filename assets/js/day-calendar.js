@@ -1,6 +1,6 @@
 // assets/js/day-calendar.js
 // Chuyên trách Trang Ngày (day.html): Tích hợp 39 Icon SVG trong ./assets/icons/fengshui/ & ./assets/icons/weather/,
-// Tooltip 3 tầng tách riêng Tag hành động, Gợi ý Mệnh Hợp/Kỵ & Bento Modal Quick-View Hybrid SEO
+// Khóa 3 Cặp Hàng Ngang chống lệch Ngã tư, 6 Animation Tiết Khí + 6 Animation Lục Diệu + 2 Animation Hoàng/Hắc Đạo (Phương án 1)
 (() => {
     const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
 
@@ -54,7 +54,6 @@
         wood: "Mộc",
     };
 
-    // Quy luật Ngũ Hành Tương Sinh & Tương Khắc để gợi ý "Tốt cho người mệnh nào"
     const ELEMENT_HARMONY_MAP = {
         metal: {
             good: "Thủy, Kim",
@@ -80,6 +79,57 @@
             good: "Kim, Thổ",
             bad: "Thủy",
             note: "Thổ sinh Kim và tương hợp mệnh Thổ; người mệnh Thủy (Thổ khắc Thủy) nên ưu tiên sự ổn định.",
+        },
+    };
+
+    const TRUC_ACTIONS_MAP = {
+        Kiến: {
+            doList: ["Xuất hành", "Khai trương", "Giá thú", "Nhậm chức"],
+            dontList: ["Động thổ", "Đào đất", "Mở kho"],
+        },
+        Trừ: {
+            doList: ["Cầu an", "Giải trừ xấu", "Dọn dẹp", "Khám chữa bệnh"],
+            dontList: ["Khai trương lớn", "Đi xa", "Ký kết"],
+        },
+        Mãn: {
+            doList: ["Tế tự", "Cầu tài", "Khai trương", "Sửa kho"],
+            dontList: ["Động thổ", "Kiện tụng", "Nhậm chức"],
+        },
+        Bình: {
+            doList: ["Tu tạo", "Nhập trạch", "Cưới gả", "Giao dịch"],
+            dontList: ["Đào kênh", "Chôn cất", "Thưa kiện"],
+        },
+        Định: {
+            doList: ["Ký kết", "Thương lượng", "Cầu danh", "Nhập học"],
+            dontList: ["Thưa kiện", "Xuất hành xa", "Động thổ"],
+        },
+        Chấp: {
+            doList: ["Xây dựng", "Tu bổ", "Tuyển dụng", "Tế tự"],
+            dontList: ["Xuất hành xa", "Mở kho", "Di chuyển"],
+        },
+        Phá: {
+            doList: ["Dỡ bỏ cũ", "Chữa bệnh", "Dọn dẹp", "Giải hạn"],
+            dontList: ["Khai trương", "Cưới hỏi", "Ký hợp đồng"],
+        },
+        Nguy: {
+            doList: ["Cầu phúc", "Tế tự", "Tu dưỡng", "Nghỉ ngơi"],
+            dontList: ["Khai trương", "Xuất hành xa", "Động thổ"],
+        },
+        Thành: {
+            doList: ["Khai trương", "Nhập học", "Cưới gả", "Nhập trạch"],
+            dontList: ["Kiện tụng", "Tranh chấp", "Đập phá"],
+        },
+        Thu: {
+            doList: ["Thu hoạch", "Cất trữ", "Mua tài sản", "Cầu tài"],
+            dontList: ["An táng", "Khởi công lớn", "Xuất tiền"],
+        },
+        Khai: {
+            doList: ["Khai trương", "Động thổ", "Cưới hỏi", "Xuất hành"],
+            dontList: ["An táng", "Chôn cất", "Kiện tụng"],
+        },
+        Bế: {
+            doList: ["Cầu phúc", "Tế tự", "Sửa kho", "Lấp lỗ"],
+            dontList: ["Khai trương", "Xuất hành", "Nhậm chức"],
         },
     };
 
@@ -120,7 +170,6 @@
         "Chính Bắc",
     ];
 
-    // 3 Vị Thần Hướng Xuất Hành (Khớp 100% với ./assets/icons/fengshui/{hy-than|tai-than|hac-than}.svg)
     const DIRECTION_DEITIES = {
         hy: {
             key: "hy-than",
@@ -151,7 +200,6 @@
         },
     };
 
-    // 6 Cung Khổng Minh Lục Diệu (Khớp 100% với ./assets/icons/fengshui/lucdieu-*.svg)
     const LUC_DIEU_6 = [
         {
             name: "Đại An",
@@ -374,11 +422,12 @@
         { name: "Đại Hải Thủy", meaning: "Nước biển lớn — Bao la, hùng vĩ và dung nạp trăm sông." },
     ];
 
-    // 24 Tiết Khí khớp 100% với danh sách 24 file SVG trong ./assets/icons/weather/term-*.svg của bạn
+    // 24 Tiết Khí kèm thuộc tính animGroup ("wind" | "rain" | "sun" | "thunder" | "sprout" | "snow")
     const SOLAR_TERMS_24 = [
         {
             name: "Tiểu Hàn",
             icon: "term-winter-minor-cold.svg",
+            animGroup: "sun",
             season: "Mùa Đông • Hành Thủy",
             meaning: "Chớm lạnh — Khí trời bắt đầu rét đậm, chuẩn bị bước vào giai đoạn lạnh nhất cuối năm.",
             advice: "Nên giữ ấm cơ thể, bồi bổ dinh dưỡng và hoàn tất các kế hoạch cuối năm.",
@@ -390,6 +439,7 @@
         {
             name: "Đại Hàn",
             icon: "term-winter-major-cold.svg",
+            animGroup: "sun",
             season: "Mùa Đông • Hành Thủy",
             meaning: "Rét cực điểm — Tiết khí cuối cùng của năm âm lịch, hàn khí đạt đỉnh trước khi mầm xuân trỗi dậy.",
             advice: "Thích hợp tổng kết năm cũ, dọn dẹp nhà cửa đón Tết và giữ ấm vùng cổ, bàn chân.",
@@ -401,6 +451,7 @@
         {
             name: "Lập Xuân",
             icon: "term-spring.svg",
+            animGroup: "sprout",
             season: "Mùa Xuân • Hành Mộc",
             meaning: "Khởi đầu mùa xuân — Dương khí bừng dậy, cây cối đâm chồi nảy lộc, vạn vật sinh sôi.",
             advice: "Đại cát cho việc lập kế hoạch năm mới, xuất hành đầu xuân, trồng cây và mở rộng giao kết.",
@@ -412,6 +463,7 @@
         {
             name: "Vũ Thủy",
             icon: "term-rain.svg",
+            animGroup: "rain",
             season: "Mùa Xuân • Hành Mộc",
             meaning: "Mưa xuân — Hơi ẩm tăng dần, những cơn mưa phùn ấm áp tưới tắm cho mùa màng tươi tốt.",
             advice: "Thuận lợi cho việc gieo trồng, học tập, bồi đắp tri thức và chăm sóc sức khỏe gan mật.",
@@ -423,6 +475,7 @@
         {
             name: "Kinh Trập",
             icon: "term-thunder.svg",
+            animGroup: "thunder",
             season: "Mùa Xuân • Hành Mộc",
             meaning: "Sấm xuân thức tỉnh — Tiếng sấm đầu mùa vang lên đánh thức vạn vật sau kỳ ngủ đông.",
             advice: "Thời điểm rất tốt để bứt phá, triển khai dự án mới và hành động quyết đoán.",
@@ -434,6 +487,7 @@
         {
             name: "Xuân Phân",
             icon: "term-spring-equinox.svg",
+            animGroup: "snow",
             season: "Mùa Xuân • Hành Mộc",
             meaning: "Giữa xuân cân bằng — Ngày và đêm dài bằng nhau, âm dương điều hòa, tiết trời ôn ấm.",
             advice: "Rất tốt cho việc hòa giải, ký kết hợp tác đôi bên cùng có lợi và cân bằng nhịp sống.",
@@ -445,6 +499,7 @@
         {
             name: "Thanh Minh",
             icon: "term-spring-clear.svg",
+            animGroup: "sprout",
             season: "Mùa Xuân • Hành Mộc",
             meaning:
                 "Trời trong sáng — Khí trời quang đãng, mát mẻ, gắn liền với truyền thống tảo mộ, hướng về cội nguồn.",
@@ -457,6 +512,7 @@
         {
             name: "Cốc Vũ",
             icon: "term-grain-rain.svg",
+            animGroup: "rain",
             season: "Cuối Xuân • Hành Mộc",
             meaning: "Mưa rào nuôi ngũ cốc — Lượng mưa dồi dào giúp lúa màu và cây trồng phát triển vượt bậc.",
             advice: "Thuận lợi cho việc tích lũy tài chính, đầu tư dài hạn và chăm sóc gia đình.",
@@ -468,6 +524,7 @@
         {
             name: "Lập Hạ",
             icon: "term-summer-sun.svg",
+            animGroup: "sun",
             season: "Mùa Hạ • Hành Hỏa",
             meaning: "Bắt đầu mùa hạ — Nắng vàng rực rỡ, nhiệt độ tăng cao, vạn vật bước vào kỳ trưởng thành mạnh mẽ.",
             advice: "Hợp đẩy mạnh kinh doanh, quảng bá thương hiệu và giữ tâm thái bình hòa dưới nắng nóng.",
@@ -479,6 +536,7 @@
         {
             name: "Tiểu Mãn",
             icon: "term-grain.svg",
+            animGroup: "sprout",
             season: "Mùa Hạ • Hành Hỏa",
             meaning: "Lúa trổ đòng chắc hạt — Hạt ngũ cốc bắt đầu căng mẩy, báo hiệu mùa màng sắp thu hoạch.",
             advice: "Nên kiên trì hoàn thiện các công việc đang dang dở để chuẩn bị gặt hái thành quả.",
@@ -490,6 +548,7 @@
         {
             name: "Mang Chủng",
             icon: "term-grain-ear.svg",
+            animGroup: "sprout",
             season: "Mùa Hạ • Hành Hỏa",
             meaning: "Lúa chín có râu — Thời điểm thu hoạch vụ chiêm và gieo cấy vụ mùa nhộn nhịp.",
             advice: "Rất tốt cho việc thu hồi công nợ, chốt doanh số và tái đầu tư xoay vòng vốn.",
@@ -501,6 +560,7 @@
         {
             name: "Hạ Chí",
             icon: "term-summer-solstice.svg",
+            animGroup: "sun",
             season: "Mùa Hạ • Hành Hỏa",
             meaning: "Đỉnh điểm mùa hạ — Ngày dài nhất trong năm, dương khí đạt cực thịnh.",
             advice: "Nên uống nhiều nước mát, nghỉ trưa hợp lý và tránh làm việc quá sức ngoài trời nắng gắt.",
@@ -512,6 +572,7 @@
         {
             name: "Tiểu Thử",
             icon: "term-summer-minor-heat.svg",
+            animGroup: "sun",
             season: "Mùa Hạ • Hành Hỏa",
             meaning: "Nóng nhẹ — Khí trời oi bức bắt đầu lan tỏa kèm theo những cơn mưa dông mùa hạ.",
             advice: "Hợp làm việc nơi thoáng mát, kiểm soát cảm xúc và giữ gìn sức khỏe tim mạch.",
@@ -523,6 +584,7 @@
         {
             name: "Đại Thử",
             icon: "term-summer-major-heat.svg",
+            animGroup: "sun",
             season: "Mùa Hạ • Hành Hỏa",
             meaning: "Nóng oi ả cực độ — Giai đoạn nhiệt độ cao nhất trong năm, năng lượng Hỏa vượng.",
             advice: "Thích hợp dưỡng tâm, ăn thực phẩm thanh nhiệt và cẩn trọng phòng chống cháy nổ.",
@@ -534,6 +596,7 @@
         {
             name: "Lập Thu",
             icon: "term-autumn-wind.svg",
+            animGroup: "wind",
             season: "Mùa Thu • Hành Kim",
             meaning: "Khởi đầu mùa thu — Gió heo may chớm về, bầu trời cao trong và dịu mát dần.",
             advice: "Thời điểm lý tưởng để hoạch định mục tiêu nửa cuối năm, khai trương và thu hoạch.",
@@ -545,6 +608,7 @@
         {
             name: "Xử Thử",
             icon: "term-autumn-cool.svg",
+            animGroup: "wind",
             season: "Mùa Thu • Hành Kim",
             meaning: "Dứt nắng nóng (Mưa ngâu) — Cái oi bức mùa hè chấm dứt, nhường chỗ cho tiết trời thu mát mẻ.",
             advice: "Rất tốt cho việc nghỉ ngơi phục hồi sức lực, gắn kết gia đình và sắp xếp lại công việc.",
@@ -556,6 +620,7 @@
         {
             name: "Bạch Lộ",
             icon: "term-dew.svg",
+            animGroup: "rain",
             season: "Mùa Thu • Hành Kim",
             meaning: "Sương trắng — Đêm về se lạnh khiến hơi nước ngưng tụ thành những giọt sương trắng trên lá.",
             advice: "Nên giữ ấm khi sáng sớm, thuận lợi cho việc học hành, thi cử và sáng tạo.",
@@ -567,6 +632,7 @@
         {
             name: "Thu Phân",
             icon: "term-autumn-day-night.svg",
+            animGroup: "snow",
             season: "Mùa Thu • Hành Kim",
             meaning: "Giữa thu cân bằng — Thời lượng ngày và đêm bằng nhau, tiết trời thu trong trẻo nhất trong năm.",
             advice: "Đại lợi cho việc hội họp, đoàn viên, ký kết giao ước và thưởng ngoạn mùa thu.",
@@ -578,6 +644,7 @@
         {
             name: "Hàn Lộ",
             icon: "term-cold-dew.svg",
+            animGroup: "rain",
             season: "Cuối Thu • Hành Kim",
             meaning: "Sương lạnh — Khí trời chuyển lạnh sâu hơn, sương đêm ngưng tụ dày và lạnh buốt trên cây cỏ.",
             advice: "Hợp thu vén tài sản, củng cố nội lực và chăm sóc hệ hô hấp khi giao mùa.",
@@ -589,6 +656,7 @@
         {
             name: "Sương Giáng",
             icon: "term-frost.svg",
+            animGroup: "rain",
             season: "Cuối Thu • Hành Kim",
             meaning: "Sương mù & Giá lạnh — Tiết khí cuối cùng của mùa thu trước khi bước sang mùa đông.",
             advice: "Nên hoàn tất các kế hoạch mùa thu, chuẩn bị tích trữ nguồn lực cho mùa đông.",
@@ -600,6 +668,7 @@
         {
             name: "Lập Đông",
             icon: "term-winter-snow.svg",
+            animGroup: "wind",
             season: "Mùa Đông • Hành Thủy",
             meaning: "Bắt đầu mùa đông — Gió mùa đông bắc tràn về, vạn vật thu mình tích trữ năng lượng.",
             advice: "Rất tốt cho việc bồi bổ sức khỏe, cất trữ tài sản và sum họp gia đình ấm cúng.",
@@ -611,6 +680,7 @@
         {
             name: "Tiểu Tuyết",
             icon: "term-winter-minor-snow.svg",
+            animGroup: "snow",
             season: "Mùa Đông • Hành Thủy",
             meaning: "Tuyết nhẹ / Rét đầu đông — Nhiệt độ giảm thấp, không khí khô lạnh rõ rệt.",
             advice: "Thích hợp nghiên cứu chuyên sâu, làm việc nội bộ và giữ ấm cơ thể.",
@@ -622,6 +692,7 @@
         {
             name: "Đại Tuyết",
             icon: "term-winter-major-snow.svg",
+            animGroup: "snow",
             season: "Mùa Đông • Hành Thủy",
             meaning: "Tuyết dày / Rét đậm — Hàn khí bao phủ mạnh mẽ, đêm dài ngày ngắn.",
             advice: "Nên hạn chế đi xa mạo hiểm, ưu tiên củng cố tài chính và chăm sóc người thân.",
@@ -633,6 +704,7 @@
         {
             name: "Đông Chí",
             icon: "term-winter-solstice.svg",
+            animGroup: "snow",
             season: "Mùa Đông • Hành Thủy",
             meaning:
                 "Giữa đông — Ngày ngắn nhất và đêm dài nhất trong năm; từ sau Đông Chí dương khí bắt đầu hồi sinh.",
@@ -644,7 +716,6 @@
         },
     ];
 
-    // Hàm tạo HTML Bento Tooltip 3 tầng (Tách câu "Bấm để mở..." xuống dòng dưới thành Tag riêng biệt)
     const buildBentoTooltipHtml = (title, desc, tagLabel) => `
         <span class="bento-tooltip" role="tooltip">
             <strong class="bento-tooltip__title">✦ ${title}</strong>
@@ -713,7 +784,6 @@
         };
     };
 
-    // Đóng / Mở Bento Modal Giải Nghĩa Thuật Ngữ (Dùng chung cho cả Hướng xuất hành, Tiết khí, Lục diệu & Bảng 12 Giờ)
     const closeDayTermModal = () => {
         const modal = document.getElementById("day-term-modal");
         if (!modal) return;
@@ -736,7 +806,6 @@
 
         visualEl.classList.remove("is-zodiac-filtered");
 
-        // 1. Mở từ khối Hướng Xuất Hành (Hỷ Thần / Tài Thần / Hạc Thần)
         if (colType === "direction" && currentDayContext) {
             const deity = DIRECTION_DEITIES[extraKey] || DIRECTION_DEITIES.hy;
             const dirVal = currentDayContext.directions[extraKey] || "Đông Nam";
@@ -755,9 +824,7 @@
             descEl.textContent = deity.desc;
             adviceEl.textContent = `${deity.advice} (Trong ngày ${currentDayContext.dayCanChi} - ${currentDayContext.dayNapAm}, hướng ${deity.name} nằm tại phương ${dirVal}).`;
             seoLabelEl.textContent = `Tra cứu Hướng Xuất Hành & Cát Thần`;
-        }
-        // 2. Mở từ khối Thông Tin Tiết Khí (24 Tiết Khí)
-        else if (colType === "solarterm" && currentDayContext) {
+        } else if (colType === "solarterm" && currentDayContext) {
             const term = currentDayContext.termRange;
             catEl.textContent = "Nhị Thập Tứ Tiết Khí";
             titleEl.textContent = `Tiết ${term.name}`;
@@ -774,9 +841,7 @@
             descEl.textContent = `Tiết ${term.name}: ${term.meaning}`;
             adviceEl.textContent = term.advice;
             seoLabelEl.textContent = `Xem bảng 24 Tiết Khí trong năm`;
-        }
-        // 3. Mở từ Bảng 12 Canh Giờ hoặc Lưới 12 ô Khổng Minh Lục Diệu
-        else {
+        } else {
             const rowData = currentDayHoursData[hourIdx];
             if (!rowData) return;
 
@@ -1113,7 +1178,7 @@
         const toolbarHeading = document.getElementById("day-toolbar-heading");
         if (toolbarHeading) toolbarHeading.textContent = fullViDateFormatter.format(viewingDate);
 
-        // 1. CỘT TRÁI (Tờ Lịch Bloc & Phong Thủy)
+        // 1. CỘT TRÁI (Tờ Lịch Bloc, Giờ Hoàng/Hắc Đạo, Trực/Sao & Việc nên làm động theo Trực)
         document.getElementById("detail-solar-year").textContent = String(sYear);
         document.getElementById("detail-solar-month-vn").textContent = info.solarMonthVnLabel;
         document.getElementById("detail-solar-month-en").textContent = info.solarMonthEnLabel;
@@ -1148,9 +1213,23 @@
         document.getElementById("detail-age-good").textContent = info.ageHarmony.good;
         document.getElementById("detail-age-bad").textContent = info.ageHarmony.bad;
 
+        const actionSet = TRUC_ACTIONS_MAP[info.trucObj.name] || TRUC_ACTIONS_MAP["Bế"];
+        const doListEl = document.getElementById("detail-do-list");
+        const dontListEl = document.getElementById("detail-dont-list");
+        if (doListEl) {
+            doListEl.innerHTML = actionSet.doList
+                .map((item) => `<li class="fengshui-actions__chip">${item}</li>`)
+                .join("");
+        }
+        if (dontListEl) {
+            dontListEl.innerHTML = actionSet.dontList
+                .map((item) => `<li class="fengshui-actions__chip">${item}</li>`)
+                .join("");
+        }
+
         updateHistoryForDay(sDay, sMonth);
 
-        // 2. CHUẨN BỊ DỮ LIỆU NGỮ CẢNH NGÀY & 12 CANH GIỜ (Tính sẵn Mệnh Hợp/Kỵ cho từng giờ)
+        // 2. CHUẨN BỊ DỮ LIỆU NGỮ CẢNH NGÀY & 12 CANH GIỜ
         const sexagenaryIdx = (((6 * dayStemIdx - 5 * info.dayChiIdx) % 60) + 60) % 60;
         const hyDir = HY_THAN_BY_STEM[dayStemIdx] || "Tây Bắc";
         const taiDir = TAI_THAN_BY_STEM[dayStemIdx] || "Đông Nam";
@@ -1252,7 +1331,7 @@
             };
         });
 
-        // 3. CỘT PHẢI — KHỐI 1: HƯỚNG XUẤT HÀNH (3 VỊ THẦN CÓ ICON SVG + WATERMARK + TOOLTIP TAG)
+        // 3. CỘT PHẢI — KHỐI 1: HƯỚNG XUẤT HÀNH
         const dirGridEl = document.getElementById("day-directions-grid");
         if (dirGridEl) {
             const dirItems = [
@@ -1298,7 +1377,7 @@
                 .join("");
         }
 
-        // 4. CỘT PHẢI — KHỐI 2: THÔNG TIN TIẾT KHÍ (24 ICON WEATHER + WATERMARK + TOOLTIP TAG)
+        // 4. CỘT PHẢI — KHỐI 2: THÔNG TIN TIẾT KHÍ (GẮN data-term-anim CHO PHƯƠNG ÁN 1)
         const termSubEl = document.getElementById("day-term-summary-sub");
         if (termSubEl) {
             termSubEl.textContent = `Tiết ${termRange.name} (${termRange.season}) — ${termRange.meaning}`;
@@ -1342,6 +1421,7 @@
                         <a
                             href="${termHref}"
                             class="day-solarterm-box ${b.isPrimary ? "day-solarterm-box--primary" : ""} has-bento-tooltip"
+                            data-term-anim="${termRange.animGroup || "wind"}"
                             data-col-modal="solarterm"
                         >
                             <span class="day-solarterm-box__card-bg" aria-hidden="true">
@@ -1371,7 +1451,7 @@
                 .join("");
         }
 
-        // 5. CỘT PHẢI — KHỐI 3: KHỔNG MINH LỤC DIỆU (6 ICON SVG + HỢP MỆNH NGŨ HÀNH + TOOLTIP TAG)
+        // 5. CỘT PHẢI — KHỐI 3: KHỔNG MINH LỤC DIỆU (6 ANIMATION ICON RIÊNG BIỆT)
         document.getElementById("day-lucdieu-day-badge").textContent = dayLucDieuObj.name;
         document.getElementById("day-lucdieu-summary").textContent =
             `Ngày ${dayLucDieuObj.name} — ${dayLucDieuObj.desc}`;
@@ -1385,6 +1465,7 @@
                         <a
                             href="./utilities.html?lucdieu=${starObj.slug}"
                             class="day-lucdieu-cell ${starObj.isGood ? "day-lucdieu-cell--good" : "day-lucdieu-cell--bad"} has-bento-tooltip"
+                            data-lucdieu-slug="${starObj.slug}"
                             data-col-modal="lucdieu"
                             data-hour-idx="${hIdx}"
                         >
@@ -1414,7 +1495,7 @@
                 .join("");
         }
 
-        // 6. CỘT PHẢI — KHỐI 4: MẶT TRỜI 4 MIỀN (CÓ ICON MỌC sun-rise.svg & LẶN sun-set.svg)
+        // 6. CỘT PHẢI — KHỐI 4: MẶT TRỜI 4 MIỀN
         const sunInfo = computeSunTimes4Regions(sDay, sMonth, sYear);
         document.getElementById("day-sun-date-label").textContent = `${pad(sDay)}/${pad(sMonth)}/${sYear}`;
         document.getElementById("day-sun-length-label").textContent = sunInfo.dayLengthLabel;
@@ -1451,7 +1532,7 @@
                 .join("");
         }
 
-        // 7. TẦNG DƯỚI: 12 CANH GIỜ (THAY EMOJI BẰNG SVG hoang-dao.svg / hac-dao.svg + TOOLTIP TAG TÁCH DÒNG)
+        // 7. TẦNG DƯỚI: 12 CANH GIỜ (ĐỒNG BỘ ANIMATION LỤC DIỆU & HOÀNG/HẮC ĐẠO Ở CỘT 3)
         const hourlyListEl = document.getElementById("day-hourly-list");
         if (hourlyListEl) {
             hourlyListEl.innerHTML = currentDayHoursData
@@ -1520,19 +1601,28 @@
                                 )}
                             </a>
 
-                            <!-- CỘT 3: KHỔNG MINH LỤC DIỆU & ICON SVG HOÀNG/HẮC ĐẠO -->
+                            <!-- CỘT 3: KHỔNG MINH LỤC DIỆU & ICON SVG HOÀNG/HẮC ĐẠO (CÓ ANIMATION ĐỒNG BỘ) -->
                             <a
                                 href="./utilities.html?lucdieu=${starObj.slug}"
                                 class="day-hour-row__col-link day-hour-row__col-lucdieu has-bento-tooltip"
                                 data-col-modal="lucdieu"
                                 data-hour-idx="${hIdx}"
                             >
-                                <span class="day-hour-row__badge ${starObj.isGood ? "day-hour-row__badge--good" : "day-hour-row__badge--bad"}">
+                                <span
+                                    class="day-hour-row__badge ${starObj.isGood ? "day-hour-row__badge--good" : "day-hour-row__badge--bad"}"
+                                    data-lucdieu-slug="${starObj.slug}"
+                                >
                                     <img src="${starObj.icon}" alt="" aria-hidden="true" />
                                     <span>${starObj.name}</span>
                                 </span>
                                 <span class="day-hour-row__dao-sub">
-                                    <img src="${daoIconPath}" alt="" aria-hidden="true" class="day-hour-row__dao-icon" />
+                                    <img
+                                        src="${daoIconPath}"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="day-hour-row__dao-icon"
+                                        data-dao-type="${fortuneKey}"
+                                    />
                                     <span>${isHoangDao ? "Giờ Hoàng Đạo" : "Giờ Hắc Đạo"}</span>
                                 </span>
                                 ${buildBentoTooltipHtml(
@@ -1658,7 +1748,6 @@
             };
         }
 
-        // Sự kiện Click Hybrid ủy quyền trên toàn trang Ngày (Bắt cả Hướng xuất hành, Tiết khí, Lục diệu & Bảng 12 Giờ)
         if (mainDayContainer) {
             mainDayContainer.addEventListener("click", (e) => {
                 const linkEl = e.target.closest("[data-col-modal]");
@@ -1674,7 +1763,6 @@
             });
         }
 
-        // Sự kiện đóng Bento Modal Quick-View
         document.getElementById("day-term-modal-close")?.addEventListener("click", closeDayTermModal);
         document.getElementById("day-term-modal-cancel")?.addEventListener("click", closeDayTermModal);
         document.getElementById("day-term-modal-backdrop")?.addEventListener("click", closeDayTermModal);
