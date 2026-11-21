@@ -22,9 +22,14 @@
 
     const syncActiveSidebarLink = () => {
         const rawPage = window.location.pathname.split("/").pop() || "index.html";
-        const targetNavPage = rawPage === "detail.html" ? "index.html" : rawPage;
-        const sidebarLinks = document.querySelectorAll(".sidebar__link[data-nav-page]");
+        let targetNavPage = rawPage;
+        if (rawPage === "detail.html") {
+            targetNavPage = "index.html";
+        } else if (rawPage === "iching-detail.html" || rawPage === "tarot-detail.html") {
+            targetNavPage = "utilities.html";
+        }
 
+        const sidebarLinks = document.querySelectorAll(".sidebar__link[data-nav-page]");
         sidebarLinks.forEach((link) => {
             const isMatch = link.dataset.navPage === targetNavPage;
             link.classList.toggle("sidebar__link--active", isMatch);

@@ -1,0 +1,67 @@
+// ==================== MỤC 6: HOROSCOPE 12 CUNG HOÀNG ĐẠO (ICON SVG 128x128 + FILTER NGŨ HÀNH) ====================
+    let hsDay = 13;
+    let hsMonth = 1;
+    const HOROSCOPE_ICON_DIR = "./assets/icons/horoscope";
+
+    const buildHoroscopeImgHtml = (signKey, extraClass = "") => `
+        <img
+            src="${HOROSCOPE_ICON_DIR}/${signKey}.svg"
+            alt=""
+            width="128"
+            height="128"
+            loading="lazy"
+            decoding="async"
+            ${extraClass ? `class="${extraClass}"` : ""}
+        />
+    `;
+
+    const renderHoroscopeSign = (sign) => {
+        const targetSign = sign || HOROSCOPE_SIGNS[0];
+        setHtml("hs-sign-symbol", buildHoroscopeImgHtml(targetSign.key));
+        setHtml("hs-hero-watermark", buildHoroscopeImgHtml(targetSign.key, "util-horoscope-hero__watermark"));
+        setText("hs-sign-dates", targetSign.dates);
+        setText("hs-sign-element", `${targetSign.element} • Linh vật: ${targetSign.mascot}`);
+        setText("hs-sign-name", targetSign.name);
+        setText("hs-sign-traits", targetSign.traits);
+        setHtml("hs-sign-daily", `<strong>Luận giải năng lượng hôm nay:</strong> ${targetSign.daily}`);
+
+        const grid = document.getElementById("hs-signs-grid");
+        if (grid) {
+            grid.innerHTML = HOROSCOPE_SIGNS.map((s) => {
+                const isSel = s.key === targetSign.key;
+                const shortName = s.name.split("(")[0].trim();
+                const shortElem = s.element.split("•")[0].trim();
+
+                return `
+                    <article
+                        class="util-bento-item ${isSel ? "is-current-highlight" : ""} has-bento-tooltip"
+                        data-sign-key="${s.key}"
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="${isSel}"
+                        aria-label="${s.name}, ${s.dates}, ${shortElem}"
+                    >
+                        <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                            ${buildHoroscopeImgHtml(s.key, "util-bento-item__watermark")}
+                        </span>
+                        <div class="util-bento-item__top">
+                            <span class="util-bento-item__icon-box util-bento-item__icon-box--filtered" aria-hidden="true">
+                                ${buildHoroscopeImgHtml(s.key)}
+                            </span>
+                            <span class="util-bento-item__badge">${s.dates}</span>
+                        </div>
+                        <div class="util-bento-item__body">
+                            <strong class="util-bento-item__title">${shortName}</strong>
+                            <span class="util-bento-item__sub">${s.mascot}</span>
+                        </div>
+                        <p class="util-bento-item__desc">${s.traits}</p>
+                        <footer class="util-bento-item__foot">
+                            <span>${shortElem}</span>
+                            <span aria-hidden="true">&#8594;</span>
+                        </footer>
+                        ${buildBentoTooltipHtml(s.name, `${s.element}. ${s.daily}`, `✦ Bấm để mở luận giải ${s.name}`)}
+                    </article>
+                `;
+            }).join("");
+        }
+    };

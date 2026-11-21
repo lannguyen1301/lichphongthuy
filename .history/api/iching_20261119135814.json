@@ -1,0 +1,122 @@
+[
+    {
+        "num": 1,
+        "name": "Thuần Càn (Càn vi Thiên)",
+        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Càn (Trời)",
+        "lines": [1, 1, 1, 1, 1, 1],
+        "fortune": "Đại Cát",
+        "judgment": "Càn: Nguyên, Hanh, Lợi, Trinh. Khí dương cương kiện, tự cường bất tức, vạn vật khởi sinh.",
+        "image": "Trời chuyển động mạnh mẽ, người quân tử noi theo đó mà tự lực vươn lên không ngừng nghỉ.",
+        "advice": "Thời cơ đại cát để khởi sự lớn, dẫn dắt dự án và giữ vị thế chủ động. Cần kết hợp sự quyết đoán với lòng khiêm tốn."
+    },
+    {
+        "num": 2,
+        "name": "Thuần Khôn (Khôn vi Địa)",
+        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Khôn (Đất)",
+        "lines": [0, 0, 0, 0, 0, 0],
+        "fortune": "Cát Hanh",
+        "judgment": "Khôn: Nguyên hanh, lợi tẫn mã chi trinh. Đức đất dày rộng nâng đỡ vạn vật, nhu thuận mà bền bỉ.",
+        "image": "Thế đất rộng dày, người quân tử lấy đức dày để dung nạp và che chở muôn người.",
+        "advice": "Thuận theo thời thế, kiên nhẫn lắng nghe và hậu thuẫn đồng đội sẽ giúp bạn tích lũy thành quả vững chắc."
+    },
+    {
+        "num": 11,
+        "name": "Địa Thiên Thái (Càn hạ - Khôn thượng)",
+        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Khôn (Đất)",
+        "lines": [1, 1, 1, 0, 0, 0],
+        "fortune": "Đại Cát",
+        "judgment": "Thái: Tiểu vãng đại lai, cát hanh. Trời đất giao hòa, âm dương thông suốt, muôn vật hưng thịnh.",
+        "image": "Khí trời và đất giao nhau tạo nên quẻ Thái. Bậc quân tử tài bồi cơ đồ giúp tập thể an lạc.",
+        "advice": "Mọi sự bế tắc đã qua, vận hội hanh thông đang mở ra. Đại lợi cho việc hợp tác, ký kết, mở rộng thị trường và cầu tài."
+    },
+    {
+        "num": 14,
+        "name": "Hỏa Thiên Đại Hữu (Càn hạ - Ly thượng)",
+        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Ly (Lửa)",
+        "lines": [1, 1, 1, 1, 0, 1],
+        "fortune": "Đại Cát",
+        "judgment": "Đại Hữu: Nguyên hanh. Mặt trời tỏa sáng trên bầu trời cao, vạn vật đều được soi chiếu, phúc lộc dồi dào.",
+        "image": "Lửa ở trên trời là tượng quẻ Đại Hữu. Người quân tử ngăn điều ác, nêu cao điều thiện, thuận theo mệnh trời.",
+        "advice": "Tài vận và uy tín cùng vượng. Rất thuận lợi cho việc đầu tư dài hạn, xây dựng thương hiệu và kết giao quý nhân."
+    },
+    {
+        "num": 15,
+        "name": "Địa Sơn Khiêm (Cấn hạ - Khôn thượng)",
+        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Khôn (Đất)",
+        "lines": [0, 0, 1, 0, 0, 0],
+        "fortune": "Cát Hanh",
+        "judgment": "Khiêm: Hanh, quân tử hữu chung. Núi cao ẩn mình dưới đất thấp, càng khiêm nhường càng tôn quý bền lâu.",
+        "image": "Trong đất có núi là tượng quẻ Khiêm. Người quân tử bớt chỗ nhiều, thêm vào chỗ ít để giữ sự cân bằng.",
+        "advice": "Giữ thái độ khiêm tốn, lắng nghe và điềm đạm sẽ giúp bạn hóa giải mọi trở ngại và thu phục lòng người."
+    },
+    {
+        "num": 18,
+        "name": "Sơn Phong Cổ (Tốn hạ - Cấn thượng)",
+        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Cấn (Núi)",
+        "lines": [0, 1, 1, 0, 0, 1],
+        "fortune": "Bình Hòa",
+        "judgment": "Cổ: Nguyên hanh, lợi thiệp đại xuyên. Chỉnh đốn những việc cũ kỹ để mở ra kỷ nguyên phát triển mới.",
+        "image": "Dưới núi có gió là tượng quẻ Cổ. Người quân tử chấn chỉnh phong hóa, nuôi dưỡng đức độ bền vững.",
+        "advice": "Đã đến lúc rà soát và đổi mới những quy trình cũ. Sự cải tổ dứt khoát, minh bạch sẽ mang lại thành quả vượt bậc."
+    },
+    {
+        "num": 24,
+        "name": "Địa Lôi Phục (Chấn hạ - Khôn thượng)",
+        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Khôn (Đất)",
+        "lines": [1, 0, 0, 0, 0, 0],
+        "fortune": "Cát Hanh",
+        "judgment": "Phục: Hanh, xuất nhập vô tật, bằng lai vô cữu. Một hào dương trở lại, sinh khí bắt đầu hồi sinh.",
+        "image": "Sấm ẩn trong lòng đất là tượng quẻ Phục. Nên tĩnh dưỡng nội lực để đón chu kỳ hưng thịnh sắp tới.",
+        "advice": "Cơ hội phục hồi và khởi sắc đang manh nha. Hãy kiên trì nuôi dưỡng những bước đi đầu tiên thật vững chắc."
+    },
+    {
+        "num": 35,
+        "name": "Hỏa Địa Tấn (Khôn hạ - Ly thượng)",
+        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Ly (Lửa)",
+        "lines": [0, 0, 0, 1, 0, 1],
+        "fortune": "Đại Cát",
+        "judgment": "Tấn: Khang hầu dụng tích mã phồn thứ. Mặt trời mọc trên mặt đất, công danh tiến bước rạng rỡ.",
+        "image": "Ánh sáng vươn lên khỏi mặt đất là tượng quẻ Tấn. Người quân tử tự làm sáng tỏ đức hạnh của mình.",
+        "advice": "Thời vận thăng tiến mạnh mẽ. Rất thuận lợi cho việc trình bày đề án, ứng tuyển, mở rộng đối tác và nâng tầm vị thế."
+    },
+    {
+        "num": 42,
+        "name": "Phong Lôi Ích (Chấn hạ - Tốn thượng)",
+        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Tốn (Gió)",
+        "lines": [1, 0, 0, 0, 1, 1],
+        "fortune": "Đại Cát",
+        "judgment": "Ích: Lợi hữu du vãng, lợi thiệp đại xuyên. Gió sấm tương trợ cho nhau, tăng thêm phúc lộc và sức mạnh.",
+        "image": "Gió và sấm khích động lẫn nhau là tượng quẻ Ích. Người quân tử thấy điều thiện thì noi theo, có lỗi thì sửa đổi.",
+        "advice": "Rất tốt để tiến hành dự án lớn, học thêm kỹ năng mới và hỗ trợ cộng sự cùng phát triển."
+    },
+    {
+        "num": 46,
+        "name": "Địa Phong Thăng (Tốn hạ - Khôn thượng)",
+        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Khôn (Đất)",
+        "lines": [0, 1, 1, 0, 0, 0],
+        "fortune": "Cát Hanh",
+        "judgment": "Thăng: Nguyên hanh, dụng kiến đại nhân, vật tuất. Cây non vươn lên từ đất, tích tiểu thành đại.",
+        "image": "Trong đất sinh cây là tượng quẻ Thăng. Người quân tử thuận đức mà tích lũy từng bước nhỏ thành sự nghiệp lớn.",
+        "advice": "Hãy kiên nhẫn đi lên từng nấc thang vững chắc và chủ động tìm kiếm sự cố vấn từ người có kinh nghiệm."
+    },
+    {
+        "num": 50,
+        "name": "Hỏa Phong Đỉnh (Tốn hạ - Ly thượng)",
+        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Ly (Lửa)",
+        "lines": [0, 1, 1, 1, 0, 1],
+        "fortune": "Đại Cát",
+        "judgment": "Đỉnh: Nguyên cát, hanh. Củi lửa nung nấu thành quả, đổi cũ thay mới, nền tảng vững vàng như vạc ba chân.",
+        "image": "Trên gỗ có lửa là tượng quẻ Đỉnh. Người quân tử chỉnh đốn ngôi vị và giữ gìn thiên mệnh vững bền.",
+        "advice": "Thời điểm chín muồi để hoàn thiện sản phẩm cốt lõi, kiện toàn đội ngũ và xây dựng nền móng dài hạn."
+    },
+    {
+        "num": 63,
+        "name": "Thủy Hỏa Ký Tế (Ly hạ - Khảm thượng)",
+        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Khảm (Nước)",
+        "lines": [1, 0, 1, 0, 1, 0],
+        "fortune": "Thận Trọng",
+        "judgment": "Ký Tế: Hanh tiểu, lợi trinh. Nước lửa giao hòa đúng ngôi vị, mọi việc đã hoàn thành trật tự viên mãn.",
+        "image": "Nước ở trên lửa là tượng quẻ Ký Tế. Người quân tử lúc thành công vẫn lo nghĩ phòng ngừa rủi ro từ sớm.",
+        "advice": "Mục tiêu hiện tại đã đạt độ chín muồi. Hãy củng cố thành quả, tránh chủ quan và chuẩn bị kỹ lưỡng cho chu kỳ tiếp theo."
+    }
+]

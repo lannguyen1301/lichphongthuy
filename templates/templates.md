@@ -620,7 +620,7 @@
 ## footer.html
 
 ```html
-<!-- Tệp templates/footer.html (Nạp vào <footer id="footer" class="footer"> trong index.html) -->
+<!-- Tệp templates/footer.html (Nạp vào <footer id="footer" class="footer">) -->
 <div class="container">
     <!-- HÀNG TRÊN: 3 Ô BENTO CHÍNH (5 CỘT - 4 CỘT - 3 CỘT TRÊN PC) -->
     <div class="row footer__bento-row">
@@ -730,7 +730,7 @@
             </section>
         </div>
 
-        <!-- BENTO 2 (4 CỘT): ĐIỀU HƯỚNG NHANH (2 CỘT LINK CHUẨN LANDMARK NAV) -->
+        <!-- BENTO 2 (4 CỘT): ĐIỀU HƯỚNG NHANH (ĐÃ NỐI ĐỦ 100% ĐƯỜNG DẪN THẬT) -->
         <div class="col-4 col-lg-7 col-md-12">
             <div class="footer__card footer__card--links">
                 <nav class="footer__nav" aria-label="Danh mục tra cứu lịch">
@@ -738,7 +738,7 @@
                     <ul class="footer__list">
                         <li class="footer__item">
                             <a
-                                href="#main"
+                                href="./day.html"
                                 class="footer__link"
                                 data-footer-nav="today"
                                 title="Xem chi tiết tờ lịch Bloc hôm nay"
@@ -748,7 +748,7 @@
                         </li>
                         <li class="footer__item">
                             <a
-                                href="#month-cal-section"
+                                href="./index.html#month-cal-section"
                                 class="footer__link"
                                 data-footer-nav="month"
                                 title="Xem lưới lịch tháng và ngày Hoàng Đạo"
@@ -769,7 +769,7 @@
                         </li>
                         <li class="footer__item">
                             <a
-                                href="#!"
+                                href="./utilities.html?tab=solarterm"
                                 class="footer__link"
                                 data-footer-nav="solar-terms"
                                 title="Tra cứu 24 Tiết khí trong năm"
@@ -784,27 +784,42 @@
                     <h2 class="footer__heading">Phong Thủy</h2>
                     <ul class="footer__list">
                         <li class="footer__item">
-                            <a href="#!" class="footer__link" data-footer-nav="bazi" title="Lập lá số Bát Tự Tử Bình">
+                            <a
+                                href="./bazi.html"
+                                class="footer__link"
+                                data-footer-nav="bazi"
+                                title="Lập lá số Bát Tự Tử Bình"
+                            >
                                 Lá Số Bát Tự
                             </a>
                         </li>
                         <li class="footer__item">
-                            <a href="#!" class="footer__link" data-footer-nav="stars" title="Tra cứu Nhị Thập Bát Tú">
+                            <a
+                                href="./utilities.html?tab=truc-sao"
+                                class="footer__link"
+                                data-footer-nav="stars"
+                                title="Tra cứu Nhị Thập Bát Tú và 12 Trực"
+                            >
                                 Nhị Thập Bát Tú
                             </a>
                         </li>
                         <li class="footer__item">
                             <a
-                                href="#!"
+                                href="./day.html"
                                 class="footer__link"
                                 data-footer-nav="auspicious"
-                                title="Chọn ngày lành tháng tốt"
+                                title="Chọn ngày lành tháng tốt và giờ Hoàng Đạo"
                             >
                                 Xem Ngày Tốt Xấu
                             </a>
                         </li>
                         <li class="footer__item">
-                            <a href="#!" class="footer__link" data-footer-nav="wuxing" title="Bảng tra Nạp Âm Ngũ Hành">
+                            <a
+                                href="./utilities.html?tab=napam"
+                                class="footer__link"
+                                data-footer-nav="wuxing"
+                                title="Bảng tra 30 Nạp Âm Ngũ Hành"
+                            >
                                 Nạp Âm Ngũ Hành
                             </a>
                         </li>
@@ -841,11 +856,9 @@
                             Gửi
                         </button>
                     </div>
-                    <!-- Dùng thuộc tính hidden để ẩn hoàn toàn khi chưa có thông báo; aria-live giúp đọc tự động khi hiện -->
                     <p id="footer-form-feedback" class="footer__feedback" aria-live="polite" hidden></p>
                 </form>
 
-                <!-- Liên kết ngoài: Bắt buộc có target="_blank" và rel="noopener noreferrer" -->
                 <div class="footer__social">
                     <span class="footer__social-label">Kết nối &amp; Mã nguồn:</span>
                     <ul class="footer__social-list">

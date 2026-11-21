@@ -5052,9 +5052,14 @@ window.addEventListener("template-loaded", () => {
 
     const syncActiveSidebarLink = () => {
         const rawPage = window.location.pathname.split("/").pop() || "index.html";
-        const targetNavPage = rawPage === "detail.html" ? "index.html" : rawPage;
-        const sidebarLinks = document.querySelectorAll(".sidebar__link[data-nav-page]");
+        let targetNavPage = rawPage;
+        if (rawPage === "detail.html") {
+            targetNavPage = "index.html";
+        } else if (rawPage === "iching-detail.html" || rawPage === "tarot-detail.html") {
+            targetNavPage = "utilities.html";
+        }
 
+        const sidebarLinks = document.querySelectorAll(".sidebar__link[data-nav-page]");
         sidebarLinks.forEach((link) => {
             const isMatch = link.dataset.navPage === targetNavPage;
             link.classList.toggle("sidebar__link--active", isMatch);
@@ -7803,12 +7808,16 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
 
 ```js
 // assets/js/utilities.js
-// BẢN FULL 100% ĐÃ FIX SẠCH LỖI SYNTAXERROR & TYPEERROR:
-// Điều khiển Bento Dual-Navbar 2 tầng, Mobile Hamburger Menu & 10 Chuyên mục Tiện ích Vạn Niên
+// BẢN HOÀN THIỆN FULL 100%: 10 Chuyên mục + Dual-Navbar 2 Tầng + Singleton Modal +
+// JSON Architecture (Tarot 78 lá 3D Flip, Kinh Dịch, 12 Cung Hoàng Đạo SVG 128x128) + Full Keyboard a11y
 (() => {
+    const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
+    const TAROT_IMG_DIR = "./assets/images/tarot";
+    const TAROT_IMG_EXT = "png"; // Sau này convert sang WebP chỉ cần đổi đúng chữ "png" -> "webp"
+    const HOROSCOPE_ICON_DIR = "./assets/icons/horoscope";
+
     const pad = (n) => String(n).padStart(2, "0");
 
-    // Bộ 3 hàm thao tác DOM an toàn tuyệt đối (Chống lỗi Cannot set properties of null)
     const setText = (id, text) => {
         const el = document.getElementById(id);
         if (el) el.textContent = text;
@@ -7834,8 +7843,39 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/(^-|-$)/g, "");
 
-    // Phát âm báo chuông bằng Web Audio API (Chạy 100% Offline không cần file MP3 ngoài)
-    const playBellChime = () => {
+    const buildBentoTooltipHtml = (title, desc, tagLabel) => `
+        <span class="bento-tooltip" role="tooltip">
+            <strong class="bento-tooltip__title">✦ ${title}</strong>
+            <span class="bento-tooltip__desc">${desc}</span>
+            <span class="bento-tooltip__tag">${tagLabel} &#8594;</span>
+        </span>
+    `;
+
+    const fetchJsonSafe = async (url, fallback) => {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) return fallback;
+            const data = await res.json();
+            return Array.isArray(data) && data.length ? data : fallback;
+        } catch (err) {
+            return fallback;
+        }
+    };
+
+    // ==================== HỆ THỐNG ÂM THANH (WEB AUDIO API + UPLOAD NHẠC TỪ MÁY) ====================
+    let customCountdownAudioUrl = "";
+    let customAlarmAudioUrl = "";
+    let activeAudioPlayer = null;
+
+    const stopCurrentAudio = () => {
+        if (activeAudioPlayer) {
+            activeAudioPlayer.pause();
+            activeAudioPlayer.currentTime = 0;
+            activeAudioPlayer = null;
+        }
+    };
+
+    const playSynthesizedBell = () => {
         try {
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
             if (!AudioCtx) return;
@@ -7845,18 +7885,261 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 const gain = ctx.createGain();
                 osc.type = "sine";
                 osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.14);
-                gain.gain.setValueAtTime(0.18, ctx.currentTime + idx * 0.14);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.14 + 0.45);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime + idx * 0.14);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.14 + 0.48);
                 osc.connect(gain);
                 gain.connect(ctx.destination);
                 osc.start(ctx.currentTime + idx * 0.14);
-                osc.stop(ctx.currentTime + idx * 0.14 + 0.45);
+                osc.stop(ctx.currentTime + idx * 0.14 + 0.48);
             });
         } catch (e) {
-            // Bỏ qua nếu trình duyệt chặn tự động phát âm thanh
+            // Bỏ qua nếu trình duyệt chặn tự động phát
         }
     };
 
+    const playSoundEffect = (customUrl = "") => {
+        stopCurrentAudio();
+        if (customUrl) {
+            try {
+                activeAudioPlayer = new Audio(customUrl);
+                activeAudioPlayer.play().catch(() => playSynthesizedBell());
+                return;
+            } catch (e) {
+                playSynthesizedBell();
+                return;
+            }
+        }
+        playSynthesizedBell();
+    };
+
+    // ==================== HỆ THỐNG SINGLETON MODAL DÙNG CHUNG (#util-detail-modal) ====================
+    let modalSlideUrls = [];
+    let modalSlideIdx = 0;
+
+    const closeUtilModal = () => {
+        const modal = document.getElementById("util-detail-modal");
+        if (!modal) return;
+        modal.hidden = true;
+        document.body.style.overflow = "";
+    };
+
+    const openUtilModal = ({
+        category = "Tiện Ích Vạn Niên",
+        title = "",
+        visualHtml = "",
+        isFilteredVisual = false,
+        pills = [],
+        box1Title = "Ý nghĩa & Nội dung chi tiết",
+        desc = "",
+        box2Title = "Lời khuyên ứng dụng & Ghi chú",
+        advice = "",
+        actionHref = "./day.html",
+        actionLabel = "Xem thêm trên Lịch Ngày",
+        actionTarget = "_self",
+        mediaSlides = [],
+        videoUrl = "",
+    }) => {
+        const modal = document.getElementById("util-detail-modal");
+        if (!modal) return;
+
+        setText("util-modal-category", category);
+        setText("util-modal-title", title);
+        setText("util-modal-box1-title", box1Title);
+        setText("util-modal-desc", desc);
+        setText("util-modal-box2-title", box2Title);
+        setText("util-modal-advice", advice);
+        setText("util-modal-action-label", actionLabel);
+        setAttr("util-modal-action-link", "href", actionHref);
+        setAttr("util-modal-action-link", "target", actionTarget);
+        setAttr("util-modal-action-link", "rel", "noopener noreferrer");
+
+        const visualEl = document.getElementById("util-modal-visual");
+        if (visualEl) {
+            visualEl.classList.toggle("is-zodiac-filtered", Boolean(isFilteredVisual));
+            visualEl.innerHTML = visualHtml;
+        }
+
+        const pillsEl = document.getElementById("util-modal-pills");
+        if (pillsEl) {
+            pillsEl.innerHTML = pills
+                .map(
+                    (p, i) =>
+                        `<span class="day-term-modal__pill ${i === 0 ? "day-term-modal__pill--highlight" : ""}">${p}</span>`,
+                )
+                .join("");
+        }
+
+        // Xử lý Khung Smart Media (Video hoặc Slideshow Ảnh cho Ngày Này Năm Xưa)
+        const mediaStage = document.getElementById("util-modal-media-stage");
+        if (mediaStage) {
+            if (videoUrl) {
+                mediaStage.hidden = false;
+                mediaStage.innerHTML = `<video src="${videoUrl}" controls autoplay muted playsinline></video>`;
+            } else if (mediaSlides && mediaSlides.length > 0) {
+                modalSlideUrls = mediaSlides;
+                modalSlideIdx = 0;
+                mediaStage.hidden = false;
+                const renderSlide = () => {
+                    mediaStage.innerHTML = `
+                        <img src="${modalSlideUrls[modalSlideIdx]}" alt="${title}" onerror="this.src='${DEFAULT_COVER_IMG}'" />
+                        ${
+                            modalSlideUrls.length > 1
+                                ? `
+                            <div class="util-modal-media__controls">
+                                <button type="button" class="util-modal-media__slide-btn" id="util-slide-prev">&#10094; Ảnh trước</button>
+                                <span class="util-modal-media__slide-btn">${modalSlideIdx + 1} / ${modalSlideUrls.length}</span>
+                                <button type="button" class="util-modal-media__slide-btn" id="util-slide-next">Ảnh tiếp &#10095;</button>
+                            </div>
+                        `
+                                : ""
+                        }
+                    `;
+                    document.getElementById("util-slide-prev")?.addEventListener("click", () => {
+                        modalSlideIdx = (modalSlideIdx - 1 + modalSlideUrls.length) % modalSlideUrls.length;
+                        renderSlide();
+                    });
+                    document.getElementById("util-slide-next")?.addEventListener("click", () => {
+                        modalSlideIdx = (modalSlideIdx + 1) % modalSlideUrls.length;
+                        renderSlide();
+                    });
+                };
+                renderSlide();
+            } else {
+                mediaStage.hidden = true;
+                mediaStage.innerHTML = "";
+            }
+        }
+
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+    };
+
+    // ==================== COMPONENT TÁI SỬ DỤNG: CUSTOM BENTO DATE PICKER (NGÀY - THÁNG - NĂM) ====================
+    const createBentoDatePicker = (containerId, initialDate, onChangeCallback) => {
+        const container = document.getElementById(containerId);
+        if (!container) return null;
+
+        const state = {
+            day: initialDate.day || 15,
+            month: initialDate.month || 11,
+            year: initialDate.year || 2026,
+            yearStart: Math.floor((initialDate.year || 2026) / 12) * 12 - 4,
+        };
+
+        const render = () => {
+            const maxDays = new Date(state.year, state.month, 0).getDate();
+            if (state.day > maxDays) state.day = maxDays;
+
+            let daysHtml = "";
+            for (let d = 1; d <= maxDays; d++) {
+                const isSel = d === state.day;
+                daysHtml += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-bp-day="${d}">${pad(d)}</button></li>`;
+            }
+
+            let monthsHtml = "";
+            for (let m = 1; m <= 12; m++) {
+                const isSel = m === state.month;
+                monthsHtml += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-bp-month="${m}">Tháng ${pad(m)}</button></li>`;
+            }
+
+            let yearsHtml = "";
+            for (let y = state.yearStart; y < state.yearStart + 12; y++) {
+                const isSel = y === state.year;
+                yearsHtml += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-bp-year="${y}">${y}</button></li>`;
+            }
+
+            container.innerHTML = `
+                <details class="bazi-picker js-cal-dropdown">
+                    <summary class="bazi-picker__summary" aria-label="Chọn ngày, hiện tại Ngày ${pad(state.day)}">
+                        <span class="bazi-picker__summary-text">Ngày ${pad(state.day)}</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
+                    </summary>
+                    <div class="bazi-picker__popover bazi-picker__popover--days">
+                        <div class="bazi-picker__popover-head">Chọn Ngày</div>
+                        <ul class="bazi-picker__grid bazi-picker__grid--days" role="listbox" aria-label="Danh sách ngày">${daysHtml}</ul>
+                    </div>
+                </details>
+
+                <details class="bazi-picker js-cal-dropdown">
+                    <summary class="bazi-picker__summary" aria-label="Chọn tháng, hiện tại Tháng ${pad(state.month)}">
+                        <span class="bazi-picker__summary-text">Tháng ${pad(state.month)}</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
+                    </summary>
+                    <div class="bazi-picker__popover bazi-picker__popover--months">
+                        <div class="bazi-picker__popover-head">Chọn Tháng</div>
+                        <ul class="bazi-picker__grid bazi-picker__grid--months" role="listbox" aria-label="Danh sách tháng">${monthsHtml}</ul>
+                    </div>
+                </details>
+
+                <details class="bazi-picker js-cal-dropdown">
+                    <summary class="bazi-picker__summary" aria-label="Chọn năm, hiện tại Năm ${state.year}">
+                        <span class="bazi-picker__summary-text">Năm ${state.year}</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
+                    </summary>
+                    <div class="bazi-picker__popover bazi-picker__popover--years">
+                        <div class="bazi-picker__year-nav">
+                            <button type="button" class="bazi-picker__year-step" data-bp-yrange="-12" aria-label="Lùi 12 năm">&#10094;</button>
+                            <span class="bazi-picker__year-range">${state.yearStart} - ${state.yearStart + 11}</span>
+                            <button type="button" class="bazi-picker__year-step" data-bp-yrange="12" aria-label="Tiến 12 năm">&#10095;</button>
+                        </div>
+                        <ul class="bazi-picker__grid bazi-picker__grid--years" role="listbox" aria-label="Danh sách năm">${yearsHtml}</ul>
+                    </div>
+                </details>
+            `;
+
+            const pickers = container.querySelectorAll(".bazi-picker");
+            pickers.forEach((cur) => {
+                cur.ontoggle = () => {
+                    if (cur.open) {
+                        document.querySelectorAll(".bazi-picker[open]").forEach((other) => {
+                            if (other !== cur) other.removeAttribute("open");
+                        });
+                    }
+                };
+            });
+        };
+
+        container.addEventListener("click", (e) => {
+            const dBtn = e.target.closest("[data-bp-day]");
+            const mBtn = e.target.closest("[data-bp-month]");
+            const yBtn = e.target.closest("[data-bp-year]");
+            const rBtn = e.target.closest("[data-bp-yrange]");
+
+            if (rBtn) {
+                e.stopPropagation();
+                state.yearStart += Number(rBtn.dataset.bpYrange);
+                render();
+                const yearPicker = container.querySelectorAll(".bazi-picker")[2];
+                if (yearPicker) yearPicker.setAttribute("open", "");
+                return;
+            }
+
+            if (dBtn) state.day = Number(dBtn.dataset.bpDay);
+            else if (mBtn) state.month = Number(mBtn.dataset.bpMonth);
+            else if (yBtn) state.year = Number(yBtn.dataset.bpYear);
+            else return;
+
+            e.stopPropagation();
+            render();
+            if (typeof onChangeCallback === "function") onChangeCallback({ ...state });
+        });
+
+        render();
+        return {
+            getState: () => ({ ...state }),
+            setState: (next) => {
+                if (next.day) state.day = next.day;
+                if (next.month) state.month = next.month;
+                if (next.year) {
+                    state.year = next.year;
+                    state.yearStart = Math.floor(next.year / 12) * 12 - 4;
+                }
+                render();
+            },
+        };
+    };
+
+    // ==================== CẤU HÌNH SUB-NAVBAR 2 TẦNG ====================
     const SUB_NAV_MAP = {
         clock: [
             { id: "stopwatch", label: "Đồng hồ bấm giờ" },
@@ -7894,7 +8177,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
     let dateCalcMode = "add";
     let fsFilterKey = "fs-all";
 
-    // ==================== 1. MODULE ĐỒNG HỒ (BẤM GIỜ, ĐẾM NGƯỢC, BÁO THỨC) ====================
+    // ==================== MỤC 1: BỘ 3 ĐỒNG HỒ (BẤM GIỜ, ĐẾM NGƯỢC, BÁO THỨC) ====================
     let swTimer = null;
     let swStartTime = 0;
     let swElapsedMs = 0;
@@ -7906,7 +8189,16 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
     let cdRunning = false;
     let cdHistory = [];
 
-    let alarmsList = [{ id: 1, hour: 6, minute: 30, title: "Dậy học bài & Tập thể dục", enabled: true }];
+    let alarmsList = [
+        {
+            id: 1,
+            hour: 6,
+            minute: 30,
+            title: "Dậy học bài & Tập thể dục",
+            repeat: "Hằng ngày",
+            enabled: true,
+        },
+    ];
 
     const formatStopwatch = (ms) => {
         const totalSec = Math.floor(ms / 1000);
@@ -7947,34 +8239,101 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         container.innerHTML = alarmsList
             .map(
                 (a) => `
-                    <article class="util-alarm-item" data-alarm-id="${a.id}">
+                    <article class="util-alarm-item ${a.enabled ? "" : "is-disabled"}" data-alarm-id="${a.id}">
                         <div>
                             <strong class="util-alarm-item__time">${pad(a.hour)}:${pad(a.minute)}</strong>
                             <span class="util-alarm-item__title">${a.title}</span>
+                            <small class="util-alarm-item__meta">🔁 ${a.repeat || "Hằng ngày"} • ${a.enabled ? "Đang bật" : "Đã tắt"}</small>
                         </div>
-                        <button type="button" class="util-alarm-item__del" data-del-alarm="${a.id}">Xóa</button>
+                        <div class="util-alarm-item__right">
+                            <button
+                                type="button"
+                                class="util-alarm-item__toggle ${a.enabled ? "is-on" : ""}"
+                                data-toggle-alarm="${a.id}"
+                                aria-pressed="${a.enabled}"
+                                aria-label="Bật hoặc tắt báo thức ${pad(a.hour)}:${pad(a.minute)}"
+                                title="Bật / Tắt báo thức này"
+                            ></button>
+                            <button
+                                type="button"
+                                class="util-alarm-item__del"
+                                data-del-alarm="${a.id}"
+                                aria-label="Xóa báo thức ${pad(a.hour)}:${pad(a.minute)}"
+                                title="Xóa báo thức"
+                            >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                            </button>
+                        </div>
                     </article>
                 `,
             )
             .join("");
     };
 
-    // ==================== 2. MODULE ĐỔI NGÀY TRỰC TIẾP TẠI CHỖ ====================
+    // ==================== MỤC 2: ĐỔI NGÀY ÂM ⇄ DƯƠNG TẠI CHỖ (CUSTOM BENTO PICKERS + 6 BENTO CARDS) ====================
+    let ucDay = 15;
+    let ucMonth = 11;
+    let ucYear = 2026;
+    let ucYearStart = 2020;
+    let ucMode = "solar2lunar";
+    let lastConvertedContext = null;
+
+    const renderUcPickers = () => {
+        const maxDays = ucMode === "solar2lunar" ? new Date(ucYear, ucMonth, 0).getDate() : 30;
+        if (ucDay > maxDays) ucDay = maxDays;
+
+        setText("uc-day-text", `Ngày ${pad(ucDay)}`);
+        setText("uc-month-text", `Tháng ${pad(ucMonth)}`);
+        setText("uc-year-text", `Năm ${ucYear}`);
+        setText("uc-year-range-label", `${ucYearStart} - ${ucYearStart + 11}`);
+        setText("uc-mode-text", ucMode === "solar2lunar" ? "Dương lịch → Âm lịch" : "Âm lịch → Dương lịch");
+
+        const dayList = document.getElementById("uc-day-list");
+        if (dayList) {
+            let html = "";
+            for (let d = 1; d <= maxDays; d++) {
+                const isSel = d === ucDay;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-uc-day="${d}">${pad(d)}</button></li>`;
+            }
+            dayList.innerHTML = html;
+        }
+
+        const monthList = document.getElementById("uc-month-list");
+        if (monthList) {
+            let html = "";
+            for (let m = 1; m <= 12; m++) {
+                const isSel = m === ucMonth;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-uc-month="${m}">Tháng ${pad(m)}</button></li>`;
+            }
+            monthList.innerHTML = html;
+        }
+
+        const yearList = document.getElementById("uc-year-list");
+        if (yearList) {
+            let html = "";
+            for (let y = ucYearStart; y < ucYearStart + 12; y++) {
+                const isSel = y === ucYear;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-uc-year="${y}">${y}</button></li>`;
+            }
+            yearList.innerHTML = html;
+        }
+    };
+
     const renderInlineConverter = () => {
         const grid = document.getElementById("uc-result-grid");
         if (!grid || !window.LunarEngine) return;
 
-        const dInput = Math.min(31, Math.max(1, Number(document.getElementById("uc-day")?.value || 14)));
-        const mInput = Math.min(12, Math.max(1, Number(document.getElementById("uc-month")?.value || 11)));
-        const yInput = Math.min(2100, Math.max(1900, Number(document.getElementById("uc-year")?.value || 2026)));
-        const mode = document.getElementById("uc-mode")?.value || "solar2lunar";
+        let sDay = ucDay;
+        let sMonth = ucMonth;
+        let sYear = ucYear;
 
-        let sDay = dInput;
-        let sMonth = mInput;
-        let sYear = yInput;
-
-        if (mode === "lunar2solar") {
-            const conv = window.LunarEngine.convertLunar2Solar(dInput, mInput, yInput, 0);
+        if (ucMode === "lunar2solar") {
+            const conv = window.LunarEngine.convertLunar2Solar(ucDay, ucMonth, ucYear, 0);
             if (conv && conv.sDay > 0) {
                 sDay = conv.sDay;
                 sMonth = conv.sMonth;
@@ -7983,218 +8342,364 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         }
 
         const info = window.LunarEngine.getFullDayInfo(sDay, sMonth, sYear);
+        const isoDate = `${sYear}-${pad(sMonth)}-${pad(sDay)}`;
+        lastConvertedContext = { info, sDay, sMonth, sYear, isoDate };
+
+        const cards = [
+            {
+                key: "solar",
+                badge: "Dương Lịch",
+                icon: "./assets/icons/calendar.svg",
+                filtered: false,
+                title: `${pad(sDay)}/${pad(sMonth)}/${sYear}`,
+                sub: info.bilingualWeekday,
+                desc: `Tiết khí: ${info.solarTerm} • Trực: ${info.trucObj.name} (${info.trucObj.short}).`,
+                foot: "Mở tờ lịch ngày này",
+            },
+            {
+                key: "lunar",
+                badge: `Âm Lịch • ${info.isFullMonth ? "Tháng Đủ" : "Tháng Thiếu"}`,
+                icon: `./assets/icons/zodiac/${info.yearZodiacFile}.svg`,
+                filtered: true,
+                title: `${pad(info.lunarDay)}/${pad(info.lunarMonth)}/${info.lunarYear}`,
+                sub: `Năm ${info.yearCanChi} (${info.yearNapAm})`,
+                desc: `Tháng ${info.monthCanChi} • Ngày ${info.dayCanChi} • Giờ đầu ngày: ${info.ratHourCanChi}.`,
+                foot: "Xem giải nghĩa Âm lịch",
+            },
+            {
+                key: "canchi",
+                badge: info.fortuneStatus === "good" ? "Ngày Hoàng Đạo" : "Can Chi & Xung Hợp",
+                icon: `./assets/icons/zodiac/${info.zodiacFile}.svg`,
+                filtered: true,
+                title: `Ngày ${info.dayCanChi}`,
+                sub: `Tuổi hợp: ${info.ageHarmony.good}`,
+                desc: `Tuổi xung cần lưu ý: ${info.ageHarmony.bad}. ${info.trucObj.desc}`,
+                foot: "Xem xung hợp 12 Con Giáp",
+            },
+            {
+                key: "napam",
+                badge: info.elementInfo.label,
+                icon: `./assets/icons/${info.elementInfo.icon}`,
+                filtered: false,
+                title: info.dayNapAm,
+                sub: `Nạp âm tháng: ${info.monthNapAm}`,
+                desc: `Năng lượng Ngũ Hành chủ đạo của ngày ${info.dayCanChi} thuộc ${info.elementInfo.label}.`,
+                foot: "Xem chi tiết Nạp Âm",
+            },
+            {
+                key: "direction",
+                badge: "Hướng Xuất Hành",
+                icon: "./assets/icons/fengshui/tai-than.svg",
+                filtered: true,
+                title: `Tài Thần: ${info.directions.tai}`,
+                sub: `Hỷ Thần: ${info.directions.hy}`,
+                desc: "Xuất hành theo hướng Tài Thần hoặc Hỷ Thần giúp công việc, giao thương và nhân duyên hanh thông.",
+                foot: "Xem hướng tốt trong ngày",
+            },
+            {
+                key: "hours",
+                badge: "6 Giờ Hoàng Đạo",
+                icon: "./assets/icons/fengshui/hoang-dao.svg",
+                filtered: true,
+                title: "Khung Giờ Tốt",
+                sub: "Chọn giờ lành khởi sự",
+                desc: info.goodHoursStr,
+                foot: "Xem bảng 12 canh giờ",
+            },
+        ];
 
         grid.innerHTML = `
-            <article class="util-item-card is-selected">
-                <div class="util-item-card__head">
-                    <span class="util-item-card__icon-wrap">
-                        <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true" />
-                    </span>
-                    <span class="util-item-card__tag">Dương Lịch</span>
-                </div>
-                <strong class="util-item-card__title">${pad(sDay)}/${pad(sMonth)}/${sYear}</strong>
-                <span class="util-item-card__sub">${info.bilingualWeekday}</span>
-                <p class="util-item-card__desc">Tiết khí: ${info.solarTerm} • Trực: ${info.trucObj.name} (${info.trucObj.short})</p>
-            </article>
-
-            <article class="util-item-card is-selected">
-                <div class="util-item-card__head">
-                    <span class="util-item-card__icon-wrap util-item-card__icon-wrap--filtered">
-                        <img src="./assets/icons/zodiac/${info.zodiacFile}.svg" alt="" aria-hidden="true" />
-                    </span>
-                    <span class="util-item-card__tag">Âm Lịch Tương Ứng</span>
-                </div>
-                <strong class="util-item-card__title">${pad(info.lunarDay)}/${pad(info.lunarMonth)}/${info.lunarYear}</strong>
-                <span class="util-item-card__sub">Năm ${info.yearCanChi} • Tháng ${info.monthCanChi} • Ngày ${info.dayCanChi}</span>
-                <p class="util-item-card__desc">Nạp âm ngày: ${info.dayNapAm} • Mệnh năm: ${info.yearNapAm}</p>
-            </article>
-
-            <article class="util-item-card">
-                <div class="util-item-card__head">
-                    <span class="util-item-card__icon-wrap">
-                        <img src="./assets/icons/${info.elementInfo.icon}" alt="" aria-hidden="true" />
-                    </span>
-                    <span class="util-item-card__tag">Giờ Hoàng Đạo &amp; Xuất Hành</span>
-                </div>
-                <strong class="util-item-card__title">Tài Thần: ${info.directions.tai}</strong>
-                <span class="util-item-card__sub">Hỷ Thần: ${info.directions.hy} • Tuổi hợp: ${info.ageHarmony.good}</span>
-                <p class="util-item-card__desc">6 Giờ Hoàng Đạo: ${info.goodHoursStr}</p>
-            </article>
+            <div class="util-catalog-grid">
+                ${cards
+                    .map(
+                        (c, idx) => `
+                            <article
+                                class="util-bento-item ${idx < 2 ? "is-current-highlight" : ""} has-bento-tooltip"
+                                data-conv-card="${c.key}"
+                                role="button"
+                                tabindex="0"
+                                aria-label="${c.badge}: ${c.title}, ${c.sub}"
+                            >
+                                <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                                    <img src="${c.icon}" alt="" class="util-bento-item__watermark" />
+                                </span>
+                                <div class="util-bento-item__top">
+                                    <span class="util-bento-item__icon-box ${c.filtered ? "util-bento-item__icon-box--filtered" : ""}">
+                                        <img src="${c.icon}" alt="" aria-hidden="true" />
+                                    </span>
+                                    <span class="util-bento-item__badge">${c.badge}</span>
+                                </div>
+                                <div class="util-bento-item__body">
+                                    <strong class="util-bento-item__title">${c.title}</strong>
+                                    <span class="util-bento-item__sub">${c.sub}</span>
+                                </div>
+                                <p class="util-bento-item__desc">${c.desc}</p>
+                                <footer class="util-bento-item__foot">
+                                    <span>${c.foot}</span>
+                                    <span aria-hidden="true">&#8594;</span>
+                                </footer>
+                                ${buildBentoTooltipHtml(c.title, `${c.sub}. ${c.desc}`, `✦ Bấm để mở thẻ ${c.badge}`)}
+                            </article>
+                        `,
+                    )
+                    .join("")}
+            </div>
         `;
     };
 
-    // ==================== 3. MODULE 24 TIẾT KHÍ ====================
+    // ==================== MỤC 3: TRA CỨU 24 TIẾT KHÍ (ĐỒNG BỘ TRANG DAY + 6 ANIMATION) ====================
     let stViewingYear = 2026;
+    let stSeasonFilter = "all";
+
     const SOLAR_TERMS_DATA = [
         [
             "Tiểu Hàn",
             "05/01",
             "15:13",
+            "winter",
+            "sun",
             "term-winter-minor-cold.svg",
             "Chớm lạnh — Khí trời bắt đầu rét đậm, chuẩn bị bước vào giai đoạn lạnh nhất cuối năm.",
+            "Nên giữ ấm cơ thể, bồi bổ dinh dưỡng và hoàn tất các kế hoạch cuối năm.",
         ],
         [
             "Đại Hàn",
             "20/01",
             "08:35",
+            "winter",
+            "sun",
             "term-winter-major-cold.svg",
             "Rét cực điểm — Tiết khí cuối năm âm lịch, hàn khí đạt đỉnh trước khi mầm xuân trỗi dậy.",
+            "Thích hợp tổng kết năm cũ, dọn dẹp nhà cửa đón Tết và giữ ấm vùng cổ, bàn chân.",
         ],
         [
             "Lập Xuân",
             "04/02",
             "02:50",
+            "spring",
+            "sprout",
             "term-spring.svg",
             "Khởi đầu mùa xuân — Dương khí bừng dậy, cây cối đâm chồi nảy lộc, vạn vật sinh sôi.",
+            "Đại cát cho việc lập kế hoạch năm mới, xuất hành đầu xuân, trồng cây và mở rộng giao kết.",
         ],
         [
             "Vũ Thủy",
             "18/02",
             "22:40",
+            "spring",
+            "rain",
             "term-rain.svg",
             "Mưa xuân — Hơi ẩm tăng dần, mưa phùn ấm áp tưới tắm cho mùa màng tươi tốt.",
+            "Thuận lợi cho việc gieo trồng, học tập, bồi đắp tri thức và chăm sóc sức khỏe gan mật.",
         ],
         [
             "Kinh Trập",
             "05/03",
             "20:44",
+            "spring",
+            "thunder",
             "term-thunder.svg",
             "Sấm xuân thức tỉnh — Tiếng sấm đầu mùa vang lên đánh thức vạn vật sau kỳ ngủ đông.",
+            "Thời điểm rất tốt để bứt phá, triển khai dự án mới và hành động quyết đoán.",
         ],
         [
             "Xuân Phân",
             "20/03",
             "21:32",
+            "spring",
+            "snow",
             "term-spring-equinox.svg",
             "Giữa xuân cân bằng — Ngày và đêm dài bằng nhau, âm dương điều hòa.",
+            "Rất tốt cho việc hòa giải, ký kết hợp tác đôi bên cùng có lợi và cân bằng nhịp sống.",
         ],
         [
             "Thanh Minh",
             "05/04",
             "01:22",
+            "spring",
+            "sprout",
             "term-spring-clear.svg",
             "Trời trong sáng — Tiết trời quang đãng, gắn liền với truyền thống tảo mộ tri ân tổ tiên.",
+            "Hợp đi tảo mộ, tri ân tổ tiên, du xuân ngoài trời và khởi sự việc thiện lành.",
         ],
         [
             "Cốc Vũ",
             "20/04",
             "08:24",
+            "spring",
+            "rain",
             "term-grain-rain.svg",
             "Mưa rào nuôi ngũ cốc — Lượng mưa dồi dào giúp lúa màu phát triển vượt bậc.",
+            "Thuận lợi cho việc tích lũy tài chính, đầu tư dài hạn và chăm sóc gia đình.",
         ],
         [
             "Lập Hạ",
             "05/05",
             "18:30",
+            "summer",
+            "sun",
             "term-summer-sun.svg",
             "Bắt đầu mùa hạ — Nắng vàng rực rỡ, vạn vật bước vào kỳ trưởng thành mạnh mẽ.",
+            "Hợp đẩy mạnh kinh doanh, quảng bá thương hiệu và giữ tâm thái bình hòa dưới nắng nóng.",
         ],
         [
             "Tiểu Mãn",
             "21/05",
             "07:23",
+            "summer",
+            "sprout",
             "term-grain.svg",
             "Lúa trổ đòng chắc hạt — Hạt ngũ cốc bắt đầu căng mẩy báo hiệu mùa màng bội thu.",
+            "Nên kiên trì hoàn thiện các công việc đang dang dở để chuẩn bị gặt hái thành quả.",
         ],
         [
             "Mang Chủng",
             "05/06",
             "22:32",
+            "summer",
+            "sprout",
             "term-grain-ear.svg",
             "Lúa chín có râu — Thời điểm thu hoạch vụ chiêm và gieo cấy vụ mùa nhộn nhịp.",
+            "Rất tốt cho việc thu hồi công nợ, chốt doanh số và tái đầu tư xoay vòng vốn.",
         ],
         [
             "Hạ Chí",
             "21/06",
             "15:10",
+            "summer",
+            "sun",
             "term-summer-solstice.svg",
             "Đỉnh điểm mùa hạ — Ngày dài nhất trong năm, dương khí đạt cực thịnh.",
+            "Nên uống nhiều nước mát, nghỉ trưa hợp lý và tránh làm việc quá sức ngoài trời nắng gắt.",
         ],
         [
             "Tiểu Thử",
             "07/07",
             "08:45",
+            "summer",
+            "sun",
             "term-summer-minor-heat.svg",
             "Nóng nhẹ — Khí trời oi bức bắt đầu lan tỏa kèm mưa dông mùa hạ.",
+            "Hợp làm việc nơi thoáng mát, kiểm soát cảm xúc và giữ gìn sức khỏe tim mạch.",
         ],
         [
             "Đại Thử",
             "23/07",
             "02:12",
+            "summer",
+            "sun",
             "term-summer-major-heat.svg",
             "Nóng oi ả cực độ — Giai đoạn nhiệt độ cao nhất trong năm, hành Hỏa vượng.",
+            "Thích hợp dưỡng tâm, ăn thực phẩm thanh nhiệt và cẩn trọng phòng chống cháy nổ.",
         ],
         [
             "Lập Thu",
             "07/08",
             "18:28",
+            "autumn",
+            "wind",
             "term-autumn-wind.svg",
             "Khởi đầu mùa thu — Gió heo may chớm về, bầu trời cao trong và dịu mát dần.",
+            "Thời điểm lý tưởng để hoạch định mục tiêu nửa cuối năm, khai trương và thu hoạch.",
         ],
         [
             "Xử Thử",
             "23/08",
             "09:05",
+            "autumn",
+            "wind",
             "term-autumn-cool.svg",
             "Dứt nắng nóng — Cái oi bức mùa hè chấm dứt, nhường chỗ cho tiết trời thu mát mẻ.",
+            "Rất tốt cho việc nghỉ ngơi phục hồi sức lực, gắn kết gia đình và sắp xếp lại công việc.",
         ],
         [
             "Bạch Lộ",
             "07/09",
             "21:18",
+            "autumn",
+            "rain",
             "term-dew.svg",
             "Sương trắng — Đêm về se lạnh khiến hơi nước ngưng tụ thành giọt sương trên lá.",
+            "Nên giữ ấm khi sáng sớm, thuận lợi cho việc học hành, thi cử và sáng tạo.",
         ],
         [
             "Thu Phân",
             "23/09",
             "06:49",
+            "autumn",
+            "snow",
             "term-autumn-day-night.svg",
             "Giữa thu cân bằng — Thời lượng ngày và đêm bằng nhau, tiết trời thu trong trẻo.",
+            "Đại lợi cho việc hội họp, đoàn viên, ký kết giao ước và thưởng ngoạn mùa thu.",
         ],
         [
             "Hàn Lộ",
             "08/10",
             "13:02",
+            "autumn",
+            "rain",
             "term-cold-dew.svg",
             "Sương lạnh — Khí trời chuyển lạnh sâu hơn, sương đêm ngưng tụ dày.",
+            "Hợp thu vén tài sản, củng cố nội lực và chăm sóc hệ hô hấp khi giao mùa.",
         ],
         [
             "Sương Giáng",
             "23/10",
             "16:15",
+            "autumn",
+            "rain",
             "term-frost.svg",
             "Sương mù & Giá lạnh — Tiết khí cuối cùng của mùa thu trước khi sang đông.",
+            "Nên hoàn tất các kế hoạch mùa thu, chuẩn bị tích trữ nguồn lực cho mùa đông.",
         ],
         [
             "Lập Đông",
             "07/11",
             "16:20",
+            "winter",
+            "wind",
             "term-winter-snow.svg",
             "Bắt đầu mùa đông — Gió mùa đông bắc tràn về, vạn vật thu mình tích trữ năng lượng.",
+            "Rất tốt cho việc bồi bổ sức khỏe, cất trữ tài sản và sum họp gia đình ấm cúng.",
         ],
         [
             "Tiểu Tuyết",
             "22/11",
             "13:45",
+            "winter",
+            "snow",
             "term-winter-minor-snow.svg",
             "Tuyết nhẹ / Rét đầu đông — Nhiệt độ giảm thấp, không khí khô lạnh rõ rệt.",
+            "Thích hợp nghiên cứu chuyên sâu, làm việc nội bộ và giữ ấm cơ thể.",
         ],
         [
             "Đại Tuyết",
             "07/12",
             "09:08",
+            "winter",
+            "snow",
             "term-winter-major-snow.svg",
             "Tuyết dày / Rét đậm — Hàn khí bao phủ mạnh mẽ, đêm dài ngày ngắn.",
+            "Nên hạn chế đi xa mạo hiểm, ưu tiên củng cố tài chính và chăm sóc người thân.",
         ],
         [
             "Đông Chí",
             "22/12",
             "03:02",
+            "winter",
+            "snow",
             "term-winter-solstice.svg",
             "Giữa đông — Đêm dài nhất trong năm; từ sau Đông Chí dương khí bắt đầu hồi sinh.",
+            "Thời điểm cát lành để cầu phúc, đoàn viên và chuẩn bị đón vận hội mới.",
         ],
     ];
+
+    const SEASON_VN = {
+        spring: "Mùa Xuân • Hành Mộc",
+        summer: "Mùa Hạ • Hành Hỏa",
+        autumn: "Mùa Thu • Hành Kim",
+        winter: "Mùa Đông • Hành Thủy",
+    };
 
     const renderSolarTermsPanel = () => {
         setText("st-year-title", String(stViewingYear));
@@ -8207,114 +8712,109 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                   .solarTerm
             : "Lập Đông";
 
-        grid.innerHTML = SOLAR_TERMS_DATA.map(([name, ddmm, timeStr, icon, desc]) => {
-            const isCur = name === curTerm;
-            return `
-                <article class="util-term-card ${isCur ? "is-current-term" : ""}">
-                    <div class="util-term-card__top">
-                        <span class="util-term-card__icon-box">
-                            <img src="./assets/icons/weather/${icon}" alt="" aria-hidden="true" />
+        const filtered = SOLAR_TERMS_DATA.filter((item) => stSeasonFilter === "all" || item[3] === stSeasonFilter);
+
+        grid.innerHTML = filtered
+            .map(([name, ddmm, timeStr, seasonKey, animGroup, icon, desc, advice]) => {
+                const isCur = name === curTerm;
+                const iconPath = `./assets/icons/weather/${icon}`;
+                const seasonLabel = SEASON_VN[seasonKey];
+                const idx = SOLAR_TERMS_DATA.findIndex((x) => x[0] === name);
+
+                return `
+                    <article
+                        class="util-bento-item ${isCur ? "is-current-highlight" : ""} has-bento-tooltip"
+                        data-term-anim="${animGroup}"
+                        data-st-idx="${idx}"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Tiết ${name}, ${ddmm}/${stViewingYear}, ${seasonLabel}"
+                    >
+                        <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                            <img src="${iconPath}" alt="" class="util-bento-item__watermark" />
                         </span>
-                        <div class="util-term-card__date-box">
-                            <strong>${ddmm}/${stViewingYear}</strong>
-                            <small>Khởi tiết: ${timeStr}</small>
+
+                        <div class="util-bento-item__top">
+                            <span class="util-bento-item__icon-box util-bento-item__icon-box--filtered">
+                                <img src="${iconPath}" alt="" aria-hidden="true" />
+                            </span>
+                            <span class="util-bento-item__badge">${ddmm}/${stViewingYear} • ${timeStr}</span>
                         </div>
-                    </div>
-                    <strong class="util-term-card__name">Tiết ${name} ${isCur ? "• Đang vận hành" : ""}</strong>
-                    <p class="util-term-card__desc">${desc}</p>
-                </article>
-            `;
-        }).join("");
+
+                        <div class="util-bento-item__body">
+                            <strong class="util-bento-item__title">Tiết ${name} ${isCur ? "• Hiện tại" : ""}</strong>
+                            <span class="util-bento-item__sub">${seasonLabel}</span>
+                        </div>
+
+                        <p class="util-bento-item__desc">${desc}</p>
+
+                        <footer class="util-bento-item__foot">
+                            <span>Xem dưỡng sinh &amp; hành sự</span>
+                            <span aria-hidden="true">&#8594;</span>
+                        </footer>
+
+                        ${buildBentoTooltipHtml(
+                            `Tiết ${name} (${ddmm}/${stViewingYear})`,
+                            `${desc} ${advice}`,
+                            `✦ Bấm để mở thẻ chi tiết Tiết ${name}`,
+                        )}
+                    </article>
+                `;
+            })
+            .join("");
     };
 
-    // ==================== 4. MODULE KINH DỊCH & TAROT ====================
-    const ICHING_HEXAGRAMS = [
-        {
-            num: 1,
-            name: "Thuần Càn (Càn vi Thiên)",
-            lines: [1, 1, 1, 1, 1, 1],
-            judgment: "Càn: Nguyên, Hanh, Lợi, Trinh. Khí dương cương kiện, tự cường bất tức.",
-            image: "Trời chuyển động mạnh mẽ, người quân tử noi theo mà tự lực vươn lên không ngừng nghỉ.",
-            advice: "Thời cơ đại cát để khởi sự lớn, giữ vị thế chủ động, quyết đoán nhưng tránh kiêu ngạo.",
-        },
-        {
-            num: 11,
-            name: "Địa Thiên Thái (Càn hạ - Khôn thượng)",
-            lines: [1, 1, 1, 0, 0, 0],
-            judgment: "Thái: Tiểu vãng đại lai, cát hanh. Trời đất giao hòa, âm dương thông suốt.",
-            image: "Khí trời và đất giao nhau tạo nên quẻ Thái. Bậc quân tử tài bồi cơ đồ giúp muôn dân an lạc.",
-            advice: "Mọi sự bế tắc đã qua, vận hội hanh thông đang mở ra. Rất lợi cho hợp tác, ký kết và cầu tài.",
-        },
+    // ==================== MỤC 4: KINH DỊCH (JSON + 3 ĐỒNG XU 3D) & TAROT (78 LÁ JSON + LẬT 3D) ====================
+    const getTarotFrontImgUrl = (card) => `${TAROT_IMG_DIR}/${card.suit}/${card.slug}.${TAROT_IMG_EXT}`;
+    const getTarotBackImgUrl = () => `${TAROT_IMG_DIR}/back.${TAROT_IMG_EXT}`;
+
+    const SUIT_LABEL_VN = {
+        major: "Bộ Ẩn Chính • Major Arcana",
+        wands: "Bộ Gậy (Hành Hỏa) • Wands",
+        swords: "Bộ Kiếm (Hành Khí) • Swords",
+        cups: "Bộ Cốc (Hành Nước) • Cups",
+        pentacles: "Bộ Tiền (Hành Đất) • Pentacles",
+    };
+
+    let mouseEntropyAccumulator = 19870113;
+    let mouseMoveCount = 0;
+    let isTarotAnimating = false;
+
+    // Dữ liệu dự phòng tối thiểu (Sẽ tự động được thay bằng ./api/iching.json & ./api/tarot.json)
+    let ICHING_HEXAGRAMS = [
         {
             num: 14,
             name: "Hỏa Thiên Đại Hữu (Càn hạ - Ly thượng)",
+            trigrams: "Nội quái: Càn (Trời) • Ngoại quái: Ly (Lửa)",
             lines: [1, 1, 1, 1, 0, 1],
-            judgment: "Đại Hữu: Nguyên hanh. Mặt trời soi sáng trên bầu trời cao, phúc lộc dồi dào.",
-            image: "Lửa ở trên trời là tượng quẻ Đại Hữu. Người quân tử ngăn điều ác, nêu cao điều thiện.",
-            advice: "Tài vận và uy tín cùng vượng. Hãy giữ tâm khiêm cung và chia sẻ giá trị với cộng sự.",
-        },
-        {
-            num: 18,
-            name: "Sơn Phong Cổ (Tốn hạ - Cấn thượng)",
-            lines: [0, 1, 1, 0, 0, 1],
-            judgment: "Cổ: Nguyên hanh, lợi thiệp đại xuyên. Chỉnh đốn việc cũ để mở ra kỷ nguyên mới.",
-            image: "Dưới núi có gió là tượng quẻ Cổ. Người quân tử chấn chỉnh phong hóa, nuôi dưỡng đức độ bền vững.",
-            advice: "Đã đến lúc sửa chữa những thiếu sót cũ và đổi mới quy trình để tạo ra khởi đầu tốt đẹp hơn.",
-        },
-        {
-            num: 63,
-            name: "Thủy Hỏa Ký Tế (Ly hạ - Khảm thượng)",
-            lines: [1, 0, 1, 0, 1, 0],
-            judgment: "Ký Tế: Hanh tiểu, lợi trinh. Mọi việc đã hoàn thành trật tự viên mãn.",
-            image: "Nước ở trên lửa là tượng quẻ Ký Tế. Người quân tử lúc thành công vẫn lo nghĩ phòng ngừa rủi ro.",
-            advice: "Mục tiêu hiện tại đã đạt độ chín muồi. Hãy củng cố thành quả và chuẩn bị kỹ cho chu kỳ tiếp theo.",
+            fortune: "Đại Cát",
+            judgment:
+                "Đại Hữu: Nguyên hanh. Mặt trời tỏa sáng trên bầu trời cao, vạn vật đều được soi chiếu, phúc lộc dồi dào.",
+            image: "Lửa ở trên trời là tượng quẻ Đại Hữu. Người quân tử ngăn điều ác, nêu cao điều thiện, thuận theo mệnh trời.",
+            advice: "Tài vận và uy tín cùng vượng. Rất thuận lợi cho việc đầu tư dài hạn, xây dựng thương hiệu và kết giao quý nhân.",
         },
     ];
 
-    const TAROT_CARDS = [
+    let TAROT_CARDS = [
         {
-            roman: "I",
-            en: "THE MAGICIAN",
-            vn: "Nhà Ảo Thuật (The Magician)",
-            symbol: "🪄",
-            keywords: "Hành động, kỹ năng điêu luyện, sự tập trung và biến ý tưởng thành hiện thực.",
-            msg: "Bạn đã có đầy đủ nguồn lực và kỹ năng cần thiết trong tay. Đây là lúc bắt tay vào hành động ngay với sự tự tin cao nhất.",
-        },
-        {
-            roman: "X",
-            en: "WHEEL OF FORTUNE",
-            vn: "Bánh Xe Số Phận (Wheel of Fortune)",
-            symbol: "☸️",
-            keywords: "Bước ngoặt may mắn, chu kỳ vận hội mới và nhân quả tốt lành.",
-            msg: "Bánh xe thời vận đang xoay chuyển theo chiều hướng tích cực. Hãy linh hoạt đón nhận cơ hội mới vừa xuất hiện.",
-        },
-        {
+            id: 14,
+            suit: "major",
+            slug: "14-temperance",
             roman: "XIV",
-            en: "TEMPERANCE",
-            vn: "Sự Điều Độ (Temperance)",
-            symbol: "⚖️",
-            keywords: "Đại diện cho sự cân bằng, kiên nhẫn, sự hòa hợp và mục đích rõ ràng.",
-            msg: "Sự cân bằng, hòa hợp và kiên nhẫn. Hãy tìm kiếm sự điều độ trong mọi khía cạnh của cuộc sống và kết hợp các yếu tố đối lập một cách hài hòa.",
-        },
-        {
-            roman: "XVII",
-            en: "THE STAR",
-            vn: "Ngôi Sao Hy Vọng (The Star)",
-            symbol: "🌟",
-            keywords: "Niềm tin, cảm hứng sáng tạo, sự bình yên và tầm nhìn tương lai.",
-            msg: "Sau những thử thách, bầu trời đã quang đãng trở lại. Hãy tin tưởng vào định hướng dài hạn và tỏa sáng theo cách riêng của bạn.",
-        },
-        {
-            roman: "XIX",
-            en: "THE SUN",
-            vn: "Mặt Trời Rực Rỡ (The Sun)",
-            symbol: "☀️",
-            keywords: "Thành công viên mãn, niềm vui, sức sống tràn đầy và sự minh bạch.",
-            msg: "Năng lượng tích cực và thành tựu rõ rệt đang đến với bạn. Mọi nỗ lực bền bỉ trong thời gian qua sắp đơm hoa kết trái.",
+            en: "Temperance",
+            vn: "Sự Điều Độ",
+            keywords_upright: "Cân bằng, kiên nhẫn, dung hòa hai cực đối lập và mục đích sống rõ ràng.",
+            keywords_reversed: "Mất cân bằng, nóng vội, quá đà hoặc xung đột nhịp điệu làm việc.",
+            career: "Phối hợp nhịp nhàng giữa các bộ phận và quản trị tài chính cân đối tạo hiệu quả bền vững.",
+            msg_upright: "Hãy tìm kiếm sự điều độ và kết hợp hài hòa giữa lý trí sắc bén với trực giác tinh tế.",
+            msg_reversed: "Điều chỉnh lại nhịp sinh hoạt và làm việc để tránh căng thẳng kéo dài.",
         },
     ];
+
+    let currentTarotState = { card: TAROT_CARDS[0], isUpright: true };
 
     const renderIChingHexagram = (hex) => {
+        if (!hex) return;
         const visual = document.getElementById("ic-lines-visual");
         if (visual) {
             visual.innerHTML = [...hex.lines]
@@ -8326,239 +8826,309 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 )
                 .join("");
         }
-        setText("ic-hex-number", `Quẻ số ${hex.num} • Chu Dịch`);
+        setText("ic-hex-number", `Quẻ số ${hex.num} • ${hex.fortune || "Chu Dịch"}`);
         setText("ic-hex-name", hex.name);
+        setText("ic-hex-trigrams", hex.trigrams);
         setText("ic-hex-judgment", hex.judgment);
         setText("ic-hex-image", hex.image);
         setText("ic-hex-advice", hex.advice);
     };
 
-    // ==================== 5. MODULE NGÀY NÀY NĂM XƯA (FETCH JSON) ====================
-    const renderHistoryMonthEvents = async (monthNum = 11) => {
-        const grid = document.getElementById("hi-events-grid");
-        if (!grid) return;
+    const renderTarotCard = (card, isUpright = true) => {
+        if (!card) return;
+        currentTarotState = { card, isUpright };
 
-        let items = [];
-        for (const path of [`./api/thang-${monthNum}.json`, `./api/thang-${pad(monthNum)}.json`]) {
-            try {
-                const res = await fetch(path);
-                if (res.ok) {
-                    const data = await res.json();
-                    items = Array.isArray(data) ? data : data?.data || data?.events || [];
-                    break;
-                }
-            } catch (e) {
-                // Thử đường dẫn tiếp theo
-            }
+        const stageEl = document.getElementById("tr-card-art");
+        const frontImg = document.getElementById("tr-card-front-img");
+        const orientEl = document.getElementById("tr-card-orientation");
+
+        const orientationKey = isUpright ? "upright" : "reversed";
+        const displayTitle = `${card.roman ? `${card.roman}. ` : ""}${card.vn} (${card.en})`;
+
+        if (stageEl) {
+            stageEl.dataset.orientation = orientationKey;
+            stageEl.setAttribute(
+                "aria-label",
+                `Phóng to lá bài ${displayTitle} - ${isUpright ? "Chiều Xuôi" : "Chiều Ngược"}`,
+            );
         }
 
-        if (!items.length) {
-            items = [
-                {
-                    ten: "Nguyễn Thị Minh Khai",
-                    ngay_hien_thi: `01/${pad(monthNum)}`,
-                    hien_thi_nhan_dip: "Kỷ niệm ngày sinh nhà cách mạng Nguyễn Thị Minh Khai (01/11/1910)",
-                    image_slug: "nguyen-thi-minh-khai-01-11-1910-28-08-1941",
-                    category_id: "figures",
-                },
-            ];
+        if (frontImg) {
+            frontImg.src = getTarotFrontImgUrl(card);
+            frontImg.alt = `Lá bài Tarot ${displayTitle} - ${isUpright ? "Chiều Xuôi" : "Chiều Ngược"}`;
         }
 
-        grid.innerHTML = items
-            .slice(0, 12)
-            .map((item) => {
-                const rawSlug = item.image_slug || item.slug || "";
-                const cleanFolder = rawSlug.replace(/-\d{2}-\d{2}-\d{4}.*$/, "") || rawSlug;
-                const typeFolder = String(item.category_id || "")
-                    .toLowerCase()
-                    .includes("event")
-                    ? "events"
-                    : "figures";
-                const href = `./detail.html?type=${typeFolder}&folder=${cleanFolder}&slug=${rawSlug}&month=${monthNum}`;
+        if (orientEl) {
+            orientEl.dataset.orientation = orientationKey;
+            orientEl.textContent = isUpright
+                ? "Lá bài Xuôi (Upright)"
+                : "Lá bài Ngược (Reversed • Chiêm nghiệm nội tâm)";
+        }
 
-                return `
-                <a href="${href}" class="util-item-card">
-                    <div class="util-item-card__head">
-                        <span class="util-item-card__icon-wrap">
-                            <img src="./assets/icons/calendarDay.svg" alt="" aria-hidden="true" />
-                        </span>
-                        <span class="util-item-card__tag">${item.ngay_hien_thi || `Tháng ${monthNum}`}</span>
-                    </div>
-                    <strong class="util-item-card__title">${item.ten || "Sự kiện lịch sử"}</strong>
-                    <span class="util-item-card__sub">${item.hien_thi_nhan_dip || ""}</span>
-                    <p class="util-item-card__desc">Bấm để đọc toàn văn tiểu sử và tư liệu lưu trữ &#8594;</p>
-                </a>
-            `;
-            })
-            .join("");
+        setText("tr-card-suit-pill", SUIT_LABEL_VN[card.suit] || "Tarot Rider-Waite");
+        setText("tr-card-vn", displayTitle);
+        setText("tr-card-keywords", isUpright ? card.keywords_upright : card.keywords_reversed);
+        setText("tr-card-career", card.career);
+        setText("tr-card-message", isUpright ? card.msg_upright : card.msg_reversed);
     };
 
-    // ==================== 6. MODULE HOROSCOPE 12 CUNG HOÀNG ĐẠO ====================
-    const HOROSCOPE_SIGNS = [
+    // ==================== MỤC 5: NGÀY NÀY NĂM XƯA (CUSTOM PICKER + ẢNH NỀN + PHÂN TRANG + MODAL SLIDESHOW) ====================
+    let hiMonth = 11;
+    let hiScope = "all";
+    let hiPage = 1;
+    const HI_PAGE_SIZE = 6;
+    const hiCache = new Map();
+    let currentHiFilteredList = [];
+
+    const renderHistoryMonthPicker = () => {
+        setText("hi-month-text", `Tháng ${pad(hiMonth)}`);
+        const list = document.getElementById("hi-month-list");
+        if (!list) return;
+        let html = "";
+        for (let m = 1; m <= 12; m++) {
+            const isSel = m === hiMonth;
+            html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-hi-month="${m}">Tháng ${pad(m)}</button></li>`;
+        }
+        list.innerHTML = html;
+    };
+
+    const fetchAndRenderHistory = async () => {
+        const grid = document.getElementById("hi-events-grid");
+        const pagEl = document.getElementById("hi-pagination");
+        if (!grid) return;
+
+        if (!hiCache.has(hiMonth)) {
+            let loaded = [];
+            for (const path of [`./api/thang-${hiMonth}.json`, `./api/thang-${pad(hiMonth)}.json`]) {
+                try {
+                    const res = await fetch(path);
+                    if (res.ok) {
+                        const data = await res.json();
+                        loaded = Array.isArray(data) ? data : data?.data || data?.events || [];
+                        break;
+                    }
+                } catch (e) {
+                    // Fallback
+                }
+            }
+            hiCache.set(hiMonth, loaded);
+        }
+
+        const rawItems = hiCache.get(hiMonth) || [];
+        currentHiFilteredList = rawItems.filter((item) => {
+            const scopeStr = String(item.pham_vi || item.scope || item.category_id || "").toLowerCase();
+            const isIntl = Boolean(item.is_international) || scopeStr.includes("quoc-te") || scopeStr.includes("intl");
+            if (hiScope === "vn") return !isIntl;
+            if (hiScope === "intl") return isIntl;
+            return true;
+        });
+
+        const totalPages = Math.max(1, Math.ceil(currentHiFilteredList.length / HI_PAGE_SIZE));
+        if (hiPage > totalPages) hiPage = 1;
+
+        const pageItems = currentHiFilteredList.slice((hiPage - 1) * HI_PAGE_SIZE, hiPage * HI_PAGE_SIZE);
+
+        grid.innerHTML = pageItems
+            .map((item, idx) => {
+                const globalIdx = (hiPage - 1) * HI_PAGE_SIZE + idx;
+                const rawSlug = String(item.image_slug || item.slug || "").trim();
+                const cleanSlug = rawSlug
+                    .split("/")
+                    .pop()
+                    .replace(/\.(jpg|jpeg|png|webp)$/i, "");
+                const coverUrl = cleanSlug
+                    ? `./assets/images/calendar-covers/thang-${hiMonth}/${cleanSlug}.jpg`
+                    : DEFAULT_COVER_IMG;
+                const scopeStr = String(item.pham_vi || item.scope || "").toLowerCase();
+                const isIntl = Boolean(item.is_international) || scopeStr.includes("quoc-te");
+                const name = item.ten || "Nhân vật & Sự kiện lịch sử";
+                const occasion = item.hien_thi_nhan_dip || `Kỷ niệm lịch sử tháng ${hiMonth}`;
+                const quote = item.danh_ngon || item.quote || occasion;
+
+                return `
+                    <article
+                        class="util-history-card has-bento-tooltip"
+                        data-hi-idx="${globalIdx}"
+                        role="button"
+                        tabindex="0"
+                        aria-label="${name}, ${item.ngay_hien_thi || `Tháng ${pad(hiMonth)}`}"
+                    >
+                        <div class="util-history-card__media" aria-hidden="true">
+                            <img src="${coverUrl}" alt="" onerror="this.src='${DEFAULT_COVER_IMG}'" loading="lazy" decoding="async" />
+                        </div>
+
+                        <div class="util-history-card__top">
+                            <span class="util-history-card__date-pill">${item.ngay_hien_thi || `Tháng ${pad(hiMonth)}`}</span>
+                            <span class="util-history-card__scope-pill">${isIntl ? "Sự kiện Quốc tế" : "Lịch sử Việt Nam"}</span>
+                        </div>
+
+                        <div class="util-history-card__body">
+                            <strong class="util-history-card__title">${name}</strong>
+                            <p class="util-history-card__sub">${occasion}</p>
+                        </div>
+
+                        ${buildBentoTooltipHtml(
+                            `${name} (${item.ngay_hien_thi || `T${hiMonth}`})`,
+                            `${occasion}. "${quote}"`,
+                            "✦ Bấm để mở Hồ sơ & Trình chiếu ảnh tư liệu",
+                        )}
+                    </article>
+                `;
+            })
+            .join("");
+
+        if (pagEl) {
+            if (totalPages <= 1) {
+                pagEl.innerHTML = "";
+            } else {
+                let pagHtml = "";
+                for (let p = 1; p <= totalPages; p++) {
+                    pagHtml += `<button type="button" class="util-pagination__btn ${p === hiPage ? "is-active" : ""}" data-hi-page="${p}" ${p === hiPage ? 'aria-current="page"' : ""}>${p}</button>`;
+                }
+                pagEl.innerHTML = pagHtml;
+            }
+        }
+    };
+
+    // ==================== MỤC 6: HOROSCOPE 12 CUNG HOÀNG ĐẠO (JSON + ICON SVG 128x128 + FILTER NGŨ HÀNH) ====================
+    let hsDay = 13;
+    let hsMonth = 1;
+
+    // Dữ liệu dự phòng tối thiểu (Sẽ tự động được thay bằng ./api/horoscope.json)
+    let HOROSCOPE_SIGNS = [
         {
             key: "capricorn",
             name: "Ma Kết (Capricorn)",
-            symbol: "♑",
+            mascot: "Dê Biển Đuôi Cá",
             dates: "22/12 – 19/01",
             element: "Nguyên tố Đất • Sao Thổ chủ quản",
-            traits: "Có trách nhiệm, kỷ luật và đầy tham vọng. Ma Kết là người làm việc chăm chỉ, có tầm nhìn xa và luôn nỗ lực để đạt được mục tiêu đã đề ra.",
-            daily: "Hôm nay năng lượng nguyên tố Đất giúp Ma Kết xử lý công việc và tài chính cực kỳ sáng suốt. Con số may mắn: 4, 8.",
-        },
-        {
-            key: "aquarius",
-            name: "Bảo Bình (Aquarius)",
-            symbol: "♒",
-            dates: "20/01 – 18/02",
-            element: "Nguyên tố Khí • Sao Thiên Vương chủ quản",
-            traits: "Độc lập, thông thái, giàu ý tưởng đổi mới công nghệ và luôn hướng tới giá trị nhân văn.",
-            daily: "Một ý tưởng sáng tạo đột phá của Bảo Bình sẽ nhận được sự ủng hộ lớn từ đồng nghiệp hôm nay. Số may mắn: 7, 11.",
-        },
-        {
-            key: "pisces",
-            name: "Song Ngư (Pisces)",
-            symbol: "♓",
-            dates: "19/02 – 20/03",
-            element: "Nguyên tố Nước • Sao Hải Vương chủ quản",
-            traits: "Giàu lòng trắc ẩn, trực giác nhạy bén, tinh tế và có tâm hồn nghệ thuật phong phú.",
-            daily: "Trực giác của Song Ngư hôm nay vô cùng chính xác; hãy lắng nghe tiếng nói bên trong. Số may mắn: 3, 9.",
-        },
-        {
-            key: "aries",
-            name: "Bạch Dương (Aries)",
-            symbol: "♈",
-            dates: "21/03 – 19/04",
-            element: "Nguyên tố Lửa • Sao Hỏa chủ quản",
-            traits: "Nhiệt huyết, tiên phong, dũng cảm và luôn tràn đầy năng lượng khởi đầu mới.",
-            daily: "Ngày tuyệt vời để Bạch Dương khởi động dự án mới hoặc giải quyết dứt điểm việc tồn đọng. Số may mắn: 1, 9.",
-        },
-        {
-            key: "taurus",
-            name: "Kim Ngưu (Taurus)",
-            symbol: "♉",
-            dates: "20/04 – 20/05",
-            element: "Nguyên tố Đất • Sao Kim chủ quản",
-            traits: "Điềm tĩnh, đáng tin cậy, yêu cái đẹp và có năng lực quản lý tài sản vững vàng.",
-            daily: "Tài vận của Kim Ngưu hôm nay rất ổn định; thích hợp lập kế hoạch tích lũy dài hạn. Số may mắn: 2, 6.",
-        },
-        {
-            key: "gemini",
-            name: "Song Tử (Gemini)",
-            symbol: "♊",
-            dates: "21/05 – 21/06",
-            element: "Nguyên tố Khí • Sao Thủy chủ quản",
-            traits: "Linh hoạt, giao tiếp sắc sảo, ham học hỏi và thích nghi nhanh với mọi hoàn cảnh.",
-            daily: "Khả năng đàm phán và kết nối thông tin giúp Song Tử mở ra cơ hội hợp tác mới. Số may mắn: 5, 14.",
-        },
-        {
-            key: "cancer",
-            name: "Cự Giải (Cancer)",
-            symbol: "♋",
-            dates: "22/06 – 22/07",
-            element: "Nguyên tố Nước • Mặt Trăng chủ quản",
-            traits: "Chu đáo, ấm áp, trọng tình nghĩa và luôn là hậu phương vững chắc cho gia đình.",
-            daily: "Không gian ấm cúng và sự sẻ chia chân thành mang lại nguồn năng lượng bình an cho Cự Giải. Số may mắn: 2, 7.",
-        },
-        {
-            key: "leo",
-            name: "Sư Tử (Leo)",
-            symbol: "♌",
-            dates: "23/07 – 22/08",
-            element: "Nguyên tố Lửa • Mặt Trời chủ quản",
-            traits: "Tự tin, hào sảng, bản lĩnh dẫn dắt và luôn tỏa sáng với nguồn năng lượng ấm áp.",
-            daily: "Sự quyết đoán và phong thái tự tin giúp Sư Tử ghi điểm ấn tượng trong mắt đối tác. Số may mắn: 1, 5.",
-        },
-        {
-            key: "virgo",
-            name: "Xử Nữ (Virgo)",
-            symbol: "♍",
-            dates: "23/08 – 22/09",
-            element: "Nguyên tố Đất • Sao Thủy chủ quản",
-            traits: "Tỉ mỉ, chuẩn mực, tư duy phân tích hệ thống sắc bén và luôn hướng tới sự hoàn thiện.",
-            daily: "Sự cẩn trọng đến từng chi tiết giúp Xử Nữ tối ưu hóa quy trình làm việc đạt hiệu suất cao nhất. Số may mắn: 5, 15.",
-        },
-        {
-            key: "libra",
-            name: "Thiên Bình (Libra)",
-            symbol: "♎",
-            dates: "23/09 – 23/10",
-            element: "Nguyên tố Khí • Sao Kim chủ quản",
-            traits: "Công bằng, lịch thiệp, giàu gu thẩm mỹ và có biệt tài dung hòa các mối quan hệ.",
-            daily: "Thiên Bình dễ dàng đạt được thỏa thuận đôi bên cùng có lợi trong các cuộc trao đổi. Số may mắn: 6, 9.",
-        },
-        {
-            key: "scorpio",
-            name: "Bọ Cạp (Scorpio)",
-            symbol: "♏",
-            dates: "24/10 – 21/11",
-            element: "Nguyên tố Nước • Sao Diêm Vương chủ quản",
-            traits: "Sâu sắc, quyết liệt, tập trung cao độ và có nội lực bứt phá mạnh mẽ.",
-            daily: "Sự tập trung bền bỉ giúp Bọ Cạp nhìn thấu bản chất vấn đề và nắm bắt cơ hội chiến lược. Số may mắn: 8, 18.",
-        },
-        {
-            key: "sagittarius",
-            name: "Nhân Mã (Sagittarius)",
-            symbol: "♐",
-            dates: "22/11 – 21/12",
-            element: "Nguyên tố Lửa • Sao Mộc chủ quản",
-            traits: "Phóng khoáng, lạc quan, yêu tự do khám phá tri thức và luôn nhìn về phía trước.",
-            daily: "Tầm nhìn cởi mở mang lại cho Nhân Mã niềm cảm hứng mới mẻ trong học tập và công việc. Số may mắn: 3, 12.",
+            traits: "Có trách nhiệm, kỷ luật, thực tế và giàu tham vọng. Ma Kết là người làm việc kiên trì, có tầm nhìn chiến lược xa và luôn nỗ lực đạt mục tiêu.",
+            daily: "Hôm nay năng lượng nguyên tố Đất giúp Ma Kết xử lý công việc và tài chính cực kỳ sáng suốt. Con số may mắn: 4, 8 • Màu hợp: Nâu trầm, Xanh đen.",
         },
     ];
 
+    const buildHoroscopeImgHtml = (signKey, extraClass = "") => `
+        <img
+            src="${HOROSCOPE_ICON_DIR}/${signKey}.svg"
+            alt=""
+            width="128"
+            height="128"
+            loading="lazy"
+            decoding="async"
+            ${extraClass ? `class="${extraClass}"` : ""}
+        />
+    `;
+
     const getSignByMonthDay = (m, d) => {
         const code = m * 100 + d;
-        if (code >= 1222 || code <= 119) return HOROSCOPE_SIGNS[0];
-        if (code <= 218) return HOROSCOPE_SIGNS[1];
-        if (code <= 320) return HOROSCOPE_SIGNS[2];
-        if (code <= 419) return HOROSCOPE_SIGNS[3];
-        if (code <= 520) return HOROSCOPE_SIGNS[4];
-        if (code <= 621) return HOROSCOPE_SIGNS[5];
-        if (code <= 722) return HOROSCOPE_SIGNS[6];
-        if (code <= 822) return HOROSCOPE_SIGNS[7];
-        if (code <= 922) return HOROSCOPE_SIGNS[8];
-        if (code <= 1023) return HOROSCOPE_SIGNS[9];
-        if (code <= 1121) return HOROSCOPE_SIGNS[10];
-        return HOROSCOPE_SIGNS[11];
+        const findByKey = (k) => HOROSCOPE_SIGNS.find((s) => s.key === k) || HOROSCOPE_SIGNS[0];
+        if (code >= 1222 || code <= 119) return findByKey("capricorn");
+        if (code <= 218) return findByKey("aquarius");
+        if (code <= 320) return findByKey("pisces");
+        if (code <= 419) return findByKey("aries");
+        if (code <= 520) return findByKey("taurus");
+        if (code <= 621) return findByKey("gemini");
+        if (code <= 722) return findByKey("cancer");
+        if (code <= 822) return findByKey("leo");
+        if (code <= 922) return findByKey("virgo");
+        if (code <= 1023) return findByKey("libra");
+        if (code <= 1121) return findByKey("scorpio");
+        return findByKey("sagittarius");
     };
 
-    const renderHoroscopeSign = (sign) => {
-        setText("hs-sign-symbol", sign.symbol);
-        setText("hs-sign-dates", sign.dates);
-        setText("hs-sign-element", sign.element);
-        setText("hs-sign-name", sign.name);
-        setText("hs-sign-traits", sign.traits);
-        setHtml("hs-sign-daily", `<strong>Luận giải cho ngày hôm nay:</strong> ${sign.daily}`);
+    const renderHsPickers = () => {
+        setText("hs-day-text", `Ngày ${pad(hsDay)}`);
+        setText("hs-month-text", `Tháng ${pad(hsMonth)}`);
 
-        const grid = document.getElementById("hs-signs-grid");
-        if (grid) {
-            grid.innerHTML = HOROSCOPE_SIGNS.map(
-                (s) => `
-                    <button
-                        type="button"
-                        class="util-sign-btn ${s.key === sign.key ? "is-active" : ""}"
-                        data-sign-key="${s.key}"
-                    >
-                        <span>${s.symbol}</span>
-                        <strong>${s.name.split("(")[0].trim()}</strong>
-                        <small>${s.dates}</small>
-                    </button>
-                `,
-            ).join("");
+        const dList = document.getElementById("hs-day-list");
+        if (dList) {
+            let html = "";
+            for (let d = 1; d <= 31; d++) {
+                const isSel = d === hsDay;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-hs-day="${d}">${pad(d)}</button></li>`;
+            }
+            dList.innerHTML = html;
+        }
+
+        const mList = document.getElementById("hs-month-list");
+        if (mList) {
+            let html = "";
+            for (let m = 1; m <= 12; m++) {
+                const isSel = m === hsMonth;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-hs-month="${m}">Tháng ${pad(m)}</button></li>`;
+            }
+            mList.innerHTML = html;
         }
     };
 
-    // ==================== 7. MODULE TÍNH KHOẢNG CÁCH & CỘNG/TRỪ NGÀY ====================
-    const computeDateDiff = () => {
-        const sVal = document.getElementById("dd-start-date")?.value;
-        const eVal = document.getElementById("dd-end-date")?.value;
-        if (!sVal || !eVal) return;
+    const renderHoroscopeSign = (sign) => {
+        const targetSign = sign || HOROSCOPE_SIGNS[0];
+        if (!targetSign) return;
+        setHtml("hs-sign-symbol", buildHoroscopeImgHtml(targetSign.key));
+        setHtml("hs-hero-watermark", buildHoroscopeImgHtml(targetSign.key, "util-horoscope-hero__watermark"));
+        setText("hs-sign-dates", targetSign.dates);
+        setText("hs-sign-element", `${targetSign.element} • Linh vật: ${targetSign.mascot}`);
+        setText("hs-sign-name", targetSign.name);
+        setText("hs-sign-traits", targetSign.traits);
+        setHtml("hs-sign-daily", `<strong>Luận giải năng lượng hôm nay:</strong> ${targetSign.daily}`);
 
-        const d1 = new Date(sVal);
-        const d2 = new Date(eVal);
+        const grid = document.getElementById("hs-signs-grid");
+        if (grid) {
+            grid.innerHTML = HOROSCOPE_SIGNS.map((s) => {
+                const isSel = s.key === targetSign.key;
+                const shortName = s.name.split("(")[0].trim();
+                const shortElem = s.element.split("•")[0].trim();
+
+                return `
+                    <article
+                        class="util-bento-item ${isSel ? "is-current-highlight" : ""} has-bento-tooltip"
+                        data-sign-key="${s.key}"
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="${isSel}"
+                        aria-label="${s.name}, ${s.dates}, ${shortElem}"
+                    >
+                        <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                            ${buildHoroscopeImgHtml(s.key, "util-bento-item__watermark")}
+                        </span>
+                        <div class="util-bento-item__top">
+                            <span class="util-bento-item__icon-box util-bento-item__icon-box--filtered" aria-hidden="true">
+                                ${buildHoroscopeImgHtml(s.key)}
+                            </span>
+                            <span class="util-bento-item__badge">${s.dates}</span>
+                        </div>
+                        <div class="util-bento-item__body">
+                            <strong class="util-bento-item__title">${shortName}</strong>
+                            <span class="util-bento-item__sub">${s.mascot}</span>
+                        </div>
+                        <p class="util-bento-item__desc">${s.traits}</p>
+                        <footer class="util-bento-item__foot">
+                            <span>${shortElem}</span>
+                            <span aria-hidden="true">&#8594;</span>
+                        </footer>
+                        ${buildBentoTooltipHtml(s.name, `${s.element}. ${s.daily}`, `✦ Bấm để mở luận giải ${s.name}`)}
+                    </article>
+                `;
+            }).join("");
+        }
+    };
+
+    // ==================== MỤC 7: TÍNH THỜI GIAN (CUSTOM BENTO PICKERS + 6 STAT CARDS) ====================
+    let ddStartPicker = null;
+    let ddEndPicker = null;
+    let asBasePicker = null;
+
+    const computeDateDiff = () => {
+        if (!ddStartPicker || !ddEndPicker) return;
+        const s = ddStartPicker.getState();
+        const e = ddEndPicker.getState();
+
+        const d1 = new Date(s.year, s.month - 1, s.day);
+        const d2 = new Date(e.year, e.month - 1, e.day);
         const diffMs = Math.abs(d2 - d1);
-        const totalMins = Math.floor(diffMs / 60000);
-        const totalHours = Math.floor(totalMins / 60);
-        const totalDays = Math.floor(totalHours / 24);
+        const totalDays = Math.round(diffMs / 86400000);
+        const totalHours = totalDays * 24;
+        const totalMins = totalHours * 60;
         const weeks = Math.floor(totalDays / 7);
         const months = Math.floor(totalDays / 30.4375);
         const years = Math.floor(totalDays / 365.25);
@@ -8567,35 +9137,34 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         setText("dd-val-months", String(months));
         setText("dd-val-weeks", String(weeks));
         setText("dd-val-days", String(totalDays));
-        setText("dd-val-hours", String(totalHours));
-        setText("dd-val-minutes", String(totalMins % 60));
-        setText("dd-total-days-badge", `Tổng cộng: ${(diffMs / 86400000).toFixed(2)} ngày`);
+        setText("dd-val-hours", totalHours.toLocaleString("vi-VN"));
+        setText("dd-val-minutes", totalMins.toLocaleString("vi-VN"));
+        setText("dd-total-days-badge", `Tổng thời gian: ${totalDays} ngày`);
 
         if (window.LunarEngine) {
-            const l1 = window.LunarEngine.getFullDayInfo(d1.getDate(), d1.getMonth() + 1, d1.getFullYear());
-            const l2 = window.LunarEngine.getFullDayInfo(d2.getDate(), d2.getMonth() + 1, d2.getFullYear());
+            const l1 = window.LunarEngine.getFullDayInfo(s.day, s.month, s.year);
+            const l2 = window.LunarEngine.getFullDayInfo(e.day, e.month, e.year);
             setText(
                 "dd-start-lunar-hint",
-                `Âm lịch: ${pad(l1.lunarDay)}/${pad(l1.lunarMonth)}/${l1.lunarYear} (${l1.dayCanChi})`,
+                `Âm lịch: ${pad(l1.lunarDay)}/${pad(l1.lunarMonth)}/${l1.lunarYear} (Ngày ${l1.dayCanChi} • ${l1.dayNapAm})`,
             );
             setText(
                 "dd-end-lunar-hint",
-                `Âm lịch: ${pad(l2.lunarDay)}/${pad(l2.lunarMonth)}/${l2.lunarYear} (${l2.dayCanChi})`,
+                `Âm lịch: ${pad(l2.lunarDay)}/${pad(l2.lunarMonth)}/${l2.lunarYear} (Ngày ${l2.dayCanChi} • ${l2.dayNapAm})`,
             );
         }
     };
 
     const computeDateAddSub = () => {
-        const baseVal = document.getElementById("as-base-date")?.value;
-        if (!baseVal) return;
-        const [by, bm, bd] = baseVal.split("-").map(Number);
+        if (!asBasePicker) return;
+        const b = asBasePicker.getState();
         const yOff = Number(document.getElementById("as-years")?.value || 0);
         const mOff = Number(document.getElementById("as-months")?.value || 0);
         const wOff = Number(document.getElementById("as-weeks")?.value || 0);
         const dOff = Number(document.getElementById("as-days")?.value || 0);
 
         const dir = dateCalcMode === "sub" ? -1 : 1;
-        const target = new Date(by + dir * yOff, bm - 1 + dir * mOff, bd + dir * (wOff * 7 + dOff));
+        const target = new Date(b.year + dir * yOff, b.month - 1 + dir * mOff, b.day + dir * (wOff * 7 + dOff));
         const ty = target.getFullYear();
         const tm = target.getMonth() + 1;
         const td = target.getDate();
@@ -8607,7 +9176,10 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             year: "numeric",
         }).format(target);
 
-        setText("as-res-mode-tag", dateCalcMode === "sub" ? "Kết quả sau khi trừ đi" : "Kết quả sau khi cộng thêm");
+        setText(
+            "as-res-mode-tag",
+            dateCalcMode === "sub" ? "Kết quả sau khi trừ thời gian" : "Kết quả sau khi cộng thêm thời gian",
+        );
         setText("as-res-solar", `${fullVi} Dương lịch`);
         setAttr("as-res-link", "href", `./day.html?date=${ty}-${pad(tm)}-${pad(td)}`);
 
@@ -8620,48 +9192,64 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         }
     };
 
-    // ==================== 8. MODULE THẦN SỐ HỌC PYTHAGORAS ====================
+    // ==================== MỤC 8: THẦN SỐ HỌC PYTHAGORAS ====================
+    let numBirthPicker = null;
+
     const NUMEROLOGY_MEANINGS = {
-        1: { title: "Nhà Tiên Phong Độc Lập", desc: "Đại diện cho khả năng lãnh đạo, tự chủ, quyết đoán và mở đường." },
+        1: {
+            title: "Nhà Tiên Phong Độc Lập",
+            desc: "Đại diện cho khả năng lãnh đạo bẩm sinh, tự chủ, quyết đoán và bản lĩnh mở đường.",
+            advice: "Phát huy tinh thần chủ động dẫn dắt, đồng thời học cách lắng nghe ý kiến từ đội ngũ cộng sự.",
+        },
         2: {
             title: "Người Hòa Giải Tinh Tế",
-            desc: "Đại diện cho sự lắng nghe, ngoại giao khéo léo, trực giác và hợp tác.",
+            desc: "Đại diện cho sự lắng nghe, ngoại giao khéo léo, trực giác nhạy bén và tinh thần hợp tác.",
+            advice: "Rất hợp vai trò kết nối, cố vấn chiến lược và xây dựng sự đồng thuận trong tập thể.",
         },
         3: {
             title: "Người Truyền Cảm Hứng & Sáng Tạo",
-            desc: "Đại diện cho tư duy nhạy bén, ngôn từ sắc sảo, nghệ thuật và niềm vui.",
+            desc: "Đại diện cho tư duy nhạy bén, ngôn từ sắc sảo, óc thẩm mỹ nghệ thuật và năng lượng tích cực.",
+            advice: "Tập trung năng lượng vào việc sáng tạo sản phẩm, thuyết trình và hoàn tất mục tiêu đến cùng.",
         },
         4: {
-            title: "Kiến Trúc Sư Thực Tế",
-            desc: "Đại diện cho tính kỷ luật, quy trình vững chắc, nguyên tắc và sự bền bỉ.",
+            title: "Kiến Trúc Sư Thực Tế & Kỷ Luật",
+            desc: "Đại diện cho tính hệ thống, quy trình chuẩn mực, nền tảng kỹ thuật vững chắc và sự bền bỉ.",
+            advice: "Rất xuất sắc trong việc xây dựng cấu trúc dữ liệu, quản trị dự án và tích lũy tài sản an toàn.",
         },
         5: {
-            title: "Người Tự Do & Đổi Mới",
-            desc: "Đại diện cho sự linh hoạt, kết nối đa chiều, trải nghiệm và bứt phá.",
+            title: "Người Tự Do & Đổi Mới Đột Phá",
+            desc: "Đại diện cho sự linh hoạt, thích nghi nhanh, kết nối đa chiều và dám vượt qua giới hạn cũ.",
+            advice: "Giữ kỷ luật cá nhân song hành cùng khát vọng đổi mới để biến trải nghiệm thành thành tựu.",
         },
         6: {
             title: "Người Nuôi Dưỡng & Trách Nhiệm",
-            desc: "Đại diện cho tình yêu thương gia đình, sự tận tâm, thẩm mỹ và phụng sự.",
+            desc: "Đại diện cho tình yêu thương gia đình, sự tận tâm, gu thẩm mỹ tinh tế và tinh thần phụng sự.",
+            advice: "Cân bằng giữa việc chăm lo cho người khác và dành thời gian tái tạo năng lượng cho bản thân.",
         },
         7: {
             title: "Nhà Triết Học & Nghiên Cứu Chuyên Sâu",
-            desc: "Đại diện cho chiều sâu học thuật, phân tích bản chất, nội tâm và chiêm nghiệm.",
+            desc: "Đại diện cho chiều sâu học thuật, tư duy phân tích gốc rễ, trực giác tâm linh và tự chiêm nghiệm.",
+            advice: "Phù hợp tuyệt vời với nghiên cứu chuyên môn sâu, lập trình hệ thống, cổ học và chiến lược.",
         },
         8: {
-            title: "Nhà Điều Hành & Tài Chính",
-            desc: "Đại diện cho năng lực quản trị, nhạy bén kinh doanh, quyền lực và thịnh vượng.",
+            title: "Nhà Điều Hành & Thịnh Vượng Tài Chính",
+            desc: "Đại diện cho năng lực quản trị vĩ mô, nhạy bén thương mại, quyền lực và hiệu quả thực tiễn.",
+            advice: "Kết hợp mục tiêu tài chính với giá trị bền vững cho cộng đồng sẽ mang lại thành công lớn.",
         },
         9: {
             title: "Nhà Nhân Đạo & Lý Tưởng Lớn",
-            desc: "Đại diện cho tầm nhìn bao dung, trách nhiệm cộng đồng và sự viên mãn.",
+            desc: "Đại diện cho tầm nhìn bao dung, trách nhiệm xã hội, trí tuệ tổng hợp và sự viên mãn.",
+            advice: "Lan tỏa tri thức, dẫn dắt thế hệ kế cận và theo đuổi những dự án mang lại giá trị lâu dài.",
         },
         11: {
             title: "Số Master 11/2 • Trực Giác Tâm Linh Cao",
-            desc: "Bậc thầy truyền cảm hứng tinh thần, nhạy cảm và thấu thị sâu sắc.",
+            desc: "Bậc thầy truyền cảm hứng tinh thần, nhạy cảm với trường năng lượng và có tầm nhìn thấu thị.",
+            advice: "Giữ tâm tĩnh tại để chuyển hóa trực giác nhạy bén thành những tác phẩm hoặc giải pháp giá trị.",
         },
         22: {
             title: "Số Master 22/4 • Kiến Tạo Đại Sự",
-            desc: "Kết hợp tầm nhìn lớn với năng lực thực thi thực tế để tạo di sản bền vững.",
+            desc: "Kết hợp tầm nhìn vĩ mô của số 11 với năng lực thực thi kỷ luật của số 4 để tạo di sản bền vững.",
+            advice: "Hãy mạnh dạn đặt ra những mục tiêu lớn lao và kiên trì thực hiện từng bước vững chắc.",
         },
     };
 
@@ -8677,9 +9265,10 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
     };
 
     const renderNumerologyPersonal = () => {
-        const val = document.getElementById("num-birth-input")?.value || "1987-01-13";
-        const [y, m, d] = val.split("-").map(Number);
-        const allDigits = val.replace(/-/g, "").split("").map(Number);
+        if (!numBirthPicker) return;
+        const { day: d, month: m, year: y } = numBirthPicker.getState();
+        const digitsStr = `${pad(d)}${pad(m)}${y}`;
+        const allDigits = digitsStr.split("").map(Number);
         const rawSum = allDigits.reduce((a, b) => a + b, 0);
         const lifePath = reduceNum(rawSum, true);
         const info = NUMEROLOGY_MEANINGS[lifePath] || NUMEROLOGY_MEANINGS[3];
@@ -8687,19 +9276,44 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         setText("num-lifepath-number", String(lifePath));
         setText(
             "num-lifepath-formula",
-            `Ngày sinh: ${pad(d)}/${pad(m)}/${y} (Tổng: ${rawSum} → Số Chủ Đạo ${lifePath})`,
+            `Ngày sinh: ${pad(d)}/${pad(m)}/${y} (Tổng các chữ số: ${rawSum} → Số Chủ Đạo ${lifePath})`,
         );
         setText("num-lifepath-title", `Con Số Chủ Đạo ${lifePath} • ${info.title}`);
-        setText("num-lifepath-desc", info.desc);
+        setText("num-lifepath-desc", `${info.desc} ${info.advice}`);
 
         const now = new Date();
         const pYear = reduceNum(d + m + now.getFullYear(), false);
         const pMonth = reduceNum(pYear + (now.getMonth() + 1), false);
         const pDay = reduceNum(pMonth + now.getDate(), false);
 
-        setText("num-personal-year", `Số ${pYear}`);
-        setText("num-personal-month", `Số ${pMonth}`);
-        setText("num-personal-day", `Số ${pDay}`);
+        const cyclesGrid = document.getElementById("num-cycles-grid");
+        if (cyclesGrid) {
+            const cList = [
+                { label: `Năm Cá Nhân (${now.getFullYear()})`, num: pYear },
+                { label: `Tháng Cá Nhân (T${now.getMonth() + 1})`, num: pMonth },
+                { label: "Ngày Cá Nhân Hôm Nay", num: pDay },
+            ];
+            cyclesGrid.innerHTML = cList
+                .map((c) => {
+                    const mObj = NUMEROLOGY_MEANINGS[c.num] || NUMEROLOGY_MEANINGS[1];
+                    return `
+                        <article
+                            class="util-num-cycle-box has-bento-tooltip"
+                            data-num-modal="${c.num}"
+                            data-num-role="${c.label}"
+                            role="button"
+                            tabindex="0"
+                            aria-label="${c.label}: Số ${c.num}, ${mObj.title}"
+                        >
+                            <span>${c.label}</span>
+                            <strong>Số ${c.num}</strong>
+                            <small>${mObj.title}</small>
+                            ${buildBentoTooltipHtml(`${c.label}: Số ${c.num}`, mObj.desc, "✦ Bấm để mở giải nghĩa chi tiết")}
+                        </article>
+                    `;
+                })
+                .join("");
+        }
 
         const counts = {};
         allDigits.forEach((digit) => {
@@ -8722,10 +9336,19 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             chartGrid.innerHTML = layoutOrder
                 .map(([num, label]) => {
                     const str = counts[num] || "—";
+                    const mObj = NUMEROLOGY_MEANINGS[num];
                     return `
-                        <div class="util-pythagoras-cell ${counts[num] ? "has-val" : ""}">
+                        <div
+                            class="util-pythagoras-cell ${counts[num] ? "has-val" : ""} has-bento-tooltip"
+                            data-num-modal="${num}"
+                            data-num-role="Ô số ${num} (${label})"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Ô số ${num} (${label}): ${counts[num] ? str : "Đang khuyết"}"
+                        >
                             <small>Ô số ${num} (${label})</small>
                             <strong>${str}</strong>
+                            ${buildBentoTooltipHtml(`Ô số ${num} (${label}): ${counts[num] ? `Xuất hiện ${counts[num].length} lần` : "Đang khuyết"}`, mObj.desc, `✦ Bấm để xem ý nghĩa Ô số ${num}`)}
                         </div>
                     `;
                 })
@@ -8733,7 +9356,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         }
     };
 
-    const renderNumerologyMonthCalendar = (selectedDay = 14) => {
+    const renderNumerologyMonthCalendar = (selectedDay = 15) => {
         const year = 2026;
         const month = 11;
         const firstDayJs = new Date(year, month - 1, 1).getDay();
@@ -8749,7 +9372,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             setText("num-cal-selected-badge", `Ngày ${pad(d)}/11/2026 • Số ${num}`);
             setText("num-day-tag", `Con số năng lượng của ngày ${pad(d)}/11/2026 là: Số ${num}`);
             setText("num-day-title", `Tần Số ${num}: ${info.title}`);
-            setText("num-day-meaning", info.desc);
+            setText("num-day-meaning", `${info.desc} ${info.advice}`);
             setAttr("num-day-link", "href", `./day.html?date=${year}-${pad(month)}-${pad(d)}`);
         };
 
@@ -8757,17 +9380,20 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         for (let i = 0; i < 35; i++) {
             const d = i - leading + 1;
             if (d < 1 || d > maxDays) {
-                html += `<div class="util-num-day-cell is-muted"><small>—</small><strong>•</strong></div>`;
+                html += `<div class="util-num-day-cell is-muted" aria-hidden="true"><small>—</small><strong>•</strong></div>`;
             } else {
                 const raw = `${pad(d)}${pad(month)}${year}`.split("").reduce((a, b) => a + Number(b), 0);
                 const num = reduceNum(raw, true);
+                const isSel = d === selectedDay;
                 html += `
                     <button
                         type="button"
-                        class="util-num-day-cell ${d === selectedDay ? "is-active" : ""}"
+                        class="util-num-day-cell ${isSel ? "is-active" : ""}"
                         data-num-cal-day="${d}"
+                        aria-pressed="${isSel}"
+                        aria-label="Ngày ${d} tháng 11, con số năng lượng ${num}"
                     >
-                        <small>${d}</small>
+                        <small>${d}/11</small>
                         <strong>${num}</strong>
                     </button>
                 `;
@@ -8781,34 +9407,69 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         });
     };
 
-    // ==================== 9. MODULE NHỊP SINH HỌC BIORHYTHM (ĐÃ FIX CHUẨN CÚ PHÁP SVG PATH) ====================
+    // ==================== MỤC 9: NHỊP SINH HỌC BIORHYTHM (CUSTOM PICKERS + ANIMATION SÓNG + NGÀY GIAO ĐIỂM) ====================
+    let bioBirthPicker = null;
+
     const renderBiorhythm = () => {
-        const val = document.getElementById("bio-birth-input")?.value || "1987-01-13";
-        const [by, bm, bd] = val.split("-").map(Number);
+        if (!bioBirthPicker) return;
+        const { day: bd, month: bm, year: by } = bioBirthPicker.getState();
         const birthDate = new Date(by, bm - 1, bd);
         const now = new Date();
         const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         const daysAlive = Math.floor((todayStart - birthDate) / 86400000);
 
         const cycles = [
-            { key: "phys", name: "Thể chất (23 ngày)", period: 23, color: "#2563eb" },
-            { key: "emo", name: "Tình cảm (28 ngày)", period: 28, color: "#10b981" },
-            { key: "intel", name: "Trí tuệ (33 ngày)", period: 33, color: "#f97316" },
-            { key: "intuit", name: "Trực giác (38 ngày)", period: 38, color: "#8b5cf6" },
+            {
+                key: "phys",
+                name: "Thể chất (23 ngày)",
+                period: 23,
+                color: "#2563eb",
+                desc: "Chu kỳ 23 ngày chi phối sức bền cơ bắp, thể lực, hệ miễn dịch và khả năng vận động.",
+            },
+            {
+                key: "emo",
+                name: "Tình cảm (28 ngày)",
+                period: 28,
+                color: "#10b981",
+                desc: "Chu kỳ 28 ngày chi phối cảm xúc, tâm trạng, sự đồng cảm, trực giác giao tiếp và nghệ thuật.",
+            },
+            {
+                key: "intel",
+                name: "Trí tuệ (33 ngày)",
+                period: 33,
+                color: "#f97316",
+                desc: "Chu kỳ 33 ngày chi phối tư duy logic, khả năng tập trung, phân tích giải quyết vấn đề và trí nhớ.",
+            },
+            {
+                key: "intuit",
+                name: "Trực giác (38 ngày)",
+                period: 38,
+                color: "#8b5cf6",
+                desc: "Chu kỳ 38 ngày chi phối linh cảm vô thức, khả năng nắm bắt cơ hội và sáng tạo đột phá.",
+            },
         ];
 
+        let totalPct = 0;
         const statsGrid = document.getElementById("bio-stats-grid");
         if (statsGrid) {
             statsGrid.innerHTML = cycles
                 .map((c) => {
                     const pct = Math.round(Math.sin((2 * Math.PI * daysAlive) / c.period) * 100);
+                    totalPct += pct;
                     let state = "Trạng thái ổn định";
-                    if (Math.abs(pct) <= 10) state = "⚠️ Ngày giao điểm (Cần lưu ý)";
+                    if (Math.abs(pct) <= 12) state = "⚠️ Ngày giao điểm (Cần lưu ý)";
                     else if (pct >= 50) state = "🌟 Năng lượng đỉnh cao";
                     else if (pct < 0) state = "🌙 Giai đoạn nạp năng lượng";
 
                     return `
-                        <article class="util-bio-stat-card">
+                        <article
+                            class="util-bio-stat-card has-bento-tooltip"
+                            data-bio-key="${c.key}"
+                            data-bio-pct="${pct}"
+                            role="button"
+                            tabindex="0"
+                            aria-label="${c.name}: ${pct > 0 ? `+${pct}%` : `${pct}%`}, ${state}"
+                        >
                             <div class="util-bio-stat-card__head">
                                 <span>${c.name}</span>
                             </div>
@@ -8816,6 +9477,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                                 ${pct > 0 ? `+${pct}%` : `${pct}%`}
                             </strong>
                             <span class="util-bio-stat-card__advice">${state}</span>
+                            ${buildBentoTooltipHtml(`${c.name}: ${pct}%`, c.desc, "✦ Bấm để xem khuyến nghị chi tiết")}
                         </article>
                     `;
                 })
@@ -8832,7 +9494,9 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         const plotH = svgH - topPad - bottomPad;
         const midY = topPad + plotH / 2;
 
-        // ✅ ĐÃ FIX TRIỆT ĐỂ LỖI CÚ PHÁP TẠI ĐÂY: Tách rõ cmd = i === 0 ? "M" : "L"
+        const criticalDaysList = [];
+        const peakDaysList = [];
+
         const pathsHtml = cycles
             .map((c) => {
                 const pts = [];
@@ -8842,8 +9506,19 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                     const y = midY - v * (plotH / 2);
                     const cmd = i === 0 ? "M" : "L";
                     pts.push(`${cmd}${x.toFixed(1)},${y.toFixed(1)}`);
+
+                    if (i > 0 && i <= 15) {
+                        const dTarget = new Date(todayStart.getTime() + i * 86400000);
+                        const dStr = `${pad(dTarget.getDate())}/${pad(dTarget.getMonth() + 1)}`;
+                        if (Math.abs(v) < 0.13 && criticalDaysList.length < 4) {
+                            criticalDaysList.push(`${dStr} (${c.name.split("(")[0].trim()})`);
+                        }
+                        if (v > 0.94 && peakDaysList.length < 4) {
+                            peakDaysList.push(`${dStr} (${c.name.split("(")[0].trim()})`);
+                        }
+                    }
                 }
-                return `<path d="${pts.join(" ")}" fill="none" stroke="${c.color}" stroke-width="2.6" stroke-linecap="round" />`;
+                return `<path class="util-bio-wave-path" d="${pts.join(" ")}" fill="none" stroke="${c.color}" stroke-width="2.8" stroke-linecap="round" />`;
             })
             .join("");
 
@@ -8865,9 +9540,51 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 </svg>
             `;
         }
+
+        const avgPct = Math.round(totalPct / 4);
+        const insightsEl = document.getElementById("bio-insights-grid");
+        if (insightsEl) {
+            insightsEl.innerHTML = `
+                <article class="util-bento-item is-current-highlight">
+                    <div class="util-bento-item__top">
+                        <span class="util-bento-item__icon-box">
+                            <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" />
+                        </span>
+                        <span class="util-bento-item__badge">Chỉ Số Tổng Hợp Hôm Nay</span>
+                    </div>
+                    <div class="util-bento-item__body">
+                        <strong class="util-bento-item__title">Mức Năng Lượng Trung Bình: ${avgPct > 0 ? `+${avgPct}%` : `${avgPct}%`}</strong>
+                        <span class="util-bento-item__sub">Đã sống: ${daysAlive.toLocaleString("vi-VN")} ngày tính từ ngày sinh</span>
+                    </div>
+                    <p class="util-bento-item__desc">
+                        ${
+                            avgPct >= 20
+                                ? "Tổng hòa 4 chu kỳ đang ở pha Dương tích cực. Rất thuận lợi để giải quyết các công việc đòi hỏi sự tập trung và ra quyết định quan trọng."
+                                : "Cơ thể đang trong giai đoạn điều hòa và tích lũy nội lực. Hãy phân bổ thời gian làm việc vừa sức và ưu tiên giấc ngủ sâu."
+                        }
+                    </p>
+                </article>
+
+                <article class="util-bento-item">
+                    <div class="util-bento-item__top">
+                        <span class="util-bento-item__icon-box">
+                            <img src="./assets/icons/calendarCheck.svg" alt="" aria-hidden="true" />
+                        </span>
+                        <span class="util-bento-item__badge">Dự Báo 15 Ngày Tới</span>
+                    </div>
+                    <div class="util-bento-item__body">
+                        <strong class="util-bento-item__title">Cảnh Báo Ngày Giao Điểm (0%) &amp; Đỉnh Cao</strong>
+                        <span class="util-bento-item__sub">Ngày Giao Điểm: ${criticalDaysList.join(", ") || "Không có"}</span>
+                    </div>
+                    <p class="util-bento-item__desc">
+                        🌟 <strong>Các ngày đạt đỉnh (+100%):</strong> ${peakDaysList.join(", ") || "Đang tiến dần lên đỉnh"}. Vào Ngày Giao Điểm (khi đường sóng cắt trục 0%), bạn nên tránh làm việc quá sức hoặc tranh luận căng thẳng.
+                    </p>
+                </article>
+            `;
+        }
     };
 
-    // ==================== 10. MODULE TỪ ĐIỂN CỔ HỌC PHONG THỦY ====================
+    // ==================== MỤC 10: TỪ ĐIỂN CỔ HỌC (ĐỒNG BỘ TRANG DAY + ICON ĐỘNG + TOOLTIP + MODAL) ====================
     const FENGSHUI_DICT = [
         [
             "Hải Trung Kim",
@@ -8875,7 +9592,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/metal.svg",
             false,
-            "Vàng dưới biển — Nội lực tiềm ẩn, sâu sắc, điềm tĩnh và bền bỉ. Hợp mệnh Thủy, Thổ, Kim.",
+            "Vàng dưới biển — Nội lực tiềm ẩn, sâu sắc, điềm tĩnh và bền bỉ.",
+            "Thổ sinh Kim, Kim sinh Thủy. Hợp màu trắng, bạc, vàng ánh kim; phương vị Chính Tây, Tây Bắc.",
         ],
         [
             "Lư Trung Hỏa",
@@ -8883,7 +9601,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/fire.svg",
             false,
-            "Lửa trong lò — Nhiệt huyết được tôi luyện, ấm áp và kiên định. Hợp mệnh Thổ, Mộc, Hỏa.",
+            "Lửa trong lò — Nhiệt huyết được tôi luyện, ấm áp và kiên định.",
+            "Mộc sinh Hỏa, Hỏa sinh Thổ. Hợp màu đỏ chu sa, cam ấm, tím; phương vị Chính Nam.",
         ],
         [
             "Đại Lâm Mộc",
@@ -8891,7 +9610,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/wood.svg",
             false,
-            "Gỗ rừng già — Vững chãi, che chở, nhân hậu và giàu sức sống. Hợp mệnh Hỏa, Thủy, Mộc.",
+            "Gỗ rừng già — Vững chãi, che chở, nhân hậu và giàu sức sống.",
+            "Thủy sinh Mộc, Mộc sinh Hỏa. Hợp màu xanh lục bảo, xanh lá; phương vị Chính Đông, Đông Nam.",
         ],
         [
             "Lộ Bàng Thổ",
@@ -8899,7 +9619,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/earth.svg",
             false,
-            "Đất ven đường — Bằng phẳng, gắn kết giao thương và thực tế. Hợp mệnh Kim, Hỏa, Thổ.",
+            "Đất ven đường — Bằng phẳng, gắn kết giao thương và thực tế.",
+            "Hỏa sinh Thổ, Thổ sinh Kim. Hợp màu vàng đất, nâu trầm; phương vị Trung Cung, Đông Bắc, Tây Nam.",
         ],
         [
             "Kiếm Phong Kim",
@@ -8907,7 +9628,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/metal.svg",
             false,
-            "Vàng mũi kiếm — Sắc bén, quyết đoán, bản lĩnh và mạnh mẽ. Hợp mệnh Thủy, Thổ, Kim.",
+            "Vàng mũi kiếm — Sắc bén, quyết đoán, bản lĩnh và mạnh mẽ.",
+            "Hợp mệnh Thủy, Thổ, Kim. Rất tốt cho các ngành kỹ thuật, tài chính, công nghệ và quản trị.",
         ],
         [
             "Giản Hạ Thủy",
@@ -8915,7 +9637,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/water.svg",
             false,
-            "Nước dưới khe — Dòng chảy ngầm tĩnh lặng, tinh tế và linh hoạt. Hợp mệnh Mộc, Kim, Thủy.",
+            "Nước dưới khe — Dòng chảy ngầm tĩnh lặng, tinh tế và linh hoạt.",
+            "Kim sinh Thủy, Thủy sinh Mộc. Hợp màu xanh đại dương, đen; phương vị Chính Bắc.",
         ],
         [
             "Tuyền Trung Thủy",
@@ -8923,7 +9646,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/water.svg",
             false,
-            "Nước trong suối — Nguồn nước mát lành, trí tuệ và dồi dào. Hợp mệnh Mộc, Kim, Thủy.",
+            "Nước trong suối — Nguồn nước mát lành, trí tuệ và dồi dào.",
+            "Hợp mệnh Mộc, Kim, Thủy. Thuận lợi cho nghiên cứu, học thuật, ngoại giao và thương mại.",
         ],
         [
             "Tùng Bách Mộc",
@@ -8931,7 +9655,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/wood.svg",
             false,
-            "Gỗ tùng bách — Bất khuất trước gió sương, trường thọ và chính trực. Hợp mệnh Hỏa, Thủy, Mộc.",
+            "Gỗ tùng bách — Bất khuất trước gió sương, trường thọ và chính trực.",
+            "Hợp mệnh Hỏa, Thủy, Mộc. Đại diện cho ý chí kiên cường và uy tín bền vững.",
         ],
         [
             "Trường Lưu Thủy",
@@ -8939,7 +9664,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/water.svg",
             false,
-            "Nước chảy dài — Kiên trì, vươn xa biển lớn và không ngừng vận động. Hợp mệnh Mộc, Kim, Thủy.",
+            "Nước chảy dài — Kiên trì, vươn xa biển lớn và không ngừng vận động.",
+            "Hợp mệnh Mộc, Kim, Thủy. Tốt cho mở rộng quy mô, đầu tư dài hạn và logistics.",
         ],
         [
             "Bình Địa Mộc",
@@ -8947,7 +9673,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/wood.svg",
             false,
-            "Cây đất bằng — Ôn hòa, phát triển thuận lợi và dễ kết giao. Hợp mệnh Hỏa, Thủy, Mộc.",
+            "Cây đất bằng — Ôn hòa, phát triển thuận lợi và dễ kết giao.",
+            "Hợp mệnh Hỏa, Thủy, Mộc. Thuận lợi cho hợp tác đội nhóm, kiến trúc, giáo dục.",
         ],
         [
             "Thiên Hà Thủy",
@@ -8955,7 +9682,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-napam",
             "./assets/icons/water.svg",
             false,
-            "Nước mưa trên trời — Thanh khiết, rộng lớn và nuôi dưỡng vạn vật. Hợp mệnh Mộc, Kim, Thủy.",
+            "Nước mưa trên trời — Thanh khiết, rộng lớn và nuôi dưỡng vạn vật.",
+            "Hợp mệnh Mộc, Kim, Thủy. Mang lại phúc khí, sự hài hòa và tầm nhìn rộng mở.",
         ],
         [
             "Cung Đại An",
@@ -8963,7 +9691,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-lucdieu",
             "./assets/icons/fengshui/lucdieu-daian.svg",
             true,
-            "Mọi việc đều tốt lành, cầu tài đi hướng Tây Nam, nhà cửa yên ổn. Hợp khởi sự, ký kết, xuất hành.",
+            "Mọi việc đều tốt lành, cầu tài đi hướng Tây Nam, nhà cửa yên ổn.",
+            "Rất hợp để khởi sự việc quan trọng, ký kết hợp đồng, xuất hành hoặc cầu bình an.",
         ],
         [
             "Cung Lưu Niên",
@@ -8971,7 +9700,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-lucdieu",
             "./assets/icons/fengshui/lucdieu-luunien.svg",
             true,
-            "Mưu sự dễ chậm trễ, cầu lộc chưa thông; nên ưu tiên xử lý việc tồn đọng và rà soát hồ sơ.",
+            "Mưu sự dễ chậm trễ, cầu lộc chưa thông; cần đề phòng khẩu thiệt.",
+            "Nên ưu tiên xử lý việc tồn đọng, rà soát kỹ hồ sơ pháp lý và tránh vội vàng.",
         ],
         [
             "Cung Tốc Hỷ",
@@ -8979,23 +9709,26 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-lucdieu",
             "./assets/icons/fengshui/lucdieu-tochy.svg",
             true,
-            "Tin vui đến nhanh, mưu sự đại cát; thời điểm vàng để thương thảo, khai trương và kết nối quý nhân.",
+            "Tin vui đến nhanh, mưu sự đại cát, thuận lợi cho gặp gỡ, ký kết.",
+            "Thời điểm vàng để thương thảo, khai trương, ra mắt sản phẩm và kết nối quý nhân.",
         ],
         [
             "Cung Xích Khẩu",
-            "Khổng Minh Lục Diệu • Đề Phòng Khẩu Thiệt",
+            "Khổng Minh Lục Diệu • Khẩu Thiệt",
             "fs-lucdieu",
             "./assets/icons/fengshui/lucdieu-xichkhau.svg",
             true,
-            "Dễ xảy ra bất đồng lời ăn tiếng nói; nên giữ thái độ hòa nhã và cẩn trọng văn bản hợp đồng.",
+            "Dễ xảy ra bất đồng lời ăn tiếng nói; nên cẩn trọng hợp đồng.",
+            "Giữ thái độ hòa nhã trong giao tiếp, hạn chế tranh luận gay gắt.",
         ],
         [
             "Cung Tiểu Cát",
-            "Khổng Minh Lục Diệu • Quý Nhân Phù Trợ",
+            "Khổng Minh Lục Diệu • Quý Nhân",
             "fs-lucdieu",
             "./assets/icons/fengshui/lucdieu-tieucat.svg",
             true,
-            "Cát lành, hòa hợp, mưu sự suôn sẻ và rất thuận lợi cho giao dịch tài chính, mở hàng.",
+            "Cát lành, hòa hợp, mưu sự suôn sẻ và rất dễ gặp người giúp đỡ.",
+            "Thuận lợi cho giao dịch tài chính, mở hàng, cầu tài lộc và vun đắp đối tác.",
         ],
         [
             "Cung Không Vong",
@@ -9003,55 +9736,80 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             "fs-lucdieu",
             "./assets/icons/fengshui/lucdieu-khongvong.svg",
             true,
-            "Cầu tài chưa lợi; thích hợp nghỉ ngơi, học tập, lập kế hoạch nội bộ hoặc làm việc thiện nguyện.",
+            "Cầu tài chưa lợi; mưu sự lớn dễ hao tổn công sức.",
+            "Thích hợp nghỉ ngơi, học tập, lập kế hoạch nội bộ hoặc làm việc thiện nguyện.",
         ],
         [
-            "Quẻ Càn (☰)",
+            "Quẻ Càn",
             "Bát Quái • Hướng Tây Bắc (Hành Kim)",
             "fs-bagua",
             "./assets/icons/zodiac/dog.svg",
             true,
-            "Tượng trưng cho Trời lớn, cương kiện, uy quyền, lãnh đạo và tầm nhìn chiến lược.",
+            "Tượng trưng cho Trời lớn, cương kiện, uy quyền, người đứng đầu và sự chính trực.",
+            "Phương vị Tây Bắc (Hành Kim). Hợp cầu công danh, lãnh đạo và hoạch định chiến lược.",
         ],
         [
-            "Quẻ Khảm (☵)",
+            "Quẻ Khảm",
             "Bát Quái • Hướng Chính Bắc (Hành Thủy)",
             "fs-bagua",
             "./assets/icons/zodiac/mouse.svg",
             true,
-            "Tượng trưng cho Nước sâu, trí tuệ uyên bác, nghiên cứu và sự linh hoạt.",
+            "Tượng trưng cho Nước sâu, trí tuệ uyên bác, sự linh hoạt vượt qua hiểm trở.",
+            "Phương vị Chính Bắc (Hành Thủy). Hợp nghiên cứu, học thuật, giao thương và tĩnh tâm.",
         ],
         [
-            "Quẻ Chấn (☳)",
+            "Quẻ Cấn",
+            "Bát Quái • Hướng Đông Bắc (Hành Thổ)",
+            "fs-bagua",
+            "./assets/icons/zodiac/tiger.svg",
+            true,
+            "Tượng trưng cho Núi cao vững chãi, sự tĩnh tâm và tích lũy nội lực.",
+            "Phương vị Đông Bắc (Hành Thổ). Hợp tu dưỡng, củng cố nền tảng và bảo toàn tài sản.",
+        ],
+        [
+            "Quẻ Chấn",
             "Bát Quái • Hướng Chính Đông (Hành Mộc)",
             "fs-bagua",
             "./assets/icons/zodiac/cat.svg",
             true,
             "Tượng trưng cho Sấm động mùa xuân, sinh khí bừng tỉnh và khởi đầu mới.",
+            "Phương vị Chính Đông (Hành Mộc). Đại lợi cho xuất hành buổi sớm, khởi nghiệp.",
         ],
         [
-            "Quẻ Tốn (☴)",
+            "Quẻ Tốn",
             "Bát Quái • Hướng Đông Nam (Hành Mộc)",
             "fs-bagua",
             "./assets/icons/zodiac/dragon.svg",
             true,
-            "Tượng trưng cho Gió thuận, giao thương hanh thông và cung Tài Lộc.",
+            "Tượng trưng cho Gió thuận hiền hòa, giao thương hanh thông và cung Tài Lộc.",
+            "Phương vị Đông Nam (Hành Mộc). Rất tốt cho đàm phán, truyền thông và cầu tài.",
         ],
         [
-            "Quẻ Ly (☲)",
+            "Quẻ Ly",
             "Bát Quái • Hướng Chính Nam (Hành Hỏa)",
             "fs-bagua",
             "./assets/icons/zodiac/horse.svg",
             true,
-            "Tượng trưng cho Lửa sáng, danh vọng, truyền thông và nhiệt huyết.",
+            "Tượng trưng cho Lửa sáng, Mặt trời rực rỡ, văn minh, danh vọng và nhiệt huyết.",
+            "Phương vị Chính Nam (Hành Hỏa). Hợp quảng bá thương hiệu, nghệ thuật và tỏa sáng.",
         ],
         [
-            "Quẻ Khôn (☷)",
+            "Quẻ Khôn",
             "Bát Quái • Hướng Tây Nam (Hành Thổ)",
             "fs-bagua",
             "./assets/icons/zodiac/goat.svg",
             true,
-            "Tượng trưng cho Đất mẹ bao dung, bất động sản, nhân sự và gia đạo.",
+            "Tượng trưng cho Đất mẹ bao dung, sự nhu thuận và hậu thuẫn vững chắc.",
+            "Phương vị Tây Nam (Hành Thổ). Rất tốt cho bất động sản, nhân sự và gia đạo.",
+        ],
+        [
+            "Quẻ Đoài",
+            "Bát Quái • Hướng Chính Tây (Hành Kim)",
+            "fs-bagua",
+            "./assets/icons/zodiac/rooster.svg",
+            true,
+            "Tượng trưng cho Đầm nước, niềm vui, tài thuyết trình và ngoại giao hài hòa.",
+            "Phương vị Chính Tây (Hành Kim). Hợp ngoại giao, thuyết trình và kết nối khách hàng.",
         ],
     ];
 
@@ -9067,48 +9825,124 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         });
 
         grid.innerHTML = items
-            .map(([title, sub, , icon, isFiltered, desc]) => {
+            .map(([title, sub, , icon, isFiltered, desc, advice]) => {
                 const slug = toSlug(title);
                 const isSel = highlightSlug && (slug.includes(highlightSlug) || highlightSlug.includes(slug));
+                const idx = FENGSHUI_DICT.findIndex((x) => x[0] === title);
+
                 return `
-                    <article class="util-item-card ${isSel ? "is-selected" : ""}">
-                        <div class="util-item-card__head">
-                            <span class="util-item-card__icon-wrap ${isFiltered ? "util-item-card__icon-wrap--filtered" : ""}">
+                    <article
+                        class="util-bento-item ${isSel ? "is-current-highlight" : ""} has-bento-tooltip"
+                        data-fs-idx="${idx}"
+                        role="button"
+                        tabindex="0"
+                        aria-label="${title}, ${sub}"
+                    >
+                        <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                            <img src="${icon}" alt="" class="util-bento-item__watermark" />
+                        </span>
+                        <div class="util-bento-item__top">
+                            <span class="util-bento-item__icon-box ${isFiltered ? "util-bento-item__icon-box--filtered" : ""}">
                                 <img src="${icon}" alt="" aria-hidden="true" />
                             </span>
-                            <span class="util-item-card__tag">Cổ Học Tinh Hoa</span>
+                            <span class="util-bento-item__badge">Cổ Học Tinh Hoa</span>
                         </div>
-                        <strong class="util-item-card__title">${title}</strong>
-                        <span class="util-item-card__sub">${sub}</span>
-                        <p class="util-item-card__desc">${desc}</p>
+                        <div class="util-bento-item__body">
+                            <strong class="util-bento-item__title">${title}</strong>
+                            <span class="util-bento-item__sub">${sub}</span>
+                        </div>
+                        <p class="util-bento-item__desc">${desc}</p>
+                        <footer class="util-bento-item__foot">
+                            <span>Xem luận giải ứng dụng</span>
+                            <span aria-hidden="true">&#8594;</span>
+                        </footer>
+                        ${buildBentoTooltipHtml(title, `${desc} ${advice}`, `✦ Bấm để mở thẻ giải nghĩa ${title}`)}
                     </article>
                 `;
             })
             .join("");
     };
 
-    // ==================== ĐIỀU KHIỂN MENU MOBILE & BENTO DUAL-NAVBAR ====================
+    // ==================== ĐIỀU KHIỂN MENU MOBILE, DRAG-TO-SCROLL & DUAL-NAVBAR ====================
     const toggleMobileUtilMenu = (forceClose = false) => {
         const nav = document.getElementById("util-primary-nav");
         const burger = document.getElementById("util-burger-btn");
         const backdrop = document.getElementById("util-mobile-backdrop");
         if (!nav || !burger || !backdrop) return;
 
-        const isOpen = nav.classList.contains("is-open");
-        const nextState = forceClose ? false : !isOpen;
-
+        const nextState = forceClose ? false : !nav.classList.contains("is-open");
         nav.classList.toggle("is-open", nextState);
         burger.classList.toggle("is-active", nextState);
         backdrop.classList.toggle("is-active", nextState);
         burger.setAttribute("aria-expanded", String(nextState));
-
         document.body.style.overflow = nextState ? "hidden" : "";
+    };
+
+    const bindDragToScrollNav = () => {
+        const slider = document.getElementById("util-primary-nav-list");
+        const prevBtn = document.getElementById("util-nav-prev");
+        const nextBtn = document.getElementById("util-nav-next");
+        if (!slider) return;
+
+        let isDown = false;
+        let isDragged = false;
+        let startX = 0;
+        let scrollLeft = 0;
+
+        slider.addEventListener("mousedown", (e) => {
+            if (e.button !== 0) return;
+            isDown = true;
+            isDragged = false;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        const stopDrag = () => {
+            isDown = false;
+            setTimeout(() => slider.classList.remove("is-dragging"), 40);
+        };
+
+        slider.addEventListener("mouseleave", stopDrag);
+        slider.addEventListener("mouseup", stopDrag);
+
+        slider.addEventListener("mousemove", (e) => {
+            if (!isDown) return;
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 1.6;
+            if (Math.abs(walk) > 6) {
+                isDragged = true;
+                slider.classList.add("is-dragging");
+                e.preventDefault();
+                slider.scrollLeft = scrollLeft - walk;
+            }
+        });
+
+        slider.addEventListener(
+            "click",
+            (e) => {
+                if (isDragged) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    isDragged = false;
+                }
+            },
+            true,
+        );
+
+        prevBtn?.addEventListener("click", () => slider.scrollBy({ left: -260, behavior: "smooth" }));
+        nextBtn?.addEventListener("click", () => slider.scrollBy({ left: 260, behavior: "smooth" }));
     };
 
     const switchCategoryAndSub = (catKey, subKey = "") => {
         activeCat = SUB_NAV_MAP[catKey] ? catKey : "clock";
         const subItems = SUB_NAV_MAP[activeCat] || [];
         activeSub = subKey || (subItems[0]?.id ?? "");
+
+        const mainEl = document.getElementById("main");
+        if (mainEl) {
+            mainEl.dataset.activeCat = activeCat;
+            mainEl.dataset.activeSub = activeSub;
+        }
 
         document.querySelectorAll("[data-util-cat]").forEach((link) => {
             const isMatch = link.dataset.utilCat === activeCat;
@@ -9181,25 +10015,74 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         toggleMobileUtilMenu(true);
     };
 
+    // ==================== KHỞI TẠO TOÀN BỘ TRANG UTILITIES ====================
     const initUtilitiesPage = () => {
         const mainEl = document.getElementById("main");
         if (!mainEl || mainEl.dataset.utilBound === "true") return;
         mainEl.dataset.utilBound = "true";
 
+        bindDragToScrollNav();
+
+        const now = new Date();
+        ucDay = now.getDate();
+        ucMonth = now.getMonth() + 1;
+        ucYear = now.getFullYear();
+
+        // Khởi tạo các Custom Bento Date Pickers cho Mục 7, 8, 9
+        ddStartPicker = createBentoDatePicker(
+            "dd-start-pickers",
+            { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() },
+            computeDateDiff,
+        );
+        ddEndPicker = createBentoDatePicker("dd-end-pickers", { day: 17, month: 2, year: 2027 }, computeDateDiff);
+        asBasePicker = createBentoDatePicker(
+            "as-base-pickers",
+            { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() },
+            computeDateAddSub,
+        );
+        numBirthPicker = createBentoDatePicker(
+            "num-birth-pickers",
+            { day: 13, month: 1, year: 1987 },
+            renderNumerologyPersonal,
+        );
+        bioBirthPicker = createBentoDatePicker("bio-birth-pickers", { day: 13, month: 1, year: 1987 }, renderBiorhythm);
+
         renderStopwatchLaps();
         renderAlarmsList();
+        renderUcPickers();
         renderInlineConverter();
         renderSolarTermsPanel();
-        renderIChingHexagram(ICHING_HEXAGRAMS[2]);
-        renderHistoryMonthEvents(11);
+        renderIChingHexagram(ICHING_HEXAGRAMS[0]);
+        renderTarotCard(TAROT_CARDS[0], true);
+        renderHistoryMonthPicker();
+        fetchAndRenderHistory();
+        renderHsPickers();
         renderHoroscopeSign(HOROSCOPE_SIGNS[0]);
         computeDateDiff();
         computeDateAddSub();
         renderNumerologyPersonal();
-        renderNumerologyMonthCalendar(new Date().getDate());
+        renderNumerologyMonthCalendar(now.getDate());
         renderBiorhythm();
         renderFengShuiDict();
 
+        // Nạp song song 3 kho dữ liệu JSON (Tarot 78 lá, Kinh Dịch, 12 Cung Hoàng Đạo)
+        Promise.all([
+            fetchJsonSafe("./api/tarot.json", TAROT_CARDS),
+            fetchJsonSafe("./api/iching.json", ICHING_HEXAGRAMS),
+            fetchJsonSafe("./api/horoscope.json", HOROSCOPE_SIGNS),
+        ]).then(([tarotData, ichingData, horoscopeData]) => {
+            TAROT_CARDS = tarotData;
+            ICHING_HEXAGRAMS = ichingData;
+            HOROSCOPE_SIGNS = horoscopeData;
+
+            const defaultHex = ICHING_HEXAGRAMS.find((h) => h.num === 14) || ICHING_HEXAGRAMS[0];
+            const defaultTarot = TAROT_CARDS.find((c) => c.id === 14) || TAROT_CARDS[0];
+            renderIChingHexagram(defaultHex);
+            renderTarotCard(defaultTarot, true);
+            renderHoroscopeSign(getSignByMonthDay(hsMonth, hsDay));
+        });
+
+        // Đọc tham số URL Deep-Link từ day.html / footer.html
         const params = new URLSearchParams(window.location.search);
         const napamParam = params.get("napam");
         const lucdieuParam = params.get("lucdieu") || params.get("direction");
@@ -9218,12 +10101,19 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             renderFengShuiDict(baguaParam);
         } else if (termParam || tabParam === "solarterm") {
             switchCategoryAndSub("solarterm");
+        } else if (tabParam === "tarot") {
+            switchCategoryAndSub("divination", "tarot");
+        } else if (tabParam === "iching") {
+            switchCategoryAndSub("divination", "iching");
+        } else if (tabParam === "horoscope") {
+            switchCategoryAndSub("horoscope");
         } else if (tabParam === "napam" || tabParam === "lucdieu" || tabParam === "truc-sao") {
             switchCategoryAndSub("fengshui", "fs-all");
         } else {
             switchCategoryAndSub("clock", "stopwatch");
         }
 
+        // Sự kiện điều hướng trên Dual-Navbar & Mobile Menu
         document.getElementById("util-burger-btn")?.addEventListener("click", () => toggleMobileUtilMenu());
         document.getElementById("util-mobile-backdrop")?.addEventListener("click", () => toggleMobileUtilMenu(true));
 
@@ -9241,13 +10131,24 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             switchCategoryAndSub(activeCat, subLink.dataset.utilSub);
         });
 
-        // Hỗ trợ cả 2 ID nút mở nhanh Converter Modal (ở bản 8 tab và bản 10 tab)
-        const handleOpenModal = () => {
+        document.getElementById("util-open-modal-btn")?.addEventListener("click", () => {
             if (typeof window.openConverterModal === "function") window.openConverterModal(true);
             else document.getElementById("widget-trigger-btn")?.click();
-        };
-        document.getElementById("util-open-modal-btn")?.addEventListener("click", handleOpenModal);
-        document.getElementById("util-shortcut-converter")?.addEventListener("click", handleOpenModal);
+        });
+
+        // Sự kiện dùng chung cho tất cả nút Bento Stepper (− / +) trên trang
+        mainEl.addEventListener("click", (e) => {
+            const stepBtn = e.target.closest("[data-step-target]");
+            if (!stepBtn) return;
+            const inputEl = document.getElementById(stepBtn.dataset.stepTarget);
+            if (!inputEl) return;
+            const step = Number(stepBtn.dataset.step || 1);
+            const min = Number(inputEl.min || 0);
+            const max = Number(inputEl.max || 9999);
+            const nextVal = Math.min(max, Math.max(min, Number(inputEl.value || 0) + step));
+            inputEl.value = String(nextVal);
+            inputEl.dispatchEvent(new Event("input", { bubbles: true }));
+        });
 
         // 1.1. Sự kiện Đồng hồ bấm giờ
         const swStartBtn = document.getElementById("sw-start-btn");
@@ -9262,6 +10163,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                     swStartBtn.innerHTML = "<span>&#10074;&#10074; Tạm dừng</span>";
                     if (swLapBtn) swLapBtn.disabled = false;
                     setText("sw-status-tag", "Đang bấm giờ...");
+                    setText("sw-head-badge", "Đang chạy");
                     swTimer = setInterval(() => {
                         swElapsedMs = performance.now() - swStartTime;
                         const fmt = formatStopwatch(swElapsedMs);
@@ -9273,6 +10175,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                     clearInterval(swTimer);
                     swStartBtn.innerHTML = "<span>&#9654; Tiếp tục</span>";
                     setText("sw-status-tag", "Đang tạm dừng");
+                    setText("sw-head-badge", "Tạm dừng");
                 }
             };
         }
@@ -9303,19 +10206,31 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 setText("sw-main-display", "00:00:00");
                 setText("sw-ms-display", ".00");
                 setText("sw-status-tag", "Sẵn sàng bấm giờ");
+                setText("sw-head-badge", "Chuẩn 1/100s");
                 if (swStartBtn) swStartBtn.innerHTML = "<span>&#9654; Bắt đầu</span>";
                 if (swLapBtn) swLapBtn.disabled = true;
                 renderStopwatchLaps();
             };
         }
 
-        // 1.2. Sự kiện Đồng hồ đếm ngược
+        // 1.2. Sự kiện Đồng hồ đếm ngược & Upload nhạc từ máy
         const syncCountdownDisplay = (sec) => {
             const h = Math.floor(sec / 3600);
             const m = Math.floor((sec % 3600) / 60);
             const s = sec % 60;
             setText("cd-display-digits", `${pad(h)}:${pad(m)}:${pad(s)}`);
         };
+
+        ["cd-input-hours", "cd-input-minutes", "cd-input-seconds"].forEach((id) => {
+            document.getElementById(id)?.addEventListener("input", () => {
+                if (cdRunning) return;
+                const h = Number(document.getElementById("cd-input-hours")?.value || 0);
+                const m = Number(document.getElementById("cd-input-minutes")?.value || 0);
+                const s = Number(document.getElementById("cd-input-seconds")?.value || 0);
+                cdRemainingSec = Math.max(0, h * 3600 + m * 60 + s);
+                syncCountdownDisplay(cdRemainingSec);
+            });
+        });
 
         document.querySelectorAll("[data-cd-preset]").forEach((chip) => {
             chip.onclick = () => {
@@ -9334,11 +10249,24 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             };
         });
 
-        document.getElementById("cd-test-sound-btn")?.addEventListener("click", playBellChime);
+        const cdAudioInput = document.getElementById("cd-audio-file");
+        document.getElementById("cd-upload-sound-btn")?.addEventListener("click", () => cdAudioInput?.click());
+        cdAudioInput?.addEventListener("change", (e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            customCountdownAudioUrl = URL.createObjectURL(file);
+            setText("cd-sound-file-label", `🎵 ${file.name}`);
+            playSoundEffect(customCountdownAudioUrl);
+        });
+
+        document.getElementById("cd-test-sound-btn")?.addEventListener("click", () => {
+            playSoundEffect(customCountdownAudioUrl);
+        });
 
         const cdStartBtn = document.getElementById("cd-start-btn");
         if (cdStartBtn) {
             cdStartBtn.onclick = () => {
+                stopCurrentAudio();
                 if (!cdRunning) {
                     const h = Number(document.getElementById("cd-input-hours")?.value || 0);
                     const m = Number(document.getElementById("cd-input-minutes")?.value || 0);
@@ -9382,7 +10310,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                             cdRunning = false;
                             cdStartBtn.innerHTML = "<span>&#9654; Bắt đầu hẹn giờ</span>";
                             setText("cd-status-badge", "🔔 Đã hết giờ!");
-                            playBellChime();
+                            playSoundEffect(customCountdownAudioUrl);
                         }
                     }, 1000);
                 } else {
@@ -9395,6 +10323,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         }
 
         document.getElementById("cd-reset-btn")?.addEventListener("click", () => {
+            stopCurrentAudio();
             cdRunning = false;
             clearInterval(cdTimer);
             cdTimer = null;
@@ -9407,57 +10336,174 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             setText("cd-status-badge", "Đang chờ");
         });
 
-        // 1.3. Sự kiện Đồng hồ báo thức
+        // 1.3. Sự kiện Đồng hồ báo thức (Upload nhạc + Toggle + Snooze + Icon Thùng Rác SVG)
+        const alAudioInput = document.getElementById("al-audio-file");
+        document.getElementById("al-upload-sound-btn")?.addEventListener("click", () => alAudioInput?.click());
+        alAudioInput?.addEventListener("change", (e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            customAlarmAudioUrl = URL.createObjectURL(file);
+            setText("al-sound-file-label", `🎵 ${file.name}`);
+            playSoundEffect(customAlarmAudioUrl);
+        });
+
+        document.getElementById("al-test-sound-btn")?.addEventListener("click", () => {
+            playSoundEffect(customAlarmAudioUrl);
+        });
+
+        document.getElementById("al-repeat-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-al-repeat]");
+            if (!btn) return;
+            e.stopPropagation();
+            const val = btn.dataset.alRepeat;
+            const textEl = document.getElementById("al-repeat-text");
+            if (textEl) {
+                textEl.textContent = val;
+                textEl.dataset.repeatVal = val;
+            }
+            document.querySelectorAll("[data-al-repeat]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-selected", isSel);
+                b.setAttribute("aria-selected", String(isSel));
+            });
+            document.getElementById("al-repeat-dropdown")?.removeAttribute("open");
+        });
+
         document.getElementById("al-add-btn")?.addEventListener("click", () => {
             const hour = Math.min(23, Math.max(0, Number(document.getElementById("al-input-hour")?.value || 6)));
             const minute = Math.min(59, Math.max(0, Number(document.getElementById("al-input-minute")?.value || 30)));
             const title = document.getElementById("al-input-title")?.value || "Dậy học bài";
-            alarmsList.push({ id: Date.now(), hour, minute, title, enabled: true });
+            const repeat = document.getElementById("al-repeat-text")?.dataset.repeatVal || "Hằng ngày";
+            alarmsList.push({ id: Date.now(), hour, minute, title, repeat, enabled: true });
             renderAlarmsList();
         });
 
         document.getElementById("al-list-container")?.addEventListener("click", (e) => {
+            const toggleBtn = e.target.closest("[data-toggle-alarm]");
+            if (toggleBtn) {
+                const id = Number(toggleBtn.dataset.toggleAlarm);
+                alarmsList = alarmsList.map((a) => (a.id === id ? { ...a, enabled: !a.enabled } : a));
+                renderAlarmsList();
+                return;
+            }
             const delBtn = e.target.closest("[data-del-alarm]");
-            if (!delBtn) return;
-            const id = Number(delBtn.dataset.delAlarm);
-            alarmsList = alarmsList.filter((a) => a.id !== id);
+            if (delBtn) {
+                const id = Number(delBtn.dataset.delAlarm);
+                alarmsList = alarmsList.filter((a) => a.id !== id);
+                renderAlarmsList();
+            }
+        });
+
+        document.getElementById("al-stop-ring-btn")?.addEventListener("click", () => {
+            stopCurrentAudio();
+            const banner = document.getElementById("al-ringing-banner");
+            if (banner) banner.hidden = true;
+        });
+
+        document.getElementById("al-snooze-btn")?.addEventListener("click", () => {
+            stopCurrentAudio();
+            const banner = document.getElementById("al-ringing-banner");
+            if (banner) banner.hidden = true;
+            const snoozeTime = new Date(Date.now() + 5 * 60000);
+            alarmsList.push({
+                id: Date.now(),
+                hour: snoozeTime.getHours(),
+                minute: snoozeTime.getMinutes(),
+                title: "Báo lại sau 5 phút (Snooze)",
+                repeat: "Chỉ một lần",
+                enabled: true,
+            });
             renderAlarmsList();
         });
 
         setInterval(() => {
-            const now = new Date();
+            const cur = new Date();
             setText(
                 "al-live-clock-pill",
-                `Giờ hiện tại: ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`,
+                `Giờ hiện tại: ${pad(cur.getHours())}:${pad(cur.getMinutes())}:${pad(cur.getSeconds())}`,
             );
-            if (now.getSeconds() === 0) {
+            if (cur.getSeconds() === 0) {
                 alarmsList.forEach((a) => {
-                    if (a.enabled && a.hour === now.getHours() && a.minute === now.getMinutes()) {
-                        playBellChime();
+                    if (a.enabled && a.hour === cur.getHours() && a.minute === cur.getMinutes()) {
+                        const banner = document.getElementById("al-ringing-banner");
+                        if (banner) banner.hidden = false;
+                        setText("al-ringing-title", `${pad(a.hour)}:${pad(a.minute)} — ${a.title}`);
+                        playSoundEffect(customAlarmAudioUrl);
                     }
                 });
             }
         }, 1000);
 
-        // 2. Sự kiện Đổi ngày tại chỗ
-        ["uc-day", "uc-month", "uc-year", "uc-mode"].forEach((id) => {
-            document.getElementById(id)?.addEventListener("input", renderInlineConverter);
-            document.getElementById(id)?.addEventListener("change", renderInlineConverter);
-        });
-        document.getElementById("uc-today-btn")?.addEventListener("click", () => {
-            const now = new Date();
-            const dEl = document.getElementById("uc-day");
-            const mEl = document.getElementById("uc-month");
-            const yEl = document.getElementById("uc-year");
-            const modeEl = document.getElementById("uc-mode");
-            if (dEl) dEl.value = String(now.getDate());
-            if (mEl) mEl.value = String(now.getMonth() + 1);
-            if (yEl) yEl.value = String(now.getFullYear());
-            if (modeEl) modeEl.value = "solar2lunar";
+        // 2. Sự kiện Mục 2: Đổi Ngày Custom Bento Pickers
+        document.getElementById("uc-day-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-uc-day]");
+            if (!btn) return;
+            e.stopPropagation();
+            ucDay = Number(btn.dataset.ucDay);
+            document.getElementById("uc-day-dropdown")?.removeAttribute("open");
+            renderUcPickers();
             renderInlineConverter();
         });
 
-        // 3. Sự kiện Tiết Khí
+        document.getElementById("uc-month-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-uc-month]");
+            if (!btn) return;
+            e.stopPropagation();
+            ucMonth = Number(btn.dataset.ucMonth);
+            document.getElementById("uc-month-dropdown")?.removeAttribute("open");
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        document.getElementById("uc-year-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-uc-year]");
+            if (!btn) return;
+            e.stopPropagation();
+            ucYear = Number(btn.dataset.ucYear);
+            document.getElementById("uc-year-dropdown")?.removeAttribute("open");
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        document.getElementById("uc-year-prev-range")?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            ucYearStart -= 12;
+            renderUcPickers();
+        });
+
+        document.getElementById("uc-year-next-range")?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            ucYearStart += 12;
+            renderUcPickers();
+        });
+
+        document.getElementById("uc-mode-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-uc-mode]");
+            if (!btn) return;
+            e.stopPropagation();
+            ucMode = btn.dataset.ucMode;
+            document.querySelectorAll("[data-uc-mode]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-selected", isSel);
+                b.setAttribute("aria-selected", String(isSel));
+            });
+            document.getElementById("uc-mode-dropdown")?.removeAttribute("open");
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        document.getElementById("uc-today-btn")?.addEventListener("click", () => {
+            const t = new Date();
+            ucDay = t.getDate();
+            ucMonth = t.getMonth() + 1;
+            ucYear = t.getFullYear();
+            ucYearStart = Math.floor(ucYear / 12) * 12 - 4;
+            ucMode = "solar2lunar";
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        // 3. Sự kiện Mục 3: 24 Tiết Khí
         document.getElementById("st-prev-year")?.addEventListener("click", () => {
             stViewingYear--;
             renderSolarTermsPanel();
@@ -9470,67 +10516,405 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             stViewingYear = new Date().getFullYear();
             renderSolarTermsPanel();
         });
-
-        // 4. Sự kiện Kinh Dịch & Tarot
-        document.getElementById("ic-cast-btn")?.addEventListener("click", () => {
-            const randomHex = ICHING_HEXAGRAMS[Math.floor(Math.random() * ICHING_HEXAGRAMS.length)];
-            renderIChingHexagram(randomHex);
+        document.getElementById("st-season-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-st-season]");
+            if (!btn) return;
+            stSeasonFilter = btn.dataset.stSeason;
+            document.querySelectorAll("[data-st-season]").forEach((b) => b.classList.toggle("is-active", b === btn));
+            renderSolarTermsPanel();
         });
+
+        // 4. Sự kiện Mục 4: Kinh Dịch (Mouse Entropy + Đồng xu 3D) & Tarot (78 lá + Tráo quạt bài + Lật 3D)
+        document.getElementById("panel-divination")?.addEventListener("mousemove", (e) => {
+            mouseMoveCount++;
+            mouseEntropyAccumulator =
+                (mouseEntropyAccumulator ^
+                    ((e.clientX * 31 + e.clientY * 17 + Math.floor(performance.now())) & 0xffffff)) >>>
+                0;
+            const pct = Math.min(100, 60 + (mouseMoveCount % 41));
+            setText("ic-entropy-text", `Độ hội tụ năng lượng tương tác chuột: ${pct}%`);
+            const bar = document.getElementById("ic-entropy-bar");
+            if (bar) bar.style.width = `${pct}%`;
+        });
+
+        document.getElementById("ic-cast-btn")?.addEventListener("click", (e) => {
+            if (!ICHING_HEXAGRAMS.length) return;
+            const coins = document.querySelectorAll("#ic-coins-stage .util-coin");
+            const resultBox = document.getElementById("ic-result-box");
+            coins.forEach((c) => c.classList.add("is-tossing"));
+            resultBox?.classList.add("is-sliding");
+
+            const clickEntropy = (e.clientX * 73 + e.clientY * 37 + Math.floor(performance.now() * 100)) >>> 0;
+            const combinedSeed = (mouseEntropyAccumulator ^ clickEntropy ^ Math.floor(Math.random() * 100000)) >>> 0;
+            const chosenIdx = combinedSeed % ICHING_HEXAGRAMS.length;
+
+            let stepCount = 0;
+            const slideTimer = setInterval(() => {
+                stepCount++;
+                renderIChingHexagram(ICHING_HEXAGRAMS[(chosenIdx + stepCount) % ICHING_HEXAGRAMS.length]);
+            }, 140);
+
+            setTimeout(() => {
+                clearInterval(slideTimer);
+                coins.forEach((c) => c.classList.remove("is-tossing"));
+                resultBox?.classList.remove("is-sliding");
+                renderIChingHexagram(ICHING_HEXAGRAMS[chosenIdx]);
+            }, 900);
+        });
+
+        const triggerTarotDraw = (fanIdx = -1, withShuffle = false) => {
+            if (isTarotAnimating || !TAROT_CARDS.length) return;
+            isTarotAnimating = true;
+
+            const fanEl = document.getElementById("tr-deck-fan");
+            const stageEl = document.getElementById("tr-card-art");
+            const resultBox = document.getElementById("tr-result-box");
+
+            // Đồng bộ đường dẫn mặt lưng theo cấu hình TAROT_IMG_EXT
+            const backImgUrl = getTarotBackImgUrl();
+            document.querySelectorAll("#tr-deck-fan img, #tr-card-back-img").forEach((img) => {
+                if (!img.getAttribute("src")?.endsWith(backImgUrl.replace("./", ""))) {
+                    img.src = backImgUrl;
+                }
+            });
+
+            // Nhịp 1: Úp lá bài lớn & chạy hiệu ứng tráo bài nếu nhấn nút Tráo
+            if (stageEl) stageEl.dataset.flipped = "false";
+            if (fanEl && withShuffle) fanEl.dataset.deckState = "shuffling";
+            resultBox?.classList.remove("is-sliding");
+
+            // Chọn chỉ số lá trên quạt (trên màn hình < 768px chỉ lấy trong 7 lá giữa 1..7)
+            const isCompactFan = window.innerWidth < 768;
+            const randomVisibleIdx = isCompactFan ? 1 + Math.floor(Math.random() * 7) : Math.floor(Math.random() * 9);
+            const chosenFanIdx = fanIdx >= 0 ? fanIdx : randomVisibleIdx;
+
+            document.querySelectorAll("#tr-deck-fan .util-tarot-back").forEach((b) => {
+                const isMatch = Number(b.dataset.fanIdx) === chosenFanIdx;
+                b.classList.toggle("is-picked", isMatch);
+                b.setAttribute("aria-pressed", String(isMatch));
+            });
+
+            // Bốc ngẫu nhiên từ đủ kho 78 lá (tránh trùng lá ngay trước đó)
+            const entropySeed =
+                (mouseEntropyAccumulator ^ Math.floor(performance.now() * 100) ^ (chosenFanIdx * 97)) >>> 0;
+            let nextIdx = (entropySeed + Math.floor(Math.random() * TAROT_CARDS.length)) % TAROT_CARDS.length;
+            if (TAROT_CARDS.length > 1 && TAROT_CARDS[nextIdx].id === currentTarotState.card?.id) {
+                nextIdx = (nextIdx + 1) % TAROT_CARDS.length;
+            }
+            const nextCard = TAROT_CARDS[nextIdx];
+            const isUpright = Math.random() > 0.25;
+
+            // Tải trước ảnh lá mới trong lúc đang úp để lật ra không bị chớp khung
+            const preload = new Image();
+            preload.src = getTarotFrontImgUrl(nextCard);
+
+            const flipDelay = withShuffle ? 580 : 320;
+            setTimeout(() => {
+                if (fanEl) fanEl.dataset.deckState = "idle";
+                renderTarotCard(nextCard, isUpright);
+
+                // Nhịp 2 & 3: Lật mở 3D 180 độ + trượt 3 thẻ Bento luận giải
+                requestAnimationFrame(() => {
+                    if (stageEl) stageEl.dataset.flipped = "true";
+                    resultBox?.classList.add("is-sliding");
+                    setTimeout(() => {
+                        isTarotAnimating = false;
+                    }, 520);
+                });
+            }, flipDelay);
+        };
 
         document.getElementById("tr-draw-btn")?.addEventListener("click", () => {
-            const card = TAROT_CARDS[Math.floor(Math.random() * TAROT_CARDS.length)];
-            const isUpright = Math.random() > 0.25;
-            setText("tr-card-roman", card.roman);
-            setText("tr-card-symbol", card.symbol);
-            setText("tr-card-en", card.en);
-            setText(
-                "tr-card-orientation",
-                isUpright ? "Lá bài Xuôi (Upright)" : "Lá bài Ngược (Reversed • Cần chiêm nghiệm nội tâm)",
-            );
-            setText("tr-card-vn", card.vn);
-            setText("tr-card-keywords", card.keywords);
-            setText("tr-card-message", card.msg);
+            triggerTarotDraw(-1, true);
         });
 
-        // 5. Sự kiện Ngày Này Năm Xưa
-        document.getElementById("hi-month-select")?.addEventListener("change", (e) => {
-            renderHistoryMonthEvents(Number(e.target.value) || 11);
-        });
-
-        // 6. Sự kiện Horoscope
-        document.getElementById("hs-birth-input")?.addEventListener("change", (e) => {
-            const [, m, d] = (e.target.value || "1987-01-13").split("-").map(Number);
-            renderHoroscopeSign(getSignByMonthDay(m, d));
-        });
-
-        document.getElementById("hs-signs-grid")?.addEventListener("click", (e) => {
-            const btn = e.target.closest("[data-sign-key]");
+        document.getElementById("tr-deck-fan")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-fan-idx]");
             if (!btn) return;
-            const found = HOROSCOPE_SIGNS.find((s) => s.key === btn.dataset.signKey);
-            if (found) renderHoroscopeSign(found);
+            triggerTarotDraw(Number(btn.dataset.fanIdx), false);
         });
 
-        // 7. Sự kiện Tính khoảng cách
-        document.getElementById("dd-start-date")?.addEventListener("change", computeDateDiff);
-        document.getElementById("dd-end-date")?.addEventListener("change", computeDateDiff);
+        // 5. Sự kiện Mục 5: Ngày Này Năm Xưa
+        document.getElementById("hi-month-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hi-month]");
+            if (!btn) return;
+            e.stopPropagation();
+            hiMonth = Number(btn.dataset.hiMonth);
+            hiPage = 1;
+            document.getElementById("hi-month-dropdown")?.removeAttribute("open");
+            renderHistoryMonthPicker();
+            fetchAndRenderHistory();
+        });
 
-        ["as-base-date", "as-years", "as-months", "as-weeks", "as-days"].forEach((id) => {
+        document.getElementById("hi-scope-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hi-scope]");
+            if (!btn) return;
+            hiScope = btn.dataset.hiScope;
+            hiPage = 1;
+            document.querySelectorAll("[data-hi-scope]").forEach((b) => b.classList.toggle("is-active", b === btn));
+            fetchAndRenderHistory();
+        });
+
+        document.getElementById("hi-pagination")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hi-page]");
+            if (!btn) return;
+            hiPage = Number(btn.dataset.hiPage);
+            fetchAndRenderHistory();
+        });
+
+        // 6. Sự kiện Mục 6: Horoscope
+        document.getElementById("hs-day-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hs-day]");
+            if (!btn) return;
+            e.stopPropagation();
+            hsDay = Number(btn.dataset.hsDay);
+            document.getElementById("hs-day-dropdown")?.removeAttribute("open");
+            renderHsPickers();
+            renderHoroscopeSign(getSignByMonthDay(hsMonth, hsDay));
+        });
+
+        document.getElementById("hs-month-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hs-month]");
+            if (!btn) return;
+            e.stopPropagation();
+            hsMonth = Number(btn.dataset.hsMonth);
+            document.getElementById("hs-month-dropdown")?.removeAttribute("open");
+            renderHsPickers();
+            renderHoroscopeSign(getSignByMonthDay(hsMonth, hsDay));
+        });
+
+        // 7 & 10. Sự kiện Cộng/Trừ ngày & Tìm kiếm Từ điển
+        ["as-years", "as-months", "as-weeks", "as-days"].forEach((id) => {
             document.getElementById(id)?.addEventListener("input", computeDateAddSub);
         });
 
         document.getElementById("as-today-btn")?.addEventListener("click", () => {
-            const now = new Date();
-            const baseInput = document.getElementById("as-base-date");
-            if (baseInput) {
-                baseInput.value = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
-            }
+            const t = new Date();
+            asBasePicker?.setState({ day: t.getDate(), month: t.getMonth() + 1, year: t.getFullYear() });
             computeDateAddSub();
         });
 
-        // 8, 9, 10. Sự kiện Thần số học, Nhịp sinh học & Tìm kiếm Từ điển
-        document.getElementById("num-birth-input")?.addEventListener("change", renderNumerologyPersonal);
-        document.getElementById("bio-birth-input")?.addEventListener("change", renderBiorhythm);
         document.getElementById("fs-search-input")?.addEventListener("input", () => renderFengShuiDict());
+
+        // ==================== ỦY QUYỀN SỰ KIỆN CLICK MỞ SINGLETON MODAL (#util-detail-modal) ====================
+        mainEl.addEventListener("click", (e) => {
+            // 1. Click vào Card ở Tab Đổi Ngày
+            const convCard = e.target.closest("[data-conv-card]");
+            if (convCard && lastConvertedContext) {
+                const { info, sDay, sMonth, sYear, isoDate } = lastConvertedContext;
+                openUtilModal({
+                    category: "Đổi Ngày Âm ⇄ Dương",
+                    title: `Ngày ${pad(sDay)}/${pad(sMonth)}/${sYear} DL (${pad(info.lunarDay)}/${pad(info.lunarMonth)} ÂL)`,
+                    visualHtml: `<img src="./assets/icons/zodiac/${info.zodiacFile}.svg" alt="" /><strong>Ngày ${info.dayCanChi}</strong>`,
+                    isFilteredVisual: true,
+                    pills: [info.yearCanChi, info.dayNapAm, `Tiết ${info.solarTerm}`],
+                    desc: `Ngày ${pad(sDay)}/${pad(sMonth)}/${sYear} Dương lịch nhằm ngày ${pad(info.lunarDay)}/${pad(info.lunarMonth)}/${info.lunarYear} Âm lịch (Năm ${info.yearCanChi}, Tháng ${info.monthCanChi}, Ngày ${info.dayCanChi}).`,
+                    advice: `Trực ${info.trucObj.name}: ${info.trucObj.desc} • 6 Giờ Hoàng Đạo: ${info.goodHoursStr}.`,
+                    actionHref: `./day.html?date=${isoDate}`,
+                    actionLabel: "Mở trang Chi tiết Ngày này",
+                });
+                return;
+            }
+
+            // 2. Click vào Card ở Tab 24 Tiết Khí
+            const stCard = e.target.closest("[data-st-idx]");
+            if (stCard) {
+                const item = SOLAR_TERMS_DATA[Number(stCard.dataset.stIdx)];
+                if (!item) return;
+                const [name, ddmm, timeStr, seasonKey, , icon, desc, advice] = item;
+                openUtilModal({
+                    category: "Nhị Thập Tứ Tiết Khí",
+                    title: `Tiết ${name} (${ddmm}/${stViewingYear})`,
+                    visualHtml: `<img src="./assets/icons/weather/${icon}" alt="" /><strong>${SEASON_VN[seasonKey]}</strong>`,
+                    isFilteredVisual: true,
+                    pills: [`Khởi tiết: ${timeStr}`, SEASON_VN[seasonKey], `Năm ${stViewingYear}`],
+                    desc,
+                    advice,
+                    actionHref: `./day.html?date=${stViewingYear}-${ddmm.split("/")[1]}-${ddmm.split("/")[0]}`,
+                    actionLabel: `Xem lịch ngày ${ddmm}/${stViewingYear}`,
+                });
+                return;
+            }
+
+            // 3. Click vào Card ở Tab Ngày Này Năm Xưa (Mở Smart Media Slideshow + Link Detail Tab mới)
+            const hiCard = e.target.closest("[data-hi-idx]");
+            if (hiCard) {
+                const item = currentHiFilteredList[Number(hiCard.dataset.hiIdx)];
+                if (!item) return;
+                const rawSlug = String(item.image_slug || item.slug || "").trim();
+                const cleanFolder = rawSlug.replace(/-\d{2}-\d{2}-\d{4}.*$/, "") || rawSlug;
+                const cleanSlug = rawSlug
+                    .split("/")
+                    .pop()
+                    .replace(/\.(jpg|jpeg|png|webp)$/i, "");
+                const typeFolder = String(item.category_id || "")
+                    .toLowerCase()
+                    .includes("event")
+                    ? "events"
+                    : "figures";
+                const coverUrl = `./assets/images/calendar-covers/thang-${hiMonth}/${cleanSlug}.jpg`;
+                const slide2 = `./assets/images/${typeFolder}/${cleanFolder}/${cleanFolder}.webp`;
+                const slide3 = `./assets/images/${typeFolder}/${cleanFolder}/2.webp`;
+                const detailHref = `./detail.html?type=${typeFolder}&folder=${cleanFolder}&slug=${rawSlug}&month=${hiMonth}`;
+
+                openUtilModal({
+                    category: `Ngày Này Năm Xưa • ${item.ngay_hien_thi || `Tháng ${hiMonth}`}`,
+                    title: item.ten || "Nhân vật & Sự kiện lịch sử",
+                    visualHtml: `<img src="./assets/icons/calendarDay.svg" alt="" /><strong>${item.ngay_hien_thi || `Tháng ${hiMonth}`}</strong>`,
+                    isFilteredVisual: true,
+                    pills: [
+                        item.ngay_hien_thi || `Tháng ${hiMonth}`,
+                        typeFolder === "events" ? "Sự kiện lịch sử" : "Danh nhân lịch sử",
+                    ],
+                    box1Title: "Tiểu sử & Bối cảnh lịch sử",
+                    desc: item.mo_ta || item.noi_dung || item.hien_thi_nhan_dip || "",
+                    box2Title: "Danh ngôn & Dấu ấn thời đại",
+                    advice: item.danh_ngon || item.quote || item.hien_thi_nhan_dip || "",
+                    actionHref: detailHref,
+                    actionLabel: "Đọc bài phân tích toàn văn (Mở trang mới) ↗",
+                    actionTarget: "_blank",
+                    mediaSlides: [coverUrl, slide2, slide3],
+                    videoUrl: item.video_url || "",
+                });
+                return;
+            }
+
+            // 4. Click vào Lá bài Tarot đã lật (#tr-card-art) để phóng to trong Modal
+            const tarotStage = e.target.closest("[data-tarot-modal]");
+            if (tarotStage && currentTarotState.card) {
+                const { card, isUpright } = currentTarotState;
+                const displayTitle = `${card.roman ? `${card.roman}. ` : ""}${card.vn} (${card.en})`;
+                openUtilModal({
+                    category: SUIT_LABEL_VN[card.suit] || "Tarot Rider-Waite",
+                    title: displayTitle,
+                    visualHtml: `
+                        <img
+                            src="${getTarotFrontImgUrl(card)}"
+                            alt="Lá bài ${displayTitle}"
+                            class="util-modal-tarot-img ${isUpright ? "" : "is-reversed"}"
+                        />
+                        <strong>${isUpright ? "Chiều Xuôi (Upright)" : "Chiều Ngược (Reversed)"}</strong>
+                    `,
+                    isFilteredVisual: false,
+                    pills: [
+                        SUIT_LABEL_VN[card.suit] || "Tarot",
+                        isUpright ? "Chiều Xuôi" : "Chiều Ngược",
+                        `Mã lá #${pad(card.id)}`,
+                    ],
+                    box1Title: "Từ khóa & Thông điệp tổng quan",
+                    desc: `${isUpright ? card.keywords_upright : card.keywords_reversed} ${isUpright ? card.msg_upright : card.msg_reversed}`,
+                    box2Title: "Công việc, Sự nghiệp & Tài chính",
+                    advice: card.career,
+                    actionHref: "./bazi.html",
+                    actionLabel: "Đối chiếu thêm Lá Số Bát Tự Phương Đông",
+                });
+                return;
+            }
+
+            // 5. Click vào Card ở Tab Horoscope 12 Cung (Icon SVG 128x128 + Filter màu Ngũ Hành)
+            const signCard = e.target.closest("[data-sign-key]");
+            if (signCard) {
+                const found = HOROSCOPE_SIGNS.find((s) => s.key === signCard.dataset.signKey);
+                if (!found) return;
+                renderHoroscopeSign(found);
+                openUtilModal({
+                    category: "Chiêm Tinh Học Horoscope",
+                    title: `${found.name} • ${found.mascot}`,
+                    visualHtml: `${buildHoroscopeImgHtml(found.key)}<strong>${found.dates}</strong>`,
+                    isFilteredVisual: true,
+                    pills: [found.dates, found.element, found.mascot],
+                    box1Title: "Đặc trưng tính cách & Bản mệnh",
+                    desc: found.traits,
+                    box2Title: "Thông điệp năng lượng trong ngày",
+                    advice: found.daily,
+                    actionHref: "./bazi.html",
+                    actionLabel: "Đối chiếu thêm Lá Số Bát Tự Phương Đông",
+                });
+                return;
+            }
+
+            // 6. Click vào Ô Số ở Tab Thần Số Học Pythagoras
+            const numCell = e.target.closest("[data-num-modal]");
+            if (numCell) {
+                const num = Number(numCell.dataset.numModal || 1);
+                const role = numCell.dataset.numRole || `Con số ${num}`;
+                const mObj = NUMEROLOGY_MEANINGS[num] || NUMEROLOGY_MEANINGS[1];
+                openUtilModal({
+                    category: "Thần Số Học Pythagoras",
+                    title: `${role} • ${mObj.title}`,
+                    visualHtml: `<strong style="font-size:4.8rem;line-height:1">${num}</strong><strong>Tần số ${num}</strong>`,
+                    pills: [role, mObj.title],
+                    desc: mObj.desc,
+                    advice: mObj.advice,
+                    actionHref: "./bazi.html",
+                    actionLabel: "Khám phá thêm Bát Tự Tử Bình",
+                });
+                return;
+            }
+
+            // 7. Click vào Thẻ Chỉ Số ở Tab Nhịp Sinh Học
+            const bioCard = e.target.closest("[data-bio-key]");
+            if (bioCard) {
+                const pct = Number(bioCard.dataset.bioPct || 0);
+                const title = bioCard.querySelector(".util-bio-stat-card__head span")?.textContent || "Nhịp sinh học";
+                const tipDesc = bioCard.querySelector(".bento-tooltip__desc")?.textContent || "";
+                openUtilModal({
+                    category: "Nhịp Sinh Học Biorhythm",
+                    title: `${title}: ${pct > 0 ? `+${pct}%` : `${pct}%`}`,
+                    visualHtml: `<strong style="font-size:3.8rem">${pct > 0 ? `+${pct}%` : `${pct}%`}</strong><strong>Hôm nay</strong>`,
+                    pills: [title, pct >= 0 ? "Pha Dương (Phát tiết)" : "Pha Âm (Tích lũy)"],
+                    desc: tipDesc,
+                    advice:
+                        Math.abs(pct) <= 12
+                            ? "Hôm nay chỉ số này đang đi qua vùng Giao Điểm (0%). Bạn nên làm việc điều độ, tránh căng thẳng và nghỉ ngơi sớm."
+                            : pct > 0
+                              ? "Chỉ số đang ở nửa chu kỳ cao. Hãy tận dụng nguồn năng lượng này cho các hoạt động trọng tâm."
+                              : "Chỉ số đang ở pha nạp lại năng lượng. Thích hợp duy trì nhịp độ ổn định và bồi dưỡng sức khỏe.",
+                    actionHref: "./day.html",
+                    actionLabel: "Xem thêm Giờ Hoàng Đạo hôm nay",
+                });
+                return;
+            }
+
+            // 8. Click vào Thẻ ở Tab Từ Điển Cổ Học
+            const fsCard = e.target.closest("[data-fs-idx]");
+            if (fsCard) {
+                const item = FENGSHUI_DICT[Number(fsCard.dataset.fsIdx)];
+                if (!item) return;
+                const [title, sub, , icon, isFiltered, desc, advice] = item;
+                openUtilModal({
+                    category: "Từ Điển Bách Khoa Phong Thủy",
+                    title,
+                    visualHtml: `<img src="${icon}" alt="" /><strong>${sub.split("•")[0].trim()}</strong>`,
+                    isFilteredVisual: Boolean(isFiltered),
+                    pills: [sub, "Cổ Học Tinh Hoa"],
+                    desc,
+                    advice,
+                    actionHref: "./bazi.html",
+                    actionLabel: "Phân tích chuyên sâu trên Bàn Bát Tự",
+                });
+            }
+        });
+
+        // Hỗ trợ bàn phím (Enter / Space) cho toàn bộ thẻ tương tác có tabindex="0"
+        mainEl.addEventListener("keydown", (e) => {
+            if (e.key !== "Enter" && e.key !== " ") return;
+            const interactiveCard = e.target.closest(
+                "[data-sign-key], [data-tarot-modal], [data-conv-card], [data-st-idx], [data-hi-idx], [data-num-modal], [data-bio-key], [data-fs-idx]",
+            );
+            if (!interactiveCard) return;
+            e.preventDefault();
+            interactiveCard.click();
+        });
+
+        document.getElementById("util-modal-close")?.addEventListener("click", closeUtilModal);
+        document.getElementById("util-modal-cancel")?.addEventListener("click", closeUtilModal);
+        document.getElementById("util-modal-backdrop")?.addEventListener("click", closeUtilModal);
+
+        document.addEventListener("keydown", (e) => {
+            const modal = document.getElementById("util-detail-modal");
+            if (e.key === "Escape" && modal && !modal.hidden) closeUtilModal();
+        });
     };
 
     if (document.readyState === "loading") {
@@ -9539,5 +10923,4172 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         initUtilitiesPage();
     }
     window.addEventListener("template-loaded", initUtilitiesPage);
+})();
+```
+
+### util-core.js
+
+```js
+// assets/js/utilities/util-core.js
+// Lõi hệ thống Utilities: Helpers, Web Audio + Upload nhạc, Singleton Modal, Bento Date Picker,
+// Dual-Navbar đồng bộ URL #hash 2 chiều (Fix F5 giữ nguyên Tab/Subtab) & Registry cho các module con
+(() => {
+    const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
+    const TAROT_IMG_DIR = "./assets/images/tarot";
+    const TAROT_IMG_EXT = "png"; // Sau này convert sang WebP chỉ cần đổi "png" -> "webp"
+    const ICHING_ICON_DIR = "./assets/icons/iching";
+    const HOROSCOPE_ICON_DIR = "./assets/icons/horoscope";
+
+    const SUB_NAV_MAP = {
+        clock: [
+            { id: "stopwatch", label: "Đồng hồ bấm giờ" },
+            { id: "timer", label: "Đồng hồ đếm ngược" },
+            { id: "alarm", label: "Đồng hồ báo thức" },
+        ],
+        converter: [],
+        solarterm: [],
+        divination: [
+            { id: "iching", label: "Rút Quẻ Kinh Dịch" },
+            { id: "tarot", label: "Rút Bài Tarot" },
+        ],
+        history: [],
+        horoscope: [],
+        datediff: [
+            { id: "diff", label: "Đếm số ngày" },
+            { id: "add", label: "+ Cộng thêm ngày" },
+            { id: "sub", label: "− Trừ ngày" },
+        ],
+        numerology: [
+            { id: "num-personal", label: "Con Số Chủ Đạo & Biểu Đồ 3x3" },
+            { id: "num-calendar", label: "Tính Con Số Năng Lượng Của Ngày" },
+        ],
+        biorhythm: [],
+        fengshui: [
+            { id: "fs-all", label: "Tất cả Từ điển" },
+            { id: "fs-napam", label: "30 Nạp Âm" },
+            { id: "fs-lucdieu", label: "Lục Diệu & Xuất Hành" },
+            { id: "fs-bagua", label: "12 Trực & Bát Quái" },
+        ],
+    };
+
+    const pad = (n) => String(n).padStart(2, "0");
+
+    const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    };
+
+    const setHtml = (id, html) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
+    };
+
+    const setAttr = (id, attr, val) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute(attr, val);
+    };
+
+    const toSlug = (str) =>
+        String(str || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "D")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)/g, "");
+
+    const buildBentoTooltipHtml = (title, desc, tagLabel) => `
+        <span class="bento-tooltip" role="tooltip">
+            <strong class="bento-tooltip__title">✦ ${title}</strong>
+            <span class="bento-tooltip__desc">${desc}</span>
+            <span class="bento-tooltip__tag">${tagLabel} &#8594;</span>
+        </span>
+    `;
+
+    const fetchJsonSafe = async (url, fallback) => {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) return fallback;
+            const data = await res.json();
+            return Array.isArray(data) && data.length ? data : fallback;
+        } catch (err) {
+            return fallback;
+        }
+    };
+
+    // ==================== 1. HỆ THỐNG ÂM THANH (WEB AUDIO API + UPLOAD NHẠC TỪ MÁY) ====================
+    let activeAudioPlayer = null;
+
+    const stopCurrentAudio = () => {
+        if (activeAudioPlayer) {
+            activeAudioPlayer.pause();
+            activeAudioPlayer.currentTime = 0;
+            activeAudioPlayer = null;
+        }
+    };
+
+    const playSynthesizedBell = () => {
+        try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = new AudioCtx();
+            [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.14);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime + idx * 0.14);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.14 + 0.48);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(ctx.currentTime + idx * 0.14);
+                osc.stop(ctx.currentTime + idx * 0.14 + 0.48);
+            });
+        } catch (e) {
+            // Bỏ qua nếu trình duyệt chặn tự động phát
+        }
+    };
+
+    const playSoundEffect = (customUrl = "") => {
+        stopCurrentAudio();
+        if (customUrl) {
+            try {
+                activeAudioPlayer = new Audio(customUrl);
+                activeAudioPlayer.play().catch(() => playSynthesizedBell());
+                return;
+            } catch (e) {
+                playSynthesizedBell();
+                return;
+            }
+        }
+        playSynthesizedBell();
+    };
+
+    // ==================== 2. SINGLETON MODAL DÙNG CHUNG (#util-detail-modal) ====================
+    let modalSlideUrls = [];
+    let modalSlideIdx = 0;
+    let lastFocusedBeforeModal = null;
+
+    const closeUtilModal = () => {
+        const modal = document.getElementById("util-detail-modal");
+        if (!modal) return;
+        modal.hidden = true;
+        document.body.style.overflow = "";
+        const mediaStage = document.getElementById("util-modal-media-stage");
+        if (mediaStage) {
+            mediaStage.innerHTML = "";
+            mediaStage.hidden = true;
+        }
+        if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === "function") {
+            lastFocusedBeforeModal.focus();
+            lastFocusedBeforeModal = null;
+        }
+    };
+
+    const openUtilModal = ({
+        category = "Tiện Ích Vạn Niên",
+        title = "",
+        visualHtml = "",
+        isFilteredVisual = false,
+        pills = [],
+        box1Title = "Ý nghĩa & Nội dung chi tiết",
+        desc = "",
+        box2Title = "Lời khuyên ứng dụng & Ghi chú",
+        advice = "",
+        actionHref = "./day.html",
+        actionLabel = "Xem thêm trên Lịch Ngày",
+        actionTarget = "_self",
+        mediaSlides = [],
+        videoUrl = "",
+    }) => {
+        const modal = document.getElementById("util-detail-modal");
+        if (!modal) return;
+
+        lastFocusedBeforeModal = document.activeElement;
+
+        setText("util-modal-category", category);
+        setText("util-modal-title", title);
+        setText("util-modal-box1-title", box1Title);
+        setText("util-modal-desc", desc);
+        setText("util-modal-box2-title", box2Title);
+        setText("util-modal-advice", advice);
+        setText("util-modal-action-label", actionLabel);
+
+        const actionLink = document.getElementById("util-modal-action-link");
+        if (actionLink) {
+            actionLink.setAttribute("href", actionHref);
+            actionLink.setAttribute("target", actionTarget);
+            if (actionTarget === "_blank") actionLink.setAttribute("rel", "noopener noreferrer");
+            else actionLink.removeAttribute("rel");
+        }
+
+        const visualEl = document.getElementById("util-modal-visual");
+        if (visualEl) {
+            visualEl.classList.toggle("is-zodiac-filtered", Boolean(isFilteredVisual));
+            visualEl.innerHTML = visualHtml;
+        }
+
+        const pillsEl = document.getElementById("util-modal-pills");
+        if (pillsEl) {
+            pillsEl.innerHTML = pills
+                .map(
+                    (p, i) =>
+                        `<span class="day-term-modal__pill ${i === 0 ? "day-term-modal__pill--highlight" : ""}">${p}</span>`,
+                )
+                .join("");
+        }
+
+        // Khung Smart Media (Video hoặc Slideshow Ảnh cho Ngày Này Năm Xưa)
+        const mediaStage = document.getElementById("util-modal-media-stage");
+        if (mediaStage) {
+            if (videoUrl) {
+                mediaStage.hidden = false;
+                mediaStage.innerHTML = `<video src="${videoUrl}" controls autoplay muted playsinline></video>`;
+            } else if (mediaSlides && mediaSlides.length > 0) {
+                modalSlideUrls = mediaSlides;
+                modalSlideIdx = 0;
+                mediaStage.hidden = false;
+                const renderSlide = () => {
+                    mediaStage.innerHTML = `
+                        <img src="${modalSlideUrls[modalSlideIdx]}" alt="${title}" onerror="this.src='${DEFAULT_COVER_IMG}'" />
+                        ${
+                            modalSlideUrls.length > 1
+                                ? `
+                            <div class="util-modal-media__controls">
+                                <button type="button" class="util-modal-media__slide-btn" id="util-slide-prev">&#10094; Ảnh trước</button>
+                                <span class="util-modal-media__slide-btn">${modalSlideIdx + 1} / ${modalSlideUrls.length}</span>
+                                <button type="button" class="util-modal-media__slide-btn" id="util-slide-next">Ảnh tiếp &#10095;</button>
+                            </div>
+                        `
+                                : ""
+                        }
+                    `;
+                    document.getElementById("util-slide-prev")?.addEventListener("click", () => {
+                        modalSlideIdx = (modalSlideIdx - 1 + modalSlideUrls.length) % modalSlideUrls.length;
+                        renderSlide();
+                    });
+                    document.getElementById("util-slide-next")?.addEventListener("click", () => {
+                        modalSlideIdx = (modalSlideIdx + 1) % modalSlideUrls.length;
+                        renderSlide();
+                    });
+                };
+                renderSlide();
+            } else {
+                mediaStage.hidden = true;
+                mediaStage.innerHTML = "";
+            }
+        }
+
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+        document.getElementById("util-modal-close")?.focus();
+    };
+
+    // ==================== 3. COMPONENT TÁI SỬ DỤNG: CUSTOM BENTO DATE PICKER ====================
+    const createBentoDatePicker = (containerId, initialDate, onChangeCallback) => {
+        const container = document.getElementById(containerId);
+        if (!container) return null;
+
+        const state = {
+            day: initialDate.day || 15,
+            month: initialDate.month || 11,
+            year: initialDate.year || 2026,
+            yearStart: Math.floor((initialDate.year || 2026) / 12) * 12 - 4,
+        };
+
+        const render = () => {
+            const maxDays = new Date(state.year, state.month, 0).getDate();
+            if (state.day > maxDays) state.day = maxDays;
+
+            let daysHtml = "";
+            for (let d = 1; d <= maxDays; d++) {
+                const isSel = d === state.day;
+                daysHtml += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-bp-day="${d}">${pad(d)}</button></li>`;
+            }
+
+            let monthsHtml = "";
+            for (let m = 1; m <= 12; m++) {
+                const isSel = m === state.month;
+                monthsHtml += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-bp-month="${m}">Tháng ${pad(m)}</button></li>`;
+            }
+
+            let yearsHtml = "";
+            for (let y = state.yearStart; y < state.yearStart + 12; y++) {
+                const isSel = y === state.year;
+                yearsHtml += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-bp-year="${y}">${y}</button></li>`;
+            }
+
+            container.innerHTML = `
+                <details class="bazi-picker js-cal-dropdown">
+                    <summary class="bazi-picker__summary" aria-label="Chọn ngày, hiện tại Ngày ${pad(state.day)}">
+                        <span class="bazi-picker__summary-text">Ngày ${pad(state.day)}</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
+                    </summary>
+                    <div class="bazi-picker__popover bazi-picker__popover--days">
+                        <div class="bazi-picker__popover-head">Chọn Ngày</div>
+                        <ul class="bazi-picker__grid bazi-picker__grid--days" role="listbox" aria-label="Danh sách ngày">${daysHtml}</ul>
+                    </div>
+                </details>
+
+                <details class="bazi-picker js-cal-dropdown">
+                    <summary class="bazi-picker__summary" aria-label="Chọn tháng, hiện tại Tháng ${pad(state.month)}">
+                        <span class="bazi-picker__summary-text">Tháng ${pad(state.month)}</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
+                    </summary>
+                    <div class="bazi-picker__popover bazi-picker__popover--months">
+                        <div class="bazi-picker__popover-head">Chọn Tháng</div>
+                        <ul class="bazi-picker__grid bazi-picker__grid--months" role="listbox" aria-label="Danh sách tháng">${monthsHtml}</ul>
+                    </div>
+                </details>
+
+                <details class="bazi-picker js-cal-dropdown">
+                    <summary class="bazi-picker__summary" aria-label="Chọn năm, hiện tại Năm ${state.year}">
+                        <span class="bazi-picker__summary-text">Năm ${state.year}</span>
+                        <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
+                    </summary>
+                    <div class="bazi-picker__popover bazi-picker__popover--years">
+                        <div class="bazi-picker__year-nav">
+                            <button type="button" class="bazi-picker__year-step" data-bp-yrange="-12" aria-label="Lùi 12 năm">&#10094;</button>
+                            <span class="bazi-picker__year-range">${state.yearStart} - ${state.yearStart + 11}</span>
+                            <button type="button" class="bazi-picker__year-step" data-bp-yrange="12" aria-label="Tiến 12 năm">&#10095;</button>
+                        </div>
+                        <ul class="bazi-picker__grid bazi-picker__grid--years" role="listbox" aria-label="Danh sách năm">${yearsHtml}</ul>
+                    </div>
+                </details>
+            `;
+
+            container.querySelectorAll(".bazi-picker").forEach((cur) => {
+                cur.ontoggle = () => {
+                    if (cur.open) {
+                        document.querySelectorAll(".bazi-picker[open]").forEach((other) => {
+                            if (other !== cur) other.removeAttribute("open");
+                        });
+                    }
+                };
+            });
+        };
+
+        container.addEventListener("click", (e) => {
+            const dBtn = e.target.closest("[data-bp-day]");
+            const mBtn = e.target.closest("[data-bp-month]");
+            const yBtn = e.target.closest("[data-bp-year]");
+            const rBtn = e.target.closest("[data-bp-yrange]");
+
+            if (rBtn) {
+                e.stopPropagation();
+                state.yearStart += Number(rBtn.dataset.bpYrange);
+                render();
+                const yearPicker = container.querySelectorAll(".bazi-picker")[2];
+                if (yearPicker) yearPicker.setAttribute("open", "");
+                return;
+            }
+
+            if (dBtn) state.day = Number(dBtn.dataset.bpDay);
+            else if (mBtn) state.month = Number(mBtn.dataset.bpMonth);
+            else if (yBtn) state.year = Number(yBtn.dataset.bpYear);
+            else return;
+
+            e.stopPropagation();
+            render();
+            if (typeof onChangeCallback === "function") onChangeCallback({ ...state });
+        });
+
+        render();
+        return {
+            getState: () => ({ ...state }),
+            setState: (next) => {
+                if (next.day) state.day = next.day;
+                if (next.month) state.month = next.month;
+                if (next.year) {
+                    state.year = next.year;
+                    state.yearStart = Math.floor(next.year / 12) * 12 - 4;
+                }
+                render();
+            },
+        };
+    };
+
+    // ==================== 4. ĐIỀU HƯỚNG DUAL-NAVBAR 2 TẦNG & ĐỒNG BỘ URL HASH (FIX F5) ====================
+    let activeCat = "clock";
+    let activeSub = "stopwatch";
+    const moduleInitCallbacks = [];
+    const routeChangeListeners = [];
+    const modalClickHandlers = [];
+
+    const toggleMobileUtilMenu = (forceClose = false) => {
+        const nav = document.getElementById("util-primary-nav");
+        const burger = document.getElementById("util-burger-btn");
+        const backdrop = document.getElementById("util-mobile-backdrop");
+        if (!nav || !burger || !backdrop) return;
+
+        const nextState = forceClose ? false : !nav.classList.contains("is-open");
+        nav.classList.toggle("is-open", nextState);
+        burger.classList.toggle("is-active", nextState);
+        backdrop.classList.toggle("is-active", nextState);
+        burger.setAttribute("aria-expanded", String(nextState));
+        document.body.style.overflow = nextState ? "hidden" : "";
+    };
+
+    const bindDragToScrollNav = () => {
+        const slider = document.getElementById("util-primary-nav-list");
+        const prevBtn = document.getElementById("util-nav-prev");
+        const nextBtn = document.getElementById("util-nav-next");
+        if (!slider) return;
+
+        let isDown = false;
+        let isDragged = false;
+        let startX = 0;
+        let scrollLeft = 0;
+
+        slider.addEventListener("mousedown", (e) => {
+            if (e.button !== 0) return;
+            isDown = true;
+            isDragged = false;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        const stopDrag = () => {
+            isDown = false;
+            setTimeout(() => slider.classList.remove("is-dragging"), 40);
+        };
+
+        slider.addEventListener("mouseleave", stopDrag);
+        slider.addEventListener("mouseup", stopDrag);
+
+        slider.addEventListener("mousemove", (e) => {
+            if (!isDown) return;
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 1.6;
+            if (Math.abs(walk) > 6) {
+                isDragged = true;
+                slider.classList.add("is-dragging");
+                e.preventDefault();
+                slider.scrollLeft = scrollLeft - walk;
+            }
+        });
+
+        slider.addEventListener(
+            "click",
+            (e) => {
+                if (isDragged) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    isDragged = false;
+                }
+            },
+            true,
+        );
+
+        prevBtn?.addEventListener("click", () => slider.scrollBy({ left: -260, behavior: "smooth" }));
+        nextBtn?.addEventListener("click", () => slider.scrollBy({ left: 260, behavior: "smooth" }));
+    };
+
+    const switchCategoryAndSub = (catKey, subKey = "", { syncUrl = true, replace = false, highlight = "" } = {}) => {
+        activeCat = SUB_NAV_MAP[catKey] ? catKey : "clock";
+        const subItems = SUB_NAV_MAP[activeCat] || [];
+        const hasValidSub = subItems.some((item) => item.id === subKey);
+        activeSub = hasValidSub ? subKey : (subItems[0]?.id ?? "");
+
+        const mainEl = document.getElementById("main");
+        if (mainEl) {
+            mainEl.dataset.activeCat = activeCat;
+            mainEl.dataset.activeSub = activeSub;
+        }
+
+        // Ghi trạng thái Tab/Subtab lên URL Hash (#cat/sub hoặc #cat) để F5 giữ đúng vị trí đang xem
+        if (syncUrl) {
+            const nextHash = activeSub ? `#${activeCat}/${activeSub}` : `#${activeCat}`;
+            if (window.location.hash !== nextHash) {
+                const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
+                if (replace) window.history.replaceState({ cat: activeCat, sub: activeSub }, "", nextUrl);
+                else window.history.pushState({ cat: activeCat, sub: activeSub }, "", nextUrl);
+            }
+        }
+
+        document.querySelectorAll("[data-util-cat]").forEach((link) => {
+            const isMatch = link.dataset.utilCat === activeCat;
+            link.classList.toggle("is-active", isMatch);
+            if (isMatch) link.setAttribute("aria-current", "page");
+            else link.removeAttribute("aria-current");
+        });
+
+        const subBar = document.getElementById("util-subnav-bar");
+        const subList = document.getElementById("util-subnav-list");
+        if (subBar && subList) {
+            if (!subItems.length) {
+                subBar.hidden = true;
+            } else {
+                subBar.hidden = false;
+                subList.innerHTML = subItems
+                    .map(
+                        (item) => `
+                            <li class="util-sub-nav__item">
+                                <a
+                                    href="#${activeCat}/${item.id}"
+                                    class="util-sub-nav__link ${item.id === activeSub ? "is-active" : ""}"
+                                    ${item.id === activeSub ? 'aria-current="page"' : ""}
+                                    data-util-sub="${item.id}"
+                                >
+                                    ${item.label}
+                                </a>
+                            </li>
+                        `,
+                    )
+                    .join("");
+            }
+        }
+
+        document.querySelectorAll(".util-panel").forEach((panel) => {
+            panel.hidden = panel.dataset.panelCat !== activeCat;
+        });
+
+        const currentPanel = document.querySelector(`.util-panel[data-panel-cat="${activeCat}"]`);
+        if (currentPanel && activeCat !== "datediff" && activeCat !== "fengshui") {
+            currentPanel.querySelectorAll(".util-subpanel").forEach((sp) => {
+                sp.hidden = sp.dataset.subpanel !== activeSub;
+            });
+        }
+
+        routeChangeListeners.forEach((fn) => fn({ cat: activeCat, sub: activeSub, highlight }));
+        toggleMobileUtilMenu(true);
+    };
+
+    const resolveRouteFromUrl = () => {
+        // 1. Ưu tiên đọc URL Hash dạng #cat/sub hoặc #cat (Giữ nguyên trạng thái khi bấm F5 / Back / Forward)
+        const rawHash = window.location.hash.replace(/^#/, "").trim();
+        if (rawHash) {
+            if (rawHash === "ic-catalog-section") {
+                return { cat: "divination", sub: "iching", highlight: "" };
+            }
+            const [hashCat, hashSub = ""] = rawHash.split("/");
+            if (SUB_NAV_MAP[hashCat]) {
+                return { cat: hashCat, sub: hashSub, highlight: "" };
+            }
+            // Hỗ trợ hash rút gọn chỉ ghi tên subtab (vd: #tarot, #iching, #alarm, #add)
+            for (const [catKey, subs] of Object.entries(SUB_NAV_MAP)) {
+                if (subs.some((s) => s.id === hashCat)) {
+                    return { cat: catKey, sub: hashCat, highlight: "" };
+                }
+            }
+        }
+
+        // 2. Fallback đọc Query Deep-Link (?tab=, ?napam=, ?lucdieu=, ?bagua=, ?term=) từ day.html / footer.html
+        const params = new URLSearchParams(window.location.search);
+        const napamParam = params.get("napam");
+        const lucdieuParam = params.get("lucdieu") || params.get("direction");
+        const baguaParam = params.get("bagua");
+        const termParam = params.get("term");
+        const tabParam = params.get("tab");
+
+        if (napamParam) return { cat: "fengshui", sub: "fs-napam", highlight: napamParam };
+        if (lucdieuParam) return { cat: "fengshui", sub: "fs-lucdieu", highlight: lucdieuParam };
+        if (baguaParam) return { cat: "fengshui", sub: "fs-bagua", highlight: baguaParam };
+        if (termParam || tabParam === "solarterm") return { cat: "solarterm", sub: "", highlight: "" };
+        if (tabParam === "tarot") return { cat: "divination", sub: "tarot", highlight: "" };
+        if (tabParam === "iching") return { cat: "divination", sub: "iching", highlight: "" };
+        if (tabParam === "horoscope") return { cat: "horoscope", sub: "", highlight: "" };
+        if (tabParam === "napam" || tabParam === "lucdieu" || tabParam === "truc-sao") {
+            return { cat: "fengshui", sub: "fs-all", highlight: "" };
+        }
+        if (tabParam && SUB_NAV_MAP[tabParam]) return { cat: tabParam, sub: "", highlight: "" };
+
+        return { cat: "clock", sub: "stopwatch", highlight: "" };
+    };
+
+    // ==================== 5. BOOTSTRAP TOÀN TRANG UTILITIES ====================
+    const initUtilitiesCore = () => {
+        const mainEl = document.getElementById("main");
+        if (!mainEl || mainEl.dataset.utilBound === "true") return;
+        mainEl.dataset.utilBound = "true";
+
+        bindDragToScrollNav();
+
+        // Khởi chạy toàn bộ 4 module chức năng đã đăng ký
+        moduleInitCallbacks.forEach((initFn) => initFn(mainEl));
+
+        // Đọc và áp dụng đúng Route từ URL ngay lúc tải trang (Fix F5)
+        const initialRoute = resolveRouteFromUrl();
+        switchCategoryAndSub(initialRoute.cat, initialRoute.sub, {
+            syncUrl: true,
+            replace: true,
+            highlight: initialRoute.highlight,
+        });
+
+        // Đồng bộ nút Back / Forward & thay đổi hash thủ công
+        const syncFromLocation = () => {
+            const route = resolveRouteFromUrl();
+            switchCategoryAndSub(route.cat, route.sub, { syncUrl: false, highlight: route.highlight });
+        };
+        window.addEventListener("popstate", syncFromLocation);
+        window.addEventListener("hashchange", syncFromLocation);
+
+        // Điều hướng Dual-Navbar & Mobile Hamburger
+        document.getElementById("util-burger-btn")?.addEventListener("click", () => toggleMobileUtilMenu());
+        document.getElementById("util-mobile-backdrop")?.addEventListener("click", () => toggleMobileUtilMenu(true));
+
+        document.getElementById("util-primary-nav-list")?.addEventListener("click", (e) => {
+            const link = e.target.closest("[data-util-cat]");
+            if (!link) return;
+            e.preventDefault();
+            switchCategoryAndSub(link.dataset.utilCat);
+        });
+
+        document.getElementById("util-subnav-list")?.addEventListener("click", (e) => {
+            const subLink = e.target.closest("[data-util-sub]");
+            if (!subLink) return;
+            e.preventDefault();
+            switchCategoryAndSub(activeCat, subLink.dataset.utilSub);
+        });
+
+        document.getElementById("util-open-modal-btn")?.addEventListener("click", () => {
+            if (typeof window.openConverterModal === "function") window.openConverterModal(true);
+            else document.getElementById("widget-trigger-btn")?.click();
+        });
+
+        // Dùng chung cho tất cả nút Bento Stepper (− / +) trên toàn trang
+        mainEl.addEventListener("click", (e) => {
+            const stepBtn = e.target.closest("[data-step-target]");
+            if (stepBtn) {
+                const inputEl = document.getElementById(stepBtn.dataset.stepTarget);
+                if (!inputEl) return;
+                const step = Number(stepBtn.dataset.step || 1);
+                const min = Number(inputEl.min || 0);
+                const max = Number(inputEl.max || 9999);
+                const nextVal = Math.min(max, Math.max(min, Number(inputEl.value || 0) + step));
+                inputEl.value = String(nextVal);
+                inputEl.dispatchEvent(new Event("input", { bubbles: true }));
+                return;
+            }
+
+            // Ủy quyền click mở Singleton Modal tới từng module
+            for (const handler of modalClickHandlers) {
+                if (handler(e) === true) return;
+            }
+        });
+
+        // Hỗ trợ bàn phím (Enter / Space) cho mọi thẻ tương tác role="button" tabindex="0"
+        mainEl.addEventListener("keydown", (e) => {
+            if (e.key !== "Enter" && e.key !== " ") return;
+            const interactiveCard = e.target.closest(
+                "#ic-catalog-grid [data-hex-num], [data-ic-modal='current'], [data-sign-key], [data-tarot-modal], [data-conv-card], [data-st-idx], [data-hi-idx], [data-num-modal], [data-bio-key], [data-fs-idx]",
+            );
+            if (!interactiveCard) return;
+            e.preventDefault();
+            interactiveCard.click();
+        });
+
+        document.getElementById("util-modal-close")?.addEventListener("click", closeUtilModal);
+        document.getElementById("util-modal-cancel")?.addEventListener("click", closeUtilModal);
+        document.getElementById("util-modal-backdrop")?.addEventListener("click", closeUtilModal);
+        document.addEventListener("keydown", (e) => {
+            const modal = document.getElementById("util-detail-modal");
+            if (e.key === "Escape" && modal && !modal.hidden) closeUtilModal();
+        });
+    };
+
+    // Xuất trục điều phối dùng chung
+    window.UtilHub = {
+        DEFAULT_COVER_IMG,
+        TAROT_IMG_DIR,
+        TAROT_IMG_EXT,
+        ICHING_ICON_DIR,
+        HOROSCOPE_ICON_DIR,
+        pad,
+        setText,
+        setHtml,
+        setAttr,
+        toSlug,
+        buildBentoTooltipHtml,
+        fetchJsonSafe,
+        playSoundEffect,
+        stopCurrentAudio,
+        openUtilModal,
+        closeUtilModal,
+        createBentoDatePicker,
+        switchCategoryAndSub,
+        registerModule: (fn) => {
+            if (typeof fn === "function") moduleInitCallbacks.push(fn);
+        },
+        onRouteChange: (fn) => {
+            if (typeof fn === "function") routeChangeListeners.push(fn);
+        },
+        registerModalHandler: (fn) => {
+            if (typeof fn === "function") modalClickHandlers.push(fn);
+        },
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initUtilitiesCore);
+    } else {
+        initUtilitiesCore();
+    }
+    window.addEventListener("template-loaded", initUtilitiesCore);
+})();
+```
+
+### util-clock.js
+
+```js
+// assets/js/utilities/util-clock.js
+// Mục 1: Bộ 3 Đồng hồ (Bấm giờ 1/100s, Đếm ngược Bento Stepper + Upload nhạc, Báo thức đa năng + Snooze)
+(() => {
+    const Hub = window.UtilHub;
+    if (!Hub) return;
+
+    const { pad, setText, playSoundEffect, stopCurrentAudio } = Hub;
+
+    let customCountdownAudioUrl = "";
+    let customAlarmAudioUrl = "";
+
+    let swTimer = null;
+    let swStartTime = 0;
+    let swElapsedMs = 0;
+    let swRunning = false;
+    let swLaps = [];
+
+    let cdTimer = null;
+    let cdRemainingSec = 300;
+    let cdRunning = false;
+    let cdHistory = [];
+
+    let alarmsList = [
+        {
+            id: 1,
+            hour: 6,
+            minute: 30,
+            title: "Dậy học bài & Tập thể dục",
+            repeat: "Hằng ngày",
+            enabled: true,
+        },
+    ];
+
+    const formatStopwatch = (ms) => {
+        const totalSec = Math.floor(ms / 1000);
+        const h = Math.floor(totalSec / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = totalSec % 60;
+        const centi = Math.floor((ms % 1000) / 10);
+        return { main: `${pad(h)}:${pad(m)}:${pad(s)}`, ms: `.${pad(centi)}` };
+    };
+
+    const renderStopwatchLaps = () => {
+        const body = document.getElementById("sw-laps-body");
+        if (!body) return;
+        if (!swLaps.length) {
+            body.innerHTML = `<p class="util-data-table__empty">Chưa có dữ liệu bấm giờ. Hãy nhấn <strong>Bắt đầu</strong> và thực hiện <strong>Ngắt (Vòng)</strong> để lưu lại.</p>`;
+            return;
+        }
+        body.innerHTML = swLaps
+            .map(
+                (l) => `
+                    <div class="util-data-table__row util-data-table__row--3cols" role="row">
+                        <span>Vòng #${pad(l.idx)}</span>
+                        <span>+${l.lapStr}</span>
+                        <strong>${l.totalStr}</strong>
+                    </div>
+                `,
+            )
+            .join("");
+    };
+
+    const renderAlarmsList = () => {
+        const container = document.getElementById("al-list-container");
+        if (!container) return;
+        if (!alarmsList.length) {
+            container.innerHTML = `<p class="util-data-table__empty">Chưa có báo thức nào. Thêm báo thức của bạn ở trên.</p>`;
+            return;
+        }
+        container.innerHTML = alarmsList
+            .map(
+                (a) => `
+                    <article class="util-alarm-item ${a.enabled ? "" : "is-disabled"}" data-alarm-id="${a.id}">
+                        <div>
+                            <strong class="util-alarm-item__time">${pad(a.hour)}:${pad(a.minute)}</strong>
+                            <span class="util-alarm-item__title">${a.title}</span>
+                            <small class="util-alarm-item__meta">🔁 ${a.repeat || "Hằng ngày"} • ${a.enabled ? "Đang bật" : "Đã tắt"}</small>
+                        </div>
+                        <div class="util-alarm-item__right">
+                            <button
+                                type="button"
+                                class="util-alarm-item__toggle ${a.enabled ? "is-on" : ""}"
+                                data-toggle-alarm="${a.id}"
+                                aria-pressed="${a.enabled}"
+                                aria-label="Bật hoặc tắt báo thức ${pad(a.hour)}:${pad(a.minute)}"
+                                title="Bật / Tắt báo thức này"
+                            ></button>
+                            <button
+                                type="button"
+                                class="util-alarm-item__del"
+                                data-del-alarm="${a.id}"
+                                aria-label="Xóa báo thức ${pad(a.hour)}:${pad(a.minute)}"
+                                title="Xóa báo thức"
+                            >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </article>
+                `,
+            )
+            .join("");
+    };
+
+    Hub.registerModule(() => {
+        renderStopwatchLaps();
+        renderAlarmsList();
+
+        // 1.1. Đồng hồ bấm giờ
+        const swStartBtn = document.getElementById("sw-start-btn");
+        const swLapBtn = document.getElementById("sw-lap-btn");
+        const swResetBtn = document.getElementById("sw-reset-btn");
+
+        if (swStartBtn) {
+            swStartBtn.onclick = () => {
+                if (!swRunning) {
+                    swRunning = true;
+                    swStartTime = performance.now() - swElapsedMs;
+                    swStartBtn.innerHTML = "<span>&#10074;&#10074; Tạm dừng</span>";
+                    if (swLapBtn) swLapBtn.disabled = false;
+                    setText("sw-status-tag", "Đang bấm giờ...");
+                    setText("sw-head-badge", "Đang chạy");
+                    swTimer = setInterval(() => {
+                        swElapsedMs = performance.now() - swStartTime;
+                        const fmt = formatStopwatch(swElapsedMs);
+                        setText("sw-main-display", fmt.main);
+                        setText("sw-ms-display", fmt.ms);
+                    }, 30);
+                } else {
+                    swRunning = false;
+                    clearInterval(swTimer);
+                    swStartBtn.innerHTML = "<span>&#9654; Tiếp tục</span>";
+                    setText("sw-status-tag", "Đang tạm dừng");
+                    setText("sw-head-badge", "Tạm dừng");
+                }
+            };
+        }
+
+        if (swLapBtn) {
+            swLapBtn.onclick = () => {
+                if (!swRunning) return;
+                const prevTotalMs = swLaps[0]?.totalMs || 0;
+                const lapFmt = formatStopwatch(swElapsedMs - prevTotalMs);
+                const totalFmt = formatStopwatch(swElapsedMs);
+                swLaps.unshift({
+                    idx: swLaps.length + 1,
+                    totalMs: swElapsedMs,
+                    lapStr: `${lapFmt.main}${lapFmt.ms}`,
+                    totalStr: `${totalFmt.main}${totalFmt.ms}`,
+                });
+                renderStopwatchLaps();
+            };
+        }
+
+        if (swResetBtn) {
+            swResetBtn.onclick = () => {
+                swRunning = false;
+                clearInterval(swTimer);
+                swElapsedMs = 0;
+                swLaps = [];
+                setText("sw-main-display", "00:00:00");
+                setText("sw-ms-display", ".00");
+                setText("sw-status-tag", "Sẵn sàng bấm giờ");
+                setText("sw-head-badge", "Chuẩn 1/100s");
+                if (swStartBtn) swStartBtn.innerHTML = "<span>&#9654; Bắt đầu</span>";
+                if (swLapBtn) swLapBtn.disabled = true;
+                renderStopwatchLaps();
+            };
+        }
+
+        // 1.2. Đồng hồ đếm ngược & Upload nhạc từ máy
+        const syncCountdownDisplay = (sec) => {
+            const h = Math.floor(sec / 3600);
+            const m = Math.floor((sec % 3600) / 60);
+            const s = sec % 60;
+            setText("cd-display-digits", `${pad(h)}:${pad(m)}:${pad(s)}`);
+        };
+
+        ["cd-input-hours", "cd-input-minutes", "cd-input-seconds"].forEach((id) => {
+            document.getElementById(id)?.addEventListener("input", () => {
+                if (cdRunning) return;
+                const h = Number(document.getElementById("cd-input-hours")?.value || 0);
+                const m = Number(document.getElementById("cd-input-minutes")?.value || 0);
+                const s = Number(document.getElementById("cd-input-seconds")?.value || 0);
+                cdRemainingSec = Math.max(0, h * 3600 + m * 60 + s);
+                syncCountdownDisplay(cdRemainingSec);
+            });
+        });
+
+        document.querySelectorAll("[data-cd-preset]").forEach((chip) => {
+            chip.onclick = () => {
+                document
+                    .querySelectorAll("[data-cd-preset]")
+                    .forEach((c) => c.classList.toggle("is-active", c === chip));
+                const total = Number(chip.dataset.cdPreset || 300);
+                cdRemainingSec = total;
+                const hEl = document.getElementById("cd-input-hours");
+                const mEl = document.getElementById("cd-input-minutes");
+                const sEl = document.getElementById("cd-input-seconds");
+                if (hEl) hEl.value = String(Math.floor(total / 3600));
+                if (mEl) mEl.value = String(Math.floor((total % 3600) / 60));
+                if (sEl) sEl.value = String(total % 60);
+                syncCountdownDisplay(cdRemainingSec);
+            };
+        });
+
+        const cdAudioInput = document.getElementById("cd-audio-file");
+        document.getElementById("cd-upload-sound-btn")?.addEventListener("click", () => cdAudioInput?.click());
+        cdAudioInput?.addEventListener("change", (e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            customCountdownAudioUrl = URL.createObjectURL(file);
+            setText("cd-sound-file-label", `🎵 ${file.name}`);
+            playSoundEffect(customCountdownAudioUrl);
+        });
+
+        document.getElementById("cd-test-sound-btn")?.addEventListener("click", () => {
+            playSoundEffect(customCountdownAudioUrl);
+        });
+
+        const cdStartBtn = document.getElementById("cd-start-btn");
+        if (cdStartBtn) {
+            cdStartBtn.onclick = () => {
+                stopCurrentAudio();
+                if (!cdRunning) {
+                    const h = Number(document.getElementById("cd-input-hours")?.value || 0);
+                    const m = Number(document.getElementById("cd-input-minutes")?.value || 0);
+                    const s = Number(document.getElementById("cd-input-seconds")?.value || 0);
+                    const title = document.getElementById("cd-input-title")?.value || "Đồng hồ đếm ngược";
+                    if (!cdTimer) cdRemainingSec = Math.max(1, h * 3600 + m * 60 + s);
+
+                    cdRunning = true;
+                    setText("cd-active-title-label", title);
+                    setText("cd-status-badge", "Đang đếm ngược");
+                    cdStartBtn.innerHTML = "<span>&#10074;&#10074; Tạm dừng hẹn giờ</span>";
+
+                    cdHistory.unshift({
+                        idx: cdHistory.length + 1,
+                        title,
+                        duration: `${pad(h)}:${pad(m)}:${pad(s)}`,
+                        startedAt: new Date().toLocaleTimeString("vi-VN"),
+                    });
+                    const histBody = document.getElementById("cd-history-body");
+                    if (histBody) {
+                        histBody.innerHTML = cdHistory
+                            .map(
+                                (item) => `
+                                    <div class="util-data-table__row util-data-table__row--4cols" role="row">
+                                        <span>#${pad(item.idx)}</span>
+                                        <strong>${item.title}</strong>
+                                        <span>${item.duration}</span>
+                                        <span>${item.startedAt}</span>
+                                    </div>
+                                `,
+                            )
+                            .join("");
+                    }
+
+                    cdTimer = setInterval(() => {
+                        cdRemainingSec = Math.max(0, cdRemainingSec - 1);
+                        syncCountdownDisplay(cdRemainingSec);
+                        if (cdRemainingSec <= 0) {
+                            clearInterval(cdTimer);
+                            cdTimer = null;
+                            cdRunning = false;
+                            cdStartBtn.innerHTML = "<span>&#9654; Bắt đầu hẹn giờ</span>";
+                            setText("cd-status-badge", "🔔 Đã hết giờ!");
+                            playSoundEffect(customCountdownAudioUrl);
+                        }
+                    }, 1000);
+                } else {
+                    cdRunning = false;
+                    clearInterval(cdTimer);
+                    cdStartBtn.innerHTML = "<span>&#9654; Tiếp tục hẹn giờ</span>";
+                    setText("cd-status-badge", "Tạm dừng");
+                }
+            };
+        }
+
+        document.getElementById("cd-reset-btn")?.addEventListener("click", () => {
+            stopCurrentAudio();
+            cdRunning = false;
+            clearInterval(cdTimer);
+            cdTimer = null;
+            const h = Number(document.getElementById("cd-input-hours")?.value || 0);
+            const m = Number(document.getElementById("cd-input-minutes")?.value || 0);
+            const s = Number(document.getElementById("cd-input-seconds")?.value || 0);
+            cdRemainingSec = h * 3600 + m * 60 + s;
+            syncCountdownDisplay(cdRemainingSec);
+            if (cdStartBtn) cdStartBtn.innerHTML = "<span>&#9654; Bắt đầu hẹn giờ</span>";
+            setText("cd-status-badge", "Đang chờ");
+        });
+
+        // 1.3. Đồng hồ báo thức (Upload nhạc + Toggle + Snooze + Thùng rác SVG)
+        const alAudioInput = document.getElementById("al-audio-file");
+        document.getElementById("al-upload-sound-btn")?.addEventListener("click", () => alAudioInput?.click());
+        alAudioInput?.addEventListener("change", (e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            customAlarmAudioUrl = URL.createObjectURL(file);
+            setText("al-sound-file-label", `🎵 ${file.name}`);
+            playSoundEffect(customAlarmAudioUrl);
+        });
+
+        document.getElementById("al-test-sound-btn")?.addEventListener("click", () => {
+            playSoundEffect(customAlarmAudioUrl);
+        });
+
+        document.getElementById("al-repeat-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-al-repeat]");
+            if (!btn) return;
+            e.stopPropagation();
+            const val = btn.dataset.alRepeat;
+            const textEl = document.getElementById("al-repeat-text");
+            if (textEl) {
+                textEl.textContent = val;
+                textEl.dataset.repeatVal = val;
+            }
+            document.querySelectorAll("[data-al-repeat]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-selected", isSel);
+                b.setAttribute("aria-selected", String(isSel));
+            });
+            document.getElementById("al-repeat-dropdown")?.removeAttribute("open");
+        });
+
+        document.getElementById("al-add-btn")?.addEventListener("click", () => {
+            const hour = Math.min(23, Math.max(0, Number(document.getElementById("al-input-hour")?.value || 6)));
+            const minute = Math.min(59, Math.max(0, Number(document.getElementById("al-input-minute")?.value || 30)));
+            const title = document.getElementById("al-input-title")?.value || "Dậy học bài";
+            const repeat = document.getElementById("al-repeat-text")?.dataset.repeatVal || "Hằng ngày";
+            alarmsList.push({ id: Date.now(), hour, minute, title, repeat, enabled: true });
+            renderAlarmsList();
+        });
+
+        document.getElementById("al-list-container")?.addEventListener("click", (e) => {
+            const toggleBtn = e.target.closest("[data-toggle-alarm]");
+            if (toggleBtn) {
+                const id = Number(toggleBtn.dataset.toggleAlarm);
+                alarmsList = alarmsList.map((a) => (a.id === id ? { ...a, enabled: !a.enabled } : a));
+                renderAlarmsList();
+                return;
+            }
+            const delBtn = e.target.closest("[data-del-alarm]");
+            if (delBtn) {
+                const id = Number(delBtn.dataset.delAlarm);
+                alarmsList = alarmsList.filter((a) => a.id !== id);
+                renderAlarmsList();
+            }
+        });
+
+        document.getElementById("al-stop-ring-btn")?.addEventListener("click", () => {
+            stopCurrentAudio();
+            const banner = document.getElementById("al-ringing-banner");
+            if (banner) banner.hidden = true;
+        });
+
+        document.getElementById("al-snooze-btn")?.addEventListener("click", () => {
+            stopCurrentAudio();
+            const banner = document.getElementById("al-ringing-banner");
+            if (banner) banner.hidden = true;
+            const snoozeTime = new Date(Date.now() + 5 * 60000);
+            alarmsList.push({
+                id: Date.now(),
+                hour: snoozeTime.getHours(),
+                minute: snoozeTime.getMinutes(),
+                title: "Báo lại sau 5 phút (Snooze)",
+                repeat: "Chỉ một lần",
+                enabled: true,
+            });
+            renderAlarmsList();
+        });
+
+        setInterval(() => {
+            const cur = new Date();
+            setText(
+                "al-live-clock-pill",
+                `Giờ hiện tại: ${pad(cur.getHours())}:${pad(cur.getMinutes())}:${pad(cur.getSeconds())}`,
+            );
+            if (cur.getSeconds() === 0) {
+                alarmsList.forEach((a) => {
+                    if (a.enabled && a.hour === cur.getHours() && a.minute === cur.getMinutes()) {
+                        const banner = document.getElementById("al-ringing-banner");
+                        if (banner) banner.hidden = false;
+                        setText("al-ringing-title", `${pad(a.hour)}:${pad(a.minute)} — ${a.title}`);
+                        playSoundEffect(customAlarmAudioUrl);
+                    }
+                });
+            }
+        }, 1000);
+    });
+})();
+```
+
+### util-calendar.js
+
+```js
+// assets/js/utilities/util-calendar.js
+// Mục 2 (Đổi ngày Bento 6 thẻ), Mục 3 (24 Tiết khí lọc 4 mùa + 6 animation), Mục 7 (Tính khoảng cách & Cộng/Trừ ngày)
+(() => {
+    const Hub = window.UtilHub;
+    if (!Hub) return;
+
+    const { pad, setText, setAttr, buildBentoTooltipHtml, openUtilModal, createBentoDatePicker } = Hub;
+
+    // ==================== MỤC 2: ĐỔI NGÀY ÂM ⇄ DƯƠNG TẠI CHỖ ====================
+    let ucDay = 15;
+    let ucMonth = 11;
+    let ucYear = 2026;
+    let ucYearStart = 2020;
+    let ucMode = "solar2lunar";
+    let lastConvertedContext = null;
+
+    const renderUcPickers = () => {
+        const maxDays = ucMode === "solar2lunar" ? new Date(ucYear, ucMonth, 0).getDate() : 30;
+        if (ucDay > maxDays) ucDay = maxDays;
+
+        setText("uc-day-text", `Ngày ${pad(ucDay)}`);
+        setText("uc-month-text", `Tháng ${pad(ucMonth)}`);
+        setText("uc-year-text", `Năm ${ucYear}`);
+        setText("uc-year-range-label", `${ucYearStart} - ${ucYearStart + 11}`);
+        setText("uc-mode-text", ucMode === "solar2lunar" ? "Dương lịch → Âm lịch" : "Âm lịch → Dương lịch");
+
+        const dayList = document.getElementById("uc-day-list");
+        if (dayList) {
+            let html = "";
+            for (let d = 1; d <= maxDays; d++) {
+                const isSel = d === ucDay;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-uc-day="${d}">${pad(d)}</button></li>`;
+            }
+            dayList.innerHTML = html;
+        }
+
+        const monthList = document.getElementById("uc-month-list");
+        if (monthList) {
+            let html = "";
+            for (let m = 1; m <= 12; m++) {
+                const isSel = m === ucMonth;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-uc-month="${m}">Tháng ${pad(m)}</button></li>`;
+            }
+            monthList.innerHTML = html;
+        }
+
+        const yearList = document.getElementById("uc-year-list");
+        if (yearList) {
+            let html = "";
+            for (let y = ucYearStart; y < ucYearStart + 12; y++) {
+                const isSel = y === ucYear;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-uc-year="${y}">${y}</button></li>`;
+            }
+            yearList.innerHTML = html;
+        }
+    };
+
+    const renderInlineConverter = () => {
+        const grid = document.getElementById("uc-result-grid");
+        if (!grid || !window.LunarEngine) return;
+
+        let sDay = ucDay;
+        let sMonth = ucMonth;
+        let sYear = ucYear;
+
+        if (ucMode === "lunar2solar") {
+            const conv = window.LunarEngine.convertLunar2Solar(ucDay, ucMonth, ucYear, 0);
+            if (conv && conv.sDay > 0) {
+                sDay = conv.sDay;
+                sMonth = conv.sMonth;
+                sYear = conv.sYear;
+            }
+        }
+
+        const info = window.LunarEngine.getFullDayInfo(sDay, sMonth, sYear);
+        const isoDate = `${sYear}-${pad(sMonth)}-${pad(sDay)}`;
+        lastConvertedContext = { info, sDay, sMonth, sYear, isoDate };
+
+        const cards = [
+            {
+                key: "solar",
+                badge: "Dương Lịch",
+                icon: "./assets/icons/calendar.svg",
+                filtered: false,
+                title: `${pad(sDay)}/${pad(sMonth)}/${sYear}`,
+                sub: info.bilingualWeekday,
+                desc: `Tiết khí: ${info.solarTerm} • Trực: ${info.trucObj.name} (${info.trucObj.short}).`,
+                foot: "Mở tờ lịch ngày này",
+            },
+            {
+                key: "lunar",
+                badge: `Âm Lịch • ${info.isFullMonth ? "Tháng Đủ" : "Tháng Thiếu"}`,
+                icon: `./assets/icons/zodiac/${info.yearZodiacFile}.svg`,
+                filtered: true,
+                title: `${pad(info.lunarDay)}/${pad(info.lunarMonth)}/${info.lunarYear}`,
+                sub: `Năm ${info.yearCanChi} (${info.yearNapAm})`,
+                desc: `Tháng ${info.monthCanChi} • Ngày ${info.dayCanChi} • Giờ đầu ngày: ${info.ratHourCanChi}.`,
+                foot: "Xem giải nghĩa Âm lịch",
+            },
+            {
+                key: "canchi",
+                badge: info.fortuneStatus === "good" ? "Ngày Hoàng Đạo" : "Can Chi & Xung Hợp",
+                icon: `./assets/icons/zodiac/${info.zodiacFile}.svg`,
+                filtered: true,
+                title: `Ngày ${info.dayCanChi}`,
+                sub: `Tuổi hợp: ${info.ageHarmony.good}`,
+                desc: `Tuổi xung cần lưu ý: ${info.ageHarmony.bad}. ${info.trucObj.desc}`,
+                foot: "Xem xung hợp 12 Con Giáp",
+            },
+            {
+                key: "napam",
+                badge: info.elementInfo.label,
+                icon: `./assets/icons/${info.elementInfo.icon}`,
+                filtered: false,
+                title: info.dayNapAm,
+                sub: `Nạp âm tháng: ${info.monthNapAm}`,
+                desc: `Năng lượng Ngũ Hành chủ đạo của ngày ${info.dayCanChi} thuộc ${info.elementInfo.label}.`,
+                foot: "Xem chi tiết Nạp Âm",
+            },
+            {
+                key: "direction",
+                badge: "Hướng Xuất Hành",
+                icon: "./assets/icons/fengshui/tai-than.svg",
+                filtered: true,
+                title: `Tài Thần: ${info.directions.tai}`,
+                sub: `Hỷ Thần: ${info.directions.hy}`,
+                desc: "Xuất hành theo hướng Tài Thần hoặc Hỷ Thần giúp công việc, giao thương và nhân duyên hanh thông.",
+                foot: "Xem hướng tốt trong ngày",
+            },
+            {
+                key: "hours",
+                badge: "6 Giờ Hoàng Đạo",
+                icon: "./assets/icons/fengshui/hoang-dao.svg",
+                filtered: true,
+                title: "Khung Giờ Tốt",
+                sub: "Chọn giờ lành khởi sự",
+                desc: info.goodHoursStr,
+                foot: "Xem bảng 12 canh giờ",
+            },
+        ];
+
+        grid.innerHTML = `
+            <div class="util-catalog-grid">
+                ${cards
+                    .map(
+                        (c, idx) => `
+                            <article
+                                class="util-bento-item ${idx < 2 ? "is-current-highlight" : ""} has-bento-tooltip"
+                                data-conv-card="${c.key}"
+                                role="button"
+                                tabindex="0"
+                                aria-label="${c.badge}: ${c.title}, ${c.sub}"
+                            >
+                                <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                                    <img src="${c.icon}" alt="" class="util-bento-item__watermark" />
+                                </span>
+                                <div class="util-bento-item__top">
+                                    <span class="util-bento-item__icon-box ${c.filtered ? "util-bento-item__icon-box--filtered" : ""}">
+                                        <img src="${c.icon}" alt="" aria-hidden="true" />
+                                    </span>
+                                    <span class="util-bento-item__badge">${c.badge}</span>
+                                </div>
+                                <div class="util-bento-item__body">
+                                    <strong class="util-bento-item__title">${c.title}</strong>
+                                    <span class="util-bento-item__sub">${c.sub}</span>
+                                </div>
+                                <p class="util-bento-item__desc">${c.desc}</p>
+                                <footer class="util-bento-item__foot">
+                                    <span>${c.foot}</span>
+                                    <span aria-hidden="true">&#8594;</span>
+                                </footer>
+                                ${buildBentoTooltipHtml(c.title, `${c.sub}. ${c.desc}`, `✦ Bấm để mở thẻ ${c.badge}`)}
+                            </article>
+                        `,
+                    )
+                    .join("")}
+            </div>
+        `;
+    };
+
+    // ==================== MỤC 3: TRA CỨU 24 TIẾT KHÍ ====================
+    let stViewingYear = 2026;
+    let stSeasonFilter = "all";
+
+    const SOLAR_TERMS_DATA = [
+        [
+            "Tiểu Hàn",
+            "05/01",
+            "15:13",
+            "winter",
+            "sun",
+            "term-winter-minor-cold.svg",
+            "Chớm lạnh — Khí trời bắt đầu rét đậm, chuẩn bị bước vào giai đoạn lạnh nhất cuối năm.",
+            "Nên giữ ấm cơ thể, bồi bổ dinh dưỡng và hoàn tất các kế hoạch cuối năm.",
+        ],
+        [
+            "Đại Hàn",
+            "20/01",
+            "08:35",
+            "winter",
+            "sun",
+            "term-winter-major-cold.svg",
+            "Rét cực điểm — Tiết khí cuối năm âm lịch, hàn khí đạt đỉnh trước khi mầm xuân trỗi dậy.",
+            "Thích hợp tổng kết năm cũ, dọn dẹp nhà cửa đón Tết và giữ ấm vùng cổ, bàn chân.",
+        ],
+        [
+            "Lập Xuân",
+            "04/02",
+            "02:50",
+            "spring",
+            "sprout",
+            "term-spring.svg",
+            "Khởi đầu mùa xuân — Dương khí bừng dậy, cây cối đâm chồi nảy lộc, vạn vật sinh sôi.",
+            "Đại cát cho việc lập kế hoạch năm mới, xuất hành đầu xuân, trồng cây và mở rộng giao kết.",
+        ],
+        [
+            "Vũ Thủy",
+            "18/02",
+            "22:40",
+            "spring",
+            "rain",
+            "term-rain.svg",
+            "Mưa xuân — Hơi ẩm tăng dần, mưa phùn ấm áp tưới tắm cho mùa màng tươi tốt.",
+            "Thuận lợi cho việc gieo trồng, học tập, bồi đắp tri thức và chăm sóc sức khỏe gan mật.",
+        ],
+        [
+            "Kinh Trập",
+            "05/03",
+            "20:44",
+            "spring",
+            "thunder",
+            "term-thunder.svg",
+            "Sấm xuân thức tỉnh — Tiếng sấm đầu mùa vang lên đánh thức vạn vật sau kỳ ngủ đông.",
+            "Thời điểm rất tốt để bứt phá, triển khai dự án mới và hành động quyết đoán.",
+        ],
+        [
+            "Xuân Phân",
+            "20/03",
+            "21:32",
+            "spring",
+            "snow",
+            "term-spring-equinox.svg",
+            "Giữa xuân cân bằng — Ngày và đêm dài bằng nhau, âm dương điều hòa.",
+            "Rất tốt cho việc hòa giải, ký kết hợp tác đôi bên cùng có lợi và cân bằng nhịp sống.",
+        ],
+        [
+            "Thanh Minh",
+            "05/04",
+            "01:22",
+            "spring",
+            "sprout",
+            "term-spring-clear.svg",
+            "Trời trong sáng — Tiết trời quang đãng, gắn liền với truyền thống tảo mộ tri ân tổ tiên.",
+            "Hợp đi tảo mộ, tri ân tổ tiên, du xuân ngoài trời và khởi sự việc thiện lành.",
+        ],
+        [
+            "Cốc Vũ",
+            "20/04",
+            "08:24",
+            "spring",
+            "rain",
+            "term-grain-rain.svg",
+            "Mưa rào nuôi ngũ cốc — Lượng mưa dồi dào giúp lúa màu phát triển vượt bậc.",
+            "Thuận lợi cho việc tích lũy tài chính, đầu tư dài hạn và chăm sóc gia đình.",
+        ],
+        [
+            "Lập Hạ",
+            "05/05",
+            "18:30",
+            "summer",
+            "sun",
+            "term-summer-sun.svg",
+            "Bắt đầu mùa hạ — Nắng vàng rực rỡ, vạn vật bước vào kỳ trưởng thành mạnh mẽ.",
+            "Hợp đẩy mạnh kinh doanh, quảng bá thương hiệu và giữ tâm thái bình hòa dưới nắng nóng.",
+        ],
+        [
+            "Tiểu Mãn",
+            "21/05",
+            "07:23",
+            "summer",
+            "sprout",
+            "term-grain.svg",
+            "Lúa trổ đòng chắc hạt — Hạt ngũ cốc bắt đầu căng mẩy báo hiệu mùa màng bội thu.",
+            "Nên kiên trì hoàn thiện các công việc đang dang dở để chuẩn bị gặt hái thành quả.",
+        ],
+        [
+            "Mang Chủng",
+            "05/06",
+            "22:32",
+            "summer",
+            "sprout",
+            "term-grain-ear.svg",
+            "Lúa chín có râu — Thời điểm thu hoạch vụ chiêm và gieo cấy vụ mùa nhộn nhịp.",
+            "Rất tốt cho việc thu hồi công nợ, chốt doanh số và tái đầu tư xoay vòng vốn.",
+        ],
+        [
+            "Hạ Chí",
+            "21/06",
+            "15:10",
+            "summer",
+            "sun",
+            "term-summer-solstice.svg",
+            "Đỉnh điểm mùa hạ — Ngày dài nhất trong năm, dương khí đạt cực thịnh.",
+            "Nên uống nhiều nước mát, nghỉ trưa hợp lý và tránh làm việc quá sức ngoài trời nắng gắt.",
+        ],
+        [
+            "Tiểu Thử",
+            "07/07",
+            "08:45",
+            "summer",
+            "sun",
+            "term-summer-minor-heat.svg",
+            "Nóng nhẹ — Khí trời oi bức bắt đầu lan tỏa kèm mưa dông mùa hạ.",
+            "Hợp làm việc nơi thoáng mát, kiểm soát cảm xúc và giữ gìn sức khỏe tim mạch.",
+        ],
+        [
+            "Đại Thử",
+            "23/07",
+            "02:12",
+            "summer",
+            "sun",
+            "term-summer-major-heat.svg",
+            "Nóng oi ả cực độ — Giai đoạn nhiệt độ cao nhất trong năm, hành Hỏa vượng.",
+            "Thích hợp dưỡng tâm, ăn thực phẩm thanh nhiệt và cẩn trọng phòng chống cháy nổ.",
+        ],
+        [
+            "Lập Thu",
+            "07/08",
+            "18:28",
+            "autumn",
+            "wind",
+            "term-autumn-wind.svg",
+            "Khởi đầu mùa thu — Gió heo may chớm về, bầu trời cao trong và dịu mát dần.",
+            "Thời điểm lý tưởng để hoạch định mục tiêu nửa cuối năm, khai trương và thu hoạch.",
+        ],
+        [
+            "Xử Thử",
+            "23/08",
+            "09:05",
+            "autumn",
+            "wind",
+            "term-autumn-cool.svg",
+            "Dứt nắng nóng — Cái oi bức mùa hè chấm dứt, nhường chỗ cho tiết trời thu mát mẻ.",
+            "Rất tốt cho việc nghỉ ngơi phục hồi sức lực, gắn kết gia đình và sắp xếp lại công việc.",
+        ],
+        [
+            "Bạch Lộ",
+            "07/09",
+            "21:18",
+            "autumn",
+            "rain",
+            "term-dew.svg",
+            "Sương trắng — Đêm về se lạnh khiến hơi nước ngưng tụ thành giọt sương trên lá.",
+            "Nên giữ ấm khi sáng sớm, thuận lợi cho việc học hành, thi cử và sáng tạo.",
+        ],
+        [
+            "Thu Phân",
+            "23/09",
+            "06:49",
+            "autumn",
+            "snow",
+            "term-autumn-day-night.svg",
+            "Giữa thu cân bằng — Thời lượng ngày và đêm bằng nhau, tiết trời thu trong trẻo.",
+            "Đại lợi cho việc hội họp, đoàn viên, ký kết giao ước và thưởng ngoạn mùa thu.",
+        ],
+        [
+            "Hàn Lộ",
+            "08/10",
+            "13:02",
+            "autumn",
+            "rain",
+            "term-cold-dew.svg",
+            "Sương lạnh — Khí trời chuyển lạnh sâu hơn, sương đêm ngưng tụ dày.",
+            "Hợp thu vén tài sản, củng cố nội lực và chăm sóc hệ hô hấp khi giao mùa.",
+        ],
+        [
+            "Sương Giáng",
+            "23/10",
+            "16:15",
+            "autumn",
+            "rain",
+            "term-frost.svg",
+            "Sương mù & Giá lạnh — Tiết khí cuối cùng của mùa thu trước khi sang đông.",
+            "Nên hoàn tất các kế hoạch mùa thu, chuẩn bị tích trữ nguồn lực cho mùa đông.",
+        ],
+        [
+            "Lập Đông",
+            "07/11",
+            "16:20",
+            "winter",
+            "wind",
+            "term-winter-snow.svg",
+            "Bắt đầu mùa đông — Gió mùa đông bắc tràn về, vạn vật thu mình tích trữ năng lượng.",
+            "Rất tốt cho việc bồi bổ sức khỏe, cất trữ tài sản và sum họp gia đình ấm cúng.",
+        ],
+        [
+            "Tiểu Tuyết",
+            "22/11",
+            "13:45",
+            "winter",
+            "snow",
+            "term-winter-minor-snow.svg",
+            "Tuyết nhẹ / Rét đầu đông — Nhiệt độ giảm thấp, không khí khô lạnh rõ rệt.",
+            "Thích hợp nghiên cứu chuyên sâu, làm việc nội bộ và giữ ấm cơ thể.",
+        ],
+        [
+            "Đại Tuyết",
+            "07/12",
+            "09:08",
+            "winter",
+            "snow",
+            "term-winter-major-snow.svg",
+            "Tuyết dày / Rét đậm — Hàn khí bao phủ mạnh mẽ, đêm dài ngày ngắn.",
+            "Nên hạn chế đi xa mạo hiểm, ưu tiên củng cố tài chính và chăm sóc người thân.",
+        ],
+        [
+            "Đông Chí",
+            "22/12",
+            "03:02",
+            "winter",
+            "snow",
+            "term-winter-solstice.svg",
+            "Giữa đông — Đêm dài nhất trong năm; từ sau Đông Chí dương khí bắt đầu hồi sinh.",
+            "Thời điểm cát lành để cầu phúc, đoàn viên và chuẩn bị đón vận hội mới.",
+        ],
+    ];
+
+    const SEASON_VN = {
+        spring: "Mùa Xuân • Hành Mộc",
+        summer: "Mùa Hạ • Hành Hỏa",
+        autumn: "Mùa Thu • Hành Kim",
+        winter: "Mùa Đông • Hành Thủy",
+    };
+
+    const renderSolarTermsPanel = () => {
+        setText("st-year-title", String(stViewingYear));
+        setText("st-year-badge", `Năm ${stViewingYear}`);
+        const grid = document.getElementById("st-cards-grid");
+        if (!grid) return;
+
+        const curTerm = window.LunarEngine
+            ? window.LunarEngine.getFullDayInfo(new Date().getDate(), new Date().getMonth() + 1, stViewingYear)
+                  .solarTerm
+            : "Lập Đông";
+
+        const filtered = SOLAR_TERMS_DATA.filter((item) => stSeasonFilter === "all" || item[3] === stSeasonFilter);
+
+        grid.innerHTML = filtered
+            .map(([name, ddmm, timeStr, seasonKey, animGroup, icon, desc, advice]) => {
+                const isCur = name === curTerm;
+                const iconPath = `./assets/icons/weather/${icon}`;
+                const seasonLabel = SEASON_VN[seasonKey];
+                const idx = SOLAR_TERMS_DATA.findIndex((x) => x[0] === name);
+
+                return `
+                    <article
+                        class="util-bento-item ${isCur ? "is-current-highlight" : ""} has-bento-tooltip"
+                        data-term-anim="${animGroup}"
+                        data-st-idx="${idx}"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Tiết ${name}, ${ddmm}/${stViewingYear}, ${seasonLabel}"
+                    >
+                        <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                            <img src="${iconPath}" alt="" class="util-bento-item__watermark" />
+                        </span>
+                        <div class="util-bento-item__top">
+                            <span class="util-bento-item__icon-box util-bento-item__icon-box--filtered">
+                                <img src="${iconPath}" alt="" aria-hidden="true" />
+                            </span>
+                            <span class="util-bento-item__badge">${ddmm}/${stViewingYear} • ${timeStr}</span>
+                        </div>
+                        <div class="util-bento-item__body">
+                            <strong class="util-bento-item__title">Tiết ${name} ${isCur ? "• Hiện tại" : ""}</strong>
+                            <span class="util-bento-item__sub">${seasonLabel}</span>
+                        </div>
+                        <p class="util-bento-item__desc">${desc}</p>
+                        <footer class="util-bento-item__foot">
+                            <span>Xem dưỡng sinh &amp; hành sự</span>
+                            <span aria-hidden="true">&#8594;</span>
+                        </footer>
+                        ${buildBentoTooltipHtml(`Tiết ${name} (${ddmm}/${stViewingYear})`, `${desc} ${advice}`, `✦ Bấm để mở thẻ chi tiết Tiết ${name}`)}
+                    </article>
+                `;
+            })
+            .join("");
+    };
+
+    // ==================== MỤC 7: TÍNH KHOẢNG CÁCH & CỘNG / TRỪ NGÀY ====================
+    let dateCalcMode = "add";
+    let ddStartPicker = null;
+    let ddEndPicker = null;
+    let asBasePicker = null;
+
+    const computeDateDiff = () => {
+        if (!ddStartPicker || !ddEndPicker) return;
+        const s = ddStartPicker.getState();
+        const e = ddEndPicker.getState();
+
+        const d1 = new Date(s.year, s.month - 1, s.day);
+        const d2 = new Date(e.year, e.month - 1, e.day);
+        const totalDays = Math.round(Math.abs(d2 - d1) / 86400000);
+        const totalHours = totalDays * 24;
+        const totalMins = totalHours * 60;
+        const weeks = Math.floor(totalDays / 7);
+        const months = Math.floor(totalDays / 30.4375);
+        const years = Math.floor(totalDays / 365.25);
+
+        setText("dd-val-years", String(years));
+        setText("dd-val-months", String(months));
+        setText("dd-val-weeks", String(weeks));
+        setText("dd-val-days", String(totalDays));
+        setText("dd-val-hours", totalHours.toLocaleString("vi-VN"));
+        setText("dd-val-minutes", totalMins.toLocaleString("vi-VN"));
+        setText("dd-total-days-badge", `Tổng thời gian: ${totalDays} ngày`);
+
+        if (window.LunarEngine) {
+            const l1 = window.LunarEngine.getFullDayInfo(s.day, s.month, s.year);
+            const l2 = window.LunarEngine.getFullDayInfo(e.day, e.month, e.year);
+            setText(
+                "dd-start-lunar-hint",
+                `Âm lịch: ${pad(l1.lunarDay)}/${pad(l1.lunarMonth)}/${l1.lunarYear} (Ngày ${l1.dayCanChi} • ${l1.dayNapAm})`,
+            );
+            setText(
+                "dd-end-lunar-hint",
+                `Âm lịch: ${pad(l2.lunarDay)}/${pad(l2.lunarMonth)}/${l2.lunarYear} (Ngày ${l2.dayCanChi} • ${l2.dayNapAm})`,
+            );
+        }
+    };
+
+    const computeDateAddSub = () => {
+        if (!asBasePicker) return;
+        const b = asBasePicker.getState();
+        const yOff = Number(document.getElementById("as-years")?.value || 0);
+        const mOff = Number(document.getElementById("as-months")?.value || 0);
+        const wOff = Number(document.getElementById("as-weeks")?.value || 0);
+        const dOff = Number(document.getElementById("as-days")?.value || 0);
+
+        const dir = dateCalcMode === "sub" ? -1 : 1;
+        const target = new Date(b.year + dir * yOff, b.month - 1 + dir * mOff, b.day + dir * (wOff * 7 + dOff));
+        const ty = target.getFullYear();
+        const tm = target.getMonth() + 1;
+        const td = target.getDate();
+
+        const fullVi = new Intl.DateTimeFormat("vi-VN", {
+            weekday: "long",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+        }).format(target);
+
+        setText(
+            "as-res-mode-tag",
+            dateCalcMode === "sub" ? "Kết quả sau khi trừ thời gian" : "Kết quả sau khi cộng thêm thời gian",
+        );
+        setText("as-res-solar", `${fullVi} Dương lịch`);
+        setAttr("as-res-link", "href", `./day.html?date=${ty}-${pad(tm)}-${pad(td)}`);
+
+        if (window.LunarEngine) {
+            const info = window.LunarEngine.getFullDayInfo(td, tm, ty);
+            setText(
+                "as-res-lunar",
+                `Nhằm ngày ${pad(info.lunarDay)}/${pad(info.lunarMonth)}/${info.lunarYear} Âm lịch • Năm ${info.yearCanChi} • Ngày ${info.dayCanChi} (${info.dayNapAm})`,
+            );
+        }
+    };
+
+    // Đồng bộ subpanel Cộng/Trừ ngày khi đổi Route
+    Hub.onRouteChange(({ cat, sub }) => {
+        if (cat !== "datediff") return;
+        const panel = document.querySelector('.util-panel[data-panel-cat="datediff"]');
+        if (!panel) return;
+
+        dateCalcMode = sub === "sub" ? "sub" : "add";
+        const diffSub = panel.querySelector('[data-subpanel="diff"]');
+        const addSub = panel.querySelector('[data-subpanel="add-sub"]');
+        if (diffSub) diffSub.hidden = sub !== "diff";
+        if (addSub) addSub.hidden = sub === "diff";
+
+        const actionWord = dateCalcMode === "sub" ? "trừ" : "cộng";
+        setText(
+            "as-panel-title",
+            dateCalcMode === "sub"
+                ? "Trừ Ngày & Tra Cứu Âm Lịch Ngày Đích"
+                : "Cộng Thêm Ngày & Tra Cứu Âm Lịch Ngày Đích",
+        );
+        setText("as-label-years", `Số năm ${actionWord}`);
+        setText("as-label-months", `Số tháng ${actionWord}`);
+        setText("as-label-weeks", `Số tuần ${actionWord}`);
+        setText("as-label-days", `Số ngày ${actionWord}`);
+        computeDateAddSub();
+    });
+
+    // Ủy quyền Modal cho Mục 2 & Mục 3
+    Hub.registerModalHandler((e) => {
+        const convCard = e.target.closest("[data-conv-card]");
+        if (convCard && lastConvertedContext) {
+            const { info, sDay, sMonth, sYear, isoDate } = lastConvertedContext;
+            openUtilModal({
+                category: "Đổi Ngày Âm ⇄ Dương",
+                title: `Ngày ${pad(sDay)}/${pad(sMonth)}/${sYear} DL (${pad(info.lunarDay)}/${pad(info.lunarMonth)} ÂL)`,
+                visualHtml: `<img src="./assets/icons/zodiac/${info.zodiacFile}.svg" alt="" /><strong>Ngày ${info.dayCanChi}</strong>`,
+                isFilteredVisual: true,
+                pills: [info.yearCanChi, info.dayNapAm, `Tiết ${info.solarTerm}`],
+                desc: `Ngày ${pad(sDay)}/${pad(sMonth)}/${sYear} Dương lịch nhằm ngày ${pad(info.lunarDay)}/${pad(info.lunarMonth)}/${info.lunarYear} Âm lịch (Năm ${info.yearCanChi}, Tháng ${info.monthCanChi}, Ngày ${info.dayCanChi}).`,
+                advice: `Trực ${info.trucObj.name}: ${info.trucObj.desc} • 6 Giờ Hoàng Đạo: ${info.goodHoursStr}.`,
+                actionHref: `./day.html?date=${isoDate}`,
+                actionLabel: "Mở trang Chi tiết Ngày này",
+            });
+            return true;
+        }
+
+        const stCard = e.target.closest("[data-st-idx]");
+        if (stCard) {
+            const item = SOLAR_TERMS_DATA[Number(stCard.dataset.stIdx)];
+            if (!item) return true;
+            const [name, ddmm, timeStr, seasonKey, , icon, desc, advice] = item;
+            openUtilModal({
+                category: "Nhị Thập Tứ Tiết Khí",
+                title: `Tiết ${name} (${ddmm}/${stViewingYear})`,
+                visualHtml: `<img src="./assets/icons/weather/${icon}" alt="" /><strong>${SEASON_VN[seasonKey]}</strong>`,
+                isFilteredVisual: true,
+                pills: [`Khởi tiết: ${timeStr}`, SEASON_VN[seasonKey], `Năm ${stViewingYear}`],
+                desc,
+                advice,
+                actionHref: `./day.html?date=${stViewingYear}-${ddmm.split("/")[1]}-${ddmm.split("/")[0]}`,
+                actionLabel: `Xem lịch ngày ${ddmm}/${stViewingYear}`,
+            });
+            return true;
+        }
+        return false;
+    });
+
+    Hub.registerModule(() => {
+        const now = new Date();
+        ucDay = now.getDate();
+        ucMonth = now.getMonth() + 1;
+        ucYear = now.getFullYear();
+        ucYearStart = Math.floor(ucYear / 12) * 12 - 4;
+
+        ddStartPicker = createBentoDatePicker(
+            "dd-start-pickers",
+            { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() },
+            computeDateDiff,
+        );
+        ddEndPicker = createBentoDatePicker("dd-end-pickers", { day: 17, month: 2, year: 2027 }, computeDateDiff);
+        asBasePicker = createBentoDatePicker(
+            "as-base-pickers",
+            { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() },
+            computeDateAddSub,
+        );
+
+        renderUcPickers();
+        renderInlineConverter();
+        renderSolarTermsPanel();
+        computeDateDiff();
+        computeDateAddSub();
+
+        // Sự kiện Mục 2: Đổi ngày
+        document.getElementById("uc-day-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-uc-day]");
+            if (!btn) return;
+            e.stopPropagation();
+            ucDay = Number(btn.dataset.ucDay);
+            document.getElementById("uc-day-dropdown")?.removeAttribute("open");
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        document.getElementById("uc-month-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-uc-month]");
+            if (!btn) return;
+            e.stopPropagation();
+            ucMonth = Number(btn.dataset.ucMonth);
+            document.getElementById("uc-month-dropdown")?.removeAttribute("open");
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        document.getElementById("uc-year-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-uc-year]");
+            if (!btn) return;
+            e.stopPropagation();
+            ucYear = Number(btn.dataset.ucYear);
+            document.getElementById("uc-year-dropdown")?.removeAttribute("open");
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        document.getElementById("uc-year-prev-range")?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            ucYearStart -= 12;
+            renderUcPickers();
+        });
+
+        document.getElementById("uc-year-next-range")?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            ucYearStart += 12;
+            renderUcPickers();
+        });
+
+        document.getElementById("uc-mode-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-uc-mode]");
+            if (!btn) return;
+            e.stopPropagation();
+            ucMode = btn.dataset.ucMode;
+            document.querySelectorAll("[data-uc-mode]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-selected", isSel);
+                b.setAttribute("aria-selected", String(isSel));
+            });
+            document.getElementById("uc-mode-dropdown")?.removeAttribute("open");
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        document.getElementById("uc-today-btn")?.addEventListener("click", () => {
+            const t = new Date();
+            ucDay = t.getDate();
+            ucMonth = t.getMonth() + 1;
+            ucYear = t.getFullYear();
+            ucYearStart = Math.floor(ucYear / 12) * 12 - 4;
+            ucMode = "solar2lunar";
+            renderUcPickers();
+            renderInlineConverter();
+        });
+
+        // Sự kiện Mục 3: 24 Tiết khí
+        document.getElementById("st-prev-year")?.addEventListener("click", () => {
+            stViewingYear--;
+            renderSolarTermsPanel();
+        });
+        document.getElementById("st-next-year")?.addEventListener("click", () => {
+            stViewingYear++;
+            renderSolarTermsPanel();
+        });
+        document.getElementById("st-current-year")?.addEventListener("click", () => {
+            stViewingYear = new Date().getFullYear();
+            renderSolarTermsPanel();
+        });
+        document.getElementById("st-season-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-st-season]");
+            if (!btn) return;
+            stSeasonFilter = btn.dataset.stSeason;
+            document.querySelectorAll("[data-st-season]").forEach((b) => b.classList.toggle("is-active", b === btn));
+            renderSolarTermsPanel();
+        });
+
+        // Sự kiện Mục 7: Cộng / Trừ ngày
+        ["as-years", "as-months", "as-weeks", "as-days"].forEach((id) => {
+            document.getElementById(id)?.addEventListener("input", computeDateAddSub);
+        });
+        document.getElementById("as-today-btn")?.addEventListener("click", () => {
+            const t = new Date();
+            asBasePicker?.setState({ day: t.getDate(), month: t.getMonth() + 1, year: t.getFullYear() });
+            computeDateAddSub();
+        });
+    });
+})();
+```
+
+### util-divination.js
+
+```js
+// assets/js/utilities/util-divination.js
+// Mục 4.1 (Kinh Dịch 64 Quẻ + 3 Xu SVG 3D + List 64 Quẻ Hybrid)
+// Mục 4.2 (Tarot 78 Lá Quạt 9/7 + Lật 3D + List 78 Lá Hybrid)
+// Mục 6 (12 Cung Hoàng Đạo SVG 128x128 + Custom Bento Picker)
+(() => {
+    const Hub = window.UtilHub;
+    if (!Hub) return;
+
+    const {
+        TAROT_IMG_DIR,
+        TAROT_IMG_EXT,
+        ICHING_ICON_DIR,
+        HOROSCOPE_ICON_DIR,
+        pad,
+        setText,
+        setHtml,
+        buildBentoTooltipHtml,
+        fetchJsonSafe,
+        openUtilModal,
+    } = Hub;
+
+    const getTarotFrontImgUrl = (card) => `${TAROT_IMG_DIR}/${card.suit}/${card.slug}.${TAROT_IMG_EXT}`;
+    const getTarotBackImgUrl = () => `${TAROT_IMG_DIR}/back.${TAROT_IMG_EXT}`;
+    const getIChingSvgUrl = (hex) => `${ICHING_ICON_DIR}/${hex.slug}.svg`;
+    const getIChingDetailHref = (hex) => `./iching-detail.html?slug=${encodeURIComponent(hex.slug)}`;
+    const getTarotDetailHref = (card, isUpright = true) =>
+        `./tarot-detail.html?slug=${encodeURIComponent(card.slug)}&orientation=${isUpright ? "upright" : "reversed"}`;
+
+    const SUIT_LABEL_VN = {
+        major: "Bộ Ẩn Chính • Major Arcana",
+        wands: "Bộ Gậy (Hành Hỏa) • Wands",
+        swords: "Bộ Kiếm (Hành Khí) • Swords",
+        cups: "Bộ Cốc (Hành Nước) • Cups",
+        pentacles: "Bộ Tiền (Hành Đất) • Pentacles",
+    };
+
+    const SUIT_SHORT_VN = {
+        major: "Ẩn Chính",
+        wands: "Bộ Gậy",
+        swords: "Bộ Kiếm",
+        cups: "Bộ Cốc",
+        pentacles: "Bộ Tiền",
+    };
+
+    let mouseEntropyAccumulator = 19870113;
+    let isIChingAnimating = false;
+    let isTarotAnimating = false;
+    let icFortuneFilter = "all";
+    let trSuitFilter = "all";
+
+    let ICHING_HEXAGRAMS = [
+        {
+            num: 14,
+            slug: "14-dai-huu",
+            short: "Đại Hữu",
+            name: "Hỏa Thiên Đại Hữu (Càn hạ - Ly thượng)",
+            trigrams: "Nội quái: Càn (Trời) • Ngoại quái: Ly (Lửa)",
+            lines: [1, 1, 1, 1, 0, 1],
+            fortune: "Đại Cát",
+            judgment:
+                "Đại Hữu: Nguyên hanh. Mặt trời tỏa sáng trên trời cao, vạn vật được soi chiếu, phúc lộc sung túc.",
+            image: "Lửa ở trên trời là tượng quẻ Đại Hữu; người quân tử ngăn điều ác, nêu cao điều thiện.",
+            advice: "Tài vận và uy tín cùng vượng. Rất thuận lợi cho đầu tư dài hạn, xây thương hiệu và kết giao quý nhân.",
+        },
+    ];
+
+    let TAROT_CARDS = [
+        {
+            id: 14,
+            suit: "major",
+            slug: "14-temperance",
+            roman: "XIV",
+            en: "Temperance",
+            vn: "Sự Điều Độ",
+            keywords_upright: "Cân bằng, kiên nhẫn, dung hòa hai cực đối lập và mục đích sống rõ ràng.",
+            keywords_reversed: "Mất cân bằng, nóng vội, quá đà hoặc xung đột nhịp điệu làm việc.",
+            career: "Phối hợp nhịp nhàng giữa các bộ phận và quản trị tài chính cân đối tạo hiệu quả bền vững.",
+            msg_upright: "Hãy tìm kiếm sự điều độ và kết hợp hài hòa giữa lý trí sắc bén với trực giác tinh tế.",
+            msg_reversed: "Điều chỉnh lại nhịp sinh hoạt và làm việc để tránh căng thẳng kéo dài.",
+        },
+    ];
+
+    let HOROSCOPE_SIGNS = [
+        {
+            key: "capricorn",
+            name: "Ma Kết (Capricorn)",
+            mascot: "Dê Biển Đuôi Cá",
+            dates: "22/12 – 19/01",
+            element: "Nguyên tố Đất • Sao Thổ chủ quản",
+            traits: "Có trách nhiệm, kỷ luật, thực tế và giàu tham vọng. Ma Kết luôn kiên trì đạt mục tiêu dài hạn.",
+            daily: "Hôm nay năng lượng nguyên tố Đất giúp Ma Kết xử lý công việc và tài chính cực kỳ sáng suốt. Con số may mắn: 4, 8.",
+        },
+    ];
+
+    let currentIChingHex = ICHING_HEXAGRAMS[0];
+    let currentTarotState = { card: TAROT_CARDS[0], isUpright: true };
+    let hsDay = 13;
+    let hsMonth = 1;
+
+    // ==================== 4.1. KINH DỊCH 64 QUẺ (HYBRID MODAL + DETAIL) ====================
+    const openIChingModal = (hex) => {
+        if (!hex) return;
+        openUtilModal({
+            category: `Chu Dịch • Quẻ số ${pad(hex.num)}`,
+            title: hex.name,
+            visualHtml: `
+                <img src="${getIChingSvgUrl(hex)}" alt="Đồ hình ${hex.name}" width="70" height="70" decoding="async" />
+                <strong>Quẻ ${hex.short || hex.num} • ${hex.fortune || "Chu Dịch"}</strong>
+            `,
+            isFilteredVisual: true,
+            pills: [`Quẻ #${pad(hex.num)}`, hex.fortune || "Chu Dịch", hex.trigrams || "Lục Thập Tứ Quái"],
+            box1Title: "Thoán Từ & Tượng Từ",
+            desc: `${hex.judgment} ${hex.image}`,
+            box2Title: "Diễn giải & Lời khuyên ứng dụng",
+            advice: hex.advice,
+            actionHref: getIChingDetailHref(hex),
+            actionLabel: `Xem bài phân tích chi tiết Quẻ ${hex.short}`,
+            actionTarget: "_self",
+        });
+    };
+
+    const renderIChingHexagram = (hex) => {
+        if (!hex) return;
+        currentIChingHex = hex;
+
+        const stageEl = document.getElementById("ic-hex-stage");
+        const svgImg = document.getElementById("ic-hex-svg");
+        const visual = document.getElementById("ic-lines-visual");
+
+        if (stageEl) {
+            stageEl.dataset.hexNum = String(hex.num);
+            stageEl.setAttribute("aria-label", `Mở chi tiết Quẻ số ${hex.num}: ${hex.name}`);
+        }
+
+        if (svgImg && hex.slug) {
+            svgImg.src = getIChingSvgUrl(hex);
+            svgImg.alt = `Đồ hình Quẻ số ${hex.num}: ${hex.name}`;
+        }
+
+        // Xếp 6 hào hiển thị từ dưới lên trên (Hào 1 dưới đáy xuất hiện trước -> Hào 6 trên đỉnh)
+        if (visual && Array.isArray(hex.lines)) {
+            visual.innerHTML = [...hex.lines]
+                .reverse()
+                .map((bit, revIdx) => {
+                    const bottomOrder = 5 - revIdx;
+                    const delay = (bottomOrder * 0.08).toFixed(2);
+                    return bit === 1
+                        ? `<div class="util-hex-line util-hex-line--yang" style="animation-delay:${delay}s"><span></span></div>`
+                        : `<div class="util-hex-line util-hex-line--yin" style="animation-delay:${delay}s"><span></span><span></span></div>`;
+                })
+                .join("");
+        }
+
+        setText("ic-hex-number", `Quẻ số ${pad(hex.num)} • ${hex.fortune || "Chu Dịch"}`);
+        setText("ic-hex-trigrams", hex.trigrams || "");
+        setText("ic-hex-name", hex.name);
+        setText("ic-hex-judgment", hex.judgment);
+        setText("ic-hex-image", hex.image);
+        setText("ic-hex-advice", hex.advice);
+
+        document.querySelectorAll("#ic-catalog-grid [data-hex-num]").forEach((card) => {
+            const isMatch = Number(card.dataset.hexNum) === Number(hex.num);
+            card.classList.toggle("is-current-highlight", isMatch);
+            if (isMatch) card.setAttribute("aria-current", "true");
+            else card.removeAttribute("aria-current");
+        });
+    };
+
+    const renderIChingCatalog = () => {
+        const grid = document.getElementById("ic-catalog-grid");
+        if (!grid) return;
+
+        const q = (document.getElementById("ic-search-input")?.value || "").trim().toLowerCase();
+        const filtered = ICHING_HEXAGRAMS.filter((h) => {
+            if (icFortuneFilter !== "all" && h.fortune !== icFortuneFilter) return false;
+            if (!q) return true;
+            return `${pad(h.num)} ${h.num} ${h.short} ${h.name} ${h.trigrams} ${h.advice}`.toLowerCase().includes(q);
+        });
+
+        setText("ic-catalog-count", `${filtered.length} / ${ICHING_HEXAGRAMS.length} quẻ`);
+
+        if (!filtered.length) {
+            grid.innerHTML = `<p class="util-data-table__empty">Không tìm thấy quẻ nào khớp từ khóa.</p>`;
+            return;
+        }
+
+        grid.innerHTML = filtered
+            .map((h) => {
+                const isCur = Number(currentIChingHex?.num) === Number(h.num);
+                return `
+                    <a
+                        href="${getIChingDetailHref(h)}"
+                        class="util-hex-card ${isCur ? "is-current-highlight" : ""}"
+                        data-hex-num="${h.num}"
+                        data-hybrid-modal="iching"
+                        ${isCur ? 'aria-current="true"' : ""}
+                        title="Bấm để xem nhanh giải nghĩa Quẻ ${h.short} (Ctrl + Click mở trang chi tiết)"
+                    >
+                        <div class="util-hex-card__top">
+                            <span class="util-hex-card__svg" aria-hidden="true">
+                                <img src="${getIChingSvgUrl(h)}" alt="" width="70" height="70" loading="lazy" decoding="async" />
+                            </span>
+                            <span class="util-hex-card__badge">#${pad(h.num)} • ${h.fortune}</span>
+                        </div>
+                        <div>
+                            <strong class="util-hex-card__title">${h.short}</strong>
+                            <div class="util-hex-card__sub">${h.name.split("(")[0].trim()}</div>
+                        </div>
+                        <p class="util-hex-card__desc">${h.advice}</p>
+                    </a>
+                `;
+            })
+            .join("");
+    };
+
+    // ==================== 4.2. TAROT 78 LÁ 3D & LIST 78 LÁ (HYBRID MODAL + DETAIL) ====================
+    const openTarotModal = (card, isUpright = true) => {
+        if (!card) return;
+        const displayTitle = `${card.roman ? `${card.roman}. ` : ""}${card.vn} (${card.en})`;
+        openUtilModal({
+            category: SUIT_LABEL_VN[card.suit] || "Tarot Rider-Waite",
+            title: displayTitle,
+            visualHtml: `
+                <img
+                    src="${getTarotFrontImgUrl(card)}"
+                    alt="Lá bài ${displayTitle}"
+                    width="350"
+                    height="600"
+                    class="util-modal-tarot-img ${isUpright ? "" : "is-reversed"}"
+                />
+                <strong>${isUpright ? "Chiều Xuôi (Upright)" : "Chiều Ngược (Reversed)"}</strong>
+            `,
+            isFilteredVisual: false,
+            pills: [
+                SUIT_LABEL_VN[card.suit] || "Tarot",
+                isUpright ? "Chiều Xuôi" : "Chiều Ngược",
+                `Mã lá #${pad(card.id)}`,
+            ],
+            box1Title: "Từ khóa & Thông điệp tổng quan",
+            desc: `${isUpright ? card.keywords_upright : card.keywords_reversed} ${isUpright ? card.msg_upright : card.msg_reversed}`,
+            box2Title: "Công việc, Sự nghiệp & Tài chính",
+            advice: card.career,
+            actionHref: getTarotDetailHref(card, isUpright),
+            actionLabel: `Xem bài phân tích chi tiết ${card.vn}`,
+            actionTarget: "_self",
+        });
+    };
+
+    const renderTarotCard = (card, isUpright = true) => {
+        if (!card) return;
+        currentTarotState = { card, isUpright };
+
+        const stageEl = document.getElementById("tr-card-art");
+        const frontImg = document.getElementById("tr-card-front-img");
+        const orientEl = document.getElementById("tr-card-orientation");
+
+        const orientationKey = isUpright ? "upright" : "reversed";
+        const displayTitle = `${card.roman ? `${card.roman}. ` : ""}${card.vn} (${card.en})`;
+
+        if (stageEl) {
+            stageEl.dataset.orientation = orientationKey;
+            stageEl.setAttribute(
+                "aria-label",
+                `Phóng to lá bài ${displayTitle} - ${isUpright ? "Chiều Xuôi" : "Chiều Ngược"}`,
+            );
+        }
+
+        if (frontImg) {
+            frontImg.src = getTarotFrontImgUrl(card);
+            frontImg.alt = `Lá bài Tarot ${displayTitle} - ${isUpright ? "Chiều Xuôi" : "Chiều Ngược"}`;
+        }
+
+        if (orientEl) {
+            orientEl.dataset.orientation = orientationKey;
+            orientEl.textContent = isUpright
+                ? "Lá bài Xuôi (Upright)"
+                : "Lá bài Ngược (Reversed • Chiêm nghiệm nội tâm)";
+        }
+
+        setText("tr-card-suit-pill", SUIT_LABEL_VN[card.suit] || "Tarot Rider-Waite");
+        setText("tr-card-vn", displayTitle);
+        setText("tr-card-keywords", isUpright ? card.keywords_upright : card.keywords_reversed);
+        setText("tr-card-career", card.career);
+        setText("tr-card-message", isUpright ? card.msg_upright : card.msg_reversed);
+
+        document.querySelectorAll("#tr-catalog-grid [data-tarot-id]").forEach((el) => {
+            const isMatch = Number(el.dataset.tarotId) === Number(card.id);
+            el.classList.toggle("is-current-highlight", isMatch);
+            if (isMatch) el.setAttribute("aria-current", "true");
+            else el.removeAttribute("aria-current");
+        });
+    };
+
+    const renderTarotCatalog = () => {
+        const grid = document.getElementById("tr-catalog-grid");
+        if (!grid) return;
+
+        const q = (document.getElementById("tr-search-input")?.value || "").trim().toLowerCase();
+        const filtered = TAROT_CARDS.filter((c) => {
+            if (trSuitFilter !== "all" && c.suit !== trSuitFilter) return false;
+            if (!q) return true;
+            return `${pad(c.id)} ${c.id} ${c.roman} ${c.vn} ${c.en} ${c.keywords_upright} ${SUIT_SHORT_VN[c.suit] || ""}`
+                .toLowerCase()
+                .includes(q);
+        });
+
+        setText("tr-catalog-count", `${filtered.length} / ${TAROT_CARDS.length} lá`);
+
+        if (!filtered.length) {
+            grid.innerHTML = `<p class="util-data-table__empty">Không tìm thấy lá bài Tarot nào khớp từ khóa.</p>`;
+            return;
+        }
+
+        grid.innerHTML = filtered
+            .map((c) => {
+                const isCur = Number(currentTarotState.card?.id) === Number(c.id);
+                const suitLabel = SUIT_SHORT_VN[c.suit] || "Tarot";
+                return `
+                    <a
+                        href="${getTarotDetailHref(c, true)}"
+                        class="util-tarot-card ${isCur ? "is-current-highlight" : ""}"
+                        data-tarot-id="${c.id}"
+                        data-suit="${c.suit}"
+                        data-hybrid-modal="tarot"
+                        ${isCur ? 'aria-current="true"' : ""}
+                        title="Bấm để xem nhanh lá bài ${c.vn} (${c.en}) — Ctrl + Click mở trang chi tiết"
+                    >
+                        <div class="util-tarot-card__thumb">
+                            <img
+                                src="${getTarotFrontImgUrl(c)}"
+                                alt="Lá bài Tarot ${c.vn} (${c.en})"
+                                width="350"
+                                height="600"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <span class="util-tarot-card__badge">#${pad(c.id)} • ${suitLabel}</span>
+                        </div>
+                        <div class="util-tarot-card__body">
+                            <strong class="util-tarot-card__title">${c.roman ? `${c.roman}. ` : ""}${c.vn}</strong>
+                            <span class="util-tarot-card__sub">${c.en}</span>
+                            <p class="util-tarot-card__desc">${c.keywords_upright}</p>
+                        </div>
+                    </a>
+                `;
+            })
+            .join("");
+    };
+
+    // ==================== 6. HOROSCOPE 12 CUNG HOÀNG ĐẠO ====================
+    const buildHoroscopeImgHtml = (signKey, extraClass = "") => `
+        <img
+            src="${HOROSCOPE_ICON_DIR}/${signKey}.svg"
+            alt=""
+            width="128"
+            height="128"
+            loading="lazy"
+            decoding="async"
+            ${extraClass ? `class="${extraClass}"` : ""}
+        />
+    `;
+
+    const getSignByMonthDay = (m, d) => {
+        const code = m * 100 + d;
+        const findByKey = (k) => HOROSCOPE_SIGNS.find((s) => s.key === k) || HOROSCOPE_SIGNS[0];
+        if (code >= 1222 || code <= 119) return findByKey("capricorn");
+        if (code <= 218) return findByKey("aquarius");
+        if (code <= 320) return findByKey("pisces");
+        if (code <= 419) return findByKey("aries");
+        if (code <= 520) return findByKey("taurus");
+        if (code <= 621) return findByKey("gemini");
+        if (code <= 722) return findByKey("cancer");
+        if (code <= 822) return findByKey("leo");
+        if (code <= 922) return findByKey("virgo");
+        if (code <= 1023) return findByKey("libra");
+        if (code <= 1121) return findByKey("scorpio");
+        return findByKey("sagittarius");
+    };
+
+    const renderHsPickers = () => {
+        setText("hs-day-text", `Ngày ${pad(hsDay)}`);
+        setText("hs-month-text", `Tháng ${pad(hsMonth)}`);
+
+        const dList = document.getElementById("hs-day-list");
+        if (dList) {
+            let html = "";
+            for (let d = 1; d <= 31; d++) {
+                const isSel = d === hsDay;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-hs-day="${d}">${pad(d)}</button></li>`;
+            }
+            dList.innerHTML = html;
+        }
+
+        const mList = document.getElementById("hs-month-list");
+        if (mList) {
+            let html = "";
+            for (let m = 1; m <= 12; m++) {
+                const isSel = m === hsMonth;
+                html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-hs-month="${m}">Tháng ${pad(m)}</button></li>`;
+            }
+            mList.innerHTML = html;
+        }
+    };
+
+    const renderHoroscopeSign = (sign) => {
+        const targetSign = sign || HOROSCOPE_SIGNS[0];
+        if (!targetSign) return;
+
+        setHtml("hs-sign-symbol", buildHoroscopeImgHtml(targetSign.key));
+        setHtml("hs-hero-watermark", buildHoroscopeImgHtml(targetSign.key, "util-horoscope-hero__watermark"));
+        setText("hs-sign-dates", targetSign.dates);
+        setText("hs-sign-element", `${targetSign.element} • Linh vật: ${targetSign.mascot}`);
+        setText("hs-sign-name", targetSign.name);
+        setText("hs-sign-traits", targetSign.traits);
+        setHtml("hs-sign-daily", `<strong>Luận giải năng lượng hôm nay:</strong> ${targetSign.daily}`);
+
+        const grid = document.getElementById("hs-signs-grid");
+        if (grid) {
+            grid.innerHTML = HOROSCOPE_SIGNS.map((s) => {
+                const isSel = s.key === targetSign.key;
+                const shortName = s.name.split("(")[0].trim();
+                const shortElem = s.element.split("•")[0].trim();
+
+                return `
+                    <article
+                        class="util-bento-item ${isSel ? "is-current-highlight" : ""} has-bento-tooltip"
+                        data-sign-key="${s.key}"
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="${isSel}"
+                        aria-label="${s.name}, ${s.dates}, ${shortElem}"
+                    >
+                        <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                            ${buildHoroscopeImgHtml(s.key, "util-bento-item__watermark")}
+                        </span>
+                        <div class="util-bento-item__top">
+                            <span class="util-bento-item__icon-box util-bento-item__icon-box--filtered" aria-hidden="true">
+                                ${buildHoroscopeImgHtml(s.key)}
+                            </span>
+                            <span class="util-bento-item__badge">${s.dates}</span>
+                        </div>
+                        <div class="util-bento-item__body">
+                            <strong class="util-bento-item__title">${shortName}</strong>
+                            <span class="util-bento-item__sub">${s.mascot}</span>
+                        </div>
+                        <p class="util-bento-item__desc">${s.traits}</p>
+                        <footer class="util-bento-item__foot">
+                            <span>${shortElem}</span>
+                            <span aria-hidden="true">&#8594;</span>
+                        </footer>
+                        ${buildBentoTooltipHtml(s.name, `${s.element}. ${s.daily}`, `✦ Bấm để mở luận giải ${s.name}`)}
+                    </article>
+                `;
+            }).join("");
+        }
+    };
+
+    // ==================== ỦY QUYỀN CLICK HYBRID MODAL ====================
+    Hub.registerModalHandler((e) => {
+        const isModifiedClick = e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button === 1;
+
+        // 1. Click thẻ trong List 64 Quẻ Kinh Dịch (Hybrid <a>)
+        const hexCard = e.target.closest("#ic-catalog-grid [data-hex-num]");
+        if (hexCard) {
+            if (isModifiedClick) return true;
+            e.preventDefault();
+            const hex = ICHING_HEXAGRAMS.find((h) => Number(h.num) === Number(hexCard.dataset.hexNum));
+            if (hex) {
+                renderIChingHexagram(hex);
+                openIChingModal(hex);
+            }
+            return true;
+        }
+
+        if (e.target.closest("[data-ic-modal='current']")) {
+            openIChingModal(currentIChingHex);
+            return true;
+        }
+
+        // 2. Click thẻ trong List 78 Lá Tarot (Hybrid <a>)
+        const tarotListCard = e.target.closest("#tr-catalog-grid [data-tarot-id]");
+        if (tarotListCard) {
+            if (isModifiedClick) return true;
+            e.preventDefault();
+            const card = TAROT_CARDS.find((c) => Number(c.id) === Number(tarotListCard.dataset.tarotId));
+            if (card) {
+                renderTarotCard(card, true);
+                openTarotModal(card, true);
+            }
+            return true;
+        }
+
+        // 3. Click vào Lá bài Tarot lớn đang lật
+        if (e.target.closest("[data-tarot-modal]") && currentTarotState.card) {
+            openTarotModal(currentTarotState.card, currentTarotState.isUpright);
+            return true;
+        }
+
+        // 4. Click vào Cung Hoàng Đạo
+        const signCard = e.target.closest("[data-sign-key]");
+        if (signCard) {
+            const found = HOROSCOPE_SIGNS.find((s) => s.key === signCard.dataset.signKey);
+            if (!found) return true;
+            renderHoroscopeSign(found);
+            openUtilModal({
+                category: "Chiêm Tinh Học Horoscope",
+                title: `${found.name} • ${found.mascot}`,
+                visualHtml: `${buildHoroscopeImgHtml(found.key)}<strong>${found.dates}</strong>`,
+                isFilteredVisual: true,
+                pills: [found.dates, found.element, found.mascot],
+                box1Title: "Đặc trưng tính cách & Bản mệnh",
+                desc: found.traits,
+                box2Title: "Thông điệp năng lượng trong ngày",
+                advice: found.daily,
+                actionHref: "./bazi.html",
+                actionLabel: "Đối chiếu thêm Lá Số Bát Tự Phương Đông",
+            });
+            return true;
+        }
+
+        return false;
+    });
+
+    // ==================== KHỞI TẠO MODULE & GẮN SỰ KIỆN ====================
+    Hub.registerModule(() => {
+        renderIChingHexagram(ICHING_HEXAGRAMS[0]);
+        renderIChingCatalog();
+        renderTarotCard(TAROT_CARDS[0], true);
+        renderTarotCatalog();
+        renderHsPickers();
+        renderHoroscopeSign(HOROSCOPE_SIGNS[0]);
+
+        // Nạp song song 3 kho dữ liệu JSON tĩnh
+        Promise.all([
+            fetchJsonSafe("./api/iching.json", ICHING_HEXAGRAMS),
+            fetchJsonSafe("./api/tarot.json", TAROT_CARDS),
+            fetchJsonSafe("./api/horoscope.json", HOROSCOPE_SIGNS),
+        ]).then(([ichingData, tarotData, horoscopeData]) => {
+            ICHING_HEXAGRAMS = ichingData;
+            TAROT_CARDS = tarotData;
+            HOROSCOPE_SIGNS = horoscopeData;
+
+            const defaultHex = ICHING_HEXAGRAMS.find((h) => h.num === 14) || ICHING_HEXAGRAMS[0];
+            const defaultTarot = TAROT_CARDS.find((c) => c.id === 14) || TAROT_CARDS[0];
+            renderIChingHexagram(defaultHex);
+            renderIChingCatalog();
+            renderTarotCard(defaultTarot, true);
+            renderTarotCatalog();
+            renderHoroscopeSign(getSignByMonthDay(hsMonth, hsDay));
+        });
+
+        // Thu thập Mouse Entropy cho Gieo Quẻ & Rút Tarot
+        document.getElementById("panel-divination")?.addEventListener("mousemove", (e) => {
+            mouseEntropyAccumulator =
+                (mouseEntropyAccumulator ^
+                    ((e.clientX * 31 + e.clientY * 17 + Math.floor(performance.now())) & 0xffffff)) >>>
+                0;
+        });
+
+        // Cuộn mượt xuống bảng tra cứu không làm đổi URL hash tab hiện tại
+        document.getElementById("ic-jump-catalog-btn")?.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("ic-catalog-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        document.getElementById("tr-jump-catalog-btn")?.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("tr-catalog-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        // Gieo Quẻ Kinh Dịch 1-Click (3 Xu SVG 2 mặt 3D + Xếp 6 hào từ dưới lên)
+        document.getElementById("ic-cast-btn")?.addEventListener("click", (e) => {
+            if (isIChingAnimating || !ICHING_HEXAGRAMS.length) return;
+            isIChingAnimating = true;
+
+            const coins = document.querySelectorAll("#ic-coins-stage .util-coin");
+            const resultBox = document.getElementById("ic-result-box");
+            resultBox?.classList.remove("is-sliding");
+
+            coins.forEach((c) => {
+                c.classList.remove("is-tossing");
+                void c.offsetWidth;
+                c.classList.add("is-tossing");
+                c.dataset.face = Math.random() > 0.5 ? "yang" : "yin";
+            });
+
+            const clickEntropy = (e.clientX * 73 + e.clientY * 37 + Math.floor(performance.now() * 100)) >>> 0;
+            let chosenIdx =
+                (mouseEntropyAccumulator ^ clickEntropy ^ Math.floor(Math.random() * 100000)) % ICHING_HEXAGRAMS.length;
+            if (ICHING_HEXAGRAMS.length > 1 && ICHING_HEXAGRAMS[chosenIdx].num === currentIChingHex?.num) {
+                chosenIdx = (chosenIdx + 1) % ICHING_HEXAGRAMS.length;
+            }
+
+            setTimeout(() => {
+                coins.forEach((c) => c.classList.remove("is-tossing"));
+                renderIChingHexagram(ICHING_HEXAGRAMS[chosenIdx]);
+                resultBox?.classList.add("is-sliding");
+                isIChingAnimating = false;
+            }, 820);
+        });
+
+        // Tìm kiếm & lọc List 64 Quẻ Kinh Dịch
+        document.getElementById("ic-search-input")?.addEventListener("input", renderIChingCatalog);
+        document.getElementById("ic-fortune-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-ic-fortune]");
+            if (!btn) return;
+            icFortuneFilter = btn.dataset.icFortune || "all";
+            document.querySelectorAll("[data-ic-fortune]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-active", isSel);
+                b.setAttribute("aria-pressed", String(isSel));
+            });
+            renderIChingCatalog();
+        });
+
+        // Rút Bài Tarot 78 Lá (Quạt 9/7 lá + Lật 3D)
+        const triggerTarotDraw = (fanIdx = -1, withShuffle = false) => {
+            if (isTarotAnimating || !TAROT_CARDS.length) return;
+            isTarotAnimating = true;
+
+            const fanEl = document.getElementById("tr-deck-fan");
+            const stageEl = document.getElementById("tr-card-art");
+            const resultBox = document.getElementById("tr-result-box");
+
+            const backImgUrl = getTarotBackImgUrl();
+            document.querySelectorAll("#tr-deck-fan img, #tr-card-back-img").forEach((img) => {
+                if (!img.getAttribute("src")?.endsWith(backImgUrl.replace("./", ""))) img.src = backImgUrl;
+            });
+
+            if (stageEl) stageEl.dataset.flipped = "false";
+            if (fanEl && withShuffle) fanEl.dataset.deckState = "shuffling";
+            resultBox?.classList.remove("is-sliding");
+
+            const isCompactFan = window.innerWidth < 768;
+            const randomVisibleIdx = isCompactFan ? 1 + Math.floor(Math.random() * 7) : Math.floor(Math.random() * 9);
+            const chosenFanIdx = fanIdx >= 0 ? fanIdx : randomVisibleIdx;
+
+            document.querySelectorAll("#tr-deck-fan .util-tarot-back").forEach((b) => {
+                const isMatch = Number(b.dataset.fanIdx) === chosenFanIdx;
+                b.classList.toggle("is-picked", isMatch);
+                b.setAttribute("aria-pressed", String(isMatch));
+            });
+
+            const entropySeed =
+                (mouseEntropyAccumulator ^ Math.floor(performance.now() * 100) ^ (chosenFanIdx * 97)) >>> 0;
+            let nextIdx = (entropySeed + Math.floor(Math.random() * TAROT_CARDS.length)) % TAROT_CARDS.length;
+            if (TAROT_CARDS.length > 1 && TAROT_CARDS[nextIdx].id === currentTarotState.card?.id) {
+                nextIdx = (nextIdx + 1) % TAROT_CARDS.length;
+            }
+            const nextCard = TAROT_CARDS[nextIdx];
+            const isUpright = Math.random() > 0.25;
+
+            const preload = new Image();
+            preload.src = getTarotFrontImgUrl(nextCard);
+
+            const flipDelay = withShuffle ? 580 : 320;
+            setTimeout(() => {
+                if (fanEl) fanEl.dataset.deckState = "idle";
+                renderTarotCard(nextCard, isUpright);
+
+                requestAnimationFrame(() => {
+                    if (stageEl) stageEl.dataset.flipped = "true";
+                    resultBox?.classList.add("is-sliding");
+                    setTimeout(() => {
+                        isTarotAnimating = false;
+                    }, 520);
+                });
+            }, flipDelay);
+        };
+
+        document.getElementById("tr-draw-btn")?.addEventListener("click", () => triggerTarotDraw(-1, true));
+        document.getElementById("tr-deck-fan")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-fan-idx]");
+            if (!btn) return;
+            triggerTarotDraw(Number(btn.dataset.fanIdx), false);
+        });
+
+        // Tìm kiếm & lọc List 78 Lá Tarot
+        document.getElementById("tr-search-input")?.addEventListener("input", renderTarotCatalog);
+        document.getElementById("tr-suit-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-tr-suit]");
+            if (!btn) return;
+            trSuitFilter = btn.dataset.trSuit || "all";
+            document.querySelectorAll("[data-tr-suit]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-active", isSel);
+                b.setAttribute("aria-pressed", String(isSel));
+            });
+            renderTarotCatalog();
+        });
+
+        // Horoscope Pickers
+        document.getElementById("hs-day-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hs-day]");
+            if (!btn) return;
+            e.stopPropagation();
+            hsDay = Number(btn.dataset.hsDay);
+            document.getElementById("hs-day-dropdown")?.removeAttribute("open");
+            renderHsPickers();
+            renderHoroscopeSign(getSignByMonthDay(hsMonth, hsDay));
+        });
+
+        document.getElementById("hs-month-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hs-month]");
+            if (!btn) return;
+            e.stopPropagation();
+            hsMonth = Number(btn.dataset.hsMonth);
+            document.getElementById("hs-month-dropdown")?.removeAttribute("open");
+            renderHsPickers();
+            renderHoroscopeSign(getSignByMonthDay(hsMonth, hsDay));
+        });
+    });
+})();
+```
+
+### util-explore.js
+
+```js
+// assets/js/utilities/util-explore.js
+// Mục 5 (Ngày Này Năm Xưa + Slideshow Modal), Mục 8 (Thần số học Pythagoras 3x3),
+// Mục 9 (Nhịp sinh học SVG 30 ngày + Ngày Giao Điểm), Mục 10 (Từ điển Cổ học 25 mục)
+(() => {
+    const Hub = window.UtilHub;
+    if (!Hub) return;
+
+    const {
+        DEFAULT_COVER_IMG,
+        pad,
+        setText,
+        setAttr,
+        toSlug,
+        buildBentoTooltipHtml,
+        openUtilModal,
+        createBentoDatePicker,
+    } = Hub;
+
+    // ==================== MỤC 5: NGÀY NÀY NĂM XƯA ====================
+    let hiMonth = 11;
+    let hiScope = "all";
+    let hiPage = 1;
+    const HI_PAGE_SIZE = 6;
+    const hiCache = new Map();
+    let currentHiFilteredList = [];
+
+    const renderHistoryMonthPicker = () => {
+        setText("hi-month-text", `Tháng ${pad(hiMonth)}`);
+        const list = document.getElementById("hi-month-list");
+        if (!list) return;
+        let html = "";
+        for (let m = 1; m <= 12; m++) {
+            const isSel = m === hiMonth;
+            html += `<li><button type="button" role="option" aria-selected="${isSel}" class="bazi-picker__option ${isSel ? "is-selected" : ""}" data-hi-month="${m}">Tháng ${pad(m)}</button></li>`;
+        }
+        list.innerHTML = html;
+    };
+
+    const fetchAndRenderHistory = async () => {
+        const grid = document.getElementById("hi-events-grid");
+        const pagEl = document.getElementById("hi-pagination");
+        if (!grid) return;
+
+        if (!hiCache.has(hiMonth)) {
+            let loaded = [];
+            for (const path of [`./api/thang-${hiMonth}.json`, `./api/thang-${pad(hiMonth)}.json`]) {
+                try {
+                    const res = await fetch(path);
+                    if (res.ok) {
+                        const data = await res.json();
+                        loaded = Array.isArray(data) ? data : data?.data || data?.events || [];
+                        break;
+                    }
+                } catch (e) {
+                    // Fallback sang path kế tiếp
+                }
+            }
+            hiCache.set(hiMonth, loaded);
+        }
+
+        const rawItems = hiCache.get(hiMonth) || [];
+        currentHiFilteredList = rawItems.filter((item) => {
+            const scopeStr = String(item.pham_vi || item.scope || item.category_id || "").toLowerCase();
+            const isIntl = Boolean(item.is_international) || scopeStr.includes("quoc-te") || scopeStr.includes("intl");
+            if (hiScope === "vn") return !isIntl;
+            if (hiScope === "intl") return isIntl;
+            return true;
+        });
+
+        const totalPages = Math.max(1, Math.ceil(currentHiFilteredList.length / HI_PAGE_SIZE));
+        if (hiPage > totalPages) hiPage = 1;
+
+        const pageItems = currentHiFilteredList.slice((hiPage - 1) * HI_PAGE_SIZE, hiPage * HI_PAGE_SIZE);
+
+        grid.innerHTML = pageItems
+            .map((item, idx) => {
+                const globalIdx = (hiPage - 1) * HI_PAGE_SIZE + idx;
+                const rawSlug = String(item.image_slug || item.slug || "").trim();
+                const cleanSlug = rawSlug
+                    .split("/")
+                    .pop()
+                    .replace(/\.(jpg|jpeg|png|webp)$/i, "");
+                const coverUrl = cleanSlug
+                    ? `./assets/images/calendar-covers/thang-${hiMonth}/${cleanSlug}.jpg`
+                    : DEFAULT_COVER_IMG;
+                const scopeStr = String(item.pham_vi || item.scope || "").toLowerCase();
+                const isIntl = Boolean(item.is_international) || scopeStr.includes("quoc-te");
+                const name = item.ten || "Nhân vật & Sự kiện lịch sử";
+                const occasion = item.hien_thi_nhan_dip || `Kỷ niệm lịch sử tháng ${hiMonth}`;
+                const quote = item.danh_ngon || item.quote || occasion;
+
+                return `
+                    <article
+                        class="util-history-card has-bento-tooltip"
+                        data-hi-idx="${globalIdx}"
+                        role="button"
+                        tabindex="0"
+                        aria-label="${name}, ${item.ngay_hien_thi || `Tháng ${pad(hiMonth)}`}"
+                    >
+                        <div class="util-history-card__media" aria-hidden="true">
+                            <img src="${coverUrl}" alt="" onerror="this.src='${DEFAULT_COVER_IMG}'" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="util-history-card__top">
+                            <span class="util-history-card__date-pill">${item.ngay_hien_thi || `Tháng ${pad(hiMonth)}`}</span>
+                            <span class="util-history-card__scope-pill">${isIntl ? "Sự kiện Quốc tế" : "Lịch sử Việt Nam"}</span>
+                        </div>
+                        <div class="util-history-card__body">
+                            <strong class="util-history-card__title">${name}</strong>
+                            <p class="util-history-card__sub">${occasion}</p>
+                        </div>
+                        ${buildBentoTooltipHtml(
+                            `${name} (${item.ngay_hien_thi || `T${hiMonth}`})`,
+                            `${occasion}. "${quote}"`,
+                            "✦ Bấm để mở Hồ sơ & Trình chiếu ảnh tư liệu",
+                        )}
+                    </article>
+                `;
+            })
+            .join("");
+
+        if (pagEl) {
+            if (totalPages <= 1) {
+                pagEl.innerHTML = "";
+            } else {
+                let pagHtml = "";
+                for (let p = 1; p <= totalPages; p++) {
+                    pagHtml += `<button type="button" class="util-pagination__btn ${p === hiPage ? "is-active" : ""}" data-hi-page="${p}" ${p === hiPage ? 'aria-current="page"' : ""}>${p}</button>`;
+                }
+                pagEl.innerHTML = pagHtml;
+            }
+        }
+    };
+
+    // ==================== MỤC 8: THẦN SỐ HỌC PYTHAGORAS ====================
+    let numBirthPicker = null;
+
+    const NUMEROLOGY_MEANINGS = {
+        1: {
+            title: "Nhà Tiên Phong Độc Lập",
+            desc: "Đại diện cho khả năng lãnh đạo bẩm sinh, tự chủ, quyết đoán và bản lĩnh mở đường.",
+            advice: "Phát huy tinh thần chủ động dẫn dắt, đồng thời học cách lắng nghe ý kiến từ đội ngũ cộng sự.",
+        },
+        2: {
+            title: "Người Hòa Giải Tinh Tế",
+            desc: "Đại diện cho sự lắng nghe, ngoại giao khéo léo, trực giác nhạy bén và tinh thần hợp tác.",
+            advice: "Rất hợp vai trò kết nối, cố vấn chiến lược và xây dựng sự đồng thuận trong tập thể.",
+        },
+        3: {
+            title: "Người Truyền Cảm Hứng & Sáng Tạo",
+            desc: "Đại diện cho tư duy nhạy bén, ngôn từ sắc sảo, óc thẩm mỹ nghệ thuật và năng lượng tích cực.",
+            advice: "Tập trung năng lượng vào việc sáng tạo sản phẩm, thuyết trình và hoàn tất mục tiêu đến cùng.",
+        },
+        4: {
+            title: "Kiến Trúc Sư Thực Tế & Kỷ Luật",
+            desc: "Đại diện cho tính hệ thống, quy trình chuẩn mực, nền tảng kỹ thuật vững chắc và sự bền bỉ.",
+            advice: "Rất xuất sắc trong việc xây dựng cấu trúc dữ liệu, quản trị dự án và tích lũy tài sản an toàn.",
+        },
+        5: {
+            title: "Người Tự Do & Đổi Mới Đột Phá",
+            desc: "Đại diện cho sự linh hoạt, thích nghi nhanh, kết nối đa chiều và dám vượt qua giới hạn cũ.",
+            advice: "Giữ kỷ luật cá nhân song hành cùng khát vọng đổi mới để biến trải nghiệm thành thành tựu.",
+        },
+        6: {
+            title: "Người Nuôi Dưỡng & Trách Nhiệm",
+            desc: "Đại diện cho tình yêu thương gia đình, sự tận tâm, gu thẩm mỹ tinh tế và tinh thần phụng sự.",
+            advice: "Cân bằng giữa việc chăm lo cho người khác và dành thời gian tái tạo năng lượng cho bản thân.",
+        },
+        7: {
+            title: "Nhà Triết Học & Nghiên Cứu Chuyên Sâu",
+            desc: "Đại diện cho chiều sâu học thuật, tư duy phân tích gốc rễ, trực giác tâm linh và tự chiêm nghiệm.",
+            advice: "Phù hợp tuyệt vời với nghiên cứu chuyên môn sâu, lập trình hệ thống, cổ học và chiến lược.",
+        },
+        8: {
+            title: "Nhà Điều Hành & Thịnh Vượng Tài Chính",
+            desc: "Đại diện cho năng lực quản trị vĩ mô, nhạy bén thương mại, quyền lực và hiệu quả thực tiễn.",
+            advice: "Kết hợp mục tiêu tài chính với giá trị bền vững cho cộng đồng sẽ mang lại thành công lớn.",
+        },
+        9: {
+            title: "Nhà Nhân Đạo & Lý Tưởng Lớn",
+            desc: "Đại diện cho tầm nhìn bao dung, trách nhiệm xã hội, trí tuệ tổng hợp và sự viên mãn.",
+            advice: "Lan tỏa tri thức, dẫn dắt thế hệ kế cận và theo đuổi những dự án mang lại giá trị lâu dài.",
+        },
+        11: {
+            title: "Số Master 11/2 • Trực Giác Tâm Linh Cao",
+            desc: "Bậc thầy truyền cảm hứng tinh thần, nhạy cảm với trường năng lượng và có tầm nhìn thấu thị.",
+            advice: "Giữ tâm tĩnh tại để chuyển hóa trực giác nhạy bén thành những tác phẩm hoặc giải pháp giá trị.",
+        },
+        22: {
+            title: "Số Master 22/4 • Kiến Tạo Đại Sự",
+            desc: "Kết hợp tầm nhìn vĩ mô của số 11 với năng lực thực thi kỷ luật của số 4 để tạo di sản bền vững.",
+            advice: "Hãy mạnh dạn đặt ra những mục tiêu lớn lao và kiên trì thực hiện từng bước vững chắc.",
+        },
+    };
+
+    const reduceNum = (n, keepMaster = true) => {
+        let cur = Number(n);
+        while (cur > 9) {
+            if (keepMaster && (cur === 11 || cur === 22)) return cur;
+            cur = String(cur)
+                .split("")
+                .reduce((a, b) => a + Number(b), 0);
+        }
+        return cur || 1;
+    };
+
+    const renderNumerologyPersonal = () => {
+        if (!numBirthPicker) return;
+        const { day: d, month: m, year: y } = numBirthPicker.getState();
+        const allDigits = `${pad(d)}${pad(m)}${y}`.split("").map(Number);
+        const rawSum = allDigits.reduce((a, b) => a + b, 0);
+        const lifePath = reduceNum(rawSum, true);
+        const info = NUMEROLOGY_MEANINGS[lifePath] || NUMEROLOGY_MEANINGS[3];
+
+        setText("num-lifepath-number", String(lifePath));
+        setText(
+            "num-lifepath-formula",
+            `Ngày sinh: ${pad(d)}/${pad(m)}/${y} (Tổng các chữ số: ${rawSum} → Số Chủ Đạo ${lifePath})`,
+        );
+        setText("num-lifepath-title", `Con Số Chủ Đạo ${lifePath} • ${info.title}`);
+        setText("num-lifepath-desc", `${info.desc} ${info.advice}`);
+
+        const now = new Date();
+        const pYear = reduceNum(d + m + now.getFullYear(), false);
+        const pMonth = reduceNum(pYear + (now.getMonth() + 1), false);
+        const pDay = reduceNum(pMonth + now.getDate(), false);
+
+        const cyclesGrid = document.getElementById("num-cycles-grid");
+        if (cyclesGrid) {
+            const cList = [
+                { label: `Năm Cá Nhân (${now.getFullYear()})`, num: pYear },
+                { label: `Tháng Cá Nhân (T${now.getMonth() + 1})`, num: pMonth },
+                { label: "Ngày Cá Nhân Hôm Nay", num: pDay },
+            ];
+            cyclesGrid.innerHTML = cList
+                .map((c) => {
+                    const mObj = NUMEROLOGY_MEANINGS[c.num] || NUMEROLOGY_MEANINGS[1];
+                    return `
+                        <article
+                            class="util-num-cycle-box has-bento-tooltip"
+                            data-num-modal="${c.num}"
+                            data-num-role="${c.label}"
+                            role="button"
+                            tabindex="0"
+                            aria-label="${c.label}: Số ${c.num}, ${mObj.title}"
+                        >
+                            <span>${c.label}</span>
+                            <strong>Số ${c.num}</strong>
+                            <small>${mObj.title}</small>
+                            ${buildBentoTooltipHtml(`${c.label}: Số ${c.num}`, mObj.desc, "✦ Bấm để mở giải nghĩa chi tiết")}
+                        </article>
+                    `;
+                })
+                .join("");
+        }
+
+        const counts = {};
+        allDigits.forEach((digit) => {
+            if (digit > 0) counts[digit] = (counts[digit] || "") + String(digit);
+        });
+        const layoutOrder = [
+            [3, "Trí nhớ"],
+            [6, "Sáng tạo"],
+            [9, "Lý tưởng"],
+            [2, "Trực giác"],
+            [5, "Cân bằng"],
+            [8, "Trí tuệ"],
+            [1, "Thể chất"],
+            [4, "Thực tế"],
+            [7, "Trải nghiệm"],
+        ];
+
+        const chartGrid = document.getElementById("num-pythagoras-grid");
+        if (chartGrid) {
+            chartGrid.innerHTML = layoutOrder
+                .map(([num, label]) => {
+                    const str = counts[num] || "—";
+                    const mObj = NUMEROLOGY_MEANINGS[num];
+                    return `
+                        <div
+                            class="util-pythagoras-cell ${counts[num] ? "has-val" : ""} has-bento-tooltip"
+                            data-num-modal="${num}"
+                            data-num-role="Ô số ${num} (${label})"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Ô số ${num} (${label}): ${counts[num] ? str : "Đang khuyết"}"
+                        >
+                            <small>Ô số ${num} (${label})</small>
+                            <strong>${str}</strong>
+                            ${buildBentoTooltipHtml(`Ô số ${num} (${label}): ${counts[num] ? `Xuất hiện ${counts[num].length} lần` : "Đang khuyết"}`, mObj.desc, `✦ Bấm để xem ý nghĩa Ô số ${num}`)}
+                        </div>
+                    `;
+                })
+                .join("");
+        }
+    };
+
+    const renderNumerologyMonthCalendar = (selectedDay = 15) => {
+        const year = 2026;
+        const month = 11;
+        const leading = (new Date(year, month - 1, 1).getDay() + 6) % 7;
+        const maxDays = 30;
+        const grid = document.getElementById("num-month-grid");
+        if (!grid) return;
+
+        const updateSelectedNumDay = (d) => {
+            const raw = `${pad(d)}${pad(month)}${year}`.split("").reduce((a, b) => a + Number(b), 0);
+            const num = reduceNum(raw, true);
+            const info = NUMEROLOGY_MEANINGS[num] || NUMEROLOGY_MEANINGS[8];
+            setText("num-cal-selected-badge", `Ngày ${pad(d)}/11/2026 • Số ${num}`);
+            setText("num-day-tag", `Con số năng lượng của ngày ${pad(d)}/11/2026 là: Số ${num}`);
+            setText("num-day-title", `Tần Số ${num}: ${info.title}`);
+            setText("num-day-meaning", `${info.desc} ${info.advice}`);
+            setAttr("num-day-link", "href", `./day.html?date=${year}-${pad(month)}-${pad(d)}`);
+        };
+
+        let html = "";
+        for (let i = 0; i < 35; i++) {
+            const d = i - leading + 1;
+            if (d < 1 || d > maxDays) {
+                html += `<div class="util-num-day-cell is-muted" aria-hidden="true"><small>—</small><strong>•</strong></div>`;
+            } else {
+                const raw = `${pad(d)}${pad(month)}${year}`.split("").reduce((a, b) => a + Number(b), 0);
+                const num = reduceNum(raw, true);
+                const isSel = d === selectedDay;
+                html += `
+                    <button
+                        type="button"
+                        class="util-num-day-cell ${isSel ? "is-active" : ""}"
+                        data-num-cal-day="${d}"
+                        aria-pressed="${isSel}"
+                        aria-label="Ngày ${d} tháng 11, con số năng lượng ${num}"
+                    >
+                        <small>${d}/11</small>
+                        <strong>${num}</strong>
+                    </button>
+                `;
+            }
+        }
+        grid.innerHTML = html;
+        updateSelectedNumDay(selectedDay);
+
+        grid.querySelectorAll("[data-num-cal-day]").forEach((btn) => {
+            btn.onclick = () => renderNumerologyMonthCalendar(Number(btn.dataset.numCalDay));
+        });
+    };
+
+    // ==================== MỤC 9: NHỊP SINH HỌC BIORHYTHM ====================
+    let bioBirthPicker = null;
+
+    const renderBiorhythm = () => {
+        if (!bioBirthPicker) return;
+        const { day: bd, month: bm, year: by } = bioBirthPicker.getState();
+        const birthDate = new Date(by, bm - 1, bd);
+        const now = new Date();
+        const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const daysAlive = Math.floor((todayStart - birthDate) / 86400000);
+
+        const cycles = [
+            {
+                key: "phys",
+                name: "Thể chất (23 ngày)",
+                period: 23,
+                color: "#2563eb",
+                desc: "Chu kỳ 23 ngày chi phối sức bền cơ bắp, thể lực, hệ miễn dịch và khả năng vận động.",
+            },
+            {
+                key: "emo",
+                name: "Tình cảm (28 ngày)",
+                period: 28,
+                color: "#10b981",
+                desc: "Chu kỳ 28 ngày chi phối cảm xúc, tâm trạng, sự đồng cảm, trực giác giao tiếp và nghệ thuật.",
+            },
+            {
+                key: "intel",
+                name: "Trí tuệ (33 ngày)",
+                period: 33,
+                color: "#f97316",
+                desc: "Chu kỳ 33 ngày chi phối tư duy logic, khả năng tập trung, phân tích giải quyết vấn đề và trí nhớ.",
+            },
+            {
+                key: "intuit",
+                name: "Trực giác (38 ngày)",
+                period: 38,
+                color: "#8b5cf6",
+                desc: "Chu kỳ 38 ngày chi phối linh cảm vô thức, khả năng nắm bắt cơ hội và sáng tạo đột phá.",
+            },
+        ];
+
+        let totalPct = 0;
+        const statsGrid = document.getElementById("bio-stats-grid");
+        if (statsGrid) {
+            statsGrid.innerHTML = cycles
+                .map((c) => {
+                    const pct = Math.round(Math.sin((2 * Math.PI * daysAlive) / c.period) * 100);
+                    totalPct += pct;
+                    let state = "Trạng thái ổn định";
+                    if (Math.abs(pct) <= 12) state = "⚠️ Ngày giao điểm (Cần lưu ý)";
+                    else if (pct >= 50) state = "🌟 Năng lượng đỉnh cao";
+                    else if (pct < 0) state = "🌙 Giai đoạn nạp năng lượng";
+
+                    return `
+                        <article
+                            class="util-bio-stat-card has-bento-tooltip"
+                            data-bio-key="${c.key}"
+                            data-bio-pct="${pct}"
+                            role="button"
+                            tabindex="0"
+                            aria-label="${c.name}: ${pct > 0 ? `+${pct}%` : `${pct}%`}, ${state}"
+                        >
+                            <div class="util-bio-stat-card__head"><span>${c.name}</span></div>
+                            <strong class="util-bio-stat-card__val" style="color:${c.color}">${pct > 0 ? `+${pct}%` : `${pct}%`}</strong>
+                            <span class="util-bio-stat-card__advice">${state}</span>
+                            ${buildBentoTooltipHtml(`${c.name}: ${pct}%`, c.desc, "✦ Bấm để xem khuyến nghị chi tiết")}
+                        </article>
+                    `;
+                })
+                .join("");
+        }
+
+        const svgW = 820;
+        const svgH = 260;
+        const leftPad = 68;
+        const rightPad = 24;
+        const topPad = 32;
+        const plotW = svgW - leftPad - rightPad;
+        const plotH = svgH - topPad * 2;
+        const midY = topPad + plotH / 2;
+
+        const criticalDaysList = [];
+        const peakDaysList = [];
+
+        const pathsHtml = cycles
+            .map((c) => {
+                const pts = [];
+                for (let i = 0; i <= 30; i++) {
+                    const x = leftPad + (i / 30) * plotW;
+                    const v = Math.sin((2 * Math.PI * (daysAlive + i)) / c.period);
+                    const y = midY - v * (plotH / 2);
+                    pts.push(`${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`);
+
+                    if (i > 0 && i <= 15) {
+                        const dTarget = new Date(todayStart.getTime() + i * 86400000);
+                        const dStr = `${pad(dTarget.getDate())}/${pad(dTarget.getMonth() + 1)}`;
+                        if (Math.abs(v) < 0.13 && criticalDaysList.length < 4) {
+                            criticalDaysList.push(`${dStr} (${c.name.split("(")[0].trim()})`);
+                        }
+                        if (v > 0.94 && peakDaysList.length < 4) {
+                            peakDaysList.push(`${dStr} (${c.name.split("(")[0].trim()})`);
+                        }
+                    }
+                }
+                return `<path class="util-bio-wave-path" d="${pts.join(" ")}" fill="none" stroke="${c.color}" stroke-width="2.8" stroke-linecap="round" />`;
+            })
+            .join("");
+
+        const container = document.getElementById("bio-svg-container");
+        if (container) {
+            container.innerHTML = `
+                <svg viewBox="0 0 ${svgW} ${svgH}" role="img" aria-label="Biểu đồ Nhịp sinh học 30 ngày tới">
+                    <line x1="${leftPad}" y1="${topPad}" x2="${svgW - rightPad}" y2="${topPad}" stroke="var(--border-color)" stroke-dasharray="4 4" />
+                    <line x1="${leftPad}" y1="${midY}" x2="${svgW - rightPad}" y2="${midY}" stroke="var(--text-muted)" stroke-width="1.2" />
+                    <line x1="${leftPad}" y1="${topPad + plotH}" x2="${svgW - rightPad}" y2="${topPad + plotH}" stroke="var(--border-color)" stroke-dasharray="4 4" />
+                    <line x1="${leftPad}" y1="${topPad - 10}" x2="${leftPad}" y2="${topPad + plotH + 10}" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 3" />
+                    <text x="${leftPad - 10}" y="${topPad + 4}" text-anchor="end" font-size="11" font-weight="700" fill="var(--text-muted)">+100%</text>
+                    <text x="${leftPad - 10}" y="${midY + 4}" text-anchor="end" font-size="11" font-weight="700" fill="var(--text-muted)">0%</text>
+                    <text x="${leftPad - 10}" y="${topPad + plotH + 4}" text-anchor="end" font-size="11" font-weight="700" fill="var(--text-muted)">-100%</text>
+                    <text x="${leftPad + 8}" y="${topPad - 10}" font-size="11.5" font-weight="800" fill="#ef4444">Hôm nay (${pad(now.getDate())}/${pad(now.getMonth() + 1)})</text>
+                    ${pathsHtml}
+                </svg>
+            `;
+        }
+
+        const avgPct = Math.round(totalPct / 4);
+        const insightsEl = document.getElementById("bio-insights-grid");
+        if (insightsEl) {
+            insightsEl.innerHTML = `
+                <article class="util-bento-item is-current-highlight">
+                    <div class="util-bento-item__top">
+                        <span class="util-bento-item__icon-box"><img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" /></span>
+                        <span class="util-bento-item__badge">Chỉ Số Tổng Hợp Hôm Nay</span>
+                    </div>
+                    <div class="util-bento-item__body">
+                        <strong class="util-bento-item__title">Mức Năng Lượng Trung Bình: ${avgPct > 0 ? `+${avgPct}%` : `${avgPct}%`}</strong>
+                        <span class="util-bento-item__sub">Đã sống: ${daysAlive.toLocaleString("vi-VN")} ngày tính từ ngày sinh</span>
+                    </div>
+                    <p class="util-bento-item__desc">
+                        ${
+                            avgPct >= 20
+                                ? "Tổng hòa 4 chu kỳ đang ở pha Dương tích cực. Rất thuận lợi để giải quyết các công việc đòi hỏi sự tập trung và ra quyết định quan trọng."
+                                : "Cơ thể đang trong giai đoạn điều hòa và tích lũy nội lực. Hãy phân bổ thời gian làm việc vừa sức và ưu tiên giấc ngủ sâu."
+                        }
+                    </p>
+                </article>
+                <article class="util-bento-item">
+                    <div class="util-bento-item__top">
+                        <span class="util-bento-item__icon-box"><img src="./assets/icons/calendarCheck.svg" alt="" aria-hidden="true" /></span>
+                        <span class="util-bento-item__badge">Dự Báo 15 Ngày Tới</span>
+                    </div>
+                    <div class="util-bento-item__body">
+                        <strong class="util-bento-item__title">Cảnh Báo Ngày Giao Điểm (0%) &amp; Đỉnh Cao</strong>
+                        <span class="util-bento-item__sub">Ngày Giao Điểm: ${criticalDaysList.join(", ") || "Không có"}</span>
+                    </div>
+                    <p class="util-bento-item__desc">
+                        🌟 <strong>Các ngày đạt đỉnh (+100%):</strong> ${peakDaysList.join(", ") || "Đang tiến dần lên đỉnh"}. Vào Ngày Giao Điểm (khi đường sóng cắt trục 0%), bạn nên tránh làm việc quá sức hoặc tranh luận căng thẳng.
+                    </p>
+                </article>
+            `;
+        }
+    };
+
+    // ==================== MỤC 10: TỪ ĐIỂN CỔ HỌC (ĐỦ 25 MỤC NGUYÊN BẢN) ====================
+    let fsFilterKey = "fs-all";
+
+    const FENGSHUI_DICT = [
+        [
+            "Hải Trung Kim",
+            "Giáp Tý, Ất Sửu",
+            "fs-napam",
+            "./assets/icons/metal.svg",
+            false,
+            "Vàng dưới biển — Nội lực tiềm ẩn, sâu sắc, điềm tĩnh và bền bỉ.",
+            "Thổ sinh Kim, Kim sinh Thủy. Hợp màu trắng, bạc, vàng ánh kim; phương vị Chính Tây, Tây Bắc.",
+        ],
+        [
+            "Lư Trung Hỏa",
+            "Bính Dần, Đinh Mão",
+            "fs-napam",
+            "./assets/icons/fire.svg",
+            false,
+            "Lửa trong lò — Nhiệt huyết được tôi luyện, ấm áp và kiên định.",
+            "Mộc sinh Hỏa, Hỏa sinh Thổ. Hợp màu đỏ chu sa, cam ấm, tím; phương vị Chính Nam.",
+        ],
+        [
+            "Đại Lâm Mộc",
+            "Mậu Thìn, Kỷ Tỵ",
+            "fs-napam",
+            "./assets/icons/wood.svg",
+            false,
+            "Gỗ rừng già — Vững chãi, che chở, nhân hậu và giàu sức sống.",
+            "Thủy sinh Mộc, Mộc sinh Hỏa. Hợp màu xanh lục bảo, xanh lá; phương vị Chính Đông, Đông Nam.",
+        ],
+        [
+            "Lộ Bàng Thổ",
+            "Canh Ngọ, Tân Mùi",
+            "fs-napam",
+            "./assets/icons/earth.svg",
+            false,
+            "Đất ven đường — Bằng phẳng, gắn kết giao thương và thực tế.",
+            "Hỏa sinh Thổ, Thổ sinh Kim. Hợp màu vàng đất, nâu trầm; phương vị Trung Cung, Đông Bắc, Tây Nam.",
+        ],
+        [
+            "Kiếm Phong Kim",
+            "Nhâm Thân, Quý Dậu",
+            "fs-napam",
+            "./assets/icons/metal.svg",
+            false,
+            "Vàng mũi kiếm — Sắc bén, quyết đoán, bản lĩnh và mạnh mẽ.",
+            "Hợp mệnh Thủy, Thổ, Kim. Rất tốt cho các ngành kỹ thuật, tài chính, công nghệ và quản trị.",
+        ],
+        [
+            "Giản Hạ Thủy",
+            "Bính Tý, Đinh Sửu",
+            "fs-napam",
+            "./assets/icons/water.svg",
+            false,
+            "Nước dưới khe — Dòng chảy ngầm tĩnh lặng, tinh tế và linh hoạt.",
+            "Kim sinh Thủy, Thủy sinh Mộc. Hợp màu xanh đại dương, đen; phương vị Chính Bắc.",
+        ],
+        [
+            "Tuyền Trung Thủy",
+            "Giáp Thân, Ất Dậu",
+            "fs-napam",
+            "./assets/icons/water.svg",
+            false,
+            "Nước trong suối — Nguồn nước mát lành, trí tuệ và dồi dào.",
+            "Hợp mệnh Mộc, Kim, Thủy. Thuận lợi cho nghiên cứu, học thuật, ngoại giao và thương mại.",
+        ],
+        [
+            "Tùng Bách Mộc",
+            "Canh Dần, Tân Mão",
+            "fs-napam",
+            "./assets/icons/wood.svg",
+            false,
+            "Gỗ tùng bách — Bất khuất trước gió sương, trường thọ và chính trực.",
+            "Hợp mệnh Hỏa, Thủy, Mộc. Đại diện cho ý chí kiên cường và uy tín bền vững.",
+        ],
+        [
+            "Trường Lưu Thủy",
+            "Nhâm Thìn, Quý Tỵ",
+            "fs-napam",
+            "./assets/icons/water.svg",
+            false,
+            "Nước chảy dài — Kiên trì, vươn xa biển lớn và không ngừng vận động.",
+            "Hợp mệnh Mộc, Kim, Thủy. Tốt cho mở rộng quy mô, đầu tư dài hạn và logistics.",
+        ],
+        [
+            "Bình Địa Mộc",
+            "Mậu Tuất, Kỷ Hợi",
+            "fs-napam",
+            "./assets/icons/wood.svg",
+            false,
+            "Cây đất bằng — Ôn hòa, phát triển thuận lợi và dễ kết giao.",
+            "Hợp mệnh Hỏa, Thủy, Mộc. Thuận lợi cho hợp tác đội nhóm, kiến trúc, giáo dục.",
+        ],
+        [
+            "Thiên Hà Thủy",
+            "Bính Ngọ, Đinh Mùi",
+            "fs-napam",
+            "./assets/icons/water.svg",
+            false,
+            "Nước mưa trên trời — Thanh khiết, rộng lớn và nuôi dưỡng vạn vật.",
+            "Hợp mệnh Mộc, Kim, Thủy. Mang lại phúc khí, sự hài hòa và tầm nhìn rộng mở.",
+        ],
+        [
+            "Cung Đại An",
+            "Khổng Minh Lục Diệu • Đại Cát",
+            "fs-lucdieu",
+            "./assets/icons/fengshui/lucdieu-daian.svg",
+            true,
+            "Mọi việc đều tốt lành, cầu tài đi hướng Tây Nam, nhà cửa yên ổn.",
+            "Rất hợp để khởi sự việc quan trọng, ký kết hợp đồng, xuất hành hoặc cầu bình an.",
+        ],
+        [
+            "Cung Lưu Niên",
+            "Khổng Minh Lục Diệu • Thận Trọng",
+            "fs-lucdieu",
+            "./assets/icons/fengshui/lucdieu-luunien.svg",
+            true,
+            "Mưu sự dễ chậm trễ, cầu lộc chưa thông; cần đề phòng khẩu thiệt.",
+            "Nên ưu tiên xử lý việc tồn đọng, rà soát kỹ hồ sơ pháp lý và tránh vội vàng.",
+        ],
+        [
+            "Cung Tốc Hỷ",
+            "Khổng Minh Lục Diệu • Cát Tinh",
+            "fs-lucdieu",
+            "./assets/icons/fengshui/lucdieu-tochy.svg",
+            true,
+            "Tin vui đến nhanh, mưu sự đại cát, thuận lợi cho gặp gỡ, ký kết.",
+            "Thời điểm vàng để thương thảo, khai trương, ra mắt sản phẩm và kết nối quý nhân.",
+        ],
+        [
+            "Cung Xích Khẩu",
+            "Khổng Minh Lục Diệu • Khẩu Thiệt",
+            "fs-lucdieu",
+            "./assets/icons/fengshui/lucdieu-xichkhau.svg",
+            true,
+            "Dễ xảy ra bất đồng lời ăn tiếng nói; nên cẩn trọng hợp đồng.",
+            "Giữ thái độ hòa nhã trong giao tiếp, hạn chế tranh luận gay gắt.",
+        ],
+        [
+            "Cung Tiểu Cát",
+            "Khổng Minh Lục Diệu • Quý Nhân",
+            "fs-lucdieu",
+            "./assets/icons/fengshui/lucdieu-tieucat.svg",
+            true,
+            "Cát lành, hòa hợp, mưu sự suôn sẻ và rất dễ gặp người giúp đỡ.",
+            "Thuận lợi cho giao dịch tài chính, mở hàng, cầu tài lộc và vun đắp đối tác.",
+        ],
+        [
+            "Cung Không Vong",
+            "Khổng Minh Lục Diệu • Tránh Việc Lớn",
+            "fs-lucdieu",
+            "./assets/icons/fengshui/lucdieu-khongvong.svg",
+            true,
+            "Cầu tài chưa lợi; mưu sự lớn dễ hao tổn công sức.",
+            "Thích hợp nghỉ ngơi, học tập, lập kế hoạch nội bộ hoặc làm việc thiện nguyện.",
+        ],
+        [
+            "Quẻ Càn",
+            "Bát Quái • Hướng Tây Bắc (Hành Kim)",
+            "fs-bagua",
+            "./assets/icons/zodiac/dog.svg",
+            true,
+            "Tượng trưng cho Trời lớn, cương kiện, uy quyền, người đứng đầu và sự chính trực.",
+            "Phương vị Tây Bắc (Hành Kim). Hợp cầu công danh, lãnh đạo và hoạch định chiến lược.",
+        ],
+        [
+            "Quẻ Khảm",
+            "Bát Quái • Hướng Chính Bắc (Hành Thủy)",
+            "fs-bagua",
+            "./assets/icons/zodiac/mouse.svg",
+            true,
+            "Tượng trưng cho Nước sâu, trí tuệ uyên bác, sự linh hoạt vượt qua hiểm trở.",
+            "Phương vị Chính Bắc (Hành Thủy). Hợp nghiên cứu, học thuật, giao thương và tĩnh tâm.",
+        ],
+        [
+            "Quẻ Cấn",
+            "Bát Quái • Hướng Đông Bắc (Hành Thổ)",
+            "fs-bagua",
+            "./assets/icons/zodiac/tiger.svg",
+            true,
+            "Tượng trưng cho Núi cao vững chãi, sự tĩnh tâm và tích lũy nội lực.",
+            "Phương vị Đông Bắc (Hành Thổ). Hợp tu dưỡng, củng cố nền tảng và bảo toàn tài sản.",
+        ],
+        [
+            "Quẻ Chấn",
+            "Bát Quái • Hướng Chính Đông (Hành Mộc)",
+            "fs-bagua",
+            "./assets/icons/zodiac/cat.svg",
+            true,
+            "Tượng trưng cho Sấm động mùa xuân, sinh khí bừng tỉnh và khởi đầu mới.",
+            "Phương vị Chính Đông (Hành Mộc). Đại lợi cho xuất hành buổi sớm, khởi nghiệp.",
+        ],
+        [
+            "Quẻ Tốn",
+            "Bát Quái • Hướng Đông Nam (Hành Mộc)",
+            "fs-bagua",
+            "./assets/icons/zodiac/dragon.svg",
+            true,
+            "Tượng trưng cho Gió thuận hiền hòa, giao thương hanh thông và cung Tài Lộc.",
+            "Phương vị Đông Nam (Hành Mộc). Rất tốt cho đàm phán, truyền thông và cầu tài.",
+        ],
+        [
+            "Quẻ Ly",
+            "Bát Quái • Hướng Chính Nam (Hành Hỏa)",
+            "fs-bagua",
+            "./assets/icons/zodiac/horse.svg",
+            true,
+            "Tượng trưng cho Lửa sáng, Mặt trời rực rỡ, văn minh, danh vọng và nhiệt huyết.",
+            "Phương vị Chính Nam (Hành Hỏa). Hợp quảng bá thương hiệu, nghệ thuật và tỏa sáng.",
+        ],
+        [
+            "Quẻ Khôn",
+            "Bát Quái • Hướng Tây Nam (Hành Thổ)",
+            "fs-bagua",
+            "./assets/icons/zodiac/goat.svg",
+            true,
+            "Tượng trưng cho Đất mẹ bao dung, sự nhu thuận và hậu thuẫn vững chắc.",
+            "Phương vị Tây Nam (Hành Thổ). Rất tốt cho bất động sản, nhân sự và gia đạo.",
+        ],
+        [
+            "Quẻ Đoài",
+            "Bát Quái • Hướng Chính Tây (Hành Kim)",
+            "fs-bagua",
+            "./assets/icons/zodiac/rooster.svg",
+            true,
+            "Tượng trưng cho Đầm nước, niềm vui, tài thuyết trình và ngoại giao hài hòa.",
+            "Phương vị Chính Tây (Hành Kim). Hợp ngoại giao, thuyết trình và kết nối khách hàng.",
+        ],
+    ];
+
+    const renderFengShuiDict = (highlightSlug = "") => {
+        const grid = document.getElementById("fs-dict-grid");
+        const q = (document.getElementById("fs-search-input")?.value || "").trim().toLowerCase();
+        if (!grid) return;
+
+        const items = FENGSHUI_DICT.filter(([title, sub, group, , , desc]) => {
+            if (q) return `${title} ${sub} ${desc}`.toLowerCase().includes(q);
+            if (fsFilterKey !== "fs-all" && group !== fsFilterKey) return false;
+            return true;
+        });
+
+        grid.innerHTML = items
+            .map(([title, sub, , icon, isFiltered, desc, advice]) => {
+                const slug = toSlug(title);
+                const isSel = highlightSlug && (slug.includes(highlightSlug) || highlightSlug.includes(slug));
+                const idx = FENGSHUI_DICT.findIndex((x) => x[0] === title);
+
+                return `
+                    <article
+                        class="util-bento-item ${isSel ? "is-current-highlight" : ""} has-bento-tooltip"
+                        data-fs-idx="${idx}"
+                        role="button"
+                        tabindex="0"
+                        aria-label="${title}, ${sub}"
+                    >
+                        <span class="util-bento-item__bg-wrap" aria-hidden="true">
+                            <img src="${icon}" alt="" class="util-bento-item__watermark" />
+                        </span>
+                        <div class="util-bento-item__top">
+                            <span class="util-bento-item__icon-box ${isFiltered ? "util-bento-item__icon-box--filtered" : ""}">
+                                <img src="${icon}" alt="" aria-hidden="true" />
+                            </span>
+                            <span class="util-bento-item__badge">Cổ Học Tinh Hoa</span>
+                        </div>
+                        <div class="util-bento-item__body">
+                            <strong class="util-bento-item__title">${title}</strong>
+                            <span class="util-bento-item__sub">${sub}</span>
+                        </div>
+                        <p class="util-bento-item__desc">${desc}</p>
+                        <footer class="util-bento-item__foot">
+                            <span>Xem luận giải ứng dụng</span>
+                            <span aria-hidden="true">&#8594;</span>
+                        </footer>
+                        ${buildBentoTooltipHtml(title, `${desc} ${advice}`, `✦ Bấm để mở thẻ giải nghĩa ${title}`)}
+                    </article>
+                `;
+            })
+            .join("");
+    };
+
+    // Đồng bộ bộ lọc Từ điển khi đổi Route hoặc nhận deep-link ?napam= / ?lucdieu= / ?bagua=
+    Hub.onRouteChange(({ cat, sub, highlight }) => {
+        if (cat !== "fengshui") return;
+        fsFilterKey = sub || "fs-all";
+        renderFengShuiDict(highlight || "");
+    });
+
+    // Ủy quyền Modal cho Mục 5, 8, 9, 10
+    Hub.registerModalHandler((e) => {
+        const hiCard = e.target.closest("[data-hi-idx]");
+        if (hiCard) {
+            const item = currentHiFilteredList[Number(hiCard.dataset.hiIdx)];
+            if (!item) return true;
+            const rawSlug = String(item.image_slug || item.slug || "").trim();
+            const cleanFolder = rawSlug.replace(/-\d{2}-\d{2}-\d{4}.*$/, "") || rawSlug;
+            const cleanSlug = rawSlug
+                .split("/")
+                .pop()
+                .replace(/\.(jpg|jpeg|png|webp)$/i, "");
+            const typeFolder = String(item.category_id || "")
+                .toLowerCase()
+                .includes("event")
+                ? "events"
+                : "figures";
+            const coverUrl = `./assets/images/calendar-covers/thang-${hiMonth}/${cleanSlug}.jpg`;
+            const slide2 = `./assets/images/${typeFolder}/${cleanFolder}/${cleanFolder}.webp`;
+            const slide3 = `./assets/images/${typeFolder}/${cleanFolder}/2.webp`;
+            const detailHref = `./detail.html?type=${typeFolder}&folder=${cleanFolder}&slug=${rawSlug}&month=${hiMonth}`;
+
+            openUtilModal({
+                category: `Ngày Này Năm Xưa • ${item.ngay_hien_thi || `Tháng ${hiMonth}`}`,
+                title: item.ten || "Nhân vật & Sự kiện lịch sử",
+                visualHtml: `<img src="./assets/icons/calendarDay.svg" alt="" /><strong>${item.ngay_hien_thi || `Tháng ${hiMonth}`}</strong>`,
+                isFilteredVisual: true,
+                pills: [
+                    item.ngay_hien_thi || `Tháng ${hiMonth}`,
+                    typeFolder === "events" ? "Sự kiện lịch sử" : "Danh nhân lịch sử",
+                ],
+                box1Title: "Tiểu sử & Bối cảnh lịch sử",
+                desc: item.mo_ta || item.noi_dung || item.hien_thi_nhan_dip || "",
+                box2Title: "Danh ngôn & Dấu ấn thời đại",
+                advice: item.danh_ngon || item.quote || item.hien_thi_nhan_dip || "",
+                actionHref: detailHref,
+                actionLabel: "Đọc bài phân tích toàn văn (Mở trang mới) ↗",
+                actionTarget: "_blank",
+                mediaSlides: [coverUrl, slide2, slide3],
+                videoUrl: item.video_url || "",
+            });
+            return true;
+        }
+
+        const numCell = e.target.closest("[data-num-modal]");
+        if (numCell) {
+            const num = Number(numCell.dataset.numModal || 1);
+            const role = numCell.dataset.numRole || `Con số ${num}`;
+            const mObj = NUMEROLOGY_MEANINGS[num] || NUMEROLOGY_MEANINGS[1];
+            openUtilModal({
+                category: "Thần Số Học Pythagoras",
+                title: `${role} • ${mObj.title}`,
+                visualHtml: `<strong style="font-size:4.8rem;line-height:1">${num}</strong><strong>Tần số ${num}</strong>`,
+                pills: [role, mObj.title],
+                desc: mObj.desc,
+                advice: mObj.advice,
+                actionHref: "./bazi.html",
+                actionLabel: "Khám phá thêm Bát Tự Tử Bình",
+            });
+            return true;
+        }
+
+        const bioCard = e.target.closest("[data-bio-key]");
+        if (bioCard) {
+            const pct = Number(bioCard.dataset.bioPct || 0);
+            const title = bioCard.querySelector(".util-bio-stat-card__head span")?.textContent || "Nhịp sinh học";
+            const tipDesc = bioCard.querySelector(".bento-tooltip__desc")?.textContent || "";
+            openUtilModal({
+                category: "Nhịp Sinh Học Biorhythm",
+                title: `${title}: ${pct > 0 ? `+${pct}%` : `${pct}%`}`,
+                visualHtml: `<strong style="font-size:3.8rem">${pct > 0 ? `+${pct}%` : `${pct}%`}</strong><strong>Hôm nay</strong>`,
+                pills: [title, pct >= 0 ? "Pha Dương (Phát tiết)" : "Pha Âm (Tích lũy)"],
+                desc: tipDesc,
+                advice:
+                    Math.abs(pct) <= 12
+                        ? "Hôm nay chỉ số này đang đi qua vùng Giao Điểm (0%). Bạn nên làm việc điều độ, tránh căng thẳng và nghỉ ngơi sớm."
+                        : pct > 0
+                          ? "Chỉ số đang ở nửa chu kỳ cao. Hãy tận dụng nguồn năng lượng này cho các hoạt động trọng tâm."
+                          : "Chỉ số đang ở pha nạp lại năng lượng. Thích hợp duy trì nhịp độ ổn định và bồi dưỡng sức khỏe.",
+                actionHref: "./day.html",
+                actionLabel: "Xem thêm Giờ Hoàng Đạo hôm nay",
+            });
+            return true;
+        }
+
+        const fsCard = e.target.closest("[data-fs-idx]");
+        if (fsCard) {
+            const item = FENGSHUI_DICT[Number(fsCard.dataset.fsIdx)];
+            if (!item) return true;
+            const [title, sub, , icon, isFiltered, desc, advice] = item;
+            openUtilModal({
+                category: "Từ Điển Bách Khoa Phong Thủy",
+                title,
+                visualHtml: `<img src="${icon}" alt="" /><strong>${sub.split("•")[0].trim()}</strong>`,
+                isFilteredVisual: Boolean(isFiltered),
+                pills: [sub, "Cổ Học Tinh Hoa"],
+                desc,
+                advice,
+                actionHref: "./bazi.html",
+                actionLabel: "Phân tích chuyên sâu trên Bàn Bát Tự",
+            });
+            return true;
+        }
+
+        return false;
+    });
+
+    Hub.registerModule(() => {
+        const now = new Date();
+        numBirthPicker = createBentoDatePicker(
+            "num-birth-pickers",
+            { day: 13, month: 1, year: 1987 },
+            renderNumerologyPersonal,
+        );
+        bioBirthPicker = createBentoDatePicker("bio-birth-pickers", { day: 13, month: 1, year: 1987 }, renderBiorhythm);
+
+        renderHistoryMonthPicker();
+        fetchAndRenderHistory();
+        renderNumerologyPersonal();
+        renderNumerologyMonthCalendar(now.getDate());
+        renderBiorhythm();
+        renderFengShuiDict();
+
+        // Sự kiện Mục 5: Ngày Này Năm Xưa
+        document.getElementById("hi-month-dropdown")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hi-month]");
+            if (!btn) return;
+            e.stopPropagation();
+            hiMonth = Number(btn.dataset.hiMonth);
+            hiPage = 1;
+            document.getElementById("hi-month-dropdown")?.removeAttribute("open");
+            renderHistoryMonthPicker();
+            fetchAndRenderHistory();
+        });
+
+        document.getElementById("hi-scope-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hi-scope]");
+            if (!btn) return;
+            hiScope = btn.dataset.hiScope;
+            hiPage = 1;
+            document.querySelectorAll("[data-hi-scope]").forEach((b) => b.classList.toggle("is-active", b === btn));
+            fetchAndRenderHistory();
+        });
+
+        document.getElementById("hi-pagination")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-hi-page]");
+            if (!btn) return;
+            hiPage = Number(btn.dataset.hiPage);
+            fetchAndRenderHistory();
+        });
+
+        // Sự kiện Mục 10: Từ điển Cổ học
+        document.getElementById("fs-search-input")?.addEventListener("input", () => renderFengShuiDict());
+    });
+})();
+```
+
+### iching-detail.js
+
+```js
+// assets/js/iching-detail.js
+// Trang chi tiết 64 Quẻ Kinh Dịch: Đọc ./api/iching.json, vẽ 6 hào từ dưới lên,
+// tự động tính 3 Quẻ Biến Liên Quan (Quẻ Hổ / Hỗ Quái, Quẻ Đối / Thác Quái, Quẻ Đảo / Tống Quái) & Sidebar Sticky
+(() => {
+    const ICON_DIR = "./assets/icons/iching";
+    const pad = (n) => String(n).padStart(2, "0");
+
+    let allHexagrams = [];
+    let currentHex = null;
+    let activeFilter = "all";
+
+    if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+    const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    };
+
+    const linesKey = (arr) => (Array.isArray(arr) ? arr.join("") : "");
+
+    const parseTrigrams = (trigramsStr = "") => {
+        const lowerMatch = trigramsStr.match(/Nội quái:\s*([^•]+)/i);
+        const upperMatch = trigramsStr.match(/Ngoại quái:\s*(.+)$/i);
+        return {
+            lower: lowerMatch ? lowerMatch[1].trim() : "Càn (Trời)",
+            upper: upperMatch ? upperMatch[1].trim() : "Ly (Lửa)",
+        };
+    };
+
+    const renderRelatedHexagrams = (hex, lookupByBits) => {
+        const grid = document.getElementById("icd-related-grid");
+        if (!grid || !Array.isArray(hex.lines) || hex.lines.length !== 6) return;
+
+        const [h1, h2, h3, h4, h5, h6] = hex.lines;
+        const nuclearBits = [h2, h3, h4, h3, h4, h5]; // Hỗ Quái (Quẻ Hổ: Hào 2-3-4 hạ, Hào 3-4-5 thượng)
+        const oppositeBits = hex.lines.map((b) => (b === 1 ? 0 : 1)); // Thác Quái (Quẻ Đối: đảo âm dương)
+        const invertedBits = [h6, h5, h4, h3, h2, h1]; // Tống Quái (Quẻ Đảo: lật ngược 180 độ)
+
+        const relations = [
+            {
+                role: "Quẻ Hổ (Hỗ Quái)",
+                note: "Diễn biến ẩn bên trong (ghép từ Hào 2-3-4 & 3-4-5)",
+                target: lookupByBits.get(linesKey(nuclearBits)),
+            },
+            {
+                role: "Quẻ Đối (Thác Quái)",
+                note: "Thế âm dương đối lập hoàn toàn với quẻ gốc",
+                target: lookupByBits.get(linesKey(oppositeBits)),
+            },
+            {
+                role: "Quẻ Đảo (Tống Quái)",
+                note: "Góc nhìn đảo ngược khi lật 180 độ toàn bộ 6 hào",
+                target: lookupByBits.get(linesKey(invertedBits)),
+            },
+        ].filter((item) => Boolean(item.target));
+
+        grid.innerHTML = relations
+            .map(({ role, note, target }) => {
+                const isSelf = target.num === hex.num;
+                return `
+                    <a
+                        href="./iching-detail.html?slug=${encodeURIComponent(target.slug)}"
+                        class="div-related-card ${isSelf ? "is-self-mirror" : ""}"
+                        title="Xem chi tiết ${role}: Quẻ số ${target.num} - ${target.name}"
+                    >
+                        <div class="div-related-card__head">
+                            <span class="div-related-card__role">${role}</span>
+                            <span class="div-related-card__num">#${pad(target.num)}</span>
+                        </div>
+                        <div class="div-related-card__main">
+                            <span class="div-related-card__svg-wrap" aria-hidden="true">
+                                <img
+                                    src="${ICON_DIR}/${target.slug}.svg"
+                                    alt=""
+                                    width="70"
+                                    height="70"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </span>
+                            <div class="div-related-card__info">
+                                <strong>${target.short} ${isSelf ? "(Tự phản chiếu)" : ""}</strong>
+                                <span>${target.name.split("(")[0].trim()}</span>
+                                <small>${target.fortune}</small>
+                            </div>
+                        </div>
+                        <p class="div-related-card__note">${note}</p>
+                    </a>
+                `;
+            })
+            .join("");
+    };
+
+    const renderSidebar = () => {
+        const listEl = document.getElementById("icd-sidebar-list");
+        if (!listEl) return;
+
+        const q = (document.getElementById("icd-sidebar-search")?.value || "").trim().toLowerCase();
+        const filtered = allHexagrams.filter((h) => {
+            if (activeFilter !== "all" && h.fortune !== activeFilter) return false;
+            if (!q) return true;
+            return `${pad(h.num)} ${h.num} ${h.short} ${h.name} ${h.trigrams}`.toLowerCase().includes(q);
+        });
+
+        setText("icd-sidebar-count", `${filtered.length} quẻ`);
+
+        if (!filtered.length) {
+            listEl.innerHTML = `<p class="util-data-table__empty">Không có quẻ nào khớp bộ lọc.</p>`;
+            return;
+        }
+
+        listEl.innerHTML = filtered
+            .map((h) => {
+                const isCur = currentHex && Number(h.num) === Number(currentHex.num);
+                return `
+                    <a
+                        href="./iching-detail.html?slug=${encodeURIComponent(h.slug)}"
+                        class="detail-sidebar__item div-sidebar-item ${isCur ? "is-current" : ""}"
+                        ${isCur ? 'aria-current="page"' : ""}
+                    >
+                        <span class="div-sidebar-item__svg" aria-hidden="true">
+                            <img src="${ICON_DIR}/${h.slug}.svg" alt="" width="40" height="40" loading="lazy" decoding="async" />
+                        </span>
+                        <div class="detail-sidebar__item-info">
+                            <strong class="detail-sidebar__item-name">#${pad(h.num)} • ${h.short}</strong>
+                            <span class="detail-sidebar__item-occasion">${h.name.split("(")[0].trim()} • ${h.fortune}</span>
+                        </div>
+                    </a>
+                `;
+            })
+            .join("");
+
+        const activeEl = listEl.querySelector(".detail-sidebar__item.is-current");
+        if (activeEl) {
+            const topPos = activeEl.offsetTop - listEl.offsetTop - listEl.clientHeight / 2 + activeEl.clientHeight / 2;
+            listEl.scrollTo({ top: Math.max(0, topPos), behavior: "smooth" });
+        }
+    };
+
+    const initIChingDetailPage = async () => {
+        try {
+            const res = await fetch("./api/iching.json");
+            if (!res.ok) return;
+            allHexagrams = await res.json();
+        } catch (err) {
+            return;
+        }
+
+        if (!Array.isArray(allHexagrams) || !allHexagrams.length) return;
+
+        const params = new URLSearchParams(window.location.search);
+        const slugParam = params.get("slug") || "";
+        const numParam = Number(params.get("num") || 0);
+
+        currentHex =
+            allHexagrams.find((h) => h.slug === slugParam) ||
+            allHexagrams.find((h) => Number(h.num) === numParam) ||
+            allHexagrams.find((h) => Number(h.num) === 14) ||
+            allHexagrams[0];
+
+        const curIdx = allHexagrams.indexOf(currentHex);
+        const prevHex = allHexagrams[(curIdx - 1 + allHexagrams.length) % allHexagrams.length];
+        const nextHex = allHexagrams[(curIdx + 1) % allHexagrams.length];
+
+        document
+            .getElementById("icd-prev-btn")
+            ?.setAttribute("href", `./iching-detail.html?slug=${encodeURIComponent(prevHex.slug)}`);
+        document
+            .getElementById("icd-next-btn")
+            ?.setAttribute("href", `./iching-detail.html?slug=${encodeURIComponent(nextHex.slug)}`);
+
+        const cleanMainName = currentHex.name.split("(")[0].trim();
+        document.title = `Quẻ ${pad(currentHex.num)}: ${cleanMainName} - Kinh Dịch • Lịch Phong Thủy`;
+
+        setText("icd-num-badge", `Quẻ số ${pad(currentHex.num)}`);
+        setText("icd-fortune-badge", currentHex.fortune);
+        setText("icd-trigrams-eyebrow", currentHex.trigrams);
+        setText("icd-main-title", `Quẻ ${pad(currentHex.num)}: ${cleanMainName}`);
+        setText("icd-full-name", currentHex.name);
+        setText("icd-hero-quote", `"${currentHex.judgment}"`);
+
+        const svgImg = document.getElementById("icd-hero-svg");
+        if (svgImg) {
+            svgImg.src = `${ICON_DIR}/${currentHex.slug}.svg`;
+            svgImg.alt = `Đồ hình Quẻ số ${pad(currentHex.num)}: ${currentHex.name}`;
+        }
+
+        const linesStack = document.getElementById("icd-lines-stack");
+        if (linesStack && Array.isArray(currentHex.lines)) {
+            linesStack.innerHTML = [...currentHex.lines]
+                .reverse()
+                .map((bit, revIdx) => {
+                    const haoNum = 6 - revIdx;
+                    const typeLabel = bit === 1 ? "Dương" : "Âm";
+                    const lineMarkup =
+                        bit === 1
+                            ? `<div class="util-hex-line util-hex-line--yang" style="animation-delay:${(haoNum - 1) * 0.06}s"><span></span></div>`
+                            : `<div class="util-hex-line util-hex-line--yin" style="animation-delay:${(haoNum - 1) * 0.06}s"><span></span><span></span></div>`;
+                    return `
+                        <div class="div-hao-row">
+                            <span class="div-hao-row__label">Hào ${haoNum}</span>
+                            <div class="div-hao-row__bar">${lineMarkup}</div>
+                            <span class="div-hao-row__type">${typeLabel}</span>
+                        </div>
+                    `;
+                })
+                .join("");
+        }
+
+        const yangCount = (currentHex.lines || []).filter((b) => b === 1).length;
+        const yinCount = 6 - yangCount;
+        const { lower, upper } = parseTrigrams(currentHex.trigrams);
+
+        setText("icd-stat-num", `Quẻ #${pad(currentHex.num)} / 64`);
+        setText("icd-stat-short", `Quẻ ${currentHex.short}`);
+        setText("icd-stat-fortune", currentHex.fortune);
+        setText("icd-stat-ratio", `${yangCount} Hào Dương • ${yinCount} Hào Âm`);
+        setText("icd-stat-lower", lower);
+        setText("icd-stat-upper", upper);
+
+        setText("icd-body-judgment", currentHex.judgment);
+        setText("icd-body-image", currentHex.image);
+        setText("icd-body-advice", currentHex.advice);
+
+        const lookupByBits = new Map(allHexagrams.map((h) => [linesKey(h.lines), h]));
+        renderRelatedHexagrams(currentHex, lookupByBits);
+        renderSidebar();
+
+        document.getElementById("icd-sidebar-search")?.addEventListener("input", renderSidebar);
+        document.getElementById("icd-sidebar-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-icd-filter]");
+            if (!btn) return;
+            activeFilter = btn.dataset.icdFilter || "all";
+            document.querySelectorAll("[data-icd-filter]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-active", isSel);
+                b.setAttribute("aria-pressed", String(isSel));
+            });
+            renderSidebar();
+        });
+
+        const shareBtn = document.getElementById("icd-share-btn");
+        const shareLabel = document.getElementById("icd-share-label");
+        if (shareBtn && shareLabel) {
+            shareBtn.onclick = async () => {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    shareLabel.textContent = "Đã sao chép!";
+                    setTimeout(() => {
+                        shareLabel.textContent = "Chia sẻ";
+                    }, 2000);
+                } catch (e) {
+                    shareLabel.textContent = "Chia sẻ";
+                }
+            };
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", initIChingDetailPage);
+})();
+```
+
+### tarot-detail.js
+
+```js
+// assets/js/tarot-detail.js
+// Trang chi tiết 78 Lá Bài Tarot: Đọc ./api/tarot.json, công tắc Chiều Xuôi / Chiều Ngược 180°,
+// phân tích Nguyên tố theo Bộ, Lightbox phóng to & Sidebar Sticky 78 lá
+(() => {
+    const TAROT_IMG_DIR = "./assets/images/tarot";
+    const TAROT_IMG_EXT = "png";
+    const pad = (n) => String(n).padStart(2, "0");
+
+    const SUIT_META = {
+        major: {
+            en: "Major Arcana",
+            vn: "Bộ Ẩn Chính (22 lá)",
+            short: "Ẩn Chính",
+            element: "Tinh thần & Chu kỳ Lớn",
+            domain: "Bước ngoặt cuộc đời & Sứ mệnh",
+            icon: "./assets/icons/sparkle.svg",
+            guide: "22 lá Bộ Ẩn Chính (Major Arcana) đại diện cho những bài học cốt lõi, bước ngoặt chiến lược và hành trình trưởng thành sâu sắc về nhận thức. Khi lá Ẩn Chính xuất hiện, thông điệp thường mang tầm ảnh hưởng dài hạn thay vì chỉ là chuyện nhất thời.",
+        },
+        wands: {
+            en: "Suit of Wands",
+            vn: "Bộ Gậy (14 lá)",
+            short: "Bộ Gậy",
+            element: "Nguyên tố Lửa (Hỏa)",
+            domain: "Đam mê, Sáng tạo & Hành động",
+            icon: "./assets/icons/fire.svg",
+            guide: "Bộ Gậy gắn liền với nguyên tố Lửa — đại diện cho ý chí tiên phong, cảm hứng sáng tạo, động lực hành động và bản lĩnh dấn thân. Các lá Bộ Gậy khuyến khích sự chủ động, tốc độ và dám mở đường mới.",
+        },
+        swords: {
+            en: "Suit of Swords",
+            vn: "Bộ Kiếm (14 lá)",
+            short: "Bộ Kiếm",
+            element: "Nguyên tố Khí",
+            domain: "Trí tuệ, Logic & Quyết định",
+            icon: "./assets/icons/metal.svg",
+            guide: "Bộ Kiếm gắn liền với nguyên tố Khí — đại diện cho tư duy phân tích, sự minh bạch, giao tiếp sắc bén và khả năng cắt bỏ những ràng buộc mơ hồ. Bộ bài này nhắc nhở dùng cái đầu lạnh và góc nhìn khách quan để giải quyết thử thách.",
+        },
+        cups: {
+            en: "Suit of Cups",
+            vn: "Bộ Cốc (14 lá)",
+            short: "Bộ Cốc",
+            element: "Nguyên tố Nước (Thủy)",
+            domain: "Cảm xúc, Trực giác & Nhân duyên",
+            icon: "./assets/icons/water.svg",
+            guide: "Bộ Cốc gắn liền với nguyên tố Nước — đại diện cho đời sống nội tâm, lòng trắc ẩn, sự đồng điệu trong các mối quan hệ và cảm hứng nghệ thuật. Thông điệp Bộ Cốc thường nhấn mạnh sự lắng nghe trái tim và giữ gìn hòa khí.",
+        },
+        pentacles: {
+            en: "Suit of Pentacles",
+            vn: "Bộ Tiền (14 lá)",
+            short: "Bộ Tiền",
+            element: "Nguyên tố Đất (Thổ)",
+            domain: "Tài chính, Sự nghiệp & Giá trị thực",
+            icon: "./assets/icons/earth.svg",
+            guide: "Bộ Tiền gắn liền với nguyên tố Đất — đại diện cho tài sản hữu hình, nền tảng sự nghiệp bền vững, sức khỏe thể chất và tính kỷ luật thực tế. Bộ bài này ủng hộ chiến lược đi từng bước chắc chắn để tích lũy thành quả lâu dài.",
+        },
+    };
+
+    let allCards = [];
+    let currentCard = null;
+    let currentOrient = "upright";
+    let activeSuitFilter = "all";
+    let lastFocusedBeforeLightbox = null;
+
+    if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+    const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    };
+
+    const getCardImgUrl = (card) => `${TAROT_IMG_DIR}/${card.suit}/${card.slug}.${TAROT_IMG_EXT}`;
+    const getCardHref = (card, orient = "upright") =>
+        `./tarot-detail.html?slug=${encodeURIComponent(card.slug)}&orientation=${orient}`;
+
+    const applyOrientationState = (orient, { updateUrl = true } = {}) => {
+        if (!currentCard) return;
+        currentOrient = orient === "reversed" ? "reversed" : "upright";
+        const isUp = currentOrient === "upright";
+
+        const poster = document.getElementById("trd-poster-figure");
+        const orientBadge = document.getElementById("trd-orient-badge");
+        if (poster) poster.dataset.orientation = currentOrient;
+        if (orientBadge) {
+            orientBadge.dataset.orientation = currentOrient;
+            orientBadge.textContent = isUp ? "Đang xem: Lá bài Xuôi (Upright)" : "Đang xem: Lá bài Ngược (Reversed)";
+        }
+
+        document.querySelectorAll("[data-set-orient]").forEach((btn) => {
+            const isSel = btn.dataset.setOrient === currentOrient;
+            btn.classList.toggle("is-active", isSel);
+            btn.setAttribute("aria-pressed", String(isSel));
+        });
+
+        setText("trd-hero-message", `"${isUp ? currentCard.msg_upright : currentCard.msg_reversed}"`);
+        setText("trd-hero-keywords", `Từ khóa: ${isUp ? currentCard.keywords_upright : currentCard.keywords_reversed}`);
+        setText("trd-stat-orient", isUp ? "Chiều Xuôi (Upright)" : "Chiều Ngược (Reversed)");
+
+        document.getElementById("trd-box-upright")?.classList.toggle("div-detail-block--highlight", isUp);
+        document.getElementById("trd-box-reversed")?.classList.toggle("div-detail-block--highlight", !isUp);
+
+        if (updateUrl) {
+            const url = new URL(window.location.href);
+            url.searchParams.set("slug", currentCard.slug);
+            url.searchParams.set("orientation", currentOrient);
+            window.history.replaceState({}, "", url.toString());
+        }
+    };
+
+    const openLightbox = () => {
+        if (!currentCard) return;
+        const lightbox = document.getElementById("detail-lightbox");
+        const img = document.getElementById("detail-lightbox-img");
+        const cap = document.getElementById("detail-lightbox-caption");
+        if (!lightbox || !img) return;
+
+        lastFocusedBeforeLightbox = document.activeElement;
+        const title = `${currentCard.roman ? `${currentCard.roman}. ` : ""}${currentCard.vn} (${currentCard.en})`;
+        const isRev = currentOrient === "reversed";
+
+        img.src = getCardImgUrl(currentCard);
+        img.alt = `Lá bài Tarot ${title}`;
+        img.classList.toggle("is-reversed", isRev);
+        if (cap) cap.textContent = `${title} • ${isRev ? "Chiều Ngược (Reversed)" : "Chiều Xuôi (Upright)"}`;
+
+        lightbox.hidden = false;
+        document.body.style.overflow = "hidden";
+        document.getElementById("detail-lightbox-close")?.focus();
+    };
+
+    const closeLightbox = () => {
+        const lightbox = document.getElementById("detail-lightbox");
+        if (!lightbox || lightbox.hidden) return;
+        lightbox.hidden = true;
+        document.body.style.overflow = "";
+        if (lastFocusedBeforeLightbox && typeof lastFocusedBeforeLightbox.focus === "function") {
+            lastFocusedBeforeLightbox.focus();
+            lastFocusedBeforeLightbox = null;
+        }
+    };
+
+    const renderRelatedSuitCards = () => {
+        const grid = document.getElementById("trd-related-grid");
+        if (!grid || !currentCard) return;
+
+        const sameSuit = allCards.filter((c) => c.suit === currentCard.suit);
+        const curPos = sameSuit.findIndex((c) => c.id === currentCard.id);
+        const related = [];
+        for (const offset of [-2, -1, 1, 2]) {
+            const pick = sameSuit[(curPos + offset + sameSuit.length) % sameSuit.length];
+            if (pick && pick.id !== currentCard.id && !related.some((r) => r.id === pick.id)) {
+                related.push(pick);
+            }
+        }
+
+        grid.innerHTML = related
+            .map(
+                (c) => `
+                    <a
+                        href="${getCardHref(c, "upright")}"
+                        class="util-tarot-card"
+                        title="Xem chi tiết lá bài ${c.vn} (${c.en})"
+                    >
+                        <div class="util-tarot-card__thumb">
+                            <img
+                                src="${getCardImgUrl(c)}"
+                                alt="Lá bài Tarot ${c.vn} (${c.en})"
+                                width="350"
+                                height="600"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <span class="util-tarot-card__badge">#${pad(c.id)}</span>
+                        </div>
+                        <div class="util-tarot-card__body">
+                            <strong class="util-tarot-card__title">${c.roman ? `${c.roman}. ` : ""}${c.vn}</strong>
+                            <span class="util-tarot-card__sub">${c.en}</span>
+                        </div>
+                    </a>
+                `,
+            )
+            .join("");
+    };
+
+    const renderSidebar = () => {
+        const listEl = document.getElementById("trd-sidebar-list");
+        if (!listEl) return;
+
+        const q = (document.getElementById("trd-sidebar-search")?.value || "").trim().toLowerCase();
+        const filtered = allCards.filter((c) => {
+            if (activeSuitFilter !== "all" && c.suit !== activeSuitFilter) return false;
+            if (!q) return true;
+            return `${pad(c.id)} ${c.id} ${c.roman} ${c.vn} ${c.en}`.toLowerCase().includes(q);
+        });
+
+        setText("trd-sidebar-count", `${filtered.length} lá`);
+
+        if (!filtered.length) {
+            listEl.innerHTML = `<p class="util-data-table__empty">Không có lá bài nào khớp bộ lọc.</p>`;
+            return;
+        }
+
+        listEl.innerHTML = filtered
+            .map((c) => {
+                const isCur = currentCard && Number(c.id) === Number(currentCard.id);
+                const suitShort = SUIT_META[c.suit]?.short || "Tarot";
+                return `
+                    <a
+                        href="${getCardHref(c, "upright")}"
+                        class="detail-sidebar__item div-sidebar-item ${isCur ? "is-current" : ""}"
+                        ${isCur ? 'aria-current="page"' : ""}
+                    >
+                        <span class="div-sidebar-item__tarot-thumb" aria-hidden="true">
+                            <img src="${getCardImgUrl(c)}" alt="" width="35" height="60" loading="lazy" decoding="async" />
+                        </span>
+                        <div class="detail-sidebar__item-info">
+                            <strong class="detail-sidebar__item-name">${c.roman ? `${c.roman}. ` : ""}${c.vn}</strong>
+                            <span class="detail-sidebar__item-occasion">${c.en} • ${suitShort}</span>
+                        </div>
+                    </a>
+                `;
+            })
+            .join("");
+
+        const activeEl = listEl.querySelector(".detail-sidebar__item.is-current");
+        if (activeEl) {
+            const topPos = activeEl.offsetTop - listEl.offsetTop - listEl.clientHeight / 2 + activeEl.clientHeight / 2;
+            listEl.scrollTo({ top: Math.max(0, topPos), behavior: "smooth" });
+        }
+    };
+
+    const initTarotDetailPage = async () => {
+        try {
+            const res = await fetch("./api/tarot.json");
+            if (!res.ok) return;
+            allCards = await res.json();
+        } catch (err) {
+            return;
+        }
+
+        if (!Array.isArray(allCards) || !allCards.length) return;
+
+        const params = new URLSearchParams(window.location.search);
+        const slugParam = params.get("slug") || "";
+        const idParam = params.has("id") ? Number(params.get("id")) : -1;
+        const orientParam = params.get("orientation") === "reversed" ? "reversed" : "upright";
+
+        currentCard =
+            allCards.find((c) => c.slug === slugParam) ||
+            allCards.find((c) => Number(c.id) === idParam) ||
+            allCards.find((c) => Number(c.id) === 14) ||
+            allCards[0];
+
+        const curIdx = allCards.indexOf(currentCard);
+        const prevCard = allCards[(curIdx - 1 + allCards.length) % allCards.length];
+        const nextCard = allCards[(curIdx + 1) % allCards.length];
+
+        document.getElementById("trd-prev-btn")?.setAttribute("href", getCardHref(prevCard, "upright"));
+        document.getElementById("trd-next-btn")?.setAttribute("href", getCardHref(nextCard, "upright"));
+
+        const suitInfo = SUIT_META[currentCard.suit] || SUIT_META.major;
+        const displayTitle = `${currentCard.roman ? `${currentCard.roman}. ` : ""}${currentCard.vn} (${currentCard.en})`;
+
+        document.title = `${displayTitle} - Tarot Rider-Waite • Lịch Phong Thủy`;
+
+        setText("trd-suit-badge", suitInfo.short);
+        setText("trd-id-badge", `Lá #${pad(currentCard.id)} / 78`);
+        setText("trd-suit-eyebrow", `${suitInfo.vn} • ${suitInfo.en}`);
+        setText("trd-main-title", displayTitle);
+
+        const heroImg = document.getElementById("trd-hero-img");
+        if (heroImg) {
+            heroImg.src = getCardImgUrl(currentCard);
+            heroImg.alt = `Lá bài Tarot ${displayTitle}`;
+        }
+
+        setText("trd-stat-suit", suitInfo.en);
+        setText("trd-stat-suit-vn", suitInfo.vn);
+        setText("trd-stat-element", suitInfo.element);
+        setText("trd-stat-domain", suitInfo.domain);
+        document.getElementById("trd-stat-elem-icon")?.setAttribute("src", suitInfo.icon);
+        setText("trd-stat-roman", `${currentCard.roman || pad(currentCard.id)} • #${pad(currentCard.id)}`);
+        setText("trd-stat-en", currentCard.en);
+
+        setText("trd-up-keywords", currentCard.keywords_upright);
+        setText("trd-up-msg", currentCard.msg_upright);
+        setText("trd-rev-keywords", currentCard.keywords_reversed);
+        setText("trd-rev-msg", currentCard.msg_reversed);
+        setText("trd-body-career", currentCard.career);
+        setText("trd-suit-guide-title", `Đặc Tính Nguyên Tố • ${suitInfo.vn}`);
+        setText("trd-suit-guide-desc", suitInfo.guide);
+
+        applyOrientationState(orientParam, { updateUrl: false });
+        renderRelatedSuitCards();
+        renderSidebar();
+
+        // Công tắc Xuôi / Ngược
+        document.querySelectorAll("[data-set-orient]").forEach((btn) => {
+            btn.addEventListener("click", () => applyOrientationState(btn.dataset.setOrient, { updateUrl: true }));
+        });
+
+        // Lightbox phóng to (Chuột + Bàn phím)
+        const poster = document.getElementById("trd-poster-figure");
+        poster?.addEventListener("click", openLightbox);
+        poster?.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openLightbox();
+            }
+        });
+        document.getElementById("detail-lightbox-close")?.addEventListener("click", closeLightbox);
+        document.getElementById("detail-lightbox-backdrop")?.addEventListener("click", closeLightbox);
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeLightbox();
+        });
+
+        // Bộ lọc Sidebar 78 lá
+        document.getElementById("trd-sidebar-search")?.addEventListener("input", renderSidebar);
+        document.getElementById("trd-sidebar-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-trd-filter]");
+            if (!btn) return;
+            activeSuitFilter = btn.dataset.trdFilter || "all";
+            document.querySelectorAll("[data-trd-filter]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-active", isSel);
+                b.setAttribute("aria-pressed", String(isSel));
+            });
+            renderSidebar();
+        });
+
+        // Sao chép liên kết chia sẻ
+        const shareBtn = document.getElementById("trd-share-btn");
+        const shareLabel = document.getElementById("trd-share-label");
+        if (shareBtn && shareLabel) {
+            shareBtn.onclick = async () => {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    shareLabel.textContent = "Đã sao chép!";
+                    setTimeout(() => {
+                        shareLabel.textContent = "Chia sẻ";
+                    }, 2000);
+                } catch (e) {
+                    shareLabel.textContent = "Chia sẻ";
+                }
+            };
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", initTarotDetailPage);
 })();
 ```

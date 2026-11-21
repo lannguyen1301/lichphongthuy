@@ -1,5 +1,5 @@
 // scss/pages/_utilities.scss
-// BẢN FULL 100% ĐÃ FIX TRIỆT ĐỂ LỖI "@extend selectors across media queries" TẠI DÒNG 286
+// BẢN SẠCH 100% — Đủ 10 Chuyên mục + Kinh Dịch 64 Quẻ (3 Xu SVG 3D) + Tarot 78 Lá + Full a11y
 @use "../abstracts" as abs;
 
 .util-page {
@@ -19,8 +19,12 @@
     }
 }
 
+.util-sr-only {
+    @extend %srOnly;
+}
+
 // ==========================================================================
-// 1. HEADER & BENTO DUAL-NAVBAR 2 TẦNG (.util-header) CHUẨN CHECKLIST
+// 1. HEADER & BENTO DUAL-NAVBAR 2 TẦNG (.util-header)
 // ==========================================================================
 .util-header {
     position: relative;
@@ -31,17 +35,17 @@
 
     &__top-card {
         @extend %flexColumn;
-        gap: 1.4rem;
-        padding: 1.8rem 2.2rem;
+        gap: 1.5rem;
+        padding: 2rem 2.4rem;
         background-color: var(--body-bg);
         border: 1px solid var(--border-color);
-        border-radius: 2.4rem;
-        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        border-radius: 2.6rem;
+        box-shadow: 0 0.6rem 2rem var(--shadow-color);
         @extend %transHeaderScroll;
 
         @include abs.screen(sm) {
-            padding: 1.4rem 1.6rem;
-            border-radius: 1.8rem;
+            padding: 1.5rem 1.6rem;
+            border-radius: 2rem;
         }
     }
 
@@ -54,36 +58,48 @@
     &__brand-row {
         @extend %flexBetween;
         flex-wrap: wrap;
-        gap: 1.4rem;
-        padding-bottom: 1.2rem;
+        gap: 1.6rem;
+        padding-bottom: 1.4rem;
         border-bottom: 1px solid var(--border-color);
     }
 
+    &__brand-box,
     &__brand-link {
         @extend %flexItemCenter;
-        gap: 1.2rem;
+        gap: 1.4rem;
         min-width: 0;
     }
 
     &__logo-box {
         @extend %inlineFlexCenter;
         @extend %flexItemFixed;
-        width: 4.4rem;
-        height: 4.4rem;
-        border-radius: 1.3rem;
+        width: 5.2rem;
+        height: 5.2rem;
+        border-radius: 1.5rem;
         background-color: var(--primary-soft-bg, var(--bg-surface));
         border: 1.5px solid var(--primary-color);
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        cursor: pointer;
+        @extend %transInteractive;
+
+        &:hover {
+            transform: translateY(-2px);
+
+            .util-header__logo-img {
+                animation: baziIconHoverBounce 0.85s ease-in-out infinite;
+            }
+        }
     }
 
     &__logo-img {
-        width: 2.4rem;
-        height: 2.4rem;
+        width: 2.8rem;
+        height: 2.8rem;
         filter: var(--zodiac-filter);
     }
 
     &__title-group {
         @extend %flexColumn;
-        gap: 0.2rem;
+        gap: 0.3rem;
         min-width: 0;
     }
 
@@ -91,7 +107,7 @@
         @extend %inlineFlexCenter;
         gap: 0.6rem;
         width: fit-content;
-        font-size: 1.15rem;
+        font-size: 1.2rem;
         font-weight: 800;
         color: var(--primary-color);
         text-transform: uppercase;
@@ -100,29 +116,28 @@
         &-icon {
             width: 1.6rem;
             height: 1.6rem;
+            filter: var(--zodiac-filter);
         }
     }
 
     &__title {
-        font-size: clamp(1.85rem, 2.2vw, 2.3rem);
+        font-size: clamp(2rem, 2.4vw, 2.5rem);
         font-weight: 800;
         line-height: 1.2;
         color: var(--text-color);
         @extend %textEllipsis;
     }
 
-    &__actions,
-    &__quick-links {
+    &__actions {
         @extend %flexItemCenter;
         flex-wrap: wrap;
         gap: 1rem;
     }
 
-    &__modal-trigger,
-    &__shortcut-btn {
-        height: 4.2rem;
-        padding: 0 1.6rem;
-        border-radius: 1.2rem;
+    &__modal-trigger {
+        height: 4.4rem;
+        padding: 0 1.8rem;
+        border-radius: 1.4rem;
         background-color: var(--primary-soft-bg, var(--bg-surface));
         border: 1.5px solid var(--primary-color);
         font-size: 1.35rem;
@@ -130,46 +145,43 @@
         color: var(--primary-color);
 
         .icon {
-            width: 1.7rem;
-            height: 1.7rem;
+            width: 1.8rem;
+            height: 1.8rem;
             filter: var(--zodiac-filter);
         }
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
             background-color: var(--primary-color);
             color: #ffffff;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
 
             .icon {
                 filter: brightness(0) invert(1);
             }
         }
 
-        &--outline {
-            background-color: var(--bg-surface);
-            border-color: var(--border-color);
-            color: var(--text-color);
-
-            &:hover {
-                border-color: var(--primary-color);
-                background-color: var(--primary-color);
-                color: #ffffff;
-            }
-        }
-    }
-
-    &__modal-trigger {
+        // Ẩn chữ về mặt thị giác ở mobile nhưng vẫn giữ trong cây a11y cho trình đọc màn hình
         @include abs.screen(sm) {
-            span {
-                display: none;
-            }
             width: 4.4rem;
             height: 4.4rem;
             padding: 0;
+
+            span {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+            }
         }
     }
 
-    // Nút Hamburger 44x44px chuẩn Checklist trên Mobile (< 768px)
+    // Nút Hamburger 44x44px chuẩn vùng chạm Mobile (< 768px)
     &__burger {
         display: none;
         flex-direction: column;
@@ -209,7 +221,6 @@
         }
     }
 
-    // Tầng 2: Segmented Pill Sub-Navbar
     &__sub-bar {
         @extend %flexCenter;
 
@@ -219,27 +230,75 @@
     }
 }
 
-// Tầng 1: Primary Utility Navbar (Đã đưa @extend %animDropdownFadeIn ra ngoài @media)
+.util-primary-nav-shell {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.8rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+    }
+}
+
 .util-primary-nav {
     width: 100%;
+    min-width: 0;
 
-    // ✅ ĐÃ FIX: Đặt @extend %animDropdownFadeIn ở cấp gốc (bên ngoài @include abs.screen(md))
     &.is-open {
         @extend %animDropdownFadeIn;
+    }
+
+    &__step {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.8rem;
+        height: 4.6rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+
+        @include abs.screen(md) {
+            display: none;
+        }
     }
 
     &__list {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 0.8rem;
+        justify-content: flex-start;
+        gap: 1rem;
         overflow-x: auto;
         overflow-y: hidden;
-        padding: 0.2rem;
+        padding: 0.3rem 0.2rem;
         scrollbar-width: none;
+        cursor: grab;
+        user-select: none;
+        scroll-behavior: smooth;
 
         &::-webkit-scrollbar {
             display: none;
+        }
+
+        &.is-dragging {
+            cursor: grabbing;
+            scroll-behavior: auto;
+
+            .util-primary-nav__link {
+                pointer-events: none;
+            }
         }
     }
 
@@ -249,23 +308,29 @@
 
     &__link {
         @extend %inlineFlexCenter;
-        gap: 0.7rem;
-        height: 4.2rem;
-        padding: 0 1.4rem;
+        gap: 0.9rem;
+        height: 4.8rem;
+        padding: 0 1.6rem 0 1rem;
         background-color: var(--bg-surface);
         border: 1.5px solid var(--border-color);
-        border-radius: 1.3rem;
-        font-size: 1.35rem;
+        border-radius: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 800;
         color: var(--text-color);
+        -webkit-user-drag: none;
         @extend %textNoWrap;
         @extend %transInteractive;
 
         &:hover,
         &:focus-visible {
             border-color: var(--primary-color);
+            background-color: var(--body-bg);
             color: var(--primary-color);
             transform: translateY(-2px);
+
+            .util-primary-nav__icon {
+                animation: baziIconHoverBounce 0.85s ease-in-out infinite;
+            }
         }
 
         &.is-active,
@@ -273,7 +338,12 @@
             background-color: var(--primary-color);
             border-color: var(--primary-color);
             color: #ffffff;
-            box-shadow: 0 0.5rem 1.4rem var(--shadow-color);
+            box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+
+            .util-primary-nav__icon-box {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.35);
+            }
 
             .util-primary-nav__icon {
                 filter: brightness(0) invert(1);
@@ -281,18 +351,26 @@
         }
     }
 
-    &__icon {
-        width: 1.8rem;
-        height: 1.8rem;
-        object-fit: contain;
+    &__icon-box {
+        @extend %inlineFlexCenter;
         @extend %flexItemFixed;
-
-        &--filtered {
-            filter: var(--zodiac-filter);
-        }
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        pointer-events: none;
+        @extend %transTheme;
     }
 
-    // Bên trong @include abs.screen(md) tuyệt đối không gọi @extend
+    &__icon {
+        width: 2.1rem;
+        height: 2.1rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+        pointer-events: none;
+    }
+
     @include abs.screen(md) {
         display: none;
         padding-top: 0.8rem;
@@ -305,6 +383,7 @@
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             overflow: visible;
+            cursor: default;
             gap: 0.8rem;
         }
 
@@ -339,7 +418,7 @@
 .util-sub-nav {
     display: inline-flex;
     max-width: 100%;
-    padding: 0.5rem;
+    padding: 0.55rem;
     background-color: var(--body-bg);
     border: 1.5px solid var(--border-color);
     border-radius: 99.9rem;
@@ -364,7 +443,8 @@
         @extend %textNoWrap;
         @extend %transTheme;
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
             color: var(--text-color);
         }
 
@@ -378,7 +458,7 @@
 }
 
 // ==========================================================================
-// 2. KHUNG CARD CHUNG & HỆ THỐNG FORM TRONG UTILITIES
+// 2. KHUNG CARD CHUNG & HỆ THỐNG FORM / BENTO STEPPER
 // ==========================================================================
 .util-panel,
 .util-subpanel {
@@ -389,9 +469,10 @@
 
 .util-card {
     position: relative;
+    overflow: visible;
     min-width: 0;
     @extend %flexColumn;
-    gap: 2rem;
+    gap: 2.2rem;
     padding: 2.6rem 2.8rem;
     background-color: var(--body-bg);
     border: 1px solid var(--border-color);
@@ -407,6 +488,7 @@
 
     &__head {
         @extend %flexBetween;
+        align-items: flex-start;
         flex-wrap: wrap;
         gap: 1.4rem;
         padding-bottom: 1.4rem;
@@ -420,17 +502,18 @@
     }
 
     &__sub {
-        margin-top: 0.3rem;
+        margin-top: 0.35rem;
         font-size: 1.35rem;
         font-weight: 600;
+        line-height: 1.5;
         color: var(--text-muted);
     }
 
     &__tag {
-        padding: 0.45rem 1.4rem;
+        padding: 0.5rem 1.5rem;
         border-radius: 99.9rem;
         background-color: var(--primary-soft-bg, var(--bg-surface));
-        border: 1px solid var(--primary-color);
+        border: 1.5px solid var(--primary-color);
         font-size: 1.25rem;
         font-weight: 800;
         color: var(--primary-color);
@@ -469,18 +552,6 @@
             grid-template-columns: 1fr;
         }
     }
-
-    &--5cols {
-        grid-template-columns: 1.3fr repeat(4, minmax(0, 1fr));
-
-        @include abs.screen(lg) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        @include abs.screen(sm) {
-            grid-template-columns: 1fr;
-        }
-    }
 }
 
 .util-field {
@@ -498,8 +569,8 @@
 
     &__input {
         width: 100%;
-        height: 4.6rem;
-        padding: 0 1.4rem;
+        height: 4.8rem;
+        padding: 0 1.5rem;
         background-color: var(--bg-surface);
         border: 1.5px solid var(--border-color);
         border-radius: 1.4rem;
@@ -517,30 +588,39 @@
     }
 
     &__hint {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         font-weight: 700;
         color: var(--primary-color);
-    }
-
-    &--action .util-btn {
-        width: 100%;
-        height: 4.6rem;
     }
 }
 
 .util-btn {
-    height: 4.6rem;
+    height: 4.8rem;
     padding: 0 2.4rem;
     border-radius: 1.4rem;
     font-size: 1.45rem;
     font-weight: 800;
+
+    &--sm {
+        height: 3.8rem;
+        padding: 0 1.4rem;
+        border-radius: 1.1rem;
+        font-size: 1.25rem;
+    }
+
+    &__svg-icon {
+        width: 2rem;
+        height: 2rem;
+        filter: brightness(0) invert(1);
+    }
 
     &--primary {
         background-color: var(--primary-color);
         color: #ffffff;
         box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
 
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled),
+        &:focus-visible:not(:disabled) {
             background-color: var(--primary-hover);
             transform: translateY(-2px);
         }
@@ -551,7 +631,8 @@
         border: 1.5px solid var(--primary-color);
         color: var(--primary-color);
 
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled),
+        &:focus-visible:not(:disabled) {
             background-color: var(--primary-color);
             color: #ffffff;
         }
@@ -562,7 +643,8 @@
         border: 1.5px solid var(--border-color);
         color: var(--text-color);
 
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled),
+        &:focus-visible:not(:disabled) {
             border-color: var(--primary-color);
             color: var(--primary-color);
         }
@@ -574,12 +656,121 @@
     }
 }
 
-// ==========================================================================
-// 3. MỤC 1 & 2: ĐỒNG HỒ ĐA NĂNG & ĐỔI NGÀY TRỰC TIẾP
-// ==========================================================================
-.util-clock-stage {
-    @extend %flexColumnCenterAll;
+.util-stepper-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+
+    &--2cols {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &--4cols {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+        @include abs.screen(lg) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-stepper-box {
+    @extend %flexColumn;
     gap: 0.8rem;
+    padding: 1.4rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-align: center;
+    @extend %transTheme;
+
+    &:hover,
+    &:focus-within {
+        border-color: var(--primary-color);
+    }
+
+    &__label {
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-muted);
+    }
+
+    &__ctrl {
+        display: grid;
+        grid-template-columns: 3.8rem 1fr 3.8rem;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    &__btn {
+        @extend %inlineFlexCenter;
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 1.1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &__input {
+        width: 100%;
+        text-align: center;
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+        appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+    }
+}
+
+// ==========================================================================
+// 3. MỤC 1: ĐỒNG HỒ BẤM GIỜ, ĐẾM NGƯỢC BENTO & BÁO THỨC ĐA NĂNG
+// ==========================================================================
+.util-timer-bento {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    align-items: stretch;
+    gap: 2rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: 1fr;
+    }
+
+    &__left,
+    &__right {
+        @extend %flexColumn;
+        justify-content: space-between;
+        gap: 1.4rem;
+        min-width: 0;
+    }
+}
+
+.util-clock-stage {
+    flex: 1;
+    @extend %flexColumnCenterAll;
+    gap: 1.2rem;
     padding: 3.2rem 2rem;
     background-color: var(--bg-surface);
     border: 2px solid var(--border-color);
@@ -587,22 +778,28 @@
     text-align: center;
 
     &--compact {
-        padding: 2.4rem 2rem;
+        padding: 2.4rem 1.8rem;
     }
 
     &__tag {
-        padding: 0.35rem 1.2rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3.4rem;
+        padding: 0.6rem 1.8rem;
         border-radius: 99.9rem;
         background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-        font-size: 1.2rem;
+        border: 1.5px solid var(--primary-color);
+        font-size: 1.25rem;
         font-weight: 800;
+        line-height: 1.3;
         color: var(--primary-color);
         text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
 
     &__digits {
-        font-size: clamp(4.6rem, 9vw, 8.6rem);
+        font-size: clamp(4.4rem, 7.5vw, 7.8rem);
         font-weight: 800;
         line-height: 1;
         color: var(--text-color);
@@ -617,6 +814,41 @@
     }
 }
 
+.util-sound-bento {
+    @extend %flexColumn;
+    gap: 1.4rem;
+    padding: 1.6rem 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+
+    &__row {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        padding-top: 1.2rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__info {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__name {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textEllipsis;
+    }
+
+    &__actions {
+        @extend %flexWrapGap;
+        gap: 0.8rem;
+    }
+}
+
 .util-clock-controls {
     @extend %flexCenter;
     flex-wrap: wrap;
@@ -625,12 +857,8 @@
 
 .util-preset-chips {
     display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0.8rem;
-
-    @include abs.screen(lg) {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
 
     @include abs.screen(sm) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -648,6 +876,7 @@
     @extend %transInteractive;
 
     &:hover,
+    &:focus-visible,
     &.is-active {
         background-color: var(--primary-color);
         border-color: var(--primary-color);
@@ -707,10 +936,48 @@
     }
 }
 
+.util-alarm-ring-banner {
+    @extend %flexBetween;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    padding: 1.8rem 2.2rem;
+    background-color: var(--primary-soft-bg);
+    border: 2px solid var(--primary-color);
+    border-radius: 2rem;
+    animation: pulse 1.2s ease-in-out infinite;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &__info {
+        @extend %flexColumn;
+        gap: 0.3rem;
+
+        strong {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+    }
+
+    &__tag {
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--primary-color);
+    }
+
+    &__btns {
+        @extend %flexWrapGap;
+        gap: 1rem;
+    }
+}
+
 .util-alarms-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.2rem;
+    gap: 1.4rem;
 
     @include abs.screen(md) {
         grid-template-columns: 1fr;
@@ -719,14 +986,24 @@
 
 .util-alarm-item {
     @extend %flexBetween;
-    gap: 1.2rem;
-    padding: 1.6rem 2rem;
+    gap: 1.4rem;
+    padding: 1.8rem 2rem;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
-    border-radius: 1.8rem;
+    border-radius: 2rem;
+    @extend %transInteractive;
+
+    &.is-disabled {
+        opacity: 0.52;
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+    }
 
     &__time {
-        font-size: 2.6rem;
+        font-size: 2.8rem;
         font-weight: 800;
         line-height: 1;
         color: var(--primary-color);
@@ -735,36 +1012,114 @@
 
     &__title {
         display: block;
-        margin-top: 0.3rem;
-        font-size: 1.35rem;
-        font-weight: 700;
+        margin-top: 0.4rem;
+        font-size: 1.45rem;
+        font-weight: 800;
         color: var(--text-color);
     }
 
+    &__meta {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__right {
+        @extend %flexItemCenter;
+        gap: 1rem;
+    }
+
+    &__toggle {
+        position: relative;
+        width: 4.8rem;
+        height: 2.6rem;
+        border-radius: 99.9rem;
+        background-color: var(--border-color);
+        @extend %transTheme;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0.3rem;
+            left: 0.3rem;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: #ffffff;
+            transition: transform 0.25s ease;
+        }
+
+        &.is-on {
+            background-color: var(--primary-color);
+
+            &::after {
+                transform: translateX(2.2rem);
+            }
+        }
+    }
+
     &__del {
-        padding: 0.6rem 1.2rem;
-        border-radius: 1rem;
+        @extend %inlineFlexCenter;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 1.2rem;
         background-color: var(--body-bg);
         border: 1px solid var(--border-color);
-        font-size: 1.25rem;
-        font-weight: 800;
         color: var(--color-danger);
-    }
-}
+        @extend %transInteractive;
 
-.util-conv-result-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.4rem;
+        svg {
+            width: 1.9rem;
+            height: 1.9rem;
+        }
 
-    @include abs.screen(md) {
-        grid-template-columns: 1fr;
+        &:hover,
+        &:focus-visible {
+            background-color: var(--color-danger);
+            border-color: var(--color-danger);
+            color: #ffffff;
+            transform: scale(1.06);
+        }
     }
 }
 
 // ==========================================================================
-// 4. MỤC 3, 4, 5: TIẾT KHÍ, KINH DỊCH, TAROT & NGÀY NÀY NĂM XƯA
+// 4. MỤC 2 & 3: ĐỔI NGÀY BENTO DASHBOARD & 24 TIẾT KHÍ ĐỒNG BỘ TRANG DAY
 // ==========================================================================
+.util-conv-dashboard {
+    @extend %flexColumn;
+    gap: 1.8rem;
+}
+
+.util-season-filters {
+    @extend %flexWrapGap;
+    gap: 0.8rem;
+}
+
+.util-subfilter-btn {
+    @extend %inlineFlexCenter;
+    height: 3.8rem;
+    padding: 0 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 99.9rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-color);
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible,
+    &.is-active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+        transform: translateY(-1px);
+    }
+}
+
 .util-year-Step-bar {
     @extend %flexItemCenter;
     gap: 0.8rem;
@@ -784,7 +1139,8 @@
         border: 1px solid var(--border-color);
         font-weight: 800;
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
             border-color: var(--primary-color);
             color: var(--primary-color);
         }
@@ -798,9 +1154,9 @@
     }
 
     &__today {
-        height: 3.6rem;
-        padding: 0 1.4rem;
-        border-radius: 1rem;
+        height: 3.8rem;
+        padding: 0 1.6rem;
+        border-radius: 1.1rem;
         background-color: var(--primary-color);
         color: #ffffff;
         font-size: 1.3rem;
@@ -808,10 +1164,12 @@
     }
 }
 
-.util-solarterms-grid {
+.util-solarterms-grid,
+.util-catalog-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.4rem;
+    align-items: stretch;
+    gap: 1.5rem;
 
     @include abs.screen(lg) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -822,165 +1180,348 @@
     }
 }
 
-.util-term-card {
+.util-bento-item {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 0.9rem;
-    padding: 1.6rem 1.8rem;
+    height: 100%;
+    min-height: 16.8rem;
+    gap: 1rem;
+    padding: 1.8rem 2rem;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
-    border-radius: 2rem;
+    border-radius: 2.2rem;
+    text-align: left;
+    cursor: pointer;
     @extend %transInteractive;
 
-    &.is-current-term {
+    &.is-current-highlight {
         background-color: var(--primary-soft-bg, var(--body-bg));
         border: 2px solid var(--primary-color);
+        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
     }
 
-    &:hover {
+    &__bg-wrap {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -0.6rem;
+        bottom: -0.6rem;
+        width: 6.4rem;
+        height: 6.4rem;
+        object-fit: contain;
+        opacity: 0.11;
+        filter: var(--zodiac-filter);
+        transform: rotate(-10deg);
+        @extend %transWatermark;
+    }
+
+    &:hover,
+    &:focus-visible {
         border-color: var(--primary-color);
         background-color: var(--body-bg);
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+        .util-bento-item__watermark {
+            opacity: 0.25;
+            transform: scale(1.1) rotate(0deg);
+        }
+    }
+
+    &[data-term-anim="wind"]:hover &__icon-box img,
+    &.is-current-highlight[data-term-anim="wind"] &__icon-box img {
+        @extend %animTermWind;
+    }
+    &[data-term-anim="rain"]:hover &__icon-box img,
+    &.is-current-highlight[data-term-anim="rain"] &__icon-box img {
+        @extend %animTermRain;
+    }
+    &[data-term-anim="sun"]:hover &__icon-box img,
+    &.is-current-highlight[data-term-anim="sun"] &__icon-box img {
+        @extend %animTermSun;
+    }
+    &[data-term-anim="thunder"]:hover &__icon-box img,
+    &.is-current-highlight[data-term-anim="thunder"] &__icon-box img {
+        @extend %animTermThunder;
+    }
+    &[data-term-anim="sprout"]:hover &__icon-box img,
+    &.is-current-highlight[data-term-anim="sprout"] &__icon-box img {
+        @extend %animTermSprout;
+    }
+    &[data-term-anim="snow"]:hover &__icon-box img,
+    &.is-current-highlight[data-term-anim="snow"] &__icon-box img {
+        @extend %animTermSnow;
+    }
+
+    &:hover &__icon-box img {
+        animation: baziIconHoverBounce 0.85s ease-in-out infinite;
     }
 
     &__top {
+        position: relative;
+        z-index: 2;
         @extend %flexBetween;
         gap: 1rem;
     }
 
     &__icon-box {
         @extend %inlineFlexCenter;
-        width: 4.4rem;
-        height: 4.4rem;
-        border-radius: 1.2rem;
+        @extend %flexItemFixed;
+        width: 4.6rem;
+        height: 4.6rem;
+        border-radius: 1.4rem;
         background-color: var(--body-bg);
         border: 1px solid var(--border-color);
+        box-shadow: 0 0.4rem 1rem var(--shadow-color);
 
-        img {
-            width: 2.6rem;
-            height: 2.6rem;
+        img,
+        svg {
+            width: 2.7rem;
+            height: 2.7rem;
+            object-fit: contain;
+        }
+
+        &--filtered img {
             filter: var(--zodiac-filter);
         }
     }
 
-    &__date-box {
-        text-align: right;
+    &__badge {
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
         font-variant-numeric: tabular-nums;
-
-        strong {
-            display: block;
-            font-size: 1.45rem;
-            font-weight: 800;
-            color: var(--primary-color);
-        }
-
-        small {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-muted);
-        }
     }
 
-    &__name {
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.3rem;
+    }
+
+    &__title {
         font-size: 1.85rem;
         font-weight: 800;
         color: var(--text-color);
     }
 
+    &__sub {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
     &__desc {
+        position: relative;
+        z-index: 2;
         font-size: 1.3rem;
-        line-height: 1.5;
+        line-height: 1.55;
         color: var(--text-muted);
+    }
+
+    &__foot {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        margin-top: auto;
+        padding-top: 0.8rem;
+        border-top: 1px dashed var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
     }
 }
 
+// ==========================================================================
+// 5. MỤC 4: KINH DỊCH (3 XU SVG 3D + 64 QUẺ) & TAROT (QUẠT 9/7 LÁ + LẬT 3D)
+// ==========================================================================
 .util-divination-hero {
     @extend %flexColumnCenterAll;
-    gap: 0.8rem;
+    gap: 1.2rem;
     text-align: center;
-    padding-bottom: 1.6rem;
+    padding-bottom: 2rem;
     border-bottom: 1px dashed var(--border-color);
 }
 
-.util-iching-result,
-.util-tarot-result {
+.util-divination-actions {
+    @extend %flexCenter;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 0.6rem;
+}
+
+// --- 5.1. Sân khấu 3 đồng xu SVG 2 mặt (Đổi màu động theo 5 mệnh Ngũ Hành) ---
+.util-coins-stage {
+    @extend %flexCenter;
+    gap: 2.2rem;
+    padding: 1.6rem 0 1.2rem;
+    perspective: 90rem;
+
+    @include abs.screen(sm) {
+        gap: 1.2rem;
+    }
+}
+
+.util-coin {
+    width: 8.6rem;
+    height: 8.6rem;
+    perspective: 60rem;
+    background: transparent;
+    border: none;
+
+    @include abs.screen(sm) {
+        width: 6.8rem;
+        height: 6.8rem;
+    }
+
+    &__inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.65s cubic-bezier(0.34, 1.32, 0.64, 1);
+    }
+
+    &[data-face="yin"] &__inner {
+        transform: rotateY(180deg);
+    }
+
+    &.is-tossing &__inner {
+        animation: coinToss3D 0.82s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    &:nth-child(2).is-tossing &__inner {
+        animation-delay: 0.08s;
+    }
+
+    &:nth-child(3).is-tossing &__inner {
+        animation-delay: 0.16s;
+    }
+
+    &__face {
+        position: absolute;
+        inset: 0;
+        @extend %flexCenter;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 50%;
+        background-color: var(--bg-surface);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        img {
+            width: 92%;
+            height: 92%;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+
+        &--yin {
+            transform: rotateY(180deg);
+        }
+    }
+}
+
+// --- 5.2. Khối kết quả Kinh Dịch & Xếp 6 hào từ dưới lên ---
+.util-iching-bento {
     display: grid;
-    grid-template-columns: 22rem 1fr;
-    align-items: center;
-    gap: 2.6rem;
-    padding: 2.4rem;
+    grid-template-columns: 23rem 1fr;
+    align-items: start;
+    gap: 2.4rem;
+    padding: 2.2rem;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
     border-radius: 2.4rem;
 
+    &.is-sliding .util-iching-cards-stack {
+        animation: tarotResultSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     @include abs.screen(md) {
         grid-template-columns: 1fr;
-        padding: 1.8rem;
+        justify-items: center;
+        padding: 1.6rem;
+    }
+}
+
+.util-iching-stage {
+    @extend %flexColumnCenterAll;
+    gap: 1.4rem;
+    width: 100%;
+    max-width: 23rem;
+    padding: 2rem 1.8rem;
+    background-color: var(--body-bg);
+    border: 2px solid var(--primary-color);
+    border-radius: 2.2rem;
+    box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible {
+        transform: translateY(-3px);
+        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
     }
 
-    &__visual {
-        @extend %flexColumn;
-        gap: 1rem;
-        padding: 2.2rem 2rem;
-        background-color: var(--body-bg);
-        border: 2px solid var(--primary-color);
-        border-radius: 2rem;
-    }
+    &__svg-box {
+        @extend %flexCenter;
+        width: 10.4rem;
+        height: 10.4rem;
+        padding: 1.2rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1.5px dashed var(--primary-color);
+        border-radius: 1.8rem;
 
-    &__content,
-    &__info {
-        @extend %flexColumn;
-        gap: 1.2rem;
-    }
-
-    &__num,
-    &__status {
-        display: inline-block;
-        width: fit-content;
-        padding: 0.35rem 1.2rem;
-        border-radius: 99.9rem;
-        background-color: var(--primary-color);
-        color: #ffffff;
-        font-size: 1.2rem;
-        font-weight: 800;
-    }
-
-    &__name {
-        font-size: 2.4rem;
-        font-weight: 800;
-        color: var(--primary-color);
-    }
-
-    &__block {
-        padding: 1.2rem 1.5rem;
-        background-color: var(--body-bg);
-        border-left: 4px solid var(--primary-color);
-        border-radius: 0 1.4rem 1.4rem 0;
-        font-size: 1.4rem;
-        line-height: 1.6;
-
-        strong {
-            display: block;
-            margin-bottom: 0.25rem;
-            color: var(--text-color);
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
         }
+    }
+
+    &__lines {
+        @extend %flexColumn;
+        gap: 0.7rem;
+        width: 100%;
+        padding-top: 1rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__hint {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
     }
 }
 
 .util-hex-line {
     display: flex;
     justify-content: space-between;
-    gap: 1.4rem;
-    height: 1.3rem;
+    gap: 1.2rem;
+    height: 1rem;
+    opacity: 0;
+    animation: hexLineReveal 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 
     span {
         flex: 1;
         height: 100%;
         background-color: var(--text-color);
-        border-radius: 0.4rem;
+        border-radius: 0.35rem;
     }
 
     &--yang span {
@@ -988,62 +1529,621 @@
     }
 }
 
-.util-tarot-card-art {
-    @extend %flexColumnCenterAll;
-    justify-content: space-between;
-    min-height: 31rem;
-    padding: 2.4rem 1.8rem;
-    background: linear-gradient(145deg, var(--primary-color), var(--primary-active));
-    border: 3px solid #ffffff;
-    border-radius: 2.2rem;
-    color: #ffffff;
-    box-shadow: 0 1.4rem 3rem var(--shadow-color);
-    text-align: center;
-
-    &__roman {
-        padding: 0.3rem 1.2rem;
+.util-iching-result {
+    &__num {
+        padding: 0.4rem 1.4rem;
         border-radius: 99.9rem;
-        background-color: rgba(255, 255, 255, 0.2);
-        font-size: 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.25rem;
         font-weight: 800;
-        letter-spacing: 0.08em;
+
+        &[data-orientation="reversed"] {
+            background-color: var(--color-danger, #dc2626);
+        }
     }
 
-    &__emblem {
-        font-size: 7.2rem;
-        line-height: 1;
-        filter: drop-shadow(0 0.6rem 1.2rem rgba(0, 0, 0, 0.25));
+    &__trigrams {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__name {
+        font-size: 2.1rem;
+        font-weight: 800;
+        line-height: 1.25;
+        color: var(--primary-color);
+    }
+}
+
+.util-iching-cards-stack {
+    @extend %flexColumn;
+    gap: 1.2rem;
+    width: 100%;
+    min-width: 0;
+}
+
+.util-div-detail-card {
+    @extend %flexColumn;
+    gap: 0.6rem;
+    padding: 1.6rem 1.8rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    @extend %transInteractive;
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    &--highlight {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border-color: var(--primary-color);
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    strong {
+        color: var(--text-color);
+        font-weight: 800;
+    }
+}
+
+// --- 5.3. Lưới tra cứu trọn bộ 64 Quẻ Kinh Dịch ---
+.util-iching-catalog {
+    @extend %flexColumn;
+    gap: 1.6rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--border-color);
+
+    &__tools {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+.util-iching-filters {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.util-iching-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.2rem;
+
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-hex-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 1.5rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-align: left;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible,
+    &.is-current-highlight {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+    }
+
+    &.is-current-highlight {
+        border-width: 2px;
+        background-color: var(--primary-soft-bg, var(--body-bg));
+    }
+
+    &__top {
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__svg {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 4.8rem;
+        height: 4.8rem;
+        padding: 0.6rem;
+        border-radius: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__badge {
+        padding: 0.3rem 0.9rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %textNoWrap;
     }
 
     &__title {
-        font-size: 1.5rem;
+        font-size: 1.55rem;
         font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__desc {
+        font-size: 1.25rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+        @extend %textClamp2;
+    }
+}
+
+// --- 5.4. Tarot Quạt Bài 9/7 Lá & Sân Khấu Lật 3D ---
+.util-tarot-fan {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 3.4rem 1.6rem 2.2rem;
+    min-height: 22rem;
+    width: 100%;
+    overflow: visible;
+
+    @include abs.screen(md) {
+        padding: 2.6rem 0.8rem 1.6rem;
+        min-height: 17.5rem;
+    }
+
+    &[data-deck-state="shuffling"] {
+        pointer-events: none;
+
+        .util-tarot-back {
+            animation: tarotShufflePulse 0.68s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+    }
+}
+
+.util-tarot-back {
+    --fan-angle: 0deg;
+    --fan-y: 0rem;
+    --shuffle-dx: 0px;
+
+    position: relative;
+    width: 10.6rem;
+    aspect-ratio: 7 / 12;
+    margin-left: -3.2rem;
+    border-radius: 1.1rem;
+    overflow: hidden;
+    background: transparent;
+    border: 2px solid transparent;
+    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.22);
+    transform-origin: bottom center;
+    transform: translateY(var(--fan-y)) rotate(var(--fan-angle));
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        border-color 0.25s ease;
+    cursor: pointer;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none;
+    }
+
+    &[data-fan-idx="0"] {
+        --fan-angle: -20deg;
+        --fan-y: 2.6rem;
+        --shuffle-dx: 120px;
+        z-index: 1;
+    }
+    &[data-fan-idx="1"] {
+        --fan-angle: -15deg;
+        --fan-y: 1.5rem;
+        --shuffle-dx: 90px;
+        z-index: 2;
+    }
+    &[data-fan-idx="2"] {
+        --fan-angle: -10deg;
+        --fan-y: 0.7rem;
+        --shuffle-dx: 60px;
+        z-index: 3;
+    }
+    &[data-fan-idx="3"] {
+        --fan-angle: -5deg;
+        --fan-y: 0.2rem;
+        --shuffle-dx: 30px;
+        z-index: 4;
+    }
+    &[data-fan-idx="4"] {
+        --fan-angle: 0deg;
+        --fan-y: 0rem;
+        --shuffle-dx: 0px;
+        z-index: 5;
+    }
+    &[data-fan-idx="5"] {
+        --fan-angle: 5deg;
+        --fan-y: 0.2rem;
+        --shuffle-dx: -30px;
+        z-index: 4;
+    }
+    &[data-fan-idx="6"] {
+        --fan-angle: 10deg;
+        --fan-y: 0.7rem;
+        --shuffle-dx: -60px;
+        z-index: 3;
+    }
+    &[data-fan-idx="7"] {
+        --fan-angle: 15deg;
+        --fan-y: 1.5rem;
+        --shuffle-dx: -90px;
+        z-index: 2;
+    }
+    &[data-fan-idx="8"] {
+        --fan-angle: 20deg;
+        --fan-y: 2.6rem;
+        --shuffle-dx: -120px;
+        z-index: 1;
+    }
+
+    &:hover,
+    &:focus-visible {
+        z-index: 20;
+        border-color: #facc15;
+        transform: translateY(calc(var(--fan-y) - 2.2rem)) rotate(var(--fan-angle)) scale(1.08);
+        box-shadow:
+            0 1.4rem 3rem rgba(15, 23, 42, 0.35),
+            0 0 1.6rem rgba(250, 204, 21, 0.55);
+    }
+
+    &.is-picked {
+        z-index: 18;
+        border-color: var(--primary-color);
+        transform: translateY(calc(var(--fan-y) - 2.6rem)) rotate(var(--fan-angle)) scale(1.1);
+        box-shadow:
+            0 1.6rem 3.2rem var(--shadow-color),
+            0 0 1.8rem rgba(250, 204, 21, 0.65);
+    }
+
+    @include abs.screen(md) {
+        width: 8.6rem;
+        margin-left: -3rem;
+
+        &--edge {
+            display: none;
+        }
+
+        &[data-fan-idx="1"] {
+            margin-left: 0;
+        }
+    }
+
+    @include abs.screen(sm) {
+        width: 7.2rem;
+        margin-left: -2.6rem;
+    }
+}
+
+.util-tarot-bento {
+    display: grid;
+    grid-template-columns: 24rem 1fr;
+    align-items: start;
+    gap: 2.6rem;
+    padding: 2.2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.4rem;
+
+    &.is-sliding .util-iching-cards-stack {
+        animation: tarotResultSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        padding: 1.6rem;
+    }
+}
+
+.util-tarot-stage {
+    @extend %flexColumnCenterAll;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 24rem;
+    perspective: 120rem;
+    cursor: pointer;
+
+    &__inner {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 7 / 12;
+        transform-style: preserve-3d;
+        transition: transform 0.72s cubic-bezier(0.34, 1.32, 0.64, 1);
+        border-radius: 1.8rem;
+    }
+
+    &[data-flipped="true"] &__inner {
+        transform: rotateY(180deg);
+    }
+
+    &:hover &__inner,
+    &:focus-visible &__inner {
+        filter: drop-shadow(0 1.4rem 2.8rem var(--shadow-color));
+    }
+
+    &__face {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 1.8rem;
+        overflow: hidden;
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        &--front {
+            transform: rotateY(180deg);
+        }
+    }
+
+    &[data-orientation="reversed"] &__face--front img {
+        transform: rotate(180deg);
+    }
+
+    &__hint {
+        @extend %flexColumnCenterAll;
+        gap: 0.3rem;
+        text-align: center;
+
+        span {
+            padding: 0.35rem 1.2rem;
+            border-radius: 99.9rem;
+            background-color: var(--body-bg);
+            border: 1px solid var(--border-color);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        small {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
     }
 }
 
 // ==========================================================================
-// 5. MỤC 6, 7, 8, 9, 10: HOROSCOPE, KHOẢNG CÁCH, THẦN SỐ HỌC, NHỊP SINH HỌC & TỪ ĐIỂN
+// 6. MỤC 5: NGÀY NÀY NĂM XƯA (CARD CÓ BACKGROUND ẢNH + HOVER PROFILE + PHÂN TRANG)
 // ==========================================================================
-.util-inline-birth-picker {
+.util-history-controls {
     @extend %flexItemCenter;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
 
-    label {
+.util-history-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.8rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-history-card {
+    position: relative;
+    overflow: visible;
+    min-height: 25rem;
+    border-radius: 2.2rem;
+    border: 1.5px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.8rem;
+    color: #ffffff;
+    @extend %transInteractive;
+
+    &__media {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        z-index: 1;
+
+        img {
+            @extend %imgCover;
+            filter: brightness(0.68);
+            transition:
+                transform 0.5s ease,
+                filter 0.4s ease;
+        }
+
+        &::after {
+            content: "";
+            @extend %absCover;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.86) 100%);
+        }
+    }
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        transform: translateY(-4px);
+        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
+
+        .util-history-card__media img {
+            transform: scale(1.06);
+            filter: brightness(0.88);
+        }
+    }
+
+    &__top {
+        position: relative;
+        z-index: 2;
+        @extend %flexBetween;
+        margin-bottom: auto;
+    }
+
+    &__date-pill {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.25rem;
+        font-weight: 800;
+    }
+
+    &__scope-pill {
+        padding: 0.35rem 1rem;
+        border-radius: 99.9rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(6px);
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+
+    &__body {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumn;
+        gap: 0.45rem;
+    }
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.25;
+        color: #ffffff;
+    }
+
+    &__sub {
+        font-size: 1.3rem;
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.88);
+        @extend %textClamp2;
+    }
+}
+
+.util-pagination {
+    @extend %flexCenter;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding-top: 0.8rem;
+
+    &__btn {
+        @extend %inlineFlexCenter;
+        min-width: 4rem;
+        height: 4rem;
+        padding: 0 1.2rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
         font-size: 1.35rem;
         font-weight: 800;
-        color: var(--text-muted);
-        @extend %textNoWrap;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible,
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
     }
+}
+
+// ==========================================================================
+// 7. MỤC 6, 7, 8, 9: HOROSCOPE LINH VẬT, TÍNH THỜI GIAN, THẦN SỐ HỌC & NHỊP SINH HỌC
+// ==========================================================================
+.util-inline-custom-pickers,
+.util-inline-birth-picker {
+    @extend %flexItemCenter;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.util-date-picker-card {
+    @extend %flexColumn;
+    gap: 1rem;
+    padding: 1.8rem 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
 }
 
 .util-horoscope-hero {
+    position: relative;
+    overflow: hidden;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: 2.2rem;
-    padding: 2.4rem;
+    padding: 2.4rem 2.6rem;
     background-color: var(--primary-soft-bg, var(--bg-surface));
     border: 1.5px solid var(--primary-color);
     border-radius: 2.4rem;
@@ -1053,19 +2153,56 @@
         text-align: center;
     }
 
+    &__bg-wrap {
+        @extend %absCover;
+        border-radius: inherit;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+
+        img {
+            position: absolute;
+            right: -1rem;
+            bottom: -1rem;
+            width: 14rem;
+            height: 14rem;
+            object-fit: contain;
+            opacity: 0.12;
+            filter: var(--zodiac-filter);
+            transform: rotate(-10deg);
+            @extend %transWatermark;
+        }
+    }
+
+    &:hover &__bg-wrap img {
+        opacity: 0.22;
+        transform: scale(1.06) rotate(0deg);
+    }
+
     &__badge {
+        position: relative;
+        z-index: 2;
         @extend %inlineFlexCenter;
         width: 8.8rem;
         height: 8.8rem;
         border-radius: 2.4rem;
         background-color: var(--primary-color);
         color: #ffffff;
-        font-size: 4.8rem;
         margin: 0 auto;
         box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        svg,
+        img {
+            width: 5.6rem;
+            height: 5.6rem;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
     }
 
     &__main {
+        position: relative;
+        z-index: 2;
         @extend %flexColumn;
         gap: 0.7rem;
     }
@@ -1075,7 +2212,7 @@
     }
 
     &__pill {
-        padding: 0.3rem 1.1rem;
+        padding: 0.35rem 1.2rem;
         border-radius: 99.9rem;
         background-color: var(--body-bg);
         border: 1px solid var(--border-color);
@@ -1104,58 +2241,31 @@
         font-size: 1.35rem;
         line-height: 1.55;
     }
+
+    &__watermark {
+        position: absolute;
+        right: -1rem;
+        bottom: -1rem;
+        width: 14rem;
+        height: 14rem;
+        opacity: 0.12;
+        pointer-events: none;
+        z-index: 1;
+
+        svg,
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
 }
 
 .util-horoscope-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1rem;
-
-    @include abs.screen(lg) {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    @include abs.screen(sm) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-.util-sign-btn {
-    @extend %flexColumnCenterAll;
-    gap: 0.35rem;
-    padding: 1.3rem 1rem;
-    background-color: var(--bg-surface);
-    border: 1.5px solid var(--border-color);
-    border-radius: 1.6rem;
-    @extend %transInteractive;
-
-    span {
-        font-size: 2.4rem;
-    }
-
-    strong {
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: var(--text-color);
-    }
-
-    small {
-        font-size: 1.1rem;
-        color: var(--text-muted);
-    }
-
-    &:hover,
-    &.is-active {
-        border-color: var(--primary-color);
-        background-color: var(--primary-soft-bg, var(--body-bg));
-        transform: translateY(-2px);
-    }
-}
-
-.util-diff-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.3rem;
 
     @include abs.screen(lg) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1166,27 +2276,66 @@
     }
 }
 
+.util-diff-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
 .util-diff-stat {
-    @extend %flexColumnCenterAll;
-    gap: 0.4rem;
-    padding: 2rem 1.2rem;
-    background-color: var(--primary-soft-bg, var(--bg-surface));
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    min-height: 13.6rem;
+    gap: 0.6rem;
+    padding: 2rem 2.2rem;
+    background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
-    border-radius: 1.8rem;
-    text-align: center;
+    border-radius: 2.2rem;
+    @extend %transInteractive;
+
+    &--highlight {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border: 2px solid var(--primary-color);
+    }
+
+    &:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    &__tag {
+        width: fit-content;
+        padding: 0.25rem 0.9rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--text-muted);
+    }
 
     strong {
-        font-size: 2.8rem;
+        font-size: 3.6rem;
         font-weight: 800;
         line-height: 1;
         color: var(--primary-color);
         font-variant-numeric: tabular-nums;
     }
 
-    span {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: var(--text-muted);
+    span:last-child {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
     }
 }
 
@@ -1282,14 +2431,24 @@
 }
 
 .util-num-cycle-box {
+    position: relative;
+    overflow: visible;
     @extend %flexColumn;
     gap: 0.25rem;
     padding: 1.3rem;
     background-color: var(--body-bg);
-    border: 1px solid var(--border-color);
+    border: 1.5px solid var(--border-color);
     border-radius: 1.4rem;
+    cursor: pointer;
+    @extend %transInteractive;
 
-    span {
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    span:first-child {
         font-size: 1.15rem;
         font-weight: 700;
         color: var(--text-muted);
@@ -1332,16 +2491,26 @@
 }
 
 .util-pythagoras-cell {
+    position: relative;
+    overflow: visible;
     @extend %flexColumnCenterAll;
-    min-height: 6.8rem;
+    min-height: 7.4rem;
     padding: 0.8rem;
     background-color: var(--body-bg);
     border: 1.5px solid var(--border-color);
     border-radius: 1.4rem;
+    cursor: pointer;
+    @extend %transInteractive;
 
     &.has-val {
         border-color: var(--primary-color);
         background-color: var(--primary-soft-bg);
+    }
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
     }
 
     small {
@@ -1390,6 +2559,7 @@
     }
 
     &:hover,
+    &:focus-visible,
     &.is-active {
         background-color: var(--primary-color);
         border-color: var(--primary-color);
@@ -1417,12 +2587,22 @@
 }
 
 .util-bio-stat-card {
+    position: relative;
+    overflow: visible;
     @extend %flexColumn;
-    gap: 0.4rem;
-    padding: 1.6rem;
+    gap: 0.5rem;
+    padding: 1.6rem 1.8rem;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
     border-radius: 1.8rem;
+    cursor: pointer;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
 
     &__head {
         @extend %flexBetween;
@@ -1432,14 +2612,14 @@
     }
 
     &__val {
-        font-size: 2.6rem;
+        font-size: 2.8rem;
         font-weight: 800;
         font-variant-numeric: tabular-nums;
     }
 
     &__advice {
         font-size: 1.25rem;
-        font-weight: 600;
+        font-weight: 700;
         color: var(--text-color);
     }
 }
@@ -1448,7 +2628,7 @@
     width: 100%;
     padding: 1.8rem;
     background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
+    border: 1.5px solid var(--border-color);
     border-radius: 2.2rem;
     overflow-x: auto;
 
@@ -1456,6 +2636,12 @@
         width: 100%;
         min-width: 68rem;
         height: auto;
+    }
+
+    .util-bio-wave-path {
+        stroke-dasharray: 1400;
+        stroke-dashoffset: 1400;
+        animation: utilWaveDraw 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 }
 
@@ -1495,95 +2681,218 @@
     max-width: 42rem;
 }
 
-.util-catalog-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.4rem;
+// ==========================================================================
+// 8. SINGLETON MODAL MỞ RỘNG & PREFERS-REDUCED-MOTION TOÀN TRANG
+// ==========================================================================
+.util-modal-dialog {
+    max-width: 78rem;
+    max-height: calc(100vh - 3.2rem);
+    overflow-y: auto;
+}
 
-    @include abs.screen(lg) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+// Không cần !important nhờ độ đặc hiệu cao hơn .day-term-modal__visual img ở _day.scss
+.day-term-modal__visual .util-modal-tarot-img {
+    width: 15.4rem;
+    height: auto;
+    aspect-ratio: 7 / 12;
+    border-radius: 1.4rem;
+    box-shadow: 0 1rem 2.4rem var(--shadow-color);
 
-    @include abs.screen(sm) {
-        grid-template-columns: 1fr;
+    &.is-reversed {
+        transform: rotate(180deg);
     }
 }
 
-.util-item-card {
+.util-modal-media {
     position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000000;
+    border-bottom: 1px solid var(--border-color);
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.8rem;
-    padding: 1.8rem;
-    background-color: var(--bg-surface);
-    border: 1.5px solid var(--border-color);
-    border-radius: 2rem;
-    text-decoration: none;
-    color: inherit;
-    @extend %transInteractive;
 
-    &.is-selected {
-        border: 2px solid var(--primary-color);
-        background-color: var(--primary-soft-bg, var(--body-bg));
+    &[hidden] {
+        display: none !important;
     }
 
-    &:hover {
-        border-color: var(--primary-color);
-        background-color: var(--body-bg);
-        transform: translateY(-2px);
+    img,
+    video {
+        @extend %imgCover;
     }
 
-    &__head {
-        @extend %flexBetween;
+    &__controls {
+        position: absolute;
+        right: 1.4rem;
+        bottom: 1.4rem;
+        z-index: 3;
+        @extend %flexItemCenter;
         gap: 0.8rem;
     }
 
-    &__icon-wrap {
+    &__slide-btn {
         @extend %inlineFlexCenter;
-        width: 4.2rem;
-        height: 4.2rem;
-        border-radius: 1.2rem;
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        border-radius: 99.9rem;
+        background-color: rgba(0, 0, 0, 0.68);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: #ffffff;
+        font-size: 1.25rem;
+        font-weight: 800;
+        backdrop-filter: blur(6px);
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    }
+}
+
+// --- List 78 Lá Bài Tarot (Dùng chung cho tab Tarot & khối liên kết trên tarot-detail.html) ---
+.util-tarot-catalog {
+    @extend %flexColumn;
+    gap: 1.6rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+.util-tarot-filters {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.util-tarot-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.4rem;
+
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+.util-tarot-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-align: left;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible,
+    &.is-current-highlight {
+        border-color: var(--primary-color);
         background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2.2rem var(--shadow-color);
+    }
+
+    &.is-current-highlight {
+        border-width: 2px;
+        background-color: var(--primary-soft-bg, var(--body-bg));
+    }
+
+    &__thumb {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 7 / 12;
+        overflow: hidden;
+        background-color: var(--body-bg);
 
         img {
-            width: 2.5rem;
-            height: 2.5rem;
-            object-fit: contain;
-        }
-
-        &--filtered img {
-            filter: var(--zodiac-filter);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
         }
     }
 
-    &__tag {
-        padding: 0.3rem 1rem;
+    &:hover &__thumb img {
+        transform: scale(1.04);
+    }
+
+    &__badge {
+        position: absolute;
+        top: 0.7rem;
+        left: 0.7rem;
+        padding: 0.25rem 0.8rem;
         border-radius: 99.9rem;
-        background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-        font-size: 1.15rem;
+        background-color: rgba(15, 23, 42, 0.78);
+        color: #ffffff;
+        font-size: 1.05rem;
         font-weight: 800;
-        color: var(--primary-color);
+        backdrop-filter: blur(4px);
+    }
+
+    &__body {
+        @extend %flexColumn;
+        gap: 0.3rem;
+        padding: 1.2rem;
     }
 
     &__title {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         font-weight: 800;
+        line-height: 1.3;
         color: var(--text-color);
+        @extend %textEllipsis;
     }
 
     &__sub {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         font-weight: 700;
         color: var(--primary-color);
+        @extend %textEllipsis;
     }
 
     &__desc {
-        font-size: 1.3rem;
-        line-height: 1.55;
+        margin-top: 0.2rem;
+        font-size: 1.2rem;
+        line-height: 1.45;
         color: var(--text-muted);
+        @extend %textClamp2;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .util-coin__inner,
+    .util-hex-line,
+    .util-tarot-back,
+    .util-tarot-stage__inner,
+    .util-iching-bento.is-sliding .util-iching-cards-stack,
+    .util-tarot-bento.is-sliding .util-iching-cards-stack,
+    .util-alarm-ring-banner,
+    .util-header__logo-img,
+    .util-primary-nav__icon,
+    .util-bento-item__icon-box img {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        opacity: 1 !important;
+    }
+
+    .util-bio-chart-stage .util-bio-wave-path {
+        animation: none !important;
+        stroke-dashoffset: 0;
     }
 }

@@ -1,0 +1,33 @@
+<svg viewBox="-5 -5 80 80" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="none" id="iching-hexagram-8">
+  <g id="g-hexagram" fill="currentColor">
+    <!-- Hào 1 (Âm) -->
+    <g id="g-line1" transform="translate(0,0)">
+      <rect id="r-line1-yinleft" width="28" height="6" x="2" y="62" />
+      <rect id="r-line1-yinright" width="28" height="6" x="40" y="62" />
+    </g>
+    <!-- Hào 2 (Âm) -->
+    <g id="g-line2" transform="translate(0,-12)">
+      <rect id="r-line2-yinleft" width="28" height="6" x="2" y="62" />
+      <rect id="r-line2-yinright" width="28" height="6" x="40" y="62" />
+    </g>
+    <!-- Hào 3 (Âm) -->
+    <g id="g-line3" transform="translate(0,-24)">
+      <rect id="r-line3-yinleft" width="28" height="6" x="2" y="62" />
+      <rect id="r-line3-yinright" width="28" height="6" x="40" y="62" />
+    </g>
+    <!-- Hào 4 (Âm) -->
+    <g id="g-line4" transform="translate(0,-36)">
+      <rect id="r-line4-yinleft" width="28" height="6" x="2" y="62" />
+      <rect id="r-line4-yinright" width="28" height="6" x="40" y="62" />
+    </g>
+    <!-- Hào 5 (Dương) -->
+    <g id="g-line5" transform="translate(0,-48)">
+      <rect id="r-line5-yang" width="66" height="6" x="2" y="62" />
+    </g>
+    <!-- Hào 6 (Âm) -->
+    <g id="g-line6" transform="translate(0,-60)">
+      <rect id="r-line6-yinleft" width="28" height="6" x="2" y="62" />
+      <rect id="r-line6-yinright" width="28" height="6" x="40" y="62" />
+    </g>
+  </g>
+</svg>
