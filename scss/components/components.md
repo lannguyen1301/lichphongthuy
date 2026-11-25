@@ -16,6 +16,7 @@
 @forward "./month-calendar";
 @forward "./converter-modal";
 @forward "./festival-calendar";
+@forward "./iching-card";
 ```
 
 ### button.scss
@@ -5319,5 +5320,344 @@
             transform 0.35s ease,
             opacity 0.35s ease;
     }
+}
+```
+
+### iching-card.scss
+
+```scss
+// scss/components/_iching-card.scss
+// Component Thẻ bài Kinh Dịch khắc gỗ 3:4 (Dùng cho iching-detail.html & tái sử dụng được ở utilities.html)
+@use "../abstracts" as abs;
+
+.iching-hero-grid {
+    display: grid;
+    grid-template-columns: 28rem minmax(0, 1fr);
+    align-items: start;
+    gap: 2.8rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: 24rem minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+
+.iching-card {
+    @extend %flexColumn;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 28rem;
+
+    // Điểm nhấn viền theo Ngũ Hành đọc từ data-element
+    &[data-element="kim"] {
+        --iching-accent: #eab308;
+    }
+    &[data-element="moc"] {
+        --iching-accent: #10b981;
+    }
+    &[data-element="thuy"] {
+        --iching-accent: #3b82f6;
+    }
+    &[data-element="hoa"] {
+        --iching-accent: #d92b2b;
+    }
+    &[data-element="tho"] {
+        --iching-accent: #f59e0b;
+    }
+
+    &__poster {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        border-radius: 2.2rem;
+        overflow: hidden;
+        background-color: #0b0b0c;
+        border: 2px solid var(--iching-accent, var(--primary-color));
+        box-shadow: 0 1.2rem 3rem var(--shadow-color);
+        cursor: zoom-in;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            transform: translateY(-4px);
+            box-shadow: 0 1.8rem 3.8rem var(--shadow-color);
+
+            .iching-card__img {
+                transform: scale(1.04);
+            }
+
+            .iching-card__zoom-pill {
+                background-color: var(--primary-color);
+                border-color: var(--primary-color);
+                color: #ffffff;
+            }
+        }
+    }
+
+    // Chế độ fallback khi quẻ chưa có ảnh khắc gỗ 3:4 (hiển thị icon đồ hình 70x70 căn giữa)
+    &.is-fallback-art &__poster {
+        background-color: var(--bg-surface);
+        @extend %flexCenter;
+        padding: 4.8rem 3.2rem 6.8rem;
+    }
+
+    &.is-fallback-art &__img {
+        width: 13rem;
+        height: 13rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+    }
+
+    &.is-fallback-art &__caption {
+        background: linear-gradient(180deg, transparent 0%, var(--body-bg) 45%);
+        color: var(--text-color);
+    }
+
+    &.is-fallback-art &__caption-title {
+        color: var(--text-color);
+    }
+
+    &__top-meta {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+        right: 1.2rem;
+        z-index: 3;
+        @extend %flexBetween;
+        gap: 0.6rem;
+        pointer-events: none;
+    }
+
+    &__num,
+    &__hanzi,
+    &__status {
+        @extend %inlineFlexCenter;
+        height: 2.8rem;
+        padding: 0 0.9rem;
+        border-radius: 99.9rem;
+        background-color: rgba(10, 10, 12, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 800;
+        backdrop-filter: blur(6px);
+        @extend %textNoWrap;
+    }
+
+    &__hanzi {
+        font-size: 1.3rem;
+        letter-spacing: 0.08em;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__status {
+        background-color: var(--iching-accent, var(--primary-color));
+        border-color: transparent;
+    }
+
+    &__img {
+        @extend %imgCover;
+        display: block;
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &__caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+        @extend %flexColumn;
+        gap: 0.4rem;
+        padding: 2.6rem 1.4rem 1.4rem;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.88) 65%);
+        color: #ffffff;
+        pointer-events: none;
+    }
+
+    &__caption-title {
+        font-size: 1.6rem;
+        font-weight: 800;
+        line-height: 1.25;
+        color: #ffffff;
+    }
+
+    &__focal {
+        font-size: 1.15rem;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.84);
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__zoom-pill {
+        width: fit-content;
+        margin-top: 0.3rem;
+        padding: 0.35rem 1rem;
+        border-radius: 99.9rem;
+        background-color: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 700;
+        backdrop-filter: blur(6px);
+        @extend %transTheme;
+    }
+
+    &__lines-box {
+        padding: 1.2rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+    }
+
+    &__raw-link {
+        @extend %flexCenter;
+        gap: 0.6rem;
+        height: 3.8rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+}
+
+// Tượng quẻ & Dải Từ khóa bên cột phải Hero
+.iching-card-meta {
+    @extend %flexColumn;
+    gap: 1rem;
+    margin-top: 0.4rem;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &__omens,
+    &__keywords {
+        @extend %flexWrapGap;
+        gap: 0.7rem;
+    }
+
+    &__omen-pill {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--primary-color);
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__keyword {
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+}
+
+// Hộp Accordion Giải nghĩa 2 vế Trái / Phải
+.iching-pair-box {
+    @extend %flexColumn;
+    gap: 1rem;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &__toggle {
+        @extend %flexBetween;
+        width: 100%;
+        height: 4.4rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+
+        &:hover,
+        &[aria-expanded="true"] {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+
+        &[aria-expanded="true"] .iching-pair-box__arrow {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__arrow {
+        width: 1.6rem;
+        height: 1.6rem;
+        transition: transform 0.25s ease;
+    }
+
+    &__panel {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.2rem;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__col {
+        @extend %flexColumn;
+        gap: 0.5rem;
+        padding: 1.4rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+
+        strong {
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        p {
+            font-size: 1.4rem;
+            line-height: 1.55;
+            color: var(--text-color);
+        }
+    }
+}
+
+.iching-lightbox-img {
+    aspect-ratio: 3 / 4;
+    object-fit: contain;
+    background-color: #0b0b0c;
 }
 ```
