@@ -6,7 +6,12 @@
 <div class="header__container container">
     <div class="header__left">
         <div class="header__logo logo">
-            <a href="./index.html" class="header__logo-link" aria-label="Lịch Phong Thủy - Trang chủ">
+            <a
+                href="./index.html"
+                class="header__logo-link"
+                aria-label="Lịch Phong Thủy - Trang chủ"
+                title="Về trang chủ Lịch Phong Thủy"
+            >
                 <img src="./assets/icons/logo.svg" alt="Lịch Phong Thủy - Trang chủ" class="header__logo-img" />
             </a>
         </div>
@@ -20,6 +25,7 @@
                 aria-haspopup="dialog"
                 aria-expanded="false"
                 aria-controls="converter-modal"
+                title="Mở hộp thoại quy đổi ngày Âm ⇄ Dương"
             >
                 <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" class="header__widget-icon icon" />
                 <span class="header__widget-label">Đổi Âm/Dương</span>
@@ -39,11 +45,18 @@
             </div>
         </div>
 
+        <!-- 1. Dropdown Ngôn ngữ -->
         <div class="header__lang-group">
-            <details class="header__lang-details js-header-dropdown">
-                <summary class="header__lang-summary" aria-label="Chọn ngôn ngữ, hiện tại là Tiếng Việt">
+            <details class="header__lang-details js-header-dropdown" id="header-lang-dropdown">
+                <summary
+                    class="header__lang-summary"
+                    aria-label="Chọn ngôn ngữ, hiện tại là Tiếng Việt"
+                    aria-expanded="false"
+                    aria-controls="header-lang-list"
+                    title="Chuyển đổi ngôn ngữ hiển thị"
+                >
                     <img src="./assets/icons/global.svg" alt="" aria-hidden="true" class="header__lang-icon icon" />
-                    <span class="header__lang-current">VN</span>
+                    <span class="header__lang-current" id="header-lang-current">VN</span>
                     <img
                         src="./assets/icons/arrow-down.svg"
                         alt=""
@@ -51,34 +64,65 @@
                         class="header__lang-arrow icon"
                     />
                 </summary>
-                <ul class="header__lang-list">
-                    <li class="header__lang-item">
-                        <a href="#!" lang="vi" aria-current="true" class="header__lang-link header__lang-link--active"
+                <ul class="header__lang-list" id="header-lang-list" role="menu">
+                    <li class="header__lang-item" role="none">
+                        <a
+                            href="#!"
+                            role="menuitem"
+                            lang="vi"
+                            data-lang="vi"
+                            aria-current="true"
+                            class="header__lang-link header__lang-link--active"
+                            title="Hiển thị Tiếng Việt"
                             >VN</a
                         >
                     </li>
-                    <li class="header__lang-item">
-                        <a href="#!" lang="en" class="header__lang-link">EN</a>
+                    <li class="header__lang-item" role="none">
+                        <a
+                            href="#!"
+                            role="menuitem"
+                            lang="en"
+                            data-lang="en"
+                            class="header__lang-link"
+                            title="Switch to English"
+                            >EN</a
+                        >
                     </li>
-                    <li class="header__lang-item">
-                        <a href="#!" lang="ja" class="header__lang-link">JP</a>
+                    <li class="header__lang-item" role="none">
+                        <a
+                            href="#!"
+                            role="menuitem"
+                            lang="ja"
+                            data-lang="ja"
+                            class="header__lang-link"
+                            title="日本語に切り替え"
+                            >JP</a
+                        >
                     </li>
                 </ul>
             </details>
         </div>
 
+        <!-- 2. Dropdown Theme Ngũ Hành -->
         <div class="header__theme-group">
-            <details class="header__theme-details js-header-dropdown">
-                <summary class="header__theme-summary" aria-label="Chọn giao diện Ngũ hành">
+            <details class="header__theme-details js-header-dropdown" id="header-theme-dropdown">
+                <summary
+                    class="header__theme-summary"
+                    aria-label="Chọn giao diện Ngũ hành"
+                    aria-expanded="false"
+                    aria-controls="header-theme-list"
+                    title="Đổi giao diện theo 5 bản mệnh Ngũ Hành"
+                >
                     <img src="./assets/icons/theme.svg" alt="" aria-hidden="true" class="header__theme-icon icon" />
                 </summary>
-                <ul class="header__theme-list">
+                <ul class="header__theme-list" id="header-theme-list">
                     <li class="header__theme-item">
                         <button
                             type="button"
                             data-theme="earth"
                             aria-pressed="true"
                             class="btn header__theme-btn is-active"
+                            title="Giao diện Mệnh Thổ"
                         >
                             <img
                                 src="./assets/icons/earth.svg"
@@ -90,7 +134,13 @@
                         </button>
                     </li>
                     <li class="header__theme-item">
-                        <button type="button" data-theme="fire" aria-pressed="false" class="btn header__theme-btn">
+                        <button
+                            type="button"
+                            data-theme="fire"
+                            aria-pressed="false"
+                            class="btn header__theme-btn"
+                            title="Giao diện Mệnh Hỏa"
+                        >
                             <img
                                 src="./assets/icons/fire.svg"
                                 alt=""
@@ -101,7 +151,13 @@
                         </button>
                     </li>
                     <li class="header__theme-item">
-                        <button type="button" data-theme="metal" aria-pressed="false" class="btn header__theme-btn">
+                        <button
+                            type="button"
+                            data-theme="metal"
+                            aria-pressed="false"
+                            class="btn header__theme-btn"
+                            title="Giao diện Mệnh Kim"
+                        >
                             <img
                                 src="./assets/icons/metal.svg"
                                 alt=""
@@ -112,7 +168,13 @@
                         </button>
                     </li>
                     <li class="header__theme-item">
-                        <button type="button" data-theme="water" aria-pressed="false" class="btn header__theme-btn">
+                        <button
+                            type="button"
+                            data-theme="water"
+                            aria-pressed="false"
+                            class="btn header__theme-btn"
+                            title="Giao diện Mệnh Thủy"
+                        >
                             <img
                                 src="./assets/icons/water.svg"
                                 alt=""
@@ -123,7 +185,13 @@
                         </button>
                     </li>
                     <li class="header__theme-item">
-                        <button type="button" data-theme="wood" aria-pressed="false" class="btn header__theme-btn">
+                        <button
+                            type="button"
+                            data-theme="wood"
+                            aria-pressed="false"
+                            class="btn header__theme-btn"
+                            title="Giao diện Mệnh Mộc"
+                        >
                             <img
                                 src="./assets/icons/wood.svg"
                                 alt=""
@@ -137,10 +205,186 @@
             </details>
         </div>
 
-        <div class="header__auth">
-            <a href="./sign-in.html" class="btn btn--login header__auth-btn">Đăng nhập</a>
+        <!-- 3. KHU VỰC TÀI KHOẢN (HƯỚNG 1: TỰ ĐỘNG ẨN NÚT TRÙNG LẶP Ở SIGN-IN/SIGN-UP + PROFILE TOGGLE) -->
+        <div class="header__auth" id="header-auth-root" data-auth-state="guest">
+            <!-- 3A. Trạng thái CHƯA đăng nhập -->
+            <div class="header__auth-guest" id="header-auth-guest">
+                <a
+                    href="./sign-up.html"
+                    class="btn header__auth-register"
+                    data-auth-link="signup"
+                    title="Tạo tài khoản mới miễn phí"
+                >
+                    Đăng ký
+                </a>
+                <a
+                    href="./sign-in.html"
+                    class="btn btn--login header__auth-btn"
+                    data-auth-link="signin"
+                    title="Đăng nhập vào tài khoản Lịch Phong Thủy"
+                >
+                    Đăng nhập
+                </a>
+            </div>
+
+            <!-- 3B. Trạng thái ĐÃ đăng nhập + Toggle Profile Dropdown (ẩn bằng hidden khi ở chế độ khách) -->
+            <details
+                class="header__profile-details js-header-dropdown"
+                id="header-auth-profile"
+                itemscope
+                itemtype="https://schema.org/Person"
+                hidden
+            >
+                <summary
+                    class="header__profile-summary"
+                    id="header-profile-trigger"
+                    aria-label="Mở menu tài khoản cá nhân"
+                    aria-expanded="false"
+                    aria-controls="header-profile-popover"
+                    title="Tài khoản cá nhân &amp; Cài đặt bản mệnh"
+                >
+                    <span class="header__profile-avatar" id="header-profile-avatar" aria-hidden="true">TV</span>
+                    <span class="header__profile-meta d-md-none">
+                        <strong class="header__profile-name" id="header-profile-name" itemprop="name"
+                            >Thành viên</strong
+                        >
+                        <small class="header__profile-element" id="header-profile-element">Hành Thổ</small>
+                    </span>
+                    <img
+                        src="./assets/icons/arrow-down.svg"
+                        alt=""
+                        aria-hidden="true"
+                        class="header__profile-arrow icon"
+                    />
+                </summary>
+
+                <div
+                    class="header__profile-popover"
+                    id="header-profile-popover"
+                    role="region"
+                    aria-label="Bảng điều khiển tài khoản cá nhân"
+                >
+                    <div class="header__profile-card">
+                        <div class="header__profile-card-avatar" id="header-popover-avatar" aria-hidden="true">TV</div>
+                        <div class="header__profile-card-info">
+                            <strong class="header__profile-card-name" id="header-popover-name">Thành viên</strong>
+                            <span class="header__profile-card-email" id="header-popover-email" itemprop="email">
+                                thanhvien@lichphongthuy.vn
+                            </span>
+                            <span class="header__profile-card-badge" id="header-popover-destiny">
+                                Bản mệnh: Hành Thổ
+                            </span>
+                        </div>
+                    </div>
+
+                    <ul class="header__profile-menu" role="menu">
+                        <li role="none">
+                            <a
+                                href="./profile.html"
+                                role="menuitem"
+                                class="header__profile-link"
+                                title="Quản lý thông tin tài khoản, người thân và mật khẩu"
+                            >
+                                <svg
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span>Hồ sơ &amp; Bản mệnh của tôi</span>
+                            </a>
+                        </li>
+                        <li role="none">
+                            <a
+                                href="./profile.html#family"
+                                role="menuitem"
+                                class="header__profile-link"
+                                title="Quản lý danh sách ngày sinh người thân"
+                            >
+                                <svg
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                <span>Danh sách Người thân</span>
+                            </a>
+                        </li>
+                        <li role="none">
+                            <a
+                                href="./bazi.html"
+                                role="menuitem"
+                                class="header__profile-link"
+                                id="header-profile-bazi-link"
+                                title="Mở nhanh Lá số Bát Tự theo ngày sinh đã lưu"
+                            >
+                                <img src="./assets/icons/ying-yang-2.svg" alt="" aria-hidden="true" class="icon" />
+                                <span>Lá số Bát Tự của tôi</span>
+                            </a>
+                        </li>
+                        <li role="none">
+                            <button
+                                type="button"
+                                role="menuitem"
+                                class="header__profile-link"
+                                data-auth-action="open-converter"
+                                aria-controls="converter-modal"
+                                title="Mở nhanh hộp thoại Đổi ngày Âm Dương"
+                            >
+                                <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" class="icon" />
+                                <span>Đổi Ngày Âm &#8644; Dương</span>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="header__profile-foot">
+                        <button
+                            type="button"
+                            class="header__profile-logout"
+                            data-auth-action="logout"
+                            title="Đăng xuất khỏi phiên làm việc hiện tại"
+                        >
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            <span>Đăng xuất</span>
+                        </button>
+                    </div>
+                </div>
+            </details>
         </div>
 
+        <!-- 4. Nút Hamburger Mobile -->
         <button
             type="button"
             class="header__burger"
@@ -148,15 +392,16 @@
             aria-label="Mở danh mục Xem Ngày Tốt"
             aria-expanded="false"
             aria-controls="calendar-sidebar"
+            title="Mở menu điều hướng"
         >
-            <span class="header__burger-bar"></span>
-            <span class="header__burger-bar"></span>
-            <span class="header__burger-bar"></span>
+            <span class="header__burger-bar" aria-hidden="true"></span>
+            <span class="header__burger-bar" aria-hidden="true"></span>
+            <span class="header__burger-bar" aria-hidden="true"></span>
         </button>
     </div>
 </div>
 
-<!-- ==================== MODAL BENTO ĐỔI NGÀY ÂM - DƯƠNG (BẢN HOÀN THIỆN 112REM CHỐNG GIẬT LAYOUT) ==================== -->
+<!-- ==================== MODAL BENTO ĐỔI NGÀY ÂM - DƯƠNG (GIỮ NGUYÊN ĐẦY ĐỦ + ĐÃ VÁ A11Y) ==================== -->
 <div
     class="converter-modal"
     id="converter-modal"
@@ -168,7 +413,6 @@
     <div class="converter-modal__backdrop" id="converter-modal-backdrop" aria-hidden="true"></div>
 
     <div class="converter-modal__dialog" role="document">
-        <!-- 1. Header Modal (Khoảng cách trên/dưới thoáng rộng) -->
         <header class="converter-modal__header">
             <div class="converter-modal__title-wrap">
                 <span class="converter-modal__badge">
@@ -217,14 +461,17 @@
             </button>
         </header>
 
-        <!-- 2. Bộ 4 Cột Đồng Phẳng: Ngày | Tháng | Năm | Chế độ Tháng Nhuận (Cố định chiều cao 100%) -->
         <div class="converter-modal__control-bar">
             <div class="converter-modal__pickers">
-                <!-- Cột 1: Chọn Ngày -->
                 <div class="converter-modal__field">
                     <span class="converter-modal__label" id="conv-day-label">Ngày Dương</span>
                     <details class="converter-modal__dropdown js-cal-dropdown" id="conv-day-dropdown">
-                        <summary class="converter-modal__summary" aria-label="Chọn ngày">
+                        <summary
+                            class="converter-modal__summary"
+                            aria-label="Chọn ngày"
+                            aria-expanded="false"
+                            aria-controls="conv-day-list"
+                        >
                             <span class="converter-modal__summary-main">
                                 <img
                                     src="./assets/icons/calendar.svg"
@@ -252,11 +499,15 @@
                     </details>
                 </div>
 
-                <!-- Cột 2: Chọn Tháng -->
                 <div class="converter-modal__field">
                     <span class="converter-modal__label" id="conv-month-label">Tháng Dương</span>
                     <details class="converter-modal__dropdown js-cal-dropdown" id="conv-month-dropdown">
-                        <summary class="converter-modal__summary" aria-label="Chọn tháng">
+                        <summary
+                            class="converter-modal__summary"
+                            aria-label="Chọn tháng"
+                            aria-expanded="false"
+                            aria-controls="conv-month-list"
+                        >
                             <span class="converter-modal__summary-main">
                                 <img
                                     src="./assets/icons/calendarCheck.svg"
@@ -284,11 +535,15 @@
                     </details>
                 </div>
 
-                <!-- Cột 3: Chọn Năm -->
                 <div class="converter-modal__field">
                     <span class="converter-modal__label" id="conv-year-label">Năm tra cứu</span>
                     <details class="converter-modal__dropdown js-cal-dropdown" id="conv-year-dropdown">
-                        <summary class="converter-modal__summary" aria-label="Chọn năm">
+                        <summary
+                            class="converter-modal__summary"
+                            aria-label="Chọn năm"
+                            aria-expanded="false"
+                            aria-controls="conv-year-list"
+                        >
                             <span class="converter-modal__summary-main">
                                 <img
                                     src="./assets/icons/clock.svg"
@@ -311,6 +566,7 @@
                                     type="button"
                                     class="converter-modal__year-step"
                                     id="conv-year-prev-range"
+                                    aria-label="Lùi 12 năm"
                                     title="Lùi 12 năm"
                                 >
                                     &#10094;
@@ -322,6 +578,7 @@
                                     type="button"
                                     class="converter-modal__year-step"
                                     id="conv-year-next-range"
+                                    aria-label="Tiến 12 năm"
                                     title="Tiến 12 năm"
                                 >
                                     &#10095;
@@ -336,7 +593,6 @@
                     </details>
                 </div>
 
-                <!-- Cột 4: Chế độ Tháng Nhuận -->
                 <div class="converter-modal__field" id="conv-leap-field">
                     <span class="converter-modal__label" id="conv-leap-label">Chế độ tháng Âm</span>
                     <button
@@ -361,9 +617,7 @@
             </div>
         </div>
 
-        <!-- 3. Bento Dashboard Kết quả Quy đổi & Phong Thủy -->
         <section class="converter-modal__bento-body" aria-live="polite">
-            <!-- TẦNG A: 2 Đảo Lớn Dương Lịch ⇄ Âm Lịch -->
             <div class="converter-modal__hero-compare">
                 <article class="converter-modal__date-card converter-modal__date-card--solar">
                     <div class="converter-modal__date-top">
@@ -413,7 +667,6 @@
                 </article>
             </div>
 
-            <!-- TẦNG B: 4 Bento Cards Thông Số Cao Ráo -->
             <div class="converter-modal__stats-grid">
                 <article class="converter-modal__stat-card">
                     <div class="converter-modal__stat-icon-box">
@@ -497,7 +750,6 @@
                 </article>
             </div>
 
-            <!-- TẦNG C: Lưới 6 Bento Cards Giờ Hoàng Đạo -->
             <div class="converter-modal__hours-section">
                 <div class="converter-modal__hours-head">
                     <div class="converter-modal__hours-title-group">
@@ -514,7 +766,6 @@
             </div>
         </section>
 
-        <!-- 4. Footer Modal -->
         <footer class="converter-modal__footer">
             <button type="button" class="btn converter-modal__today-btn" id="conv-btn-today">
                 <img src="./assets/icons/calendar.svg" alt="" aria-hidden="true" class="icon" />
@@ -1732,7 +1983,6 @@
 ## year-calendar.html
 
 ```html
-<!-- templates/year-calendar.html -->
 <section class="year-cal-app" id="year-cal-app" aria-label="Lịch tổng hợp 12 tháng năm 2026" data-active-year="2026">
     <!-- THANH ĐIỀU KHIỂN NĂM: Trái (< + Về Năm Nay) | Giữa (Năm 2026) | Phải (Chọn năm + >) -->
     <header class="month-cal year-cal-app__toolbar-card">
@@ -8569,38 +8819,6 @@
                 </p>
             </div>
         </div>
-
-        <!-- Cột Phải (Mục 5): Đồng hồ đếm ngược kích thước lớn, đồng bộ font Theme, số Giây nổi bật -->
-        <!-- <div class="festival-countdown-bar__clock-wrap">
-            <time id="festival-master-timer" class="festival-countdown-bar__timer" itemprop="startDate"
-                datetime="2026-11-20T00:00:00+07:00" role="timer" aria-live="off" aria-atomic="true"
-                data-target-iso="2026-11-20T00:00:00"
-                title="Bộ đếm ngược thời gian thực (Ngày, Giờ, Phút, Giây) tính đến 00:00 ngày diễn ra sự kiện">
-                <div class="festival-countdown-bar__unit">
-                    <strong class="festival-countdown-bar__num" data-timer-part="days">10</strong>
-                    <span class="festival-countdown-bar__unit-label">Ngày</span>
-                </div>
-                <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
-                <div class="festival-countdown-bar__unit">
-                    <strong class="festival-countdown-bar__num" data-timer-part="hours">12</strong>
-                    <span class="festival-countdown-bar__unit-label">Giờ</span>
-                </div>
-                <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
-                <div class="festival-countdown-bar__unit">
-                    <strong class="festival-countdown-bar__num" data-timer-part="minutes">08</strong>
-                    <span class="festival-countdown-bar__unit-label">Phút</span>
-                </div>
-                <span class="festival-countdown-bar__sep" aria-hidden="true">:</span>
-                <div class="festival-countdown-bar__unit festival-countdown-bar__unit--sec">
-                    <strong class="festival-countdown-bar__num festival-countdown-bar__num--sec"
-                        data-timer-part="seconds">
-                        00
-                    </strong>
-                    <span class="festival-countdown-bar__unit-label">Giây</span>
-                </div>
-            </time>
-        </div> -->
-
         <!-- nháp -->
         <div class="festival-countdown-bar__clock-wrap">
             <time

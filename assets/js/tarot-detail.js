@@ -349,4 +349,3 @@
 
     document.addEventListener("DOMContentLoaded", initTarotDetailPage);
 })();
-

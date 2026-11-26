@@ -1,770 +1,1666 @@
 [
     {
-        "num": 1,
+        "id": 1,
+        "number": 1,
+        "code": "111111",
         "slug": "01-can",
-        "short": "Càn",
-        "name": "Thuần Càn (Càn vi Thiên)",
-        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Càn (Trời)",
+        "unicode": "䷀",
+        "element": "metal",
+        "name": {
+            "short": "Càn",
+            "full": "Thuần Càn",
+            "alias": "Càn vi Thiên",
+            "hanzi": "乾"
+        },
+        "trigrams": {
+            "lower": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" },
+            "upper": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" }
+        },
         "lines": [1, 1, 1, 1, 1, 1],
-        "fortune": "Đại Cát",
-        "judgment": "Càn: Nguyên, Hanh, Lợi, Trinh. Khí dương cương kiện, tự cường bất tức, vạn vật khởi sinh.",
-        "image": "Trời chuyển động mạnh mẽ; người quân tử noi theo đó mà tự lực vươn lên không ngừng nghỉ.",
-        "advice": "Thời cơ đại cát để khởi sự lớn và giữ thế chủ động. Kết hợp bản lĩnh quyết đoán với sự khiêm tốn."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Khởi sinh", "Cương kiện", "Tự cường", "Chủ động"],
+        "meaning": {
+            "judgment": "Càn: Nguyên, Hanh, Lợi, Trinh. Khí dương cương kiện, tự cường bất tức, vạn vật khởi sinh.",
+            "symbolism": "Trời chuyển động mạnh mẽ; người quân tử noi theo đó mà tự lực vươn lên không ngừng nghỉ.",
+            "advice": "Thời cơ đại cát để khởi sự lớn và giữ thế chủ động. Kết hợp bản lĩnh quyết đoán với sự khiêm tốn."
+        }
     },
     {
-        "num": 2,
+        "id": 2,
+        "number": 2,
+        "code": "000000",
         "slug": "02-khon",
-        "short": "Khôn",
-        "name": "Thuần Khôn (Khôn vi Địa)",
-        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Khôn (Đất)",
+        "unicode": "䷁",
+        "element": "earth",
+        "name": {
+            "short": "Khôn",
+            "full": "Thuần Khôn",
+            "alias": "Khôn vi Địa",
+            "hanzi": "坤"
+        },
+        "trigrams": {
+            "lower": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" },
+            "upper": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" }
+        },
         "lines": [0, 0, 0, 0, 0, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Khôn: Nguyên hanh, lợi tẫn mã chi trinh. Đức đất dày rộng nâng đỡ vạn vật, nhu thuận mà bền bỉ.",
-        "image": "Thế đất rộng dày; người quân tử lấy đức dày để dung nạp và che chở muôn người.",
-        "advice": "Thuận theo thời thế, kiên nhẫn lắng nghe và hỗ trợ cộng sự sẽ tích lũy thành quả bền lâu."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Nhu thuận", "Bao dung", "Bền bỉ", "Nâng đỡ"],
+        "meaning": {
+            "judgment": "Khôn: Nguyên hanh, lợi tẫn mã chi trinh. Đức đất dày rộng nâng đỡ vạn vật, nhu thuận mà bền bỉ.",
+            "symbolism": "Thế đất rộng dày; người quân tử lấy đức dày để dung nạp và che chở muôn người.",
+            "advice": "Thuận theo thời thế, kiên nhẫn lắng nghe và hỗ trợ cộng sự sẽ tích lũy thành quả bền lâu."
+        }
     },
     {
-        "num": 3,
+        "id": 3,
+        "number": 3,
+        "code": "100010",
         "slug": "03-truan",
-        "short": "Truân",
-        "name": "Thủy Lôi Truân (Chấn hạ - Khảm thượng)",
-        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Khảm (Nước)",
+        "unicode": "䷂",
+        "element": "water",
+        "name": {
+            "short": "Truân",
+            "full": "Thủy Lôi Truân",
+            "alias": null,
+            "hanzi": "屯"
+        },
+        "trigrams": {
+            "lower": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" },
+            "upper": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" }
+        },
         "lines": [1, 0, 0, 0, 1, 0],
-        "fortune": "Thận Trọng",
-        "judgment": "Truân: Nguyên hanh lợi trinh, vật dụng hữu du vãng. Mầm non mới đội đất, gian nan buổi đầu.",
-        "image": "Mây sấm tụ hội tạo thành quẻ Truân; người quân tử kiên trì gây dựng trật tự từ nền móng.",
-        "advice": "Vạn sự khởi đầu nan. Không nên vội vã đánh lớn mà hãy củng cố nền tảng và tìm người đồng hành."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Khởi đầu nan", "Tích lũy", "Củng cố nền", "Tìm đồng hành"],
+        "meaning": {
+            "judgment": "Truân: Nguyên hanh lợi trinh, vật dụng hữu du vãng. Mầm non mới đội đất, gian nan buổi đầu.",
+            "symbolism": "Mây sấm tụ hội tạo thành quẻ Truân; người quân tử kiên trì gây dựng trật tự từ nền móng.",
+            "advice": "Vạn sự khởi đầu nan. Không nên vội vã đánh lớn mà hãy củng cố nền tảng và tìm người đồng hành."
+        }
     },
     {
-        "num": 4,
+        "id": 4,
+        "number": 4,
+        "code": "010001",
         "slug": "04-mong",
-        "short": "Mông",
-        "name": "Sơn Thủy Mông (Khảm hạ - Cấn thượng)",
-        "trigrams": "Nội quái: Khảm (Nước) • Ngoại quái: Cấn (Núi)",
+        "unicode": "䷃",
+        "element": "fire",
+        "name": {
+            "short": "Mông",
+            "full": "Sơn Thủy Mông",
+            "alias": null,
+            "hanzi": "蒙"
+        },
+        "trigrams": {
+            "lower": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" },
+            "upper": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" }
+        },
         "lines": [0, 1, 0, 0, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Mông: Hanh. Sương mù che núi, cần khai mở trí tuệ bằng sự cầu thị và học hỏi nghiêm túc.",
-        "image": "Dưới núi có dòng suối tuôn chảy; người quân tử rèn hành vi ngay thẳng và bồi đắp tri thức.",
-        "advice": "Hãy chủ động học hỏi, tham vấn người đi trước và rà soát kỹ dữ liệu trước khi chốt kế hoạch."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Khai mở", "Học hỏi", "Cầu thị", "Tham vấn"],
+        "meaning": {
+            "judgment": "Mông: Hanh. Sương mù che núi, cần khai mở trí tuệ bằng sự cầu thị và học hỏi nghiêm túc.",
+            "symbolism": "Dưới núi có dòng suối tuôn chảy; người quân tử rèn hành vi ngay thẳng và bồi đắp tri thức.",
+            "advice": "Hãy chủ động học hỏi, tham vấn người đi trước và rà soát kỹ dữ liệu trước khi chốt kế hoạch."
+        }
     },
     {
-        "num": 5,
+        "id": 5,
+        "number": 5,
+        "code": "111010",
         "slug": "05-nhu",
-        "short": "Nhu",
-        "name": "Thủy Thiên Nhu (Càn hạ - Khảm thượng)",
-        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Khảm (Nước)",
+        "unicode": "䷄",
+        "element": "earth",
+        "name": {
+            "short": "Nhu",
+            "full": "Thủy Thiên Nhu",
+            "alias": null,
+            "hanzi": "需"
+        },
+        "trigrams": {
+            "lower": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" },
+            "upper": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" }
+        },
         "lines": [1, 1, 1, 0, 1, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Nhu: Hữu phu, quang hanh, trinh cát. Mây tụ trên trời chờ mưa xuống; kiên nhẫn đợi đúng thời cơ.",
-        "image": "Mây bay lên trời là tượng quẻ Nhu; người quân tử giữ tâm an vui, dưỡng sức chờ thời.",
-        "advice": "Đừng nóng vội đốt cháy giai đoạn. Chuẩn bị kỹ năng và nguồn lực ngay lúc này sẽ thắng lớn khi thời tới."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Chờ thời", "Kiên nhẫn", "Dưỡng sức", "Chuẩn bị"],
+        "meaning": {
+            "judgment": "Nhu: Hữu phu, quang hanh, trinh cát. Mây tụ trên trời chờ mưa xuống; kiên nhẫn đợi đúng thời cơ.",
+            "symbolism": "Mây bay lên trời là tượng quẻ Nhu; người quân tử giữ tâm an vui, dưỡng sức chờ thời.",
+            "advice": "Đừng nóng vội đốt cháy giai đoạn. Chuẩn bị kỹ năng và nguồn lực ngay lúc này sẽ thắng lớn khi thời tới."
+        }
     },
     {
-        "num": 6,
+        "id": 6,
+        "number": 6,
+        "code": "010111",
         "slug": "06-tung",
-        "short": "Tụng",
-        "name": "Thiên Thủy Tụng (Khảm hạ - Càn thượng)",
-        "trigrams": "Nội quái: Khảm (Nước) • Ngoại quái: Càn (Trời)",
+        "unicode": "䷅",
+        "element": "fire",
+        "name": {
+            "short": "Tụng",
+            "full": "Thiên Thủy Tụng",
+            "alias": null,
+            "hanzi": "訟"
+        },
+        "trigrams": {
+            "lower": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" },
+            "upper": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" }
+        },
         "lines": [0, 1, 0, 1, 1, 1],
-        "fortune": "Thận Trọng",
-        "judgment": "Tụng: Hữu phu trất dịch, trung cát, chung hung. Trời lên nước xuống, trái chiều sinh tranh chấp.",
-        "image": "Trời và nước đi ngược chiều nhau; người quân tử mưu việc gì cũng bàn định kỹ từ lúc khởi đầu.",
-        "advice": "Ưu tiên hòa giải và minh bạch điều khoản hợp đồng từ sớm; tránh kéo dài tranh cãi gây hao tổn."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Tranh chấp", "Hòa giải", "Minh bạch", "Phòng ngừa"],
+        "meaning": {
+            "judgment": "Tụng: Hữu phu trất dịch, trung cát, chung hung. Trời lên nước xuống, trái chiều sinh tranh chấp.",
+            "symbolism": "Trời và nước đi ngược chiều nhau; người quân tử mưu việc gì cũng bàn định kỹ từ lúc khởi đầu.",
+            "advice": "Ưu tiên hòa giải và minh bạch điều khoản hợp đồng từ sớm; tránh kéo dài tranh cãi gây hao tổn."
+        }
     },
     {
-        "num": 7,
+        "id": 7,
+        "number": 7,
+        "code": "010000",
         "slug": "07-su",
-        "short": "Sư",
-        "name": "Địa Thủy Sư (Khảm hạ - Khôn thượng)",
-        "trigrams": "Nội quái: Khảm (Nước) • Ngoại quái: Khôn (Đất)",
+        "unicode": "䷆",
+        "element": "water",
+        "name": {
+            "short": "Sư",
+            "full": "Địa Thủy Sư",
+            "alias": null,
+            "hanzi": "師"
+        },
+        "trigrams": {
+            "lower": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" },
+            "upper": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" }
+        },
         "lines": [0, 1, 0, 0, 0, 0],
-        "fortune": "Bình Hòa",
-        "judgment": "Sư: Trinh, trượng nhân cát, vô cữu. Nước ẩn trong đất như binh lực quy tụ cần người cầm trịch vững vàng.",
-        "image": "Trong lòng đất có nước là tượng quẻ Sư; người quân tử dung dưỡng và tổ chức tập thể có kỷ luật.",
-        "advice": "Tập trung vào kỷ luật đội nhóm, phân công minh bạch và có người dẫn dắt giàu kinh nghiệm."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Kỷ luật", "Tổ chức", "Lãnh đạo", "Quy tụ"],
+        "meaning": {
+            "judgment": "Sư: Trinh, trượng nhân cát, vô cữu. Nước ẩn trong đất như binh lực quy tụ cần người cầm trịch vững vàng.",
+            "symbolism": "Trong lòng đất có nước là tượng quẻ Sư; người quân tử dung dưỡng và tổ chức tập thể có kỷ luật.",
+            "advice": "Tập trung vào kỷ luật đội nhóm, phân công minh bạch và có người dẫn dắt giàu kinh nghiệm."
+        }
     },
     {
-        "num": 8,
+        "id": 8,
+        "number": 8,
+        "code": "000010",
         "slug": "08-ty",
-        "short": "Tỷ",
-        "name": "Thủy Địa Tỷ (Khôn hạ - Khảm thượng)",
-        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Khảm (Nước)",
+        "unicode": "䷇",
+        "element": "earth",
+        "name": {
+            "short": "Tỷ",
+            "full": "Thủy Địa Tỷ",
+            "alias": null,
+            "hanzi": "比"
+        },
+        "trigrams": {
+            "lower": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" },
+            "upper": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" }
+        },
         "lines": [0, 0, 0, 0, 1, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Tỷ: Cát. Nước thấm trên mặt đất gắn kết hài hòa, biểu tượng của sự đồng lòng và liên minh bền chặt.",
-        "image": "Trên đất có nước là tượng quẻ Tỷ; bậc lãnh đạo thân thiện kết nối và chia sẻ lợi ích công bằng.",
-        "advice": "Rất thuận lợi cho hợp tác, mở rộng mạng lưới đối tác và xây dựng lòng tin dài hạn."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Gắn kết", "Đồng lòng", "Liên minh", "Tin cậy"],
+        "meaning": {
+            "judgment": "Tỷ: Cát. Nước thấm trên mặt đất gắn kết hài hòa, biểu tượng của sự đồng lòng và liên minh bền chặt.",
+            "symbolism": "Trên đất có nước là tượng quẻ Tỷ; bậc lãnh đạo thân thiện kết nối và chia sẻ lợi ích công bằng.",
+            "advice": "Rất thuận lợi cho hợp tác, mở rộng mạng lưới đối tác và xây dựng lòng tin dài hạn."
+        }
     },
     {
-        "num": 9,
+        "id": 9,
+        "number": 9,
+        "code": "111011",
         "slug": "09-tieu-suc",
-        "short": "Tiểu Súc",
-        "name": "Phong Thiên Tiểu Súc (Càn hạ - Tốn thượng)",
-        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Tốn (Gió)",
+        "unicode": "䷈",
+        "element": "wood",
+        "name": {
+            "short": "Tiểu Súc",
+            "full": "Phong Thiên Tiểu Súc",
+            "alias": null,
+            "hanzi": "小畜"
+        },
+        "trigrams": {
+            "lower": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" },
+            "upper": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" }
+        },
         "lines": [1, 1, 1, 0, 1, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Tiểu Súc: Hanh, mật vân bất vũ. Mây dày chưa mưa; tích lũy từng bước nhỏ tạo đà cho bước lớn.",
-        "image": "Gió thổi trên bầu trời; người quân tử trau dồi văn đức và hoàn thiện những chi tiết nhỏ nhất.",
-        "advice": "Chưa phải lúc bứt phá ồ ạt; hãy tích lũy vốn, tối ưu sản phẩm và làm tốt từng đầu việc nhỏ."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Tích lũy nhỏ", "Trau dồi", "Tối ưu", "Kiên trì"],
+        "meaning": {
+            "judgment": "Tiểu Súc: Hanh, mật vân bất vũ. Mây dày chưa mưa; tích lũy từng bước nhỏ tạo đà cho bước lớn.",
+            "symbolism": "Gió thổi trên bầu trời; người quân tử trau dồi văn đức và hoàn thiện những chi tiết nhỏ nhất.",
+            "advice": "Chưa phải lúc bứt phá ồ ạt; hãy tích lũy vốn, tối ưu sản phẩm và làm tốt từng đầu việc nhỏ."
+        }
     },
     {
-        "num": 10,
+        "id": 10,
+        "number": 10,
+        "code": "110111",
         "slug": "10-ly",
-        "short": "Lý",
-        "name": "Thiên Trạch Lý (Đoài hạ - Càn thượng)",
-        "trigrams": "Nội quái: Đoài (Đầm) • Ngoại quái: Càn (Trời)",
+        "unicode": "䷉",
+        "element": "earth",
+        "name": {
+            "short": "Lý",
+            "full": "Thiên Trạch Lý",
+            "alias": null,
+            "hanzi": "履"
+        },
+        "trigrams": {
+            "lower": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" },
+            "upper": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" }
+        },
         "lines": [1, 1, 0, 1, 1, 1],
-        "fortune": "Cát Hanh",
-        "judgment": "Lý: Lý hổ vĩ, bất điệt nhân, hanh. Bước đi thận trọng đúng lễ nghĩa, dù gặp thử thách lớn vẫn bình an.",
-        "image": "Trên trời dưới đầm phân định rõ trên dưới; người quân tử giữ đúng chừng mực để ổn định tâm chí.",
-        "advice": "Giữ thái độ lịch thiệp, chuẩn mực và tôn trọng quy tắc giúp bạn vượt qua môi trường cạnh tranh khốc liệt."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Lễ nghĩa", "Thận trọng", "Chuẩn mực", "Chừng mực"],
+        "meaning": {
+            "judgment": "Lý: Lý hổ vĩ, bất điệt nhân, hanh. Bước đi thận trọng đúng lễ nghĩa, dù gặp thử thách lớn vẫn bình an.",
+            "symbolism": "Trên trời dưới đầm phân định rõ trên dưới; người quân tử giữ đúng chừng mực để ổn định tâm chí.",
+            "advice": "Giữ thái độ lịch thiệp, chuẩn mực và tôn trọng quy tắc giúp bạn vượt qua môi trường cạnh tranh khốc liệt."
+        }
     },
     {
-        "num": 11,
+        "id": 11,
+        "number": 11,
+        "code": "111000",
         "slug": "11-thai",
-        "short": "Thái",
-        "name": "Địa Thiên Thái (Càn hạ - Khôn thượng)",
-        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Khôn (Đất)",
+        "unicode": "䷊",
+        "element": "earth",
+        "name": {
+            "short": "Thái",
+            "full": "Địa Thiên Thái",
+            "alias": null,
+            "hanzi": "泰"
+        },
+        "trigrams": {
+            "lower": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" },
+            "upper": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" }
+        },
         "lines": [1, 1, 1, 0, 0, 0],
-        "fortune": "Đại Cát",
-        "judgment": "Thái: Tiểu vãng đại lai, cát hanh. Trời đất giao hòa, âm dương thông suốt, muôn vật hưng thịnh.",
-        "image": "Khí trời đất giao hòa tạo nên quẻ Thái; bậc quân tử bồi đắp cơ đồ giúp tập thể an lạc.",
-        "advice": "Mọi bế tắc đã tan, vận hội hanh thông rộng mở. Đại lợi cho ký kết, mở rộng dự án và cầu tài."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Giao hòa", "Hanh thông", "Hưng thịnh", "Vận hội lớn"],
+        "meaning": {
+            "judgment": "Thái: Tiểu vãng đại lai, cát hanh. Trời đất giao hòa, âm dương thông suốt, muôn vật hưng thịnh.",
+            "symbolism": "Khí trời đất giao hòa tạo nên quẻ Thái; bậc quân tử bồi đắp cơ đồ giúp tập thể an lạc.",
+            "advice": "Mọi bế tắc đã tan, vận hội hanh thông rộng mở. Đại lợi cho ký kết, mở rộng dự án và cầu tài."
+        }
     },
     {
-        "num": 12,
+        "id": 12,
+        "number": 12,
+        "code": "000111",
         "slug": "12-bi",
-        "short": "Bĩ",
-        "name": "Thiên Địa Bĩ (Khôn hạ - Càn thượng)",
-        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Càn (Trời)",
+        "unicode": "䷋",
+        "element": "metal",
+        "name": {
+            "short": "Bĩ",
+            "full": "Thiên Địa Bĩ",
+            "alias": null,
+            "hanzi": "否"
+        },
+        "trigrams": {
+            "lower": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" },
+            "upper": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" }
+        },
         "lines": [0, 0, 0, 1, 1, 1],
-        "fortune": "Thận Trọng",
-        "judgment": "Bĩ: Bĩ chi phỉ nhân, bất lợi quân tử trinh. Khí trên dưới chưa thông, cần giữ mình chờ thời chuyển biến.",
-        "image": "Trời đất chưa giao nhau; người quân tử thu liễm năng lượng, giữ vững đạo đức tránh thị phi.",
-        "advice": "Giai đoạn phòng thủ và rà soát nội bộ; không nên đầu tư dàn trải mà hãy bảo toàn nguồn lực."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Bế tắc tạm", "Phòng thủ", "Thu liễm", "Bảo toàn"],
+        "meaning": {
+            "judgment": "Bĩ: Bĩ chi phỉ nhân, bất lợi quân tử trinh. Khí trên dưới chưa thông, cần giữ mình chờ thời chuyển biến.",
+            "symbolism": "Trời đất chưa giao nhau; người quân tử thu liễm năng lượng, giữ vững đạo đức tránh thị phi.",
+            "advice": "Giai đoạn phòng thủ và rà soát nội bộ; không nên đầu tư dàn trải mà hãy bảo toàn nguồn lực."
+        }
     },
     {
-        "num": 13,
+        "id": 13,
+        "number": 13,
+        "code": "101111",
         "slug": "13-dong-nhan",
-        "short": "Đồng Nhân",
-        "name": "Thiên Hỏa Đồng Nhân (Ly hạ - Càn thượng)",
-        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Càn (Trời)",
+        "unicode": "䷌",
+        "element": "fire",
+        "name": {
+            "short": "Đồng Nhân",
+            "full": "Thiên Hỏa Đồng Nhân",
+            "alias": null,
+            "hanzi": "同人"
+        },
+        "trigrams": {
+            "lower": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" },
+            "upper": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" }
+        },
         "lines": [1, 0, 1, 1, 1, 1],
-        "fortune": "Đại Cát",
-        "judgment": "Đồng Nhân: Đồng nhân vu dã, hanh. Lửa sáng dưới trời cao; đồng tâm hiệp lực công tâm thì đại sự ắt thành.",
-        "image": "Trời cùng lửa sáng soi chiếu muôn nơi; người quân tử phân biệt rõ ràng để hợp tác rộng mở.",
-        "advice": "Mở rộng liên minh cộng đồng, chia sẻ tầm nhìn minh bạch sẽ thu hút được cộng sự tài giỏi."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Đồng tâm", "Hiệp lực", "Cộng đồng", "Minh bạch"],
+        "meaning": {
+            "judgment": "Đồng Nhân: Đồng nhân vu dã, hanh. Lửa sáng dưới trời cao; đồng tâm hiệp lực công tâm thì đại sự ắt thành.",
+            "symbolism": "Trời cùng lửa sáng soi chiếu muôn nơi; người quân tử phân biệt rõ ràng để hợp tác rộng mở.",
+            "advice": "Mở rộng liên minh cộng đồng, chia sẻ tầm nhìn minh bạch sẽ thu hút được cộng sự tài giỏi."
+        }
     },
     {
-        "num": 14,
+        "id": 14,
+        "number": 14,
+        "code": "111101",
         "slug": "14-dai-huu",
-        "short": "Đại Hữu",
-        "name": "Hỏa Thiên Đại Hữu (Càn hạ - Ly thượng)",
-        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Ly (Lửa)",
+        "unicode": "䷍",
+        "element": "metal",
+        "name": {
+            "short": "Đại Hữu",
+            "full": "Hỏa Thiên Đại Hữu",
+            "alias": null,
+            "hanzi": "大有"
+        },
+        "trigrams": {
+            "lower": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" },
+            "upper": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" }
+        },
         "lines": [1, 1, 1, 1, 0, 1],
-        "fortune": "Đại Cát",
-        "judgment": "Đại Hữu: Nguyên hanh. Mặt trời tỏa sáng trên trời cao, vạn vật được soi chiếu, phúc lộc sung túc.",
-        "image": "Lửa ở trên trời là tượng quẻ Đại Hữu; người quân tử ngăn điều ác, nêu cao điều thiện.",
-        "advice": "Tài vận và uy tín cùng vượng. Rất thuận lợi cho đầu tư dài hạn, xây thương hiệu và kết giao quý nhân."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Phúc lộc", "Sung túc", "Uy tín", "Tỏa sáng"],
+        "meaning": {
+            "judgment": "Đại Hữu: Nguyên hanh. Mặt trời tỏa sáng trên trời cao, vạn vật được soi chiếu, phúc lộc sung túc.",
+            "symbolism": "Lửa ở trên trời là tượng quẻ Đại Hữu; người quân tử ngăn điều ác, nêu cao điều thiện.",
+            "advice": "Tài vận và uy tín cùng vượng. Rất thuận lợi cho đầu tư dài hạn, xây thương hiệu và kết giao quý nhân."
+        }
     },
     {
-        "num": 15,
+        "id": 15,
+        "number": 15,
+        "code": "001000",
         "slug": "15-khiem",
-        "short": "Khiêm",
-        "name": "Địa Sơn Khiêm (Cấn hạ - Khôn thượng)",
-        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Khôn (Đất)",
+        "unicode": "䷎",
+        "element": "metal",
+        "name": {
+            "short": "Khiêm",
+            "full": "Địa Sơn Khiêm",
+            "alias": null,
+            "hanzi": "謙"
+        },
+        "trigrams": {
+            "lower": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" },
+            "upper": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" }
+        },
         "lines": [0, 0, 1, 0, 0, 0],
-        "fortune": "Đại Cát",
-        "judgment": "Khiêm: Hanh, quân tử hữu chung. Núi cao ẩn mình dưới đất thấp, càng khiêm nhường càng tôn quý bền lâu.",
-        "image": "Trong đất có núi là tượng quẻ Khiêm; người quân tử bớt chỗ thừa, bù chỗ thiếu để giữ cân bằng.",
-        "advice": "Thái độ khiêm tốn, điềm đạm và biết lắng nghe sẽ hóa giải mọi trở ngại và giúp bạn thắng bền vững."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Khiêm nhường", "Cân bằng", "Điềm đạm", "Bền vững"],
+        "meaning": {
+            "judgment": "Khiêm: Hanh, quân tử hữu chung. Núi cao ẩn mình dưới đất thấp, càng khiêm nhường càng tôn quý bền lâu.",
+            "symbolism": "Trong đất có núi là tượng quẻ Khiêm; người quân tử bớt chỗ thừa, bù chỗ thiếu để giữ cân bằng.",
+            "advice": "Thái độ khiêm tốn, điềm đạm và biết lắng nghe sẽ hóa giải mọi trở ngại và giúp bạn thắng bền vững."
+        }
     },
     {
-        "num": 16,
+        "id": 16,
+        "number": 16,
+        "code": "000100",
         "slug": "16-du",
-        "short": "Dự",
-        "name": "Lôi Địa Dự (Khôn hạ - Chấn thượng)",
-        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Chấn (Sấm)",
+        "unicode": "䷏",
+        "element": "wood",
+        "name": {
+            "short": "Dự",
+            "full": "Lôi Địa Dự",
+            "alias": null,
+            "hanzi": "豫"
+        },
+        "trigrams": {
+            "lower": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" },
+            "upper": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" }
+        },
         "lines": [0, 0, 0, 1, 0, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Dự: Lợi kiến hầu hành sư. Sấm vang trên mặt đất báo mùa xuân tới, lòng người phấn chấn thuận hòa.",
-        "image": "Sấm dậy từ lòng đất; người xưa thuận theo nhịp tự nhiên để khơi dậy khí thế và dự phòng từ xa.",
-        "advice": "Năng lượng hào hứng lan tỏa rất tốt cho ra mắt sản phẩm; tuy nhiên lúc vui vẫn cần kế hoạch dự phòng."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Phấn chấn", "Thuận hòa", "Khí thế", "Dự phòng"],
+        "meaning": {
+            "judgment": "Dự: Lợi kiến hầu hành sư. Sấm vang trên mặt đất báo mùa xuân tới, lòng người phấn chấn thuận hòa.",
+            "symbolism": "Sấm dậy từ lòng đất; người xưa thuận theo nhịp tự nhiên để khơi dậy khí thế và dự phòng từ xa.",
+            "advice": "Năng lượng hào hứng lan tỏa rất tốt cho ra mắt sản phẩm; tuy nhiên lúc vui vẫn cần kế hoạch dự phòng."
+        }
     },
     {
-        "num": 17,
+        "id": 17,
+        "number": 17,
+        "code": "100110",
         "slug": "17-tuy",
-        "short": "Tùy",
-        "name": "Trạch Lôi Tùy (Chấn hạ - Đoài thượng)",
-        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Đoài (Đầm)",
+        "unicode": "䷐",
+        "element": "wood",
+        "name": {
+            "short": "Tùy",
+            "full": "Trạch Lôi Tùy",
+            "alias": null,
+            "hanzi": "隨"
+        },
+        "trigrams": {
+            "lower": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" },
+            "upper": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" }
+        },
         "lines": [1, 0, 0, 1, 1, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Tùy: Nguyên hanh lợi trinh, vô cữu. Linh hoạt thuận theo xu thế đúng đắn sẽ được mọi người ủng hộ.",
-        "image": "Trong đầm có sấm ẩn nghỉ; người quân tử biết thuận nhịp thời gian, làm việc và nghỉ ngơi hợp lý.",
-        "advice": "Linh hoạt thích nghi với nhu cầu thị trường thay vì bảo thủ giữ nguyên phương án cũ."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Linh hoạt", "Thuận thế", "Thích nghi", "Ủng hộ"],
+        "meaning": {
+            "judgment": "Tùy: Nguyên hanh lợi trinh, vô cữu. Linh hoạt thuận theo xu thế đúng đắn sẽ được mọi người ủng hộ.",
+            "symbolism": "Trong đầm có sấm ẩn nghỉ; người quân tử biết thuận nhịp thời gian, làm việc và nghỉ ngơi hợp lý.",
+            "advice": "Linh hoạt thích nghi với nhu cầu thị trường thay vì bảo thủ giữ nguyên phương án cũ."
+        }
     },
     {
-        "num": 18,
+        "id": 18,
+        "number": 18,
+        "code": "011001",
         "slug": "18-co",
-        "short": "Cổ",
-        "name": "Sơn Phong Cổ (Tốn hạ - Cấn thượng)",
-        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Cấn (Núi)",
+        "unicode": "䷑",
+        "element": "wood",
+        "name": {
+            "short": "Cổ",
+            "full": "Sơn Phong Cổ",
+            "alias": null,
+            "hanzi": "蠱"
+        },
+        "trigrams": {
+            "lower": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" },
+            "upper": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" }
+        },
         "lines": [0, 1, 1, 0, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Cổ: Nguyên hanh, lợi thiệp đại xuyên. Chỉnh đốn những thiếu sót cũ kỹ để mở ra kỷ nguyên phát triển mới.",
-        "image": "Dưới núi có gió là tượng quẻ Cổ; người quân tử chấn chỉnh phong hóa và bồi dưỡng đức độ.",
-        "advice": "Đã đến lúc rà soát, dọn dẹp nợ kỹ thuật hoặc quy trình lỗi thời; cải tổ dứt khoát sẽ rất thành công."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Chỉnh đốn", "Cải tổ", "Dọn nợ cũ", "Đổi mới"],
+        "meaning": {
+            "judgment": "Cổ: Nguyên hanh, lợi thiệp đại xuyên. Chỉnh đốn những thiếu sót cũ kỹ để mở ra kỷ nguyên phát triển mới.",
+            "symbolism": "Dưới núi có gió là tượng quẻ Cổ; người quân tử chấn chỉnh phong hóa và bồi dưỡng đức độ.",
+            "advice": "Đã đến lúc rà soát, dọn dẹp nợ kỹ thuật hoặc quy trình lỗi thời; cải tổ dứt khoát sẽ rất thành công."
+        }
     },
     {
-        "num": 19,
+        "id": 19,
+        "number": 19,
+        "code": "110000",
         "slug": "19-lam",
-        "short": "Lâm",
-        "name": "Địa Trạch Lâm (Đoài hạ - Khôn thượng)",
-        "trigrams": "Nội quái: Đoài (Đầm) • Ngoại quái: Khôn (Đất)",
+        "unicode": "䷒",
+        "element": "earth",
+        "name": {
+            "short": "Lâm",
+            "full": "Địa Trạch Lâm",
+            "alias": null,
+            "hanzi": "臨"
+        },
+        "trigrams": {
+            "lower": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" },
+            "upper": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" }
+        },
         "lines": [1, 1, 0, 0, 0, 0],
-        "fortune": "Đại Cát",
-        "judgment": "Lâm: Nguyên hanh lợi trinh. Hai hào dương đang lớn mạnh đi lên, thế vận tăng trưởng rõ rệt.",
-        "image": "Trên đầm có đất bao bọc; người quân tử dạy bảo không mỏi mệt và che chở cộng đồng bằng lòng bao dung.",
-        "advice": "Thời điểm vượng khí để mở rộng đội ngũ, truyền đạt kinh nghiệm và dẫn dắt các mục tiêu mới."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Tăng trưởng", "Vượng khí", "Mở rộng", "Dẫn dắt"],
+        "meaning": {
+            "judgment": "Lâm: Nguyên hanh lợi trinh. Hai hào dương đang lớn mạnh đi lên, thế vận tăng trưởng rõ rệt.",
+            "symbolism": "Trên đầm có đất bao bọc; người quân tử dạy bảo không mỏi mệt và che chở cộng đồng bằng lòng bao dung.",
+            "advice": "Thời điểm vượng khí để mở rộng đội ngũ, truyền đạt kinh nghiệm và dẫn dắt các mục tiêu mới."
+        }
     },
     {
-        "num": 20,
+        "id": 20,
+        "number": 20,
+        "code": "000011",
         "slug": "20-quan",
-        "short": "Quán",
-        "name": "Phong Địa Quán (Khôn hạ - Tốn thượng)",
-        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Tốn (Gió)",
+        "unicode": "䷓",
+        "element": "metal",
+        "name": {
+            "short": "Quán",
+            "full": "Phong Địa Quán",
+            "alias": null,
+            "hanzi": "觀"
+        },
+        "trigrams": {
+            "lower": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" },
+            "upper": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" }
+        },
         "lines": [0, 0, 0, 0, 1, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Quán: Quan sát tổng thể từ trên cao để nhìn rõ bản chất trước khi hành động.",
-        "image": "Gió thổi khắp mặt đất; bậc minh quân đi khắp nơi quan sát thực tiễn để định ra chính sách đúng.",
-        "advice": "Tạm dừng để phân tích dữ liệu, lắng nghe phản hồi người dùng và soi chiếu lại tầm nhìn dài hạn."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Quan sát", "Phân tích", "Soi chiếu", "Tầm nhìn"],
+        "meaning": {
+            "judgment": "Quán: Quan sát tổng thể từ trên cao để nhìn rõ bản chất trước khi hành động.",
+            "symbolism": "Gió thổi khắp mặt đất; bậc minh quân đi khắp nơi quan sát thực tiễn để định ra chính sách đúng.",
+            "advice": "Tạm dừng để phân tích dữ liệu, lắng nghe phản hồi người dùng và soi chiếu lại tầm nhìn dài hạn."
+        }
     },
     {
-        "num": 21,
+        "id": 21,
+        "number": 21,
+        "code": "100101",
         "slug": "21-phe-hap",
-        "short": "Phệ Hạp",
-        "name": "Hỏa Lôi Phệ Hạp (Chấn hạ - Ly thượng)",
-        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Ly (Lửa)",
+        "unicode": "䷔",
+        "element": "wood",
+        "name": {
+            "short": "Phệ Hạp",
+            "full": "Hỏa Lôi Phệ Hạp",
+            "alias": null,
+            "hanzi": "噬嗑"
+        },
+        "trigrams": {
+            "lower": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" },
+            "upper": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" }
+        },
         "lines": [1, 0, 0, 1, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Phệ Hạp: Hanh, lợi dụng ngục. Sấm chớp sáng rõ, xử lý dứt khoát vật cản giữa đường để mọi việc thông suốt.",
-        "image": "Sấm và chớp cùng phát sáng; người lãnh đạo làm rõ quy định và thực thi công bằng, minh bạch.",
-        "advice": "Đừng né tránh nút thắt hiện tại; đối diện thẳng thắn và giải quyết dứt điểm một lần cho xong."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Dứt khoát", "Gỡ nút thắt", "Công minh", "Thực thi"],
+        "meaning": {
+            "judgment": "Phệ Hạp: Hanh, lợi dụng ngục. Sấm chớp sáng rõ, xử lý dứt khoát vật cản giữa đường để mọi việc thông suốt.",
+            "symbolism": "Sấm và chớp cùng phát sáng; người lãnh đạo làm rõ quy định và thực thi công bằng, minh bạch.",
+            "advice": "Đừng né tránh nút thắt hiện tại; đối diện thẳng thắn và giải quyết dứt điểm một lần cho xong."
+        }
     },
     {
-        "num": 22,
+        "id": 22,
+        "number": 22,
+        "code": "101001",
         "slug": "22-bi",
-        "short": "Bí",
-        "name": "Sơn Hỏa Bí (Ly hạ - Cấn thượng)",
-        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Cấn (Núi)",
+        "unicode": "䷕",
+        "element": "earth",
+        "name": {
+            "short": "Bí",
+            "full": "Sơn Hỏa Bí",
+            "alias": null,
+            "hanzi": "賁"
+        },
+        "trigrams": {
+            "lower": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" },
+            "upper": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" }
+        },
         "lines": [1, 0, 1, 0, 0, 1],
-        "fortune": "Cát Hanh",
-        "judgment": "Bí: Hanh, tiểu lợi hữu du vãng. Ánh lửa soi sáng chân núi, tượng trưng cho thẩm mỹ và sự trau chuốt.",
-        "image": "Dưới núi có lửa sáng; người quân tử trau chuốt hình thức thanh nhã nhưng không đánh mất thực chất.",
-        "advice": "Rất tốt cho thiết kế UI/UX, làm đẹp thương hiệu và trình bày sản phẩm; giữ sự hài hòa giữa hình thức và lõi."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Thẩm mỹ", "Trau chuốt", "Thanh nhã", "Thực chất"],
+        "meaning": {
+            "judgment": "Bí: Hanh, tiểu lợi hữu du vãng. Ánh lửa soi sáng chân núi, tượng trưng cho thẩm mỹ và sự trau chuốt.",
+            "symbolism": "Dưới núi có lửa sáng; người quân tử trau chuốt hình thức thanh nhã nhưng không đánh mất thực chất.",
+            "advice": "Rất tốt cho thiết kế UI/UX, làm đẹp thương hiệu và trình bày sản phẩm; giữ sự hài hòa giữa hình thức và lõi."
+        }
     },
     {
-        "num": 23,
+        "id": 23,
+        "number": 23,
+        "code": "000001",
         "slug": "23-bac",
-        "short": "Bác",
-        "name": "Sơn Địa Bác (Khôn hạ - Cấn thượng)",
-        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Cấn (Núi)",
+        "unicode": "䷖",
+        "element": "metal",
+        "name": {
+            "short": "Bác",
+            "full": "Sơn Địa Bác",
+            "alias": null,
+            "hanzi": "剝"
+        },
+        "trigrams": {
+            "lower": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" },
+            "upper": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" }
+        },
         "lines": [0, 0, 0, 0, 0, 1],
-        "fortune": "Thận Trọng",
-        "judgment": "Bác: Bất lợi hữu du vãng. Lớp vỏ cũ đang bong tróc dần; nên tĩnh thủ củng cố phần gốc rễ còn vững.",
-        "image": "Núi tựa trên nền đất; bậc quân tử củng cố tầng nền bên dưới để chỗ đứng luôn an yên.",
-        "advice": "Không nên mạo hiểm mở rộng ngay lúc này; cắt bỏ hạng mục kém hiệu quả và giữ chắc nguồn lực cốt lõi."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Tĩnh thủ", "Củng cố gốc", "Tinh gọn", "Tránh mạo hiểm"],
+        "meaning": {
+            "judgment": "Bác: Bất lợi hữu du vãng. Lớp vỏ cũ đang bong tróc dần; nên tĩnh thủ củng cố phần gốc rễ còn vững.",
+            "symbolism": "Núi tựa trên nền đất; bậc quân tử củng cố tầng nền bên dưới để chỗ đứng luôn an yên.",
+            "advice": "Không nên mạo hiểm mở rộng ngay lúc này; cắt bỏ hạng mục kém hiệu quả và giữ chắc nguồn lực cốt lõi."
+        }
     },
     {
-        "num": 24,
+        "id": 24,
+        "number": 24,
+        "code": "100000",
         "slug": "24-phuc",
-        "short": "Phục",
-        "name": "Địa Lôi Phục (Chấn hạ - Khôn thượng)",
-        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Khôn (Đất)",
+        "unicode": "䷗",
+        "element": "earth",
+        "name": {
+            "short": "Phục",
+            "full": "Địa Lôi Phục",
+            "alias": null,
+            "hanzi": "復"
+        },
+        "trigrams": {
+            "lower": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" },
+            "upper": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" }
+        },
         "lines": [1, 0, 0, 0, 0, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Phục: Hanh, xuất nhập vô tật, bằng lai vô cữu. Một hào dương trở lại, sinh khí bắt đầu hồi sinh.",
-        "image": "Sấm ẩn trong lòng đất là tượng quẻ Phục; nên tĩnh dưỡng nội lực để đón chu kỳ hưng thịnh mới.",
-        "advice": "Giai đoạn khó khăn đã qua điểm đáy; kiên trì nuôi dưỡng những mầm mống cơ hội đầu tiên thật vững."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Hồi sinh", "Chuyển mình", "Dưỡng nội lực", "Khởi sắc"],
+        "meaning": {
+            "judgment": "Phục: Hanh, xuất nhập vô tật, bằng lai vô cữu. Một hào dương trở lại, sinh khí bắt đầu hồi sinh.",
+            "symbolism": "Sấm ẩn trong lòng đất là tượng quẻ Phục; nên tĩnh dưỡng nội lực để đón chu kỳ hưng thịnh mới.",
+            "advice": "Giai đoạn khó khăn đã qua điểm đáy; kiên trì nuôi dưỡng những mầm mống cơ hội đầu tiên thật vững."
+        }
     },
     {
-        "num": 25,
+        "id": 25,
+        "number": 25,
+        "code": "100111",
         "slug": "25-vo-vong",
-        "short": "Vô Vọng",
-        "name": "Thiên Lôi Vô Vọng (Chấn hạ - Càn thượng)",
-        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Càn (Trời)",
+        "unicode": "䷘",
+        "element": "wood",
+        "name": {
+            "short": "Vô Vọng",
+            "full": "Thiên Lôi Vô Vọng",
+            "alias": null,
+            "hanzi": "無妄"
+        },
+        "trigrams": {
+            "lower": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" },
+            "upper": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" }
+        },
         "lines": [1, 0, 0, 1, 1, 1],
-        "fortune": "Cát Hanh",
-        "judgment": "Vô Vọng: Nguyên hanh lợi trinh. Hành động chân thật, thuận theo đạo lý tự nhiên không mưu cầu xảo trá.",
-        "image": "Dưới trời sấm động muôn vật sinh sôi chân thực; người quân tử sống ngay thẳng, thuận thời mà làm.",
-        "advice": "Giữ tâm trong sáng, làm thật tạo giá trị thật thì tự nhiên tránh được rắc rối bất ngờ."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Chân thật", "Thuận tự nhiên", "Ngay thẳng", "Giá trị thật"],
+        "meaning": {
+            "judgment": "Vô Vọng: Nguyên hanh lợi trinh. Hành động chân thật, thuận theo đạo lý tự nhiên không mưu cầu xảo trá.",
+            "symbolism": "Dưới trời sấm động muôn vật sinh sôi chân thực; người quân tử sống ngay thẳng, thuận thời mà làm.",
+            "advice": "Giữ tâm trong sáng, làm thật tạo giá trị thật thì tự nhiên tránh được rắc rối bất ngờ."
+        }
     },
     {
-        "num": 26,
+        "id": 26,
+        "number": 26,
+        "code": "111001",
         "slug": "26-dai-suc",
-        "short": "Đại Súc",
-        "name": "Sơn Thiên Đại Súc (Càn hạ - Cấn thượng)",
-        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Cấn (Núi)",
+        "unicode": "䷙",
+        "element": "earth",
+        "name": {
+            "short": "Đại Súc",
+            "full": "Sơn Thiên Đại Súc",
+            "alias": null,
+            "hanzi": "大畜"
+        },
+        "trigrams": {
+            "lower": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" },
+            "upper": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" }
+        },
         "lines": [1, 1, 1, 0, 0, 1],
-        "fortune": "Đại Cát",
-        "judgment": "Đại Súc: Lợi trinh, lợi thiệp đại xuyên. Tích tụ nội lực, tri thức và tài sản dồi dào để làm việc lớn.",
-        "image": "Trời chứa trong núi lớn; người quân tử học hỏi nhiều kinh nghiệm cổ kim để bồi đắp bản lĩnh.",
-        "advice": "Thời cơ chín muồi để biến những tích lũy bền bỉ thời gian qua thành bước tiến đột phá lớn."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Tích lũy lớn", "Bản lĩnh", "Chín muồi", "Đột phá"],
+        "meaning": {
+            "judgment": "Đại Súc: Lợi trinh, lợi thiệp đại xuyên. Tích tụ nội lực, tri thức và tài sản dồi dào để làm việc lớn.",
+            "symbolism": "Trời chứa trong núi lớn; người quân tử học hỏi nhiều kinh nghiệm cổ kim để bồi đắp bản lĩnh.",
+            "advice": "Thời cơ chín muồi để biến những tích lũy bền bỉ thời gian qua thành bước tiến đột phá lớn."
+        }
     },
     {
-        "num": 27,
+        "id": 27,
+        "number": 27,
+        "code": "100001",
         "slug": "27-di",
-        "short": "Di",
-        "name": "Sơn Lôi Di (Chấn hạ - Cấn thượng)",
-        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Cấn (Núi)",
+        "unicode": "䷚",
+        "element": "wood",
+        "name": {
+            "short": "Di",
+            "full": "Sơn Lôi Di",
+            "alias": null,
+            "hanzi": "頤"
+        },
+        "trigrams": {
+            "lower": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" },
+            "upper": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" }
+        },
         "lines": [1, 0, 0, 0, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Di: Trinh cát, quan di tự cầu khẩu thực. Chăm lo dưỡng sinh, nuôi dưỡng thân tâm và giữ lời nói chừng mực.",
-        "image": "Dưới núi có sấm là tượng quẻ Di; người quân tử thận trọng ngôn từ và điều độ ăn uống nghỉ ngơi.",
-        "advice": "Chú ý sức khỏe, nhịp sinh học và cách diễn đạt; nuôi dưỡng nội lực tốt là nền tảng của mọi thành công."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Dưỡng sinh", "Cẩn ngôn", "Điều độ", "Nuôi nội lực"],
+        "meaning": {
+            "judgment": "Di: Trinh cát, quan di tự cầu khẩu thực. Chăm lo dưỡng sinh, nuôi dưỡng thân tâm và giữ lời nói chừng mực.",
+            "symbolism": "Dưới núi có sấm là tượng quẻ Di; người quân tử thận trọng ngôn từ và điều độ ăn uống nghỉ ngơi.",
+            "advice": "Chú ý sức khỏe, nhịp sinh học và cách diễn đạt; nuôi dưỡng nội lực tốt là nền tảng của mọi thành công."
+        }
     },
     {
-        "num": 28,
+        "id": 28,
+        "number": 28,
+        "code": "011110",
         "slug": "28-dai-qua",
-        "short": "Đại Quá",
-        "name": "Trạch Phong Đại Quá (Tốn hạ - Đoài thượng)",
-        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Đoài (Đầm)",
+        "unicode": "䷛",
+        "element": "wood",
+        "name": {
+            "short": "Đại Quá",
+            "full": "Trạch Phong Đại Quá",
+            "alias": null,
+            "hanzi": "大過"
+        },
+        "trigrams": {
+            "lower": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" },
+            "upper": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" }
+        },
         "lines": [0, 1, 1, 1, 1, 0],
-        "fortune": "Thận Trọng",
-        "judgment": "Đại Quá: Đống nạo, lợi hữu du vãng, hanh. Gánh nặng lớn đặt lên trụ giữa; cần giải pháp táo bạo để xoay chuyển.",
-        "image": "Nước đầm ngập cây gỗ; người quân tử giữ bản lĩnh độc lập, không sợ hãi trước áp lực lớn.",
-        "advice": "Áp lực công việc đang cao; hãy phân bổ lại tải trọng, tránh ôm đồm một mình gây quá sức."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Áp lực lớn", "Xoay chuyển", "Phân bổ tải", "Độc lập"],
+        "meaning": {
+            "judgment": "Đại Quá: Đống nạo, lợi hữu du vãng, hanh. Gánh nặng lớn đặt lên trụ giữa; cần giải pháp táo bạo để xoay chuyển.",
+            "symbolism": "Nước đầm ngập cây gỗ; người quân tử giữ bản lĩnh độc lập, không sợ hãi trước áp lực lớn.",
+            "advice": "Áp lực công việc đang cao; hãy phân bổ lại tải trọng, tránh ôm đồm một mình gây quá sức."
+        }
     },
     {
-        "num": 29,
+        "id": 29,
+        "number": 29,
+        "code": "010010",
         "slug": "29-kham",
-        "short": "Khảm",
-        "name": "Thuần Khảm (Khảm vi Thủy)",
-        "trigrams": "Nội quái: Khảm (Nước) • Ngoại quái: Khảm (Nước)",
+        "unicode": "䷜",
+        "element": "water",
+        "name": {
+            "short": "Khảm",
+            "full": "Thuần Khảm",
+            "alias": "Khảm vi Thủy",
+            "hanzi": "坎"
+        },
+        "trigrams": {
+            "lower": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" },
+            "upper": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" }
+        },
         "lines": [0, 1, 0, 0, 1, 0],
-        "fortune": "Thận Trọng",
-        "judgment": "Khảm: Tập khảm, hữu phu duy tâm hanh. Nước chảy qua ghềnh thác không ngừng, giữ lòng thành tín ắt vượt hiểm.",
-        "image": "Dòng nước nối tiếp chảy mãi; người quân tử bền bỉ tu dưỡng phẩm hạnh và kỹ năng thực chiến.",
-        "advice": "Khi gặp thử thách nối tiếp, giữ bình tĩnh và linh hoạt như dòng nước sẽ tìm ra khe hở để vượt qua."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Vượt hiểm", "Thành tín", "Bình tĩnh", "Linh hoạt"],
+        "meaning": {
+            "judgment": "Khảm: Tập khảm, hữu phu duy tâm hanh. Nước chảy qua ghềnh thác không ngừng, giữ lòng thành tín ắt vượt hiểm.",
+            "symbolism": "Dòng nước nối tiếp chảy mãi; người quân tử bền bỉ tu dưỡng phẩm hạnh và kỹ năng thực chiến.",
+            "advice": "Khi gặp thử thách nối tiếp, giữ bình tĩnh và linh hoạt như dòng nước sẽ tìm ra khe hở để vượt qua."
+        }
     },
     {
-        "num": 30,
+        "id": 30,
+        "number": 30,
+        "code": "101101",
         "slug": "30-ly",
-        "short": "Ly",
-        "name": "Thuần Ly (Ly vi Hỏa)",
-        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Ly (Lửa)",
+        "unicode": "䷝",
+        "element": "fire",
+        "name": {
+            "short": "Ly",
+            "full": "Thuần Ly",
+            "alias": "Ly vi Hỏa",
+            "hanzi": "離"
+        },
+        "trigrams": {
+            "lower": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" },
+            "upper": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" }
+        },
         "lines": [1, 0, 1, 1, 0, 1],
-        "fortune": "Cát Hanh",
-        "judgment": "Ly: Lợi trinh, hanh. Hai ngọn lửa nối tiếp soi sáng, trí tuệ minh mẫn và cần điểm tựa vững bền để tỏa sáng.",
-        "image": "Ánh sáng nối tiếp rạng rỡ; bậc đại nhân dùng trí tuệ quang minh soi đường cho công việc và tập thể.",
-        "advice": "Rất thuận lợi cho truyền thông, học thuật và sáng tạo; giữ cảm xúc ổn định để ánh sáng luôn bền bỉ."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Soi sáng", "Minh mẫn", "Sáng tạo", "Điểm tựa"],
+        "meaning": {
+            "judgment": "Ly: Lợi trinh, hanh. Hai ngọn lửa nối tiếp soi sáng, trí tuệ minh mẫn và cần điểm tựa vững bền để tỏa sáng.",
+            "symbolism": "Ánh sáng nối tiếp rạng rỡ; bậc đại nhân dùng trí tuệ quang minh soi đường cho công việc và tập thể.",
+            "advice": "Rất thuận lợi cho truyền thông, học thuật và sáng tạo; giữ cảm xúc ổn định để ánh sáng luôn bền bỉ."
+        }
     },
     {
-        "num": 31,
+        "id": 31,
+        "number": 31,
+        "code": "001110",
         "slug": "31-ham",
-        "short": "Hàm",
-        "name": "Trạch Sơn Hàm (Cấn hạ - Đoài thượng)",
-        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Đoài (Đầm)",
+        "unicode": "䷞",
+        "element": "metal",
+        "name": {
+            "short": "Hàm",
+            "full": "Trạch Sơn Hàm",
+            "alias": null,
+            "hanzi": "咸"
+        },
+        "trigrams": {
+            "lower": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" },
+            "upper": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" }
+        },
         "lines": [0, 0, 1, 1, 1, 0],
-        "fortune": "Đại Cát",
-        "judgment": "Hàm: Hanh lợi trinh, thủ nữ cát. Cảm ứng chân thành giữa hai trái tim và sự đồng điệu trong hợp tác.",
-        "image": "Trên núi có đầm nước; người quân tử giữ lòng rộng mở, khiêm hạ để đón nhận và thấu hiểu người khác.",
-        "advice": "Tuyệt vời cho nhân duyên, đàm phán khách hàng và kết nối đội nhóm bằng sự chân thành."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Cảm ứng", "Đồng điệu", "Chân thành", "Thấu hiểu"],
+        "meaning": {
+            "judgment": "Hàm: Hanh lợi trinh, thủ nữ cát. Cảm ứng chân thành giữa hai trái tim và sự đồng điệu trong hợp tác.",
+            "symbolism": "Trên núi có đầm nước; người quân tử giữ lòng rộng mở, khiêm hạ để đón nhận và thấu hiểu người khác.",
+            "advice": "Tuyệt vời cho nhân duyên, đàm phán khách hàng và kết nối đội nhóm bằng sự chân thành."
+        }
     },
     {
-        "num": 32,
+        "id": 32,
+        "number": 32,
+        "code": "011100",
         "slug": "32-hang",
-        "short": "Hằng",
-        "name": "Lôi Phong Hằng (Tốn hạ - Chấn thượng)",
-        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Chấn (Sấm)",
+        "unicode": "䷟",
+        "element": "wood",
+        "name": {
+            "short": "Hằng",
+            "full": "Lôi Phong Hằng",
+            "alias": null,
+            "hanzi": "恆"
+        },
+        "trigrams": {
+            "lower": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" },
+            "upper": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" }
+        },
         "lines": [0, 1, 1, 1, 0, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Hằng: Hanh, vô cữu, lợi trinh. Sấm gió song hành bền bỉ, kiên trì theo đuổi con đường đúng đắn sẽ thành công.",
-        "image": "Sấm và gió tương trợ lâu dài; người quân tử giữ vững lập trường chính trực không đổi thay tùy tiện.",
-        "advice": "Thành quả lớn đến từ sự đều đặn mỗi ngày. Hãy kiên định với lộ trình dài hạn đã chọn."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Bền bỉ", "Kiên định", "Đều đặn", "Đường dài"],
+        "meaning": {
+            "judgment": "Hằng: Hanh, vô cữu, lợi trinh. Sấm gió song hành bền bỉ, kiên trì theo đuổi con đường đúng đắn sẽ thành công.",
+            "symbolism": "Sấm và gió tương trợ lâu dài; người quân tử giữ vững lập trường chính trực không đổi thay tùy tiện.",
+            "advice": "Thành quả lớn đến từ sự đều đặn mỗi ngày. Hãy kiên định với lộ trình dài hạn đã chọn."
+        }
     },
     {
-        "num": 33,
+        "id": 33,
+        "number": 33,
+        "code": "001111",
         "slug": "33-don",
-        "short": "Độn",
-        "name": "Thiên Sơn Độn (Cấn hạ - Càn thượng)",
-        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Càn (Trời)",
+        "unicode": "䷠",
+        "element": "metal",
+        "name": {
+            "short": "Độn",
+            "full": "Thiên Sơn Độn",
+            "alias": null,
+            "hanzi": "遯"
+        },
+        "trigrams": {
+            "lower": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" },
+            "upper": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" }
+        },
         "lines": [0, 0, 1, 1, 1, 1],
-        "fortune": "Thận Trọng",
-        "judgment": "Độn: Hanh, tiểu lợi trinh. Chủ động lùi một bước đúng lúc để bảo toàn lực lượng và giữ thế chủ động.",
-        "image": "Dưới trời có núi cao; người quân tử giữ khoảng cách chừng mực với ồn ào, không nóng giận đối đầu.",
-        "advice": "Tạm rút khỏi những cuộc cạnh tranh vô ích để tập trung nâng cấp thực lực cho giai đoạn sau."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Lùi đúng lúc", "Bảo toàn lực", "Giữ khoảng cách", "Nâng thực lực"],
+        "meaning": {
+            "judgment": "Độn: Hanh, tiểu lợi trinh. Chủ động lùi một bước đúng lúc để bảo toàn lực lượng và giữ thế chủ động.",
+            "symbolism": "Dưới trời có núi cao; người quân tử giữ khoảng cách chừng mực với ồn ào, không nóng giận đối đầu.",
+            "advice": "Tạm rút khỏi những cuộc cạnh tranh vô ích để tập trung nâng cấp thực lực cho giai đoạn sau."
+        }
     },
     {
-        "num": 34,
+        "id": 34,
+        "number": 34,
+        "code": "111100",
         "slug": "34-dai-trang",
-        "short": "Đại Tráng",
-        "name": "Lôi Thiên Đại Tráng (Càn hạ - Chấn thượng)",
-        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Chấn (Sấm)",
+        "unicode": "䷡",
+        "element": "earth",
+        "name": {
+            "short": "Đại Tráng",
+            "full": "Lôi Thiên Đại Tráng",
+            "alias": null,
+            "hanzi": "大壯"
+        },
+        "trigrams": {
+            "lower": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" },
+            "upper": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" }
+        },
         "lines": [1, 1, 1, 1, 0, 0],
-        "fortune": "Đại Cát",
-        "judgment": "Đại Tráng: Lợi trinh. Sấm vang trên trời cao, khí thế cường thịnh nhưng phải hành xử đúng chừng mực.",
-        "image": "Sấm rền trên bầu trời; người quân tử không làm điều trái lễ nghĩa dù đang nắm sức mạnh lớn.",
-        "advice": "Nội lực đang rất sung mãn để bứt tốc; kết hợp sức mạnh với kỷ luật sẽ tạo thành tích vượt trội."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Cường thịnh", "Bứt tốc", "Kỷ luật", "Chừng mực"],
+        "meaning": {
+            "judgment": "Đại Tráng: Lợi trinh. Sấm vang trên trời cao, khí thế cường thịnh nhưng phải hành xử đúng chừng mực.",
+            "symbolism": "Sấm rền trên bầu trời; người quân tử không làm điều trái lễ nghĩa dù đang nắm sức mạnh lớn.",
+            "advice": "Nội lực đang rất sung mãn để bứt tốc; kết hợp sức mạnh với kỷ luật sẽ tạo thành tích vượt trội."
+        }
     },
     {
-        "num": 35,
+        "id": 35,
+        "number": 35,
+        "code": "000101",
         "slug": "35-tan",
-        "short": "Tấn",
-        "name": "Hỏa Địa Tấn (Khôn hạ - Ly thượng)",
-        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Ly (Lửa)",
+        "unicode": "䷢",
+        "element": "metal",
+        "name": {
+            "short": "Tấn",
+            "full": "Hỏa Địa Tấn",
+            "alias": null,
+            "hanzi": "晉"
+        },
+        "trigrams": {
+            "lower": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" },
+            "upper": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" }
+        },
         "lines": [0, 0, 0, 1, 0, 1],
-        "fortune": "Đại Cát",
-        "judgment": "Tấn: Khang hầu dụng tích mã phồn thứ. Mặt trời mọc trên mặt đất, công danh tiến bước rạng rỡ.",
-        "image": "Ánh sáng vươn lên khỏi mặt đất; người quân tử tự làm sáng tỏ tài năng và đức hạnh của mình.",
-        "advice": "Thời vận thăng tiến mạnh mẽ. Rất thuận lợi trình bày đề án, mở rộng đối tác và nâng tầm vị thế."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Thăng tiến", "Rạng rỡ", "Tỏa sáng", "Nâng vị thế"],
+        "meaning": {
+            "judgment": "Tấn: Khang hầu dụng tích mã phồn thứ. Mặt trời mọc trên mặt đất, công danh tiến bước rạng rỡ.",
+            "symbolism": "Ánh sáng vươn lên khỏi mặt đất; người quân tử tự làm sáng tỏ tài năng và đức hạnh của mình.",
+            "advice": "Thời vận thăng tiến mạnh mẽ. Rất thuận lợi trình bày đề án, mở rộng đối tác và nâng tầm vị thế."
+        }
     },
     {
-        "num": 36,
+        "id": 36,
+        "number": 36,
+        "code": "101000",
         "slug": "36-minh-di",
-        "short": "Minh Di",
-        "name": "Địa Hỏa Minh Di (Ly hạ - Khôn thượng)",
-        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Khôn (Đất)",
+        "unicode": "䷣",
+        "element": "water",
+        "name": {
+            "short": "Minh Di",
+            "full": "Địa Hỏa Minh Di",
+            "alias": null,
+            "hanzi": "明夷"
+        },
+        "trigrams": {
+            "lower": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" },
+            "upper": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" }
+        },
         "lines": [1, 0, 1, 0, 0, 0],
-        "fortune": "Thận Trọng",
-        "judgment": "Minh Di: Lợi gian trinh. Ánh sáng tạm ẩn dưới lòng đất; giấu tài giữ chí trong hoàn cảnh chưa thuận.",
-        "image": "Ánh sáng chìm trong đất; người quân tử ngoài mềm dẻo khiêm nhường nhưng bên trong vẫn giữ trí sáng.",
-        "advice": "Không nên phô trương hay đối đầu trực diện lúc này; âm thầm làm tốt việc của mình chờ trời sáng."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Giấu tài", "Giữ chí", "Âm thầm", "Chờ trời sáng"],
+        "meaning": {
+            "judgment": "Minh Di: Lợi gian trinh. Ánh sáng tạm ẩn dưới lòng đất; giấu tài giữ chí trong hoàn cảnh chưa thuận.",
+            "symbolism": "Ánh sáng chìm trong đất; người quân tử ngoài mềm dẻo khiêm nhường nhưng bên trong vẫn giữ trí sáng.",
+            "advice": "Không nên phô trương hay đối đầu trực diện lúc này; âm thầm làm tốt việc của mình chờ trời sáng."
+        }
     },
     {
-        "num": 37,
+        "id": 37,
+        "number": 37,
+        "code": "101011",
         "slug": "37-gia-nhan",
-        "short": "Gia Nhân",
-        "name": "Phong Hỏa Gia Nhân (Ly hạ - Tốn thượng)",
-        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Tốn (Gió)",
+        "unicode": "䷤",
+        "element": "wood",
+        "name": {
+            "short": "Gia Nhân",
+            "full": "Phong Hỏa Gia Nhân",
+            "alias": null,
+            "hanzi": "家人"
+        },
+        "trigrams": {
+            "lower": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" },
+            "upper": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" }
+        },
         "lines": [1, 0, 1, 0, 1, 1],
-        "fortune": "Cát Hanh",
-        "judgment": "Gia Nhân: Lợi nữ trinh. Gió tỏa ra từ lửa ấm, gia đạo hòa thuận và đội ngũ nội bộ gắn kết vững vàng.",
-        "image": "Lửa sinh gió ấm lan tỏa; người quân tử nói lời chân thực và hành động nhất quán làm gương.",
-        "advice": "Chăm lo tốt hậu phương gia đình và văn hóa nội bộ nhóm là bệ phóng vững nhất cho sự nghiệp."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Gia đạo hòa", "Gắn kết", "Nhất quán", "Hậu phương"],
+        "meaning": {
+            "judgment": "Gia Nhân: Lợi nữ trinh. Gió tỏa ra từ lửa ấm, gia đạo hòa thuận và đội ngũ nội bộ gắn kết vững vàng.",
+            "symbolism": "Lửa sinh gió ấm lan tỏa; người quân tử nói lời chân thực và hành động nhất quán làm gương.",
+            "advice": "Chăm lo tốt hậu phương gia đình và văn hóa nội bộ nhóm là bệ phóng vững nhất cho sự nghiệp."
+        }
     },
     {
-        "num": 38,
+        "id": 38,
+        "number": 38,
+        "code": "110101",
         "slug": "38-khue",
-        "short": "Khuê",
-        "name": "Hỏa Trạch Khuê (Đoài hạ - Ly thượng)",
-        "trigrams": "Nội quái: Đoài (Đầm) • Ngoại quái: Ly (Lửa)",
+        "unicode": "䷥",
+        "element": "earth",
+        "name": {
+            "short": "Khuê",
+            "full": "Hỏa Trạch Khuê",
+            "alias": null,
+            "hanzi": "睽"
+        },
+        "trigrams": {
+            "lower": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" },
+            "upper": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" }
+        },
         "lines": [1, 1, 0, 1, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Khuê: Tiểu sự cát. Lửa bốc lên còn nước đầm chảy xuống; tuy khác biệt góc nhìn nhưng biết tôn trọng sẽ hóa hay.",
-        "image": "Trên lửa dưới đầm trái tính nhau; người quân tử hòa đồng trong đại cục nhưng vẫn giữ bản sắc riêng.",
-        "advice": "Khi gặp bất đồng quan điểm, hãy tập trung vào điểm chung và xử lý tốt từng mục tiêu nhỏ trước."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Khác biệt", "Tôn trọng", "Tìm điểm chung", "Việc nhỏ cát"],
+        "meaning": {
+            "judgment": "Khuê: Tiểu sự cát. Lửa bốc lên còn nước đầm chảy xuống; tuy khác biệt góc nhìn nhưng biết tôn trọng sẽ hóa hay.",
+            "symbolism": "Trên lửa dưới đầm trái tính nhau; người quân tử hòa đồng trong đại cục nhưng vẫn giữ bản sắc riêng.",
+            "advice": "Khi gặp bất đồng quan điểm, hãy tập trung vào điểm chung và xử lý tốt từng mục tiêu nhỏ trước."
+        }
     },
     {
-        "num": 39,
+        "id": 39,
+        "number": 39,
+        "code": "001010",
         "slug": "39-kien",
-        "short": "Kiển",
-        "name": "Thủy Sơn Kiển (Cấn hạ - Khảm thượng)",
-        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Khảm (Nước)",
+        "unicode": "䷦",
+        "element": "metal",
+        "name": {
+            "short": "Kiển",
+            "full": "Thủy Sơn Kiển",
+            "alias": null,
+            "hanzi": "蹇"
+        },
+        "trigrams": {
+            "lower": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" },
+            "upper": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" }
+        },
         "lines": [0, 0, 1, 0, 1, 0],
-        "fortune": "Thận Trọng",
-        "judgment": "Kiển: Lợi Tây Nam, bất lợi Đông Bắc, lợi kiến đại nhân. Trước hiểm sau núi, cần dừng lại soi xét bản thân.",
-        "image": "Trên núi có nước hiểm trở; người quân tử quay vào tự kiểm điểm và nâng cấp năng lực của mình.",
-        "advice": "Đừng cố lao vào ngõ cụt; đổi hướng mềm dẻo hơn và chủ động tìm sự cố vấn từ chuyên gia."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Trở ngại", "Soi xét mình", "Đổi hướng", "Tìm cố vấn"],
+        "meaning": {
+            "judgment": "Kiển: Lợi Tây Nam, bất lợi Đông Bắc, lợi kiến đại nhân. Trước hiểm sau núi, cần dừng lại soi xét bản thân.",
+            "symbolism": "Trên núi có nước hiểm trở; người quân tử quay vào tự kiểm điểm và nâng cấp năng lực của mình.",
+            "advice": "Đừng cố lao vào ngõ cụt; đổi hướng mềm dẻo hơn và chủ động tìm sự cố vấn từ chuyên gia."
+        }
     },
     {
-        "num": 40,
+        "id": 40,
+        "number": 40,
+        "code": "010100",
         "slug": "40-giai",
-        "short": "Giải",
-        "name": "Lôi Thủy Giải (Khảm hạ - Chấn thượng)",
-        "trigrams": "Nội quái: Khảm (Nước) • Ngoại quái: Chấn (Sấm)",
+        "unicode": "䷧",
+        "element": "wood",
+        "name": {
+            "short": "Giải",
+            "full": "Lôi Thủy Giải",
+            "alias": null,
+            "hanzi": "解"
+        },
+        "trigrams": {
+            "lower": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" },
+            "upper": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" }
+        },
         "lines": [0, 1, 0, 1, 0, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Giải: Lợi Tây Nam, hữu du vãng túc cát. Sấm mưa giải tỏa bầu trời u ám, khó khăn được tháo gỡ nhanh chóng.",
-        "image": "Sấm mưa cùng nổi làm tan khí bức bối; người quân tử biết tha thứ lỗi nhỏ và giải tỏa căng thẳng.",
-        "advice": "Nút thắt sắp được cởi bỏ; khi cơ hội xuất hiện hãy hành động nhanh gọn rồi sớm trở về nhịp ổn định."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Tháo gỡ", "Giải tỏa", "Bao dung", "Nhanh gọn"],
+        "meaning": {
+            "judgment": "Giải: Lợi Tây Nam, hữu du vãng túc cát. Sấm mưa giải tỏa bầu trời u ám, khó khăn được tháo gỡ nhanh chóng.",
+            "symbolism": "Sấm mưa cùng nổi làm tan khí bức bối; người quân tử biết tha thứ lỗi nhỏ và giải tỏa căng thẳng.",
+            "advice": "Nút thắt sắp được cởi bỏ; khi cơ hội xuất hiện hãy hành động nhanh gọn rồi sớm trở về nhịp ổn định."
+        }
     },
     {
-        "num": 41,
+        "id": 41,
+        "number": 41,
+        "code": "110001",
         "slug": "41-ton",
-        "short": "Tổn",
-        "name": "Sơn Trạch Tổn (Đoài hạ - Cấn thượng)",
-        "trigrams": "Nội quái: Đoài (Đầm) • Ngoại quái: Cấn (Núi)",
+        "unicode": "䷨",
+        "element": "earth",
+        "name": {
+            "short": "Tổn",
+            "full": "Sơn Trạch Tổn",
+            "alias": null,
+            "hanzi": "損"
+        },
+        "trigrams": {
+            "lower": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" },
+            "upper": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" }
+        },
         "lines": [1, 1, 0, 0, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Tổn: Hữu phu nguyên cát. Bớt đi những thứ thừa thãi bên ngoài để bồi đắp giá trị cốt lõi bên trong.",
-        "image": "Dưới núi có đầm sâu; người quân tử tiết chế nóng giận và giảm bớt ham muốn phù phiếm.",
-        "advice": "Cắt giảm chi phí hoặc tính năng rườm rà không cần thiết; tinh gọn lúc này chính là đầu tư cho tương lai."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Tinh gọn", "Tiết chế", "Giá trị lõi", "Đầu tư sâu"],
+        "meaning": {
+            "judgment": "Tổn: Hữu phu nguyên cát. Bớt đi những thứ thừa thãi bên ngoài để bồi đắp giá trị cốt lõi bên trong.",
+            "symbolism": "Dưới núi có đầm sâu; người quân tử tiết chế nóng giận và giảm bớt ham muốn phù phiếm.",
+            "advice": "Cắt giảm chi phí hoặc tính năng rườm rà không cần thiết; tinh gọn lúc này chính là đầu tư cho tương lai."
+        }
     },
     {
-        "num": 42,
+        "id": 42,
+        "number": 42,
+        "code": "100011",
         "slug": "42-ich",
-        "short": "Ích",
-        "name": "Phong Lôi Ích (Chấn hạ - Tốn thượng)",
-        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Tốn (Gió)",
+        "unicode": "䷩",
+        "element": "wood",
+        "name": {
+            "short": "Ích",
+            "full": "Phong Lôi Ích",
+            "alias": null,
+            "hanzi": "益"
+        },
+        "trigrams": {
+            "lower": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" },
+            "upper": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" }
+        },
         "lines": [1, 0, 0, 0, 1, 1],
-        "fortune": "Đại Cát",
-        "judgment": "Ích: Lợi hữu du vãng, lợi thiệp đại xuyên. Gió sấm tương trợ, tăng thêm phúc lộc và sức mạnh cộng hưởng.",
-        "image": "Gió và sấm khích động nhau; người quân tử thấy điều hay thì học ngay, có lỗi thì sửa liền.",
-        "advice": "Rất tốt để khởi động dự án lớn, đầu tư nâng cấp kỹ năng và hỗ trợ cộng sự cùng phát triển."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Tăng ích", "Cộng hưởng", "Tiến bộ", "Hỗ trợ"],
+        "meaning": {
+            "judgment": "Ích: Lợi hữu du vãng, lợi thiệp đại xuyên. Gió sấm tương trợ, tăng thêm phúc lộc và sức mạnh cộng hưởng.",
+            "symbolism": "Gió và sấm khích động nhau; người quân tử thấy điều hay thì học ngay, có lỗi thì sửa liền.",
+            "advice": "Rất tốt để khởi động dự án lớn, đầu tư nâng cấp kỹ năng và hỗ trợ cộng sự cùng phát triển."
+        }
     },
     {
-        "num": 43,
+        "id": 43,
+        "number": 43,
+        "code": "111110",
         "slug": "43-quai",
-        "short": "Quải",
-        "name": "Trạch Thiên Quải (Càn hạ - Đoài thượng)",
-        "trigrams": "Nội quái: Càn (Trời) • Ngoại quái: Đoài (Đầm)",
+        "unicode": "䷪",
+        "element": "earth",
+        "name": {
+            "short": "Quải",
+            "full": "Trạch Thiên Quải",
+            "alias": null,
+            "hanzi": "夬"
+        },
+        "trigrams": {
+            "lower": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" },
+            "upper": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" }
+        },
         "lines": [1, 1, 1, 1, 1, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Quải: Dương vu vương đình. Năm hào dương dứt khoát đẩy lùi một hào âm; quyết đoán minh bạch sẽ thắng lợi.",
-        "image": "Nước đầm dâng lên trời; người quân tử chia sẻ ân huệ cho tập thể và tránh tự mãn kiêu căng.",
-        "advice": "Đã đến lúc đưa ra quyết định dứt khoát, công khai minh bạch nhưng vẫn giữ thái độ ôn hòa văn minh."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Quyết đoán", "Minh bạch", "Ôn hòa", "Chia sẻ"],
+        "meaning": {
+            "judgment": "Quải: Dương vu vương đình. Năm hào dương dứt khoát đẩy lùi một hào âm; quyết đoán minh bạch sẽ thắng lợi.",
+            "symbolism": "Nước đầm dâng lên trời; người quân tử chia sẻ ân huệ cho tập thể và tránh tự mãn kiêu căng.",
+            "advice": "Đã đến lúc đưa ra quyết định dứt khoát, công khai minh bạch nhưng vẫn giữ thái độ ôn hòa văn minh."
+        }
     },
     {
-        "num": 44,
+        "id": 44,
+        "number": 44,
+        "code": "011111",
         "slug": "44-cau",
-        "short": "Cấu",
-        "name": "Thiên Phong Cấu (Tốn hạ - Càn thượng)",
-        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Càn (Trời)",
+        "unicode": "䷫",
+        "element": "metal",
+        "name": {
+            "short": "Cấu",
+            "full": "Thiên Phong Cấu",
+            "alias": null,
+            "hanzi": "姤"
+        },
+        "trigrams": {
+            "lower": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" },
+            "upper": { "key": "qian", "name": "Càn", "nature": "Trời", "symbol": "☰" }
+        },
         "lines": [0, 1, 1, 1, 1, 1],
-        "fortune": "Thận Trọng",
-        "judgment": "Cấu: Cuộc gặp gỡ bất ngờ hoặc nhân tố mới xuất hiện; cần tỉnh táo nhận diện trước khi cam kết sâu.",
-        "image": "Dưới trời có gió thổi khắp bốn phương; người lãnh đạo ban truyền thông điệp rõ ràng tới mọi nơi.",
-        "advice": "Cơ hội hoặc đối tác mới đến bất ngờ; hãy kiểm chứng kỹ năng lực và giữ ranh giới an toàn."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Gặp gỡ bất ngờ", "Tỉnh táo", "Kiểm chứng", "Giữ ranh giới"],
+        "meaning": {
+            "judgment": "Cấu: Cuộc gặp gỡ bất ngờ hoặc nhân tố mới xuất hiện; cần tỉnh táo nhận diện trước khi cam kết sâu.",
+            "symbolism": "Dưới trời có gió thổi khắp bốn phương; người lãnh đạo ban truyền thông điệp rõ ràng tới mọi nơi.",
+            "advice": "Cơ hội hoặc đối tác mới đến bất ngờ; hãy kiểm chứng kỹ năng lực và giữ ranh giới an toàn."
+        }
     },
     {
-        "num": 45,
+        "id": 45,
+        "number": 45,
+        "code": "000110",
         "slug": "45-tuy",
-        "short": "Tụy",
-        "name": "Trạch Địa Tụy (Khôn hạ - Đoài thượng)",
-        "trigrams": "Nội quái: Khôn (Đất) • Ngoại quái: Đoài (Đầm)",
+        "unicode": "䷬",
+        "element": "metal",
+        "name": {
+            "short": "Tụy",
+            "full": "Trạch Địa Tụy",
+            "alias": null,
+            "hanzi": "萃"
+        },
+        "trigrams": {
+            "lower": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" },
+            "upper": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" }
+        },
         "lines": [0, 0, 0, 1, 1, 0],
-        "fortune": "Đại Cát",
-        "judgment": "Tụy: Hanh, lợi kiến đại nhân, lợi dụng đại sinh. Nước tụ về đầm lớn, nhân tài và nguồn lực quy tụ.",
-        "image": "Nước tụ trên mặt đất; người quân tử chuẩn bị sẵn công cụ tốt để phòng ngừa mọi tình huống bất ngờ.",
-        "advice": "Rất thuận lợi cho tổ chức sự kiện, gây quỹ, xây dựng cộng đồng và tập hợp đội ngũ cùng chí hướng."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Quy tụ", "Hội tụ lực", "Cộng đồng", "Chuẩn bị sẵn"],
+        "meaning": {
+            "judgment": "Tụy: Hanh, lợi kiến đại nhân, lợi dụng đại sinh. Nước tụ về đầm lớn, nhân tài và nguồn lực quy tụ.",
+            "symbolism": "Nước tụ trên mặt đất; người quân tử chuẩn bị sẵn công cụ tốt để phòng ngừa mọi tình huống bất ngờ.",
+            "advice": "Rất thuận lợi cho tổ chức sự kiện, gây quỹ, xây dựng cộng đồng và tập hợp đội ngũ cùng chí hướng."
+        }
     },
     {
-        "num": 46,
+        "id": 46,
+        "number": 46,
+        "code": "011000",
         "slug": "46-thang",
-        "short": "Thăng",
-        "name": "Địa Phong Thăng (Tốn hạ - Khôn thượng)",
-        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Khôn (Đất)",
+        "unicode": "䷭",
+        "element": "wood",
+        "name": {
+            "short": "Thăng",
+            "full": "Địa Phong Thăng",
+            "alias": null,
+            "hanzi": "升"
+        },
+        "trigrams": {
+            "lower": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" },
+            "upper": { "key": "kun", "name": "Khôn", "nature": "Đất", "symbol": "☷" }
+        },
         "lines": [0, 1, 1, 0, 0, 0],
-        "fortune": "Đại Cát",
-        "judgment": "Thăng: Nguyên hanh, dụng kiến đại nhân, vật tuất. Cây non vươn lên từ đất, tích tiểu thành đại vững chắc.",
-        "image": "Trong đất sinh cây lớn dần; người quân tử thuận đức mà tích lũy từng bước nhỏ thành sự nghiệp lớn.",
-        "advice": "Kiên nhẫn tiến lên từng nấc thang chắc chắn và chủ động kết nối với quý nhân, cố vấn giàu kinh nghiệm."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Vươn lên", "Tích tiểu thành đại", "Quý nhân", "Vững chắc"],
+        "meaning": {
+            "judgment": "Thăng: Nguyên hanh, dụng kiến đại nhân, vật tuất. Cây non vươn lên từ đất, tích tiểu thành đại vững chắc.",
+            "symbolism": "Trong đất sinh cây lớn dần; người quân tử thuận đức mà tích lũy từng bước nhỏ thành sự nghiệp lớn.",
+            "advice": "Kiên nhẫn tiến lên từng nấc thang chắc chắn và chủ động kết nối với quý nhân, cố vấn giàu kinh nghiệm."
+        }
     },
     {
-        "num": 47,
+        "id": 47,
+        "number": 47,
+        "code": "010110",
         "slug": "47-khon",
-        "short": "Khốn",
-        "name": "Trạch Thủy Khốn (Khảm hạ - Đoài thượng)",
-        "trigrams": "Nội quái: Khảm (Nước) • Ngoại quái: Đoài (Đầm)",
+        "unicode": "䷮",
+        "element": "metal",
+        "name": {
+            "short": "Khốn",
+            "full": "Trạch Thủy Khốn",
+            "alias": null,
+            "hanzi": "困"
+        },
+        "trigrams": {
+            "lower": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" },
+            "upper": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" }
+        },
         "lines": [0, 1, 0, 1, 1, 0],
-        "fortune": "Thận Trọng",
-        "judgment": "Khốn: Hanh, trinh đại nhân cát. Đầm cạn nước thử thách bản lĩnh; giữ vững ý chí trong nghịch cảnh sẽ thoát hiểm.",
-        "image": "Đầm không có nước là tượng quẻ Khốn; người quân tử giữ trọn chí khí, lấy hành động chứng minh thay lời nói.",
-        "advice": "Đừng giải thích nhiều khi chưa được hiểu; lặng lẽ chứng minh bằng kết quả thực tế và kiên trì vượt khó."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Thử thách", "Vững chí", "Hành động thật", "Vượt nghịch cảnh"],
+        "meaning": {
+            "judgment": "Khốn: Hanh, trinh đại nhân cát. Đầm cạn nước thử thách bản lĩnh; giữ vững ý chí trong nghịch cảnh sẽ thoát hiểm.",
+            "symbolism": "Đầm không có nước là tượng quẻ Khốn; người quân tử giữ trọn chí khí, lấy hành động chứng minh thay lời nói.",
+            "advice": "Đừng giải thích nhiều khi chưa được hiểu; lặng lẽ chứng minh bằng kết quả thực tế và kiên trì vượt khó."
+        }
     },
     {
-        "num": 48,
+        "id": 48,
+        "number": 48,
+        "code": "011010",
         "slug": "48-tinh",
-        "short": "Tỉnh",
-        "name": "Thủy Phong Tỉnh (Tốn hạ - Khảm thượng)",
-        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Khảm (Nước)",
+        "unicode": "䷯",
+        "element": "wood",
+        "name": {
+            "short": "Tỉnh",
+            "full": "Thủy Phong Tỉnh",
+            "alias": null,
+            "hanzi": "井"
+        },
+        "trigrams": {
+            "lower": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" },
+            "upper": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" }
+        },
         "lines": [0, 1, 1, 0, 1, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Tỉnh: Cải ấp bất cải tỉnh. Giếng nước trong lành nuôi dưỡng muôn người, biểu tượng của nguồn lực bền bỉ.",
-        "image": "Trên gỗ có nước là tượng múc nước giếng; người quân tử động viên tập thể cùng chia sẻ và nâng đỡ nhau.",
-        "advice": "Chăm chút nguồn giá trị cốt lõi (kỹ năng, dữ liệu, uy tín) vì đó là chiếc giếng không bao giờ cạn của bạn."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Nguồn lực bền", "Giá trị lõi", "Nuôi dưỡng", "Chia sẻ"],
+        "meaning": {
+            "judgment": "Tỉnh: Cải ấp bất cải tỉnh. Giếng nước trong lành nuôi dưỡng muôn người, biểu tượng của nguồn lực bền bỉ.",
+            "symbolism": "Trên gỗ có nước là tượng múc nước giếng; người quân tử động viên tập thể cùng chia sẻ và nâng đỡ nhau.",
+            "advice": "Chăm chút nguồn giá trị cốt lõi (kỹ năng, dữ liệu, uy tín) vì đó là chiếc giếng không bao giờ cạn của bạn."
+        }
     },
     {
-        "num": 49,
+        "id": 49,
+        "number": 49,
+        "code": "101110",
         "slug": "49-cach",
-        "short": "Cách",
-        "name": "Trạch Hỏa Cách (Ly hạ - Đoài thượng)",
-        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Đoài (Đầm)",
+        "unicode": "䷰",
+        "element": "water",
+        "name": {
+            "short": "Cách",
+            "full": "Trạch Hỏa Cách",
+            "alias": null,
+            "hanzi": "革"
+        },
+        "trigrams": {
+            "lower": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" },
+            "upper": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" }
+        },
         "lines": [1, 0, 1, 1, 1, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Cách: Kỷ nhật nãi phu, nguyên hanh lợi trinh. Nước lửa giao tranh tạo cuộc đổi mới sâu sắc đúng thời điểm.",
-        "image": "Trong đầm có lửa là tượng quẻ Cách; bậc hiền triết chỉnh định lịch pháp, nắm rõ chu kỳ biến đổi thời gian.",
-        "advice": "Thời điểm chín muồi để nâng cấp công nghệ, làm mới giao diện hoặc cải tiến mô hình cũ đã lỗi thời."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Đổi mới", "Cải cách", "Đúng thời điểm", "Nâng cấp"],
+        "meaning": {
+            "judgment": "Cách: Kỷ nhật nãi phu, nguyên hanh lợi trinh. Nước lửa giao tranh tạo cuộc đổi mới sâu sắc đúng thời điểm.",
+            "symbolism": "Trong đầm có lửa là tượng quẻ Cách; bậc hiền triết chỉnh định lịch pháp, nắm rõ chu kỳ biến đổi thời gian.",
+            "advice": "Thời điểm chín muồi để nâng cấp công nghệ, làm mới giao diện hoặc cải tiến mô hình cũ đã lỗi thời."
+        }
     },
     {
-        "num": 50,
+        "id": 50,
+        "number": 50,
+        "code": "011101",
         "slug": "50-dinh",
-        "short": "Đỉnh",
-        "name": "Hỏa Phong Đỉnh (Tốn hạ - Ly thượng)",
-        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Ly (Lửa)",
+        "unicode": "䷱",
+        "element": "fire",
+        "name": {
+            "short": "Đỉnh",
+            "full": "Hỏa Phong Đỉnh",
+            "alias": null,
+            "hanzi": "鼎"
+        },
+        "trigrams": {
+            "lower": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" },
+            "upper": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" }
+        },
         "lines": [0, 1, 1, 1, 0, 1],
-        "fortune": "Đại Cát",
-        "judgment": "Đỉnh: Nguyên cát, hanh. Củi lửa nung nấu thành quả, đổi cũ thay mới, nền tảng vững vàng như vạc ba chân.",
-        "image": "Trên gỗ có lửa là tượng quẻ Đỉnh; người quân tử chỉnh đốn ngôi vị và giữ gìn thiên mệnh vững bền.",
-        "advice": "Thời cơ vàng để hoàn thiện sản phẩm chủ lực, kiện toàn hệ thống và tạo dựng nền móng dài hạn."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Đổi cũ thay mới", "Nền móng vững", "Kiện toàn", "Thành quả"],
+        "meaning": {
+            "judgment": "Đỉnh: Nguyên cát, hanh. Củi lửa nung nấu thành quả, đổi cũ thay mới, nền tảng vững vàng như vạc ba chân.",
+            "symbolism": "Trên gỗ có lửa là tượng quẻ Đỉnh; người quân tử chỉnh đốn ngôi vị và giữ gìn thiên mệnh vững bền.",
+            "advice": "Thời cơ vàng để hoàn thiện sản phẩm chủ lực, kiện toàn hệ thống và tạo dựng nền móng dài hạn."
+        }
     },
     {
-        "num": 51,
+        "id": 51,
+        "number": 51,
+        "code": "100100",
         "slug": "51-chan",
-        "short": "Chấn",
-        "name": "Thuần Chấn (Chấn vi Lôi)",
-        "trigrams": "Nội quái: Chấn (Sấm) • Ngoại quái: Chấn (Sấm)",
+        "unicode": "䷲",
+        "element": "wood",
+        "name": {
+            "short": "Chấn",
+            "full": "Thuần Chấn",
+            "alias": "Chấn vi Lôi",
+            "hanzi": "震"
+        },
+        "trigrams": {
+            "lower": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" },
+            "upper": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" }
+        },
         "lines": [1, 0, 0, 1, 0, 0],
-        "fortune": "Bình Hòa",
-        "judgment": "Chấn: Hanh, chấn lai khích khích, tiếu ngôn ách ách. Tiếng sấm bất ngờ giúp thức tỉnh, bình tĩnh sẽ thành vui.",
-        "image": "Sấm rền nối tiếp nhau; người quân tử biết cẩn trọng tự kiểm điểm để biến biến động thành cơ hội.",
-        "advice": "Trước thay đổi bất ngờ, giữ cái đầu lạnh sẽ giúp bạn đi trước người khác một bước."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Thức tỉnh", "Biến động", "Bình tĩnh", "Đón cơ hội"],
+        "meaning": {
+            "judgment": "Chấn: Hanh, chấn lai khích khích, tiếu ngôn ách ách. Tiếng sấm bất ngờ giúp thức tỉnh, bình tĩnh sẽ thành vui.",
+            "symbolism": "Sấm rền nối tiếp nhau; người quân tử biết cẩn trọng tự kiểm điểm để biến biến động thành cơ hội.",
+            "advice": "Trước thay đổi bất ngờ, giữ cái đầu lạnh sẽ giúp bạn đi trước người khác một bước."
+        }
     },
     {
-        "num": 52,
+        "id": 52,
+        "number": 52,
+        "code": "001001",
         "slug": "52-can",
-        "short": "Cấn",
-        "name": "Thuần Cấn (Cấn vi Sơn)",
-        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Cấn (Núi)",
+        "unicode": "䷳",
+        "element": "earth",
+        "name": {
+            "short": "Cấn",
+            "full": "Thuần Cấn",
+            "alias": "Cấn vi Sơn",
+            "hanzi": "艮"
+        },
+        "trigrams": {
+            "lower": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" },
+            "upper": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" }
+        },
         "lines": [0, 0, 1, 0, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Cấn: Cấn kỳ bối, bất hoạch kỳ thân. Núi chồng núi vững chãi; biết dừng đúng lúc để tâm trí tĩnh tại sáng suốt.",
-        "image": "Núi nối tiếp núi; người quân tử giữ suy nghĩ chuyên nhất vào đúng bổn phận, không lan man viển vông.",
-        "advice": "Học cách nói không với những xao nhãng; sự tập trung tĩnh lặng sẽ tạo ra chiều sâu công việc."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Biết dừng", "Tĩnh tại", "Chuyên nhất", "Vững chãi"],
+        "meaning": {
+            "judgment": "Cấn: Cấn kỳ bối, bất hoạch kỳ thân. Núi chồng núi vững chãi; biết dừng đúng lúc để tâm trí tĩnh tại sáng suốt.",
+            "symbolism": "Núi nối tiếp núi; người quân tử giữ suy nghĩ chuyên nhất vào đúng bổn phận, không lan man viển vông.",
+            "advice": "Học cách nói không với những xao nhãng; sự tập trung tĩnh lặng sẽ tạo ra chiều sâu công việc."
+        }
     },
     {
-        "num": 53,
+        "id": 53,
+        "number": 53,
+        "code": "001011",
         "slug": "53-tiem",
-        "short": "Tiệm",
-        "name": "Phong Sơn Tiệm (Cấn hạ - Tốn thượng)",
-        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Tốn (Gió)",
+        "unicode": "䷴",
+        "element": "earth",
+        "name": {
+            "short": "Tiệm",
+            "full": "Phong Sơn Tiệm",
+            "alias": null,
+            "hanzi": "漸"
+        },
+        "trigrams": {
+            "lower": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" },
+            "upper": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" }
+        },
         "lines": [0, 0, 1, 0, 1, 1],
-        "fortune": "Cát Hanh",
-        "judgment": "Tiệm: Nữ quy cát, lợi trinh. Cây lớn dần trên núi theo đúng trình tự tự nhiên, chậm mà cực kỳ chắc.",
-        "image": "Trên núi có cây lớn dần; người quân tử bền bỉ bồi đắp đức hạnh và làm tốt từng bước một.",
-        "advice": "Đi đúng quy trình từng giai đoạn thay vì đốt cháy giai đoạn; thành quả tích lũy sẽ rất vững."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Chậm mà chắc", "Đúng trình tự", "Tích lũy", "Bền vững"],
+        "meaning": {
+            "judgment": "Tiệm: Nữ quy cát, lợi trinh. Cây lớn dần trên núi theo đúng trình tự tự nhiên, chậm mà cực kỳ chắc.",
+            "symbolism": "Trên núi có cây lớn dần; người quân tử bền bỉ bồi đắp đức hạnh và làm tốt từng bước một.",
+            "advice": "Đi đúng quy trình từng giai đoạn thay vì đốt cháy giai đoạn; thành quả tích lũy sẽ rất vững."
+        }
     },
     {
-        "num": 54,
+        "id": 54,
+        "number": 54,
+        "code": "110100",
         "slug": "54-quy-muoi",
-        "short": "Quy Muội",
-        "name": "Lôi Trạch Quy Muội (Đoài hạ - Chấn thượng)",
-        "trigrams": "Nội quái: Đoài (Đầm) • Ngoại quái: Chấn (Sấm)",
+        "unicode": "䷵",
+        "element": "metal",
+        "name": {
+            "short": "Quy Muội",
+            "full": "Lôi Trạch Quy Muội",
+            "alias": null,
+            "hanzi": "歸妹"
+        },
+        "trigrams": {
+            "lower": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" },
+            "upper": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" }
+        },
         "lines": [1, 1, 0, 1, 0, 0],
-        "fortune": "Thận Trọng",
-        "judgment": "Quy Muội: Chinh hung, vô du lợi. Cảm xúc nhất thời dễ lấn át lý trí; cần nhìn xa hậu quả đường dài.",
-        "image": "Trên đầm có sấm động; người quân tử nhìn thấu kết cục lâu dài để nhận diện và tránh sai sót từ sớm.",
-        "advice": "Chậm lại trước các thỏa thuận vội vàng; kiểm tra kỹ quyền lợi dài hạn trước khi gật đầu."
+        "fortune": { "level": "than_trong", "label": "Thận Trọng" },
+        "keywords": ["Tránh vội vàng", "Nhìn đường dài", "Kiểm soát cảm xúc", "Thận trọng"],
+        "meaning": {
+            "judgment": "Quy Muội: Chinh hung, vô du lợi. Cảm xúc nhất thời dễ lấn át lý trí; cần nhìn xa hậu quả đường dài.",
+            "symbolism": "Trên đầm có sấm động; người quân tử nhìn thấu kết cục lâu dài để nhận diện và tránh sai sót từ sớm.",
+            "advice": "Chậm lại trước các thỏa thuận vội vàng; kiểm tra kỹ quyền lợi dài hạn trước khi gật đầu."
+        }
     },
     {
-        "num": 55,
+        "id": 55,
+        "number": 55,
+        "code": "101100",
         "slug": "55-phong",
-        "short": "Phong",
-        "name": "Lôi Hỏa Phong (Ly hạ - Chấn thượng)",
-        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Chấn (Sấm)",
+        "unicode": "䷶",
+        "element": "water",
+        "name": {
+            "short": "Phong",
+            "full": "Lôi Hỏa Phong",
+            "alias": null,
+            "hanzi": "豐"
+        },
+        "trigrams": {
+            "lower": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" },
+            "upper": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" }
+        },
         "lines": [1, 0, 1, 1, 0, 0],
-        "fortune": "Đại Cát",
-        "judgment": "Phong: Hanh, vật ưu, nghi nhật trung. Sấm chớp song hành, vận khí đạt đỉnh cao rực rỡ như mặt trời giữa trưa.",
-        "image": "Sấm và chớp cùng phát; bậc lãnh đạo hành động sáng suốt, dứt khoát và công minh.",
-        "advice": "Tận dụng tối đa đỉnh năng lượng hôm nay để chốt việc lớn; đồng thời lên kế hoạch duy trì phong độ."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Đỉnh cao", "Rực rỡ", "Chốt việc lớn", "Giữ phong độ"],
+        "meaning": {
+            "judgment": "Phong: Hanh, vật ưu, nghi nhật trung. Sấm chớp song hành, vận khí đạt đỉnh cao rực rỡ như mặt trời giữa trưa.",
+            "symbolism": "Sấm và chớp cùng phát; bậc lãnh đạo hành động sáng suốt, dứt khoát và công minh.",
+            "advice": "Tận dụng tối đa đỉnh năng lượng hôm nay để chốt việc lớn; đồng thời lên kế hoạch duy trì phong độ."
+        }
     },
     {
-        "num": 56,
+        "id": 56,
+        "number": 56,
+        "code": "001101",
         "slug": "56-lu",
-        "short": "Lữ",
-        "name": "Hỏa Sơn Lữ (Cấn hạ - Ly thượng)",
-        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Ly (Lửa)",
+        "unicode": "䷷",
+        "element": "fire",
+        "name": {
+            "short": "Lữ",
+            "full": "Hỏa Sơn Lữ",
+            "alias": null,
+            "hanzi": "旅"
+        },
+        "trigrams": {
+            "lower": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" },
+            "upper": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" }
+        },
         "lines": [0, 0, 1, 1, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Lữ: Tiểu hanh, lữ trinh cát. Lửa cháy trên núi di chuyển nhanh; tâm thế người lữ hành cần linh hoạt và khiêm hòa.",
-        "image": "Trên núi có lửa là tượng quẻ Lữ; người quân tử sáng suốt, thận trọng và giải quyết việc nhanh gọn.",
-        "advice": "Khi bước vào môi trường hoặc dự án mới, giữ thái độ tôn trọng, gọn gàng và thích ứng nhanh."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Lữ hành", "Linh hoạt", "Khiêm hòa", "Thích ứng nhanh"],
+        "meaning": {
+            "judgment": "Lữ: Tiểu hanh, lữ trinh cát. Lửa cháy trên núi di chuyển nhanh; tâm thế người lữ hành cần linh hoạt và khiêm hòa.",
+            "symbolism": "Trên núi có lửa là tượng quẻ Lữ; người quân tử sáng suốt, thận trọng và giải quyết việc nhanh gọn.",
+            "advice": "Khi bước vào môi trường hoặc dự án mới, giữ thái độ tôn trọng, gọn gàng và thích ứng nhanh."
+        }
     },
     {
-        "num": 57,
+        "id": 57,
+        "number": 57,
+        "code": "011011",
         "slug": "57-ton",
-        "short": "Tốn",
-        "name": "Thuần Tốn (Tốn vi Phong)",
-        "trigrams": "Nội quái: Tốn (Gió) • Ngoại quái: Tốn (Gió)",
+        "unicode": "䷸",
+        "element": "wood",
+        "name": {
+            "short": "Tốn",
+            "full": "Thuần Tốn",
+            "alias": "Tốn vi Phong",
+            "hanzi": "巽"
+        },
+        "trigrams": {
+            "lower": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" },
+            "upper": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" }
+        },
         "lines": [0, 1, 1, 0, 1, 1],
-        "fortune": "Cát Hanh",
-        "judgment": "Tốn: Tiểu hanh, lợi hữu du vãng, lợi kiến đại nhân. Gió nhẹ thấm sâu bền bỉ, mềm dẻo mà đạt mục tiêu lớn.",
-        "image": "Gió nối tiếp thổi đều; người quân tử truyền đạt chủ trương rõ ràng và kiên trì thực thi tới nơi.",
-        "advice": "Sự khéo léo, thuyết phục nhẹ nhàng và nhất quán hiệu quả gấp nhiều lần sự cứng nhắc áp đặt."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Thấm sâu", "Mềm dẻo", "Thuyết phục", "Nhất quán"],
+        "meaning": {
+            "judgment": "Tốn: Tiểu hanh, lợi hữu du vãng, lợi kiến đại nhân. Gió nhẹ thấm sâu bền bỉ, mềm dẻo mà đạt mục tiêu lớn.",
+            "symbolism": "Gió nối tiếp thổi đều; người quân tử truyền đạt chủ trương rõ ràng và kiên trì thực thi tới nơi.",
+            "advice": "Sự khéo léo, thuyết phục nhẹ nhàng và nhất quán hiệu quả gấp nhiều lần sự cứng nhắc áp đặt."
+        }
     },
     {
-        "num": 58,
+        "id": 58,
+        "number": 58,
+        "code": "110110",
         "slug": "58-doai",
-        "short": "Đoài",
-        "name": "Thuần Đoài (Đoài vi Trạch)",
-        "trigrams": "Nội quái: Đoài (Đầm) • Ngoại quái: Đoài (Đầm)",
+        "unicode": "䷹",
+        "element": "metal",
+        "name": {
+            "short": "Đoài",
+            "full": "Thuần Đoài",
+            "alias": "Đoài vi Trạch",
+            "hanzi": "兌"
+        },
+        "trigrams": {
+            "lower": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" },
+            "upper": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" }
+        },
         "lines": [1, 1, 0, 1, 1, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Đoài: Hanh, lợi trinh. Hai đầm nước nối nhau nuôi dưỡng, tượng trưng cho niềm vui chân thành và giao tiếp hài hòa.",
-        "image": "Hai đầm nước liền nhau; người quân tử kết giao cùng bạn hiền để trao đổi học thuật và cùng tiến bộ.",
-        "advice": "Tuyệt vời cho ngoại giao, thuyết trình, kết nối khách hàng và chia sẻ tri thức cùng cộng đồng."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Niềm vui", "Giao tiếp tốt", "Ngoại giao", "Chia sẻ"],
+        "meaning": {
+            "judgment": "Đoài: Hanh, lợi trinh. Hai đầm nước nối nhau nuôi dưỡng, tượng trưng cho niềm vui chân thành và giao tiếp hài hòa.",
+            "symbolism": "Hai đầm nước liền nhau; người quân tử kết giao cùng bạn hiền để trao đổi học thuật và cùng tiến bộ.",
+            "advice": "Tuyệt vời cho ngoại giao, thuyết trình, kết nối khách hàng và chia sẻ tri thức cùng cộng đồng."
+        }
     },
     {
-        "num": 59,
+        "id": 59,
+        "number": 59,
+        "code": "010011",
         "slug": "59-hoan",
-        "short": "Hoán",
-        "name": "Phong Thủy Hoán (Khảm hạ - Tốn thượng)",
-        "trigrams": "Nội quái: Khảm (Nước) • Ngoại quái: Tốn (Gió)",
+        "unicode": "䷺",
+        "element": "fire",
+        "name": {
+            "short": "Hoán",
+            "full": "Phong Thủy Hoán",
+            "alias": null,
+            "hanzi": "渙"
+        },
+        "trigrams": {
+            "lower": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" },
+            "upper": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" }
+        },
         "lines": [0, 1, 0, 0, 1, 1],
-        "fortune": "Cát Hanh",
-        "judgment": "Hoán: Hanh, lợi thiệp đại xuyên. Gió thổi trên mặt nước làm tan băng giá, hóa giải sự trì trệ và khoảng cách.",
-        "image": "Gió thổi lướt trên mặt nước; bậc lãnh đạo dùng lý tưởng chung để quy tụ lại lòng người.",
-        "advice": "Hóa giải hiểu lầm, phá bỏ tâm lý e ngại cũ để khơi thông lại dòng chảy hợp tác."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Tan băng", "Khơi thông", "Hóa giải", "Quy tụ lòng người"],
+        "meaning": {
+            "judgment": "Hoán: Hanh, lợi thiệp đại xuyên. Gió thổi trên mặt nước làm tan băng giá, hóa giải sự trì trệ và khoảng cách.",
+            "symbolism": "Gió thổi lướt trên mặt nước; bậc lãnh đạo dùng lý tưởng chung để quy tụ lại lòng người.",
+            "advice": "Hóa giải hiểu lầm, phá bỏ tâm lý e ngại cũ để khơi thông lại dòng chảy hợp tác."
+        }
     },
     {
-        "num": 60,
+        "id": 60,
+        "number": 60,
+        "code": "110010",
         "slug": "60-tiet",
-        "short": "Tiết",
-        "name": "Thủy Trạch Tiết (Đoài hạ - Khảm thượng)",
-        "trigrams": "Nội quái: Đoài (Đầm) • Ngoại quái: Khảm (Nước)",
+        "unicode": "䷻",
+        "element": "water",
+        "name": {
+            "short": "Tiết",
+            "full": "Thủy Trạch Tiết",
+            "alias": null,
+            "hanzi": "節"
+        },
+        "trigrams": {
+            "lower": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" },
+            "upper": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" }
+        },
         "lines": [1, 1, 0, 0, 1, 0],
-        "fortune": "Bình Hòa",
-        "judgment": "Tiết: Hanh, khổ tiết bất khả trinh. Nước đầm có bờ bao vừa vặn; biết đặt giới hạn hợp lý nhưng không quá khắc nghiệt.",
-        "image": "Trên đầm có nước là tượng quẻ Tiết; người quân tử lập ra chuẩn mực rõ ràng và điều độ hành vi.",
-        "advice": "Quản trị ngân sách, thời gian và phạm vi dự án có kỷ luật nhưng vẫn giữ sự thoải mái bền lâu."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Giới hạn hợp lý", "Chuẩn mực", "Điều độ", "Kỷ luật"],
+        "meaning": {
+            "judgment": "Tiết: Hanh, khổ tiết bất khả trinh. Nước đầm có bờ bao vừa vặn; biết đặt giới hạn hợp lý nhưng không quá khắc nghiệt.",
+            "symbolism": "Trên đầm có nước là tượng quẻ Tiết; người quân tử lập ra chuẩn mực rõ ràng và điều độ hành vi.",
+            "advice": "Quản trị ngân sách, thời gian và phạm vi dự án có kỷ luật nhưng vẫn giữ sự thoải mái bền lâu."
+        }
     },
     {
-        "num": 61,
+        "id": 61,
+        "number": 61,
+        "code": "110011",
         "slug": "61-trung-phu",
-        "short": "Trung Phu",
-        "name": "Phong Trạch Trung Phu (Đoài hạ - Tốn thượng)",
-        "trigrams": "Nội quái: Đoài (Đầm) • Ngoại quái: Tốn (Gió)",
+        "unicode": "䷼",
+        "element": "earth",
+        "name": {
+            "short": "Trung Phu",
+            "full": "Phong Trạch Trung Phu",
+            "alias": null,
+            "hanzi": "中孚"
+        },
+        "trigrams": {
+            "lower": { "key": "dui", "name": "Đoài", "nature": "Đầm", "symbol": "☱" },
+            "upper": { "key": "xun", "name": "Tốn", "nature": "Gió", "symbol": "☴" }
+        },
         "lines": [1, 1, 0, 0, 1, 1],
-        "fortune": "Đại Cát",
-        "judgment": "Trung Phu: Lợi thiệp đại xuyên, lợi trinh. Trong rỗng ngoài thực, lấy chữ tín và sự chân thành cảm hóa tất cả.",
-        "image": "Trên đầm có gió thổi; người quân tử cân nhắc thấu tình đạt lý trước mọi quyết định quan trọng.",
-        "advice": "Chữ tín là tài sản lớn nhất lúc này. Giữ đúng cam kết sẽ mở ra những cơ hội hợp tác rất lớn."
+        "fortune": { "level": "dai_cat", "label": "Đại Cát" },
+        "keywords": ["Chữ tín", "Chân thành", "Cảm hóa", "Thấu tình đạt lý"],
+        "meaning": {
+            "judgment": "Trung Phu: Lợi thiệp đại xuyên, lợi trinh. Trong rỗng ngoài thực, lấy chữ tín và sự chân thành cảm hóa tất cả.",
+            "symbolism": "Trên đầm có gió thổi; người quân tử cân nhắc thấu tình đạt lý trước mọi quyết định quan trọng.",
+            "advice": "Chữ tín là tài sản lớn nhất lúc này. Giữ đúng cam kết sẽ mở ra những cơ hội hợp tác rất lớn."
+        }
     },
     {
-        "num": 62,
+        "id": 62,
+        "number": 62,
+        "code": "001100",
         "slug": "62-tieu-qua",
-        "short": "Tiểu Quá",
-        "name": "Lôi Sơn Tiểu Quá (Cấn hạ - Chấn thượng)",
-        "trigrams": "Nội quái: Cấn (Núi) • Ngoại quái: Chấn (Sấm)",
+        "unicode": "䷽",
+        "element": "metal",
+        "name": {
+            "short": "Tiểu Quá",
+            "full": "Lôi Sơn Tiểu Quá",
+            "alias": null,
+            "hanzi": "小過"
+        },
+        "trigrams": {
+            "lower": { "key": "gen", "name": "Cấn", "nature": "Núi", "symbol": "☶" },
+            "upper": { "key": "zhen", "name": "Chấn", "nature": "Sấm", "symbol": "☳" }
+        },
         "lines": [0, 0, 1, 1, 0, 0],
-        "fortune": "Bình Hòa",
-        "judgment": "Tiểu Quá: Hanh lợi trinh, khả tiểu sự bất khả đại sự. Chim bay tầm thấp an toàn; tập trung làm cực tốt việc nhỏ.",
-        "image": "Trên núi có sấm rền; người quân tử hành xử cung kính hơn một chút, tiết kiệm hơn một chút.",
-        "advice": "Ưu tiên hoàn thiện tỉ mỉ các đầu việc nhỏ, tránh đánh cược vào kế hoạch quá sức trong thời điểm này."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Tỉ mỉ việc nhỏ", "An toàn", "Tiết kiệm", "Khiêm cung"],
+        "meaning": {
+            "judgment": "Tiểu Quá: Hanh lợi trinh, khả tiểu sự bất khả đại sự. Chim bay tầm thấp an toàn; tập trung làm cực tốt việc nhỏ.",
+            "symbolism": "Trên núi có sấm rền; người quân tử hành xử cung kính hơn một chút, tiết kiệm hơn một chút.",
+            "advice": "Ưu tiên hoàn thiện tỉ mỉ các đầu việc nhỏ, tránh đánh cược vào kế hoạch quá sức trong thời điểm này."
+        }
     },
     {
-        "num": 63,
+        "id": 63,
+        "number": 63,
+        "code": "101010",
         "slug": "63-ky-te",
-        "short": "Ký Tế",
-        "name": "Thủy Hỏa Ký Tế (Ly hạ - Khảm thượng)",
-        "trigrams": "Nội quái: Ly (Lửa) • Ngoại quái: Khảm (Nước)",
+        "unicode": "䷾",
+        "element": "water",
+        "name": {
+            "short": "Ký Tế",
+            "full": "Thủy Hỏa Ký Tế",
+            "alias": null,
+            "hanzi": "既濟"
+        },
+        "trigrams": {
+            "lower": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" },
+            "upper": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" }
+        },
         "lines": [1, 0, 1, 0, 1, 0],
-        "fortune": "Cát Hanh",
-        "judgment": "Ký Tế: Hanh tiểu, lợi trinh, sơ cát chung loạn. Nước lửa giao hòa đúng vị trí, mục tiêu đã hoàn thành viên mãn.",
-        "image": "Nước ở trên lửa là tượng quẻ Ký Tế; người quân tử lúc thành công vẫn lo nghĩ phòng ngừa rủi ro từ sớm.",
-        "advice": "Đích đến đã hoàn tất đẹp đẽ. Hãy bảo trì thành quả, sao lưu dữ liệu và tránh tâm lý chủ quan."
+        "fortune": { "level": "cat_hanh", "label": "Cát Hanh" },
+        "keywords": ["Viên mãn", "Hoàn thành", "Phòng rủi ro", "Bảo trì"],
+        "meaning": {
+            "judgment": "Ký Tế: Hanh tiểu, lợi trinh, sơ cát chung loạn. Nước lửa giao hòa đúng vị trí, mục tiêu đã hoàn thành viên mãn.",
+            "symbolism": "Nước ở trên lửa là tượng quẻ Ký Tế; người quân tử lúc thành công vẫn lo nghĩ phòng ngừa rủi ro từ sớm.",
+            "advice": "Đích đến đã hoàn tất đẹp đẽ. Hãy bảo trì thành quả, sao lưu dữ liệu và tránh tâm lý chủ quan."
+        }
     },
     {
-        "num": 64,
+        "id": 64,
+        "number": 64,
+        "code": "010101",
         "slug": "64-vi-te",
-        "short": "Vị Tế",
-        "name": "Hỏa Thủy Vị Tế (Khảm hạ - Ly thượng)",
-        "trigrams": "Nội quái: Khảm (Nước) • Ngoại quái: Ly (Lửa)",
+        "unicode": "䷿",
+        "element": "fire",
+        "name": {
+            "short": "Vị Tế",
+            "full": "Hỏa Thủy Vị Tế",
+            "alias": null,
+            "hanzi": "未濟"
+        },
+        "trigrams": {
+            "lower": { "key": "kan", "name": "Khảm", "nature": "Nước", "symbol": "☵" },
+            "upper": { "key": "li", "name": "Ly", "nature": "Lửa", "symbol": "☲" }
+        },
         "lines": [0, 1, 0, 1, 0, 1],
-        "fortune": "Bình Hòa",
-        "judgment": "Vị Tế: Hanh. Chu kỳ cũ khép lại mở ra chân trời mới; chỉ còn bước cuối qua sông cần sự cẩn trọng cao nhất.",
-        "image": "Lửa ở trên nước là tượng quẻ Vị Tế; người quân tử phân loại rạch ròi, đặt đúng việc vào đúng vị trí.",
-        "advice": "Dự án đang gần về đích và mở ra tiềm năng mới; giữ sự tập trung ở chặng cuối để hoàn thiện trọn vẹn."
+        "fortune": { "level": "binh_hoa", "label": "Bình Hòa" },
+        "keywords": ["Chặng cuối", "Chuyển giao", "Cẩn trọng", "Tiềm năng mới"],
+        "meaning": {
+            "judgment": "Vị Tế: Hanh. Chu kỳ cũ khép lại mở ra chân trời mới; chỉ còn bước cuối qua sông cần sự cẩn trọng cao nhất.",
+            "symbolism": "Lửa ở trên nước là tượng quẻ Vị Tế; người quân tử phân loại rạch ròi, đặt đúng việc vào đúng vị trí.",
+            "advice": "Dự án đang gần về đích và mở ra tiềm năng mới; giữ sự tập trung ở chặng cuối để hoàn thiện trọn vẹn."
+        }
     }
 ]

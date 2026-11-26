@@ -1474,7 +1474,6 @@ $zodiac-active-filters: (
 
 ```scss
 // scss/abstracts/_animations.scss
-// Tuân thủ đúng nguyên tắc main.scss: Tầng Abstracts chỉ chứa Placeholders, không tự sinh ra CSS nếu không được @extend
 
 // ==========================================
 // 1. TRANSITION PLACEHOLDERS (Chuyển tiếp trạng thái khi tương tác)
@@ -2413,6 +2412,7 @@ strong {
 @forward "./month-calendar";
 @forward "./converter-modal";
 @forward "./festival-calendar";
+@forward "./iching-card";
 ```
 
 ### button.scss
@@ -7719,6 +7719,345 @@ strong {
 }
 ```
 
+### iching-card.scss
+
+```scss
+// scss/components/_iching-card.scss
+// Component Thẻ bài Kinh Dịch khắc gỗ 3:4 (Dùng cho iching-detail.html & tái sử dụng được ở utilities.html)
+@use "../abstracts" as abs;
+
+.iching-hero-grid {
+    display: grid;
+    grid-template-columns: 28rem minmax(0, 1fr);
+    align-items: start;
+    gap: 2.8rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: 24rem minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+
+.iching-card {
+    @extend %flexColumn;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 28rem;
+
+    // Điểm nhấn viền theo Ngũ Hành đọc từ data-element
+    &[data-element="kim"] {
+        --iching-accent: #eab308;
+    }
+    &[data-element="moc"] {
+        --iching-accent: #10b981;
+    }
+    &[data-element="thuy"] {
+        --iching-accent: #3b82f6;
+    }
+    &[data-element="hoa"] {
+        --iching-accent: #d92b2b;
+    }
+    &[data-element="tho"] {
+        --iching-accent: #f59e0b;
+    }
+
+    &__poster {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        border-radius: 2.2rem;
+        overflow: hidden;
+        background-color: #0b0b0c;
+        border: 2px solid var(--iching-accent, var(--primary-color));
+        box-shadow: 0 1.2rem 3rem var(--shadow-color);
+        cursor: zoom-in;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            transform: translateY(-4px);
+            box-shadow: 0 1.8rem 3.8rem var(--shadow-color);
+
+            .iching-card__img {
+                transform: scale(1.04);
+            }
+
+            .iching-card__zoom-pill {
+                background-color: var(--primary-color);
+                border-color: var(--primary-color);
+                color: #ffffff;
+            }
+        }
+    }
+
+    // Chế độ fallback khi quẻ chưa có ảnh khắc gỗ 3:4 (hiển thị icon đồ hình 70x70 căn giữa)
+    &.is-fallback-art &__poster {
+        background-color: var(--bg-surface);
+        @extend %flexCenter;
+        padding: 4.8rem 3.2rem 6.8rem;
+    }
+
+    &.is-fallback-art &__img {
+        width: 13rem;
+        height: 13rem;
+        object-fit: contain;
+        filter: var(--zodiac-filter);
+    }
+
+    &.is-fallback-art &__caption {
+        background: linear-gradient(180deg, transparent 0%, var(--body-bg) 45%);
+        color: var(--text-color);
+    }
+
+    &.is-fallback-art &__caption-title {
+        color: var(--text-color);
+    }
+
+    &__top-meta {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+        right: 1.2rem;
+        z-index: 3;
+        @extend %flexBetween;
+        gap: 0.6rem;
+        pointer-events: none;
+    }
+
+    &__num,
+    &__hanzi,
+    &__status {
+        @extend %inlineFlexCenter;
+        height: 2.8rem;
+        padding: 0 0.9rem;
+        border-radius: 99.9rem;
+        background-color: rgba(10, 10, 12, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 800;
+        backdrop-filter: blur(6px);
+        @extend %textNoWrap;
+    }
+
+    &__hanzi {
+        font-size: 1.3rem;
+        letter-spacing: 0.08em;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__status {
+        background-color: var(--iching-accent, var(--primary-color));
+        border-color: transparent;
+    }
+
+    &__img {
+        @extend %imgCover;
+        display: block;
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &__caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+        @extend %flexColumn;
+        gap: 0.4rem;
+        padding: 2.6rem 1.4rem 1.4rem;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.88) 65%);
+        color: #ffffff;
+        pointer-events: none;
+    }
+
+    &__caption-title {
+        font-size: 1.6rem;
+        font-weight: 800;
+        line-height: 1.25;
+        color: #ffffff;
+    }
+
+    &__focal {
+        font-size: 1.15rem;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.84);
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__zoom-pill {
+        width: fit-content;
+        margin-top: 0.3rem;
+        padding: 0.35rem 1rem;
+        border-radius: 99.9rem;
+        background-color: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 700;
+        backdrop-filter: blur(6px);
+        @extend %transTheme;
+    }
+
+    &__lines-box {
+        padding: 1.2rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+    }
+
+    &__raw-link {
+        @extend %flexCenter;
+        gap: 0.6rem;
+        height: 3.8rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+    }
+}
+
+// Tượng quẻ & Dải Từ khóa bên cột phải Hero
+.iching-card-meta {
+    @extend %flexColumn;
+    gap: 1rem;
+    margin-top: 0.4rem;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &__omens,
+    &__keywords {
+        @extend %flexWrapGap;
+        gap: 0.7rem;
+    }
+
+    &__omen-pill {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--primary-color);
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__keyword {
+        padding: 0.35rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+}
+
+// Hộp Accordion Giải nghĩa 2 vế Trái / Phải
+.iching-pair-box {
+    @extend %flexColumn;
+    gap: 1rem;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &__toggle {
+        @extend %flexBetween;
+        width: 100%;
+        height: 4.4rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+
+        &:hover,
+        &[aria-expanded="true"] {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+
+        &[aria-expanded="true"] .iching-pair-box__arrow {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__arrow {
+        width: 1.6rem;
+        height: 1.6rem;
+        transition: transform 0.25s ease;
+    }
+
+    &__panel {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.2rem;
+
+        &[hidden] {
+            display: none !important;
+        }
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__col {
+        @extend %flexColumn;
+        gap: 0.5rem;
+        padding: 1.4rem 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.6rem;
+
+        strong {
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        p {
+            font-size: 1.4rem;
+            line-height: 1.55;
+            color: var(--text-color);
+        }
+    }
+}
+
+.iching-lightbox-img {
+    aspect-ratio: 3 / 4;
+    object-fit: contain;
+    background-color: #0b0b0c;
+}
+```
+
 ## layout folder
 
 ### index.scss
@@ -7732,7 +8071,7 @@ strong {
 ### header.scss
 
 ```scss
-// 1. scss/layout/_header.scss
+// scss/layout/_header.scss
 @use "../abstracts" as abs;
 
 .header {
@@ -7881,6 +8220,271 @@ strong {
         font-weight: 700;
     }
 
+    // ==========================================================================
+    // HEADER AUTH (HƯỚNG 1) & TOGGLE PROFILE DROPDOWN
+    // ==========================================================================
+    &__auth {
+        @extend %flexItemCenter;
+    }
+
+    &__auth-guest {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__auth-register {
+        height: 4.2rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        // Trên trang bình thường ẩn nút Đăng ký dưới 1200px cho gọn; riêng trang sign-in.html sẽ hiện lại ở rule dưới
+        @include abs.screen(xl) {
+            display: none;
+        }
+
+        @include abs.screen(sm) {
+            height: 3.8rem;
+            padding: 0 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__auth-btn {
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__profile-details {
+        position: relative;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__profile-summary {
+        @extend %inlineFlexCenter;
+        gap: 0.9rem;
+        height: 4.4rem;
+        padding: 0.4rem 1.2rem 0.4rem 0.5rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 99.9rem;
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+
+        @include abs.screen(sm) {
+            height: 3.8rem;
+            padding: 0.3rem 0.8rem 0.3rem 0.35rem;
+            gap: 0.5rem;
+        }
+    }
+
+    &__profile-details[open] &__profile-summary {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        box-shadow: 0 0 0 3px var(--primary-soft-bg);
+    }
+
+    &__profile-avatar {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 800;
+
+        @include abs.screen(sm) {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.15rem;
+        }
+    }
+
+    &__profile-meta {
+        @extend %flexColumn;
+        align-items: flex-start;
+        max-width: 12.5rem;
+        line-height: 1.2;
+    }
+
+    &__profile-name {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+        max-width: 100%;
+        @extend %textEllipsis;
+    }
+
+    &__profile-element {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__profile-arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+        @extend %flexItemFixed;
+        @extend %transBurgerBar;
+    }
+
+    &__profile-details[open] &__profile-arrow {
+        transform: rotate(180deg);
+    }
+
+    &__profile-popover {
+        position: absolute;
+        top: calc(100% + 1rem);
+        right: 0;
+        z-index: 70;
+        width: 29rem;
+        max-width: calc(100vw - 2.4rem);
+        padding: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 2rem;
+        box-shadow: 0 1.6rem 3.8rem var(--shadow-color);
+        @extend %flexColumn;
+        gap: 1rem;
+        @extend %animDropdownFadeIn;
+    }
+
+    &__profile-card {
+        @extend %flexItemCenter;
+        gap: 1.2rem;
+        padding: 1.2rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+
+        &-avatar {
+            @extend %inlineFlexCenter;
+            @extend %flexItemFixed;
+            width: 4.4rem;
+            height: 4.4rem;
+            border-radius: 1.3rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        &-info {
+            @extend %flexColumn;
+            gap: 0.2rem;
+            min-width: 0;
+        }
+
+        &-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--text-color);
+            @extend %textEllipsis;
+        }
+
+        &-email {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            @extend %textEllipsis;
+        }
+
+        &-badge {
+            display: inline-block;
+            width: fit-content;
+            margin-top: 0.25rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 99.9rem;
+            background-color: var(--body-bg);
+            border: 1px solid var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+    }
+
+    &__profile-menu {
+        @extend %flexColumn;
+        gap: 0.35rem;
+    }
+
+    &__profile-link {
+        @extend %flexYCenterLeft;
+        gap: 1rem;
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border-radius: 1.1rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transTheme;
+
+        .icon,
+        svg {
+            width: 1.8rem;
+            height: 1.8rem;
+            @extend %flexItemFixed;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+    }
+
+    &__profile-foot {
+        padding-top: 0.8rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__profile-logout {
+        @extend %flexCenter;
+        gap: 0.8rem;
+        width: 100%;
+        height: 4rem;
+        border-radius: 1.2rem;
+        background-color: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--color-danger);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--color-danger);
+            border-color: var(--color-danger);
+            color: #ffffff;
+        }
+    }
+
     &__burger {
         display: none;
         flex-direction: column;
@@ -7915,6 +8519,972 @@ strong {
         &.is-active &-bar:nth-child(3) {
             transform: translateY(-0.7rem) rotate(-45deg);
         }
+    }
+}
+
+// HƯỚNG 1 (Chống nhấp nháy FOUC trước khi JS gắn thuộc tính hidden):
+// - Đang ở trang Đăng nhập: Ẩn nút Đăng nhập, luôn hiển thị nút Đăng ký nổi bật theo màu Theme trên mọi màn hình
+body[data-page="signin"] {
+    .header__auth-btn[data-auth-link="signin"] {
+        display: none;
+    }
+
+    .header__auth-register[data-auth-link="signup"] {
+        display: inline-flex;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+
+        &:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: #ffffff;
+        }
+    }
+}
+
+// - Đang ở trang Đăng ký: Ẩn nút Đăng ký, giữ nút Đăng nhập
+body[data-page="signup"] {
+    .header__auth-register[data-auth-link="signup"] {
+        display: none;
+    }
+}
+```
+
+### footer.scss
+
+```scss
+// scss/layout/_footer.scss
+@use "../abstracts" as abs;
+
+.footer {
+    margin-top: abs.$gap-section-default;
+    padding-bottom: 4rem;
+    color: var(--text-color);
+
+    &__bento-row {
+        --grid-gutter-y: 2.4rem;
+    }
+
+    // Khung chuẩn cho mọi đảo Bento trong Footer
+    &__card {
+        @extend %flexColumn;
+        justify-content: space-between;
+        height: 100%;
+        padding: 2.8rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 2.4rem;
+        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+
+        @include abs.screen(md) {
+            padding: 2rem;
+            border-radius: 1.8rem;
+        }
+
+        &--links {
+            @extend %gridCols2;
+            gap: 2rem;
+
+            @include abs.screen(sm) {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+
+    &__brand-head {
+        @extend %flexBetween;
+        gap: 1.2rem;
+        margin-bottom: 1.4rem;
+    }
+
+    &__logo-link {
+        @extend %inlineFlexCenter;
+        gap: 1rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    &__logo-img {
+        height: 3.6rem;
+        width: auto;
+    }
+
+    &__version-badge {
+        padding: 0.4rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        @extend %textNoWrap;
+    }
+
+    &__desc,
+    &__sub-desc {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 1.8rem;
+    }
+
+    // Cụm chọn nhanh Ngũ Hành trong Footer
+    &__elements {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        margin-bottom: 1.6rem;
+        background-color: var(--bg-surface);
+        border-radius: 1.4rem;
+        border: 1px solid var(--border-color);
+
+        &-label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        &-list {
+            @extend %flexWrapGap;
+        }
+    }
+
+    &__element-dot {
+        padding: 0.4rem 1rem;
+        border-radius: 0.8rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &.is-active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+    }
+
+    &__contact {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-style: normal;
+        font-size: 1.3rem;
+        color: var(--text-muted);
+        padding-top: 1.4rem;
+        border-top: 1px dashed var(--border-color);
+
+        &-link {
+            font-weight: 600;
+            color: var(--primary-color);
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // Cột điều hướng
+    &__heading {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 1.4rem;
+    }
+
+    &__list {
+        @extend %flexColumn;
+        gap: 1rem;
+    }
+
+    &__link {
+        font-size: 1.4rem;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--primary-color);
+        }
+
+        &--btn {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+    }
+
+    // Form nhận tin & Mạng xã hội
+    &__sr-only {
+        @extend %srOnly;
+    }
+
+    &__input-group {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+        padding: 0.4rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        margin-bottom: 1.2rem;
+
+        &:focus-within {
+            border-color: var(--primary-color);
+        }
+    }
+
+    &__input {
+        @extend %flexItemFluid;
+        padding: 0.8rem 1rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+    }
+
+    &__submit-btn {
+        height: 3.6rem;
+        padding: 0 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 1rem;
+        font-size: 1.3rem;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    &__feedback {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--color-success);
+        margin-bottom: 1.2rem;
+    }
+
+    &__social {
+        @extend %flexBetween;
+        padding-top: 1.4rem;
+        border-top: 1px dashed var(--border-color);
+
+        &-label {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+        }
+
+        &-list {
+            @extend %flexItemCenter;
+            gap: 0.8rem;
+        }
+
+        &-link {
+            @extend %inlineFlexCenter;
+            width: 3.6rem;
+            height: 3.6rem;
+            border-radius: 1rem;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            @extend %transInteractive;
+
+            &:hover {
+                background-color: var(--primary-color);
+                border-color: var(--primary-color);
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    // Thanh Bento Bar dưới cùng
+    &__bottom-bar {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.6rem;
+        margin-top: 2.4rem;
+        padding: 1.6rem 2.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 2rem;
+        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        @extend %transTheme;
+
+        @include abs.screen(sm) {
+            padding: 1.4rem 1.6rem;
+            border-radius: 1.6rem;
+        }
+    }
+
+    &__copyright {
+        font-size: 1.3rem;
+        color: var(--text-muted);
+    }
+
+    &__top-btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        padding: 0.8rem 1.4rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+    }
+}
+```
+
+### sidebar.scss
+
+```scss
+@use "../abstracts" as abs;
+
+#sidebar-root {
+    display: contents;
+}
+
+.sidebar {
+    position: fixed;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    padding: 1rem 0.8rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2rem;
+    box-shadow: 0 0.8rem 2.4rem var(--shadow-color);
+    @extend %transSidebarDrawer;
+
+    &__list {
+        @extend %flexColumn;
+        gap: 0.8rem;
+    }
+
+    &__link {
+        position: relative;
+        @extend %flexCenter;
+        width: 4.6rem;
+        height: 4.6rem;
+        border-radius: 1.2rem;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+
+        &--active {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+            box-shadow: inset 0 0 0 0.2rem var(--primary-color);
+        }
+    }
+
+    &__tooltip {
+        @extend %absCenterY;
+        left: calc(100% + 1.4rem);
+        transform: translate(-0.8rem, -50%);
+        padding: 0.6rem 1.2rem;
+        background-color: var(--tooltip-bg, var(--bg-surface));
+        color: var(--tooltip-text, var(--text-color));
+        border: 1.5px solid var(--tooltip-border, var(--primary-color));
+        font-size: 1.3rem;
+        font-weight: 700;
+        border-radius: 1rem;
+        @extend %textNoWrap;
+        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        @extend %transTooltip;
+
+        &::before {
+            @extend %absPseudo;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 0.55rem;
+            border-style: solid;
+            border-color: transparent var(--tooltip-border, var(--primary-color)) transparent transparent;
+        }
+    }
+
+    &__link:hover &__tooltip,
+    &__link:focus-visible &__tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0, -50%);
+    }
+
+    @include abs.screen(md) {
+        top: calc(#{abs.$header-top-offset} + #{abs.$header-height-mobile} + 1.5rem);
+        left: 1.6rem;
+        bottom: 1.6rem;
+        width: 26rem;
+        transform: translateX(calc(-100% - 3rem));
+        border-radius: 2rem;
+        padding: 1.6rem;
+        z-index: 55;
+        overflow-y: auto;
+
+        &.is-open {
+            transform: translateX(0);
+        }
+
+        &__link {
+            justify-content: flex-start;
+            width: 100%;
+            height: 4.8rem;
+            padding: 0 1.6rem;
+            gap: 1.4rem;
+        }
+
+        &__tooltip {
+            position: static;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            background-color: transparent;
+            border: none;
+            color: inherit;
+            padding: 0;
+            font-size: 1.5rem;
+            box-shadow: none;
+            pointer-events: auto;
+
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+
+.sidebar-backdrop {
+    @extend %fixedCover;
+    @extend %transBackdrop;
+    display: none;
+    background-color: var(--overlay-bg);
+    backdrop-filter: blur(2px);
+    z-index: 45;
+    opacity: 0;
+    visibility: hidden;
+
+    @include abs.screen(md) {
+        display: block;
+
+        &.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+```
+
+### index.scss
+
+```scss
+@forward "./header";
+@forward "./footer";
+@forward "./sidebar";
+```
+
+### header.scss
+
+```scss
+// scss/layout/_header.scss
+@use "../abstracts" as abs;
+
+.header {
+    @extend %stickyTop;
+    top: abs.$header-top-offset;
+    margin-top: abs.$header-top-offset;
+    margin-bottom: abs.$gap-header-main;
+    z-index: 50;
+    height: abs.$header-height-pc;
+    background-color: transparent;
+    border-bottom: none;
+
+    @include abs.screen(md) {
+        height: abs.$header-height-mobile;
+    }
+
+    &__container {
+        @extend %flexBetween;
+        height: 100%;
+        padding-left: 2.4rem;
+        padding-right: 2.4rem;
+        gap: 2rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 2.4rem;
+        box-shadow: 0 0.4rem 1.6rem var(--shadow-color);
+        @extend %transHeaderScroll;
+
+        @include abs.screen(xl) {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        @include abs.screen(md) {
+            padding-left: 1.6rem;
+            padding-right: 1.6rem;
+            border-radius: 1.6rem;
+            gap: 1.2rem;
+        }
+
+        @include abs.screen(sm) {
+            padding-left: 1.2rem !important;
+            padding-right: 1.2rem !important;
+            border-radius: 1.4rem;
+            gap: 0.8rem;
+        }
+    }
+
+    &--scrolled &__container {
+        box-shadow: 0 1rem 2.8rem var(--shadow-color);
+        border-color: var(--primary-color);
+        backdrop-filter: blur(10px);
+    }
+
+    &__left,
+    &__right {
+        @extend %flexItemCenter;
+        gap: 1.2rem;
+
+        @include abs.screen(md) {
+            gap: 1rem;
+        }
+
+        @include abs.screen(sm) {
+            gap: 0.6rem;
+        }
+    }
+
+    &__lang-details,
+    &__theme-details {
+        position: relative;
+    }
+
+    &__lang-summary,
+    &__theme-summary {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 4.2rem;
+        padding: 0 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+        }
+
+        @include abs.screen(sm) {
+            height: 3.8rem;
+            padding: 0 0.8rem;
+        }
+    }
+
+    &__lang-arrow {
+        width: 1.6rem;
+        height: 1.6rem;
+        @extend %transBurgerBar;
+    }
+
+    &__lang-details[open] &__lang-arrow {
+        transform: rotate(180deg);
+    }
+
+    &__lang-list,
+    &__theme-list {
+        position: absolute;
+        top: calc(100% + 1rem);
+        right: 0;
+        z-index: 60;
+        min-width: 14rem;
+        padding: 0.6rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+        box-shadow: 0 1rem 2.5rem var(--shadow-color);
+        @extend %animDropdownFadeIn;
+    }
+
+    &__lang-link,
+    &__theme-btn {
+        @extend %flexYCenterLeft;
+        gap: 1rem;
+        width: 100%;
+        padding: 0.8rem 1.2rem;
+        border-radius: 0.8rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--text-color);
+        @extend %transTheme;
+
+        &:hover {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+    }
+
+    &__lang-link--active,
+    &__theme-btn.is-active {
+        background-color: var(--bg-surface);
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+
+    // ==========================================================================
+    // HEADER AUTH (HƯỚNG 1) & TOGGLE PROFILE DROPDOWN
+    // ==========================================================================
+    &__auth {
+        @extend %flexItemCenter;
+    }
+
+    &__auth-guest {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__auth-register {
+        height: 4.2rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        // Trên trang bình thường ẩn nút Đăng ký dưới 1200px cho gọn; riêng trang sign-in.html sẽ hiện lại ở rule dưới
+        @include abs.screen(xl) {
+            display: none;
+        }
+
+        @include abs.screen(sm) {
+            height: 3.8rem;
+            padding: 0 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__auth-btn {
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__profile-details {
+        position: relative;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__profile-summary {
+        @extend %inlineFlexCenter;
+        gap: 0.9rem;
+        height: 4.4rem;
+        padding: 0.4rem 1.2rem 0.4rem 0.5rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 99.9rem;
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+
+        @include abs.screen(sm) {
+            height: 3.8rem;
+            padding: 0.3rem 0.8rem 0.3rem 0.35rem;
+            gap: 0.5rem;
+        }
+    }
+
+    &__profile-details[open] &__profile-summary {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        box-shadow: 0 0 0 3px var(--primary-soft-bg);
+    }
+
+    &__profile-avatar {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 800;
+
+        @include abs.screen(sm) {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.15rem;
+        }
+    }
+
+    &__profile-meta {
+        @extend %flexColumn;
+        align-items: flex-start;
+        max-width: 12.5rem;
+        line-height: 1.2;
+    }
+
+    &__profile-name {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+        max-width: 100%;
+        @extend %textEllipsis;
+    }
+
+    &__profile-element {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__profile-arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+        @extend %flexItemFixed;
+        @extend %transBurgerBar;
+    }
+
+    &__profile-details[open] &__profile-arrow {
+        transform: rotate(180deg);
+    }
+
+    &__profile-popover {
+        position: absolute;
+        top: calc(100% + 1rem);
+        right: 0;
+        z-index: 70;
+        width: 29rem;
+        max-width: calc(100vw - 2.4rem);
+        padding: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 2rem;
+        box-shadow: 0 1.6rem 3.8rem var(--shadow-color);
+        @extend %flexColumn;
+        gap: 1rem;
+        @extend %animDropdownFadeIn;
+    }
+
+    &__profile-card {
+        @extend %flexItemCenter;
+        gap: 1.2rem;
+        padding: 1.2rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+
+        &-avatar {
+            @extend %inlineFlexCenter;
+            @extend %flexItemFixed;
+            width: 4.4rem;
+            height: 4.4rem;
+            border-radius: 1.3rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        &-info {
+            @extend %flexColumn;
+            gap: 0.2rem;
+            min-width: 0;
+        }
+
+        &-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--text-color);
+            @extend %textEllipsis;
+        }
+
+        &-email {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            @extend %textEllipsis;
+        }
+
+        &-badge {
+            display: inline-block;
+            width: fit-content;
+            margin-top: 0.25rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 99.9rem;
+            background-color: var(--body-bg);
+            border: 1px solid var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+    }
+
+    &__profile-menu {
+        @extend %flexColumn;
+        gap: 0.35rem;
+    }
+
+    &__profile-link {
+        @extend %flexYCenterLeft;
+        gap: 1rem;
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border-radius: 1.1rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transTheme;
+
+        .icon,
+        svg {
+            width: 1.8rem;
+            height: 1.8rem;
+            @extend %flexItemFixed;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+    }
+
+    &__profile-foot {
+        padding-top: 0.8rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__profile-logout {
+        @extend %flexCenter;
+        gap: 0.8rem;
+        width: 100%;
+        height: 4rem;
+        border-radius: 1.2rem;
+        background-color: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--color-danger);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--color-danger);
+            border-color: var(--color-danger);
+            color: #ffffff;
+        }
+    }
+
+    &__burger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        width: 4.4rem;
+        height: 4.4rem;
+        border-radius: 1.2rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        @extend %transTheme;
+
+        @include abs.screen(md) {
+            display: inline-flex;
+        }
+
+        &-bar {
+            width: 2rem;
+            height: 0.2rem;
+            background-color: var(--text-color);
+            border-radius: 0.2rem;
+            @extend %transBurgerBar;
+        }
+
+        &.is-active &-bar:nth-child(1) {
+            transform: translateY(0.7rem) rotate(45deg);
+        }
+        &.is-active &-bar:nth-child(2) {
+            opacity: 0;
+        }
+        &.is-active &-bar:nth-child(3) {
+            transform: translateY(-0.7rem) rotate(-45deg);
+        }
+    }
+}
+
+// HƯỚNG 1 (Chống nhấp nháy FOUC trước khi JS gắn thuộc tính hidden):
+// - Đang ở trang Đăng nhập: Ẩn nút Đăng nhập, luôn hiển thị nút Đăng ký nổi bật theo màu Theme trên mọi màn hình
+body[data-page="signin"] {
+    .header__auth-btn[data-auth-link="signin"] {
+        display: none;
+    }
+
+    .header__auth-register[data-auth-link="signup"] {
+        display: inline-flex;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+
+        &:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: #ffffff;
+        }
+    }
+}
+
+// - Đang ở trang Đăng ký: Ẩn nút Đăng ký, giữ nút Đăng nhập
+body[data-page="signup"] {
+    .header__auth-register[data-auth-link="signup"] {
+        display: none;
     }
 }
 ```
@@ -8382,6 +9952,7 @@ strong {
 @forward "./bazi";
 @forward "./utilities";
 @forward "./divination-detail";
+@forward "./auth";
 ```
 
 ### home.scss
@@ -16218,6 +17789,814 @@ body[data-page="festival"] .header,
 @media (prefers-reduced-motion: reduce) {
     .div-tarot-poster img {
         transition-duration: 0.01ms !important;
+    }
+}
+```
+
+### auth.scss
+
+```scss
+// scss/pages/_auth.scss
+// Dùng chung cho sign-in.html, sign-up.html và profile.html (Gồm Tabs, Danh sách Người thân & Đổi mật khẩu)
+@use "../abstracts" as abs;
+
+.auth-page {
+    padding-bottom: abs.$gap-section-default;
+}
+
+.auth-bento {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: start;
+    gap: 2.4rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.auth-hero {
+    position: relative;
+    overflow: hidden;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 2.4rem;
+    padding: 3.2rem;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-hover);
+    border-radius: 2.8rem;
+    color: #ffffff;
+    box-shadow: 0 1.2rem 3.2rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 2.2rem 1.8rem;
+        border-radius: 2rem;
+        gap: 1.8rem;
+    }
+
+    &__top,
+    &__perks,
+    &__foot {
+        position: relative;
+        z-index: 2;
+    }
+
+    &__top {
+        @extend %flexColumn;
+        gap: 1.4rem;
+    }
+
+    &__badge {
+        @extend %inlineFlexCenter;
+        gap: 0.7rem;
+        width: fit-content;
+        padding: 0.45rem 1.3rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 99.9rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+
+        .icon {
+            width: 1.6rem;
+            height: 1.6rem;
+            filter: brightness(0) invert(1);
+        }
+    }
+
+    &__title {
+        font-size: clamp(2.6rem, 3.2vw, 3.6rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: #ffffff;
+    }
+
+    &__desc {
+        font-size: 1.45rem;
+        line-height: 1.6;
+        color: var(--hero-text-soft);
+    }
+
+    &__perks {
+        @extend %flexColumn;
+        gap: 1.2rem;
+    }
+
+    &__perk {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.2rem;
+        padding: 1.4rem 1.6rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 1.8rem;
+
+        strong {
+            display: block;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+        }
+
+        p {
+            font-size: 1.3rem;
+            line-height: 1.45;
+            color: var(--hero-text-soft);
+        }
+    }
+
+    &__perk-icon {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 1rem;
+        background-color: var(--hero-chip-bg);
+        border: 1px solid var(--hero-border-color);
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #ffffff;
+    }
+
+    &__foot {
+        @extend %flexBetween;
+        padding-top: 0.6rem;
+    }
+
+    &__back-link {
+        @extend %inlineFlexCenter;
+        gap: 0.8rem;
+        height: 4.2rem;
+        padding: 0 1.8rem;
+        background-color: var(--hero-chip-bg);
+        border: 1px solid var(--hero-border-color);
+        border-radius: 99.9rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #ffffff;
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: #ffffff;
+            color: var(--primary-active);
+            transform: translateY(-2px);
+        }
+
+        &--danger:hover,
+        &--danger:focus-visible {
+            background-color: var(--color-danger);
+            border-color: var(--color-danger);
+            color: #ffffff;
+        }
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -1.4rem;
+        bottom: -1.4rem;
+        width: 18rem;
+        height: 18rem;
+        object-fit: contain;
+        opacity: 0.14;
+        filter: var(--zodiac-filter-active);
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+
+.profile-summary {
+    @extend %flexItemCenter;
+    gap: 1.6rem;
+
+    @include abs.screen(sm) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__avatar {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 7.2rem;
+        height: 7.2rem;
+        border-radius: 2rem;
+        background-color: #ffffff;
+        color: var(--primary-active);
+        font-size: 2.6rem;
+        font-weight: 800;
+        box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.16);
+    }
+
+    &__name {
+        margin-top: 0.6rem;
+        font-size: 2.4rem;
+    }
+
+    &__email {
+        margin-top: 0.2rem;
+        font-size: 1.35rem;
+        color: var(--hero-text-soft);
+    }
+}
+
+.profile-lunar-box {
+    @extend %flexColumn;
+    gap: 0.4rem;
+    padding: 1.4rem 1.6rem;
+    background-color: var(--hero-box-bg);
+    border: 1px solid var(--hero-border-color);
+    border-radius: 1.6rem;
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--hero-text-soft);
+    }
+
+    &__val {
+        font-size: 1.45rem;
+        font-weight: 800;
+        line-height: 1.45;
+        color: #ffffff;
+    }
+}
+
+.profile-stats-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.profile-stat-pill {
+    @extend %flexColumn;
+    gap: 0.2rem;
+    padding: 1.2rem 1.4rem;
+    background-color: var(--hero-box-bg);
+    border: 1px solid var(--hero-border-color);
+    border-radius: 1.5rem;
+
+    small {
+        font-size: 1.15rem;
+        color: var(--hero-text-soft);
+    }
+
+    strong {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: #ffffff;
+    }
+}
+
+.profile-quick-links {
+    position: relative;
+    z-index: 2;
+    @extend %flexWrapGap;
+    gap: 1rem;
+}
+
+.auth-card {
+    @extend %flexColumn;
+    justify-content: flex-start;
+    gap: 2.2rem;
+    padding: 3.2rem 3.4rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 2.8rem;
+    box-shadow: 0 0.8rem 2.8rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(sm) {
+        padding: 2.2rem 1.8rem;
+        border-radius: 2rem;
+        gap: 1.8rem;
+    }
+
+    &__head {
+        @extend %flexColumn;
+        gap: 0.6rem;
+    }
+
+    &__eyebrow {
+        font-size: 1.25rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary-color);
+    }
+
+    &__title {
+        font-size: clamp(2.3rem, 2.8vw, 2.9rem);
+        font-weight: 800;
+        line-height: 1.2;
+        color: var(--text-color);
+    }
+
+    &__sub {
+        font-size: 1.4rem;
+        color: var(--text-muted);
+    }
+
+    &__switch-link {
+        font-weight: 800;
+        color: var(--primary-color);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// THANH 3 TAB TRÊN TRANG PROFILE
+.profile-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+    padding: 0.5rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.6rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    &__btn {
+        @extend %inlineFlexCenter;
+        gap: 0.6rem;
+        height: 4.2rem;
+        padding: 0 1.2rem;
+        border-radius: 1.2rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--text-color);
+        }
+
+        &.is-active,
+        &[aria-selected="true"] {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+
+            .profile-tabs__count {
+                background-color: rgba(255, 255, 255, 0.25);
+                color: #ffffff;
+            }
+        }
+    }
+
+    &__count {
+        padding: 0.15rem 0.7rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+}
+
+.profile-tabpanel {
+    @extend %flexColumn;
+    gap: 2rem;
+
+    &[hidden] {
+        display: none !important;
+    }
+}
+
+// DANH SÁCH NGƯỜI THÂN TRONG PROFILE.HTML
+.family-form {
+    padding: 1.8rem 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+
+    @include abs.screen(sm) {
+        padding: 1.4rem;
+    }
+
+    &__title {
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: var(--text-color);
+        margin-bottom: 0.4rem;
+    }
+}
+
+.family-list {
+    @extend %flexColumn;
+    gap: 1.2rem;
+
+    &__empty {
+        padding: 2.6rem 1.8rem;
+        text-align: center;
+        background-color: var(--bg-surface);
+        border: 1.5px dashed var(--border-color);
+        border-radius: 1.8rem;
+        font-size: 1.4rem;
+        color: var(--text-muted);
+    }
+}
+
+.family-card {
+    position: relative;
+    overflow: hidden;
+    @extend %flexBetween;
+    flex-wrap: wrap;
+    gap: 1.4rem;
+    padding: 1.6rem 1.8rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    @extend %transInteractive;
+
+    &:hover {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        transform: translateY(-2px);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+    }
+
+    &__left {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 1.4rem;
+        min-width: 0;
+        flex: 1 1 24rem;
+    }
+
+    &__zodiac {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 1.4rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+
+        img {
+            width: 3.2rem;
+            height: 3.2rem;
+            object-fit: contain;
+            filter: var(--zodiac-filter);
+        }
+    }
+
+    &__info {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
+    }
+
+    &__head {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+    }
+
+    &__name {
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__rel {
+        padding: 0.2rem 0.9rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border: 1px solid var(--primary-color);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    &__dates {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &__napam {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__actions {
+        position: relative;
+        z-index: 2;
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+    }
+
+    &__bazi-btn {
+        height: 3.8rem;
+        padding: 0 1.4rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-radius: 1.1rem;
+        font-size: 1.3rem;
+        font-weight: 800;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+
+    &__del-btn {
+        @extend %inlineFlexCenter;
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 1.1rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        color: var(--color-danger);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--color-danger);
+            border-color: var(--color-danger);
+            color: #ffffff;
+        }
+    }
+}
+
+.auth-alert {
+    padding: 1.2rem 1.6rem;
+    border-radius: 1.4rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: var(--color-danger);
+
+    &[data-type="success"] {
+        background-color: rgba(34, 197, 94, 0.1);
+        border-color: rgba(34, 197, 94, 0.35);
+        color: var(--color-success);
+    }
+
+    &[hidden] {
+        display: none !important;
+    }
+}
+
+.auth-form {
+    @extend %flexColumn;
+    gap: 1.6rem;
+
+    &__row-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.4rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__group {
+        @extend %flexColumn;
+        gap: 0.65rem;
+        min-width: 0;
+    }
+
+    &__label-row {
+        @extend %flexBetween;
+        gap: 1rem;
+    }
+
+    &__label {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__hint {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+    }
+
+    &__forgot {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__input-wrap {
+        position: relative;
+        @extend %flexItemCenter;
+    }
+
+    &__input {
+        width: 100%;
+        height: 4.8rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.4rem;
+        font-size: 1.45rem;
+        font-weight: 600;
+        color: var(--text-color);
+        @extend %transTheme;
+
+        &--password {
+            padding-right: 4.8rem;
+        }
+
+        &:focus {
+            background-color: var(--body-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-soft-bg);
+        }
+
+        &[aria-invalid="true"] {
+            border-color: var(--color-danger);
+        }
+    }
+
+    &__select {
+        appearance: auto;
+        cursor: pointer;
+        background-color: var(--body-bg);
+    }
+
+    &__eye-btn {
+        position: absolute;
+        right: 0.6rem;
+        @extend %inlineFlexCenter;
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 1rem;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &:hover,
+        &[aria-pressed="true"] {
+            background-color: var(--body-bg);
+            color: var(--primary-color);
+        }
+    }
+
+    &__error {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-danger);
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__options {
+        @extend %flexColumn;
+        gap: 0.5rem;
+    }
+
+    &__check {
+        @extend %flexItemCenter;
+        gap: 0.9rem;
+        font-size: 1.35rem;
+        color: var(--text-muted);
+        cursor: pointer;
+
+        input[type="checkbox"] {
+            width: 1.8rem;
+            height: 1.8rem;
+            accent-color: var(--primary-color);
+            @extend %flexItemFixed;
+        }
+    }
+
+    &__submit {
+        width: 100%;
+        height: 4.8rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.5rem;
+        font-weight: 800;
+        border-radius: 1.4rem;
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        &:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+    }
+
+    &__demo-btn {
+        width: 100%;
+        height: 4.4rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1.5px dashed var(--primary-color);
+        border-radius: 1.4rem;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--primary-color);
+
+        .icon {
+            width: 1.8rem;
+            height: 1.8rem;
+            filter: var(--zodiac-filter);
+        }
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+
+            .icon {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+}
+
+.auth-elements {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.8rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &__btn {
+        @extend %flexColumnCenterAll;
+        gap: 0.4rem;
+        padding: 0.9rem 0.6rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 1.3rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-color);
+        @extend %transInteractive;
+
+        img {
+            width: 2.2rem;
+            height: 2.2rem;
+            object-fit: contain;
+        }
+
+        &:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        &.is-active {
+            background-color: var(--primary-soft-bg, var(--body-bg));
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        }
+    }
+}
+
+.auth-strength {
+    @extend %flexColumn;
+    gap: 0.4rem;
+    margin-top: 0.2rem;
+
+    &__meter {
+        width: 100%;
+        height: 0.8rem;
+        border-radius: 99.9rem;
+        overflow: hidden;
+        accent-color: var(--primary-color);
+
+        &::-webkit-meter-bar {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 99.9rem;
+        }
+        &::-webkit-meter-optimum-value {
+            background: var(--color-success);
+        }
+        &::-webkit-meter-suboptimum-value {
+            background: var(--color-warning);
+        }
+        &::-webkit-meter-even-less-good-value {
+            background: var(--color-danger);
+        }
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
     }
 }
 ```

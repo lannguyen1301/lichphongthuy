@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, follow" />
+        <title>Hồ Sơ Cá Nhân, Người Thân &amp; Bảo Mật - Lịch Phong Thủy</title>
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+        <script src="./assets/js/script.js"></script>
+    </head>
+
+    <body class="auth-body" data-page="profile" itemscope itemtype="https://schema.org/WebPage">
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "./templates/header.html");
+        </script>
+
+        <div id="sidebar-root"></div>
+        <script>
+            load("#sidebar-root", "./templates/sidebar.html");
+        </script>
+
+        <main id="main" class="main auth-page">
+            <div class="container">
+                <div class="auth-bento" data-auth-view="profile">
+                    <!-- CỘT TRÁI: THẺ HỒ SƠ BẢN MỆNH -->
+                    <aside
+                        class="auth-hero"
+                        aria-label="Tóm tắt hồ sơ bản mệnh thành viên"
+                        itemscope
+                        itemtype="https://schema.org/Person"
+                    >
+                        <div class="auth-hero__top">
+                            <div class="profile-summary">
+                                <span class="profile-summary__avatar" id="profile-hero-avatar" aria-hidden="true">
+                                    TV
+                                </span>
+                                <div>
+                                    <span class="auth-hero__badge">
+                                        <span id="profile-hero-element">Bản mệnh: Hành Thổ</span>
+                                    </span>
+                                    <h1
+                                        class="auth-hero__title profile-summary__name"
+                                        id="profile-hero-name"
+                                        itemprop="name"
+                                    >
+                                        Thành viên Lịch Phong Thủy
+                                    </h1>
+                                    <p class="profile-summary__email" id="profile-hero-email" itemprop="email">
+                                        thanhvien@lichphongthuy.vn
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="profile-lunar-box" id="profile-lunar-box">
+                                <span class="profile-lunar-box__label">Thông tin sinh tiêu &amp; Can Chi</span>
+                                <strong class="profile-lunar-box__val" id="profile-lunar-summary">
+                                    Cập nhật ngày sinh để tự động quy đổi Âm lịch &amp; Nạp âm
+                                </strong>
+                            </div>
+
+                            <div class="profile-stats-row">
+                                <div class="profile-stat-pill">
+                                    <small>Người thân đã lưu</small>
+                                    <strong id="profile-hero-family-count">0 hồ sơ</strong>
+                                </div>
+                                <div class="profile-stat-pill">
+                                    <small>Trạng thái bảo mật</small>
+                                    <strong id="profile-hero-security-status">Đã bảo vệ</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-quick-links">
+                            <a
+                                href="./bazi.html"
+                                class="auth-hero__back-link"
+                                id="profile-open-bazi-btn"
+                                title="Mở Lá số Bát Tự theo ngày sinh cá nhân"
+                            >
+                                <span>Xem Lá số Bát Tự của tôi</span>
+                                <span aria-hidden="true">&#8594;</span>
+                            </a>
+
+                            <button
+                                type="button"
+                                class="auth-hero__back-link auth-hero__back-link--danger"
+                                data-auth-action="logout"
+                                title="Đăng xuất khỏi tài khoản trên thiết bị này"
+                            >
+                                <span>Đăng xuất</span>
+                            </button>
+                        </div>
+
+                        <img
+                            src="./assets/icons/zodiac/tiger.svg"
+                            alt=""
+                            aria-hidden="true"
+                            class="auth-hero__watermark"
+                            id="profile-hero-watermark"
+                        />
+                    </aside>
+
+                    <!-- CỘT PHẢI: BẢNG ĐIỀU KHIỂN 3 TAB CHUẨN A11Y -->
+                    <section class="auth-card" aria-labelledby="profile-heading">
+                        <header class="auth-card__head">
+                            <span class="auth-card__eyebrow">Trung tâm tài khoản</span>
+                            <h2 class="auth-card__title" id="profile-heading">Quản lý Hồ sơ, Người thân &amp; Mật khẩu</h2>
+                            <p class="auth-card__sub">
+                                Dữ liệu được lưu riêng tư trong trình duyệt và đồng bộ ngay lập tức với Header &amp; Bát
+                                Tự.
+                            </p>
+                        </header>
+
+                        <!-- Bộ 3 Tab dùng Roving Tabindex (tabindex="0" / "-1") + aria-selected + aria-controls -->
+                        <div class="profile-tabs" id="profile-tablist" role="tablist" aria-label="Danh mục cài đặt tài khoản">
+                            <button
+                                type="button"
+                                role="tab"
+                                id="tab-btn-info"
+                                class="profile-tabs__btn is-active"
+                                data-profile-tab="info"
+                                aria-selected="true"
+                                aria-controls="tab-panel-info"
+                                tabindex="0"
+                            >
+                                <span>Hồ sơ &amp; Bản mệnh</span>
+                            </button>
+                            <button
+                                type="button"
+                                role="tab"
+                                id="tab-btn-family"
+                                class="profile-tabs__btn"
+                                data-profile-tab="family"
+                                aria-selected="false"
+                                aria-controls="tab-panel-family"
+                                tabindex="-1"
+                            >
+                                <span>Người thân</span>
+                                <span class="profile-tabs__count" id="tab-family-count">0</span>
+                            </button>
+                            <button
+                                type="button"
+                                role="tab"
+                                id="tab-btn-security"
+                                class="profile-tabs__btn"
+                                data-profile-tab="security"
+                                aria-selected="false"
+                                aria-controls="tab-panel-security"
+                                tabindex="-1"
+                            >
+                                <span>Đổi mật khẩu</span>
+                            </button>
+                        </div>
+
+                        <div
+                            class="auth-alert"
+                            id="profile-alert"
+                            role="alert"
+                            aria-live="assertive"
+                            tabindex="-1"
+                            hidden
+                        ></div>
+
+                        <!-- TAB 1: CHỈNH SỬA HỒ SƠ & BẢN MỆNH -->
+                        <div
+                            class="profile-tabpanel"
+                            id="tab-panel-info"
+                            role="tabpanel"
+                            aria-labelledby="tab-btn-info"
+                        >
+                            <form class="auth-form" id="form-profile" data-auth-form="profile" novalidate>
+                                <div class="auth-form__row-2">
+                                    <div class="auth-form__group">
+                                        <label for="profile-name" class="auth-form__label">Họ và tên hiển thị</label>
+                                        <input
+                                            type="text"
+                                            id="profile-name"
+                                            name="fullname"
+                                            class="auth-form__input"
+                                            autocomplete="name"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="profile-name-error"
+                                        />
+                                        <p class="auth-form__error" id="profile-name-error" role="alert" hidden></p>
+                                    </div>
+
+                                    <div class="auth-form__group">
+                                        <label for="profile-birthdate" class="auth-form__label">Ngày sinh Dương lịch</label>
+                                        <input
+                                            type="date"
+                                            id="profile-birthdate"
+                                            name="birthdate"
+                                            class="auth-form__input"
+                                            autocomplete="bday"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="auth-form__row-2">
+                                    <div class="auth-form__group">
+                                        <label for="profile-email" class="auth-form__label">Địa chỉ Email</label>
+                                        <input
+                                            type="email"
+                                            id="profile-email"
+                                            name="email"
+                                            class="auth-form__input"
+                                            inputmode="email"
+                                            autocomplete="email"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="profile-email-error"
+                                        />
+                                        <p class="auth-form__error" id="profile-email-error" role="alert" hidden></p>
+                                    </div>
+
+                                    <div class="auth-form__group">
+                                        <label for="profile-gender" class="auth-form__label">Giới tính (An Đại Vận)</label>
+                                        <select id="profile-gender" name="gender" class="auth-form__input auth-form__select">
+                                            <option value="male">Nam mệnh</option>
+                                            <option value="female">Nữ mệnh</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="auth-form__group">
+                                    <span class="auth-form__label" id="profile-element-label">
+                                        Bản Mệnh Ngũ Hành (Đồng bộ màu Theme)
+                                    </span>
+                                    <div
+                                        class="auth-elements"
+                                        role="group"
+                                        aria-labelledby="profile-element-label"
+                                        id="profile-element-group"
+                                        data-element-picker="profile-element-input"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn"
+                                            data-select-element="metal"
+                                            aria-pressed="false"
+                                            title="Mệnh Kim (Vàng kim)"
+                                        >
+                                            <img src="./assets/icons/metal.svg" alt="" aria-hidden="true" />
+                                            <span>Kim</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn"
+                                            data-select-element="wood"
+                                            aria-pressed="false"
+                                            title="Mệnh Mộc (Xanh lục bảo)"
+                                        >
+                                            <img src="./assets/icons/wood.svg" alt="" aria-hidden="true" />
+                                            <span>Mộc</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn"
+                                            data-select-element="water"
+                                            aria-pressed="false"
+                                            title="Mệnh Thủy (Xanh đại dương)"
+                                        >
+                                            <img src="./assets/icons/water.svg" alt="" aria-hidden="true" />
+                                            <span>Thủy</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn"
+                                            data-select-element="fire"
+                                            aria-pressed="false"
+                                            title="Mệnh Hỏa (Đỏ chu sa)"
+                                        >
+                                            <img src="./assets/icons/fire.svg" alt="" aria-hidden="true" />
+                                            <span>Hỏa</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn is-active"
+                                            data-select-element="earth"
+                                            aria-pressed="true"
+                                            title="Mệnh Thổ (Cam đất)"
+                                        >
+                                            <img src="./assets/icons/earth.svg" alt="" aria-hidden="true" />
+                                            <span>Thổ</span>
+                                        </button>
+                                    </div>
+                                    <input type="hidden" id="profile-element-input" name="element" value="earth" />
+                                </div>
+
+                                <button type="submit" class="btn auth-form__submit">
+                                    <span>Lưu thay đổi hồ sơ</span>
+                                    <span aria-hidden="true">&#10003;</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- TAB 2: QUẢN LÝ DANH SÁCH NGÀY SINH NGƯỜI THÂN -->
+                        <div
+                            class="profile-tabpanel"
+                            id="tab-panel-family"
+                            role="tabpanel"
+                            aria-labelledby="tab-btn-family"
+                            hidden
+                        >
+                            <form class="auth-form family-form" id="form-family-add" data-auth-form="family" novalidate>
+                                <h3 class="family-form__title">Thêm người thân / ngày sinh quan trọng</h3>
+
+                                <div class="auth-form__row-2">
+                                    <div class="auth-form__group">
+                                        <label for="family-name" class="auth-form__label">Họ và tên</label>
+                                        <input
+                                            type="text"
+                                            id="family-name"
+                                            name="memberName"
+                                            class="auth-form__input"
+                                            placeholder="Ví dụ: Bảo An"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="family-name-error"
+                                        />
+                                        <p class="auth-form__error" id="family-name-error" role="alert" hidden></p>
+                                    </div>
+
+                                    <div class="auth-form__group">
+                                        <label for="family-relation" class="auth-form__label">Mối quan hệ</label>
+                                        <select
+                                            id="family-relation"
+                                            name="relation"
+                                            class="auth-form__input auth-form__select"
+                                        >
+                                            <option value="Vợ / Chồng">Vợ / Chồng</option>
+                                            <option value="Con cái">Con cái</option>
+                                            <option value="Cha / Mẹ">Cha / Mẹ</option>
+                                            <option value="Anh / Chị / Em">Anh / Chị / Em</option>
+                                            <option value="Đối tác / Bạn thân">Đối tác / Bạn thân</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="auth-form__row-2">
+                                    <div class="auth-form__group">
+                                        <label for="family-birthdate" class="auth-form__label">Ngày sinh Dương lịch</label>
+                                        <input
+                                            type="date"
+                                            id="family-birthdate"
+                                            name="memberBirthdate"
+                                            class="auth-form__input"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="family-birthdate-error"
+                                        />
+                                        <p class="auth-form__error" id="family-birthdate-error" role="alert" hidden></p>
+                                    </div>
+
+                                    <div class="auth-form__group">
+                                        <label for="family-gender" class="auth-form__label">Giới tính (Lập Bát Tự)</label>
+                                        <select
+                                            id="family-gender"
+                                            name="memberGender"
+                                            class="auth-form__input auth-form__select"
+                                        >
+                                            <option value="female">Nữ mệnh</option>
+                                            <option value="male">Nam mệnh</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn auth-form__submit">
+                                    <span>+ Lưu vào danh sách người thân</span>
+                                </button>
+                            </form>
+
+                            <div
+                                class="family-list"
+                                id="profile-family-list"
+                                aria-live="polite"
+                                aria-label="Danh sách hồ sơ người thân đã lưu"
+                            ></div>
+                        </div>
+
+                        <!-- TAB 3: ĐỔI MẬT KHẨU BẢO MẬT -->
+                        <div
+                            class="profile-tabpanel"
+                            id="tab-panel-security"
+                            role="tabpanel"
+                            aria-labelledby="tab-btn-security"
+                            hidden
+                        >
+                            <form class="auth-form" id="form-change-password" data-auth-form="password" novalidate>
+                                <div class="auth-form__group">
+                                    <label for="pw-current" class="auth-form__label">Mật khẩu hiện tại</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="password"
+                                            id="pw-current"
+                                            name="currentPassword"
+                                            class="auth-form__input auth-form__input--password"
+                                            placeholder="Nhập mật khẩu đang sử dụng"
+                                            autocomplete="current-password"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="pw-current-hint pw-current-error"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="auth-form__eye-btn"
+                                            data-toggle-password="pw-current"
+                                            aria-label="Hiện mật khẩu hiện tại"
+                                            aria-pressed="false"
+                                            aria-controls="pw-current"
+                                            title="Bật hoặc tắt hiển thị mật khẩu"
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <p class="auth-form__hint" id="pw-current-hint">
+                                        Gợi ý: Nếu dùng tài khoản Demo, mật khẩu mặc định là <strong>Demo@1234</strong>.
+                                    </p>
+                                    <p class="auth-form__error" id="pw-current-error" role="alert" hidden></p>
+                                </div>
+
+                                <div class="auth-form__group">
+                                    <label for="pw-new" class="auth-form__label">Mật khẩu mới</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="password"
+                                            id="pw-new"
+                                            name="newPassword"
+                                            class="auth-form__input auth-form__input--password"
+                                            placeholder="Tối thiểu 8 ký tự (Hoa, thường, số, ký tự đặc biệt)"
+                                            autocomplete="new-password"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="pw-new-strength-text pw-new-error"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="auth-form__eye-btn"
+                                            data-toggle-password="pw-new"
+                                            aria-label="Hiện mật khẩu mới"
+                                            aria-pressed="false"
+                                            aria-controls="pw-new"
+                                            title="Bật hoặc tắt hiển thị mật khẩu mới"
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div class="auth-strength">
+                                        <meter
+                                            id="pw-new-meter"
+                                            class="auth-strength__meter"
+                                            min="0"
+                                            max="4"
+                                            low="2"
+                                            high="3"
+                                            optimum="4"
+                                            value="0"
+                                        >
+                                            0/4
+                                        </meter>
+                                        <span class="auth-strength__label" id="pw-new-strength-text" aria-live="polite">
+                                            Độ mạnh mật khẩu mới: Chưa nhập
+                                        </span>
+                                    </div>
+                                    <p class="auth-form__error" id="pw-new-error" role="alert" hidden></p>
+                                </div>
+
+                                <div class="auth-form__group">
+                                    <label for="pw-confirm" class="auth-form__label">Xác nhận mật khẩu mới</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="password"
+                                            id="pw-confirm"
+                                            name="confirmNewPassword"
+                                            class="auth-form__input auth-form__input--password"
+                                            placeholder="Nhập lại mật khẩu mới khớp ở trên"
+                                            autocomplete="new-password"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="pw-confirm-error"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="auth-form__eye-btn"
+                                            data-toggle-password="pw-confirm"
+                                            aria-label="Hiện xác nhận mật khẩu mới"
+                                            aria-pressed="false"
+                                            aria-controls="pw-confirm"
+                                            title="Bật hoặc tắt hiển thị mật khẩu xác nhận"
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <p class="auth-form__error" id="pw-confirm-error" role="alert" hidden></p>
+                                </div>
+
+                                <button type="submit" class="btn auth-form__submit">
+                                    <span>Cập nhật mật khẩu mới</span>
+                                    <span aria-hidden="true">&#10003;</span>
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer id="footer" class="footer"></footer>
+        <script>
+            load("#footer", "./templates/footer.html");
+        </script>
+
+        <script src="./assets/js/lunar-engine.js"></script>
+        <script src="./assets/js/header.js"></script>
+        <script src="./assets/js/sidebar.js"></script>
+        <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/converter-modal.js"></script>
+        <script src="./assets/js/auth.js"></script>
+    </body>
+</html>

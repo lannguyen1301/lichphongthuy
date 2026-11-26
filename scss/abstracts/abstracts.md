@@ -1440,7 +1440,6 @@ $zodiac-active-filters: (
 
 ```scss
 // scss/abstracts/_animations.scss
-// Tuân thủ đúng nguyên tắc main.scss: Tầng Abstracts chỉ chứa Placeholders, không tự sinh ra CSS nếu không được @extend
 
 // ==========================================
 // 1. TRANSITION PLACEHOLDERS (Chuyển tiếp trạng thái khi tương tác)

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, follow" />
+        <title>Đăng Ký Tài Khoản - Lịch Phong Thủy</title>
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+        <script src="./assets/js/script.js"></script>
+    </head>
+
+    <body class="auth-body" data-page="signup" itemscope itemtype="https://schema.org/WebPage">
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "./templates/header.html");
+        </script>
+
+        <div id="sidebar-root"></div>
+        <script>
+            load("#sidebar-root", "./templates/sidebar.html");
+        </script>
+
+        <main id="main" class="main auth-page">
+            <div class="container">
+                <div class="auth-bento" data-auth-view="signup">
+                    <!-- CỘT TRÁI: GIỚI THIỆU -->
+                    <aside class="auth-hero" aria-label="Khởi tạo hồ sơ Bản mệnh Ngũ Hành">
+                        <div class="auth-hero__top">
+                            <span class="auth-hero__badge">
+                                <img src="./assets/icons/ying-yang-2.svg" alt="" aria-hidden="true" class="icon" />
+                                <span>Khởi Tạo Hồ Sơ Bản Mệnh</span>
+                            </span>
+
+                            <h1 class="auth-hero__title" itemprop="name">
+                                Tạo Tài Khoản<br />Lịch Phong Thủy
+                            </h1>
+                            <p class="auth-hero__desc">
+                                Thiết lập nhanh tên hiển thị, ngày sinh Dương lịch và Bản mệnh Ngũ Hành để đồng bộ giao
+                                diện cũng như cá nhân hóa lá số Bát Tự.
+                            </p>
+                        </div>
+
+                        <ul class="auth-hero__perks">
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">01</span>
+                                <div>
+                                    <strong>Chọn Bản Mệnh Ngũ Hành</strong>
+                                    <p>Giao diện toàn trang tự động chuyển sang Kim, Mộc, Thủy, Hỏa hoặc Thổ.</p>
+                                </div>
+                            </li>
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">02</span>
+                                <div>
+                                    <strong>Kiểm tra độ mạnh mật khẩu trực quan</strong>
+                                    <p>Đánh giá bảo mật theo thời gian thực ngay khi gõ bằng thẻ chuẩn HTML5.</p>
+                                </div>
+                            </li>
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">03</span>
+                                <div>
+                                    <strong>Lưu trữ cục bộ an toàn</strong>
+                                    <p>Quản lý hồ sơ, người thân và mật khẩu ngay trong trang Cá nhân.</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <footer class="auth-hero__foot">
+                            <a
+                                href="./index.html"
+                                class="auth-hero__back-link"
+                                title="Quay về trang chủ xem Lịch Tháng"
+                            >
+                                <span aria-hidden="true">&#8592;</span>
+                                <span>Quay về trang Lịch chính</span>
+                            </a>
+
+                            <img
+                                src="./assets/icons/zodiac/horse.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="auth-hero__watermark"
+                            />
+                        </footer>
+                    </aside>
+
+                    <!-- CỘT PHẢI: BIỂU MẪU ĐĂNG KÝ -->
+                    <section class="auth-card" aria-labelledby="signup-heading">
+                        <header class="auth-card__head">
+                            <span class="auth-card__eyebrow">Thành viên mới</span>
+                            <h2 class="auth-card__title" id="signup-heading">Đăng ký tài khoản</h2>
+                            <p class="auth-card__sub">
+                                Đã có tài khoản?
+                                <a href="./sign-in.html" class="auth-card__switch-link">Đăng nhập tại đây</a>
+                            </p>
+                        </header>
+
+                        <div
+                            class="auth-alert"
+                            id="signup-alert"
+                            role="alert"
+                            aria-live="assertive"
+                            tabindex="-1"
+                            hidden
+                        ></div>
+
+                        <form class="auth-form" id="form-signup" data-auth-form="signup" novalidate>
+                            <div class="auth-form__row-2">
+                                <div class="auth-form__group">
+                                    <label for="signup-name" class="auth-form__label">Họ và tên hiển thị</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="text"
+                                            id="signup-name"
+                                            name="fullname"
+                                            class="auth-form__input"
+                                            placeholder="Ví dụ: Minh Khôi"
+                                            autocomplete="name"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="signup-name-error"
+                                        />
+                                    </div>
+                                    <p class="auth-form__error" id="signup-name-error" role="alert" hidden></p>
+                                </div>
+
+                                <div class="auth-form__group">
+                                    <label for="signup-birthdate" class="auth-form__label">Ngày sinh (Tùy chọn)</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="date"
+                                            id="signup-birthdate"
+                                            name="birthdate"
+                                            class="auth-form__input"
+                                            autocomplete="bday"
+                                            title="Dùng để mở nhanh Lá số Bát Tự từ Profile"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="auth-form__group">
+                                <label for="signup-email" class="auth-form__label">Địa chỉ Email</label>
+                                <div class="auth-form__input-wrap">
+                                    <input
+                                        type="email"
+                                        id="signup-email"
+                                        name="email"
+                                        class="auth-form__input"
+                                        placeholder="nhap@email.vn"
+                                        inputmode="email"
+                                        autocomplete="email"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="signup-email-error"
+                                    />
+                                </div>
+                                <p class="auth-form__error" id="signup-email-error" role="alert" hidden></p>
+                            </div>
+
+                            <div class="auth-form__group">
+                                <span class="auth-form__label" id="signup-element-label">
+                                    Bản Mệnh Ngũ Hành (Tự động đổi màu giao diện)
+                                </span>
+                                <div
+                                    class="auth-elements"
+                                    role="group"
+                                    aria-labelledby="signup-element-label"
+                                    id="signup-element-group"
+                                    data-element-picker="signup-element-input"
+                                >
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn"
+                                        data-select-element="metal"
+                                        aria-pressed="false"
+                                        title="Mệnh Kim (Vàng kim)"
+                                    >
+                                        <img src="./assets/icons/metal.svg" alt="" aria-hidden="true" />
+                                        <span>Kim</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn"
+                                        data-select-element="wood"
+                                        aria-pressed="false"
+                                        title="Mệnh Mộc (Xanh lục bảo)"
+                                    >
+                                        <img src="./assets/icons/wood.svg" alt="" aria-hidden="true" />
+                                        <span>Mộc</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn"
+                                        data-select-element="water"
+                                        aria-pressed="false"
+                                        title="Mệnh Thủy (Xanh đại dương)"
+                                    >
+                                        <img src="./assets/icons/water.svg" alt="" aria-hidden="true" />
+                                        <span>Thủy</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn"
+                                        data-select-element="fire"
+                                        aria-pressed="false"
+                                        title="Mệnh Hỏa (Đỏ chu sa)"
+                                    >
+                                        <img src="./assets/icons/fire.svg" alt="" aria-hidden="true" />
+                                        <span>Hỏa</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn is-active"
+                                        data-select-element="earth"
+                                        aria-pressed="true"
+                                        title="Mệnh Thổ (Cam đất)"
+                                    >
+                                        <img src="./assets/icons/earth.svg" alt="" aria-hidden="true" />
+                                        <span>Thổ</span>
+                                    </button>
+                                </div>
+                                <input type="hidden" id="signup-element-input" name="element" value="earth" />
+                            </div>
+
+                            <div class="auth-form__group">
+                                <label for="signup-password" class="auth-form__label">Mật khẩu</label>
+                                <div class="auth-form__input-wrap">
+                                    <input
+                                        type="password"
+                                        id="signup-password"
+                                        name="password"
+                                        class="auth-form__input auth-form__input--password"
+                                        placeholder="Tối thiểu 8 ký tự (Hoa, thường, số, ký tự đặc biệt)"
+                                        autocomplete="new-password"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="signup-pw-strength-text signup-password-error"
+                                    />
+                                    <button
+                                        type="button"
+                                        class="auth-form__eye-btn"
+                                        data-toggle-password="signup-password"
+                                        aria-label="Hiện mật khẩu"
+                                        aria-pressed="false"
+                                        aria-controls="signup-password"
+                                        title="Bật hoặc tắt hiển thị mật khẩu"
+                                    >
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="auth-strength">
+                                    <meter
+                                        id="signup-pw-meter"
+                                        class="auth-strength__meter"
+                                        min="0"
+                                        max="4"
+                                        low="2"
+                                        high="3"
+                                        optimum="4"
+                                        value="0"
+                                    >
+                                        0/4
+                                    </meter>
+                                    <span class="auth-strength__label" id="signup-pw-strength-text" aria-live="polite">
+                                        Độ mạnh mật khẩu: Chưa nhập
+                                    </span>
+                                </div>
+                                <p class="auth-form__error" id="signup-password-error" role="alert" hidden></p>
+                            </div>
+
+                            <div class="auth-form__group">
+                                <label for="signup-confirm" class="auth-form__label">Nhập lại mật khẩu</label>
+                                <div class="auth-form__input-wrap">
+                                    <input
+                                        type="password"
+                                        id="signup-confirm"
+                                        name="confirmPassword"
+                                        class="auth-form__input auth-form__input--password"
+                                        placeholder="Nhập lại mật khẩu khớp ở trên"
+                                        autocomplete="new-password"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="signup-confirm-error"
+                                    />
+                                    <button
+                                        type="button"
+                                        class="auth-form__eye-btn"
+                                        data-toggle-password="signup-confirm"
+                                        aria-label="Hiện mật khẩu xác nhận"
+                                        aria-pressed="false"
+                                        aria-controls="signup-confirm"
+                                        title="Bật hoặc tắt hiển thị mật khẩu xác nhận"
+                                    >
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="auth-form__error" id="signup-confirm-error" role="alert" hidden></p>
+                            </div>
+
+                            <div class="auth-form__options">
+                                <label class="auth-form__check">
+                                    <input
+                                        type="checkbox"
+                                        id="signup-terms"
+                                        name="terms"
+                                        required
+                                        aria-describedby="signup-terms-error"
+                                    />
+                                    <span>
+                                        Tôi đồng ý với
+                                        <a
+                                            href="./index.html"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="auth-card__switch-link"
+                                        >
+                                            Điều khoản sử dụng
+                                        </a>
+                                        &amp; Chính sách bảo mật.
+                                    </span>
+                                </label>
+                                <p class="auth-form__error" id="signup-terms-error" role="alert" hidden></p>
+                            </div>
+
+                            <button type="submit" class="btn auth-form__submit">
+                                <span>Tạo tài khoản &amp; Vào trang chủ</span>
+                                <span aria-hidden="true">&#8594;</span>
+                            </button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer id="footer" class="footer"></footer>
+        <script>
+            load("#footer", "./templates/footer.html");
+        </script>
+
+        <script src="./assets/js/lunar-engine.js"></script>
+        <script src="./assets/js/header.js"></script>
+        <script src="./assets/js/sidebar.js"></script>
+        <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/converter-modal.js"></script>
+        <script src="./assets/js/auth.js"></script>
+    </body>
+</html>

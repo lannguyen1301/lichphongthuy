@@ -1,0 +1,1624 @@
+## numerology-cards.json
+```json
+[
+    {
+        "id": "01",
+        "slug": "01-tien-phong",
+        "number": 1,
+        "root_number": 1,
+        "roman_numeral": "I",
+        "letters": ["A", "J", "S"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "TIÊN PHONG",
+        "archetype": "Người Khởi Xướng",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "monad_circle_dot",
+        "keywords": ["ĐỘC LẬP", "DẪN DẮT", "BẢN LĨNH", "KHỞI XƯỚNG"],
+        "couplet": {
+            "opening": "Ý CHÍ KIÊN ĐỊNH",
+            "closing": "MỞ LỐI TIÊN PHONG"
+        },
+        "description": "Ngọn lửa khai phá mang ý chí tự chủ và khát vọng dẫn đầu. Dám bước đi trên con đường riêng sẽ kiến tạo dấu ấn khó phai.",
+        "lesson": "Giữ vững bản lĩnh tiên phong nhưng luôn biết lắng nghe, biến sức mạnh cá nhân thành nguồn cảm hứng cho tập thể.",
+        "artwork": {
+            "file": "./assets/images/numerology/01-tien-phong",
+            "focal_object": "Chim ưng vàng đậu trên cành tùng đón ánh mặt trời chu sa"
+        }
+    },
+    {
+        "id": "02",
+        "slug": "02-hai-hoa",
+        "number": 2,
+        "root_number": 2,
+        "roman_numeral": "II",
+        "letters": ["B", "K", "T"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "HÀI HÒA",
+        "archetype": "Người Kết Nối",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "vesica_piscis_circle",
+        "keywords": ["THẤU CẢM", "TRỰC GIÁC", "HỢP TÁC", "DỊU DÀNG"],
+        "couplet": {
+            "opening": "LẮNG NGHE SÂU SẮC",
+            "closing": "GẮN KẾT AN HÒA"
+        },
+        "description": "Ánh trăng dịu hiền sở hữu trực giác tinh tế và trái tim đồng điệu. Sự mềm mỏng đúng lúc là nhịp cầu hóa giải mọi cách ngăn.",
+        "lesson": "Tin tưởng vào tiếng nói trực giác và giữ vững ranh giới bản thân, để lòng vị tha luôn song hành cùng sự tự tôn.",
+        "artwork": {
+            "file": "./assets/images/numerology/02-hai-hoa",
+            "focal_object": "Đôi hạc trắng đối xứng bên hoa sen hồng nhạt"
+        }
+    },
+    {
+        "id": "03",
+        "slug": "03-sang-tao",
+        "number": 3,
+        "root_number": 3,
+        "roman_numeral": "III",
+        "letters": ["C", "L", "U"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "SÁNG TẠO",
+        "archetype": "Người Truyền Cảm Hứng",
+        "planet": "Sao Mộc",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "triangle_stripes_circle",
+        "keywords": ["SÁNG TẠO", "LẠC QUAN", "GIAO TIẾP", "NGHỆ THUẬT"],
+        "couplet": {
+            "opening": "NGÔN TỪ TỎA SÁNG",
+            "closing": "CẢM HỨNG SÁNG TẠO"
+        },
+        "description": "Tâm hồn giàu trí tưởng tượng, lan tỏa niềm vui bằng ngôn từ. Biến cảm xúc thành giá trị thực tế sẽ mở rộng ảnh hưởng bền lâu.",
+        "lesson": "Khơi mở nguồn cảm hứng mỗi ngày, rèn luyện sự tập trung và hoàn thiện từng ý tưởng đến nơi đến chốn.",
+        "artwork": {
+            "file": "./assets/images/numerology/03-sang-tao",
+            "focal_object": "Chim hót đậu cành hoa đào cùng đàn tỳ bà cổ trên mây lành"
+        }
+    },
+    {
+        "id": "04",
+        "slug": "04-vung-chai",
+        "number": 4,
+        "root_number": 4,
+        "roman_numeral": "IV",
+        "letters": ["D", "M", "V"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "VỮNG CHÃI",
+        "archetype": "Người Kiến Tạo",
+        "planet": "Sao Thiên Vương",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "square_cross_circle",
+        "keywords": ["KỶ LUẬT", "THỰC TẾ", "NỀN TẢNG", "BỀN BỈ"],
+        "couplet": {
+            "opening": "NỀN MÓNG VỮNG VÀNG",
+            "closing": "KIẾN TẠO TRƯỜNG TỒN"
+        },
+        "description": "Tư duy mạch lạc, tận tụy dựng xây thành quả từ từng viên gạch nhỏ. Sự kiên trì và trật tự tạo nên điểm tựa tin cậy cho mọi người.",
+        "lesson": "Giữ vững kỷ luật nhưng mở lòng trước những đổi mới, cho phép bản thân linh hoạt để không tự bó buộc trong khuôn mẫu.",
+        "artwork": {
+            "file": "./assets/images/numerology/04-vung-chai",
+            "focal_object": "Đình gỗ lục giác trên bệ đá khắc cùng đôi cây tùng cổ"
+        }
+    },
+    {
+        "id": "05",
+        "slug": "05-tu-do",
+        "number": 5,
+        "root_number": 5,
+        "roman_numeral": "V",
+        "letters": ["E", "N", "W"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "TỰ DO",
+        "archetype": "Người Khám Phá",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "pentagram_circle",
+        "keywords": ["LINH HOẠT", "TRẢI NGHIỆM", "BỨT PHÁ", "PHIÊU LƯU"],
+        "couplet": {
+            "opening": "VƯỢT MỌI GIỚI HẠN",
+            "closing": "CHUYỂN DỊCH LINH HOẠT"
+        },
+        "description": "Cánh gió tự do mang khao khát trải nghiệm và thích nghi nhạy bén. Mỗi hành trình mới đều mang đến góc nhìn rộng mở và sức sống tươi mới.",
+        "lesson": "Xây dựng tự do đích thực trên nền tảng tự chủ, học cách cam kết với mục tiêu cốt lõi giữa muôn vàn lựa chọn.",
+        "artwork": {
+            "file": "./assets/images/numerology/05-tu-do",
+            "focal_object": "Thuyền buồm gỗ lướt sóng cùng chim én"
+        }
+    },
+    {
+        "id": "06",
+        "slug": "06-yeu-thuong",
+        "number": 6,
+        "root_number": 6,
+        "roman_numeral": "VI",
+        "letters": ["F", "O", "X"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "YÊU THƯƠNG",
+        "archetype": "Người Chữa Lành",
+        "planet": "Sao Kim",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "hexagram_circle",
+        "keywords": ["CHĂM SÓC", "TRÁCH NHIỆM", "THẨM MỸ", "CHỮA LÀNH"],
+        "couplet": {
+            "opening": "TRÁI TIM ẤM ÁP",
+            "closing": "NUÔI DƯỠNG BÌNH AN"
+        },
+        "description": "Vòng tay ân cần giàu lòng trắc ẩn và cảm quan thẩm mỹ tinh tế. Bạn kiến tạo không gian an yên để tình thân và cái đẹp cùng đơm hoa.",
+        "lesson": "Chăm sóc chính mình trước khi bao bọc người khác, trao đi yêu thương bằng sự tôn trọng thay vì lo âu kiểm soát.",
+        "artwork": {
+            "file": "./assets/images/numerology/06-yeu-thuong",
+            "focal_object": "Đôi uyên ương bên khóm mẫu đơn hồng và cành đào chín"
+        }
+    },
+    {
+        "id": "07",
+        "slug": "07-tri-tue",
+        "number": 7,
+        "root_number": 7,
+        "roman_numeral": "VII",
+        "letters": ["G", "P", "Y"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "TRÍ TUỆ",
+        "archetype": "Người Tìm Chân Lý",
+        "planet": "Sao Hải Vương",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "heptagram_circle",
+        "keywords": ["CHIÊM NGHIỆM", "PHÂN TÍCH", "CHÂN LÝ", "HUYỀN HỌC"],
+        "couplet": {
+            "opening": "TĨNH TÂM NGỘ ĐẠO",
+            "closing": "SOI THẤU CHÂN LÝ"
+        },
+        "description": "Ánh đèn tĩnh lặng hướng vào chiều sâu tri thức và bản chất vạn vật. Những khoảng lặng chiêm nghiệm giúp bạn nhìn thấu điều người khác bỏ qua.",
+        "lesson": "Mở lòng sẻ chia tri thức và cảm xúc với đời, để trí tuệ không khép kín trong cô độc mà trở thành ánh sáng dẫn đường.",
+        "artwork": {
+            "file": "./assets/images/numerology/07-tri-tue",
+            "focal_object": "Cuộn thư cổ, đèn lồng gỗ ấm, ấm trà men ngọc và nhành trúc"
+        }
+    },
+    {
+        "id": "08",
+        "slug": "08-thinh-vuong",
+        "number": 8,
+        "root_number": 8,
+        "roman_numeral": "VIII",
+        "letters": ["H", "Q", "Z"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "THỊNH VƯỢNG",
+        "archetype": "Người Làm Chủ",
+        "planet": "Sao Thổ",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "octagram_circle",
+        "keywords": ["QUYỀN LỰC", "ĐIỀU HÀNH", "THÀNH TỰU", "NHÂN QUẢ"],
+        "couplet": {
+            "opening": "TẦM NHÌN CHIẾN LƯỢC",
+            "closing": "LÀM CHỦ THỊNH VƯỢNG"
+        },
+        "description": "Bản lĩnh điều hành sắc bén cùng tư duy kiến tạo giá trị vật chất lớn lao. Hiểu rõ quy luật nhân quả giúp bạn xây dựng sự sung túc bền lâu.",
+        "lesson": "Cân bằng giữa tham vọng vật chất và sự bình an nội tâm, dùng nguồn lực mình tạo ra để phụng sự giá trị chính trực.",
+        "artwork": {
+            "file": "./assets/images/numerology/08-thinh-vuong",
+            "focal_object": "Rồng vàng uốn dáng vô cực ngậm minh châu giữa tầng mây cổ"
+        }
+    },
+    {
+        "id": "09",
+        "slug": "09-phung-su",
+        "number": 9,
+        "root_number": 9,
+        "roman_numeral": "IX",
+        "letters": ["I", "R"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "PHỤNG SỰ",
+        "archetype": "Người Phụng Sự",
+        "planet": "Sao Hỏa",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "enneagram_circle",
+        "keywords": ["BÁC ÁI", "BAO DUNG", "HOÀN THIỆN", "LÝ TƯỞNG"],
+        "couplet": {
+            "opening": "TẤM LÒNG BAO DUNG",
+            "closing": "KHÉP VÒNG VIÊN MÃN"
+        },
+        "description": "Trái tim nhân văn hội tụ trải nghiệm sâu sắc và tầm nhìn vì cộng đồng. Sự vị tha chín chắn giúp bạn chuyển hóa nỗi đau thành ánh sáng chữa lành.",
+        "lesson": "Học cách buông nhẹ quá khứ và chấp nhận sự bất toàn của cuộc sống, để tâm hồn thanh thản bước vào chu kỳ mới.",
+        "artwork": {
+            "file": "./assets/images/numerology/09-phung-su",
+            "focal_object": "Đóa sen đỏ nhũ vàng nở rộ cùng cành liễu và hạc trắng cất cánh"
+        }
+    },
+    {
+        "id": "10",
+        "slug": "10-khoi-nguyen",
+        "number": 10,
+        "root_number": 1,
+        "roman_numeral": "X",
+        "letters": ["A", "J", "S"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "KHỞI NGUYÊN",
+        "archetype": "Bánh Xe Vận Mệnh",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "wheel_ten_spokes_circle",
+        "keywords": ["VẬN HỘI", "LINH HOẠT", "TỰ TIN", "BỨT PHÁ"],
+        "couplet": {
+            "opening": "THUẬN THỜI XOAY CHUYỂN",
+            "closing": "KHỞI ĐẦU VẬN MỚI"
+        },
+        "description": "Năng lượng khởi đầu ở tầm cao mới với khả năng xoay chuyển linh hoạt. Nắm bắt đúng thời cơ giúp bạn mở ra những bước ngoặt rực rỡ.",
+        "lesson": "Giữ tâm thế chủ động và khiêm nhường trước mọi thăng trầm, để may mắn trở thành thành quả của bản lĩnh vững vàng.",
+        "artwork": {
+            "file": "./assets/images/numerology/10-khoi-nguyen",
+            "focal_object": "Bánh xe thiên văn mười nan gỗ vàng cùng hoa cúc và cá chép vượt mây"
+        }
+    },
+    {
+        "id": "11",
+        "slug": "11-truc-giac",
+        "number": 11,
+        "root_number": 2,
+        "roman_numeral": "XI",
+        "letters": ["B", "K", "T"],
+        "group": "Số Bậc Thầy",
+        "group_code": "master",
+        "title": "TRỰC GIÁC",
+        "archetype": "Người Khai Sáng",
+        "planet": "Sao Thiên Vương",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "twin_pillars_rays_circle",
+        "keywords": ["KHAI SÁNG", "NHẠY BÉN", "TÂM LINH", "TRUYỀN LỬA"],
+        "couplet": {
+            "opening": "TRỰC GIÁC KHAI MINH",
+            "closing": "ÁNH SÁNG DẪN ĐƯỜNG"
+        },
+        "description": "Tần số bậc thầy sở hữu trực giác sắc bén và chiều sâu tâm linh hiếm có. Bạn truyền cảm hứng bằng ánh sáng tỉnh thức và lòng thấu cảm.",
+        "lesson": "Gìn giữ sự bình an nội tâm và neo mình vào thực tế, biến những linh cảm tinh tế thành giá trị phụng sự đời sống.",
+        "artwork": {
+            "file": "./assets/images/numerology/11-truc-giac",
+            "focal_object": "Đôi đèn lồng gỗ đối xứng tỏa sáng giữa hai đỉnh núi ngọc bích"
+        }
+    },
+    {
+        "id": "12",
+        "slug": "12-goc-nhin",
+        "number": 12,
+        "root_number": 3,
+        "roman_numeral": "XII",
+        "letters": ["C", "L", "U"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "GÓC NHÌN",
+        "archetype": "Người Chuyển Đổi",
+        "planet": "Sao Mộc",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "dodecagram_circle",
+        "keywords": ["ĐA CHIỀU", "HIỂU BIẾT", "BIỂU ĐẠT", "CHUYỂN ĐỔI"],
+        "couplet": {
+            "opening": "ĐỔI GÓC NHÌN MỚI",
+            "closing": "KHAI MỞ TRÍ TÂM"
+        },
+        "description": "Sự kết hợp hài hòa giữa ý chí độc lập và nét tinh tế trong giao tiếp. Khi dám nhìn sự việc từ góc độ mới, bạn tìm thấy lối đi sáng tạo.",
+        "lesson": "Tránh để mình mắc kẹt trong tâm thế hy sinh thụ động, hãy chủ động chuyển hóa trải nghiệm thành trí tuệ sống động.",
+        "artwork": {
+            "file": "./assets/images/numerology/12-goc-nhin",
+            "focal_object": "Hỗn thiên nghi đồng cổ bên cành mai nở và chim xanh vàng"
+        }
+    },
+    {
+        "id": "13",
+        "slug": "13-chuyen-hoa",
+        "number": 13,
+        "root_number": 4,
+        "roman_numeral": "XIII",
+        "letters": ["D", "M", "V"],
+        "group": "Nợ Nghiệp",
+        "group_code": "karmic_debt",
+        "title": "CHUYỂN HÓA",
+        "archetype": "Người Tái Sinh",
+        "planet": "Sao Thổ",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "phoenix_diamond_circle",
+        "keywords": ["BỀN BỈ", "TÁI SINH", "KỶ LUẬT", "VƯỢT KHÓ"],
+        "couplet": {
+            "opening": "RÈN MÀI NÊN NGỌC",
+            "closing": "TÁI SINH VỮNG BỀN"
+        },
+        "description": "Hành trình tôi luyện qua thử thách để kiến tạo nền móng vững chãi thật sự. Nỗ lực bền bỉ và trung thực sẽ mở khóa sức mạnh chuyển hóa lớn lao.",
+        "lesson": "Không tìm lối tắt trước khó khăn, kiên trì hoàn thiện từng việc nhỏ bằng sự tập trung và tinh thần trách nhiệm cao.",
+        "artwork": {
+            "file": "./assets/images/numerology/13-chuyen-hoa",
+            "focal_object": "Gốc mai cổ nảy hoa thắm và chồi biếc bên khối ngọc thô chạm khắc"
+        }
+    },
+    {
+        "id": "14",
+        "slug": "14-tiet-do",
+        "number": 14,
+        "root_number": 5,
+        "roman_numeral": "XIV",
+        "letters": ["E", "N", "W"],
+        "group": "Nợ Nghiệp",
+        "group_code": "karmic_debt",
+        "title": "TIẾT ĐỘ",
+        "archetype": "Người Giữ Nhịp",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "hourglass_balance_circle",
+        "keywords": ["CÂN BẰNG", "TỰ CHỦ", "THÍCH NGHI", "CHỪNG MỰC"],
+        "couplet": {
+            "opening": "TỰ DO CÓ ĐỘ",
+            "closing": "TÂM TĨNH HÒA DÒNG"
+        },
+        "description": "Bài học sâu sắc về việc làm chủ khát khao trải nghiệm và cảm xúc nhất thời. Khi biết giữ nhịp cân bằng, sự linh hoạt sẽ trở thành lợi thế lớn.",
+        "lesson": "Rèn luyện đức tính chừng mực và kiên định với cam kết, để quyền tự do luôn đi cùng sự tỉnh táo và bền vững.",
+        "artwork": {
+            "file": "./assets/images/numerology/14-tiet-do",
+            "focal_object": "Đôi bình gốm men ngọc rót dòng nước ngọc lam hòa quyện giữa lá lau"
+        }
+    },
+    {
+        "id": "15",
+        "slug": "15-quyen-ru",
+        "number": 15,
+        "root_number": 6,
+        "roman_numeral": "XV",
+        "letters": ["F", "O", "X"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "QUYẾN RŨ",
+        "archetype": "Người Giả Kim",
+        "planet": "Sao Kim",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "pentadecagram_rose_circle",
+        "keywords": ["THU HÚT", "THẨM MỸ", "HÀO PHÓNG", "GẮN KẾT"],
+        "couplet": {
+            "opening": "TỎA HƯƠNG DUYÊN LÀNH",
+            "closing": "GIỮ TRỌN CHÂN TÌNH"
+        },
+        "description": "Sức hút tự nhiên hòa quyện giữa nét phóng khoáng và trái tim giàu yêu thương. Bạn biết cách mang lại niềm vui, sự sung túc và hơi ấm cho mọi người.",
+        "lesson": "Dùng sức hấp dẫn và tài năng của mình để vun đắp mối quan hệ chân thành, tránh để bản thân vướng vào hào nhoáng phù du.",
+        "artwork": {
+            "file": "./assets/images/numerology/15-quyen-ru",
+            "focal_object": "Gương đồng cổ tròn giữa hoa mẫu đơn, cành lựu đỏ và bướm vàng"
+        }
+    },
+    {
+        "id": "16",
+        "slug": "16-tinh-thuc",
+        "number": 16,
+        "root_number": 7,
+        "roman_numeral": "XVI",
+        "letters": ["G", "P", "Y"],
+        "group": "Nợ Nghiệp",
+        "group_code": "karmic_debt",
+        "title": "TỈNH THỨC",
+        "archetype": "Người Phá Chấp",
+        "planet": "Sao Hải Vương",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "prism_light_circle",
+        "keywords": ["KHIÊM HẠ", "GIÁC NGỘ", "CHÂN THẬT", "BUÔNG BỎ"],
+        "couplet": {
+            "opening": "BUÔNG CHẤP KIẾN TÁNH",
+            "closing": "TỈNH THỨC AN NHIÊN"
+        },
+        "description": "Hành trình gột rửa bản ngã để chạm tới sự thật thuần khiết bên trong tâm hồn. Sau mỗi lần buông bỏ điều cũ kỹ, trí tuệ và bình an lại nở rộ.",
+        "lesson": "Nuôi dưỡng lòng khiêm nhường và sống chân thật với chính mình, xem mọi biến cố là cánh cửa mở ra sự trưởng thành sâu sắc.",
+        "artwork": {
+            "file": "./assets/images/numerology/16-tinh-thuc",
+            "focal_object": "Ngôi chùa gỗ trên núi đón tia nắng bình minh cùng đóa sen trắng"
+        }
+    },
+    {
+        "id": "17",
+        "slug": "17-tinh-tu",
+        "number": 17,
+        "root_number": 8,
+        "roman_numeral": "XVII",
+        "letters": ["H", "Q", "Z"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "TINH TÚ",
+        "archetype": "Ngôi Sao Dẫn Lối",
+        "planet": "Sao Thổ",
+        "element": "Kim",
+        "element_key": "metal",
+        "geometry": "eight_point_star_circle",
+        "keywords": ["DI SẢN", "TẦM NHÌN", "BỀN VỮNG", "HY VỌNG"],
+        "couplet": {
+            "opening": "TINH TÚ SOI ĐƯỜNG",
+            "closing": "LƯU DANH BỀN VỮNG"
+        },
+        "description": "Sự giao thoa tuyệt đẹp giữa trực giác minh triết và năng lực kiến tạo thành tựu lớn. Bạn hướng tới những giá trị trường tồn vượt qua giới hạn thời gian.",
+        "lesson": "Kết hợp tầm nhìn tinh thần cao đẹp với bước đi thực tế chắc chắn, để thành công cá nhân trở thành di sản lành cho cộng đồng.",
+        "artwork": {
+            "file": "./assets/images/numerology/17-tinh-tu",
+            "focal_object": "Ngôi sao tám cánh nhũ vàng soi bóng bát sứ men ngọc cùng hạc trắng"
+        }
+    },
+    {
+        "id": "18",
+        "slug": "18-anh-trang",
+        "number": 18,
+        "root_number": 9,
+        "roman_numeral": "XVIII",
+        "letters": ["I", "R"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "ÁNH TRĂNG",
+        "archetype": "Người Thấu Cảm",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "crescent_tide_circle",
+        "keywords": ["NHÂN VĂN", "SÂU LẮNG", "CHỮA LÀNH", "BAO DUNG"],
+        "couplet": {
+            "opening": "TÂM SÁNG NHƯ TRĂNG",
+            "closing": "VƯỢT SÓNG AN LÀNH"
+        },
+        "description": "Trái tim sâu lắng mang lý tưởng phụng sự và sức mạnh nội lực vượt qua sóng gió. Sự điềm tĩnh trước biến động giúp bạn thấu hiểu lòng người sâu sắc.",
+        "lesson": "Giữ sự tỉnh táo trước những ảo ảnh cảm xúc, dùng lòng bao dung và sự chính trực để dẫn lối bản thân qua thử thách.",
+        "artwork": {
+            "file": "./assets/images/numerology/18-anh-trang",
+            "focal_object": "Trăng lưỡi liềm vàng nhạt trên sóng chàm cùng cá chép vượt sóng và hoa nhài"
+        }
+    },
+    {
+        "id": "19",
+        "slug": "19-tu-chu",
+        "number": 19,
+        "root_number": 1,
+        "roman_numeral": "XIX",
+        "letters": ["A", "J", "S"],
+        "group": "Nợ Nghiệp",
+        "group_code": "karmic_debt",
+        "title": "TỰ CHỦ",
+        "archetype": "Người Độc Hành",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "solar_crown_circle",
+        "keywords": ["ĐỘC LẬP", "CHIA SẺ", "VỮNG VÀNG", "ÁNH DƯƠNG"],
+        "couplet": {
+            "opening": "TỰ LỰC VƯƠN CAO",
+            "closing": "MỞ LÒNG ĐỒNG HÀNH"
+        },
+        "description": "Nguồn sáng rực rỡ của bản lĩnh tự cường kết hợp cùng trái tim rộng mở nhân ái. Bạn trưởng thành trọn vẹn nhất khi biết đứng vững mà vẫn sẵn lòng đón nhận.",
+        "lesson": "Học cách mở lòng nhờ cậy và sẻ chia đúng lúc, nhận ra rằng sự gắn kết chân thành không làm giảm đi sức mạnh độc lập.",
+        "artwork": {
+            "file": "./assets/images/numerology/19-tu-chu",
+            "focal_object": "Hoa hướng dương hướng mặt trời chu sa cùng giỏ tre đựng quýt chín vàng"
+        }
+    },
+    {
+        "id": "20",
+        "slug": "20-thuc-tinh",
+        "number": 20,
+        "root_number": 2,
+        "roman_numeral": "XX",
+        "letters": ["B", "K", "T"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "THỨC TỈNH",
+        "archetype": "Người Gọi Hồn",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "double_crescent_circle",
+        "keywords": ["TÁI KHỞI", "NHẠY CẢM", "HÒA ĐIỆU", "LẮNG NGHE"],
+        "couplet": {
+            "opening": "CHUÔNG NGÂN THỨC TỈNH",
+            "closing": "HÒA NHỊP YÊU THƯƠNG"
+        },
+        "description": "Năng lượng lắng đọng giúp bạn cảm nhận rõ tiếng gọi nội tâm và chu kỳ đổi mới. Sự tinh tế trong quan sát mở ra những mối duyên hợp tác đầy tin cậy.",
+        "lesson": "Kiên nhẫn lắng nghe nhịp điệu tự nhiên của cuộc sống, can đảm đáp lại tiếng gọi đổi mới thay vì chần chừ trong lo âu.",
+        "artwork": {
+            "file": "./assets/images/numerology/20-thuc-tinh",
+            "focal_object": "Chuông đồng cổ treo trên cành liễu rủ tỏa gợn sóng âm nhũ vàng"
+        }
+    },
+    {
+        "id": "21",
+        "slug": "21-vien-man",
+        "number": 21,
+        "root_number": 3,
+        "roman_numeral": "XXI",
+        "letters": ["C", "L", "U"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "VIÊN MÃN",
+        "archetype": "Người Tỏa Sáng",
+        "planet": "Sao Mộc",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "laurel_world_circle",
+        "keywords": ["THÀNH TỰU", "TỎA SÁNG", "HỘI TỤ", "HẠNH PHÚC"],
+        "couplet": {
+            "opening": "TÀI HOA HỘI TỤ",
+            "closing": "VIÊN MÃN BỐN PHƯƠNG"
+        },
+        "description": "Vương miện của niềm vui sáng tạo, sự hòa hợp và thành quả viên mãn sau nỗ lực. Bạn dễ dàng kết nối với thế giới rộng lớn bằng phong thái tự tin, duyên dáng.",
+        "lesson": "Trân trọng thành tựu đã đạt được bằng lòng biết ơn, giữ sự tập trung bền bỉ để niềm vui sáng tạo không bị phân tán.",
+        "artwork": {
+            "file": "./assets/images/numerology/21-vien-man",
+            "focal_object": "Vòng hoa mai và lá ô liu ôm ngọc bích buộc dải lụa chu sa"
+        }
+    },
+    {
+        "id": "22",
+        "slug": "22-dai-kien-tao",
+        "number": 22,
+        "root_number": 4,
+        "roman_numeral": "XXII",
+        "letters": ["D", "M", "V"],
+        "group": "Số Bậc Thầy",
+        "group_code": "master",
+        "title": "ĐẠI KIẾN TẠO",
+        "archetype": "Bậc Thầy Kiến Tạo",
+        "planet": "Sao Thiên Vương",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "metatron_square_circle",
+        "keywords": ["TẦM VÓC", "HIỆN THỰC", "DI SẢN", "KỶ CƯƠNG"],
+        "couplet": {
+            "opening": "TẦM NHÌN VẠN DẶM",
+            "closing": "DỰNG XÂY ĐẠI NGHIỆP"
+        },
+        "description": "Năng lượng bậc thầy hợp nhất tầm nhìn vĩ đại với khả năng tổ chức thực tiễn sắc bén. Bạn sinh ra để biến những giấc mơ lớn thành công trình bền vững cho đời.",
+        "lesson": "Chia mục tiêu vĩ đại thành từng nền móng khả thi mỗi ngày, giữ tâm bình tĩnh để áp lực lớn không lấn át niềm tin.",
+        "artwork": {
+            "file": "./assets/images/numerology/22-dai-kien-tao",
+            "focal_object": "Cầu đá vòm chạm khắc nối hai vách núi bách cổ dẫn tới lầu gỗ cổ điển"
+        }
+    },
+    {
+        "id": "23",
+        "slug": "23-da-tai",
+        "number": 23,
+        "root_number": 5,
+        "roman_numeral": "XXIII",
+        "letters": ["E", "N", "W"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "ĐA TÀI",
+        "archetype": "Sứ Giả May Mắn",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "winged_pentagon_circle",
+        "keywords": ["NHANH NHẠY", "DUYÊN DÁNG", "KẾT NỐI", "QUÝ NHÂN"],
+        "couplet": {
+            "opening": "KHÉO LÉO GIAO HÒA",
+            "closing": "VẬN LÀNH TỰ ĐẾN"
+        },
+        "description": "Ngôi sao của sự linh hoạt, khả năng ứng biến sắc sảo và sức hút tự nhiên trong giao tiếp. Sự tinh tế giúp bạn dễ dàng gặp quý nhân nâng bước.",
+        "lesson": "Dùng sự nhạy bén để xây dựng giá trị chiều sâu thay vì chỉ lướt qua bề nổi, giữ chữ tín trong mọi mối hợp tác.",
+        "artwork": {
+            "file": "./assets/images/numerology/23-da-tai",
+            "focal_object": "Chim trĩ vàng đậu cạnh ống tiêu ngọc bích buộc tua đỏ trên mây lành"
+        }
+    },
+    {
+        "id": "24",
+        "slug": "24-an-gia",
+        "number": 24,
+        "root_number": 6,
+        "roman_numeral": "XXIV",
+        "letters": ["F", "O", "X"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "AN GIA",
+        "archetype": "Người Vun Đắp",
+        "planet": "Sao Kim",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "hearth_hexagram_circle",
+        "keywords": ["HÒA THUẬN", "CHUNG THỦY", "SUNG TÚC", "CHỞ CHE"],
+        "couplet": {
+            "opening": "GIA ĐẠO YÊN VUI",
+            "closing": "PHÚC LỘC BỀN LÂU"
+        },
+        "description": "Năng lượng ấm áp kết hợp giữa lòng thấu cảm và tinh thần xây dựng bền vững. Bạn có duyên vun đắp tổ ấm hài hòa và sự nghiệp ổn định lâu dài.",
+        "lesson": "Nuôi dưỡng tình thân bằng sự tin tưởng rộng mở, tránh để những lo toan nhỏ nhặt làm nặng nề niềm vui sum vầy.",
+        "artwork": {
+            "file": "./assets/images/numerology/24-an-gia",
+            "focal_object": "Đôi chim én bên cành hoa mộc lan trắng và nút kết đồng tâm lụa đỏ"
+        }
+    },
+    {
+        "id": "25",
+        "slug": "25-minh-triet",
+        "number": 25,
+        "root_number": 7,
+        "roman_numeral": "XXV",
+        "letters": ["G", "P", "Y"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "MINH TRIẾT",
+        "archetype": "Người Thấu Thị",
+        "planet": "Sao Hải Vương",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "compass_heptagram_circle",
+        "keywords": ["TRẢI NGHIỆM", "SÂU SẮC", "TINH TƯỜNG", "ĐỊNH TÂM"],
+        "couplet": {
+            "opening": "TỪNG TRẢI NÊN KHÔN",
+            "closing": "MINH TÂM KIẾN ĐẠO"
+        },
+        "description": "Trí tuệ được chưng cất qua những trải nghiệm thực tế và khả năng quan sát tinh tường. Càng đi qua nhiều thử thách, trực giác của bạn càng sáng rõ.",
+        "lesson": "Đừng vội phán xét qua ấn tượng ban đầu, hãy lắng nghe cả lý trí lẫn cảm nhận tĩnh lặng trước mỗi quyết định lớn.",
+        "artwork": {
+            "file": "./assets/images/numerology/25-minh-triet",
+            "focal_object": "La bàn đồng ngọc cổ bên nhành hoa lan quân tử và gợn nước trong"
+        }
+    },
+    {
+        "id": "26",
+        "slug": "26-chu-dao",
+        "number": 26,
+        "root_number": 8,
+        "roman_numeral": "XXVI",
+        "letters": ["H", "Q", "Z"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "CHỦ ĐẠO",
+        "archetype": "Người Quản Trị",
+        "planet": "Sao Thổ",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "scales_octagram_circle",
+        "keywords": ["ĐỒNG HÀNH", "TRÁCH NHIỆM", "TÀI CHÍNH", "MINH BẠCH"],
+        "couplet": {
+            "opening": "CÔNG MINH ĐIỀU ĐỘ",
+            "closing": "HỢP LỰC THÀNH CÔNG"
+        },
+        "description": "Bản lĩnh quản trị tài chính đi cùng tấm lòng trách nhiệm với cộng sự và gia đình. Bạn tỏa sáng khi biết chọn đúng người đồng hành và minh bạch lợi ích.",
+        "lesson": "Sáng suốt trong các cam kết hợp tác, không để cả nể hay cảm tính chi phối những nguyên tắc nền tảng của sự bền vững.",
+        "artwork": {
+            "file": "./assets/images/numerology/26-chu-dao",
+            "focal_object": "Bàn tính gỗ cổ, cân đồng thau và cành hồng chín vàng trên mây nhạt"
+        }
+    },
+    {
+        "id": "27",
+        "slug": "27-uy-duc",
+        "number": 27,
+        "root_number": 9,
+        "roman_numeral": "XXVII",
+        "letters": ["I", "R"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "UY ĐỨC",
+        "archetype": "Người Dẫn Đạo",
+        "planet": "Sao Hỏa",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "scepter_enneagram_circle",
+        "keywords": ["QUYỀN TRƯỢNG", "CHÍNH TRỰC", "TRÍ LỰC", "NHÂN ÁI"],
+        "couplet": {
+            "opening": "ĐỨC SÁNG UY NGHIÊM",
+            "closing": "DẪN LỐI QUẦN ANH"
+        },
+        "description": "Biểu tượng của quyền trượng trí tuệ và lòng nhân ái sâu rộng. Bạn thuyết phục người khác không bằng áp đặt mà bằng tầm nhìn minh bạch và phẩm hạnh.",
+        "lesson": "Kiên định tin vào trực giác lương thiện của mình, dùng vị thế ảnh hưởng để nâng đỡ và khai phóng tiềm năng cho tập thể.",
+        "artwork": {
+            "file": "./assets/images/numerology/27-uy-duc",
+            "focal_object": "Ngọc như ý chạm vân mây buộc tua chu sa bên đóa hoa thủy tiên trắng"
+        }
+    },
+    {
+        "id": "28",
+        "slug": "28-ban-linh",
+        "number": 28,
+        "root_number": 1,
+        "roman_numeral": "XXVIII",
+        "letters": ["A", "J", "S"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "BẢN LĨNH",
+        "archetype": "Người Vượt Sóng",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "sun_bastion_circle",
+        "keywords": ["KIÊN CƯỜNG", "TÁI THIẾT", "ĐỘC LẬP", "QUYẾT ĐOÁN"],
+        "couplet": {
+            "opening": "VỮNG TÂM TRƯỚC SÓNG",
+            "closing": "TỰ CHỦ VƯƠN LÊN"
+        },
+        "description": "Ý chí kiên cường sẵn sàng đứng dậy mạnh mẽ sau mọi biến động để tái thiết từ gốc rễ. Sự kết hợp giữa mềm mỏng và quyết đoán tạo nên sức bật hiếm có.",
+        "lesson": "Rút kinh nghiệm từ những va vấp cũ bằng tâm thế bình tĩnh, chủ động nắm giữ vận mệnh thay vì trông chờ vào hoàn cảnh.",
+        "artwork": {
+            "file": "./assets/images/numerology/28-ban-linh",
+            "focal_object": "Hạc đầu đỏ đứng vững trên tảng đá Thái Hồ bên khóm trúc chịu gió và sóng cuộn"
+        }
+    },
+    {
+        "id": "29",
+        "slug": "29-cam-ung",
+        "number": 29,
+        "root_number": 2,
+        "roman_numeral": "XXIX",
+        "letters": ["B", "K", "T"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "CẢM ỨNG",
+        "archetype": "Người Hòa Giải",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "taiji_crescent_circle",
+        "keywords": ["LINH CẢM", "CÂN BẰNG", "NHỊP CẦU", "NHÂN HẬU"],
+        "couplet": {
+            "opening": "ÂM DƯƠNG HÒA ĐIỆU",
+            "closing": "CẢM ỨNG LÒNG NGƯỜI"
+        },
+        "description": "Tần số trực giác cực nhạy mang âm hưởng của số bậc thầy 11 ẩn sâu bên trong. Bạn có năng lực dung hòa những thái cực đối lập bằng sự thấu hiểu chân thành.",
+        "lesson": "Giữ ranh giới cảm xúc trong sáng để không hấp thụ nỗi bất an của người khác, chuyển hóa nhạy cảm thành sự tỉnh thức dịu dàng.",
+        "artwork": {
+            "file": "./assets/images/numerology/29-cam-ung",
+            "focal_object": "Đôi cá chép bạc vàng bơi vòng hài hòa dưới chùm hoa tử đằng ánh trăng"
+        }
+    },
+    {
+        "id": "30",
+        "slug": "30-tai-hoa",
+        "number": 30,
+        "root_number": 3,
+        "roman_numeral": "XXX",
+        "letters": ["C", "L", "U"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "TÀI HOA",
+        "archetype": "Người Điểm Sắc",
+        "planet": "Sao Mộc",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "radiant_triad_circle",
+        "keywords": ["BIỂU ĐẠT", "HOẠT NGÔN", "TỎA SÁNG", "PHÓNG KHOÁNG"],
+        "couplet": {
+            "opening": "DIỆU ÂM KHAI Ý",
+            "closing": "TÀI HOA ĐIỂM SẮC"
+        },
+        "description": "Nguồn sáng sáng tạo được khuếch đại trọn vẹn qua năng khiếu ngôn từ, nghệ thuật và tư duy phóng khoáng. Sự hiện diện của bạn làm bừng sáng mọi không gian.",
+        "lesson": "Nuôi dưỡng chiều sâu nội lực song hành với tài hoa bên ngoài, dùng lời nói và tác phẩm để gieo niềm tin tích cực cho đời.",
+        "artwork": {
+            "file": "./assets/images/numerology/30-tai-hoa",
+            "focal_object": "Đàn cổ cầm gỗ trầm buộc dây lụa bên khóm lan vàng rực rỡ trên mây cổ"
+        }
+    },
+    {
+        "id": "31",
+        "slug": "31-kien-lap",
+        "number": 31,
+        "root_number": 4,
+        "roman_numeral": "XXXI",
+        "letters": ["D", "M", "V"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "KIẾN LẬP",
+        "archetype": "Người Sáng Chế",
+        "planet": "Sao Thiên Vương",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "architect_square_circle",
+        "keywords": ["ĐỔI MỚI", "KẾT CẤU", "SÁNG CHẾ", "CHUẨN MỰC"],
+        "couplet": {
+            "opening": "Ý TƯỞNG KHAI HÌNH",
+            "closing": "KHUÔN PHÉP KIẾN LẬP"
+        },
+        "description": "Sự kết hợp độc đáo giữa trí tưởng tượng sáng tạo, ý chí tiên phong và bàn tay tổ chức chuẩn mực. Bạn giỏi đưa những ý tưởng mới mẻ vào hệ thống vận hành thực tế.",
+        "lesson": "Kiên nhẫn chia sẻ tầm nhìn với đồng đội để tránh cảm giác đơn độc, biến sự khác biệt tư duy thành lợi thế kiến tạo đột phá.",
+        "artwork": {
+            "file": "./assets/images/numerology/31-kien-lap",
+            "focal_object": "Thước gỗ cổ, compa đồng và bản vẽ cuộn bên cành hoa trà my đỏ thắm"
+        }
+    },
+    {
+        "id": "32",
+        "slug": "32-lan-toa",
+        "number": 32,
+        "root_number": 5,
+        "roman_numeral": "XXXII",
+        "letters": ["E", "N", "W"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "LAN TỎA",
+        "archetype": "Người Truyền Tin",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "breeze_pentagram_circle",
+        "keywords": ["THUYẾT PHỤC", "DUYÊN DÁNG", "CỘNG ĐỒNG", "BIẾN HÓA"],
+        "couplet": {
+            "opening": "LỜI HAY KẾT BẠN",
+            "closing": "HƯƠNG THƠM LAN TỎA"
+        },
+        "description": "Năng lượng giao tiếp cuốn hút mang sức lan tỏa tự nhiên giữa đám đông và cộng đồng. Bạn truyền tải thông điệp nhẹ nhàng mà chạm sâu vào cảm xúc người nghe.",
+        "lesson": "Giữ lập trường vững vàng giữa muôn vàn ý kiến bên ngoài, để sức thuyết phục của bạn luôn bắt nguồn từ sự chân thành nhất quán.",
+        "artwork": {
+            "file": "./assets/images/numerology/32-lan-toa",
+            "focal_object": "Quạt lụa cổ vẽ sơn thủy bên cành hoa mộc tê vàng và cánh bướm nhẹ"
+        }
+    },
+    {
+        "id": "33",
+        "slug": "33-dai-tu-bi",
+        "number": 33,
+        "root_number": 6,
+        "roman_numeral": "XXXIII",
+        "letters": ["F", "O", "X"],
+        "group": "Số Bậc Thầy",
+        "group_code": "master",
+        "title": "ĐẠI TỪ BI",
+        "archetype": "Bậc Thầy Chữa Lành",
+        "planet": "Sao Kim",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "sacred_lotus_hexagram_circle",
+        "keywords": ["TỪ ÁI", "CHỮA LÀNH", "KHAI TÂM", "PHỤNG SỰ"],
+        "couplet": {
+            "opening": "TỪ TÂM VÔ LƯỢNG",
+            "closing": "CHỮA LÀNH NHÂN GIAN"
+        },
+        "description": "Tần số bậc thầy cao quý của tình yêu thương vô điều kiện, nghệ thuật truyền cảm hứng và sứ mệnh nâng đỡ cộng đồng. Sự hiện diện an hòa của bạn tự thân đã là liều thuốc chữa lành.",
+        "lesson": "Trao đi lòng từ ái bằng sự tỉnh táo và bền bỉ, luôn giữ bình năng lượng của chính mình đầy đặn trước khi sưởi ấm cho thế gian.",
+        "artwork": {
+            "file": "./assets/images/numerology/33-dai-tu-bi",
+            "focal_object": "Bình cam lồ men ngọc rót giọt sương sáng xuống sen trắng cùng phượng hoàng hiền hòa"
+        }
+    },
+    {
+        "id": "34",
+        "slug": "34-doc-dao",
+        "number": 34,
+        "root_number": 7,
+        "roman_numeral": "XXXIV",
+        "letters": ["G", "P", "Y"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "ĐỘC ĐÁO",
+        "archetype": "Người Định Hình",
+        "planet": "Sao Hải Vương",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "inkstone_heptagram_circle",
+        "keywords": ["CHUYÊN SÂU", "NGHIÊN CỨU", "KỶ CƯƠNG", "TINH XẢO"],
+        "couplet": {
+            "opening": "MÀI GIŨA TINH HOA",
+            "closing": "KHẮC GHI BẢN SẮC"
+        },
+        "description": "Sự kết hợp bền bỉ giữa tư duy sáng tạo, phương pháp chặt chẽ và chiều sâu nghiên cứu. Bạn chinh phục đỉnh cao bằng sự tinh xảo và dấu ấn riêng khó trộn lẫn.",
+        "lesson": "Kiên nhẫn nuôi dưỡng công trình của mình qua năm tháng, tránh nóng vội bỏ cuộc khi thành quả chưa kịp hiển lộ.",
+        "artwork": {
+            "file": "./assets/images/numerology/34-doc-dao",
+            "focal_object": "Nghiên mực đá cổ, bút lông thỏ và nhành tùng xanh trên mây nhạt"
+        }
+    },
+    {
+        "id": "35",
+        "slug": "35-but-toc",
+        "number": 35,
+        "root_number": 8,
+        "roman_numeral": "XXXV",
+        "letters": ["H", "Q", "Z"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "BỨT TỐC",
+        "archetype": "Người Đột Phá",
+        "planet": "Sao Thổ",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "chariot_octagram_circle",
+        "keywords": ["NĂNG ĐỘNG", "NHẠY BÉN", "THƯƠNG MẠI", "VƯỢT TRỘI"],
+        "couplet": {
+            "opening": "NHẠY BÉN THỜI CƠ",
+            "closing": "BỨT PHÁ THÀNH CÔNG"
+        },
+        "description": "Nguồn năng lượng dồi dào hội tụ óc sáng tạo, sự linh hoạt và nhạy bén trong kiến tạo thịnh vượng. Bạn dễ dàng xoay chuyển nguồn lực để mở ra cơ hội lớn.",
+        "lesson": "Kiểm soát nhịp độ đầu tư và cảm xúc nhất thời, dùng kế hoạch rõ ràng để biến đà tăng tốc thành thành tựu lâu dài.",
+        "artwork": {
+            "file": "./assets/images/numerology/35-but-toc",
+            "focal_object": "Tuấn mã màu hạt dẻ phi nước đại giữa dải mây vàng và đồng tiền cổ"
+        }
+    },
+    {
+        "id": "36",
+        "slug": "36-hien-dang",
+        "number": 36,
+        "root_number": 9,
+        "roman_numeral": "XXXVI",
+        "letters": ["I", "R"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "HIẾN DÂNG",
+        "archetype": "Người Truyền Đạo",
+        "planet": "Sao Hỏa",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "triad_enneagram_circle",
+        "keywords": ["NHÂN ÁI", "NGHỆ THUẬT", "PHỤNG SỰ", "CHỮA LÀNH"],
+        "couplet": {
+            "opening": "MỸ TÂM KHAI HÓA",
+            "closing": "HIẾN DÂNG AN LÀNH"
+        },
+        "description": "Tần số hài hòa bậc nhất của bộ ba 3–6–9, kết nối cái đẹp nghệ thuật với lòng vị tha sâu sắc. Bạn mang sức mạnh nâng đỡ tinh thần và đánh thức điều thiện lành.",
+        "lesson": "Trao đi lý tưởng cao đẹp bằng sự chân thành giản dị, giữ cho trái tim luôn ấm áp mà không bị kiệt sức vì ôm đồm.",
+        "artwork": {
+            "file": "./assets/images/numerology/36-hien-dang",
+            "focal_object": "Lư hương đồng cổ tỏa làn khói trầm uốn lượn bên đóa sen vàng"
+        }
+    },
+    {
+        "id": "37",
+        "slug": "37-toa-rang",
+        "number": 37,
+        "root_number": 1,
+        "roman_numeral": "XXXVII",
+        "letters": ["A", "J", "S"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "TỎA RẠNG",
+        "archetype": "Ngôi Sao Hoàng Kim",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "radiant_crown_circle",
+        "keywords": ["TỪ TÍNH", "TÌNH BẰNG HỮU", "CÁT TƯỜNG", "ĐỘC LẬP"],
+        "couplet": {
+            "opening": "NHÂN DUYÊN CÁT KHÁNH",
+            "closing": "TỎA RẠNG UY DANH"
+        },
+        "description": "Con số cát tường mang sức hút tự nhiên trong tình bằng hữu, cộng tác và sáng tạo độc lập. Bạn truyền cảm hứng mạnh mẽ và thường nhận được sự ủng hộ chân thành.",
+        "lesson": "Trân trọng những mối duyên lành đến với mình bằng sự trung thành và khiêm tốn, giữ ngọn lửa đam mê luôn trong sáng.",
+        "artwork": {
+            "file": "./assets/images/numerology/37-toa-rang",
+            "focal_object": "Đôi chim phượng nhỏ đậu trên cành ngô đồng xanh đón ánh bình minh"
+        }
+    },
+    {
+        "id": "38",
+        "slug": "38-dong-dieu",
+        "number": 38,
+        "root_number": 2,
+        "roman_numeral": "XXXVIII",
+        "letters": ["B", "K", "T"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "ĐỒNG ĐIỆU",
+        "archetype": "Người Gắn Kết",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "harmonic_vesica_circle",
+        "keywords": ["HỢP TÁC", "NHẠY CẢM", "CÂN ĐỐI", "NHÂN DUYÊN"],
+        "couplet": {
+            "opening": "CHUNG TÂM HỢP LỰC",
+            "closing": "ĐỒNG ĐIỆU VẠN DUYÊN"
+        },
+        "description": "Nhịp cầu tinh tế kết nối nguồn sáng sáng tạo với năng lực tổ chức vững chắc. Bạn phát huy sức mạnh trọn vẹn nhất trong những mối quan hệ hợp tác bình đẳng và chân thành.",
+        "lesson": "Lựa chọn môi trường và cộng sự cùng hệ giá trị, giữ sự kiên định dịu dàng trước những dao động cảm xúc bên ngoài.",
+        "artwork": {
+            "file": "./assets/images/numerology/38-dong-dieu",
+            "focal_object": "Đôi chén trà gốm men lam đối xứng bên nhành hoa mơ trắng nở dịu"
+        }
+    },
+    {
+        "id": "39",
+        "slug": "39-my-cam",
+        "number": 39,
+        "root_number": 3,
+        "roman_numeral": "XXXIX",
+        "letters": ["C", "L", "U"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "MỸ CẢM",
+        "archetype": "Người Dệt Mộng",
+        "planet": "Sao Mộc",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "lyre_triangle_circle",
+        "keywords": ["THẨM MỸ", "CẢM XÚC", "NGÔN TỪ", "TRUYỀN CẢM"],
+        "couplet": {
+            "opening": "MỸ CẢM KHAI HOA",
+            "closing": "NGÔN TỪ CHẠM CẢM"
+        },
+        "description": "Tâm hồn tinh tế sở hữu trực giác nghệ thuật dồi dào và tình yêu sâu sắc dành cho con người. Mỗi ý tưởng bạn chia sẻ đều mang hơi thở nhân văn và sức lay động lớn.",
+        "lesson": "Đưa những giấc mơ đẹp bước vào kế hoạch cụ thể, tránh để sự nhạy cảm trước lời khen chê làm chùn bước sáng tạo.",
+        "artwork": {
+            "file": "./assets/images/numerology/39-my-cam",
+            "focal_object": "Sáo trúc cổ khảm ngọc bích bên cuộn tranh thủy mặc và bướm xanh"
+        }
+    },
+    {
+        "id": "40",
+        "slug": "40-quy-cu",
+        "number": 40,
+        "root_number": 4,
+        "roman_numeral": "XL",
+        "letters": ["D", "M", "V"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "QUY CỦ",
+        "archetype": "Người Giữ Trụ",
+        "planet": "Sao Thiên Vương",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "pillar_square_circle",
+        "keywords": ["CHUẨN MỰC", "TỔ CHỨC", "CHẮC CHẮN", "TẬN TỤY"],
+        "couplet": {
+            "opening": "KỶ CƯƠNG VỮNG TRỤ",
+            "closing": "BỀN CHÍ THÀNH CÔNG"
+        },
+        "description": "Sức mạnh của sự tập trung cao độ, tư duy hệ thống và tinh thần trách nhiệm kiên định. Bạn tạo ra sự an tâm tuyệt đối nhờ cách làm việc chuẩn xác và minh bạch.",
+        "lesson": "Mở rộng góc nhìn để đón nhận những phương pháp mới mẻ, tránh tự đóng khung mình trong thói quen cũ kỹ.",
+        "artwork": {
+            "file": "./assets/images/numerology/40-quy-cu",
+            "focal_object": "Tháp đá cổ bốn tầng uy nghiêm trên bệ sen giữa nhành tùng xanh"
+        }
+    },
+    {
+        "id": "41",
+        "slug": "41-tien-phat",
+        "number": 41,
+        "root_number": 5,
+        "roman_numeral": "XLI",
+        "letters": ["E", "N", "W"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "TIÊN PHÁT",
+        "archetype": "Người Mở Đường",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "wind_pentagon_circle",
+        "keywords": ["ĐỔI MỚI", "CHỦ ĐỘNG", "LINH ĐỘNG", "TIÊN PHONG"],
+        "couplet": {
+            "opening": "VỮNG BƯỚC KHAI ĐÀ",
+            "closing": "GIÓ THUẬN VƯƠN XA"
+        },
+        "description": "Sự hòa quyện giữa nền móng kỷ luật, bản lĩnh khởi xướng và tinh thần thích nghi nhanh nhạy. Bạn vừa dám mở lối đi mới vừa biết cách giữ vững thực tế.",
+        "lesson": "Tránh để sự bồn chồn thúc ép bạn thay đổi hướng đi quá sớm, hãy cho từng ý tưởng tiên phong đủ thời gian bén rễ.",
+        "artwork": {
+            "file": "./assets/images/numerology/41-tien-phat",
+            "focal_object": "Cánh diều giấy cổ vẽ vân mây bay cao qua tán trúc xanh và gió nhẹ"
+        }
+    },
+    {
+        "id": "42",
+        "slug": "42-am-ap",
+        "number": 42,
+        "root_number": 6,
+        "roman_numeral": "XLII",
+        "letters": ["F", "O", "X"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "ẤM ÁP",
+        "archetype": "Người Giữ Lửa",
+        "planet": "Sao Kim",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "lantern_hexagram_circle",
+        "keywords": ["BÌNH YÊN", "TẬN TÂM", "GIA ĐÌNH", "TIN CẬY"],
+        "couplet": {
+            "opening": "GIỮ LỬA AN VUI",
+            "closing": "VUN BỒI HẠNH PHÚC"
+        },
+        "description": "Bàn tay vững chãi song hành cùng trái tim dịu dàng biết lắng nghe và sẻ chia. Bạn mang lại cảm giác ấm cúng, tin cậy và sự gắn kết bền lâu cho tổ ấm lẫn tập thể.",
+        "lesson": "Học cách chia sẻ gánh nặng trách nhiệm với người thân yêu, đừng âm thầm chịu đựng mọi áp lực một mình.",
+        "artwork": {
+            "file": "./assets/images/numerology/42-am-ap",
+            "focal_object": "Ngọn đèn dầu gốm cổ ấm sáng bên khóm cúc vàng và nhành lá biếc"
+        }
+    },
+    {
+        "id": "43",
+        "slug": "43-cach-tan",
+        "number": 43,
+        "root_number": 7,
+        "roman_numeral": "XLIII",
+        "letters": ["G", "P", "Y"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "CÁCH TÂN",
+        "archetype": "Người Đổi Mới",
+        "planet": "Sao Hải Vương",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "alembic_heptagram_circle",
+        "keywords": ["PHẢN BIỆN", "SÁNG KIẾN", "ĐỘT PHÁ", "SÂU SẮC"],
+        "couplet": {
+            "opening": "PHÁ CŨ LẬP MỚI",
+            "closing": "TRÍ SÁNG CÁCH TÂN"
+        },
+        "description": "Tư duy sắc sảo không ngại chất vấn lối mòn để tìm ra giải pháp vượt thời đại. Qua những bước ngoặt thử thách, bạn rèn giũa được trí tuệ độc lập và tầm nhìn khác biệt.",
+        "lesson": "Chuyển hóa tinh thần phản biện thành hành động xây dựng ôn hòa, kiên nhẫn lắng nghe thực tế để sáng kiến đi vào đời sống.",
+        "artwork": {
+            "file": "./assets/images/numerology/43-cach-tan",
+            "focal_object": "Lò luyện đan đồng cổ bên cụm tinh thể tím nhạt và cành mai trắng"
+        }
+    },
+    {
+        "id": "44",
+        "slug": "44-dai-nen-tang",
+        "number": 44,
+        "root_number": 8,
+        "roman_numeral": "XLIV",
+        "letters": ["H", "Q", "Z"],
+        "group": "Số Bậc Thầy",
+        "group_code": "master",
+        "title": "ĐẠI NỀN TẢNG",
+        "archetype": "Bậc Thầy Trụ Cột",
+        "planet": "Sao Thổ",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "double_cube_octagram_circle",
+        "keywords": ["TRỤ CỘT", "TẦM CỠ", "CHÍNH TRỰC", "TRƯỜNG TỒN"],
+        "couplet": {
+            "opening": "VỮNG NHƯ BÀN THẠCH",
+            "closing": "DỰNG NGHIỆP MUÔN ĐỜI"
+        },
+        "description": "Tần số bậc thầy hiếm có hợp nhất kỷ luật thép, sức bền phi thường và năng lực quản trị quy mô lớn. Bạn gánh vác trọng trách kiến tạo những hệ thống trường tồn mang tầm di sản.",
+        "lesson": "Giữ trái tim nhân hậu song hành với bản lĩnh thép, biết nghỉ ngơi đúng lúc để sức mạnh nội lực luôn bền bỉ theo năm tháng.",
+        "artwork": {
+            "file": "./assets/images/numerology/44-dai-nen-tang",
+            "focal_object": "Cổng tam quan đá chạm vân mây uy nghi đặt trên nền đá vững chãi và tùng cổ"
+        }
+    },
+    {
+        "id": "45",
+        "slug": "45-phong-khoang",
+        "number": 45,
+        "root_number": 9,
+        "roman_numeral": "XLV",
+        "letters": ["I", "R"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "PHÓNG KHOÁNG",
+        "archetype": "Người Hành Giả",
+        "planet": "Sao Hỏa",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "horizon_enneagram_circle",
+        "keywords": ["TRẢI ĐỜI", "RỘNG MỞ", "NHÂN VĂN", "TỰ TẠI"],
+        "couplet": {
+            "opening": "DU PHƯƠNG TÍCH ĐỨC",
+            "closing": "TỰ TẠI AN NHIÊN"
+        },
+        "description": "Sự hòa điệu giữa bản lĩnh thực tế, khát khao trải nghiệm rộng mở và tấm lòng nhân văn chín chắn. Mỗi miền đất và con người đi qua đều làm giàu thêm chiều sâu tâm hồn bạn.",
+        "lesson": "Đúc kết những trải nghiệm phong phú thành trí tuệ ứng dụng, giữ tâm bình lặng trước mọi đổi thay của dòng đời.",
+        "artwork": {
+            "file": "./assets/images/numerology/45-phong-khoang",
+            "focal_object": "Chiếc nón tre cổ, gậy trúc và bầu hồ lô vàng trên dải mây du phương"
+        }
+    },
+    {
+        "id": "46",
+        "slug": "46-khang-thinh",
+        "number": 46,
+        "root_number": 1,
+        "roman_numeral": "XLVI",
+        "letters": ["A", "J", "S"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "KHANG THỊNH",
+        "archetype": "Người Gieo Mùa",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "harvest_sun_circle",
+        "keywords": ["SUNG TÚC", "CHĂM CHỈ", "TRÁCH NHIỆM", "VỮNG CHẮC"],
+        "couplet": {
+            "opening": "CHĂM LÀM TÍCH PHÚC",
+            "closing": "MÙA VÀNG KHANG THỊNH"
+        },
+        "description": "Năng lượng an khang kết tinh từ lao động chăm chỉ, tinh thần trách nhiệm và ý chí tự lập vững vàng. Bạn gặt hái thành quả xứng đáng khi gieo trồng bằng sự tận tụy.",
+        "lesson": "Biết tận hưởng thành quả lao động bằng lòng biết ơn, đừng để nỗi lo tích lũy làm lu mờ niềm vui sống ở hiện tại.",
+        "artwork": {
+            "file": "./assets/images/numerology/46-khang-thinh",
+            "focal_object": "Bó lúa chín vàng trĩu hạt buộc lụa đỏ cùng cành lựu sai quả và chim sẻ"
+        }
+    },
+    {
+        "id": "47",
+        "slug": "47-thau-cam",
+        "number": 47,
+        "root_number": 2,
+        "roman_numeral": "XLVII",
+        "letters": ["B", "K", "T"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "THẤU CẢM",
+        "archetype": "Người Tri Âm",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "mirror_vesica_circle",
+        "keywords": ["SÂU SẮC", "CHÂN THÀNH", "CHÍN CHẮN", "ĐỒNG CẢM"],
+        "couplet": {
+            "opening": "LẶNG NGHE THẤU LÝ",
+            "closing": "ĐẮM ẤM TRI ÂM"
+        },
+        "description": "Tâm hồn trầm lắng dung hòa giữa kỷ luật chắc chắn, chiều sâu chiêm nghiệm và sự đồng cảm chân thành. Bạn là người bạn tri âm đáng tin cậy giúp người khác tìm lại sự cân bằng.",
+        "lesson": "Mạnh dạn bày tỏ suy nghĩ và cảm xúc thật của mình thay vì giữ kín trong lòng, để sự thấu hiểu diễn ra trọn vẹn từ hai phía.",
+        "artwork": {
+            "file": "./assets/images/numerology/47-thau-cam",
+            "focal_object": "Đôi chim oanh đậu bên cành liễu rủ soi bóng mặt nước tĩnh cùng hoa sen trắng"
+        }
+    },
+    {
+        "id": "48",
+        "slug": "48-khai-hoa",
+        "number": 48,
+        "root_number": 3,
+        "roman_numeral": "XLVIII",
+        "letters": ["C", "L", "U"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "KHAI HOA",
+        "archetype": "Người Kiến Mỹ",
+        "planet": "Sao Mộc",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "blossom_triad_circle",
+        "keywords": ["TINH TẾ", "THỰC TIỄN", "THÀNH QUẢ", "NỞ RỘ"],
+        "couplet": {
+            "opening": "GỐC VỮNG CÀNH XANH",
+            "closing": "KHAI HOA KẾT TRÁI"
+        },
+        "description": "Sự kết tinh giữa nền móng kỷ luật, năng lực kiến tạo tài chính và nét duyên sáng tạo tự nhiên. Bạn biến những giá trị thực tế khô khan thành tác phẩm giàu sức sống.",
+        "lesson": "Giữ niềm vui sáng tạo luôn tươi mới trong công việc thường nhật, để thành quả vật chất đi cùng vẻ đẹp tinh thần.",
+        "artwork": {
+            "file": "./assets/images/numerology/48-khai-hoa",
+            "focal_object": "Bình gốm men rạn cắm cành hải đường đỏ thắm cùng đôi bướm kem vàng"
+        }
+    },
+    {
+        "id": "49",
+        "slug": "49-hoan-bi",
+        "number": 49,
+        "root_number": 4,
+        "roman_numeral": "XLIX",
+        "letters": ["D", "M", "V"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "HOÀN BỊ",
+        "archetype": "Người Hoàn Thiện",
+        "planet": "Sao Thiên Vương",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "seven_square_grid_circle",
+        "keywords": ["CHÍN MUỒI", "CHU TOÀN", "TỔNG HỢP", "CHUẨN XÁC"],
+        "couplet": {
+            "opening": "CHU TOÀN MỌI NẺO",
+            "closing": "HOÀN BỊ CÔNG THÀNH"
+        },
+        "description": "Dấu ấn hoàn thiện của một chu kỳ lớn, hội tụ kỷ luật chắc chắn với tầm nhìn bao quát sâu rộng. Bạn có năng lực kiểm soát chi tiết xuất sắc mà vẫn nhìn thấy bức tranh toàn cảnh.",
+        "lesson": "Biết dừng lại đúng lúc khi công trình đã trọn vẹn, đừng để chủ nghĩa hoàn hảo quá mức lấy đi sự thanh thản của bản thân.",
+        "artwork": {
+            "file": "./assets/images/numerology/49-hoan-bi",
+            "focal_object": "Hộp cờ vây gỗ mun khảm ngọc cùng quân cờ trắng đen bên nhành tùng xanh"
+        }
+    },
+    {
+        "id": "50",
+        "slug": "50-chuyen-dich",
+        "number": 50,
+        "root_number": 5,
+        "roman_numeral": "L",
+        "letters": ["E", "N", "W"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "CHUYỂN DỊCH",
+        "archetype": "Người Đón Gió",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "vortex_pentagram_circle",
+        "keywords": ["BIẾN HÓA", "PHÓNG TẦM", "CƠ HỘI", "TỰ DO"],
+        "couplet": {
+            "opening": "NƯƠNG GIÓ CHUYỂN MÌNH",
+            "closing": "KHAI MỞ CHÂN TRỜI"
+        },
+        "description": "Nguồn năng lượng tự do được khuếch đại trọn vẹn, mang khả năng xoay chuyển tình thế và thích nghi nhanh hiếm có. Mỗi sự thay đổi đều là bàn đạp đưa bạn đến tầm cao rộng mở hơn.",
+        "lesson": "Giữ một điểm neo nội tâm tĩnh lặng giữa những chuyển dịch không ngừng, để sự tự do luôn dẫn lối tới đích đến ý nghĩa.",
+        "artwork": {
+            "file": "./assets/images/numerology/50-chuyen-dich",
+            "focal_object": "Chim bói cá lam ngọc lướt cánh qua dải lụa ngọc lam và cụm lau mềm"
+        }
+    },
+    {
+        "id": "51",
+        "slug": "51-ho-menh",
+        "number": 51,
+        "root_number": 6,
+        "roman_numeral": "LI",
+        "letters": ["F", "O", "X"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "HỘ MỆNH",
+        "archetype": "Người Bảo Hộ",
+        "planet": "Sao Kim",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "shield_hexagram_circle",
+        "keywords": ["DŨNG KHÍ", "CHE CHỞ", "TRUNG NGHĨA", "VỮNG TÂM"],
+        "couplet": {
+            "opening": "DŨNG KHÍ BẢO TOÀN",
+            "closing": "TÌNH THÂM HỘ MỆNH"
+        },
+        "description": "Khí chất dũng mãnh của người tiên phong kết hợp cùng trái tim giàu trách nhiệm và lòng trung nghĩa. Bạn sẵn sàng đứng mũi chịu sào để bảo vệ lý tưởng và những người mình yêu thương.",
+        "lesson": "Kết hợp sức mạnh cương trực với sự mềm mỏng khéo léo, để bản lĩnh bảo vệ luôn đi cùng sự bình hòa thay vì đối đầu căng thẳng.",
+        "artwork": {
+            "file": "./assets/images/numerology/51-ho-menh",
+            "focal_object": "Thanh kiếm cổ tra vỏ khảm đồng nằm an yên bên cành nguyệt quế và hoa cúc trắng"
+        }
+    },
+    {
+        "id": "52",
+        "slug": "52-thong-tue",
+        "number": 52,
+        "root_number": 7,
+        "roman_numeral": "LII",
+        "letters": ["G", "P", "Y"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "THÔNG TUỆ",
+        "archetype": "Người Quan Sát",
+        "planet": "Sao Hải Vương",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "hourglass_heptagram_circle",
+        "keywords": ["TINH ANH", "CHIÊM NGHIỆM", "NHẠY BÉN", "THỜI ĐIỂM"],
+        "couplet": {
+            "opening": "TĨNH QUAN BIẾN HÓA",
+            "closing": "THÔNG TUỆ THỜI CƠ"
+        },
+        "description": "Trí tuệ linh hoạt hòa quyện giữa trải nghiệm đa chiều, trực giác sắc sảo và óc phân tích điềm tĩnh. Bạn đọc vị được nhịp điệu ẩn sau các biến chuyển và chọn đúng thời điểm hành động.",
+        "lesson": "Tin vào nhịp thời gian tự nhiên của mọi tiến trình, đừng để suy tư quá nhiều làm chậm bước chân khi cơ hội đã chín muồi.",
+        "artwork": {
+            "file": "./assets/images/numerology/52-thong-tue",
+            "focal_object": "Đồng hồ cát khung gỗ trắc cổ chảy cát vàng bên nhành lá ngân hạnh thu"
+        }
+    },
+    {
+        "id": "53",
+        "slug": "53-hung-vuong",
+        "number": 53,
+        "root_number": 8,
+        "roman_numeral": "LIII",
+        "letters": ["H", "Q", "Z"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "HƯNG VƯỢNG",
+        "archetype": "Người Dựng Nghiệp",
+        "planet": "Sao Thổ",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "seal_octagram_circle",
+        "keywords": ["THƯƠNG ĐẠO", "NHANH TRÍ", "PHỒN VINH", "UY TÍN"],
+        "couplet": {
+            "opening": "TÀI TRÍ HÒA THÔNG",
+            "closing": "HƯNG VƯỢNG GIA NGHIỆP"
+        },
+        "description": "Khả năng giao tiếp sắc bén kết hợp cùng óc sáng tạo và tư duy thương đạo vững vàng. Bạn biết cách nắm bắt xu thế thị trường để tạo dựng uy tín cùng sự phồn vinh thực chất.",
+        "lesson": "Xây dựng sự hưng thịnh trên chữ tín và kỷ luật tài chính rõ ràng, tránh phân tán nguồn lực vào quá nhiều hướng cùng lúc.",
+        "artwork": {
+            "file": "./assets/images/numerology/53-hung-vuong",
+            "focal_object": "Ấn triện ngọc bích khắc kỳ lân đặt trên đệm gấm đỏ cùng cành kim quất sai quả"
+        }
+    },
+    {
+        "id": "54",
+        "slug": "54-vien-dung",
+        "number": 54,
+        "root_number": 9,
+        "roman_numeral": "LIV",
+        "letters": ["I", "R"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "VIÊN DUNG",
+        "archetype": "Người Khai Phóng",
+        "planet": "Sao Hỏa",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "globe_enneagram_circle",
+        "keywords": ["DUNG HÒA", "RỘNG LƯỢNG", "TRÍ LỰC", "HÒA BÌNH"],
+        "couplet": {
+            "opening": "DUNG HÒA ĐA SẮC",
+            "closing": "VIÊN DUNG ĐẠI ĐẠO"
+        },
+        "description": "Tầm nhìn rộng mở biết kết hợp sự phóng khoáng với nền tảng trật tự để phụng sự giá trị chung. Bạn dễ dàng cảm thông với những khác biệt và mang tinh thần hòa giải đến mọi nơi.",
+        "lesson": "Giữ lòng bao dung đi đôi với ranh giới minh bạch, để sự rộng lượng của bạn luôn nuôi dưỡng những mối quan hệ lành mạnh.",
+        "artwork": {
+            "file": "./assets/images/numerology/54-vien-dung",
+            "focal_object": "Quả cầu lưu ly lam nhạt trên giá gỗ chạm mây cùng chim bồ câu trắng và cành ô liu"
+        }
+    },
+    {
+        "id": "55",
+        "slug": "55-dai-bien-chuyen",
+        "number": 55,
+        "root_number": 1,
+        "roman_numeral": "LV",
+        "letters": ["A", "J", "S"],
+        "group": "Số Bậc Thầy",
+        "group_code": "master",
+        "title": "ĐẠI BIẾN CHUYỂN",
+        "archetype": "Bậc Thầy Đột Phá",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "double_pentagram_sun_circle",
+        "keywords": ["ĐỘT PHÁ", "GIẢI PHÓNG", "TẦM NHÌN", "TÁI TẠO"],
+        "couplet": {
+            "opening": "CƯỠI GIÓ ĐỔI THỜI",
+            "closing": "KHAI TẠO KỶ NGUYÊN"
+        },
+        "description": "Tần số bậc thầy của những bước ngoặt vĩ đại, tư duy giải phóng lối mòn và sức sáng tạo dẫn đầu thời đại. Bạn mang sứ mệnh khơi nguồn đổi mới và mở ra những chân trời chưa ai từng chạm tới.",
+        "lesson": "Rèn luyện tâm định vững vàng giữa cơn gió đổi thay mạnh mẽ, chuyển hóa nguồn năng lượng bùng nổ thành công trình bền vững.",
+        "artwork": {
+            "file": "./assets/images/numerology/55-dai-bien-chuyen",
+            "focal_object": "Chim Đại Bằng lam vàng sải cánh xuyên vòng mây xoáy rực rỡ trên sóng ngọc"
+        }
+    },
+    {
+        "id": "56",
+        "slug": "56-hoa-hop",
+        "number": 56,
+        "root_number": 2,
+        "roman_numeral": "LVI",
+        "letters": ["B", "K", "T"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "HÒA HỢP",
+        "archetype": "Người Gieo Duyên",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "lute_vesica_circle",
+        "keywords": ["DUYÊN LÀNH", "NHẸ NHÀNG", "GẮN BÓ", "CẢM THÔNG"],
+        "couplet": {
+            "opening": "GIEO DUYÊN THUẬN THẢO",
+            "closing": "HÒA HỢP YÊN VUI"
+        },
+        "description": "Sự dung hòa êm dịu giữa tinh thần cởi mở, trái tim yêu thương và trực giác sâu sắc của tầng năng lượng 11 ẩn hiện. Bạn gieo những mối duyên ấm áp và mang lại cảm giác dễ chịu cho mọi người.",
+        "lesson": "Nuôi dưỡng sự tự tin bên trong để luôn giữ được tiếng nói riêng, đồng hành bằng tình thương tự nguyện thay vì phụ thuộc.",
+        "artwork": {
+            "file": "./assets/images/numerology/56-hoa-hop",
+            "focal_object": "Đàn nguyệt gỗ cổ buộc dải lụa đỏ đặt dịu dàng bên cành hoa tường vi hồng phấn"
+        }
+    },
+    {
+        "id": "57",
+        "slug": "57-tai-bien",
+        "number": 57,
+        "root_number": 3,
+        "roman_numeral": "LVII",
+        "letters": ["C", "L", "U"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "TÀI BIỆN",
+        "archetype": "Người Luận Đạo",
+        "planet": "Sao Mộc",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "scroll_triad_circle",
+        "keywords": ["SẮC BÉN", "TRI THỨC", "DIỄN ĐẠT", "KHAI MỞ"],
+        "couplet": {
+            "opening": "BÁC HỌC TINH THÔNG",
+            "closing": "TÀI BIỆN KHAI MINH"
+        },
+        "description": "Sự kết hợp tinh tế giữa vốn trải nghiệm phong phú, chiều sâu tri thức và khả năng diễn đạt mạch lạc đầy thuyết phục. Bạn biến những chân lý sâu xa trở nên gần gũi và dễ thấu hiểu.",
+        "lesson": "Dùng lời nói sắc sảo để khai mở và kết nối thay vì tranh thắng thua, giữ sự khiêm cung trước bể học vô biên.",
+        "artwork": {
+            "file": "./assets/images/numerology/57-tai-bien",
+            "focal_object": "Chồng sách cổ đóng chỉ ngay ngắn bên gác bút ngọc bích và hoa súng lam nhạt"
+        }
+    },
+    {
+        "id": "58",
+        "slug": "58-kien-dinh",
+        "number": 58,
+        "root_number": 4,
+        "roman_numeral": "LVIII",
+        "letters": ["D", "M", "V"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "KIÊN ĐỊNH",
+        "archetype": "Người Rèn Bản Lĩnh",
+        "planet": "Sao Thiên Vương",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "ding_square_circle",
+        "keywords": ["VỮNG VÀNG", "BẢN LĨNH", "BỀN SỨC", "QUYẾT TÂM"],
+        "couplet": {
+            "opening": "VỮNG CHÍ RÈN TÂM",
+            "closing": "KIÊN ĐỊNH THÀNH DANH"
+        },
+        "description": "Nội lực rắn rỏi kết hợp giữa sự nhạy bén với thời cuộc, năng lực điều hành và sức bền kiến tạo. Bạn không ngại thử thách cam go mà xem đó là lò lửa tôi luyện bản lĩnh vững vàng.",
+        "lesson": "Biết uyển chuyển điều chỉnh phương pháp khi hoàn cảnh đổi thay, để sự kiên định trở thành sức mạnh chứ không thành cố chấp.",
+        "artwork": {
+            "file": "./assets/images/numerology/58-kien-dinh",
+            "focal_object": "Đỉnh đồng vuông cổ chạm hoa văn hồi văn bên cành bách xanh rắn rỏi"
+        }
+    },
+    {
+        "id": "59",
+        "slug": "59-vien-du",
+        "number": 59,
+        "root_number": 5,
+        "roman_numeral": "LIX",
+        "letters": ["E", "N", "W"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "VIỄN DU",
+        "archetype": "Người Vượt Biển",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "astrolabe_pentagram_circle",
+        "keywords": ["CHÂN TRỜI", "KHÁM PHÁ", "NHÂN BẢN", "BỐN PHƯƠNG"],
+        "couplet": {
+            "opening": "VƯỢT BIỂN TẦM ĐẠO",
+            "closing": "VIỄN DU BỐN PHƯƠNG"
+        },
+        "description": "Tâm hồn công dân toàn cầu mang khát khao khám phá không biên giới và tầm nhìn nhân bản rộng lớn. Những chuyến đi xa cả về địa lý lẫn tri thức giúp bạn không ngừng mở rộng bản thân.",
+        "lesson": "Biết giữ sự chừng mực và lòng biết ơn với cội nguồn, để mỗi chuyến viễn du đều mang về giá trị lành làm giàu cho cuộc sống.",
+        "artwork": {
+            "file": "./assets/images/numerology/59-vien-du",
+            "focal_object": "La bàn hàng hải đồng cổ trên hải đồ cuộn cùng đôi chim hải âu trắng lướt sóng"
+        }
+    },
+    {
+        "id": "60",
+        "slug": "60-an-nhien",
+        "number": 60,
+        "root_number": 6,
+        "roman_numeral": "LX",
+        "letters": ["F", "O", "X"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "AN NHIÊN",
+        "archetype": "Người Giữ Bình Yên",
+        "planet": "Sao Kim",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "lotus_mandala_hexagram_circle",
+        "keywords": ["VIÊN MÃN", "THANH THẢN", "PHÚC HẬU", "BÌNH AN"],
+        "couplet": {
+            "opening": "TÂM HÒA VẠN SỰ",
+            "closing": "AN NHIÊN VIÊN MÃN"
+        },
+        "description": "Khúc vĩ thanh dịu hiền của trọn vòng lục thập hoa giáp, nơi tình yêu thương, sự sung túc và bình an nội tại hòa làm một. Sự điềm đạm phúc hậu của bạn tự nhiên thu hút phúc lành bền lâu.",
+        "lesson": "Sống trọn vẹn trong từng phút giây hiện tại với tâm biết ơn, lan tỏa sự bình yên từ chính ngôi nhà bên trong tâm hồn mình.",
+        "artwork": {
+            "file": "./assets/images/numerology/60-an-nhien",
+            "focal_object": "Ấm trà tử sa trên khay tre cổ bên đóa sen hồng mãn khai và dải mây vàng viên mãn"
+        }
+    }
+]

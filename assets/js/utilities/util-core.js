@@ -1,10 +1,17 @@
 // assets/js/utilities/util-core.js
-// Lõi hệ thống Utilities: Helpers, Web Audio + Upload nhạc, Singleton Modal, Bento Date Picker,
-// Dual-Navbar đồng bộ URL #hash 2 chiều (Fix F5 giữ nguyên Tab/Subtab) & Registry cho các module con
+// Lõi hệ thống Utilities: Cấu hình tập trung ảnh thẻ 800x1200 (.png -> .webp), Helpers, Web Audio,
+// Singleton Modal, Bento Date Picker chuẩn a11y, Dual-Navbar đồng bộ URL #hash & Registry cô lập lỗi
 (() => {
     const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
+
+    // Cấu hình tập trung cho 3 bộ thẻ bài 800x1200 (Sau này chuyển sang WebP chỉ cần đổi "png" -> "webp" tại đây)
+    const CARD_IMG_EXT = "png";
+    const CARD_IMG_WIDTH = 800;
+    const CARD_IMG_HEIGHT = 1200;
     const TAROT_IMG_DIR = "./assets/images/tarot";
-    const TAROT_IMG_EXT = "png"; // Sau này convert sang WebP chỉ cần đổi "png" -> "webp"
+    const TAROT_IMG_EXT = CARD_IMG_EXT;
+    const ICHING_IMG_DIR = "./assets/images/iching";
+    const NUMEROLOGY_IMG_DIR = "./assets/images/numerology";
     const ICHING_ICON_DIR = "./assets/icons/iching";
     const HOROSCOPE_ICON_DIR = "./assets/icons/horoscope";
 
@@ -42,6 +49,14 @@
 
     const pad = (n) => String(n).padStart(2, "0");
 
+    const escapeHtml = (str) =>
+        String(str || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+
     const setText = (id, text) => {
         const el = document.getElementById(id);
         if (el) el.textContent = text;
@@ -67,6 +82,15 @@
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/(^-|-$)/g, "");
 
+    const resolveCardImageUrl = (basePath, ext = CARD_IMG_EXT) => {
+        if (!basePath) return "";
+        const normalized = String(basePath).trim().startsWith("/")
+            ? `.${String(basePath).trim()}`
+            : String(basePath).trim();
+        if (/\.(png|webp|jpe?g|svg)$/i.test(normalized)) return normalized;
+        return `${normalized}.${ext}`;
+    };
+
     const buildBentoTooltipHtml = (title, desc, tagLabel) => `
         <span class="bento-tooltip" role="tooltip">
             <strong class="bento-tooltip__title">✦ ${title}</strong>
@@ -78,11 +102,24 @@
     const fetchJsonSafe = async (url, fallback) => {
         try {
             const res = await fetch(url);
-            if (!res.ok) return fallback;
+            if (!res.ok) {
+                console.warn(`[UtilHub] Không thể nạp ${url} (HTTP ${res.status}), dùng dữ liệu dự phòng.`);
+                return fallback;
+            }
             const data = await res.json();
             return Array.isArray(data) && data.length ? data : fallback;
         } catch (err) {
+            console.warn(`[UtilHub] Lỗi đọc/parse JSON tại ${url}:`, err.message);
             return fallback;
+        }
+    };
+
+    const runSafe = (label, fn, ...args) => {
+        try {
+            return fn(...args);
+        } catch (err) {
+            console.error(`[UtilHub][${label}] Lỗi thực thi module:`, err);
+            return undefined;
         }
     };
 
@@ -220,7 +257,7 @@
                 mediaStage.hidden = false;
                 const renderSlide = () => {
                     mediaStage.innerHTML = `
-                        <img src="${modalSlideUrls[modalSlideIdx]}" alt="${title}" onerror="this.src='${DEFAULT_COVER_IMG}'" />
+                        <img src="${modalSlideUrls[modalSlideIdx]}" alt="${escapeHtml(title)}" onerror="this.src='${DEFAULT_COVER_IMG}'" />
                         ${
                             modalSlideUrls.length > 1
                                 ? `
@@ -254,7 +291,27 @@
         document.getElementById("util-modal-close")?.focus();
     };
 
-    // ==================== 3. COMPONENT TÁI SỬ DỤNG: CUSTOM BENTO DATE PICKER ====================
+    // ==================== 3. ĐỒNG BỘ ARIA-EXPANDED & BENTO DATE PICKER ====================
+    const syncDetailsAriaExpanded = (scopeEl) => {
+        if (!scopeEl) return;
+        scopeEl.querySelectorAll("details.bazi-picker").forEach((dd) => {
+            if (dd.dataset.ariaSynced === "true") return;
+            dd.dataset.ariaSynced = "true";
+
+            const summary = dd.querySelector("summary");
+            if (summary) summary.setAttribute("aria-expanded", String(dd.open));
+
+            dd.addEventListener("toggle", () => {
+                summary?.setAttribute("aria-expanded", String(dd.open));
+                if (dd.open) {
+                    document.querySelectorAll("details.bazi-picker[open]").forEach((other) => {
+                        if (other !== dd) other.removeAttribute("open");
+                    });
+                }
+            });
+        });
+    };
+
     const createBentoDatePicker = (containerId, initialDate, onChangeCallback) => {
         const container = document.getElementById(containerId);
         if (!container) return null;
@@ -265,6 +322,10 @@
             year: initialDate.year || 2026,
             yearStart: Math.floor((initialDate.year || 2026) / 12) * 12 - 4,
         };
+
+        const dayListId = `${containerId}-day-list`;
+        const monthListId = `${containerId}-month-list`;
+        const yearListId = `${containerId}-year-list`;
 
         const render = () => {
             const maxDays = new Date(state.year, state.month, 0).getDate();
@@ -290,29 +351,44 @@
 
             container.innerHTML = `
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary class="bazi-picker__summary" aria-label="Chọn ngày, hiện tại Ngày ${pad(state.day)}">
+                    <summary
+                        class="bazi-picker__summary"
+                        aria-label="Chọn ngày, hiện tại Ngày ${pad(state.day)}"
+                        aria-expanded="false"
+                        aria-controls="${dayListId}"
+                    >
                         <span class="bazi-picker__summary-text">Ngày ${pad(state.day)}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
                     <div class="bazi-picker__popover bazi-picker__popover--days">
                         <div class="bazi-picker__popover-head">Chọn Ngày</div>
-                        <ul class="bazi-picker__grid bazi-picker__grid--days" role="listbox" aria-label="Danh sách ngày">${daysHtml}</ul>
+                        <ul class="bazi-picker__grid bazi-picker__grid--days" id="${dayListId}" role="listbox" aria-label="Danh sách ngày">${daysHtml}</ul>
                     </div>
                 </details>
 
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary class="bazi-picker__summary" aria-label="Chọn tháng, hiện tại Tháng ${pad(state.month)}">
+                    <summary
+                        class="bazi-picker__summary"
+                        aria-label="Chọn tháng, hiện tại Tháng ${pad(state.month)}"
+                        aria-expanded="false"
+                        aria-controls="${monthListId}"
+                    >
                         <span class="bazi-picker__summary-text">Tháng ${pad(state.month)}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
                     <div class="bazi-picker__popover bazi-picker__popover--months">
                         <div class="bazi-picker__popover-head">Chọn Tháng</div>
-                        <ul class="bazi-picker__grid bazi-picker__grid--months" role="listbox" aria-label="Danh sách tháng">${monthsHtml}</ul>
+                        <ul class="bazi-picker__grid bazi-picker__grid--months" id="${monthListId}" role="listbox" aria-label="Danh sách tháng">${monthsHtml}</ul>
                     </div>
                 </details>
 
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary class="bazi-picker__summary" aria-label="Chọn năm, hiện tại Năm ${state.year}">
+                    <summary
+                        class="bazi-picker__summary"
+                        aria-label="Chọn năm, hiện tại Năm ${state.year}"
+                        aria-expanded="false"
+                        aria-controls="${yearListId}"
+                    >
                         <span class="bazi-picker__summary-text">Năm ${state.year}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
@@ -322,20 +398,12 @@
                             <span class="bazi-picker__year-range">${state.yearStart} - ${state.yearStart + 11}</span>
                             <button type="button" class="bazi-picker__year-step" data-bp-yrange="12" aria-label="Tiến 12 năm">&#10095;</button>
                         </div>
-                        <ul class="bazi-picker__grid bazi-picker__grid--years" role="listbox" aria-label="Danh sách năm">${yearsHtml}</ul>
+                        <ul class="bazi-picker__grid bazi-picker__grid--years" id="${yearListId}" role="listbox" aria-label="Danh sách năm">${yearsHtml}</ul>
                     </div>
                 </details>
             `;
 
-            container.querySelectorAll(".bazi-picker").forEach((cur) => {
-                cur.ontoggle = () => {
-                    if (cur.open) {
-                        document.querySelectorAll(".bazi-picker[open]").forEach((other) => {
-                            if (other !== cur) other.removeAttribute("open");
-                        });
-                    }
-                };
-            });
+            syncDetailsAriaExpanded(container);
         };
 
         container.addEventListener("click", (e) => {
@@ -349,7 +417,10 @@
                 state.yearStart += Number(rBtn.dataset.bpYrange);
                 render();
                 const yearPicker = container.querySelectorAll(".bazi-picker")[2];
-                if (yearPicker) yearPicker.setAttribute("open", "");
+                if (yearPicker) {
+                    yearPicker.setAttribute("open", "");
+                    yearPicker.querySelector("summary")?.setAttribute("aria-expanded", "true");
+                }
                 return;
             }
 
@@ -379,8 +450,11 @@
     };
 
     // ==================== 4. ĐIỀU HƯỚNG DUAL-NAVBAR 2 TẦNG & ĐỒNG BỘ URL HASH (FIX F5) ====================
+    let isCoreBooted = false;
     let activeCat = "clock";
     let activeSub = "stopwatch";
+    let currentRouteState = { cat: "clock", sub: "stopwatch", highlight: "" };
+
     const moduleInitCallbacks = [];
     const routeChangeListeners = [];
     const modalClickHandlers = [];
@@ -459,6 +533,7 @@
         const subItems = SUB_NAV_MAP[activeCat] || [];
         const hasValidSub = subItems.some((item) => item.id === subKey);
         activeSub = hasValidSub ? subKey : (subItems[0]?.id ?? "");
+        currentRouteState = { cat: activeCat, sub: activeSub, highlight };
 
         const mainEl = document.getElementById("main");
         if (mainEl) {
@@ -520,7 +595,7 @@
             });
         }
 
-        routeChangeListeners.forEach((fn) => fn({ cat: activeCat, sub: activeSub, highlight }));
+        routeChangeListeners.forEach((fn, idx) => runSafe(`routeListener#${idx}`, fn, currentRouteState));
         toggleMobileUtilMenu(true);
     };
 
@@ -530,6 +605,9 @@
         if (rawHash) {
             if (rawHash === "ic-catalog-section") {
                 return { cat: "divination", sub: "iching", highlight: "" };
+            }
+            if (rawHash === "tr-catalog-section") {
+                return { cat: "divination", sub: "tarot", highlight: "" };
             }
             const [hashCat, hashSub = ""] = rawHash.split("/");
             if (SUB_NAV_MAP[hashCat]) {
@@ -571,11 +649,13 @@
         const mainEl = document.getElementById("main");
         if (!mainEl || mainEl.dataset.utilBound === "true") return;
         mainEl.dataset.utilBound = "true";
+        isCoreBooted = true;
 
         bindDragToScrollNav();
+        syncDetailsAriaExpanded(mainEl);
 
-        // Khởi chạy toàn bộ 4 module chức năng đã đăng ký
-        moduleInitCallbacks.forEach((initFn) => initFn(mainEl));
+        // Khởi chạy cô lập toàn bộ các module chức năng đã đăng ký
+        moduleInitCallbacks.forEach((initFn, idx) => runSafe(`moduleInit#${idx}`, initFn, mainEl));
 
         // Đọc và áp dụng đúng Route từ URL ngay lúc tải trang (Fix F5)
         const initialRoute = resolveRouteFromUrl();
@@ -616,7 +696,7 @@
             else document.getElementById("widget-trigger-btn")?.click();
         });
 
-        // Dùng chung cho tất cả nút Bento Stepper (− / +) trên toàn trang
+        // Dùng chung cho tất cả nút Bento Stepper (− / +) & Modal trên toàn trang
         mainEl.addEventListener("click", (e) => {
             const stepBtn = e.target.closest("[data-step-target]");
             if (stepBtn) {
@@ -631,9 +711,10 @@
                 return;
             }
 
-            // Ủy quyền click mở Singleton Modal tới từng module
-            for (const handler of modalClickHandlers) {
-                if (handler(e) === true) return;
+            // Ủy quyền click mở Singleton Modal tới từng module (có cô lập lỗi)
+            for (let i = 0; i < modalClickHandlers.length; i++) {
+                const handled = runSafe(`modalHandler#${i}`, modalClickHandlers[i], e);
+                if (handled === true) return;
             }
         });
 
@@ -660,15 +741,22 @@
     // Xuất trục điều phối dùng chung
     window.UtilHub = {
         DEFAULT_COVER_IMG,
+        CARD_IMG_EXT,
+        CARD_IMG_WIDTH,
+        CARD_IMG_HEIGHT,
         TAROT_IMG_DIR,
         TAROT_IMG_EXT,
+        ICHING_IMG_DIR,
+        NUMEROLOGY_IMG_DIR,
         ICHING_ICON_DIR,
         HOROSCOPE_ICON_DIR,
         pad,
+        escapeHtml,
         setText,
         setHtml,
         setAttr,
         toSlug,
+        resolveCardImageUrl,
         buildBentoTooltipHtml,
         fetchJsonSafe,
         playSoundEffect,
@@ -678,20 +766,29 @@
         createBentoDatePicker,
         switchCategoryAndSub,
         registerModule: (fn) => {
-            if (typeof fn === "function") moduleInitCallbacks.push(fn);
+            if (typeof fn !== "function") return;
+            moduleInitCallbacks.push(fn);
+            if (isCoreBooted) {
+                const mainEl = document.getElementById("main");
+                if (mainEl) runSafe("lateModuleInit", fn, mainEl);
+            }
         },
         onRouteChange: (fn) => {
-            if (typeof fn === "function") routeChangeListeners.push(fn);
+            if (typeof fn !== "function") return;
+            routeChangeListeners.push(fn);
+            if (isCoreBooted) {
+                runSafe("lateRouteListener", fn, currentRouteState);
+            }
         },
         registerModalHandler: (fn) => {
             if (typeof fn === "function") modalClickHandlers.push(fn);
         },
     };
 
+    // Chỉ boot trên DOMContentLoaded (KHÔNG nghe template-loaded để tránh khóa cổng sớm trước khi 4 module con nạp xong)
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", initUtilitiesCore);
     } else {
         initUtilitiesCore();
     }
-    window.addEventListener("template-loaded", initUtilitiesCore);
 })();

@@ -1,0 +1,434 @@
+## horoscope.json
+
+```json
+[
+    {
+        "id": 1,
+        "slug": "aries",
+        "symbol": "♈",
+        "name": {
+            "en": "Aries",
+            "vi": "Bạch Dương"
+        },
+        "mascot": "Cừu Đực Sừng Vàng",
+        "element": "fire",
+        "ruling_planet": {
+            "en": "Mars",
+            "vi": "Sao Hỏa"
+        },
+        "date_range": {
+            "start": { "month": 3, "day": 21 },
+            "end": { "month": 4, "day": 19 },
+            "label": "21/03 – 19/04"
+        },
+        "keywords": ["Nhiệt huyết", "Tiên phong", "Dũng cảm", "Khởi đầu"],
+        "traits": "Nhiệt huyết, tiên phong, dũng cảm và luôn tràn đầy năng lượng khởi đầu mới.",
+        "lucky": {
+            "numbers": [1, 9],
+            "colors": ["Đỏ thẫm", "Cam cháy"]
+        },
+        "daily": [
+            "Ngày tuyệt vời để Bạch Dương khởi động dự án mới hoặc giải quyết dứt điểm việc tồn đọng.",
+            "Năng lượng nguyên tố Lửa thúc đẩy sự quyết đoán; hãy chủ động đề xuất ý tưởng bạn đã ấp ủ.",
+            "Một chút kiên nhẫn trong giao tiếp hôm nay sẽ giúp Bạch Dương ghi điểm tuyệt đối với cộng sự.",
+            "Dòng tiền có dấu hiệu khởi sắc từ nỗ lực chủ động, nhưng nhớ tránh các khoản chi tiêu bốc đồng.",
+            "Vận động nhẹ hoặc đổi không gian làm việc sẽ giúp Bạch Dương nạp lại cảm hứng tức thì.",
+            "Thử thách bất ngờ hôm nay chính là cơ hội để bạn khẳng định bản lĩnh tiên phong của mình.",
+            "Dành buổi tối thư giãn và gác lại nhịp độ gấp gáp để tái tạo năng lượng cho chặng đường mới."
+        ]
+    },
+    {
+        "id": 2,
+        "slug": "taurus",
+        "symbol": "♉",
+        "name": {
+            "en": "Taurus",
+            "vi": "Kim Ngưu"
+        },
+        "mascot": "Bò Đực Dũng Mãnh",
+        "element": "earth",
+        "ruling_planet": {
+            "en": "Venus",
+            "vi": "Sao Kim"
+        },
+        "date_range": {
+            "start": { "month": 4, "day": 20 },
+            "end": { "month": 5, "day": 20 },
+            "label": "20/04 – 20/05"
+        },
+        "keywords": ["Điềm tĩnh", "Đáng tin cậy", "Yêu cái đẹp", "Vững vàng"],
+        "traits": "Điềm tĩnh, đáng tin cậy, yêu cái đẹp và có năng lực quản lý tài sản vững vàng.",
+        "lucky": {
+            "numbers": [2, 6],
+            "colors": ["Xanh lục bảo", "Hồng phấn"]
+        },
+        "daily": [
+            "Tài vận của Kim Ngưu hôm nay rất ổn định; thích hợp lập kế hoạch tích lũy dài hạn.",
+            "Sự điềm tĩnh và chắc chắn giúp Kim Ngưu giải quyết êm đẹp các đầu việc đòi hỏi tính tỉ mỉ.",
+            "Hôm nay rất hợp để chăm chút góc làm việc hoặc tự thưởng một bữa ăn ngon lành, tinh tế.",
+            "Một mối quan hệ bền chặt mang lại lời khuyên giá trị cho kế hoạch sắp tới của Kim Ngưu.",
+            "Đừng ngại thử một cách làm mới linh hoạt hơn thay vì giữ nguyên thói quen cũ quen thuộc.",
+            "Năng lượng nguyên tố Đất giúp bạn tập trung sâu và hoàn thành mục tiêu đúng tiến độ đã đặt.",
+            "Sự chân thành và đáng tin cậy chính là điểm sáng thu hút cơ hội hợp tác lâu dài đến với bạn."
+        ]
+    },
+    {
+        "id": 3,
+        "slug": "gemini",
+        "symbol": "♊",
+        "name": {
+            "en": "Gemini",
+            "vi": "Song Tử"
+        },
+        "mascot": "Cặp Song Sinh",
+        "element": "air",
+        "ruling_planet": {
+            "en": "Mercury",
+            "vi": "Sao Thủy"
+        },
+        "date_range": {
+            "start": { "month": 5, "day": 21 },
+            "end": { "month": 6, "day": 21 },
+            "label": "21/05 – 21/06"
+        },
+        "keywords": ["Linh hoạt", "Giao tiếp tốt", "Ham học hỏi", "Thích nghi nhanh"],
+        "traits": "Linh hoạt, giao tiếp sắc sảo, ham học hỏi và thích nghi nhanh với mọi hoàn cảnh.",
+        "lucky": {
+            "numbers": [5, 14],
+            "colors": ["Vàng tươi", "Xanh da trời"]
+        },
+        "daily": [
+            "Khả năng đàm phán và kết nối thông tin giúp Song Tử mở ra cơ hội hợp tác mới.",
+            "Trí óc linh hoạt mang lại cho Song Tử nhiều góc nhìn mới mẻ để tháo gỡ nút thắt hiện tại.",
+            "Hôm nay nên ưu tiên hoàn thành từng đầu việc trọng tâm thay vì mở quá nhiều hướng cùng lúc.",
+            "Một cuộc trò chuyện tình cờ có thể đem đến nguồn cảm hứng hoặc thông tin cực kỳ hữu ích.",
+            "Tài chính duy trì nhịp ổn định; hãy kiểm tra kỹ các chi tiết nhỏ trước khi xác nhận giao dịch.",
+            "Năng lượng nguyên tố Khí giúp Song Tử học nhanh kỹ năng mới và thích nghi mượt mà với thay đổi.",
+            "Tạm rời màn hình một chút vào cuối ngày để tâm trí lắng lại và tái tạo sự sắc bén."
+        ]
+    },
+    {
+        "id": 4,
+        "slug": "cancer",
+        "symbol": "♋",
+        "name": {
+            "en": "Cancer",
+            "vi": "Cự Giải"
+        },
+        "mascot": "Linh Vật Cua Biển",
+        "element": "water",
+        "ruling_planet": {
+            "en": "Moon",
+            "vi": "Mặt Trăng"
+        },
+        "date_range": {
+            "start": { "month": 6, "day": 22 },
+            "end": { "month": 7, "day": 22 },
+            "label": "22/06 – 22/07"
+        },
+        "keywords": ["Chu đáo", "Ấm áp", "Trọng tình nghĩa", "Hậu phương"],
+        "traits": "Chu đáo, ấm áp, trọng tình nghĩa và luôn là hậu phương vững chắc cho gia đình.",
+        "lucky": {
+            "numbers": [2, 7],
+            "colors": ["Trắng bạc", "Xanh ngọc"]
+        },
+        "daily": [
+            "Không gian ấm cúng và sự sẻ chia chân thành mang lại nguồn năng lượng bình an cho Cự Giải.",
+            "Trực giác tinh tế giúp Cự Giải dễ dàng nắm bắt tâm lý đối phương và xử lý tình huống khéo léo.",
+            "Công việc tiến triển thuận lợi nhờ sự chu đáo và tinh thần trách nhiệm cao của bạn.",
+            "Hôm nay thích hợp để rà soát ngân sách gia đình hoặc lên kế hoạch tiết kiệm an toàn.",
+            "Hãy đặt ranh giới cảm xúc lành mạnh để bảo vệ năng lượng của mình trước áp lực bên ngoài.",
+            "Một lời hỏi thăm từ người thân hoặc bạn cũ sẽ làm ngày hôm nay của Cự Giải thêm ấm áp.",
+            "Chăm sóc giấc ngủ và dinh dưỡng đầy đủ là chìa khóa giữ vững phong độ bền bỉ cho bạn."
+        ]
+    },
+    {
+        "id": 5,
+        "slug": "leo",
+        "symbol": "♌",
+        "name": {
+            "en": "Leo",
+            "vi": "Sư Tử"
+        },
+        "mascot": "Sư Tử Bờm Vàng",
+        "element": "fire",
+        "ruling_planet": {
+            "en": "Sun",
+            "vi": "Mặt Trời"
+        },
+        "date_range": {
+            "start": { "month": 7, "day": 23 },
+            "end": { "month": 8, "day": 22 },
+            "label": "23/07 – 22/08"
+        },
+        "keywords": ["Tự tin", "Hào sảng", "Dẫn dắt", "Tỏa sáng"],
+        "traits": "Tự tin, hào sảng, bản lĩnh dẫn dắt và luôn tỏa sáng với nguồn năng lượng ấm áp.",
+        "lucky": {
+            "numbers": [1, 5],
+            "colors": ["Vàng kim", "Cam rực"]
+        },
+        "daily": [
+            "Sự quyết đoán và phong thái tự tin giúp Sư Tử ghi điểm ấn tượng trong mắt đối tác.",
+            "Ánh sáng từ Mặt Trời chủ quản tiếp thêm sức hút để Sư Tử truyền cảm hứng cho cả tập thể.",
+            "Lắng nghe thêm góc nhìn từ cộng sự sẽ giúp kế hoạch lớn của bạn trở nên toàn diện hơn.",
+            "Hôm nay thuận lợi để Sư Tử trình bày ý tưởng, thuyết trình hoặc khẳng định dấu ấn cá nhân.",
+            "Tài chính có tín hiệu tích cực; hãy cân nhắc phân bổ hợp lý giữa tận hưởng và tích lũy.",
+            "Sự hào phóng đúng lúc mang lại cho Sư Tử nhiều thiện cảm và sự ủng hộ bất ngờ.",
+            "Tự thưởng một khoảng thời gian cho đam mê cá nhân sẽ giúp ngọn lửa sáng tạo luôn rực cháy."
+        ]
+    },
+    {
+        "id": 6,
+        "slug": "virgo",
+        "symbol": "♍",
+        "name": {
+            "en": "Virgo",
+            "vi": "Xử Nữ"
+        },
+        "mascot": "Trinh Nữ Cầm Bông Lúa",
+        "element": "earth",
+        "ruling_planet": {
+            "en": "Mercury",
+            "vi": "Sao Thủy"
+        },
+        "date_range": {
+            "start": { "month": 8, "day": 23 },
+            "end": { "month": 9, "day": 22 },
+            "label": "23/08 – 22/09"
+        },
+        "keywords": ["Tỉ mỉ", "Chuẩn mực", "Phân tích sắc", "Hoàn thiện"],
+        "traits": "Tỉ mỉ, chuẩn mực, tư duy phân tích hệ thống sắc bén và luôn hướng tới sự hoàn thiện.",
+        "lucky": {
+            "numbers": [5, 15],
+            "colors": ["Xanh ô liu", "Be sữa"]
+        },
+        "daily": [
+            "Sự cẩn trọng đến từng chi tiết giúp Xử Nữ tối ưu hóa quy trình làm việc đạt hiệu suất cao nhất.",
+            "Tư duy phân tích mạch lạc giúp Xử Nữ phát hiện sớm lỗ hổng và xử lý gọn gàng trước hạn.",
+            "Hôm nay rất hợp để dọn dẹp bàn làm việc, sắp xếp lại tài liệu và chốt danh sách ưu tiên.",
+            "Đừng quá khắt khe với bản thân; tiến bộ đều đặn vẫn quý hơn sự cầu toàn gây áp lực.",
+            "Khả năng quản trị chi tiêu chặt chẽ giúp Xử Nữ giữ vững nền tảng tài chính an toàn.",
+            "Một lời góp ý khéo léo, chân thành hôm nay sẽ giúp mối quan hệ hợp tác thêm gắn kết.",
+            "Dành thời gian vận động nhẹ và giữ nhịp sinh hoạt điều độ để cơ thể luôn nhẹ nhàng."
+        ]
+    },
+    {
+        "id": 7,
+        "slug": "libra",
+        "symbol": "♎",
+        "name": {
+            "en": "Libra",
+            "vi": "Thiên Bình"
+        },
+        "mascot": "Cán Cân Công Lý",
+        "element": "air",
+        "ruling_planet": {
+            "en": "Venus",
+            "vi": "Sao Kim"
+        },
+        "date_range": {
+            "start": { "month": 9, "day": 23 },
+            "end": { "month": 10, "day": 23 },
+            "label": "23/09 – 23/10"
+        },
+        "keywords": ["Công bằng", "Lịch thiệp", "Thẩm mỹ", "Dung hòa"],
+        "traits": "Công bằng, lịch thiệp, giàu gu thẩm mỹ và có biệt tài dung hòa các mối quan hệ.",
+        "lucky": {
+            "numbers": [6, 9],
+            "colors": ["Hồng pastel", "Xanh lam nhạt"]
+        },
+        "daily": [
+            "Thiên Bình dễ dàng đạt được thỏa thuận đôi bên cùng có lợi trong các cuộc trao đổi.",
+            "Gu thẩm mỹ tinh tế giúp Thiên Bình tỏa sáng trong các công việc liên quan đến thiết kế và sáng tạo.",
+            "Khi đứng trước hai lựa chọn, hãy tin vào tiêu chí cốt lõi của mình thay vì cân nhắc quá lâu.",
+            "Sự lịch thiệp và công tâm giúp bạn hóa giải êm đẹp một hiểu lầm nhỏ trong tập thể.",
+            "Hôm nay thích hợp để gặp gỡ đối tác, mở rộng kết nối hoặc làm mới không gian làm việc.",
+            "Cân bằng giữa ngân sách cho sở thích và kế hoạch tiết kiệm sẽ giúp bạn an tâm hơn.",
+            "Âm nhạc nhẹ nhàng hoặc một buổi dạo mát cuối ngày giúp Thiên Bình khôi phục trạng thái hài hòa."
+        ]
+    },
+    {
+        "id": 8,
+        "slug": "scorpio",
+        "symbol": "♏",
+        "name": {
+            "en": "Scorpio",
+            "vi": "Bọ Cạp"
+        },
+        "mascot": "Bọ Cạp Huyền Bí",
+        "element": "water",
+        "ruling_planet": {
+            "en": "Pluto",
+            "vi": "Sao Diêm Vương"
+        },
+        "date_range": {
+            "start": { "month": 10, "day": 24 },
+            "end": { "month": 11, "day": 21 },
+            "label": "24/10 – 21/11"
+        },
+        "keywords": ["Sâu sắc", "Quyết liệt", "Tập trung cao", "Bứt phá"],
+        "traits": "Sâu sắc, quyết liệt, tập trung cao độ và có nội lực bứt phá mạnh mẽ.",
+        "lucky": {
+            "numbers": [8, 18],
+            "colors": ["Đỏ rượu vang", "Đen huyền"]
+        },
+        "daily": [
+            "Sự tập trung bền bỉ giúp Bọ Cạp nhìn thấu bản chất vấn đề và nắm bắt cơ hội chiến lược.",
+            "Nội lực mạnh mẽ giúp Bọ Cạp xử lý gọn những nhiệm vụ khó nhằn mà người khác dễ nản lòng.",
+            "Hôm nay thích hợp để nghiên cứu chuyên sâu, bảo mật thông tin và lập kế hoạch đường dài.",
+            "Mở lòng chia sẻ thêm một chút với người tin cậy sẽ giúp Bọ Cạp nhẹ gánh áp lực hơn nhiều.",
+            "Trực giác tài chính khá sắc bén, nhưng vẫn nên đối chiếu dữ liệu thực tế trước khi xuống tiền.",
+            "Buông bỏ những bận tâm cũ không còn giá trị sẽ giải phóng nguồn năng lượng bứt phá rất lớn.",
+            "Một khoảng lặng riêng tư vào buổi tối giúp Bọ Cạp tái tạo chiều sâu tinh thần và sự tỉnh táo."
+        ]
+    },
+    {
+        "id": 9,
+        "slug": "sagittarius",
+        "symbol": "♐",
+        "name": {
+            "en": "Sagittarius",
+            "vi": "Nhân Mã"
+        },
+        "mascot": "Cung Thủ Nhân Mã",
+        "element": "fire",
+        "ruling_planet": {
+            "en": "Jupiter",
+            "vi": "Sao Mộc"
+        },
+        "date_range": {
+            "start": { "month": 11, "day": 22 },
+            "end": { "month": 12, "day": 21 },
+            "label": "22/11 – 21/12"
+        },
+        "keywords": ["Phóng khoáng", "Lạc quan", "Tự do", "Khám phá"],
+        "traits": "Phóng khoáng, lạc quan, yêu tự do khám phá tri thức và luôn nhìn về phía trước.",
+        "lucky": {
+            "numbers": [3, 12],
+            "colors": ["Tím hoàng gia", "Xanh cô ban"]
+        },
+        "daily": [
+            "Tầm nhìn cởi mở mang lại cho Nhân Mã niềm cảm hứng mới mẻ trong học tập và công việc.",
+            "Tinh thần lạc quan giúp Nhân Mã biến trở ngại nhỏ thành trải nghiệm thú vị và bài học hay.",
+            "Hôm nay thuận lợi cho việc mở rộng kiến thức, khám phá công cụ mới hoặc kết nối bạn bè phương xa.",
+            "Kiểm tra lại các mốc thời gian và chi tiết nhỏ sẽ giúp ý tưởng lớn của bạn về đích trọn vẹn.",
+            "Năng lượng nguyên tố Lửa thúc đẩy sự phóng khoáng; hãy cân đối ngân sách trước các khoản chi hứng khởi.",
+            "Sự thẳng thắn vui vẻ của Nhân Mã mang lại bầu không khí tích cực cho cả nhóm hôm nay.",
+            "Thay đổi cung đường quen thuộc hoặc ra ngoài hít thở khí trời sẽ khơi dậy nhiều ý tưởng sáng giá."
+        ]
+    },
+    {
+        "id": 10,
+        "slug": "capricorn",
+        "symbol": "♑",
+        "name": {
+            "en": "Capricorn",
+            "vi": "Ma Kết"
+        },
+        "mascot": "Dê Biển Đuôi Cá",
+        "element": "earth",
+        "ruling_planet": {
+            "en": "Saturn",
+            "vi": "Sao Thổ"
+        },
+        "date_range": {
+            "start": { "month": 12, "day": 22 },
+            "end": { "month": 1, "day": 19 },
+            "label": "22/12 – 19/01"
+        },
+        "keywords": ["Trách nhiệm", "Kỷ luật", "Thực tế", "Tham vọng"],
+        "traits": "Có trách nhiệm, kỷ luật, thực tế và giàu tham vọng. Ma Kết là người làm việc kiên trì, có tầm nhìn chiến lược xa và luôn nỗ lực đạt mục tiêu.",
+        "lucky": {
+            "numbers": [4, 8],
+            "colors": ["Nâu trầm", "Xanh đen"]
+        },
+        "daily": [
+            "Hôm nay năng lượng nguyên tố Đất giúp Ma Kết xử lý công việc và tài chính cực kỳ sáng suốt.",
+            "Tính kỷ luật và lộ trình rõ ràng giúp Ma Kết tạo bước tiến chắc chắn trong mục tiêu dài hạn.",
+            "Uy tín tích lũy từ sự chỉn chu giúp bạn nhận được sự tin tưởng lớn từ cấp trên và đối tác.",
+            "Thích hợp để rà soát hợp đồng, cơ cấu lại nguồn lực hoặc tối ưu các khoản đầu tư bền vững.",
+            "Chia sẻ bớt đầu việc nhỏ cho cộng sự sẽ giúp Ma Kết giữ sức cho các quyết định chiến lược.",
+            "Một cuộc trò chuyện chân thành với gia đình hoặc người thân giúp bạn cân bằng lại nhịp sống.",
+            "Đừng quên cho phép mình nghỉ ngơi trọn vẹn sau khi đã hoàn thành xuất sắc danh sách việc trong ngày."
+        ]
+    },
+    {
+        "id": 11,
+        "slug": "aquarius",
+        "symbol": "♒",
+        "name": {
+            "en": "Aquarius",
+            "vi": "Bảo Bình"
+        },
+        "mascot": "Người Ôm Bình Nước",
+        "element": "air",
+        "ruling_planet": {
+            "en": "Uranus",
+            "vi": "Sao Thiên Vương"
+        },
+        "date_range": {
+            "start": { "month": 1, "day": 20 },
+            "end": { "month": 2, "day": 18 },
+            "label": "20/01 – 18/02"
+        },
+        "keywords": ["Độc lập", "Thông thái", "Đổi mới", "Nhân văn"],
+        "traits": "Độc lập, thông thái, giàu ý tưởng đổi mới công nghệ và luôn hướng tới giá trị nhân văn.",
+        "lucky": {
+            "numbers": [7, 11],
+            "colors": ["Xanh điện quang", "Bạc ánh kim"]
+        },
+        "daily": [
+            "Một ý tưởng sáng tạo đột phá của Bảo Bình sẽ nhận được sự ủng hộ lớn từ đồng nghiệp hôm nay.",
+            "Tư duy độc lập và nhạy bén công nghệ giúp Bảo Bình tìm ra cách tối ưu quy trình cực kỳ thông minh.",
+            "Hôm nay rất thuận lợi để làm việc nhóm, trao đổi cộng đồng và kết nối những người cùng chí hướng.",
+            "Gắn ý tưởng mới mẻ với các bước thực thi cụ thể sẽ giúp tầm nhìn của bạn sớm thành hiện thực.",
+            "Tài chính ổn định; thích hợp đầu tư vào công cụ học tập hoặc giải pháp nâng cao hiệu suất.",
+            "Giữ sự cởi mở lắng nghe cảm xúc của người xung quanh giúp các mối quan hệ của bạn thêm ấm áp.",
+            "Dành chút không gian tự do cho sở thích cá nhân để trí tuệ Bảo Bình luôn tươi mới và sắc sảo."
+        ]
+    },
+    {
+        "id": 12,
+        "slug": "pisces",
+        "symbol": "♓",
+        "name": {
+            "en": "Pisces",
+            "vi": "Song Ngư"
+        },
+        "mascot": "Đôi Cá Bơi Ngược Chiều",
+        "element": "water",
+        "ruling_planet": {
+            "en": "Neptune",
+            "vi": "Sao Hải Vương"
+        },
+        "date_range": {
+            "start": { "month": 2, "day": 19 },
+            "end": { "month": 3, "day": 20 },
+            "label": "19/02 – 20/03"
+        },
+        "keywords": ["Trắc ẩn", "Trực giác tốt", "Tinh tế", "Nghệ thuật"],
+        "traits": "Giàu lòng trắc ẩn, trực giác nhạy bén, tinh tế và có tâm hồn nghệ thuật phong phú.",
+        "lucky": {
+            "numbers": [3, 9],
+            "colors": ["Xanh biển nhạt", "Tím oải hương"]
+        },
+        "daily": [
+            "Trực giác của Song Ngư hôm nay vô cùng chính xác; hãy lắng nghe tiếng nói bên trong.",
+            "Nguồn cảm hứng nghệ thuật dồi dào giúp Song Ngư tạo ra những sản phẩm giàu chiều sâu và tinh tế.",
+            "Sự thấu cảm giúp bạn kết nối dễ dàng với khách hàng, đồng nghiệp và hóa giải căng thẳng nhẹ nhàng.",
+            "Ghi chép lại kế hoạch cụ thể từng bước sẽ giúp Song Ngư giữ sự tập trung suốt cả ngày.",
+            "Cần tỉnh táo trước các lời mời chi tiêu theo cảm hứng để giữ cân đối tài chính cuối tháng.",
+            "Một khoảnh khắc yên tĩnh bên tách trà hoặc bản nhạc yêu thích sẽ nạp đầy lại năng lượng cho bạn.",
+            "Lòng tử tế giản dị mà Song Ngư trao đi hôm nay sẽ sớm quay lại dưới dạng những niềm vui bất ngờ."
+        ]
+    }
+]
+// "daily" vẫn còn thiếu nội dung
+// code lấy nội dung daily theo ngày:
+// function getDailyMessage(sign, date = new Date()) {
+//   const dayIndex = Math.floor(
+//     Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000
+//   );
+//   return sign.daily[(dayIndex + sign.id) % sign.daily.length];
+// }
+```

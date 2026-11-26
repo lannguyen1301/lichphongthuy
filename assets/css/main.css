@@ -2,7 +2,7 @@
 /* ==========================================================================
    BIẾN HỆ THỐNG TOÀN CỤC (GLOBAL VARIABLES)
    ========================================================================== */
-.div-related-card__info span, .util-header__title, .util-sound-bento__name, .util-tarot-card__title, .util-tarot-card__sub, .bazi-picker__summary-text, .bazi-pillar-col__stage-pill, .detail-sidebar__item-name, .festival-countdown-bar__heading, .festival-countdown-bar__sub-line, .festival-hero__pill, .festival-hero__title, .festival-hero__lunar, .festival-hero__hours-val, .converter-modal__leap-text, .clock-world-card__city {
+.div-related-card__info span, .util-header__title, .util-sound-bento__name, .util-tarot-card__title, .util-tarot-card__sub, .bazi-picker__summary-text, .bazi-pillar-col__stage-pill, .detail-sidebar__item-name, .festival-countdown-bar__heading, .festival-countdown-bar__sub-line, .festival-hero__pill, .festival-hero__title, .festival-hero__lunar, .festival-hero__hours-val, .converter-modal__leap-text, .clock-world-card__city, .header__profile-name, .header__profile-card-name, .header__profile-card-email {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -30,7 +30,7 @@
   overflow: hidden;
 }
 
-.util-primary-nav__link, .util-sub-nav__link, .util-card__tag, .util-hex-card__badge, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-btn, .bazi-pillar-col__pillar-name, .bazi-pillar-col__ten-god, .bazi-tengods-row__label, .bazi-remedy-box__tag, .bazi-luck-card__step, .bazi-luck-card__ages, .bazi-luck-card__canchi, .bazi-luck-card__stage, .day-bento-card__tag, .day-bento-card__badge, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-hero__type-badge, .festival-seasons-bento__master, .festival-seasons-bento__q-label, .converter-modal__tab, .converter-modal__stat-label, .month-cal__option, .month-cal__badge, .week-cal__badge, .week-cal__legend-badge, .clock-pillar-card__badge, .clock-world-card__utc, .clock-world-card__tag, .bloc-card__event-btn, .header__date-group,
+.util-primary-nav__link, .util-sub-nav__link, .util-card__tag, .util-hex-card__badge, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-btn, .bazi-pillar-col__pillar-name, .bazi-pillar-col__ten-god, .bazi-tengods-row__label, .bazi-remedy-box__tag, .bazi-luck-card__step, .bazi-luck-card__ages, .bazi-luck-card__canchi, .bazi-luck-card__stage, .day-bento-card__tag, .day-bento-card__badge, .iching-card__num, .iching-card__hanzi, .iching-card__status, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-hero__type-badge, .festival-seasons-bento__master, .festival-seasons-bento__q-label, .converter-modal__tab, .converter-modal__stat-label, .month-cal__option, .month-cal__badge, .week-cal__badge, .week-cal__legend-badge, .clock-pillar-card__badge, .clock-world-card__utc, .clock-world-card__tag, .bloc-card__event-btn, .header__date-group,
 .header__time-group, .header__widget-btn, .btn, .sidebar__tooltip, .footer__version-badge {
   white-space: nowrap;
 }
@@ -90,7 +90,7 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-.div-detail-hero__svg-frame, .util-header__sub-bar, .util-clock-controls, .util-divination-actions, .util-coins-stage, .util-coin__face, .util-iching-stage__svg-box, .util-pagination, .bazi-wuxing-card__svg-box, .detail-lightbox, .day-hour-row__col-wuxing, .converter-modal, .month-cal__weekday, .month-cal__legend, .clock-hero__stage, .bloc-card__ribbon-year, .bloc-card__ribbon-weekday, .sidebar__link {
+.div-detail-hero__svg-frame, .util-header__sub-bar, .util-clock-controls, .util-divination-actions, .util-coins-stage, .util-coin__face, .util-iching-stage__svg-box, .util-pagination, .bazi-wuxing-card__svg-box, .detail-lightbox, .day-hour-row__col-wuxing, .iching-card.is-fallback-art .iching-card__poster, .iching-card__raw-link, .converter-modal, .month-cal__weekday, .month-cal__legend, .clock-hero__stage, .bloc-card__ribbon-year, .bloc-card__ribbon-weekday, .sidebar__link, .header__profile-logout {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,7 +108,7 @@
   justify-content: flex-end;
 }
 
-.converter-modal__leap-toggle, .header__lang-link, .header__theme-btn {
+.converter-modal__leap-toggle, .header__lang-link, .header__theme-btn, .header__profile-link {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -120,39 +120,39 @@
   justify-content: flex-start;
 }
 
-.div-detail-hero__lines-stack, .div-detail-blocks, .div-detail-block, .div-related-section, .div-related-card__info, .util-header, .util-header__top-card, .util-header__title-group, .util-card, .util-field, .util-stepper-box, .util-timer-bento__left, .util-timer-bento__right, .util-sound-bento, .util-sound-bento__info, .util-alarm-ring-banner__info, .util-conv-dashboard, .util-bento-item__body, .util-iching-stage__lines, .util-iching-cards-stack, .util-div-detail-card, .util-iching-catalog, .util-history-card__body, .util-date-picker-card, .util-horoscope-hero__main, .util-diff-stat, .util-date-result-banner__main, .util-num-hero, .util-num-cycle-box, .util-birth-chart-box, .util-bio-stat-card, .util-tarot-catalog, .util-tarot-card__body, .bazi-page__pairs-wrapper, .bazi-card, .bazi-toolbar__title-wrap, .bazi-toolbar__field, .bazi-picker__list, .bazi-master-card__top, .bazi-master-card__title-group, .bazi-master-card__meta-item, .bazi-pillar-col__main-chars, .bazi-pillar-col__char-info, .bazi-pillar-col__hidden-stems, .bazi-pillar-col__foot, .bazi-wuxing-card__legend, .bazi-elements-bars, .bazi-element-row, .bazi-tengods-summary, .bazi-tengods-summary__grid, .bazi-luck-card__canchi-group, .bazi-luck-card__wide-left, .bazi-luck-card__wide-right, .detail-hero, .detail-hero__info, .detail-hero__eyebrow-group, .detail-stat-card__content, .detail-article, .detail-article__body, .detail-gallery, .detail-sources__list, .detail-sidebar__card, .detail-sidebar__list, .detail-sidebar__item-info, .year-cal-app, .day-page__pairs-wrapper, .day-bento-card, .day-dir-box__body, .day-solarterm-box__body, .day-hourly-table, .day-hourly-table__list, .day-hour-row__col-time, .day-hour-row__napam-info, .day-hour-row__col-lucdieu, .day-hour-row__bagua-text, .day-term-modal__title-group, .day-term-modal__content, .day-term-modal__box, .clock-page__wrapper, .home-page__left, .festival-cal, .festival-cal__main-right, .festival-countdown-bar__info, .festival-countdown-bar__subtitles, .festival-picker__popover, .festival-picker__list, .festival-hero, .festival-hero__top, .festival-hero__weekday-group, .festival-hero__detail-box, .festival-hero__hours-line, .festival-controls, .festival-controls__intro, .festival-seasons-bento__quarter, .festival-bento-box, .festival-bento-box__footer, .festival-tile__body, .festival-tile__main, .festival-tile__big-date, .converter-modal__dialog, .converter-modal__title-wrap, .converter-modal__field, .converter-modal__bento-body, .converter-modal__date-card, .converter-modal__stat-content, .converter-modal__hours-section, .converter-modal__hour-card, .month-cal, .month-cal__dropdown-menu--year, .week-cal, .week-cal__intro, .week-cal__hero-top, .week-cal__card, .week-cal__card.day-card--full-width .day-card__col-left, .week-cal__card.day-card--full-width .day-card__col-right, .week-cal__card-title-group, .week-cal__card-section, .week-cal__card-meta, .week-cal__card-meta-group, .clock-zodiac-section, .clock-zodiac-card, .clock-zodiac-card__mid, .clock-location-card, .clock-location-card__stat-box, .clock-energy, .clock-pillar-card, .clock-pillar-card__title-group, .clock-hero, .clock-hero__loc-menu, .clock-world-card, .fengshui-stack, .fengshui-card, .fengshui-actions__box, .bloc-card, .bloc-card__month-box, .bloc-card__date-hero, .bloc-card__overlay, .bloc-card__canchi-list, .bloc-card__quick-fengshui, .sidebar__list, .footer__card, .footer__list {
+.auth-hero, .auth-hero__top, .auth-hero__perks, .profile-lunar-box, .profile-stat-pill, .auth-card, .auth-card__head, .profile-tabpanel, .family-list, .family-card__info, .auth-form, .auth-form__group, .auth-form__options, .auth-strength, .div-detail-hero__lines-stack, .div-detail-blocks, .div-detail-block, .div-related-section, .div-related-card__info, .util-header, .util-header__top-card, .util-header__title-group, .util-card, .util-field, .util-stepper-box, .util-timer-bento__left, .util-timer-bento__right, .util-sound-bento, .util-sound-bento__info, .util-alarm-ring-banner__info, .util-conv-dashboard, .util-bento-item__body, .util-iching-stage__lines, .util-iching-cards-stack, .util-div-detail-card, .util-iching-catalog, .util-history-card__body, .util-date-picker-card, .util-horoscope-hero__main, .util-diff-stat, .util-date-result-banner__main, .util-num-hero, .util-num-cycle-box, .util-birth-chart-box, .util-bio-stat-card, .util-tarot-catalog, .util-tarot-card__body, .bazi-page__pairs-wrapper, .bazi-card, .bazi-toolbar__title-wrap, .bazi-toolbar__field, .bazi-picker__list, .bazi-master-card__top, .bazi-master-card__title-group, .bazi-master-card__meta-item, .bazi-pillar-col__main-chars, .bazi-pillar-col__char-info, .bazi-pillar-col__hidden-stems, .bazi-pillar-col__foot, .bazi-wuxing-card__legend, .bazi-elements-bars, .bazi-element-row, .bazi-tengods-summary, .bazi-tengods-summary__grid, .bazi-luck-card__canchi-group, .bazi-luck-card__wide-left, .bazi-luck-card__wide-right, .detail-hero, .detail-hero__info, .detail-hero__eyebrow-group, .detail-stat-card__content, .detail-article, .detail-article__body, .detail-gallery, .detail-sources__list, .detail-sidebar__card, .detail-sidebar__list, .detail-sidebar__item-info, .year-cal-app, .day-page__pairs-wrapper, .day-bento-card, .day-dir-box__body, .day-solarterm-box__body, .day-hourly-table, .day-hourly-table__list, .day-hour-row__col-time, .day-hour-row__napam-info, .day-hour-row__col-lucdieu, .day-hour-row__bagua-text, .day-term-modal__title-group, .day-term-modal__content, .day-term-modal__box, .clock-page__wrapper, .home-page__left, .iching-card, .iching-card__caption, .iching-card-meta, .iching-pair-box, .iching-pair-box__col, .festival-cal, .festival-cal__main-right, .festival-countdown-bar__info, .festival-countdown-bar__subtitles, .festival-picker__popover, .festival-picker__list, .festival-hero, .festival-hero__top, .festival-hero__weekday-group, .festival-hero__detail-box, .festival-hero__hours-line, .festival-controls, .festival-controls__intro, .festival-seasons-bento__quarter, .festival-bento-box, .festival-bento-box__footer, .festival-tile__body, .festival-tile__main, .festival-tile__big-date, .converter-modal__dialog, .converter-modal__title-wrap, .converter-modal__field, .converter-modal__bento-body, .converter-modal__date-card, .converter-modal__stat-content, .converter-modal__hours-section, .converter-modal__hour-card, .month-cal, .month-cal__dropdown-menu--year, .week-cal, .week-cal__intro, .week-cal__hero-top, .week-cal__card, .week-cal__card.day-card--full-width .day-card__col-left, .week-cal__card.day-card--full-width .day-card__col-right, .week-cal__card-title-group, .week-cal__card-section, .week-cal__card-meta, .week-cal__card-meta-group, .clock-zodiac-section, .clock-zodiac-card, .clock-zodiac-card__mid, .clock-location-card, .clock-location-card__stat-box, .clock-energy, .clock-pillar-card, .clock-pillar-card__title-group, .clock-hero, .clock-hero__loc-menu, .clock-world-card, .fengshui-stack, .fengshui-card, .fengshui-actions__box, .bloc-card, .bloc-card__month-box, .bloc-card__date-hero, .bloc-card__overlay, .bloc-card__canchi-list, .bloc-card__quick-fengshui, .sidebar__list, .footer__card, .footer__list, .header__profile-meta, .header__profile-popover, .header__profile-card-info, .header__profile-menu {
   display: flex;
   flex-direction: column;
 }
 
-.div-detail-hero__hex-panel, .div-detail-hero__tarot-col, .util-clock-stage, .util-divination-hero, .util-iching-stage, .util-tarot-stage, .util-tarot-stage__hint, .util-pythagoras-cell, .util-num-day-cell, .bazi-pillar-col__head, .detail-sidebar__date-box, .detail-lightbox__figure, .month-cal--mini .month-cal__cell, .day-term-modal__visual, .festival-countdown-bar__unit, .clock-hero__meta-col--center, .bloc-card__lunar-num-box {
+.auth-elements__btn, .div-detail-hero__hex-panel, .div-detail-hero__tarot-col, .util-clock-stage, .util-divination-hero, .util-iching-stage, .util-tarot-stage, .util-tarot-stage__hint, .util-pythagoras-cell, .util-num-day-cell, .bazi-pillar-col__head, .detail-sidebar__date-box, .detail-lightbox__figure, .month-cal--mini .month-cal__cell, .day-term-modal__visual, .festival-countdown-bar__unit, .clock-hero__meta-col--center, .bloc-card__lunar-num-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.div-related-card__main, .util-header__brand-box, .util-header__brand-link, .util-header__actions, .util-alarm-item__right, .util-year-Step-bar, .util-iching-catalog__tools, .util-history-controls, .util-inline-custom-pickers,
+.profile-summary, .family-card__left, .family-card__head, .family-card__actions, .auth-form__input-wrap, .auth-form__check, .div-related-card__main, .util-header__brand-box, .util-header__brand-link, .util-header__actions, .util-alarm-item__right, .util-year-Step-bar, .util-iching-catalog__tools, .util-history-controls, .util-inline-custom-pickers,
 .util-inline-birth-picker, .util-num-hero__top, .util-bio-legend__item, .util-modal-media__controls, .bazi-master-card__hero, .bazi-wuxing-card__legend-item, .bazi-element-row__name, .bazi-element-row__meta, .bazi-remedy-box__title-wrap, .bazi-luck-card__mid, .detail-page__top-left, .detail-page__top-right, .detail-page__badges, .detail-hero__action-row, .detail-stat-card, .detail-gallery__caption, .detail-sidebar__item, .year-cal-app__side, .day-page__center-group, .day-sun-table__th, .day-sun-table__time, .day-hour-row__col-napam, .day-hour-row__dao-sub, .day-hour-row__col-bagua, .festival-hero__date-row, .festival-controls__year-toolbar, .converter-modal__summary-main, .converter-modal__stat-card, .converter-modal__hours-title-group, .converter-modal__hour-top, .month-cal__controls, .month-cal__dots, .week-cal__toolbar, .week-cal__toolbar-center, .week-cal__hero-date, .clock-energy__title-wrap, .clock-pillar-card__body, .clock-hero__meta-col, .fengshui-hours__title, .fengshui-card__head, .bloc-card__event-pills, .bloc-card__caption-btn, .header__datetime-wrapper, .header__date-group,
-.header__time-group, .footer__elements, .footer__input-group, .footer__social-list, .header__left, .header__right {
+.header__time-group, .footer__elements, .footer__input-group, .footer__social-list, .header__left, .header__right, .header__auth, .header__auth-guest, .header__profile-card {
   display: flex;
   align-items: center;
 }
 
-.div-related-card__head, .util-header__brand-row, .util-card__head, .util-sound-bento__row, .util-alarm-ring-banner, .util-alarm-item, .util-bento-item__top, .util-bento-item__foot, .util-div-detail-card__head, .util-hex-card__top, .util-history-card__top, .util-date-result-banner, .util-bio-stat-card__head, .bazi-card__head, .bazi-toolbar__head, .bazi-picker__summary, .bazi-picker__year-nav, .bazi-master-card__badges, .bazi-master-card__footer, .bazi-pillar-col__stem-box, .bazi-pillar-col__branch-box, .bazi-element-row__top, .bazi-tengods-summary__head, .bazi-god-box__top, .bazi-remedy-box__head, .bazi-luck-card__top, .bazi-luck-card__foot, .detail-page__top-bar, .detail-article__head, .detail-gallery__head, .detail-sidebar__head, .day-page__toolbar, .day-bento-card__head, .day-dir-box__top, .day-solarterm-box__top, .day-lucdieu-cell__head, .day-sun-summary__pill, .day-hourly-section__header, .day-term-modal__header, .day-term-modal__footer, .festival-picker__summary, .festival-picker__option, .festival-hero__footer, .festival-controls__head, .festival-controls__filter-row, .festival-bento-box__bar, .festival-bento-box__subnote, .festival-tile__head, .festival-tile__foot, .converter-modal__header, .converter-modal__summary, .converter-modal__year-nav, .converter-modal__date-top, .converter-modal__hours-head, .converter-modal__footer, .month-cal__toolbar, .week-cal__header, .week-cal__hero-badges, .week-cal__hero-footer, .week-cal__card-head, .week-cal__footer, .clock-zodiac-section__header, .clock-zodiac-card__top, .clock-zodiac-card__bottom, .clock-energy__head, .clock-pillar-card__head, .clock-pillar-card__foot, .clock-hero__header, .clock-hero__loc-option, .clock-world-card__top, .clock-world-card__bottom, .fengshui-actions__header, .bloc-card__top, .footer__brand-head, .footer__contact, .footer__social, .footer__bottom-bar, .header__container {
+.auth-hero__foot, .family-card, .auth-form__label-row, .div-related-card__head, .util-header__brand-row, .util-card__head, .util-sound-bento__row, .util-alarm-ring-banner, .util-alarm-item, .util-bento-item__top, .util-bento-item__foot, .util-div-detail-card__head, .util-hex-card__top, .util-history-card__top, .util-date-result-banner, .util-bio-stat-card__head, .bazi-card__head, .bazi-toolbar__head, .bazi-picker__summary, .bazi-picker__year-nav, .bazi-master-card__badges, .bazi-master-card__footer, .bazi-pillar-col__stem-box, .bazi-pillar-col__branch-box, .bazi-element-row__top, .bazi-tengods-summary__head, .bazi-god-box__top, .bazi-remedy-box__head, .bazi-luck-card__top, .bazi-luck-card__foot, .detail-page__top-bar, .detail-article__head, .detail-gallery__head, .detail-sidebar__head, .day-page__toolbar, .day-bento-card__head, .day-dir-box__top, .day-solarterm-box__top, .day-lucdieu-cell__head, .day-sun-summary__pill, .day-hourly-section__header, .day-term-modal__header, .day-term-modal__footer, .iching-card__top-meta, .iching-pair-box__toggle, .festival-picker__summary, .festival-picker__option, .festival-hero__footer, .festival-controls__head, .festival-controls__filter-row, .festival-bento-box__bar, .festival-bento-box__subnote, .festival-tile__head, .festival-tile__foot, .converter-modal__header, .converter-modal__summary, .converter-modal__year-nav, .converter-modal__date-top, .converter-modal__hours-head, .converter-modal__footer, .month-cal__toolbar, .week-cal__header, .week-cal__hero-badges, .week-cal__hero-footer, .week-cal__card-head, .week-cal__footer, .clock-zodiac-section__header, .clock-zodiac-card__top, .clock-zodiac-card__bottom, .clock-energy__head, .clock-pillar-card__head, .clock-pillar-card__foot, .clock-hero__header, .clock-hero__loc-option, .clock-world-card__top, .clock-world-card__bottom, .fengshui-actions__header, .bloc-card__top, .footer__brand-head, .footer__contact, .footer__social, .footer__bottom-bar, .header__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.div-orient-pill-row, .div-sidebar-chips, .util-sound-bento__actions, .util-alarm-ring-banner__btns, .util-season-filters, .util-horoscope-hero__pills, .util-bio-legend, .bazi-toolbar__quick-actions, .bazi-pillar-col__hidden-list, .day-hourly-section__filters, .day-term-modal__meta-pills, .festival-controls__eyebrow-row, .festival-controls__filter-bar, .week-cal__title-row, .week-cal__hero-meta-pills, .clock-zodiac-section__filters, .fengshui-actions__list, .footer__elements-list {
+.profile-quick-links, .div-orient-pill-row, .div-sidebar-chips, .util-sound-bento__actions, .util-alarm-ring-banner__btns, .util-season-filters, .util-horoscope-hero__pills, .util-bio-legend, .bazi-toolbar__quick-actions, .bazi-pillar-col__hidden-list, .day-hourly-section__filters, .day-term-modal__meta-pills, .iching-card-meta__omens, .iching-card-meta__keywords, .festival-controls__eyebrow-row, .festival-controls__filter-bar, .week-cal__title-row, .week-cal__hero-meta-pills, .clock-zodiac-section__filters, .fengshui-actions__list, .footer__elements-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
 }
 
-.div-related-card__svg-wrap, .div-sidebar-item__svg, .util-header__logo-box, .util-header__eyebrow, .util-primary-nav__step, .util-primary-nav__link, .util-primary-nav__icon-box, .util-sub-nav__link, .util-stepper-box__btn, .util-alarm-item__del, .util-subfilter-btn, .util-year-step__btn, .util-bento-item__icon-box, .util-hex-card__svg, .util-pagination__btn, .util-horoscope-hero__badge, .util-num-hero__circle, .util-modal-media__slide-btn, .bazi-toolbar__eyebrow, .bazi-toolbar__preset-icon-box, .bazi-toolbar__gender-btn, .bazi-picker__year-step, .bazi-picker__option, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-luck-card__zodiac-box, .detail-page__cat-pill, .detail-page__date-pill, .detail-hero__occasion-tag, .detail-stat-card__icon-box, .detail-gallery__hint-badge, .detail-gallery__caption-badge, .detail-lightbox__close, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-hourly-section__filter-btn, .day-hour-row__napam-icon-box, .day-hour-row__badge, .day-hour-row__bagua-ring, .day-term-modal__close, .day-term-modal__pill, .festival-countdown-bar__badge, .festival-picker__tab, .festival-hero__type-badge, .festival-hero__link, .festival-controls__filter-btn, .festival-controls__reset-btn, .festival-seasons-bento__master, .festival-seasons-bento__btn, .festival-bento-box__more-btn, .festival-bento-box__ext-link, .festival-tile__cta, .converter-modal__badge, .converter-modal__tab, .converter-modal__close-btn, .converter-modal__year-step, .converter-modal__option-btn, .converter-modal__swap-btn, .converter-modal__stat-icon-box, .converter-modal__fortune-pill, .month-cal__nav-btn, .month-cal__summary, .month-cal__option, .month-cal__legend-pill, .week-cal__week-badge, .week-cal__lunar-badge, .week-cal__nav-btn, .week-cal__hero-pill, .week-cal__hero-fortune, .week-cal__hero-meta-badge, .week-cal__hero-link, .week-cal__badge, .week-cal__legend-badge, .clock-zodiac-section__filter-btn, .clock-zodiac-card__fortune, .clock-pillar-card__icon-box, .clock-hero__status-pill, .clock-hero__loc-summary, .clock-hero__format-switch, .clock-hero__digits, .clock-hero__utc-badge, .clock-hero__weather-chip, .clock-hero__lunar-pill, .fengshui-actions__icon, .bloc-card__share-btn, .bloc-card__event-btn, .bloc-card__caption-badge, .header__logo-link, .header__widget-btn, .btn, .footer__logo-link, .footer__social-link, .footer__top-btn, .header__lang-summary, .header__theme-summary {
+.auth-hero__badge, .auth-hero__perk-icon, .auth-hero__back-link, .profile-summary__avatar, .profile-tabs__btn, .family-card__zodiac, .family-card__del-btn, .auth-form__eye-btn, .div-related-card__svg-wrap, .div-sidebar-item__svg, .util-header__logo-box, .util-header__eyebrow, .util-primary-nav__step, .util-primary-nav__link, .util-primary-nav__icon-box, .util-sub-nav__link, .util-stepper-box__btn, .util-alarm-item__del, .util-subfilter-btn, .util-year-step__btn, .util-bento-item__icon-box, .util-hex-card__svg, .util-pagination__btn, .util-horoscope-hero__badge, .util-num-hero__circle, .util-modal-media__slide-btn, .bazi-toolbar__eyebrow, .bazi-toolbar__preset-icon-box, .bazi-toolbar__gender-btn, .bazi-picker__year-step, .bazi-picker__option, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-luck-card__zodiac-box, .detail-page__cat-pill, .detail-page__date-pill, .detail-hero__occasion-tag, .detail-stat-card__icon-box, .detail-gallery__hint-badge, .detail-gallery__caption-badge, .detail-lightbox__close, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-hourly-section__filter-btn, .day-hour-row__napam-icon-box, .day-hour-row__badge, .day-hour-row__bagua-ring, .day-term-modal__close, .day-term-modal__pill, .iching-card__num, .iching-card__hanzi, .iching-card__status, .festival-countdown-bar__badge, .festival-picker__tab, .festival-hero__type-badge, .festival-hero__link, .festival-controls__filter-btn, .festival-controls__reset-btn, .festival-seasons-bento__master, .festival-seasons-bento__btn, .festival-bento-box__more-btn, .festival-bento-box__ext-link, .festival-tile__cta, .converter-modal__badge, .converter-modal__tab, .converter-modal__close-btn, .converter-modal__year-step, .converter-modal__option-btn, .converter-modal__swap-btn, .converter-modal__stat-icon-box, .converter-modal__fortune-pill, .month-cal__nav-btn, .month-cal__summary, .month-cal__option, .month-cal__legend-pill, .week-cal__week-badge, .week-cal__lunar-badge, .week-cal__nav-btn, .week-cal__hero-pill, .week-cal__hero-fortune, .week-cal__hero-meta-badge, .week-cal__hero-link, .week-cal__badge, .week-cal__legend-badge, .clock-zodiac-section__filter-btn, .clock-zodiac-card__fortune, .clock-pillar-card__icon-box, .clock-hero__status-pill, .clock-hero__loc-summary, .clock-hero__format-switch, .clock-hero__digits, .clock-hero__utc-badge, .clock-hero__weather-chip, .clock-hero__lunar-pill, .fengshui-actions__icon, .bloc-card__share-btn, .bloc-card__event-btn, .bloc-card__caption-badge, .header__logo-link, .header__widget-btn, .btn, .footer__logo-link, .footer__social-link, .footer__top-btn, .header__lang-summary, .header__theme-summary, .header__profile-summary, .header__profile-avatar, .header__profile-card-avatar {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -164,12 +164,13 @@
   min-width: 0;
 }
 
-.div-related-card__svg-wrap, .div-sidebar-item__svg, .div-sidebar-item__tarot-thumb, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__item, .util-primary-nav__icon-box, .util-bento-item__icon-box, .util-hex-card__svg, .util-num-hero__circle, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-dot, .bazi-picker__arrow, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-wuxing-card__dot, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-remedy-box__tag, .bazi-luck-card__zodiac-box, .detail-stat-card__icon-box, .detail-gallery__caption-badge, .detail-sidebar__date-box, .day-page__hours-icon, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-lucdieu-cell__icon, .day-sun-table__th-icon, .day-sun-table__time-icon, .day-hourly-section__dao-icon, .day-hour-row__napam-icon-box, .day-hour-row__dao-icon, .day-hour-row__bagua-ring, .wuxing-mini, .festival-cal__dot, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-picker__summary-date, .festival-picker__arrow, .festival-picker__opt-date, .converter-modal__checkbox, .converter-modal__stat-icon-box, .converter-modal__hour-dot, .week-cal__badge-dot, .clock-pillar-card__icon-box, .fengshui-hours__dot, .bloc-card__event-dot, .bloc-card__caption-badge, .header__logo, .header__widget, .header__widget-icon {
+.auth-hero__perk-icon, .profile-summary__avatar, .family-card__zodiac, .auth-form__check input[type=checkbox], .div-related-card__svg-wrap, .div-sidebar-item__svg, .div-sidebar-item__tarot-thumb, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__item, .util-primary-nav__icon-box, .util-bento-item__icon-box, .util-hex-card__svg, .util-num-hero__circle, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-dot, .bazi-picker__arrow, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-wuxing-card__dot, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-remedy-box__tag, .bazi-luck-card__zodiac-box, .detail-stat-card__icon-box, .detail-gallery__caption-badge, .detail-sidebar__date-box, .day-page__hours-icon, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-lucdieu-cell__icon, .day-sun-table__th-icon, .day-sun-table__time-icon, .day-hourly-section__dao-icon, .day-hour-row__napam-icon-box, .day-hour-row__dao-icon, .day-hour-row__bagua-ring, .wuxing-mini, .festival-cal__dot, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-picker__summary-date, .festival-picker__arrow, .festival-picker__opt-date, .converter-modal__checkbox, .converter-modal__stat-icon-box, .converter-modal__hour-dot, .week-cal__badge-dot, .clock-pillar-card__icon-box, .fengshui-hours__dot, .bloc-card__event-dot, .bloc-card__caption-badge, .header__logo, .header__widget, .header__widget-icon, .header__profile-avatar, .header__profile-arrow, .header__profile-card-avatar, .header__profile-link .icon,
+.header__profile-link svg {
   flex: 0 0 auto;
 }
 
 .util-history-card__media img, .util-modal-media img,
-.util-modal-media video, .detail-hero__img, .detail-gallery__img, .bloc-card__img {
+.util-modal-media video, .detail-hero__img, .detail-gallery__img, .iching-card__img, .bloc-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -181,11 +182,11 @@
   height: auto;
 }
 
-.div-orient-switch__btn, .div-detail-block, .div-sidebar-chip, .util-header__burger, .util-primary-nav__icon-box, .util-sub-nav__link, .util-card, .util-field__input, .util-stepper-box, .util-alarm-item__toggle, .bazi-card, .bazi-toolbar__preset-icon-box, .bazi-toolbar__gender-btn, .bazi-picker__summary, .detail-page__top-bar, .detail-hero, .detail-hero__media, .detail-gallery__caption, .detail-gallery__caption-badge, .detail-sidebar__filter-btn, .day-page__toolbar, .day-bento-card, .day-hour-row__col-time strong, .day-hour-row__napam-icon-box, .festival-countdown-bar, .festival-countdown-bar__unit, .festival-countdown-bar__num, .festival-picker__summary, .festival-picker__tab, .festival-picker__option, .festival-hero, .festival-controls, .festival-seasons-bento__quarter, .festival-bento-box, .converter-modal__dialog, .converter-modal__tab, .converter-modal__summary, .converter-modal__leap-toggle, .converter-modal__date-card, .month-cal, .month-cal__summary, .month-cal__option, .week-cal, .week-cal__hero, .week-cal__flat-action.fengshui-actions__box, .clock-zodiac-section, .clock-location-card, .clock-energy, .clock-hero, .clock-hero__loc-summary, .clock-hero__loc-option, .clock-hero__format-btn, .fengshui-hours__box, .fengshui-card, .bloc-card, .bloc-card__year-badge, .bloc-card__month-vn, .bloc-card__day-status, .bloc-card__solar-num, .bloc-card__media, .bloc-card__event-dot, .bloc-card__caption-badge, .bloc-card__ribbon-year, .bloc-card__ribbon-weekday, .bloc-card__lunar-num-box, .bloc-card__lunar-num, .bloc-card__lunar-month, .header__datetime-wrapper, .sidebar__link, .footer__card, .footer__link, .footer__bottom-bar, .header__lang-summary, .header__theme-summary, .header__lang-link, .header__theme-btn, .header__burger {
+.auth-hero, .auth-card, .profile-tabs__btn, .auth-form__input, .auth-form__eye-btn, .div-orient-switch__btn, .div-detail-block, .div-sidebar-chip, .util-header__burger, .util-primary-nav__icon-box, .util-sub-nav__link, .util-card, .util-field__input, .util-stepper-box, .util-alarm-item__toggle, .bazi-card, .bazi-toolbar__preset-icon-box, .bazi-toolbar__gender-btn, .bazi-picker__summary, .detail-page__top-bar, .detail-hero, .detail-hero__media, .detail-gallery__caption, .detail-gallery__caption-badge, .detail-sidebar__filter-btn, .day-page__toolbar, .day-bento-card, .day-hour-row__col-time strong, .day-hour-row__napam-icon-box, .iching-card__zoom-pill, .festival-countdown-bar, .festival-countdown-bar__unit, .festival-countdown-bar__num, .festival-picker__summary, .festival-picker__tab, .festival-picker__option, .festival-hero, .festival-controls, .festival-seasons-bento__quarter, .festival-bento-box, .converter-modal__dialog, .converter-modal__tab, .converter-modal__summary, .converter-modal__leap-toggle, .converter-modal__date-card, .month-cal, .month-cal__summary, .month-cal__option, .week-cal, .week-cal__hero, .week-cal__flat-action.fengshui-actions__box, .clock-zodiac-section, .clock-location-card, .clock-energy, .clock-hero, .clock-hero__loc-summary, .clock-hero__loc-option, .clock-hero__format-btn, .fengshui-hours__box, .fengshui-card, .bloc-card, .bloc-card__year-badge, .bloc-card__month-vn, .bloc-card__day-status, .bloc-card__solar-num, .bloc-card__media, .bloc-card__event-dot, .bloc-card__caption-badge, .bloc-card__ribbon-year, .bloc-card__ribbon-weekday, .bloc-card__lunar-num-box, .bloc-card__lunar-num, .bloc-card__lunar-month, .header__datetime-wrapper, .sidebar__link, .footer__card, .footer__link, .footer__bottom-bar, .header__lang-summary, .header__theme-summary, .header__lang-link, .header__theme-btn, .header__profile-summary, .header__profile-link, .header__burger {
   transition: var(--theme-transition);
 }
 
-.div-tarot-poster, .div-related-card, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__link, .util-stepper-box__btn, .util-preset-chip, .util-alarm-item, .util-alarm-item__del, .util-subfilter-btn, .util-bento-item, .util-iching-stage, .util-div-detail-card, .util-hex-card, .util-history-card, .util-pagination__btn, .util-diff-stat, .util-num-cycle-box, .util-pythagoras-cell, .util-num-day-cell, .util-bio-stat-card, .util-tarot-card, .bazi-picker__year-step, .bazi-picker__option, .bazi-pillar-col, .bazi-element-row, .bazi-god-box, .bazi-remedy-box, .bazi-luck-card, .detail-hero__zoom-badge, .detail-stat-card, .detail-gallery__item, .detail-sidebar__item, .day-dir-box, .day-solarterm-box, .day-lucdieu-cell, .day-hourly-section__filter-btn, .day-hour-row, .day-hour-row__col-link, .day-hour-row__bagua-ring, .day-term-modal__close, .festival-hero__link, .festival-controls__filter-btn, .festival-controls__reset-btn, .festival-seasons-bento__master, .festival-seasons-bento__btn, .festival-bento-box__more-btn, .festival-tile, .converter-modal__close-btn, .converter-modal__year-step, .converter-modal__option-btn, .converter-modal__swap-btn, .converter-modal__stat-card, .converter-modal__hour-card, .month-cal__nav-btn, .month-cal__cell, .month-cal__legend-pill, .week-cal__nav-btn, .week-cal__hero-link, .week-cal__card, .clock-zodiac-section__filter-btn, .clock-zodiac-card, .clock-pillar-card, .clock-world-card, .bloc-card__share-btn, .bloc-card__event-btn, .bloc-card__caption-btn, .header__widget-btn, .btn, .footer__element-dot, .footer__social-link, .footer__top-btn {
+.auth-hero__back-link, .family-card, .family-card__del-btn, .auth-elements__btn, .div-tarot-poster, .div-related-card, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__link, .util-stepper-box__btn, .util-preset-chip, .util-alarm-item, .util-alarm-item__del, .util-subfilter-btn, .util-bento-item, .util-iching-stage, .util-div-detail-card, .util-hex-card, .util-history-card, .util-pagination__btn, .util-diff-stat, .util-num-cycle-box, .util-pythagoras-cell, .util-num-day-cell, .util-bio-stat-card, .util-tarot-card, .bazi-picker__year-step, .bazi-picker__option, .bazi-pillar-col, .bazi-element-row, .bazi-god-box, .bazi-remedy-box, .bazi-luck-card, .detail-hero__zoom-badge, .detail-stat-card, .detail-gallery__item, .detail-sidebar__item, .day-dir-box, .day-solarterm-box, .day-lucdieu-cell, .day-hourly-section__filter-btn, .day-hour-row, .day-hour-row__col-link, .day-hour-row__bagua-ring, .day-term-modal__close, .iching-card__poster, .iching-card__raw-link, .festival-hero__link, .festival-controls__filter-btn, .festival-controls__reset-btn, .festival-seasons-bento__master, .festival-seasons-bento__btn, .festival-bento-box__more-btn, .festival-tile, .converter-modal__close-btn, .converter-modal__year-step, .converter-modal__option-btn, .converter-modal__swap-btn, .converter-modal__stat-card, .converter-modal__hour-card, .month-cal__nav-btn, .month-cal__cell, .month-cal__legend-pill, .week-cal__nav-btn, .week-cal__hero-link, .week-cal__card, .clock-zodiac-section__filter-btn, .clock-zodiac-card, .clock-pillar-card, .clock-world-card, .bloc-card__share-btn, .bloc-card__event-btn, .bloc-card__caption-btn, .header__widget-btn, .btn, .footer__element-dot, .footer__social-link, .footer__top-btn, .header__profile-logout {
   transition: var(--theme-transition), transform 0.2s ease;
 }
 
@@ -213,7 +214,7 @@
   transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.util-header__burger-bar, .bazi-picker__arrow, .festival-picker__arrow, .converter-modal__arrow, .month-cal__arrow, .clock-hero__loc-arrow, .header__lang-arrow, .header__burger-bar {
+.util-header__burger-bar, .bazi-picker__arrow, .festival-picker__arrow, .converter-modal__arrow, .month-cal__arrow, .clock-hero__loc-arrow, .header__lang-arrow, .header__profile-arrow, .header__burger-bar {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
@@ -221,7 +222,7 @@
   transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
-.util-primary-nav.is-open, .bazi-picker__popover, .detail-lightbox__figure, .day-term-modal__dialog, .festival-picker__popover, .converter-modal__dialog, .converter-modal__popover, .month-cal__dropdown-menu, .clock-hero__loc-menu, .header__lang-list, .header__theme-list {
+.util-primary-nav.is-open, .bazi-picker__popover, .detail-lightbox__figure, .day-term-modal__dialog, .festival-picker__popover, .converter-modal__dialog, .converter-modal__popover, .month-cal__dropdown-menu, .clock-hero__loc-menu, .header__lang-list, .header__theme-list, .header__profile-popover {
   animation: fadeIn 0.2s ease-out forwards;
 }
 
@@ -1737,6 +1738,209 @@ strong {
   color: var(--primary-color);
   font-weight: 700;
 }
+.header__auth-guest {
+  gap: 0.8rem;
+}
+.header__auth-guest[hidden] {
+  display: none !important;
+}
+.header__auth-register {
+  height: 4.2rem;
+  padding: 0 1.6rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+.header__auth-register:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+@media (max-width: 1199.98px) {
+  .header__auth-register {
+    display: none;
+  }
+}
+@media (max-width: 575.98px) {
+  .header__auth-register {
+    height: 3.8rem;
+    padding: 0 1.2rem;
+    font-size: 1.3rem;
+  }
+}
+.header__auth-register[hidden] {
+  display: none !important;
+}
+.header__auth-btn[hidden] {
+  display: none !important;
+}
+.header__profile-details {
+  position: relative;
+}
+.header__profile-details[hidden] {
+  display: none !important;
+}
+.header__profile-summary {
+  gap: 0.9rem;
+  height: 4.4rem;
+  padding: 0.4rem 1.2rem 0.4rem 0.5rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 99.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+.header__profile-summary:hover {
+  border-color: var(--primary-color);
+  background-color: var(--body-bg);
+}
+@media (max-width: 575.98px) {
+  .header__profile-summary {
+    height: 3.8rem;
+    padding: 0.3rem 0.8rem 0.3rem 0.35rem;
+    gap: 0.5rem;
+  }
+}
+.header__profile-details[open] .header__profile-summary {
+  border-color: var(--primary-color);
+  background-color: var(--body-bg);
+  box-shadow: 0 0 0 3px var(--primary-soft-bg);
+}
+.header__profile-avatar {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+@media (max-width: 575.98px) {
+  .header__profile-avatar {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.15rem;
+  }
+}
+.header__profile-meta {
+  align-items: flex-start;
+  max-width: 12.5rem;
+  line-height: 1.2;
+}
+.header__profile-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-color);
+  max-width: 100%;
+}
+.header__profile-element {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.header__profile-arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.header__profile-details[open] .header__profile-arrow {
+  transform: rotate(180deg);
+}
+.header__profile-popover {
+  position: absolute;
+  top: calc(100% + 1rem);
+  right: 0;
+  z-index: 70;
+  width: 29rem;
+  max-width: calc(100vw - 2.4rem);
+  padding: 1.2rem;
+  background-color: var(--body-bg);
+  border: 1.5px solid var(--primary-color);
+  border-radius: 2rem;
+  box-shadow: 0 1.6rem 3.8rem var(--shadow-color);
+  gap: 1rem;
+}
+.header__profile-card {
+  gap: 1.2rem;
+  padding: 1.2rem;
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+  border: 1px solid var(--border-color);
+  border-radius: 1.4rem;
+}
+.header__profile-card-avatar {
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 1.3rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.header__profile-card-info {
+  gap: 0.2rem;
+  min-width: 0;
+}
+.header__profile-card-name {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.header__profile-card-email {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+.header__profile-card-badge {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 0.25rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 99.9rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+.header__profile-menu {
+  gap: 0.35rem;
+}
+.header__profile-link {
+  gap: 1rem;
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border-radius: 1.1rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+.header__profile-link .icon,
+.header__profile-link svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.header__profile-link:hover, .header__profile-link:focus-visible {
+  background-color: var(--bg-surface);
+  color: var(--primary-color);
+}
+.header__profile-foot {
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--border-color);
+}
+.header__profile-logout {
+  gap: 0.8rem;
+  width: 100%;
+  height: 4rem;
+  border-radius: 1.2rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-danger);
+}
+.header__profile-logout:hover, .header__profile-logout:focus-visible {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #ffffff;
+}
 .header__burger {
   display: none;
   flex-direction: column;
@@ -1768,6 +1972,25 @@ strong {
 }
 .header__burger.is-active .header__burger-bar:nth-child(3) {
   transform: translateY(-0.7rem) rotate(-45deg);
+}
+
+body[data-page=signin] .header__auth-btn[data-auth-link=signin] {
+  display: none;
+}
+body[data-page=signin] .header__auth-register[data-auth-link=signup] {
+  display: inline-flex;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+body[data-page=signin] .header__auth-register[data-auth-link=signup]:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #ffffff;
+}
+
+body[data-page=signup] .header__auth-register[data-auth-link=signup] {
+  display: none;
 }
 
 .footer {
@@ -6385,6 +6608,277 @@ strong {
   pointer-events: none;
   z-index: 1;
   transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.iching-hero-grid {
+  display: grid;
+  grid-template-columns: 28rem minmax(0, 1fr);
+  align-items: start;
+  gap: 2.8rem;
+}
+@media (max-width: 991.98px) {
+  .iching-hero-grid {
+    grid-template-columns: 24rem minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
+@media (max-width: 767.98px) {
+  .iching-hero-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+.iching-card {
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 28rem;
+}
+.iching-card[data-element=kim] {
+  --iching-accent: #eab308;
+}
+.iching-card[data-element=moc] {
+  --iching-accent: #10b981;
+}
+.iching-card[data-element=thuy] {
+  --iching-accent: #3b82f6;
+}
+.iching-card[data-element=hoa] {
+  --iching-accent: #d92b2b;
+}
+.iching-card[data-element=tho] {
+  --iching-accent: #f59e0b;
+}
+.iching-card__poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 2.2rem;
+  overflow: hidden;
+  background-color: #0b0b0c;
+  border: 2px solid var(--iching-accent, var(--primary-color));
+  box-shadow: 0 1.2rem 3rem var(--shadow-color);
+  cursor: zoom-in;
+}
+.iching-card__poster:hover, .iching-card__poster:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 1.8rem 3.8rem var(--shadow-color);
+}
+.iching-card__poster:hover .iching-card__img, .iching-card__poster:focus-visible .iching-card__img {
+  transform: scale(1.04);
+}
+.iching-card__poster:hover .iching-card__zoom-pill, .iching-card__poster:focus-visible .iching-card__zoom-pill {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+.iching-card.is-fallback-art .iching-card__poster {
+  background-color: var(--bg-surface);
+  padding: 4.8rem 3.2rem 6.8rem;
+}
+.iching-card.is-fallback-art .iching-card__img {
+  width: 13rem;
+  height: 13rem;
+  object-fit: contain;
+  filter: var(--zodiac-filter);
+}
+.iching-card.is-fallback-art .iching-card__caption {
+  background: linear-gradient(180deg, transparent 0%, var(--body-bg) 45%);
+  color: var(--text-color);
+}
+.iching-card.is-fallback-art .iching-card__caption-title {
+  color: var(--text-color);
+}
+.iching-card__top-meta {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  right: 1.2rem;
+  z-index: 3;
+  gap: 0.6rem;
+  pointer-events: none;
+}
+.iching-card__num, .iching-card__hanzi, .iching-card__status {
+  height: 2.8rem;
+  padding: 0 0.9rem;
+  border-radius: 99.9rem;
+  background-color: rgba(10, 10, 12, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  backdrop-filter: blur(6px);
+}
+.iching-card__hanzi {
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+}
+.iching-card__hanzi[hidden] {
+  display: none !important;
+}
+.iching-card__status {
+  background-color: var(--iching-accent, var(--primary-color));
+  border-color: transparent;
+}
+.iching-card__img {
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.iching-card__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  gap: 0.4rem;
+  padding: 2.6rem 1.4rem 1.4rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.88) 65%);
+  color: #ffffff;
+  pointer-events: none;
+}
+.iching-card__caption-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #ffffff;
+}
+.iching-card__focal {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.84);
+}
+.iching-card__focal[hidden] {
+  display: none !important;
+}
+.iching-card__zoom-pill {
+  width: fit-content;
+  margin-top: 0.3rem;
+  padding: 0.35rem 1rem;
+  border-radius: 99.9rem;
+  background-color: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  backdrop-filter: blur(6px);
+}
+.iching-card__lines-box {
+  padding: 1.2rem 1.6rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 1.6rem;
+}
+.iching-card__raw-link {
+  gap: 0.6rem;
+  height: 3.8rem;
+  border-radius: 1.2rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.iching-card__raw-link:hover, .iching-card__raw-link:focus-visible {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.iching-card-meta {
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+.iching-card-meta[hidden] {
+  display: none !important;
+}
+.iching-card-meta__omens, .iching-card-meta__keywords {
+  gap: 0.7rem;
+}
+.iching-card-meta__omen-pill {
+  padding: 0.4rem 1.2rem;
+  border-radius: 99.9rem;
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+  border: 1px solid var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+.iching-card-meta__keyword {
+  padding: 0.35rem 1.1rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.iching-pair-box {
+  gap: 1rem;
+}
+.iching-pair-box[hidden] {
+  display: none !important;
+}
+.iching-pair-box__toggle {
+  width: 100%;
+  height: 4.4rem;
+  padding: 0 1.6rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.4rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.iching-pair-box__toggle:hover, .iching-pair-box__toggle[aria-expanded=true] {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: var(--body-bg);
+}
+.iching-pair-box__toggle[aria-expanded=true] .iching-pair-box__arrow {
+  transform: rotate(180deg);
+}
+.iching-pair-box__arrow {
+  width: 1.6rem;
+  height: 1.6rem;
+  transition: transform 0.25s ease;
+}
+.iching-pair-box__panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+.iching-pair-box__panel[hidden] {
+  display: none !important;
+}
+@media (max-width: 575.98px) {
+  .iching-pair-box__panel {
+    grid-template-columns: 1fr;
+  }
+}
+.iching-pair-box__col {
+  gap: 0.5rem;
+  padding: 1.4rem 1.6rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 1.6rem;
+}
+.iching-pair-box__col strong {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+.iching-pair-box__col p {
+  font-size: 1.4rem;
+  line-height: 1.55;
+  color: var(--text-color);
+}
+
+.iching-lightbox-img {
+  aspect-ratio: 3/4;
+  object-fit: contain;
+  background-color: #0b0b0c;
 }
 
 .home-page {
@@ -12688,6 +13182,672 @@ body[data-page=festival] .header,
     transition-duration: 0.01ms !important;
   }
 }
+.auth-page {
+  padding-bottom: 60px;
+}
+
+.auth-bento {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 2.4rem;
+}
+@media (max-width: 991.98px) {
+  .auth-bento {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.auth-hero {
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
+  gap: 2.4rem;
+  padding: 3.2rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-hover);
+  border-radius: 2.8rem;
+  color: #ffffff;
+  box-shadow: 0 1.2rem 3.2rem var(--shadow-color);
+}
+@media (max-width: 575.98px) {
+  .auth-hero {
+    padding: 2.2rem 1.8rem;
+    border-radius: 2rem;
+    gap: 1.8rem;
+  }
+}
+.auth-hero__top, .auth-hero__perks, .auth-hero__foot {
+  position: relative;
+  z-index: 2;
+}
+.auth-hero__top {
+  gap: 1.4rem;
+}
+.auth-hero__badge {
+  gap: 0.7rem;
+  width: fit-content;
+  padding: 0.45rem 1.3rem;
+  background-color: var(--hero-box-bg);
+  border: 1px solid var(--hero-border-color);
+  border-radius: 99.9rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.auth-hero__badge .icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  filter: brightness(0) invert(1);
+}
+.auth-hero__title {
+  font-size: clamp(2.6rem, 3.2vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffffff;
+}
+.auth-hero__desc {
+  font-size: 1.45rem;
+  line-height: 1.6;
+  color: var(--hero-text-soft);
+}
+.auth-hero__perks {
+  gap: 1.2rem;
+}
+.auth-hero__perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  background-color: var(--hero-box-bg);
+  border: 1px solid var(--hero-border-color);
+  border-radius: 1.8rem;
+}
+.auth-hero__perk strong {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+.auth-hero__perk p {
+  font-size: 1.3rem;
+  line-height: 1.45;
+  color: var(--hero-text-soft);
+}
+.auth-hero__perk-icon {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 1rem;
+  background-color: var(--hero-chip-bg);
+  border: 1px solid var(--hero-border-color);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+.auth-hero__foot {
+  padding-top: 0.6rem;
+}
+.auth-hero__back-link {
+  gap: 0.8rem;
+  height: 4.2rem;
+  padding: 0 1.8rem;
+  background-color: var(--hero-chip-bg);
+  border: 1px solid var(--hero-border-color);
+  border-radius: 99.9rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+.auth-hero__back-link:hover, .auth-hero__back-link:focus-visible {
+  background-color: #ffffff;
+  color: var(--primary-active);
+  transform: translateY(-2px);
+}
+.auth-hero__back-link--danger:hover, .auth-hero__back-link--danger:focus-visible {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #ffffff;
+}
+.auth-hero__watermark {
+  position: absolute;
+  right: -1.4rem;
+  bottom: -1.4rem;
+  width: 18rem;
+  height: 18rem;
+  object-fit: contain;
+  opacity: 0.14;
+  filter: var(--zodiac-filter-active);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.profile-summary {
+  gap: 1.6rem;
+}
+@media (max-width: 575.98px) {
+  .profile-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.profile-summary__avatar {
+  width: 7.2rem;
+  height: 7.2rem;
+  border-radius: 2rem;
+  background-color: #ffffff;
+  color: var(--primary-active);
+  font-size: 2.6rem;
+  font-weight: 800;
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.16);
+}
+.profile-summary__name {
+  margin-top: 0.6rem;
+  font-size: 2.4rem;
+}
+.profile-summary__email {
+  margin-top: 0.2rem;
+  font-size: 1.35rem;
+  color: var(--hero-text-soft);
+}
+
+.profile-lunar-box {
+  gap: 0.4rem;
+  padding: 1.4rem 1.6rem;
+  background-color: var(--hero-box-bg);
+  border: 1px solid var(--hero-border-color);
+  border-radius: 1.6rem;
+}
+.profile-lunar-box__label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--hero-text-soft);
+}
+.profile-lunar-box__val {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #ffffff;
+}
+
+.profile-stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.profile-stat-pill {
+  gap: 0.2rem;
+  padding: 1.2rem 1.4rem;
+  background-color: var(--hero-box-bg);
+  border: 1px solid var(--hero-border-color);
+  border-radius: 1.5rem;
+}
+.profile-stat-pill small {
+  font-size: 1.15rem;
+  color: var(--hero-text-soft);
+}
+.profile-stat-pill strong {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.profile-quick-links {
+  position: relative;
+  z-index: 2;
+  gap: 1rem;
+}
+
+.auth-card {
+  justify-content: flex-start;
+  gap: 2.2rem;
+  padding: 3.2rem 3.4rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 2.8rem;
+  box-shadow: 0 0.8rem 2.8rem var(--shadow-color);
+}
+@media (max-width: 575.98px) {
+  .auth-card {
+    padding: 2.2rem 1.8rem;
+    border-radius: 2rem;
+    gap: 1.8rem;
+  }
+}
+.auth-card__head {
+  gap: 0.6rem;
+}
+.auth-card__eyebrow {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary-color);
+}
+.auth-card__title {
+  font-size: clamp(2.3rem, 2.8vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+.auth-card__sub {
+  font-size: 1.4rem;
+  color: var(--text-muted);
+}
+.auth-card__switch-link {
+  font-weight: 800;
+  color: var(--primary-color);
+}
+.auth-card__switch-link:hover {
+  text-decoration: underline;
+}
+
+.profile-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  padding: 0.5rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.6rem;
+}
+@media (max-width: 575.98px) {
+  .profile-tabs {
+    grid-template-columns: 1fr;
+  }
+}
+.profile-tabs__btn {
+  gap: 0.6rem;
+  height: 4.2rem;
+  padding: 0 1.2rem;
+  border-radius: 1.2rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.profile-tabs__btn:hover {
+  color: var(--text-color);
+}
+.profile-tabs__btn.is-active, .profile-tabs__btn[aria-selected=true] {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+}
+.profile-tabs__btn.is-active .profile-tabs__count, .profile-tabs__btn[aria-selected=true] .profile-tabs__count {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+.profile-tabs__count {
+  padding: 0.15rem 0.7rem;
+  border-radius: 99.9rem;
+  background-color: var(--body-bg);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.profile-tabpanel {
+  gap: 2rem;
+}
+.profile-tabpanel[hidden] {
+  display: none !important;
+}
+
+.family-form {
+  padding: 1.8rem 2rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2rem;
+}
+@media (max-width: 575.98px) {
+  .family-form {
+    padding: 1.4rem;
+  }
+}
+.family-form__title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-color);
+  margin-bottom: 0.4rem;
+}
+
+.family-list {
+  gap: 1.2rem;
+}
+.family-list__empty {
+  padding: 2.6rem 1.8rem;
+  text-align: center;
+  background-color: var(--bg-surface);
+  border: 1.5px dashed var(--border-color);
+  border-radius: 1.8rem;
+  font-size: 1.4rem;
+  color: var(--text-muted);
+}
+
+.family-card {
+  position: relative;
+  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  padding: 1.6rem 1.8rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.8rem;
+}
+.family-card:hover {
+  border-color: var(--primary-color);
+  background-color: var(--body-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 0.8rem 2rem var(--shadow-color);
+}
+.family-card__left {
+  position: relative;
+  z-index: 2;
+  gap: 1.4rem;
+  min-width: 0;
+  flex: 1 1 24rem;
+}
+.family-card__zodiac {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1.4rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+}
+.family-card__zodiac img {
+  width: 3.2rem;
+  height: 3.2rem;
+  object-fit: contain;
+  filter: var(--zodiac-filter);
+}
+.family-card__info {
+  gap: 0.25rem;
+  min-width: 0;
+}
+.family-card__head {
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.family-card__name {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.family-card__rel {
+  padding: 0.2rem 0.9rem;
+  border-radius: 99.9rem;
+  background-color: var(--primary-soft-bg, var(--body-bg));
+  border: 1px solid var(--primary-color);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+.family-card__dates {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.family-card__napam {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.family-card__actions {
+  position: relative;
+  z-index: 2;
+  gap: 0.8rem;
+}
+.family-card__bazi-btn {
+  height: 3.8rem;
+  padding: 0 1.4rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-radius: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.family-card__bazi-btn:hover {
+  background-color: var(--primary-hover);
+}
+.family-card__del-btn {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 1.1rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  color: var(--color-danger);
+}
+.family-card__del-btn:hover, .family-card__del-btn:focus-visible {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #ffffff;
+}
+
+.auth-alert {
+  padding: 1.2rem 1.6rem;
+  border-radius: 1.4rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: var(--color-danger);
+}
+.auth-alert[data-type=success] {
+  background-color: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.35);
+  color: var(--color-success);
+}
+.auth-alert[hidden] {
+  display: none !important;
+}
+
+.auth-form {
+  gap: 1.6rem;
+}
+.auth-form__row-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+@media (max-width: 575.98px) {
+  .auth-form__row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.auth-form__group {
+  gap: 0.65rem;
+  min-width: 0;
+}
+.auth-form__label-row {
+  gap: 1rem;
+}
+.auth-form__label {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.auth-form__hint {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+.auth-form__forgot {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.auth-form__forgot:hover {
+  text-decoration: underline;
+}
+.auth-form__input-wrap {
+  position: relative;
+}
+.auth-form__input {
+  width: 100%;
+  height: 4.8rem;
+  padding: 0 1.6rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.4rem;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+.auth-form__input--password {
+  padding-right: 4.8rem;
+}
+.auth-form__input:focus {
+  background-color: var(--body-bg);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-soft-bg);
+}
+.auth-form__input[aria-invalid=true] {
+  border-color: var(--color-danger);
+}
+.auth-form__select {
+  appearance: auto;
+  cursor: pointer;
+  background-color: var(--body-bg);
+}
+.auth-form__eye-btn {
+  position: absolute;
+  right: 0.6rem;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 1rem;
+  color: var(--text-muted);
+}
+.auth-form__eye-btn:hover, .auth-form__eye-btn[aria-pressed=true] {
+  background-color: var(--body-bg);
+  color: var(--primary-color);
+}
+.auth-form__error {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-danger);
+}
+.auth-form__error[hidden] {
+  display: none !important;
+}
+.auth-form__options {
+  gap: 0.5rem;
+}
+.auth-form__check {
+  gap: 0.9rem;
+  font-size: 1.35rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.auth-form__check input[type=checkbox] {
+  width: 1.8rem;
+  height: 1.8rem;
+  accent-color: var(--primary-color);
+}
+.auth-form__submit {
+  width: 100%;
+  height: 4.8rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-radius: 1.4rem;
+  box-shadow: 0 0.8rem 2rem var(--shadow-color);
+}
+.auth-form__submit:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+.auth-form__demo-btn {
+  width: 100%;
+  height: 4.4rem;
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+  border: 1.5px dashed var(--primary-color);
+  border-radius: 1.4rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+.auth-form__demo-btn .icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  filter: var(--zodiac-filter);
+}
+.auth-form__demo-btn:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+.auth-form__demo-btn:hover .icon {
+  filter: brightness(0) invert(1);
+}
+
+.auth-elements {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+@media (max-width: 575.98px) {
+  .auth-elements {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.auth-elements__btn {
+  gap: 0.4rem;
+  padding: 0.9rem 0.6rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.3rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.auth-elements__btn img {
+  width: 2.2rem;
+  height: 2.2rem;
+  object-fit: contain;
+}
+.auth-elements__btn:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+.auth-elements__btn.is-active {
+  background-color: var(--primary-soft-bg, var(--body-bg));
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+}
+
+.auth-strength {
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+.auth-strength__meter {
+  width: 100%;
+  height: 0.8rem;
+  border-radius: 99.9rem;
+  overflow: hidden;
+  accent-color: var(--primary-color);
+}
+.auth-strength__meter::-webkit-meter-bar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 99.9rem;
+}
+.auth-strength__meter::-webkit-meter-optimum-value {
+  background: var(--color-success);
+}
+.auth-strength__meter::-webkit-meter-suboptimum-value {
+  background: var(--color-warning);
+}
+.auth-strength__meter::-webkit-meter-even-less-good-value {
+  background: var(--color-danger);
+}
+.auth-strength__label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
 :root, [data-theme=earth] {
   /* 1. NHÓM NỀN & CHỮ */
   --body-bg: #f5f5f4;

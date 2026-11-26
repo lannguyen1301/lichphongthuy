@@ -1,0 +1,619 @@
+[
+    {
+        "id": "01",
+        "slug": "01-tien-phong",
+        "number": 1,
+        "root_number": 1,
+        "roman_numeral": "I",
+        "letters": ["A", "J", "S"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "TIÊN PHONG",
+        "archetype": "Người Khởi Xướng",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "monad_circle_dot",
+        "keywords": ["ĐỘC LẬP", "DẪN DẮT", "BẢN LĨNH", "KHỞI XƯỚNG"],
+        "couplet": {
+            "opening": "Ý CHÍ KIÊN ĐỊNH",
+            "closing": "MỞ LỐI TIÊN PHONG"
+        },
+        "description": "Ngọn lửa khai phá mang ý chí tự chủ và khát vọng dẫn đầu. Dám bước đi trên con đường riêng sẽ kiến tạo dấu ấn khó phai.",
+        "lesson": "Giữ vững bản lĩnh tiên phong nhưng luôn biết lắng nghe, biến sức mạnh cá nhân thành nguồn cảm hứng cho tập thể.",
+        "artwork": {
+            "file": "assets/images/numerology/num-01-tien-phong.png",
+            "focal_object": "Chim ưng vàng đậu trên cành tùng đón ánh mặt trời chu sa",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A majestic golden-brown eagle perched proudly on a gnarled pine branch facing a small vermilion rising sun with delicate swirling golden-beige auspicious clouds. Crisp dark sepia ink outlines, soft mineral pigments of vermilion, warm ochre, pine green, and wood brown, clean editorial spot-illustration style matching classical Vietnamese-Chinese woodblock parchment aesthetics, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "02",
+        "slug": "02-hai-hoa",
+        "number": 2,
+        "root_number": 2,
+        "roman_numeral": "II",
+        "letters": ["B", "K", "T"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "HÀI HÒA",
+        "archetype": "Người Kết Nối",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "vesica_piscis_circle",
+        "keywords": ["THẤU CẢM", "TRỰC GIÁC", "HỢP TÁC", "DỊU DÀNG"],
+        "couplet": {
+            "opening": "LẮNG NGHE SÂU SẮC",
+            "closing": "GẮN KẾT AN HÒA"
+        },
+        "description": "Ánh trăng dịu hiền sở hữu trực giác tinh tế và trái tim đồng điệu. Sự mềm mỏng đúng lúc là nhịp cầu hóa giải mọi cách ngăn.",
+        "lesson": "Tin tưởng vào tiếng nói trực giác và giữ vững ranh giới bản thân, để lòng vị tha luôn song hành cùng sự tự tôn.",
+        "artwork": {
+            "file": "assets/images/numerology/num-02-hai-hoa.png",
+            "focal_object": "Đôi hạc trắng đối xứng bên hoa sen hồng nhạt",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. Two graceful white cranes facing each other in gentle symmetry beside blooming pale pink and ivory lotus flowers resting on subtle ripples and soft golden-beige auspicious clouds. Crisp dark sepia ink outlines, delicate mineral washes of ivory, muted rose, celadon green, and pale gold, airy minimalist composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "03",
+        "slug": "03-sang-tao",
+        "number": 3,
+        "root_number": 3,
+        "roman_numeral": "III",
+        "letters": ["C", "L", "U"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "SÁNG TẠO",
+        "archetype": "Người Truyền Cảm Hứng",
+        "planet": "Sao Mộc",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "triangle_stripes_circle",
+        "keywords": ["SÁNG TẠO", "LẠC QUAN", "GIAO TIẾP", "NGHỆ THUẬT"],
+        "couplet": {
+            "opening": "NGÔN TỪ TỎA SÁNG",
+            "closing": "CẢM HỨNG SÁNG TẠO"
+        },
+        "description": "Tâm hồn giàu trí tưởng tượng, lan tỏa niềm vui bằng ngôn từ. Biến cảm xúc thành giá trị thực tế sẽ mở rộng ảnh hưởng bền lâu.",
+        "lesson": "Khơi mở nguồn cảm hứng mỗi ngày, rèn luyện sự tập trung và hoàn thiện từng ý tưởng đến nơi đến chốn.",
+        "artwork": {
+            "file": "assets/images/numerology/num-03-sang-tao.png",
+            "focal_object": "Chim hót đậu cành hoa đào cùng đàn tỳ bà cổ trên mây lành",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A vibrant vermilion-and-gold songbird perched on a blooming pink peach blossom branch on the left, paired with a classic wooden pipa lute resting gracefully on swirling warm beige auspicious clouds on the right. Crisp dark sepia ink outlines, refined mineral pigments of dusty coral pink, vermilion, ochre wood, and warm gold, airy balanced composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "04",
+        "slug": "04-vung-chai",
+        "number": 4,
+        "root_number": 4,
+        "roman_numeral": "IV",
+        "letters": ["D", "M", "V"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "VỮNG CHÃI",
+        "archetype": "Người Kiến Tạo",
+        "planet": "Sao Thiên Vương",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "square_cross_circle",
+        "keywords": ["KỶ LUẬT", "THỰC TẾ", "NỀN TẢNG", "BỀN BỈ"],
+        "couplet": {
+            "opening": "NỀN MÓNG VỮNG VÀNG",
+            "closing": "KIẾN TẠO TRƯỜNG TỒN"
+        },
+        "description": "Tư duy mạch lạc, tận tụy dựng xây thành quả từ từng viên gạch nhỏ. Sự kiên trì và trật tự tạo nên điểm tựa tin cậy cho mọi người.",
+        "lesson": "Giữ vững kỷ luật nhưng mở lòng trước những đổi mới, cho phép bản thân linh hoạt để không tự bó buộc trong khuôn mẫu.",
+        "artwork": {
+            "file": "assets/images/numerology/num-04-vung-chai.png",
+            "focal_object": "Đình gỗ lục giác trên bệ đá khắc cùng đôi cây tùng cổ",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A finely detailed classical wooden hexagonal pavilion resting solidly on a carved stone foundation flanked by two bonsai ancient pine trees and gentle curled auspicious clouds at the base. Crisp dark sepia ink outlines, mineral pigments of muted malachite green, terracotta wood brown, warm slate, and soft ochre, airy isolated spot-illustration, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "05",
+        "slug": "05-tu-do",
+        "number": 5,
+        "root_number": 5,
+        "roman_numeral": "V",
+        "letters": ["E", "N", "W"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "TỰ DO",
+        "archetype": "Người Khám Phá",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "pentagram_circle",
+        "keywords": ["LINH HOẠT", "TRẢI NGHIỆM", "BỨT PHÁ", "PHIÊU LƯU"],
+        "couplet": {
+            "opening": "VƯỢT MỌI GIỚI HẠN",
+            "closing": "CHUYỂN DỊCH LINH HOẠT"
+        },
+        "description": "Cánh gió tự do mang khao khát trải nghiệm và thích nghi nhạy bén. Mỗi hành trình mới đều mang đến góc nhìn rộng mở và sức sống tươi mới.",
+        "lesson": "Xây dựng tự do đích thực trên nền tảng tự chủ, học cách cam kết với mục tiêu cốt lõi giữa muôn vàn lựa chọn.",
+        "artwork": {
+            "file": "assets/images/numerology/num-05-tu-do.png",
+            "focal_object": "Thuyền buồm gỗ lướt sóng cùng chim én",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A classical wooden sailing junk with billowing ochre-cream sails gliding over stylized curled turquoise waves, accompanied by three soaring swallows and light golden-beige wind clouds. Crisp dark sepia ink outlines, mineral pigments of antique teal, ochre brown, muted vermilion, and cream, clean airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "06",
+        "slug": "06-yeu-thuong",
+        "number": 6,
+        "root_number": 6,
+        "roman_numeral": "VI",
+        "letters": ["F", "O", "X"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "YÊU THƯƠNG",
+        "archetype": "Người Chữa Lành",
+        "planet": "Sao Kim",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "hexagram_circle",
+        "keywords": ["CHĂM SÓC", "TRÁCH NHIỆM", "THẨM MỸ", "CHỮA LÀNH"],
+        "couplet": {
+            "opening": "TRÁI TIM ẤM ÁP",
+            "closing": "NUÔI DƯỠNG BÌNH AN"
+        },
+        "description": "Vòng tay ân cần giàu lòng trắc ẩn và cảm quan thẩm mỹ tinh tế. Bạn kiến tạo không gian an yên để tình thân và cái đẹp cùng đơm hoa.",
+        "lesson": "Chăm sóc chính mình trước khi bao bọc người khác, trao đi yêu thương bằng sự tôn trọng thay vì lo âu kiểm soát.",
+        "artwork": {
+            "file": "assets/images/numerology/num-06-yeu-thuong.png",
+            "focal_object": "Đôi uyên ương bên khóm mẫu đơn hồng và cành đào chín",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A flourishing cluster of dusty-rose peonies and ripe peach branches sheltering a serene pair of mandarin ducks floating gently amidst soft beige auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of muted rose carmine, warm peach, sage green, and golden ochre, refined airy vignette composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "07",
+        "slug": "07-tri-tue",
+        "number": 7,
+        "root_number": 7,
+        "roman_numeral": "VII",
+        "letters": ["G", "P", "Y"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "TRÍ TUỆ",
+        "archetype": "Người Tìm Chân Lý",
+        "planet": "Sao Hải Vương",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "heptagram_circle",
+        "keywords": ["CHIÊM NGHIỆM", "PHÂN TÍCH", "CHÂN LÝ", "HUYỀN HỌC"],
+        "couplet": {
+            "opening": "TĨNH TÂM NGỘ ĐẠO",
+            "closing": "SOI THẤU CHÂN LÝ"
+        },
+        "description": "Ánh đèn tĩnh lặng hướng vào chiều sâu tri thức và bản chất vạn vật. Những khoảng lặng chiêm nghiệm giúp bạn nhìn thấu điều người khác bỏ qua.",
+        "lesson": "Mở lòng sẻ chia tri thức và cảm xúc với đời, để trí tuệ không khép kín trong cô độc mà trở thành ánh sáng dẫn đường.",
+        "artwork": {
+            "file": "assets/images/numerology/num-07-tri-tue.png",
+            "focal_object": "Cuộn thư cổ, đèn lồng gỗ ấm, ấm trà men ngọc và nhành trúc",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. An unrolled antique calligraphy scroll resting beside a warm glowing traditional wooden lantern, a celadon porcelain tea vessel, and a delicate branch of bamboo floating gently over pale auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of muted indigo, celadon, amber glow, and antique wood brown, serene minimalist composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "08",
+        "slug": "08-thinh-vuong",
+        "number": 8,
+        "root_number": 8,
+        "roman_numeral": "VIII",
+        "letters": ["H", "Q", "Z"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "THỊNH VƯỢNG",
+        "archetype": "Người Làm Chủ",
+        "planet": "Sao Thổ",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "octagram_circle",
+        "keywords": ["QUYỀN LỰC", "ĐIỀU HÀNH", "THÀNH TỰU", "NHÂN QUẢ"],
+        "couplet": {
+            "opening": "TẦM NHÌN CHIẾN LƯỢC",
+            "closing": "LÀM CHỦ THỊNH VƯỢNG"
+        },
+        "description": "Bản lĩnh điều hành sắc bén cùng tư duy kiến tạo giá trị vật chất lớn lao. Hiểu rõ quy luật nhân quả giúp bạn xây dựng sự sung túc bền lâu.",
+        "lesson": "Cân bằng giữa tham vọng vật chất và sự bình an nội tâm, dùng nguồn lực mình tạo ra để phụng sự giá trị chính trực.",
+        "artwork": {
+            "file": "assets/images/numerology/num-08-thinh-vuong.png",
+            "focal_object": "Rồng vàng uốn dáng vô cực ngậm minh châu giữa tầng mây cổ",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A refined golden-ochre classical dragon coiling gracefully in a balanced figure-eight curve amidst layered beige and muted indigo auspicious clouds holding a small luminous pearl. Crisp dark sepia ink outlines, mineral pigments of antique bronze gold, warm umber, muted slate blue, and vermilion touches, dignified airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "09",
+        "slug": "09-phung-su",
+        "number": 9,
+        "root_number": 9,
+        "roman_numeral": "IX",
+        "letters": ["I", "R"],
+        "group": "Đường Đời",
+        "group_code": "life_path",
+        "title": "PHỤNG SỰ",
+        "archetype": "Người Phụng Sự",
+        "planet": "Sao Hỏa",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "enneagram_circle",
+        "keywords": ["BÁC ÁI", "BAO DUNG", "HOÀN THIỆN", "LÝ TƯỞNG"],
+        "couplet": {
+            "opening": "TẤM LÒNG BAO DUNG",
+            "closing": "KHÉP VÒNG VIÊN MÃN"
+        },
+        "description": "Trái tim nhân văn hội tụ trải nghiệm sâu sắc và tầm nhìn vì cộng đồng. Sự vị tha chín chắn giúp bạn chuyển hóa nỗi đau thành ánh sáng chữa lành.",
+        "lesson": "Học cách buông nhẹ quá khứ và chấp nhận sự bất toàn của cuộc sống, để tâm hồn thanh thản bước vào chu kỳ mới.",
+        "artwork": {
+            "file": "assets/images/numerology/num-09-phung-su.png",
+            "focal_object": "Đóa sen đỏ nhũ vàng nở rộ cùng cành liễu và hạc trắng cất cánh",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A magnificent full-bloomed crimson and warm-gold lotus flower surrounded by delicate golden willow branches and a single white crane taking flight gracefully across soft auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of deep cinnabar red, antique gold, muted sage, and ivory, sublime tranquil composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "10",
+        "slug": "10-khoi-nguyen",
+        "number": 10,
+        "root_number": 1,
+        "roman_numeral": "X",
+        "letters": ["A", "J", "S"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "KHỞI NGUYÊN",
+        "archetype": "Bánh Xe Vận Mệnh",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "wheel_ten_spokes_circle",
+        "keywords": ["VẬN HỘI", "LINH HOẠT", "TỰ TIN", "BỨT PHÁ"],
+        "couplet": {
+            "opening": "THUẬN THỜI XOAY CHUYỂN",
+            "closing": "KHỞI ĐẦU VẬN MỚI"
+        },
+        "description": "Năng lượng khởi đầu ở tầm cao mới với khả năng xoay chuyển linh hoạt. Nắm bắt đúng thời cơ giúp bạn mở ra những bước ngoặt rực rỡ.",
+        "lesson": "Giữ tâm thế chủ động và khiêm nhường trước mọi thăng trầm, để may mắn trở thành thành quả của bản lĩnh vững vàng.",
+        "artwork": {
+            "file": "assets/images/numerology/num-10-khoi-nguyen.png",
+            "focal_object": "Bánh xe thiên văn mười nan gỗ vàng cùng hoa cúc và cá chép vượt mây",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. An ornate antique wooden-and-gold celestial wheel with ten delicate spokes rising gently beside blooming golden chrysanthemums and a graceful golden koi leaping through curled auspicious clouds. Crisp dark sepia ink outlines, soft mineral pigments of warm gold, vermilion, muted ochre, and jade green, clean airy spot-illustration style, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "11",
+        "slug": "11-truc-giac",
+        "number": 11,
+        "root_number": 2,
+        "roman_numeral": "XI",
+        "letters": ["B", "K", "T"],
+        "group": "Số Bậc Thầy",
+        "group_code": "master",
+        "title": "TRỰC GIÁC",
+        "archetype": "Người Khai Sáng",
+        "planet": "Sao Thiên Vương",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "twin_pillars_rays_circle",
+        "keywords": ["KHAI SÁNG", "NHẠY BÉN", "TÂM LINH", "TRUYỀN LỬA"],
+        "couplet": {
+            "opening": "TRỰC GIÁC KHAI MINH",
+            "closing": "ÁNH SÁNG DẪN ĐƯỜNG"
+        },
+        "description": "Tần số bậc thầy sở hữu trực giác sắc bén và chiều sâu tâm linh hiếm có. Bạn truyền cảm hứng bằng ánh sáng tỉnh thức và lòng thấu cảm.",
+        "lesson": "Gìn giữ sự bình an nội tâm và neo mình vào thực tế, biến những linh cảm tinh tế thành giá trị phụng sự đời sống.",
+        "artwork": {
+            "file": "assets/images/numerology/num-11-truc-giac.png",
+            "focal_object": "Đôi đèn lồng gỗ đối xứng tỏa sáng giữa hai đỉnh núi ngọc bích",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. Two symmetrical antique carved wooden lanterns glowing softly with warm amber light suspended above twin misty pale-jade peaks, a slender golden beam illuminating delicate white clouds between them. Crisp dark sepia ink outlines, refined mineral pigments of pale silver-blue, warm gold, soft amber, and ivory, serene ethereal spot-illustration style, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "12",
+        "slug": "12-goc-nhin",
+        "number": 12,
+        "root_number": 3,
+        "roman_numeral": "XII",
+        "letters": ["C", "L", "U"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "GÓC NHÌN",
+        "archetype": "Người Chuyển Đổi",
+        "planet": "Sao Mộc",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "dodecagram_circle",
+        "keywords": ["ĐA CHIỀU", "HIỂU BIẾT", "BIỂU ĐẠT", "CHUYỂN ĐỔI"],
+        "couplet": {
+            "opening": "ĐỔI GÓC NHÌN MỚI",
+            "closing": "KHAI MỞ TRÍ TÂM"
+        },
+        "description": "Sự kết hợp hài hòa giữa ý chí độc lập và nét tinh tế trong giao tiếp. Khi dám nhìn sự việc từ góc độ mới, bạn tìm thấy lối đi sáng tạo.",
+        "lesson": "Tránh để mình mắc kẹt trong tâm thế hy sinh thụ động, hãy chủ động chuyển hóa trải nghiệm thành trí tuệ sống động.",
+        "artwork": {
+            "file": "assets/images/numerology/num-12-goc-nhin.png",
+            "focal_object": "Hỗn thiên nghi đồng cổ bên cành mai nở và chim xanh vàng",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. An antique bronze astronomical armillary sphere resting beside a gracefully arching flowering plum branch with a small indigo-and-gold songbird looking softly over curled beige auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of antique bronze, dusty coral, muted indigo, and warm ochre, airy editorial illustration style, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "13",
+        "slug": "13-chuyen-hoa",
+        "number": 13,
+        "root_number": 4,
+        "roman_numeral": "XIII",
+        "letters": ["D", "M", "V"],
+        "group": "Nợ Nghiệp",
+        "group_code": "karmic_debt",
+        "title": "CHUYỂN HÓA",
+        "archetype": "Người Tái Sinh",
+        "planet": "Sao Thổ",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "phoenix_diamond_circle",
+        "keywords": ["BỀN BỈ", "TÁI SINH", "KỶ LUẬT", "VƯỢT KHÓ"],
+        "couplet": {
+            "opening": "RÈN MÀI NÊN NGỌC",
+            "closing": "TÁI SINH VỮNG BỀN"
+        },
+        "description": "Hành trình tôi luyện qua thử thách để kiến tạo nền móng vững chãi thật sự. Nỗ lực bền bỉ và trung thực sẽ mở khóa sức mạnh chuyển hóa lớn lao.",
+        "lesson": "Không tìm lối tắt trước khó khăn, kiên trì hoàn thiện từng việc nhỏ bằng sự tập trung và tinh thần trách nhiệm cao.",
+        "artwork": {
+            "file": "assets/images/numerology/num-13-chuyen-hoa.png",
+            "focal_object": "Gốc mai cổ nảy hoa thắm và chồi biếc bên khối ngọc thô chạm khắc",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A weathered ancient gnarled plum bonsai trunk sprouting vibrant fresh crimson-pink blossoms and tender green shoots beside a finely carved raw jade stone resting on soft beige clouds. Crisp dark sepia ink outlines, mineral pigments of weathered wood brown, cinnabar pink, celadon jade, and soft ochre, balanced airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "14",
+        "slug": "14-tiet-do",
+        "number": 14,
+        "root_number": 5,
+        "roman_numeral": "XIV",
+        "letters": ["E", "N", "W"],
+        "group": "Nợ Nghiệp",
+        "group_code": "karmic_debt",
+        "title": "TIẾT ĐỘ",
+        "archetype": "Người Giữ Nhịp",
+        "planet": "Sao Thủy",
+        "element": "Khí",
+        "element_key": "air",
+        "geometry": "hourglass_balance_circle",
+        "keywords": ["CÂN BẰNG", "TỰ CHỦ", "THÍCH NGHI", "CHỪNG MỰC"],
+        "couplet": {
+            "opening": "TỰ DO CÓ ĐỘ",
+            "closing": "TÂM TĨNH HÒA DÒNG"
+        },
+        "description": "Bài học sâu sắc về việc làm chủ khát khao trải nghiệm và cảm xúc nhất thời. Khi biết giữ nhịp cân bằng, sự linh hoạt sẽ trở thành lợi thế lớn.",
+        "lesson": "Rèn luyện đức tính chừng mực và kiên định với cam kết, để quyền tự do luôn đi cùng sự tỉnh táo và bền vững.",
+        "artwork": {
+            "file": "assets/images/numerology/num-14-tiet-do.png",
+            "focal_object": "Đôi bình gốm men ngọc rót dòng nước ngọc lam hòa quyện giữa lá lau",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. Two graceful antique celadon ceramic ewers tilted in harmonious balance pouring a single ribbon of translucent turquoise water seamlessly between them amidst delicate reed leaves and soft auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of celadon jade, soft turquoise, warm beige, and antique bronze, airy spot-illustration style, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "15",
+        "slug": "15-quyen-ru",
+        "number": 15,
+        "root_number": 6,
+        "roman_numeral": "XV",
+        "letters": ["F", "O", "X"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "QUYẾN RŨ",
+        "archetype": "Người Giả Kim",
+        "planet": "Sao Kim",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "pentadecagram_rose_circle",
+        "keywords": ["THU HÚT", "THẨM MỸ", "HÀO PHÓNG", "GẮN KẾT"],
+        "couplet": {
+            "opening": "TỎA HƯƠNG DUYÊN LÀNH",
+            "closing": "GIỮ TRỌN CHÂN TÌNH"
+        },
+        "description": "Sức hút tự nhiên hòa quyện giữa nét phóng khoáng và trái tim giàu yêu thương. Bạn biết cách mang lại niềm vui, sự sung túc và hơi ấm cho mọi người.",
+        "lesson": "Dùng sức hấp dẫn và tài năng của mình để vun đắp mối quan hệ chân thành, tránh để bản thân vướng vào hào nhoáng phù du.",
+        "artwork": {
+            "file": "assets/images/numerology/num-15-quyen-ru.png",
+            "focal_object": "Gương đồng cổ tròn giữa hoa mẫu đơn, cành lựu đỏ và bướm vàng",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A classic round antique bronze hand-mirror nestled among lush dusty-rose peonies, a ripe vermilion pomegranate branch, and a delicate golden swallowtail butterfly floating over curled pale clouds. Crisp dark sepia ink outlines, mineral pigments of muted rose red, antique gold, olive green, and warm cream, refined airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "16",
+        "slug": "16-tinh-thuc",
+        "number": 16,
+        "root_number": 7,
+        "roman_numeral": "XVI",
+        "letters": ["G", "P", "Y"],
+        "group": "Nợ Nghiệp",
+        "group_code": "karmic_debt",
+        "title": "TỈNH THỨC",
+        "archetype": "Người Phá Chấp",
+        "planet": "Sao Hải Vương",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "prism_light_circle",
+        "keywords": ["KHIÊM HẠ", "GIÁC NGỘ", "CHÂN THẬT", "BUÔNG BỎ"],
+        "couplet": {
+            "opening": "BUÔNG CHẤP KIẾN TÁNH",
+            "closing": "TỈNH THỨC AN NHIÊN"
+        },
+        "description": "Hành trình gột rửa bản ngã để chạm tới sự thật thuần khiết bên trong tâm hồn. Sau mỗi lần buông bỏ điều cũ kỹ, trí tuệ và bình an lại nở rộ.",
+        "lesson": "Nuôi dưỡng lòng khiêm nhường và sống chân thật với chính mình, xem mọi biến cố là cánh cửa mở ra sự trưởng thành sâu sắc.",
+        "artwork": {
+            "file": "assets/images/numerology/num-16-tinh-thuc.png",
+            "focal_object": "Ngôi chùa gỗ trên núi đón tia nắng bình minh cùng đóa sen trắng",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A serene classical wooden mountain pagoda softly bathed in a single warm golden ray of dawn light parting misty indigo clouds, with a pristine white lotus blooming serenely at its stone base. Crisp dark sepia ink outlines, mineral pigments of muted indigo, antique wood brown, warm gold, and ivory white, contemplative airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "17",
+        "slug": "17-tinh-tu",
+        "number": 17,
+        "root_number": 8,
+        "roman_numeral": "XVII",
+        "letters": ["H", "Q", "Z"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "TINH TÚ",
+        "archetype": "Ngôi Sao Dẫn Lối",
+        "planet": "Sao Thổ",
+        "element": "Kim",
+        "element_key": "metal",
+        "geometry": "eight_point_star_circle",
+        "keywords": ["DI SẢN", "TẦM NHÌN", "BỀN VỮNG", "HY VỌNG"],
+        "couplet": {
+            "opening": "TINH TÚ SOI ĐƯỜNG",
+            "closing": "LƯU DANH BỀN VỮNG"
+        },
+        "description": "Sự giao thoa tuyệt đẹp giữa trực giác minh triết và năng lực kiến tạo thành tựu lớn. Bạn hướng tới những giá trị trường tồn vượt qua giới hạn thời gian.",
+        "lesson": "Kết hợp tầm nhìn tinh thần cao đẹp với bước đi thực tế chắc chắn, để thành công cá nhân trở thành di sản lành cho cộng đồng.",
+        "artwork": {
+            "file": "assets/images/numerology/num-17-tinh-tu.png",
+            "focal_object": "Ngôi sao tám cánh nhũ vàng soi bóng bát sứ men ngọc cùng hạc trắng",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A radiant antique-gold eight-pointed celestial star hovering gracefully above a serene celadon porcelain bowl reflecting rippling starlight, accompanied by a soaring white crane and soft golden-beige auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of warm gold, celadon, muted slate blue, and ivory, refined airy vignette, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "18",
+        "slug": "18-anh-trang",
+        "number": 18,
+        "root_number": 9,
+        "roman_numeral": "XVIII",
+        "letters": ["I", "R"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "ÁNH TRĂNG",
+        "archetype": "Người Thấu Cảm",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "crescent_tide_circle",
+        "keywords": ["NHÂN VĂN", "SÂU LẮNG", "CHỮA LÀNH", "BAO DUNG"],
+        "couplet": {
+            "opening": "TÂM SÁNG NHƯ TRĂNG",
+            "closing": "VƯỢT SÓNG AN LÀNH"
+        },
+        "description": "Trái tim sâu lắng mang lý tưởng phụng sự và sức mạnh nội lực vượt qua sóng gió. Sự điềm tĩnh trước biến động giúp bạn thấu hiểu lòng người sâu sắc.",
+        "lesson": "Giữ sự tỉnh táo trước những ảo ảnh cảm xúc, dùng lòng bao dung và sự chính trực để dẫn lối bản thân qua thử thách.",
+        "artwork": {
+            "file": "assets/images/numerology/num-18-anh-trang.png",
+            "focal_object": "Trăng lưỡi liềm vàng nhạt trên sóng chàm cùng cá chép vượt sóng và hoa nhài",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A luminous pale-gold crescent moon shining gently over stylized curled muted-indigo waves with a graceful silver-gold carp leaping upward beside delicate blooming white night-jasmine branches. Crisp dark sepia ink outlines, mineral pigments of soft slate indigo, antique gold, ivory, and sage green, serene airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "19",
+        "slug": "19-tu-chu",
+        "number": 19,
+        "root_number": 1,
+        "roman_numeral": "XIX",
+        "letters": ["A", "J", "S"],
+        "group": "Nợ Nghiệp",
+        "group_code": "karmic_debt",
+        "title": "TỰ CHỦ",
+        "archetype": "Người Độc Hành",
+        "planet": "Mặt Trời",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "solar_crown_circle",
+        "keywords": ["ĐỘC LẬP", "CHIA SẺ", "VỮNG VÀNG", "ÁNH DƯƠNG"],
+        "couplet": {
+            "opening": "TỰ LỰC VƯƠN CAO",
+            "closing": "MỞ LÒNG ĐỒNG HÀNH"
+        },
+        "description": "Nguồn sáng rực rỡ của bản lĩnh tự cường kết hợp cùng trái tim rộng mở nhân ái. Bạn trưởng thành trọn vẹn nhất khi biết đứng vững mà vẫn sẵn lòng đón nhận.",
+        "lesson": "Học cách mở lòng nhờ cậy và sẻ chia đúng lúc, nhận ra rằng sự gắn kết chân thành không làm giảm đi sức mạnh độc lập.",
+        "artwork": {
+            "file": "assets/images/numerology/num-19-tu-chu.png",
+            "focal_object": "Hoa hướng dương hướng mặt trời chu sa cùng giỏ tre đựng quýt chín vàng",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. Radiant golden-ochre sunflowers turning gracefully toward a warm vermilion sun alongside a finely woven antique bamboo basket filled with ripe golden tangerines resting over soft beige auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of warm amber gold, vermilion, muted olive green, and natural bamboo ochre, bright airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "20",
+        "slug": "20-thuc-tinh",
+        "number": 20,
+        "root_number": 2,
+        "roman_numeral": "XX",
+        "letters": ["B", "K", "T"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "THỨC TỈNH",
+        "archetype": "Người Gọi Hồn",
+        "planet": "Mặt Trăng",
+        "element": "Nước",
+        "element_key": "water",
+        "geometry": "double_crescent_circle",
+        "keywords": ["TÁI KHỞI", "NHẠY CẢM", "HÒA ĐIỆU", "LẮNG NGHE"],
+        "couplet": {
+            "opening": "CHUÔNG NGÂN THỨC TỈNH",
+            "closing": "HÒA NHỊP YÊU THƯƠNG"
+        },
+        "description": "Năng lượng lắng đọng giúp bạn cảm nhận rõ tiếng gọi nội tâm và chu kỳ đổi mới. Sự tinh tế trong quan sát mở ra những mối duyên hợp tác đầy tin cậy.",
+        "lesson": "Kiên nhẫn lắng nghe nhịp điệu tự nhiên của cuộc sống, can đảm đáp lại tiếng gọi đổi mới thay vì chần chừ trong lo âu.",
+        "artwork": {
+            "file": "assets/images/numerology/num-20-thuc-tinh.png",
+            "focal_object": "Chuông đồng cổ treo trên cành liễu rủ tỏa gợn sóng âm nhũ vàng",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A finely embossed antique bronze temple bell suspended gracefully from a slender drooping willow branch, delicate concentric golden ripple lines emanating softly across pale auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of antique bronze, soft willow green, muted gold, and warm parchment cream, tranquil airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "21",
+        "slug": "21-vien-man",
+        "number": 21,
+        "root_number": 3,
+        "roman_numeral": "XXI",
+        "letters": ["C", "L", "U"],
+        "group": "Số Hợp",
+        "group_code": "compound",
+        "title": "VIÊN MÃN",
+        "archetype": "Người Tỏa Sáng",
+        "planet": "Sao Mộc",
+        "element": "Lửa",
+        "element_key": "fire",
+        "geometry": "laurel_world_circle",
+        "keywords": ["THÀNH TỰU", "TỎA SÁNG", "HỘI TỤ", "HẠNH PHÚC"],
+        "couplet": {
+            "opening": "TÀI HOA HỘI TỤ",
+            "closing": "VIÊN MÃN BỐN PHƯƠNG"
+        },
+        "description": "Vương miện của niềm vui sáng tạo, sự hòa hợp và thành quả viên mãn sau nỗ lực. Bạn dễ dàng kết nối với thế giới rộng lớn bằng phong thái tự tin, duyên dáng.",
+        "lesson": "Trân trọng thành tựu đã đạt được bằng lòng biết ơn, giữ sự tập trung bền bỉ để niềm vui sáng tạo không bị phân tán.",
+        "artwork": {
+            "file": "assets/images/numerology/num-21-vien-man.png",
+            "focal_object": "Vòng hoa mai và lá ô liu ôm ngọc bích buộc dải lụa chu sa",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A circular botanical wreath woven from golden apricot blossoms and olive leaves framing an intricately carved celadon jade bi-disc tied with a flowing vermilion silk ribbon floating over soft beige auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of celadon jade, warm gold, cinnabar red, and muted olive, celebratory airy composition, no border, no frame, no text, no numbers."
+        }
+    },
+    {
+        "id": "22",
+        "slug": "22-dai-kien-tao",
+        "number": 22,
+        "root_number": 4,
+        "roman_numeral": "XXII",
+        "letters": ["D", "M", "V"],
+        "group": "Số Bậc Thầy",
+        "group_code": "master",
+        "title": "ĐẠI KIẾN TẠO",
+        "archetype": "Bậc Thầy Kiến Tạo",
+        "planet": "Sao Thiên Vương",
+        "element": "Đất",
+        "element_key": "earth",
+        "geometry": "metatron_square_circle",
+        "keywords": ["TẦM VÓC", "HIỆN THỰC", "DI SẢN", "KỶ CƯƠNG"],
+        "couplet": {
+            "opening": "TẦM NHÌN VẠN DẶM",
+            "closing": "DỰNG XÂY ĐẠI NGHIỆP"
+        },
+        "description": "Năng lượng bậc thầy hợp nhất tầm nhìn vĩ đại với khả năng tổ chức thực tiễn sắc bén. Bạn sinh ra để biến những giấc mơ lớn thành công trình bền vững cho đời.",
+        "lesson": "Chia mục tiêu vĩ đại thành từng nền móng khả thi mỗi ngày, giữ tâm bình tĩnh để áp lực lớn không lấn át niềm tin.",
+        "artwork": {
+            "file": "assets/images/numerology/num-22-dai-kien-tao.png",
+            "focal_object": "Cầu đá vòm chạm khắc nối hai vách núi bách cổ dẫn tới lầu gỗ cổ điển",
+            "prompt": "Traditional East Asian Gongbi fine-line ink and watercolor illustration isolated cleanly on warm cream aged parchment background (#FBF3E0), 3:2 horizontal composition, generous negative space. A majestic classical arched stone bridge with delicate carved balustrades spanning gracefully between two ancient cypress-crowned crags, a refined wooden pavilion rising solidly over curled golden-beige auspicious clouds. Crisp dark sepia ink outlines, mineral pigments of warm sandstone, malachite cypress green, antique wood brown, and muted gold, grand yet airy spot-illustration style, no border, no frame, no text, no numbers."
+        }
+    },
+    
+]

@@ -1,46 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In | Lịch phong thuỷ</title>
-
-    <!-- favicons -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <title>Đăng Nhập - Lịch Phong Thủy</title>
     <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-
-    <!-- fonts -->
-    <link rel="stylesheet" href="./assets/fonts/stylesheet.css">
-
-    <!-- styles -->
-    <link rel="stylesheet" href="./assets/css/main.css">
-
-    <!-- scripts -->
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
     <script src="./assets/js/script.js"></script>
-
 </head>
 
-<body>
-
-    <header id="header">
-        <!-- Header content will be inserted here -->
-    </header>
+<body class="auth-body" data-page="signin" itemscope itemtype="https://schema.org/WebPage">
+    <header id="header" class="header"></header>
     <script>
         load("#header", "./templates/header.html");
     </script>
-    <main>
-        <!-- Main content will be inserted here -->
-        <h1>Sign in pages</h1>
+
+    <div id="sidebar-root"></div>
+    <script>
+        load("#sidebar-root", "./templates/sidebar.html");
+    </script>
+
+    <main id="main" class="main auth-page">
+        <div class="container">
+            <div class="auth-bento" data-auth-view="signin">
+                <!-- CỘT TRÁI: SHOWCASE NGŨ HÀNH -->
+                <aside class="auth-hero" aria-label="Quyền lợi thành viên Lịch Phong Thủy">
+                    <div class="auth-hero__top">
+                        <span class="auth-hero__badge">
+                            <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" class="icon" />
+                            <span>Không Gian Cá Nhân Hóa Ngũ Hành</span>
+                        </span>
+
+                        <h1 class="auth-hero__title" itemprop="name">
+                            Chào Mừng Trở Lại<br />Lịch Phong Thủy
+                        </h1>
+                        <p class="auth-hero__desc">
+                            Đăng nhập để tự động áp dụng bản mệnh Ngũ Hành, quản lý danh sách ngày sinh người thân
+                            và mở nhanh Lá số Bát Tự trên mọi trang.
+                        </p>
+                    </div>
+
+                    <ul class="auth-hero__perks">
+                        <li class="auth-hero__perk">
+                            <span class="auth-hero__perk-icon" aria-hidden="true">✦</span>
+                            <div>
+                                <strong>Đồng bộ giao diện 5 Bản Mệnh</strong>
+                                <p>Tự động kích hoạt màu sắc tương sinh Kim, Mộc, Thủy, Hỏa hoặc Thổ.</p>
+                            </div>
+                        </li>
+                        <li class="auth-hero__perk">
+                            <span class="auth-hero__perk-icon" aria-hidden="true">✦</span>
+                            <div>
+                                <strong>Lưu danh sách ngày sinh người thân</strong>
+                                <p>Tự động quy đổi Âm lịch, Nạp âm và mở nhanh Tứ Trụ chỉ với 1 lần chạm.</p>
+                            </div>
+                        </li>
+                        <li class="auth-hero__perk">
+                            <span class="auth-hero__perk-icon" aria-hidden="true">✦</span>
+                            <div>
+                                <strong>Trọn bộ 10 Tiện ích Cổ học</strong>
+                                <p>Kinh Dịch 64 quẻ, Tarot 78 lá, Thần số học và Nhịp sinh học cá nhân.</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <footer class="auth-hero__foot">
+                        <a href="./index.html" class="auth-hero__back-link" title="Quay về trang chủ xem Lịch Tháng">
+                            <span aria-hidden="true">&#8592;</span>
+                            <span>Quay về trang Lịch chính</span>
+                        </a>
+
+                        <img src="./assets/icons/zodiac/dragon.svg" alt="" aria-hidden="true"
+                            class="auth-hero__watermark" />
+                    </footer>
+                </aside>
+
+                <!-- CỘT PHẢI: BIỂU MẪU ĐĂNG NHẬP -->
+                <section class="auth-card" aria-labelledby="signin-heading">
+                    <header class="auth-card__head">
+                        <span class="auth-card__eyebrow">Tài khoản thành viên</span>
+                        <h2 class="auth-card__title" id="signin-heading">Đăng nhập hệ thống</h2>
+                        <p class="auth-card__sub">
+                            Chưa có tài khoản?
+                            <a href="./sign-up.html" class="auth-card__switch-link">Đăng ký miễn phí ngay</a>
+                        </p>
+                    </header>
+
+                    <div class="auth-alert" id="signin-alert" role="alert" aria-live="assertive" tabindex="-1" hidden>
+                    </div>
+
+                    <form class="auth-form" id="form-signin" data-auth-form="signin" novalidate>
+                        <div class="auth-form__group">
+                            <label for="signin-email" class="auth-form__label">Địa chỉ Email</label>
+                            <div class="auth-form__input-wrap">
+                                <input type="email" id="signin-email" name="email" class="auth-form__input"
+                                    placeholder="nhap@email.vn" inputmode="email" autocomplete="email" required
+                                    aria-invalid="false" aria-describedby="signin-email-error" />
+                            </div>
+                            <p class="auth-form__error" id="signin-email-error" role="alert" hidden></p>
+                        </div>
+
+                        <div class="auth-form__group">
+                            <div class="auth-form__label-row">
+                                <label for="signin-password" class="auth-form__label">Mật khẩu</label>
+                                <a href="#!" class="auth-form__forgot" data-auth-action="forgot-hint"
+                                    title="Nhận hướng dẫn đặt lại mật khẩu">
+                                    Quên mật khẩu?
+                                </a>
+                            </div>
+                            <div class="auth-form__input-wrap">
+                                <input type="password" id="signin-password" name="password"
+                                    class="auth-form__input auth-form__input--password"
+                                    placeholder="Nhập mật khẩu của bạn" autocomplete="current-password" required
+                                    aria-invalid="false" aria-describedby="signin-password-error" />
+                                <button type="button" class="auth-form__eye-btn" data-toggle-password="signin-password"
+                                    aria-label="Hiện mật khẩu" aria-pressed="false" aria-controls="signin-password"
+                                    title="Bật hoặc tắt hiển thị mật khẩu">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="auth-form__error" id="signin-password-error" role="alert" hidden></p>
+                        </div>
+
+                        <div class="auth-form__options">
+                            <label class="auth-form__check">
+                                <input type="checkbox" id="signin-remember" name="remember" checked />
+                                <span>Ghi nhớ phiên đăng nhập trên thiết bị này</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn auth-form__submit">
+                            <span>Đăng nhập ngay</span>
+                            <span aria-hidden="true">&#8594;</span>
+                        </button>
+
+                        <button type="button" class="btn auth-form__demo-btn" data-auth-action="demo-login"
+                            title="Đăng nhập nhanh bằng tài khoản mẫu (Mật khẩu: Demo@1234)">
+                            <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" class="icon" />
+                            <span>Dùng thử tài khoản Demo (Xem nhanh Profile Toggle)</span>
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
     </main>
-    <footer id="footer"></footer>
+
+    <footer id="footer" class="footer"></footer>
     <script>
         load("#footer", "./templates/footer.html");
     </script>
+
+    <script src="./assets/js/lunar-engine.js"></script>
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/sidebar.js"></script>
+    <script src="./assets/js/footer.js"></script>
+    <script src="./assets/js/converter-modal.js"></script>
+    <script src="./assets/js/auth.js"></script>
 </body>
-`
 
 </html>

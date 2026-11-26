@@ -11,7 +11,7 @@
 ### header.scss
 
 ```scss
-// 1. scss/layout/_header.scss
+// scss/layout/_header.scss
 @use "../abstracts" as abs;
 
 .header {
@@ -160,6 +160,271 @@
         font-weight: 700;
     }
 
+    // ==========================================================================
+    // HEADER AUTH (HƯỚNG 1) & TOGGLE PROFILE DROPDOWN
+    // ==========================================================================
+    &__auth {
+        @extend %flexItemCenter;
+    }
+
+    &__auth-guest {
+        @extend %flexItemCenter;
+        gap: 0.8rem;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__auth-register {
+        height: 4.2rem;
+        padding: 0 1.6rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+
+        &:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        // Trên trang bình thường ẩn nút Đăng ký dưới 1200px cho gọn; riêng trang sign-in.html sẽ hiện lại ở rule dưới
+        @include abs.screen(xl) {
+            display: none;
+        }
+
+        @include abs.screen(sm) {
+            height: 3.8rem;
+            padding: 0 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__auth-btn {
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__profile-details {
+        position: relative;
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+
+    &__profile-summary {
+        @extend %inlineFlexCenter;
+        gap: 0.9rem;
+        height: 4.4rem;
+        padding: 0.4rem 1.2rem 0.4rem 0.5rem;
+        background-color: var(--bg-surface);
+        border: 1.5px solid var(--border-color);
+        border-radius: 99.9rem;
+        cursor: pointer;
+        user-select: none;
+        @extend %transTheme;
+
+        &:hover {
+            border-color: var(--primary-color);
+            background-color: var(--body-bg);
+        }
+
+        @include abs.screen(sm) {
+            height: 3.8rem;
+            padding: 0.3rem 0.8rem 0.3rem 0.35rem;
+            gap: 0.5rem;
+        }
+    }
+
+    &__profile-details[open] &__profile-summary {
+        border-color: var(--primary-color);
+        background-color: var(--body-bg);
+        box-shadow: 0 0 0 3px var(--primary-soft-bg);
+    }
+
+    &__profile-avatar {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 800;
+
+        @include abs.screen(sm) {
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.15rem;
+        }
+    }
+
+    &__profile-meta {
+        @extend %flexColumn;
+        align-items: flex-start;
+        max-width: 12.5rem;
+        line-height: 1.2;
+    }
+
+    &__profile-name {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--text-color);
+        max-width: 100%;
+        @extend %textEllipsis;
+    }
+
+    &__profile-element {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__profile-arrow {
+        width: 1.5rem;
+        height: 1.5rem;
+        @extend %flexItemFixed;
+        @extend %transBurgerBar;
+    }
+
+    &__profile-details[open] &__profile-arrow {
+        transform: rotate(180deg);
+    }
+
+    &__profile-popover {
+        position: absolute;
+        top: calc(100% + 1rem);
+        right: 0;
+        z-index: 70;
+        width: 29rem;
+        max-width: calc(100vw - 2.4rem);
+        padding: 1.2rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        border-radius: 2rem;
+        box-shadow: 0 1.6rem 3.8rem var(--shadow-color);
+        @extend %flexColumn;
+        gap: 1rem;
+        @extend %animDropdownFadeIn;
+    }
+
+    &__profile-card {
+        @extend %flexItemCenter;
+        gap: 1.2rem;
+        padding: 1.2rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--border-color);
+        border-radius: 1.4rem;
+
+        &-avatar {
+            @extend %inlineFlexCenter;
+            @extend %flexItemFixed;
+            width: 4.4rem;
+            height: 4.4rem;
+            border-radius: 1.3rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        &-info {
+            @extend %flexColumn;
+            gap: 0.2rem;
+            min-width: 0;
+        }
+
+        &-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--text-color);
+            @extend %textEllipsis;
+        }
+
+        &-email {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            @extend %textEllipsis;
+        }
+
+        &-badge {
+            display: inline-block;
+            width: fit-content;
+            margin-top: 0.25rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 99.9rem;
+            background-color: var(--body-bg);
+            border: 1px solid var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+    }
+
+    &__profile-menu {
+        @extend %flexColumn;
+        gap: 0.35rem;
+    }
+
+    &__profile-link {
+        @extend %flexYCenterLeft;
+        gap: 1rem;
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border-radius: 1.1rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-color);
+        @extend %transTheme;
+
+        .icon,
+        svg {
+            width: 1.8rem;
+            height: 1.8rem;
+            @extend %flexItemFixed;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--bg-surface);
+            color: var(--primary-color);
+        }
+    }
+
+    &__profile-foot {
+        padding-top: 0.8rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__profile-logout {
+        @extend %flexCenter;
+        gap: 0.8rem;
+        width: 100%;
+        height: 4rem;
+        border-radius: 1.2rem;
+        background-color: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--color-danger);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--color-danger);
+            border-color: var(--color-danger);
+            color: #ffffff;
+        }
+    }
+
     &__burger {
         display: none;
         flex-direction: column;
@@ -194,6 +459,34 @@
         &.is-active &-bar:nth-child(3) {
             transform: translateY(-0.7rem) rotate(-45deg);
         }
+    }
+}
+
+// HƯỚNG 1 (Chống nhấp nháy FOUC trước khi JS gắn thuộc tính hidden):
+// - Đang ở trang Đăng nhập: Ẩn nút Đăng nhập, luôn hiển thị nút Đăng ký nổi bật theo màu Theme trên mọi màn hình
+body[data-page="signin"] {
+    .header__auth-btn[data-auth-link="signin"] {
+        display: none;
+    }
+
+    .header__auth-register[data-auth-link="signup"] {
+        display: inline-flex;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+
+        &:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: #ffffff;
+        }
+    }
+}
+
+// - Đang ở trang Đăng ký: Ẩn nút Đăng ký, giữ nút Đăng nhập
+body[data-page="signup"] {
+    .header__auth-register[data-auth-link="signup"] {
+        display: none;
     }
 }
 ```

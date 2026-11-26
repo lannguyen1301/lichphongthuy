@@ -1,0 +1,1732 @@
+[
+    {
+        "id": 1,
+        "number": "01",
+        "slug": "01-can-vi-thien",
+        "name": "Càn Vi Thiên",
+        "alias": "Thuần Càn",
+        "chinese": { "short": "乾", "full": "乾為天" },
+        "line_code": "111111",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
+            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Khốn Long Đắc Thủy", "Tự Cường Bất Tức"],
+        "keywords": ["Sáng tạo", "Chính trực", "Tiên phong", "Bền bỉ", "Lãnh đạo", "Thịnh vượng"],
+        "couplet": {
+            "opening": "Trời chồng trên trời, khí dương thuần khiết khởi sinh vạn vật không ngừng.",
+            "closing": "Nguyên hanh lợi trinh: khởi đầu lớn, hanh thông rộng, bền vững chính đạo."
+        },
+        "advice": "Thời vận đang lên mạnh mẽ, thích hợp khởi xướng dự án lớn và khẳng định vai trò dẫn dắt. Tuy nhiên, càng ở đỉnh cao càng cần giữ tâm khiêm nhường, kiên trì nguyên tắc và tránh nóng vội kiêu căng kẻo đánh mất thế thuận đang nắm giữ.",
+        "artwork": {
+            "image_base": "./assets/images/iching/01-can-vi-thien",
+            "alt": "Tranh minh họa quẻ Càn Vi Thiên với rồng vàng uốn lượn trong mây vờn viên ngọc minh châu rực lửa",
+            "focal_object": "Viên ngọc minh châu trên mây"
+        }
+    },
+    {
+        "id": 2,
+        "number": "02",
+        "slug": "02-khon-vi-dia",
+        "name": "Khôn Vi Địa",
+        "alias": "Thuần Khôn",
+        "chinese": { "short": "坤", "full": "坤為地" },
+        "line_code": "000000",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
+            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Hậu Đức Tải Vật", "Nhu Thuận Thành Công"],
+        "keywords": ["Bao dung", "Nhu thuận", "Nuôi dưỡng", "Vững chãi", "Hợp tác", "Kiên nhẫn"],
+        "couplet": {
+            "opening": "Đất dày nâng đỡ vạn vật, đức nhu thuận bao dung sinh dưỡng muôn loài.",
+            "closing": "Lợi tẫn mã chi trinh: thuận theo lẽ phải, kiên định như ngựa cái hiền."
+        },
+        "advice": "Giai đoạn này nên lấy nhu thắng cương, ưu tiên lắng nghe, hỗ trợ đồng đội và tích lũy nền tảng thay vì tranh tiên dẫn đầu. Sự điềm tĩnh, tận tụy và bền lòng theo đuổi mục tiêu chung sẽ mang lại thành quả vững bền.",
+        "artwork": {
+            "image_base": "./assets/images/iching/02-khon-vi-dia",
+            "alt": "Tranh minh họa quẻ Khôn Vi Địa với hình tượng bó lúa chín trĩu hạt giữa cánh đồng",
+            "focal_object": "Bó lúa chín trĩu hạt giữa cánh đồng"
+        }
+    },
+    {
+        "id": 3,
+        "number": "03",
+        "slug": "03-thuy-loi-truan",
+        "name": "Thủy Lôi Truân",
+        "alias": null,
+        "chinese": { "short": "屯", "full": "水雷屯" },
+        "line_code": "100010",
+        "element": "water",
+        "trigrams": {
+            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
+            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Loạn Ty Vô Đầu", "Vạn Sự Khởi Đầu Nan"],
+        "keywords": ["Gian nan", "Mầm non", "Tích lũy", "Kiên trì", "Tìm trợ lực", "Khởi đầu"],
+        "couplet": {
+            "opening": "Mưa trên sấm dưới, chồi non phá đất vươn lên giữa buổi đầu khó nhọc.",
+            "closing": "Vật dụng hữu du vãng, lợi kiến hầu: chớ vội tiến, nên lập trợ lực."
+        },
+        "advice": "Khởi đầu nào cũng nhiều chướng ngại và rối ren như tơ vò. Đừng hấp tấp hành động đơn độc hay bỏ cuộc giữa chừng; hãy kiên nhẫn sắp xếp lại trật tự, củng cố nội lực và chủ động tìm kiếm cố vấn đáng tin cậy.",
+        "artwork": {
+            "image_base": "./assets/images/iching/03-thuy-loi-truan",
+            "alt": "Tranh minh họa quẻ Thủy Lôi Truân với hình tượng chồi non phá đá vươn lên",
+            "focal_object": "Chồi non phá đá vươn lên"
+        }
+    },
+    {
+        "id": 4,
+        "number": "04",
+        "slug": "04-son-thuy-mong",
+        "name": "Sơn Thủy Mông",
+        "alias": null,
+        "chinese": { "short": "蒙", "full": "山水蒙" },
+        "line_code": "010001",
+        "element": "fire",
+        "trigrams": {
+            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
+            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Tiểu Quỷ Thâu Tiền", "Khai Tâm Khai Trí"],
+        "keywords": ["Học hỏi", "Khai mở", "Ngây thơ", "Khiêm cung", "Kỷ luật", "Dẫn dắt"],
+        "couplet": {
+            "opening": "Suối nguồn tuôn dưới chân núi, tượng tâm trí non trẻ cần được khai sáng.",
+            "closing": "Đồng mông cầu ngã: người học chân thành cầu thị ắt được chỉ lối sáng."
+        },
+        "advice": "Khi đối diện lĩnh vực mới còn mờ mịt, hãy giữ thái độ cầu thị, thành tâm lắng nghe người có kinh nghiệm thay vì đoán mò cố chấp. Thiết lập kỷ luật học tập rõ ràng, làm từng bước chắc chắn sẽ giúp bạn sớm trưởng thành.",
+        "artwork": {
+            "image_base": "./assets/images/iching/04-son-thuy-mong",
+            "alt": "Tranh minh họa quẻ Sơn Thủy Mông với hình tượng chiếc đèn lồng soi đường dưới chân núi",
+            "focal_object": "Chiếc đèn lồng soi đường dưới chân núi"
+        }
+    },
+    {
+        "id": 5,
+        "number": "05",
+        "slug": "05-thuy-thien-nhu",
+        "name": "Thủy Thiên Nhu",
+        "alias": null,
+        "chinese": { "short": "需", "full": "水天需" },
+        "line_code": "111010",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
+            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Minh Châu Xuất Thổ", "Đãi Thời Nhi Động"],
+        "keywords": ["Chờ thời", "Dưỡng sức", "Tín thực", "Bình tĩnh", "Chuẩn bị", "An nhiên"],
+        "couplet": {
+            "opening": "Mây tụ trên trời chưa thành mưa, tượng cho việc kiên tâm đợi thời cơ.",
+            "closing": "Hữu phu quang hanh, trinh cát: giữ lòng thành tín, chờ thời ắt vượt sông."
+        },
+        "advice": "Cơ hội lớn đang đến gần nhưng chưa chín muồi để hành động gấp gáp. Hãy tận dụng khoảng lặng này để bồi dưỡng thể lực, trau dồi chuyên môn và giữ tinh thần lạc quan. Khi thời điểm thuận lợi tới, sự chuẩn bị sẽ giúp thắng lớn.",
+        "artwork": {
+            "image_base": "./assets/images/iching/05-thuy-thien-nhu",
+            "alt": "Tranh minh họa quẻ Thủy Thiên Nhu với hình tượng chén trà nghi lễ trên bàn đá chờ mưa",
+            "focal_object": "Chén trà nghi lễ trên bàn đá chờ mưa"
+        }
+    },
+    {
+        "id": 6,
+        "number": "06",
+        "slug": "06-thien-thuy-tung",
+        "name": "Thiên Thủy Tụng",
+        "alias": null,
+        "chinese": { "short": "訟", "full": "天水訟" },
+        "line_code": "010111",
+        "element": "fire",
+        "trigrams": {
+            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
+            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        },
+        "status": { "code": "hung", "label": "Hung" },
+        "hexagram_images": ["Nhị Nhân Tranh Lộ", "Hòa Vi Quý"],
+        "keywords": ["Tranh chấp", "Bất đồng", "Thận trọng", "Hòa giải", "Công minh", "Lùi bước"],
+        "couplet": {
+            "opening": "Trời lên nước xuống trái chiều, dễ nảy sinh bất đồng tranh chấp kiện tụng.",
+            "closing": "Trung cát, chung hung: biết dừng giữa chừng thì lành, cố chấp tất tổn hại."
+        },
+        "advice": "Mâu thuẫn lợi ích hoặc bất đồng quan điểm đang tiềm ẩn nguy cơ leo thang. Thay vì hơn thua bằng mọi giá, hãy bình tĩnh rà soát giấy tờ, đối thoại minh bạch và tìm người trung gian công tâm. Biết nhượng bộ đúng lúc sẽ giữ đại cục.",
+        "artwork": {
+            "image_base": "./assets/images/iching/06-thien-thuy-tung",
+            "alt": "Tranh minh họa quẻ Thiên Thủy Tụng với hình tượng chiếc cân cổ đặt giữa hai luồng khí",
+            "focal_object": "Chiếc cân cổ đặt giữa hai luồng khí"
+        }
+    },
+    {
+        "id": 7,
+        "number": "07",
+        "slug": "07-dia-thuy-su",
+        "name": "Địa Thủy Sư",
+        "alias": null,
+        "chinese": { "short": "師", "full": "地水師" },
+        "line_code": "010000",
+        "element": "water",
+        "trigrams": {
+            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
+            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Mã Đáo Thành Công", "Kỷ Luật Sinh Sức Mạnh"],
+        "keywords": ["Kỷ luật", "Đoàn kết", "Chiến lược", "Tổ chức", "Chính nghĩa", "Quản trị"],
+        "couplet": {
+            "opening": "Nước ngầm chứa trong lòng đất, tượng đạo quân quy củ dưới kỷ cương nghiêm.",
+            "closing": "Trinh trượng nhân cát: giao việc cho bậc lão luyện chính trực ắt thành công."
+        },
+        "advice": "Công việc lớn đòi hỏi kế hoạch bài bản, phân công rõ ràng và tinh thần kỷ luật cao độ. Hãy chọn người dẫn dắt giàu kinh nghiệm, đặt lợi ích tập thể lên trên cảm tính cá nhân. Tổ chức chặt chẽ từ đầu sẽ giúp vượt thử thách.",
+        "artwork": {
+            "image_base": "./assets/images/iching/07-dia-thuy-su",
+            "alt": "Tranh minh họa quẻ Địa Thủy Sư với hình tượng lá cờ lệnh dựng giữa trận địa",
+            "focal_object": "Lá cờ lệnh dựng giữa trận địa"
+        }
+    },
+    {
+        "id": 8,
+        "number": "08",
+        "slug": "08-thuy-dia-ty",
+        "name": "Thủy Địa Tỷ",
+        "alias": null,
+        "chinese": { "short": "比", "full": "水地比" },
+        "line_code": "000010",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
+            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Thuyền Thuận Bát Phong", "Thân Thiện Gắn Kết"],
+        "keywords": ["Gắn kết", "Hòa hợp", "Đồng lòng", "Kết giao", "Tin cậy", "Chân thành"],
+        "couplet": {
+            "opening": "Nước chảy hòa trên mặt đất, tượng lòng người quy tụ thân ái giúp nhau.",
+            "closing": "Nguyên vĩnh trinh, vô cữu: giữ đức thành thực lâu bền, chớ chậm kết giao."
+        },
+        "advice": "Thời điểm thuận lợi để mở rộng quan hệ hợp tác, củng cố tình thân và tìm kiếm đối tác đồng chí hướng. Hãy chủ động kết nối sớm bằng sự chân thành và minh bạch, tránh do dự đứng ngoài cuộc kẻo lỡ mất cơ hội quý giá.",
+        "artwork": {
+            "image_base": "./assets/images/iching/08-thuy-dia-ty",
+            "alt": "Tranh minh họa quẻ Thủy Địa Tỷ với hình tượng vòng ngọc bích liền mạch giữa dòng nước",
+            "focal_object": "Vòng ngọc bích liền mạch giữa dòng nước"
+        }
+    },
+    {
+        "id": 9,
+        "number": "09",
+        "slug": "09-phong-thien-tieu-suc",
+        "name": "Phong Thiên Tiểu Súc",
+        "alias": null,
+        "chinese": { "short": "小畜", "full": "風天小畜" },
+        "line_code": "111011",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
+            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Mật Vân Bất Vũ", "Tích Tiểu Thành Đại"],
+        "keywords": ["Tích góp", "Kiềm chế", "Tỉ mỉ", "Chờ đợi", "Nuôi dưỡng", "Chậm rãi"],
+        "couplet": {
+            "opening": "Gió thổi trên trời tụ mây dày, tích trữ sức mạnh từ điều nhỏ.",
+            "closing": "Mật vân bất vũ, tự ngã tây giao: mây dày chưa mưa, hãy đợi."
+        },
+        "advice": "Tình thế hiện tại chưa thích hợp để bứt phá lớn mà cần kiên trì chăm chút từng chi tiết nhỏ. Hãy tiết kiệm nguồn lực, trau dồi kỹ năng và giữ thái độ ôn hòa. Tích tiểu thành đại hôm nay sẽ tạo nền tảng vững chắc cho ngày mai.",
+        "artwork": {
+            "image_base": "./assets/images/iching/09-phong-thien-tieu-suc",
+            "alt": "Tranh minh họa quẻ Phong Thiên Tiểu Súc với hình tượng hạt giống có cánh xoay trong gió",
+            "focal_object": "Hạt giống có cánh xoay trong gió"
+        }
+    },
+    {
+        "id": 10,
+        "number": "10",
+        "slug": "10-thien-trach-ly",
+        "name": "Thiên Trạch Lý",
+        "alias": null,
+        "chinese": { "short": "履", "full": "天澤履" },
+        "line_code": "110111",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
+            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Phượng Hoàng Lạc Sơn", "Cẩn Trọng Giữ Lễ"],
+        "keywords": ["Lễ nghĩa", "Thận trọng", "Đĩnh đạc", "Dũng cảm", "Hòa nhã", "Khuôn phép"],
+        "couplet": {
+            "opening": "Trời cao trên đầm sâu, giữ lễ nghĩa điềm đạm bước qua lối hiểm.",
+            "closing": "Lý hổ vĩ, bất điệt nhân: giẫm đuôi hổ chẳng hại nhờ hòa nhã."
+        },
+        "advice": "Bạn đang đối diện tình huống nhạy cảm hoặc làm việc cùng người quyền uy, khó tính. Chìa khóa thành công là giữ thái độ lịch thiệp, tôn trọng quy tắc và bước đi cẩn trọng từng nhịp. Khi giữ sự điềm đạm chân thành, nguy cơ tự hóa bình an.",
+        "artwork": {
+            "image_base": "./assets/images/iching/10-thien-trach-ly",
+            "alt": "Tranh minh họa quẻ Thiên Trạch Lý với hình tượng phiến đá bước chân nghi lễ trước hổ dữ",
+            "focal_object": "Phiến đá bước chân nghi lễ trước hổ dữ"
+        }
+    },
+    {
+        "id": 11,
+        "number": "11",
+        "slug": "11-dia-thien-thai",
+        "name": "Địa Thiên Thái",
+        "alias": null,
+        "chinese": { "short": "泰", "full": "地天泰" },
+        "line_code": "111000",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
+            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Hỷ Báo Tam Nguyên", "Thiên Địa Giao Hòa"],
+        "keywords": ["Hanh thông", "Hòa hợp", "Thịnh trị", "Giao cảm", "Thuận lợi", "Mở rộng"],
+        "couplet": {
+            "opening": "Khí trời giáng xuống, khí đất bốc lên, âm dương giao hòa hưng thịnh.",
+            "closing": "Tiểu vãng đại lai, cát hanh: việc nhỏ đi qua, vận lớn tìm đến."
+        },
+        "advice": "Vận khí đang ở độ giao hòa lý tưởng giữa thiên thời, địa lợi và nhân hòa. Đây là thời điểm tốt để triển khai dự án quan trọng, mở rộng hợp tác và gieo hạt dài hạn. Luôn giữ tâm khiêm tốn và dự phòng khi thịnh để bền lâu.",
+        "artwork": {
+            "image_base": "./assets/images/iching/11-dia-thien-thai",
+            "alt": "Tranh minh họa quẻ Địa Thiên Thái với hình tượng vòng nhật nguyệt giao hòa ở trung tâm",
+            "focal_object": "Vòng nhật nguyệt giao hòa ở trung tâm"
+        }
+    },
+    {
+        "id": 12,
+        "number": "12",
+        "slug": "12-thien-dia-bi",
+        "name": "Thiên Địa Bĩ",
+        "alias": null,
+        "chinese": { "short": "否", "full": "天地否" },
+        "line_code": "000111",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
+            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        },
+        "status": { "code": "hung", "label": "Hung" },
+        "hexagram_images": ["Hổ Lạc Hãm Khanh", "Ẩn Đức Tránh Họa"],
+        "keywords": ["Bế tắc", "Cách trở", "Thu mình", "Tự thủ", "Kiên định", "Chờ xoay chuyển"],
+        "couplet": {
+            "opening": "Trời trên đất dưới không giao hòa, khí vận ngưng trệ khiến việc bế tắc.",
+            "closing": "Bĩ chi phỉ nhân, bất lợi quân tử trinh: thời bế tắc nên giữ mình."
+        },
+        "advice": "Giai đoạn bế tắc và thiếu tiếng nói chung không phải lúc cố sức hay mở rộng mạo hiểm. Hãy chủ động thu gọn quy mô, bảo toàn tài chính và giữ vững phẩm hạnh. Sự trầm tĩnh tu dưỡng hôm nay giúp bạn sẵn sàng khi vận bĩ chuyển thái.",
+        "artwork": {
+            "image_base": "./assets/images/iching/12-thien-dia-bi",
+            "alt": "Tranh minh họa quẻ Thiên Địa Bĩ với hình tượng ổ khóa đá niêm phong giữa trời đất",
+            "focal_object": "Ổ khóa đá niêm phong giữa trời đất"
+        }
+    },
+    {
+        "id": 13,
+        "number": "13",
+        "slug": "13-thien-hoa-dong-nhan",
+        "name": "Thiên Hỏa Đồng Nhân",
+        "alias": null,
+        "chinese": { "short": "同人", "full": "天火同人" },
+        "line_code": "101111",
+        "element": "fire",
+        "trigrams": {
+            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
+            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Tiên Nhân Chỉ Lộ", "Đồng Tâm Hiệp Lực"],
+        "keywords": ["Đồng tâm", "Cộng đồng", "Công minh", "Chia sẻ", "Kết nối", "Đại cuộc"],
+        "couplet": {
+            "opening": "Lửa sáng bốc lên trời rộng, tượng lòng người cùng chung chí lớn lý tưởng.",
+            "closing": "Đồng nhân vu dã, hanh: hòa đồng rộng mở không phe phái ắt vượt sông."
+        },
+        "advice": "Sức mạnh lớn nhất lúc này nằm ở tinh thần đồng đội và tầm nhìn công tâm vượt lên lợi ích phe nhóm. Hãy mở lòng hợp tác cùng những người chung giá trị cốt lõi, minh bạch mục tiêu và chia sẻ thành quả để chinh phục đỉnh cao.",
+        "artwork": {
+            "image_base": "./assets/images/iching/13-thien-hoa-dong-nhan",
+            "alt": "Tranh minh họa quẻ Thiên Hỏa Đồng Nhân với hình tượng ngọn đuốc hiệu cháy sáng giữa đồng rộng",
+            "focal_object": "Ngọn đuốc hiệu cháy sáng giữa đồng rộng"
+        }
+    },
+    {
+        "id": 14,
+        "number": "14",
+        "slug": "14-hoa-thien-dai-huu",
+        "name": "Hỏa Thiên Đại Hữu",
+        "alias": null,
+        "chinese": { "short": "大有", "full": "火天大有" },
+        "line_code": "111101",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
+            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Khảm Khố Đắc Bảo", "Phú Quý Minh Sáng"],
+        "keywords": ["Sung túc", "Rực rỡ", "Quảng đại", "Thịnh vượng", "Chính đạo", "Sẻ chia"],
+        "couplet": {
+            "opening": "Mặt trời rực rỡ giữa trời cao, soi sáng muôn nơi, tài đức đều thịnh.",
+            "closing": "Đại hữu, nguyên hanh: sở hữu dồi dào, thuận đạo trời nên đại hanh thông."
+        },
+        "advice": "Tài nguyên, uy tín và cơ hội đang hội tụ dồi dào quanh bạn. Để giữ phúc lộc lâu dài, hãy quản trị tài sản minh bạch, dùng nguồn lực nâng đỡ điều thiện và tránh thói xa hoa tự mãn. Đức rộng song hành tài lớn sẽ càng thịnh.",
+        "artwork": {
+            "image_base": "./assets/images/iching/14-hoa-thien-dai-huu",
+            "alt": "Tranh minh họa quẻ Hỏa Thiên Đại Hữu với hình tượng mặt trời chính ngọ giữa đỉnh trời",
+            "focal_object": "Mặt trời chính ngọ giữa đỉnh trời"
+        }
+    },
+    {
+        "id": 15,
+        "number": "15",
+        "slug": "15-dia-son-khiem",
+        "name": "Địa Sơn Khiêm",
+        "alias": null,
+        "chinese": { "short": "謙", "full": "地山謙" },
+        "line_code": "001000",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
+            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Nhị Nhân Phân Kim", "Khiêm Tốn Hữu Chung"],
+        "keywords": ["Lui mình", "Ẩn nhẫn", "Khiêm tốn", "Nhường nhịn", "Giữ gìn", "Chân thật"],
+        "couplet": {
+            "opening": "Núi cao ẩn mình dưới đất phẳng, tượng bậc tài đức chẳng khoe khoang.",
+            "closing": "Khiêm hanh, quân tử hữu chung: người khiêm nhường luôn giữ trọn kết quả đẹp."
+        },
+        "advice": "Dù năng lực vượt trội hay đang gặt hái thành tích, hãy luôn giữ thái độ nhã nhặn, tôn trọng người khác và nhận phần khó về mình. Sự khiêm cung thực chất không làm bạn nhỏ bé đi, mà thu hút quý nhân và giữ vững thành quả.",
+        "artwork": {
+            "image_base": "./assets/images/iching/15-dia-son-khiem",
+            "alt": "Tranh minh họa quẻ Địa Sơn Khiêm với hình tượng đỉnh núi ngọc ẩn dưới lòng đất phẳng",
+            "focal_object": "Đỉnh núi ngọc ẩn dưới lòng đất phẳng"
+        }
+    },
+    {
+        "id": 16,
+        "number": "16",
+        "slug": "16-loi-dia-du",
+        "name": "Lôi Địa Dự",
+        "alias": null,
+        "chinese": { "short": "豫", "full": "雷地豫" },
+        "line_code": "000100",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
+            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Thanh Long Đắc Vị", "Hòa Lạc Dự Phòng"],
+        "keywords": ["Hân hoan", "Hứng khởi", "Dự bị", "Thuận lòng", "Sáng tạo", "Cảnh giác"],
+        "couplet": {
+            "opening": "Sấm xuân vang rền trên mặt đất, đánh thức vạn vật mang niềm vui mới.",
+            "closing": "Lợi kiến hầu hành sư: thuận theo lòng người khởi sự ắt được hưởng ứng."
+        },
+        "advice": "Tinh thần hăng hái và sự ủng hộ xung quanh tạo đà thuận lợi cho việc khởi động kế hoạch mới. Tuy vậy, giữa lúc vui vẻ thuận buồm xuôi gió, đừng quên chuẩn bị phương án dự phòng và giữ tỉnh táo trước những lời khen quá đà.",
+        "artwork": {
+            "image_base": "./assets/images/iching/16-loi-dia-du",
+            "alt": "Tranh minh họa quẻ Lôi Địa Dự với hình tượng chiếc trống đồng vang động trên đồi xuân",
+            "focal_object": "Chiếc trống đồng vang động trên đồi xuân"
+        }
+    },
+    {
+        "id": 17,
+        "number": "17",
+        "slug": "17-trach-loi-tuy",
+        "name": "Trạch Lôi Tùy",
+        "alias": null,
+        "chinese": { "short": "隨", "full": "澤雷隨" },
+        "line_code": "100110",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
+            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Thôi Xa Kháo Nhai", "Tùy Thời Ứng Biến"],
+        "keywords": ["Linh hoạt", "Thuận thời", "Thích nghi", "Hòa nhập", "Cởi mở", "Chính đáng"],
+        "couplet": {
+            "opening": "Sấm nghỉ dưới đầm nước, tượng sự linh hoạt thuận theo thời thế.",
+            "closing": "Nguyên hanh lợi trinh, vô cữu: theo điều đúng lúc sẽ trọn vẹn."
+        },
+        "advice": "Đừng cố chấp giữ lối mòn cũ khi hoàn cảnh xung quanh đã chuyển dịch rõ rệt. Hãy chủ động lắng nghe góp ý xác đáng và linh hoạt điều chỉnh kế hoạch theo dòng chảy thực tế, đồng thời giữ vững nguyên tắc cốt lõi để không bị cuốn trôi theo trào lưu.",
+        "artwork": {
+            "image_base": "./assets/images/iching/17-trach-loi-tuy",
+            "alt": "Tranh minh họa quẻ Trạch Lôi Tùy với hình tượng chiếc thuyền nan xuôi dòng nước êm",
+            "focal_object": "Chiếc thuyền nan xuôi dòng nước êm"
+        }
+    },
+    {
+        "id": 18,
+        "number": "18",
+        "slug": "18-son-phong-co",
+        "name": "Sơn Phong Cổ",
+        "alias": null,
+        "chinese": { "short": "蠱", "full": "山風蠱" },
+        "line_code": "011001",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
+            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Thôi Ma Đảo Thạch", "Chấn Chỉnh Cải Cách"],
+        "keywords": ["Sửa sai", "Cải tổ", "Khắc phục", "Đổi mới", "Trách nhiệm", "Tỉnh thức"],
+        "couplet": {
+            "opening": "Gió quẩn dưới chân núi sinh mục nát, nhắc nhở việc chỉnh đốn.",
+            "closing": "Nguyên hanh, lợi thiệp đại xuyên: dứt khoát cải tổ ắt sinh khí."
+        },
+        "advice": "Những tồn đọng cũ kỹ hoặc thói quen trì trệ đang âm thầm bào mòn thành quả của bạn. Thay vì né tránh hay che giấu, hãy thẳng thắn truy tìm nguyên nhân tận gốc, lên lộ trình khắc phục bài bản và kiên quyết đổi mới để tái thiết nền tảng vững chắc.",
+        "artwork": {
+            "image_base": "./assets/images/iching/18-son-phong-co",
+            "alt": "Tranh minh họa quẻ Sơn Phong Cổ với hình tượng chiếc đỉnh đồng cổ được hàn gắn",
+            "focal_object": "Chiếc đỉnh đồng cổ được hàn gắn"
+        }
+    },
+    {
+        "id": 19,
+        "number": "19",
+        "slug": "19-dia-trach-lam",
+        "name": "Địa Trạch Lâm",
+        "alias": null,
+        "chinese": { "short": "臨", "full": "地澤臨" },
+        "line_code": "110000",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
+            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Phát Chính Thi Nhân", "Tiến Tới Khai Mở"],
+        "keywords": ["Thăng tiến", "Giám sát", "Nhân ái", "Phát triển", "Chủ động", "Nhìn xa"],
+        "couplet": {
+            "opening": "Đất cao nhìn xuống đầm rộng, khí dương đang lớn mạnh từng ngày.",
+            "closing": "Nguyên hanh lợi trinh, bát nguyệt hữu hung: tiến mạnh nhưng phòng suy."
+        },
+        "advice": "Vận thế đang mở rộng thuận lợi cho việc thăng tiến, dẫn dắt đội ngũ và khẳng định uy tín cá nhân. Hãy chủ động nắm bắt thời cơ bằng năng lực thực chất cùng phong thái nhân hậu, nhưng cũng cần lập phương án dự phòng sớm trước khi chu kỳ đảo chiều.",
+        "artwork": {
+            "image_base": "./assets/images/iching/19-dia-trach-lam",
+            "alt": "Tranh minh họa quẻ Địa Trạch Lâm với hình tượng lầu vọng cảnh trên bờ đất cao",
+            "focal_object": "Lầu vọng cảnh trên bờ đất cao"
+        }
+    },
+    {
+        "id": 20,
+        "number": "20",
+        "slug": "20-phong-dia-quan",
+        "name": "Phong Địa Quán",
+        "alias": null,
+        "chinese": { "short": "觀", "full": "風地觀" },
+        "line_code": "000011",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
+            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Hạn Bồng Phùng Hà", "Quan Sát Thấu Đáo"],
+        "keywords": ["Quan sát", "Chiêm nghiệm", "Làm gương", "Tỉnh thức", "Tầm nhìn", "Điềm tĩnh"],
+        "couplet": {
+            "opening": "Gió lướt khắp mặt đất, tượng tầm nhìn bao quát và đức nêu gương.",
+            "closing": "Quán quán nhi bất tiến: giữ tâm trang nghiêm thành kính khi xét việc."
+        },
+        "advice": "Trước khi chốt quyết định quan trọng, hãy tạm dừng bước để quan sát toàn cảnh từ nhiều góc độ thay vì phán đoán vội vàng. Đồng thời tự soi chiếu lại hành vi bản thân, bởi sự điềm tĩnh và chuẩn mực của bạn đang tạo sức ảnh hưởng lan tỏa mạnh mẽ.",
+        "artwork": {
+            "image_base": "./assets/images/iching/20-phong-dia-quan",
+            "alt": "Tranh minh họa quẻ Phong Địa Quán với hình tượng thiên nhãn soi rọi giữa tầng gió",
+            "focal_object": "Thiên nhãn soi rọi giữa tầng gió"
+        }
+    },
+    {
+        "id": 21,
+        "number": "21",
+        "slug": "21-hoa-loi-phe-hap",
+        "name": "Hỏa Lôi Phệ Hạp",
+        "alias": null,
+        "chinese": { "short": "噬嗑", "full": "火雷噬嗑" },
+        "line_code": "100101",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
+            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Cơ Nhân Ngộ Thực", "Quyết Đoán Phá Ngại"],
+        "keywords": ["Quyết đoán", "Công minh", "Tháo gỡ", "Minh bạch", "Kỷ cương", "Hành động"],
+        "couplet": {
+            "opening": "Chớp sáng đi cùng sấm rền, cắn đứt vật cản lập lại công minh.",
+            "closing": "Phệ hạp hanh, lợi dụng ngục: xử lý dứt khoát công bằng ắt thông."
+        },
+        "advice": "Một nút thắt hoặc sự bất hợp lý đang cản trở dòng chảy công việc chung. Chần chừ nể nang lúc này chỉ khiến rắc rối kéo dài và phức tạp hơn. Hãy căn cứ vào sự thật minh bạch, kết hợp lý trí sắc bén với thái độ công tâm để giải quyết dứt điểm.",
+        "artwork": {
+            "image_base": "./assets/images/iching/21-hoa-loi-phe-hap",
+            "alt": "Tranh minh họa quẻ Hỏa Lôi Phệ Hạp với hình tượng tia sét đỏ chẻ đôi tảng đá chắn lối",
+            "focal_object": "Tia sét đỏ chẻ đôi tảng đá chắn lối"
+        }
+    },
+    {
+        "id": 22,
+        "number": "22",
+        "slug": "22-son-hoa-bi",
+        "name": "Sơn Hỏa Bí",
+        "alias": null,
+        "chinese": { "short": "賁", "full": "山火賁" },
+        "line_code": "101001",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
+            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Hỷ Khí Doanh Môn", "Văn Nhã Tinh Tế"],
+        "keywords": ["Thẩm mỹ", "Trang nhã", "Văn hóa", "Lịch thiệp", "Hài hòa", "Chân chất"],
+        "couplet": {
+            "opening": "Ánh lửa rọi sáng chân núi, tượng vẻ đẹp trang nhã tôn giá trị.",
+            "closing": "Bí hanh, tiểu lợi hữu du vãng: trau chuốt hình thức lợi việc nhỏ."
+        },
+        "advice": "Thời điểm thuận lợi cho thiết kế, truyền thông, ngoại giao và làm mới diện mạo thương hiệu. Hãy chăm chút sự tinh tế trong cách trình bày để gây thiện cảm, nhưng luôn nhớ lấy chất lượng cốt lõi và sự chân thật làm gốc thay vì phô trương hào nhoáng.",
+        "artwork": {
+            "image_base": "./assets/images/iching/22-son-hoa-bi",
+            "alt": "Tranh minh họa quẻ Sơn Hỏa Bí với hình tượng đóa mẫu đơn nở rộ dưới chân núi",
+            "focal_object": "Đóa mẫu đơn nở rộ dưới chân núi"
+        }
+    },
+    {
+        "id": 23,
+        "number": "23",
+        "slug": "23-son-dia-bac",
+        "name": "Sơn Địa Bác",
+        "alias": null,
+        "chinese": { "short": "剝", "full": "山地剝" },
+        "line_code": "000001",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
+            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        },
+        "status": { "code": "hung", "label": "Hung" },
+        "hexagram_images": ["Ưng Thước Đồng Lâm", "Bào Mòn Cần Thủ"],
+        "keywords": ["Suy giảm", "Bào mòn", "Phòng thủ", "Buông bỏ", "Bảo toàn", "Tĩnh lặng"],
+        "couplet": {
+            "opening": "Núi dựng trên nền đất xói lở, báo hiệu thế suy giảm từ gốc.",
+            "closing": "Bác, bất lợi hữu du vãng: lúc thế đang rút chớ mạo hiểm tiến."
+        },
+        "advice": "Những cấu trúc cũ kỹ hoặc mối quan hệ thiếu bền vững đang dần rụng bỏ theo quy luật tự nhiên. Đừng cố chống chọi ngược dòng hay đầu tư liều lĩnh lúc này; hãy cắt giảm chi phí dư thừa, dưỡng sức và bảo toàn giá trị cốt lõi chờ thời chuyển.",
+        "artwork": {
+            "image_base": "./assets/images/iching/23-son-dia-bac",
+            "alt": "Tranh minh họa quẻ Sơn Địa Bác với hình tượng chiếc lá cuối cùng lìa cành bên vách núi",
+            "focal_object": "Chiếc lá cuối cùng lìa cành bên vách núi"
+        }
+    },
+    {
+        "id": 24,
+        "number": "24",
+        "slug": "24-dia-loi-phuc",
+        "name": "Địa Lôi Phục",
+        "alias": null,
+        "chinese": { "short": "復", "full": "地雷復" },
+        "line_code": "100000",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
+            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Nhất Dương Lai Phục", "Dương Khí Hồi Sinh"],
+        "keywords": ["Hồi sinh", "Quay về", "Khởi sắc", "Tái tạo", "Hy vọng", "Sửa mình"],
+        "couplet": {
+            "opening": "Một hào dương trở lại dưới lòng đất, báo hiệu sinh khí hồi sinh.",
+            "closing": "Phục hanh, xuất nhập vô tật: trở về chính đạo, bạn hiền tìm đến."
+        },
+        "advice": "Bước ngoặt tích cực đã bắt đầu hé mở sau quãng thời gian trầm lắng kéo dài. Tuy nhiên, mầm sinh khí còn non yếu nên đừng vội bung sức quá độ; hãy nuôi dưỡng thói quen tốt, sửa sai kịp thời từ sớm để đà phục hồi lớn mạnh tự nhiên.",
+        "artwork": {
+            "image_base": "./assets/images/iching/24-dia-loi-phuc",
+            "alt": "Tranh minh họa quẻ Địa Lôi Phục với hình tượng mặt trời đông chí hé rạng dưới lòng đất",
+            "focal_object": "Mặt trời đông chí hé rạng dưới lòng đất"
+        }
+    },
+    {
+        "id": 25,
+        "number": "25",
+        "slug": "25-thien-loi-vo-vong",
+        "name": "Thiên Lôi Vô Vọng",
+        "alias": null,
+        "chinese": { "short": "無妄", "full": "天雷無妄" },
+        "line_code": "100111",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
+            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Chân Thành Vô Tà", "Thuận Theo Tự Nhiên"],
+        "keywords": ["Chân thực", "Thuận thiên", "Ngay thẳng", "Trong sáng", "Không mưu cầu", "An lành"],
+        "couplet": {
+            "opening": "Sấm chuyển dưới trời rộng, giữ tâm thuần khiết không chút tà niệm.",
+            "closing": "Nguyên hanh lợi trinh, phỉ chính hữu sảnh: ngay thẳng hanh, lệch họa."
+        },
+        "advice": "Hãy hành động bằng động cơ trong sáng, trung thực và thuận theo quy luật tự nhiên thay vì tính toán mưu mẹo vụ lợi. Nếu gặp sự cố ngoài ý muốn, đừng hoảng loạn tìm đường tắt; sự chính trực và điềm tĩnh sẽ hóa giải mọi rủi ro.",
+        "artwork": {
+            "image_base": "./assets/images/iching/25-thien-loi-vo-vong",
+            "alt": "Tranh minh họa quẻ Thiên Lôi Vô Vọng với hình tượng viên tinh thể pha lê giữa trời sấm",
+            "focal_object": "Viên tinh thể pha lê giữa trời sấm"
+        }
+    },
+    {
+        "id": 26,
+        "number": "26",
+        "slug": "26-son-thien-dai-suc",
+        "name": "Sơn Thiên Đại Súc",
+        "alias": null,
+        "chinese": { "short": "大畜", "full": "山天大畜" },
+        "line_code": "111001",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
+            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Trận Thế Đắc Khai", "Tích Lũy Hùng Hậu"],
+        "keywords": ["Tích lũy lớn", "Bản lĩnh", "Tri thức", "Kìm nén", "Bứt phá", "Vững vàng"],
+        "couplet": {
+            "opening": "Khí trời tụ trong lòng núi lớn, tích trữ tài đức dồi dào.",
+            "closing": "Lợi trinh, bất gia thực cát: tích đức sâu rộng, đủ sức gánh việc."
+        },
+        "advice": "Bạn đang sở hữu nền tảng kiến thức và nội lực đáng quý. Hãy tiếp tục học hỏi kinh nghiệm từ người đi trước, rèn bản lĩnh kiềm chế cảm xúc và dồn sức cho mục tiêu dài hơi. Khi thời cơ mở cửa, nguồn lực này sẽ giúp bứt phá.",
+        "artwork": {
+            "image_base": "./assets/images/iching/26-son-thien-dai-suc",
+            "alt": "Tranh minh họa quẻ Sơn Thiên Đại Súc với hình tượng ấn ngọc vuông cất giữ trong lòng núi",
+            "focal_object": "Ấn ngọc vuông cất giữ trong lòng núi"
+        }
+    },
+    {
+        "id": 27,
+        "number": "27",
+        "slug": "27-son-loi-di",
+        "name": "Sơn Lôi Di",
+        "alias": null,
+        "chinese": { "short": "頤", "full": "山雷頤" },
+        "line_code": "100001",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
+            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Vị Thủy Phỏng Hiền", "Dưỡng Thân Dưỡng Tâm"],
+        "keywords": ["Nuôi dưỡng", "Lời nói", "Tiết độ", "Sức khỏe", "Cẩn ngôn", "Tự lập"],
+        "couplet": {
+            "opening": "Núi tĩnh trên, sấm động dưới như đôi hàm, nhắc đạo nuôi dưỡng.",
+            "closing": "Trinh cát, quán di tự cầu khẩu thực: giữ lời nói, dưỡng thân đúng."
+        },
+        "advice": "Hãy đặc biệt cẩn trọng với hai điều gắn liền với miệng: chế độ dinh dưỡng chăm sóc thân thể và lời ăn tiếng nói giao tiếp mỗi ngày. Tránh tiếp nạp thông tin tiêu cực, không buông lời tổn thương người khác và chủ động tự bồi đắp giá trị.",
+        "artwork": {
+            "image_base": "./assets/images/iching/27-son-loi-di",
+            "alt": "Tranh minh họa quẻ Sơn Lôi Di với hình tượng chiếc bát ngọc đựng tinh hoa dưỡng sinh",
+            "focal_object": "Chiếc bát ngọc đựng tinh hoa dưỡng sinh"
+        }
+    },
+    {
+        "id": 28,
+        "number": "28",
+        "slug": "28-trach-phong-dai-qua",
+        "name": "Trạch Phong Đại Quá",
+        "alias": null,
+        "chinese": { "short": "大過", "full": "澤風大過" },
+        "line_code": "011110",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
+            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        },
+        "status": { "code": "tieu_hung", "label": "Tiểu Hung" },
+        "hexagram_images": ["Dạ Mộng Kim Ngân", "Quá Tải Cần Điều Chỉnh"],
+        "keywords": ["Quá tải", "Đột phá", "Bản lĩnh", "Áp lực", "Táo bạo", "Chịu lực"],
+        "couplet": {
+            "opening": "Nước đầm dâng ngập ngọn cây, tượng kèo nhà cong oằn vì quá tải.",
+            "closing": "Đống nạo, lợi hữu du vãng, hanh: trụ yếu cần sớm đổi thay thoát."
+        },
+        "advice": "Áp lực công việc đang vượt ngưỡng chịu đựng bình thường và đòi hỏi giải pháp quyết liệt thay vì chắp vá tạm bợ. Hãy dũng cảm san sẻ trách nhiệm, lược bỏ cam kết quá sức và giữ bản lĩnh độc lập để đưa tập thể vượt khúc cua khó.",
+        "artwork": {
+            "image_base": "./assets/images/iching/28-trach-phong-dai-qua",
+            "alt": "Tranh minh họa quẻ Trạch Phong Đại Quá với hình tượng thanh xà gỗ cong chịu lực giữa dòng nước",
+            "focal_object": "Thanh xà gỗ cong chịu lực giữa dòng nước"
+        }
+    },
+    {
+        "id": 29,
+        "number": "29",
+        "slug": "29-kham-vi-thuy",
+        "name": "Khảm Vi Thủy",
+        "alias": "Thuần Khảm",
+        "chinese": { "short": "坎", "full": "坎為水" },
+        "line_code": "010010",
+        "element": "water",
+        "trigrams": {
+            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
+            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        },
+        "status": { "code": "hung", "label": "Hung" },
+        "hexagram_images": ["Thủy Để Lao Nguyệt", "Vững Tâm Vượt Hiểm"],
+        "keywords": ["Thử thách", "Hiểm trở", "Bền chí", "Thành tín", "Bình tĩnh", "Vượt khó"],
+        "couplet": {
+            "opening": "Nước chồng trên nước thành vực sâu, thử thách liên tiếp rèn ý chí.",
+            "closing": "Hữu phu duy tâm hanh: giữ lòng thành thực sáng suốt ắt vượt hiểm."
+        },
+        "advice": "Thử thách có thể kéo đến dồn dập khiến bạn cảm thấy chông chênh. Điều cốt lõi là giữ tâm trí bình tĩnh như dòng nước luôn tìm lối chảy, không hoảng loạn hay đánh mất chữ tín. Rèn luyện thực lực mỗi ngày sẽ giúp bạn vượt qua vực sâu.",
+        "artwork": {
+            "image_base": "./assets/images/iching/29-kham-vi-thuy",
+            "alt": "Tranh minh họa quẻ Khảm Vi Thủy với hình tượng vầng trăng tròn tĩnh lặng giữa xoáy nước",
+            "focal_object": "Vầng trăng tròn tĩnh lặng giữa xoáy nước"
+        }
+    },
+    {
+        "id": 30,
+        "number": "30",
+        "slug": "30-ly-vi-hoa",
+        "name": "Ly Vi Hỏa",
+        "alias": "Thuần Ly",
+        "chinese": { "short": "離", "full": "離為火" },
+        "line_code": "101101",
+        "element": "fire",
+        "trigrams": {
+            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
+            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Thiên Quan Tứ Phúc", "Minh Trí Tỏa Sáng"],
+        "keywords": ["Sáng suốt", "Nhiệt huyết", "Bám tựa", "Văn minh", "Rõ ràng", "Cân bằng"],
+        "couplet": {
+            "opening": "Lửa nối tiếp lửa tỏa sáng rực rỡ, trí tuệ cần chỗ dựa bền.",
+            "closing": "Lợi trinh hanh, súc tẫn ngưu cát: giữ tâm ôn hòa thì sáng bền."
+        },
+        "advice": "Tư duy minh mẫn và nguồn cảm hứng sáng tạo đang giúp bạn tỏa sáng rõ nét. Tuy nhiên, lửa muốn cháy lâu phải có chỗ bám vững vàng; hãy gắn bó với môi trường lành mạnh, tiết chế nóng nảy và giữ kỷ luật để không sớm kiệt sức.",
+        "artwork": {
+            "image_base": "./assets/images/iching/30-ly-vi-hoa",
+            "alt": "Tranh minh họa quẻ Ly Vi Hỏa với hình tượng chim chu tước dang cánh giữa ngọn lửa",
+            "focal_object": "Chim chu tước dang cánh giữa ngọn lửa"
+        }
+    },
+    {
+        "id": 31,
+        "number": "31",
+        "slug": "31-trach-son-ham",
+        "name": "Trạch Sơn Hàm",
+        "alias": null,
+        "chinese": { "short": "咸", "full": "澤山咸" },
+        "line_code": "001110",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
+            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Manh Nha Xuất Thổ", "Tâm Đầu Ý Hợp"],
+        "keywords": ["Cảm ứng", "Hấp dẫn", "Chân thành", "Hòa quyện", "Tình duyên", "Cởi mở"],
+        "couplet": {
+            "opening": "Đầm nước mát trên đỉnh núi, tượng sự giao cảm tự nhiên chân thành.",
+            "closing": "Hàm hanh lợi trinh, thủ nữ cát: lấy lòng trong sáng cảm hóa nhau."
+        },
+        "advice": "Sự đồng điệu về cảm xúc và tư tưởng đang mở ra những mối nhân duyên hoặc cơ hội hợp tác đầy triển vọng. Hãy giữ tâm trí cởi mở, lắng nghe không định kiến và trao đi sự chân thành tự nhiên để mọi kết nối sớm đơm hoa kết trái.",
+        "artwork": {
+            "image_base": "./assets/images/iching/31-trach-son-ham",
+            "alt": "Tranh minh họa quẻ Trạch Sơn Hàm với hình tượng nút thắt đồng tâm lơ lửng trên hồ núi",
+            "focal_object": "Nút thắt đồng tâm lơ lửng trên hồ núi"
+        }
+    },
+    {
+        "id": 32,
+        "number": "32",
+        "slug": "32-loi-phong-hang",
+        "name": "Lôi Phong Hằng",
+        "alias": null,
+        "chinese": { "short": "恆", "full": "雷風恆" },
+        "line_code": "011100",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
+            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Kiên Định Bền Lâu", "Thường Hằng Bất Biến"],
+        "keywords": ["Bền bỉ", "Ổn định", "Kiên định", "Trường cửu", "Kỷ luật", "Nhất quán"],
+        "couplet": {
+            "opening": "Sấm trên gió dưới tương hỗ nhịp nhàng, tượng đạo lý bền lâu bất biến.",
+            "closing": "Hằng hanh vô cữu, lợi trinh: bền chí theo chính đạo đường dài thành."
+        },
+        "advice": "Thành quả vững bền không đến từ hứng khởi nhất thời mà từ thói quen kỷ luật duy trì đều đặn mỗi ngày. Hãy kiên định với con đường đã chọn, tránh đứng núi này trông núi nọ, đồng thời linh hoạt cải tiến phương pháp để ngày càng tiến bộ.",
+        "artwork": {
+            "image_base": "./assets/images/iching/32-loi-phong-hang",
+            "alt": "Tranh minh họa quẻ Lôi Phong Hằng với hình tượng bánh xe cổ tám nan quay đều giữa sấm gió",
+            "focal_object": "Bánh xe cổ tám nan quay đều giữa sấm gió"
+        }
+    },
+    {
+        "id": 33,
+        "number": "33",
+        "slug": "33-thien-son-don",
+        "name": "Thiên Sơn Độn",
+        "alias": null,
+        "chinese": { "short": "遯", "full": "天山遯" },
+        "line_code": "001111",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
+            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Nùng Vân Tế Nhật", "Tri Cơ Nhi Thoái"],
+        "keywords": ["Ẩn lánh", "Lùi bước", "Bảo toàn", "Tỉnh táo", "Kín đáo", "Đợi thời"],
+        "couplet": {
+            "opening": "Trời cao xa núi, người sáng suốt chủ động rút lui bảo toàn.",
+            "closing": "Độn hanh, tiểu lợi trinh: biết lùi đúng lúc giữ vững chính đạo."
+        },
+        "advice": "Thế trận hiện tại đang chuyển dần sang bất lợi, cố tranh chấp chỉ thêm hao tổn tâm sức. Hãy chủ động rút lui có trật tự để bảo toàn nguồn lực, tránh xa thị phi và lặng lẽ củng cố nội lực. Lùi đúng lúc chính là giữ thế chủ động.",
+        "artwork": {
+            "image_base": "./assets/images/iching/33-thien-son-don",
+            "alt": "Tranh minh họa quẻ Thiên Sơn Độn với hình tượng vầng trăng khuyết ẩn sau đỉnh núi mây",
+            "focal_object": "Vầng trăng khuyết ẩn sau đỉnh núi mây"
+        }
+    },
+    {
+        "id": 34,
+        "number": "34",
+        "slug": "34-loi-thien-dai-trang",
+        "name": "Lôi Thiên Đại Tráng",
+        "alias": null,
+        "chinese": { "short": "大壯", "full": "雷天大壯" },
+        "line_code": "111100",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
+            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Công Sư Đắc Mộc", "Cương Kiện Hữu Lễ"],
+        "keywords": ["Hùng mạnh", "Bứt phá", "Chính trực", "Tự tin", "Tiết chế", "Quyết tâm"],
+        "couplet": {
+            "opening": "Sấm rền vang trên trời cao, khí thế dương cương mạnh mẽ dâng trào.",
+            "closing": "Đại tráng, lợi trinh: sức mạnh càng lớn càng phải giữ đạo chính trực."
+        },
+        "advice": "Năng lượng và vị thế của bạn đang ở giai đoạn sung mãn nhất, rất thuận lợi để tạo đột phá lớn. Tuy nhiên, sức mạnh thiếu kiểm soát dễ hóa liều lĩnh như dê húc rào. Hãy dùng uy lực một cách công tâm, tôn trọng quy tắc và biết điểm dừng đúng mực.",
+        "artwork": {
+            "image_base": "./assets/images/iching/34-loi-thien-dai-trang",
+            "alt": "Tranh minh họa quẻ Lôi Thiên Đại Tráng với hình tượng chiếc chuông đồng lớn vang giữa trời sấm",
+            "focal_object": "Chiếc chuông đồng lớn vang giữa trời sấm"
+        }
+    },
+    {
+        "id": 35,
+        "number": "35",
+        "slug": "35-hoa-dia-tan",
+        "name": "Hỏa Địa Tấn",
+        "alias": null,
+        "chinese": { "short": "晉", "full": "火地晉" },
+        "line_code": "000101",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
+            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Sừ Địa Đắc Kim", "Nhật Xuất Địa Thượng"],
+        "keywords": ["Thăng tiến", "Rạng rỡ", "Trọng dụng", "Khởi sắc", "Cống hiến", "Tỏa sáng"],
+        "couplet": {
+            "opening": "Mặt trời vươn lên khỏi mặt đất, ánh sáng lan tỏa ngày càng cao.",
+            "closing": "Khang hầu dụng tích mã phồn thứ: công lao sáng tỏ được trọng thưởng."
+        },
+        "advice": "Vận trình công danh và sự nghiệp đang bước vào đà tăng trưởng rực rỡ, năng lực thực chất của bạn dễ được cấp trên hoặc đối tác ghi nhận. Hãy mạnh dạn đảm nhận trọng trách mới, duy trì phong thái điềm đạm, thuận hòa để đà tiến bước thêm bền vững.",
+        "artwork": {
+            "image_base": "./assets/images/iching/35-hoa-dia-tan",
+            "alt": "Tranh minh họa quẻ Hỏa Địa Tấn với hình tượng vầng thái dương vừa mọc trên chân trời",
+            "focal_object": "Vầng thái dương vừa mọc trên chân trời"
+        }
+    },
+    {
+        "id": 36,
+        "number": "36",
+        "slug": "36-dia-hoa-minh-di",
+        "name": "Địa Hỏa Minh Di",
+        "alias": null,
+        "chinese": { "short": "明夷", "full": "地火明夷" },
+        "line_code": "101000",
+        "element": "water",
+        "trigrams": {
+            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
+            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        },
+        "status": { "code": "hung", "label": "Hung" },
+        "hexagram_images": ["Quá Hà Sách Kiều", "Thao Quang Dưỡng Hối"],
+        "keywords": ["Ẩn sáng", "Kiên nhẫn", "Tự bảo vệ", "Bị lu mờ", "Tỉnh táo", "Nội lực"],
+        "couplet": {
+            "opening": "Mặt trời lặn sâu dưới lòng đất, ánh sáng tạm thời bị che khuất.",
+            "closing": "Minh di, lợi gian trinh: gặp thời tối tăm nên ẩn mình giữ chí."
+        },
+        "advice": "Môi trường xung quanh đang tồn tại sự đố kỵ, hiểu lầm hoặc cản trở khiến tài năng khó phát huy. Đừng phô trương hay đối đầu trực diện kẻo chuốc họa vào thân; hãy khiêm nhường ẩn giấu sự sắc sảo, giữ tâm sáng bên trong và âm thầm chờ ngày trời sáng.",
+        "artwork": {
+            "image_base": "./assets/images/iching/36-dia-hoa-minh-di",
+            "alt": "Tranh minh họa quẻ Địa Hỏa Minh Di với hình tượng vầng mặt trời lặn sâu dưới lòng đất",
+            "focal_object": "Vầng mặt trời lặn sâu dưới lòng đất"
+        }
+    },
+    {
+        "id": 37,
+        "number": "37",
+        "slug": "37-phong-hoa-gia-nhan",
+        "name": "Phong Hỏa Gia Nhân",
+        "alias": null,
+        "chinese": { "short": "家人", "full": "風火家人" },
+        "line_code": "101011",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
+            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Kính Lý Quan Hoa", "Tề Gia Trị Quốc"],
+        "keywords": ["Gia đình", "Ấm cúng", "Kỷ cương", "Nội bộ", "Trách nhiệm", "Gắn bó"],
+        "couplet": {
+            "opening": "Gió thổi từ bếp lửa ấm, tượng gia đạo yên vui trên dưới thuận hòa.",
+            "closing": "Gia nhân, lợi nữ trinh: hậu phương vững vàng, mỗi người tròn bổn phận."
+        },
+        "advice": "Sự ổn định bên ngoài luôn bắt nguồn từ nền tảng nội bộ vững chắc. Đây là lúc cần ưu tiên chăm lo gia đình, củng cố văn hóa đội ngũ và phân định rõ trách nhiệm từng thành viên. Lấy sự chân thành kết hợp kỷ cương sẽ tạo sức mạnh bền lâu.",
+        "artwork": {
+            "image_base": "./assets/images/iching/37-phong-hoa-gia-nhan",
+            "alt": "Tranh minh họa quẻ Phong Hỏa Gia Nhân với hình tượng lư hương đồng tỏa khói giữa gian nhà",
+            "focal_object": "Lư hương đồng tỏa khói giữa gian nhà"
+        }
+    },
+    {
+        "id": 38,
+        "number": "38",
+        "slug": "38-hoa-trach-khue",
+        "name": "Hỏa Trạch Khuê",
+        "alias": null,
+        "chinese": { "short": "睽", "full": "火澤睽" },
+        "line_code": "110101",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
+            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        },
+        "status": { "code": "tieu_hung", "label": "Tiểu Hung" },
+        "hexagram_images": ["Thái Công Ngộ Văn Vương", "Cầu Đồng Tồn Dị"],
+        "keywords": ["Khác biệt", "Bất đồng", "Hiểu lầm", "Hòa giải", "Tôn trọng", "Việc nhỏ"],
+        "couplet": {
+            "opening": "Lửa bốc lên cao, nước đầm chảy xuống, hai hướng trái ngược dễ bất đồng.",
+            "closing": "Khuê, tiểu sự cát: thời chia rẽ nên làm việc nhỏ, giữ hòa khí."
+        },
+        "advice": "Sự khác biệt về góc nhìn đang tạo ra khoảng cách và hiểu lầm trong hợp tác. Đừng vội đẩy mạnh dự án lớn hay ép người khác theo ý mình; hãy bắt đầu từ những việc nhỏ dễ đồng thuận, tôn trọng cá tính riêng và kiên nhẫn tìm điểm chung.",
+        "artwork": {
+            "image_base": "./assets/images/iching/38-hoa-trach-khue",
+            "alt": "Tranh minh họa quẻ Hỏa Trạch Khuê với hình tượng chiếc gương đồng cổ đặt giữa lửa và nước",
+            "focal_object": "Chiếc gương đồng cổ đặt giữa lửa và nước"
+        }
+    },
+    {
+        "id": 39,
+        "number": "39",
+        "slug": "39-thuy-son-kien",
+        "name": "Thủy Sơn Kiển",
+        "alias": null,
+        "chinese": { "short": "蹇", "full": "水山蹇" },
+        "line_code": "001010",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
+            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        },
+        "status": { "code": "hung", "label": "Hung" },
+        "hexagram_images": ["Vũ Tuyết Tải Đồ", "Tri Nạn Nhi Chỉ"],
+        "keywords": ["Trở ngại", "Khó khăn", "Tạm dừng", "Tự xét", "Cầu hiền", "Kiên cường"],
+        "couplet": {
+            "opening": "Nước hiểm phía trước, núi cao sau lưng, bước tiến gặp nhiều chướng ngại.",
+            "closing": "Lợi tây nam, bất lợi đông bắc: tránh chỗ hiểm, quay về tu thân."
+        },
+        "advice": "Con đường phía trước đang có chướng ngại lớn khiến tiến thoái đều khó khăn. Càng cố lao tới càng dễ mắc kẹt; giải pháp khôn ngoan là tạm dừng bước, quay vào tự rà soát điểm yếu của mình và tìm sự hỗ trợ từ người đáng tin cậy để vượt qua.",
+        "artwork": {
+            "image_base": "./assets/images/iching/39-thuy-son-kien",
+            "alt": "Tranh minh họa quẻ Thủy Sơn Kiển với hình tượng cây gậy trúc chống bước qua ghềnh đá",
+            "focal_object": "Cây gậy trúc chống bước qua ghềnh đá"
+        }
+    },
+    {
+        "id": 40,
+        "number": "40",
+        "slug": "40-loi-thuy-giai",
+        "name": "Lôi Thủy Giải",
+        "alias": null,
+        "chinese": { "short": "解", "full": "雷水解" },
+        "line_code": "010100",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
+            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Ngũ Quan Thoát Nạn", "Tháo Gỡ Hanh Thông"],
+        "keywords": ["Giải thoát", "Nhẹ nhõm", "Tháo gỡ", "Khoan dung", "Hồi phục", "Nhanh chóng"],
+        "couplet": {
+            "opening": "Sấm mưa đổ xuống rửa tan u ám, mọi nút thắt dần được tháo gỡ.",
+            "closing": "Lợi tây nam, kỳ lai phục cát: khó khăn qua đi, sớm trở lại yên ổn."
+        },
+        "advice": "Căng thẳng và bế tắc kéo dài đang dần được hóa giải rõ rệt. Nếu còn việc tồn đọng, hãy giải quyết nhanh gọn ngay khi thời cơ mở ra; nếu mọi chuyện đã ổn định, hãy giữ nhịp sống bình hòa và bao dung tha thứ cho lỗi lầm cũ.",
+        "artwork": {
+            "image_base": "./assets/images/iching/40-loi-thuy-giai",
+            "alt": "Tranh minh họa quẻ Lôi Thủy Giải với hình tượng chiếc chìa khóa cổ mở tan xiềng xích",
+            "focal_object": "Chiếc chìa khóa cổ mở tan xiềng xích"
+        }
+    },
+    {
+        "id": 41,
+        "number": "41",
+        "slug": "41-son-trach-ton",
+        "name": "Sơn Trạch Tổn",
+        "alias": null,
+        "chinese": { "short": "損", "full": "山澤損" },
+        "line_code": "110001",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
+            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Thôi Xa Đảo Thạch", "Tổn Hạ Ích Thượng"],
+        "keywords": ["Tinh giản", "Tiết chế", "Hy sinh", "Chân thành", "Tích lũy", "Buông bỏ"],
+        "couplet": {
+            "opening": "Núi trên đầm dưới, bớt phần thừa bên dưới để vun đắp trên cao.",
+            "closing": "Hữu phu nguyên cát vô cữu: thành tâm tiết giản ắt gặp đại cát."
+        },
+        "advice": "Đôi khi lùi một bước hoặc cắt bỏ phần dư thừa lại là cách nhanh nhất để tích lũy giá trị bền vững. Hãy mạnh dạn tinh giản chi tiêu, tiết chế cảm xúc nóng nảy và tập trung nguồn lực vào mục tiêu cốt lõi nhất bằng sự chân thành.",
+        "artwork": {
+            "image_base": "./assets/images/iching/41-son-trach-ton",
+            "alt": "Tranh minh họa quẻ Sơn Trạch Tổn với hình tượng chiếc bát tre mộc mạc dâng lễ dưới chân núi",
+            "focal_object": "Chiếc bát tre mộc mạc dâng lễ dưới chân núi"
+        }
+    },
+    {
+        "id": 42,
+        "number": "42",
+        "slug": "42-phong-loi-ich",
+        "name": "Phong Lôi Ích",
+        "alias": null,
+        "chinese": { "short": "益", "full": "風雷益" },
+        "line_code": "100011",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
+            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Khô Mộc Khai Hoa", "Tổn Thượng Ích Hạ"],
+        "keywords": ["Tăng trưởng", "Lợi ích", "Hào phóng", "Cải thiện", "Thuận lợi", "Bứt phá"],
+        "couplet": {
+            "opening": "Gió mạnh giúp sấm vang xa, bớt trên bù dưới tạo lợi ích lớn.",
+            "closing": "Lợi hữu du vãng, lợi thiệp đại xuyên: thuận thời tiến bước ắt thành."
+        },
+        "advice": "Thời cơ tăng trưởng và mở rộng đang rộng mở rõ rệt trước mắt. Hãy chủ động triển khai dự án mới, mạnh dạn chia sẻ lợi ích với cộng sự và nhanh chóng học theo điều hay, sửa đổi điều dở để tạo sức bật mạnh mẽ dài lâu.",
+        "artwork": {
+            "image_base": "./assets/images/iching/42-phong-loi-ich",
+            "alt": "Tranh minh họa quẻ Phong Lôi Ích với hình tượng chồi măng non vươn cao giữa sấm gió",
+            "focal_object": "Chồi măng non vươn cao giữa sấm gió"
+        }
+    },
+    {
+        "id": 43,
+        "number": "43",
+        "slug": "43-trach-thien-quai",
+        "name": "Trạch Thiên Quải",
+        "alias": null,
+        "chinese": { "short": "夬", "full": "澤天夬" },
+        "line_code": "111110",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
+            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Du Phong Xuất Võng", "Quyết Đoán Trừ Tà"],
+        "keywords": ["Quyết đoán", "Dứt khoát", "Công khai", "Thanh lọc", "Chính nghĩa", "Cảnh giác"],
+        "couplet": {
+            "opening": "Nước đầm dâng tận trời cao sắp vỡ bờ, tượng quyết đoán trừ tà.",
+            "closing": "Dương vu vương đình, phu hiệu hữu lệ: công khai chính nghĩa nhưng thận trọng."
+        },
+        "advice": "Đã đến lúc phải đưa ra quyết định dứt khoát để chấm dứt vấn đề tồn đọng hoặc mối quan hệ độc hại. Hãy hành xử công khai minh bạch và dứt điểm bằng lý lẽ thuyết phục thay vì nóng nảy dùng vũ lực kẻo gây phản tác dụng không đáng có.",
+        "artwork": {
+            "image_base": "./assets/images/iching/43-trach-thien-quai",
+            "alt": "Tranh minh họa quẻ Trạch Thiên Quải với hình tượng thanh kiếm đồng dựng thẳng giữa thác nước",
+            "focal_object": "Thanh kiếm đồng dựng thẳng giữa thác nước"
+        }
+    },
+    {
+        "id": 44,
+        "number": "44",
+        "slug": "44-thien-phong-cau",
+        "name": "Thiên Phong Cấu",
+        "alias": null,
+        "chinese": { "short": "姤", "full": "天風姤" },
+        "line_code": "011111",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
+            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        },
+        "status": { "code": "tieu_hung", "label": "Tiểu Hung" },
+        "hexagram_images": ["Tha Hương Ngộ Hữu", "Ngẫu Nhiên Tương Phùng"],
+        "keywords": ["Gặp gỡ", "Bất ngờ", "Cám dỗ", "Cảnh giác", "Kiềm chế", "Tạm thời"],
+        "couplet": {
+            "opening": "Gió thổi lướt dưới bầu trời rộng, tượng cuộc gặp gỡ bất ngờ khó lường.",
+            "closing": "Nữ tráng, vật dụng thủ nữ: âm khí mới sinh, chớ vội gắn bó sâu."
+        },
+        "advice": "Một cơ hội, con người hay cám dỗ bất ngờ sắp xuất hiện ngoài dự tính. Đừng vội vàng tin tưởng hay cam kết dài hạn ngay từ phút đầu; hãy giữ tỉnh táo quan sát bản chất sự việc và kiểm soát ranh giới sớm để tránh bị lấn át về sau.",
+        "artwork": {
+            "image_base": "./assets/images/iching/44-thien-phong-cau",
+            "alt": "Tranh minh họa quẻ Thiên Phong Cấu với hình tượng chiếc chuông gió đồng rung nhẹ dưới vòm trời",
+            "focal_object": "Chiếc chuông gió đồng rung nhẹ dưới vòm trời"
+        }
+    },
+    {
+        "id": 45,
+        "number": "45",
+        "slug": "45-trach-dia-tuy",
+        "name": "Trạch Địa Tụy",
+        "alias": null,
+        "chinese": { "short": "萃", "full": "澤地萃" },
+        "line_code": "000110",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
+            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Lý Ngư Hóa Long", "Quần Anh Hội Tụ"],
+        "keywords": ["Tụ họp", "Đoàn tụ", "Tập thể", "Thịnh vượng", "Tổ chức", "Phòng bị"],
+        "couplet": {
+            "opening": "Nước đầm tụ hợp trên mặt đất rộng, tượng lòng người quy về một mối.",
+            "closing": "Vương cách hữu miếu, lợi kiến đại nhân: quy tụ tinh hoa cần chuẩn bị."
+        },
+        "advice": "Thời điểm lý tưởng để hội tụ nhân tài, tổ chức sự kiện lớn và kết nối nguồn lực tập thể hướng về mục tiêu chung. Tuy nhiên, nơi đông người tụ họp cũng dễ phát sinh xáo trộn bất ngờ, vì vậy hãy luôn chuẩn bị phương án quản trị dự phòng chu đáo.",
+        "artwork": {
+            "image_base": "./assets/images/iching/45-trach-dia-tuy",
+            "alt": "Tranh minh họa quẻ Trạch Địa Tụy với hình tượng chiếc vạc đồng tế lễ giữa mặt hồ đất",
+            "focal_object": "Chiếc vạc đồng tế lễ giữa mặt hồ đất"
+        }
+    },
+    {
+        "id": 46,
+        "number": "46",
+        "slug": "46-dia-phong-thang",
+        "name": "Địa Phong Thăng",
+        "alias": null,
+        "chinese": { "short": "升", "full": "地風升" },
+        "line_code": "011000",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
+            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Chỉ Nhật Cao Thăng", "Tích Lũy Vươn Cao"],
+        "keywords": ["Thăng tiến", "Vươn lên", "Bền bỉ", "Trưởng thành", "Nỗ lực", "Quý nhân"],
+        "couplet": {
+            "opening": "Cây xanh từ lòng đất vươn lên từng ngày, tượng đà thăng tiến vững chắc.",
+            "closing": "Nguyên hanh, dụng kiến đại nhân, vật tuất: kiên trì tiến bước ắt gặp quý nhân."
+        },
+        "advice": "Sự nghiệp và năng lực cá nhân đang trên đà tăng tiến tự nhiên nhờ quá trình tích lũy bền bỉ. Hãy tiếp tục duy trì thái độ khiêm tốn, linh hoạt từng bước vững vàng thay vì đốt cháy giai đoạn, đồng thời chủ động tìm sự nâng đỡ từ bậc tiền bối.",
+        "artwork": {
+            "image_base": "./assets/images/iching/46-dia-phong-thang",
+            "alt": "Tranh minh họa quẻ Địa Phong Thăng với hình tượng cây tùng non vươn thẳng xuyên tầng đất đá",
+            "focal_object": "Cây tùng non vươn thẳng xuyên tầng đất đá"
+        }
+    },
+    {
+        "id": 47,
+        "number": "47",
+        "slug": "47-trach-thuy-khon",
+        "name": "Trạch Thủy Khốn",
+        "alias": null,
+        "chinese": { "short": "困", "full": "澤水困" },
+        "line_code": "010110",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
+            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        },
+        "status": { "code": "hung", "label": "Hung" },
+        "hexagram_images": ["Toát Không Tiếu Ngư", "Khốn Cảnh Rèn Chí"],
+        "keywords": ["Khốn khó", "Cạn kiệt", "Kiên cường", "Trầm tĩnh", "Ít nói", "Thử thách"],
+        "couplet": {
+            "opening": "Nước chảy cạn khỏi lòng đầm khô, tượng cảnh túng quẫn thử thách bản lĩnh.",
+            "closing": "Khốn hanh, trinh đại nhân cát: giữ chí kiên định, hành động hơn lời nói."
+        },
+        "advice": "Bạn có thể đang đối diện giai đoạn eo hẹp về tài chính, cạn kiệt cảm hứng hoặc lời nói thiếu trọng lượng. Đừng vội thanh minh hay than vãn vô ích; hãy thu mình chịu khó, giữ vững khí tiết và chứng minh bằng hành động thực tế để sớm thoát cảnh khốn.",
+        "artwork": {
+            "image_base": "./assets/images/iching/47-trach-thuy-khon",
+            "alt": "Tranh minh họa quẻ Trạch Thủy Khốn với hình tượng chiếc bình gốm đựng giọt nước cuối đáy hồ khô",
+            "focal_object": "Chiếc bình gốm đựng giọt nước cuối đáy hồ khô"
+        }
+    },
+    {
+        "id": 48,
+        "number": "48",
+        "slug": "48-thuy-phong-tinh",
+        "name": "Thủy Phong Tỉnh",
+        "alias": null,
+        "chinese": { "short": "井", "full": "水風井" },
+        "line_code": "011010",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
+            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Khô Tỉnh Sinh Tuyền", "Dưỡng Nhân Bất Cùng"],
+        "keywords": ["Nguồn cội", "Bền bỉ", "Nuôi dưỡng", "Chuyên môn", "Kiên nhẫn", "Chia sẻ"],
+        "couplet": {
+            "opening": "Gỗ múc nước từ mạch giếng sâu, tượng nguồn dưỡng nuôi bền bỉ chẳng vơi.",
+            "closing": "Cải ấp bất cải tỉnh, vô táng vô đắc: cảnh đổi nhưng gốc nguồn giữ vững."
+        },
+        "advice": "Giá trị thực sự của bạn nằm ở nền tảng tri thức, kỹ năng cốt lõi và sự hữu ích dành cho cộng đồng. Hãy thường xuyên khơi thông, cập nhật chuyên môn như nạo vét giếng trong và đừng bỏ cuộc ở bước cuối khi gàu nước đã sắp lên tới miệng giếng.",
+        "artwork": {
+            "image_base": "./assets/images/iching/48-thuy-phong-tinh",
+            "alt": "Tranh minh họa quẻ Thủy Phong Tỉnh với hình tượng chiếc gàu gỗ đầy nước kéo lên từ miệng giếng",
+            "focal_object": "Chiếc gàu gỗ đầy nước kéo lên từ miệng giếng"
+        }
+    },
+    {
+        "id": 49,
+        "number": "49",
+        "slug": "49-trach-hoa-cach",
+        "name": "Trạch Hỏa Cách",
+        "alias": null,
+        "chinese": { "short": "革", "full": "澤火革" },
+        "line_code": "101110",
+        "element": "water",
+        "trigrams": {
+            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
+            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Hạn Miêu Đắc Vũ", "Cải Cách Đổi Mới"],
+        "keywords": ["Cải cách", "Lột xác", "Đổi mới", "Quyết tâm", "Thuận thời", "Chuyển hóa"],
+        "couplet": {
+            "opening": "Lửa cháy dưới đầm nước, hai khí xung khắc thúc đẩy cải cách.",
+            "closing": "Kỷ nhật nãi phu, nguyên hanh lợi trinh: đổi mới đúng lúc ắt tin."
+        },
+        "advice": "Cách làm cũ đã không còn phù hợp với hiện tại và đòi hỏi sự cải tổ mạnh mẽ. Đừng níu giữ lối mòn, nhưng cũng tránh thay đổi vội vàng thiếu tính toán; hãy chuẩn bị kỹ lưỡng, tạo sự đồng thuận và hành động dứt khoát đúng thời cơ.",
+        "artwork": {
+            "image_base": "./assets/images/iching/49-trach-hoa-cach",
+            "alt": "Tranh minh họa quẻ Trạch Hỏa Cách với hình tượng viên ngọc ve sầu lột xác giữa lửa và nước",
+            "focal_object": "Viên ngọc ve sầu lột xác giữa lửa và nước"
+        }
+    },
+    {
+        "id": 50,
+        "number": "50",
+        "slug": "50-hoa-phong-dinh",
+        "name": "Hỏa Phong Đỉnh",
+        "alias": null,
+        "chinese": { "short": "鼎", "full": "火風鼎" },
+        "line_code": "011101",
+        "element": "fire",
+        "trigrams": {
+            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
+            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Ngư Ông Đắc Lợi", "Cách Cố Đỉnh Tân"],
+        "keywords": ["Kiến tạo", "Ổn định", "Nuôi dưỡng", "Chính vị", "Hội tụ", "Thịnh vượng"],
+        "couplet": {
+            "opening": "Lửa đun trên củi gió, chiếc đỉnh ba chân vững vàng kiến tạo mới.",
+            "closing": "Đỉnh, nguyên cát hanh: giữ vững nền tảng mới, nuôi nhân tài ắt thịnh."
+        },
+        "advice": "Sau giai đoạn cải tổ, đây là lúc kiến lập trật tự mới vững chắc như thế kiềng ba chân. Hãy trọng dụng người tài đức, kết hợp hài hòa nguồn lực sẵn có và duy trì tác phong điềm đạm, chính trực để nuôi dưỡng thành quả phát triển bền vững.",
+        "artwork": {
+            "image_base": "./assets/images/iching/50-hoa-phong-dinh",
+            "alt": "Tranh minh họa quẻ Hỏa Phong Đỉnh với hình tượng chiếc đỉnh đồng ba chân giữa ngọn lửa",
+            "focal_object": "Chiếc đỉnh đồng ba chân giữa ngọn lửa"
+        }
+    },
+    {
+        "id": 51,
+        "number": "51",
+        "slug": "51-chan-vi-loi",
+        "name": "Chấn Vi Lôi",
+        "alias": "Thuần Chấn",
+        "chinese": { "short": "震", "full": "震為雷" },
+        "line_code": "100100",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
+            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Kim Chung Dạ Minh", "Kinh Động Tỉnh Thức"],
+        "keywords": ["Chấn động", "Thức tỉnh", "Bất ngờ", "Bình tĩnh", "Đột phá", "Tự xét"],
+        "couplet": {
+            "opening": "Sấm rền nối tiếp sấm vang, biến cố bất ngờ đánh thức lòng người.",
+            "closing": "Chấn hanh, tiếu ngôn ách ách: hoảng hốt ban đầu, vững tâm sau cười."
+        },
+        "advice": "Biến cố bất ngờ hoặc bước ngoặt lớn có thể ập đến khiến xung quanh náo động. Điều quý giá nhất lúc này là giữ bản lĩnh bình tĩnh không đánh rơi mục tiêu cốt lõi; hãy xem rung chấn là hồi chuông tỉnh thức để tự điều chỉnh bản thân.",
+        "artwork": {
+            "image_base": "./assets/images/iching/51-chan-vi-loi",
+            "alt": "Tranh minh họa quẻ Chấn Vi Lôi với hình tượng chiếc khánh ngọc cổ vang giữa luồng sét đôi",
+            "focal_object": "Chiếc khánh ngọc cổ vang giữa luồng sét đôi"
+        }
+    },
+    {
+        "id": 52,
+        "number": "52",
+        "slug": "52-can-vi-son",
+        "name": "Cấn Vi Sơn",
+        "alias": "Thuần Cấn",
+        "chinese": { "short": "艮", "full": "艮為山" },
+        "line_code": "001001",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
+            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Lưỡng Sơn Tương Đối", "Tri Chỉ Nhi An"],
+        "keywords": ["Tĩnh lặng", "Dừng lại", "Thiền định", "Vững chãi", "Kiềm chế", "Nội tâm"],
+        "couplet": {
+            "opening": "Núi chồng trên núi bất động, tượng đạo lý biết dừng lại đúng lúc.",
+            "closing": "Cấn kỳ bối, bất hoạch kỳ thân: giữ tâm tĩnh tại, vượt ngoài chấp niệm."
+        },
+        "advice": "Nên dừng lại đúng lúc thay vì cố tiến bước khi thời cơ chưa chín muồi. Hãy dành khoảng lặng quay về củng cố nội tâm, giữ ranh giới công việc rõ ràng và không suy nghĩ vượt quá bổn phận hiện tại. Tâm tĩnh như núi mới thấy đường đúng.",
+        "artwork": {
+            "image_base": "./assets/images/iching/52-can-vi-son",
+            "alt": "Tranh minh họa quẻ Cấn Vi Sơn với hình tượng ngọn tháp đá cổ tĩnh lặng trên đỉnh núi",
+            "focal_object": "Ngọn tháp đá cổ tĩnh lặng trên đỉnh núi"
+        }
+    },
+    {
+        "id": 53,
+        "number": "53",
+        "slug": "53-phong-son-tiem",
+        "name": "Phong Sơn Tiệm",
+        "alias": null,
+        "chinese": { "short": "漸", "full": "風山漸" },
+        "line_code": "001011",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
+            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Tuấn Điểu Xuất Lâm", "Tuần Tự Tiệm Tiến"],
+        "keywords": ["Từng bước", "Tiến dần", "Kiên nhẫn", "Ổn định", "Trật tự", "Hôn nhân"],
+        "couplet": {
+            "opening": "Cây mọc trên núi lớn chậm rãi, tượng sự tiến bước theo trình tự.",
+            "closing": "Nữ quy cát, lợi trinh: làm việc đúng lễ nghi, tiến từng bước ắt lành."
+        },
+        "advice": "Mọi thành tựu bền vững lúc này đều đòi hỏi sự kiên nhẫn đi đúng quy trình, chớ nóng vội đốt cháy giai đoạn. Hãy xây nền tảng vững chắc từng nhịp một như cánh nhạn bay theo hàng lối; tiến chậm mà chắc sẽ đưa bạn tới đích an toàn.",
+        "artwork": {
+            "image_base": "./assets/images/iching/53-phong-son-tiem",
+            "alt": "Tranh minh họa quẻ Phong Sơn Tiệm với hình tượng cánh chim hồng nhạn bay lên qua đỉnh núi",
+            "focal_object": "Cánh chim hồng nhạn bay lên qua đỉnh núi"
+        }
+    },
+    {
+        "id": 54,
+        "number": "54",
+        "slug": "54-loi-trach-quy-muoi",
+        "name": "Lôi Trạch Quy Muội",
+        "alias": null,
+        "chinese": { "short": "歸妹", "full": "雷澤歸妹" },
+        "line_code": "110100",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
+            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        },
+        "status": { "code": "tieu_hung", "label": "Tiểu Hung" },
+        "hexagram_images": ["Duyên Mộc Cầu Ngư", "Cẩn Trọng Khởi Đầu"],
+        "keywords": ["Cảm tính", "Thứ bậc", "Nhẫn nhịn", "Cảnh giác", "Ràng buộc", "Tạm thời"],
+        "couplet": {
+            "opening": "Sấm động trên đầm nước, dễ vì cảm xúc nhất thời mà mất trật tự.",
+            "closing": "Chinh hung, vô du lợi: hành động vội vàng theo dục vọng khó bền lâu."
+        },
+        "advice": "Đừng để cảm xúc nhất thời hay sự hấp tấp chi phối quyết định hợp tác và tình cảm. Khi vị thế chưa ngang bằng hoặc điều kiện chưa chín muồi, cố ép buộc chỉ dẫn tới thất vọng. Hãy cân nhắc hệ quả lâu dài và tôn trọng đúng trật tự.",
+        "artwork": {
+            "image_base": "./assets/images/iching/54-loi-trach-quy-muoi",
+            "alt": "Tranh minh họa quẻ Lôi Trạch Quy Muội với hình tượng chiếc quạt lụa cổ khép hờ trên mặt đầm",
+            "focal_object": "Chiếc quạt lụa cổ khép hờ trên mặt đầm"
+        }
+    },
+    {
+        "id": 55,
+        "number": "55",
+        "slug": "55-loi-hoa-phong",
+        "name": "Lôi Hỏa Phong",
+        "alias": null,
+        "chinese": { "short": "豐", "full": "雷火豐" },
+        "line_code": "101100",
+        "element": "water",
+        "trigrams": {
+            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
+            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Cổ Kính Trọng Minh", "Phong Thịnh Chính Ngọ"],
+        "keywords": ["Thịnh vượng", "Rực rỡ", "Đỉnh cao", "Quyết đoán", "Quảng đại", "Cảnh tỉnh"],
+        "couplet": {
+            "opening": "Sấm chớp đi cùng ánh sáng rực rỡ, tượng thời kỳ cực thịnh đầy đủ.",
+            "closing": "Phong hanh, vật ưu, nghi nhật trung: hãy tỏa sáng hết mình lúc chính ngọ."
+        },
+        "advice": "Bạn đang bước vào giai đoạn rực rỡ và dồi dào nguồn lực bậc nhất. Đừng lo âu chần chừ mà hãy mạnh dạn hành động, lan tỏa giá trị rộng rãi như mặt trời đứng bóng. Đồng thời nhớ quy luật thịnh cực tất suy để giữ tâm sáng.",
+        "artwork": {
+            "image_base": "./assets/images/iching/55-loi-hoa-phong",
+            "alt": "Tranh minh họa quẻ Lôi Hỏa Phong với hình tượng vòng nhật thực rực sáng giữa trời sấm chớp",
+            "focal_object": "Vòng nhật thực rực sáng giữa trời sấm chớp"
+        }
+    },
+    {
+        "id": 56,
+        "number": "56",
+        "slug": "56-hoa-son-lu",
+        "name": "Hỏa Sơn Lữ",
+        "alias": null,
+        "chinese": { "short": "旅", "full": "火山旅" },
+        "line_code": "001101",
+        "element": "fire",
+        "trigrams": {
+            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
+            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Túc Điểu Phần Sào", "Lữ Khách Khiêm Nhu"],
+        "keywords": ["Lữ hành", "Chuyển dịch", "Tạm trú", "Thận trọng", "Khiêm nhường", "Thích nghi"],
+        "couplet": {
+            "opening": "Lửa cháy nhanh trên sườn núi, tượng cảnh lữ khách nay đây mai đó.",
+            "closing": "Lữ tiểu hanh, lữ trinh cát: nơi đất khách giữ khiêm tốn ắt bình an."
+        },
+        "advice": "Hoàn cảnh đang có sự dịch chuyển, thay đổi môi trường hoặc bạn đang ở thế khách thiếu chỗ dựa vững chắc. Hãy ứng xử khéo léo, khiêm nhường và giữ chừng mực lời nói để tránh va chạm. Tập trung làm tốt việc nhỏ thay vì mạo hiểm dài hạn.",
+        "artwork": {
+            "image_base": "./assets/images/iching/56-hoa-son-lu",
+            "alt": "Tranh minh họa quẻ Hỏa Sơn Lữ với hình tượng chiếc hồ lô lữ hành bên lối mòn sườn núi",
+            "focal_object": "Chiếc hồ lô lữ hành bên lối mòn sườn núi"
+        }
+    },
+    {
+        "id": 57,
+        "number": "57",
+        "slug": "57-ton-vi-phong",
+        "name": "Tốn Vi Phong",
+        "alias": "Thuần Tốn",
+        "chinese": { "short": "巽", "full": "巽為風" },
+        "line_code": "011011",
+        "element": "wood",
+        "trigrams": {
+            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
+            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Cô Chu Đắc Thủy", "Nhu Thuận Thấm Sâu"],
+        "keywords": ["Nhu thuận", "Linh hoạt", "Thuyết phục", "Kiên trì", "Khiêm nhường", "Lan tỏa"],
+        "couplet": {
+            "opening": "Gió nối tiếp gió thấm sâu, lấy đức nhu thuận cảm hóa lòng người.",
+            "closing": "Tiểu hanh, lợi hữu du vãng: làm việc nhỏ thuận, nên gặp quý nhân."
+        },
+        "advice": "Thay vì cưỡng ép trực diện, hãy dùng sự mềm mỏng, kiên trì và giao tiếp khéo léo để thuyết phục từng bước như cơn gió thấm dần vào mọi ngóc ngách. Giữ lập trường rõ ràng nhưng linh hoạt phương pháp sẽ giúp bạn dễ dàng nhận được sự ủng hộ.",
+        "artwork": {
+            "image_base": "./assets/images/iching/57-ton-vi-phong",
+            "alt": "Tranh minh họa quẻ Tốn Vi Phong với hình tượng chiếc lông hạc uốn lượn giữa hai tầng gió",
+            "focal_object": "Chiếc lông hạc uốn lượn giữa hai tầng gió"
+        }
+    },
+    {
+        "id": 58,
+        "number": "58",
+        "slug": "58-doai-vi-trach",
+        "name": "Đoài Vi Trạch",
+        "alias": "Thuần Đoài",
+        "chinese": { "short": "兌", "full": "兌為澤" },
+        "line_code": "110110",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
+            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Phượng Hoàng Lạc Đầm", "Hòa Duyệt Tương Trợ"],
+        "keywords": ["Vui vẻ", "Giao tiếp", "Hòa nhã", "Sẻ chia", "Thuận hòa", "Khéo léo"],
+        "couplet": {
+            "opening": "Hai đầm nước thông nhau nuôi dưỡng, tượng niềm vui chân thành sẻ chia.",
+            "closing": "Đoài hanh, lợi trinh: giao tiếp hòa vui nhưng luôn giữ đúng chuẩn mực."
+        },
+        "advice": "Năng lượng tích cực và sự cởi mở trong giao tiếp đang mang lại nhiều thuận lợi cho đàm phán, hợp tác và kết nối bạn bè. Tuy nhiên, hãy giữ niềm vui xuất phát từ sự chân thành, tránh lời nịnh nọt sáo rỗng hay buông thả quá đà mất kỷ luật.",
+        "artwork": {
+            "image_base": "./assets/images/iching/58-doai-vi-trach",
+            "alt": "Tranh minh họa quẻ Đoài Vi Trạch với hình tượng đóa sen nở rộ giữa hai mặt đầm nối liền",
+            "focal_object": "Đóa sen nở rộ giữa hai mặt đầm nối liền"
+        }
+    },
+    {
+        "id": 59,
+        "number": "59",
+        "slug": "59-phong-thuy-hoan",
+        "name": "Phong Thủy Hoán",
+        "alias": null,
+        "chinese": { "short": "渙", "full": "風水渙" },
+        "line_code": "010011",
+        "element": "fire",
+        "trigrams": {
+            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
+            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Cách Hà Vọng Kim", "Tan Băng Hóa Giải"],
+        "keywords": ["Hóa giải", "Tan rã", "Khơi thông", "Đoàn kết", "Rộng mở", "Vượt sóng"],
+        "couplet": {
+            "opening": "Gió thổi lướt mặt nước làm tan băng giá, hóa giải mọi nghi kỵ.",
+            "closing": "Hoán hanh, lợi thiệp đại xuyên: phá bỏ chia rẽ, đoàn kết ắt vượt khó."
+        },
+        "advice": "Những hiểu lầm, rào cản hay sự ích kỷ cục bộ đang làm rạn nứt tập thể cần được khơi thông ngay lập tức. Hãy dùng tấm lòng rộng mở, đặt lợi ích chung lên hàng đầu và chia sẻ tài nguyên minh bạch để gắn kết lại mọi người cùng vượt sóng.",
+        "artwork": {
+            "image_base": "./assets/images/iching/59-phong-thuy-hoan",
+            "alt": "Tranh minh họa quẻ Phong Thủy Hoán với hình tượng cánh buồm cổ căng gió rẽ sóng lớn",
+            "focal_object": "Cánh buồm cổ căng gió rẽ sóng lớn"
+        }
+    },
+    {
+        "id": 60,
+        "number": "60",
+        "slug": "60-thuy-trach-tiet",
+        "name": "Thủy Trạch Tiết",
+        "alias": null,
+        "chinese": { "short": "節", "full": "水澤節" },
+        "line_code": "110010",
+        "element": "water",
+        "trigrams": {
+            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
+            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        },
+        "status": { "code": "cat", "label": "Cát" },
+        "hexagram_images": ["Trảm Tướng Phong Thần", "Tiết Độ Hữu Chừng"],
+        "keywords": ["Tiết chế", "Kỷ luật", "Chừng mực", "Giới hạn", "Cân bằng", "Quản trị"],
+        "couplet": {
+            "opening": "Nước chứa vừa vặn trong lòng đầm, tượng đạo lý tiết độ có chừng mực.",
+            "closing": "Tiết hanh, khổ tiết bất khả trinh: biết tiết chế tốt, khắt khe hại."
+        },
+        "advice": "Quản lý ngân sách, thời gian và năng lượng theo nguyên tắc chừng mực sẽ giúp bạn duy trì đà phát triển bền vững. Hãy thiết lập kỷ luật hợp lý và ranh giới rõ ràng, nhưng tránh hà khắc cực đoan với bản thân hay người khác kẻo sinh tâm lý phản kháng.",
+        "artwork": {
+            "image_base": "./assets/images/iching/60-thuy-trach-tiet",
+            "alt": "Tranh minh họa quẻ Thủy Trạch Tiết với hình tượng thân trúc thẳng chia đốt đều giữa dòng nước",
+            "focal_object": "Thân trúc thẳng chia đốt đều giữa dòng nước"
+        }
+    },
+    {
+        "id": 61,
+        "number": "61",
+        "slug": "61-phong-trach-trung-phu",
+        "name": "Phong Trạch Trung Phu",
+        "alias": null,
+        "chinese": { "short": "中孚", "full": "風澤中孚" },
+        "line_code": "110011",
+        "element": "earth",
+        "trigrams": {
+            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
+            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Hành Tẩu Bạc Băng - Tín Thực Cảm Thông", "Minh Hạc Tại Âm"],
+        "keywords": ["Chân thành", "Chữ tín", "Cảm hóa", "Minh bạch", "Đồng cảm", "Tin cậy"],
+        "couplet": {
+            "opening": "Gió thổi trên mặt đầm trong, lòng chân thành thấu suốt cảm hóa vạn vật.",
+            "closing": "Đồn ngư cát, lợi thiệp đại xuyên: giữ chữ tín trọn vẹn ắt vượt hiểm."
+        },
+        "advice": "Sức mạnh lớn nhất lúc này là sự thành tín, minh bạch và tấm lòng không chút vụ lợi. Đừng dùng lời hoa mỹ hay thủ thuật đối phó; khi lời nói đi đôi với việc làm và xuất phát từ sự đồng cảm thật sự, bạn sẽ chinh phục được cả đối tác khó tính nhất.",
+        "artwork": {
+            "image_base": "./assets/images/iching/61-phong-trach-trung-phu",
+            "alt": "Tranh minh họa quẻ Phong Trạch Trung Phu với hình tượng chim hạc đứng gọi bạn giữa mặt hồ tĩnh",
+            "focal_object": "Chim hạc đứng gọi bạn giữa mặt hồ tĩnh"
+        }
+    },
+    {
+        "id": 62,
+        "number": "62",
+        "slug": "62-loi-son-tieu-qua",
+        "name": "Lôi Sơn Tiểu Quá",
+        "alias": null,
+        "chinese": { "short": "小過", "full": "雷山小過" },
+        "line_code": "001100",
+        "element": "metal",
+        "trigrams": {
+            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
+            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Cấp Quá Độc Mộc", "Phi Điểu Di Âm"],
+        "keywords": ["Thận trọng", "Việc nhỏ", "Khiêm cung", "Tiết kiệm", "Bay thấp", "Tỉ mỉ"],
+        "couplet": {
+            "opening": "Sấm vang trên đỉnh núi cao, chim nhỏ bay thấp mới giữ được an toàn.",
+            "closing": "Khả tiểu sự, bất khả đại sự: thuận làm việc nhỏ, chớ mạo hiểm lớn."
+        },
+        "advice": "Giai đoạn này không thích hợp cho những bước nhảy vọt quá tầm hay kế hoạch phô trương lớn lao. Hãy tập trung xử lý chỉn chu từng đầu việc nhỏ, giữ thái độ cung kính, chi tiêu tiết kiệm và thận trọng từng bước để tránh vấp ngã không đáng có.",
+        "artwork": {
+            "image_base": "./assets/images/iching/62-loi-son-tieu-qua",
+            "alt": "Tranh minh họa quẻ Lôi Sơn Tiểu Quá với hình tượng chim én nhỏ sải cánh bay thấp sát sườn núi",
+            "focal_object": "Chim én nhỏ sải cánh bay thấp sát sườn núi"
+        }
+    },
+    {
+        "id": 63,
+        "number": "63",
+        "slug": "63-thuy-hoa-ky-te",
+        "name": "Thủy Hỏa Ký Tế",
+        "alias": null,
+        "chinese": { "short": "既濟", "full": "水火既濟" },
+        "line_code": "101010",
+        "element": "water",
+        "trigrams": {
+            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
+            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        },
+        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "hexagram_images": ["Kim Bảng Đề Danh", "Công Thành Viên Mãn"],
+        "keywords": ["Hoàn thành", "Viên mãn", "Cân bằng", "Thành tựu", "Phòng xa", "Ổn định"],
+        "couplet": {
+            "opening": "Nước trên lửa dưới giao hòa trọn vẹn, tượng việc lớn đã thành công.",
+            "closing": "Sơ cát chung loạn: khởi đầu hanh thông mỹ mãn, lơ là về sau loạn."
+        },
+        "advice": "Mục tiêu quan trọng đã cơ bản hoàn thành tốt đẹp và mọi yếu tố đang ở thế cân bằng lý tưởng. Tuy nhiên, lúc viên mãn cũng là lúc dễ nảy sinh chủ quan nhất; hãy rà soát chi tiết nhỏ, dự phòng rủi ro từ sớm để bảo vệ thành quả dài lâu.",
+        "artwork": {
+            "image_base": "./assets/images/iching/63-thuy-hoa-ky-te",
+            "alt": "Tranh minh họa quẻ Thủy Hỏa Ký Tế với hình tượng chiếc ấm đồng cân bằng giữa lửa và nước",
+            "focal_object": "Chiếc ấm đồng cân bằng giữa lửa và nước"
+        }
+    },
+    {
+        "id": 64,
+        "number": "64",
+        "slug": "64-hoa-thuy-vi-te",
+        "name": "Hỏa Thủy Vị Tế",
+        "alias": null,
+        "chinese": { "short": "未濟", "full": "火水未濟" },
+        "line_code": "010101",
+        "element": "fire",
+        "trigrams": {
+            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
+            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        },
+        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "hexagram_images": ["Ưu Trung Vọng Hỷ", "Chưa Trọn Nhưng Mở Lối"],
+        "keywords": ["Chuyển giao", "Dang dở", "Tiềm năng", "Thận trọng", "Sắp xếp", "Chu kỳ mới"],
+        "couplet": {
+            "opening": "Lửa lên nước xuống chưa giao hòa, báo hiệu chặng đường mới còn dang dở.",
+            "closing": "Tiểu hồ khất tế, nhu kỳ vĩ: sắp sang sông chớ vội kẻo lỡ bước."
+        },
+        "advice": "Công việc đang ở giai đoạn chuyển giao đầy tiềm năng nhưng chưa thực sự hoàn tất. Như chú cáo nhỏ cẩn trọng bước qua dòng sông băng, bạn cần đánh giá kỹ thực lực, sắp xếp lại trật tự từng phần và kiên nhẫn đến phút cuối để mở ra chu kỳ thắng lợi mới.",
+        "artwork": {
+            "image_base": "./assets/images/iching/64-hoa-thuy-vi-te",
+            "alt": "Tranh minh họa quẻ Hỏa Thủy Vị Tế với hình tượng chú cáo nhỏ thận trọng bước qua dòng sông băng",
+            "focal_object": "Chú cáo nhỏ thận trọng bước qua dòng sông băng"
+        }
+    }
+]
+
+// xủ lý assaet để update lại skill và tiếp tục code, hiện tại các trang đều lỗi giao diện và nội dung

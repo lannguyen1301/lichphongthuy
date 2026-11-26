@@ -1281,6 +1281,66 @@
 </html>
 ```
 
+## clock.html
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Đồng Hồ Phong Thủy &amp; 12 Canh Giờ Âm Lịch</title>
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+        <script src="./assets/js/script.js"></script>
+    </head>
+
+    <body>
+        <!-- 1. Header chung của hệ thống -->
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "./templates/header.html");
+        </script>
+
+        <!-- 2. Sidebar điều hướng -->
+        <div id="sidebar-root"></div>
+        <script>
+            load("#sidebar-root", "./templates/sidebar.html");
+        </script>
+
+        <!-- 3. Main: Trang Giờ Bento Grid -->
+        <main id="main" class="main clock-page">
+            <div class="container">
+                <div id="clock-calendar-root" aria-busy="true"></div>
+                <script>
+                    load("#clock-calendar-root", "./templates/clock-calendar.html");
+                </script>
+            </div>
+        </main>
+
+        <!-- 4. Footer chung của hệ thống -->
+        <footer id="footer" class="footer"></footer>
+        <script>
+            load("#footer", "./templates/footer.html");
+        </script>
+
+        <!-- 5. Bộ Script Modular (Đã xóa calendar.js thừa) -->
+        <script src="https://cdn.jsdelivr.net/npm/lunar-javascript/lunar.min.js"></script>
+        <script src="./assets/js/lunar-engine.js"></script>
+        <script src="./assets/js/header.js"></script>
+        <script src="./assets/js/sidebar.js"></script>
+        <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/converter-modal.js"></script>
+        <script src="./assets/js/clock.js"></script>
+    </body>
+</html>
+```
+
 ## day.html
 
 ```html
@@ -2266,126 +2326,127 @@
 
 ## week.html
 
-```html
+````HTML
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Lịch Tuần Phong Thủy - Lịch Vạn Niên 2026</title>
-        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
-        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
-        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
-        <link rel="stylesheet" href="./assets/css/main.css" />
-        <script src="./assets/js/script.js"></script>
-    </head>
 
-    <body>
-        <!-- 1. Header dùng chung -->
-        <header id="header" class="header"></header>
-        <script>
-            load("#header", "./templates/header.html");
-        </script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch Tuần Phong Thủy - Lịch Vạn Niên 2026</title>
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="./assets/js/script.js"></script>
+</head>
 
-        <!-- 2. Sidebar dùng chung -->
-        <div id="sidebar-root"></div>
-        <script>
-            load("#sidebar-root", "./templates/sidebar.html");
-        </script>
+<body>
+    <!-- 1. Header dùng chung -->
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "./templates/header.html");
+    </script>
 
-        <!-- 3. Main Bento Grid: Lịch Tuần (Nạp động từ templates/week-calendar.html) -->
-        <main id="main" class="main week-page">
-            <div class="container">
-                <div id="week-calendar-root" aria-busy="true"></div>
-                <script>
-                    load("#week-calendar-root", "./templates/week-calendar.html");
-                </script>
-            </div>
-        </main>
+    <!-- 2. Sidebar dùng chung -->
+    <div id="sidebar-root"></div>
+    <script>
+        load("#sidebar-root", "./templates/sidebar.html");
+    </script>
 
-        <!-- 4. Footer dùng chung -->
-        <footer id="footer" class="footer"></footer>
-        <script>
-            load("#footer", "./templates/footer.html");
-        </script>
+    <!-- 3. Main Bento Grid: Lịch Tuần (Nạp động từ templates/week-calendar.html) -->
+    <main id="main" class="main week-page">
+        <div class="container">
+            <div id="week-calendar-root" aria-busy="true"></div>
+            <script>
+                load("#week-calendar-root", "./templates/week-calendar.html");
+            </script>
+        </div>
+    </main>
 
-        <!-- 5. Bộ Script Modular: Core Engine + Layout + Trang Tuần -->
-        <script src="./assets/js/lunar-engine.js"></script>
-        <script src="./assets/js/header.js"></script>
-        <script src="./assets/js/sidebar.js"></script>
-        <script src="./assets/js/footer.js"></script>
-        <script src="./assets/js/converter-modal.js"></script>
-        <script src="./assets/js/week-calendar.js"></script>
-    </body>
+    <!-- 4. Footer dùng chung -->
+    <footer id="footer" class="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script>
+
+    <!-- 5. Bộ Script Modular: Core Engine + Layout + Trang Tuần -->
+    <script src="./assets/js/lunar-engine.js"></script>
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/sidebar.js"></script>
+    <script src="./assets/js/footer.js"></script>
+    <script src="./assets/js/converter-modal.js"></script>
+    <script src="./assets/js/week-calendar.js"></script>
+</body>
+
 </html>
-```
+```## year.html
 
-## year.html
-
-```html
+```HTML
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Lịch Năm 2026 - Lịch Phong Thủy</title>
-        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
-        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
-        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
-        <link rel="stylesheet" href="./assets/css/main.css" />
-        <script src="./assets/js/script.js"></script>
-    </head>
 
-    <body>
-        <!-- 1. Header dùng chung -->
-        <header id="header" class="header"></header>
-        <script>
-            load("#header", "./templates/header.html");
-        </script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch Năm 2026 - Lịch Phong Thủy</title>
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="./assets/js/script.js"></script>
+</head>
 
-        <!-- 2. Sidebar dùng chung -->
-        <div id="sidebar-root"></div>
-        <script>
-            load("#sidebar-root", "./templates/sidebar.html");
-        </script>
+<body>
+    <!-- 1. Header dùng chung -->
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "./templates/header.html");
+    </script>
 
-        <!-- 3. Main Bento Grid: Lịch Năm 2026 (Đủ 12 Tháng) -->
-        <main id="main" class="main year-page">
-            <div class="container">
-                <div id="year-calendar-root" aria-busy="true"></div>
-                <script>
-                    load("#year-calendar-root", "./templates/year-calendar.html");
-                </script>
-            </div>
-        </main>
+    <!-- 2. Sidebar dùng chung -->
+    <div id="sidebar-root"></div>
+    <script>
+        load("#sidebar-root", "./templates/sidebar.html");
+    </script>
 
-        <!-- 4. Footer dùng chung -->
-        <footer id="footer" class="footer"></footer>
-        <script>
-            load("#footer", "./templates/footer.html");
-        </script>
+    <!-- 3. Main Bento Grid: Lịch Năm 2026 (Đủ 12 Tháng) -->
+    <main id="main" class="main year-page">
+        <div class="container">
+            <div id="year-calendar-root" aria-busy="true"></div>
+            <script>
+                load("#year-calendar-root", "./templates/year-calendar.html");
+            </script>
+        </div>
+    </main>
 
-        <!-- 5. Bộ Script Modular (Đã xóa calendar.js thừa và nhúng year-calendar.js) -->
-        <script src="./assets/js/lunar-engine.js"></script>
-        <script src="./assets/js/header.js"></script>
-        <script src="./assets/js/sidebar.js"></script>
-        <script src="./assets/js/footer.js"></script>
-        <script src="./assets/js/converter-modal.js"></script>
-        <script src="./assets/js/year-calendar.js"></script>
-    </body>
+    <!-- 4. Footer dùng chung -->
+    <footer id="footer" class="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script>
+
+    <!-- 5. Bộ Script Modular (Đã xóa calendar.js thừa và nhúng year-calendar.js) -->
+    <script src="./assets/js/lunar-engine.js"></script>
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/sidebar.js"></script>
+    <script src="./assets/js/footer.js"></script>
+    <script src="./assets/js/converter-modal.js"></script>
+    <script src="./assets/js/year-calendar.js"></script>
+</body>
+
 </html>
-```
+````
 
 ## utilities.html
 
-````html
-## utilities.html ```html
+```html
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -4815,7 +4876,7 @@
         <script src="./assets/js/utilities/util-explore.js"></script>
     </body>
 </html>
-````
+```
 
 ## tarot-detail.html
 
@@ -5276,7 +5337,7 @@
         <title>Chi Tiết 64 Quẻ Kinh Dịch (Chu Dịch) - Lịch Phong Thủy</title>
         <meta
             name="description"
-            content="Luận giải chi tiết 64 Quẻ Kinh Dịch chuẩn Văn Vương: Đồ hình 6 hào, Nội Ngoại quái, Thoán Từ, Tượng Từ, lời khuyên ứng dụng và 3 quẻ biến liên quan."
+            content="Luận giải chi tiết 64 Quẻ Kinh Dịch chuẩn Văn Vương: Thẻ bài tranh khắc gỗ, Đồ hình 6 hào, Nội Ngoại quái, Thoán Từ, Tượng Từ, lời khuyên ứng dụng và 3 quẻ biến liên quan."
         />
         <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
@@ -5311,6 +5372,7 @@
                             href="./utilities.html#divination/iching"
                             class="btn detail-page__back-btn"
                             id="icd-back-link"
+                            title="Quay về trang Gieo Quẻ Kinh Dịch"
                         >
                             <span aria-hidden="true">&#8592;</span>
                             <span>Quay lại Gieo Quẻ</span>
@@ -5349,35 +5411,96 @@
                             id="icd-share-btn"
                             title="Sao chép liên kết quẻ Kinh Dịch này"
                         >
-                            <span id="icd-share-label">Chia sẻ</span>
+                            <span id="icd-share-label" aria-live="polite">Chia sẻ</span>
                         </button>
                     </div>
                 </nav>
 
-                <!-- TẦNG 1: HERO BENTO QUẺ KINH DỊCH -->
+                <!-- TẦNG 1: HERO BENTO QUẺ KINH DỊCH (TÍCH HỢP THẺ BÀI 3:4 TỪ iching-card.json) -->
                 <article class="detail-hero div-detail-hero" aria-labelledby="icd-main-title">
-                    <div class="div-detail-hero__iching-grid">
-                        <!-- Khung Đồ Hình SVG 70x70 + 6 Vạch Hào -->
-                        <div class="div-detail-hero__hex-panel">
-                            <div class="div-detail-hero__svg-frame">
+                    <div class="div-detail-hero__iching-grid iching-hero-grid">
+                        <!-- CỘT TRÁI: THẺ BÀI KINH DỊCH 3:4 CHUẨN DATA-*, A11Y & SCHEMA.ORG/VISUALARTWORK -->
+                        <div
+                            class="iching-card"
+                            id="icd-card-shell"
+                            itemscope
+                            itemtype="https://schema.org/VisualArtwork"
+                            data-hex-id="14"
+                            data-hex-slug="14-dai-huu"
+                            data-element="hoa"
+                            data-fortune-code="dai_cat"
+                            data-ma-hao="111101"
+                        >
+                            <meta itemprop="artform" content="Woodcut Vector Illustration" />
+                            <meta itemprop="keywords" id="icd-schema-keywords" content="Đại Hữu, Kinh Dịch" />
+
+                            <figure
+                                class="iching-card__poster"
+                                id="icd-card-figure"
+                                role="button"
+                                tabindex="0"
+                                aria-haspopup="dialog"
+                                aria-controls="detail-lightbox"
+                                aria-label="Phóng to thẻ bài Quẻ số 14: Hỏa Thiên Đại Hữu"
+                                title="Bấm hoặc nhấn Enter để phóng to thẻ bài Kinh Dịch"
+                                data-card-action="zoom"
+                                data-full-src="./assets/icons/iching/14-dai-huu.svg"
+                                data-caption="Quẻ 14: Hỏa Thiên Đại Hữu"
+                            >
+                                <div class="iching-card__top-meta">
+                                    <span class="iching-card__num" id="icd-card-num" title="Số thứ tự quẻ">#14</span>
+                                    <span
+                                        class="iching-card__hanzi"
+                                        id="icd-card-hanzi"
+                                        lang="zh-Hant"
+                                        title="Hán tự Phồn thể của quẻ"
+                                        hidden
+                                    ></span>
+                                    <span class="iching-card__status" id="icd-card-status">Đại Cát</span>
+                                </div>
+
                                 <img
                                     id="icd-hero-svg"
                                     src="./assets/icons/iching/14-dai-huu.svg"
                                     alt="Đồ hình Quẻ số 14: Hỏa Thiên Đại Hữu"
-                                    width="70"
-                                    height="70"
+                                    width="360"
+                                    height="480"
                                     decoding="async"
                                     itemprop="image"
+                                    class="iching-card__img"
                                 />
-                            </div>
+
+                                <figcaption class="iching-card__caption">
+                                    <strong class="iching-card__caption-title" id="icd-card-title" itemprop="name">
+                                        Hỏa Thiên Đại Hữu
+                                    </strong>
+                                    <span class="iching-card__focal" id="icd-card-focal" hidden></span>
+                                    <span class="iching-card__zoom-pill" aria-hidden="true">🔍 Phóng to lá bài</span>
+                                </figcaption>
+                            </figure>
+
+                            <!-- 6 Vạch Hào xếp từ dưới lên trên (Ẩn với Screen Reader bằng aria-hidden="true") -->
                             <div
-                                class="div-detail-hero__lines-stack"
+                                class="div-detail-hero__lines-stack iching-card__lines-box"
                                 id="icd-lines-stack"
-                                aria-label="Cấu trúc 6 hào xếp từ dưới lên trên"
+                                aria-hidden="true"
                             ></div>
+
+                            <!-- Liên kết mở bản tranh gốc trong tab mới chuẩn bảo mật -->
+                            <a
+                                href="./assets/icons/iching/14-dai-huu.svg"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="iching-card__raw-link"
+                                id="icd-raw-art-link"
+                                title="Mở file tranh minh họa SVG gốc trong tab mới"
+                            >
+                                <span>Mở tranh gốc SVG</span>
+                                <span aria-hidden="true">&#8599;</span>
+                            </a>
                         </div>
 
-                        <!-- Thông tin tiêu đề, Thoán từ tóm tắt & Hành động -->
+                        <!-- CỘT PHẢI: TIÊU ĐỀ, TƯỢNG QUẺ, TỪ KHÓA, THOÁN TỪ & GIẢI NGHĨA 2 VẾ -->
                         <div class="detail-hero__info">
                             <div class="detail-hero__eyebrow-group">
                                 <span class="detail-hero__occasion-tag">
@@ -5396,6 +5519,16 @@
                                 <p class="div-detail-hero__subtitle" id="icd-full-name" itemprop="description">
                                     Hỏa Thiên Đại Hữu (Càn hạ - Ly thượng)
                                 </p>
+
+                                <!-- Tượng quẻ & Dải Từ khóa (Tự hiện khi quẻ có trong iching-card.json) -->
+                                <div class="iching-card-meta" id="icd-card-meta-box" hidden>
+                                    <div class="iching-card-meta__omens" id="icd-omen-list"></div>
+                                    <ul
+                                        class="iching-card-meta__keywords"
+                                        id="icd-keywords-list"
+                                        aria-label="Từ khóa cốt lõi của quẻ"
+                                    ></ul>
+                                </div>
                             </div>
 
                             <blockquote class="detail-hero__quote-box">
@@ -5403,13 +5536,60 @@
                                 <cite class="detail-hero__quote-author" id="icd-hero-cite">— Chu Dịch • Thoán Từ</cite>
                             </blockquote>
 
+                            <!-- Nút Accordion bật/tắt Giải nghĩa 2 vế Trái / Phải từ iching-card.json -->
+                            <div class="iching-pair-box" id="icd-pair-wrapper" hidden>
+                                <button
+                                    type="button"
+                                    class="btn iching-pair-box__toggle"
+                                    id="icd-pair-toggle-btn"
+                                    data-card-action="toggle-pair"
+                                    aria-expanded="false"
+                                    aria-controls="icd-card-pair-panel"
+                                    title="Bấm để mở hoặc đóng giải nghĩa song hành 2 vế của thẻ bài"
+                                >
+                                    <span>Xem giải nghĩa 2 vế (Tượng &amp; Từ trên thẻ bài)</span>
+                                    <img
+                                        src="./assets/icons/arrow-down.svg"
+                                        alt=""
+                                        aria-hidden="true"
+                                        class="iching-pair-box__arrow icon"
+                                    />
+                                </button>
+
+                                <div
+                                    class="iching-pair-box__panel"
+                                    id="icd-card-pair-panel"
+                                    role="region"
+                                    aria-label="Giải nghĩa 2 vế trái phải của thẻ bài"
+                                    tabindex="-1"
+                                    hidden
+                                >
+                                    <div class="iching-pair-box__col">
+                                        <strong>Vế trái (Tượng Quẻ)</strong>
+                                        <p id="icd-pair-left"></p>
+                                    </div>
+                                    <div class="iching-pair-box__col">
+                                        <strong>Vế phải (Lời Răn)</strong>
+                                        <p id="icd-pair-right"></p>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="detail-hero__action-row">
-                                <a href="./utilities.html#divination/iching" class="btn detail-hero__calendar-btn">
+                                <a
+                                    href="./utilities.html#divination/iching"
+                                    class="btn detail-hero__calendar-btn"
+                                    title="Mở công cụ gieo 3 đồng xu Lục Hào"
+                                >
                                     <img src="./assets/icons/ying-yang-2.svg" alt="" aria-hidden="true" class="icon" />
                                     <span>Gieo quẻ mới ngay</span>
                                 </a>
-                                <a href="./bazi.html" class="btn detail-page__step-btn">
-                                    <span>Đối chiếu Bát Tự &#8594;</span>
+                                <a
+                                    href="./bazi.html"
+                                    class="btn detail-page__step-btn"
+                                    title="Mở công cụ Lập Lá Số Bát Tự Tử Bình"
+                                >
+                                    <span>Đối chiếu Bát Tự <span aria-hidden="true">&#8594;</span></span>
                                 </a>
                             </div>
                         </div>
@@ -5417,7 +5597,7 @@
 
                     <!-- DẢI 4 THẺ THÔNG SỐ CẤU TRÚC QUẺ -->
                     <div class="detail-hero__stats-grid" aria-label="Thông số cấu trúc quẻ Kinh Dịch">
-                        <div class="detail-stat-card">
+                        <div class="detail-stat-card" title="Thứ tự quẻ theo Kinh Dịch Văn Vương">
                             <div class="detail-stat-card__icon-box">
                                 <img
                                     src="./assets/icons/ying-yang-2.svg"
@@ -5433,7 +5613,7 @@
                             </div>
                         </div>
 
-                        <div class="detail-stat-card">
+                        <div class="detail-stat-card" title="Mức độ cát hung và tỷ lệ hào Dương / Âm">
                             <div class="detail-stat-card__icon-box">
                                 <img
                                     src="./assets/icons/sparkle.svg"
@@ -5449,7 +5629,11 @@
                             </div>
                         </div>
 
-                        <div class="detail-stat-card">
+                        <div
+                            class="detail-stat-card"
+                            id="icd-stat-lower-card"
+                            title="Hạ quái đại diện nền tảng bên trong"
+                        >
                             <div class="detail-stat-card__icon-box">
                                 <img
                                     src="./assets/icons/fengshui/lucdieu-daian.svg"
@@ -5461,11 +5645,17 @@
                             <div class="detail-stat-card__content">
                                 <span class="detail-stat-card__label">Nội quái (Hạ quái)</span>
                                 <strong class="detail-stat-card__value" id="icd-stat-lower">Càn (Trời)</strong>
-                                <span class="detail-stat-card__sub">Hào 1 – 2 – 3 (Nền tảng)</span>
+                                <span class="detail-stat-card__sub" id="icd-stat-lower-sub"
+                                    >Hào 1 – 2 – 3 (Nền tảng)</span
+                                >
                             </div>
                         </div>
 
-                        <div class="detail-stat-card">
+                        <div
+                            class="detail-stat-card"
+                            id="icd-stat-upper-card"
+                            title="Thượng quái đại diện biểu hiện bên ngoài"
+                        >
                             <div class="detail-stat-card__icon-box">
                                 <img
                                     src="./assets/icons/fengshui/hoang-dao.svg"
@@ -5477,7 +5667,9 @@
                             <div class="detail-stat-card__content">
                                 <span class="detail-stat-card__label">Ngoại quái (Thượng quái)</span>
                                 <strong class="detail-stat-card__value" id="icd-stat-upper">Ly (Lửa)</strong>
-                                <span class="detail-stat-card__sub">Hào 4 – 5 – 6 (Biểu hiện)</span>
+                                <span class="detail-stat-card__sub" id="icd-stat-upper-sub"
+                                    >Hào 4 – 5 – 6 (Biểu hiện)</span
+                                >
                             </div>
                         </div>
                     </div>
@@ -5566,6 +5758,7 @@
                                         class="div-sidebar-chip is-active"
                                         data-icd-filter="all"
                                         aria-pressed="true"
+                                        aria-controls="icd-sidebar-list"
                                     >
                                         Tất cả
                                     </button>
@@ -5574,6 +5767,7 @@
                                         class="div-sidebar-chip"
                                         data-icd-filter="Đại Cát"
                                         aria-pressed="false"
+                                        aria-controls="icd-sidebar-list"
                                     >
                                         Đại Cát
                                     </button>
@@ -5582,6 +5776,7 @@
                                         class="div-sidebar-chip"
                                         data-icd-filter="Cát Hanh"
                                         aria-pressed="false"
+                                        aria-controls="icd-sidebar-list"
                                     >
                                         Cát Hanh
                                     </button>
@@ -5590,6 +5785,7 @@
                                         class="div-sidebar-chip"
                                         data-icd-filter="Bình Hòa"
                                         aria-pressed="false"
+                                        aria-controls="icd-sidebar-list"
                                     >
                                         Bình Hòa
                                     </button>
@@ -5598,6 +5794,7 @@
                                         class="div-sidebar-chip"
                                         data-icd-filter="Thận Trọng"
                                         aria-pressed="false"
+                                        aria-controls="icd-sidebar-list"
                                     >
                                         Thận Trọng
                                     </button>
@@ -5610,6 +5807,31 @@
                 </div>
             </div>
         </main>
+
+        <!-- LIGHTBOX PHÓNG TO THẺ BÀI KINH DỊCH (Tái sử dụng .detail-lightbox từ _detail.scss) -->
+        <div
+            class="detail-lightbox"
+            id="detail-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Xem thẻ bài Kinh Dịch phóng to"
+            hidden
+        >
+            <div class="detail-lightbox__backdrop" id="detail-lightbox-backdrop" aria-hidden="true"></div>
+            <figure class="detail-lightbox__figure">
+                <button
+                    type="button"
+                    class="detail-lightbox__close"
+                    id="detail-lightbox-close"
+                    aria-label="Đóng ảnh phóng to"
+                    title="Đóng (Esc)"
+                >
+                    &#10005;
+                </button>
+                <img src="" alt="" class="detail-lightbox__img iching-lightbox-img" id="detail-lightbox-img" />
+                <figcaption class="detail-lightbox__caption" id="detail-lightbox-caption"></figcaption>
+            </figure>
+        </div>
 
         <!-- 4. Footer dùng chung -->
         <footer id="footer" class="footer"></footer>
@@ -5624,6 +5846,1207 @@
         <script src="./assets/js/footer.js"></script>
         <script src="./assets/js/converter-modal.js"></script>
         <script src="./assets/js/iching-detail.js"></script>
+    </body>
+</html>
+```
+
+## profile.html
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, follow" />
+        <title>Hồ Sơ Cá Nhân, Người Thân &amp; Bảo Mật - Lịch Phong Thủy</title>
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+        <script src="./assets/js/script.js"></script>
+    </head>
+
+    <body class="auth-body" data-page="profile" itemscope itemtype="https://schema.org/WebPage">
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "./templates/header.html");
+        </script>
+
+        <div id="sidebar-root"></div>
+        <script>
+            load("#sidebar-root", "./templates/sidebar.html");
+        </script>
+
+        <main id="main" class="main auth-page">
+            <div class="container">
+                <div class="auth-bento" data-auth-view="profile">
+                    <!-- CỘT TRÁI: THẺ HỒ SƠ BẢN MỆNH -->
+                    <aside
+                        class="auth-hero"
+                        aria-label="Tóm tắt hồ sơ bản mệnh thành viên"
+                        itemscope
+                        itemtype="https://schema.org/Person"
+                    >
+                        <div class="auth-hero__top">
+                            <div class="profile-summary">
+                                <span class="profile-summary__avatar" id="profile-hero-avatar" aria-hidden="true">
+                                    TV
+                                </span>
+                                <div>
+                                    <span class="auth-hero__badge">
+                                        <span id="profile-hero-element">Bản mệnh: Hành Thổ</span>
+                                    </span>
+                                    <h1
+                                        class="auth-hero__title profile-summary__name"
+                                        id="profile-hero-name"
+                                        itemprop="name"
+                                    >
+                                        Thành viên Lịch Phong Thủy
+                                    </h1>
+                                    <p class="profile-summary__email" id="profile-hero-email" itemprop="email">
+                                        thanhvien@lichphongthuy.vn
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="profile-lunar-box" id="profile-lunar-box">
+                                <span class="profile-lunar-box__label">Thông tin sinh tiêu &amp; Can Chi</span>
+                                <strong class="profile-lunar-box__val" id="profile-lunar-summary">
+                                    Cập nhật ngày sinh để tự động quy đổi Âm lịch &amp; Nạp âm
+                                </strong>
+                            </div>
+
+                            <div class="profile-stats-row">
+                                <div class="profile-stat-pill">
+                                    <small>Người thân đã lưu</small>
+                                    <strong id="profile-hero-family-count">0 hồ sơ</strong>
+                                </div>
+                                <div class="profile-stat-pill">
+                                    <small>Trạng thái bảo mật</small>
+                                    <strong id="profile-hero-security-status">Đã bảo vệ</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-quick-links">
+                            <a
+                                href="./bazi.html"
+                                class="auth-hero__back-link"
+                                id="profile-open-bazi-btn"
+                                title="Mở Lá số Bát Tự theo ngày sinh cá nhân"
+                            >
+                                <span>Xem Lá số Bát Tự của tôi</span>
+                                <span aria-hidden="true">&#8594;</span>
+                            </a>
+
+                            <button
+                                type="button"
+                                class="auth-hero__back-link auth-hero__back-link--danger"
+                                data-auth-action="logout"
+                                title="Đăng xuất khỏi tài khoản trên thiết bị này"
+                            >
+                                <span>Đăng xuất</span>
+                            </button>
+                        </div>
+
+                        <img
+                            src="./assets/icons/zodiac/tiger.svg"
+                            alt=""
+                            aria-hidden="true"
+                            class="auth-hero__watermark"
+                            id="profile-hero-watermark"
+                        />
+                    </aside>
+
+                    <!-- CỘT PHẢI: BẢNG ĐIỀU KHIỂN 3 TAB CHUẨN A11Y -->
+                    <section class="auth-card" aria-labelledby="profile-heading">
+                        <header class="auth-card__head">
+                            <span class="auth-card__eyebrow">Trung tâm tài khoản</span>
+                            <h2 class="auth-card__title" id="profile-heading">
+                                Quản lý Hồ sơ, Người thân &amp; Mật khẩu
+                            </h2>
+                            <p class="auth-card__sub">
+                                Dữ liệu được lưu riêng tư trong trình duyệt và đồng bộ ngay lập tức với Header &amp; Bát
+                                Tự.
+                            </p>
+                        </header>
+
+                        <!-- Bộ 3 Tab dùng Roving Tabindex (tabindex="0" / "-1") + aria-selected + aria-controls -->
+                        <div
+                            class="profile-tabs"
+                            id="profile-tablist"
+                            role="tablist"
+                            aria-label="Danh mục cài đặt tài khoản"
+                        >
+                            <button
+                                type="button"
+                                role="tab"
+                                id="tab-btn-info"
+                                class="profile-tabs__btn is-active"
+                                data-profile-tab="info"
+                                aria-selected="true"
+                                aria-controls="tab-panel-info"
+                                tabindex="0"
+                            >
+                                <span>Hồ sơ &amp; Bản mệnh</span>
+                            </button>
+                            <button
+                                type="button"
+                                role="tab"
+                                id="tab-btn-family"
+                                class="profile-tabs__btn"
+                                data-profile-tab="family"
+                                aria-selected="false"
+                                aria-controls="tab-panel-family"
+                                tabindex="-1"
+                            >
+                                <span>Người thân</span>
+                                <span class="profile-tabs__count" id="tab-family-count">0</span>
+                            </button>
+                            <button
+                                type="button"
+                                role="tab"
+                                id="tab-btn-security"
+                                class="profile-tabs__btn"
+                                data-profile-tab="security"
+                                aria-selected="false"
+                                aria-controls="tab-panel-security"
+                                tabindex="-1"
+                            >
+                                <span>Đổi mật khẩu</span>
+                            </button>
+                        </div>
+
+                        <div
+                            class="auth-alert"
+                            id="profile-alert"
+                            role="alert"
+                            aria-live="assertive"
+                            tabindex="-1"
+                            hidden
+                        ></div>
+
+                        <!-- TAB 1: CHỈNH SỬA HỒ SƠ & BẢN MỆNH -->
+                        <div
+                            class="profile-tabpanel"
+                            id="tab-panel-info"
+                            role="tabpanel"
+                            aria-labelledby="tab-btn-info"
+                        >
+                            <form class="auth-form" id="form-profile" data-auth-form="profile" novalidate>
+                                <div class="auth-form__row-2">
+                                    <div class="auth-form__group">
+                                        <label for="profile-name" class="auth-form__label">Họ và tên hiển thị</label>
+                                        <input
+                                            type="text"
+                                            id="profile-name"
+                                            name="fullname"
+                                            class="auth-form__input"
+                                            autocomplete="name"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="profile-name-error"
+                                        />
+                                        <p class="auth-form__error" id="profile-name-error" role="alert" hidden></p>
+                                    </div>
+
+                                    <div class="auth-form__group">
+                                        <label for="profile-birthdate" class="auth-form__label"
+                                            >Ngày sinh Dương lịch</label
+                                        >
+                                        <input
+                                            type="date"
+                                            id="profile-birthdate"
+                                            name="birthdate"
+                                            class="auth-form__input"
+                                            autocomplete="bday"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="auth-form__row-2">
+                                    <div class="auth-form__group">
+                                        <label for="profile-email" class="auth-form__label">Địa chỉ Email</label>
+                                        <input
+                                            type="email"
+                                            id="profile-email"
+                                            name="email"
+                                            class="auth-form__input"
+                                            inputmode="email"
+                                            autocomplete="email"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="profile-email-error"
+                                        />
+                                        <p class="auth-form__error" id="profile-email-error" role="alert" hidden></p>
+                                    </div>
+
+                                    <div class="auth-form__group">
+                                        <label for="profile-gender" class="auth-form__label"
+                                            >Giới tính (An Đại Vận)</label
+                                        >
+                                        <select
+                                            id="profile-gender"
+                                            name="gender"
+                                            class="auth-form__input auth-form__select"
+                                        >
+                                            <option value="male">Nam mệnh</option>
+                                            <option value="female">Nữ mệnh</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="auth-form__group">
+                                    <span class="auth-form__label" id="profile-element-label">
+                                        Bản Mệnh Ngũ Hành (Đồng bộ màu Theme)
+                                    </span>
+                                    <div
+                                        class="auth-elements"
+                                        role="group"
+                                        aria-labelledby="profile-element-label"
+                                        id="profile-element-group"
+                                        data-element-picker="profile-element-input"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn"
+                                            data-select-element="metal"
+                                            aria-pressed="false"
+                                            title="Mệnh Kim (Vàng kim)"
+                                        >
+                                            <img src="./assets/icons/metal.svg" alt="" aria-hidden="true" />
+                                            <span>Kim</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn"
+                                            data-select-element="wood"
+                                            aria-pressed="false"
+                                            title="Mệnh Mộc (Xanh lục bảo)"
+                                        >
+                                            <img src="./assets/icons/wood.svg" alt="" aria-hidden="true" />
+                                            <span>Mộc</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn"
+                                            data-select-element="water"
+                                            aria-pressed="false"
+                                            title="Mệnh Thủy (Xanh đại dương)"
+                                        >
+                                            <img src="./assets/icons/water.svg" alt="" aria-hidden="true" />
+                                            <span>Thủy</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn"
+                                            data-select-element="fire"
+                                            aria-pressed="false"
+                                            title="Mệnh Hỏa (Đỏ chu sa)"
+                                        >
+                                            <img src="./assets/icons/fire.svg" alt="" aria-hidden="true" />
+                                            <span>Hỏa</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="auth-elements__btn is-active"
+                                            data-select-element="earth"
+                                            aria-pressed="true"
+                                            title="Mệnh Thổ (Cam đất)"
+                                        >
+                                            <img src="./assets/icons/earth.svg" alt="" aria-hidden="true" />
+                                            <span>Thổ</span>
+                                        </button>
+                                    </div>
+                                    <input type="hidden" id="profile-element-input" name="element" value="earth" />
+                                </div>
+
+                                <button type="submit" class="btn auth-form__submit">
+                                    <span>Lưu thay đổi hồ sơ</span>
+                                    <span aria-hidden="true">&#10003;</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- TAB 2: QUẢN LÝ DANH SÁCH NGÀY SINH NGƯỜI THÂN -->
+                        <div
+                            class="profile-tabpanel"
+                            id="tab-panel-family"
+                            role="tabpanel"
+                            aria-labelledby="tab-btn-family"
+                            hidden
+                        >
+                            <form class="auth-form family-form" id="form-family-add" data-auth-form="family" novalidate>
+                                <h3 class="family-form__title">Thêm người thân / ngày sinh quan trọng</h3>
+
+                                <div class="auth-form__row-2">
+                                    <div class="auth-form__group">
+                                        <label for="family-name" class="auth-form__label">Họ và tên</label>
+                                        <input
+                                            type="text"
+                                            id="family-name"
+                                            name="memberName"
+                                            class="auth-form__input"
+                                            placeholder="Ví dụ: Bảo An"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="family-name-error"
+                                        />
+                                        <p class="auth-form__error" id="family-name-error" role="alert" hidden></p>
+                                    </div>
+
+                                    <div class="auth-form__group">
+                                        <label for="family-relation" class="auth-form__label">Mối quan hệ</label>
+                                        <select
+                                            id="family-relation"
+                                            name="relation"
+                                            class="auth-form__input auth-form__select"
+                                        >
+                                            <option value="Vợ / Chồng">Vợ / Chồng</option>
+                                            <option value="Con cái">Con cái</option>
+                                            <option value="Cha / Mẹ">Cha / Mẹ</option>
+                                            <option value="Anh / Chị / Em">Anh / Chị / Em</option>
+                                            <option value="Đối tác / Bạn thân">Đối tác / Bạn thân</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="auth-form__row-2">
+                                    <div class="auth-form__group">
+                                        <label for="family-birthdate" class="auth-form__label"
+                                            >Ngày sinh Dương lịch</label
+                                        >
+                                        <input
+                                            type="date"
+                                            id="family-birthdate"
+                                            name="memberBirthdate"
+                                            class="auth-form__input"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="family-birthdate-error"
+                                        />
+                                        <p class="auth-form__error" id="family-birthdate-error" role="alert" hidden></p>
+                                    </div>
+
+                                    <div class="auth-form__group">
+                                        <label for="family-gender" class="auth-form__label"
+                                            >Giới tính (Lập Bát Tự)</label
+                                        >
+                                        <select
+                                            id="family-gender"
+                                            name="memberGender"
+                                            class="auth-form__input auth-form__select"
+                                        >
+                                            <option value="female">Nữ mệnh</option>
+                                            <option value="male">Nam mệnh</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn auth-form__submit">
+                                    <span>+ Lưu vào danh sách người thân</span>
+                                </button>
+                            </form>
+
+                            <div
+                                class="family-list"
+                                id="profile-family-list"
+                                aria-live="polite"
+                                aria-label="Danh sách hồ sơ người thân đã lưu"
+                            ></div>
+                        </div>
+
+                        <!-- TAB 3: ĐỔI MẬT KHẨU BẢO MẬT -->
+                        <div
+                            class="profile-tabpanel"
+                            id="tab-panel-security"
+                            role="tabpanel"
+                            aria-labelledby="tab-btn-security"
+                            hidden
+                        >
+                            <form class="auth-form" id="form-change-password" data-auth-form="password" novalidate>
+                                <div class="auth-form__group">
+                                    <label for="pw-current" class="auth-form__label">Mật khẩu hiện tại</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="password"
+                                            id="pw-current"
+                                            name="currentPassword"
+                                            class="auth-form__input auth-form__input--password"
+                                            placeholder="Nhập mật khẩu đang sử dụng"
+                                            autocomplete="current-password"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="pw-current-hint pw-current-error"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="auth-form__eye-btn"
+                                            data-toggle-password="pw-current"
+                                            aria-label="Hiện mật khẩu hiện tại"
+                                            aria-pressed="false"
+                                            aria-controls="pw-current"
+                                            title="Bật hoặc tắt hiển thị mật khẩu"
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <p class="auth-form__hint" id="pw-current-hint">
+                                        Gợi ý: Nếu dùng tài khoản Demo, mật khẩu mặc định là <strong>Demo@1234</strong>.
+                                    </p>
+                                    <p class="auth-form__error" id="pw-current-error" role="alert" hidden></p>
+                                </div>
+
+                                <div class="auth-form__group">
+                                    <label for="pw-new" class="auth-form__label">Mật khẩu mới</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="password"
+                                            id="pw-new"
+                                            name="newPassword"
+                                            class="auth-form__input auth-form__input--password"
+                                            placeholder="Tối thiểu 8 ký tự (Hoa, thường, số, ký tự đặc biệt)"
+                                            autocomplete="new-password"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="pw-new-strength-text pw-new-error"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="auth-form__eye-btn"
+                                            data-toggle-password="pw-new"
+                                            aria-label="Hiện mật khẩu mới"
+                                            aria-pressed="false"
+                                            aria-controls="pw-new"
+                                            title="Bật hoặc tắt hiển thị mật khẩu mới"
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div class="auth-strength">
+                                        <meter
+                                            id="pw-new-meter"
+                                            class="auth-strength__meter"
+                                            min="0"
+                                            max="4"
+                                            low="2"
+                                            high="3"
+                                            optimum="4"
+                                            value="0"
+                                        >
+                                            0/4
+                                        </meter>
+                                        <span class="auth-strength__label" id="pw-new-strength-text" aria-live="polite">
+                                            Độ mạnh mật khẩu mới: Chưa nhập
+                                        </span>
+                                    </div>
+                                    <p class="auth-form__error" id="pw-new-error" role="alert" hidden></p>
+                                </div>
+
+                                <div class="auth-form__group">
+                                    <label for="pw-confirm" class="auth-form__label">Xác nhận mật khẩu mới</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="password"
+                                            id="pw-confirm"
+                                            name="confirmNewPassword"
+                                            class="auth-form__input auth-form__input--password"
+                                            placeholder="Nhập lại mật khẩu mới khớp ở trên"
+                                            autocomplete="new-password"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="pw-confirm-error"
+                                        />
+                                        <button
+                                            type="button"
+                                            class="auth-form__eye-btn"
+                                            data-toggle-password="pw-confirm"
+                                            aria-label="Hiện xác nhận mật khẩu mới"
+                                            aria-pressed="false"
+                                            aria-controls="pw-confirm"
+                                            title="Bật hoặc tắt hiển thị mật khẩu xác nhận"
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <p class="auth-form__error" id="pw-confirm-error" role="alert" hidden></p>
+                                </div>
+
+                                <button type="submit" class="btn auth-form__submit">
+                                    <span>Cập nhật mật khẩu mới</span>
+                                    <span aria-hidden="true">&#10003;</span>
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer id="footer" class="footer"></footer>
+        <script>
+            load("#footer", "./templates/footer.html");
+        </script>
+
+        <script src="./assets/js/lunar-engine.js"></script>
+        <script src="./assets/js/header.js"></script>
+        <script src="./assets/js/sidebar.js"></script>
+        <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/converter-modal.js"></script>
+        <script src="./assets/js/auth.js"></script>
+    </body>
+</html>
+```
+
+## sign-up.html
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, follow" />
+        <title>Đăng Ký Tài Khoản - Lịch Phong Thủy</title>
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+        <script src="./assets/js/script.js"></script>
+    </head>
+
+    <body class="auth-body" data-page="signup" itemscope itemtype="https://schema.org/WebPage">
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "./templates/header.html");
+        </script>
+
+        <div id="sidebar-root"></div>
+        <script>
+            load("#sidebar-root", "./templates/sidebar.html");
+        </script>
+
+        <main id="main" class="main auth-page">
+            <div class="container">
+                <div class="auth-bento" data-auth-view="signup">
+                    <!-- CỘT TRÁI: GIỚI THIỆU -->
+                    <aside class="auth-hero" aria-label="Khởi tạo hồ sơ Bản mệnh Ngũ Hành">
+                        <div class="auth-hero__top">
+                            <span class="auth-hero__badge">
+                                <img src="./assets/icons/ying-yang-2.svg" alt="" aria-hidden="true" class="icon" />
+                                <span>Khởi Tạo Hồ Sơ Bản Mệnh</span>
+                            </span>
+
+                            <h1 class="auth-hero__title" itemprop="name">Tạo Tài Khoản<br />Lịch Phong Thủy</h1>
+                            <p class="auth-hero__desc">
+                                Thiết lập nhanh tên hiển thị, ngày sinh Dương lịch và Bản mệnh Ngũ Hành để đồng bộ giao
+                                diện cũng như cá nhân hóa lá số Bát Tự.
+                            </p>
+                        </div>
+
+                        <ul class="auth-hero__perks">
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">01</span>
+                                <div>
+                                    <strong>Chọn Bản Mệnh Ngũ Hành</strong>
+                                    <p>Giao diện toàn trang tự động chuyển sang Kim, Mộc, Thủy, Hỏa hoặc Thổ.</p>
+                                </div>
+                            </li>
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">02</span>
+                                <div>
+                                    <strong>Kiểm tra độ mạnh mật khẩu trực quan</strong>
+                                    <p>Đánh giá bảo mật theo thời gian thực ngay khi gõ bằng thẻ chuẩn HTML5.</p>
+                                </div>
+                            </li>
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">03</span>
+                                <div>
+                                    <strong>Lưu trữ cục bộ an toàn</strong>
+                                    <p>Quản lý hồ sơ, người thân và mật khẩu ngay trong trang Cá nhân.</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <footer class="auth-hero__foot">
+                            <a
+                                href="./index.html"
+                                class="auth-hero__back-link"
+                                title="Quay về trang chủ xem Lịch Tháng"
+                            >
+                                <span aria-hidden="true">&#8592;</span>
+                                <span>Quay về trang Lịch chính</span>
+                            </a>
+
+                            <img
+                                src="./assets/icons/zodiac/horse.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="auth-hero__watermark"
+                            />
+                        </footer>
+                    </aside>
+
+                    <!-- CỘT PHẢI: BIỂU MẪU ĐĂNG KÝ -->
+                    <section class="auth-card" aria-labelledby="signup-heading">
+                        <header class="auth-card__head">
+                            <span class="auth-card__eyebrow">Thành viên mới</span>
+                            <h2 class="auth-card__title" id="signup-heading">Đăng ký tài khoản</h2>
+                            <p class="auth-card__sub">
+                                Đã có tài khoản?
+                                <a href="./sign-in.html" class="auth-card__switch-link">Đăng nhập tại đây</a>
+                            </p>
+                        </header>
+
+                        <div
+                            class="auth-alert"
+                            id="signup-alert"
+                            role="alert"
+                            aria-live="assertive"
+                            tabindex="-1"
+                            hidden
+                        ></div>
+
+                        <form class="auth-form" id="form-signup" data-auth-form="signup" novalidate>
+                            <div class="auth-form__row-2">
+                                <div class="auth-form__group">
+                                    <label for="signup-name" class="auth-form__label">Họ và tên hiển thị</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="text"
+                                            id="signup-name"
+                                            name="fullname"
+                                            class="auth-form__input"
+                                            placeholder="Ví dụ: Minh Khôi"
+                                            autocomplete="name"
+                                            required
+                                            aria-invalid="false"
+                                            aria-describedby="signup-name-error"
+                                        />
+                                    </div>
+                                    <p class="auth-form__error" id="signup-name-error" role="alert" hidden></p>
+                                </div>
+
+                                <div class="auth-form__group">
+                                    <label for="signup-birthdate" class="auth-form__label">Ngày sinh (Tùy chọn)</label>
+                                    <div class="auth-form__input-wrap">
+                                        <input
+                                            type="date"
+                                            id="signup-birthdate"
+                                            name="birthdate"
+                                            class="auth-form__input"
+                                            autocomplete="bday"
+                                            title="Dùng để mở nhanh Lá số Bát Tự từ Profile"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="auth-form__group">
+                                <label for="signup-email" class="auth-form__label">Địa chỉ Email</label>
+                                <div class="auth-form__input-wrap">
+                                    <input
+                                        type="email"
+                                        id="signup-email"
+                                        name="email"
+                                        class="auth-form__input"
+                                        placeholder="nhap@email.vn"
+                                        inputmode="email"
+                                        autocomplete="email"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="signup-email-error"
+                                    />
+                                </div>
+                                <p class="auth-form__error" id="signup-email-error" role="alert" hidden></p>
+                            </div>
+
+                            <div class="auth-form__group">
+                                <span class="auth-form__label" id="signup-element-label">
+                                    Bản Mệnh Ngũ Hành (Tự động đổi màu giao diện)
+                                </span>
+                                <div
+                                    class="auth-elements"
+                                    role="group"
+                                    aria-labelledby="signup-element-label"
+                                    id="signup-element-group"
+                                    data-element-picker="signup-element-input"
+                                >
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn"
+                                        data-select-element="metal"
+                                        aria-pressed="false"
+                                        title="Mệnh Kim (Vàng kim)"
+                                    >
+                                        <img src="./assets/icons/metal.svg" alt="" aria-hidden="true" />
+                                        <span>Kim</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn"
+                                        data-select-element="wood"
+                                        aria-pressed="false"
+                                        title="Mệnh Mộc (Xanh lục bảo)"
+                                    >
+                                        <img src="./assets/icons/wood.svg" alt="" aria-hidden="true" />
+                                        <span>Mộc</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn"
+                                        data-select-element="water"
+                                        aria-pressed="false"
+                                        title="Mệnh Thủy (Xanh đại dương)"
+                                    >
+                                        <img src="./assets/icons/water.svg" alt="" aria-hidden="true" />
+                                        <span>Thủy</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn"
+                                        data-select-element="fire"
+                                        aria-pressed="false"
+                                        title="Mệnh Hỏa (Đỏ chu sa)"
+                                    >
+                                        <img src="./assets/icons/fire.svg" alt="" aria-hidden="true" />
+                                        <span>Hỏa</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="auth-elements__btn is-active"
+                                        data-select-element="earth"
+                                        aria-pressed="true"
+                                        title="Mệnh Thổ (Cam đất)"
+                                    >
+                                        <img src="./assets/icons/earth.svg" alt="" aria-hidden="true" />
+                                        <span>Thổ</span>
+                                    </button>
+                                </div>
+                                <input type="hidden" id="signup-element-input" name="element" value="earth" />
+                            </div>
+
+                            <div class="auth-form__group">
+                                <label for="signup-password" class="auth-form__label">Mật khẩu</label>
+                                <div class="auth-form__input-wrap">
+                                    <input
+                                        type="password"
+                                        id="signup-password"
+                                        name="password"
+                                        class="auth-form__input auth-form__input--password"
+                                        placeholder="Tối thiểu 8 ký tự (Hoa, thường, số, ký tự đặc biệt)"
+                                        autocomplete="new-password"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="signup-pw-strength-text signup-password-error"
+                                    />
+                                    <button
+                                        type="button"
+                                        class="auth-form__eye-btn"
+                                        data-toggle-password="signup-password"
+                                        aria-label="Hiện mật khẩu"
+                                        aria-pressed="false"
+                                        aria-controls="signup-password"
+                                        title="Bật hoặc tắt hiển thị mật khẩu"
+                                    >
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="auth-strength">
+                                    <meter
+                                        id="signup-pw-meter"
+                                        class="auth-strength__meter"
+                                        min="0"
+                                        max="4"
+                                        low="2"
+                                        high="3"
+                                        optimum="4"
+                                        value="0"
+                                    >
+                                        0/4
+                                    </meter>
+                                    <span class="auth-strength__label" id="signup-pw-strength-text" aria-live="polite">
+                                        Độ mạnh mật khẩu: Chưa nhập
+                                    </span>
+                                </div>
+                                <p class="auth-form__error" id="signup-password-error" role="alert" hidden></p>
+                            </div>
+
+                            <div class="auth-form__group">
+                                <label for="signup-confirm" class="auth-form__label">Nhập lại mật khẩu</label>
+                                <div class="auth-form__input-wrap">
+                                    <input
+                                        type="password"
+                                        id="signup-confirm"
+                                        name="confirmPassword"
+                                        class="auth-form__input auth-form__input--password"
+                                        placeholder="Nhập lại mật khẩu khớp ở trên"
+                                        autocomplete="new-password"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="signup-confirm-error"
+                                    />
+                                    <button
+                                        type="button"
+                                        class="auth-form__eye-btn"
+                                        data-toggle-password="signup-confirm"
+                                        aria-label="Hiện mật khẩu xác nhận"
+                                        aria-pressed="false"
+                                        aria-controls="signup-confirm"
+                                        title="Bật hoặc tắt hiển thị mật khẩu xác nhận"
+                                    >
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="auth-form__error" id="signup-confirm-error" role="alert" hidden></p>
+                            </div>
+
+                            <div class="auth-form__options">
+                                <label class="auth-form__check">
+                                    <input
+                                        type="checkbox"
+                                        id="signup-terms"
+                                        name="terms"
+                                        required
+                                        aria-describedby="signup-terms-error"
+                                    />
+                                    <span>
+                                        Tôi đồng ý với
+                                        <a
+                                            href="./index.html"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="auth-card__switch-link"
+                                        >
+                                            Điều khoản sử dụng
+                                        </a>
+                                        &amp; Chính sách bảo mật.
+                                    </span>
+                                </label>
+                                <p class="auth-form__error" id="signup-terms-error" role="alert" hidden></p>
+                            </div>
+
+                            <button type="submit" class="btn auth-form__submit">
+                                <span>Tạo tài khoản &amp; Vào trang chủ</span>
+                                <span aria-hidden="true">&#8594;</span>
+                            </button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer id="footer" class="footer"></footer>
+        <script>
+            load("#footer", "./templates/footer.html");
+        </script>
+
+        <script src="./assets/js/lunar-engine.js"></script>
+        <script src="./assets/js/header.js"></script>
+        <script src="./assets/js/sidebar.js"></script>
+        <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/converter-modal.js"></script>
+        <script src="./assets/js/auth.js"></script>
+    </body>
+</html>
+```
+
+## sign-in.html
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex, follow" />
+        <title>Đăng Nhập - Lịch Phong Thủy</title>
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <link rel="stylesheet" href="./assets/css/main.css" />
+        <script src="./assets/js/script.js"></script>
+    </head>
+
+    <body class="auth-body" data-page="signin" itemscope itemtype="https://schema.org/WebPage">
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "./templates/header.html");
+        </script>
+
+        <div id="sidebar-root"></div>
+        <script>
+            load("#sidebar-root", "./templates/sidebar.html");
+        </script>
+
+        <main id="main" class="main auth-page">
+            <div class="container">
+                <div class="auth-bento" data-auth-view="signin">
+                    <!-- CỘT TRÁI: SHOWCASE NGŨ HÀNH -->
+                    <aside class="auth-hero" aria-label="Quyền lợi thành viên Lịch Phong Thủy">
+                        <div class="auth-hero__top">
+                            <span class="auth-hero__badge">
+                                <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" class="icon" />
+                                <span>Không Gian Cá Nhân Hóa Ngũ Hành</span>
+                            </span>
+
+                            <h1 class="auth-hero__title" itemprop="name">Chào Mừng Trở Lại<br />Lịch Phong Thủy</h1>
+                            <p class="auth-hero__desc">
+                                Đăng nhập để tự động áp dụng bản mệnh Ngũ Hành, quản lý danh sách ngày sinh người thân
+                                và mở nhanh Lá số Bát Tự trên mọi trang.
+                            </p>
+                        </div>
+
+                        <ul class="auth-hero__perks">
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">✦</span>
+                                <div>
+                                    <strong>Đồng bộ giao diện 5 Bản Mệnh</strong>
+                                    <p>Tự động kích hoạt màu sắc tương sinh Kim, Mộc, Thủy, Hỏa hoặc Thổ.</p>
+                                </div>
+                            </li>
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">✦</span>
+                                <div>
+                                    <strong>Lưu danh sách ngày sinh người thân</strong>
+                                    <p>Tự động quy đổi Âm lịch, Nạp âm và mở nhanh Tứ Trụ chỉ với 1 lần chạm.</p>
+                                </div>
+                            </li>
+                            <li class="auth-hero__perk">
+                                <span class="auth-hero__perk-icon" aria-hidden="true">✦</span>
+                                <div>
+                                    <strong>Trọn bộ 10 Tiện ích Cổ học</strong>
+                                    <p>Kinh Dịch 64 quẻ, Tarot 78 lá, Thần số học và Nhịp sinh học cá nhân.</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <footer class="auth-hero__foot">
+                            <a
+                                href="./index.html"
+                                class="auth-hero__back-link"
+                                title="Quay về trang chủ xem Lịch Tháng"
+                            >
+                                <span aria-hidden="true">&#8592;</span>
+                                <span>Quay về trang Lịch chính</span>
+                            </a>
+
+                            <img
+                                src="./assets/icons/zodiac/dragon.svg"
+                                alt=""
+                                aria-hidden="true"
+                                class="auth-hero__watermark"
+                            />
+                        </footer>
+                    </aside>
+
+                    <!-- CỘT PHẢI: BIỂU MẪU ĐĂNG NHẬP -->
+                    <section class="auth-card" aria-labelledby="signin-heading">
+                        <header class="auth-card__head">
+                            <span class="auth-card__eyebrow">Tài khoản thành viên</span>
+                            <h2 class="auth-card__title" id="signin-heading">Đăng nhập hệ thống</h2>
+                            <p class="auth-card__sub">
+                                Chưa có tài khoản?
+                                <a href="./sign-up.html" class="auth-card__switch-link">Đăng ký miễn phí ngay</a>
+                            </p>
+                        </header>
+
+                        <div
+                            class="auth-alert"
+                            id="signin-alert"
+                            role="alert"
+                            aria-live="assertive"
+                            tabindex="-1"
+                            hidden
+                        ></div>
+
+                        <form class="auth-form" id="form-signin" data-auth-form="signin" novalidate>
+                            <div class="auth-form__group">
+                                <label for="signin-email" class="auth-form__label">Địa chỉ Email</label>
+                                <div class="auth-form__input-wrap">
+                                    <input
+                                        type="email"
+                                        id="signin-email"
+                                        name="email"
+                                        class="auth-form__input"
+                                        placeholder="nhap@email.vn"
+                                        inputmode="email"
+                                        autocomplete="email"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="signin-email-error"
+                                    />
+                                </div>
+                                <p class="auth-form__error" id="signin-email-error" role="alert" hidden></p>
+                            </div>
+
+                            <div class="auth-form__group">
+                                <div class="auth-form__label-row">
+                                    <label for="signin-password" class="auth-form__label">Mật khẩu</label>
+                                    <a
+                                        href="#!"
+                                        class="auth-form__forgot"
+                                        data-auth-action="forgot-hint"
+                                        title="Nhận hướng dẫn đặt lại mật khẩu"
+                                    >
+                                        Quên mật khẩu?
+                                    </a>
+                                </div>
+                                <div class="auth-form__input-wrap">
+                                    <input
+                                        type="password"
+                                        id="signin-password"
+                                        name="password"
+                                        class="auth-form__input auth-form__input--password"
+                                        placeholder="Nhập mật khẩu của bạn"
+                                        autocomplete="current-password"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="signin-password-error"
+                                    />
+                                    <button
+                                        type="button"
+                                        class="auth-form__eye-btn"
+                                        data-toggle-password="signin-password"
+                                        aria-label="Hiện mật khẩu"
+                                        aria-pressed="false"
+                                        aria-controls="signin-password"
+                                        title="Bật hoặc tắt hiển thị mật khẩu"
+                                    >
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            aria-hidden="true"
+                                        >
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="auth-form__error" id="signin-password-error" role="alert" hidden></p>
+                            </div>
+
+                            <div class="auth-form__options">
+                                <label class="auth-form__check">
+                                    <input type="checkbox" id="signin-remember" name="remember" checked />
+                                    <span>Ghi nhớ phiên đăng nhập trên thiết bị này</span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn auth-form__submit">
+                                <span>Đăng nhập ngay</span>
+                                <span aria-hidden="true">&#8594;</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn auth-form__demo-btn"
+                                data-auth-action="demo-login"
+                                title="Đăng nhập nhanh bằng tài khoản mẫu (Mật khẩu: Demo@1234)"
+                            >
+                                <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" class="icon" />
+                                <span>Dùng thử tài khoản Demo (Xem nhanh Profile Toggle)</span>
+                            </button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer id="footer" class="footer"></footer>
+        <script>
+            load("#footer", "./templates/footer.html");
+        </script>
+
+        <script src="./assets/js/lunar-engine.js"></script>
+        <script src="./assets/js/header.js"></script>
+        <script src="./assets/js/sidebar.js"></script>
+        <script src="./assets/js/footer.js"></script>
+        <script src="./assets/js/converter-modal.js"></script>
+        <script src="./assets/js/auth.js"></script>
     </body>
 </html>
 ```
