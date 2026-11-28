@@ -24,19 +24,22 @@
 
         <!-- CỘT TRÁI: THẺ BÀI 2:3 + THANH HÀNH ĐỘNG NẰM TRONG CÙNG 1 KHỐI BENTO -->
         <div class="util-ic-poster-col">
-            <figure class="util-ic-poster" id="ic-hex-stage" data-hex-num="14" data-ic-modal="current" role="button"
-                tabindex="0" aria-haspopup="dialog" aria-controls="util-detail-modal"
-                aria-label="Phóng to lá bài Quẻ số 14: Hỏa Thiên Đại Hữu"
-                title="Bấm hoặc nhấn Enter để phóng to lá bài Kinh Dịch">
+            <figure class="util-ic-poster" id="ic-hex-stage" data-hex-num="14" data-ic-zoom="current" role="button"
+                tabindex="0" aria-haspopup="dialog" aria-label="Phóng to lá bài Quẻ số 14: Hỏa Thiên Đại Hữu"
+                title="Bấm hoặc nhấn Enter để phóng to ảnh lá bài">
                 <img id="ic-hex-card-img" src="./assets/images/iching/14-hoa-thien-dai-huu.webp"
                     alt="Tranh minh họa quẻ Hỏa Thiên Đại Hữu" width="800" height="1200" decoding="async"
                     itemprop="image" />
-                <figcaption class="util-ic-poster__zoom" aria-hidden="true">🔍 Phóng to lá bài</figcaption>
+                <figcaption class="util-ic-poster__zoom" aria-hidden="true">
+                    <span class="util-ico util-ico--search" aria-hidden="true"></span>
+                    <span>Phóng to lá bài</span>
+                </figcaption>
             </figure>
 
             <div class="util-ic-poster-actions">
                 <button type="button" class="btn util-btn util-btn--outline util-btn--sm" data-ic-modal="current">
-                    <span>🔍 Xem nhanh</span>
+                    <span class="util-ico util-ico--search" aria-hidden="true"></span>
+                    <span>Xem nhanh</span>
                 </button>
                 <a href="./iching-detail.html?slug=14-hoa-thien-dai-huu&num=14"
                     class="btn util-btn util-btn--primary util-btn--sm" id="ic-detail-page-link">
@@ -261,6 +264,7 @@
         </div>
 
         <div class="util-iching-catalog-grid" id="ic-catalog-grid" role="group"
-            aria-label="Danh sách 64 lá bài Kinh Dịch"></div>
+            aria-label="Danh sách 64 lá bài Kinh Dịch">
+        </div>
     </section>
 </div>

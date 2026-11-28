@@ -1,0 +1,274 @@
+<!-- templates/utilities/util-tarot.html -->
+<div class="util-card util-divination-card">
+    <header class="util-card__head">
+        <div>
+            <span class="util-header__eyebrow">
+                <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true"
+                    class="util-header__eyebrow-icon icon" />
+                <span>Bộ Bài Chuẩn 78 Lá • Major &amp; Minor Arcana</span>
+            </span>
+            <h2 class="util-card__title">Rút Bài Tarot Nhận Thông Điệp</h2>
+            <p class="util-card__sub">
+                Tĩnh tâm, chạm trực tiếp vào 1 lá bài trên quạt hoặc nhấn Tráo Bài để lật mở 3D lá bài của bạn
+            </p>
+        </div>
+        <span class="util-card__tag" id="tr-head-badge">78 Lá Rider-Waite</span>
+    </header>
+
+    <!-- ==================== TẦNG 1: SÂN KHẤU QUẠT BÀI 9 LÁ ==================== -->
+    <div class="util-tr-deck-bar">
+        <div class="util-tarot-fan" id="tr-deck-fan" data-deck-state="idle" role="group"
+            aria-label="Chọn 1 lá bài Tarot đang úp">
+            <button type="button" class="util-tarot-back util-tarot-back--edge" data-fan-idx="0" aria-pressed="false"
+                aria-label="Chọn lá bài số 1">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="util-tarot-back" data-fan-idx="1" aria-pressed="false"
+                aria-label="Chọn lá bài số 2">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="util-tarot-back" data-fan-idx="2" aria-pressed="false"
+                aria-label="Chọn lá bài số 3">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="util-tarot-back" data-fan-idx="3" aria-pressed="false"
+                aria-label="Chọn lá bài số 4">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="util-tarot-back is-picked" data-fan-idx="4" aria-pressed="true"
+                aria-label="Chọn lá bài số 5">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="util-tarot-back" data-fan-idx="5" aria-pressed="false"
+                aria-label="Chọn lá bài số 6">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="util-tarot-back" data-fan-idx="6" aria-pressed="false"
+                aria-label="Chọn lá bài số 7">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="util-tarot-back" data-fan-idx="7" aria-pressed="false"
+                aria-label="Chọn lá bài số 8">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+            <button type="button" class="util-tarot-back util-tarot-back--edge" data-fan-idx="8" aria-pressed="false"
+                aria-label="Chọn lá bài số 9">
+                <img src="./assets/images/tarot/back.webp" alt="" aria-hidden="true" width="800" height="1200"
+                    loading="lazy" decoding="async" />
+            </button>
+        </div>
+
+        <div class="util-divination-actions">
+            <button type="button" class="btn util-btn util-btn--primary" id="tr-draw-btn">
+                <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true" class="util-btn__svg-icon" />
+                <span>Tráo Bài &amp; Rút Lá Mới</span>
+            </button>
+            <a href="#tr-catalog-section" class="btn util-btn util-btn--outline" id="tr-jump-catalog-btn">
+                <span>Tra cứu 78 Lá Tarot &#8595;</span>
+            </a>
+        </div>
+
+        <div class="util-ic-history" id="tr-history-wrap" hidden>
+            <span class="util-ic-history__label">Vừa rút:</span>
+            <div class="util-ic-history__list" id="tr-history-list" role="group"
+                aria-label="Các lá Tarot vừa rút gần đây"></div>
+        </div>
+    </div>
+
+    <!-- ==================== TẦNG 2: BENTO KẾT QUẢ KHÓA PHẲNG 2 CỘT ==================== -->
+    <article class="util-tarot-bento" id="tr-result-box" aria-live="polite" aria-atomic="true" data-card-id="14"
+        data-arcana="major" data-element="fire" data-orientation="upright" itemscope
+        itemtype="https://schema.org/VisualArtwork">
+        <meta itemprop="artform" content="Tarot Card Illustration 800x1200" />
+        <meta itemprop="keywords" id="tr-schema-keywords" content="Cân bằng, Kiên nhẫn, Dung hòa" />
+
+        <!-- CỘT TRÁI: KHỐI BENTO LÁ BÀI 3D + GẠT XUÔI/NGƯỢC + NÚT HÀNH ĐỘNG -->
+        <div class="util-tr-poster-col">
+            <figure class="util-tarot-stage" id="tr-card-art" data-flipped="true" data-orientation="upright"
+                data-tarot-zoom="current" role="button" tabindex="0" aria-haspopup="dialog"
+                aria-label="Phóng to ảnh lá bài Tarot đang rút" title="Bấm hoặc nhấn Enter để phóng to ảnh lá bài">
+                <div class="util-tarot-stage__inner">
+                    <div class="util-tarot-stage__face util-tarot-stage__face--back" aria-hidden="true">
+                        <img src="./assets/images/tarot/back.webp" alt="" width="800" height="1200" decoding="async"
+                            id="tr-card-back-img" />
+                    </div>
+                    <div class="util-tarot-stage__face util-tarot-stage__face--front">
+                        <img src="./assets/images/tarot/major/14-temperance.webp"
+                            alt="Lá bài Tarot XIV - Temperance (Sự Điều Độ)" width="800" height="1200" decoding="async"
+                            itemprop="image" id="tr-card-front-img" />
+                    </div>
+                </div>
+                <figcaption class="util-ic-poster__zoom" aria-hidden="true">
+                    <span class="util-ico util-ico--search" aria-hidden="true"></span>
+                    <span>Phóng to lá bài</span>
+                </figcaption>
+            </figure>
+
+            <div class="util-tr-orient-switch" role="group" aria-label="Chuyển đổi góc nhìn Xuôi hoặc Ngược">
+                <button type="button" class="util-tr-orient-switch__btn is-active" data-tr-orient="upright"
+                    aria-pressed="true">
+                    ✦ Chiều Xuôi
+                </button>
+                <button type="button" class="util-tr-orient-switch__btn" data-tr-orient="reversed" aria-pressed="false">
+                    ↺ Chiều Ngược
+                </button>
+            </div>
+
+            <div class="util-ic-poster-actions">
+                <button type="button" class="btn util-btn util-btn--outline util-btn--sm" data-tarot-modal="current">
+    <span class="util-ico util-ico--search" aria-hidden="true"></span>
+    <span>Xem nhanh</span>
+</button>
+                <a href="./tarot-detail.html?slug=14-temperance&orient=upright"
+                    class="btn util-btn util-btn--primary util-btn--sm" id="tr-detail-page-link">
+                    <span>Trang chi tiết &#8594;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- CỘT PHẢI: BẢNG LUẬN GIẢI LIỀN MẠCH (KHÔNG KHOẢNG TRỐNG RỜI RẠC) -->
+        <div class="util-iching-cards-stack">
+            <!-- Bảng chính: Định danh + Tóm tắt + Công việc + Thông điệp -->
+            <div class="util-div-detail-card util-tr-reading-sheet">
+                <div class="util-div-detail-card__head">
+                    <span class="util-iching-result__num" id="tr-card-orientation" data-orientation="upright">
+                        ✦ Lá bài Xuôi (Upright)
+                    </span>
+                    <div class="util-tr-meta-pills">
+                        <span class="util-tr-pill" id="tr-card-suit-pill">Bộ Ẩn Chính</span>
+                        <span class="util-tr-pill util-tr-pill--elem" id="tr-card-elem-pill">Nguyên tố Lửa</span>
+                    </div>
+                </div>
+
+                <div class="util-tr-title-block">
+                    <h3 class="util-iching-result__name" id="tr-card-vn" itemprop="name">XIV. Sự Điều Độ</h3>
+                    <span class="util-tr-en-sub" id="tr-card-en">Temperance • Lá #14 / 78</span>
+                </div>
+
+                <ul class="util-ic-keywords" id="tr-card-keywords" aria-label="Từ khóa cốt lõi của lá bài"></ul>
+
+                <div class="util-tr-message-callout">
+                    <span class="util-tr-section-label">Thông Điệp Tổng Quan &amp; Lời Khuyên</span>
+                    <p id="tr-card-message"></p>
+                </div>
+
+                <div class="util-tr-aspects-grid">
+                    <div class="util-tr-aspect-box">
+                        <span class="util-tr-section-label">Tóm Tắt Năng Lượng</span>
+                        <p id="tr-card-summary"></p>
+                    </div>
+
+                    <div class="util-tr-aspect-box">
+                        <span class="util-tr-section-label">Công Việc &amp; Tài Chính</span>
+                        <p id="tr-card-career"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tầng phụ bổ trợ: Đối chiếu chiều đối lập + Đặc tính Bộ bài -->
+            <div class="util-tr-secondary-grid">
+                <div class="util-div-detail-card util-tr-contrast-card">
+                    <div class="util-div-detail-card__head">
+                        <strong id="tr-alt-orient-title">↺ Góc nhìn khi lá Ngược</strong>
+                        <button type="button" class="util-tr-flip-link" id="tr-alt-orient-btn">Xem chi tiết
+                            &#8594;</button>
+                    </div>
+                    <p id="tr-alt-orient-summary"></p>
+                    <div class="util-tr-alt-kws" id="tr-alt-orient-keywords"></div>
+                </div>
+
+                <div class="util-div-detail-card util-tr-suit-card">
+                    <strong id="tr-suit-essence-title">Đặc tính Bộ Ẩn Chính</strong>
+                    <p id="tr-suit-essence-desc"></p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- ==================== TẦNG 3: BẢNG TRA CỨU 78 LÁ BÀI (LƯỚI 4 CỘT KHUNG VIỀN) ==================== -->
+    <section class="util-tarot-catalog" id="tr-catalog-section" aria-labelledby="tr-catalog-heading">
+        <header class="util-card__head">
+            <div>
+                <h3 class="util-card__title" id="tr-catalog-heading">Bảng Tra Cứu Trọn Bộ 78 Lá Bài Tarot (Rider-Waite)
+                </h3>
+                <p class="util-card__sub">
+                    Bấm vào bất kỳ lá bài nào để xem nhanh trong hộp thoại hoặc giữ Ctrl + Click để mở thẳng trang chi
+                    tiết
+                </p>
+            </div>
+
+            <div class="util-iching-catalog__tools">
+                <div class="util-search-wrap" role="search">
+                    <label for="tr-search-input" class="util-sr-only">Tìm kiếm trong 78 lá bài Tarot</label>
+                    <input type="search" id="tr-search-input" class="util-field__input"
+                        placeholder="Tìm tên lá bài hoặc từ khóa: The Sun, Sự Điều Độ, Át Gậy..." />
+                </div>
+                <span class="util-card__tag" id="tr-catalog-count">78 / 78 lá</span>
+            </div>
+        </header>
+
+        <div class="util-ic-filter-bar">
+            <div class="util-ic-filter-group" id="tr-suit-filters" role="group"
+                aria-label="Lọc 78 lá bài Tarot theo 5 Bộ">
+                <button type="button" class="util-subfilter-btn is-active" data-tr-suit="all" aria-pressed="true"
+                    aria-controls="tr-catalog-grid">
+                    Tất cả (78)
+                </button>
+                <button type="button" class="util-subfilter-btn" data-tr-suit="major" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Ẩn Chính (22)
+                </button>
+                <button type="button" class="util-subfilter-btn" data-tr-suit="wands" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Bộ Gậy (14)
+                </button>
+                <button type="button" class="util-subfilter-btn" data-tr-suit="swords" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Bộ Kiếm (14)
+                </button>
+                <button type="button" class="util-subfilter-btn" data-tr-suit="cups" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Bộ Cốc (14)
+                </button>
+                <button type="button" class="util-subfilter-btn" data-tr-suit="pentacles" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Bộ Tiền (14)
+                </button>
+            </div>
+
+            <div class="util-ic-filter-group" id="tr-element-filters" role="group" aria-label="Lọc theo 4 nguyên tố">
+                <button type="button" class="util-al-quick-chip is-active" data-tr-element="all" aria-pressed="true"
+                    aria-controls="tr-catalog-grid">
+                    4 Nguyên tố
+                </button>
+                <button type="button" class="util-al-quick-chip" data-tr-element="fire" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Lửa
+                </button>
+                <button type="button" class="util-al-quick-chip" data-tr-element="water" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Nước
+                </button>
+                <button type="button" class="util-al-quick-chip" data-tr-element="air" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Khí
+                </button>
+                <button type="button" class="util-al-quick-chip" data-tr-element="earth" aria-pressed="false"
+                    aria-controls="tr-catalog-grid">
+                    Đất
+                </button>
+            </div>
+        </div>
+
+        <div class="util-tarot-catalog-grid" id="tr-catalog-grid" role="group" aria-label="Danh sách 78 lá bài Tarot">
+        </div>
+    </section>
+</div>

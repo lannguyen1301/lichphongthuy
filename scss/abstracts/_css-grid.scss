@@ -15,6 +15,18 @@
     place-items: center;
 }
 
+// Đẩy các phần tử con lên mép trên cùng của ô lưới (giữ nguyên chiều cao tự nhiên, không tự kéo giãn)
+%gridStart {
+    display: grid;
+    align-items: start;
+}
+
+// Căn giữa các phần tử con theo chiều dọc của ô lưới (chiều ngang vẫn tự giãn hết cột)
+%gridItemCenter {
+    display: grid;
+    align-items: center;
+}
+
 // Chia cột đều nhau (Equal Columns)
 %gridCols2 {
     display: grid;

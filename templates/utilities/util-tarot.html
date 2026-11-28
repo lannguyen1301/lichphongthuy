@@ -93,9 +93,8 @@
         <!-- CỘT TRÁI: KHỐI BENTO LÁ BÀI 3D + GẠT XUÔI/NGƯỢC + NÚT HÀNH ĐỘNG -->
         <div class="util-tr-poster-col">
             <figure class="util-tarot-stage" id="tr-card-art" data-flipped="true" data-orientation="upright"
-                data-tarot-modal="current" role="button" tabindex="0" aria-haspopup="dialog"
-                aria-controls="util-detail-modal" aria-label="Phóng to xem chi tiết lá bài Tarot đang rút"
-                title="Bấm hoặc nhấn Enter để phóng to lá bài">
+                data-tarot-zoom="current" role="button" tabindex="0" aria-haspopup="dialog"
+                aria-label="Phóng to ảnh lá bài Tarot đang rút" title="Bấm hoặc nhấn Enter để phóng to ảnh lá bài">
                 <div class="util-tarot-stage__inner">
                     <div class="util-tarot-stage__face util-tarot-stage__face--back" aria-hidden="true">
                         <img src="./assets/images/tarot/back.webp" alt="" width="800" height="1200" decoding="async"
@@ -107,7 +106,10 @@
                             itemprop="image" id="tr-card-front-img" />
                     </div>
                 </div>
-                <figcaption class="util-ic-poster__zoom" aria-hidden="true">🔍 Phóng to lá bài</figcaption>
+                <figcaption class="util-ic-poster__zoom" aria-hidden="true">
+                    <span class="util-ico util-ico--search" aria-hidden="true"></span>
+                    <span>Phóng to lá bài</span>
+                </figcaption>
             </figure>
 
             <div class="util-tr-orient-switch" role="group" aria-label="Chuyển đổi góc nhìn Xuôi hoặc Ngược">
@@ -122,7 +124,8 @@
 
             <div class="util-ic-poster-actions">
                 <button type="button" class="btn util-btn util-btn--outline util-btn--sm" data-tarot-modal="current">
-                    <span>🔍 Xem nhanh</span>
+                    <span class="util-ico util-ico--search" aria-hidden="true"></span>
+                    <span>Xem nhanh</span>
                 </button>
                 <a href="./tarot-detail.html?slug=14-temperance&orient=upright"
                     class="btn util-btn util-btn--primary util-btn--sm" id="tr-detail-page-link">

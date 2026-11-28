@@ -2367,84 +2367,197 @@
 }
 
 // ==========================================================================
-// 5. MỤC 4: KINH DỊCH (3 XU SVG 3D + 64 QUẺ) & TAROT (QUẠT 9/7 LÁ + LẬT 3D)
+// 5. MỤC 4: KINH DỊCH (64 LÁ) & TAROT (78 LÁ) — BENTO KHÓA ĐÁY & GALLERY 4 CỘT
 // ==========================================================================
-.util-divination-hero {
-    @extend %flexColumnCenterAll;
-    gap: 1.2rem;
-    text-align: center;
-    padding-bottom: 2rem;
-    border-bottom: 1px dashed var(--border-color);
-}
-
 .util-divination-actions {
     @extend %flexCenter;
     flex-wrap: wrap;
     gap: 1.2rem;
-    margin-top: 0.6rem;
 }
 
-// --- 5.1. Sân khấu 3 đồng xu SVG 2 mặt (Đổi màu động theo 5 mệnh Ngũ Hành) ---
+.util-iching-bento,
+.util-tarot-bento {
+    display: grid;
+    grid-template-columns: 30rem minmax(0, 1fr);
+    align-items: stretch;
+    gap: 1.8rem;
+    padding: 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.4rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: 1fr;
+    }
+
+    @include abs.screen(md) {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+}
+
+.util-iching-bento {
+    &[data-element="metal"] {
+        --ic-accent: #eab308;
+    }
+    &[data-element="wood"] {
+        --ic-accent: #10b981;
+    }
+    &[data-element="water"] {
+        --ic-accent: #3b82f6;
+    }
+    &[data-element="fire"] {
+        --ic-accent: #ef4444;
+    }
+    &[data-element="earth"] {
+        --ic-accent: #f59e0b;
+    }
+
+    &.is-sliding .util-iching-cards-stack {
+        animation: tarotResultSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+}
+
+// Cột trái bọc gọn thành 1 Bento Card hoàn chỉnh -> khóa đáy phẳng với cột phải
+.util-ic-poster-col,
+.util-tr-poster-col {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: 1.4rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+
+    @include abs.screen(lg) {
+        max-width: 34rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+.util-ic-poster-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+    padding-top: 0.4rem;
+}
+
+// Cột phải: dùng gap đều chặt, TUYỆT ĐỐI không dùng space-between tạo khoảng trống chết
+.util-iching-cards-stack {
+    @extend %flexColumn;
+    gap: 1.2rem;
+    min-width: 0;
+}
+
+.util-div-detail-card {
+    @extend %flexColumn;
+    gap: 0.7rem;
+    padding: 1.6rem 1.8rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    @extend %transTheme;
+
+    &--highlight {
+        flex: 1;
+        justify-content: center;
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border-color: var(--primary-color);
+    }
+
+    &__head {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    > strong {
+        font-size: 1.25rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--primary-color);
+    }
+
+    p {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        color: var(--text-color);
+    }
+}
+
+.util-iching-result__num {
+    @extend %inlineFlexCenter;
+    padding: 0.35rem 1.2rem;
+    border-radius: 99.9rem;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 800;
+
+    &[data-orientation="upright"] {
+        background-color: #059669;
+    }
+
+    &[data-orientation="reversed"] {
+        background-color: #d97706;
+    }
+}
+
+.util-iching-result__name {
+    font-size: clamp(2.1rem, 2.4vw, 2.7rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-color);
+}
+
+// --- 5.1. KINH DỊCH: 3 ĐỒNG XU + ĐỒ HÌNH 6 HÀO + DẢI 4 THÔNG SỐ LỚN ---
 .util-coins-stage {
     @extend %flexCenter;
-    gap: 2.2rem;
-    padding: 1.6rem 0 1.2rem;
-    perspective: 90rem;
+    gap: 1.2rem;
+    perspective: 900px;
 
-    @include abs.screen(sm) {
-        gap: 1.2rem;
+    &--compact {
+        gap: 0.8rem;
+
+        .util-coin {
+            width: 4.8rem;
+            height: 4.8rem;
+        }
     }
 }
 
 .util-coin {
-    width: 8.6rem;
-    height: 8.6rem;
-    perspective: 60rem;
-    background: transparent;
-    border: none;
-
-    @include abs.screen(sm) {
-        width: 6.8rem;
-        height: 6.8rem;
-    }
+    width: 6.8rem;
+    height: 6.8rem;
+    transform-style: preserve-3d;
 
     &__inner {
         position: relative;
         width: 100%;
         height: 100%;
         transform-style: preserve-3d;
-        transition: transform 0.65s cubic-bezier(0.34, 1.32, 0.64, 1);
+        transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     &[data-face="yin"] &__inner {
         transform: rotateY(180deg);
     }
 
-    &.is-tossing &__inner {
-        animation: coinToss3D 0.82s cubic-bezier(0.22, 1, 0.36, 1) both;
-    }
-
-    &:nth-child(2).is-tossing &__inner {
-        animation-delay: 0.08s;
-    }
-
-    &:nth-child(3).is-tossing &__inner {
-        animation-delay: 0.16s;
+    &.is-tossing {
+        animation: coinToss3D 0.82s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
     }
 
     &__face {
-        position: absolute;
-        inset: 0;
-        @extend %flexCenter;
+        @extend %absCover;
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
         border-radius: 50%;
-        background-color: var(--bg-surface);
-        box-shadow: 0 0.8rem 2rem var(--shadow-color);
 
         img {
-            width: 92%;
-            height: 92%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
             filter: var(--zodiac-filter);
         }
@@ -2455,221 +2568,740 @@
     }
 }
 
-// --- 5.2. Khối kết quả Kinh Dịch & Xếp 6 hào từ dưới lên ---
-.util-iching-bento {
-    display: grid;
-    grid-template-columns: 23rem 1fr;
-    align-items: start;
-    gap: 2.4rem;
-    padding: 2.2rem;
-    background-color: var(--bg-surface);
-    border: 1.5px solid var(--border-color);
-    border-radius: 2.4rem;
-
-    &.is-sliding .util-iching-cards-stack {
-        animation: tarotResultSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    @include abs.screen(md) {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        padding: 1.6rem;
-    }
-}
-
-.util-iching-stage {
-    @extend %flexColumnCenterAll;
-    gap: 1.4rem;
+.util-ic-poster {
+    position: relative;
     width: 100%;
-    max-width: 23rem;
-    padding: 2rem 1.8rem;
-    background-color: var(--body-bg);
-    border: 2px solid var(--primary-color);
-    border-radius: 2.2rem;
-    box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
-    cursor: pointer;
+    aspect-ratio: 2 / 3;
+    border-radius: 1.4rem;
+    overflow: hidden;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--ic-accent, var(--border-color));
+    box-shadow: 0 0.8rem 2rem var(--shadow-color);
+    cursor: zoom-in;
     @extend %transInteractive;
 
-    &:hover,
-    &:focus-visible {
-        transform: translateY(-3px);
-        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
+    img {
+        @extend %imgCover;
+        display: block;
     }
 
-    &__svg-box {
+    &.is-fallback-art {
         @extend %flexCenter;
-        width: 10.4rem;
-        height: 10.4rem;
-        padding: 1.2rem;
-        background-color: var(--primary-soft-bg, var(--bg-surface));
-        border: 1.5px dashed var(--primary-color);
-        border-radius: 1.8rem;
+        padding: 3.6rem;
 
         img {
-            width: 100%;
-            height: 100%;
+            width: 13rem;
+            height: 13rem;
             object-fit: contain;
             filter: var(--zodiac-filter);
         }
     }
 
-    &__lines {
-        @extend %flexColumn;
-        gap: 0.7rem;
-        width: 100%;
-        padding-top: 1rem;
-        border-top: 1px dashed var(--border-color);
+    &__zoom {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 3;
+        padding: 0.4rem 1.1rem;
+        border-radius: 99.9rem;
+        background-color: rgba(15, 23, 42, 0.84);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 800;
+        backdrop-filter: blur(6px);
+        opacity: 0;
+        transform: translateY(0.4rem);
+        pointer-events: none;
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease;
     }
 
-    &__hint {
+    &:hover .util-ic-poster__zoom,
+    &:focus-visible .util-ic-poster__zoom {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.util-ic-cast-strip {
+    @extend %flexColumn;
+    gap: 1rem;
+    padding: 1.3rem 1.6rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+
+    &__row {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+    }
+
+    &__left {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+    }
+
+    &__status {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__actions {
+        @extend %flexItemCenter;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+}
+
+.util-ic-history {
+    @extend %flexItemCenter;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--border-color);
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+    }
+
+    &__list {
+        @extend %flexWrapGap;
+        gap: 0.55rem;
+    }
+}
+
+.util-ic-mid-bento {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 1.2rem;
+    align-items: stretch;
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-ic-identity-card {
+    justify-content: center;
+    gap: 0.9rem;
+}
+
+.util-ic-structure-box {
+    justify-content: space-between;
+}
+
+.util-ic-structure-card__code {
+    padding: 0.25rem 0.9rem;
+    border-radius: 99.9rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    font-variant-numeric: tabular-nums;
+}
+
+.util-ic-structure-card__lines {
+    @extend %flexColumn;
+    gap: 0.5rem;
+    padding: 1rem 1.2rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.3rem;
+}
+
+.util-ic-hao-row {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr 4.4rem;
+    align-items: center;
+    gap: 0.8rem;
+
+    &__num,
+    &__type {
         font-size: 1.15rem;
-        font-weight: 700;
+        font-weight: 800;
+        color: var(--text-muted);
+    }
+
+    &__type {
+        text-align: right;
         color: var(--primary-color);
     }
 }
 
 .util-hex-line {
     display: flex;
-    justify-content: space-between;
-    gap: 1.2rem;
-    height: 1rem;
-    opacity: 0;
-    animation: hexLineReveal 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    align-items: center;
+    gap: 0.9rem;
+    width: 100%;
+    height: 0.95rem;
+    animation: hexLineReveal 0.35s ease both;
 
     span {
-        flex: 1;
+        display: block;
         height: 100%;
-        background-color: var(--text-color);
-        border-radius: 0.35rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
     }
 
     &--yang span {
-        background-color: var(--primary-color);
+        width: 100%;
+    }
+
+    &--yin span {
+        flex: 1;
     }
 }
 
-.util-iching-result {
-    &__num {
-        padding: 0.4rem 1.4rem;
-        border-radius: 99.9rem;
-        background-color: var(--primary-color);
-        color: #ffffff;
-        font-size: 1.25rem;
-        font-weight: 800;
+// Dải 4 Thông Số Lớn (Sửa dứt điểm chữ nhỏ bị bóp trong hộp Lục Hào)
+.util-ic-stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
 
-        &[data-orientation="reversed"] {
-            background-color: var(--color-danger, #dc2626);
-        }
+    @include abs.screen(md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
 
-    &__trigrams {
-        font-size: 1.25rem;
+.util-ic-stat-tile {
+    @extend %flexColumn;
+    gap: 0.35rem;
+    padding: 1.2rem 1.4rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.5rem;
+
+    span {
+        font-size: 1.15rem;
         font-weight: 700;
         color: var(--text-muted);
     }
 
-    &__name {
-        font-size: 2.1rem;
-        font-weight: 800;
-        line-height: 1.25;
-        color: var(--primary-color);
-    }
-}
-
-.util-iching-cards-stack {
-    @extend %flexColumn;
-    gap: 1.2rem;
-    width: 100%;
-    min-width: 0;
-}
-
-.util-div-detail-card {
-    @extend %flexColumn;
-    gap: 0.6rem;
-    padding: 1.6rem 1.8rem;
-    background-color: var(--body-bg);
-    border: 1.5px solid var(--border-color);
-    border-radius: 1.8rem;
-    font-size: 1.4rem;
-    line-height: 1.6;
-    @extend %transInteractive;
-
-    &__head {
-        @extend %flexBetween;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-    }
-
-    &--highlight {
-        background-color: var(--primary-soft-bg, var(--body-bg));
-        border-color: var(--primary-color);
-    }
-
-    &:hover {
-        border-color: var(--primary-color);
-        transform: translateY(-2px);
-    }
-
     strong {
+        font-size: 1.5rem;
+        font-weight: 800;
         color: var(--text-color);
+        line-height: 1.25;
+    }
+}
+
+.util-ic-hanzi-badge {
+    padding: 0.35rem 1.2rem;
+    border-radius: 99.9rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-color);
+    letter-spacing: 0.06em;
+}
+
+.util-ic-tags-row,
+.util-ic-keywords {
+    @extend %flexWrapGap;
+    gap: 0.6rem;
+}
+
+.util-ic-omen-pill {
+    padding: 0.3rem 1rem;
+    border-radius: 99.9rem;
+    background-color: var(--primary-soft-bg, var(--bg-surface));
+    border: 1px solid var(--primary-color);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.util-ic-keyword {
+    padding: 0.32rem 1rem;
+    border-radius: 99.9rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.util-ic-couplet {
+    @extend %flexColumn;
+    gap: 0.3rem;
+    margin-top: 0.2rem;
+    padding: 1rem 1.3rem;
+    background-color: var(--bg-surface);
+    border-left: 3.5px solid var(--ic-accent, var(--primary-color));
+    border-radius: 0 1.2rem 1.2rem 0;
+
+    &[hidden] {
+        display: none !important;
+    }
+
+    p {
+        font-size: 1.3rem;
+        line-height: 1.5;
+    }
+
+    p:first-child {
         font-weight: 800;
     }
-}
 
-// --- 5.3. Lưới tra cứu trọn bộ 64 Quẻ Kinh Dịch ---
-.util-iching-catalog {
-    @extend %flexColumn;
-    gap: 1.6rem;
-    padding-top: 2rem;
-    border-top: 1px dashed var(--border-color);
-
-    &__tools {
-        @extend %flexItemCenter;
-        flex-wrap: wrap;
-        gap: 1rem;
+    p:last-child {
+        font-style: italic;
+        color: var(--text-muted);
     }
 }
 
-.util-iching-filters {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-
-    @include abs.screen(md) {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    @include abs.screen(sm) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-.util-iching-catalog-grid {
+.util-ic-meaning-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.2rem;
-
-    @include abs.screen(xl) {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    @include abs.screen(md) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
 
     @include abs.screen(sm) {
         grid-template-columns: 1fr;
     }
 }
 
-.util-hex-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.9rem;
-    padding: 1.5rem 1.6rem;
+.util-iching-result__num,
+.util-hex-card__status-tag {
+    &[data-status-code="dai_cat"] {
+        background-color: #059669;
+        color: #ffffff;
+    }
+    &[data-status-code="cat"],
+    &[data-status-code="cat_hanh"] {
+        background-color: #2563eb;
+        color: #ffffff;
+    }
+    &[data-status-code="binh_hoa"] {
+        background-color: #d97706;
+        color: #ffffff;
+    }
+    &[data-status-code="tieu_hung"],
+    &[data-status-code="than_trong"] {
+        background-color: #ea580c;
+        color: #ffffff;
+    }
+    &[data-status-code="hung"] {
+        background-color: #dc2626;
+        color: #ffffff;
+    }
+}
+
+// --- 5.2. TAROT: QUẠT 9 LÁ + LẬT 3D + BẢNG LUẬN GIẢI LIỀN MẠCH ---
+.util-tr-deck-bar {
+    @extend %flexColumnCenterAll;
+    gap: 1.6rem;
+    padding: 2rem;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
-    border-radius: 1.8rem;
+    border-radius: 2.4rem;
+    overflow: hidden;
+
+    .util-ic-history {
+        border-top: none;
+        padding-top: 0;
+        justify-content: center;
+    }
+}
+
+.util-tarot-fan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16rem;
+    padding-top: 1.4rem;
+    width: 100%;
+
+    &[data-deck-state="shuffling"] .util-tarot-back {
+        animation: tarotShufflePulse 0.42s ease-in-out;
+    }
+}
+
+.util-tarot-back {
+    --fan-angle: 0deg;
+    --fan-y: 0px;
+    --shuffle-dx: 0px;
+    position: relative;
+    width: 8.8rem;
+    height: 13.2rem;
+    margin-left: -3.2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    background-color: #111827;
+    box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+    transform: translateY(var(--fan-y)) rotate(var(--fan-angle));
+    transform-origin: bottom center;
+    cursor: pointer;
+    z-index: 1;
+    @extend %flexItemFixed;
+    transition:
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    &[data-fan-idx="0"] {
+        --fan-angle: -20deg;
+        --fan-y: 1.8rem;
+        --shuffle-dx: 5rem;
+    }
+    &[data-fan-idx="1"] {
+        --fan-angle: -15deg;
+        --fan-y: 1rem;
+        --shuffle-dx: 3.5rem;
+    }
+    &[data-fan-idx="2"] {
+        --fan-angle: -10deg;
+        --fan-y: 0.4rem;
+        --shuffle-dx: 2rem;
+    }
+    &[data-fan-idx="3"] {
+        --fan-angle: -5deg;
+        --fan-y: 0.1rem;
+        --shuffle-dx: 1rem;
+    }
+    &[data-fan-idx="4"] {
+        --fan-angle: 0deg;
+        --fan-y: 0px;
+        --shuffle-dx: 0px;
+    }
+    &[data-fan-idx="5"] {
+        --fan-angle: 5deg;
+        --fan-y: 0.1rem;
+        --shuffle-dx: -1rem;
+    }
+    &[data-fan-idx="6"] {
+        --fan-angle: 10deg;
+        --fan-y: 0.4rem;
+        --shuffle-dx: -2rem;
+    }
+    &[data-fan-idx="7"] {
+        --fan-angle: 15deg;
+        --fan-y: 1rem;
+        --shuffle-dx: -3.5rem;
+    }
+    &[data-fan-idx="8"] {
+        --fan-angle: 20deg;
+        --fan-y: 1.8rem;
+        --shuffle-dx: -5rem;
+    }
+
+    img {
+        @extend %imgCover;
+        display: block;
+    }
+
+    &:hover,
+    &:focus-visible,
+    &.is-picked {
+        border-color: var(--primary-color);
+        transform: translateY(calc(var(--fan-y) - 1.6rem)) rotate(var(--fan-angle)) scale(1.06);
+        box-shadow: 0 1.4rem 2.6rem var(--shadow-color);
+        z-index: 10;
+    }
+
+    @include abs.screen(sm) {
+        width: 7rem;
+        height: 10.5rem;
+        margin-left: -2.8rem;
+
+        &--edge {
+            display: none;
+        }
+    }
+}
+
+.util-tarot-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    perspective: 1200px;
+    cursor: zoom-in;
+
+    &__inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &[data-flipped="true"] &__inner {
+        transform: rotateY(180deg);
+    }
+
+    &__face {
+        @extend %absCover;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 1.4rem;
+        overflow: hidden;
+        border: 1.5px solid var(--border-color);
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+        background-color: #111827;
+
+        img {
+            @extend %imgCover;
+            display: block;
+            transition: transform 0.45s ease;
+        }
+
+        &--back {
+            transform: rotateY(0deg);
+            z-index: 2;
+        }
+
+        &--front {
+            transform: rotateY(180deg);
+            z-index: 1;
+        }
+    }
+
+    &[data-flipped="true"] &__face--back {
+        z-index: 1;
+    }
+
+    &[data-flipped="true"] &__face--front {
+        z-index: 3;
+    }
+
+    &[data-orientation="reversed"] &__face--front img {
+        transform: rotate(180deg);
+    }
+
+    &:hover .util-ic-poster__zoom,
+    &:focus-visible .util-ic-poster__zoom {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.util-tr-orient-switch {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+    padding: 0.4rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.2rem;
+
+    &__btn {
+        height: 3.4rem;
+        border-radius: 0.85rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        @extend %transTheme;
+
+        &:hover {
+            color: var(--text-color);
+        }
+
+        &.is-active,
+        &[aria-pressed="true"] {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 0.3rem 0.9rem var(--shadow-color);
+        }
+    }
+}
+
+.util-tr-reading-sheet {
+    flex: 1;
+    gap: 1.2rem;
+    padding: 2rem 2.2rem;
+}
+
+.util-tr-title-block {
+    @extend %flexColumn;
+    gap: 0.2rem;
+}
+
+.util-tr-meta-pills {
+    @extend %flexWrapGap;
+    gap: 0.6rem;
+}
+
+.util-tr-pill {
+    padding: 0.32rem 1.1rem;
+    border-radius: 99.9rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-color);
+
+    &--elem {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+    }
+}
+
+.util-tr-en-sub {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.util-tr-section-label {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--primary-color);
+    margin-bottom: 0.4rem;
+}
+
+.util-tr-message-callout {
+    padding: 1.4rem 1.6rem;
+    background-color: var(--primary-soft-bg, var(--bg-surface));
+    border: 1px solid var(--primary-color);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 1.4rem;
+
+    p {
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.6;
+        color: var(--text-color);
+    }
+}
+
+.util-tr-aspects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-tr-aspect-box {
+    padding: 1.3rem 1.5rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 1.4rem;
+
+    p {
+        font-size: 1.38rem;
+        line-height: 1.58;
+        color: var(--text-color);
+    }
+}
+
+.util-tr-secondary-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 1.2rem;
+
+    @include abs.screen(md) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-tr-flip-link {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.util-tr-alt-kws {
+    @extend %flexWrapGap;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+
+    span {
+        padding: 0.2rem 0.8rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        font-size: 1.12rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+}
+
+// --- 5.3. BẢNG TRA CỨU 4 CỘT KHUNG VIỀN TRONG (FIX ẢNH 4 & ẢNH 8) ---
+.util-iching-catalog,
+.util-tarot-catalog {
+    @extend %flexColumn;
+    gap: 1.6rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+.util-iching-catalog__tools {
+    @extend %flexItemCenter;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.util-ic-filter-bar {
+    @extend %flexBetween;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.util-ic-filter-group {
+    @extend %flexWrapGap;
+    gap: 0.7rem;
+
+    .util-al-quick-chip.is-active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+    }
+}
+
+// Đồng bộ 4 cột rộng rãi cho cả Kinh Dịch (64 lá) và Tarot (78 lá)
+.util-iching-catalog-grid,
+.util-tarot-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.6rem;
+
+    @include abs.screen(xl) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+.util-hex-card,
+.util-tr-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
     text-align: left;
     cursor: pointer;
     @extend %transInteractive;
@@ -2678,9 +3310,8 @@
     &:focus-visible,
     &.is-current-highlight {
         border-color: var(--primary-color);
-        background-color: var(--body-bg);
-        transform: translateY(-2px);
-        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+        transform: translateY(-4px);
+        box-shadow: 0 1.2rem 2.6rem var(--shadow-color);
     }
 
     &.is-current-highlight {
@@ -2688,305 +3319,123 @@
         background-color: var(--primary-soft-bg, var(--body-bg));
     }
 
-    &__top {
-        @extend %flexBetween;
-        gap: 0.8rem;
-    }
-
-    &__svg {
-        @extend %inlineFlexCenter;
-        @extend %flexItemFixed;
-        width: 4.8rem;
-        height: 4.8rem;
-        padding: 0.6rem;
+    // Khung viền trong tách ảnh khỏi mép ngoài -> giữ trọn border khi hover, không còn lấn viền
+    &__thumb {
+        width: 100%;
+        aspect-ratio: 2 / 3;
         border-radius: 1.2rem;
-        background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: var(--zodiac-filter);
-        }
-    }
-
-    &__badge {
-        padding: 0.3rem 0.9rem;
-        border-radius: 99.9rem;
-        background-color: var(--body-bg);
-        border: 1px solid var(--border-color);
-        font-size: 1.1rem;
-        font-weight: 800;
-        color: var(--primary-color);
-        @extend %textNoWrap;
-    }
-
-    &__title {
-        font-size: 1.55rem;
-        font-weight: 800;
-        color: var(--text-color);
-    }
-
-    &__sub {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--text-muted);
-    }
-
-    &__desc {
-        font-size: 1.25rem;
-        line-height: 1.5;
-        color: var(--text-muted);
-        @extend %textClamp2;
-    }
-}
-
-// --- 5.4. Tarot Quạt Bài 9/7 Lá & Sân Khấu Lật 3D ---
-.util-tarot-fan {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 3.4rem 1.6rem 2.2rem;
-    min-height: 22rem;
-    width: 100%;
-    overflow: visible;
-
-    @include abs.screen(md) {
-        padding: 2.6rem 0.8rem 1.6rem;
-        min-height: 17.5rem;
-    }
-
-    &[data-deck-state="shuffling"] {
-        pointer-events: none;
-
-        .util-tarot-back {
-            animation: tarotShufflePulse 0.68s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-        }
-    }
-}
-
-.util-tarot-back {
-    --fan-angle: 0deg;
-    --fan-y: 0rem;
-    --shuffle-dx: 0px;
-
-    position: relative;
-    width: 10.6rem;
-    aspect-ratio: 7 / 12;
-    margin-left: -3.2rem;
-    border-radius: 1.1rem;
-    overflow: hidden;
-    background: transparent;
-    border: 2px solid transparent;
-    box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.22);
-    transform-origin: bottom center;
-    transform: translateY(var(--fan-y)) rotate(var(--fan-angle));
-    transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.3s ease,
-        border-color 0.25s ease;
-    cursor: pointer;
-
-    &:first-child {
-        margin-left: 0;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        pointer-events: none;
-    }
-
-    &[data-fan-idx="0"] {
-        --fan-angle: -20deg;
-        --fan-y: 2.6rem;
-        --shuffle-dx: 120px;
-        z-index: 1;
-    }
-    &[data-fan-idx="1"] {
-        --fan-angle: -15deg;
-        --fan-y: 1.5rem;
-        --shuffle-dx: 90px;
-        z-index: 2;
-    }
-    &[data-fan-idx="2"] {
-        --fan-angle: -10deg;
-        --fan-y: 0.7rem;
-        --shuffle-dx: 60px;
-        z-index: 3;
-    }
-    &[data-fan-idx="3"] {
-        --fan-angle: -5deg;
-        --fan-y: 0.2rem;
-        --shuffle-dx: 30px;
-        z-index: 4;
-    }
-    &[data-fan-idx="4"] {
-        --fan-angle: 0deg;
-        --fan-y: 0rem;
-        --shuffle-dx: 0px;
-        z-index: 5;
-    }
-    &[data-fan-idx="5"] {
-        --fan-angle: 5deg;
-        --fan-y: 0.2rem;
-        --shuffle-dx: -30px;
-        z-index: 4;
-    }
-    &[data-fan-idx="6"] {
-        --fan-angle: 10deg;
-        --fan-y: 0.7rem;
-        --shuffle-dx: -60px;
-        z-index: 3;
-    }
-    &[data-fan-idx="7"] {
-        --fan-angle: 15deg;
-        --fan-y: 1.5rem;
-        --shuffle-dx: -90px;
-        z-index: 2;
-    }
-    &[data-fan-idx="8"] {
-        --fan-angle: 20deg;
-        --fan-y: 2.6rem;
-        --shuffle-dx: -120px;
-        z-index: 1;
-    }
-
-    &:hover,
-    &:focus-visible {
-        z-index: 20;
-        border-color: #facc15;
-        transform: translateY(calc(var(--fan-y) - 2.2rem)) rotate(var(--fan-angle)) scale(1.08);
-        box-shadow:
-            0 1.4rem 3rem rgba(15, 23, 42, 0.35),
-            0 0 1.6rem rgba(250, 204, 21, 0.55);
-    }
-
-    &.is-picked {
-        z-index: 18;
-        border-color: var(--primary-color);
-        transform: translateY(calc(var(--fan-y) - 2.6rem)) rotate(var(--fan-angle)) scale(1.1);
-        box-shadow:
-            0 1.6rem 3.2rem var(--shadow-color),
-            0 0 1.8rem rgba(250, 204, 21, 0.65);
-    }
-
-    @include abs.screen(md) {
-        width: 8.6rem;
-        margin-left: -3rem;
-
-        &--edge {
-            display: none;
-        }
-
-        &[data-fan-idx="1"] {
-            margin-left: 0;
-        }
-    }
-
-    @include abs.screen(sm) {
-        width: 7.2rem;
-        margin-left: -2.6rem;
-    }
-}
-
-.util-tarot-bento {
-    display: grid;
-    grid-template-columns: 24rem 1fr;
-    align-items: start;
-    gap: 2.6rem;
-    padding: 2.2rem;
-    background-color: var(--bg-surface);
-    border: 1.5px solid var(--border-color);
-    border-radius: 2.4rem;
-
-    &.is-sliding .util-iching-cards-stack {
-        animation: tarotResultSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    @include abs.screen(md) {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        padding: 1.6rem;
-    }
-}
-
-.util-tarot-stage {
-    @extend %flexColumnCenterAll;
-    gap: 1.2rem;
-    width: 100%;
-    max-width: 24rem;
-    perspective: 120rem;
-    cursor: pointer;
-
-    &__inner {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 7 / 12;
-        transform-style: preserve-3d;
-        transition: transform 0.72s cubic-bezier(0.34, 1.32, 0.64, 1);
-        border-radius: 1.8rem;
-    }
-
-    &[data-flipped="true"] &__inner {
-        transform: rotateY(180deg);
-    }
-
-    &:hover &__inner,
-    &:focus-visible &__inner {
-        filter: drop-shadow(0 1.4rem 2.8rem var(--shadow-color));
-    }
-
-    &__face {
-        position: absolute;
-        inset: 0;
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        border-radius: 1.8rem;
         overflow: hidden;
-        border: 2px solid var(--primary-color);
-        box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-surface);
 
         img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            @extend %imgCover;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.35s ease;
         }
 
-        &--front {
-            transform: rotateY(180deg);
+        &.is-fallback-svg {
+            @extend %flexCenter;
+            padding: 3rem;
+
+            img {
+                width: 7.2rem;
+                height: 7.2rem;
+                object-fit: contain;
+                filter: var(--zodiac-filter);
+            }
         }
     }
 
-    &[data-orientation="reversed"] &__face--front img {
+    &:hover &__thumb img {
+        transform: scale(1.015);
+    }
+
+    &__body {
+        @extend %flexColumn;
+        gap: 0.45rem;
+        padding: 0.2rem 0.4rem 0.4rem;
+    }
+}
+
+.util-tr-card__meta {
+    @extend %flexBetween;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.util-tr-card__num {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.util-tr-card__suit,
+.util-hex-card__status-tag {
+    padding: 0.22rem 0.85rem;
+    border-radius: 99.9rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.util-hex-card__status-tag {
+    border-color: transparent;
+}
+
+.util-hex-card__title-row {
+    @extend %flexBetween;
+    align-items: baseline;
+    gap: 0.6rem;
+}
+
+.util-hex-card__title,
+.util-tr-card__title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--text-color);
+    @extend %textEllipsis;
+}
+
+.util-hex-card__hanzi {
+    @extend %flexItemFixed;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.util-hex-card__sub,
+.util-tr-card__en {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    @extend %textEllipsis;
+}
+
+// Ảnh lá bài 800x1200 (2:3) trong Singleton Modal
+.day-term-modal__visual .util-modal-card-img {
+    width: 16.4rem;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 1.4rem;
+    box-shadow: 0 1rem 2.4rem var(--shadow-color);
+
+    &.is-fallback-svg {
+        width: 9rem;
+        height: 9rem;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        box-shadow: none;
+        filter: var(--zodiac-filter);
+    }
+
+    &.is-reversed {
         transform: rotate(180deg);
-    }
-
-    &__hint {
-        @extend %flexColumnCenterAll;
-        gap: 0.3rem;
-        text-align: center;
-
-        span {
-            padding: 0.35rem 1.2rem;
-            border-radius: 99.9rem;
-            background-color: var(--body-bg);
-            border: 1px solid var(--border-color);
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--primary-color);
-        }
-
-        small {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
     }
 }
 

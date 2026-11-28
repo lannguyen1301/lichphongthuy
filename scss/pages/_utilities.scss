@@ -2394,6 +2394,18 @@
 }
 
 .util-iching-bento {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    // align-items: start;
+
+    @include abs.screen(xl) {
+        grid-template-columns: minmax(0, 4.4fr) minmax(0, 7.6fr);
+        align-items: start;
+    }
+
+    @include abs.screen(lg) {
+        grid-template-columns: 1fr;
+    }
+
     &[data-element="metal"] {
         --ic-accent: #eab308;
     }
@@ -2427,9 +2439,74 @@
     border-radius: 2rem;
 
     @include abs.screen(lg) {
-        max-width: 34rem;
+        position: static;
+        max-width: none;
         width: 100%;
-        margin: 0 auto;
+        align-items: center;
+        padding: 1.8rem;
+
+        .util-ic-poster,
+        .util-tarot-stage,
+        .util-tr-orient-switch,
+        .util-ic-poster-actions {
+            width: 100%;
+            max-width: 38rem;
+        }
+    }
+}
+
+.util-ic-poster-col {
+    position: sticky;
+    top: calc(var(--header-height, 8.4rem) + 5.6rem);
+    justify-content: flex-start;
+
+    @include abs.screen(lg) {
+        position: static;
+        max-width: none; // Trải đều 100% khung Bento trên Tablet, không bị bóp hẹp lọt thỏm
+        width: 100%;
+        align-items: center;
+        padding: 1.8rem;
+
+        .util-ic-poster,
+        .util-ic-poster-actions {
+            width: 100%;
+            max-width: 38rem;
+        }
+    }
+}
+
+.util-tarot-bento {
+    grid-template-columns: minmax(0, 4.2fr) minmax(0, 7.8fr);
+    // align-items: start;
+
+    @include abs.screen(xl) {
+        grid-template-columns: minmax(0, 4.4fr) minmax(0, 7.6fr);
+        align-items: start;
+    }
+
+    @include abs.screen(lg) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.util-tr-poster-col {
+    position: sticky;
+    top: 2rem;
+    justify-content: flex-start;
+
+    @include abs.screen(lg) {
+        position: static;
+        max-width: none; // Trải đều 100% khung Bento trên Tablet giống Kinh Dịch
+        width: 100%;
+        align-items: center;
+        padding: 1.8rem;
+
+        .util-tarot-stage,
+        .util-tr-orient-switch,
+        .util-ic-poster-actions {
+            width: 100%;
+            max-width: 38rem;
+        }
     }
 }
 
@@ -2573,6 +2650,7 @@
     overflow: hidden;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--ic-accent, var(--border-color));
+    border: none;
     box-shadow: 0 0.8rem 2rem var(--shadow-color);
     cursor: zoom-in;
     @extend %transInteractive;
@@ -2595,6 +2673,8 @@
     }
 
     &__zoom {
+        @extend %flexItemCenter;
+        gap: 0.55rem;
         position: absolute;
         right: 1rem;
         bottom: 1rem;
@@ -2619,6 +2699,25 @@
     &:focus-visible .util-ic-poster__zoom {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.util-ico {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+
+    &--search {
+        -webkit-mask-image: url("../icons/search.svg");
+        mask-image: url("../icons/search.svg");
     }
 }
 
@@ -2680,9 +2779,10 @@
 
 .util-ic-mid-bento {
     display: grid;
+    align-items: stretch;
+
     grid-template-columns: 1.35fr 1fr;
     gap: 1.2rem;
-    align-items: stretch;
 
     @include abs.screen(md) {
         grid-template-columns: 1fr;
@@ -2695,7 +2795,8 @@
 }
 
 .util-ic-structure-box {
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1.2rem;
 }
 
 .util-ic-structure-card__code {
@@ -2711,8 +2812,10 @@
 
 .util-ic-structure-card__lines {
     @extend %flexColumn;
-    gap: 0.5rem;
-    padding: 1rem 1.2rem;
+    flex: 1;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 1.2rem 1.4rem;
     background-color: var(--bg-surface);
     border: 1px solid var(--border-color);
     border-radius: 1.3rem;
@@ -2767,7 +2870,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
 
-    @include abs.screen(md) {
+    @include abs.screen(xl) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
@@ -2872,25 +2975,25 @@
 .util-iching-result__num,
 .util-hex-card__status-tag {
     &[data-status-code="dai_cat"] {
-        background-color: #059669;
+        background-color: #a3261d; // Đỏ son Đại Cát
         color: #ffffff;
     }
     &[data-status-code="cat"],
     &[data-status-code="cat_hanh"] {
-        background-color: #2563eb;
+        background-color: #1f6b4b; // Xanh ngọc đậm Cát
         color: #ffffff;
     }
     &[data-status-code="binh_hoa"] {
-        background-color: #d97706;
+        background-color: #966d2f; // Vàng nâu đồng Bình Hòa
         color: #ffffff;
     }
     &[data-status-code="tieu_hung"],
     &[data-status-code="than_trong"] {
-        background-color: #ea580c;
+        background-color: #7c482b; // Nâu đất trầm Tiểu Hung
         color: #ffffff;
     }
     &[data-status-code="hung"] {
-        background-color: #dc2626;
+        background-color: #333c47; // Xám than đậm Hung
         color: #ffffff;
     }
 }
@@ -3209,7 +3312,7 @@
     grid-template-columns: 1.25fr 1fr;
     gap: 1.2rem;
 
-    @include abs.screen(md) {
+    @include abs.screen(xl) {
         grid-template-columns: 1fr;
     }
 }
@@ -3413,6 +3516,80 @@
     @extend %textEllipsis;
 }
 
+// Tinh chỉnh riêng chân thẻ 2 hàng (Phương án 2B) cho Kinh Dịch
+.util-hex-card {
+    gap: 1.2rem;
+    padding: 1.2rem;
+
+    &__body {
+        @extend %flexColumn;
+        gap: 0.75rem;
+        padding: 0.3rem 0.4rem 0.5rem;
+    }
+
+    &__meta {
+        @extend %flexBetween;
+        align-items: center;
+        gap: 0.8rem;
+        min-width: 0;
+    }
+
+    &__meta-left {
+        @extend %flexItemCenter;
+        gap: 0.65rem;
+        min-width: 0;
+    }
+
+    &__trigrams {
+        font-size: 1.35rem;
+        font-weight: 600;
+        line-height: 1.3;
+        color: var(--text-muted);
+        @extend %textEllipsis;
+    }
+
+    &__title-row {
+        @extend %flexBetween;
+        align-items: baseline;
+        gap: 0.8rem;
+        min-width: 0;
+    }
+
+    &__title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        line-height: 1.3;
+        color: var(--text-color);
+        @extend %textEllipsis;
+    }
+
+    &__hanzi {
+        @extend %flexItemFixed;
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--text-muted);
+    }
+
+    .util-tr-card__num {
+        @extend %flexItemFixed;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .util-hex-card__status-tag {
+        @extend %flexItemFixed;
+        padding: 0.3rem 0.95rem;
+        border-radius: 99.9rem;
+        border-color: transparent;
+        font-size: 1.2rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+}
+
 // Ảnh lá bài 800x1200 (2:3) trong Singleton Modal
 .day-term-modal__visual .util-modal-card-img {
     width: 16.4rem;
@@ -3433,6 +3610,112 @@
 
     &.is-reversed {
         transform: rotate(180deg);
+    }
+}
+
+// Khóa phẳng đỉnh & đáy cột ảnh với cột nội dung trong Modal Xem nhanh
+.day-term-modal__body {
+    align-items: stretch;
+}
+
+.day-term-modal__visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    height: 100%;
+}
+
+// Lightbox phóng to ảnh lá bài thuần (tách biệt với Modal Xem nhanh)
+.util-card-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+    &.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    &__backdrop {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(15, 23, 42, 0.86);
+        backdrop-filter: blur(8px);
+    }
+
+    &__stage {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        max-height: 92vh;
+        transform: scale(0.95);
+        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &.is-open &__stage {
+        transform: scale(1);
+    }
+
+    &__img {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: min(92vw, 56rem);
+        max-height: 82vh;
+        object-fit: contain;
+        border-radius: 1.6rem;
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.55);
+
+        &.is-reversed {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__caption {
+        padding: 0.5rem 1.4rem;
+        border-radius: 99.9rem;
+        background-color: rgba(15, 23, 42, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #f8fafc;
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+
+    &__close {
+        position: absolute;
+        top: -1.4rem;
+        right: -1.4rem;
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 50%;
+        background-color: #ffffff;
+        color: #0f172a;
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1;
+        box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.35);
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
     }
 }
 

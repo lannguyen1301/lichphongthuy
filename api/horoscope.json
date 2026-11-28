@@ -420,11 +420,3 @@
         ]
     }
 ]
-// "daily" vẫn còn thiếu nội dung
-// code lấy nội dung daily theo ngày:
-// function getDailyMessage(sign, date = new Date()) {
-//   const dayIndex = Math.floor(
-//     Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000
-//   );
-//   return sign.daily[(dayIndex + sign.id) % sign.daily.length];
-// }

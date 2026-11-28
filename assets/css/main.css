@@ -4,7 +4,7 @@
    ========================================================================== */
 .div-related-card__info span, .util-header__title, .util-sound-bento__name, .util-cd-history-tile__info strong, .util-alarm-item__title, .util-hex-card__title,
 .util-tr-card__title, .util-hex-card__sub,
-.util-tr-card__en, .util-tarot-card__title, .util-tarot-card__sub, .bazi-picker__summary-text, .bazi-pillar-col__stage-pill, .detail-sidebar__item-name, .festival-countdown-bar__heading, .festival-countdown-bar__sub-line, .festival-hero__pill, .festival-hero__title, .festival-hero__lunar, .festival-hero__hours-val, .converter-modal__leap-text, .clock-world-card__city, .header__profile-name, .header__profile-card-name, .header__profile-card-email {
+.util-tr-card__en, .util-hex-card__trigrams, .util-tarot-card__title, .util-tarot-card__sub, .bazi-picker__summary-text, .bazi-pillar-col__stage-pill, .detail-sidebar__item-name, .festival-countdown-bar__heading, .festival-countdown-bar__sub-line, .festival-hero__pill, .festival-hero__title, .festival-hero__lunar, .festival-hero__hours-val, .converter-modal__leap-text, .clock-world-card__city, .header__profile-name, .header__profile-card-name, .header__profile-card-email {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -138,14 +138,14 @@
   align-items: center;
 }
 
-.profile-summary, .family-card__left, .family-card__head, .family-card__actions, .auth-form__input-wrap, .auth-form__check, .div-related-card__main, .util-header__brand-box, .util-header__brand-link, .util-header__actions, .util-sw-lap-row__left, .util-sw-lap-row__times, .util-alarm-item__right, .util-year-Step-bar, .util-ic-cast-strip__left, .util-ic-cast-strip__actions, .util-ic-history, .util-iching-catalog__tools, .util-history-controls, .util-inline-custom-pickers,
+.profile-summary, .family-card__left, .family-card__head, .family-card__actions, .auth-form__input-wrap, .auth-form__check, .div-related-card__main, .util-header__brand-box, .util-header__brand-link, .util-header__actions, .util-sw-lap-row__left, .util-sw-lap-row__times, .util-alarm-item__right, .util-year-Step-bar, .util-ic-poster__zoom, .util-ic-cast-strip__left, .util-ic-cast-strip__actions, .util-ic-history, .util-iching-catalog__tools, .util-hex-card__meta-left, .util-history-controls, .util-inline-custom-pickers,
 .util-inline-birth-picker, .util-num-hero__top, .util-bio-legend__item, .util-modal-media__controls, .bazi-master-card__hero, .bazi-wuxing-card__legend-item, .bazi-element-row__name, .bazi-element-row__meta, .bazi-remedy-box__title-wrap, .bazi-luck-card__mid, .detail-page__top-left, .detail-page__top-right, .detail-page__badges, .detail-hero__action-row, .detail-stat-card, .detail-gallery__caption, .detail-sidebar__item, .year-cal-app__side, .day-page__center-group, .day-sun-table__th, .day-sun-table__time, .day-hour-row__col-napam, .day-hour-row__dao-sub, .day-hour-row__col-bagua, .festival-hero__date-row, .festival-controls__year-toolbar, .converter-modal__summary-main, .converter-modal__stat-card, .converter-modal__hours-title-group, .converter-modal__hour-top, .month-cal__controls, .month-cal__dots, .week-cal__toolbar, .week-cal__toolbar-center, .week-cal__hero-date, .clock-energy__title-wrap, .clock-pillar-card__body, .clock-hero__meta-col, .fengshui-hours__title, .fengshui-card__head, .bloc-card__event-pills, .bloc-card__caption-btn, .header__datetime-wrapper, .header__date-group,
 .header__time-group, .footer__elements, .footer__input-group, .footer__social-list, .header__left, .header__right, .header__auth, .header__auth-guest, .header__profile-card {
   display: flex;
   align-items: center;
 }
 
-.auth-hero__foot, .family-card, .auth-form__label-row, .div-related-card__head, .util-header__brand-row, .util-card__head, .util-sw-hero__top, .util-sw-stat__head, .util-sw-laps__head, .util-sw-lap-row__top, .util-cd-hero__top, .util-cd-presets-card__head, .util-preset-tile__head, .util-sound-bento__row, .util-cd-history-tile, .util-alarm-ring-banner, .util-al-hero__top, .util-al-composer__top, .util-al-composer__footer, .util-alarm-item__head, .util-alarm-item__foot, .util-bento-item__top, .util-bento-item__foot, .util-div-detail-card__head, .util-ic-cast-strip__row, .util-ic-filter-bar, .util-tr-card__meta, .util-hex-card__title-row, .util-history-card__top, .util-date-result-banner, .util-bio-stat-card__head, .bazi-card__head, .bazi-toolbar__head, .bazi-picker__summary, .bazi-picker__year-nav, .bazi-master-card__badges, .bazi-master-card__footer, .bazi-pillar-col__stem-box, .bazi-pillar-col__branch-box, .bazi-element-row__top, .bazi-tengods-summary__head, .bazi-god-box__top, .bazi-remedy-box__head, .bazi-luck-card__top, .bazi-luck-card__foot, .detail-page__top-bar, .detail-article__head, .detail-gallery__head, .detail-sidebar__head, .day-page__toolbar, .day-bento-card__head, .day-dir-box__top, .day-solarterm-box__top, .day-lucdieu-cell__head, .day-sun-summary__pill, .day-hourly-section__header, .day-term-modal__header, .day-term-modal__footer, .iching-card__top-meta, .iching-pair-box__toggle, .festival-picker__summary, .festival-picker__option, .festival-hero__footer, .festival-controls__head, .festival-controls__filter-row, .festival-bento-box__bar, .festival-bento-box__subnote, .festival-tile__head, .festival-tile__foot, .converter-modal__header, .converter-modal__summary, .converter-modal__year-nav, .converter-modal__date-top, .converter-modal__hours-head, .converter-modal__footer, .month-cal__toolbar, .week-cal__header, .week-cal__hero-badges, .week-cal__hero-footer, .week-cal__card-head, .week-cal__footer, .clock-zodiac-section__header, .clock-zodiac-card__top, .clock-zodiac-card__bottom, .clock-energy__head, .clock-pillar-card__head, .clock-pillar-card__foot, .clock-hero__header, .clock-hero__loc-option, .clock-world-card__top, .clock-world-card__bottom, .fengshui-actions__header, .bloc-card__top, .footer__brand-head, .footer__contact, .footer__social, .footer__bottom-bar, .header__container {
+.auth-hero__foot, .family-card, .auth-form__label-row, .div-related-card__head, .util-header__brand-row, .util-card__head, .util-sw-hero__top, .util-sw-stat__head, .util-sw-laps__head, .util-sw-lap-row__top, .util-cd-hero__top, .util-cd-presets-card__head, .util-preset-tile__head, .util-sound-bento__row, .util-cd-history-tile, .util-alarm-ring-banner, .util-al-hero__top, .util-al-composer__top, .util-al-composer__footer, .util-alarm-item__head, .util-alarm-item__foot, .util-bento-item__top, .util-bento-item__foot, .util-div-detail-card__head, .util-ic-cast-strip__row, .util-ic-filter-bar, .util-tr-card__meta, .util-hex-card__title-row, .util-hex-card__meta, .util-history-card__top, .util-date-result-banner, .util-bio-stat-card__head, .bazi-card__head, .bazi-toolbar__head, .bazi-picker__summary, .bazi-picker__year-nav, .bazi-master-card__badges, .bazi-master-card__footer, .bazi-pillar-col__stem-box, .bazi-pillar-col__branch-box, .bazi-element-row__top, .bazi-tengods-summary__head, .bazi-god-box__top, .bazi-remedy-box__head, .bazi-luck-card__top, .bazi-luck-card__foot, .detail-page__top-bar, .detail-article__head, .detail-gallery__head, .detail-sidebar__head, .day-page__toolbar, .day-bento-card__head, .day-dir-box__top, .day-solarterm-box__top, .day-lucdieu-cell__head, .day-sun-summary__pill, .day-hourly-section__header, .day-term-modal__header, .day-term-modal__footer, .iching-card__top-meta, .iching-pair-box__toggle, .festival-picker__summary, .festival-picker__option, .festival-hero__footer, .festival-controls__head, .festival-controls__filter-row, .festival-bento-box__bar, .festival-bento-box__subnote, .festival-tile__head, .festival-tile__foot, .converter-modal__header, .converter-modal__summary, .converter-modal__year-nav, .converter-modal__date-top, .converter-modal__hours-head, .converter-modal__footer, .month-cal__toolbar, .week-cal__header, .week-cal__hero-badges, .week-cal__hero-footer, .week-cal__card-head, .week-cal__footer, .clock-zodiac-section__header, .clock-zodiac-card__top, .clock-zodiac-card__bottom, .clock-energy__head, .clock-pillar-card__head, .clock-pillar-card__foot, .clock-hero__header, .clock-hero__loc-option, .clock-world-card__top, .clock-world-card__bottom, .fengshui-actions__header, .bloc-card__top, .footer__brand-head, .footer__contact, .footer__social, .footer__bottom-bar, .header__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -171,7 +171,7 @@
   min-width: 0;
 }
 
-.auth-hero__perk-icon, .profile-summary__avatar, .family-card__zodiac, .auth-form__check input[type=checkbox], .div-related-card__svg-wrap, .div-sidebar-item__svg, .div-sidebar-item__tarot-thumb, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__item, .util-primary-nav__icon-box, .util-live-dot, .util-cd-history-tile__replay, .util-bento-item__icon-box, .util-tarot-back, .util-hex-card__hanzi, .util-num-hero__circle, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-dot, .bazi-picker__arrow, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-wuxing-card__dot, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-remedy-box__tag, .bazi-luck-card__zodiac-box, .detail-stat-card__icon-box, .detail-gallery__caption-badge, .detail-sidebar__date-box, .day-page__hours-icon, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-lucdieu-cell__icon, .day-sun-table__th-icon, .day-sun-table__time-icon, .day-hourly-section__dao-icon, .day-hour-row__napam-icon-box, .day-hour-row__dao-icon, .day-hour-row__bagua-ring, .wuxing-mini, .festival-cal__dot, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-picker__summary-date, .festival-picker__arrow, .festival-picker__opt-date, .converter-modal__checkbox, .converter-modal__stat-icon-box, .converter-modal__hour-dot, .week-cal__badge-dot, .clock-pillar-card__icon-box, .fengshui-hours__dot, .bloc-card__event-dot, .bloc-card__caption-badge, .header__logo, .header__widget, .header__widget-icon, .header__profile-avatar, .header__profile-arrow, .header__profile-card-avatar, .header__profile-link .icon,
+.auth-hero__perk-icon, .profile-summary__avatar, .family-card__zodiac, .auth-form__check input[type=checkbox], .div-related-card__svg-wrap, .div-sidebar-item__svg, .div-sidebar-item__tarot-thumb, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__item, .util-primary-nav__icon-box, .util-live-dot, .util-cd-history-tile__replay, .util-bento-item__icon-box, .util-tarot-back, .util-hex-card__hanzi, .util-hex-card .util-tr-card__num, .util-hex-card .util-hex-card__status-tag, .util-num-hero__circle, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-dot, .bazi-picker__arrow, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-wuxing-card__dot, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-remedy-box__tag, .bazi-luck-card__zodiac-box, .detail-stat-card__icon-box, .detail-gallery__caption-badge, .detail-sidebar__date-box, .day-page__hours-icon, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-lucdieu-cell__icon, .day-sun-table__th-icon, .day-sun-table__time-icon, .day-hourly-section__dao-icon, .day-hour-row__napam-icon-box, .day-hour-row__dao-icon, .day-hour-row__bagua-ring, .wuxing-mini, .festival-cal__dot, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-picker__summary-date, .festival-picker__arrow, .festival-picker__opt-date, .converter-modal__checkbox, .converter-modal__stat-icon-box, .converter-modal__hour-dot, .week-cal__badge-dot, .clock-pillar-card__icon-box, .fengshui-hours__dot, .bloc-card__event-dot, .bloc-card__caption-badge, .header__logo, .header__widget, .header__widget-icon, .header__profile-avatar, .header__profile-arrow, .header__profile-card-avatar, .header__profile-link .icon,
 .header__profile-link svg {
   flex: 0 0 auto;
 }
@@ -12413,6 +12413,20 @@ body[data-page=festival] .header,
   }
 }
 
+.util-iching-bento {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+}
+@media (max-width: 1199.98px) {
+  .util-iching-bento {
+    grid-template-columns: minmax(0, 4.4fr) minmax(0, 7.6fr);
+    align-items: start;
+  }
+}
+@media (max-width: 991.98px) {
+  .util-iching-bento {
+    grid-template-columns: 1fr;
+  }
+}
 .util-iching-bento[data-element=metal] {
   --ic-accent: #eab308;
 }
@@ -12444,9 +12458,78 @@ body[data-page=festival] .header,
 @media (max-width: 991.98px) {
   .util-ic-poster-col,
   .util-tr-poster-col {
-    max-width: 34rem;
+    position: static;
+    max-width: none;
     width: 100%;
-    margin: 0 auto;
+    align-items: center;
+    padding: 1.8rem;
+  }
+  .util-ic-poster-col .util-ic-poster,
+  .util-ic-poster-col .util-tarot-stage,
+  .util-ic-poster-col .util-tr-orient-switch,
+  .util-ic-poster-col .util-ic-poster-actions,
+  .util-tr-poster-col .util-ic-poster,
+  .util-tr-poster-col .util-tarot-stage,
+  .util-tr-poster-col .util-tr-orient-switch,
+  .util-tr-poster-col .util-ic-poster-actions {
+    width: 100%;
+    max-width: 38rem;
+  }
+}
+
+.util-ic-poster-col {
+  position: sticky;
+  top: calc(var(--header-height, 8.4rem) + 5.6rem);
+  justify-content: flex-start;
+}
+@media (max-width: 991.98px) {
+  .util-ic-poster-col {
+    position: static;
+    max-width: none;
+    width: 100%;
+    align-items: center;
+    padding: 1.8rem;
+  }
+  .util-ic-poster-col .util-ic-poster,
+  .util-ic-poster-col .util-ic-poster-actions {
+    width: 100%;
+    max-width: 38rem;
+  }
+}
+
+.util-tarot-bento {
+  grid-template-columns: minmax(0, 4.2fr) minmax(0, 7.8fr);
+}
+@media (max-width: 1199.98px) {
+  .util-tarot-bento {
+    grid-template-columns: minmax(0, 4.4fr) minmax(0, 7.6fr);
+    align-items: start;
+  }
+}
+@media (max-width: 991.98px) {
+  .util-tarot-bento {
+    grid-template-columns: 1fr;
+  }
+}
+
+.util-tr-poster-col {
+  position: sticky;
+  top: 2rem;
+  justify-content: flex-start;
+}
+@media (max-width: 991.98px) {
+  .util-tr-poster-col {
+    position: static;
+    max-width: none;
+    width: 100%;
+    align-items: center;
+    padding: 1.8rem;
+  }
+  .util-tr-poster-col .util-tarot-stage,
+  .util-tr-poster-col .util-tr-orient-switch,
+  .util-tr-poster-col .util-ic-poster-actions {
+    width: 100%;
+    max-width: 38rem;
   }
 }
 
@@ -12567,6 +12650,7 @@ body[data-page=festival] .header,
   overflow: hidden;
   background-color: var(--bg-surface);
   border: 1.5px solid var(--ic-accent, var(--border-color));
+  border: none;
   box-shadow: 0 0.8rem 2rem var(--shadow-color);
   cursor: zoom-in;
 }
@@ -12583,6 +12667,7 @@ body[data-page=festival] .header,
   filter: var(--zodiac-filter);
 }
 .util-ic-poster__zoom {
+  gap: 0.55rem;
   position: absolute;
   right: 1rem;
   bottom: 1rem;
@@ -12603,6 +12688,24 @@ body[data-page=festival] .header,
 .util-ic-poster:hover .util-ic-poster__zoom, .util-ic-poster:focus-visible .util-ic-poster__zoom {
   opacity: 1;
   transform: translateY(0);
+}
+
+.util-ico {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.util-ico--search {
+  -webkit-mask-image: url("../icons/search.svg");
+  mask-image: url("../icons/search.svg");
 }
 
 .util-ic-cast-strip {
@@ -12650,9 +12753,9 @@ body[data-page=festival] .header,
 
 .util-ic-mid-bento {
   display: grid;
+  align-items: stretch;
   grid-template-columns: 1.35fr 1fr;
   gap: 1.2rem;
-  align-items: stretch;
 }
 @media (max-width: 767.98px) {
   .util-ic-mid-bento {
@@ -12666,7 +12769,8 @@ body[data-page=festival] .header,
 }
 
 .util-ic-structure-box {
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 1.2rem;
 }
 
 .util-ic-structure-card__code {
@@ -12681,8 +12785,10 @@ body[data-page=festival] .header,
 }
 
 .util-ic-structure-card__lines {
-  gap: 0.5rem;
-  padding: 1rem 1.2rem;
+  flex: 1;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 1.2rem 1.4rem;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: 1.3rem;
@@ -12730,7 +12836,7 @@ body[data-page=festival] .header,
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
 }
-@media (max-width: 767.98px) {
+@media (max-width: 1199.98px) {
   .util-ic-stats-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -12827,29 +12933,29 @@ body[data-page=festival] .header,
 
 .util-iching-result__num[data-status-code=dai_cat],
 .util-hex-card__status-tag[data-status-code=dai_cat] {
-  background-color: #059669;
+  background-color: #a3261d;
   color: #ffffff;
 }
 .util-iching-result__num[data-status-code=cat], .util-iching-result__num[data-status-code=cat_hanh],
 .util-hex-card__status-tag[data-status-code=cat],
 .util-hex-card__status-tag[data-status-code=cat_hanh] {
-  background-color: #2563eb;
+  background-color: #1f6b4b;
   color: #ffffff;
 }
 .util-iching-result__num[data-status-code=binh_hoa],
 .util-hex-card__status-tag[data-status-code=binh_hoa] {
-  background-color: #d97706;
+  background-color: #966d2f;
   color: #ffffff;
 }
 .util-iching-result__num[data-status-code=tieu_hung], .util-iching-result__num[data-status-code=than_trong],
 .util-hex-card__status-tag[data-status-code=tieu_hung],
 .util-hex-card__status-tag[data-status-code=than_trong] {
-  background-color: #ea580c;
+  background-color: #7c482b;
   color: #ffffff;
 }
 .util-iching-result__num[data-status-code=hung],
 .util-hex-card__status-tag[data-status-code=hung] {
-  background-color: #dc2626;
+  background-color: #333c47;
   color: #ffffff;
 }
 
@@ -13130,7 +13236,7 @@ body[data-page=festival] .header,
   grid-template-columns: 1.25fr 1fr;
   gap: 1.2rem;
 }
-@media (max-width: 767.98px) {
+@media (max-width: 1199.98px) {
   .util-tr-secondary-grid {
     grid-template-columns: 1fr;
   }
@@ -13321,6 +13427,61 @@ body[data-page=festival] .header,
   color: var(--text-muted);
 }
 
+.util-hex-card {
+  gap: 1.2rem;
+  padding: 1.2rem;
+}
+.util-hex-card__body {
+  gap: 0.75rem;
+  padding: 0.3rem 0.4rem 0.5rem;
+}
+.util-hex-card__meta {
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+}
+.util-hex-card__meta-left {
+  gap: 0.65rem;
+  min-width: 0;
+}
+.util-hex-card__trigrams {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+.util-hex-card__title-row {
+  align-items: baseline;
+  gap: 0.8rem;
+  min-width: 0;
+}
+.util-hex-card__title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+.util-hex-card__hanzi {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-muted);
+}
+.util-hex-card .util-tr-card__num {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-color);
+  font-variant-numeric: tabular-nums;
+}
+.util-hex-card .util-hex-card__status-tag {
+  padding: 0.3rem 0.95rem;
+  border-radius: 99.9rem;
+  border-color: transparent;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
 .day-term-modal__visual .util-modal-card-img {
   width: 16.4rem;
   height: auto;
@@ -13339,6 +13500,99 @@ body[data-page=festival] .header,
 }
 .day-term-modal__visual .util-modal-card-img.is-reversed {
   transform: rotate(180deg);
+}
+
+.day-term-modal__body {
+  align-items: stretch;
+}
+
+.day-term-modal__visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 100%;
+}
+
+.util-card-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.util-card-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.util-card-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.86);
+  backdrop-filter: blur(8px);
+}
+.util-card-lightbox__stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  max-height: 92vh;
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.util-card-lightbox.is-open .util-card-lightbox__stage {
+  transform: scale(1);
+}
+.util-card-lightbox__img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(92vw, 56rem);
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 1.6rem;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.55);
+}
+.util-card-lightbox__img.is-reversed {
+  transform: rotate(180deg);
+}
+.util-card-lightbox__caption {
+  padding: 0.5rem 1.4rem;
+  border-radius: 99.9rem;
+  background-color: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f8fafc;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.util-card-lightbox__close {
+  position: absolute;
+  top: -1.4rem;
+  right: -1.4rem;
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+.util-card-lightbox__close:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
 }
 
 .util-history-controls {

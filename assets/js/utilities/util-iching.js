@@ -174,6 +174,53 @@
         });
     };
 
+    const openCardLightbox = (hex) => {
+        if (!hex) return;
+        let lightbox = document.getElementById("util-card-lightbox");
+        if (!lightbox) {
+            lightbox = document.createElement("div");
+            lightbox.id = "util-card-lightbox";
+            lightbox.className = "util-card-lightbox";
+            lightbox.setAttribute("role", "dialog");
+            lightbox.setAttribute("aria-modal", "true");
+            lightbox.innerHTML = `
+                <div class="util-card-lightbox__backdrop" data-lightbox-close></div>
+                <div class="util-card-lightbox__stage">
+                    <button type="button" class="util-card-lightbox__close" data-lightbox-close aria-label="Đóng ảnh phóng to">&times;</button>
+                    <img class="util-card-lightbox__img" alt="" width="${CARD_IMG_WIDTH}" height="${CARD_IMG_HEIGHT}" />
+                    <p class="util-card-lightbox__caption"></p>
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+
+            lightbox.addEventListener("click", (e) => {
+                if (e.target.closest("[data-lightbox-close]")) {
+                    lightbox.classList.remove("is-open");
+                    document.body.style.overflow = "";
+                }
+            });
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+                    lightbox.classList.remove("is-open");
+                    document.body.style.overflow = "";
+                }
+            });
+        }
+
+        const img = lightbox.querySelector(".util-card-lightbox__img");
+        const cap = lightbox.querySelector(".util-card-lightbox__caption");
+        if (img) {
+            img.src = hex.cardImgUrl;
+            img.alt = hex.cardAlt;
+        }
+        if (cap) {
+            cap.textContent = `Quẻ #${hex.numberStr} • ${hex.fullName}${hex.hanziFull ? ` (${hex.hanziFull})` : ""}`;
+        }
+
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+    };
+
     const openIChingModal = (hex) => {
         if (!hex) return;
         const fallbackSvg = getFallbackSvgUrl(hex);
@@ -263,14 +310,8 @@
         }
 
         setText("ic-line-code", hex.lineCode);
-        setText(
-            "ic-upper-trigram",
-            `${hex.upper.symbol} ${hex.upper.name}${hex.upper.nature ? ` • ${hex.upper.nature}` : ""}`,
-        );
-        setText(
-            "ic-lower-trigram",
-            `${hex.lower.symbol} ${hex.lower.name}${hex.lower.nature ? ` • ${hex.lower.nature}` : ""}`,
-        );
+        setText("ic-upper-trigram", `${hex.upper.symbol} ${hex.upper.name}`.trim());
+        setText("ic-lower-trigram", `${hex.lower.symbol} ${hex.lower.name}`.trim());
         setText("ic-hex-element-label", hex.elementLabel);
 
         const yangCount = hex.lines.filter((b) => b === 1).length;
@@ -428,8 +469,13 @@
                         </div>
 
                         <div class="util-hex-card__body">
-                            <div class="util-tr-card__meta">
-                                <span class="util-tr-card__num">#${h.numberStr}</span>
+                            <div class="util-hex-card__meta">
+                                <div class="util-hex-card__meta-left">
+                                    <span class="util-tr-card__num">#${h.numberStr}</span>
+                                    <span class="util-hex-card__trigrams">
+                                        ${h.upper.symbol} ${escapeHtml(h.upper.name)} • ${h.lower.symbol} ${escapeHtml(h.lower.name)}
+                                    </span>
+                                </div>
                                 <span class="util-hex-card__status-tag" data-status-code="${h.statusCode}">
                                     ${escapeHtml(h.statusLabel)}
                                 </span>
@@ -438,9 +484,6 @@
                                 <strong class="util-hex-card__title">${escapeHtml(h.fullName)}</strong>
                                 ${h.hanziShort ? `<span class="util-hex-card__hanzi" lang="zh-Hant">${escapeHtml(h.hanziShort)}</span>` : ""}
                             </div>
-                            <span class="util-hex-card__sub">
-                                ${h.upper.symbol} ${escapeHtml(h.upper.name)} • ${h.lower.symbol} ${escapeHtml(h.lower.name)}
-                            </span>
                         </div>
                     </a>
                 `;
@@ -460,6 +503,16 @@
                 renderActiveHexagram(hex);
                 openIChingModal(hex);
             }
+            return true;
+        }
+
+        if (e.target.closest("[data-ic-zoom='current']")) {
+            if (currentHex) openCardLightbox(currentHex);
+            return true;
+        }
+
+        if (e.target.closest("[data-ic-modal='current']")) {
+            if (currentHex) openIChingModal(currentHex);
             return true;
         }
 
@@ -495,6 +548,13 @@
         document.getElementById("ic-jump-catalog-btn")?.addEventListener("click", (e) => {
             e.preventDefault();
             document.getElementById("ic-catalog-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        document.getElementById("ic-hex-stage")?.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                if (currentHex) openCardLightbox(currentHex);
+            }
         });
 
         document.getElementById("ic-history-list")?.addEventListener("click", (e) => {
