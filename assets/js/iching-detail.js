@@ -1,13 +1,23 @@
 // assets/js/iching-detail.js
-// Nạp song song ./api/iching.json và ./api/iching-card.json, ghép theo số quẻ (1-64),
-// hiển thị Thẻ bài khắc gỗ 3:4, Lightbox phóng to, 3 Quẻ biến & Sidebar lọc 64 quẻ chuẩn a11y
+// Đồng bộ 100% schema mới ./api/iching.json & ./api/iching-cards.json + ảnh thẻ 800x1200 (2:3)
 (() => {
+    const CARD_IMG_EXT = "png"; // Sau này chuyển sang WebP chỉ đổi "png" -> "webp"
+    const ICHING_ICON_DIR = "./assets/icons/iching";
+
+    const ELEMENT_LABEL_VN = {
+        metal: "Hành Kim",
+        wood: "Hành Mộc",
+        water: "Hành Thủy",
+        fire: "Hành Hỏa",
+        earth: "Hành Thổ",
+    };
+
     const pad = (n) => String(n).padStart(2, "0");
 
-    let allHexagrams = [];
-    let cardMapByNum = new Map();
+    let mergedHexagrams = [];
     let activeHex = null;
     let activeFilter = "all";
+    let lastFocusedBeforeLightbox = null;
 
     const setText = (id, text) => {
         const el = document.getElementById(id);
@@ -22,34 +32,113 @@
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#39;");
 
-    const normalizeAssetPath = (rawPath) => {
-        if (!rawPath) return "";
-        return rawPath.startsWith("/") ? `.${rawPath}` : rawPath;
+    const resolveCardImageUrl = (basePath, ext = CARD_IMG_EXT) => {
+        if (!basePath) return "";
+        const normalized = String(basePath).trim().startsWith("/")
+            ? `.${String(basePath).trim()}`
+            : String(basePath).trim();
+        if (/\.svg$/i.test(normalized)) return normalized;
+        const withoutExt = normalized.replace(/\.(png|webp|jpe?g)$/i, "");
+        return `${withoutExt}.${ext}`;
     };
 
-    // Mở & Đóng Lightbox phóng to thẻ bài
+    const getFallbackSvgUrl = (hex) => `${ICHING_ICON_DIR}/${hex.iconSlug}.svg`;
+    const getDetailHref = (hex) => `./iching-detail.html?slug=${encodeURIComponent(hex.cardSlug)}&num=${hex.id}`;
+
+    const mergeIchingDatasets = (baseList, cardList) => {
+        const cardById = new Map((Array.isArray(cardList) ? cardList : []).map((c) => [Number(c.id), c]));
+
+        return (Array.isArray(baseList) ? baseList : []).map((base) => {
+            const id = Number(base.id || base.number);
+            const card = cardById.get(id) || null;
+
+            const upper = card?.trigrams?.upper || base.trigrams?.upper || {};
+            const lower = card?.trigrams?.lower || base.trigrams?.lower || {};
+            const element = card?.element || base.element || "metal";
+            const statusCode = card?.status?.code || base.fortune?.level || "binh_hoa";
+            const statusLabel = card?.status?.label || base.fortune?.label || "Bình Hòa";
+            const hasCardArt = Boolean(card?.artwork?.image_base);
+
+            const cardImgUrl = hasCardArt
+                ? resolveCardImageUrl(card.artwork.image_base)
+                : `${ICHING_ICON_DIR}/${base.slug}.svg`;
+
+            return {
+                id,
+                numberStr: pad(id),
+                iconSlug: base.slug || pad(id),
+                cardSlug: card?.slug || base.slug || pad(id),
+                unicode: base.unicode || "",
+                element,
+                elementLabel: ELEMENT_LABEL_VN[element] || "Ngũ Hành",
+                shortName: base.name?.short || card?.name || `Quẻ ${id}`,
+                fullName: card?.name || base.name?.full || `Quẻ ${id}`,
+                alias: card?.alias || base.name?.alias || "",
+                hanziShort: card?.chinese?.short || base.name?.hanzi || "",
+                hanziFull: card?.chinese?.full || card?.chinese?.short || base.name?.hanzi || "",
+                lines: Array.isArray(base.lines)
+                    ? base.lines
+                    : String(card?.line_code || "111111")
+                          .split("")
+                          .map(Number),
+                lineCode: card?.line_code || base.code || "111111",
+                upper: {
+                    name: upper.name || "",
+                    nature: upper.nature || "",
+                    symbol: upper.symbol || "",
+                    code: upper.code || "",
+                },
+                lower: {
+                    name: lower.name || "",
+                    nature: lower.nature || "",
+                    symbol: lower.symbol || "",
+                    code: lower.code || "",
+                },
+                statusCode,
+                statusLabel,
+                hexagramImages: Array.isArray(card?.hexagram_images) ? card.hexagram_images : [],
+                keywords: Array.isArray(card?.keywords) && card.keywords.length ? card.keywords : base.keywords || [],
+                coupletOpening: card?.couplet?.opening || "",
+                coupletClosing: card?.couplet?.closing || "",
+                judgment: base.meaning?.judgment || "",
+                symbolism: base.meaning?.symbolism || "",
+                advice: card?.advice || base.meaning?.advice || "",
+                hasCardArt,
+                cardImgUrl,
+                cardAlt:
+                    card?.artwork?.alt || `Thẻ bài Kinh Dịch Quẻ ${pad(id)}: ${card?.name || base.name?.full || ""}`,
+                focalObject: card?.artwork?.focal_object || "",
+            };
+        });
+    };
+
     const openLightbox = (imgSrc, captionText) => {
         const lightbox = document.getElementById("detail-lightbox");
         const imgEl = document.getElementById("detail-lightbox-img");
         const capEl = document.getElementById("detail-lightbox-caption");
         if (!lightbox || !imgEl) return;
 
+        lastFocusedBeforeLightbox = document.activeElement;
         imgEl.src = imgSrc;
         imgEl.alt = captionText || "Thẻ bài Kinh Dịch";
         if (capEl) capEl.textContent = captionText || "";
 
         lightbox.hidden = false;
         document.body.style.overflow = "hidden";
+        document.getElementById("detail-lightbox-close")?.focus();
     };
 
     const closeLightbox = () => {
         const lightbox = document.getElementById("detail-lightbox");
-        if (!lightbox) return;
+        if (!lightbox || lightbox.hidden) return;
         lightbox.hidden = true;
         document.body.style.overflow = "";
+        if (lastFocusedBeforeLightbox && typeof lastFocusedBeforeLightbox.focus === "function") {
+            lastFocusedBeforeLightbox.focus();
+            lastFocusedBeforeLightbox = null;
+        }
     };
 
-    // Vẽ 6 hào từ trên xuống dưới (index 5 -> 0)
     const renderHexLines = (lines) => {
         const stackEl = document.getElementById("icd-lines-stack");
         if (!stackEl || !Array.isArray(lines)) return;
@@ -64,12 +153,11 @@
             .join("");
     };
 
-    // Tính 3 Quẻ biến (Hỗ Quái, Thác Quái, Tống Quái) từ mảng 6 hào [h1..h6]
     const renderRelatedHexagrams = (hex) => {
         const gridEl = document.getElementById("icd-related-grid");
         if (!gridEl || !Array.isArray(hex.lines) || hex.lines.length !== 6) return;
 
-        const findByLines = (arr) => allHexagrams.find((h) => h.lines.join("") === arr.join(""));
+        const findByLines = (arr) => mergedHexagrams.find((h) => h.lines.join("") === arr.join(""));
 
         const hoLines = [hex.lines[1], hex.lines[2], hex.lines[3], hex.lines[2], hex.lines[3], hex.lines[4]];
         const thacLines = hex.lines.map((b) => (b ? 0 : 1));
@@ -83,43 +171,77 @@
 
         gridEl.innerHTML = variants
             .map(({ role, hex: target }) => {
-                const iconSrc = `./assets/icons/iching/${target.slug}.svg`;
+                const fallbackSvg = getFallbackSvgUrl(target);
                 return `
                     <a
-                        href="./iching-detail.html?slug=${encodeURIComponent(target.slug)}"
+                        href="${getDetailHref(target)}"
                         class="util-hex-card"
-                        title="Xem chi tiết ${role}: Quẻ ${target.num} ${escapeHtml(target.name)}"
+                        data-element="${target.element}"
+                        data-status-code="${target.statusCode}"
+                        title="Xem chi tiết ${role}: Quẻ #${target.numberStr} ${escapeHtml(target.fullName)}"
                     >
-                        <div class="util-hex-card__top">
-                            <span class="util-hex-card__svg" aria-hidden="true">
-                                <img src="${iconSrc}" alt="" loading="lazy" />
-                            </span>
-                            <span class="util-hex-card__badge">${role}</span>
+                        <div class="util-hex-card__thumb ${target.hasCardArt ? "" : "is-fallback-svg"}">
+                            <img
+                                src="${target.cardImgUrl}"
+                                alt="${escapeHtml(target.cardAlt)}"
+                                width="800"
+                                height="1200"
+                                loading="lazy"
+                                decoding="async"
+                                onerror="this.onerror=null;this.src='${fallbackSvg}';this.closest('.util-hex-card__thumb')?.classList.add('is-fallback-svg');"
+                            />
                         </div>
-                        <strong class="util-hex-card__title">Quẻ ${target.num}: ${escapeHtml(target.short)}</strong>
-                        <span class="util-hex-card__sub">${escapeHtml(target.name)}</span>
-                        <p class="util-hex-card__desc">${escapeHtml(target.advice)}</p>
+                        <div class="util-hex-card__body">
+                            <div class="util-tr-card__meta">
+                                <span class="util-tr-card__num">${role}</span>
+                                <span class="util-hex-card__status-tag" data-status-code="${target.statusCode}">
+                                    ${escapeHtml(target.statusLabel)}
+                                </span>
+                            </div>
+                            <div class="util-hex-card__title-row">
+                                <strong class="util-hex-card__title">#${target.numberStr} ${escapeHtml(target.fullName)}</strong>
+                                ${target.hanziShort ? `<span class="util-hex-card__hanzi" lang="zh-Hant">${escapeHtml(target.hanziShort)}</span>` : ""}
+                            </div>
+                            <span class="util-hex-card__sub">${escapeHtml(target.advice)}</span>
+                        </div>
                     </a>
                 `;
             })
             .join("");
     };
 
-    // Render Sidebar 64 Quẻ + Lọc & Tìm kiếm
+    const matchesStatusFilter = (hex, filterVal) => {
+        if (!filterVal || filterVal === "all") return true;
+        if (hex.statusCode === filterVal || hex.statusLabel === filterVal) return true;
+        // Tương thích ngược với các nút lọc cũ trên iching-detail.html nếu chưa đổi sang mã statusCode
+        if (filterVal === "Cát Hanh") return hex.statusCode === "cat";
+        if (filterVal === "Thận Trọng") return hex.statusCode === "tieu_hung" || hex.statusCode === "hung";
+        return false;
+    };
+
     const renderSidebarList = () => {
         const listEl = document.getElementById("icd-sidebar-list");
         const countEl = document.getElementById("icd-sidebar-count");
         const searchVal = (document.getElementById("icd-sidebar-search")?.value || "").trim().toLowerCase();
         if (!listEl) return;
 
-        const filtered = allHexagrams.filter((h) => {
-            const card = cardMapByNum.get(h.num);
-            const displayFortune = card?.trang_thai || h.fortune;
-
-            if (activeFilter !== "all" && displayFortune !== activeFilter) return false;
+        const filtered = mergedHexagrams.filter((h) => {
+            if (!matchesStatusFilter(h, activeFilter)) return false;
             if (searchVal) {
-                const haystack =
-                    `${h.num} ${h.short} ${h.name} ${card?.ten_que || ""} ${card?.han_tu_day_du || ""}`.toLowerCase();
+                const haystack = [
+                    h.numberStr,
+                    String(h.id),
+                    h.shortName,
+                    h.fullName,
+                    h.alias,
+                    h.hanziShort,
+                    h.hanziFull,
+                    h.statusLabel,
+                    h.elementLabel,
+                    h.keywords.join(" "),
+                ]
+                    .join(" ")
+                    .toLowerCase();
                 if (!haystack.includes(searchVal)) return false;
             }
             return true;
@@ -129,27 +251,25 @@
 
         listEl.innerHTML = filtered
             .map((h) => {
-                const card = cardMapByNum.get(h.num);
-                const isCurrent = activeHex && h.num === activeHex.num;
-                const displayFortune = card?.trang_thai || h.fortune;
+                const isCurrent = activeHex && h.id === activeHex.id;
                 return `
                     <a
-                        href="./iching-detail.html?slug=${encodeURIComponent(h.slug)}"
+                        href="${getDetailHref(h)}"
                         class="detail-sidebar__item ${isCurrent ? "is-current" : ""}"
                         ${isCurrent ? 'aria-current="page"' : ""}
-                        title="Quẻ #${pad(h.num)}: ${escapeHtml(card?.ten_que || h.name)}"
+                        title="Quẻ #${h.numberStr}: ${escapeHtml(h.fullName)}"
                     >
                         <div class="detail-sidebar__date-box">
                             <small>Quẻ</small>
-                            <strong>${pad(h.num)}</strong>
+                            <strong>${h.numberStr}</strong>
                         </div>
                         <div class="detail-sidebar__item-info">
                             <strong class="detail-sidebar__item-name">
-                                ${escapeHtml(card?.ten_que || h.short)}
-                                ${card?.han_tu ? `<span lang="zh-Hant"> (${escapeHtml(card.han_tu)})</span>` : ""}
+                                ${escapeHtml(h.fullName)}
+                                ${h.hanziShort ? `<span lang="zh-Hant"> (${escapeHtml(h.hanziShort)})</span>` : ""}
                             </strong>
                             <span class="detail-sidebar__item-occasion">
-                                ${escapeHtml(displayFortune)} • ${escapeHtml(h.name)}
+                                ${escapeHtml(h.statusLabel)} • ${escapeHtml(h.elementLabel)}
                             </span>
                         </div>
                     </a>
@@ -165,43 +285,42 @@
         }
     };
 
-    // Đổ dữ liệu Quẻ hiện tại + Metadata từ iching-card.json vào DOM
     const renderActiveHexagram = (hex) => {
         if (!hex) return;
         activeHex = hex;
 
-        const card = cardMapByNum.get(hex.num) || null;
-        const displayTitle = card?.ten_que || hex.name;
-        const displayFortune = card?.trang_thai || hex.fortune;
-        const fallbackSvg = `./assets/icons/iching/${hex.slug}.svg`;
-        const artSrc = card?.image_file ? normalizeAssetPath(card.image_file) : fallbackSvg;
-        const focalText = card?.focal_accent_object || "";
+        const fallbackSvg = getFallbackSvgUrl(hex);
 
-        document.title = `Quẻ ${pad(hex.num)}: ${displayTitle} - Lịch Phong Thủy`;
+        document.title = `Quẻ ${hex.numberStr}: ${hex.fullName} - Lịch Phong Thủy`;
 
-        // Thanh điều hướng Top bar (Prev / Next)
-        const idx = allHexagrams.findIndex((h) => h.num === hex.num);
-        const prevHex = allHexagrams[(idx - 1 + allHexagrams.length) % allHexagrams.length];
-        const nextHex = allHexagrams[(idx + 1) % allHexagrams.length];
+        // Prev / Next
+        const idx = mergedHexagrams.findIndex((h) => h.id === hex.id);
+        const prevHex = mergedHexagrams[(idx - 1 + mergedHexagrams.length) % mergedHexagrams.length];
+        const nextHex = mergedHexagrams[(idx + 1) % mergedHexagrams.length];
+
         if (prevHex) {
             const prevBtn = document.getElementById("icd-prev-btn");
             if (prevBtn) {
-                prevBtn.href = `./iching-detail.html?slug=${encodeURIComponent(prevHex.slug)}`;
-                prevBtn.title = `Quẻ trước: #${pad(prevHex.num)} ${prevHex.short}`;
+                prevBtn.href = getDetailHref(prevHex);
+                prevBtn.title = `Quẻ trước: #${prevHex.numberStr} ${prevHex.fullName}`;
             }
         }
         if (nextHex) {
             const nextBtn = document.getElementById("icd-next-btn");
             if (nextBtn) {
-                nextBtn.href = `./iching-detail.html?slug=${encodeURIComponent(nextHex.slug)}`;
-                nextBtn.title = `Quẻ tiếp: #${pad(nextHex.num)} ${nextHex.short}`;
+                nextBtn.href = getDetailHref(nextHex);
+                nextBtn.title = `Quẻ tiếp: #${nextHex.numberStr} ${nextHex.fullName}`;
             }
         }
 
-        setText("icd-num-badge", `Quẻ số ${pad(hex.num)}`);
-        setText("icd-fortune-badge", displayFortune);
+        setText("icd-num-badge", `Quẻ số ${hex.numberStr}`);
+        const fortuneBadge = document.getElementById("icd-fortune-badge");
+        if (fortuneBadge) {
+            fortuneBadge.textContent = hex.statusLabel;
+            fortuneBadge.dataset.statusCode = hex.statusCode;
+        }
 
-        // Cập nhật Thẻ bài 3:4 & toàn bộ data-* qua dataset
+        // Thẻ bài 2:3 (800x1200) & data-* chuẩn tiếng Anh
         const cardShell = document.getElementById("icd-card-shell");
         const cardFigure = document.getElementById("icd-card-figure");
         const heroImg = document.getElementById("icd-hero-svg");
@@ -210,22 +329,26 @@
         const focalEl = document.getElementById("icd-card-focal");
 
         if (cardShell) {
-            cardShell.dataset.hexId = pad(hex.num);
-            cardShell.dataset.hexSlug = card?.slug || hex.slug;
-            cardShell.dataset.element = card?.ngu_hanh || "hoa";
-            cardShell.dataset.fortuneCode = card?.trang_thai_code || "";
-            cardShell.dataset.maHao = card?.ma_hao || hex.lines.join("");
-            cardShell.classList.toggle("is-fallback-art", !card);
+            cardShell.dataset.hexId = hex.numberStr;
+            cardShell.dataset.hexSlug = hex.cardSlug;
+            cardShell.dataset.element = hex.element;
+            cardShell.dataset.fortuneCode = hex.statusCode;
+            cardShell.dataset.maHao = hex.lineCode;
+            cardShell.classList.toggle("is-fallback-art", !hex.hasCardArt);
         }
 
-        setText("icd-card-num", `#${pad(hex.num)}`);
-        setText("icd-card-status", displayFortune);
-        setText("icd-card-title", displayTitle);
+        setText("icd-card-num", `#${hex.numberStr}`);
+        const cardStatusEl = document.getElementById("icd-card-status");
+        if (cardStatusEl) {
+            cardStatusEl.textContent = hex.statusLabel;
+            cardStatusEl.dataset.statusCode = hex.statusCode;
+        }
+        setText("icd-card-title", hex.fullName);
 
         if (hanziEl) {
-            if (card?.han_tu_day_du || card?.han_tu) {
-                hanziEl.textContent = card.han_tu_day_du || card.han_tu;
-                hanziEl.title = `Hán tự đầy đủ: ${card.han_tu_day_du || card.han_tu} (${displayTitle})`;
+            if (hex.hanziFull) {
+                hanziEl.textContent = hex.hanziFull;
+                hanziEl.title = `Hán tự đầy đủ: ${hex.hanziFull} (${hex.fullName})`;
                 hanziEl.hidden = false;
             } else {
                 hanziEl.hidden = true;
@@ -233,20 +356,17 @@
         }
 
         if (focalEl) {
-            if (focalText) {
-                focalEl.textContent = focalText;
+            if (hex.focalObject) {
+                focalEl.textContent = hex.focalObject;
                 focalEl.hidden = false;
             } else {
                 focalEl.hidden = true;
             }
         }
 
-        const fullAlt = focalText
-            ? `Minh họa khắc gỗ Quẻ ${pad(hex.num)} ${displayTitle}: ${focalText}`
-            : `Đồ hình Quẻ ${pad(hex.num)}: ${displayTitle}`;
-        const lightboxCaption = focalText
-            ? `Quẻ ${pad(hex.num)}: ${displayTitle}${card?.han_tu_day_du ? ` (${card.han_tu_day_du})` : ""} — ${focalText}`
-            : `Quẻ ${pad(hex.num)}: ${displayTitle}`;
+        const lightboxCaption = hex.focalObject
+            ? `Quẻ ${hex.numberStr}: ${hex.fullName}${hex.hanziFull ? ` (${hex.hanziFull})` : ""} — ${hex.focalObject}`
+            : `Quẻ ${hex.numberStr}: ${hex.fullName}`;
 
         if (heroImg) {
             heroImg.onerror = () => {
@@ -254,49 +374,51 @@
                 heroImg.src = fallbackSvg;
                 cardShell?.classList.add("is-fallback-art");
             };
-            heroImg.src = artSrc;
-            heroImg.alt = fullAlt;
+            heroImg.src = hex.cardImgUrl;
+            heroImg.alt = hex.cardAlt;
+            heroImg.width = 800;
+            heroImg.height = 1200;
         }
 
         if (cardFigure) {
-            cardFigure.dataset.fullSrc = artSrc;
+            cardFigure.dataset.fullSrc = hex.cardImgUrl;
             cardFigure.dataset.caption = lightboxCaption;
             cardFigure.setAttribute("aria-label", `Phóng to thẻ bài ${lightboxCaption}`);
             cardFigure.title = `Bấm hoặc nhấn Enter để phóng to — ${lightboxCaption}`;
         }
 
-        if (rawLink) rawLink.href = artSrc;
-
-        // Schema keywords
-        const keywordsMeta = document.getElementById("icd-schema-keywords");
-        if (keywordsMeta && Array.isArray(card?.tu_khoa)) {
-            keywordsMeta.content = card.tu_khoa.join(", ");
+        if (rawLink) {
+            rawLink.href = hex.cardImgUrl;
+            const rawLabel = rawLink.querySelector("span:first-child");
+            if (rawLabel) rawLabel.textContent = hex.hasCardArt ? "Mở ảnh thẻ bài gốc" : "Mở đồ hình SVG gốc";
         }
 
-        // Nội / Ngoại quái & Tiêu đề
-        const trigramsStr = card
-            ? `Thượng quái: ${card.thuong_quai.ten} (${card.thuong_quai.tuong}) • Hạ quái: ${card.ha_quai.ten} (${card.ha_quai.tuong})`
-            : hex.trigrams;
-        setText("icd-trigrams-eyebrow", trigramsStr);
+        const keywordsMeta = document.getElementById("icd-schema-keywords");
+        if (keywordsMeta) keywordsMeta.content = hex.keywords.join(", ");
+
+        // Cột phải Hero
+        setText(
+            "icd-trigrams-eyebrow",
+            `Ngoại quái: ${hex.upper.symbol} ${hex.upper.name} (${hex.upper.nature}) • Nội quái: ${hex.lower.symbol} ${hex.lower.name} (${hex.lower.nature})`,
+        );
 
         const mainTitleEl = document.getElementById("icd-main-title");
         if (mainTitleEl) {
-            mainTitleEl.innerHTML = card?.han_tu
-                ? `Quẻ ${pad(hex.num)}: ${escapeHtml(displayTitle)} <small lang="zh-Hant">(${escapeHtml(card.han_tu)})</small>`
-                : `Quẻ ${pad(hex.num)}: ${escapeHtml(displayTitle)}`;
+            mainTitleEl.innerHTML = hex.hanziShort
+                ? `Quẻ ${hex.numberStr}: ${escapeHtml(hex.fullName)} <small lang="zh-Hant">(${escapeHtml(hex.hanziShort)})</small>`
+                : `Quẻ ${hex.numberStr}: ${escapeHtml(hex.fullName)}`;
         }
-        setText("icd-full-name", hex.name);
+        setText("icd-full-name", `${hex.alias ? `${hex.alias} • ` : ""}${hex.elementLabel} • Mã hào ${hex.lineCode}`);
 
-        // Tượng quẻ & Dải Từ khóa từ iching-card.json
         const metaBox = document.getElementById("icd-card-meta-box");
         const omenListEl = document.getElementById("icd-omen-list");
         const kwListEl = document.getElementById("icd-keywords-list");
         if (metaBox && omenListEl && kwListEl) {
-            if (card && (card.tuong_que?.length || card.tu_khoa?.length)) {
-                omenListEl.innerHTML = (card.tuong_que || [])
-                    .map((o) => `<span class="iching-card-meta__omen-pill">${escapeHtml(o)}</span>`)
+            if (hex.hexagramImages.length || hex.keywords.length) {
+                omenListEl.innerHTML = hex.hexagramImages
+                    .map((o) => `<span class="iching-card-meta__omen-pill">✦ ${escapeHtml(o)}</span>`)
                     .join("");
-                kwListEl.innerHTML = (card.tu_khoa || [])
+                kwListEl.innerHTML = hex.keywords
                     .map((k) => `<li class="iching-card-meta__keyword">#${escapeHtml(k)}</li>`)
                     .join("");
                 metaBox.hidden = false;
@@ -305,14 +427,14 @@
             }
         }
 
-        // Giải nghĩa 2 vế Trái / Phải (Accordion)
+        // Accordion câu đối 2 vế (couplet.opening & couplet.closing)
         const pairWrapper = document.getElementById("icd-pair-wrapper");
         const pairBtn = document.getElementById("icd-pair-toggle-btn");
         const pairPanel = document.getElementById("icd-card-pair-panel");
         if (pairWrapper && pairBtn && pairPanel) {
-            if (card?.giai_nghia_trai || card?.giai_nghia_phai) {
-                setText("icd-pair-left", card.giai_nghia_trai || "");
-                setText("icd-pair-right", card.giai_nghia_phai || "");
+            if (hex.coupletOpening || hex.coupletClosing) {
+                setText("icd-pair-left", hex.coupletOpening);
+                setText("icd-pair-right", hex.coupletClosing);
                 pairWrapper.hidden = false;
                 pairBtn.setAttribute("aria-expanded", "false");
                 pairPanel.hidden = true;
@@ -321,30 +443,29 @@
             }
         }
 
-        // Thoán từ, Tượng từ & Lời khuyên (Ưu tiên lời khuyên giàu chi tiết của iching-card.json nếu có)
         setText("icd-hero-quote", hex.judgment);
         setText("icd-body-judgment", hex.judgment);
-        setText("icd-body-image", hex.image);
-        setText("icd-body-advice", card?.loi_khuyen || hex.advice);
+        setText("icd-body-image", hex.symbolism);
+        setText("icd-body-advice", hex.advice);
 
-        // 4 Thẻ thông số cấu trúc
+        // 4 thẻ thông số cấu trúc
         const yangCount = hex.lines.filter((b) => b === 1).length;
         const yinCount = 6 - yangCount;
-        setText("icd-stat-num", `Quẻ #${pad(hex.num)} / 64`);
-        setText("icd-stat-short", `Quẻ ${hex.short}`);
-        setText("icd-stat-fortune", displayFortune);
+        setText("icd-stat-num", `Quẻ #${hex.numberStr} / 64`);
+        setText("icd-stat-short", `${hex.elementLabel} • Quẻ ${hex.shortName}`);
+        setText("icd-stat-fortune", hex.statusLabel);
         setText("icd-stat-ratio", `${yangCount} Dương • ${yinCount} Âm`);
 
-        if (card?.ha_quai && card?.thuong_quai) {
-            setText("icd-stat-lower", `${card.ha_quai.ten} (${card.ha_quai.tuong})`);
-            setText("icd-stat-lower-sub", `Mã hào: ${card.ha_quai.ma} • Hào 1 – 2 – 3`);
-            setText("icd-stat-upper", `${card.thuong_quai.ten} (${card.thuong_quai.tuong})`);
-            setText("icd-stat-upper-sub", `Mã hào: ${card.thuong_quai.ma} • Hào 4 – 5 – 6`);
-        } else {
-            const parts = String(hex.trigrams || "").split("•");
-            setText("icd-stat-lower", (parts[0] || "").replace("Nội quái:", "").trim() || "--");
-            setText("icd-stat-upper", (parts[1] || "").replace("Ngoại quái:", "").trim() || "--");
-        }
+        setText("icd-stat-lower", `${hex.lower.symbol} ${hex.lower.name} (${hex.lower.nature})`);
+        setText(
+            "icd-stat-lower-sub",
+            hex.lower.code ? `Mã hào: ${hex.lower.code} • Hào 1 – 2 – 3` : "Hào 1 – 2 – 3 (Nền tảng)",
+        );
+        setText("icd-stat-upper", `${hex.upper.symbol} ${hex.upper.name} (${hex.upper.nature})`);
+        setText(
+            "icd-stat-upper-sub",
+            hex.upper.code ? `Mã hào: ${hex.upper.code} • Hào 4 – 5 – 6` : "Hào 4 – 5 – 6 (Biểu hiện)",
+        );
 
         renderHexLines(hex.lines);
         renderRelatedHexagrams(hex);
@@ -352,36 +473,30 @@
     };
 
     const initIchingDetailPage = async () => {
-        const [hexRes, cardRes] = await Promise.all([
+        const [baseRes, cardRes] = await Promise.all([
             fetch("./api/iching.json")
                 .then((r) => (r.ok ? r.json() : []))
                 .catch(() => []),
-            fetch("./api/iching-card.json")
+            fetch("./api/iching-cards.json")
                 .then((r) => (r.ok ? r.json() : []))
                 .catch(() => []),
         ]);
 
-        allHexagrams = Array.isArray(hexRes) ? hexRes : [];
-        const cardsArr = Array.isArray(cardRes) ? cardRes : [];
-        cardMapByNum = new Map(cardsArr.map((c) => [Number(c.id), c]));
+        mergedHexagrams = mergeIchingDatasets(baseRes, cardRes);
+        if (!mergedHexagrams.length) return;
 
-        if (!allHexagrams.length) return;
-
-        // Hỗ trợ mở theo ?slug=02-khon, ?slug=02-khon-vi-dia hoặc ?num=2 (mặc định Quẻ 14)
         const params = new URLSearchParams(window.location.search);
         const slugParam = params.get("slug") || "";
         const numParam = Number(params.get("num")) || 0;
 
-        let targetHex =
-            (numParam && allHexagrams.find((h) => h.num === numParam)) ||
-            allHexagrams.find((h) => h.slug === slugParam) ||
-            allHexagrams.find((h) => cardMapByNum.get(h.num)?.slug === slugParam) ||
-            allHexagrams.find((h) => h.num === 14) ||
-            allHexagrams[0];
+        const targetHex =
+            (numParam && mergedHexagrams.find((h) => h.id === numParam)) ||
+            mergedHexagrams.find((h) => h.cardSlug === slugParam || h.iconSlug === slugParam) ||
+            mergedHexagrams.find((h) => h.id === 14) ||
+            mergedHexagrams[0];
 
         renderActiveHexagram(targetHex);
 
-        // Ủy quyền sự kiện Click & Bàn phím đọc từ data-card-action
         const mainEl = document.getElementById("main");
         mainEl?.addEventListener("click", (e) => {
             const trigger = e.target.closest("[data-card-action]");
@@ -409,7 +524,6 @@
             poster.click();
         });
 
-        // Bộ lọc & Tìm kiếm Sidebar 64 quẻ
         document.getElementById("icd-sidebar-search")?.addEventListener("input", renderSidebarList);
 
         document.querySelectorAll("#icd-sidebar-filters [data-icd-filter]").forEach((btn) => {
@@ -424,7 +538,6 @@
             });
         });
 
-        // Nút Chia sẻ
         const shareBtn = document.getElementById("icd-share-btn");
         const shareLabel = document.getElementById("icd-share-label");
         shareBtn?.addEventListener("click", async () => {
@@ -437,11 +550,10 @@
                     }, 2000);
                 }
             } catch (err) {
-                // Bỏ qua nếu trình duyệt không hỗ trợ clipboard
+                // Trình duyệt không hỗ trợ clipboard
             }
         });
 
-        // Đóng Lightbox
         document.getElementById("detail-lightbox-close")?.addEventListener("click", closeLightbox);
         document.getElementById("detail-lightbox-backdrop")?.addEventListener("click", closeLightbox);
         document.addEventListener("keydown", (e) => {

@@ -1,128 +1,108 @@
 // assets/js/tarot-detail.js
-// Trang chi tiết 78 Lá Bài Tarot: Đọc ./api/tarot.json, công tắc Chiều Xuôi / Chiều Ngược 180°,
-// phân tích Nguyên tố theo Bộ, Lightbox phóng to & Sidebar Sticky 78 lá
+// Đồng bộ 100% schema mới ./api/tarot.json + ảnh lá bài 800x1200 (2:3) cho tarot-detail.html
 (() => {
     const TAROT_IMG_DIR = "./assets/images/tarot";
-    const TAROT_IMG_EXT = "png";
-    const pad = (n) => String(n).padStart(2, "0");
+    const TAROT_IMG_EXT = "png"; // Sau này chuyển sang WebP chỉ đổi "png" -> "webp"
 
     const SUIT_META = {
         major: {
+            label: "Bộ Ẩn Chính",
             en: "Major Arcana",
-            vn: "Bộ Ẩn Chính (22 lá)",
+            countLabel: "Bộ Ẩn Chính (22 lá)",
             short: "Ẩn Chính",
-            element: "Tinh thần & Chu kỳ Lớn",
-            domain: "Bước ngoặt cuộc đời & Sứ mệnh",
-            icon: "./assets/icons/sparkle.svg",
-            guide: "22 lá Bộ Ẩn Chính (Major Arcana) đại diện cho những bài học cốt lõi, bước ngoặt chiến lược và hành trình trưởng thành sâu sắc về nhận thức. Khi lá Ẩn Chính xuất hiện, thông điệp thường mang tầm ảnh hưởng dài hạn thay vì chỉ là chuyện nhất thời.",
+            domain: "Bước ngoặt & Bài học lớn",
+            guideTitle: "Ý Nghĩa Bộ Ẩn Chính (Major Arcana)",
+            guideDesc:
+                "22 lá Ẩn Chính đại diện cho những cột mốc quan trọng, bài học linh hồn và các bước ngoặt định hình hành trình trưởng thành lâu dài của mỗi người.",
         },
         wands: {
+            label: "Bộ Gậy",
             en: "Suit of Wands",
-            vn: "Bộ Gậy (14 lá)",
+            countLabel: "Bộ Gậy (14 lá)",
             short: "Bộ Gậy",
-            element: "Nguyên tố Lửa (Hỏa)",
             domain: "Đam mê, Sáng tạo & Hành động",
-            icon: "./assets/icons/fire.svg",
-            guide: "Bộ Gậy gắn liền với nguyên tố Lửa — đại diện cho ý chí tiên phong, cảm hứng sáng tạo, động lực hành động và bản lĩnh dấn thân. Các lá Bộ Gậy khuyến khích sự chủ động, tốc độ và dám mở đường mới.",
+            guideTitle: "Đặc Tính Nguyên Tố Lửa — Bộ Gậy (Wands)",
+            guideDesc:
+                "Bộ Gậy mang năng lượng nguyên tố Lửa, chủ quản ý chí tiên phong, cảm hứng sáng tạo, khát vọng chinh phục và tốc độ hành động trong sự nghiệp.",
         },
         swords: {
+            label: "Bộ Kiếm",
             en: "Suit of Swords",
-            vn: "Bộ Kiếm (14 lá)",
+            countLabel: "Bộ Kiếm (14 lá)",
             short: "Bộ Kiếm",
-            element: "Nguyên tố Khí",
-            domain: "Trí tuệ, Logic & Quyết định",
-            icon: "./assets/icons/metal.svg",
-            guide: "Bộ Kiếm gắn liền với nguyên tố Khí — đại diện cho tư duy phân tích, sự minh bạch, giao tiếp sắc bén và khả năng cắt bỏ những ràng buộc mơ hồ. Bộ bài này nhắc nhở dùng cái đầu lạnh và góc nhìn khách quan để giải quyết thử thách.",
+            domain: "Trí tuệ, Sự thật & Quyết định",
+            guideTitle: "Đặc Tính Nguyên Tố Khí — Bộ Kiếm (Swords)",
+            guideDesc:
+                "Bộ Kiếm mang năng lượng nguyên tố Khí, đại diện cho tư duy phân tích sắc bén, giao tiếp minh bạch, chiến lược và bản lĩnh đối diện thử thách tâm trí.",
         },
         cups: {
+            label: "Bộ Cốc",
             en: "Suit of Cups",
-            vn: "Bộ Cốc (14 lá)",
+            countLabel: "Bộ Cốc (14 lá)",
             short: "Bộ Cốc",
-            element: "Nguyên tố Nước (Thủy)",
-            domain: "Cảm xúc, Trực giác & Nhân duyên",
-            icon: "./assets/icons/water.svg",
-            guide: "Bộ Cốc gắn liền với nguyên tố Nước — đại diện cho đời sống nội tâm, lòng trắc ẩn, sự đồng điệu trong các mối quan hệ và cảm hứng nghệ thuật. Thông điệp Bộ Cốc thường nhấn mạnh sự lắng nghe trái tim và giữ gìn hòa khí.",
+            domain: "Cảm xúc, Nhân duyên & Trực giác",
+            guideTitle: "Đặc Tính Nguyên Tố Nước — Bộ Cốc (Cups)",
+            guideDesc:
+                "Bộ Cốc mang năng lượng nguyên tố Nước, phản ánh đời sống cảm xúc, tình yêu, sự thấu cảm, các mối nhân duyên và chiều sâu nghệ thuật.",
         },
         pentacles: {
+            label: "Bộ Tiền",
             en: "Suit of Pentacles",
-            vn: "Bộ Tiền (14 lá)",
+            countLabel: "Bộ Tiền (14 lá)",
             short: "Bộ Tiền",
-            element: "Nguyên tố Đất (Thổ)",
-            domain: "Tài chính, Sự nghiệp & Giá trị thực",
-            icon: "./assets/icons/earth.svg",
-            guide: "Bộ Tiền gắn liền với nguyên tố Đất — đại diện cho tài sản hữu hình, nền tảng sự nghiệp bền vững, sức khỏe thể chất và tính kỷ luật thực tế. Bộ bài này ủng hộ chiến lược đi từng bước chắc chắn để tích lũy thành quả lâu dài.",
+            domain: "Tài chính, Vật chất & Bền vững",
+            guideTitle: "Đặc Tính Nguyên Tố Đất — Bộ Tiền (Pentacles)",
+            guideDesc:
+                "Bộ Tiền mang năng lượng nguyên tố Đất, gắn liền với tài sản, công việc thực tiễn, kỹ năng chuyên môn, sức khỏe và sự thịnh vượng bền vững.",
         },
     };
 
-    let allCards = [];
-    let currentCard = null;
-    let currentOrient = "upright";
+    const ELEMENT_META = {
+        fire: { label: "Nguyên tố Lửa (Fire)", icon: "./assets/icons/fire.svg" },
+        water: { label: "Nguyên tố Nước (Water)", icon: "./assets/icons/water.svg" },
+        air: { label: "Nguyên tố Khí (Air)", icon: "./assets/icons/sparkle.svg" },
+        earth: { label: "Nguyên tố Đất (Earth)", icon: "./assets/icons/earth.svg" },
+    };
+
+    const pad = (n) => String(n).padStart(2, "0");
+
+    let tarotDeck = [];
+    let activeCard = null;
+    let activeOrient = "upright";
     let activeSuitFilter = "all";
     let lastFocusedBeforeLightbox = null;
-
-    if ("scrollRestoration" in window.history) {
-        window.history.scrollRestoration = "manual";
-    }
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
     const setText = (id, text) => {
         const el = document.getElementById(id);
         if (el) el.textContent = text;
     };
 
-    const getCardImgUrl = (card) => `${TAROT_IMG_DIR}/${card.suit}/${card.slug}.${TAROT_IMG_EXT}`;
-    const getCardHref = (card, orient = "upright") =>
-        `./tarot-detail.html?slug=${encodeURIComponent(card.slug)}&orientation=${orient}`;
+    const escapeHtml = (str) =>
+        String(str || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
 
-    const applyOrientationState = (orient, { updateUrl = true } = {}) => {
-        if (!currentCard) return;
-        currentOrient = orient === "reversed" ? "reversed" : "upright";
-        const isUp = currentOrient === "upright";
+    const getSuitKey = (card) => (card.arcana === "major" || !card.suit ? "major" : card.suit);
+    const getBackImageUrl = () => `${TAROT_IMG_DIR}/back.${TAROT_IMG_EXT}`;
+    const getCardImageUrl = (card) => `${TAROT_IMG_DIR}/${getSuitKey(card)}/${card.slug}.${TAROT_IMG_EXT}`;
+    const getDetailHref = (card, orient = "upright") =>
+        `./tarot-detail.html?slug=${encodeURIComponent(card.slug)}&orient=${encodeURIComponent(orient)}`;
 
-        const poster = document.getElementById("trd-poster-figure");
-        const orientBadge = document.getElementById("trd-orient-badge");
-        if (poster) poster.dataset.orientation = currentOrient;
-        if (orientBadge) {
-            orientBadge.dataset.orientation = currentOrient;
-            orientBadge.textContent = isUp ? "Đang xem: Lá bài Xuôi (Upright)" : "Đang xem: Lá bài Ngược (Reversed)";
-        }
-
-        document.querySelectorAll("[data-set-orient]").forEach((btn) => {
-            const isSel = btn.dataset.setOrient === currentOrient;
-            btn.classList.toggle("is-active", isSel);
-            btn.setAttribute("aria-pressed", String(isSel));
-        });
-
-        setText("trd-hero-message", `"${isUp ? currentCard.msg_upright : currentCard.msg_reversed}"`);
-        setText("trd-hero-keywords", `Từ khóa: ${isUp ? currentCard.keywords_upright : currentCard.keywords_reversed}`);
-        setText("trd-stat-orient", isUp ? "Chiều Xuôi (Upright)" : "Chiều Ngược (Reversed)");
-
-        document.getElementById("trd-box-upright")?.classList.toggle("div-detail-block--highlight", isUp);
-        document.getElementById("trd-box-reversed")?.classList.toggle("div-detail-block--highlight", !isUp);
-
-        if (updateUrl) {
-            const url = new URL(window.location.href);
-            url.searchParams.set("slug", currentCard.slug);
-            url.searchParams.set("orientation", currentOrient);
-            window.history.replaceState({}, "", url.toString());
-        }
-    };
-
-    const openLightbox = () => {
-        if (!currentCard) return;
+    const openLightbox = (imgSrc, captionText, orient = "upright") => {
         const lightbox = document.getElementById("detail-lightbox");
-        const img = document.getElementById("detail-lightbox-img");
-        const cap = document.getElementById("detail-lightbox-caption");
-        if (!lightbox || !img) return;
+        const imgEl = document.getElementById("detail-lightbox-img");
+        const capEl = document.getElementById("detail-lightbox-caption");
+        if (!lightbox || !imgEl) return;
 
         lastFocusedBeforeLightbox = document.activeElement;
-        const title = `${currentCard.roman ? `${currentCard.roman}. ` : ""}${currentCard.vn} (${currentCard.en})`;
-        const isRev = currentOrient === "reversed";
-
-        img.src = getCardImgUrl(currentCard);
-        img.alt = `Lá bài Tarot ${title}`;
-        img.classList.toggle("is-reversed", isRev);
-        if (cap) cap.textContent = `${title} • ${isRev ? "Chiều Ngược (Reversed)" : "Chiều Xuôi (Upright)"}`;
+        imgEl.src = imgSrc;
+        imgEl.alt = captionText || "Lá bài Tarot";
+        imgEl.dataset.orientation = orient;
+        imgEl.style.transform = orient === "reversed" ? "rotate(180deg)" : "";
+        if (capEl) capEl.textContent = captionText || "";
 
         lightbox.hidden = false;
         document.body.style.overflow = "hidden";
@@ -140,211 +120,330 @@
         }
     };
 
-    const renderRelatedSuitCards = () => {
-        const grid = document.getElementById("trd-related-grid");
-        if (!grid || !currentCard) return;
+    const renderRelatedCards = (card) => {
+        const gridEl = document.getElementById("trd-related-grid");
+        if (!gridEl) return;
 
-        const sameSuit = allCards.filter((c) => c.suit === currentCard.suit);
-        const curPos = sameSuit.findIndex((c) => c.id === currentCard.id);
-        const related = [];
+        const suitKey = getSuitKey(card);
+        const sameSuit = tarotDeck.filter((c) => getSuitKey(c) === suitKey);
+        const pos = sameSuit.findIndex((c) => Number(c.id) === Number(card.id));
+
+        const picked = [];
         for (const offset of [-2, -1, 1, 2]) {
-            const pick = sameSuit[(curPos + offset + sameSuit.length) % sameSuit.length];
-            if (pick && pick.id !== currentCard.id && !related.some((r) => r.id === pick.id)) {
-                related.push(pick);
+            if (sameSuit.length <= 1) break;
+            const neighbor = sameSuit[(pos + offset + sameSuit.length) % sameSuit.length];
+            if (neighbor && neighbor.id !== card.id && !picked.some((p) => p.id === neighbor.id)) {
+                picked.push(neighbor);
             }
         }
 
-        grid.innerHTML = related
-            .map(
-                (c) => `
+        const backUrl = getBackImageUrl();
+        const suitInfo = SUIT_META[suitKey] || SUIT_META.major;
+
+        gridEl.innerHTML = picked
+            .slice(0, 4)
+            .map((item) => {
+                const titleVi = item.name?.vi || "";
+                const titleEn = item.name?.en || "";
+                return `
                     <a
-                        href="${getCardHref(c, "upright")}"
-                        class="util-tarot-card"
-                        title="Xem chi tiết lá bài ${c.vn} (${c.en})"
+                        href="${getDetailHref(item, "upright")}"
+                        class="util-tr-card"
+                        title="${escapeHtml(`${item.label}. ${titleVi} (${titleEn})`)}"
                     >
-                        <div class="util-tarot-card__thumb">
+                        <div class="util-tr-card__thumb">
                             <img
-                                src="${getCardImgUrl(c)}"
-                                alt="Lá bài Tarot ${c.vn} (${c.en})"
-                                width="350"
-                                height="600"
+                                src="${getCardImageUrl(item)}"
+                                alt="${escapeHtml(`Lá bài Tarot ${item.label} - ${titleVi} (${titleEn})`)}"
+                                width="800"
+                                height="1200"
                                 loading="lazy"
                                 decoding="async"
+                                onerror="this.onerror=null;this.src='${backUrl}';"
                             />
-                            <span class="util-tarot-card__badge">#${pad(c.id)}</span>
                         </div>
-                        <div class="util-tarot-card__body">
-                            <strong class="util-tarot-card__title">${c.roman ? `${c.roman}. ` : ""}${c.vn}</strong>
-                            <span class="util-tarot-card__sub">${c.en}</span>
+                        <div class="util-tr-card__body">
+                            <div class="util-tr-card__meta">
+                                <span class="util-tr-card__num">#${pad(item.id)}</span>
+                                <span class="util-tr-card__suit">${suitInfo.short}</span>
+                            </div>
+                            <strong class="util-tr-card__title">${escapeHtml(titleVi)}</strong>
+                            <span class="util-tr-card__en">${escapeHtml(titleEn)}</span>
                         </div>
                     </a>
-                `,
-            )
+                `;
+            })
             .join("");
     };
 
-    const renderSidebar = () => {
+    const renderSidebarList = () => {
         const listEl = document.getElementById("trd-sidebar-list");
+        const countEl = document.getElementById("trd-sidebar-count");
+        const searchVal = (document.getElementById("trd-sidebar-search")?.value || "").trim().toLowerCase();
         if (!listEl) return;
 
-        const q = (document.getElementById("trd-sidebar-search")?.value || "").trim().toLowerCase();
-        const filtered = allCards.filter((c) => {
-            if (activeSuitFilter !== "all" && c.suit !== activeSuitFilter) return false;
-            if (!q) return true;
-            return `${pad(c.id)} ${c.id} ${c.roman} ${c.vn} ${c.en}`.toLowerCase().includes(q);
+        const filtered = tarotDeck.filter((c) => {
+            const suitKey = getSuitKey(c);
+            if (activeSuitFilter !== "all" && suitKey !== activeSuitFilter) return false;
+            if (searchVal) {
+                const haystack = [
+                    pad(c.id),
+                    String(c.id),
+                    c.label,
+                    c.name?.vi,
+                    c.name?.en,
+                    SUIT_META[suitKey]?.label,
+                    ...(c.upright?.keywords || []),
+                    ...(c.reversed?.keywords || []),
+                ]
+                    .join(" ")
+                    .toLowerCase();
+                if (!haystack.includes(searchVal)) return false;
+            }
+            return true;
         });
 
-        setText("trd-sidebar-count", `${filtered.length} lá`);
-
-        if (!filtered.length) {
-            listEl.innerHTML = `<p class="util-data-table__empty">Không có lá bài nào khớp bộ lọc.</p>`;
-            return;
-        }
+        if (countEl) countEl.textContent = `${filtered.length} lá`;
 
         listEl.innerHTML = filtered
             .map((c) => {
-                const isCur = currentCard && Number(c.id) === Number(currentCard.id);
-                const suitShort = SUIT_META[c.suit]?.short || "Tarot";
+                const suitKey = getSuitKey(c);
+                const suitInfo = SUIT_META[suitKey] || SUIT_META.major;
+                const isCurrent = activeCard && Number(c.id) === Number(activeCard.id);
+                const titleVi = c.name?.vi || "";
+                const titleEn = c.name?.en || "";
+
                 return `
                     <a
-                        href="${getCardHref(c, "upright")}"
-                        class="detail-sidebar__item div-sidebar-item ${isCur ? "is-current" : ""}"
-                        ${isCur ? 'aria-current="page"' : ""}
+                        href="${getDetailHref(c, "upright")}"
+                        class="detail-sidebar__item ${isCurrent ? "is-current" : ""}"
+                        ${isCurrent ? 'aria-current="page"' : ""}
+                        title="#${pad(c.id)} ${escapeHtml(titleVi)} (${escapeHtml(titleEn)})"
                     >
-                        <span class="div-sidebar-item__tarot-thumb" aria-hidden="true">
-                            <img src="${getCardImgUrl(c)}" alt="" width="35" height="60" loading="lazy" decoding="async" />
-                        </span>
+                        <div class="detail-sidebar__date-box">
+                            <small>#${pad(c.id)}</small>
+                            <strong>${escapeHtml(c.label)}</strong>
+                        </div>
                         <div class="detail-sidebar__item-info">
-                            <strong class="detail-sidebar__item-name">${c.roman ? `${c.roman}. ` : ""}${c.vn}</strong>
-                            <span class="detail-sidebar__item-occasion">${c.en} • ${suitShort}</span>
+                            <strong class="detail-sidebar__item-name">${escapeHtml(titleVi)}</strong>
+                            <span class="detail-sidebar__item-occasion">
+                                ${escapeHtml(titleEn)} • ${suitInfo.short}
+                            </span>
                         </div>
                     </a>
                 `;
             })
             .join("");
 
-        const activeEl = listEl.querySelector(".detail-sidebar__item.is-current");
-        if (activeEl) {
-            const topPos = activeEl.offsetTop - listEl.offsetTop - listEl.clientHeight / 2 + activeEl.clientHeight / 2;
+        const activeItem = listEl.querySelector(".detail-sidebar__item.is-current");
+        if (activeItem) {
+            const topPos =
+                activeItem.offsetTop - listEl.offsetTop - listEl.clientHeight / 2 + activeItem.clientHeight / 2;
             listEl.scrollTo({ top: Math.max(0, topPos), behavior: "smooth" });
         }
     };
 
-    const initTarotDetailPage = async () => {
-        try {
-            const res = await fetch("./api/tarot.json");
-            if (!res.ok) return;
-            allCards = await res.json();
-        } catch (err) {
-            return;
+    const renderOrientationState = () => {
+        if (!activeCard) return;
+        const isRev = activeOrient === "reversed";
+        const side = activeCard[activeOrient] || activeCard.upright || {};
+        const keywordsStr = Array.isArray(side.keywords) ? side.keywords.join(" • ") : "";
+
+        const posterEl = document.getElementById("trd-poster-figure");
+        if (posterEl) {
+            posterEl.dataset.orientation = activeOrient;
+            posterEl.setAttribute(
+                "aria-label",
+                `Phóng to lá bài Tarot ${activeCard.label} - ${activeCard.name?.vi} (${isRev ? "Chiều Ngược" : "Chiều Xuôi"})`,
+            );
         }
 
-        if (!Array.isArray(allCards) || !allCards.length) return;
+        const orientBadge = document.getElementById("trd-orient-badge");
+        if (orientBadge) {
+            orientBadge.dataset.orientation = activeOrient;
+            orientBadge.textContent = isRev ? "Đang xem: Lá bài Ngược (Reversed)" : "Đang xem: Lá bài Xuôi (Upright)";
+        }
 
-        const params = new URLSearchParams(window.location.search);
-        const slugParam = params.get("slug") || "";
-        const idParam = params.has("id") ? Number(params.get("id")) : -1;
-        const orientParam = params.get("orientation") === "reversed" ? "reversed" : "upright";
+        setText("trd-hero-message", side.message || side.summary || "");
+        setText("trd-hero-keywords", keywordsStr ? `Từ khóa: ${keywordsStr}` : "");
+        setText("trd-stat-orient", isRev ? "Chiều Ngược" : "Chiều Xuôi");
+        setText("trd-body-career", side.aspects?.career || activeCard.upright?.aspects?.career || "");
 
-        currentCard =
-            allCards.find((c) => c.slug === slugParam) ||
-            allCards.find((c) => Number(c.id) === idParam) ||
-            allCards.find((c) => Number(c.id) === 14) ||
-            allCards[0];
+        document.querySelectorAll("[data-set-orient]").forEach((btn) => {
+            const isMatch = btn.dataset.setOrient === activeOrient;
+            btn.classList.toggle("is-active", isMatch);
+            btn.setAttribute("aria-pressed", String(isMatch));
+        });
 
-        const curIdx = allCards.indexOf(currentCard);
-        const prevCard = allCards[(curIdx - 1 + allCards.length) % allCards.length];
-        const nextCard = allCards[(curIdx + 1) % allCards.length];
+        document.getElementById("trd-box-upright")?.classList.toggle("is-active-orient", !isRev);
+        document.getElementById("trd-box-reversed")?.classList.toggle("is-active-orient", isRev);
 
-        document.getElementById("trd-prev-btn")?.setAttribute("href", getCardHref(prevCard, "upright"));
-        document.getElementById("trd-next-btn")?.setAttribute("href", getCardHref(nextCard, "upright"));
+        // Đồng bộ ?orient= lên URL để bấm "Chia sẻ" giữ đúng chiều đang xem
+        const url = new URL(window.location.href);
+        url.searchParams.set("slug", activeCard.slug);
+        url.searchParams.set("orient", activeOrient);
+        window.history.replaceState({}, "", `${url.pathname}${url.search}`);
+    };
 
-        const suitInfo = SUIT_META[currentCard.suit] || SUIT_META.major;
-        const displayTitle = `${currentCard.roman ? `${currentCard.roman}. ` : ""}${currentCard.vn} (${currentCard.en})`;
+    const renderActiveCard = (card, orient = "upright") => {
+        if (!card) return;
+        activeCard = card;
+        activeOrient = orient === "reversed" ? "reversed" : "upright";
 
-        document.title = `${displayTitle} - Tarot Rider-Waite • Lịch Phong Thủy`;
+        const suitKey = getSuitKey(card);
+        const suitInfo = SUIT_META[suitKey] || SUIT_META.major;
+        const elemInfo = ELEMENT_META[card.element] || ELEMENT_META.fire;
+        const titleVi = card.name?.vi || "";
+        const titleEn = card.name?.en || "";
+        const backUrl = getBackImageUrl();
 
-        setText("trd-suit-badge", suitInfo.short);
-        setText("trd-id-badge", `Lá #${pad(currentCard.id)} / 78`);
-        setText("trd-suit-eyebrow", `${suitInfo.vn} • ${suitInfo.en}`);
-        setText("trd-main-title", displayTitle);
+        document.title = `${card.label}. ${titleVi} (${titleEn}) - Chi Tiết Tarot`;
+
+        // Prev / Next
+        const idx = tarotDeck.findIndex((c) => Number(c.id) === Number(card.id));
+        const prevCard = tarotDeck[(idx - 1 + tarotDeck.length) % tarotDeck.length];
+        const nextCard = tarotDeck[(idx + 1) % tarotDeck.length];
+
+        if (prevCard) {
+            const prevBtn = document.getElementById("trd-prev-btn");
+            if (prevBtn) {
+                prevBtn.href = getDetailHref(prevCard, "upright");
+                prevBtn.title = `Lá trước: ${prevCard.label}. ${prevCard.name?.vi}`;
+            }
+        }
+        if (nextCard) {
+            const nextBtn = document.getElementById("trd-next-btn");
+            if (nextBtn) {
+                nextBtn.href = getDetailHref(nextCard, "upright");
+                nextBtn.title = `Lá tiếp: ${nextCard.label}. ${nextCard.name?.vi}`;
+            }
+        }
+
+        setText("trd-suit-badge", suitInfo.label);
+        setText("trd-id-badge", `Lá #${pad(card.id)} / 78`);
+        setText("trd-suit-eyebrow", `${suitInfo.label} • ${suitInfo.en}`);
+        setText("trd-main-title", `${card.label}. ${titleVi} (${titleEn})`);
 
         const heroImg = document.getElementById("trd-hero-img");
         if (heroImg) {
-            heroImg.src = getCardImgUrl(currentCard);
-            heroImg.alt = `Lá bài Tarot ${displayTitle}`;
+            heroImg.onerror = () => {
+                heroImg.onerror = null;
+                heroImg.src = backUrl;
+            };
+            heroImg.src = getCardImageUrl(card);
+            heroImg.alt = `Lá bài Tarot ${card.label} - ${titleVi} (${titleEn})`;
+            heroImg.width = 800;
+            heroImg.height = 1200;
         }
 
+        // 4 thẻ thông số
         setText("trd-stat-suit", suitInfo.en);
-        setText("trd-stat-suit-vn", suitInfo.vn);
-        setText("trd-stat-element", suitInfo.element);
+        setText("trd-stat-suit-vn", suitInfo.countLabel);
+        const elemIconEl = document.getElementById("trd-stat-elem-icon");
+        if (elemIconEl) elemIconEl.src = elemInfo.icon;
+        setText("trd-stat-element", elemInfo.label);
         setText("trd-stat-domain", suitInfo.domain);
-        document.getElementById("trd-stat-elem-icon")?.setAttribute("src", suitInfo.icon);
-        setText("trd-stat-roman", `${currentCard.roman || pad(currentCard.id)} • #${pad(currentCard.id)}`);
-        setText("trd-stat-en", currentCard.en);
+        setText("trd-stat-roman", `${card.label} • #${pad(card.id)}`);
+        setText("trd-stat-en", titleEn);
 
-        setText("trd-up-keywords", currentCard.keywords_upright);
-        setText("trd-up-msg", currentCard.msg_upright);
-        setText("trd-rev-keywords", currentCard.keywords_reversed);
-        setText("trd-rev-msg", currentCard.msg_reversed);
-        setText("trd-body-career", currentCard.career);
-        setText("trd-suit-guide-title", `Đặc Tính Nguyên Tố • ${suitInfo.vn}`);
-        setText("trd-suit-guide-desc", suitInfo.guide);
+        // Đối chiếu 2 chiều Xuôi & Ngược
+        const up = card.upright || {};
+        const rev = card.reversed || {};
+        setText("trd-up-keywords", Array.isArray(up.keywords) ? up.keywords.join(", ") : "");
+        setText("trd-up-msg", `${up.summary || ""} ${up.message || ""}`.trim());
+        setText("trd-rev-keywords", Array.isArray(rev.keywords) ? rev.keywords.join(", ") : "");
+        setText("trd-rev-msg", `${rev.summary || ""} ${rev.message || ""}`.trim());
 
-        applyOrientationState(orientParam, { updateUrl: false });
-        renderRelatedSuitCards();
-        renderSidebar();
+        setText("trd-suit-guide-title", suitInfo.guideTitle);
+        setText("trd-suit-guide-desc", suitInfo.guideDesc);
 
-        // Công tắc Xuôi / Ngược
+        renderOrientationState();
+        renderRelatedCards(card);
+        renderSidebarList();
+    };
+
+    const initTarotDetailPage = async () => {
+        const res = await fetch("./api/tarot.json")
+            .then((r) => (r.ok ? r.json() : []))
+            .catch(() => []);
+
+        tarotDeck = Array.isArray(res) ? res : [];
+        if (!tarotDeck.length) return;
+
+        const params = new URLSearchParams(window.location.search);
+        const slugParam = params.get("slug") || "";
+        const idParam = params.has("id") ? Number(params.get("id")) : NaN;
+        const orientParam = params.get("orient") === "reversed" ? "reversed" : "upright";
+
+        const targetCard =
+            (!Number.isNaN(idParam) && tarotDeck.find((c) => Number(c.id) === idParam)) ||
+            tarotDeck.find((c) => c.slug === slugParam) ||
+            tarotDeck.find((c) => Number(c.id) === 14) ||
+            tarotDeck[0];
+
+        renderActiveCard(targetCard, orientParam);
+
+        // Công tắc gạt Chiều Xuôi / Ngược
         document.querySelectorAll("[data-set-orient]").forEach((btn) => {
-            btn.addEventListener("click", () => applyOrientationState(btn.dataset.setOrient, { updateUrl: true }));
+            btn.addEventListener("click", () => {
+                activeOrient = btn.dataset.setOrient === "reversed" ? "reversed" : "upright";
+                renderOrientationState();
+            });
         });
 
-        // Lightbox phóng to (Chuột + Bàn phím)
-        const poster = document.getElementById("trd-poster-figure");
-        poster?.addEventListener("click", openLightbox);
-        poster?.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                openLightbox();
+        // Lightbox (Click + bàn phím Enter/Space)
+        const posterEl = document.getElementById("trd-poster-figure");
+        const openPosterLightbox = () => {
+            if (!activeCard) return;
+            const imgSrc = document.getElementById("trd-hero-img")?.src || getCardImageUrl(activeCard);
+            const caption = `${activeCard.label}. ${activeCard.name?.vi} (${activeCard.name?.en}) — ${activeOrient === "reversed" ? "Chiều Ngược" : "Chiều Xuôi"}`;
+            openLightbox(imgSrc, caption, activeOrient);
+        };
+
+        posterEl?.addEventListener("click", openPosterLightbox);
+        posterEl?.addEventListener("keydown", (e) => {
+            if (e.key !== "Enter" && e.key !== " ") return;
+            e.preventDefault();
+            openPosterLightbox();
+        });
+
+        // Sidebar lọc 5 Bộ & tìm kiếm
+        document.getElementById("trd-sidebar-search")?.addEventListener("input", renderSidebarList);
+
+        document.querySelectorAll("#trd-sidebar-filters [data-trd-filter]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                activeSuitFilter = btn.dataset.trdFilter || "all";
+                document.querySelectorAll("#trd-sidebar-filters [data-trd-filter]").forEach((b) => {
+                    const isMatch = b === btn;
+                    b.classList.toggle("is-active", isMatch);
+                    b.setAttribute("aria-pressed", String(isMatch));
+                });
+                renderSidebarList();
+            });
+        });
+
+        // Nút Chia sẻ
+        const shareBtn = document.getElementById("trd-share-btn");
+        const shareLabel = document.getElementById("trd-share-label");
+        shareBtn?.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                if (shareLabel) {
+                    shareLabel.textContent = "Đã sao chép!";
+                    setTimeout(() => {
+                        shareLabel.textContent = "Chia sẻ";
+                    }, 2000);
+                }
+            } catch (err) {
+                // Trình duyệt không hỗ trợ clipboard
             }
         });
+
         document.getElementById("detail-lightbox-close")?.addEventListener("click", closeLightbox);
         document.getElementById("detail-lightbox-backdrop")?.addEventListener("click", closeLightbox);
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") closeLightbox();
         });
-
-        // Bộ lọc Sidebar 78 lá
-        document.getElementById("trd-sidebar-search")?.addEventListener("input", renderSidebar);
-        document.getElementById("trd-sidebar-filters")?.addEventListener("click", (e) => {
-            const btn = e.target.closest("[data-trd-filter]");
-            if (!btn) return;
-            activeSuitFilter = btn.dataset.trdFilter || "all";
-            document.querySelectorAll("[data-trd-filter]").forEach((b) => {
-                const isSel = b === btn;
-                b.classList.toggle("is-active", isSel);
-                b.setAttribute("aria-pressed", String(isSel));
-            });
-            renderSidebar();
-        });
-
-        // Sao chép liên kết chia sẻ
-        const shareBtn = document.getElementById("trd-share-btn");
-        const shareLabel = document.getElementById("trd-share-label");
-        if (shareBtn && shareLabel) {
-            shareBtn.onclick = async () => {
-                try {
-                    await navigator.clipboard.writeText(window.location.href);
-                    shareLabel.textContent = "Đã sao chép!";
-                    setTimeout(() => {
-                        shareLabel.textContent = "Chia sẻ";
-                    }, 2000);
-                } catch (e) {
-                    shareLabel.textContent = "Chia sẻ";
-                }
-            };
-        }
     };
 
     document.addEventListener("DOMContentLoaded", initTarotDetailPage);

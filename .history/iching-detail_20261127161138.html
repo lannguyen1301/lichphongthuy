@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết 64 Quẻ Kinh Dịch (Chu Dịch) - Lịch Phong Thủy</title>
+    <meta name="description"
+        content="Luận giải chi tiết 64 Quẻ Kinh Dịch chuẩn Văn Vương: Thẻ bài tranh khắc gỗ, Đồ hình 6 hào, Nội Ngoại quái, Thoán Từ, Tượng Từ, lời khuyên ứng dụng và 3 quẻ biến liên quan." />
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="./assets/js/script.js"></script>
+</head>
+
+<body>
+    <!-- 1. Header dùng chung -->
+    <header id="header" class="header"></header>
+    <script>
+        load("#header", "./templates/header.html");
+    </script>
+
+    <!-- 2. Sidebar dùng chung -->
+    <div id="sidebar-root"></div>
+    <script>
+        load("#sidebar-root", "./templates/sidebar.html");
+    </script>
+
+    <!-- 3. Main Bento Detail: Chi Tiết Quẻ Kinh Dịch -->
+    <main id="main" class="main detail-page div-detail-page" itemscope itemtype="https://schema.org/Article">
+        <div class="container">
+            <!-- THANH ĐIỀU HƯỚNG ĐẦU TRANG -->
+            <nav class="detail-page__top-bar" aria-label="Điều hướng chi tiết 64 Quẻ Kinh Dịch">
+                <div class="detail-page__top-left">
+                    <a href="./utilities.html#divination/iching" class="btn detail-page__back-btn" id="icd-back-link"
+                        title="Quay về trang Gieo Quẻ Kinh Dịch">
+                        <span aria-hidden="true">&#8592;</span>
+                        <span>Quay lại Gieo Quẻ</span>
+                    </a>
+
+                    <div class="detail-page__badges">
+                        <span class="detail-page__cat-pill" id="icd-num-badge">Quẻ số 14</span>
+                        <span class="detail-page__date-pill" id="icd-fortune-badge">Đại Cát</span>
+                    </div>
+                </div>
+
+                <div class="detail-page__top-right">
+                    <a href="./iching-detail.html?slug=13-dong-nhan" class="btn detail-page__step-btn" id="icd-prev-btn"
+                        title="Xem quẻ đứng trước">
+                        <span aria-hidden="true">&#10094;</span>
+                        <span class="detail-page__step-text">Quẻ trước</span>
+                    </a>
+
+                    <a href="./iching-detail.html?slug=15-khiem" class="btn detail-page__step-btn" id="icd-next-btn"
+                        title="Xem quẻ kế tiếp">
+                        <span class="detail-page__step-text">Quẻ tiếp</span>
+                        <span aria-hidden="true">&#10095;</span>
+                    </a>
+
+                    <button type="button" class="btn detail-page__share-btn" id="icd-share-btn"
+                        title="Sao chép liên kết quẻ Kinh Dịch này">
+                        <span id="icd-share-label" aria-live="polite">Chia sẻ</span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- TẦNG 1: HERO BENTO QUẺ KINH DỊCH (TÍCH HỢP THẺ BÀI 3:4 TỪ iching-card.json) -->
+            <article class="detail-hero div-detail-hero" aria-labelledby="icd-main-title">
+                <div class="div-detail-hero__iching-grid iching-hero-grid">
+                    <!-- CỘT TRÁI: THẺ BÀI KINH DỊCH 3:4 CHUẨN DATA-*, A11Y & SCHEMA.ORG/VISUALARTWORK -->
+                    <div class="iching-card" id="icd-card-shell" itemscope itemtype="https://schema.org/VisualArtwork"
+                        data-hex-id="14" data-hex-slug="14-hoa-thien-dai-huu" data-element="metal"
+                        data-fortune-code="dai_cat" data-ma-hao="111101">
+                        <meta itemprop="artform" content="Woodcut Vector Illustration" />
+                        <meta itemprop="keywords" id="icd-schema-keywords" content="Đại Hữu, Kinh Dịch" />
+
+                        <figure class="iching-card__poster" id="icd-card-figure" role="button" tabindex="0"
+                            aria-haspopup="dialog" aria-controls="detail-lightbox"
+                            aria-label="Phóng to thẻ bài Quẻ số 14: Hỏa Thiên Đại Hữu"
+                            title="Bấm hoặc nhấn Enter để phóng to thẻ bài Kinh Dịch" data-card-action="zoom"
+                            data-full-src="./assets/icons/iching/14-dai-huu.svg"
+                            data-caption="Quẻ 14: Hỏa Thiên Đại Hữu">
+                            <div class="iching-card__top-meta">
+                                <span class="iching-card__num" id="icd-card-num" title="Số thứ tự quẻ">#14</span>
+                                <span class="iching-card__hanzi" id="icd-card-hanzi" lang="zh-Hant"
+                                    title="Hán tự Phồn thể của quẻ" hidden></span>
+                                <span class="iching-card__status" id="icd-card-status">Đại Cát</span>
+                            </div>
+
+                            <img id="icd-hero-svg" src="./assets/icons/iching/14-dai-huu.svg"
+                                alt="Đồ hình Quẻ số 14: Hỏa Thiên Đại Hữu" width="800" height="1200" decoding="async"
+                                itemprop="image" class="iching-card__img" />
+
+                            <figcaption class="iching-card__caption">
+                                <strong class="iching-card__caption-title" id="icd-card-title" itemprop="name">
+                                    Hỏa Thiên Đại Hữu
+                                </strong>
+                                <span class="iching-card__focal" id="icd-card-focal" hidden></span>
+                                <span class="iching-card__zoom-pill" aria-hidden="true">🔍 Phóng to lá bài</span>
+                            </figcaption>
+                        </figure>
+
+                        <!-- 6 Vạch Hào xếp từ dưới lên trên (Ẩn với Screen Reader bằng aria-hidden="true") -->
+                        <div class="div-detail-hero__lines-stack iching-card__lines-box" id="icd-lines-stack"
+                            aria-hidden="true"></div>
+
+                        <!-- Liên kết mở bản tranh gốc trong tab mới chuẩn bảo mật -->
+                        <a href="./assets/icons/iching/14-dai-huu.svg" target="_blank" rel="noopener noreferrer"
+                            class="iching-card__raw-link" id="icd-raw-art-link"
+                            title="Mở file tranh minh họa SVG gốc trong tab mới">
+                            <span>Mở tranh gốc SVG</span>
+                            <span aria-hidden="true">&#8599;</span>
+                        </a>
+                    </div>
+
+                    <!-- CỘT PHẢI: TIÊU ĐỀ, TƯỢNG QUẺ, TỪ KHÓA, THOÁN TỪ & GIẢI NGHĨA 2 VẾ -->
+                    <div class="detail-hero__info">
+                        <div class="detail-hero__eyebrow-group">
+                            <span class="detail-hero__occasion-tag">
+                                <img src="./assets/icons/ying-yang-2.svg" alt="" aria-hidden="true"
+                                    class="detail-hero__occasion-icon icon" />
+                                <span id="icd-trigrams-eyebrow">
+                                    Nội quái: Càn (Trời) • Ngoại quái: Ly (Lửa)
+                                </span>
+                            </span>
+
+                            <h1 class="detail-hero__title" id="icd-main-title" itemprop="headline">
+                                Quẻ 14: Hỏa Thiên Đại Hữu
+                            </h1>
+                            <p class="div-detail-hero__subtitle" id="icd-full-name" itemprop="description">
+                                Hỏa Thiên Đại Hữu (Càn hạ - Ly thượng)
+                            </p>
+
+                            <!-- Tượng quẻ & Dải Từ khóa (Tự hiện khi quẻ có trong iching-card.json) -->
+                            <div class="iching-card-meta" id="icd-card-meta-box" hidden>
+                                <div class="iching-card-meta__omens" id="icd-omen-list"></div>
+                                <ul class="iching-card-meta__keywords" id="icd-keywords-list"
+                                    aria-label="Từ khóa cốt lõi của quẻ"></ul>
+                            </div>
+                        </div>
+
+                        <blockquote class="detail-hero__quote-box">
+                            <p class="detail-hero__quote-text" id="icd-hero-quote"></p>
+                            <cite class="detail-hero__quote-author" id="icd-hero-cite">— Chu Dịch • Thoán Từ</cite>
+                        </blockquote>
+
+                        <!-- Nút Accordion bật/tắt Giải nghĩa 2 vế Trái / Phải từ iching-card.json -->
+                        <div class="iching-pair-box" id="icd-pair-wrapper" hidden>
+                            <button type="button" class="btn iching-pair-box__toggle" id="icd-pair-toggle-btn"
+                                data-card-action="toggle-pair" aria-expanded="false" aria-controls="icd-card-pair-panel"
+                                title="Bấm để mở hoặc đóng giải nghĩa song hành 2 vế của thẻ bài">
+                                <span>Xem giải nghĩa 2 vế (Tượng &amp; Từ trên thẻ bài)</span>
+                                <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true"
+                                    class="iching-pair-box__arrow icon" />
+                            </button>
+
+                            <div class="iching-pair-box__panel" id="icd-card-pair-panel" role="region"
+                                aria-label="Giải nghĩa 2 vế trái phải của thẻ bài" tabindex="-1" hidden>
+                                <div class="iching-pair-box__col">
+                                    <strong>Vế trái (Tượng Quẻ)</strong>
+                                    <p id="icd-pair-left"></p>
+                                </div>
+                                <div class="iching-pair-box__col">
+                                    <strong>Vế phải (Lời Răn)</strong>
+                                    <p id="icd-pair-right"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-hero__action-row">
+                            <a href="./utilities.html#divination/iching" class="btn detail-hero__calendar-btn"
+                                title="Mở công cụ gieo 3 đồng xu Lục Hào">
+                                <img src="./assets/icons/ying-yang-2.svg" alt="" aria-hidden="true" class="icon" />
+                                <span>Gieo quẻ mới ngay</span>
+                            </a>
+                            <a href="./bazi.html" class="btn detail-page__step-btn"
+                                title="Mở công cụ Lập Lá Số Bát Tự Tử Bình">
+                                <span>Đối chiếu Bát Tự <span aria-hidden="true">&#8594;</span></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DẢI 4 THẺ THÔNG SỐ CẤU TRÚC QUẺ -->
+                <div class="detail-hero__stats-grid" aria-label="Thông số cấu trúc quẻ Kinh Dịch">
+                    <div class="detail-stat-card" title="Thứ tự quẻ theo Kinh Dịch Văn Vương">
+                        <div class="detail-stat-card__icon-box">
+                            <img src="./assets/icons/ying-yang-2.svg" alt="" aria-hidden="true"
+                                class="detail-stat-card__zodiac" />
+                        </div>
+                        <div class="detail-stat-card__content">
+                            <span class="detail-stat-card__label">Thứ tự Văn Vương</span>
+                            <strong class="detail-stat-card__value" id="icd-stat-num">Quẻ #14 / 64</strong>
+                            <span class="detail-stat-card__sub" id="icd-stat-short">Quẻ Đại Hữu</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-stat-card" title="Mức độ cát hung và tỷ lệ hào Dương / Âm">
+                        <div class="detail-stat-card__icon-box">
+                            <img src="./assets/icons/sparkle.svg" alt="" aria-hidden="true"
+                                class="detail-stat-card__zodiac" />
+                        </div>
+                        <div class="detail-stat-card__content">
+                            <span class="detail-stat-card__label">Tính chất cát hung</span>
+                            <strong class="detail-stat-card__value" id="icd-stat-fortune">Đại Cát</strong>
+                            <span class="detail-stat-card__sub" id="icd-stat-ratio">5 Dương • 1 Âm</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-stat-card" id="icd-stat-lower-card" title="Hạ quái đại diện nền tảng bên trong">
+                        <div class="detail-stat-card__icon-box">
+                            <img src="./assets/icons/fengshui/lucdieu-daian.svg" alt="" aria-hidden="true"
+                                class="detail-stat-card__zodiac" />
+                        </div>
+                        <div class="detail-stat-card__content">
+                            <span class="detail-stat-card__label">Nội quái (Hạ quái)</span>
+                            <strong class="detail-stat-card__value" id="icd-stat-lower">Càn (Trời)</strong>
+                            <span class="detail-stat-card__sub" id="icd-stat-lower-sub">Hào 1 – 2 – 3 (Nền tảng)</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-stat-card" id="icd-stat-upper-card"
+                        title="Thượng quái đại diện biểu hiện bên ngoài">
+                        <div class="detail-stat-card__icon-box">
+                            <img src="./assets/icons/fengshui/hoang-dao.svg" alt="" aria-hidden="true"
+                                class="detail-stat-card__zodiac" />
+                        </div>
+                        <div class="detail-stat-card__content">
+                            <span class="detail-stat-card__label">Ngoại quái (Thượng quái)</span>
+                            <strong class="detail-stat-card__value" id="icd-stat-upper">Ly (Lửa)</strong>
+                            <span class="detail-stat-card__sub" id="icd-stat-upper-sub">Hào 4 – 5 – 6 (Biểu hiện)</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- TẦNG 2: NỘI DUNG LUẬN GIẢI (8 CỘT) & SIDEBAR 64 QUẺ (4 CỘT) -->
+            <div class="row detail-page__content-row">
+                <div class="col-8 col-lg-12">
+                    <section class="detail-article" aria-label="Luận giải chi tiết quẻ Kinh Dịch"
+                        itemprop="articleBody">
+                        <header class="detail-article__head">
+                            <h2 class="detail-article__heading">Luận Giải Chi Tiết &amp; Ứng Dụng</h2>
+                            <span class="detail-article__type-tag" id="icd-article-tag">Chu Dịch 64 Quẻ</span>
+                        </header>
+
+                        <div class="div-detail-blocks">
+                            <article class="div-detail-block">
+                                <h3 class="div-detail-block__title">1. Thoán Từ (Lời Phán Chung Của Quẻ)</h3>
+                                <p class="div-detail-block__text" id="icd-body-judgment"></p>
+                            </article>
+
+                            <article class="div-detail-block">
+                                <h3 class="div-detail-block__title">
+                                    2. Tượng Từ (Hình Tượng Tự Nhiên &amp; Đạo Lý)
+                                </h3>
+                                <p class="div-detail-block__text" id="icd-body-image"></p>
+                            </article>
+
+                            <article class="div-detail-block div-detail-block--highlight">
+                                <h3 class="div-detail-block__title">
+                                    3. Diễn Giải Thực Tiễn &amp; Lời Khuyên Hành Động
+                                </h3>
+                                <p class="div-detail-block__text" id="icd-body-advice"></p>
+                            </article>
+                        </div>
+
+                        <!-- 3 QUẺ BIẾN LIÊN QUAN (TỰ ĐỘNG TÍNH TỪ 6 HÀO) -->
+                        <section class="div-related-section" aria-labelledby="icd-related-heading">
+                            <header class="div-related-section__head">
+                                <div>
+                                    <h3 class="div-related-section__title" id="icd-related-heading">
+                                        3 Quẻ Biến Liên Quan (Hỗ Quái • Thác Quái • Tống Quái)
+                                    </h3>
+                                    <p class="div-related-section__sub">
+                                        Khám phá diễn biến ẩn sâu bên trong, mặt đối lập và góc nhìn đảo ngược của
+                                        quẻ này
+                                    </p>
+                                </div>
+                            </header>
+
+                            <div class="div-related-grid" id="icd-related-grid"></div>
+                        </section>
+                    </section>
+                </div>
+
+                <!-- SIDEBAR PHẢI STICKY: TRA CỨU NHANH 64 QUẺ -->
+                <div class="col-4 col-lg-12">
+                    <aside class="detail-sidebar" aria-label="Danh sách tra cứu nhanh 64 Quẻ Kinh Dịch">
+                        <div class="detail-sidebar__card">
+                            <div class="detail-sidebar__head">
+                                <h2 class="detail-sidebar__title">64 Quẻ Kinh Dịch</h2>
+                                <span class="detail-sidebar__count" id="icd-sidebar-count">64 quẻ</span>
+                            </div>
+
+                            <div class="div-sidebar-search" role="search">
+                                <label for="icd-sidebar-search" class="util-sr-only">Tìm nhanh trong 64 quẻ</label>
+                                <input type="search" id="icd-sidebar-search" class="util-field__input"
+                                    placeholder="Tìm số hoặc tên quẻ..." />
+                            </div>
+
+                            <div class="div-sidebar-chips" id="icd-sidebar-filters" role="group"
+                                aria-label="Lọc 64 quẻ theo cát hung">
+                                <button type="button" class="div-sidebar-chip is-active" data-icd-filter="all"
+                                    aria-pressed="true" aria-controls="icd-sidebar-list">
+                                    Tất cả
+                                </button>
+                                <button type="button" class="div-sidebar-chip" data-icd-filter="Đại Cát"
+                                    aria-pressed="false" aria-controls="icd-sidebar-list">
+                                    Đại Cát
+                                </button>
+                                <button type="button" class="div-sidebar-chip" data-icd-filter="Cát Hanh"
+                                    aria-pressed="false" aria-controls="icd-sidebar-list">
+                                    Cát Hanh
+                                </button>
+                                <button type="button" class="div-sidebar-chip" data-icd-filter="Bình Hòa"
+                                    aria-pressed="false" aria-controls="icd-sidebar-list">
+                                    Bình Hòa
+                                </button>
+                                <button type="button" class="div-sidebar-chip" data-icd-filter="Thận Trọng"
+                                    aria-pressed="false" aria-controls="icd-sidebar-list">
+                                    Thận Trọng
+                                </button>
+                            </div>
+
+                            <div class="detail-sidebar__list" id="icd-sidebar-list"></div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- LIGHTBOX PHÓNG TO THẺ BÀI KINH DỊCH (Tái sử dụng .detail-lightbox từ _detail.scss) -->
+    <div class="detail-lightbox" id="detail-lightbox" role="dialog" aria-modal="true"
+        aria-label="Xem thẻ bài Kinh Dịch phóng to" hidden>
+        <div class="detail-lightbox__backdrop" id="detail-lightbox-backdrop" aria-hidden="true"></div>
+        <figure class="detail-lightbox__figure">
+            <button type="button" class="detail-lightbox__close" id="detail-lightbox-close"
+                aria-label="Đóng ảnh phóng to" title="Đóng (Esc)">
+                &#10005;
+            </button>
+            <img src="" alt="" class="detail-lightbox__img iching-lightbox-img" id="detail-lightbox-img" />
+            <figcaption class="detail-lightbox__caption" id="detail-lightbox-caption"></figcaption>
+        </figure>
+    </div>
+
+    <!-- 4. Footer dùng chung -->
+    <footer id="footer" class="footer"></footer>
+    <script>
+        load("#footer", "./templates/footer.html");
+    </script>
+
+    <!-- 5. Bộ Script Modular -->
+    <script src="./assets/js/lunar-engine.js"></script>
+    <script src="./assets/js/header.js"></script>
+    <script src="./assets/js/sidebar.js"></script>
+    <script src="./assets/js/footer.js"></script>
+    <script src="./assets/js/converter-modal.js"></script>
+    <script src="./assets/js/iching-detail.js"></script>
+</body>
+
+</html>

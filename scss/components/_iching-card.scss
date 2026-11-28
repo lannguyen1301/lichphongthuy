@@ -1,15 +1,15 @@
 // scss/components/_iching-card.scss
-// Component Thẻ bài Kinh Dịch khắc gỗ 3:4 (Dùng cho iching-detail.html & tái sử dụng được ở utilities.html)
+// Component Thẻ bài Kinh Dịch 800x1200 (2:3) cho iching-detail.html
 @use "../abstracts" as abs;
 
 .iching-hero-grid {
     display: grid;
-    grid-template-columns: 28rem minmax(0, 1fr);
+    grid-template-columns: 30rem minmax(0, 1fr);
     align-items: start;
     gap: 2.8rem;
 
     @include abs.screen(lg) {
-        grid-template-columns: 24rem minmax(0, 1fr);
+        grid-template-columns: 26rem minmax(0, 1fr);
         gap: 2rem;
     }
 
@@ -23,34 +23,34 @@
     @extend %flexColumn;
     gap: 1.2rem;
     width: 100%;
-    max-width: 28rem;
+    max-width: 30rem;
 
-    // Điểm nhấn viền theo Ngũ Hành đọc từ data-element
-    &[data-element="kim"] {
+    // Điểm nhấn viền theo Ngũ Hành chuẩn tiếng Anh (từ iching-cards.json)
+    &[data-element="metal"] {
         --iching-accent: #eab308;
     }
-    &[data-element="moc"] {
+    &[data-element="wood"] {
         --iching-accent: #10b981;
     }
-    &[data-element="thuy"] {
+    &[data-element="water"] {
         --iching-accent: #3b82f6;
     }
-    &[data-element="hoa"] {
-        --iching-accent: #d92b2b;
+    &[data-element="fire"] {
+        --iching-accent: #ef4444;
     }
-    &[data-element="tho"] {
+    &[data-element="earth"] {
         --iching-accent: #f59e0b;
     }
 
     &__poster {
         position: relative;
         width: 100%;
-        aspect-ratio: 3 / 4;
+        aspect-ratio: 2 / 3;
         border-radius: 2.2rem;
         overflow: hidden;
-        background-color: #0b0b0c;
+        background-color: var(--bg-surface);
         border: 2px solid var(--iching-accent, var(--primary-color));
-        box-shadow: 0 1.2rem 3rem var(--shadow-color);
+        box-shadow: 0 1.4rem 3.2rem var(--shadow-color);
         cursor: zoom-in;
         @extend %transInteractive;
 
@@ -60,18 +60,42 @@
             box-shadow: 0 1.8rem 3.8rem var(--shadow-color);
 
             .iching-card__img {
-                transform: scale(1.04);
+                transform: scale(1.03);
             }
 
             .iching-card__zoom-pill {
-                background-color: var(--primary-color);
-                border-color: var(--primary-color);
-                color: #ffffff;
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     }
 
-    // Chế độ fallback khi quẻ chưa có ảnh khắc gỗ 3:4 (hiển thị icon đồ hình 70x70 căn giữa)
+    // Với lá bài 800x1200 đã có sẵn khung + chữ Hán + tên quẻ -> giữ mặt lá bài thoáng 100%, chỉ hiện nút phóng to khi hover
+    &:not(.is-fallback-art) {
+        .iching-card__top-meta,
+        .iching-card__caption-title,
+        .iching-card__focal {
+            display: none;
+        }
+
+        .iching-card__caption {
+            padding: 1.2rem;
+            background: none;
+            align-items: flex-end;
+        }
+
+        .iching-card__zoom-pill {
+            opacity: 0;
+            transform: translateY(0.4rem);
+            background-color: rgba(15, 23, 42, 0.84);
+            border-color: rgba(255, 255, 255, 0.28);
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease;
+        }
+    }
+
+    // Chế độ fallback khi chưa có ảnh 800x1200 (hiện icon 70x70 căn giữa + đầy đủ metadata)
     &.is-fallback-art &__poster {
         background-color: var(--bg-surface);
         @extend %flexCenter;
@@ -112,7 +136,7 @@
         height: 2.8rem;
         padding: 0 0.9rem;
         border-radius: 99.9rem;
-        background-color: rgba(10, 10, 12, 0.78);
+        background-color: rgba(15, 23, 42, 0.8);
         border: 1px solid rgba(255, 255, 255, 0.22);
         color: #ffffff;
         font-size: 1.15rem;
@@ -175,19 +199,21 @@
     &__zoom-pill {
         width: fit-content;
         margin-top: 0.3rem;
-        padding: 0.35rem 1rem;
+        padding: 0.45rem 1.1rem;
         border-radius: 99.9rem;
-        background-color: rgba(255, 255, 255, 0.16);
+        background-color: rgba(15, 23, 42, 0.8);
         border: 1px solid rgba(255, 255, 255, 0.32);
         color: #ffffff;
         font-size: 1.15rem;
-        font-weight: 700;
+        font-weight: 800;
         backdrop-filter: blur(6px);
         @extend %transTheme;
     }
 
     &__lines-box {
-        padding: 1.2rem 1.6rem;
+        @extend %flexColumn;
+        gap: 0.65rem;
+        padding: 1.3rem 1.6rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
         border-radius: 1.6rem;
@@ -196,11 +222,11 @@
     &__raw-link {
         @extend %flexCenter;
         gap: 0.6rem;
-        height: 3.8rem;
+        height: 4rem;
         border-radius: 1.2rem;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
-        font-size: 1.25rem;
+        font-size: 1.3rem;
         font-weight: 700;
         color: var(--text-muted);
         @extend %transInteractive;
@@ -214,7 +240,35 @@
     }
 }
 
-// Tượng quẻ & Dải Từ khóa bên cột phải Hero
+// Badge trạng thái cát hung trên thanh top-bar của iching-detail.html
+#icd-fortune-badge {
+    &[data-status-code="dai_cat"] {
+        background-color: #059669;
+        border-color: #059669;
+        color: #ffffff;
+    }
+    &[data-status-code="cat"] {
+        background-color: #2563eb;
+        border-color: #2563eb;
+        color: #ffffff;
+    }
+    &[data-status-code="binh_hoa"] {
+        background-color: #d97706;
+        border-color: #d97706;
+        color: #ffffff;
+    }
+    &[data-status-code="tieu_hung"] {
+        background-color: #ea580c;
+        border-color: #ea580c;
+        color: #ffffff;
+    }
+    &[data-status-code="hung"] {
+        background-color: #dc2626;
+        border-color: #dc2626;
+        color: #ffffff;
+    }
+}
+
 .iching-card-meta {
     @extend %flexColumn;
     gap: 1rem;
@@ -251,7 +305,6 @@
     }
 }
 
-// Hộp Accordion Giải nghĩa 2 vế Trái / Phải
 .iching-pair-box {
     @extend %flexColumn;
     gap: 1rem;
@@ -328,7 +381,7 @@
 }
 
 .iching-lightbox-img {
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 2 / 3;
     object-fit: contain;
     background-color: #0b0b0c;
 }

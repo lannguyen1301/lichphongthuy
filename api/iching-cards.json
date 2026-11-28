@@ -5,14 +5,30 @@
         "slug": "01-can-vi-thien",
         "name": "Càn Vi Thiên",
         "alias": "Thuần Càn",
-        "chinese": { "short": "乾", "full": "乾為天" },
-        "line_code": "111111",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
-            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        "chinese": {
+            "short": "乾",
+            "full": "乾為天"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "111111",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            },
+            "lower": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Khốn Long Đắc Thủy", "Tự Cường Bất Tức"],
         "keywords": ["Sáng tạo", "Chính trực", "Tiên phong", "Bền bỉ", "Lãnh đạo", "Thịnh vượng"],
         "couplet": {
@@ -23,7 +39,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/01-can-vi-thien",
             "alt": "Tranh minh họa quẻ Càn Vi Thiên với rồng vàng uốn lượn trong mây vờn viên ngọc minh châu rực lửa",
-            "focal_object": "Viên ngọc minh châu trên mây"
+            "focal_accent_object": "Viên ngọc minh châu trên mây"
         }
     },
     {
@@ -32,14 +48,30 @@
         "slug": "02-khon-vi-dia",
         "name": "Khôn Vi Địa",
         "alias": "Thuần Khôn",
-        "chinese": { "short": "坤", "full": "坤為地" },
-        "line_code": "000000",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
-            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        "chinese": {
+            "short": "坤",
+            "full": "坤為地"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "000000",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            },
+            "lower": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Hậu Đức Tải Vật", "Nhu Thuận Thành Công"],
         "keywords": ["Bao dung", "Nhu thuận", "Nuôi dưỡng", "Vững chãi", "Hợp tác", "Kiên nhẫn"],
         "couplet": {
@@ -50,7 +82,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/02-khon-vi-dia",
             "alt": "Tranh minh họa quẻ Khôn Vi Địa với hình tượng bó lúa chín trĩu hạt giữa cánh đồng",
-            "focal_object": "Bó lúa chín trĩu hạt giữa cánh đồng"
+            "focal_accent_object": "Bó lúa chín trĩu hạt giữa cánh đồng"
         }
     },
     {
@@ -59,14 +91,30 @@
         "slug": "03-thuy-loi-truan",
         "name": "Thủy Lôi Truân",
         "alias": null,
-        "chinese": { "short": "屯", "full": "水雷屯" },
-        "line_code": "100010",
-        "element": "water",
-        "trigrams": {
-            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
-            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        "chinese": {
+            "short": "屯",
+            "full": "水雷屯"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "100010",
+        "element": "thuy",
+        "trigrams": {
+            "upper": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            },
+            "lower": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Loạn Ty Vô Đầu", "Vạn Sự Khởi Đầu Nan"],
         "keywords": ["Gian nan", "Mầm non", "Tích lũy", "Kiên trì", "Tìm trợ lực", "Khởi đầu"],
         "couplet": {
@@ -77,7 +125,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/03-thuy-loi-truan",
             "alt": "Tranh minh họa quẻ Thủy Lôi Truân với hình tượng chồi non phá đá vươn lên",
-            "focal_object": "Chồi non phá đá vươn lên"
+            "focal_accent_object": "Chồi non phá đá vươn lên"
         }
     },
     {
@@ -86,14 +134,30 @@
         "slug": "04-son-thuy-mong",
         "name": "Sơn Thủy Mông",
         "alias": null,
-        "chinese": { "short": "蒙", "full": "山水蒙" },
-        "line_code": "010001",
-        "element": "fire",
-        "trigrams": {
-            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
-            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        "chinese": {
+            "short": "蒙",
+            "full": "山水蒙"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "010001",
+        "element": "hoa",
+        "trigrams": {
+            "upper": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            },
+            "lower": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Tiểu Quỷ Thâu Tiền", "Khai Tâm Khai Trí"],
         "keywords": ["Học hỏi", "Khai mở", "Ngây thơ", "Khiêm cung", "Kỷ luật", "Dẫn dắt"],
         "couplet": {
@@ -104,7 +168,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/04-son-thuy-mong",
             "alt": "Tranh minh họa quẻ Sơn Thủy Mông với hình tượng chiếc đèn lồng soi đường dưới chân núi",
-            "focal_object": "Chiếc đèn lồng soi đường dưới chân núi"
+            "focal_accent_object": "Chiếc đèn lồng soi đường dưới chân núi"
         }
     },
     {
@@ -113,14 +177,30 @@
         "slug": "05-thuy-thien-nhu",
         "name": "Thủy Thiên Nhu",
         "alias": null,
-        "chinese": { "short": "需", "full": "水天需" },
-        "line_code": "111010",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
-            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        "chinese": {
+            "short": "需",
+            "full": "水天需"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "111010",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            },
+            "lower": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Minh Châu Xuất Thổ", "Đãi Thời Nhi Động"],
         "keywords": ["Chờ thời", "Dưỡng sức", "Tín thực", "Bình tĩnh", "Chuẩn bị", "An nhiên"],
         "couplet": {
@@ -131,7 +211,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/05-thuy-thien-nhu",
             "alt": "Tranh minh họa quẻ Thủy Thiên Nhu với hình tượng chén trà nghi lễ trên bàn đá chờ mưa",
-            "focal_object": "Chén trà nghi lễ trên bàn đá chờ mưa"
+            "focal_accent_object": "Chén trà nghi lễ trên bàn đá chờ mưa"
         }
     },
     {
@@ -140,14 +220,30 @@
         "slug": "06-thien-thuy-tung",
         "name": "Thiên Thủy Tụng",
         "alias": null,
-        "chinese": { "short": "訟", "full": "天水訟" },
-        "line_code": "010111",
-        "element": "fire",
-        "trigrams": {
-            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
-            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        "chinese": {
+            "short": "訟",
+            "full": "天水訟"
         },
-        "status": { "code": "hung", "label": "Hung" },
+        "line_code": "010111",
+        "element": "hoa",
+        "trigrams": {
+            "upper": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            },
+            "lower": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            }
+        },
+        "status": {
+            "code": "hung",
+            "label": "Hung"
+        },
         "hexagram_images": ["Nhị Nhân Tranh Lộ", "Hòa Vi Quý"],
         "keywords": ["Tranh chấp", "Bất đồng", "Thận trọng", "Hòa giải", "Công minh", "Lùi bước"],
         "couplet": {
@@ -158,7 +254,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/06-thien-thuy-tung",
             "alt": "Tranh minh họa quẻ Thiên Thủy Tụng với hình tượng chiếc cân cổ đặt giữa hai luồng khí",
-            "focal_object": "Chiếc cân cổ đặt giữa hai luồng khí"
+            "focal_accent_object": "Chiếc cân cổ đặt giữa hai luồng khí"
         }
     },
     {
@@ -167,14 +263,30 @@
         "slug": "07-dia-thuy-su",
         "name": "Địa Thủy Sư",
         "alias": null,
-        "chinese": { "short": "師", "full": "地水師" },
-        "line_code": "010000",
-        "element": "water",
-        "trigrams": {
-            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
-            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        "chinese": {
+            "short": "師",
+            "full": "地水師"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "010000",
+        "element": "thuy",
+        "trigrams": {
+            "upper": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            },
+            "lower": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Mã Đáo Thành Công", "Kỷ Luật Sinh Sức Mạnh"],
         "keywords": ["Kỷ luật", "Đoàn kết", "Chiến lược", "Tổ chức", "Chính nghĩa", "Quản trị"],
         "couplet": {
@@ -185,7 +297,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/07-dia-thuy-su",
             "alt": "Tranh minh họa quẻ Địa Thủy Sư với hình tượng lá cờ lệnh dựng giữa trận địa",
-            "focal_object": "Lá cờ lệnh dựng giữa trận địa"
+            "focal_accent_object": "Lá cờ lệnh dựng giữa trận địa"
         }
     },
     {
@@ -194,14 +306,30 @@
         "slug": "08-thuy-dia-ty",
         "name": "Thủy Địa Tỷ",
         "alias": null,
-        "chinese": { "short": "比", "full": "水地比" },
-        "line_code": "000010",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
-            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        "chinese": {
+            "short": "比",
+            "full": "水地比"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "000010",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            },
+            "lower": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Thuyền Thuận Bát Phong", "Thân Thiện Gắn Kết"],
         "keywords": ["Gắn kết", "Hòa hợp", "Đồng lòng", "Kết giao", "Tin cậy", "Chân thành"],
         "couplet": {
@@ -212,7 +340,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/08-thuy-dia-ty",
             "alt": "Tranh minh họa quẻ Thủy Địa Tỷ với hình tượng vòng ngọc bích liền mạch giữa dòng nước",
-            "focal_object": "Vòng ngọc bích liền mạch giữa dòng nước"
+            "focal_accent_object": "Vòng ngọc bích liền mạch giữa dòng nước"
         }
     },
     {
@@ -221,14 +349,30 @@
         "slug": "09-phong-thien-tieu-suc",
         "name": "Phong Thiên Tiểu Súc",
         "alias": null,
-        "chinese": { "short": "小畜", "full": "風天小畜" },
-        "line_code": "111011",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
-            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        "chinese": {
+            "short": "小畜",
+            "full": "風天小畜"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "111011",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            },
+            "lower": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Mật Vân Bất Vũ", "Tích Tiểu Thành Đại"],
         "keywords": ["Tích góp", "Kiềm chế", "Tỉ mỉ", "Chờ đợi", "Nuôi dưỡng", "Chậm rãi"],
         "couplet": {
@@ -239,7 +383,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/09-phong-thien-tieu-suc",
             "alt": "Tranh minh họa quẻ Phong Thiên Tiểu Súc với hình tượng hạt giống có cánh xoay trong gió",
-            "focal_object": "Hạt giống có cánh xoay trong gió"
+            "focal_accent_object": "Hạt giống có cánh xoay trong gió"
         }
     },
     {
@@ -248,14 +392,30 @@
         "slug": "10-thien-trach-ly",
         "name": "Thiên Trạch Lý",
         "alias": null,
-        "chinese": { "short": "履", "full": "天澤履" },
-        "line_code": "110111",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
-            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        "chinese": {
+            "short": "履",
+            "full": "天澤履"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "110111",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            },
+            "lower": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Phượng Hoàng Lạc Sơn", "Cẩn Trọng Giữ Lễ"],
         "keywords": ["Lễ nghĩa", "Thận trọng", "Đĩnh đạc", "Dũng cảm", "Hòa nhã", "Khuôn phép"],
         "couplet": {
@@ -266,7 +426,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/10-thien-trach-ly",
             "alt": "Tranh minh họa quẻ Thiên Trạch Lý với hình tượng phiến đá bước chân nghi lễ trước hổ dữ",
-            "focal_object": "Phiến đá bước chân nghi lễ trước hổ dữ"
+            "focal_accent_object": "Phiến đá bước chân nghi lễ trước hổ dữ"
         }
     },
     {
@@ -275,14 +435,30 @@
         "slug": "11-dia-thien-thai",
         "name": "Địa Thiên Thái",
         "alias": null,
-        "chinese": { "short": "泰", "full": "地天泰" },
-        "line_code": "111000",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
-            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        "chinese": {
+            "short": "泰",
+            "full": "地天泰"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "111000",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            },
+            "lower": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Hỷ Báo Tam Nguyên", "Thiên Địa Giao Hòa"],
         "keywords": ["Hanh thông", "Hòa hợp", "Thịnh trị", "Giao cảm", "Thuận lợi", "Mở rộng"],
         "couplet": {
@@ -293,7 +469,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/11-dia-thien-thai",
             "alt": "Tranh minh họa quẻ Địa Thiên Thái với hình tượng vòng nhật nguyệt giao hòa ở trung tâm",
-            "focal_object": "Vòng nhật nguyệt giao hòa ở trung tâm"
+            "focal_accent_object": "Vòng nhật nguyệt giao hòa ở trung tâm"
         }
     },
     {
@@ -302,14 +478,30 @@
         "slug": "12-thien-dia-bi",
         "name": "Thiên Địa Bĩ",
         "alias": null,
-        "chinese": { "short": "否", "full": "天地否" },
-        "line_code": "000111",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
-            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        "chinese": {
+            "short": "否",
+            "full": "天地否"
         },
-        "status": { "code": "hung", "label": "Hung" },
+        "line_code": "000111",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            },
+            "lower": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            }
+        },
+        "status": {
+            "code": "hung",
+            "label": "Hung"
+        },
         "hexagram_images": ["Hổ Lạc Hãm Khanh", "Ẩn Đức Tránh Họa"],
         "keywords": ["Bế tắc", "Cách trở", "Thu mình", "Tự thủ", "Kiên định", "Chờ xoay chuyển"],
         "couplet": {
@@ -320,7 +512,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/12-thien-dia-bi",
             "alt": "Tranh minh họa quẻ Thiên Địa Bĩ với hình tượng ổ khóa đá niêm phong giữa trời đất",
-            "focal_object": "Ổ khóa đá niêm phong giữa trời đất"
+            "focal_accent_object": "Ổ khóa đá niêm phong giữa trời đất"
         }
     },
     {
@@ -329,14 +521,30 @@
         "slug": "13-thien-hoa-dong-nhan",
         "name": "Thiên Hỏa Đồng Nhân",
         "alias": null,
-        "chinese": { "short": "同人", "full": "天火同人" },
-        "line_code": "101111",
-        "element": "fire",
-        "trigrams": {
-            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
-            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        "chinese": {
+            "short": "同人",
+            "full": "天火同人"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "101111",
+        "element": "hoa",
+        "trigrams": {
+            "upper": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            },
+            "lower": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Tiên Nhân Chỉ Lộ", "Đồng Tâm Hiệp Lực"],
         "keywords": ["Đồng tâm", "Cộng đồng", "Công minh", "Chia sẻ", "Kết nối", "Đại cuộc"],
         "couplet": {
@@ -347,7 +555,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/13-thien-hoa-dong-nhan",
             "alt": "Tranh minh họa quẻ Thiên Hỏa Đồng Nhân với hình tượng ngọn đuốc hiệu cháy sáng giữa đồng rộng",
-            "focal_object": "Ngọn đuốc hiệu cháy sáng giữa đồng rộng"
+            "focal_accent_object": "Ngọn đuốc hiệu cháy sáng giữa đồng rộng"
         }
     },
     {
@@ -356,14 +564,30 @@
         "slug": "14-hoa-thien-dai-huu",
         "name": "Hỏa Thiên Đại Hữu",
         "alias": null,
-        "chinese": { "short": "大有", "full": "火天大有" },
-        "line_code": "111101",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
-            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        "chinese": {
+            "short": "大有",
+            "full": "火天大有"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "111101",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            },
+            "lower": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Khảm Khố Đắc Bảo", "Phú Quý Minh Sáng"],
         "keywords": ["Sung túc", "Rực rỡ", "Quảng đại", "Thịnh vượng", "Chính đạo", "Sẻ chia"],
         "couplet": {
@@ -374,7 +598,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/14-hoa-thien-dai-huu",
             "alt": "Tranh minh họa quẻ Hỏa Thiên Đại Hữu với hình tượng mặt trời chính ngọ giữa đỉnh trời",
-            "focal_object": "Mặt trời chính ngọ giữa đỉnh trời"
+            "focal_accent_object": "Mặt trời chính ngọ giữa đỉnh trời"
         }
     },
     {
@@ -383,14 +607,30 @@
         "slug": "15-dia-son-khiem",
         "name": "Địa Sơn Khiêm",
         "alias": null,
-        "chinese": { "short": "謙", "full": "地山謙" },
-        "line_code": "001000",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
-            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        "chinese": {
+            "short": "謙",
+            "full": "地山謙"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "001000",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            },
+            "lower": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Nhị Nhân Phân Kim", "Khiêm Tốn Hữu Chung"],
         "keywords": ["Lui mình", "Ẩn nhẫn", "Khiêm tốn", "Nhường nhịn", "Giữ gìn", "Chân thật"],
         "couplet": {
@@ -401,7 +641,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/15-dia-son-khiem",
             "alt": "Tranh minh họa quẻ Địa Sơn Khiêm với hình tượng đỉnh núi ngọc ẩn dưới lòng đất phẳng",
-            "focal_object": "Đỉnh núi ngọc ẩn dưới lòng đất phẳng"
+            "focal_accent_object": "Đỉnh núi ngọc ẩn dưới lòng đất phẳng"
         }
     },
     {
@@ -410,14 +650,30 @@
         "slug": "16-loi-dia-du",
         "name": "Lôi Địa Dự",
         "alias": null,
-        "chinese": { "short": "豫", "full": "雷地豫" },
-        "line_code": "000100",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
-            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        "chinese": {
+            "short": "豫",
+            "full": "雷地豫"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "000100",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            },
+            "lower": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Thanh Long Đắc Vị", "Hòa Lạc Dự Phòng"],
         "keywords": ["Hân hoan", "Hứng khởi", "Dự bị", "Thuận lòng", "Sáng tạo", "Cảnh giác"],
         "couplet": {
@@ -428,7 +684,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/16-loi-dia-du",
             "alt": "Tranh minh họa quẻ Lôi Địa Dự với hình tượng chiếc trống đồng vang động trên đồi xuân",
-            "focal_object": "Chiếc trống đồng vang động trên đồi xuân"
+            "focal_accent_object": "Chiếc trống đồng vang động trên đồi xuân"
         }
     },
     {
@@ -437,14 +693,30 @@
         "slug": "17-trach-loi-tuy",
         "name": "Trạch Lôi Tùy",
         "alias": null,
-        "chinese": { "short": "隨", "full": "澤雷隨" },
-        "line_code": "100110",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
-            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        "chinese": {
+            "short": "隨",
+            "full": "澤雷隨"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "100110",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            },
+            "lower": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Thôi Xa Kháo Nhai", "Tùy Thời Ứng Biến"],
         "keywords": ["Linh hoạt", "Thuận thời", "Thích nghi", "Hòa nhập", "Cởi mở", "Chính đáng"],
         "couplet": {
@@ -455,7 +727,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/17-trach-loi-tuy",
             "alt": "Tranh minh họa quẻ Trạch Lôi Tùy với hình tượng chiếc thuyền nan xuôi dòng nước êm",
-            "focal_object": "Chiếc thuyền nan xuôi dòng nước êm"
+            "focal_accent_object": "Chiếc thuyền nan xuôi dòng nước êm"
         }
     },
     {
@@ -464,14 +736,30 @@
         "slug": "18-son-phong-co",
         "name": "Sơn Phong Cổ",
         "alias": null,
-        "chinese": { "short": "蠱", "full": "山風蠱" },
-        "line_code": "011001",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
-            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        "chinese": {
+            "short": "蠱",
+            "full": "山風蠱"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "011001",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            },
+            "lower": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Thôi Ma Đảo Thạch", "Chấn Chỉnh Cải Cách"],
         "keywords": ["Sửa sai", "Cải tổ", "Khắc phục", "Đổi mới", "Trách nhiệm", "Tỉnh thức"],
         "couplet": {
@@ -482,7 +770,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/18-son-phong-co",
             "alt": "Tranh minh họa quẻ Sơn Phong Cổ với hình tượng chiếc đỉnh đồng cổ được hàn gắn",
-            "focal_object": "Chiếc đỉnh đồng cổ được hàn gắn"
+            "focal_accent_object": "Chiếc đỉnh đồng cổ được hàn gắn"
         }
     },
     {
@@ -491,14 +779,30 @@
         "slug": "19-dia-trach-lam",
         "name": "Địa Trạch Lâm",
         "alias": null,
-        "chinese": { "short": "臨", "full": "地澤臨" },
-        "line_code": "110000",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
-            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        "chinese": {
+            "short": "臨",
+            "full": "地澤臨"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "110000",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            },
+            "lower": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Phát Chính Thi Nhân", "Tiến Tới Khai Mở"],
         "keywords": ["Thăng tiến", "Giám sát", "Nhân ái", "Phát triển", "Chủ động", "Nhìn xa"],
         "couplet": {
@@ -509,7 +813,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/19-dia-trach-lam",
             "alt": "Tranh minh họa quẻ Địa Trạch Lâm với hình tượng lầu vọng cảnh trên bờ đất cao",
-            "focal_object": "Lầu vọng cảnh trên bờ đất cao"
+            "focal_accent_object": "Lầu vọng cảnh trên bờ đất cao"
         }
     },
     {
@@ -518,14 +822,30 @@
         "slug": "20-phong-dia-quan",
         "name": "Phong Địa Quán",
         "alias": null,
-        "chinese": { "short": "觀", "full": "風地觀" },
-        "line_code": "000011",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
-            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        "chinese": {
+            "short": "觀",
+            "full": "風地觀"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "000011",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            },
+            "lower": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Hạn Bồng Phùng Hà", "Quan Sát Thấu Đáo"],
         "keywords": ["Quan sát", "Chiêm nghiệm", "Làm gương", "Tỉnh thức", "Tầm nhìn", "Điềm tĩnh"],
         "couplet": {
@@ -536,7 +856,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/20-phong-dia-quan",
             "alt": "Tranh minh họa quẻ Phong Địa Quán với hình tượng thiên nhãn soi rọi giữa tầng gió",
-            "focal_object": "Thiên nhãn soi rọi giữa tầng gió"
+            "focal_accent_object": "Thiên nhãn soi rọi giữa tầng gió"
         }
     },
     {
@@ -545,14 +865,30 @@
         "slug": "21-hoa-loi-phe-hap",
         "name": "Hỏa Lôi Phệ Hạp",
         "alias": null,
-        "chinese": { "short": "噬嗑", "full": "火雷噬嗑" },
-        "line_code": "100101",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
-            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        "chinese": {
+            "short": "噬嗑",
+            "full": "火雷噬嗑"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "100101",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            },
+            "lower": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Cơ Nhân Ngộ Thực", "Quyết Đoán Phá Ngại"],
         "keywords": ["Quyết đoán", "Công minh", "Tháo gỡ", "Minh bạch", "Kỷ cương", "Hành động"],
         "couplet": {
@@ -563,7 +899,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/21-hoa-loi-phe-hap",
             "alt": "Tranh minh họa quẻ Hỏa Lôi Phệ Hạp với hình tượng tia sét đỏ chẻ đôi tảng đá chắn lối",
-            "focal_object": "Tia sét đỏ chẻ đôi tảng đá chắn lối"
+            "focal_accent_object": "Tia sét đỏ chẻ đôi tảng đá chắn lối"
         }
     },
     {
@@ -572,14 +908,30 @@
         "slug": "22-son-hoa-bi",
         "name": "Sơn Hỏa Bí",
         "alias": null,
-        "chinese": { "short": "賁", "full": "山火賁" },
-        "line_code": "101001",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
-            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        "chinese": {
+            "short": "賁",
+            "full": "山火賁"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "101001",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            },
+            "lower": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Hỷ Khí Doanh Môn", "Văn Nhã Tinh Tế"],
         "keywords": ["Thẩm mỹ", "Trang nhã", "Văn hóa", "Lịch thiệp", "Hài hòa", "Chân chất"],
         "couplet": {
@@ -590,7 +942,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/22-son-hoa-bi",
             "alt": "Tranh minh họa quẻ Sơn Hỏa Bí với hình tượng đóa mẫu đơn nở rộ dưới chân núi",
-            "focal_object": "Đóa mẫu đơn nở rộ dưới chân núi"
+            "focal_accent_object": "Đóa mẫu đơn nở rộ dưới chân núi"
         }
     },
     {
@@ -599,14 +951,30 @@
         "slug": "23-son-dia-bac",
         "name": "Sơn Địa Bác",
         "alias": null,
-        "chinese": { "short": "剝", "full": "山地剝" },
-        "line_code": "000001",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
-            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        "chinese": {
+            "short": "剝",
+            "full": "山地剝"
         },
-        "status": { "code": "hung", "label": "Hung" },
+        "line_code": "000001",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            },
+            "lower": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            }
+        },
+        "status": {
+            "code": "hung",
+            "label": "Hung"
+        },
         "hexagram_images": ["Ưng Thước Đồng Lâm", "Bào Mòn Cần Thủ"],
         "keywords": ["Suy giảm", "Bào mòn", "Phòng thủ", "Buông bỏ", "Bảo toàn", "Tĩnh lặng"],
         "couplet": {
@@ -617,7 +985,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/23-son-dia-bac",
             "alt": "Tranh minh họa quẻ Sơn Địa Bác với hình tượng chiếc lá cuối cùng lìa cành bên vách núi",
-            "focal_object": "Chiếc lá cuối cùng lìa cành bên vách núi"
+            "focal_accent_object": "Chiếc lá cuối cùng lìa cành bên vách núi"
         }
     },
     {
@@ -626,14 +994,30 @@
         "slug": "24-dia-loi-phuc",
         "name": "Địa Lôi Phục",
         "alias": null,
-        "chinese": { "short": "復", "full": "地雷復" },
-        "line_code": "100000",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
-            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        "chinese": {
+            "short": "復",
+            "full": "地雷復"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "100000",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            },
+            "lower": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Nhất Dương Lai Phục", "Dương Khí Hồi Sinh"],
         "keywords": ["Hồi sinh", "Quay về", "Khởi sắc", "Tái tạo", "Hy vọng", "Sửa mình"],
         "couplet": {
@@ -644,7 +1028,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/24-dia-loi-phuc",
             "alt": "Tranh minh họa quẻ Địa Lôi Phục với hình tượng mặt trời đông chí hé rạng dưới lòng đất",
-            "focal_object": "Mặt trời đông chí hé rạng dưới lòng đất"
+            "focal_accent_object": "Mặt trời đông chí hé rạng dưới lòng đất"
         }
     },
     {
@@ -653,14 +1037,30 @@
         "slug": "25-thien-loi-vo-vong",
         "name": "Thiên Lôi Vô Vọng",
         "alias": null,
-        "chinese": { "short": "無妄", "full": "天雷無妄" },
-        "line_code": "100111",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
-            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        "chinese": {
+            "short": "無妄",
+            "full": "天雷無妄"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "100111",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            },
+            "lower": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Chân Thành Vô Tà", "Thuận Theo Tự Nhiên"],
         "keywords": ["Chân thực", "Thuận thiên", "Ngay thẳng", "Trong sáng", "Không mưu cầu", "An lành"],
         "couplet": {
@@ -671,7 +1071,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/25-thien-loi-vo-vong",
             "alt": "Tranh minh họa quẻ Thiên Lôi Vô Vọng với hình tượng viên tinh thể pha lê giữa trời sấm",
-            "focal_object": "Viên tinh thể pha lê giữa trời sấm"
+            "focal_accent_object": "Viên tinh thể pha lê giữa trời sấm"
         }
     },
     {
@@ -680,14 +1080,30 @@
         "slug": "26-son-thien-dai-suc",
         "name": "Sơn Thiên Đại Súc",
         "alias": null,
-        "chinese": { "short": "大畜", "full": "山天大畜" },
-        "line_code": "111001",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
-            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        "chinese": {
+            "short": "大畜",
+            "full": "山天大畜"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "111001",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            },
+            "lower": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Trận Thế Đắc Khai", "Tích Lũy Hùng Hậu"],
         "keywords": ["Tích lũy lớn", "Bản lĩnh", "Tri thức", "Kìm nén", "Bứt phá", "Vững vàng"],
         "couplet": {
@@ -698,7 +1114,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/26-son-thien-dai-suc",
             "alt": "Tranh minh họa quẻ Sơn Thiên Đại Súc với hình tượng ấn ngọc vuông cất giữ trong lòng núi",
-            "focal_object": "Ấn ngọc vuông cất giữ trong lòng núi"
+            "focal_accent_object": "Ấn ngọc vuông cất giữ trong lòng núi"
         }
     },
     {
@@ -707,14 +1123,30 @@
         "slug": "27-son-loi-di",
         "name": "Sơn Lôi Di",
         "alias": null,
-        "chinese": { "short": "頤", "full": "山雷頤" },
-        "line_code": "100001",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
-            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        "chinese": {
+            "short": "頤",
+            "full": "山雷頤"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "100001",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            },
+            "lower": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Vị Thủy Phỏng Hiền", "Dưỡng Thân Dưỡng Tâm"],
         "keywords": ["Nuôi dưỡng", "Lời nói", "Tiết độ", "Sức khỏe", "Cẩn ngôn", "Tự lập"],
         "couplet": {
@@ -725,7 +1157,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/27-son-loi-di",
             "alt": "Tranh minh họa quẻ Sơn Lôi Di với hình tượng chiếc bát ngọc đựng tinh hoa dưỡng sinh",
-            "focal_object": "Chiếc bát ngọc đựng tinh hoa dưỡng sinh"
+            "focal_accent_object": "Chiếc bát ngọc đựng tinh hoa dưỡng sinh"
         }
     },
     {
@@ -734,14 +1166,30 @@
         "slug": "28-trach-phong-dai-qua",
         "name": "Trạch Phong Đại Quá",
         "alias": null,
-        "chinese": { "short": "大過", "full": "澤風大過" },
-        "line_code": "011110",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
-            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        "chinese": {
+            "short": "大過",
+            "full": "澤風大過"
         },
-        "status": { "code": "tieu_hung", "label": "Tiểu Hung" },
+        "line_code": "011110",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            },
+            "lower": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            }
+        },
+        "status": {
+            "code": "tieu_hung",
+            "label": "Tiểu Hung"
+        },
         "hexagram_images": ["Dạ Mộng Kim Ngân", "Quá Tải Cần Điều Chỉnh"],
         "keywords": ["Quá tải", "Đột phá", "Bản lĩnh", "Áp lực", "Táo bạo", "Chịu lực"],
         "couplet": {
@@ -752,7 +1200,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/28-trach-phong-dai-qua",
             "alt": "Tranh minh họa quẻ Trạch Phong Đại Quá với hình tượng thanh xà gỗ cong chịu lực giữa dòng nước",
-            "focal_object": "Thanh xà gỗ cong chịu lực giữa dòng nước"
+            "focal_accent_object": "Thanh xà gỗ cong chịu lực giữa dòng nước"
         }
     },
     {
@@ -761,14 +1209,30 @@
         "slug": "29-kham-vi-thuy",
         "name": "Khảm Vi Thủy",
         "alias": "Thuần Khảm",
-        "chinese": { "short": "坎", "full": "坎為水" },
-        "line_code": "010010",
-        "element": "water",
-        "trigrams": {
-            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
-            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        "chinese": {
+            "short": "坎",
+            "full": "坎為水"
         },
-        "status": { "code": "hung", "label": "Hung" },
+        "line_code": "010010",
+        "element": "thuy",
+        "trigrams": {
+            "upper": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            },
+            "lower": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            }
+        },
+        "status": {
+            "code": "hung",
+            "label": "Hung"
+        },
         "hexagram_images": ["Thủy Để Lao Nguyệt", "Vững Tâm Vượt Hiểm"],
         "keywords": ["Thử thách", "Hiểm trở", "Bền chí", "Thành tín", "Bình tĩnh", "Vượt khó"],
         "couplet": {
@@ -779,7 +1243,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/29-kham-vi-thuy",
             "alt": "Tranh minh họa quẻ Khảm Vi Thủy với hình tượng vầng trăng tròn tĩnh lặng giữa xoáy nước",
-            "focal_object": "Vầng trăng tròn tĩnh lặng giữa xoáy nước"
+            "focal_accent_object": "Vầng trăng tròn tĩnh lặng giữa xoáy nước"
         }
     },
     {
@@ -788,14 +1252,30 @@
         "slug": "30-ly-vi-hoa",
         "name": "Ly Vi Hỏa",
         "alias": "Thuần Ly",
-        "chinese": { "short": "離", "full": "離為火" },
-        "line_code": "101101",
-        "element": "fire",
-        "trigrams": {
-            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
-            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        "chinese": {
+            "short": "離",
+            "full": "離為火"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "101101",
+        "element": "hoa",
+        "trigrams": {
+            "upper": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            },
+            "lower": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Thiên Quan Tứ Phúc", "Minh Trí Tỏa Sáng"],
         "keywords": ["Sáng suốt", "Nhiệt huyết", "Bám tựa", "Văn minh", "Rõ ràng", "Cân bằng"],
         "couplet": {
@@ -806,7 +1286,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/30-ly-vi-hoa",
             "alt": "Tranh minh họa quẻ Ly Vi Hỏa với hình tượng chim chu tước dang cánh giữa ngọn lửa",
-            "focal_object": "Chim chu tước dang cánh giữa ngọn lửa"
+            "focal_accent_object": "Chim chu tước dang cánh giữa ngọn lửa"
         }
     },
     {
@@ -815,14 +1295,30 @@
         "slug": "31-trach-son-ham",
         "name": "Trạch Sơn Hàm",
         "alias": null,
-        "chinese": { "short": "咸", "full": "澤山咸" },
-        "line_code": "001110",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
-            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        "chinese": {
+            "short": "咸",
+            "full": "澤山咸"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "001110",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            },
+            "lower": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Manh Nha Xuất Thổ", "Tâm Đầu Ý Hợp"],
         "keywords": ["Cảm ứng", "Hấp dẫn", "Chân thành", "Hòa quyện", "Tình duyên", "Cởi mở"],
         "couplet": {
@@ -833,7 +1329,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/31-trach-son-ham",
             "alt": "Tranh minh họa quẻ Trạch Sơn Hàm với hình tượng nút thắt đồng tâm lơ lửng trên hồ núi",
-            "focal_object": "Nút thắt đồng tâm lơ lửng trên hồ núi"
+            "focal_accent_object": "Nút thắt đồng tâm lơ lửng trên hồ núi"
         }
     },
     {
@@ -842,14 +1338,30 @@
         "slug": "32-loi-phong-hang",
         "name": "Lôi Phong Hằng",
         "alias": null,
-        "chinese": { "short": "恆", "full": "雷風恆" },
-        "line_code": "011100",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
-            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        "chinese": {
+            "short": "恆",
+            "full": "雷風恆"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "011100",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            },
+            "lower": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Kiên Định Bền Lâu", "Thường Hằng Bất Biến"],
         "keywords": ["Bền bỉ", "Ổn định", "Kiên định", "Trường cửu", "Kỷ luật", "Nhất quán"],
         "couplet": {
@@ -860,7 +1372,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/32-loi-phong-hang",
             "alt": "Tranh minh họa quẻ Lôi Phong Hằng với hình tượng bánh xe cổ tám nan quay đều giữa sấm gió",
-            "focal_object": "Bánh xe cổ tám nan quay đều giữa sấm gió"
+            "focal_accent_object": "Bánh xe cổ tám nan quay đều giữa sấm gió"
         }
     },
     {
@@ -869,14 +1381,30 @@
         "slug": "33-thien-son-don",
         "name": "Thiên Sơn Độn",
         "alias": null,
-        "chinese": { "short": "遯", "full": "天山遯" },
-        "line_code": "001111",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
-            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        "chinese": {
+            "short": "遯",
+            "full": "天山遯"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "001111",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            },
+            "lower": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Nùng Vân Tế Nhật", "Tri Cơ Nhi Thoái"],
         "keywords": ["Ẩn lánh", "Lùi bước", "Bảo toàn", "Tỉnh táo", "Kín đáo", "Đợi thời"],
         "couplet": {
@@ -887,7 +1415,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/33-thien-son-don",
             "alt": "Tranh minh họa quẻ Thiên Sơn Độn với hình tượng vầng trăng khuyết ẩn sau đỉnh núi mây",
-            "focal_object": "Vầng trăng khuyết ẩn sau đỉnh núi mây"
+            "focal_accent_object": "Vầng trăng khuyết ẩn sau đỉnh núi mây"
         }
     },
     {
@@ -896,14 +1424,30 @@
         "slug": "34-loi-thien-dai-trang",
         "name": "Lôi Thiên Đại Tráng",
         "alias": null,
-        "chinese": { "short": "大壯", "full": "雷天大壯" },
-        "line_code": "111100",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
-            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        "chinese": {
+            "short": "大壯",
+            "full": "雷天大壯"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "111100",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            },
+            "lower": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Công Sư Đắc Mộc", "Cương Kiện Hữu Lễ"],
         "keywords": ["Hùng mạnh", "Bứt phá", "Chính trực", "Tự tin", "Tiết chế", "Quyết tâm"],
         "couplet": {
@@ -914,7 +1458,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/34-loi-thien-dai-trang",
             "alt": "Tranh minh họa quẻ Lôi Thiên Đại Tráng với hình tượng chiếc chuông đồng lớn vang giữa trời sấm",
-            "focal_object": "Chiếc chuông đồng lớn vang giữa trời sấm"
+            "focal_accent_object": "Chiếc chuông đồng lớn vang giữa trời sấm"
         }
     },
     {
@@ -923,14 +1467,30 @@
         "slug": "35-hoa-dia-tan",
         "name": "Hỏa Địa Tấn",
         "alias": null,
-        "chinese": { "short": "晉", "full": "火地晉" },
-        "line_code": "000101",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
-            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        "chinese": {
+            "short": "晉",
+            "full": "火地晉"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "000101",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            },
+            "lower": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Sừ Địa Đắc Kim", "Nhật Xuất Địa Thượng"],
         "keywords": ["Thăng tiến", "Rạng rỡ", "Trọng dụng", "Khởi sắc", "Cống hiến", "Tỏa sáng"],
         "couplet": {
@@ -941,7 +1501,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/35-hoa-dia-tan",
             "alt": "Tranh minh họa quẻ Hỏa Địa Tấn với hình tượng vầng thái dương vừa mọc trên chân trời",
-            "focal_object": "Vầng thái dương vừa mọc trên chân trời"
+            "focal_accent_object": "Vầng thái dương vừa mọc trên chân trời"
         }
     },
     {
@@ -950,14 +1510,30 @@
         "slug": "36-dia-hoa-minh-di",
         "name": "Địa Hỏa Minh Di",
         "alias": null,
-        "chinese": { "short": "明夷", "full": "地火明夷" },
-        "line_code": "101000",
-        "element": "water",
-        "trigrams": {
-            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
-            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        "chinese": {
+            "short": "明夷",
+            "full": "地火明夷"
         },
-        "status": { "code": "hung", "label": "Hung" },
+        "line_code": "101000",
+        "element": "thuy",
+        "trigrams": {
+            "upper": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            },
+            "lower": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            }
+        },
+        "status": {
+            "code": "hung",
+            "label": "Hung"
+        },
         "hexagram_images": ["Quá Hà Sách Kiều", "Thao Quang Dưỡng Hối"],
         "keywords": ["Ẩn sáng", "Kiên nhẫn", "Tự bảo vệ", "Bị lu mờ", "Tỉnh táo", "Nội lực"],
         "couplet": {
@@ -968,7 +1544,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/36-dia-hoa-minh-di",
             "alt": "Tranh minh họa quẻ Địa Hỏa Minh Di với hình tượng vầng mặt trời lặn sâu dưới lòng đất",
-            "focal_object": "Vầng mặt trời lặn sâu dưới lòng đất"
+            "focal_accent_object": "Vầng mặt trời lặn sâu dưới lòng đất"
         }
     },
     {
@@ -977,14 +1553,30 @@
         "slug": "37-phong-hoa-gia-nhan",
         "name": "Phong Hỏa Gia Nhân",
         "alias": null,
-        "chinese": { "short": "家人", "full": "風火家人" },
-        "line_code": "101011",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
-            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        "chinese": {
+            "short": "家人",
+            "full": "風火家人"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "101011",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            },
+            "lower": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Kính Lý Quan Hoa", "Tề Gia Trị Quốc"],
         "keywords": ["Gia đình", "Ấm cúng", "Kỷ cương", "Nội bộ", "Trách nhiệm", "Gắn bó"],
         "couplet": {
@@ -995,7 +1587,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/37-phong-hoa-gia-nhan",
             "alt": "Tranh minh họa quẻ Phong Hỏa Gia Nhân với hình tượng lư hương đồng tỏa khói giữa gian nhà",
-            "focal_object": "Lư hương đồng tỏa khói giữa gian nhà"
+            "focal_accent_object": "Lư hương đồng tỏa khói giữa gian nhà"
         }
     },
     {
@@ -1004,14 +1596,30 @@
         "slug": "38-hoa-trach-khue",
         "name": "Hỏa Trạch Khuê",
         "alias": null,
-        "chinese": { "short": "睽", "full": "火澤睽" },
-        "line_code": "110101",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
-            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        "chinese": {
+            "short": "睽",
+            "full": "火澤睽"
         },
-        "status": { "code": "tieu_hung", "label": "Tiểu Hung" },
+        "line_code": "110101",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            },
+            "lower": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            }
+        },
+        "status": {
+            "code": "tieu_hung",
+            "label": "Tiểu Hung"
+        },
         "hexagram_images": ["Thái Công Ngộ Văn Vương", "Cầu Đồng Tồn Dị"],
         "keywords": ["Khác biệt", "Bất đồng", "Hiểu lầm", "Hòa giải", "Tôn trọng", "Việc nhỏ"],
         "couplet": {
@@ -1022,7 +1630,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/38-hoa-trach-khue",
             "alt": "Tranh minh họa quẻ Hỏa Trạch Khuê với hình tượng chiếc gương đồng cổ đặt giữa lửa và nước",
-            "focal_object": "Chiếc gương đồng cổ đặt giữa lửa và nước"
+            "focal_accent_object": "Chiếc gương đồng cổ đặt giữa lửa và nước"
         }
     },
     {
@@ -1031,14 +1639,30 @@
         "slug": "39-thuy-son-kien",
         "name": "Thủy Sơn Kiển",
         "alias": null,
-        "chinese": { "short": "蹇", "full": "水山蹇" },
-        "line_code": "001010",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
-            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        "chinese": {
+            "short": "蹇",
+            "full": "水山蹇"
         },
-        "status": { "code": "hung", "label": "Hung" },
+        "line_code": "001010",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            },
+            "lower": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            }
+        },
+        "status": {
+            "code": "hung",
+            "label": "Hung"
+        },
         "hexagram_images": ["Vũ Tuyết Tải Đồ", "Tri Nạn Nhi Chỉ"],
         "keywords": ["Trở ngại", "Khó khăn", "Tạm dừng", "Tự xét", "Cầu hiền", "Kiên cường"],
         "couplet": {
@@ -1049,7 +1673,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/39-thuy-son-kien",
             "alt": "Tranh minh họa quẻ Thủy Sơn Kiển với hình tượng cây gậy trúc chống bước qua ghềnh đá",
-            "focal_object": "Cây gậy trúc chống bước qua ghềnh đá"
+            "focal_accent_object": "Cây gậy trúc chống bước qua ghềnh đá"
         }
     },
     {
@@ -1058,14 +1682,30 @@
         "slug": "40-loi-thuy-giai",
         "name": "Lôi Thủy Giải",
         "alias": null,
-        "chinese": { "short": "解", "full": "雷水解" },
-        "line_code": "010100",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
-            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        "chinese": {
+            "short": "解",
+            "full": "雷水解"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "010100",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            },
+            "lower": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Ngũ Quan Thoát Nạn", "Tháo Gỡ Hanh Thông"],
         "keywords": ["Giải thoát", "Nhẹ nhõm", "Tháo gỡ", "Khoan dung", "Hồi phục", "Nhanh chóng"],
         "couplet": {
@@ -1076,7 +1716,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/40-loi-thuy-giai",
             "alt": "Tranh minh họa quẻ Lôi Thủy Giải với hình tượng chiếc chìa khóa cổ mở tan xiềng xích",
-            "focal_object": "Chiếc chìa khóa cổ mở tan xiềng xích"
+            "focal_accent_object": "Chiếc chìa khóa cổ mở tan xiềng xích"
         }
     },
     {
@@ -1085,14 +1725,30 @@
         "slug": "41-son-trach-ton",
         "name": "Sơn Trạch Tổn",
         "alias": null,
-        "chinese": { "short": "損", "full": "山澤損" },
-        "line_code": "110001",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
-            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        "chinese": {
+            "short": "損",
+            "full": "山澤損"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "110001",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            },
+            "lower": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Thôi Xa Đảo Thạch", "Tổn Hạ Ích Thượng"],
         "keywords": ["Tinh giản", "Tiết chế", "Hy sinh", "Chân thành", "Tích lũy", "Buông bỏ"],
         "couplet": {
@@ -1103,7 +1759,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/41-son-trach-ton",
             "alt": "Tranh minh họa quẻ Sơn Trạch Tổn với hình tượng chiếc bát tre mộc mạc dâng lễ dưới chân núi",
-            "focal_object": "Chiếc bát tre mộc mạc dâng lễ dưới chân núi"
+            "focal_accent_object": "Chiếc bát tre mộc mạc dâng lễ dưới chân núi"
         }
     },
     {
@@ -1112,14 +1768,30 @@
         "slug": "42-phong-loi-ich",
         "name": "Phong Lôi Ích",
         "alias": null,
-        "chinese": { "short": "益", "full": "風雷益" },
-        "line_code": "100011",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
-            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        "chinese": {
+            "short": "益",
+            "full": "風雷益"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "100011",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            },
+            "lower": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Khô Mộc Khai Hoa", "Tổn Thượng Ích Hạ"],
         "keywords": ["Tăng trưởng", "Lợi ích", "Hào phóng", "Cải thiện", "Thuận lợi", "Bứt phá"],
         "couplet": {
@@ -1130,7 +1802,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/42-phong-loi-ich",
             "alt": "Tranh minh họa quẻ Phong Lôi Ích với hình tượng chồi măng non vươn cao giữa sấm gió",
-            "focal_object": "Chồi măng non vươn cao giữa sấm gió"
+            "focal_accent_object": "Chồi măng non vươn cao giữa sấm gió"
         }
     },
     {
@@ -1139,14 +1811,30 @@
         "slug": "43-trach-thien-quai",
         "name": "Trạch Thiên Quải",
         "alias": null,
-        "chinese": { "short": "夬", "full": "澤天夬" },
-        "line_code": "111110",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
-            "lower": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" }
+        "chinese": {
+            "short": "夬",
+            "full": "澤天夬"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "111110",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            },
+            "lower": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Du Phong Xuất Võng", "Quyết Đoán Trừ Tà"],
         "keywords": ["Quyết đoán", "Dứt khoát", "Công khai", "Thanh lọc", "Chính nghĩa", "Cảnh giác"],
         "couplet": {
@@ -1157,7 +1845,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/43-trach-thien-quai",
             "alt": "Tranh minh họa quẻ Trạch Thiên Quải với hình tượng thanh kiếm đồng dựng thẳng giữa thác nước",
-            "focal_object": "Thanh kiếm đồng dựng thẳng giữa thác nước"
+            "focal_accent_object": "Thanh kiếm đồng dựng thẳng giữa thác nước"
         }
     },
     {
@@ -1166,14 +1854,30 @@
         "slug": "44-thien-phong-cau",
         "name": "Thiên Phong Cấu",
         "alias": null,
-        "chinese": { "short": "姤", "full": "天風姤" },
-        "line_code": "011111",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Càn", "han_viet": "Thiên", "nature": "Trời", "symbol": "☰", "code": "111" },
-            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        "chinese": {
+            "short": "姤",
+            "full": "天風姤"
         },
-        "status": { "code": "tieu_hung", "label": "Tiểu Hung" },
+        "line_code": "011111",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Càn",
+                "han_viet": "Thiên",
+                "symbol": "Trời",
+                "code": "111"
+            },
+            "lower": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            }
+        },
+        "status": {
+            "code": "tieu_hung",
+            "label": "Tiểu Hung"
+        },
         "hexagram_images": ["Tha Hương Ngộ Hữu", "Ngẫu Nhiên Tương Phùng"],
         "keywords": ["Gặp gỡ", "Bất ngờ", "Cám dỗ", "Cảnh giác", "Kiềm chế", "Tạm thời"],
         "couplet": {
@@ -1184,7 +1888,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/44-thien-phong-cau",
             "alt": "Tranh minh họa quẻ Thiên Phong Cấu với hình tượng chiếc chuông gió đồng rung nhẹ dưới vòm trời",
-            "focal_object": "Chiếc chuông gió đồng rung nhẹ dưới vòm trời"
+            "focal_accent_object": "Chiếc chuông gió đồng rung nhẹ dưới vòm trời"
         }
     },
     {
@@ -1193,14 +1897,30 @@
         "slug": "45-trach-dia-tuy",
         "name": "Trạch Địa Tụy",
         "alias": null,
-        "chinese": { "short": "萃", "full": "澤地萃" },
-        "line_code": "000110",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
-            "lower": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" }
+        "chinese": {
+            "short": "萃",
+            "full": "澤地萃"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "000110",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            },
+            "lower": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Lý Ngư Hóa Long", "Quần Anh Hội Tụ"],
         "keywords": ["Tụ họp", "Đoàn tụ", "Tập thể", "Thịnh vượng", "Tổ chức", "Phòng bị"],
         "couplet": {
@@ -1211,7 +1931,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/45-trach-dia-tuy",
             "alt": "Tranh minh họa quẻ Trạch Địa Tụy với hình tượng chiếc vạc đồng tế lễ giữa mặt hồ đất",
-            "focal_object": "Chiếc vạc đồng tế lễ giữa mặt hồ đất"
+            "focal_accent_object": "Chiếc vạc đồng tế lễ giữa mặt hồ đất"
         }
     },
     {
@@ -1220,14 +1940,30 @@
         "slug": "46-dia-phong-thang",
         "name": "Địa Phong Thăng",
         "alias": null,
-        "chinese": { "short": "升", "full": "地風升" },
-        "line_code": "011000",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Khôn", "han_viet": "Địa", "nature": "Đất", "symbol": "☷", "code": "000" },
-            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        "chinese": {
+            "short": "升",
+            "full": "地風升"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "011000",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Khôn",
+                "han_viet": "Địa",
+                "symbol": "Đất",
+                "code": "000"
+            },
+            "lower": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Chỉ Nhật Cao Thăng", "Tích Lũy Vươn Cao"],
         "keywords": ["Thăng tiến", "Vươn lên", "Bền bỉ", "Trưởng thành", "Nỗ lực", "Quý nhân"],
         "couplet": {
@@ -1238,7 +1974,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/46-dia-phong-thang",
             "alt": "Tranh minh họa quẻ Địa Phong Thăng với hình tượng cây tùng non vươn thẳng xuyên tầng đất đá",
-            "focal_object": "Cây tùng non vươn thẳng xuyên tầng đất đá"
+            "focal_accent_object": "Cây tùng non vươn thẳng xuyên tầng đất đá"
         }
     },
     {
@@ -1247,14 +1983,30 @@
         "slug": "47-trach-thuy-khon",
         "name": "Trạch Thủy Khốn",
         "alias": null,
-        "chinese": { "short": "困", "full": "澤水困" },
-        "line_code": "010110",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
-            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        "chinese": {
+            "short": "困",
+            "full": "澤水困"
         },
-        "status": { "code": "hung", "label": "Hung" },
+        "line_code": "010110",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            },
+            "lower": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            }
+        },
+        "status": {
+            "code": "hung",
+            "label": "Hung"
+        },
         "hexagram_images": ["Toát Không Tiếu Ngư", "Khốn Cảnh Rèn Chí"],
         "keywords": ["Khốn khó", "Cạn kiệt", "Kiên cường", "Trầm tĩnh", "Ít nói", "Thử thách"],
         "couplet": {
@@ -1265,7 +2017,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/47-trach-thuy-khon",
             "alt": "Tranh minh họa quẻ Trạch Thủy Khốn với hình tượng chiếc bình gốm đựng giọt nước cuối đáy hồ khô",
-            "focal_object": "Chiếc bình gốm đựng giọt nước cuối đáy hồ khô"
+            "focal_accent_object": "Chiếc bình gốm đựng giọt nước cuối đáy hồ khô"
         }
     },
     {
@@ -1274,14 +2026,30 @@
         "slug": "48-thuy-phong-tinh",
         "name": "Thủy Phong Tỉnh",
         "alias": null,
-        "chinese": { "short": "井", "full": "水風井" },
-        "line_code": "011010",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
-            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        "chinese": {
+            "short": "井",
+            "full": "水風井"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "011010",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            },
+            "lower": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Khô Tỉnh Sinh Tuyền", "Dưỡng Nhân Bất Cùng"],
         "keywords": ["Nguồn cội", "Bền bỉ", "Nuôi dưỡng", "Chuyên môn", "Kiên nhẫn", "Chia sẻ"],
         "couplet": {
@@ -1292,7 +2060,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/48-thuy-phong-tinh",
             "alt": "Tranh minh họa quẻ Thủy Phong Tỉnh với hình tượng chiếc gàu gỗ đầy nước kéo lên từ miệng giếng",
-            "focal_object": "Chiếc gàu gỗ đầy nước kéo lên từ miệng giếng"
+            "focal_accent_object": "Chiếc gàu gỗ đầy nước kéo lên từ miệng giếng"
         }
     },
     {
@@ -1301,14 +2069,30 @@
         "slug": "49-trach-hoa-cach",
         "name": "Trạch Hỏa Cách",
         "alias": null,
-        "chinese": { "short": "革", "full": "澤火革" },
-        "line_code": "101110",
-        "element": "water",
-        "trigrams": {
-            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
-            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        "chinese": {
+            "short": "革",
+            "full": "澤火革"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "101110",
+        "element": "thuy",
+        "trigrams": {
+            "upper": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            },
+            "lower": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Hạn Miêu Đắc Vũ", "Cải Cách Đổi Mới"],
         "keywords": ["Cải cách", "Lột xác", "Đổi mới", "Quyết tâm", "Thuận thời", "Chuyển hóa"],
         "couplet": {
@@ -1319,7 +2103,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/49-trach-hoa-cach",
             "alt": "Tranh minh họa quẻ Trạch Hỏa Cách với hình tượng viên ngọc ve sầu lột xác giữa lửa và nước",
-            "focal_object": "Viên ngọc ve sầu lột xác giữa lửa và nước"
+            "focal_accent_object": "Viên ngọc ve sầu lột xác giữa lửa và nước"
         }
     },
     {
@@ -1328,14 +2112,30 @@
         "slug": "50-hoa-phong-dinh",
         "name": "Hỏa Phong Đỉnh",
         "alias": null,
-        "chinese": { "short": "鼎", "full": "火風鼎" },
-        "line_code": "011101",
-        "element": "fire",
-        "trigrams": {
-            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
-            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        "chinese": {
+            "short": "鼎",
+            "full": "火風鼎"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "011101",
+        "element": "hoa",
+        "trigrams": {
+            "upper": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            },
+            "lower": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Ngư Ông Đắc Lợi", "Cách Cố Đỉnh Tân"],
         "keywords": ["Kiến tạo", "Ổn định", "Nuôi dưỡng", "Chính vị", "Hội tụ", "Thịnh vượng"],
         "couplet": {
@@ -1346,7 +2146,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/50-hoa-phong-dinh",
             "alt": "Tranh minh họa quẻ Hỏa Phong Đỉnh với hình tượng chiếc đỉnh đồng ba chân giữa ngọn lửa",
-            "focal_object": "Chiếc đỉnh đồng ba chân giữa ngọn lửa"
+            "focal_accent_object": "Chiếc đỉnh đồng ba chân giữa ngọn lửa"
         }
     },
     {
@@ -1355,14 +2155,30 @@
         "slug": "51-chan-vi-loi",
         "name": "Chấn Vi Lôi",
         "alias": "Thuần Chấn",
-        "chinese": { "short": "震", "full": "震為雷" },
-        "line_code": "100100",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
-            "lower": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" }
+        "chinese": {
+            "short": "震",
+            "full": "震為雷"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "100100",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            },
+            "lower": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Kim Chung Dạ Minh", "Kinh Động Tỉnh Thức"],
         "keywords": ["Chấn động", "Thức tỉnh", "Bất ngờ", "Bình tĩnh", "Đột phá", "Tự xét"],
         "couplet": {
@@ -1373,7 +2189,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/51-chan-vi-loi",
             "alt": "Tranh minh họa quẻ Chấn Vi Lôi với hình tượng chiếc khánh ngọc cổ vang giữa luồng sét đôi",
-            "focal_object": "Chiếc khánh ngọc cổ vang giữa luồng sét đôi"
+            "focal_accent_object": "Chiếc khánh ngọc cổ vang giữa luồng sét đôi"
         }
     },
     {
@@ -1382,14 +2198,30 @@
         "slug": "52-can-vi-son",
         "name": "Cấn Vi Sơn",
         "alias": "Thuần Cấn",
-        "chinese": { "short": "艮", "full": "艮為山" },
-        "line_code": "001001",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" },
-            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        "chinese": {
+            "short": "艮",
+            "full": "艮為山"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "001001",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            },
+            "lower": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Lưỡng Sơn Tương Đối", "Tri Chỉ Nhi An"],
         "keywords": ["Tĩnh lặng", "Dừng lại", "Thiền định", "Vững chãi", "Kiềm chế", "Nội tâm"],
         "couplet": {
@@ -1400,7 +2232,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/52-can-vi-son",
             "alt": "Tranh minh họa quẻ Cấn Vi Sơn với hình tượng ngọn tháp đá cổ tĩnh lặng trên đỉnh núi",
-            "focal_object": "Ngọn tháp đá cổ tĩnh lặng trên đỉnh núi"
+            "focal_accent_object": "Ngọn tháp đá cổ tĩnh lặng trên đỉnh núi"
         }
     },
     {
@@ -1409,14 +2241,30 @@
         "slug": "53-phong-son-tiem",
         "name": "Phong Sơn Tiệm",
         "alias": null,
-        "chinese": { "short": "漸", "full": "風山漸" },
-        "line_code": "001011",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
-            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        "chinese": {
+            "short": "漸",
+            "full": "風山漸"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "001011",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            },
+            "lower": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Tuấn Điểu Xuất Lâm", "Tuần Tự Tiệm Tiến"],
         "keywords": ["Từng bước", "Tiến dần", "Kiên nhẫn", "Ổn định", "Trật tự", "Hôn nhân"],
         "couplet": {
@@ -1427,7 +2275,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/53-phong-son-tiem",
             "alt": "Tranh minh họa quẻ Phong Sơn Tiệm với hình tượng cánh chim hồng nhạn bay lên qua đỉnh núi",
-            "focal_object": "Cánh chim hồng nhạn bay lên qua đỉnh núi"
+            "focal_accent_object": "Cánh chim hồng nhạn bay lên qua đỉnh núi"
         }
     },
     {
@@ -1436,14 +2284,30 @@
         "slug": "54-loi-trach-quy-muoi",
         "name": "Lôi Trạch Quy Muội",
         "alias": null,
-        "chinese": { "short": "歸妹", "full": "雷澤歸妹" },
-        "line_code": "110100",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
-            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        "chinese": {
+            "short": "歸妹",
+            "full": "雷澤歸妹"
         },
-        "status": { "code": "tieu_hung", "label": "Tiểu Hung" },
+        "line_code": "110100",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            },
+            "lower": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            }
+        },
+        "status": {
+            "code": "tieu_hung",
+            "label": "Tiểu Hung"
+        },
         "hexagram_images": ["Duyên Mộc Cầu Ngư", "Cẩn Trọng Khởi Đầu"],
         "keywords": ["Cảm tính", "Thứ bậc", "Nhẫn nhịn", "Cảnh giác", "Ràng buộc", "Tạm thời"],
         "couplet": {
@@ -1454,7 +2318,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/54-loi-trach-quy-muoi",
             "alt": "Tranh minh họa quẻ Lôi Trạch Quy Muội với hình tượng chiếc quạt lụa cổ khép hờ trên mặt đầm",
-            "focal_object": "Chiếc quạt lụa cổ khép hờ trên mặt đầm"
+            "focal_accent_object": "Chiếc quạt lụa cổ khép hờ trên mặt đầm"
         }
     },
     {
@@ -1463,14 +2327,30 @@
         "slug": "55-loi-hoa-phong",
         "name": "Lôi Hỏa Phong",
         "alias": null,
-        "chinese": { "short": "豐", "full": "雷火豐" },
-        "line_code": "101100",
-        "element": "water",
-        "trigrams": {
-            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
-            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        "chinese": {
+            "short": "豐",
+            "full": "雷火豐"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "101100",
+        "element": "thuy",
+        "trigrams": {
+            "upper": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            },
+            "lower": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Cổ Kính Trọng Minh", "Phong Thịnh Chính Ngọ"],
         "keywords": ["Thịnh vượng", "Rực rỡ", "Đỉnh cao", "Quyết đoán", "Quảng đại", "Cảnh tỉnh"],
         "couplet": {
@@ -1481,7 +2361,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/55-loi-hoa-phong",
             "alt": "Tranh minh họa quẻ Lôi Hỏa Phong với hình tượng vòng nhật thực rực sáng giữa trời sấm chớp",
-            "focal_object": "Vòng nhật thực rực sáng giữa trời sấm chớp"
+            "focal_accent_object": "Vòng nhật thực rực sáng giữa trời sấm chớp"
         }
     },
     {
@@ -1490,14 +2370,30 @@
         "slug": "56-hoa-son-lu",
         "name": "Hỏa Sơn Lữ",
         "alias": null,
-        "chinese": { "short": "旅", "full": "火山旅" },
-        "line_code": "001101",
-        "element": "fire",
-        "trigrams": {
-            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
-            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        "chinese": {
+            "short": "旅",
+            "full": "火山旅"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "001101",
+        "element": "hoa",
+        "trigrams": {
+            "upper": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            },
+            "lower": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Túc Điểu Phần Sào", "Lữ Khách Khiêm Nhu"],
         "keywords": ["Lữ hành", "Chuyển dịch", "Tạm trú", "Thận trọng", "Khiêm nhường", "Thích nghi"],
         "couplet": {
@@ -1508,7 +2404,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/56-hoa-son-lu",
             "alt": "Tranh minh họa quẻ Hỏa Sơn Lữ với hình tượng chiếc hồ lô lữ hành bên lối mòn sườn núi",
-            "focal_object": "Chiếc hồ lô lữ hành bên lối mòn sườn núi"
+            "focal_accent_object": "Chiếc hồ lô lữ hành bên lối mòn sườn núi"
         }
     },
     {
@@ -1517,14 +2413,30 @@
         "slug": "57-ton-vi-phong",
         "name": "Tốn Vi Phong",
         "alias": "Thuần Tốn",
-        "chinese": { "short": "巽", "full": "巽為風" },
-        "line_code": "011011",
-        "element": "wood",
-        "trigrams": {
-            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
-            "lower": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" }
+        "chinese": {
+            "short": "巽",
+            "full": "巽為風"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "011011",
+        "element": "moc",
+        "trigrams": {
+            "upper": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            },
+            "lower": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Cô Chu Đắc Thủy", "Nhu Thuận Thấm Sâu"],
         "keywords": ["Nhu thuận", "Linh hoạt", "Thuyết phục", "Kiên trì", "Khiêm nhường", "Lan tỏa"],
         "couplet": {
@@ -1535,7 +2447,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/57-ton-vi-phong",
             "alt": "Tranh minh họa quẻ Tốn Vi Phong với hình tượng chiếc lông hạc uốn lượn giữa hai tầng gió",
-            "focal_object": "Chiếc lông hạc uốn lượn giữa hai tầng gió"
+            "focal_accent_object": "Chiếc lông hạc uốn lượn giữa hai tầng gió"
         }
     },
     {
@@ -1544,14 +2456,30 @@
         "slug": "58-doai-vi-trach",
         "name": "Đoài Vi Trạch",
         "alias": "Thuần Đoài",
-        "chinese": { "short": "兌", "full": "兌為澤" },
-        "line_code": "110110",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" },
-            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        "chinese": {
+            "short": "兌",
+            "full": "兌為澤"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "110110",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            },
+            "lower": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Phượng Hoàng Lạc Đầm", "Hòa Duyệt Tương Trợ"],
         "keywords": ["Vui vẻ", "Giao tiếp", "Hòa nhã", "Sẻ chia", "Thuận hòa", "Khéo léo"],
         "couplet": {
@@ -1562,7 +2490,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/58-doai-vi-trach",
             "alt": "Tranh minh họa quẻ Đoài Vi Trạch với hình tượng đóa sen nở rộ giữa hai mặt đầm nối liền",
-            "focal_object": "Đóa sen nở rộ giữa hai mặt đầm nối liền"
+            "focal_accent_object": "Đóa sen nở rộ giữa hai mặt đầm nối liền"
         }
     },
     {
@@ -1571,14 +2499,30 @@
         "slug": "59-phong-thuy-hoan",
         "name": "Phong Thủy Hoán",
         "alias": null,
-        "chinese": { "short": "渙", "full": "風水渙" },
-        "line_code": "010011",
-        "element": "fire",
-        "trigrams": {
-            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
-            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        "chinese": {
+            "short": "渙",
+            "full": "風水渙"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "010011",
+        "element": "hoa",
+        "trigrams": {
+            "upper": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            },
+            "lower": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Cách Hà Vọng Kim", "Tan Băng Hóa Giải"],
         "keywords": ["Hóa giải", "Tan rã", "Khơi thông", "Đoàn kết", "Rộng mở", "Vượt sóng"],
         "couplet": {
@@ -1589,7 +2533,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/59-phong-thuy-hoan",
             "alt": "Tranh minh họa quẻ Phong Thủy Hoán với hình tượng cánh buồm cổ căng gió rẽ sóng lớn",
-            "focal_object": "Cánh buồm cổ căng gió rẽ sóng lớn"
+            "focal_accent_object": "Cánh buồm cổ căng gió rẽ sóng lớn"
         }
     },
     {
@@ -1598,14 +2542,30 @@
         "slug": "60-thuy-trach-tiet",
         "name": "Thủy Trạch Tiết",
         "alias": null,
-        "chinese": { "short": "節", "full": "水澤節" },
-        "line_code": "110010",
-        "element": "water",
-        "trigrams": {
-            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
-            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        "chinese": {
+            "short": "節",
+            "full": "水澤節"
         },
-        "status": { "code": "cat", "label": "Cát" },
+        "line_code": "110010",
+        "element": "thuy",
+        "trigrams": {
+            "upper": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            },
+            "lower": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            }
+        },
+        "status": {
+            "code": "cat",
+            "label": "Cát"
+        },
         "hexagram_images": ["Trảm Tướng Phong Thần", "Tiết Độ Hữu Chừng"],
         "keywords": ["Tiết chế", "Kỷ luật", "Chừng mực", "Giới hạn", "Cân bằng", "Quản trị"],
         "couplet": {
@@ -1616,7 +2576,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/60-thuy-trach-tiet",
             "alt": "Tranh minh họa quẻ Thủy Trạch Tiết với hình tượng thân trúc thẳng chia đốt đều giữa dòng nước",
-            "focal_object": "Thân trúc thẳng chia đốt đều giữa dòng nước"
+            "focal_accent_object": "Thân trúc thẳng chia đốt đều giữa dòng nước"
         }
     },
     {
@@ -1625,14 +2585,30 @@
         "slug": "61-phong-trach-trung-phu",
         "name": "Phong Trạch Trung Phu",
         "alias": null,
-        "chinese": { "short": "中孚", "full": "風澤中孚" },
-        "line_code": "110011",
-        "element": "earth",
-        "trigrams": {
-            "upper": { "name": "Tốn", "han_viet": "Phong", "nature": "Gió", "symbol": "☴", "code": "011" },
-            "lower": { "name": "Đoài", "han_viet": "Trạch", "nature": "Đầm", "symbol": "☱", "code": "110" }
+        "chinese": {
+            "short": "中孚",
+            "full": "風澤中孚"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "110011",
+        "element": "tho",
+        "trigrams": {
+            "upper": {
+                "name": "Tốn",
+                "han_viet": "Phong",
+                "symbol": "Gió",
+                "code": "011"
+            },
+            "lower": {
+                "name": "Đoài",
+                "han_viet": "Trạch",
+                "symbol": "Đầm",
+                "code": "110"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Hành Tẩu Bạc Băng - Tín Thực Cảm Thông", "Minh Hạc Tại Âm"],
         "keywords": ["Chân thành", "Chữ tín", "Cảm hóa", "Minh bạch", "Đồng cảm", "Tin cậy"],
         "couplet": {
@@ -1643,7 +2619,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/61-phong-trach-trung-phu",
             "alt": "Tranh minh họa quẻ Phong Trạch Trung Phu với hình tượng chim hạc đứng gọi bạn giữa mặt hồ tĩnh",
-            "focal_object": "Chim hạc đứng gọi bạn giữa mặt hồ tĩnh"
+            "focal_accent_object": "Chim hạc đứng gọi bạn giữa mặt hồ tĩnh"
         }
     },
     {
@@ -1652,14 +2628,30 @@
         "slug": "62-loi-son-tieu-qua",
         "name": "Lôi Sơn Tiểu Quá",
         "alias": null,
-        "chinese": { "short": "小過", "full": "雷山小過" },
-        "line_code": "001100",
-        "element": "metal",
-        "trigrams": {
-            "upper": { "name": "Chấn", "han_viet": "Lôi", "nature": "Sấm", "symbol": "☳", "code": "100" },
-            "lower": { "name": "Cấn", "han_viet": "Sơn", "nature": "Núi", "symbol": "☶", "code": "001" }
+        "chinese": {
+            "short": "小過",
+            "full": "雷山小過"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "001100",
+        "element": "kim",
+        "trigrams": {
+            "upper": {
+                "name": "Chấn",
+                "han_viet": "Lôi",
+                "symbol": "Sấm",
+                "code": "100"
+            },
+            "lower": {
+                "name": "Cấn",
+                "han_viet": "Sơn",
+                "symbol": "Núi",
+                "code": "001"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Cấp Quá Độc Mộc", "Phi Điểu Di Âm"],
         "keywords": ["Thận trọng", "Việc nhỏ", "Khiêm cung", "Tiết kiệm", "Bay thấp", "Tỉ mỉ"],
         "couplet": {
@@ -1670,7 +2662,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/62-loi-son-tieu-qua",
             "alt": "Tranh minh họa quẻ Lôi Sơn Tiểu Quá với hình tượng chim én nhỏ sải cánh bay thấp sát sườn núi",
-            "focal_object": "Chim én nhỏ sải cánh bay thấp sát sườn núi"
+            "focal_accent_object": "Chim én nhỏ sải cánh bay thấp sát sườn núi"
         }
     },
     {
@@ -1679,14 +2671,30 @@
         "slug": "63-thuy-hoa-ky-te",
         "name": "Thủy Hỏa Ký Tế",
         "alias": null,
-        "chinese": { "short": "既濟", "full": "水火既濟" },
-        "line_code": "101010",
-        "element": "water",
-        "trigrams": {
-            "upper": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" },
-            "lower": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" }
+        "chinese": {
+            "short": "既濟",
+            "full": "水火既濟"
         },
-        "status": { "code": "dai_cat", "label": "Đại Cát" },
+        "line_code": "101010",
+        "element": "thuy",
+        "trigrams": {
+            "upper": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            },
+            "lower": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            }
+        },
+        "status": {
+            "code": "dai_cat",
+            "label": "Đại Cát"
+        },
         "hexagram_images": ["Kim Bảng Đề Danh", "Công Thành Viên Mãn"],
         "keywords": ["Hoàn thành", "Viên mãn", "Cân bằng", "Thành tựu", "Phòng xa", "Ổn định"],
         "couplet": {
@@ -1697,7 +2705,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/63-thuy-hoa-ky-te",
             "alt": "Tranh minh họa quẻ Thủy Hỏa Ký Tế với hình tượng chiếc ấm đồng cân bằng giữa lửa và nước",
-            "focal_object": "Chiếc ấm đồng cân bằng giữa lửa và nước"
+            "focal_accent_object": "Chiếc ấm đồng cân bằng giữa lửa và nước"
         }
     },
     {
@@ -1706,14 +2714,30 @@
         "slug": "64-hoa-thuy-vi-te",
         "name": "Hỏa Thủy Vị Tế",
         "alias": null,
-        "chinese": { "short": "未濟", "full": "火水未濟" },
-        "line_code": "010101",
-        "element": "fire",
-        "trigrams": {
-            "upper": { "name": "Ly", "han_viet": "Hỏa", "nature": "Lửa", "symbol": "☲", "code": "101" },
-            "lower": { "name": "Khảm", "han_viet": "Thủy", "nature": "Nước", "symbol": "☵", "code": "010" }
+        "chinese": {
+            "short": "未濟",
+            "full": "火水未濟"
         },
-        "status": { "code": "binh_hoa", "label": "Bình Hòa" },
+        "line_code": "010101",
+        "element": "hoa",
+        "trigrams": {
+            "upper": {
+                "name": "Ly",
+                "han_viet": "Hỏa",
+                "symbol": "Lửa",
+                "code": "101"
+            },
+            "lower": {
+                "name": "Khảm",
+                "han_viet": "Thủy",
+                "symbol": "Nước",
+                "code": "010"
+            }
+        },
+        "status": {
+            "code": "binh_hoa",
+            "label": "Bình Hòa"
+        },
         "hexagram_images": ["Ưu Trung Vọng Hỷ", "Chưa Trọn Nhưng Mở Lối"],
         "keywords": ["Chuyển giao", "Dang dở", "Tiềm năng", "Thận trọng", "Sắp xếp", "Chu kỳ mới"],
         "couplet": {
@@ -1724,9 +2748,7 @@
         "artwork": {
             "image_base": "./assets/images/iching/64-hoa-thuy-vi-te",
             "alt": "Tranh minh họa quẻ Hỏa Thủy Vị Tế với hình tượng chú cáo nhỏ thận trọng bước qua dòng sông băng",
-            "focal_object": "Chú cáo nhỏ thận trọng bước qua dòng sông băng"
+            "focal_accent_object": "Chú cáo nhỏ thận trọng bước qua dòng sông băng"
         }
     }
 ]
-
-// xủ lý assaet để update lại skill và tiếp tục code, hiện tại các trang đều lỗi giao diện và nội dung

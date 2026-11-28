@@ -1,11 +1,13 @@
 // assets/js/utilities/util-core.js
-// Lõi hệ thống Utilities: Cấu hình tập trung ảnh thẻ 800x1200 (.png -> .webp), Helpers, Web Audio,
-// Singleton Modal, Bento Date Picker chuẩn a11y, Dual-Navbar đồng bộ URL #hash & Registry cô lập lỗi
+// Lõi Utilities: Lazy-load template theo Tab/Subtab, URL mặc định sạch, cấu hình ảnh 800x1200,
+// Singleton Modal, Bento Date Picker chuẩn a11y & Registry cô lập lỗi
 (() => {
     const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
+    const DEFAULT_CAT = "clock";
+    const DEFAULT_SUB = "stopwatch";
 
-    // Cấu hình tập trung cho 3 bộ thẻ bài 800x1200 (Sau này chuyển sang WebP chỉ cần đổi "png" -> "webp" tại đây)
-    const CARD_IMG_EXT = "png";
+    // Cấu hình tập trung cho 3 bộ thẻ bài 800x1200 (Sau này chuyển WebP chỉ đổi "png" -> "webp")
+    const CARD_IMG_EXT = "webp";
     const CARD_IMG_WIDTH = 800;
     const CARD_IMG_HEIGHT = 1200;
     const TAROT_IMG_DIR = "./assets/images/tarot";
@@ -87,8 +89,21 @@
         const normalized = String(basePath).trim().startsWith("/")
             ? `.${String(basePath).trim()}`
             : String(basePath).trim();
-        if (/\.(png|webp|jpe?g|svg)$/i.test(normalized)) return normalized;
-        return `${normalized}.${ext}`;
+        if (/\.svg$/i.test(normalized)) return normalized;
+        return `${normalized.replace(/\.(png|webp|jpe?g)$/i, "")}.${ext}`;
+    };
+
+    // Tự trích mảng dữ liệu kể cả khi JSON bọc trong { cards: [...] }, { hexagrams: [...] }, { data: [...] }
+    const extractArrayFromJson = (data) => {
+        if (Array.isArray(data)) return data;
+        if (data && typeof data === "object") {
+            for (const key of ["cards", "hexagrams", "items", "data", "list", "results"]) {
+                if (Array.isArray(data[key])) return data[key];
+            }
+            const firstArr = Object.values(data).find((v) => Array.isArray(v));
+            if (firstArr) return firstArr;
+        }
+        return [];
     };
 
     const buildBentoTooltipHtml = (title, desc, tagLabel) => `
@@ -107,7 +122,8 @@
                 return fallback;
             }
             const data = await res.json();
-            return Array.isArray(data) && data.length ? data : fallback;
+            const list = extractArrayFromJson(data);
+            return list.length ? list : fallback;
         } catch (err) {
             console.warn(`[UtilHub] Lỗi đọc/parse JSON tại ${url}:`, err.message);
             return fallback;
@@ -123,7 +139,7 @@
         }
     };
 
-    // ==================== 1. HỆ THỐNG ÂM THANH (WEB AUDIO API + UPLOAD NHẠC TỪ MÁY) ====================
+    // ==================== 1. HỆ THỐNG ÂM THANH ====================
     let activeAudioPlayer = null;
 
     const stopCurrentAudio = () => {
@@ -152,7 +168,7 @@
                 osc.stop(ctx.currentTime + idx * 0.14 + 0.48);
             });
         } catch (e) {
-            // Bỏ qua nếu trình duyệt chặn tự động phát
+            // Trình duyệt chặn autoplay
         }
     };
 
@@ -171,7 +187,7 @@
         playSynthesizedBell();
     };
 
-    // ==================== 2. SINGLETON MODAL DÙNG CHUNG (#util-detail-modal) ====================
+    // ==================== 2. SINGLETON MODAL (#util-detail-modal) ====================
     let modalSlideUrls = [];
     let modalSlideIdx = 0;
     let lastFocusedBeforeModal = null;
@@ -245,7 +261,6 @@
                 .join("");
         }
 
-        // Khung Smart Media (Video hoặc Slideshow Ảnh cho Ngày Này Năm Xưa)
         const mediaStage = document.getElementById("util-modal-media-stage");
         if (mediaStage) {
             if (videoUrl) {
@@ -351,12 +366,7 @@
 
             container.innerHTML = `
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary
-                        class="bazi-picker__summary"
-                        aria-label="Chọn ngày, hiện tại Ngày ${pad(state.day)}"
-                        aria-expanded="false"
-                        aria-controls="${dayListId}"
-                    >
+                    <summary class="bazi-picker__summary" aria-label="Chọn ngày, hiện tại Ngày ${pad(state.day)}" aria-expanded="false" aria-controls="${dayListId}">
                         <span class="bazi-picker__summary-text">Ngày ${pad(state.day)}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
@@ -367,12 +377,7 @@
                 </details>
 
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary
-                        class="bazi-picker__summary"
-                        aria-label="Chọn tháng, hiện tại Tháng ${pad(state.month)}"
-                        aria-expanded="false"
-                        aria-controls="${monthListId}"
-                    >
+                    <summary class="bazi-picker__summary" aria-label="Chọn tháng, hiện tại Tháng ${pad(state.month)}" aria-expanded="false" aria-controls="${monthListId}">
                         <span class="bazi-picker__summary-text">Tháng ${pad(state.month)}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
@@ -383,12 +388,7 @@
                 </details>
 
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary
-                        class="bazi-picker__summary"
-                        aria-label="Chọn năm, hiện tại Năm ${state.year}"
-                        aria-expanded="false"
-                        aria-controls="${yearListId}"
-                    >
+                    <summary class="bazi-picker__summary" aria-label="Chọn năm, hiện tại Năm ${state.year}" aria-expanded="false" aria-controls="${yearListId}">
                         <span class="bazi-picker__summary-text">Năm ${state.year}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
@@ -449,15 +449,85 @@
         };
     };
 
-    // ==================== 4. ĐIỀU HƯỚNG DUAL-NAVBAR 2 TẦNG & ĐỒNG BỘ URL HASH (FIX F5) ====================
+    // ==================== 4. LAZY-LOAD TEMPLATE THEO TAB / SUBTAB & DUAL-NAVBAR ====================
     let isCoreBooted = false;
-    let activeCat = "clock";
-    let activeSub = "stopwatch";
-    let currentRouteState = { cat: "clock", sub: "stopwatch", highlight: "" };
+    let activeCat = DEFAULT_CAT;
+    let activeSub = DEFAULT_SUB;
+    let currentRouteState = { cat: DEFAULT_CAT, sub: DEFAULT_SUB, highlight: "" };
 
-    const moduleInitCallbacks = [];
+    const legacyModuleCallbacks = [];
+    const keyedModules = new Map(); // key ("clock" | "iching" | "tarot" ...) -> [{ fn, initialized }]
+    const pendingTemplateFetches = new Map();
     const routeChangeListeners = [];
     const modalClickHandlers = [];
+
+    const runKeyedModuleIfReady = (key, targetEl) => {
+        const list = keyedModules.get(key);
+        if (!list || !targetEl) return;
+        list.forEach((entry, idx) => {
+            if (entry.initialized) return;
+            entry.initialized = true;
+            runSafe(`module:${key}#${idx}`, entry.fn, targetEl);
+        });
+    };
+
+    const loadTemplateIntoElement = async (el) => {
+        if (!el) return false;
+        const tplUrl = el.dataset.template;
+        if (!tplUrl) return true; // Đã có HTML tĩnh sẵn bên trong (tương thích ngược)
+        if (el.dataset.loaded === "true") return true;
+
+        if (pendingTemplateFetches.has(tplUrl)) {
+            return pendingTemplateFetches.get(tplUrl);
+        }
+
+        el.setAttribute("aria-busy", "true");
+        const task = (async () => {
+            try {
+                const res = await fetch(tplUrl);
+                if (!res.ok) throw new Error(`HTTP ${res.status} khi nạp ${tplUrl}`);
+                const html = await res.text();
+                el.innerHTML = html;
+                el.dataset.loaded = "true";
+                el.setAttribute("aria-busy", "false");
+                syncDetailsAriaExpanded(el);
+                return true;
+            } catch (err) {
+                console.error(`[UtilHub] Không nạp được template "${tplUrl}":`, err.message);
+                el.setAttribute("aria-busy", "false");
+                el.innerHTML = `<div class="util-card"><p class="util-data-table__empty">Không thể tải giao diện công cụ (<code>${escapeHtml(tplUrl)}</code>). Vui lòng kiểm tra lại đường dẫn file.</p></div>`;
+                return false;
+            } finally {
+                pendingTemplateFetches.delete(tplUrl);
+            }
+        })();
+
+        pendingTemplateFetches.set(tplUrl, task);
+        return task;
+    };
+
+    const ensureActiveViewLoaded = async (catKey, subKey) => {
+        const panel = document.querySelector(`.util-panel[data-panel-cat="${catKey}"]`);
+        if (!panel) return;
+
+        // 1. Nếu panel cấp 1 dùng data-template (vd: templates/utilities/clock.html)
+        const panelReady = await loadTemplateIntoElement(panel);
+        if (panelReady) {
+            runKeyedModuleIfReady(catKey, panel);
+        }
+
+        // 2. Nếu subpanel cấp 2 dùng data-template riêng (vd: iching.html / tarot.html)
+        if (subKey) {
+            const subPanel = panel.querySelector(`.util-subpanel[data-subpanel="${subKey}"]`);
+            if (subPanel) {
+                const subReady = await loadTemplateIntoElement(subPanel);
+                if (subReady) {
+                    runKeyedModuleIfReady(subKey, subPanel);
+                    runKeyedModuleIfReady(`${catKey}/${subKey}`, subPanel);
+                }
+            }
+        }
+    };
 
     const toggleMobileUtilMenu = (forceClose = false) => {
         const nav = document.getElementById("util-primary-nav");
@@ -528,8 +598,12 @@
         nextBtn?.addEventListener("click", () => slider.scrollBy({ left: 260, behavior: "smooth" }));
     };
 
-    const switchCategoryAndSub = (catKey, subKey = "", { syncUrl = true, replace = false, highlight = "" } = {}) => {
-        activeCat = SUB_NAV_MAP[catKey] ? catKey : "clock";
+    const switchCategoryAndSub = async (
+        catKey,
+        subKey = "",
+        { syncUrl = true, replace = false, highlight = "" } = {},
+    ) => {
+        activeCat = SUB_NAV_MAP[catKey] ? catKey : DEFAULT_CAT;
         const subItems = SUB_NAV_MAP[activeCat] || [];
         const hasValidSub = subItems.some((item) => item.id === subKey);
         activeSub = hasValidSub ? subKey : (subItems[0]?.id ?? "");
@@ -541,9 +615,10 @@
             mainEl.dataset.activeSub = activeSub;
         }
 
-        // Ghi trạng thái Tab/Subtab lên URL Hash (#cat/sub hoặc #cat) để F5 giữ đúng vị trí đang xem
+        // URL sạch cho trang mặc định (utilities.html), chỉ gắn #hash khi người dùng mở tab/subtab khác
         if (syncUrl) {
-            const nextHash = activeSub ? `#${activeCat}/${activeSub}` : `#${activeCat}`;
+            const isDefaultRoute = activeCat === DEFAULT_CAT && activeSub === DEFAULT_SUB && !highlight;
+            const nextHash = isDefaultRoute ? "" : activeSub ? `#${activeCat}/${activeSub}` : `#${activeCat}`;
             if (window.location.hash !== nextHash) {
                 const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
                 if (replace) window.history.replaceState({ cat: activeCat, sub: activeSub }, "", nextUrl);
@@ -570,7 +645,7 @@
                         (item) => `
                             <li class="util-sub-nav__item">
                                 <a
-                                    href="#${activeCat}/${item.id}"
+                                    href="${activeCat === DEFAULT_CAT && item.id === DEFAULT_SUB ? "./utilities.html" : `#${activeCat}/${item.id}`}"
                                     class="util-sub-nav__link ${item.id === activeSub ? "is-active" : ""}"
                                     ${item.id === activeSub ? 'aria-current="page"' : ""}
                                     data-util-sub="${item.id}"
@@ -588,6 +663,9 @@
             panel.hidden = panel.dataset.panelCat !== activeCat;
         });
 
+        // Nạp lười template (nếu panel/subpanel có data-template) trước khi bật subpanel và bắn route listener
+        await ensureActiveViewLoaded(activeCat, activeSub);
+
         const currentPanel = document.querySelector(`.util-panel[data-panel-cat="${activeCat}"]`);
         if (currentPanel && activeCat !== "datediff" && activeCat !== "fengshui") {
             currentPanel.querySelectorAll(".util-subpanel").forEach((sp) => {
@@ -600,28 +678,23 @@
     };
 
     const resolveRouteFromUrl = () => {
-        // 1. Ưu tiên đọc URL Hash dạng #cat/sub hoặc #cat (Giữ nguyên trạng thái khi bấm F5 / Back / Forward)
         const rawHash = window.location.hash.replace(/^#/, "").trim();
         if (rawHash) {
-            if (rawHash === "ic-catalog-section") {
-                return { cat: "divination", sub: "iching", highlight: "" };
-            }
-            if (rawHash === "tr-catalog-section") {
-                return { cat: "divination", sub: "tarot", highlight: "" };
-            }
+            if (rawHash === "ic-catalog-section")
+                return { cat: "divination", sub: "iching", highlight: "", hasExplicitUrl: true };
+            if (rawHash === "tr-catalog-section")
+                return { cat: "divination", sub: "tarot", highlight: "", hasExplicitUrl: true };
+
             const [hashCat, hashSub = ""] = rawHash.split("/");
-            if (SUB_NAV_MAP[hashCat]) {
-                return { cat: hashCat, sub: hashSub, highlight: "" };
-            }
-            // Hỗ trợ hash rút gọn chỉ ghi tên subtab (vd: #tarot, #iching, #alarm, #add)
+            if (SUB_NAV_MAP[hashCat]) return { cat: hashCat, sub: hashSub, highlight: "", hasExplicitUrl: true };
+
             for (const [catKey, subs] of Object.entries(SUB_NAV_MAP)) {
                 if (subs.some((s) => s.id === hashCat)) {
-                    return { cat: catKey, sub: hashCat, highlight: "" };
+                    return { cat: catKey, sub: hashCat, highlight: "", hasExplicitUrl: true };
                 }
             }
         }
 
-        // 2. Fallback đọc Query Deep-Link (?tab=, ?napam=, ?lucdieu=, ?bagua=, ?term=) từ day.html / footer.html
         const params = new URLSearchParams(window.location.search);
         const napamParam = params.get("napam");
         const lucdieuParam = params.get("lucdieu") || params.get("direction");
@@ -629,19 +702,20 @@
         const termParam = params.get("term");
         const tabParam = params.get("tab");
 
-        if (napamParam) return { cat: "fengshui", sub: "fs-napam", highlight: napamParam };
-        if (lucdieuParam) return { cat: "fengshui", sub: "fs-lucdieu", highlight: lucdieuParam };
-        if (baguaParam) return { cat: "fengshui", sub: "fs-bagua", highlight: baguaParam };
-        if (termParam || tabParam === "solarterm") return { cat: "solarterm", sub: "", highlight: "" };
-        if (tabParam === "tarot") return { cat: "divination", sub: "tarot", highlight: "" };
-        if (tabParam === "iching") return { cat: "divination", sub: "iching", highlight: "" };
-        if (tabParam === "horoscope") return { cat: "horoscope", sub: "", highlight: "" };
+        if (napamParam) return { cat: "fengshui", sub: "fs-napam", highlight: napamParam, hasExplicitUrl: true };
+        if (lucdieuParam) return { cat: "fengshui", sub: "fs-lucdieu", highlight: lucdieuParam, hasExplicitUrl: true };
+        if (baguaParam) return { cat: "fengshui", sub: "fs-bagua", highlight: baguaParam, hasExplicitUrl: true };
+        if (termParam || tabParam === "solarterm")
+            return { cat: "solarterm", sub: "", highlight: "", hasExplicitUrl: true };
+        if (tabParam === "tarot") return { cat: "divination", sub: "tarot", highlight: "", hasExplicitUrl: true };
+        if (tabParam === "iching") return { cat: "divination", sub: "iching", highlight: "", hasExplicitUrl: true };
+        if (tabParam === "horoscope") return { cat: "horoscope", sub: "", highlight: "", hasExplicitUrl: true };
         if (tabParam === "napam" || tabParam === "lucdieu" || tabParam === "truc-sao") {
-            return { cat: "fengshui", sub: "fs-all", highlight: "" };
+            return { cat: "fengshui", sub: "fs-all", highlight: "", hasExplicitUrl: true };
         }
-        if (tabParam && SUB_NAV_MAP[tabParam]) return { cat: tabParam, sub: "", highlight: "" };
+        if (tabParam && SUB_NAV_MAP[tabParam]) return { cat: tabParam, sub: "", highlight: "", hasExplicitUrl: true };
 
-        return { cat: "clock", sub: "stopwatch", highlight: "" };
+        return { cat: DEFAULT_CAT, sub: DEFAULT_SUB, highlight: "", hasExplicitUrl: false };
     };
 
     // ==================== 5. BOOTSTRAP TOÀN TRANG UTILITIES ====================
@@ -654,18 +728,17 @@
         bindDragToScrollNav();
         syncDetailsAriaExpanded(mainEl);
 
-        // Khởi chạy cô lập toàn bộ các module chức năng đã đăng ký
-        moduleInitCallbacks.forEach((initFn, idx) => runSafe(`moduleInit#${idx}`, initFn, mainEl));
+        // Khởi chạy các module cũ chưa tách template (tương thích ngược)
+        legacyModuleCallbacks.forEach((initFn, idx) => runSafe(`legacyModule#${idx}`, initFn, mainEl));
 
-        // Đọc và áp dụng đúng Route từ URL ngay lúc tải trang (Fix F5)
+        // Áp dụng Route ban đầu (giữ URL sạch utilities.html nếu mở mặc định)
         const initialRoute = resolveRouteFromUrl();
         switchCategoryAndSub(initialRoute.cat, initialRoute.sub, {
-            syncUrl: true,
+            syncUrl: initialRoute.hasExplicitUrl,
             replace: true,
             highlight: initialRoute.highlight,
         });
 
-        // Đồng bộ nút Back / Forward & thay đổi hash thủ công
         const syncFromLocation = () => {
             const route = resolveRouteFromUrl();
             switchCategoryAndSub(route.cat, route.sub, { syncUrl: false, highlight: route.highlight });
@@ -673,7 +746,6 @@
         window.addEventListener("popstate", syncFromLocation);
         window.addEventListener("hashchange", syncFromLocation);
 
-        // Điều hướng Dual-Navbar & Mobile Hamburger
         document.getElementById("util-burger-btn")?.addEventListener("click", () => toggleMobileUtilMenu());
         document.getElementById("util-mobile-backdrop")?.addEventListener("click", () => toggleMobileUtilMenu(true));
 
@@ -696,7 +768,6 @@
             else document.getElementById("widget-trigger-btn")?.click();
         });
 
-        // Dùng chung cho tất cả nút Bento Stepper (− / +) & Modal trên toàn trang
         mainEl.addEventListener("click", (e) => {
             const stepBtn = e.target.closest("[data-step-target]");
             if (stepBtn) {
@@ -711,14 +782,12 @@
                 return;
             }
 
-            // Ủy quyền click mở Singleton Modal tới từng module (có cô lập lỗi)
             for (let i = 0; i < modalClickHandlers.length; i++) {
                 const handled = runSafe(`modalHandler#${i}`, modalClickHandlers[i], e);
                 if (handled === true) return;
             }
         });
 
-        // Hỗ trợ bàn phím (Enter / Space) cho mọi thẻ tương tác role="button" tabindex="0"
         mainEl.addEventListener("keydown", (e) => {
             if (e.key !== "Enter" && e.key !== " ") return;
             const interactiveCard = e.target.closest(
@@ -738,7 +807,6 @@
         });
     };
 
-    // Xuất trục điều phối dùng chung
     window.UtilHub = {
         DEFAULT_COVER_IMG,
         CARD_IMG_EXT,
@@ -765,27 +833,37 @@
         closeUtilModal,
         createBentoDatePicker,
         switchCategoryAndSub,
-        registerModule: (fn) => {
-            if (typeof fn !== "function") return;
-            moduleInitCallbacks.push(fn);
-            if (isCoreBooted) {
-                const mainEl = document.getElementById("main");
-                if (mainEl) runSafe("lateModuleInit", fn, mainEl);
+        // Hỗ trợ cả 2 kiểu: registerModule("clock", initFn) cho template nạp lười & registerModule(initFn) cho module cũ
+        registerModule: (keyOrFn, maybeFn) => {
+            if (typeof keyOrFn === "string" && typeof maybeFn === "function") {
+                if (!keyedModules.has(keyOrFn)) keyedModules.set(keyOrFn, []);
+                keyedModules.get(keyOrFn).push({ fn: maybeFn, initialized: false });
+                if (
+                    isCoreBooted &&
+                    (activeCat === keyOrFn || activeSub === keyOrFn || `${activeCat}/${activeSub}` === keyOrFn)
+                ) {
+                    ensureActiveViewLoaded(activeCat, activeSub);
+                }
+                return;
+            }
+            if (typeof keyOrFn === "function") {
+                legacyModuleCallbacks.push(keyOrFn);
+                if (isCoreBooted) {
+                    const mainEl = document.getElementById("main");
+                    if (mainEl) runSafe("lateLegacyModule", keyOrFn, mainEl);
+                }
             }
         },
         onRouteChange: (fn) => {
             if (typeof fn !== "function") return;
             routeChangeListeners.push(fn);
-            if (isCoreBooted) {
-                runSafe("lateRouteListener", fn, currentRouteState);
-            }
+            if (isCoreBooted) runSafe("lateRouteListener", fn, currentRouteState);
         },
         registerModalHandler: (fn) => {
             if (typeof fn === "function") modalClickHandlers.push(fn);
         },
     };
 
-    // Chỉ boot trên DOMContentLoaded (KHÔNG nghe template-loaded để tránh khóa cổng sớm trước khi 4 module con nạp xong)
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", initUtilitiesCore);
     } else {

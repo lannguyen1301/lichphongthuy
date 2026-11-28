@@ -10928,3 +10928,1079 @@
     </div>
 </section>
 ```
+
+## utilities folder
+
+### clock.html
+
+```html
+<!-- templates/utilities/clock.html -->
+<!-- ==================== 1.1. ĐỒNG HỒ BẤM GIỜ BENTO ==================== -->
+<div class="util-subpanel" data-subpanel="stopwatch">
+    <div class="util-card util-clock-card">
+        <header class="util-card__head">
+            <div>
+                <h2 class="util-card__title">Đồng Hồ Bấm Giờ Thể Thao (Stopwatch)</h2>
+                <p class="util-card__sub">
+                    Đo thời gian chính xác đến 1/100 giây, tự động phân tích vòng nhanh nhất, chậm nhất và tốc độ trung
+                    bình theo thời gian thực
+                </p>
+            </div>
+            <span class="util-card__tag" id="sw-head-badge" data-clock-state="idle">Chuẩn 1/100s</span>
+        </header>
+
+        <div class="util-sw-bento" id="sw-bento-root" data-clock-state="idle">
+            <!-- Đảo Trái (7 cột): Hero Số Lớn + Cụm Điều Khiển -->
+            <div class="util-sw-hero">
+                <div class="util-sw-hero__top">
+                    <span class="util-clock-stage__tag" id="sw-status-tag">
+                        <span class="util-live-dot" aria-hidden="true"></span>
+                        <span id="sw-status-text">Sẵn sàng bấm giờ</span>
+                    </span>
+                    <span class="util-sw-hero__hint">Độ phân giải 10ms</span>
+                </div>
+
+                <div class="util-sw-hero__stage">
+                    <div class="util-sw-hero__digits" role="timer" aria-live="off">
+                        <span id="sw-main-display">00:00:00</span>
+                        <small id="sw-ms-display">.00</small>
+                    </div>
+                </div>
+
+                <div class="util-sw-hero__dock" role="group" aria-label="Điều khiển bấm giờ">
+                    <button type="button" class="btn util-btn util-btn--primary" id="sw-start-btn">
+                        <span>&#9654; Bắt đầu</span>
+                    </button>
+                    <button type="button" class="btn util-btn util-btn--secondary" id="sw-lap-btn" disabled>
+                        <span>&#9632; Ngắt (Vòng)</span>
+                    </button>
+                    <button type="button" class="btn util-btn util-btn--outline" id="sw-reset-btn">
+                        <span>&#8635; Đặt lại</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Đảo Phải (5 cột): Cụm Bento Telemetry Bất Đối Xứng + Nhật Ký Vòng -->
+            <div class="util-sw-side">
+                <div class="util-sw-stats" aria-label="Thống kê nhanh các vòng bấm giờ">
+                    <article class="util-sw-stat util-sw-stat--accent">
+                        <span class="util-sw-stat__label">Số vòng</span>
+                        <strong class="util-sw-stat__val" id="sw-stat-count">00</strong>
+                        <small class="util-sw-stat__sub">Đã ghi nhận</small>
+                    </article>
+
+                    <article class="util-sw-stat util-sw-stat--best">
+                        <div class="util-sw-stat__head">
+                            <span class="util-sw-stat__label">Nhanh nhất</span>
+                            <small class="util-sw-stat__pill" id="sw-stat-best-tag">Chưa có</small>
+                        </div>
+                        <strong class="util-sw-stat__val" id="sw-stat-best">--:--.--</strong>
+                    </article>
+
+                    <article class="util-sw-stat util-sw-stat--worst">
+                        <div class="util-sw-stat__head">
+                            <span class="util-sw-stat__label">Chậm nhất</span>
+                            <small class="util-sw-stat__pill" id="sw-stat-worst-tag">Chưa có</small>
+                        </div>
+                        <strong class="util-sw-stat__val" id="sw-stat-worst">--:--.--</strong>
+                    </article>
+
+                    <article class="util-sw-stat util-sw-stat--avg">
+                        <div class="util-sw-stat__avg-info">
+                            <span class="util-sw-stat__label">Trung bình mỗi chặng</span>
+                            <small class="util-sw-stat__sub">Tốc độ ổn định</small>
+                        </div>
+                        <strong class="util-sw-stat__val" id="sw-stat-avg">--:--.--</strong>
+                    </article>
+                </div>
+
+                <div class="util-sw-laps">
+                    <div class="util-sw-laps__head">
+                        <h3 class="util-sw-laps__title">Nhật ký các vòng (Laps)</h3>
+                        <span class="util-sw-laps__col-hint">Chặng / Tổng</span>
+                    </div>
+                    <div class="util-sw-laps__body" id="sw-laps-body" role="list" aria-live="polite"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 1.2. ĐỒNG HỒ ĐẾM NGƯỢC BENTO ==================== -->
+<div class="util-subpanel" data-subpanel="timer" hidden>
+    <div class="util-card util-clock-card">
+        <header class="util-card__head">
+            <div>
+                <h2 class="util-card__title">Đặt Đồng Hồ Hẹn Giờ (Đếm Ngược Bento)</h2>
+                <p class="util-card__sub">
+                    Vòng tiến độ rộng thoáng theo thời gian thực, chọn nhanh mốc Bento và lưu lịch sử hẹn giờ tự động
+                </p>
+            </div>
+            <span class="util-card__tag" id="cd-status-badge" data-clock-state="idle">Đang chờ</span>
+        </header>
+
+        <div class="util-cd-bento" id="cd-bento-root" data-clock-state="idle">
+            <!-- Đảo 1 (7 cột): Vòng Tròn Tiến Độ Rộng + Tag % Nổi Bật -->
+            <div class="util-cd-hero">
+                <div class="util-cd-hero__top">
+                    <span class="util-clock-stage__tag" id="cd-active-title-label">Đồng hồ đếm ngược</span>
+                    <span class="util-cd-hero__pct" id="cd-progress-pct" aria-label="Phần trăm thời gian còn lại">
+                        100%
+                    </span>
+                </div>
+
+                <div class="util-cd-ring-stage">
+                    <svg class="util-cd-ring" viewBox="0 0 260 260" aria-hidden="true">
+                        <circle class="util-cd-ring__track" cx="130" cy="130" r="116"></circle>
+                        <circle class="util-cd-ring__fill" id="cd-progress-ring" cx="130" cy="130" r="116"></circle>
+                    </svg>
+
+                    <div class="util-cd-ring-stage__inner">
+                        <div class="util-cd-hero__digits" id="cd-display-digits" role="timer" aria-live="off">
+                            00:05:00
+                        </div>
+                        <span class="util-cd-hero__end-at" id="cd-end-at-label">Nhấn Bắt đầu để đếm ngược</span>
+                    </div>
+                </div>
+
+                <div class="util-cd-hero__dock" role="group" aria-label="Điều khiển đếm ngược">
+                    <button type="button" class="btn util-btn util-btn--primary" id="cd-start-btn">
+                        <span>&#9654; Bắt đầu hẹn giờ</span>
+                    </button>
+                    <button type="button" class="btn util-btn util-btn--outline" id="cd-reset-btn">
+                        <span>&#8635; Đặt lại</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Đảo 2 (5 cột): Lưới Bento Mốc Thời Gian Số To Rõ -->
+            <div class="util-cd-presets-card">
+                <div class="util-cd-presets-card__head">
+                    <h3 class="util-cd-presets-card__title">Mốc chọn nhanh</h3>
+                    <span class="util-cd-presets-card__hint">1 chạm đặt giờ</span>
+                </div>
+
+                <div class="util-cd-presets-bento" role="group" aria-label="Mốc thời gian đếm ngược nhanh">
+                    <button
+                        type="button"
+                        class="util-preset-tile util-preset-tile--wide is-active"
+                        data-cd-preset="300"
+                        aria-pressed="true"
+                    >
+                        <div class="util-preset-tile__head">
+                            <span class="util-preset-tile__tag">Phổ biến</span>
+                            <span class="util-preset-tile__unit">phút</span>
+                        </div>
+                        <strong class="util-preset-tile__num">05</strong>
+                        <span class="util-preset-tile__desc">Giải lao ngắn</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="util-preset-tile util-preset-tile--wide"
+                        data-cd-preset="900"
+                        aria-pressed="false"
+                    >
+                        <div class="util-preset-tile__head">
+                            <span class="util-preset-tile__tag">Hiệu suất</span>
+                            <span class="util-preset-tile__unit">phút</span>
+                        </div>
+                        <strong class="util-preset-tile__num">15</strong>
+                        <span class="util-preset-tile__desc">Tập trung nhanh</span>
+                    </button>
+
+                    <button type="button" class="util-preset-tile" data-cd-preset="15" aria-pressed="false">
+                        <strong class="util-preset-tile__num">15</strong>
+                        <span class="util-preset-tile__unit">giây</span>
+                        <span class="util-preset-tile__desc">Khởi động</span>
+                    </button>
+
+                    <button type="button" class="util-preset-tile" data-cd-preset="30" aria-pressed="false">
+                        <strong class="util-preset-tile__num">30</strong>
+                        <span class="util-preset-tile__unit">giây</span>
+                        <span class="util-preset-tile__desc">Nghỉ hiệp</span>
+                    </button>
+
+                    <button type="button" class="util-preset-tile" data-cd-preset="60" aria-pressed="false">
+                        <strong class="util-preset-tile__num">01</strong>
+                        <span class="util-preset-tile__unit">phút</span>
+                        <span class="util-preset-tile__desc">Nhịp nhanh</span>
+                    </button>
+
+                    <button type="button" class="util-preset-tile" data-cd-preset="600" aria-pressed="false">
+                        <strong class="util-preset-tile__num">10</strong>
+                        <span class="util-preset-tile__unit">phút</span>
+                        <span class="util-preset-tile__desc">Thiền nhẹ</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="util-preset-tile util-preset-tile--wide"
+                        data-cd-preset="1800"
+                        aria-pressed="false"
+                    >
+                        <div class="util-preset-tile__head">
+                            <span class="util-preset-tile__tag">Sâu</span>
+                            <span class="util-preset-tile__unit">phút</span>
+                        </div>
+                        <strong class="util-preset-tile__num">30</strong>
+                        <span class="util-preset-tile__desc">Đọc sách / Học bài</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="util-preset-tile util-preset-tile--wide"
+                        data-cd-preset="3600"
+                        aria-pressed="false"
+                    >
+                        <div class="util-preset-tile__head">
+                            <span class="util-preset-tile__tag">Chặn lớn</span>
+                            <span class="util-preset-tile__unit">giờ</span>
+                        </div>
+                        <strong class="util-preset-tile__num">01</strong>
+                        <span class="util-preset-tile__desc">Phiên làm việc</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Đảo 3 (7 cột): Bộ chỉnh Giờ : Phút : Giây -->
+            <div class="util-cd-steppers-card">
+                <span class="util-field__label">Tùy chỉnh thủ công (Giờ : Phút : Giây)</span>
+                <div class="util-stepper-grid">
+                    <div class="util-stepper-box">
+                        <label for="cd-input-hours" class="util-stepper-box__label">Số Giờ</label>
+                        <div class="util-stepper-box__ctrl">
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="cd-input-hours"
+                                data-step="-1"
+                                aria-label="Giảm số giờ"
+                            >
+                                &#8722;
+                            </button>
+                            <input
+                                type="number"
+                                inputmode="numeric"
+                                id="cd-input-hours"
+                                class="util-stepper-box__input"
+                                min="0"
+                                max="99"
+                                value="0"
+                            />
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="cd-input-hours"
+                                data-step="1"
+                                aria-label="Tăng số giờ"
+                            >
+                                &#43;
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="util-stepper-box">
+                        <label for="cd-input-minutes" class="util-stepper-box__label">Số Phút</label>
+                        <div class="util-stepper-box__ctrl">
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="cd-input-minutes"
+                                data-step="-1"
+                                aria-label="Giảm số phút"
+                            >
+                                &#8722;
+                            </button>
+                            <input
+                                type="number"
+                                inputmode="numeric"
+                                id="cd-input-minutes"
+                                class="util-stepper-box__input"
+                                min="0"
+                                max="59"
+                                value="5"
+                            />
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="cd-input-minutes"
+                                data-step="1"
+                                aria-label="Tăng số phút"
+                            >
+                                &#43;
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="util-stepper-box">
+                        <label for="cd-input-seconds" class="util-stepper-box__label">Số Giây</label>
+                        <div class="util-stepper-box__ctrl">
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="cd-input-seconds"
+                                data-step="-1"
+                                aria-label="Giảm số giây"
+                            >
+                                &#8722;
+                            </button>
+                            <input
+                                type="number"
+                                inputmode="numeric"
+                                id="cd-input-seconds"
+                                class="util-stepper-box__input"
+                                min="0"
+                                max="59"
+                                value="0"
+                            />
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="cd-input-seconds"
+                                data-step="1"
+                                aria-label="Tăng số giây"
+                            >
+                                &#43;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Đảo 4 (5 cột): Nhãn & Nhạc chuông -->
+            <div class="util-sound-bento util-cd-sound-card">
+                <div class="util-field">
+                    <label for="cd-input-title" class="util-field__label">Tiêu đề hẹn giờ</label>
+                    <input
+                        type="text"
+                        id="cd-input-title"
+                        class="util-field__input"
+                        value="Đồng hồ đếm ngược"
+                        placeholder="Nhập tên công việc..."
+                    />
+                </div>
+
+                <div class="util-sound-bento__row">
+                    <div class="util-sound-bento__info">
+                        <span class="util-field__label">Âm báo chuông</span>
+                        <strong class="util-sound-bento__name" id="cd-sound-file-label">
+                            Chuông mặc định (Hợp âm Ngũ Hành)
+                        </strong>
+                    </div>
+
+                    <div class="util-sound-bento__actions">
+                        <input type="file" id="cd-audio-file" accept="audio/*" hidden />
+                        <button
+                            type="button"
+                            class="btn util-btn util-btn--outline util-btn--sm"
+                            id="cd-upload-sound-btn"
+                            title="Chọn file nhạc MP3/WAV/M4A từ thiết bị"
+                        >
+                            <span>📁 Chọn nhạc</span>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn util-btn util-btn--secondary util-btn--sm"
+                            id="cd-test-sound-btn"
+                        >
+                            <span>Nghe thử</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Đảo 5 (12 cột): Lịch sử phiên đếm ngược (Lưu localStorage) -->
+            <div class="util-cd-history-card">
+                <div class="util-cd-presets-card__head">
+                    <h3 class="util-cd-presets-card__title">Lịch sử hẹn giờ gần đây</h3>
+                    <span class="util-cd-presets-card__hint">Tự lưu trên trình duyệt • Bấm để nạp lại</span>
+                </div>
+                <div class="util-cd-history-grid" id="cd-history-body" aria-live="polite"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== 1.3. ĐỒNG HỒ BÁO THỨC BENTO ==================== -->
+<div class="util-subpanel" data-subpanel="alarm" hidden>
+    <div class="util-card util-clock-card">
+        <header class="util-card__head">
+            <div>
+                <h2 class="util-card__title">Đặt Thời Gian Báo Thức Thông Minh</h2>
+                <p class="util-card__sub">
+                    Tự động lưu trên thiết bị không cần đăng nhập, tính giờ còn lại tới báo thức gần nhất và hỗ trợ Báo
+                    lại 5 phút (Snooze)
+                </p>
+            </div>
+            <span class="util-card__tag" id="al-live-clock-pill">Giờ hiện tại: --:--:--</span>
+        </header>
+
+        <div class="util-alarm-ring-banner" id="al-ringing-banner" role="alert" aria-live="assertive" hidden>
+            <div class="util-alarm-ring-banner__info">
+                <span class="util-alarm-ring-banner__tag">Đang đổ chuông báo thức</span>
+                <strong id="al-ringing-title">Đến giờ báo thức!</strong>
+            </div>
+            <div class="util-alarm-ring-banner__btns">
+                <button type="button" class="btn util-btn util-btn--secondary" id="al-snooze-btn">
+                    <span>Báo lại sau 5 phút</span>
+                </button>
+                <button type="button" class="btn util-btn util-btn--primary" id="al-stop-ring-btn">
+                    <span>Tắt chuông</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tầng Trên: Hero Báo Thức Kế Tiếp (5 cột) + Composer (7 cột) -->
+        <div class="util-al-bento">
+            <aside class="util-al-hero" id="al-next-hero" aria-live="polite">
+                <div class="util-al-hero__top">
+                    <span class="util-al-hero__pill" id="al-active-count">1 đang bật</span>
+                    <span class="util-al-hero__badge">Kế tiếp</span>
+                </div>
+
+                <div class="util-al-hero__body">
+                    <span class="util-al-hero__eyebrow">Báo thức gần nhất</span>
+                    <strong class="util-al-hero__time" id="al-next-time">06:30</strong>
+                    <p class="util-al-hero__title" id="al-next-title">Dậy học bài &amp; Tập thể dục</p>
+                </div>
+
+                <footer class="util-al-hero__foot">
+                    <span class="util-al-hero__countdown" id="al-next-countdown">Đang tính thời gian còn lại...</span>
+                </footer>
+
+                <img src="./assets/icons/clock.svg" alt="" aria-hidden="true" class="util-al-hero__watermark" />
+            </aside>
+
+            <div class="util-al-composer">
+                <div class="util-al-composer__top">
+                    <div>
+                        <span class="util-field__label">Thiết lập giờ báo thức</span>
+                        <strong class="util-al-composer__preview" id="al-preview-time">06:30</strong>
+                    </div>
+
+                    <div class="util-al-quick-chips" role="group" aria-label="Chọn nhanh khung giờ">
+                        <button type="button" class="util-al-quick-chip" data-al-quick="05:30">05:30</button>
+                        <button type="button" class="util-al-quick-chip" data-al-quick="06:00">06:00</button>
+                        <button type="button" class="util-al-quick-chip" data-al-quick="07:00">07:00</button>
+                        <button type="button" class="util-al-quick-chip" data-al-quick="12:00">12:00</button>
+                        <button type="button" class="util-al-quick-chip" data-al-quick="22:30">22:30</button>
+                    </div>
+                </div>
+
+                <div class="util-al-composer__time-row">
+                    <div class="util-stepper-box">
+                        <label for="al-input-hour" class="util-stepper-box__label">Giờ (00 - 23)</label>
+                        <div class="util-stepper-box__ctrl">
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="al-input-hour"
+                                data-step="-1"
+                                aria-label="Giảm giờ báo thức"
+                            >
+                                &#8722;
+                            </button>
+                            <input
+                                type="number"
+                                inputmode="numeric"
+                                id="al-input-hour"
+                                class="util-stepper-box__input"
+                                min="0"
+                                max="23"
+                                value="6"
+                            />
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="al-input-hour"
+                                data-step="1"
+                                aria-label="Tăng giờ báo thức"
+                            >
+                                &#43;
+                            </button>
+                        </div>
+                    </div>
+
+                    <span class="util-al-composer__colon" aria-hidden="true">:</span>
+
+                    <div class="util-stepper-box">
+                        <label for="al-input-minute" class="util-stepper-box__label">Phút (00 - 59)</label>
+                        <div class="util-stepper-box__ctrl">
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="al-input-minute"
+                                data-step="-1"
+                                aria-label="Giảm phút báo thức"
+                            >
+                                &#8722;
+                            </button>
+                            <input
+                                type="number"
+                                inputmode="numeric"
+                                id="al-input-minute"
+                                class="util-stepper-box__input"
+                                min="0"
+                                max="59"
+                                value="30"
+                            />
+                            <button
+                                type="button"
+                                class="util-stepper-box__btn"
+                                data-step-target="al-input-minute"
+                                data-step="1"
+                                aria-label="Tăng phút báo thức"
+                            >
+                                &#43;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="util-form-grid util-form-grid--2cols">
+                    <div class="util-field">
+                        <label for="al-input-title" class="util-field__label">Tên báo thức</label>
+                        <input
+                            type="text"
+                            id="al-input-title"
+                            class="util-field__input"
+                            value="Dậy học bài &amp; Tập thể dục"
+                            placeholder="Ví dụ: Họp sáng, Uống thuốc..."
+                        />
+                    </div>
+
+                    <div class="util-field">
+                        <span class="util-field__label" id="al-repeat-label">Chế độ lặp lại</span>
+                        <details class="bazi-picker js-cal-dropdown" id="al-repeat-dropdown">
+                            <summary
+                                class="bazi-picker__summary"
+                                aria-labelledby="al-repeat-label al-repeat-text"
+                                aria-expanded="false"
+                                aria-controls="al-repeat-list"
+                            >
+                                <span class="bazi-picker__summary-text" id="al-repeat-text" data-repeat-val="Hằng ngày">
+                                    Hằng ngày
+                                </span>
+                                <img
+                                    src="./assets/icons/arrow-down.svg"
+                                    alt=""
+                                    aria-hidden="true"
+                                    class="bazi-picker__arrow icon"
+                                />
+                            </summary>
+                            <div class="bazi-picker__popover">
+                                <ul
+                                    class="bazi-picker__list"
+                                    id="al-repeat-list"
+                                    role="listbox"
+                                    aria-label="Chọn chế độ lặp lại báo thức"
+                                >
+                                    <li>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            aria-selected="true"
+                                            class="bazi-picker__option is-selected"
+                                            data-al-repeat="Hằng ngày"
+                                        >
+                                            Hằng ngày
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            aria-selected="false"
+                                            class="bazi-picker__option"
+                                            data-al-repeat="Thứ 2 – Thứ 6"
+                                        >
+                                            Thứ 2 – Thứ 6
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            aria-selected="false"
+                                            class="bazi-picker__option"
+                                            data-al-repeat="Cuối tuần (T7, CN)"
+                                        >
+                                            Cuối tuần (T7, CN)
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            aria-selected="false"
+                                            class="bazi-picker__option"
+                                            data-al-repeat="Chỉ một lần"
+                                        >
+                                            Chỉ một lần
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="util-al-composer__footer">
+                    <div class="util-al-composer__sound">
+                        <input type="file" id="al-audio-file" accept="audio/*" hidden />
+                        <strong class="util-sound-bento__name" id="al-sound-file-label">
+                            🔔 Chuông mặc định (Hợp âm Ngũ Hành)
+                        </strong>
+                        <div class="util-sound-bento__actions">
+                            <button
+                                type="button"
+                                class="btn util-btn util-btn--outline util-btn--sm"
+                                id="al-upload-sound-btn"
+                            >
+                                <span>📁 Chọn nhạc</span>
+                            </button>
+                            <button
+                                type="button"
+                                class="btn util-btn util-btn--secondary util-btn--sm"
+                                id="al-test-sound-btn"
+                            >
+                                <span>Nghe thử</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn util-btn util-btn--primary" id="al-add-btn">
+                        <span>+ Lưu báo thức</span>
+                    </button>
+                </div>
+
+                <p class="util-al-composer__hint" id="al-form-hint" aria-live="polite" hidden></p>
+            </div>
+        </div>
+
+        <!-- Tầng Dưới: Bento Deck Báo Thức (Tự khóa 12 cột mỗi hàng, không chừa lỗ trống) -->
+        <div class="util-al-deck">
+            <div class="util-cd-presets-card__head">
+                <h3 class="util-cd-presets-card__title">Bộ sưu tập báo thức của bạn</h3>
+                <span class="util-cd-presets-card__hint" id="al-total-hint">Tự động sắp xếp theo giờ gần nhất</span>
+            </div>
+            <div class="util-alarms-bento" id="al-list-container"></div>
+        </div>
+    </div>
+</div>
+```
+
+### util-iching.html
+
+```html
+<!-- templates/utilities/util-iching.html -->
+<div class="util-card util-divination-card">
+    <header class="util-card__head">
+        <div>
+            <span class="util-header__eyebrow">
+                <img
+                    src="./assets/icons/ying-yang-2.svg"
+                    alt=""
+                    aria-hidden="true"
+                    class="util-header__eyebrow-icon icon"
+                />
+                <span>Chu Dịch Lục Thập Tứ Quái • 64 Quẻ Chuẩn Văn Vương</span>
+            </span>
+            <h2 class="util-card__title">Gieo Quẻ Kinh Dịch (3 Đồng Xu Lục Hào)</h2>
+            <p class="util-card__sub">
+                Tĩnh tâm nghĩ về điều cần hỏi, nhấn Gieo Quẻ để tung 3 đồng xu 3D hoặc tra cứu trọn bộ 64 lá bài bên
+                dưới
+            </p>
+        </div>
+        <span class="util-card__tag" id="ic-head-status" data-status-code="dai_cat">64 Quẻ Chuẩn</span>
+    </header>
+
+    <!-- ==================== TẦNG 1: BENTO GIEO QUẺ (TRÁI 7 CỘT: 3 XU 3D | PHẢI 5 CỘT: CẤU TRÚC 6 HÀO) ==================== -->
+    <div class="util-ic-cast-bento">
+        <!-- Đảo Trái: Sân khấu 3 đồng xu SVG 2 mặt + Lịch sử 5 quẻ gần đây -->
+        <div class="util-ic-cast-hero">
+            <div class="util-ic-cast-hero__top">
+                <span class="util-clock-stage__tag">
+                    <span class="util-live-dot" aria-hidden="true"></span>
+                    <span id="ic-cast-state-text">Sẵn sàng gieo quẻ</span>
+                </span>
+                <span class="util-ic-cast-hero__unicode" id="ic-hero-unicode" aria-hidden="true">䷍</span>
+            </div>
+
+            <div class="util-coins-stage" id="ic-coins-stage" aria-hidden="true">
+                <div class="util-coin" data-coin-idx="0" data-face="yang">
+                    <div class="util-coin__inner">
+                        <span class="util-coin__face util-coin__face--yang">
+                            <img
+                                src="./assets/icons/iching/coin-yang.svg"
+                                alt=""
+                                width="128"
+                                height="128"
+                                decoding="async"
+                            />
+                        </span>
+                        <span class="util-coin__face util-coin__face--yin">
+                            <img
+                                src="./assets/icons/iching/coin-yin.svg"
+                                alt=""
+                                width="128"
+                                height="128"
+                                decoding="async"
+                            />
+                        </span>
+                    </div>
+                </div>
+                <div class="util-coin" data-coin-idx="1" data-face="yin">
+                    <div class="util-coin__inner">
+                        <span class="util-coin__face util-coin__face--yang">
+                            <img
+                                src="./assets/icons/iching/coin-yang.svg"
+                                alt=""
+                                width="128"
+                                height="128"
+                                decoding="async"
+                            />
+                        </span>
+                        <span class="util-coin__face util-coin__face--yin">
+                            <img
+                                src="./assets/icons/iching/coin-yin.svg"
+                                alt=""
+                                width="128"
+                                height="128"
+                                decoding="async"
+                            />
+                        </span>
+                    </div>
+                </div>
+                <div class="util-coin" data-coin-idx="2" data-face="yang">
+                    <div class="util-coin__inner">
+                        <span class="util-coin__face util-coin__face--yang">
+                            <img
+                                src="./assets/icons/iching/coin-yang.svg"
+                                alt=""
+                                width="128"
+                                height="128"
+                                decoding="async"
+                            />
+                        </span>
+                        <span class="util-coin__face util-coin__face--yin">
+                            <img
+                                src="./assets/icons/iching/coin-yin.svg"
+                                alt=""
+                                width="128"
+                                height="128"
+                                decoding="async"
+                            />
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="util-divination-actions">
+                <button type="button" class="btn util-btn util-btn--primary" id="ic-cast-btn">
+                    <img src="./assets/icons/ying-yang-2.svg" alt="" aria-hidden="true" class="util-btn__svg-icon" />
+                    <span>Gieo Quẻ Ngay</span>
+                </button>
+                <a href="#ic-catalog-section" class="btn util-btn util-btn--outline" id="ic-jump-catalog-btn">
+                    <span>Tra cứu 64 Quẻ &#8595;</span>
+                </a>
+            </div>
+
+            <div class="util-ic-history" id="ic-history-wrap" hidden>
+                <span class="util-ic-history__label">Vừa gieo:</span>
+                <div
+                    class="util-ic-history__list"
+                    id="ic-history-list"
+                    role="group"
+                    aria-label="Các quẻ vừa gieo gần đây"
+                ></div>
+            </div>
+        </div>
+
+        <!-- Đảo Phải: Cấu trúc 6 hào & Nội/Ngoại quái dạng Bento Mini -->
+        <aside class="util-ic-structure-card" aria-label="Cấu trúc 6 hào và Bát Quái">
+            <div class="util-ic-structure-card__head">
+                <strong class="util-ic-structure-card__title">Đồ Hình Lục Hào</strong>
+                <span class="util-ic-structure-card__code" id="ic-line-code">Mã hào: 111101</span>
+            </div>
+
+            <div class="util-ic-structure-card__lines" id="ic-lines-visual" aria-hidden="true"></div>
+
+            <div class="util-ic-structure-grid">
+                <div class="util-ic-mini-stat">
+                    <span>Ngoại quái (Trên)</span>
+                    <strong id="ic-upper-trigram">☲ Ly • Lửa</strong>
+                </div>
+                <div class="util-ic-mini-stat">
+                    <span>Nội quái (Dưới)</span>
+                    <strong id="ic-lower-trigram">☰ Càn • Trời</strong>
+                </div>
+                <div class="util-ic-mini-stat">
+                    <span>Ngũ hành quẻ</span>
+                    <strong id="ic-hex-element-label">Hành Kim</strong>
+                </div>
+                <div class="util-ic-mini-stat">
+                    <span>Âm / Dương</span>
+                    <strong id="ic-hex-ratio">5 Dương • 1 Âm</strong>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ==================== TẦNG 2: KẾT QUẢ BENTO (TRÁI 4 CỘT: LÁ BÀI 800x1200 | PHẢI 8 CỘT: LUẬN GIẢI) ==================== -->
+    <article
+        class="util-iching-bento"
+        id="ic-result-box"
+        aria-live="polite"
+        aria-atomic="true"
+        data-hex-id="14"
+        data-hex-slug="14-hoa-thien-dai-huu"
+        data-element="metal"
+        data-status-code="dai_cat"
+        itemscope
+        itemtype="https://schema.org/VisualArtwork"
+    >
+        <meta itemprop="artform" content="I Ching Illustrated Card 800x1200" />
+        <meta itemprop="keywords" id="ic-schema-keywords" content="Sung túc, Rực rỡ, Thịnh vượng" />
+
+        <!-- Cột Trái: Lá bài 800x1200 (Tỷ lệ 2:3 giữ nguyên thiết kế gốc không che chữ) -->
+        <div class="util-ic-poster-col">
+            <figure
+                class="util-ic-poster"
+                id="ic-hex-stage"
+                data-hex-num="14"
+                data-ic-modal="current"
+                role="button"
+                tabindex="0"
+                aria-haspopup="dialog"
+                aria-controls="util-detail-modal"
+                aria-label="Phóng to lá bài Quẻ số 14: Hỏa Thiên Đại Hữu"
+                title="Bấm hoặc nhấn Enter để phóng to lá bài Kinh Dịch"
+            >
+                <img
+                    id="ic-hex-card-img"
+                    src="./assets/images/iching/14-hoa-thien-dai-huu.png"
+                    alt="Tranh minh họa quẻ Hỏa Thiên Đại Hữu với hình tượng mặt trời chính ngọ giữa đỉnh trời"
+                    width="800"
+                    height="1200"
+                    decoding="async"
+                    itemprop="image"
+                />
+                <figcaption class="util-ic-poster__zoom" aria-hidden="true">🔍 Phóng to lá bài</figcaption>
+            </figure>
+
+            <div class="util-ic-poster-actions">
+                <button type="button" class="btn util-btn util-btn--outline util-btn--sm" data-ic-modal="current">
+                    <span>🔍 Xem nhanh</span>
+                </button>
+                <a
+                    href="./iching-detail.html?slug=14-hoa-thien-dai-huu&num=14"
+                    class="btn util-btn util-btn--secondary util-btn--sm"
+                    id="ic-detail-page-link"
+                >
+                    <span>Trang chi tiết &#8594;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Cột Phải: Hệ thống Thẻ Luận Giải Bento -->
+        <div class="util-iching-cards-stack">
+            <div class="util-div-detail-card util-ic-title-card">
+                <div class="util-div-detail-card__head">
+                    <span class="util-iching-result__num" id="ic-hex-number" data-status-code="dai_cat">
+                        Quẻ #14 • Đại Cát
+                    </span>
+                    <span class="util-ic-hanzi-badge" id="ic-hex-hanzi" lang="zh-Hant">大有 • 火天大有</span>
+                </div>
+
+                <h3 class="util-iching-result__name" id="ic-hex-name" itemprop="name">Hỏa Thiên Đại Hữu</h3>
+
+                <div class="util-ic-tags-row" id="ic-hex-images" aria-label="Tượng quẻ cổ học"></div>
+                <ul class="util-ic-keywords" id="ic-hex-keywords" aria-label="Từ khóa cốt lõi của quẻ"></ul>
+            </div>
+
+            <blockquote class="util-ic-couplet" id="ic-hex-couplet">
+                <p id="ic-couplet-opening"></p>
+                <p id="ic-couplet-closing"></p>
+            </blockquote>
+
+            <div class="util-ic-meaning-grid">
+                <div class="util-div-detail-card">
+                    <strong>Thoán Từ (Lời quẻ)</strong>
+                    <p id="ic-hex-judgment"></p>
+                </div>
+
+                <div class="util-div-detail-card">
+                    <strong>Tượng Từ (Lời tượng)</strong>
+                    <p id="ic-hex-image"></p>
+                </div>
+            </div>
+
+            <div class="util-div-detail-card util-div-detail-card--highlight">
+                <strong>Diễn giải &amp; Lời khuyên ứng dụng</strong>
+                <p id="ic-hex-advice"></p>
+            </div>
+        </div>
+    </article>
+
+    <!-- ==================== TẦNG 3: BẢNG TRA CỨU TRỌN BỘ 64 QUẺ KINH DỊCH ==================== -->
+    <section class="util-iching-catalog" id="ic-catalog-section" aria-labelledby="ic-catalog-heading">
+        <header class="util-card__head">
+            <div>
+                <h3 class="util-card__title" id="ic-catalog-heading">Bảng Tra Cứu Trọn Bộ 64 Lá Bài Kinh Dịch</h3>
+                <p class="util-card__sub">
+                    Bấm vào bất kỳ lá bài nào để xem nhanh trong hộp thoại, hoặc giữ Ctrl + Click để mở thẳng trang chi
+                    tiết
+                </p>
+            </div>
+
+            <div class="util-iching-catalog__tools">
+                <div class="util-search-wrap" role="search">
+                    <label for="ic-search-input" class="util-sr-only">Tìm kiếm trong 64 quẻ Kinh Dịch</label>
+                    <input
+                        type="search"
+                        id="ic-search-input"
+                        class="util-field__input"
+                        placeholder="Tìm số, tên, Hán tự hoặc từ khóa: 14, Đại Hữu, Càn, 乾..."
+                    />
+                </div>
+                <span class="util-card__tag" id="ic-catalog-count">64 / 64 quẻ</span>
+            </div>
+        </header>
+
+        <div class="util-ic-filter-bar">
+            <div
+                class="util-ic-filter-group"
+                id="ic-status-filters"
+                role="group"
+                aria-label="Lọc 64 quẻ theo mức độ cát hung"
+            >
+                <button
+                    type="button"
+                    class="util-subfilter-btn is-active"
+                    data-ic-status="all"
+                    aria-pressed="true"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Tất cả (64)
+                </button>
+                <button
+                    type="button"
+                    class="util-subfilter-btn"
+                    data-ic-status="dai_cat"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Đại Cát
+                </button>
+                <button
+                    type="button"
+                    class="util-subfilter-btn"
+                    data-ic-status="cat"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Cát
+                </button>
+                <button
+                    type="button"
+                    class="util-subfilter-btn"
+                    data-ic-status="binh_hoa"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Bình Hòa
+                </button>
+                <button
+                    type="button"
+                    class="util-subfilter-btn"
+                    data-ic-status="tieu_hung"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Tiểu Hung
+                </button>
+                <button
+                    type="button"
+                    class="util-subfilter-btn"
+                    data-ic-status="hung"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Hung
+                </button>
+            </div>
+
+            <div
+                class="util-ic-filter-group"
+                id="ic-element-filters"
+                role="group"
+                aria-label="Lọc 64 quẻ theo Ngũ Hành"
+            >
+                <button
+                    type="button"
+                    class="util-al-quick-chip is-active"
+                    data-ic-element="all"
+                    aria-pressed="true"
+                    aria-controls="ic-catalog-grid"
+                >
+                    5 Hành
+                </button>
+                <button
+                    type="button"
+                    class="util-al-quick-chip"
+                    data-ic-element="metal"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Kim
+                </button>
+                <button
+                    type="button"
+                    class="util-al-quick-chip"
+                    data-ic-element="wood"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Mộc
+                </button>
+                <button
+                    type="button"
+                    class="util-al-quick-chip"
+                    data-ic-element="water"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Thủy
+                </button>
+                <button
+                    type="button"
+                    class="util-al-quick-chip"
+                    data-ic-element="fire"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Hỏa
+                </button>
+                <button
+                    type="button"
+                    class="util-al-quick-chip"
+                    data-ic-element="earth"
+                    aria-pressed="false"
+                    aria-controls="ic-catalog-grid"
+                >
+                    Thổ
+                </button>
+            </div>
+        </div>
+
+        <div
+            class="util-iching-catalog-grid"
+            id="ic-catalog-grid"
+            role="group"
+            aria-label="Danh sách 64 lá bài Kinh Dịch"
+        ></div>
+    </section>
+</div>
+```

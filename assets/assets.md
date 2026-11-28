@@ -9518,12 +9518,14 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
 
 ```js
 // assets/js/utilities/util-core.js
-// Lõi hệ thống Utilities: Cấu hình tập trung ảnh thẻ 800x1200 (.png -> .webp), Helpers, Web Audio,
-// Singleton Modal, Bento Date Picker chuẩn a11y, Dual-Navbar đồng bộ URL #hash & Registry cô lập lỗi
+// Lõi Utilities: Lazy-load template theo Tab/Subtab, URL mặc định sạch, cấu hình ảnh 800x1200,
+// Singleton Modal, Bento Date Picker chuẩn a11y & Registry cô lập lỗi
 (() => {
     const DEFAULT_COVER_IMG = "./assets/images/calendar-covers/thang-11/nguyen-thi-minh-khai-01-11-1910-28-08-1941.jpg";
+    const DEFAULT_CAT = "clock";
+    const DEFAULT_SUB = "stopwatch";
 
-    // Cấu hình tập trung cho 3 bộ thẻ bài 800x1200 (Sau này chuyển sang WebP chỉ cần đổi "png" -> "webp" tại đây)
+    // Cấu hình tập trung cho 3 bộ thẻ bài 800x1200 (Sau này chuyển WebP chỉ đổi "png" -> "webp")
     const CARD_IMG_EXT = "png";
     const CARD_IMG_WIDTH = 800;
     const CARD_IMG_HEIGHT = 1200;
@@ -9642,7 +9644,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         }
     };
 
-    // ==================== 1. HỆ THỐNG ÂM THANH (WEB AUDIO API + UPLOAD NHẠC TỪ MÁY) ====================
+    // ==================== 1. HỆ THỐNG ÂM THANH ====================
     let activeAudioPlayer = null;
 
     const stopCurrentAudio = () => {
@@ -9671,7 +9673,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 osc.stop(ctx.currentTime + idx * 0.14 + 0.48);
             });
         } catch (e) {
-            // Bỏ qua nếu trình duyệt chặn tự động phát
+            // Trình duyệt chặn autoplay
         }
     };
 
@@ -9690,7 +9692,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         playSynthesizedBell();
     };
 
-    // ==================== 2. SINGLETON MODAL DÙNG CHUNG (#util-detail-modal) ====================
+    // ==================== 2. SINGLETON MODAL (#util-detail-modal) ====================
     let modalSlideUrls = [];
     let modalSlideIdx = 0;
     let lastFocusedBeforeModal = null;
@@ -9764,7 +9766,6 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 .join("");
         }
 
-        // Khung Smart Media (Video hoặc Slideshow Ảnh cho Ngày Này Năm Xưa)
         const mediaStage = document.getElementById("util-modal-media-stage");
         if (mediaStage) {
             if (videoUrl) {
@@ -9870,12 +9871,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
 
             container.innerHTML = `
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary
-                        class="bazi-picker__summary"
-                        aria-label="Chọn ngày, hiện tại Ngày ${pad(state.day)}"
-                        aria-expanded="false"
-                        aria-controls="${dayListId}"
-                    >
+                    <summary class="bazi-picker__summary" aria-label="Chọn ngày, hiện tại Ngày ${pad(state.day)}" aria-expanded="false" aria-controls="${dayListId}">
                         <span class="bazi-picker__summary-text">Ngày ${pad(state.day)}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
@@ -9886,12 +9882,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 </details>
 
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary
-                        class="bazi-picker__summary"
-                        aria-label="Chọn tháng, hiện tại Tháng ${pad(state.month)}"
-                        aria-expanded="false"
-                        aria-controls="${monthListId}"
-                    >
+                    <summary class="bazi-picker__summary" aria-label="Chọn tháng, hiện tại Tháng ${pad(state.month)}" aria-expanded="false" aria-controls="${monthListId}">
                         <span class="bazi-picker__summary-text">Tháng ${pad(state.month)}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
@@ -9902,12 +9893,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 </details>
 
                 <details class="bazi-picker js-cal-dropdown">
-                    <summary
-                        class="bazi-picker__summary"
-                        aria-label="Chọn năm, hiện tại Năm ${state.year}"
-                        aria-expanded="false"
-                        aria-controls="${yearListId}"
-                    >
+                    <summary class="bazi-picker__summary" aria-label="Chọn năm, hiện tại Năm ${state.year}" aria-expanded="false" aria-controls="${yearListId}">
                         <span class="bazi-picker__summary-text">Năm ${state.year}</span>
                         <img src="./assets/icons/arrow-down.svg" alt="" aria-hidden="true" class="bazi-picker__arrow icon" />
                     </summary>
@@ -9968,15 +9954,85 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         };
     };
 
-    // ==================== 4. ĐIỀU HƯỚNG DUAL-NAVBAR 2 TẦNG & ĐỒNG BỘ URL HASH (FIX F5) ====================
+    // ==================== 4. LAZY-LOAD TEMPLATE THEO TAB / SUBTAB & DUAL-NAVBAR ====================
     let isCoreBooted = false;
-    let activeCat = "clock";
-    let activeSub = "stopwatch";
-    let currentRouteState = { cat: "clock", sub: "stopwatch", highlight: "" };
+    let activeCat = DEFAULT_CAT;
+    let activeSub = DEFAULT_SUB;
+    let currentRouteState = { cat: DEFAULT_CAT, sub: DEFAULT_SUB, highlight: "" };
 
-    const moduleInitCallbacks = [];
+    const legacyModuleCallbacks = [];
+    const keyedModules = new Map(); // key ("clock" | "iching" | "tarot" ...) -> [{ fn, initialized }]
+    const pendingTemplateFetches = new Map();
     const routeChangeListeners = [];
     const modalClickHandlers = [];
+
+    const runKeyedModuleIfReady = (key, targetEl) => {
+        const list = keyedModules.get(key);
+        if (!list || !targetEl) return;
+        list.forEach((entry, idx) => {
+            if (entry.initialized) return;
+            entry.initialized = true;
+            runSafe(`module:${key}#${idx}`, entry.fn, targetEl);
+        });
+    };
+
+    const loadTemplateIntoElement = async (el) => {
+        if (!el) return false;
+        const tplUrl = el.dataset.template;
+        if (!tplUrl) return true; // Đã có HTML tĩnh sẵn bên trong (tương thích ngược)
+        if (el.dataset.loaded === "true") return true;
+
+        if (pendingTemplateFetches.has(tplUrl)) {
+            return pendingTemplateFetches.get(tplUrl);
+        }
+
+        el.setAttribute("aria-busy", "true");
+        const task = (async () => {
+            try {
+                const res = await fetch(tplUrl);
+                if (!res.ok) throw new Error(`HTTP ${res.status} khi nạp ${tplUrl}`);
+                const html = await res.text();
+                el.innerHTML = html;
+                el.dataset.loaded = "true";
+                el.setAttribute("aria-busy", "false");
+                syncDetailsAriaExpanded(el);
+                return true;
+            } catch (err) {
+                console.error(`[UtilHub] Không nạp được template "${tplUrl}":`, err.message);
+                el.setAttribute("aria-busy", "false");
+                el.innerHTML = `<div class="util-card"><p class="util-data-table__empty">Không thể tải giao diện công cụ (<code>${escapeHtml(tplUrl)}</code>). Vui lòng kiểm tra lại đường dẫn file.</p></div>`;
+                return false;
+            } finally {
+                pendingTemplateFetches.delete(tplUrl);
+            }
+        })();
+
+        pendingTemplateFetches.set(tplUrl, task);
+        return task;
+    };
+
+    const ensureActiveViewLoaded = async (catKey, subKey) => {
+        const panel = document.querySelector(`.util-panel[data-panel-cat="${catKey}"]`);
+        if (!panel) return;
+
+        // 1. Nếu panel cấp 1 dùng data-template (vd: templates/utilities/clock.html)
+        const panelReady = await loadTemplateIntoElement(panel);
+        if (panelReady) {
+            runKeyedModuleIfReady(catKey, panel);
+        }
+
+        // 2. Nếu subpanel cấp 2 dùng data-template riêng (vd: iching.html / tarot.html)
+        if (subKey) {
+            const subPanel = panel.querySelector(`.util-subpanel[data-subpanel="${subKey}"]`);
+            if (subPanel) {
+                const subReady = await loadTemplateIntoElement(subPanel);
+                if (subReady) {
+                    runKeyedModuleIfReady(subKey, subPanel);
+                    runKeyedModuleIfReady(`${catKey}/${subKey}`, subPanel);
+                }
+            }
+        }
+    };
 
     const toggleMobileUtilMenu = (forceClose = false) => {
         const nav = document.getElementById("util-primary-nav");
@@ -10047,8 +10103,12 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         nextBtn?.addEventListener("click", () => slider.scrollBy({ left: 260, behavior: "smooth" }));
     };
 
-    const switchCategoryAndSub = (catKey, subKey = "", { syncUrl = true, replace = false, highlight = "" } = {}) => {
-        activeCat = SUB_NAV_MAP[catKey] ? catKey : "clock";
+    const switchCategoryAndSub = async (
+        catKey,
+        subKey = "",
+        { syncUrl = true, replace = false, highlight = "" } = {},
+    ) => {
+        activeCat = SUB_NAV_MAP[catKey] ? catKey : DEFAULT_CAT;
         const subItems = SUB_NAV_MAP[activeCat] || [];
         const hasValidSub = subItems.some((item) => item.id === subKey);
         activeSub = hasValidSub ? subKey : (subItems[0]?.id ?? "");
@@ -10060,9 +10120,10 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             mainEl.dataset.activeSub = activeSub;
         }
 
-        // Ghi trạng thái Tab/Subtab lên URL Hash (#cat/sub hoặc #cat) để F5 giữ đúng vị trí đang xem
+        // URL sạch cho trang mặc định (utilities.html), chỉ gắn #hash khi người dùng mở tab/subtab khác
         if (syncUrl) {
-            const nextHash = activeSub ? `#${activeCat}/${activeSub}` : `#${activeCat}`;
+            const isDefaultRoute = activeCat === DEFAULT_CAT && activeSub === DEFAULT_SUB && !highlight;
+            const nextHash = isDefaultRoute ? "" : activeSub ? `#${activeCat}/${activeSub}` : `#${activeCat}`;
             if (window.location.hash !== nextHash) {
                 const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
                 if (replace) window.history.replaceState({ cat: activeCat, sub: activeSub }, "", nextUrl);
@@ -10089,7 +10150,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                         (item) => `
                             <li class="util-sub-nav__item">
                                 <a
-                                    href="#${activeCat}/${item.id}"
+                                    href="${activeCat === DEFAULT_CAT && item.id === DEFAULT_SUB ? "./utilities.html" : `#${activeCat}/${item.id}`}"
                                     class="util-sub-nav__link ${item.id === activeSub ? "is-active" : ""}"
                                     ${item.id === activeSub ? 'aria-current="page"' : ""}
                                     data-util-sub="${item.id}"
@@ -10107,6 +10168,9 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             panel.hidden = panel.dataset.panelCat !== activeCat;
         });
 
+        // Nạp lười template (nếu panel/subpanel có data-template) trước khi bật subpanel và bắn route listener
+        await ensureActiveViewLoaded(activeCat, activeSub);
+
         const currentPanel = document.querySelector(`.util-panel[data-panel-cat="${activeCat}"]`);
         if (currentPanel && activeCat !== "datediff" && activeCat !== "fengshui") {
             currentPanel.querySelectorAll(".util-subpanel").forEach((sp) => {
@@ -10119,28 +10183,23 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
     };
 
     const resolveRouteFromUrl = () => {
-        // 1. Ưu tiên đọc URL Hash dạng #cat/sub hoặc #cat (Giữ nguyên trạng thái khi bấm F5 / Back / Forward)
         const rawHash = window.location.hash.replace(/^#/, "").trim();
         if (rawHash) {
-            if (rawHash === "ic-catalog-section") {
-                return { cat: "divination", sub: "iching", highlight: "" };
-            }
-            if (rawHash === "tr-catalog-section") {
-                return { cat: "divination", sub: "tarot", highlight: "" };
-            }
+            if (rawHash === "ic-catalog-section")
+                return { cat: "divination", sub: "iching", highlight: "", hasExplicitUrl: true };
+            if (rawHash === "tr-catalog-section")
+                return { cat: "divination", sub: "tarot", highlight: "", hasExplicitUrl: true };
+
             const [hashCat, hashSub = ""] = rawHash.split("/");
-            if (SUB_NAV_MAP[hashCat]) {
-                return { cat: hashCat, sub: hashSub, highlight: "" };
-            }
-            // Hỗ trợ hash rút gọn chỉ ghi tên subtab (vd: #tarot, #iching, #alarm, #add)
+            if (SUB_NAV_MAP[hashCat]) return { cat: hashCat, sub: hashSub, highlight: "", hasExplicitUrl: true };
+
             for (const [catKey, subs] of Object.entries(SUB_NAV_MAP)) {
                 if (subs.some((s) => s.id === hashCat)) {
-                    return { cat: catKey, sub: hashCat, highlight: "" };
+                    return { cat: catKey, sub: hashCat, highlight: "", hasExplicitUrl: true };
                 }
             }
         }
 
-        // 2. Fallback đọc Query Deep-Link (?tab=, ?napam=, ?lucdieu=, ?bagua=, ?term=) từ day.html / footer.html
         const params = new URLSearchParams(window.location.search);
         const napamParam = params.get("napam");
         const lucdieuParam = params.get("lucdieu") || params.get("direction");
@@ -10148,19 +10207,20 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         const termParam = params.get("term");
         const tabParam = params.get("tab");
 
-        if (napamParam) return { cat: "fengshui", sub: "fs-napam", highlight: napamParam };
-        if (lucdieuParam) return { cat: "fengshui", sub: "fs-lucdieu", highlight: lucdieuParam };
-        if (baguaParam) return { cat: "fengshui", sub: "fs-bagua", highlight: baguaParam };
-        if (termParam || tabParam === "solarterm") return { cat: "solarterm", sub: "", highlight: "" };
-        if (tabParam === "tarot") return { cat: "divination", sub: "tarot", highlight: "" };
-        if (tabParam === "iching") return { cat: "divination", sub: "iching", highlight: "" };
-        if (tabParam === "horoscope") return { cat: "horoscope", sub: "", highlight: "" };
+        if (napamParam) return { cat: "fengshui", sub: "fs-napam", highlight: napamParam, hasExplicitUrl: true };
+        if (lucdieuParam) return { cat: "fengshui", sub: "fs-lucdieu", highlight: lucdieuParam, hasExplicitUrl: true };
+        if (baguaParam) return { cat: "fengshui", sub: "fs-bagua", highlight: baguaParam, hasExplicitUrl: true };
+        if (termParam || tabParam === "solarterm")
+            return { cat: "solarterm", sub: "", highlight: "", hasExplicitUrl: true };
+        if (tabParam === "tarot") return { cat: "divination", sub: "tarot", highlight: "", hasExplicitUrl: true };
+        if (tabParam === "iching") return { cat: "divination", sub: "iching", highlight: "", hasExplicitUrl: true };
+        if (tabParam === "horoscope") return { cat: "horoscope", sub: "", highlight: "", hasExplicitUrl: true };
         if (tabParam === "napam" || tabParam === "lucdieu" || tabParam === "truc-sao") {
-            return { cat: "fengshui", sub: "fs-all", highlight: "" };
+            return { cat: "fengshui", sub: "fs-all", highlight: "", hasExplicitUrl: true };
         }
-        if (tabParam && SUB_NAV_MAP[tabParam]) return { cat: tabParam, sub: "", highlight: "" };
+        if (tabParam && SUB_NAV_MAP[tabParam]) return { cat: tabParam, sub: "", highlight: "", hasExplicitUrl: true };
 
-        return { cat: "clock", sub: "stopwatch", highlight: "" };
+        return { cat: DEFAULT_CAT, sub: DEFAULT_SUB, highlight: "", hasExplicitUrl: false };
     };
 
     // ==================== 5. BOOTSTRAP TOÀN TRANG UTILITIES ====================
@@ -10173,18 +10233,17 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         bindDragToScrollNav();
         syncDetailsAriaExpanded(mainEl);
 
-        // Khởi chạy cô lập toàn bộ các module chức năng đã đăng ký
-        moduleInitCallbacks.forEach((initFn, idx) => runSafe(`moduleInit#${idx}`, initFn, mainEl));
+        // Khởi chạy các module cũ chưa tách template (tương thích ngược)
+        legacyModuleCallbacks.forEach((initFn, idx) => runSafe(`legacyModule#${idx}`, initFn, mainEl));
 
-        // Đọc và áp dụng đúng Route từ URL ngay lúc tải trang (Fix F5)
+        // Áp dụng Route ban đầu (giữ URL sạch utilities.html nếu mở mặc định)
         const initialRoute = resolveRouteFromUrl();
         switchCategoryAndSub(initialRoute.cat, initialRoute.sub, {
-            syncUrl: true,
+            syncUrl: initialRoute.hasExplicitUrl,
             replace: true,
             highlight: initialRoute.highlight,
         });
 
-        // Đồng bộ nút Back / Forward & thay đổi hash thủ công
         const syncFromLocation = () => {
             const route = resolveRouteFromUrl();
             switchCategoryAndSub(route.cat, route.sub, { syncUrl: false, highlight: route.highlight });
@@ -10192,7 +10251,6 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         window.addEventListener("popstate", syncFromLocation);
         window.addEventListener("hashchange", syncFromLocation);
 
-        // Điều hướng Dual-Navbar & Mobile Hamburger
         document.getElementById("util-burger-btn")?.addEventListener("click", () => toggleMobileUtilMenu());
         document.getElementById("util-mobile-backdrop")?.addEventListener("click", () => toggleMobileUtilMenu(true));
 
@@ -10215,7 +10273,6 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             else document.getElementById("widget-trigger-btn")?.click();
         });
 
-        // Dùng chung cho tất cả nút Bento Stepper (− / +) & Modal trên toàn trang
         mainEl.addEventListener("click", (e) => {
             const stepBtn = e.target.closest("[data-step-target]");
             if (stepBtn) {
@@ -10230,14 +10287,12 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 return;
             }
 
-            // Ủy quyền click mở Singleton Modal tới từng module (có cô lập lỗi)
             for (let i = 0; i < modalClickHandlers.length; i++) {
                 const handled = runSafe(`modalHandler#${i}`, modalClickHandlers[i], e);
                 if (handled === true) return;
             }
         });
 
-        // Hỗ trợ bàn phím (Enter / Space) cho mọi thẻ tương tác role="button" tabindex="0"
         mainEl.addEventListener("keydown", (e) => {
             if (e.key !== "Enter" && e.key !== " ") return;
             const interactiveCard = e.target.closest(
@@ -10257,7 +10312,6 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         });
     };
 
-    // Xuất trục điều phối dùng chung
     window.UtilHub = {
         DEFAULT_COVER_IMG,
         CARD_IMG_EXT,
@@ -10284,27 +10338,37 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
         closeUtilModal,
         createBentoDatePicker,
         switchCategoryAndSub,
-        registerModule: (fn) => {
-            if (typeof fn !== "function") return;
-            moduleInitCallbacks.push(fn);
-            if (isCoreBooted) {
-                const mainEl = document.getElementById("main");
-                if (mainEl) runSafe("lateModuleInit", fn, mainEl);
+        // Hỗ trợ cả 2 kiểu: registerModule("clock", initFn) cho template nạp lười & registerModule(initFn) cho module cũ
+        registerModule: (keyOrFn, maybeFn) => {
+            if (typeof keyOrFn === "string" && typeof maybeFn === "function") {
+                if (!keyedModules.has(keyOrFn)) keyedModules.set(keyOrFn, []);
+                keyedModules.get(keyOrFn).push({ fn: maybeFn, initialized: false });
+                if (
+                    isCoreBooted &&
+                    (activeCat === keyOrFn || activeSub === keyOrFn || `${activeCat}/${activeSub}` === keyOrFn)
+                ) {
+                    ensureActiveViewLoaded(activeCat, activeSub);
+                }
+                return;
+            }
+            if (typeof keyOrFn === "function") {
+                legacyModuleCallbacks.push(keyOrFn);
+                if (isCoreBooted) {
+                    const mainEl = document.getElementById("main");
+                    if (mainEl) runSafe("lateLegacyModule", keyOrFn, mainEl);
+                }
             }
         },
         onRouteChange: (fn) => {
             if (typeof fn !== "function") return;
             routeChangeListeners.push(fn);
-            if (isCoreBooted) {
-                runSafe("lateRouteListener", fn, currentRouteState);
-            }
+            if (isCoreBooted) runSafe("lateRouteListener", fn, currentRouteState);
         },
         registerModalHandler: (fn) => {
             if (typeof fn === "function") modalClickHandlers.push(fn);
         },
     };
 
-    // Chỉ boot trên DOMContentLoaded (KHÔNG nghe template-loaded để tránh khóa cổng sớm trước khi 4 module con nạp xong)
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", initUtilitiesCore);
     } else {
@@ -10317,12 +10381,47 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
 
 ```js
 // assets/js/utilities/util-clock.js
-// Mục 1: Bộ 3 Đồng hồ (Bấm giờ 1/100s, Đếm ngược Bento Stepper + Upload nhạc, Báo thức đa năng + Snooze)
+// Mục 1 Bento (Lazy-loaded qua templates/utilities/clock.html):
+// Lưu báo thức & lịch sử đếm ngược vào localStorage, vòng SVG r=116 thoáng chữ, Bento Deck báo thức khóa tròn 12 cột
 (() => {
     const Hub = window.UtilHub;
     if (!Hub) return;
 
-    const { pad, setText, playSoundEffect, stopCurrentAudio } = Hub;
+    const { pad, escapeHtml, setText, playSoundEffect, stopCurrentAudio } = Hub;
+
+    const ALARMS_STORAGE_KEY = "feng_shui_util_alarms_v1";
+    const CD_HISTORY_STORAGE_KEY = "feng_shui_util_cd_history_v1";
+    const RING_CIRCUMFERENCE = 2 * Math.PI * 116; // viewBox 260, r = 116 -> ~728.85
+
+    const DEFAULT_ALARMS = [
+        {
+            id: 1,
+            hour: 6,
+            minute: 30,
+            title: "Dậy học bài & Tập thể dục",
+            repeat: "Hằng ngày",
+            enabled: true,
+        },
+    ];
+
+    const loadStoredList = (key, fallback) => {
+        try {
+            const raw = localStorage.getItem(key);
+            if (!raw) return fallback;
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : fallback;
+        } catch (err) {
+            return fallback;
+        }
+    };
+
+    const saveStoredList = (key, list) => {
+        try {
+            localStorage.setItem(key, JSON.stringify(list));
+        } catch (err) {
+            // Bỏ qua nếu bộ nhớ trình duyệt đầy
+        }
+    };
 
     let customCountdownAudioUrl = "";
     let customAlarmAudioUrl = "";
@@ -10334,101 +10433,342 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
     let swLaps = [];
 
     let cdTimer = null;
+    let cdTotalSec = 300;
     let cdRemainingSec = 300;
     let cdRunning = false;
-    let cdHistory = [];
+    let cdHistory = loadStoredList(CD_HISTORY_STORAGE_KEY, []);
 
-    let alarmsList = [
-        {
-            id: 1,
-            hour: 6,
-            minute: 30,
-            title: "Dậy học bài & Tập thể dục",
-            repeat: "Hằng ngày",
-            enabled: true,
-        },
-    ];
+    let alarmsList = loadStoredList(ALARMS_STORAGE_KEY, DEFAULT_ALARMS);
+    let alarmClockInterval = null;
 
+    const safeEscape = (str) =>
+        typeof escapeHtml === "function"
+            ? escapeHtml(str)
+            : String(str || "")
+                  .replace(/&/g, "&amp;")
+                  .replace(/</g, "&lt;")
+                  .replace(/>/g, "&gt;");
+
+    // ==================== 1.1. HELPERS STOPWATCH ====================
     const formatStopwatch = (ms) => {
-        const totalSec = Math.floor(ms / 1000);
+        const safeMs = Math.max(0, ms);
+        const totalSec = Math.floor(safeMs / 1000);
         const h = Math.floor(totalSec / 3600);
         const m = Math.floor((totalSec % 3600) / 60);
         const s = totalSec % 60;
-        const centi = Math.floor((ms % 1000) / 10);
-        return { main: `${pad(h)}:${pad(m)}:${pad(s)}`, ms: `.${pad(centi)}` };
+        const centi = Math.floor((safeMs % 1000) / 10);
+        return {
+            main: `${pad(h)}:${pad(m)}:${pad(s)}`,
+            ms: `.${pad(centi)}`,
+            compact: h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}.${pad(centi)}`,
+        };
+    };
+
+    const setStopwatchState = (state) => {
+        const root = document.getElementById("sw-bento-root");
+        const badge = document.getElementById("sw-head-badge");
+        if (root) root.dataset.clockState = state;
+        if (badge) badge.dataset.clockState = state;
     };
 
     const renderStopwatchLaps = () => {
         const body = document.getElementById("sw-laps-body");
         if (!body) return;
+
+        setText("sw-stat-count", pad(swLaps.length));
+
         if (!swLaps.length) {
-            body.innerHTML = `<p class="util-data-table__empty">Chưa có dữ liệu bấm giờ. Hãy nhấn <strong>Bắt đầu</strong> và thực hiện <strong>Ngắt (Vòng)</strong> để lưu lại.</p>`;
+            setText("sw-stat-best", "--:--.--");
+            setText("sw-stat-best-tag", "Chưa có");
+            setText("sw-stat-worst", "--:--.--");
+            setText("sw-stat-worst-tag", "Chưa có");
+            setText("sw-stat-avg", "--:--.--");
+            body.innerHTML = `<p class="util-data-table__empty">Chưa có vòng nào. Nhấn <strong>Bắt đầu</strong> và <strong>Ngắt (Vòng)</strong> để xem phân tích tốc độ.</p>`;
             return;
         }
+
+        let bestLap = swLaps[0];
+        let worstLap = swLaps[0];
+        let sumLapMs = 0;
+
+        swLaps.forEach((l) => {
+            sumLapMs += l.lapMs;
+            if (l.lapMs < bestLap.lapMs) bestLap = l;
+            if (l.lapMs > worstLap.lapMs) worstLap = l;
+        });
+
+        const avgMs = sumLapMs / swLaps.length;
+        const maxLapMs = Math.max(1, worstLap.lapMs);
+
+        setText("sw-stat-best", formatStopwatch(bestLap.lapMs).compact);
+        setText("sw-stat-best-tag", `Vòng #${pad(bestLap.idx)}`);
+        setText("sw-stat-worst", formatStopwatch(worstLap.lapMs).compact);
+        setText("sw-stat-worst-tag", `Vòng #${pad(worstLap.idx)}`);
+        setText("sw-stat-avg", formatStopwatch(avgMs).compact);
+
         body.innerHTML = swLaps
-            .map(
-                (l) => `
-                    <div class="util-data-table__row util-data-table__row--3cols" role="row">
-                        <span>Vòng #${pad(l.idx)}</span>
-                        <span>+${l.lapStr}</span>
-                        <strong>${l.totalStr}</strong>
+            .map((l) => {
+                let rank = "normal";
+                let rankLabel = "";
+                if (swLaps.length >= 2 && l.idx === bestLap.idx) {
+                    rank = "best";
+                    rankLabel = "Nhanh nhất";
+                } else if (swLaps.length >= 2 && l.idx === worstLap.idx) {
+                    rank = "worst";
+                    rankLabel = "Chậm nhất";
+                }
+                const ratio = Math.max(10, Math.round((l.lapMs / maxLapMs) * 100));
+
+                return `
+                    <div class="util-sw-lap-row" role="listitem" data-lap-rank="${rank}">
+                        <div class="util-sw-lap-row__top">
+                            <span class="util-sw-lap-row__left">
+                                <strong>Vòng #${pad(l.idx)}</strong>
+                                ${rankLabel ? `<span class="util-sw-lap-row__badge">${rankLabel}</span>` : ""}
+                            </span>
+                            <div class="util-sw-lap-row__times">
+                                <span>+${l.lapStr}</span>
+                                <small>${l.totalStr}</small>
+                            </div>
+                        </div>
+                        <div class="util-sw-lap-row__bar" aria-hidden="true">
+                            <div class="util-sw-lap-row__bar-fill" style="--lap-ratio:${ratio}%"></div>
+                        </div>
                     </div>
-                `,
-            )
+                `;
+            })
             .join("");
     };
 
-    const renderAlarmsList = () => {
-        const container = document.getElementById("al-list-container");
-        if (!container) return;
-        if (!alarmsList.length) {
-            container.innerHTML = `<p class="util-data-table__empty">Chưa có báo thức nào. Thêm báo thức của bạn ở trên.</p>`;
+    // ==================== 1.2. HELPERS COUNTDOWN ====================
+    const syncCountdownVisual = (sec, total = cdTotalSec) => {
+        const safeSec = Math.max(0, sec);
+        const h = Math.floor(safeSec / 3600);
+        const m = Math.floor((safeSec % 3600) / 60);
+        const s = safeSec % 60;
+        setText("cd-display-digits", `${pad(h)}:${pad(m)}:${pad(s)}`);
+
+        const ratio = total > 0 ? Math.min(1, Math.max(0, safeSec / total)) : 0;
+        const pct = Math.round(ratio * 100);
+        setText("cd-progress-pct", `${pct}%`);
+
+        const ring = document.getElementById("cd-progress-ring");
+        if (ring) {
+            ring.style.strokeDasharray = String(RING_CIRCUMFERENCE);
+            ring.style.strokeDashoffset = String(RING_CIRCUMFERENCE * (1 - ratio));
+        }
+    };
+
+    const setCountdownState = (state) => {
+        const root = document.getElementById("cd-bento-root");
+        const badge = document.getElementById("cd-status-badge");
+        if (root) root.dataset.clockState = state;
+        if (badge) badge.dataset.clockState = state;
+    };
+
+    const renderCountdownHistory = () => {
+        const histBody = document.getElementById("cd-history-body");
+        if (!histBody) return;
+        if (!cdHistory.length) {
+            histBody.innerHTML = `<p class="util-data-table__empty">Chưa có dữ liệu hẹn giờ. Nhấn <strong>Bắt đầu hẹn giờ</strong> để lưu phiên đầu tiên.</p>`;
             return;
         }
-        container.innerHTML = alarmsList
+        histBody.innerHTML = cdHistory
+            .slice(0, 6)
             .map(
-                (a) => `
-                    <article class="util-alarm-item ${a.enabled ? "" : "is-disabled"}" data-alarm-id="${a.id}">
-                        <div>
-                            <strong class="util-alarm-item__time">${pad(a.hour)}:${pad(a.minute)}</strong>
-                            <span class="util-alarm-item__title">${a.title}</span>
-                            <small class="util-alarm-item__meta">🔁 ${a.repeat || "Hằng ngày"} • ${a.enabled ? "Đang bật" : "Đã tắt"}</small>
+                (item) => `
+                    <article class="util-cd-history-tile">
+                        <div class="util-cd-history-tile__info">
+                            <strong>${safeEscape(item.title)}</strong>
+                            <small>${item.duration} • Lúc ${item.startedAt}</small>
                         </div>
-                        <div class="util-alarm-item__right">
-                            <button
-                                type="button"
-                                class="util-alarm-item__toggle ${a.enabled ? "is-on" : ""}"
-                                data-toggle-alarm="${a.id}"
-                                aria-pressed="${a.enabled}"
-                                aria-label="Bật hoặc tắt báo thức ${pad(a.hour)}:${pad(a.minute)}"
-                                title="Bật / Tắt báo thức này"
-                            ></button>
-                            <button
-                                type="button"
-                                class="util-alarm-item__del"
-                                data-del-alarm="${a.id}"
-                                aria-label="Xóa báo thức ${pad(a.hour)}:${pad(a.minute)}"
-                                title="Xóa báo thức"
-                            >
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                                </svg>
-                            </button>
-                        </div>
+                        <button
+                            type="button"
+                            class="util-cd-history-tile__replay"
+                            data-cd-replay-sec="${item.seconds}"
+                            data-cd-replay-title="${safeEscape(item.title)}"
+                            title="Nạp lại mốc ${item.duration}"
+                        >
+                            &#8635; Nạp lại
+                        </button>
                     </article>
                 `,
             )
             .join("");
     };
 
-    Hub.registerModule(() => {
+    // ==================== 1.3. HELPERS ALARM & KHÓA HÀNG BENTO 12 CỘT ====================
+    const getMinutesUntilAlarm = (alarm, now = new Date()) => {
+        const nowMin = now.getHours() * 60 + now.getMinutes();
+        const targetMin = alarm.hour * 60 + alarm.minute;
+        let diff = targetMin - nowMin;
+        if (diff <= 0) diff += 24 * 60;
+        return diff;
+    };
+
+    const formatRemainMinutes = (mins) => {
+        const h = Math.floor(mins / 60);
+        const m = mins % 60;
+        if (h === 0) return `Còn ${m} phút`;
+        if (m === 0) return `Còn ${h} giờ`;
+        return `Còn ${h} giờ ${m} phút`;
+    };
+
+    const getAlarmPeriodMeta = (hour) => {
+        if (hour >= 5 && hour < 11) return { key: "morning", label: "🌅 Buổi sáng" };
+        if (hour >= 11 && hour < 14) return { key: "afternoon", label: "☀️ Buổi trưa" };
+        if (hour >= 14 && hour < 18) return { key: "afternoon", label: "🌤️ Buổi chiều" };
+        if (hour >= 18 && hour < 22) return { key: "evening", label: "🌇 Buổi tối" };
+        return { key: "night", label: "🌙 Đêm khuya" };
+    };
+
+    // Tính toán mảng span cho từng thẻ báo thức sao cho MỌI HÀNG luôn cộng tròn đúng 12 cột (0 khoảng trống)
+    const computeAlarmBentoSpans = (count) => {
+        if (count <= 0) return [];
+        if (count === 1) return [12];
+        if (count === 2) return [7, 5];
+
+        const spans = [7, 5]; // Hàng 1 luôn là cặp Bento 7 + 5 tôn báo thức gần nhất
+        const rem = count - 2;
+
+        if (rem === 1) {
+            spans.push(12);
+        } else if (rem === 2) {
+            spans.push(5, 7);
+        } else if (rem === 4) {
+            spans.push(5, 7, 7, 5);
+        } else {
+            const mod = rem % 3;
+            const tripleCount = mod === 1 ? rem - 4 : rem - mod;
+            for (let i = 0; i < tripleCount; i++) spans.push(4);
+            if (mod === 2) spans.push(5, 7);
+            else if (mod === 1) spans.push(5, 7, 7, 5);
+        }
+        return spans;
+    };
+
+    const syncAlarmComposerPreview = () => {
+        const h = Math.min(23, Math.max(0, Number(document.getElementById("al-input-hour")?.value || 0)));
+        const m = Math.min(59, Math.max(0, Number(document.getElementById("al-input-minute")?.value || 0)));
+        setText("al-preview-time", `${pad(h)}:${pad(m)}`);
+    };
+
+    const renderAlarmsList = () => {
+        const container = document.getElementById("al-list-container");
+        const heroEl = document.getElementById("al-next-hero");
+        if (!container) return;
+
+        const now = new Date();
+        const activeAlarms = alarmsList
+            .filter((a) => a.enabled)
+            .map((a) => ({ ...a, remainMin: getMinutesUntilAlarm(a, now) }))
+            .sort((a, b) => a.remainMin - b.remainMin);
+
+        const nextAlarm = activeAlarms[0] || null;
+
+        setText("al-active-count", `${activeAlarms.length} đang bật`);
+        setText(
+            "al-total-hint",
+            alarmsList.length
+                ? `${alarmsList.length} báo thức (đã lưu trên máy) • Sắp xếp gần nhất`
+                : "Chưa có báo thức",
+        );
+
+        if (heroEl) heroEl.dataset.empty = String(!nextAlarm);
+        if (nextAlarm) {
+            setText("al-next-time", `${pad(nextAlarm.hour)}:${pad(nextAlarm.minute)}`);
+            setText("al-next-title", nextAlarm.title);
+            setText("al-next-countdown", `⏰ ${formatRemainMinutes(nextAlarm.remainMin)} nữa đổ chuông`);
+        } else {
+            setText("al-next-time", "--:--");
+            setText("al-next-title", "Chưa có báo thức nào đang bật");
+            setText("al-next-countdown", "Bật hoặc thêm báo thức ở bên phải");
+        }
+
+        if (!alarmsList.length) {
+            container.innerHTML = `<p class="util-data-table__empty">Chưa có báo thức nào. Thiết lập giờ và nhấn <strong>+ Lưu báo thức</strong> ở trên.</p>`;
+            return;
+        }
+
+        const sortedAlarms = [...alarmsList].sort((a, b) => {
+            if (a.enabled !== b.enabled) return a.enabled ? -1 : 1;
+            return getMinutesUntilAlarm(a, now) - getMinutesUntilAlarm(b, now);
+        });
+
+        const bentoSpans = computeAlarmBentoSpans(sortedAlarms.length);
+
+        container.innerHTML = sortedAlarms
+            .map((a, idx) => {
+                const isNext = Boolean(nextAlarm && a.id === nextAlarm.id);
+                const remainMin = getMinutesUntilAlarm(a, now);
+                const period = getAlarmPeriodMeta(a.hour);
+                const timeStr = `${pad(a.hour)}:${pad(a.minute)}`;
+                const colSpan = bentoSpans[idx] || 4;
+
+                return `
+                    <article
+                        class="util-alarm-item ${a.enabled ? "" : "is-disabled"}"
+                        data-alarm-id="${a.id}"
+                        data-is-next="${isNext}"
+                        data-bento-span="${colSpan}"
+                        data-alarm-period="${period.key}"
+                    >
+                        <div class="util-alarm-item__head">
+                            <span class="util-alarm-item__period">${period.label}</span>
+                            ${isNext ? `<span class="util-alarm-item__next-tag">Sắp kêu</span>` : ""}
+                        </div>
+
+                        <div class="util-alarm-item__main">
+                            <strong class="util-alarm-item__time">${timeStr}</strong>
+                            <span class="util-alarm-item__title">${safeEscape(a.title)}</span>
+                            <span class="util-alarm-item__remain">
+                                ${a.enabled ? formatRemainMinutes(remainMin) : "Đang tạm tắt"}
+                            </span>
+                        </div>
+
+                        <footer class="util-alarm-item__foot">
+                            <small class="util-alarm-item__meta">🔁 ${safeEscape(a.repeat || "Hằng ngày")}</small>
+                            <div class="util-alarm-item__right">
+                                <button
+                                    type="button"
+                                    role="switch"
+                                    aria-checked="${a.enabled}"
+                                    class="util-alarm-item__toggle ${a.enabled ? "is-on" : ""}"
+                                    data-toggle-alarm="${a.id}"
+                                    aria-label="Bật hoặc tắt báo thức ${timeStr}"
+                                    title="Bật / Tắt báo thức ${timeStr}"
+                                ></button>
+                                <button
+                                    type="button"
+                                    class="util-alarm-item__del"
+                                    data-del-alarm="${a.id}"
+                                    aria-label="Xóa báo thức ${timeStr}"
+                                    title="Xóa báo thức"
+                                >
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </footer>
+                    </article>
+                `;
+            })
+            .join("");
+    };
+
+    // ==================== ĐĂNG KÝ MODULE THEO KHÓA "clock" (CHẠY SAU KHI NẠP clock.html) ====================
+    Hub.registerModule("clock", () => {
         renderStopwatchLaps();
+        syncCountdownVisual(cdRemainingSec, cdTotalSec);
+        renderCountdownHistory();
+        syncAlarmComposerPreview();
         renderAlarmsList();
 
-        // 1.1. Đồng hồ bấm giờ
+        // ---------- 1.1. ĐỒNG HỒ BẤM GIỜ ----------
         const swStartBtn = document.getElementById("sw-start-btn");
         const swLapBtn = document.getElementById("sw-lap-btn");
         const swResetBtn = document.getElementById("sw-reset-btn");
@@ -10440,7 +10780,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                     swStartTime = performance.now() - swElapsedMs;
                     swStartBtn.innerHTML = "<span>&#10074;&#10074; Tạm dừng</span>";
                     if (swLapBtn) swLapBtn.disabled = false;
-                    setText("sw-status-tag", "Đang bấm giờ...");
+                    setStopwatchState("running");
+                    setText("sw-status-text", "Đang bấm giờ...");
                     setText("sw-head-badge", "Đang chạy");
                     swTimer = setInterval(() => {
                         swElapsedMs = performance.now() - swStartTime;
@@ -10452,7 +10793,8 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                     swRunning = false;
                     clearInterval(swTimer);
                     swStartBtn.innerHTML = "<span>&#9654; Tiếp tục</span>";
-                    setText("sw-status-tag", "Đang tạm dừng");
+                    setStopwatchState("paused");
+                    setText("sw-status-text", "Đang tạm dừng");
                     setText("sw-head-badge", "Tạm dừng");
                 }
             };
@@ -10462,10 +10804,12 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             swLapBtn.onclick = () => {
                 if (!swRunning) return;
                 const prevTotalMs = swLaps[0]?.totalMs || 0;
-                const lapFmt = formatStopwatch(swElapsedMs - prevTotalMs);
+                const lapMs = Math.max(10, swElapsedMs - prevTotalMs);
+                const lapFmt = formatStopwatch(lapMs);
                 const totalFmt = formatStopwatch(swElapsedMs);
                 swLaps.unshift({
                     idx: swLaps.length + 1,
+                    lapMs,
                     totalMs: swElapsedMs,
                     lapStr: `${lapFmt.main}${lapFmt.ms}`,
                     totalStr: `${totalFmt.main}${totalFmt.ms}`,
@@ -10480,9 +10824,10 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 clearInterval(swTimer);
                 swElapsedMs = 0;
                 swLaps = [];
+                setStopwatchState("idle");
                 setText("sw-main-display", "00:00:00");
                 setText("sw-ms-display", ".00");
-                setText("sw-status-tag", "Sẵn sàng bấm giờ");
+                setText("sw-status-text", "Sẵn sàng bấm giờ");
                 setText("sw-head-badge", "Chuẩn 1/100s");
                 if (swStartBtn) swStartBtn.innerHTML = "<span>&#9654; Bắt đầu</span>";
                 if (swLapBtn) swLapBtn.disabled = true;
@@ -10490,12 +10835,20 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             };
         }
 
-        // 1.2. Đồng hồ đếm ngược & Upload nhạc từ máy
-        const syncCountdownDisplay = (sec) => {
-            const h = Math.floor(sec / 3600);
-            const m = Math.floor((sec % 3600) / 60);
-            const s = sec % 60;
-            setText("cd-display-digits", `${pad(h)}:${pad(m)}:${pad(s)}`);
+        // ---------- 1.2. ĐỒNG HỒ ĐẾM NGƯỢC ----------
+        const applyCountdownInputs = (totalSec, customTitle = "") => {
+            const safeTotal = Math.max(0, Number(totalSec) || 0);
+            cdTotalSec = Math.max(1, safeTotal);
+            cdRemainingSec = safeTotal;
+            const hEl = document.getElementById("cd-input-hours");
+            const mEl = document.getElementById("cd-input-minutes");
+            const sEl = document.getElementById("cd-input-seconds");
+            const titleEl = document.getElementById("cd-input-title");
+            if (hEl) hEl.value = String(Math.floor(safeTotal / 3600));
+            if (mEl) mEl.value = String(Math.floor((safeTotal % 3600) / 60));
+            if (sEl) sEl.value = String(safeTotal % 60);
+            if (customTitle && titleEl) titleEl.value = customTitle;
+            syncCountdownVisual(cdRemainingSec, cdTotalSec);
         };
 
         ["cd-input-hours", "cd-input-minutes", "cd-input-seconds"].forEach((id) => {
@@ -10505,25 +10858,36 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 const m = Number(document.getElementById("cd-input-minutes")?.value || 0);
                 const s = Number(document.getElementById("cd-input-seconds")?.value || 0);
                 cdRemainingSec = Math.max(0, h * 3600 + m * 60 + s);
-                syncCountdownDisplay(cdRemainingSec);
+                cdTotalSec = Math.max(1, cdRemainingSec);
+                syncCountdownVisual(cdRemainingSec, cdTotalSec);
+                document.querySelectorAll("[data-cd-preset]").forEach((c) => {
+                    const isMatch = Number(c.dataset.cdPreset) === cdRemainingSec;
+                    c.classList.toggle("is-active", isMatch);
+                    c.setAttribute("aria-pressed", String(isMatch));
+                });
             });
         });
 
-        document.querySelectorAll("[data-cd-preset]").forEach((chip) => {
-            chip.onclick = () => {
-                document
-                    .querySelectorAll("[data-cd-preset]")
-                    .forEach((c) => c.classList.toggle("is-active", c === chip));
-                const total = Number(chip.dataset.cdPreset || 300);
-                cdRemainingSec = total;
-                const hEl = document.getElementById("cd-input-hours");
-                const mEl = document.getElementById("cd-input-minutes");
-                const sEl = document.getElementById("cd-input-seconds");
-                if (hEl) hEl.value = String(Math.floor(total / 3600));
-                if (mEl) mEl.value = String(Math.floor((total % 3600) / 60));
-                if (sEl) sEl.value = String(total % 60);
-                syncCountdownDisplay(cdRemainingSec);
+        document.querySelectorAll("[data-cd-preset]").forEach((tile) => {
+            tile.onclick = () => {
+                if (cdRunning) return;
+                document.querySelectorAll("[data-cd-preset]").forEach((c) => {
+                    const isMatch = c === tile;
+                    c.classList.toggle("is-active", isMatch);
+                    c.setAttribute("aria-pressed", String(isMatch));
+                });
+                applyCountdownInputs(Number(tile.dataset.cdPreset || 300));
+                setCountdownState("idle");
+                setText("cd-end-at-label", "Sẵn sàng đếm ngược");
             };
+        });
+
+        document.getElementById("cd-history-body")?.addEventListener("click", (e) => {
+            const replayBtn = e.target.closest("[data-cd-replay-sec]");
+            if (!replayBtn || cdRunning) return;
+            applyCountdownInputs(Number(replayBtn.dataset.cdReplaySec || 300), replayBtn.dataset.cdReplayTitle || "");
+            setCountdownState("idle");
+            setText("cd-end-at-label", "Đã nạp lại mốc thời gian");
         });
 
         const cdAudioInput = document.getElementById("cd-audio-file");
@@ -10548,53 +10912,58 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                     const h = Number(document.getElementById("cd-input-hours")?.value || 0);
                     const m = Number(document.getElementById("cd-input-minutes")?.value || 0);
                     const s = Number(document.getElementById("cd-input-seconds")?.value || 0);
-                    const title = document.getElementById("cd-input-title")?.value || "Đồng hồ đếm ngược";
-                    if (!cdTimer) cdRemainingSec = Math.max(1, h * 3600 + m * 60 + s);
+                    const title = document.getElementById("cd-input-title")?.value.trim() || "Đồng hồ đếm ngược";
+                    const configuredSec = Math.max(1, h * 3600 + m * 60 + s);
+
+                    if (!cdTimer) {
+                        cdTotalSec = configuredSec;
+                        cdRemainingSec = configuredSec;
+                        cdHistory.unshift({
+                            idx: cdHistory.length + 1,
+                            title,
+                            seconds: configuredSec,
+                            duration: `${pad(Math.floor(configuredSec / 3600))}:${pad(Math.floor((configuredSec % 3600) / 60))}:${pad(configuredSec % 60)}`,
+                            startedAt: new Date().toLocaleTimeString("vi-VN"),
+                        });
+                        cdHistory = cdHistory.slice(0, 12);
+                        saveStoredList(CD_HISTORY_STORAGE_KEY, cdHistory);
+                        renderCountdownHistory();
+                    }
+
+                    const finishTime = new Date(Date.now() + cdRemainingSec * 1000);
+                    setText(
+                        "cd-end-at-label",
+                        `Kết thúc lúc ${pad(finishTime.getHours())}:${pad(finishTime.getMinutes())}:${pad(finishTime.getSeconds())}`,
+                    );
 
                     cdRunning = true;
+                    setCountdownState("running");
                     setText("cd-active-title-label", title);
                     setText("cd-status-badge", "Đang đếm ngược");
-                    cdStartBtn.innerHTML = "<span>&#10074;&#10074; Tạm dừng hẹn giờ</span>";
-
-                    cdHistory.unshift({
-                        idx: cdHistory.length + 1,
-                        title,
-                        duration: `${pad(h)}:${pad(m)}:${pad(s)}`,
-                        startedAt: new Date().toLocaleTimeString("vi-VN"),
-                    });
-                    const histBody = document.getElementById("cd-history-body");
-                    if (histBody) {
-                        histBody.innerHTML = cdHistory
-                            .map(
-                                (item) => `
-                                    <div class="util-data-table__row util-data-table__row--4cols" role="row">
-                                        <span>#${pad(item.idx)}</span>
-                                        <strong>${item.title}</strong>
-                                        <span>${item.duration}</span>
-                                        <span>${item.startedAt}</span>
-                                    </div>
-                                `,
-                            )
-                            .join("");
-                    }
+                    cdStartBtn.innerHTML = "<span>&#10074;&#10074; Tạm dừng</span>";
+                    syncCountdownVisual(cdRemainingSec, cdTotalSec);
 
                     cdTimer = setInterval(() => {
                         cdRemainingSec = Math.max(0, cdRemainingSec - 1);
-                        syncCountdownDisplay(cdRemainingSec);
+                        syncCountdownVisual(cdRemainingSec, cdTotalSec);
                         if (cdRemainingSec <= 0) {
                             clearInterval(cdTimer);
                             cdTimer = null;
                             cdRunning = false;
+                            setCountdownState("done");
                             cdStartBtn.innerHTML = "<span>&#9654; Bắt đầu hẹn giờ</span>";
                             setText("cd-status-badge", "🔔 Đã hết giờ!");
+                            setText("cd-end-at-label", "Đã hoàn tất hẹn giờ!");
                             playSoundEffect(customCountdownAudioUrl);
                         }
                     }, 1000);
                 } else {
                     cdRunning = false;
                     clearInterval(cdTimer);
-                    cdStartBtn.innerHTML = "<span>&#9654; Tiếp tục hẹn giờ</span>";
+                    setCountdownState("paused");
+                    cdStartBtn.innerHTML = "<span>&#9654; Tiếp tục</span>";
                     setText("cd-status-badge", "Tạm dừng");
+                    setText("cd-end-at-label", "Đang tạm dừng");
                 }
             };
         }
@@ -10608,12 +10977,32 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             const m = Number(document.getElementById("cd-input-minutes")?.value || 0);
             const s = Number(document.getElementById("cd-input-seconds")?.value || 0);
             cdRemainingSec = h * 3600 + m * 60 + s;
-            syncCountdownDisplay(cdRemainingSec);
+            cdTotalSec = Math.max(1, cdRemainingSec);
+            setCountdownState("idle");
+            syncCountdownVisual(cdRemainingSec, cdTotalSec);
             if (cdStartBtn) cdStartBtn.innerHTML = "<span>&#9654; Bắt đầu hẹn giờ</span>";
             setText("cd-status-badge", "Đang chờ");
+            setText("cd-end-at-label", "Nhấn Bắt đầu để đếm ngược");
         });
 
-        // 1.3. Đồng hồ báo thức (Upload nhạc + Toggle + Snooze + Thùng rác SVG)
+        // ---------- 1.3. ĐỒNG HỒ BÁO THỨC (LƯU LOCALSTORAGE) ----------
+        ["al-input-hour", "al-input-minute"].forEach((id) => {
+            document.getElementById(id)?.addEventListener("input", syncAlarmComposerPreview);
+        });
+
+        document.querySelectorAll("[data-al-quick]").forEach((chip) => {
+            chip.onclick = () => {
+                const [qh, qm] = String(chip.dataset.alQuick || "06:30")
+                    .split(":")
+                    .map(Number);
+                const hEl = document.getElementById("al-input-hour");
+                const mEl = document.getElementById("al-input-minute");
+                if (hEl) hEl.value = String(qh);
+                if (mEl) mEl.value = String(qm);
+                syncAlarmComposerPreview();
+            };
+        });
+
         const alAudioInput = document.getElementById("al-audio-file");
         document.getElementById("al-upload-sound-btn")?.addEventListener("click", () => alAudioInput?.click());
         alAudioInput?.addEventListener("change", (e) => {
@@ -10646,13 +11035,41 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             document.getElementById("al-repeat-dropdown")?.removeAttribute("open");
         });
 
+        let hintTimer = null;
+        const showAlarmHint = (msg) => {
+            const hintEl = document.getElementById("al-form-hint");
+            if (!hintEl) return;
+            hintEl.textContent = msg;
+            hintEl.hidden = false;
+            clearTimeout(hintTimer);
+            hintTimer = setTimeout(() => {
+                hintEl.hidden = true;
+            }, 3000);
+        };
+
         document.getElementById("al-add-btn")?.addEventListener("click", () => {
             const hour = Math.min(23, Math.max(0, Number(document.getElementById("al-input-hour")?.value || 6)));
             const minute = Math.min(59, Math.max(0, Number(document.getElementById("al-input-minute")?.value || 30)));
-            const title = document.getElementById("al-input-title")?.value || "Dậy học bài";
+            const title = document.getElementById("al-input-title")?.value.trim() || "Nhắc nhở báo thức";
             const repeat = document.getElementById("al-repeat-text")?.dataset.repeatVal || "Hằng ngày";
+
+            const duplicate = alarmsList.find(
+                (a) => a.hour === hour && a.minute === minute && a.repeat === repeat && a.title === title,
+            );
+            if (duplicate) {
+                duplicate.enabled = true;
+                saveStoredList(ALARMS_STORAGE_KEY, alarmsList);
+                renderAlarmsList();
+                showAlarmHint(`Báo thức ${pad(hour)}:${pad(minute)} (${title}) đã có sẵn và đang được bật!`);
+                return;
+            }
+
             alarmsList.push({ id: Date.now(), hour, minute, title, repeat, enabled: true });
+            saveStoredList(ALARMS_STORAGE_KEY, alarmsList);
             renderAlarmsList();
+            showAlarmHint(
+                `✓ Đã lưu báo thức ${pad(hour)}:${pad(minute)} (${formatRemainMinutes(getMinutesUntilAlarm({ hour, minute }))}).`,
+            );
         });
 
         document.getElementById("al-list-container")?.addEventListener("click", (e) => {
@@ -10660,6 +11077,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             if (toggleBtn) {
                 const id = Number(toggleBtn.dataset.toggleAlarm);
                 alarmsList = alarmsList.map((a) => (a.id === id ? { ...a, enabled: !a.enabled } : a));
+                saveStoredList(ALARMS_STORAGE_KEY, alarmsList);
                 renderAlarmsList();
                 return;
             }
@@ -10667,6 +11085,7 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
             if (delBtn) {
                 const id = Number(delBtn.dataset.delAlarm);
                 alarmsList = alarmsList.filter((a) => a.id !== id);
+                saveStoredList(ALARMS_STORAGE_KEY, alarmsList);
                 renderAlarmsList();
             }
         });
@@ -10690,15 +11109,24 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
                 repeat: "Chỉ một lần",
                 enabled: true,
             });
+            saveStoredList(ALARMS_STORAGE_KEY, alarmsList);
             renderAlarmsList();
         });
 
-        setInterval(() => {
+        let lastMinuteChecked = -1;
+        if (alarmClockInterval) clearInterval(alarmClockInterval);
+        alarmClockInterval = setInterval(() => {
             const cur = new Date();
             setText(
                 "al-live-clock-pill",
                 `Giờ hiện tại: ${pad(cur.getHours())}:${pad(cur.getMinutes())}:${pad(cur.getSeconds())}`,
             );
+
+            if (cur.getMinutes() !== lastMinuteChecked) {
+                lastMinuteChecked = cur.getMinutes();
+                renderAlarmsList();
+            }
+
             if (cur.getSeconds() === 0) {
                 alarmsList.forEach((a) => {
                     if (a.enabled && a.hour === cur.getHours() && a.minute === cur.getMinutes()) {
@@ -13150,6 +13578,542 @@ export const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&
 
         // Sự kiện Mục 10: Từ điển Cổ học
         document.getElementById("fs-search-input")?.addEventListener("input", () => renderFengShuiDict());
+    });
+})();
+```
+
+### util-iching.js
+
+```js
+// assets/js/utilities/util-iching.js
+// Mục 4.1 (Lazy-loaded qua templates/utilities/util-iching.html):
+// Ghép song song ./api/iching.json & ./api/iching-card.json theo id (1-64), hiển thị thẻ 800x1200 (.png -> .webp),
+// 3 đồng xu 3D, lọc Trạng thái + Ngũ Hành, lưu lịch sử 5 quẻ gần đây vào localStorage
+(() => {
+    const Hub = window.UtilHub;
+    if (!Hub) return;
+
+    const {
+        ICHING_ICON_DIR,
+        CARD_IMG_WIDTH,
+        CARD_IMG_HEIGHT,
+        pad,
+        escapeHtml,
+        setText,
+        setAttr,
+        resolveCardImageUrl,
+        fetchJsonSafe,
+        openUtilModal,
+    } = Hub;
+
+    const ICHING_HISTORY_KEY = "feng_shui_util_iching_history_v1";
+
+    const ELEMENT_LABEL_VN = {
+        metal: "Hành Kim",
+        wood: "Hành Mộc",
+        water: "Hành Thủy",
+        fire: "Hành Hỏa",
+        earth: "Hành Thổ",
+    };
+
+    let mergedHexagrams = [];
+    let currentHex = null;
+    let statusFilter = "all";
+    let elementFilter = "all";
+    let isAnimating = false;
+    let mouseEntropy = 19870113;
+    let castHistoryIds = [];
+
+    const loadHistoryIds = () => {
+        try {
+            const raw = localStorage.getItem(ICHING_HISTORY_KEY);
+            const parsed = raw ? JSON.parse(raw) : [];
+            return Array.isArray(parsed)
+                ? parsed
+                      .map(Number)
+                      .filter((n) => n >= 1 && n <= 64)
+                      .slice(0, 5)
+                : [];
+        } catch (err) {
+            return [];
+        }
+    };
+
+    const saveHistoryIds = (ids) => {
+        try {
+            localStorage.setItem(ICHING_HISTORY_KEY, JSON.stringify(ids.slice(0, 5)));
+        } catch (err) {
+            // Bỏ qua nếu bộ nhớ đầy
+        }
+    };
+
+    const getFallbackSvgUrl = (hex) => `${ICHING_ICON_DIR}/${hex.iconSlug}.svg`;
+    const getDetailHref = (hex) => `./iching-detail.html?slug=${encodeURIComponent(hex.cardSlug)}&num=${hex.id}`;
+
+    // Hợp nhất dữ liệu từ iching.json và iching-card.json thành 1 mô hình dữ liệu sạch duy nhất
+    const mergeIchingDatasets = (baseList, cardList) => {
+        const cardById = new Map((Array.isArray(cardList) ? cardList : []).map((c) => [Number(c.id), c]));
+
+        return (Array.isArray(baseList) ? baseList : []).map((base) => {
+            const id = Number(base.id || base.number);
+            const card = cardById.get(id) || null;
+
+            const upper = card?.trigrams?.upper || base.trigrams?.upper || {};
+            const lower = card?.trigrams?.lower || base.trigrams?.lower || {};
+            const element = card?.element || base.element || "metal";
+            const statusCode = card?.status?.code || base.fortune?.level || "binh_hoa";
+            const statusLabel = card?.status?.label || base.fortune?.label || "Bình Hòa";
+
+            const cardImgUrl = card?.artwork?.image_base
+                ? resolveCardImageUrl(card.artwork.image_base)
+                : `${ICHING_ICON_DIR}/${base.slug}.svg`;
+
+            return {
+                id,
+                numberStr: pad(id),
+                iconSlug: base.slug || `${pad(id)}`,
+                cardSlug: card?.slug || base.slug || `${pad(id)}`,
+                unicode: base.unicode || "",
+                element,
+                elementLabel: ELEMENT_LABEL_VN[element] || "Ngũ Hành",
+                shortName: base.name?.short || card?.name || `Quẻ ${id}`,
+                fullName: card?.name || base.name?.full || `Quẻ ${id}`,
+                alias: card?.alias || base.name?.alias || "",
+                hanziShort: card?.chinese?.short || base.name?.hanzi || "",
+                hanziFull: card?.chinese?.full || card?.chinese?.short || base.name?.hanzi || "",
+                lines: Array.isArray(base.lines)
+                    ? base.lines
+                    : String(card?.line_code || "111111")
+                          .split("")
+                          .map(Number),
+                lineCode: card?.line_code || base.code || "111111",
+                upper: {
+                    name: upper.name || "",
+                    nature: upper.nature || "",
+                    symbol: upper.symbol || "",
+                },
+                lower: {
+                    name: lower.name || "",
+                    nature: lower.nature || "",
+                    symbol: lower.symbol || "",
+                },
+                statusCode,
+                statusLabel,
+                hexagramImages: Array.isArray(card?.hexagram_images) ? card.hexagram_images : [],
+                keywords: Array.isArray(card?.keywords) && card.keywords.length ? card.keywords : base.keywords || [],
+                coupletOpening: card?.couplet?.opening || "",
+                coupletClosing: card?.couplet?.closing || "",
+                judgment: base.meaning?.judgment || "",
+                symbolism: base.meaning?.symbolism || "",
+                advice: card?.advice || base.meaning?.advice || "",
+                cardImgUrl,
+                cardAlt:
+                    card?.artwork?.alt || `Thẻ bài Kinh Dịch Quẻ ${pad(id)}: ${card?.name || base.name?.full || ""}`,
+                focalObject: card?.artwork?.focal_object || "",
+            };
+        });
+    };
+
+    const openIChingModal = (hex) => {
+        if (!hex) return;
+        const fallbackSvg = getFallbackSvgUrl(hex);
+
+        openUtilModal({
+            category: `Chu Dịch • Quẻ #${hex.numberStr}${hex.hanziFull ? ` (${hex.hanziFull})` : ""}`,
+            title: `${hex.fullName}${hex.alias ? ` (${hex.alias})` : ""}`,
+            visualHtml: `
+                <img
+                    src="${hex.cardImgUrl}"
+                    alt="${escapeHtml(hex.cardAlt)}"
+                    width="${CARD_IMG_WIDTH}"
+                    height="${CARD_IMG_HEIGHT}"
+                    class="util-modal-card-img"
+                    onerror="this.onerror=null;this.src='${fallbackSvg}';this.classList.add('is-fallback-svg');"
+                />
+                <strong>#${hex.numberStr} • ${escapeHtml(hex.statusLabel)}</strong>
+            `,
+            isFilteredVisual: false,
+            pills: [
+                hex.statusLabel,
+                hex.elementLabel,
+                `${hex.upper.symbol} ${hex.upper.name} trên • ${hex.lower.symbol} ${hex.lower.name} dưới`,
+            ],
+            box1Title: "Thoán Từ & Tượng Từ",
+            desc: `${hex.judgment} ${hex.symbolism}`.trim(),
+            box2Title: "Diễn giải & Lời khuyên ứng dụng",
+            advice: hex.advice,
+            actionHref: getDetailHref(hex),
+            actionLabel: `Xem bài phân tích chi tiết Quẻ ${hex.shortName}`,
+            actionTarget: "_self",
+        });
+    };
+
+    const renderHistoryPills = () => {
+        const wrap = document.getElementById("ic-history-wrap");
+        const listEl = document.getElementById("ic-history-list");
+        if (!wrap || !listEl) return;
+
+        if (!castHistoryIds.length || !mergedHexagrams.length) {
+            wrap.hidden = true;
+            return;
+        }
+
+        wrap.hidden = false;
+        listEl.innerHTML = castHistoryIds
+            .map((id) => {
+                const hex = mergedHexagrams.find((h) => h.id === id);
+                if (!hex) return "";
+                const isCur = currentHex && currentHex.id === hex.id;
+                return `
+                    <button
+                        type="button"
+                        class="util-al-quick-chip ${isCur ? "is-active" : ""}"
+                        data-ic-history-id="${hex.id}"
+                        aria-pressed="${isCur}"
+                        title="Xem lại Quẻ #${hex.numberStr}: ${escapeHtml(hex.fullName)}"
+                    >
+                        #${hex.numberStr} ${escapeHtml(hex.shortName)}
+                    </button>
+                `;
+            })
+            .join("");
+    };
+
+    const renderActiveHexagram = (hex) => {
+        if (!hex) return;
+        currentHex = hex;
+
+        const resultBox = document.getElementById("ic-result-box");
+        const stageEl = document.getElementById("ic-hex-stage");
+        const imgEl = document.getElementById("ic-hex-card-img");
+        const visualLines = document.getElementById("ic-lines-visual");
+        const fallbackSvg = getFallbackSvgUrl(hex);
+
+        if (resultBox) {
+            resultBox.dataset.hexId = hex.numberStr;
+            resultBox.dataset.hexSlug = hex.cardSlug;
+            resultBox.dataset.element = hex.element;
+            resultBox.dataset.statusCode = hex.statusCode;
+        }
+
+        const headStatus = document.getElementById("ic-head-status");
+        if (headStatus) {
+            headStatus.textContent = `Quẻ #${hex.numberStr} • ${hex.statusLabel}`;
+            headStatus.dataset.statusCode = hex.statusCode;
+        }
+
+        setText("ic-hero-unicode", hex.unicode || "䷀");
+        setText("ic-line-code", `Mã hào: ${hex.lineCode}`);
+        setText("ic-upper-trigram", `${hex.upper.symbol} ${hex.upper.name} • ${hex.upper.nature}`);
+        setText("ic-lower-trigram", `${hex.lower.symbol} ${hex.lower.name} • ${hex.lower.nature}`);
+        setText("ic-hex-element-label", hex.elementLabel);
+
+        const yangCount = hex.lines.filter((b) => b === 1).length;
+        setText("ic-hex-ratio", `${yangCount} Dương • ${6 - yangCount} Âm`);
+
+        // Xếp 6 hào từ dưới lên trên (Hào 1 dưới đáy lên trước -> Hào 6 trên đỉnh)
+        if (visualLines) {
+            visualLines.innerHTML = [...hex.lines]
+                .reverse()
+                .map((bit, revIdx) => {
+                    const bottomOrder = 5 - revIdx;
+                    const delay = (bottomOrder * 0.07).toFixed(2);
+                    const haoNum = 6 - revIdx;
+                    return `
+                        <div class="util-ic-hao-row">
+                            <span class="util-ic-hao-row__num">H${haoNum}</span>
+                            <div class="util-hex-line ${bit === 1 ? "util-hex-line--yang" : "util-hex-line--yin"}" style="animation-delay:${delay}s">
+                                ${bit === 1 ? "<span></span>" : "<span></span><span></span>"}
+                            </div>
+                            <span class="util-ic-hao-row__type">${bit === 1 ? "Dương" : "Âm"}</span>
+                        </div>
+                    `;
+                })
+                .join("");
+        }
+
+        if (stageEl) {
+            stageEl.dataset.hexNum = String(hex.id);
+            stageEl.classList.remove("is-fallback-art");
+            stageEl.setAttribute("aria-label", `Phóng to lá bài Quẻ #${hex.numberStr}: ${hex.fullName}`);
+        }
+
+        if (imgEl) {
+            imgEl.onerror = () => {
+                imgEl.onerror = null;
+                imgEl.src = fallbackSvg;
+                stageEl?.classList.add("is-fallback-art");
+            };
+            imgEl.src = hex.cardImgUrl;
+            imgEl.alt = hex.cardAlt;
+        }
+
+        setAttr("ic-detail-page-link", "href", getDetailHref(hex));
+        setAttr("ic-schema-keywords", "content", hex.keywords.join(", "));
+
+        const numBadge = document.getElementById("ic-hex-number");
+        if (numBadge) {
+            numBadge.textContent = `Quẻ #${hex.numberStr} • ${hex.statusLabel}`;
+            numBadge.dataset.statusCode = hex.statusCode;
+        }
+
+        setText("ic-hex-hanzi", hex.hanziFull ? `${hex.hanziShort} • ${hex.hanziFull}` : hex.hanziShort);
+        setText("ic-hex-name", `${hex.fullName}${hex.alias ? ` (${hex.alias})` : ""}`);
+
+        const imagesWrap = document.getElementById("ic-hex-images");
+        if (imagesWrap) {
+            imagesWrap.innerHTML = hex.hexagramImages
+                .map((txt) => `<span class="util-ic-omen-pill">✦ ${escapeHtml(txt)}</span>`)
+                .join("");
+            imagesWrap.hidden = !hex.hexagramImages.length;
+        }
+
+        const kwWrap = document.getElementById("ic-hex-keywords");
+        if (kwWrap) {
+            kwWrap.innerHTML = hex.keywords.map((kw) => `<li class="util-ic-keyword">#${escapeHtml(kw)}</li>`).join("");
+        }
+
+        const coupletBox = document.getElementById("ic-hex-couplet");
+        if (coupletBox) {
+            if (hex.coupletOpening || hex.coupletClosing) {
+                setText("ic-couplet-opening", `“${hex.coupletOpening}”`);
+                setText("ic-couplet-closing", hex.coupletClosing);
+                coupletBox.hidden = false;
+            } else {
+                coupletBox.hidden = true;
+            }
+        }
+
+        setText("ic-hex-judgment", hex.judgment);
+        setText("ic-hex-image", hex.symbolism);
+        setText("ic-hex-advice", hex.advice);
+
+        document.querySelectorAll("#ic-catalog-grid [data-hex-num]").forEach((cardEl) => {
+            const isMatch = Number(cardEl.dataset.hexNum) === hex.id;
+            cardEl.classList.toggle("is-current-highlight", isMatch);
+            if (isMatch) cardEl.setAttribute("aria-current", "true");
+            else cardEl.removeAttribute("aria-current");
+        });
+
+        renderHistoryPills();
+    };
+
+    const renderCatalog = () => {
+        const grid = document.getElementById("ic-catalog-grid");
+        if (!grid) return;
+
+        const q = (document.getElementById("ic-search-input")?.value || "").trim().toLowerCase();
+        const filtered = mergedHexagrams.filter((h) => {
+            if (statusFilter !== "all" && h.statusCode !== statusFilter) return false;
+            if (elementFilter !== "all" && h.element !== elementFilter) return false;
+            if (!q) return true;
+            const haystack = [
+                h.numberStr,
+                String(h.id),
+                h.shortName,
+                h.fullName,
+                h.alias,
+                h.hanziShort,
+                h.hanziFull,
+                h.statusLabel,
+                h.elementLabel,
+                h.upper.name,
+                h.lower.name,
+                h.keywords.join(" "),
+                h.hexagramImages.join(" "),
+            ]
+                .join(" ")
+                .toLowerCase();
+            return haystack.includes(q);
+        });
+
+        setText("ic-catalog-count", `${filtered.length} / ${mergedHexagrams.length} quẻ`);
+
+        if (!filtered.length) {
+            grid.innerHTML = `<p class="util-data-table__empty">Không tìm thấy quẻ Kinh Dịch nào khớp bộ lọc hiện tại.</p>`;
+            return;
+        }
+
+        grid.innerHTML = filtered
+            .map((h) => {
+                const isCur = currentHex && currentHex.id === h.id;
+                const fallbackSvg = getFallbackSvgUrl(h);
+                const topKeywords = h.keywords
+                    .slice(0, 2)
+                    .map((k) => `#${escapeHtml(k)}`)
+                    .join(" • ");
+
+                return `
+                    <a
+                        href="${getDetailHref(h)}"
+                        class="util-hex-card ${isCur ? "is-current-highlight" : ""}"
+                        data-hex-num="${h.id}"
+                        data-element="${h.element}"
+                        data-status-code="${h.statusCode}"
+                        data-hybrid-modal="iching"
+                        ${isCur ? 'aria-current="true"' : ""}
+                        title="Quẻ #${h.numberStr} ${escapeHtml(h.fullName)} — Bấm xem nhanh (Ctrl + Click mở trang chi tiết)"
+                    >
+                        <div class="util-hex-card__thumb">
+                            <img
+                                src="${h.cardImgUrl}"
+                                alt="${escapeHtml(h.cardAlt)}"
+                                width="${CARD_IMG_WIDTH}"
+                                height="${CARD_IMG_HEIGHT}"
+                                loading="lazy"
+                                decoding="async"
+                                onerror="this.onerror=null;this.src='${fallbackSvg}';this.closest('.util-hex-card__thumb')?.classList.add('is-fallback-svg');"
+                            />
+                            <span class="util-hex-card__num-pill">#${h.numberStr}</span>
+                            <span class="util-hex-card__status-pill" data-status-code="${h.statusCode}">
+                                ${escapeHtml(h.statusLabel)}
+                            </span>
+                        </div>
+
+                        <div class="util-hex-card__body">
+                            <div class="util-hex-card__title-row">
+                                <strong class="util-hex-card__title">${escapeHtml(h.fullName)}</strong>
+                                ${h.hanziShort ? `<span class="util-hex-card__hanzi" lang="zh-Hant">${escapeHtml(h.hanziShort)}</span>` : ""}
+                            </div>
+                            <span class="util-hex-card__sub">
+                                ${h.upper.symbol} ${escapeHtml(h.upper.name)} trên • ${h.lower.symbol} ${escapeHtml(h.lower.name)} dưới
+                            </span>
+                            ${topKeywords ? `<span class="util-hex-card__kw">${topKeywords}</span>` : ""}
+                        </div>
+                    </a>
+                `;
+            })
+            .join("");
+    };
+
+    // Ủy quyền Click mở Modal (đăng ký sớm hơn util-divination.js)
+    Hub.registerModalHandler((e) => {
+        const isModifiedClick = e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button === 1;
+
+        const catalogCard = e.target.closest("#ic-catalog-grid [data-hex-num]");
+        if (catalogCard) {
+            if (isModifiedClick) return true;
+            e.preventDefault();
+            const hex = mergedHexagrams.find((h) => h.id === Number(catalogCard.dataset.hexNum));
+            if (hex) {
+                renderActiveHexagram(hex);
+                openIChingModal(hex);
+            }
+            return true;
+        }
+
+        if (e.target.closest("[data-ic-modal='current']")) {
+            if (currentHex) openIChingModal(currentHex);
+            return true;
+        }
+
+        return false;
+    });
+
+    // Khởi tạo lười theo khóa subtab "iching" (chỉ chạy đúng 1 lần khi util-iching.html đã nạp xong vào DOM)
+    Hub.registerModule("iching", async (subPanelEl) => {
+        castHistoryIds = loadHistoryIds();
+
+        const [baseData, cardData] = await Promise.all([
+            fetchJsonSafe("./api/iching.json", []),
+            fetchJsonSafe("./api/iching-card.json", []),
+        ]);
+
+        mergedHexagrams = mergeIchingDatasets(baseData, cardData);
+        if (!mergedHexagrams.length) return;
+
+        const initialId = castHistoryIds[0] || 14;
+        const defaultHex = mergedHexagrams.find((h) => h.id === initialId) || mergedHexagrams[0];
+        renderActiveHexagram(defaultHex);
+        renderCatalog();
+
+        subPanelEl.addEventListener("mousemove", (e) => {
+            mouseEntropy =
+                (mouseEntropy ^ ((e.clientX * 31 + e.clientY * 17 + Math.floor(performance.now())) & 0xffffff)) >>> 0;
+        });
+
+        document.getElementById("ic-jump-catalog-btn")?.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.getElementById("ic-catalog-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        // Bấm chọn lại từ lịch sử 5 quẻ vừa gieo
+        document.getElementById("ic-history-list")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-ic-history-id]");
+            if (!btn) return;
+            const picked = mergedHexagrams.find((h) => h.id === Number(btn.dataset.icHistoryId));
+            if (picked) {
+                renderActiveHexagram(picked);
+                document.getElementById("ic-result-box")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+        });
+
+        // Gieo Quẻ 1-Click (3 đồng xu 3D + lưu lịch sử localStorage)
+        document.getElementById("ic-cast-btn")?.addEventListener("click", (e) => {
+            if (isAnimating || !mergedHexagrams.length) return;
+            isAnimating = true;
+
+            const coins = document.querySelectorAll("#ic-coins-stage .util-coin");
+            const resultBox = document.getElementById("ic-result-box");
+            resultBox?.classList.remove("is-sliding");
+            setText("ic-cast-state-text", "Đang gieo 3 đồng xu...");
+
+            coins.forEach((c) => {
+                c.classList.remove("is-tossing");
+                void c.offsetWidth;
+                c.classList.add("is-tossing");
+                c.dataset.face = Math.random() > 0.5 ? "yang" : "yin";
+            });
+
+            const clickSeed = (e.clientX * 73 + e.clientY * 37 + Math.floor(performance.now() * 100)) >>> 0;
+            let chosenIdx = (mouseEntropy ^ clickSeed ^ Math.floor(Math.random() * 100000)) % mergedHexagrams.length;
+            if (mergedHexagrams.length > 1 && mergedHexagrams[chosenIdx].id === currentHex?.id) {
+                chosenIdx = (chosenIdx + 1) % mergedHexagrams.length;
+            }
+            const nextHex = mergedHexagrams[chosenIdx];
+
+            // Tải trước ảnh 800x1200 trong lúc xu đang xoay 820ms
+            const preload = new Image();
+            preload.src = nextHex.cardImgUrl;
+
+            setTimeout(() => {
+                coins.forEach((c) => c.classList.remove("is-tossing"));
+                castHistoryIds = [nextHex.id, ...castHistoryIds.filter((id) => id !== nextHex.id)].slice(0, 5);
+                saveHistoryIds(castHistoryIds);
+
+                renderActiveHexagram(nextHex);
+                setText("ic-cast-state-text", `Đã ứng Quẻ #${nextHex.numberStr} • ${nextHex.shortName}`);
+                resultBox?.classList.add("is-sliding");
+                isAnimating = false;
+            }, 820);
+        });
+
+        // Tìm kiếm & Bộ lọc Cát Hung + Ngũ Hành
+        document.getElementById("ic-search-input")?.addEventListener("input", renderCatalog);
+
+        document.getElementById("ic-status-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-ic-status]");
+            if (!btn) return;
+            statusFilter = btn.dataset.icStatus || "all";
+            document.querySelectorAll("#ic-status-filters [data-ic-status]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-active", isSel);
+                b.setAttribute("aria-pressed", String(isSel));
+            });
+            renderCatalog();
+        });
+
+        document.getElementById("ic-element-filters")?.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-ic-element]");
+            if (!btn) return;
+            elementFilter = btn.dataset.icElement || "all";
+            document.querySelectorAll("#ic-element-filters [data-ic-element]").forEach((b) => {
+                const isSel = b === btn;
+                b.classList.toggle("is-active", isSel);
+                b.setAttribute("aria-pressed", String(isSel));
+            });
+            renderCatalog();
+        });
     });
 })();
 ```

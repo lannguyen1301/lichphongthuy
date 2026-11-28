@@ -2,7 +2,9 @@
 /* ==========================================================================
    BIẾN HỆ THỐNG TOÀN CỤC (GLOBAL VARIABLES)
    ========================================================================== */
-.div-related-card__info span, .util-header__title, .util-sound-bento__name, .util-tarot-card__title, .util-tarot-card__sub, .bazi-picker__summary-text, .bazi-pillar-col__stage-pill, .detail-sidebar__item-name, .festival-countdown-bar__heading, .festival-countdown-bar__sub-line, .festival-hero__pill, .festival-hero__title, .festival-hero__lunar, .festival-hero__hours-val, .converter-modal__leap-text, .clock-world-card__city, .header__profile-name, .header__profile-card-name, .header__profile-card-email {
+.div-related-card__info span, .util-header__title, .util-sound-bento__name, .util-cd-history-tile__info strong, .util-alarm-item__title, .util-hex-card__title,
+.util-tr-card__title, .util-hex-card__sub,
+.util-tr-card__en, .util-tarot-card__title, .util-tarot-card__sub, .bazi-picker__summary-text, .bazi-pillar-col__stage-pill, .detail-sidebar__item-name, .festival-countdown-bar__heading, .festival-countdown-bar__sub-line, .festival-hero__pill, .festival-hero__title, .festival-hero__lunar, .festival-hero__hours-val, .converter-modal__leap-text, .clock-world-card__city, .header__profile-name, .header__profile-card-name, .header__profile-card-email {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -16,7 +18,7 @@
   text-overflow: ellipsis;
 }
 
-.util-hex-card__desc, .util-history-card__sub, .util-tarot-card__desc, .detail-gallery__caption-text, .detail-sidebar__item-occasion, .festival-hero__desc, .festival-tile__name, .week-cal__card-hours, .bloc-card__caption-text {
+.util-al-hero__title, .util-history-card__sub, .util-tarot-card__desc, .detail-gallery__caption-text, .detail-sidebar__item-occasion, .festival-hero__desc, .festival-tile__name, .week-cal__card-hours, .bloc-card__caption-text {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -30,7 +32,7 @@
   overflow: hidden;
 }
 
-.util-primary-nav__link, .util-sub-nav__link, .util-card__tag, .util-hex-card__badge, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-btn, .bazi-pillar-col__pillar-name, .bazi-pillar-col__ten-god, .bazi-tengods-row__label, .bazi-remedy-box__tag, .bazi-luck-card__step, .bazi-luck-card__ages, .bazi-luck-card__canchi, .bazi-luck-card__stage, .day-bento-card__tag, .day-bento-card__badge, .iching-card__num, .iching-card__hanzi, .iching-card__status, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-hero__type-badge, .festival-seasons-bento__master, .festival-seasons-bento__q-label, .converter-modal__tab, .converter-modal__stat-label, .month-cal__option, .month-cal__badge, .week-cal__badge, .week-cal__legend-badge, .clock-pillar-card__badge, .clock-world-card__utc, .clock-world-card__tag, .bloc-card__event-btn, .header__date-group,
+.util-primary-nav__link, .util-sub-nav__link, .util-card__tag, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-btn, .bazi-pillar-col__pillar-name, .bazi-pillar-col__ten-god, .bazi-tengods-row__label, .bazi-remedy-box__tag, .bazi-luck-card__step, .bazi-luck-card__ages, .bazi-luck-card__canchi, .bazi-luck-card__stage, .day-bento-card__tag, .day-bento-card__badge, .iching-card__num, .iching-card__hanzi, .iching-card__status, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-hero__type-badge, .festival-seasons-bento__master, .festival-seasons-bento__q-label, .converter-modal__tab, .converter-modal__stat-label, .month-cal__option, .month-cal__badge, .week-cal__badge, .week-cal__legend-badge, .clock-pillar-card__badge, .clock-world-card__utc, .clock-world-card__tag, .bloc-card__event-btn, .header__date-group,
 .header__time-group, .header__widget-btn, .btn, .sidebar__tooltip, .footer__version-badge {
   white-space: nowrap;
 }
@@ -53,7 +55,7 @@
   transform: translateY(-50%);
 }
 
-.util-bento-item__bg-wrap, .util-history-card__media, .util-history-card__media::after, .util-horoscope-hero__bg-wrap, .bazi-pillar-col__bg-wrap, .bazi-god-box__bg-wrap, .bazi-luck-card__bg-wrap, .detail-lightbox__backdrop, .day-dir-box__card-bg, .day-solarterm-box__card-bg, .day-lucdieu-cell__card-bg, .day-term-modal__backdrop, .converter-modal__backdrop {
+.util-cd-ring, .util-bento-item__bg-wrap, .util-coin__face, .util-tarot-stage__face, .util-history-card__media, .util-history-card__media::after, .util-horoscope-hero__bg-wrap, .bazi-pillar-col__bg-wrap, .bazi-god-box__bg-wrap, .bazi-luck-card__bg-wrap, .detail-lightbox__backdrop, .day-dir-box__card-bg, .day-solarterm-box__card-bg, .day-lucdieu-cell__card-bg, .day-term-modal__backdrop, .converter-modal__backdrop {
   position: absolute;
   inset: 0;
 }
@@ -90,7 +92,8 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-.div-detail-hero__svg-frame, .util-header__sub-bar, .util-clock-controls, .util-divination-actions, .util-coins-stage, .util-coin__face, .util-iching-stage__svg-box, .util-pagination, .bazi-wuxing-card__svg-box, .detail-lightbox, .day-hour-row__col-wuxing, .iching-card.is-fallback-art .iching-card__poster, .iching-card__raw-link, .converter-modal, .month-cal__weekday, .month-cal__legend, .clock-hero__stage, .bloc-card__ribbon-year, .bloc-card__ribbon-weekday, .sidebar__link, .header__profile-logout {
+.div-detail-hero__svg-frame, .util-header__sub-bar, .util-sw-hero__stage, .util-cd-ring-stage, .util-divination-actions, .util-coins-stage, .util-ic-poster.is-fallback-art, .util-hex-card__thumb.is-fallback-svg,
+.util-tr-card__thumb.is-fallback-svg, .util-pagination, .bazi-wuxing-card__svg-box, .detail-lightbox, .day-hour-row__col-wuxing, .iching-card.is-fallback-art .iching-card__poster, .iching-card__raw-link, .converter-modal, .month-cal__weekday, .month-cal__legend, .clock-hero__stage, .bloc-card__ribbon-year, .bloc-card__ribbon-weekday, .sidebar__link, .header__profile-logout {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,39 +123,43 @@
   justify-content: flex-start;
 }
 
-.auth-hero, .auth-hero__top, .auth-hero__perks, .profile-lunar-box, .profile-stat-pill, .auth-card, .auth-card__head, .profile-tabpanel, .family-list, .family-card__info, .auth-form, .auth-form__group, .auth-form__options, .auth-strength, .div-detail-hero__lines-stack, .div-detail-blocks, .div-detail-block, .div-related-section, .div-related-card__info, .util-header, .util-header__top-card, .util-header__title-group, .util-card, .util-field, .util-stepper-box, .util-timer-bento__left, .util-timer-bento__right, .util-sound-bento, .util-sound-bento__info, .util-alarm-ring-banner__info, .util-conv-dashboard, .util-bento-item__body, .util-iching-stage__lines, .util-iching-cards-stack, .util-div-detail-card, .util-iching-catalog, .util-history-card__body, .util-date-picker-card, .util-horoscope-hero__main, .util-diff-stat, .util-date-result-banner__main, .util-num-hero, .util-num-cycle-box, .util-birth-chart-box, .util-bio-stat-card, .util-tarot-catalog, .util-tarot-card__body, .bazi-page__pairs-wrapper, .bazi-card, .bazi-toolbar__title-wrap, .bazi-toolbar__field, .bazi-picker__list, .bazi-master-card__top, .bazi-master-card__title-group, .bazi-master-card__meta-item, .bazi-pillar-col__main-chars, .bazi-pillar-col__char-info, .bazi-pillar-col__hidden-stems, .bazi-pillar-col__foot, .bazi-wuxing-card__legend, .bazi-elements-bars, .bazi-element-row, .bazi-tengods-summary, .bazi-tengods-summary__grid, .bazi-luck-card__canchi-group, .bazi-luck-card__wide-left, .bazi-luck-card__wide-right, .detail-hero, .detail-hero__info, .detail-hero__eyebrow-group, .detail-stat-card__content, .detail-article, .detail-article__body, .detail-gallery, .detail-sources__list, .detail-sidebar__card, .detail-sidebar__list, .detail-sidebar__item-info, .year-cal-app, .day-page__pairs-wrapper, .day-bento-card, .day-dir-box__body, .day-solarterm-box__body, .day-hourly-table, .day-hourly-table__list, .day-hour-row__col-time, .day-hour-row__napam-info, .day-hour-row__col-lucdieu, .day-hour-row__bagua-text, .day-term-modal__title-group, .day-term-modal__content, .day-term-modal__box, .clock-page__wrapper, .home-page__left, .iching-card, .iching-card__caption, .iching-card-meta, .iching-pair-box, .iching-pair-box__col, .festival-cal, .festival-cal__main-right, .festival-countdown-bar__info, .festival-countdown-bar__subtitles, .festival-picker__popover, .festival-picker__list, .festival-hero, .festival-hero__top, .festival-hero__weekday-group, .festival-hero__detail-box, .festival-hero__hours-line, .festival-controls, .festival-controls__intro, .festival-seasons-bento__quarter, .festival-bento-box, .festival-bento-box__footer, .festival-tile__body, .festival-tile__main, .festival-tile__big-date, .converter-modal__dialog, .converter-modal__title-wrap, .converter-modal__field, .converter-modal__bento-body, .converter-modal__date-card, .converter-modal__stat-content, .converter-modal__hours-section, .converter-modal__hour-card, .month-cal, .month-cal__dropdown-menu--year, .week-cal, .week-cal__intro, .week-cal__hero-top, .week-cal__card, .week-cal__card.day-card--full-width .day-card__col-left, .week-cal__card.day-card--full-width .day-card__col-right, .week-cal__card-title-group, .week-cal__card-section, .week-cal__card-meta, .week-cal__card-meta-group, .clock-zodiac-section, .clock-zodiac-card, .clock-zodiac-card__mid, .clock-location-card, .clock-location-card__stat-box, .clock-energy, .clock-pillar-card, .clock-pillar-card__title-group, .clock-hero, .clock-hero__loc-menu, .clock-world-card, .fengshui-stack, .fengshui-card, .fengshui-actions__box, .bloc-card, .bloc-card__month-box, .bloc-card__date-hero, .bloc-card__overlay, .bloc-card__canchi-list, .bloc-card__quick-fengshui, .sidebar__list, .footer__card, .footer__list, .header__profile-meta, .header__profile-popover, .header__profile-card-info, .header__profile-menu {
+.auth-hero, .auth-hero__top, .auth-hero__perks, .profile-lunar-box, .profile-stat-pill, .auth-card, .auth-card__head, .profile-tabpanel, .family-list, .family-card__info, .auth-form, .auth-form__group, .auth-form__options, .auth-strength, .div-detail-hero__lines-stack, .div-detail-blocks, .div-detail-block, .div-related-section, .div-related-card__info, .util-header, .util-header__top-card, .util-header__title-group, .util-card, .util-field, .util-stepper-box, .util-sw-hero, .util-sw-side, .util-sw-stat, .util-sw-stat__avg-info, .util-sw-laps, .util-sw-laps__body, .util-sw-lap-row, .util-cd-hero, .util-cd-presets-card, .util-preset-tile, .util-cd-steppers-card, .util-sound-bento, .util-sound-bento__info, .util-cd-history-card, .util-cd-history-tile__info, .util-alarm-ring-banner__info, .util-al-hero, .util-al-hero__body, .util-al-composer, .util-al-composer__sound, .util-al-deck, .util-alarm-item, .util-alarm-item__main, .util-conv-dashboard, .util-bento-item__body, .util-ic-poster-col,
+.util-tr-poster-col, .util-iching-cards-stack, .util-div-detail-card, .util-ic-cast-strip, .util-ic-structure-card__lines, .util-ic-stat-tile, .util-ic-couplet, .util-tr-title-block, .util-iching-catalog,
+.util-tarot-catalog, .util-hex-card__body,
+.util-tr-card__body, .util-history-card__body, .util-date-picker-card, .util-horoscope-hero__main, .util-diff-stat, .util-date-result-banner__main, .util-num-hero, .util-num-cycle-box, .util-birth-chart-box, .util-bio-stat-card, .util-tarot-card__body, .bazi-page__pairs-wrapper, .bazi-card, .bazi-toolbar__title-wrap, .bazi-toolbar__field, .bazi-picker__list, .bazi-master-card__top, .bazi-master-card__title-group, .bazi-master-card__meta-item, .bazi-pillar-col__main-chars, .bazi-pillar-col__char-info, .bazi-pillar-col__hidden-stems, .bazi-pillar-col__foot, .bazi-wuxing-card__legend, .bazi-elements-bars, .bazi-element-row, .bazi-tengods-summary, .bazi-tengods-summary__grid, .bazi-luck-card__canchi-group, .bazi-luck-card__wide-left, .bazi-luck-card__wide-right, .detail-hero, .detail-hero__info, .detail-hero__eyebrow-group, .detail-stat-card__content, .detail-article, .detail-article__body, .detail-gallery, .detail-sources__list, .detail-sidebar__card, .detail-sidebar__list, .detail-sidebar__item-info, .year-cal-app, .day-page__pairs-wrapper, .day-bento-card, .day-dir-box__body, .day-solarterm-box__body, .day-hourly-table, .day-hourly-table__list, .day-hour-row__col-time, .day-hour-row__napam-info, .day-hour-row__col-lucdieu, .day-hour-row__bagua-text, .day-term-modal__title-group, .day-term-modal__content, .day-term-modal__box, .clock-page__wrapper, .home-page__left, .iching-card, .iching-card__caption, .iching-card__lines-box, .iching-card-meta, .iching-pair-box, .iching-pair-box__col, .festival-cal, .festival-cal__main-right, .festival-countdown-bar__info, .festival-countdown-bar__subtitles, .festival-picker__popover, .festival-picker__list, .festival-hero, .festival-hero__top, .festival-hero__weekday-group, .festival-hero__detail-box, .festival-hero__hours-line, .festival-controls, .festival-controls__intro, .festival-seasons-bento__quarter, .festival-bento-box, .festival-bento-box__footer, .festival-tile__body, .festival-tile__main, .festival-tile__big-date, .converter-modal__dialog, .converter-modal__title-wrap, .converter-modal__field, .converter-modal__bento-body, .converter-modal__date-card, .converter-modal__stat-content, .converter-modal__hours-section, .converter-modal__hour-card, .month-cal, .month-cal__dropdown-menu--year, .week-cal, .week-cal__intro, .week-cal__hero-top, .week-cal__card, .week-cal__card.day-card--full-width .day-card__col-left, .week-cal__card.day-card--full-width .day-card__col-right, .week-cal__card-title-group, .week-cal__card-section, .week-cal__card-meta, .week-cal__card-meta-group, .clock-zodiac-section, .clock-zodiac-card, .clock-zodiac-card__mid, .clock-location-card, .clock-location-card__stat-box, .clock-energy, .clock-pillar-card, .clock-pillar-card__title-group, .clock-hero, .clock-hero__loc-menu, .clock-world-card, .fengshui-stack, .fengshui-card, .fengshui-actions__box, .bloc-card, .bloc-card__month-box, .bloc-card__date-hero, .bloc-card__overlay, .bloc-card__canchi-list, .bloc-card__quick-fengshui, .sidebar__list, .footer__card, .footer__list, .header__profile-meta, .header__profile-popover, .header__profile-card-info, .header__profile-menu {
   display: flex;
   flex-direction: column;
 }
 
-.auth-elements__btn, .div-detail-hero__hex-panel, .div-detail-hero__tarot-col, .util-clock-stage, .util-divination-hero, .util-iching-stage, .util-tarot-stage, .util-tarot-stage__hint, .util-pythagoras-cell, .util-num-day-cell, .bazi-pillar-col__head, .detail-sidebar__date-box, .detail-lightbox__figure, .month-cal--mini .month-cal__cell, .day-term-modal__visual, .festival-countdown-bar__unit, .clock-hero__meta-col--center, .bloc-card__lunar-num-box {
+.auth-elements__btn, .div-detail-hero__hex-panel, .div-detail-hero__tarot-col, .util-cd-ring-stage__inner, .util-tr-deck-bar, .util-pythagoras-cell, .util-num-day-cell, .bazi-pillar-col__head, .detail-sidebar__date-box, .detail-lightbox__figure, .month-cal--mini .month-cal__cell, .day-term-modal__visual, .festival-countdown-bar__unit, .clock-hero__meta-col--center, .bloc-card__lunar-num-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.profile-summary, .family-card__left, .family-card__head, .family-card__actions, .auth-form__input-wrap, .auth-form__check, .div-related-card__main, .util-header__brand-box, .util-header__brand-link, .util-header__actions, .util-alarm-item__right, .util-year-Step-bar, .util-iching-catalog__tools, .util-history-controls, .util-inline-custom-pickers,
+.profile-summary, .family-card__left, .family-card__head, .family-card__actions, .auth-form__input-wrap, .auth-form__check, .div-related-card__main, .util-header__brand-box, .util-header__brand-link, .util-header__actions, .util-sw-lap-row__left, .util-sw-lap-row__times, .util-alarm-item__right, .util-year-Step-bar, .util-ic-cast-strip__left, .util-ic-cast-strip__actions, .util-ic-history, .util-iching-catalog__tools, .util-history-controls, .util-inline-custom-pickers,
 .util-inline-birth-picker, .util-num-hero__top, .util-bio-legend__item, .util-modal-media__controls, .bazi-master-card__hero, .bazi-wuxing-card__legend-item, .bazi-element-row__name, .bazi-element-row__meta, .bazi-remedy-box__title-wrap, .bazi-luck-card__mid, .detail-page__top-left, .detail-page__top-right, .detail-page__badges, .detail-hero__action-row, .detail-stat-card, .detail-gallery__caption, .detail-sidebar__item, .year-cal-app__side, .day-page__center-group, .day-sun-table__th, .day-sun-table__time, .day-hour-row__col-napam, .day-hour-row__dao-sub, .day-hour-row__col-bagua, .festival-hero__date-row, .festival-controls__year-toolbar, .converter-modal__summary-main, .converter-modal__stat-card, .converter-modal__hours-title-group, .converter-modal__hour-top, .month-cal__controls, .month-cal__dots, .week-cal__toolbar, .week-cal__toolbar-center, .week-cal__hero-date, .clock-energy__title-wrap, .clock-pillar-card__body, .clock-hero__meta-col, .fengshui-hours__title, .fengshui-card__head, .bloc-card__event-pills, .bloc-card__caption-btn, .header__datetime-wrapper, .header__date-group,
 .header__time-group, .footer__elements, .footer__input-group, .footer__social-list, .header__left, .header__right, .header__auth, .header__auth-guest, .header__profile-card {
   display: flex;
   align-items: center;
 }
 
-.auth-hero__foot, .family-card, .auth-form__label-row, .div-related-card__head, .util-header__brand-row, .util-card__head, .util-sound-bento__row, .util-alarm-ring-banner, .util-alarm-item, .util-bento-item__top, .util-bento-item__foot, .util-div-detail-card__head, .util-hex-card__top, .util-history-card__top, .util-date-result-banner, .util-bio-stat-card__head, .bazi-card__head, .bazi-toolbar__head, .bazi-picker__summary, .bazi-picker__year-nav, .bazi-master-card__badges, .bazi-master-card__footer, .bazi-pillar-col__stem-box, .bazi-pillar-col__branch-box, .bazi-element-row__top, .bazi-tengods-summary__head, .bazi-god-box__top, .bazi-remedy-box__head, .bazi-luck-card__top, .bazi-luck-card__foot, .detail-page__top-bar, .detail-article__head, .detail-gallery__head, .detail-sidebar__head, .day-page__toolbar, .day-bento-card__head, .day-dir-box__top, .day-solarterm-box__top, .day-lucdieu-cell__head, .day-sun-summary__pill, .day-hourly-section__header, .day-term-modal__header, .day-term-modal__footer, .iching-card__top-meta, .iching-pair-box__toggle, .festival-picker__summary, .festival-picker__option, .festival-hero__footer, .festival-controls__head, .festival-controls__filter-row, .festival-bento-box__bar, .festival-bento-box__subnote, .festival-tile__head, .festival-tile__foot, .converter-modal__header, .converter-modal__summary, .converter-modal__year-nav, .converter-modal__date-top, .converter-modal__hours-head, .converter-modal__footer, .month-cal__toolbar, .week-cal__header, .week-cal__hero-badges, .week-cal__hero-footer, .week-cal__card-head, .week-cal__footer, .clock-zodiac-section__header, .clock-zodiac-card__top, .clock-zodiac-card__bottom, .clock-energy__head, .clock-pillar-card__head, .clock-pillar-card__foot, .clock-hero__header, .clock-hero__loc-option, .clock-world-card__top, .clock-world-card__bottom, .fengshui-actions__header, .bloc-card__top, .footer__brand-head, .footer__contact, .footer__social, .footer__bottom-bar, .header__container {
+.auth-hero__foot, .family-card, .auth-form__label-row, .div-related-card__head, .util-header__brand-row, .util-card__head, .util-sw-hero__top, .util-sw-stat__head, .util-sw-laps__head, .util-sw-lap-row__top, .util-cd-hero__top, .util-cd-presets-card__head, .util-preset-tile__head, .util-sound-bento__row, .util-cd-history-tile, .util-alarm-ring-banner, .util-al-hero__top, .util-al-composer__top, .util-al-composer__footer, .util-alarm-item__head, .util-alarm-item__foot, .util-bento-item__top, .util-bento-item__foot, .util-div-detail-card__head, .util-ic-cast-strip__row, .util-ic-filter-bar, .util-tr-card__meta, .util-hex-card__title-row, .util-history-card__top, .util-date-result-banner, .util-bio-stat-card__head, .bazi-card__head, .bazi-toolbar__head, .bazi-picker__summary, .bazi-picker__year-nav, .bazi-master-card__badges, .bazi-master-card__footer, .bazi-pillar-col__stem-box, .bazi-pillar-col__branch-box, .bazi-element-row__top, .bazi-tengods-summary__head, .bazi-god-box__top, .bazi-remedy-box__head, .bazi-luck-card__top, .bazi-luck-card__foot, .detail-page__top-bar, .detail-article__head, .detail-gallery__head, .detail-sidebar__head, .day-page__toolbar, .day-bento-card__head, .day-dir-box__top, .day-solarterm-box__top, .day-lucdieu-cell__head, .day-sun-summary__pill, .day-hourly-section__header, .day-term-modal__header, .day-term-modal__footer, .iching-card__top-meta, .iching-pair-box__toggle, .festival-picker__summary, .festival-picker__option, .festival-hero__footer, .festival-controls__head, .festival-controls__filter-row, .festival-bento-box__bar, .festival-bento-box__subnote, .festival-tile__head, .festival-tile__foot, .converter-modal__header, .converter-modal__summary, .converter-modal__year-nav, .converter-modal__date-top, .converter-modal__hours-head, .converter-modal__footer, .month-cal__toolbar, .week-cal__header, .week-cal__hero-badges, .week-cal__hero-footer, .week-cal__card-head, .week-cal__footer, .clock-zodiac-section__header, .clock-zodiac-card__top, .clock-zodiac-card__bottom, .clock-energy__head, .clock-pillar-card__head, .clock-pillar-card__foot, .clock-hero__header, .clock-hero__loc-option, .clock-world-card__top, .clock-world-card__bottom, .fengshui-actions__header, .bloc-card__top, .footer__brand-head, .footer__contact, .footer__social, .footer__bottom-bar, .header__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.profile-quick-links, .div-orient-pill-row, .div-sidebar-chips, .util-sound-bento__actions, .util-alarm-ring-banner__btns, .util-season-filters, .util-horoscope-hero__pills, .util-bio-legend, .bazi-toolbar__quick-actions, .bazi-pillar-col__hidden-list, .day-hourly-section__filters, .day-term-modal__meta-pills, .iching-card-meta__omens, .iching-card-meta__keywords, .festival-controls__eyebrow-row, .festival-controls__filter-bar, .week-cal__title-row, .week-cal__hero-meta-pills, .clock-zodiac-section__filters, .fengshui-actions__list, .footer__elements-list {
+.profile-quick-links, .div-orient-pill-row, .div-sidebar-chips, .util-sound-bento__actions, .util-alarm-ring-banner__btns, .util-al-quick-chips, .util-season-filters, .util-ic-history__list, .util-ic-tags-row,
+.util-ic-keywords, .util-tr-meta-pills, .util-tr-alt-kws, .util-ic-filter-group, .util-horoscope-hero__pills, .util-bio-legend, .bazi-toolbar__quick-actions, .bazi-pillar-col__hidden-list, .day-hourly-section__filters, .day-term-modal__meta-pills, .iching-card-meta__omens, .iching-card-meta__keywords, .festival-controls__eyebrow-row, .festival-controls__filter-bar, .week-cal__title-row, .week-cal__hero-meta-pills, .clock-zodiac-section__filters, .fengshui-actions__list, .footer__elements-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
 }
 
-.auth-hero__badge, .auth-hero__perk-icon, .auth-hero__back-link, .profile-summary__avatar, .profile-tabs__btn, .family-card__zodiac, .family-card__del-btn, .auth-form__eye-btn, .div-related-card__svg-wrap, .div-sidebar-item__svg, .util-header__logo-box, .util-header__eyebrow, .util-primary-nav__step, .util-primary-nav__link, .util-primary-nav__icon-box, .util-sub-nav__link, .util-stepper-box__btn, .util-alarm-item__del, .util-subfilter-btn, .util-year-step__btn, .util-bento-item__icon-box, .util-hex-card__svg, .util-pagination__btn, .util-horoscope-hero__badge, .util-num-hero__circle, .util-modal-media__slide-btn, .bazi-toolbar__eyebrow, .bazi-toolbar__preset-icon-box, .bazi-toolbar__gender-btn, .bazi-picker__year-step, .bazi-picker__option, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-luck-card__zodiac-box, .detail-page__cat-pill, .detail-page__date-pill, .detail-hero__occasion-tag, .detail-stat-card__icon-box, .detail-gallery__hint-badge, .detail-gallery__caption-badge, .detail-lightbox__close, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-hourly-section__filter-btn, .day-hour-row__napam-icon-box, .day-hour-row__badge, .day-hour-row__bagua-ring, .day-term-modal__close, .day-term-modal__pill, .iching-card__num, .iching-card__hanzi, .iching-card__status, .festival-countdown-bar__badge, .festival-picker__tab, .festival-hero__type-badge, .festival-hero__link, .festival-controls__filter-btn, .festival-controls__reset-btn, .festival-seasons-bento__master, .festival-seasons-bento__btn, .festival-bento-box__more-btn, .festival-bento-box__ext-link, .festival-tile__cta, .converter-modal__badge, .converter-modal__tab, .converter-modal__close-btn, .converter-modal__year-step, .converter-modal__option-btn, .converter-modal__swap-btn, .converter-modal__stat-icon-box, .converter-modal__fortune-pill, .month-cal__nav-btn, .month-cal__summary, .month-cal__option, .month-cal__legend-pill, .week-cal__week-badge, .week-cal__lunar-badge, .week-cal__nav-btn, .week-cal__hero-pill, .week-cal__hero-fortune, .week-cal__hero-meta-badge, .week-cal__hero-link, .week-cal__badge, .week-cal__legend-badge, .clock-zodiac-section__filter-btn, .clock-zodiac-card__fortune, .clock-pillar-card__icon-box, .clock-hero__status-pill, .clock-hero__loc-summary, .clock-hero__format-switch, .clock-hero__digits, .clock-hero__utc-badge, .clock-hero__weather-chip, .clock-hero__lunar-pill, .fengshui-actions__icon, .bloc-card__share-btn, .bloc-card__event-btn, .bloc-card__caption-badge, .header__logo-link, .header__widget-btn, .btn, .footer__logo-link, .footer__social-link, .footer__top-btn, .header__lang-summary, .header__theme-summary, .header__profile-summary, .header__profile-avatar, .header__profile-card-avatar {
+.auth-hero__badge, .auth-hero__perk-icon, .auth-hero__back-link, .profile-summary__avatar, .profile-tabs__btn, .family-card__zodiac, .family-card__del-btn, .auth-form__eye-btn, .div-related-card__svg-wrap, .div-sidebar-item__svg, .util-header__logo-box, .util-header__eyebrow, .util-primary-nav__step, .util-primary-nav__link, .util-primary-nav__icon-box, .util-sub-nav__link, .util-stepper-box__btn, .util-clock-stage__tag, .util-sw-hero__digits, .util-sw-hero__digits small, .util-cd-hero__pct, .util-cd-history-tile__replay, .util-alarm-item__del, .util-subfilter-btn, .util-year-step__btn, .util-bento-item__icon-box, .util-iching-result__num, .util-pagination__btn, .util-horoscope-hero__badge, .util-num-hero__circle, .util-modal-media__slide-btn, .bazi-toolbar__eyebrow, .bazi-toolbar__preset-icon-box, .bazi-toolbar__gender-btn, .bazi-picker__year-step, .bazi-picker__option, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-luck-card__zodiac-box, .detail-page__cat-pill, .detail-page__date-pill, .detail-hero__occasion-tag, .detail-stat-card__icon-box, .detail-gallery__hint-badge, .detail-gallery__caption-badge, .detail-lightbox__close, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-hourly-section__filter-btn, .day-hour-row__napam-icon-box, .day-hour-row__badge, .day-hour-row__bagua-ring, .day-term-modal__close, .day-term-modal__pill, .iching-card__num, .iching-card__hanzi, .iching-card__status, .festival-countdown-bar__badge, .festival-picker__tab, .festival-hero__type-badge, .festival-hero__link, .festival-controls__filter-btn, .festival-controls__reset-btn, .festival-seasons-bento__master, .festival-seasons-bento__btn, .festival-bento-box__more-btn, .festival-bento-box__ext-link, .festival-tile__cta, .converter-modal__badge, .converter-modal__tab, .converter-modal__close-btn, .converter-modal__year-step, .converter-modal__option-btn, .converter-modal__swap-btn, .converter-modal__stat-icon-box, .converter-modal__fortune-pill, .month-cal__nav-btn, .month-cal__summary, .month-cal__option, .month-cal__legend-pill, .week-cal__week-badge, .week-cal__lunar-badge, .week-cal__nav-btn, .week-cal__hero-pill, .week-cal__hero-fortune, .week-cal__hero-meta-badge, .week-cal__hero-link, .week-cal__badge, .week-cal__legend-badge, .clock-zodiac-section__filter-btn, .clock-zodiac-card__fortune, .clock-pillar-card__icon-box, .clock-hero__status-pill, .clock-hero__loc-summary, .clock-hero__format-switch, .clock-hero__digits, .clock-hero__utc-badge, .clock-hero__weather-chip, .clock-hero__lunar-pill, .fengshui-actions__icon, .bloc-card__share-btn, .bloc-card__event-btn, .bloc-card__caption-badge, .header__logo-link, .header__widget-btn, .btn, .footer__logo-link, .footer__social-link, .footer__top-btn, .header__lang-summary, .header__theme-summary, .header__profile-summary, .header__profile-avatar, .header__profile-card-avatar {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -164,12 +171,13 @@
   min-width: 0;
 }
 
-.auth-hero__perk-icon, .profile-summary__avatar, .family-card__zodiac, .auth-form__check input[type=checkbox], .div-related-card__svg-wrap, .div-sidebar-item__svg, .div-sidebar-item__tarot-thumb, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__item, .util-primary-nav__icon-box, .util-bento-item__icon-box, .util-hex-card__svg, .util-num-hero__circle, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-dot, .bazi-picker__arrow, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-wuxing-card__dot, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-remedy-box__tag, .bazi-luck-card__zodiac-box, .detail-stat-card__icon-box, .detail-gallery__caption-badge, .detail-sidebar__date-box, .day-page__hours-icon, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-lucdieu-cell__icon, .day-sun-table__th-icon, .day-sun-table__time-icon, .day-hourly-section__dao-icon, .day-hour-row__napam-icon-box, .day-hour-row__dao-icon, .day-hour-row__bagua-ring, .wuxing-mini, .festival-cal__dot, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-picker__summary-date, .festival-picker__arrow, .festival-picker__opt-date, .converter-modal__checkbox, .converter-modal__stat-icon-box, .converter-modal__hour-dot, .week-cal__badge-dot, .clock-pillar-card__icon-box, .fengshui-hours__dot, .bloc-card__event-dot, .bloc-card__caption-badge, .header__logo, .header__widget, .header__widget-icon, .header__profile-avatar, .header__profile-arrow, .header__profile-card-avatar, .header__profile-link .icon,
+.auth-hero__perk-icon, .profile-summary__avatar, .family-card__zodiac, .auth-form__check input[type=checkbox], .div-related-card__svg-wrap, .div-sidebar-item__svg, .div-sidebar-item__tarot-thumb, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__item, .util-primary-nav__icon-box, .util-live-dot, .util-cd-history-tile__replay, .util-bento-item__icon-box, .util-tarot-back, .util-hex-card__hanzi, .util-num-hero__circle, .bazi-card__tag, .bazi-card__badge, .bazi-toolbar__gender-dot, .bazi-picker__arrow, .bazi-master-card__icon-box, .bazi-pillar-col__char-icon, .bazi-wuxing-card__dot, .bazi-god-box__icon-wrap, .bazi-remedy-box__icon-wrap, .bazi-remedy-box__tag, .bazi-luck-card__zodiac-box, .detail-stat-card__icon-box, .detail-gallery__caption-badge, .detail-sidebar__date-box, .day-page__hours-icon, .day-dir-box__icon-wrap, .day-solarterm-box__icon-wrap, .day-lucdieu-cell__icon, .day-sun-table__th-icon, .day-sun-table__time-icon, .day-hourly-section__dao-icon, .day-hour-row__napam-icon-box, .day-hour-row__dao-icon, .day-hour-row__bagua-ring, .wuxing-mini, .festival-cal__dot, .festival-countdown-bar__badge, .festival-countdown-bar__select-label, .festival-picker__summary-date, .festival-picker__arrow, .festival-picker__opt-date, .converter-modal__checkbox, .converter-modal__stat-icon-box, .converter-modal__hour-dot, .week-cal__badge-dot, .clock-pillar-card__icon-box, .fengshui-hours__dot, .bloc-card__event-dot, .bloc-card__caption-badge, .header__logo, .header__widget, .header__widget-icon, .header__profile-avatar, .header__profile-arrow, .header__profile-card-avatar, .header__profile-link .icon,
 .header__profile-link svg {
   flex: 0 0 auto;
 }
 
-.util-history-card__media img, .util-modal-media img,
+.util-ic-poster img, .util-tarot-back img, .util-tarot-stage__face img, .util-hex-card__thumb img,
+.util-tr-card__thumb img, .util-history-card__media img, .util-modal-media img,
 .util-modal-media video, .detail-hero__img, .detail-gallery__img, .iching-card__img, .bloc-card__img {
   width: 100%;
   height: 100%;
@@ -182,11 +190,12 @@
   height: auto;
 }
 
-.auth-hero, .auth-card, .profile-tabs__btn, .auth-form__input, .auth-form__eye-btn, .div-orient-switch__btn, .div-detail-block, .div-sidebar-chip, .util-header__burger, .util-primary-nav__icon-box, .util-sub-nav__link, .util-card, .util-field__input, .util-stepper-box, .util-alarm-item__toggle, .bazi-card, .bazi-toolbar__preset-icon-box, .bazi-toolbar__gender-btn, .bazi-picker__summary, .detail-page__top-bar, .detail-hero, .detail-hero__media, .detail-gallery__caption, .detail-gallery__caption-badge, .detail-sidebar__filter-btn, .day-page__toolbar, .day-bento-card, .day-hour-row__col-time strong, .day-hour-row__napam-icon-box, .iching-card__zoom-pill, .festival-countdown-bar, .festival-countdown-bar__unit, .festival-countdown-bar__num, .festival-picker__summary, .festival-picker__tab, .festival-picker__option, .festival-hero, .festival-controls, .festival-seasons-bento__quarter, .festival-bento-box, .converter-modal__dialog, .converter-modal__tab, .converter-modal__summary, .converter-modal__leap-toggle, .converter-modal__date-card, .month-cal, .month-cal__summary, .month-cal__option, .week-cal, .week-cal__hero, .week-cal__flat-action.fengshui-actions__box, .clock-zodiac-section, .clock-location-card, .clock-energy, .clock-hero, .clock-hero__loc-summary, .clock-hero__loc-option, .clock-hero__format-btn, .fengshui-hours__box, .fengshui-card, .bloc-card, .bloc-card__year-badge, .bloc-card__month-vn, .bloc-card__day-status, .bloc-card__solar-num, .bloc-card__media, .bloc-card__event-dot, .bloc-card__caption-badge, .bloc-card__ribbon-year, .bloc-card__ribbon-weekday, .bloc-card__lunar-num-box, .bloc-card__lunar-num, .bloc-card__lunar-month, .header__datetime-wrapper, .sidebar__link, .footer__card, .footer__link, .footer__bottom-bar, .header__lang-summary, .header__theme-summary, .header__lang-link, .header__theme-btn, .header__profile-summary, .header__profile-link, .header__burger {
+.auth-hero, .auth-card, .profile-tabs__btn, .auth-form__input, .auth-form__eye-btn, .div-orient-switch__btn, .div-detail-block, .div-sidebar-chip, .util-header__burger, .util-primary-nav__icon-box, .util-sub-nav__link, .util-card, .util-field__input, .util-stepper-box, .util-live-dot, .util-clock-stage__tag, .util-sw-hero, .util-sw-stat, .util-sw-lap-row, .util-cd-hero, .util-cd-hero__pct, .util-al-hero, .util-alarm-item__toggle, .util-div-detail-card, .util-tr-orient-switch__btn, .bazi-card, .bazi-toolbar__preset-icon-box, .bazi-toolbar__gender-btn, .bazi-picker__summary, .detail-page__top-bar, .detail-hero, .detail-hero__media, .detail-gallery__caption, .detail-gallery__caption-badge, .detail-sidebar__filter-btn, .day-page__toolbar, .day-bento-card, .day-hour-row__col-time strong, .day-hour-row__napam-icon-box, .iching-card__zoom-pill, .festival-countdown-bar, .festival-countdown-bar__unit, .festival-countdown-bar__num, .festival-picker__summary, .festival-picker__tab, .festival-picker__option, .festival-hero, .festival-controls, .festival-seasons-bento__quarter, .festival-bento-box, .converter-modal__dialog, .converter-modal__tab, .converter-modal__summary, .converter-modal__leap-toggle, .converter-modal__date-card, .month-cal, .month-cal__summary, .month-cal__option, .week-cal, .week-cal__hero, .week-cal__flat-action.fengshui-actions__box, .clock-zodiac-section, .clock-location-card, .clock-energy, .clock-hero, .clock-hero__loc-summary, .clock-hero__loc-option, .clock-hero__format-btn, .fengshui-hours__box, .fengshui-card, .bloc-card, .bloc-card__year-badge, .bloc-card__month-vn, .bloc-card__day-status, .bloc-card__solar-num, .bloc-card__media, .bloc-card__event-dot, .bloc-card__caption-badge, .bloc-card__ribbon-year, .bloc-card__ribbon-weekday, .bloc-card__lunar-num-box, .bloc-card__lunar-num, .bloc-card__lunar-month, .header__datetime-wrapper, .sidebar__link, .footer__card, .footer__link, .footer__bottom-bar, .header__lang-summary, .header__theme-summary, .header__lang-link, .header__theme-btn, .header__profile-summary, .header__profile-link, .header__burger {
   transition: var(--theme-transition);
 }
 
-.auth-hero__back-link, .family-card, .family-card__del-btn, .auth-elements__btn, .div-tarot-poster, .div-related-card, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__link, .util-stepper-box__btn, .util-preset-chip, .util-alarm-item, .util-alarm-item__del, .util-subfilter-btn, .util-bento-item, .util-iching-stage, .util-div-detail-card, .util-hex-card, .util-history-card, .util-pagination__btn, .util-diff-stat, .util-num-cycle-box, .util-pythagoras-cell, .util-num-day-cell, .util-bio-stat-card, .util-tarot-card, .bazi-picker__year-step, .bazi-picker__option, .bazi-pillar-col, .bazi-element-row, .bazi-god-box, .bazi-remedy-box, .bazi-luck-card, .detail-hero__zoom-badge, .detail-stat-card, .detail-gallery__item, .detail-sidebar__item, .day-dir-box, .day-solarterm-box, .day-lucdieu-cell, .day-hourly-section__filter-btn, .day-hour-row, .day-hour-row__col-link, .day-hour-row__bagua-ring, .day-term-modal__close, .iching-card__poster, .iching-card__raw-link, .festival-hero__link, .festival-controls__filter-btn, .festival-controls__reset-btn, .festival-seasons-bento__master, .festival-seasons-bento__btn, .festival-bento-box__more-btn, .festival-tile, .converter-modal__close-btn, .converter-modal__year-step, .converter-modal__option-btn, .converter-modal__swap-btn, .converter-modal__stat-card, .converter-modal__hour-card, .month-cal__nav-btn, .month-cal__cell, .month-cal__legend-pill, .week-cal__nav-btn, .week-cal__hero-link, .week-cal__card, .clock-zodiac-section__filter-btn, .clock-zodiac-card, .clock-pillar-card, .clock-world-card, .bloc-card__share-btn, .bloc-card__event-btn, .bloc-card__caption-btn, .header__widget-btn, .btn, .footer__element-dot, .footer__social-link, .footer__top-btn, .header__profile-logout {
+.auth-hero__back-link, .family-card, .family-card__del-btn, .auth-elements__btn, .div-tarot-poster, .div-related-card, .util-header__logo-box, .util-primary-nav__step, .util-primary-nav__link, .util-stepper-box__btn, .util-preset-tile, .util-cd-history-tile, .util-cd-history-tile__replay, .util-al-quick-chip, .util-alarm-item, .util-alarm-item__del, .util-subfilter-btn, .util-bento-item, .util-ic-poster, .util-hex-card,
+.util-tr-card, .util-history-card, .util-pagination__btn, .util-diff-stat, .util-num-cycle-box, .util-pythagoras-cell, .util-num-day-cell, .util-bio-stat-card, .util-tarot-card, .bazi-picker__year-step, .bazi-picker__option, .bazi-pillar-col, .bazi-element-row, .bazi-god-box, .bazi-remedy-box, .bazi-luck-card, .detail-hero__zoom-badge, .detail-stat-card, .detail-gallery__item, .detail-sidebar__item, .day-dir-box, .day-solarterm-box, .day-lucdieu-cell, .day-hourly-section__filter-btn, .day-hour-row, .day-hour-row__col-link, .day-hour-row__bagua-ring, .day-term-modal__close, .iching-card__poster, .iching-card__raw-link, .festival-hero__link, .festival-controls__filter-btn, .festival-controls__reset-btn, .festival-seasons-bento__master, .festival-seasons-bento__btn, .festival-bento-box__more-btn, .festival-tile, .converter-modal__close-btn, .converter-modal__year-step, .converter-modal__option-btn, .converter-modal__swap-btn, .converter-modal__stat-card, .converter-modal__hour-card, .month-cal__nav-btn, .month-cal__cell, .month-cal__legend-pill, .week-cal__nav-btn, .week-cal__hero-link, .week-cal__card, .clock-zodiac-section__filter-btn, .clock-zodiac-card, .clock-pillar-card, .clock-world-card, .bloc-card__share-btn, .bloc-card__event-btn, .bloc-card__caption-btn, .header__widget-btn, .btn, .footer__element-dot, .footer__social-link, .footer__top-btn, .header__profile-logout {
   transition: var(--theme-transition), transform 0.2s ease;
 }
 
@@ -6612,13 +6621,13 @@ body[data-page=signup] .header__auth-register[data-auth-link=signup] {
 
 .iching-hero-grid {
   display: grid;
-  grid-template-columns: 28rem minmax(0, 1fr);
+  grid-template-columns: 30rem minmax(0, 1fr);
   align-items: start;
   gap: 2.8rem;
 }
 @media (max-width: 991.98px) {
   .iching-hero-grid {
-    grid-template-columns: 24rem minmax(0, 1fr);
+    grid-template-columns: 26rem minmax(0, 1fr);
     gap: 2rem;
   }
 }
@@ -6632,32 +6641,32 @@ body[data-page=signup] .header__auth-register[data-auth-link=signup] {
 .iching-card {
   gap: 1.2rem;
   width: 100%;
-  max-width: 28rem;
+  max-width: 30rem;
 }
-.iching-card[data-element=kim] {
+.iching-card[data-element=metal] {
   --iching-accent: #eab308;
 }
-.iching-card[data-element=moc] {
+.iching-card[data-element=wood] {
   --iching-accent: #10b981;
 }
-.iching-card[data-element=thuy] {
+.iching-card[data-element=water] {
   --iching-accent: #3b82f6;
 }
-.iching-card[data-element=hoa] {
-  --iching-accent: #d92b2b;
+.iching-card[data-element=fire] {
+  --iching-accent: #ef4444;
 }
-.iching-card[data-element=tho] {
+.iching-card[data-element=earth] {
   --iching-accent: #f59e0b;
 }
 .iching-card__poster {
   position: relative;
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 2/3;
   border-radius: 2.2rem;
   overflow: hidden;
-  background-color: #0b0b0c;
+  background-color: var(--bg-surface);
   border: 2px solid var(--iching-accent, var(--primary-color));
-  box-shadow: 0 1.2rem 3rem var(--shadow-color);
+  box-shadow: 0 1.4rem 3.2rem var(--shadow-color);
   cursor: zoom-in;
 }
 .iching-card__poster:hover, .iching-card__poster:focus-visible {
@@ -6665,12 +6674,28 @@ body[data-page=signup] .header__auth-register[data-auth-link=signup] {
   box-shadow: 0 1.8rem 3.8rem var(--shadow-color);
 }
 .iching-card__poster:hover .iching-card__img, .iching-card__poster:focus-visible .iching-card__img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 .iching-card__poster:hover .iching-card__zoom-pill, .iching-card__poster:focus-visible .iching-card__zoom-pill {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: #ffffff;
+  opacity: 1;
+  transform: translateY(0);
+}
+.iching-card:not(.is-fallback-art) .iching-card__top-meta,
+.iching-card:not(.is-fallback-art) .iching-card__caption-title,
+.iching-card:not(.is-fallback-art) .iching-card__focal {
+  display: none;
+}
+.iching-card:not(.is-fallback-art) .iching-card__caption {
+  padding: 1.2rem;
+  background: none;
+  align-items: flex-end;
+}
+.iching-card:not(.is-fallback-art) .iching-card__zoom-pill {
+  opacity: 0;
+  transform: translateY(0.4rem);
+  background-color: rgba(15, 23, 42, 0.84);
+  border-color: rgba(255, 255, 255, 0.28);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 .iching-card.is-fallback-art .iching-card__poster {
   background-color: var(--bg-surface);
@@ -6702,7 +6727,7 @@ body[data-page=signup] .header__auth-register[data-auth-link=signup] {
   height: 2.8rem;
   padding: 0 0.9rem;
   border-radius: 99.9rem;
-  background-color: rgba(10, 10, 12, 0.78);
+  background-color: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.22);
   color: #ffffff;
   font-size: 1.15rem;
@@ -6753,28 +6778,29 @@ body[data-page=signup] .header__auth-register[data-auth-link=signup] {
 .iching-card__zoom-pill {
   width: fit-content;
   margin-top: 0.3rem;
-  padding: 0.35rem 1rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 99.9rem;
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.32);
   color: #ffffff;
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 800;
   backdrop-filter: blur(6px);
 }
 .iching-card__lines-box {
-  padding: 1.2rem 1.6rem;
+  gap: 0.65rem;
+  padding: 1.3rem 1.6rem;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: 1.6rem;
 }
 .iching-card__raw-link {
   gap: 0.6rem;
-  height: 3.8rem;
+  height: 4rem;
   border-radius: 1.2rem;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--text-muted);
 }
@@ -6782,6 +6808,32 @@ body[data-page=signup] .header__auth-register[data-auth-link=signup] {
   border-color: var(--primary-color);
   color: var(--primary-color);
   transform: translateY(-1px);
+}
+
+#icd-fortune-badge[data-status-code=dai_cat] {
+  background-color: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+#icd-fortune-badge[data-status-code=cat] {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+#icd-fortune-badge[data-status-code=binh_hoa] {
+  background-color: #d97706;
+  border-color: #d97706;
+  color: #ffffff;
+}
+#icd-fortune-badge[data-status-code=tieu_hung] {
+  background-color: #ea580c;
+  border-color: #ea580c;
+  color: #ffffff;
+}
+#icd-fortune-badge[data-status-code=hung] {
+  background-color: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
 }
 
 .iching-card-meta {
@@ -6876,7 +6928,7 @@ body[data-page=signup] .header__auth-register[data-auth-link=signup] {
 }
 
 .iching-lightbox-img {
-  aspect-ratio: 3/4;
+  aspect-ratio: 2/3;
   object-fit: contain;
   background-color: #0b0b0c;
 }
@@ -11008,71 +11060,629 @@ body[data-page=festival] .header,
   margin: 0;
 }
 
-.util-timer-bento {
+.util-live-dot {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+}
+
+.util-clock-stage__tag {
+  gap: 0.75rem;
+  min-height: 3.6rem;
+  padding: 0.55rem 1.6rem;
+  border-radius: 99.9rem;
+  background-color: var(--body-bg);
+  border: 1.5px solid var(--border-color);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.util-sw-bento {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: stretch;
-  gap: 2rem;
+  gap: 1.6rem;
+}
+.util-sw-bento[data-clock-state=running] .util-sw-hero {
+  border-color: var(--primary-color);
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+}
+.util-sw-bento[data-clock-state=running] .util-clock-stage__tag {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.util-sw-bento[data-clock-state=running] .util-live-dot {
+  background-color: var(--primary-color);
+  box-shadow: 0 0 0 4px var(--primary-soft-bg);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.util-sw-bento[data-clock-state=paused] .util-live-dot {
+  background-color: var(--color-warning);
+}
+
+.util-sw-hero {
+  grid-column: span 7;
+  justify-content: space-between;
+  gap: 2.2rem;
+  padding: 2.6rem 2.8rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.4rem;
 }
 @media (max-width: 991.98px) {
-  .util-timer-bento {
+  .util-sw-hero {
+    grid-column: span 12;
+    padding: 2rem;
+  }
+}
+.util-sw-hero__top {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.util-sw-hero__hint {
+  padding: 0.4rem 1.2rem;
+  border-radius: 99.9rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.util-sw-hero__stage {
+  padding: 3.4rem 1rem;
+  text-align: center;
+}
+.util-sw-hero__digits {
+  align-items: baseline;
+  gap: 1.4rem;
+  font-size: clamp(5.8rem, 7.6vw, 9.6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-color);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 575.98px) {
+  .util-sw-hero__digits {
+    gap: 0.8rem;
+  }
+}
+.util-sw-hero__digits small {
+  min-width: 7.4rem;
+  padding: 0.55rem 1.2rem;
+  border-radius: 1.4rem;
+  background-color: var(--body-bg);
+  border: 2px solid var(--primary-color);
+  font-size: 0.38em;
+  font-weight: 800;
+  letter-spacing: 0;
+  color: var(--primary-color);
+  box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+}
+.util-sw-hero__dock {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.9fr;
+  gap: 1rem;
+  padding-top: 1.8rem;
+  border-top: 1px dashed var(--border-color);
+}
+@media (max-width: 575.98px) {
+  .util-sw-hero__dock {
     grid-template-columns: 1fr;
   }
 }
-.util-timer-bento__left, .util-timer-bento__right {
-  justify-content: space-between;
+
+.util-sw-side {
+  grid-column: span 5;
   gap: 1.4rem;
   min-width: 0;
 }
+@media (max-width: 991.98px) {
+  .util-sw-side {
+    grid-column: span 12;
+  }
+}
 
-.util-clock-stage {
-  flex: 1;
-  gap: 1.2rem;
-  padding: 3.2rem 2rem;
+.util-sw-stats {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.util-sw-stat {
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1.4rem 1.6rem;
   background-color: var(--bg-surface);
-  border: 2px solid var(--border-color);
-  border-radius: 2.4rem;
-  text-align: center;
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.9rem;
 }
-.util-clock-stage--compact {
-  padding: 2.4rem 1.8rem;
+.util-sw-stat--accent {
+  grid-column: span 5;
+  grid-row: span 2;
+  background-color: var(--primary-color);
+  border-color: var(--primary-hover);
+  color: #ffffff;
+  box-shadow: 0 0.8rem 2rem var(--shadow-color);
 }
-.util-clock-stage__tag {
-  display: inline-flex;
+.util-sw-stat--accent .util-sw-stat__label,
+.util-sw-stat--accent .util-sw-stat__sub {
+  color: var(--hero-text-soft);
+}
+.util-sw-stat--accent .util-sw-stat__val {
+  font-size: 5.2rem;
+  line-height: 1;
+  color: #ffffff;
+}
+@media (max-width: 575.98px) {
+  .util-sw-stat--accent {
+    grid-column: span 12;
+    grid-row: span 1;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.util-sw-stat--best {
+  grid-column: span 7;
+  border-color: rgba(34, 197, 94, 0.4);
+  background-color: rgba(34, 197, 94, 0.07);
+}
+.util-sw-stat--best .util-sw-stat__val {
+  color: var(--color-success);
+}
+@media (max-width: 575.98px) {
+  .util-sw-stat--best {
+    grid-column: span 12;
+  }
+}
+.util-sw-stat--worst {
+  grid-column: span 7;
+  border-color: rgba(239, 68, 68, 0.35);
+  background-color: rgba(239, 68, 68, 0.06);
+}
+.util-sw-stat--worst .util-sw-stat__val {
+  color: var(--color-danger);
+}
+@media (max-width: 575.98px) {
+  .util-sw-stat--worst {
+    grid-column: span 12;
+  }
+}
+.util-sw-stat--avg {
+  grid-column: span 12;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  min-height: 3.4rem;
-  padding: 0.6rem 1.8rem;
+  justify-content: space-between;
+  padding: 1.35rem 1.8rem;
+}
+.util-sw-stat__head {
+  gap: 0.6rem;
+}
+.util-sw-stat__avg-info {
+  gap: 0.2rem;
+}
+.util-sw-stat__label {
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+.util-sw-stat__pill {
+  padding: 0.2rem 0.8rem;
   border-radius: 99.9rem;
   background-color: var(--body-bg);
-  border: 1.5px solid var(--primary-color);
-  font-size: 1.25rem;
+  border: 1px solid var(--border-color);
+  font-size: 1.1rem;
   font-weight: 800;
-  line-height: 1.3;
-  color: var(--primary-color);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--text-muted);
 }
-.util-clock-stage__digits {
-  font-size: clamp(4.4rem, 7.5vw, 7.8rem);
+.util-sw-stat__val {
+  font-size: 2.75rem;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--text-color);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
 }
-.util-clock-stage__digits small {
-  font-size: 0.48em;
-  color: var(--primary-color);
-  margin-left: 0.2rem;
+.util-sw-stat__sub {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
-.util-sound-bento {
-  gap: 1.4rem;
-  padding: 1.6rem 1.8rem;
+.util-sw-laps {
+  flex: 1;
+  gap: 1rem;
+  padding: 1.5rem 1.6rem;
   background-color: var(--bg-surface);
   border: 1.5px solid var(--border-color);
   border-radius: 2rem;
+  min-height: 20rem;
+}
+.util-sw-laps__head {
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+.util-sw-laps__title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.util-sw-laps__col-hint {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.util-sw-laps__body {
+  gap: 0.7rem;
+  max-height: 24rem;
+  overflow-y: auto;
+  padding-right: 0.3rem;
+}
+
+.util-sw-lap-row {
+  gap: 0.5rem;
+  padding: 1rem 1.2rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1.3rem;
+  font-variant-numeric: tabular-nums;
+}
+.util-sw-lap-row[data-lap-rank=best] {
+  border-color: rgba(34, 197, 94, 0.45);
+}
+.util-sw-lap-row[data-lap-rank=best] .util-sw-lap-row__badge {
+  background-color: rgba(34, 197, 94, 0.14);
+  color: var(--color-success);
+}
+.util-sw-lap-row[data-lap-rank=best] .util-sw-lap-row__bar-fill {
+  background-color: var(--color-success);
+}
+.util-sw-lap-row[data-lap-rank=worst] {
+  border-color: rgba(239, 68, 68, 0.38);
+}
+.util-sw-lap-row[data-lap-rank=worst] .util-sw-lap-row__badge {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: var(--color-danger);
+}
+.util-sw-lap-row[data-lap-rank=worst] .util-sw-lap-row__bar-fill {
+  background-color: var(--color-danger);
+}
+.util-sw-lap-row__top {
+  gap: 0.8rem;
+  font-size: 1.35rem;
+}
+.util-sw-lap-row__left {
+  gap: 0.65rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.util-sw-lap-row__badge {
+  padding: 0.15rem 0.7rem;
+  border-radius: 99.9rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.util-sw-lap-row__times {
+  gap: 0.9rem;
+}
+.util-sw-lap-row__times span {
+  font-weight: 800;
+  color: var(--primary-color);
+}
+.util-sw-lap-row__times small {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.util-sw-lap-row__bar {
+  width: 100%;
+  height: 0.45rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  overflow: hidden;
+}
+.util-sw-lap-row__bar-fill {
+  width: var(--lap-ratio, 35%);
+  height: 100%;
+  border-radius: 99.9rem;
+  background-color: var(--primary-color);
+  transition: width 0.35s ease;
+}
+
+.util-cd-bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 1.6rem;
+}
+.util-cd-bento[data-clock-state=running] .util-cd-hero {
+  border-color: var(--primary-color);
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+}
+.util-cd-bento[data-clock-state=running] .util-cd-hero__pct {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+.util-cd-bento[data-clock-state=done] .util-cd-hero {
+  border-color: var(--color-danger);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.util-cd-hero {
+  grid-column: span 7;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding: 2.4rem 2.6rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.4rem;
+}
+@media (max-width: 991.98px) {
+  .util-cd-hero {
+    grid-column: span 12;
+  }
+}
+.util-cd-hero__top {
+  align-items: center;
+  gap: 1rem;
+}
+.util-cd-hero__pct {
+  min-height: 4.2rem;
+  padding: 0.6rem 1.8rem;
+  border-radius: 1.4rem;
+  background-color: var(--body-bg);
+  border: 1.5px solid var(--primary-color);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--primary-color);
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+}
+.util-cd-hero__digits {
+  font-size: clamp(3.6rem, 3.8vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+  font-variant-numeric: tabular-nums;
+}
+.util-cd-hero__end-at {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.util-cd-hero__dock {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+  padding-top: 1.4rem;
+  border-top: 1px dashed var(--border-color);
+}
+@media (max-width: 575.98px) {
+  .util-cd-hero__dock {
+    grid-template-columns: 1fr;
+  }
+}
+
+.util-cd-ring-stage {
+  position: relative;
+  width: 31rem;
+  height: 31rem;
+  margin: 0.6rem auto;
+}
+@media (max-width: 575.98px) {
+  .util-cd-ring-stage {
+    width: 26rem;
+    height: 26rem;
+  }
+}
+.util-cd-ring-stage__inner {
+  position: relative;
+  z-index: 2;
+  gap: 0.9rem;
+  text-align: center;
+  padding: 0 3.2rem;
+}
+
+.util-cd-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.util-cd-ring__track {
+  fill: var(--body-bg);
+  stroke: var(--border-color);
+  stroke-width: 11;
+}
+.util-cd-ring__fill {
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 11;
+  stroke-linecap: round;
+  stroke-dasharray: 728.85;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.55s cubic-bezier(0.22, 1, 0.36, 1), stroke 0.3s ease;
+}
+
+.util-cd-presets-card {
+  grid-column: span 5;
+  gap: 1.2rem;
+  padding: 2rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.4rem;
+}
+@media (max-width: 991.98px) {
+  .util-cd-presets-card {
+    grid-column: span 12;
+  }
+}
+.util-cd-presets-card__head {
+  gap: 1rem;
+}
+.util-cd-presets-card__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.util-cd-presets-card__hint {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.util-cd-presets-bento {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 1rem;
+}
+@media (max-width: 575.98px) {
+  .util-cd-presets-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.util-preset-tile {
+  position: relative;
+  grid-column: span 2;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.45rem;
+  min-height: 11.4rem;
+  padding: 1.4rem 1.5rem;
+  background-color: var(--body-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.8rem;
+  text-align: left;
+  color: var(--text-color);
+}
+.util-preset-tile:not(.util-preset-tile--wide) {
+  grid-column: span 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.25rem;
+  padding: 1.2rem 0.6rem;
+  min-height: 10.6rem;
+}
+.util-preset-tile:not(.util-preset-tile--wide) .util-preset-tile__num {
+  font-size: 3rem;
+}
+@media (max-width: 575.98px) {
+  .util-preset-tile--wide {
+    grid-column: span 2;
+  }
+  .util-preset-tile:not(.util-preset-tile--wide) {
+    grid-column: span 1;
+  }
+}
+.util-preset-tile__head {
+  width: 100%;
+  gap: 0.6rem;
+}
+.util-preset-tile__tag {
+  padding: 0.2rem 0.8rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+.util-preset-tile__unit {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.util-preset-tile__num {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-color);
+  font-variant-numeric: tabular-nums;
+}
+.util-preset-tile__desc {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.util-preset-tile:hover, .util-preset-tile:focus-visible {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+}
+.util-preset-tile.is-active, .util-preset-tile[aria-pressed=true] {
+  background-color: var(--primary-color);
+  border-color: var(--primary-hover);
+  color: #ffffff;
+  box-shadow: 0 0.8rem 2rem var(--shadow-color);
+}
+.util-preset-tile.is-active .util-preset-tile__tag, .util-preset-tile[aria-pressed=true] .util-preset-tile__tag {
+  background-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+.util-preset-tile.is-active .util-preset-tile__num,
+.util-preset-tile.is-active .util-preset-tile__unit,
+.util-preset-tile.is-active .util-preset-tile__desc, .util-preset-tile[aria-pressed=true] .util-preset-tile__num,
+.util-preset-tile[aria-pressed=true] .util-preset-tile__unit,
+.util-preset-tile[aria-pressed=true] .util-preset-tile__desc {
+  color: #ffffff;
+}
+.util-preset-tile.is-active .util-preset-tile__desc,
+.util-preset-tile.is-active .util-preset-tile__unit, .util-preset-tile[aria-pressed=true] .util-preset-tile__desc,
+.util-preset-tile[aria-pressed=true] .util-preset-tile__unit {
+  opacity: 0.9;
+}
+
+.util-cd-steppers-card {
+  grid-column: span 7;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1.8rem 2rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.2rem;
+}
+@media (max-width: 991.98px) {
+  .util-cd-steppers-card {
+    grid-column: span 12;
+  }
+}
+.util-cd-steppers-card .util-stepper-box {
+  background-color: var(--body-bg);
+}
+
+.util-cd-sound-card {
+  grid-column: span 5;
+  border-radius: 2.2rem;
+}
+@media (max-width: 991.98px) {
+  .util-cd-sound-card {
+    grid-column: span 12;
+  }
+}
+
+.util-sound-bento {
+  justify-content: space-between;
+  gap: 1.4rem;
+  padding: 1.8rem 2rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2rem;
+}
+.util-sound-bento .util-field__input {
+  background-color: var(--body-bg);
 }
 .util-sound-bento__row {
   flex-wrap: wrap;
@@ -11083,87 +11693,85 @@ body[data-page=festival] .header,
 .util-sound-bento__info {
   gap: 0.25rem;
   min-width: 0;
+  flex: 1 1 16rem;
 }
 .util-sound-bento__name {
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--primary-color);
 }
 .util-sound-bento__actions {
-  gap: 0.8rem;
+  gap: 0.7rem;
 }
 
-.util-clock-controls {
-  flex-wrap: wrap;
+.util-cd-history-card {
+  grid-column: span 12;
   gap: 1.2rem;
+  padding: 1.8rem 2rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.2rem;
 }
 
-.util-preset-chips {
+.util-cd-history-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
 }
-@media (max-width: 575.98px) {
-  .util-preset-chips {
+@media (max-width: 991.98px) {
+  .util-cd-history-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+@media (max-width: 575.98px) {
+  .util-cd-history-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.util-cd-history-grid .util-data-table__empty {
+  grid-column: 1/-1;
+  padding: 1.6rem;
+}
 
-.util-preset-chip {
-  height: 4rem;
-  border-radius: 1.2rem;
-  background-color: var(--bg-surface);
-  border: 1.5px solid var(--border-color);
-  font-size: 1.35rem;
+.util-cd-history-tile {
+  gap: 1.2rem;
+  padding: 1.3rem 1.5rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1.6rem;
+}
+.util-cd-history-tile:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+.util-cd-history-tile__info {
+  gap: 0.25rem;
+  min-width: 0;
+}
+.util-cd-history-tile__info strong {
+  font-size: 1.4rem;
   font-weight: 800;
   color: var(--text-color);
 }
-.util-preset-chip:hover, .util-preset-chip:focus-visible, .util-preset-chip.is-active {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.util-data-table {
-  border: 1px solid var(--border-color);
-  border-radius: 1.8rem;
-  overflow: hidden;
-}
-.util-data-table__head, .util-data-table__row {
-  display: grid;
-  align-items: center;
-  gap: 1.2rem;
-  padding: 1.3rem 1.8rem;
-}
-.util-data-table__head--3cols, .util-data-table__row--3cols {
-  grid-template-columns: 0.8fr 1.2fr 1.2fr;
-}
-.util-data-table__head--4cols, .util-data-table__row--4cols {
-  grid-template-columns: 0.5fr 1.5fr 1fr 1fr;
-}
-.util-data-table__head {
-  background-color: var(--bg-surface);
-  border-bottom: 1px solid var(--border-color);
+.util-cd-history-tile__info small {
   font-size: 1.2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.util-data-table__row {
-  border-bottom: 1px solid var(--border-color);
-  font-size: 1.4rem;
   font-weight: 700;
+  color: var(--text-muted);
   font-variant-numeric: tabular-nums;
 }
-.util-data-table__row:last-child {
-  border-bottom: none;
+.util-cd-history-tile__replay {
+  height: 3.4rem;
+  padding: 0 1.2rem;
+  border-radius: 1rem;
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+  border: 1px solid var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
 }
-.util-data-table__empty {
-  padding: 2.4rem;
-  text-align: center;
-  font-size: 1.35rem;
-  color: var(--text-muted);
+.util-cd-history-tile__replay:hover, .util-cd-history-tile__replay:focus-visible {
+  background-color: var(--primary-color);
+  color: #ffffff;
 }
 
 .util-alarm-ring-banner {
@@ -11196,54 +11804,343 @@ body[data-page=festival] .header,
   gap: 1rem;
 }
 
-.util-alarms-list {
+.util-al-bento {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.4rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 1.6rem;
 }
-@media (max-width: 767.98px) {
-  .util-alarms-list {
+
+.util-al-hero {
+  position: relative;
+  overflow: hidden;
+  grid-column: span 5;
+  justify-content: space-between;
+  gap: 1.8rem;
+  padding: 2.6rem;
+  background-color: var(--primary-color);
+  border: 1.5px solid var(--primary-hover);
+  border-radius: 2.4rem;
+  color: #ffffff;
+  box-shadow: 0 1rem 2.6rem var(--shadow-color);
+}
+@media (max-width: 991.98px) {
+  .util-al-hero {
+    grid-column: span 12;
+  }
+}
+.util-al-hero[data-empty=true] {
+  background-color: var(--bg-surface);
+  border-color: var(--border-color);
+  color: var(--text-color);
+  box-shadow: none;
+}
+.util-al-hero[data-empty=true] .util-al-hero__pill,
+.util-al-hero[data-empty=true] .util-al-hero__badge,
+.util-al-hero[data-empty=true] .util-al-hero__countdown {
+  background-color: var(--body-bg);
+  border-color: var(--border-color);
+  color: var(--text-muted);
+}
+.util-al-hero[data-empty=true] .util-al-hero__eyebrow,
+.util-al-hero[data-empty=true] .util-al-hero__title {
+  color: var(--text-muted);
+}
+.util-al-hero[data-empty=true] .util-al-hero__time {
+  color: var(--text-color);
+}
+.util-al-hero__top, .util-al-hero__body, .util-al-hero__foot {
+  position: relative;
+  z-index: 2;
+}
+.util-al-hero__top {
+  gap: 0.8rem;
+}
+.util-al-hero__pill {
+  padding: 0.4rem 1.3rem;
+  border-radius: 99.9rem;
+  background-color: #ffffff;
+  color: var(--primary-active);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+.util-al-hero__badge {
+  padding: 0.4rem 1.2rem;
+  border-radius: 99.9rem;
+  background-color: var(--hero-box-bg);
+  border: 1px solid var(--hero-border-color);
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.util-al-hero__body {
+  gap: 0.65rem;
+}
+.util-al-hero__eyebrow {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--hero-text-soft);
+}
+.util-al-hero__time {
+  font-size: clamp(6.4rem, 7.2vw, 8.8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+.util-al-hero__title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+.util-al-hero__countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 1.3rem;
+  background-color: var(--hero-box-bg);
+  border: 1px solid var(--hero-border-color);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+.util-al-hero__watermark {
+  position: absolute;
+  right: -1.4rem;
+  bottom: -1.4rem;
+  width: 13rem;
+  height: 13rem;
+  opacity: 0.14;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.util-al-composer {
+  grid-column: span 7;
+  justify-content: space-between;
+  gap: 1.4rem;
+  padding: 2.2rem 2.4rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.4rem;
+}
+@media (max-width: 991.98px) {
+  .util-al-composer {
+    grid-column: span 12;
+    padding: 1.6rem;
+  }
+}
+.util-al-composer .util-stepper-box,
+.util-al-composer .util-field__input,
+.util-al-composer .bazi-picker__summary {
+  background-color: var(--body-bg);
+}
+.util-al-composer__top {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.util-al-composer__preview {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--primary-color);
+  font-variant-numeric: tabular-nums;
+}
+.util-al-composer__time-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+@media (max-width: 575.98px) {
+  .util-al-composer__time-row {
     grid-template-columns: 1fr;
   }
 }
+.util-al-composer__colon {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+@media (max-width: 575.98px) {
+  .util-al-composer__colon {
+    display: none;
+  }
+}
+.util-al-composer__footer {
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--border-color);
+}
+.util-al-composer__sound {
+  gap: 0.65rem;
+  flex: 1 1 22rem;
+  min-width: 0;
+}
+.util-al-composer__hint {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.util-al-composer__hint[hidden] {
+  display: none !important;
+}
 
-.util-alarm-item {
+.util-al-quick-chips {
+  gap: 0.6rem;
+}
+
+.util-al-quick-chip {
+  height: 3.4rem;
+  padding: 0 1.2rem;
+  border-radius: 99.9rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-color);
+  font-variant-numeric: tabular-nums;
+}
+.util-al-quick-chip:hover, .util-al-quick-chip:focus-visible {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.util-al-deck {
+  gap: 1.2rem;
+}
+
+.util-alarms-bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1.4rem;
-  padding: 1.8rem 2rem;
+}
+.util-alarms-bento .util-data-table__empty {
+  grid-column: span 12;
   background-color: var(--bg-surface);
-  border: 1.5px solid var(--border-color);
+  border: 1px dashed var(--border-color);
   border-radius: 2rem;
 }
+
+.util-alarm-item {
+  position: relative;
+  grid-column: span 4;
+  justify-content: space-between;
+  gap: 1.4rem;
+  padding: 2rem 2.2rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.2rem;
+}
+.util-alarm-item[data-bento-span="4"] {
+  grid-column: span 4;
+}
+.util-alarm-item[data-bento-span="5"] {
+  grid-column: span 5;
+}
+.util-alarm-item[data-bento-span="6"] {
+  grid-column: span 6;
+}
+.util-alarm-item[data-bento-span="7"] {
+  grid-column: span 7;
+}
+.util-alarm-item[data-bento-span="12"] {
+  grid-column: span 12;
+}
+.util-alarm-item[data-is-next=true] {
+  background-color: var(--primary-soft-bg, var(--body-bg));
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+}
+.util-alarm-item[data-is-next=true] .util-alarm-item__time {
+  font-size: 5rem;
+}
+@media (max-width: 1199.98px) {
+  .util-alarm-item[data-bento-span="4"], .util-alarm-item[data-bento-span="5"], .util-alarm-item[data-bento-span="6"], .util-alarm-item[data-bento-span="7"] {
+    grid-column: span 6;
+  }
+}
+@media (max-width: 767.98px) {
+  .util-alarm-item[data-bento-span="4"], .util-alarm-item[data-bento-span="5"], .util-alarm-item[data-bento-span="6"], .util-alarm-item[data-bento-span="7"], .util-alarm-item[data-bento-span="12"] {
+    grid-column: span 12;
+  }
+  .util-alarm-item[data-is-next=true] .util-alarm-item__time {
+    font-size: 4.2rem;
+  }
+}
 .util-alarm-item.is-disabled {
-  opacity: 0.52;
+  opacity: 0.56;
+  border-style: dashed;
 }
 .util-alarm-item:hover {
   border-color: var(--primary-color);
   background-color: var(--body-bg);
+  transform: translateY(-2px);
+}
+.util-alarm-item__head {
+  gap: 0.8rem;
+}
+.util-alarm-item__period {
+  padding: 0.3rem 1rem;
+  border-radius: 99.9rem;
+  background-color: var(--body-bg);
+  border: 1px solid var(--border-color);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.util-alarm-item__next-tag {
+  padding: 0.3rem 1rem;
+  border-radius: 99.9rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.util-alarm-item__main {
+  gap: 0.45rem;
 }
 .util-alarm-item__time {
-  font-size: 2.8rem;
+  font-size: 4.2rem;
   font-weight: 800;
   line-height: 1;
+  letter-spacing: -0.025em;
   color: var(--primary-color);
   font-variant-numeric: tabular-nums;
 }
 .util-alarm-item__title {
-  display: block;
-  margin-top: 0.4rem;
-  font-size: 1.45rem;
+  font-size: 1.55rem;
   font-weight: 800;
   color: var(--text-color);
 }
+.util-alarm-item__remain {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+.util-alarm-item__foot {
+  gap: 1rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed var(--border-color);
+}
 .util-alarm-item__meta {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-muted);
 }
 .util-alarm-item__right {
-  gap: 1rem;
+  gap: 0.8rem;
 }
 .util-alarm-item__toggle {
   position: relative;
@@ -11263,29 +12160,29 @@ body[data-page=festival] .header,
   background-color: #ffffff;
   transition: transform 0.25s ease;
 }
-.util-alarm-item__toggle.is-on {
+.util-alarm-item__toggle.is-on, .util-alarm-item__toggle[aria-checked=true] {
   background-color: var(--primary-color);
 }
-.util-alarm-item__toggle.is-on::after {
+.util-alarm-item__toggle.is-on::after, .util-alarm-item__toggle[aria-checked=true]::after {
   transform: translateX(2.2rem);
 }
 .util-alarm-item__del {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 1.2rem;
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 1.1rem;
   background-color: var(--body-bg);
   border: 1px solid var(--border-color);
   color: var(--color-danger);
 }
 .util-alarm-item__del svg {
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 .util-alarm-item__del:hover, .util-alarm-item__del:focus-visible {
   background-color: var(--color-danger);
   border-color: var(--color-danger);
   color: #ffffff;
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .util-conv-dashboard {
@@ -11486,74 +12383,175 @@ body[data-page=festival] .header,
   color: var(--primary-color);
 }
 
-.util-divination-hero {
-  gap: 1.2rem;
-  text-align: center;
-  padding-bottom: 2rem;
-  border-bottom: 1px dashed var(--border-color);
-}
-
 .util-divination-actions {
   flex-wrap: wrap;
   gap: 1.2rem;
-  margin-top: 0.6rem;
+}
+
+.util-iching-bento,
+.util-tarot-bento {
+  display: grid;
+  grid-template-columns: 30rem minmax(0, 1fr);
+  align-items: stretch;
+  gap: 1.8rem;
+  padding: 2rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.4rem;
+}
+@media (max-width: 991.98px) {
+  .util-iching-bento,
+  .util-tarot-bento {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 767.98px) {
+  .util-iching-bento,
+  .util-tarot-bento {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+}
+
+.util-iching-bento[data-element=metal] {
+  --ic-accent: #eab308;
+}
+.util-iching-bento[data-element=wood] {
+  --ic-accent: #10b981;
+}
+.util-iching-bento[data-element=water] {
+  --ic-accent: #3b82f6;
+}
+.util-iching-bento[data-element=fire] {
+  --ic-accent: #ef4444;
+}
+.util-iching-bento[data-element=earth] {
+  --ic-accent: #f59e0b;
+}
+.util-iching-bento.is-sliding .util-iching-cards-stack {
+  animation: tarotResultSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.util-ic-poster-col,
+.util-tr-poster-col {
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1.4rem;
+  background-color: var(--body-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2rem;
+}
+@media (max-width: 991.98px) {
+  .util-ic-poster-col,
+  .util-tr-poster-col {
+    max-width: 34rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.util-ic-poster-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  padding-top: 0.4rem;
+}
+
+.util-iching-cards-stack {
+  gap: 1.2rem;
+  min-width: 0;
+}
+
+.util-div-detail-card {
+  gap: 0.7rem;
+  padding: 1.6rem 1.8rem;
+  background-color: var(--body-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.8rem;
+}
+.util-div-detail-card--highlight {
+  flex: 1;
+  justify-content: center;
+  background-color: var(--primary-soft-bg, var(--body-bg));
+  border-color: var(--primary-color);
+}
+.util-div-detail-card__head {
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.util-div-detail-card > strong {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--primary-color);
+}
+.util-div-detail-card p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.util-iching-result__num {
+  padding: 0.35rem 1.2rem;
+  border-radius: 99.9rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.util-iching-result__num[data-orientation=upright] {
+  background-color: #059669;
+}
+.util-iching-result__num[data-orientation=reversed] {
+  background-color: #d97706;
+}
+
+.util-iching-result__name {
+  font-size: clamp(2.1rem, 2.4vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-color);
 }
 
 .util-coins-stage {
-  gap: 2.2rem;
-  padding: 1.6rem 0 1.2rem;
-  perspective: 90rem;
+  gap: 1.2rem;
+  perspective: 900px;
 }
-@media (max-width: 575.98px) {
-  .util-coins-stage {
-    gap: 1.2rem;
-  }
+.util-coins-stage--compact {
+  gap: 0.8rem;
+}
+.util-coins-stage--compact .util-coin {
+  width: 4.8rem;
+  height: 4.8rem;
 }
 
 .util-coin {
-  width: 8.6rem;
-  height: 8.6rem;
-  perspective: 60rem;
-  background: transparent;
-  border: none;
-}
-@media (max-width: 575.98px) {
-  .util-coin {
-    width: 6.8rem;
-    height: 6.8rem;
-  }
+  width: 6.8rem;
+  height: 6.8rem;
+  transform-style: preserve-3d;
 }
 .util-coin__inner {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(0.34, 1.32, 0.64, 1);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .util-coin[data-face=yin] .util-coin__inner {
   transform: rotateY(180deg);
 }
-.util-coin.is-tossing .util-coin__inner {
-  animation: coinToss3D 0.82s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.util-coin:nth-child(2).is-tossing .util-coin__inner {
-  animation-delay: 0.08s;
-}
-.util-coin:nth-child(3).is-tossing .util-coin__inner {
-  animation-delay: 0.16s;
+.util-coin.is-tossing {
+  animation: coinToss3D 0.82s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
 .util-coin__face {
-  position: absolute;
-  inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: 50%;
-  background-color: var(--bg-surface);
-  box-shadow: 0 0.8rem 2rem var(--shadow-color);
 }
 .util-coin__face img {
-  width: 92%;
-  height: 92%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   filter: var(--zodiac-filter);
 }
@@ -11561,468 +12559,786 @@ body[data-page=festival] .header,
   transform: rotateY(180deg);
 }
 
-.util-iching-bento {
-  display: grid;
-  grid-template-columns: 23rem 1fr;
-  align-items: start;
-  gap: 2.4rem;
-  padding: 2.2rem;
+.util-ic-poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2/3;
+  border-radius: 1.4rem;
+  overflow: hidden;
   background-color: var(--bg-surface);
-  border: 1.5px solid var(--border-color);
-  border-radius: 2.4rem;
+  border: 1.5px solid var(--ic-accent, var(--border-color));
+  box-shadow: 0 0.8rem 2rem var(--shadow-color);
+  cursor: zoom-in;
 }
-.util-iching-bento.is-sliding .util-iching-cards-stack {
-  animation: tarotResultSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+.util-ic-poster img {
+  display: block;
 }
-@media (max-width: 767.98px) {
-  .util-iching-bento {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    padding: 1.6rem;
-  }
+.util-ic-poster.is-fallback-art {
+  padding: 3.6rem;
 }
-
-.util-iching-stage {
-  gap: 1.4rem;
-  width: 100%;
-  max-width: 23rem;
-  padding: 2rem 1.8rem;
-  background-color: var(--body-bg);
-  border: 2px solid var(--primary-color);
-  border-radius: 2.2rem;
-  box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
-  cursor: pointer;
-}
-.util-iching-stage:hover, .util-iching-stage:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
-}
-.util-iching-stage__svg-box {
-  width: 10.4rem;
-  height: 10.4rem;
-  padding: 1.2rem;
-  background-color: var(--primary-soft-bg, var(--bg-surface));
-  border: 1.5px dashed var(--primary-color);
-  border-radius: 1.8rem;
-}
-.util-iching-stage__svg-box img {
-  width: 100%;
-  height: 100%;
+.util-ic-poster.is-fallback-art img {
+  width: 13rem;
+  height: 13rem;
   object-fit: contain;
   filter: var(--zodiac-filter);
 }
-.util-iching-stage__lines {
+.util-ic-poster__zoom {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 3;
+  padding: 0.4rem 1.1rem;
+  border-radius: 99.9rem;
+  background-color: rgba(15, 23, 42, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(0.4rem);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.util-ic-poster:hover .util-ic-poster__zoom, .util-ic-poster:focus-visible .util-ic-poster__zoom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.util-ic-cast-strip {
+  gap: 1rem;
+  padding: 1.3rem 1.6rem;
+  background-color: var(--body-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.8rem;
+}
+.util-ic-cast-strip__row {
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+.util-ic-cast-strip__left {
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+.util-ic-cast-strip__status {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.util-ic-cast-strip__actions {
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.util-ic-history {
+  flex-wrap: wrap;
   gap: 0.7rem;
-  width: 100%;
-  padding-top: 1rem;
+  padding-top: 0.9rem;
   border-top: 1px dashed var(--border-color);
 }
-.util-iching-stage__hint {
+.util-ic-history[hidden] {
+  display: none !important;
+}
+.util-ic-history__label {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.util-ic-history__list {
+  gap: 0.55rem;
+}
+
+.util-ic-mid-bento {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.2rem;
+  align-items: stretch;
+}
+@media (max-width: 767.98px) {
+  .util-ic-mid-bento {
+    grid-template-columns: 1fr;
+  }
+}
+
+.util-ic-identity-card {
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.util-ic-structure-box {
+  justify-content: space-between;
+}
+
+.util-ic-structure-card__code {
+  padding: 0.25rem 0.9rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 800;
+  color: var(--primary-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.util-ic-structure-card__lines {
+  gap: 0.5rem;
+  padding: 1rem 1.2rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 1.3rem;
+}
+
+.util-ic-hao-row {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr 4.4rem;
+  align-items: center;
+  gap: 0.8rem;
+}
+.util-ic-hao-row__num, .util-ic-hao-row__type {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.util-ic-hao-row__type {
+  text-align: right;
   color: var(--primary-color);
 }
 
 .util-hex-line {
   display: flex;
-  justify-content: space-between;
-  gap: 1.2rem;
-  height: 1rem;
-  opacity: 0;
-  animation: hexLineReveal 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  height: 0.95rem;
+  animation: hexLineReveal 0.35s ease both;
 }
 .util-hex-line span {
-  flex: 1;
+  display: block;
   height: 100%;
-  background-color: var(--text-color);
-  border-radius: 0.35rem;
-}
-.util-hex-line--yang span {
-  background-color: var(--primary-color);
-}
-
-.util-iching-result__num {
-  padding: 0.4rem 1.4rem;
   border-radius: 99.9rem;
   background-color: var(--primary-color);
-  color: #ffffff;
-  font-size: 1.25rem;
-  font-weight: 800;
 }
-.util-iching-result__num[data-orientation=reversed] {
-  background-color: var(--color-danger, #dc2626);
+.util-hex-line--yang span {
+  width: 100%;
 }
-.util-iching-result__trigrams {
-  font-size: 1.25rem;
+.util-hex-line--yin span {
+  flex: 1;
+}
+
+.util-ic-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+@media (max-width: 767.98px) {
+  .util-ic-stats-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.util-ic-stat-tile {
+  gap: 0.35rem;
+  padding: 1.2rem 1.4rem;
+  background-color: var(--body-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.5rem;
+}
+.util-ic-stat-tile span {
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-muted);
 }
-.util-iching-result__name {
-  font-size: 2.1rem;
+.util-ic-stat-tile strong {
+  font-size: 1.5rem;
   font-weight: 800;
+  color: var(--text-color);
   line-height: 1.25;
+}
+
+.util-ic-hanzi-badge {
+  padding: 0.35rem 1.2rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-color);
+  letter-spacing: 0.06em;
+}
+
+.util-ic-tags-row,
+.util-ic-keywords {
+  gap: 0.6rem;
+}
+
+.util-ic-omen-pill {
+  padding: 0.3rem 1rem;
+  border-radius: 99.9rem;
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+  border: 1px solid var(--primary-color);
+  font-size: 1.15rem;
+  font-weight: 800;
   color: var(--primary-color);
 }
 
-.util-iching-cards-stack {
-  gap: 1.2rem;
-  width: 100%;
-  min-width: 0;
+.util-ic-keyword {
+  padding: 0.32rem 1rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
-.util-div-detail-card {
-  gap: 0.6rem;
-  padding: 1.6rem 1.8rem;
-  background-color: var(--body-bg);
-  border: 1.5px solid var(--border-color);
-  border-radius: 1.8rem;
-  font-size: 1.4rem;
-  line-height: 1.6;
+.util-ic-couplet {
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+  padding: 1rem 1.3rem;
+  background-color: var(--bg-surface);
+  border-left: 3.5px solid var(--ic-accent, var(--primary-color));
+  border-radius: 0 1.2rem 1.2rem 0;
 }
-.util-div-detail-card__head {
-  flex-wrap: wrap;
-  gap: 0.8rem;
+.util-ic-couplet[hidden] {
+  display: none !important;
 }
-.util-div-detail-card--highlight {
-  background-color: var(--primary-soft-bg, var(--body-bg));
-  border-color: var(--primary-color);
+.util-ic-couplet p {
+  font-size: 1.3rem;
+  line-height: 1.5;
 }
-.util-div-detail-card:hover {
-  border-color: var(--primary-color);
-  transform: translateY(-2px);
-}
-.util-div-detail-card strong {
-  color: var(--text-color);
+.util-ic-couplet p:first-child {
   font-weight: 800;
 }
+.util-ic-couplet p:last-child {
+  font-style: italic;
+  color: var(--text-muted);
+}
 
-.util-iching-catalog {
+.util-ic-meaning-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+@media (max-width: 575.98px) {
+  .util-ic-meaning-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.util-iching-result__num[data-status-code=dai_cat],
+.util-hex-card__status-tag[data-status-code=dai_cat] {
+  background-color: #059669;
+  color: #ffffff;
+}
+.util-iching-result__num[data-status-code=cat], .util-iching-result__num[data-status-code=cat_hanh],
+.util-hex-card__status-tag[data-status-code=cat],
+.util-hex-card__status-tag[data-status-code=cat_hanh] {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+.util-iching-result__num[data-status-code=binh_hoa],
+.util-hex-card__status-tag[data-status-code=binh_hoa] {
+  background-color: #d97706;
+  color: #ffffff;
+}
+.util-iching-result__num[data-status-code=tieu_hung], .util-iching-result__num[data-status-code=than_trong],
+.util-hex-card__status-tag[data-status-code=tieu_hung],
+.util-hex-card__status-tag[data-status-code=than_trong] {
+  background-color: #ea580c;
+  color: #ffffff;
+}
+.util-iching-result__num[data-status-code=hung],
+.util-hex-card__status-tag[data-status-code=hung] {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.util-tr-deck-bar {
+  gap: 1.6rem;
+  padding: 2rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 2.4rem;
+  overflow: hidden;
+}
+.util-tr-deck-bar .util-ic-history {
+  border-top: none;
+  padding-top: 0;
+  justify-content: center;
+}
+
+.util-tarot-fan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16rem;
+  padding-top: 1.4rem;
+  width: 100%;
+}
+.util-tarot-fan[data-deck-state=shuffling] .util-tarot-back {
+  animation: tarotShufflePulse 0.42s ease-in-out;
+}
+
+.util-tarot-back {
+  --fan-angle: 0deg;
+  --fan-y: 0px;
+  --shuffle-dx: 0px;
+  position: relative;
+  width: 8.8rem;
+  height: 13.2rem;
+  margin-left: -3.2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  background-color: #111827;
+  box-shadow: 0 0.8rem 1.8rem var(--shadow-color);
+  transform: translateY(var(--fan-y)) rotate(var(--fan-angle));
+  transform-origin: bottom center;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.util-tarot-back:first-child {
+  margin-left: 0;
+}
+.util-tarot-back[data-fan-idx="0"] {
+  --fan-angle: -20deg;
+  --fan-y: 1.8rem;
+  --shuffle-dx: 5rem;
+}
+.util-tarot-back[data-fan-idx="1"] {
+  --fan-angle: -15deg;
+  --fan-y: 1rem;
+  --shuffle-dx: 3.5rem;
+}
+.util-tarot-back[data-fan-idx="2"] {
+  --fan-angle: -10deg;
+  --fan-y: 0.4rem;
+  --shuffle-dx: 2rem;
+}
+.util-tarot-back[data-fan-idx="3"] {
+  --fan-angle: -5deg;
+  --fan-y: 0.1rem;
+  --shuffle-dx: 1rem;
+}
+.util-tarot-back[data-fan-idx="4"] {
+  --fan-angle: 0deg;
+  --fan-y: 0px;
+  --shuffle-dx: 0px;
+}
+.util-tarot-back[data-fan-idx="5"] {
+  --fan-angle: 5deg;
+  --fan-y: 0.1rem;
+  --shuffle-dx: -1rem;
+}
+.util-tarot-back[data-fan-idx="6"] {
+  --fan-angle: 10deg;
+  --fan-y: 0.4rem;
+  --shuffle-dx: -2rem;
+}
+.util-tarot-back[data-fan-idx="7"] {
+  --fan-angle: 15deg;
+  --fan-y: 1rem;
+  --shuffle-dx: -3.5rem;
+}
+.util-tarot-back[data-fan-idx="8"] {
+  --fan-angle: 20deg;
+  --fan-y: 1.8rem;
+  --shuffle-dx: -5rem;
+}
+.util-tarot-back img {
+  display: block;
+}
+.util-tarot-back:hover, .util-tarot-back:focus-visible, .util-tarot-back.is-picked {
+  border-color: var(--primary-color);
+  transform: translateY(calc(var(--fan-y) - 1.6rem)) rotate(var(--fan-angle)) scale(1.06);
+  box-shadow: 0 1.4rem 2.6rem var(--shadow-color);
+  z-index: 10;
+}
+@media (max-width: 575.98px) {
+  .util-tarot-back {
+    width: 7rem;
+    height: 10.5rem;
+    margin-left: -2.8rem;
+  }
+  .util-tarot-back--edge {
+    display: none;
+  }
+}
+
+.util-tarot-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2/3;
+  perspective: 1200px;
+  cursor: zoom-in;
+}
+.util-tarot-stage__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.util-tarot-stage[data-flipped=true] .util-tarot-stage__inner {
+  transform: rotateY(180deg);
+}
+.util-tarot-stage__face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1.4rem;
+  overflow: hidden;
+  border: 1.5px solid var(--border-color);
+  box-shadow: 0 0.8rem 2rem var(--shadow-color);
+  background-color: #111827;
+}
+.util-tarot-stage__face img {
+  display: block;
+  transition: transform 0.45s ease;
+}
+.util-tarot-stage__face--back {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+.util-tarot-stage__face--front {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+.util-tarot-stage[data-flipped=true] .util-tarot-stage__face--back {
+  z-index: 1;
+}
+.util-tarot-stage[data-flipped=true] .util-tarot-stage__face--front {
+  z-index: 3;
+}
+.util-tarot-stage[data-orientation=reversed] .util-tarot-stage__face--front img {
+  transform: rotate(180deg);
+}
+.util-tarot-stage:hover .util-ic-poster__zoom, .util-tarot-stage:focus-visible .util-ic-poster__zoom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.util-tr-orient-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  padding: 0.4rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-color);
+  border-radius: 1.2rem;
+}
+.util-tr-orient-switch__btn {
+  height: 3.4rem;
+  border-radius: 0.85rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.util-tr-orient-switch__btn:hover {
+  color: var(--text-color);
+}
+.util-tr-orient-switch__btn.is-active, .util-tr-orient-switch__btn[aria-pressed=true] {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 0.3rem 0.9rem var(--shadow-color);
+}
+
+.util-tr-reading-sheet {
+  flex: 1;
+  gap: 1.2rem;
+  padding: 2rem 2.2rem;
+}
+
+.util-tr-title-block {
+  gap: 0.2rem;
+}
+
+.util-tr-meta-pills {
+  gap: 0.6rem;
+}
+
+.util-tr-pill {
+  padding: 0.32rem 1.1rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-color);
+}
+.util-tr-pill--elem {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+}
+
+.util-tr-en-sub {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.util-tr-section-label {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--primary-color);
+  margin-bottom: 0.4rem;
+}
+
+.util-tr-message-callout {
+  padding: 1.4rem 1.6rem;
+  background-color: var(--primary-soft-bg, var(--bg-surface));
+  border: 1px solid var(--primary-color);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 1.4rem;
+}
+.util-tr-message-callout p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.util-tr-aspects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+@media (max-width: 575.98px) {
+  .util-tr-aspects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.util-tr-aspect-box {
+  padding: 1.3rem 1.5rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 1.4rem;
+}
+.util-tr-aspect-box p {
+  font-size: 1.38rem;
+  line-height: 1.58;
+  color: var(--text-color);
+}
+
+.util-tr-secondary-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 767.98px) {
+  .util-tr-secondary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.util-tr-flip-link {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.util-tr-flip-link:hover {
+  text-decoration: underline;
+}
+
+.util-tr-alt-kws {
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+.util-tr-alt-kws span {
+  padding: 0.2rem 0.8rem;
+  border-radius: 99.9rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.util-iching-catalog,
+.util-tarot-catalog {
   gap: 1.6rem;
   padding-top: 2rem;
   border-top: 1px dashed var(--border-color);
 }
+
 .util-iching-catalog__tools {
   flex-wrap: wrap;
   gap: 1rem;
 }
 
-.util-iching-filters {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-@media (max-width: 767.98px) {
-  .util-iching-filters {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-@media (max-width: 575.98px) {
-  .util-iching-filters {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.util-iching-catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.util-ic-filter-bar {
+  flex-wrap: wrap;
   gap: 1.2rem;
 }
+
+.util-ic-filter-group {
+  gap: 0.7rem;
+}
+.util-ic-filter-group .util-al-quick-chip.is-active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.util-iching-catalog-grid,
+.util-tarot-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+}
 @media (max-width: 1199.98px) {
-  .util-iching-catalog-grid {
+  .util-iching-catalog-grid,
+  .util-tarot-catalog-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
-@media (max-width: 767.98px) {
-  .util-iching-catalog-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 @media (max-width: 575.98px) {
-  .util-iching-catalog-grid {
-    grid-template-columns: 1fr;
+  .util-iching-catalog-grid,
+  .util-tarot-catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
   }
 }
 
-.util-hex-card {
-  position: relative;
+.util-hex-card,
+.util-tr-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 0.9rem;
-  padding: 1.5rem 1.6rem;
-  background-color: var(--bg-surface);
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--body-bg);
   border: 1.5px solid var(--border-color);
-  border-radius: 1.8rem;
+  border-radius: 2rem;
   text-align: left;
   cursor: pointer;
 }
-.util-hex-card:hover, .util-hex-card:focus-visible, .util-hex-card.is-current-highlight {
+.util-hex-card:hover, .util-hex-card:focus-visible, .util-hex-card.is-current-highlight,
+.util-tr-card:hover,
+.util-tr-card:focus-visible,
+.util-tr-card.is-current-highlight {
   border-color: var(--primary-color);
-  background-color: var(--body-bg);
-  transform: translateY(-2px);
-  box-shadow: 0 0.8rem 2rem var(--shadow-color);
+  transform: translateY(-4px);
+  box-shadow: 0 1.2rem 2.6rem var(--shadow-color);
 }
-.util-hex-card.is-current-highlight {
+.util-hex-card.is-current-highlight,
+.util-tr-card.is-current-highlight {
   border-width: 2px;
   background-color: var(--primary-soft-bg, var(--body-bg));
 }
-.util-hex-card__top {
-  gap: 0.8rem;
-}
-.util-hex-card__svg {
-  width: 4.8rem;
-  height: 4.8rem;
-  padding: 0.6rem;
-  border-radius: 1.2rem;
-  background-color: var(--body-bg);
-  border: 1px solid var(--border-color);
-}
-.util-hex-card__svg img {
+.util-hex-card__thumb,
+.util-tr-card__thumb {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 2/3;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+}
+.util-hex-card__thumb img,
+.util-tr-card__thumb img {
+  display: block;
+  transition: transform 0.35s ease;
+}
+.util-hex-card__thumb.is-fallback-svg,
+.util-tr-card__thumb.is-fallback-svg {
+  padding: 3rem;
+}
+.util-hex-card__thumb.is-fallback-svg img,
+.util-tr-card__thumb.is-fallback-svg img {
+  width: 7.2rem;
+  height: 7.2rem;
   object-fit: contain;
   filter: var(--zodiac-filter);
 }
-.util-hex-card__badge {
-  padding: 0.3rem 0.9rem;
+.util-hex-card:hover .util-hex-card__thumb img,
+.util-hex-card:hover .util-tr-card__thumb img,
+.util-tr-card:hover .util-hex-card__thumb img,
+.util-tr-card:hover .util-tr-card__thumb img {
+  transform: scale(1.015);
+}
+.util-hex-card__body,
+.util-tr-card__body {
+  gap: 0.45rem;
+  padding: 0.2rem 0.4rem 0.4rem;
+}
+
+.util-tr-card__meta {
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.util-tr-card__num {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.util-tr-card__suit,
+.util-hex-card__status-tag {
+  padding: 0.22rem 0.85rem;
   border-radius: 99.9rem;
-  background-color: var(--body-bg);
+  background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   font-size: 1.1rem;
   font-weight: 800;
   color: var(--primary-color);
 }
-.util-hex-card__title {
+
+.util-hex-card__status-tag {
+  border-color: transparent;
+}
+
+.util-hex-card__title-row {
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.util-hex-card__title,
+.util-tr-card__title {
   font-size: 1.55rem;
   font-weight: 800;
+  line-height: 1.25;
   color: var(--text-color);
 }
-.util-hex-card__sub {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-.util-hex-card__desc {
-  font-size: 1.25rem;
-  line-height: 1.5;
-  color: var(--text-muted);
-}
 
-.util-tarot-fan {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 3.4rem 1.6rem 2.2rem;
-  min-height: 22rem;
-  width: 100%;
-  overflow: visible;
-}
-@media (max-width: 767.98px) {
-  .util-tarot-fan {
-    padding: 2.6rem 0.8rem 1.6rem;
-    min-height: 17.5rem;
-  }
-}
-.util-tarot-fan[data-deck-state=shuffling] {
-  pointer-events: none;
-}
-.util-tarot-fan[data-deck-state=shuffling] .util-tarot-back {
-  animation: tarotShufflePulse 0.68s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-.util-tarot-back {
-  --fan-angle: 0deg;
-  --fan-y: 0rem;
-  --shuffle-dx: 0px;
-  position: relative;
-  width: 10.6rem;
-  aspect-ratio: 7/12;
-  margin-left: -3.2rem;
-  border-radius: 1.1rem;
-  overflow: hidden;
-  background: transparent;
-  border: 2px solid transparent;
-  box-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.22);
-  transform-origin: bottom center;
-  transform: translateY(var(--fan-y)) rotate(var(--fan-angle));
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.25s ease;
-  cursor: pointer;
-}
-.util-tarot-back:first-child {
-  margin-left: 0;
-}
-.util-tarot-back img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none;
-}
-.util-tarot-back[data-fan-idx="0"] {
-  --fan-angle: -20deg;
-  --fan-y: 2.6rem;
-  --shuffle-dx: 120px;
-  z-index: 1;
-}
-.util-tarot-back[data-fan-idx="1"] {
-  --fan-angle: -15deg;
-  --fan-y: 1.5rem;
-  --shuffle-dx: 90px;
-  z-index: 2;
-}
-.util-tarot-back[data-fan-idx="2"] {
-  --fan-angle: -10deg;
-  --fan-y: 0.7rem;
-  --shuffle-dx: 60px;
-  z-index: 3;
-}
-.util-tarot-back[data-fan-idx="3"] {
-  --fan-angle: -5deg;
-  --fan-y: 0.2rem;
-  --shuffle-dx: 30px;
-  z-index: 4;
-}
-.util-tarot-back[data-fan-idx="4"] {
-  --fan-angle: 0deg;
-  --fan-y: 0rem;
-  --shuffle-dx: 0px;
-  z-index: 5;
-}
-.util-tarot-back[data-fan-idx="5"] {
-  --fan-angle: 5deg;
-  --fan-y: 0.2rem;
-  --shuffle-dx: -30px;
-  z-index: 4;
-}
-.util-tarot-back[data-fan-idx="6"] {
-  --fan-angle: 10deg;
-  --fan-y: 0.7rem;
-  --shuffle-dx: -60px;
-  z-index: 3;
-}
-.util-tarot-back[data-fan-idx="7"] {
-  --fan-angle: 15deg;
-  --fan-y: 1.5rem;
-  --shuffle-dx: -90px;
-  z-index: 2;
-}
-.util-tarot-back[data-fan-idx="8"] {
-  --fan-angle: 20deg;
-  --fan-y: 2.6rem;
-  --shuffle-dx: -120px;
-  z-index: 1;
-}
-.util-tarot-back:hover, .util-tarot-back:focus-visible {
-  z-index: 20;
-  border-color: #facc15;
-  transform: translateY(calc(var(--fan-y) - 2.2rem)) rotate(var(--fan-angle)) scale(1.08);
-  box-shadow: 0 1.4rem 3rem rgba(15, 23, 42, 0.35), 0 0 1.6rem rgba(250, 204, 21, 0.55);
-}
-.util-tarot-back.is-picked {
-  z-index: 18;
-  border-color: var(--primary-color);
-  transform: translateY(calc(var(--fan-y) - 2.6rem)) rotate(var(--fan-angle)) scale(1.1);
-  box-shadow: 0 1.6rem 3.2rem var(--shadow-color), 0 0 1.8rem rgba(250, 204, 21, 0.65);
-}
-@media (max-width: 767.98px) {
-  .util-tarot-back {
-    width: 8.6rem;
-    margin-left: -3rem;
-  }
-  .util-tarot-back--edge {
-    display: none;
-  }
-  .util-tarot-back[data-fan-idx="1"] {
-    margin-left: 0;
-  }
-}
-@media (max-width: 575.98px) {
-  .util-tarot-back {
-    width: 7.2rem;
-    margin-left: -2.6rem;
-  }
-}
-
-.util-tarot-bento {
-  display: grid;
-  grid-template-columns: 24rem 1fr;
-  align-items: start;
-  gap: 2.6rem;
-  padding: 2.2rem;
-  background-color: var(--bg-surface);
-  border: 1.5px solid var(--border-color);
-  border-radius: 2.4rem;
-}
-.util-tarot-bento.is-sliding .util-iching-cards-stack {
-  animation: tarotResultSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-@media (max-width: 767.98px) {
-  .util-tarot-bento {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    padding: 1.6rem;
-  }
-}
-
-.util-tarot-stage {
-  gap: 1.2rem;
-  width: 100%;
-  max-width: 24rem;
-  perspective: 120rem;
-  cursor: pointer;
-}
-.util-tarot-stage__inner {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 7/12;
-  transform-style: preserve-3d;
-  transition: transform 0.72s cubic-bezier(0.34, 1.32, 0.64, 1);
-  border-radius: 1.8rem;
-}
-.util-tarot-stage[data-flipped=true] .util-tarot-stage__inner {
-  transform: rotateY(180deg);
-}
-.util-tarot-stage:hover .util-tarot-stage__inner, .util-tarot-stage:focus-visible .util-tarot-stage__inner {
-  filter: drop-shadow(0 1.4rem 2.8rem var(--shadow-color));
-}
-.util-tarot-stage__face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border-radius: 1.8rem;
-  overflow: hidden;
-  border: 2px solid var(--primary-color);
-  box-shadow: 0 1.2rem 2.8rem var(--shadow-color);
-}
-.util-tarot-stage__face img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease;
-}
-.util-tarot-stage__face--front {
-  transform: rotateY(180deg);
-}
-.util-tarot-stage[data-orientation=reversed] .util-tarot-stage__face--front img {
-  transform: rotate(180deg);
-}
-.util-tarot-stage__hint {
-  gap: 0.3rem;
-  text-align: center;
-}
-.util-tarot-stage__hint span {
-  padding: 0.35rem 1.2rem;
-  border-radius: 99.9rem;
-  background-color: var(--body-bg);
-  border: 1px solid var(--border-color);
-  font-size: 1.2rem;
+.util-hex-card__hanzi {
+  font-size: 1.4rem;
   font-weight: 800;
   color: var(--primary-color);
 }
-.util-tarot-stage__hint small {
-  font-size: 1.15rem;
+
+.util-hex-card__sub,
+.util-tr-card__en {
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-muted);
+}
+
+.day-term-modal__visual .util-modal-card-img {
+  width: 16.4rem;
+  height: auto;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  border-radius: 1.4rem;
+  box-shadow: 0 1rem 2.4rem var(--shadow-color);
+}
+.day-term-modal__visual .util-modal-card-img.is-fallback-svg {
+  width: 9rem;
+  height: 9rem;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  box-shadow: none;
+  filter: var(--zodiac-filter);
+}
+.day-term-modal__visual .util-modal-card-img.is-reversed {
+  transform: rotate(180deg);
 }
 
 .util-history-controls {

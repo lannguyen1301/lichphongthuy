@@ -1,0 +1,82 @@
+[
+    {
+        "id": "none",
+        "label": "Không bật lịch ăn chay",
+        "short_label": "Tắt",
+        "mode": "none",
+        "days_per_month": 0,
+        "full_month_days": [],
+        "short_month_days": [],
+        "description": "Chưa kích hoạt đánh dấu và nhắc lịch ăn chay."
+    },
+    {
+        "id": "nhi_trai",
+        "label": "Nhị Trai (2 ngày / tháng)",
+        "short_label": "2 ngày",
+        "mode": "lunar_days",
+        "days_per_month": 2,
+        "full_month_days": [1, 15],
+        "short_month_days": [1, 15],
+        "description": "Ăn chay ngày Mùng 1 và ngày Rằm (15) Âm lịch hằng tháng."
+    },
+    {
+        "id": "tam_trai",
+        "label": "Tam Trai (3 ngày / tháng)",
+        "short_label": "3 ngày",
+        "mode": "lunar_days",
+        "days_per_month": 3,
+        "full_month_days": [1, 15, 30],
+        "short_month_days": [1, 15, 29],
+        "description": "Ăn chay Mùng 1, Rằm (15) và ngày cuối tháng Âm lịch (30 hoặc 29 nếu tháng thiếu)."
+    },
+    {
+        "id": "tu_trai",
+        "label": "Tứ Trai (4 ngày / tháng)",
+        "short_label": "4 ngày",
+        "mode": "lunar_days",
+        "days_per_month": 4,
+        "full_month_days": [1, 14, 15, 30],
+        "short_month_days": [1, 14, 15, 29],
+        "description": "Ăn chay các ngày 1, 14, 15 và ngày cuối tháng Âm lịch (30 hoặc 29)."
+    },
+    {
+        "id": "luc_trai",
+        "label": "Lục Trai (6 ngày / tháng)",
+        "short_label": "6 ngày",
+        "mode": "lunar_days",
+        "days_per_month": 6,
+        "full_month_days": [8, 14, 15, 23, 29, 30],
+        "short_month_days": [8, 14, 15, 23, 28, 29],
+        "description": "Sáu ngày Lục Trai truyền thống trong Phật giáo (tự lùi 28, 29 khi gặp tháng thiếu)."
+    },
+    {
+        "id": "thap_trai",
+        "label": "Thập Trai (10 ngày / tháng)",
+        "short_label": "10 ngày",
+        "mode": "lunar_days",
+        "days_per_month": 10,
+        "full_month_days": [1, 8, 14, 15, 18, 23, 24, 28, 29, 30],
+        "short_month_days": [1, 8, 14, 15, 18, 23, 24, 27, 28, 29],
+        "description": "Mười ngày Thập Trai theo Kinh Địa Tạng (tự lùi 27, 28, 29 khi gặp tháng thiếu)."
+    },
+    {
+        "id": "chay_truong",
+        "label": "Ăn chay trường (Mỗi ngày)",
+        "short_label": "Chay trường",
+        "mode": "every_day",
+        "days_per_month": 30,
+        "full_month_days": [],
+        "short_month_days": [],
+        "description": "Duy trì chế độ ăn chay hằng ngày trong suốt cả năm."
+    },
+    {
+        "id": "custom",
+        "label": "Tự chọn ngày ăn chay riêng",
+        "short_label": "Tùy chỉnh",
+        "mode": "custom",
+        "days_per_month": null,
+        "full_month_days": [],
+        "short_month_days": [],
+        "description": "Người dùng tự chọn ngày Âm lịch bất kỳ, thứ trong tuần và giờ nhắc nhở."
+    }
+]

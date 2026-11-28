@@ -749,81 +749,745 @@
 }
 
 // ==========================================================================
-// 3. MỤC 1: ĐỒNG HỒ BẤM GIỜ, ĐẾM NGƯỢC BENTO & BÁO THỨC ĐA NĂNG
+// 3. MỤC 1: BỘ 3 ĐỒNG HỒ CHUẨN BENTO GRID (BẢN TINH CHỈNH TYPOGRAPHY & RATIO)
 // ==========================================================================
-.util-timer-bento {
-    display: grid;
-    grid-template-columns: 1.05fr 1fr;
-    align-items: stretch;
-    gap: 2rem;
+.util-live-dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    @extend %flexItemFixed;
+    @extend %transTheme;
+}
 
-    @include abs.screen(lg) {
-        grid-template-columns: 1fr;
+.util-clock-stage__tag {
+    @extend %inlineFlexCenter;
+    gap: 0.75rem;
+    min-height: 3.6rem;
+    padding: 0.55rem 1.6rem;
+    border-radius: 99.9rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    @extend %transTheme;
+}
+
+// --------------------------------------------------------------------------
+// 3.1. STOPWATCH BENTO (SỐ TO HƠN + TÁCH .00 + 4 Ô TELEMETRY BẤT ĐỐI XỨNG)
+// --------------------------------------------------------------------------
+.util-sw-bento {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.6rem;
+
+    &[data-clock-state="running"] {
+        .util-sw-hero {
+            border-color: var(--primary-color);
+            background-color: var(--primary-soft-bg, var(--bg-surface));
+        }
+
+        .util-clock-stage__tag {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .util-live-dot {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 0 4px var(--primary-soft-bg);
+            animation: pulse 1.2s ease-in-out infinite;
+        }
     }
 
-    &__left,
-    &__right {
-        @extend %flexColumn;
-        justify-content: space-between;
-        gap: 1.4rem;
-        min-width: 0;
+    &[data-clock-state="paused"] {
+        .util-live-dot {
+            background-color: var(--color-warning);
+        }
     }
 }
 
-.util-clock-stage {
-    flex: 1;
-    @extend %flexColumnCenterAll;
-    gap: 1.2rem;
-    padding: 3.2rem 2rem;
+.util-sw-hero {
+    grid-column: span 7;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 2.2rem;
+    padding: 2.6rem 2.8rem;
     background-color: var(--bg-surface);
-    border: 2px solid var(--border-color);
+    border: 1.5px solid var(--border-color);
     border-radius: 2.4rem;
-    text-align: center;
+    @extend %transTheme;
 
-    &--compact {
-        padding: 2.4rem 1.8rem;
+    @include abs.screen(lg) {
+        grid-column: span 12;
+        padding: 2rem;
     }
 
-    &__tag {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 3.4rem;
-        padding: 0.6rem 1.8rem;
+    &__top {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    &__hint {
+        padding: 0.4rem 1.2rem;
         border-radius: 99.9rem;
         background-color: var(--body-bg);
-        border: 1.5px solid var(--primary-color);
-        font-size: 1.25rem;
-        font-weight: 800;
-        line-height: 1.3;
-        color: var(--primary-color);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__stage {
+        @extend %flexCenter;
+        padding: 3.4rem 1rem;
+        text-align: center;
     }
 
     &__digits {
-        font-size: clamp(4.4rem, 7.5vw, 7.8rem);
+        @extend %inlineFlexCenter;
+        align-items: baseline;
+        gap: 1.4rem;
+        font-size: clamp(5.8rem, 7.6vw, 9.6rem);
         font-weight: 800;
         line-height: 1;
+        letter-spacing: -0.03em;
         color: var(--text-color);
         font-variant-numeric: tabular-nums;
-        letter-spacing: -0.02em;
+
+        @include abs.screen(sm) {
+            gap: 0.8rem;
+        }
 
         small {
-            font-size: 0.48em;
+            @extend %inlineFlexCenter;
+            min-width: 7.4rem;
+            padding: 0.55rem 1.2rem;
+            border-radius: 1.4rem;
+            background-color: var(--body-bg);
+            border: 2px solid var(--primary-color);
+            font-size: 0.38em;
+            font-weight: 800;
+            letter-spacing: 0;
             color: var(--primary-color);
-            margin-left: 0.2rem;
+            box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
         }
+    }
+
+    &__dock {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 0.9fr;
+        gap: 1rem;
+        padding-top: 1.8rem;
+        border-top: 1px dashed var(--border-color);
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.util-sw-side {
+    grid-column: span 5;
+    @extend %flexColumn;
+    gap: 1.4rem;
+    min-width: 0;
+
+    @include abs.screen(lg) {
+        grid-column: span 12;
+    }
+}
+
+// Lưới Bento Telemetry 12 cột bất đối xứng:
+// Trái (5 cột x 2 hàng): SỐ VÒNG lớn | Phải (7 cột): NHANH NHẤT & CHẬM NHẤT | Đáy (12 cột): TRUNG BÌNH
+.util-sw-stats {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.util-sw-stat {
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 1.4rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.9rem;
+    @extend %transTheme;
+
+    &--accent {
+        grid-column: span 5;
+        grid-row: span 2;
+        background-color: var(--primary-color);
+        border-color: var(--primary-hover);
+        color: #ffffff;
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .util-sw-stat__label,
+        .util-sw-stat__sub {
+            color: var(--hero-text-soft);
+        }
+
+        .util-sw-stat__val {
+            font-size: 5.2rem;
+            line-height: 1;
+            color: #ffffff;
+        }
+
+        @include abs.screen(sm) {
+            grid-column: span 12;
+            grid-row: span 1;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    &--best {
+        grid-column: span 7;
+        border-color: rgba(34, 197, 94, 0.4);
+        background-color: rgba(34, 197, 94, 0.07);
+
+        .util-sw-stat__val {
+            color: var(--color-success);
+        }
+
+        @include abs.screen(sm) {
+            grid-column: span 12;
+        }
+    }
+
+    &--worst {
+        grid-column: span 7;
+        border-color: rgba(239, 68, 68, 0.35);
+        background-color: rgba(239, 68, 68, 0.06);
+
+        .util-sw-stat__val {
+            color: var(--color-danger);
+        }
+
+        @include abs.screen(sm) {
+            grid-column: span 12;
+        }
+    }
+
+    &--avg {
+        grid-column: span 12;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.35rem 1.8rem;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        gap: 0.6rem;
+    }
+
+    &__avg-info {
+        @extend %flexColumn;
+        gap: 0.2rem;
+    }
+
+    &__label {
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--text-muted);
+    }
+
+    &__pill {
+        padding: 0.2rem 0.8rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--text-muted);
+    }
+
+    &__val {
+        font-size: 2.75rem;
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__sub {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+}
+
+.util-sw-laps {
+    flex: 1;
+    @extend %flexColumn;
+    gap: 1rem;
+    padding: 1.5rem 1.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2rem;
+    min-height: 20rem;
+
+    &__head {
+        @extend %flexBetween;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    &__title {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__col-hint {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__body {
+        @extend %flexColumn;
+        gap: 0.7rem;
+        max-height: 24rem;
+        overflow-y: auto;
+        padding-right: 0.3rem;
+    }
+}
+
+.util-sw-lap-row {
+    @extend %flexColumn;
+    gap: 0.5rem;
+    padding: 1rem 1.2rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1.3rem;
+    font-variant-numeric: tabular-nums;
+    @extend %transTheme;
+
+    &[data-lap-rank="best"] {
+        border-color: rgba(34, 197, 94, 0.45);
+
+        .util-sw-lap-row__badge {
+            background-color: rgba(34, 197, 94, 0.14);
+            color: var(--color-success);
+        }
+
+        .util-sw-lap-row__bar-fill {
+            background-color: var(--color-success);
+        }
+    }
+
+    &[data-lap-rank="worst"] {
+        border-color: rgba(239, 68, 68, 0.38);
+
+        .util-sw-lap-row__badge {
+            background-color: rgba(239, 68, 68, 0.12);
+            color: var(--color-danger);
+        }
+
+        .util-sw-lap-row__bar-fill {
+            background-color: var(--color-danger);
+        }
+    }
+
+    &__top {
+        @extend %flexBetween;
+        gap: 0.8rem;
+        font-size: 1.35rem;
+    }
+
+    &__left {
+        @extend %flexItemCenter;
+        gap: 0.65rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__badge {
+        padding: 0.15rem 0.7rem;
+        border-radius: 99.9rem;
+        font-size: 1.05rem;
+        font-weight: 800;
+    }
+
+    &__times {
+        @extend %flexItemCenter;
+        gap: 0.9rem;
+
+        span {
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        small {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+    }
+
+    &__bar {
+        width: 100%;
+        height: 0.45rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        overflow: hidden;
+    }
+
+    &__bar-fill {
+        width: var(--lap-ratio, 35%);
+        height: 100%;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        transition: width 0.35s ease;
+    }
+}
+
+// --------------------------------------------------------------------------
+// 3.2. COUNTDOWN BENTO (VÒNG 31REM THOÁNG CHỮ + TAG % TO + SỐ PRESET LỚN)
+// --------------------------------------------------------------------------
+.util-cd-bento {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.6rem;
+
+    &[data-clock-state="running"] {
+        .util-cd-hero {
+            border-color: var(--primary-color);
+            background-color: var(--primary-soft-bg, var(--bg-surface));
+        }
+
+        .util-cd-hero__pct {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+        }
+    }
+
+    &[data-clock-state="done"] {
+        .util-cd-hero {
+            border-color: var(--color-danger);
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+    }
+}
+
+.util-cd-hero {
+    grid-column: span 7;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.6rem;
+    padding: 2.4rem 2.6rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.4rem;
+    @extend %transTheme;
+
+    @include abs.screen(lg) {
+        grid-column: span 12;
+    }
+
+    &__top {
+        @extend %flexBetween;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__pct {
+        @extend %inlineFlexCenter;
+        min-height: 4.2rem;
+        padding: 0.6rem 1.8rem;
+        border-radius: 1.4rem;
+        background-color: var(--body-bg);
+        border: 1.5px solid var(--primary-color);
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+        box-shadow: 0 0.4rem 1.2rem var(--shadow-color);
+        @extend %transTheme;
+    }
+
+    &__digits {
+        font-size: clamp(3.6rem, 3.8vw, 4.8rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__end-at {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    &__dock {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 1rem;
+        padding-top: 1.4rem;
+        border-top: 1px dashed var(--border-color);
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+// Khung vòng tròn 31rem (310px) -> Đường kính lọt lòng ~262px, cách xa chữ 00:05:00 hơn 35px mỗi bên
+.util-cd-ring-stage {
+    position: relative;
+    width: 31rem;
+    height: 31rem;
+    margin: 0.6rem auto;
+    @extend %flexCenter;
+
+    @include abs.screen(sm) {
+        width: 26rem;
+        height: 26rem;
+    }
+
+    &__inner {
+        position: relative;
+        z-index: 2;
+        @extend %flexColumnCenterAll;
+        gap: 0.9rem;
+        text-align: center;
+        padding: 0 3.2rem;
+    }
+}
+
+.util-cd-ring {
+    @extend %absCover;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+
+    &__track {
+        fill: var(--body-bg);
+        stroke: var(--border-color);
+        stroke-width: 11;
+    }
+
+    &__fill {
+        fill: none;
+        stroke: var(--primary-color);
+        stroke-width: 11;
+        stroke-linecap: round;
+        stroke-dasharray: 728.85;
+        stroke-dashoffset: 0;
+        transition:
+            stroke-dashoffset 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+            stroke 0.3s ease;
+    }
+}
+
+.util-cd-presets-card {
+    grid-column: span 5;
+    @extend %flexColumn;
+    gap: 1.2rem;
+    padding: 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.4rem;
+
+    @include abs.screen(lg) {
+        grid-column: span 12;
+    }
+
+    &__head {
+        @extend %flexBetween;
+        gap: 1rem;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__hint {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+}
+
+.util-cd-presets-bento {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: 1rem;
+
+    @include abs.screen(sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.util-preset-tile {
+    position: relative;
+    grid-column: span 2;
+    @extend %flexColumn;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.45rem;
+    min-height: 11.4rem;
+    padding: 1.4rem 1.5rem;
+    background-color: var(--body-bg);
+    border: 1.5px solid var(--border-color);
+    border-radius: 1.8rem;
+    text-align: left;
+    color: var(--text-color);
+    @extend %transInteractive;
+
+    &:not(&--wide) {
+        grid-column: span 1;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 0.25rem;
+        padding: 1.2rem 0.6rem;
+        min-height: 10.6rem;
+
+        .util-preset-tile__num {
+            font-size: 3rem;
+        }
+    }
+
+    @include abs.screen(sm) {
+        &--wide {
+            grid-column: span 2;
+        }
+
+        &:not(&--wide) {
+            grid-column: span 1;
+        }
+    }
+
+    &__head {
+        @extend %flexBetween;
+        width: 100%;
+        gap: 0.6rem;
+    }
+
+    &__tag {
+        padding: 0.2rem 0.8rem;
+        border-radius: 99.9rem;
+        background-color: var(--bg-surface);
+        font-size: 1.05rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--primary-color);
+    }
+
+    &__unit {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--text-muted);
+    }
+
+    &__num {
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: var(--text-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__desc {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+    }
+
+    &.is-active,
+    &[aria-pressed="true"] {
+        background-color: var(--primary-color);
+        border-color: var(--primary-hover);
+        color: #ffffff;
+        box-shadow: 0 0.8rem 2rem var(--shadow-color);
+
+        .util-preset-tile__tag {
+            background-color: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+
+        .util-preset-tile__num,
+        .util-preset-tile__unit,
+        .util-preset-tile__desc {
+            color: #ffffff;
+        }
+
+        .util-preset-tile__desc,
+        .util-preset-tile__unit {
+            opacity: 0.9;
+        }
+    }
+}
+
+.util-cd-steppers-card {
+    grid-column: span 7;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: 1.8rem 2rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.2rem;
+
+    @include abs.screen(lg) {
+        grid-column: span 12;
+    }
+
+    .util-stepper-box {
+        background-color: var(--body-bg);
+    }
+}
+
+.util-cd-sound-card {
+    grid-column: span 5;
+    border-radius: 2.2rem;
+
+    @include abs.screen(lg) {
+        grid-column: span 12;
     }
 }
 
 .util-sound-bento {
     @extend %flexColumn;
+    justify-content: space-between;
     gap: 1.4rem;
-    padding: 1.6rem 1.8rem;
+    padding: 1.8rem 2rem;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
     border-radius: 2rem;
+
+    .util-field__input {
+        background-color: var(--body-bg);
+    }
 
     &__row {
         @extend %flexBetween;
@@ -837,10 +1501,11 @@
         @extend %flexColumn;
         gap: 0.25rem;
         min-width: 0;
+        flex: 1 1 16rem;
     }
 
     &__name {
-        font-size: 1.35rem;
+        font-size: 1.3rem;
         font-weight: 800;
         color: var(--primary-color);
         @extend %textEllipsis;
@@ -848,97 +1513,97 @@
 
     &__actions {
         @extend %flexWrapGap;
-        gap: 0.8rem;
+        gap: 0.7rem;
     }
 }
 
-.util-clock-controls {
-    @extend %flexCenter;
-    flex-wrap: wrap;
+.util-cd-history-card {
+    grid-column: span 12;
+    @extend %flexColumn;
     gap: 1.2rem;
-}
-
-.util-preset-chips {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.8rem;
-
-    @include abs.screen(sm) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-.util-preset-chip {
-    height: 4rem;
-    border-radius: 1.2rem;
+    padding: 1.8rem 2rem;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--text-color);
-    @extend %transInteractive;
+    border-radius: 2.2rem;
+}
 
-    &:hover,
-    &:focus-visible,
-    &.is-active {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
-        color: #ffffff;
-        transform: translateY(-2px);
+.util-cd-history-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+
+    @include abs.screen(lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include abs.screen(sm) {
+        grid-template-columns: 1fr;
+    }
+
+    .util-data-table__empty {
+        grid-column: 1 / -1;
+        padding: 1.6rem;
     }
 }
 
-.util-data-table {
+.util-cd-history-tile {
+    @extend %flexBetween;
+    gap: 1.2rem;
+    padding: 1.3rem 1.5rem;
+    background-color: var(--body-bg);
     border: 1px solid var(--border-color);
-    border-radius: 1.8rem;
-    overflow: hidden;
+    border-radius: 1.6rem;
+    @extend %transInteractive;
 
-    &__head,
-    &__row {
-        display: grid;
-        align-items: center;
-        gap: 1.2rem;
-        padding: 1.3rem 1.8rem;
+    &:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
     }
 
-    &__head--3cols,
-    &__row--3cols {
-        grid-template-columns: 0.8fr 1.2fr 1.2fr;
-    }
+    &__info {
+        @extend %flexColumn;
+        gap: 0.25rem;
+        min-width: 0;
 
-    &__head--4cols,
-    &__row--4cols {
-        grid-template-columns: 0.5fr 1.5fr 1fr 1fr;
-    }
+        strong {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-color);
+            @extend %textEllipsis;
+        }
 
-    &__head {
-        background-color: var(--bg-surface);
-        border-bottom: 1px solid var(--border-color);
-        font-size: 1.2rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        color: var(--text-muted);
-    }
-
-    &__row {
-        border-bottom: 1px solid var(--border-color);
-        font-size: 1.4rem;
-        font-weight: 700;
-        font-variant-numeric: tabular-nums;
-
-        &:last-child {
-            border-bottom: none;
+        small {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
         }
     }
 
-    &__empty {
-        padding: 2.4rem;
-        text-align: center;
-        font-size: 1.35rem;
-        color: var(--text-muted);
+    &__replay {
+        @extend %inlineFlexCenter;
+        @extend %flexItemFixed;
+        height: 3.4rem;
+        padding: 0 1.2rem;
+        border-radius: 1rem;
+        background-color: var(--primary-soft-bg, var(--bg-surface));
+        border: 1px solid var(--primary-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        @extend %transInteractive;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
     }
 }
 
+// --------------------------------------------------------------------------
+// 3.3. ALARM BENTO (SỐ ĐỒNG HỒ LỚN + DATA-BENTO-SPAN KHÓA TRÒN 12 CỘT)
+// --------------------------------------------------------------------------
 .util-alarm-ring-banner {
     @extend %flexBetween;
     flex-wrap: wrap;
@@ -977,61 +1642,411 @@
     }
 }
 
-.util-alarms-list {
+.util-al-bento {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.6rem;
+}
+
+.util-al-hero {
+    position: relative;
+    overflow: hidden;
+    grid-column: span 5;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.8rem;
+    padding: 2.6rem;
+    background-color: var(--primary-color);
+    border: 1.5px solid var(--primary-hover);
+    border-radius: 2.4rem;
+    color: #ffffff;
+    box-shadow: 0 1rem 2.6rem var(--shadow-color);
+    @extend %transTheme;
+
+    @include abs.screen(lg) {
+        grid-column: span 12;
+    }
+
+    &[data-empty="true"] {
+        background-color: var(--bg-surface);
+        border-color: var(--border-color);
+        color: var(--text-color);
+        box-shadow: none;
+
+        .util-al-hero__pill,
+        .util-al-hero__badge,
+        .util-al-hero__countdown {
+            background-color: var(--body-bg);
+            border-color: var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .util-al-hero__eyebrow,
+        .util-al-hero__title {
+            color: var(--text-muted);
+        }
+
+        .util-al-hero__time {
+            color: var(--text-color);
+        }
+    }
+
+    &__top,
+    &__body,
+    &__foot {
+        position: relative;
+        z-index: 2;
+    }
+
+    &__top {
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__pill {
+        padding: 0.4rem 1.3rem;
+        border-radius: 99.9rem;
+        background-color: #ffffff;
+        color: var(--primary-active);
+        font-size: 1.25rem;
+        font-weight: 800;
+    }
+
+    &__badge {
+        padding: 0.4rem 1.2rem;
+        border-radius: 99.9rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    &__body {
+        @extend %flexColumn;
+        gap: 0.65rem;
+    }
+
+    &__eyebrow {
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--hero-text-soft);
+    }
+
+    &__time {
+        font-size: clamp(6.4rem, 7.2vw, 8.8rem);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        color: #ffffff;
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__title {
+        font-size: 1.65rem;
+        font-weight: 700;
+        color: #ffffff;
+        @extend %textClamp2;
+    }
+
+    &__countdown {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.8rem 1.4rem;
+        border-radius: 1.3rem;
+        background-color: var(--hero-box-bg);
+        border: 1px solid var(--hero-border-color);
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    &__watermark {
+        position: absolute;
+        right: -1.4rem;
+        bottom: -1.4rem;
+        width: 13rem;
+        height: 13rem;
+        opacity: 0.14;
+        filter: brightness(0) invert(1);
+        pointer-events: none;
+        z-index: 1;
+    }
+}
+
+.util-al-composer {
+    grid-column: span 7;
+    @extend %flexColumn;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 2.2rem 2.4rem;
+    background-color: var(--bg-surface);
+    border: 1.5px solid var(--border-color);
+    border-radius: 2.4rem;
+
+    @include abs.screen(lg) {
+        grid-column: span 12;
+        padding: 1.6rem;
+    }
+
+    .util-stepper-box,
+    .util-field__input,
+    .bazi-picker__summary {
+        background-color: var(--body-bg);
+    }
+
+    &__top {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    &__preview {
+        display: block;
+        margin-top: 0.3rem;
+        font-size: 3.2rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        color: var(--primary-color);
+        font-variant-numeric: tabular-nums;
+    }
+
+    &__time-row {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1rem;
+
+        @include abs.screen(sm) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__colon {
+        font-size: 3.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+
+        @include abs.screen(sm) {
+            display: none;
+        }
+    }
+
+    &__footer {
+        @extend %flexBetween;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        padding-top: 1.2rem;
+        border-top: 1px dashed var(--border-color);
+    }
+
+    &__sound {
+        @extend %flexColumn;
+        gap: 0.65rem;
+        flex: 1 1 22rem;
+        min-width: 0;
+    }
+
+    &__hint {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+
+        &[hidden] {
+            display: none !important;
+        }
+    }
+}
+
+.util-al-quick-chips {
+    @extend %flexWrapGap;
+    gap: 0.6rem;
+}
+
+.util-al-quick-chip {
+    height: 3.4rem;
+    padding: 0 1.2rem;
+    border-radius: 99.9rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-color);
+    font-variant-numeric: tabular-nums;
+    @extend %transInteractive;
+
+    &:hover,
+    &:focus-visible {
+        border-color: var(--primary-color);
+        background-color: var(--primary-color);
+        color: #ffffff;
+    }
+}
+
+.util-al-deck {
+    @extend %flexColumn;
+    gap: 1.2rem;
+}
+
+.util-alarms-bento {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 1.4rem;
 
-    @include abs.screen(md) {
-        grid-template-columns: 1fr;
+    .util-data-table__empty {
+        grid-column: span 12;
+        background-color: var(--bg-surface);
+        border: 1px dashed var(--border-color);
+        border-radius: 2rem;
     }
 }
 
 .util-alarm-item {
-    @extend %flexBetween;
+    position: relative;
+    grid-column: span 4;
+    @extend %flexColumn;
+    justify-content: space-between;
     gap: 1.4rem;
-    padding: 1.8rem 2rem;
+    padding: 2rem 2.2rem;
     background-color: var(--bg-surface);
     border: 1.5px solid var(--border-color);
-    border-radius: 2rem;
+    border-radius: 2.2rem;
     @extend %transInteractive;
 
+    // Khóa span linh hoạt qua data-bento-span (tổng mỗi hàng luôn đúng 12 cột)
+    &[data-bento-span="4"] {
+        grid-column: span 4;
+    }
+    &[data-bento-span="5"] {
+        grid-column: span 5;
+    }
+    &[data-bento-span="6"] {
+        grid-column: span 6;
+    }
+    &[data-bento-span="7"] {
+        grid-column: span 7;
+    }
+    &[data-bento-span="12"] {
+        grid-column: span 12;
+    }
+
+    &[data-is-next="true"] {
+        background-color: var(--primary-soft-bg, var(--body-bg));
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 0.8rem 2.2rem var(--shadow-color);
+
+        .util-alarm-item__time {
+            font-size: 5rem;
+        }
+    }
+
+    @include abs.screen(xl) {
+        &[data-bento-span="4"],
+        &[data-bento-span="5"],
+        &[data-bento-span="6"],
+        &[data-bento-span="7"] {
+            grid-column: span 6;
+        }
+    }
+
+    @include abs.screen(md) {
+        &[data-bento-span="4"],
+        &[data-bento-span="5"],
+        &[data-bento-span="6"],
+        &[data-bento-span="7"],
+        &[data-bento-span="12"] {
+            grid-column: span 12;
+        }
+
+        &[data-is-next="true"] .util-alarm-item__time {
+            font-size: 4.2rem;
+        }
+    }
+
     &.is-disabled {
-        opacity: 0.52;
+        opacity: 0.56;
+        border-style: dashed;
     }
 
     &:hover {
         border-color: var(--primary-color);
         background-color: var(--body-bg);
+        transform: translateY(-2px);
+    }
+
+    &__head {
+        @extend %flexBetween;
+        gap: 0.8rem;
+    }
+
+    &__period {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--body-bg);
+        border: 1px solid var(--border-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--text-color);
+    }
+
+    &__next-tag {
+        padding: 0.3rem 1rem;
+        border-radius: 99.9rem;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 800;
+    }
+
+    &__main {
+        @extend %flexColumn;
+        gap: 0.45rem;
     }
 
     &__time {
-        font-size: 2.8rem;
+        font-size: 4.2rem;
         font-weight: 800;
         line-height: 1;
+        letter-spacing: -0.025em;
         color: var(--primary-color);
         font-variant-numeric: tabular-nums;
     }
 
     &__title {
-        display: block;
-        margin-top: 0.4rem;
-        font-size: 1.45rem;
+        font-size: 1.55rem;
         font-weight: 800;
         color: var(--text-color);
+        @extend %textEllipsis;
+    }
+
+    &__remain {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    &__foot {
+        @extend %flexBetween;
+        gap: 1rem;
+        padding-top: 1.1rem;
+        border-top: 1px dashed var(--border-color);
     }
 
     &__meta {
-        display: block;
-        margin-top: 0.25rem;
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         font-weight: 700;
         color: var(--text-muted);
     }
 
     &__right {
         @extend %flexItemCenter;
-        gap: 1rem;
+        gap: 0.8rem;
     }
 
     &__toggle {
@@ -1054,7 +2069,8 @@
             transition: transform 0.25s ease;
         }
 
-        &.is-on {
+        &.is-on,
+        &[aria-checked="true"] {
             background-color: var(--primary-color);
 
             &::after {
@@ -1065,17 +2081,17 @@
 
     &__del {
         @extend %inlineFlexCenter;
-        width: 4rem;
-        height: 4rem;
-        border-radius: 1.2rem;
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 1.1rem;
         background-color: var(--body-bg);
         border: 1px solid var(--border-color);
         color: var(--color-danger);
         @extend %transInteractive;
 
         svg {
-            width: 1.9rem;
-            height: 1.9rem;
+            width: 1.8rem;
+            height: 1.8rem;
         }
 
         &:hover,
@@ -1083,7 +2099,7 @@
             background-color: var(--color-danger);
             border-color: var(--color-danger);
             color: #ffffff;
-            transform: scale(1.06);
+            transform: scale(1.05);
         }
     }
 }
